@@ -1197,7 +1197,7 @@
       <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
       <div class="teams-summary">
         <div class="stat">
-          <div class="stat-label">Volunteers</div>
+          <div class="stat-label">Positions</div>
           <div class="stat-value have" id="totalHave">0</div>
         </div>
         <div class="stat">
@@ -1253,11 +1253,20 @@
       <div class="card" id="budgetPieCard" style="display:none;">
         <h2>Budget Allocation</h2>
         <div class="card-sub">% of income by category</div>
-        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-          <div style="width:180px;height:180px;flex-shrink:0;margin:0 auto;">
-            <canvas id="budgetPieChart"></canvas>
+        <div style="display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;">
+          <!-- Left: chart + legend -->
+          <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto;padding-right:20px;">
+            <div style="width:150px;height:150px;flex-shrink:0;">
+              <canvas id="budgetPieChart"></canvas>
+            </div>
+            <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:7px;"></div>
           </div>
-          <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:10px;flex:1;min-width:140px;"></div>
+          <!-- Right: missions panel -->
+          <div id="missionsPanel" style="flex:1;min-width:180px;border-left:1px solid var(--card-border);padding-left:20px;display:none;">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;">Church Plants &amp; Missions</div>
+            <div id="missionsList" style="display:flex;flex-direction:column;gap:6px;"></div>
+            <div id="missionsTotal" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--card-border);font-size:13px;font-weight:700;display:flex;justify-content:space-between;"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2247,7 +2256,8 @@ function normalizeDashboardData() {
   DASHBOARD_DATA.communityGroupMembers = DASHBOARD_DATA.communityGroupMembers || { months: [], counts: [] };
   DASHBOARD_DATA.baptisms = DASHBOARD_DATA.baptisms || { months: [], counts: [], total: 0 };
   DASHBOARD_DATA.communityGroupsDetailed = DASHBOARD_DATA.communityGroupsDetailed || {};
-  DASHBOARD_DATA.budget = DASHBOARD_DATA.budget || null;
+  DASHBOARD_DATA.budget   = DASHBOARD_DATA.budget   || null;
+  DASHBOARD_DATA.missions = DASHBOARD_DATA.missions || null;
 }
 
 function showDashboardError(err) {
@@ -2758,7 +2768,7 @@ function renderTeams() {
 
 function renderBudgetPie() {
   const budget = DASHBOARD_DATA.budget;
-  const card = document.getElementById('budgetPieCard');
+  const card   = document.getElementById('budgetPieCard');
   if (!budget || !budget.length) { if (card) card.style.display = 'none'; return; }
   if (card) card.style.display = '';
 
@@ -2795,13 +2805,49 @@ function renderBudgetPie() {
   const legend = document.getElementById('budgetPieLegend');
   if (legend) {
     legend.innerHTML = budget.map(function(b) {
-      return '<div style="display:flex;align-items:center;gap:8px;">' +
-        '<span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:' + b.color + ';flex-shrink:0;"></span>' +
-        '<span style="color:var(--text-muted);font-size:13px;">' + escapeHtml(b.label) + '</span>' +
-        '<span style="font-weight:600;font-size:13px;margin-left:auto;">' + b.pct.toFixed(1) + '%</span>' +
+      return '<div style="display:flex;align-items:center;gap:7px;">' +
+        '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + b.color + ';flex-shrink:0;"></span>' +
+        '<span style="color:var(--text-muted);font-size:12px;">' + escapeHtml(b.label) + '</span>' +
+        '<span style="font-weight:600;font-size:12px;margin-left:6px;color:var(--text);">' + b.pct.toFixed(1) + '%</span>' +
       '</div>';
     }).join('');
   }
+
+  // ── Missions panel ────────────────────────────────────────────────────────
+  const missions = DASHBOARD_DATA.missions;
+  const panel    = document.getElementById('missionsPanel');
+  const list     = document.getElementById('missionsList');
+  const totEl    = document.getElementById('missionsTotal');
+  if (!panel || !list || !totEl) return;
+
+  if (!missions || !missions.items || !missions.items.length) {
+    panel.style.display = 'none';
+    return;
+  }
+
+  panel.style.display = '';
+  const unlocked = mmIsUnlocked();
+
+  list.innerHTML = missions.items.map(function(m) {
+    const amtHtml = unlocked
+      ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
+      : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
+    return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;">' +
+      '<div>' +
+        '<span style="color:var(--text);">' + escapeHtml(m.name) + '</span>' +
+        (m.location ? '<span style="color:var(--text-dim);font-size:11px;margin-left:5px;">· ' + escapeHtml(m.location) + '</span>' : '') +
+      '</div>' +
+      amtHtml +
+    '</div>';
+  }).join('');
+
+  const totalAmt = missions.total || 0;
+  const totalAmtHtml = unlocked
+    ? '$' + fmtNum(totalAmt)
+    : '<span style="color:#444;filter:blur(4px);user-select:none;">$' + fmtNum(totalAmt) + '</span>';
+  totEl.innerHTML =
+    '<span style="color:var(--text-muted);">Total</span>' +
+    '<span style="font-weight:700;color:var(--text);">' + totalAmtHtml + '</span>';
 }
 
 function renderCGCount() {
@@ -3040,25 +3086,39 @@ function tmVStatus(v) {
   return { cls: 'tmod-tg', txt: 'reliable' };
 }
 
+/* ---- build serveTeams lookup by normalised name (used by modal + metrics) ---- */
+function tmServeTeamLookup() {
+  const map = {};
+  (DASHBOARD_DATA.serveTeams || []).forEach(function(t) {
+    map[t.name.toLowerCase()] = t;
+  });
+  return map;
+}
+
 /* ---- summary metrics bar ---- */
 function tmMetrics() {
-  const TEAMS = DASHBOARD_DATA.teamsLeaderForms || [];
-  const VOLS  = DASHBOARD_DATA.teamsVolunteers  || [];
-  const PLANS = DASHBOARD_DATA.teamsPlans       || [];
+  const TEAMS  = DASHBOARD_DATA.teamsLeaderForms || [];
+  const VOLS   = DASHBOARD_DATA.teamsVolunteers  || [];
+  const PLANS  = DASHBOARD_DATA.teamsPlans       || [];
+  const stLookup = tmServeTeamLookup();
 
-  const gap = TEAMS.reduce((a, t) => a + (t.need || 0), 0);
+  // Use PCO-sourced serveTeams for staffing totals to match main dashboard
+  const ST = DASHBOARD_DATA.serveTeams || [];
+  const totalPositions = ST.reduce((a, t) => a + (t.current || 0), 0);
+  const gap = ST.reduce((a, t) => a + Math.max(0, (t.needed || 0) - (t.current || 0)), 0);
+
   const recent = PLANS.filter(p => p.s > 0).slice(0, 6);
   const fill = recent.length ? Math.round(recent.reduce((a, p) => a + (p.s ? p.c / p.s : 0), 0) / recent.length * 100) : 0;
   const rel  = VOLS.length  ? Math.round(VOLS.reduce((a, v) => a + v.r, 0) / VOLS.length) : 0;
   const concern = VOLS.filter(v => tmVStatus(v).txt === 'concern').length;
 
   document.getElementById('tmodMetrics').innerHTML =
-    tm_metric(TEAMS.length, 'Teams reporting',         'leader forms on file') +
-    tm_metric(VOLS.length,  'Total volunteers',         'in Planning Center') +
-    tm_metric(gap,          'Staffing gap',             'more people requested', 'tmod-vr') +
-    tm_metric(fill + '%',   'Recent fill rate',         'last 6 services',       fill >= 75 ? 'tmod-vg' : fill >= 60 ? 'tmod-va' : 'tmod-vr') +
-    tm_metric(rel  + '%',   'Avg reliability',          'all volunteers',         rel  >= 75 ? 'tmod-vg' : rel  >= 50 ? 'tmod-va' : 'tmod-vr') +
-    tm_metric(concern,      'Volunteers of concern',    'many declines',          concern === 0 ? 'tmod-vg' : 'tmod-vr');
+    tm_metric(TEAMS.length,      'Teams reporting',       'leader forms on file') +
+    tm_metric(VOLS.length,       'Total volunteers',      'unique people in PCO') +
+    tm_metric(totalPositions,    'Total positions filled','across all teams (PCO)', '') +
+    tm_metric(gap,               'Staffing gap',          'positions still needed', gap > 0 ? 'tmod-vr' : 'tmod-vg') +
+    tm_metric(fill + '%',        'Recent fill rate',      'last 6 services',        fill >= 75 ? 'tmod-vg' : fill >= 60 ? 'tmod-va' : 'tmod-vr') +
+    tm_metric(rel  + '%',        'Avg reliability',       'all volunteers',          rel  >= 75 ? 'tmod-vg' : rel  >= 50 ? 'tmod-va' : 'tmod-vr');
 }
 function tm_metric(val, label, sub, cls) {
   return '<div class="tmod-metric"><div class="tmod-mlabel">' + label + '</div>' +
@@ -3081,14 +3141,25 @@ function tmScore(t) {
 
 /* ---- Teams tab ---- */
 function tmRT() {
-  const TEAMS = DASHBOARD_DATA.teamsLeaderForms || [];
-  const q  = (document.getElementById('tmts').value   || '').toLowerCase();
-  const so = (document.getElementById('tmtso').value  || 'gd');
+  const TEAMS    = DASHBOARD_DATA.teamsLeaderForms || [];
+  const stLookup = tmServeTeamLookup();
+  const q  = (document.getElementById('tmts').value  || '').toLowerCase();
+  const so = (document.getElementById('tmtso').value || 'gd');
+
+  // Merge leader form rich data with PCO-sourced current/needed numbers
+  function stForTeam(t) {
+    const st = stLookup[t.n.toLowerCase()];
+    if (st) return { current: st.current || 0, needed: st.needed || 0 };
+    // Fallback: reconstruct from form data
+    return { current: t.mem || 0, needed: (t.mem || 0) + (t.need || 0) };
+  }
 
   let list = TEAMS.filter(t => t.n.toLowerCase().includes(q) || (t.l || '').toLowerCase().includes(q));
   list.sort((a, b) => {
-    if (so === 'gd') return (b.need || 0) - (a.need || 0);
-    if (so === 'ga') return (a.need || 0) - (b.need || 0);
+    const ga = Math.max(0, stForTeam(b).needed - stForTeam(b).current);
+    const gb = Math.max(0, stForTeam(a).needed - stForTeam(a).current);
+    if (so === 'gd') return ga - gb;
+    if (so === 'ga') return gb - ga;
     return a.n.localeCompare(b.n);
   });
 
@@ -3098,12 +3169,14 @@ function tmRT() {
   }
 
   document.getElementById('tmTG').innerHTML = list.map(t => {
-    const have = t.mem || 0, need = t.need || 0;
-    const fp = (have + need) > 0 ? Math.round(have / (have + need) * 100) : 100;
-    const hs = tmScore(t);   // calculated health score
+    const st   = stForTeam(t);
+    const have = st.current;
+    const gap  = Math.max(0, st.needed - st.current);
+    const fp   = st.needed > 0 ? Math.round(have / st.needed * 100) : 100;
+    const hs   = tmScore(t);
     const scoreCls = hs >= 8 ? 'tmod-sg' : hs >= 6 ? 'tmod-sa' : 'tmod-sr';
-    const flagCls  = need >= 30 ? 'tmod-fr' : need > 5 ? 'tmod-fa' : 'tmod-fg';
-    const flagTxt  = need === 0 ? 'fully staffed' : 'gap: ' + need;
+    const flagCls  = gap >= 30 ? 'tmod-fr' : gap > 5 ? 'tmod-fa' : 'tmod-fg';
+    const flagTxt  = gap === 0 ? 'fully staffed' : 'gap: ' + gap;
     return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="tmTD(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
       '<div class="tmod-ttop">' +
         '<div><div class="tmod-tname">' + escapeHtml(t.n) + '</div>' +
@@ -3111,13 +3184,13 @@ function tmRT() {
         '<div class="tmod-sring ' + scoreCls + '" title="Health score: staffing (60%) + leader self-assessment (40%)">' + hs + '</div>' +
       '</div>' +
       '<div class="tmod-tstats">' +
-        '<div class="tmod-tstat"><div class="tmod-tsval">' + have + '</div><div class="tmod-tslabel">members</div></div>' +
-        '<div class="tmod-tstat"><div class="tmod-tsval" style="color:' + tmFc(need) + '">' + need + '</div><div class="tmod-tslabel">still needed</div></div>' +
-        '<div class="tmod-tstat"><div class="tmod-tsval" style="font-size:12px;padding-top:4px">' + escapeHtml(t.subC || '—') + '</div><div class="tmod-tslabel">updated</div></div>' +
+        '<div class="tmod-tstat"><div class="tmod-tsval">' + have + '</div><div class="tmod-tslabel">in PCO</div></div>' +
+        '<div class="tmod-tstat"><div class="tmod-tsval" style="color:' + tmFc(gap) + '">' + gap + '</div><div class="tmod-tslabel">still needed</div></div>' +
+        '<div class="tmod-tstat"><div class="tmod-tsval" style="font-size:12px;padding-top:4px">' + escapeHtml(t.subC || '—') + '</div><div class="tmod-tslabel">form updated</div></div>' +
       '</div>' +
       '<div class="tmod-frow">' +
-        '<div class="tmod-flabels"><span>Staffing ' + have + '/' + (have + need) + '</span><span>' + fp + '%</span></div>' +
-        '<div class="tmod-ftrack"><div class="tmod-ffill" style="width:' + fp + '%;background:' + tmFc(need) + '"></div></div>' +
+        '<div class="tmod-flabels"><span>Staffing ' + have + '/' + st.needed + '</span><span>' + fp + '%</span></div>' +
+        '<div class="tmod-ftrack"><div class="tmod-ffill" style="width:' + fp + '%;background:' + tmFc(gap) + '"></div></div>' +
       '</div>' +
       '<div class="tmod-flags"><span class="tmod-flag ' + flagCls + '">' + flagTxt + '</span></div>' +
     '</div>';
@@ -3127,13 +3200,17 @@ function tmRT() {
 function tmTD(name) {
   if (tmAT === name) { tmCloseDR(); return; }
   tmAT = name;
-  const TEAMS = DASHBOARD_DATA.teamsLeaderForms || [];
+  const TEAMS    = DASHBOARD_DATA.teamsLeaderForms || [];
+  const stLookup = tmServeTeamLookup();
   const t = TEAMS.find(x => x.n === name);
   if (!t) return;
 
-  const have = t.mem || 0, need = t.need || 0;
-  const fp = (have + need) > 0 ? Math.round(have / (have + need) * 100) : 100;
-  const DR = document.getElementById('tmDR');
+  const st   = stLookup[t.n.toLowerCase()];
+  const have = st ? (st.current || 0) : (t.mem || 0);
+  const tot  = st ? (st.needed  || 0) : ((t.mem || 0) + (t.need || 0));
+  const gap  = Math.max(0, tot - have);
+  const fp   = tot > 0 ? Math.round(have / tot * 100) : 100;
+  const DR   = document.getElementById('tmDR');
 
   DR.innerHTML =
     '<div class="tmod-dtop">' +
@@ -3142,8 +3219,8 @@ function tmTD(name) {
       '<div class="tmod-dbtns"><button class="tmod-dbtn" onclick="tmCloseDR()">&#10005; Close</button></div>' +
     '</div>' +
     '<div class="tmod-dmetrics">' +
-      '<div class="tmod-dm"><div class="tmod-dml">Members</div><div class="tmod-dmv">' + have + '</div></div>' +
-      '<div class="tmod-dm"><div class="tmod-dml">Still needed</div><div class="tmod-dmv" style="color:' + tmFc(need) + '">' + need + '</div></div>' +
+      '<div class="tmod-dm"><div class="tmod-dml">In PCO</div><div class="tmod-dmv">' + have + '</div></div>' +
+      '<div class="tmod-dm"><div class="tmod-dml">Still needed</div><div class="tmod-dmv" style="color:' + tmFc(gap) + '">' + gap + '</div></div>' +
       '<div class="tmod-dm"><div class="tmod-dml">Staffed</div><div class="tmod-dmv">' + fp + '%</div></div>' +
       '<div class="tmod-dm"><div class="tmod-dml">Health score</div><div class="tmod-dmv">' + tmScore(t) + '/10</div></div>' +
       (t.sc != null ? '<div class="tmod-dm"><div class="tmod-dml">Leader self-report</div><div class="tmod-dmv" style="font-size:12px;color:var(--text-dim)">' + t.sc + '/10</div></div>' : '') +
@@ -3471,6 +3548,29 @@ function mmApplyState() {
   if (existingChart) existingChart.destroy();
   renderGiving();
   mmUpdatePledgeDetails();
+
+  // Re-render missions amounts (blur/unblur on lock state change)
+  const missionsList = document.getElementById('missionsList');
+  const missionsTotal = document.getElementById('missionsTotal');
+  const missions = DASHBOARD_DATA.missions;
+  if (missionsList && missionsTotal && missions && missions.items) {
+    missionsList.innerHTML = missions.items.map(function(m) {
+      const amtHtml = unlocked
+        ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
+        : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
+      return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;">' +
+        '<div><span style="color:var(--text);">' + escapeHtml(m.name) + '</span>' +
+        (m.location ? '<span style="color:var(--text-dim);font-size:11px;margin-left:5px;">· ' + escapeHtml(m.location) + '</span>' : '') +
+        '</div>' + amtHtml + '</div>';
+    }).join('');
+    const totalAmt = missions.total || 0;
+    const totalAmtHtml = unlocked
+      ? '$' + fmtNum(totalAmt)
+      : '<span style="color:#444;filter:blur(4px);user-select:none;">$' + fmtNum(totalAmt) + '</span>';
+    missionsTotal.innerHTML =
+      '<span style="color:var(--text-muted);">Total</span>' +
+      '<span style="font-weight:700;color:var(--text);">' + totalAmtHtml + '</span>';
+  }
 }
 
 /* ================================================================
