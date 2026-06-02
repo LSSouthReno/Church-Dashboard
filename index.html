@@ -2832,11 +2832,8 @@ function renderBudgetPie() {
     const amtHtml = unlocked
       ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
       : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
-    return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;">' +
-      '<div>' +
-        '<span style="color:var(--text);">' + escapeHtml(m.name) + '</span>' +
-        (m.location ? '<span style="color:var(--text-dim);font-size:11px;margin-left:5px;">· ' + escapeHtml(m.location) + '</span>' : '') +
-      '</div>' +
+    return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;margin-bottom:2px;">' +
+      '<span style="color:var(--text);flex:1;line-height:1.3;">' + escapeHtml(m.name) + '</span>' +
       amtHtml +
     '</div>';
   }).join('');
@@ -3558,10 +3555,9 @@ function mmApplyState() {
       const amtHtml = unlocked
         ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
         : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
-      return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;">' +
-        '<div><span style="color:var(--text);">' + escapeHtml(m.name) + '</span>' +
-        (m.location ? '<span style="color:var(--text-dim);font-size:11px;margin-left:5px;">· ' + escapeHtml(m.location) + '</span>' : '') +
-        '</div>' + amtHtml + '</div>';
+      return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;margin-bottom:2px;">' +
+        '<span style="color:var(--text);flex:1;line-height:1.3;">' + escapeHtml(m.name) + '</span>' +
+        amtHtml + '</div>';
     }).join('');
     const totalAmt = missions.total || 0;
     const totalAmtHtml = unlocked
