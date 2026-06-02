@@ -1249,6 +1249,17 @@
           <span>May 2027</span>
         </div>
       </div>
+
+      <div class="card" id="budgetPieCard" style="display:none;">
+        <h2>Budget Allocation</h2>
+        <div class="card-sub">% of income by category</div>
+        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+          <div style="width:180px;height:180px;flex-shrink:0;margin:0 auto;">
+            <canvas id="budgetPieChart"></canvas>
+          </div>
+          <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:10px;flex:1;min-width:140px;"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2236,6 +2247,7 @@ function normalizeDashboardData() {
   DASHBOARD_DATA.communityGroupMembers = DASHBOARD_DATA.communityGroupMembers || { months: [], counts: [] };
   DASHBOARD_DATA.baptisms = DASHBOARD_DATA.baptisms || { months: [], counts: [], total: 0 };
   DASHBOARD_DATA.communityGroupsDetailed = DASHBOARD_DATA.communityGroupsDetailed || {};
+  DASHBOARD_DATA.budget = DASHBOARD_DATA.budget || null;
 }
 
 function showDashboardError(err) {
@@ -2744,6 +2756,54 @@ function renderTeams() {
   });
 }
 
+function renderBudgetPie() {
+  const budget = DASHBOARD_DATA.budget;
+  const card = document.getElementById('budgetPieCard');
+  if (!budget || !budget.length) { if (card) card.style.display = 'none'; return; }
+  if (card) card.style.display = '';
+
+  const ctx = document.getElementById('budgetPieChart');
+  if (!ctx) return;
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: budget.map(function(b) { return b.label; }),
+      datasets: [{
+        data: budget.map(function(b) { return Math.round(b.pct * 10) / 10; }),
+        backgroundColor: budget.map(function(b) { return b.color; }),
+        borderColor: '#1a1a1a',
+        borderWidth: 2,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: '62%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(c) { return ' ' + c.label + ': ' + c.parsed.toFixed(1) + '%'; }
+          }
+        }
+      }
+    }
+  });
+
+  const legend = document.getElementById('budgetPieLegend');
+  if (legend) {
+    legend.innerHTML = budget.map(function(b) {
+      return '<div style="display:flex;align-items:center;gap:8px;">' +
+        '<span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:' + b.color + ';flex-shrink:0;"></span>' +
+        '<span style="color:var(--text-muted);font-size:13px;">' + escapeHtml(b.label) + '</span>' +
+        '<span style="font-weight:600;font-size:13px;margin-left:auto;">' + b.pct.toFixed(1) + '%</span>' +
+      '</div>';
+    }).join('');
+  }
+}
+
 function renderCGCount() {
   const raw = DASHBOARD_DATA.communityGroups;
   const { months, counts } = trimEmptySeries(raw.months, raw.counts);
@@ -2895,6 +2955,7 @@ loadDashboardData()
     mmUpdatePledgeDetails();
     renderAttendance();
     renderTeams();
+    renderBudgetPie();
     renderCGCount();
     renderCGMembers();
     renderBaptisms();
