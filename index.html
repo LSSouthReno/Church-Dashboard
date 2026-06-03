@@ -3937,6 +3937,10 @@ async function staffLoadData() {
 function staffRenderAll(data) {
   staffRendered = true;
   staffRenderMeta(data);
+  staffRenderTabs(data);
+  staffRenderVTO(data);
+  staffRenderCulture(data);
+  staffRenderAccChart(data);
   staffRenderScorecard(data);
   staffRenderRocks(data);
   staffRenderIssues(data);
@@ -4238,6 +4242,169 @@ function staffRenderFunnel(data) {
     </div>`;
 
   staffUpdateFunnelRates();
+}
+
+// ── SHEET-DRIVEN RENDER FUNCTIONS ─────────────────────────────────────────────
+// These read from the JSON pushed by the LS South Reno Staff OS Google Sheet.
+// If the JSON doesn't include these fields, the hardcoded HTML fallback stays.
+
+function staffRenderTabs(data) {
+  if (!data.tabs || !data.tabs.length) return;
+  const nav = document.querySelector('#staffModContent .sp-nav-tabs');
+  if (!nav) return;
+  const visible = data.tabs.filter(t => t.visible !== false);
+  if (!visible.length) return;
+  const currentId = (nav.querySelector('.sp-nav-tab.sp-active') || {}).dataset && nav.querySelector('.sp-nav-tab.sp-active').dataset.id;
+  nav.innerHTML = visible.map(t =>
+    `<div class="sp-nav-tab" data-id="${t.id}" onclick="staffShowSection('${t.id}',this)">${t.label}</div>`
+  ).join('');
+  const toActivate = nav.querySelector(`[data-id="${currentId}"]`) || nav.querySelector('.sp-nav-tab');
+  if (toActivate) { toActivate.classList.add('sp-active'); staffShowSection(toActivate.dataset.id, toActivate); }
+}
+
+function staffRenderVTO(data) {
+  if (!data.vto) return;
+  const el = document.getElementById('sp-vto');
+  if (!el) return;
+  const v = data.vto;
+  const c = v.cards || {};
+  const esc = t => String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lis = arr => (arr||[]).map(i=>`<li>${esc(i)}</li>`).join('');
+
+  const methods = (v.ministry_methods||[]).map((m,i)=>
+    `<div class="sp-method-pill"><span class="sp-method-num">${String(i+1).padStart(2,'0')}</span><div class="sp-method-name">${esc(m.name)}</div></div>`
+  ).join('');
+
+  const cardHtml = (id, card) => {
+    if (!card) return '';
+    const title = `<div class="sp-card-title">${esc(card.title||'')} <span class="sp-badge">${esc(card.badge||'')}</span></div>`;
+    const sub   = `<div class="sp-card-subtitle">${esc(card.subtitle||'')}</div>`;
+    if (id === 'core_values') {
+      const sec = card.secondary_title ? `<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--sp-border);">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:8px;">${esc(card.secondary_title)}</div>
+        <ul class="sp-metric-list">${lis(card.secondary_items)}</ul></div>` : '';
+      return `<div class="sp-card">${title}${sub}<ul class="sp-metric-list">${lis(card.items)}</ul>${sec}</div>`;
+    }
+    if (id === 'core_focus') {
+      const lbl = (t,v) => `<div style="margin-bottom:14px;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:6px;">${t}</div><div style="font-size:15px;font-style:italic;color:var(--sp-ink);font-family:'Playfair Display',serif;">${esc(v)}</div></div>`;
+      return `<div class="sp-card">${title}${sub}
+        ${lbl('LS Family Vision', card.ls_family_vision)}
+        ${lbl('LSSR Specific Vision', card.lssr_vision)}
+        <div style="margin-bottom:14px;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:6px;">Our Niche</div><div style="font-size:14px;">${esc(card.niche)}</div></div>
+        <div style="padding-top:16px;border-top:1px solid var(--sp-border);"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:6px;">Proven Process</div><div style="font-size:13px;font-weight:600;">${esc(card.process)}</div></div>
+      </div>`;
+    }
+    if (id === 'ten_year') {
+      return `<div class="sp-card">${title}${sub}
+        <div style="background:var(--sp-section-bg);border-radius:6px;padding:14px 16px;margin-bottom:14px;text-align:center;">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:8px;">The Formula</div>
+          <div style="font-size:15px;font-family:'Playfair Display',serif;">${esc(card.formula)}</div>
+          <div style="font-size:20px;color:var(--sp-gold);margin:6px 0;">${esc(card.formula_result)}</div>
+          <div style="font-size:12px;color:var(--sp-muted);">${esc(card.formula_note)}</div>
+        </div>
+        <ul class="sp-metric-list">${lis(card.items)}</ul></div>`;
+    }
+    if (id === 'marketing') {
+      return `<div class="sp-card">${title}${sub}
+        <div style="margin-bottom:14px;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:6px;">Target Person</div><div style="font-size:14px;">${esc(card.target_person)}</div></div>
+        <div><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:6px;">Proven Process</div>
+        <ul class="sp-metric-list" style="margin-top:4px;">${lis(card.process_items)}</ul></div></div>`;
+    }
+    return `<div class="sp-card">${title}${sub}<ul class="sp-metric-list">${lis(card.items)}</ul></div>`;
+  };
+
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Tool 01</div>
+      <h2>${esc(v.title||'Vision / Traction Organizer')}</h2>
+      <p>${esc(v.description||'')}</p>
+    </div>
+    <div class="sp-methods-grid">${methods}</div>
+    <div class="sp-grid-2">
+      ${['core_values','core_focus','ten_year','marketing','three_year','one_year'].map(id=>cardHtml(id,c[id])).join('')}
+    </div>`;
+}
+
+function staffRenderCulture(data) {
+  if (!data.culture) return;
+  const el = document.getElementById('sp-vot');
+  if (!el) return;
+  const cu = data.culture;
+  const esc = t => String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const valueCards = (cu.values||[]).map(v => {
+    const bg = v.bg_color ? ` style="background:${v.bg_color};"` : '';
+    return `<div class="sp-value-card" data-letter="${esc(v.name[0]||'')}"${bg}>
+      <h3>${esc(v.name)}</h3><p>${esc(v.description)}</p>
+      <ul class="sp-value-behaviors">${(v.behaviors||[]).map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Tool 02</div>
+      <h2>Culture</h2>
+      <p>${esc(cu.howto_text||'')}</p>
+    </div>
+    <div class="sp-highlight-box"><h3>${esc(cu.howto_title||'How to Use the Culture Guide')}</h3><p>${esc(cu.howto_text||'')}</p></div>
+    <div class="sp-grid-2" style="margin-bottom:20px;">${valueCards}</div>
+    <div class="sp-card">
+      <div class="sp-card-title">Culture Scoring Guide <span class="sp-badge">Quarterly Review</span></div>
+      <div class="sp-card-subtitle">Use this in quarterly 1-on-1s and annual reviews with each direct report</div>
+      <table class="sp-scorecard-table"><thead><tr><th>Score</th><th>What It Means</th><th>Next Step</th></tr></thead><tbody>
+        <tr><td><strong>5</strong></td><td>Consistently models this value; others notice and follow their lead</td><td>Celebrate and deploy as a culture carrier</td></tr>
+        <tr><td><strong>4</strong></td><td>Lives this value well with only occasional gaps</td><td>Affirm and keep coaching toward mastery</td></tr>
+        <tr><td><strong>3</strong></td><td>Understands the value but inconsistently applies it</td><td>Create a coaching plan with specific behaviors to change</td></tr>
+        <tr><td><strong>2</strong></td><td>Struggles with this value; patterns of conflicting behavior visible</td><td>Formal growth plan with clear expectations and accountability</td></tr>
+        <tr><td><strong>1</strong></td><td>This value is not present; behavior pattern is contrary to culture</td><td>Serious conversation; may be a "wrong person" situation</td></tr>
+      </tbody></table>
+    </div>`;
+}
+
+function staffRenderAccChart(data) {
+  if (!data.acc_chart) return;
+  const el = document.getElementById('sp-acc-chart');
+  if (!el) return;
+  const a = data.acc_chart;
+  const esc = t => String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lis = arr => (arr||[]).map(i=>`<li>${esc(i)}</li>`).join('');
+  const v = a.visionary||{}, int = a.integrator||{};
+
+  const orgNodes = (a.directors||[]).map(d =>
+    `<div class="sp-org-node"><div class="sp-org-role">${esc(d.role)}</div><div class="sp-org-name">${esc(d.name)}</div><div class="sp-org-wg">${esc(d.org_wg||d.wg||'')}</div></div>`
+  ).join('');
+
+  const dirCards = (a.directors||[]).map(d =>
+    `<div class="sp-card"><div class="sp-card-title">${esc(d.name)}</div>
+     <div class="sp-card-subtitle">${esc(d.role)} &mdash; ${esc(d.subtitle||'')}</div>
+     <ul class="sp-metric-list">${lis(d.items)}</ul></div>`
+  ).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Tool 03</div>
+      <h2>Accountability Chart</h2>
+      <p>Not an org chart — a clarity chart. Every seat has one owner, every owner has clear roles and measurables. Right Person &middot; Right Seat.</p>
+    </div>
+    <div class="sp-vi-split">
+      <div class="sp-vi-box vis">
+        <div class="sp-vi-label">Visionary (V)</div>
+        <h3>${esc(v.name)} &mdash; ${esc((v.role||'').replace(' (Visionary)',''))}</h3>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(201,150,58,0.6);margin-bottom:12px;letter-spacing:1px;">${esc(v.wg||'')}</div>
+        <ul class="sp-vi-list">${lis(v.items)}</ul>
+      </div>
+      <div class="sp-vi-box int">
+        <div class="sp-vi-label">Integrator (I)</div>
+        <h3>${esc(int.name)} &mdash; ${esc((int.role||'').replace(' (Integrator)',''))}</h3>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--sp-rust);margin-bottom:12px;letter-spacing:1px;">${esc(int.wg||'')}</div>
+        <ul class="sp-vi-list">${lis(int.items)}</ul>
+      </div>
+    </div>
+    <div class="sp-org-chart">
+      <div class="sp-org-line" style="height:8px;"></div>
+      <div class="sp-org-row" style="margin-bottom:0;gap:10px;flex-wrap:wrap;">${orgNodes}</div>
+    </div>
+    <div class="sp-grid-3">${dirCards}</div>`;
 }
 
 function staffUpdateFunnelRates() {
