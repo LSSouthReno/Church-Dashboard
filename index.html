@@ -1546,7 +1546,7 @@
     <div class="tmod-lockcard">
       <div class="tmod-lockicon">&#128274;</div>
       <div class="tmod-lockttl">Staff Area</div>
-      <div class="tmod-lockmsg">Enter the staff password to access EOS tools, scorecard, rocks, and meeting data.</div>
+      <div class="tmod-lockmsg">Enter the staff password to access EOS tools, scorecard, boulders, and meeting data.</div>
       <input type="password" id="staffPwInput" placeholder="Staff password" autocomplete="off" onkeydown="if(event.key==='Enter')staffDoUnlock()">
       <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="staffDoUnlock()">Unlock</button>
       <div id="staffLockErr" class="tmod-lockerr">Incorrect password.</div>
@@ -1562,7 +1562,7 @@
       <div class="sp-nav-tab" onclick="staffShowSection('sp-scorecard',this)">Scorecard</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-vol-leads',this)">Vol Leads</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-funnel',this)">Funnel</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-rocks',this)">Rocks</div>
+      <div class="sp-nav-tab" onclick="staffShowSection('sp-boulders',this)">Boulders</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-team',this)">Team/WG</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-meetings',this)">Meeting Pulse</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-l10',this)">L10 Feed</div>
@@ -1803,7 +1803,7 @@
                 <li>Owns the Level 10 meeting pulse and EOS implementation</li>
                 <li>Manages and develops all department directors</li>
                 <li>Budget ownership, financial health, building search</li>
-                <li>Holds team accountable to rocks, scorecard, and values</li>
+                <li>Holds team accountable to boulders, scorecard, and values</li>
                 <li>HR, onboarding, staff development, and culture health</li>
                 <li>Removes obstacles; solves what the visionary can't/shouldn't</li>
               </ul>
@@ -1838,11 +1838,11 @@
           <div class="sp-section-header">
             <div class="sp-eyebrow">Tool 04</div>
             <h2>Leadership Team Scorecard</h2>
-            <p>A weekly pulse on the health of LSSR. Each number has one owner and a weekly goal. Review every Level 10 Meeting. Red for 2+ weeks = Issue to IDS.</p>
+            <p>A weekly pulse on the health of LSSR. Each number has one owner and a weekly goal. Review every Level 10 Meeting. Red for 2+ weeks = Rock to IDS.</p>
           </div>
           <div class="sp-highlight-box">
             <h3>The Rule of the Scorecard</h3>
-            <p>You're not managing people — you're managing numbers. When a number is red, it becomes an Issue to IDS. "It depends" is not a goal. "The team" is not an owner. Update current values in the Google Sheet; this page pulls live data automatically.</p>
+            <p>You're not managing people — you're managing numbers. When a number is red, it becomes a Rock to IDS. "It depends" is not a goal. "The team" is not an owner. Update current values in the Google Sheet; this page pulls live data automatically.</p>
           </div>
           <div class="sp-card">
             <div style="float:right;margin-bottom:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);letter-spacing:1px;">Baseline: 550 adults &middot; 100 kids &middot; 245 members &middot; 254 CG members (2024)</span></div>
@@ -1859,36 +1859,36 @@
         <!-- FUNNEL (rendered by staffRenderFunnel) -->
         <div class="sp-section" id="sp-funnel"></div>
 
-        <!-- ROCKS -->
-        <div class="sp-section" id="sp-rocks">
+        <!-- BOULDERS -->
+        <div class="sp-section" id="sp-boulders">
           <div class="sp-section-header">
             <div class="sp-eyebrow">Tool 05</div>
-            <h2>Quarterly Rocks</h2>
-            <p>The 3–7 most important things to accomplish this quarter. If everything is a priority, nothing is. Every rock is specific, measurable, and done in 90 days.</p>
+            <h2>Quarterly Boulders</h2>
+            <p>The 3–7 most important things to accomplish this quarter. If everything is a priority, nothing is. Every boulder is specific, measurable, and done in 90 days.</p>
           </div>
           <div class="sp-highlight-box">
-            <h3>The Rock Formula</h3>
-            <p>"By end of Q2 2026, [this specific thing] will be done and we'll know it because [here's the measurable proof]." Rocks are reported On Track / Off Track every L10. Red rocks go directly to Issues.</p>
+            <h3>The Boulder Formula</h3>
+            <p>"By end of Q2 2026, [this specific thing] will be done and we'll know it because [here's the measurable proof]." Boulders are reported On Track / Off Track every L10. Red boulders go directly to Rocks.</p>
           </div>
           <div class="sp-grid-2">
             <div>
-              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:12px;">Company Rocks — Q2 2026</div>
-              <div id="sp-company-rocks"><!-- populated by JS --></div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:12px;">Company Boulders — Q2 2026</div>
+              <div id="sp-company-boulders"><!-- populated by JS --></div>
             </div>
             <div>
-              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:12px;">Individual Rocks — Q2 2026</div>
-              <div id="sp-individual-rocks"><!-- populated by JS --></div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:12px;">Individual Boulders — Q2 2026</div>
+              <div id="sp-individual-boulders"><!-- populated by JS --></div>
             </div>
           </div>
           <div class="sp-card" style="margin-top:24px;">
-            <div class="sp-card-title">Rock Review Cadence <span class="sp-badge">Weekly L10</span></div>
-            <div class="sp-card-subtitle">Every person reports every rock every week — On Track or Off Track only</div>
+            <div class="sp-card-title">Boulder Review Cadence <span class="sp-badge">Weekly L10</span></div>
+            <div class="sp-card-subtitle">Every person reports every boulder every week — On Track or Off Track only</div>
             <ul class="sp-metric-list">
               <li><strong>On Track (Green)</strong> — No discussion needed. Move on immediately.</li>
-              <li><strong>Off Track (Red)</strong> — Brief update only. Moves to Issues List for IDS if needed.</li>
+              <li><strong>Off Track (Red)</strong> — Brief update only. Moves to Rocks List for IDS if needed.</li>
               <li><strong>Completed</strong> — Celebrate briefly. Confirm done with clear evidence.</li>
-              <li>Rocks are never moved or changed mid-quarter except genuine emergency (extremely rare).</li>
-              <li>End of quarter: hold a Quarterly Business Owner's meeting (QBOP) to set next rocks.</li>
+              <li>Boulders are never moved or changed mid-quarter except genuine emergency (extremely rare).</li>
+              <li>End of quarter: hold a Quarterly Business Owner's meeting (QBOP) to set next boulders.</li>
             </ul>
           </div>
         </div>
@@ -1961,20 +1961,20 @@
               <div class="sp-freq">Weekly &middot; 90 Minutes &middot; Same Day &amp; Time Every Week</div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Segue — one good news personally, one professionally</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Scorecard review — note any reds, no discussion yet</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Rock review — each person: On Track or Off Track only</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Boulder review — each person: On Track or Off Track only</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Customer / People Headlines — guest or staff issues to surface</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>To-Do list review — check prior week's 7-day actions</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">60 min</div><div>IDS — Identify, Discuss, Solve the top 3 issues (prioritized)</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">60 min</div><div>IDS — Identify, Discuss, Solve the top 3 rocks (prioritized)</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">5 min</div><div>Conclude — rate the meeting 1–10; recap to-dos</div></div>
             </div>
             <div class="sp-meeting-card">
               <h3>Quarterly Business Owner's Meeting (QBOP)</h3>
               <div class="sp-freq">Quarterly &middot; Full Day &middot; Off Campus</div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">AM</div><div>Review prior quarter — rocks complete? What did we learn?</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">AM</div><div>Review prior quarter — boulders complete? What did we learn?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">AM</div><div>Review V/TO — vision still clear and shared? Any updates?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">Mid</div><div>People review — right people, right seats? Culture check-in</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>IDS biggest issues entering next quarter</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>Set rocks for next quarter — company first, then individual</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>IDS biggest rocks entering next quarter</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>Set boulders for next quarter — company first, then individual</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">End</div><div>Team health + celebrate wins from the past quarter</div></div>
             </div>
             <div class="sp-meeting-card">
@@ -1982,16 +1982,16 @@
               <div class="sp-freq">Quarterly &middot; 60 Minutes &middot; Brad with each Director</div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Personal check-in — life, soul, family, energy</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>Culture review — score each of the 4 values together honestly</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>Rocks and measurables — are they hitting their numbers?</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>Boulders and measurables — are they hitting their numbers?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Development — what do they want to grow in this next quarter?</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Forward — what is their rock for next quarter?</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Forward — what is their boulder for next quarter?</div></div>
             </div>
             <div class="sp-meeting-card">
               <h3>Annual Planning (Focus Day)</h3>
               <div class="sp-freq">Annually &middot; 2 Days &middot; Visionary-Led Off Campus</div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">Day 1</div><div>Review the year — data, stories, wins, misses, surprises</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">Day 1</div><div>Update V/TO — 10-year target, 3-year picture, 1-year plan</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">Day 2</div><div>Set Q1 rocks for all seats; budget and calendar alignment</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">Day 2</div><div>Set Q1 boulders for all seats; budget and calendar alignment</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">Day 2</div><div>Team health, culture audit, and value renewal</div></div>
             </div>
           </div>
@@ -2016,29 +2016,29 @@
         <div class="sp-section" id="sp-ids">
           <div class="sp-section-header">
             <div class="sp-eyebrow">Tool 08</div>
-            <h2>Issues List &amp; IDS Process</h2>
-            <p>IDS — Identify, Discuss, Solve — is how you actually fix problems instead of talking around them forever. The Issues List is the shared, visible list of everything getting in the way.</p>
+            <h2>Rocks List &amp; IDS Process</h2>
+            <p>IDS — Identify, Discuss, Solve — is how you actually fix problems instead of talking around them forever. The Rocks List is the shared, visible list of everything getting in the way.</p>
           </div>
           <div class="sp-highlight-box">
             <h3>The IDS Rule</h3>
-            <p>Whoever identifies an issue owns putting it on the list — not solving it alone. The team solves it together in the L10. Issues are prioritized by impact, not urgency. An issue that recurs 3x becomes a Rock to fix systemically. No "holy avoidance" — name things clearly.</p>
+            <p>Whoever identifies a rock owns putting it on the list — not solving it alone. The team solves it together in the L10. Rocks are prioritized by impact, not urgency. A rock that recurs 3x becomes a Boulder to fix systemically. No "holy avoidance" — name things clearly.</p>
           </div>
           <div class="sp-grid-2">
             <div>
               <div class="sp-card" style="margin-bottom:16px;">
-                <div class="sp-card-title">Current Issues List <span class="sp-badge">Live</span></div>
-                <div class="sp-card-subtitle">Add issues in the Google Sheet — this list updates automatically</div>
+                <div class="sp-card-title">Current Rocks List <span class="sp-badge">Live</span></div>
+                <div class="sp-card-subtitle">Add rocks in the Google Sheet — this list updates automatically</div>
                 <table class="sp-scorecard-table">
-                  <thead><tr><th>Issue</th><th>Added By</th><th>Priority</th></tr></thead>
-                  <tbody id="sp-issues-tbody"><!-- populated by JS --></tbody>
+                  <thead><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
+                  <tbody id="sp-rocks-tbody"><!-- populated by JS --></tbody>
                 </table>
               </div>
               <div class="sp-ids-box">
                 <h4>The 3-Step IDS Process</h4>
                 <ul>
-                  <li><strong>Identify</strong> — State the real issue, not the symptom. "Sundays feel rushed" → issue is "no documented run-of-show assigned." Be specific.</li>
-                  <li><strong>Discuss</strong> — Open the floor until the root issue is truly clear. Don't jump to solutions. Time-boxed to ~15 min/issue.</li>
-                  <li><strong>Solve</strong> — Create one To-Do: one owner, one due date. Issue is resolved or removed. Done.</li>
+                  <li><strong>Identify</strong> — State the real rock, not the symptom. "Sundays feel rushed" → rock is "no documented run-of-show assigned." Be specific.</li>
+                  <li><strong>Discuss</strong> — Open the floor until the root rock is truly clear. Don't jump to solutions. Time-boxed to ~15 min/rock.</li>
+                  <li><strong>Solve</strong> — Create one To-Do: one owner, one due date. Rock is resolved or removed. Done.</li>
                 </ul>
               </div>
             </div>
@@ -2046,23 +2046,23 @@
               <div class="sp-ids-box">
                 <h4>LS-Specific IDS Culture Notes</h4>
                 <ul>
-                  <li>Name personnel and pastoral issues clearly. Calling it "tension" doesn't solve it.</li>
-                  <li>Issues belong to the team, not the person who raised them. No retaliation culture.</li>
+                  <li>Name personnel and pastoral rocks clearly. Calling it "tension" doesn't solve it.</li>
+                  <li>Rocks belong to the team, not the person who raised them. No retaliation culture.</li>
                   <li>Never escalate to Ryan what Brad can solve. Never escalate to Brad what a director can solve.</li>
                   <li>IDS is not a venting session. Time-box discussion.</li>
-                  <li>The Stepping Stones transition (post-Feb 2025) created systemic issues — these are Rocks, not just IDS items.</li>
-                  <li>The Wonder gap means issues may not surface until they're critical. Build in explicit "What are we missing?" as a standing L10 prompt.</li>
+                  <li>The Stepping Stones transition (post-Feb 2025) created systemic rocks — these are Boulders, not just IDS items.</li>
+                  <li>The Wonder gap means rocks may not surface until they're critical. Build in explicit "What are we missing?" as a standing L10 prompt.</li>
                 </ul>
               </div>
               <div class="sp-card">
-                <div class="sp-card-title">IDS to Rock Escalation <span class="sp-badge">Rule of 3</span></div>
-                <div class="sp-card-subtitle">When an issue keeps coming back, it needs a Rock, not just a To-Do</div>
+                <div class="sp-card-title">IDS to Boulder Escalation <span class="sp-badge">Rule of 3</span></div>
+                <div class="sp-card-subtitle">When a rock keeps coming back, it needs a Boulder, not just a To-Do</div>
                 <ul class="sp-metric-list">
-                  <li>Issue appears in IDS for the 1st time → To-Do with owner + due date</li>
-                  <li>Issue reappears for 2nd time → escalate priority; examine root cause</li>
-                  <li>Issue appears for 3rd time → becomes a company Rock next quarter</li>
-                  <li>Issues that involve "Right Person / Right Seat" → always escalate to Brad for private 1-on-1 follow-up</li>
-                  <li>Building / facility issues → Ryan + Brad own together; surface at every QBOP</li>
+                  <li>Rock appears in IDS for the 1st time → To-Do with owner + due date</li>
+                  <li>Rock reappears for 2nd time → escalate priority; examine root cause</li>
+                  <li>Rock appears for 3rd time → becomes a company Boulder next quarter</li>
+                  <li>Rocks that involve "Right Person / Right Seat" → always escalate to Brad for private 1-on-1 follow-up</li>
+                  <li>Building / facility rocks → Ryan + Brad own together; surface at every QBOP</li>
                 </ul>
               </div>
             </div>
@@ -3828,7 +3828,7 @@ const STAFF_DEFAULT_DATA = {
     { metric: 'Leader Launch Graduates (YTD)', owner: 'Brad Borowski', goal: '25', current: '', status: 'grey', notes: '18 grads in 2025; goal 25 new grads in 2026' },
     { metric: 'Staff 1-on-1 Completion Rate', owner: 'Brad Borowski', goal: '100% quarterly', current: '', status: 'grey', notes: '' }
   ],
-  rocks: [
+  boulders: [
     { title: 'EOS Rhythm Established: L10 meetings running for all directors, scorecard live and reviewed weekly', owner: 'Brad Borowski', quarter: 'Q2 2026', status: 'on-track', type: 'company' },
     { title: 'Building Search: 3 viable sites identified and financial model presented to Elders', owner: 'Brad + Ryan', quarter: 'Q2 2026', status: 'tbd', type: 'company' },
     { title: 'Discipleship Pathway: Guest → Member → Leader → Missionary fully documented with clear entry/exit criteria', owner: 'Adam Carp', quarter: 'Q2 2026', status: 'tbd', type: 'company' },
@@ -3839,14 +3839,14 @@ const STAFF_DEFAULT_DATA = {
     { title: 'Financial Dashboard: Weekly giving + budget variance report live and automated by end of quarter', owner: 'Rachel Primus', quarter: 'Q2 2026', status: 'tbd', type: 'individual' },
     { title: 'CG Growth: 3 new community groups launched with trained leaders in place', owner: 'Adam Carp', quarter: 'Q2 2026', status: 'tbd', type: 'individual' }
   ],
-  issues: [
-    { issue: 'Two "Student Ministry Director" titles in org chart — role clarity and seat definition needed between Isaac and Katie', addedBy: 'Brad', priority: 'high', status: 'open' },
-    { issue: 'Building search has no clear week-to-week owner or defined decision framework — risk of drift', addedBy: 'Brad', priority: 'high', status: 'open' },
-    { issue: 'Stepping Stones volunteer numbers still rebuilding post-transition (Feb 2025) — fill rate below target', addedBy: 'Geoffrey', priority: 'high', status: 'open' },
-    { issue: 'Creative asset lead times compressed — pastoral team often provides series info too late for quality work', addedBy: 'John Conelea', priority: 'med', status: 'open' },
-    { issue: 'CG attendance rate at 50% vs 75%+ goal — engagement strategy needed to close the gap', addedBy: 'Adam Carp', priority: 'med', status: 'open' },
-    { issue: 'No dedicated Missions Team Leader identified — missions momentum at risk without a person who owns it', addedBy: 'Ryan', priority: 'med', status: 'open' },
-    { issue: 'Team Wonder/Galvanizing gap — need to intentionally build "What are we missing?" into the L10 rhythm', addedBy: 'Brad', priority: 'low', status: 'open' }
+  rocks: [
+    { rock: 'Two "Student Ministry Director" titles in org chart — role clarity and seat definition needed between Isaac and Katie', addedBy: 'Brad', priority: 'high', status: 'open' },
+    { rock: 'Building search has no clear week-to-week owner or defined decision framework — risk of drift', addedBy: 'Brad', priority: 'high', status: 'open' },
+    { rock: 'Stepping Stones volunteer numbers still rebuilding post-transition (Feb 2025) — fill rate below target', addedBy: 'Geoffrey', priority: 'high', status: 'open' },
+    { rock: 'Creative asset lead times compressed — pastoral team often provides series info too late for quality work', addedBy: 'John Conelea', priority: 'med', status: 'open' },
+    { rock: 'CG attendance rate at 50% vs 75%+ goal — engagement strategy needed to close the gap', addedBy: 'Adam Carp', priority: 'med', status: 'open' },
+    { rock: 'No dedicated Missions Team Leader identified — missions momentum at risk without a person who owns it', addedBy: 'Ryan', priority: 'med', status: 'open' },
+    { rock: 'Team Wonder/Galvanizing gap — need to intentionally build "What are we missing?" into the L10 rhythm', addedBy: 'Brad', priority: 'low', status: 'open' }
   ]
 };
 
@@ -3917,8 +3917,8 @@ async function staffLoadData() {
       const liveData = await res.json();
       const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
       if (liveData.scorecard && liveData.scorecard.length) merged.scorecard = liveData.scorecard;
+      if (liveData.boulders && liveData.boulders.length) merged.boulders = liveData.boulders;
       if (liveData.rocks && liveData.rocks.length) merged.rocks = liveData.rocks;
-      if (liveData.issues && liveData.issues.length) merged.issues = liveData.issues;
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
@@ -3944,8 +3944,8 @@ function staffRenderAll(data) {
   staffRenderMeetings(data);
   staffRenderIDS(data);
   staffRenderScorecard(data);
+  staffRenderBoulders(data);
   staffRenderRocks(data);
-  staffRenderIssues(data);
   staffRenderTeam();
   staffRenderSnapshot(data);
   staffRenderL10(data);
@@ -3977,13 +3977,13 @@ function staffRenderScorecard(data) {
   }).join('');
 }
 
-function staffRenderRocks(data) {
-  const companyEl = document.getElementById('sp-company-rocks');
-  const indivEl = document.getElementById('sp-individual-rocks');
+function staffRenderBoulders(data) {
+  const companyEl = document.getElementById('sp-company-boulders');
+  const indivEl = document.getElementById('sp-individual-boulders');
   if (!companyEl || !indivEl) return;
-  const company = data.rocks.filter(r => r.type === 'company');
-  const individual = data.rocks.filter(r => r.type !== 'company');
-  const rockHtml = (rocks) => rocks.map(r => {
+  const company = data.boulders.filter(r => r.type === 'company');
+  const individual = data.boulders.filter(r => r.type !== 'company');
+  const boulderHtml = (boulders) => boulders.map(r => {
     const status = r.status || 'tbd';
     const label = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' }[status] || status;
     return `<div class="sp-rock-item">
@@ -3991,16 +3991,16 @@ function staffRenderRocks(data) {
       <span class="sp-rock-status ${status}">${label}</span>
     </div>`;
   }).join('');
-  companyEl.innerHTML = rockHtml(company);
-  indivEl.innerHTML = rockHtml(individual);
+  companyEl.innerHTML = boulderHtml(company);
+  indivEl.innerHTML = boulderHtml(individual);
 }
 
-function staffRenderIssues(data) {
-  const tbody = document.getElementById('sp-issues-tbody');
+function staffRenderRocks(data) {
+  const tbody = document.getElementById('sp-rocks-tbody');
   if (!tbody) return;
-  const open = data.issues.filter(i => i.status === 'open' || !i.status);
+  const open = data.rocks.filter(i => i.status === 'open' || !i.status);
   tbody.innerHTML = open.map(i => `<tr>
-    <td>${i.issue}</td>
+    <td>${i.rock}</td>
     <td><span class="sp-owner-tag">${i.addedBy}</span></td>
     <td><span class="sp-priority ${i.priority}">${i.priority}</span></td>
   </tr>`).join('');
@@ -4044,13 +4044,13 @@ function staffCopyScript() {
 function staffRenderSnapshot(data) {
   const el = document.getElementById('sp-snapshot');
   if (!el) return;
-  const rocks = data.rocks || [];
-  const onTrack = rocks.filter(r => r.status === 'on-track').length;
-  const offTrack = rocks.filter(r => r.status === 'off-track').length;
-  const complete = rocks.filter(r => r.status === 'complete').length;
-  const total = rocks.length;
-  const issues = (data.issues || []).filter(i => i.status === 'open' || !i.status);
-  const highIssues = issues.filter(i => i.priority === 'high');
+  const boulders = data.boulders || [];
+  const onTrack = boulders.filter(r => r.status === 'on-track').length;
+  const offTrack = boulders.filter(r => r.status === 'off-track').length;
+  const complete = boulders.filter(r => r.status === 'complete').length;
+  const total = boulders.length;
+  const rocks = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
+  const highRocks = rocks.filter(i => i.priority === 'high');
   const redRows = (data.scorecard || []).filter(r => r.status === 'red');
   const kpiRows = (data.scorecard || []).filter(r => r.current).slice(0, 4);
   const q = (data.meta && data.meta.quarter) || 'Q2 2026';
@@ -4061,7 +4061,7 @@ function staffRenderSnapshot(data) {
     <div class="sp-section-header">
       <div class="sp-eyebrow">Quick View</div>
       <h2>${q} Snapshot</h2>
-      <p>At-a-glance status across rocks, scorecard, and issues. Jump to any tab for details.</p>
+      <p>At-a-glance status across boulders, scorecard, and rocks. Jump to any tab for details.</p>
     </div>
     <div class="sp-snap-kpi-row">
       ${kpiRows.length ? kpiRows.map(r => `
@@ -4075,7 +4075,7 @@ function staffRenderSnapshot(data) {
           <div class="sp-snap-kpi-value empty">Update scorecard current values to see KPIs here</div>
         </div>`}
     </div>
-    <div class="sp-snap-label">Rocks — ${q}</div>
+    <div class="sp-snap-label">Boulders — ${q}</div>
     <div class="sp-snap-rocks-bar">
       ${total ? `
         <div class="seg" style="width:${Math.round(complete/total*100)}%;background:#3949ab;"></div>
@@ -4085,24 +4085,24 @@ function staffRenderSnapshot(data) {
       ` : '<div class="seg" style="width:100%;background:#9e9e9e;border-radius:5px;"></div>'}
     </div>
     <div class="sp-snap-rocks-summary">${complete} complete &nbsp;&middot;&nbsp; ${onTrack} on track &nbsp;&middot;&nbsp; ${offTrack} off track &nbsp;&middot;&nbsp; ${notSet} not set &nbsp;&middot;&nbsp; ${total} total</div>
-    <div class="sp-snap-label">Open Issues</div>
-    ${issues.length ? `<div class="sp-snap-issues-strip">
-      ${highIssues.map(i=>`<span class="sp-snap-issue-chip">⚠ ${i.issue.substring(0,50)}${i.issue.length>50?'…':''}</span>`).join('')}
-      ${issues.length > highIssues.length ? `<span style="font-size:12px;color:var(--sp-muted);padding:4px 8px;">${issues.length - highIssues.length} more (med/low)</span>` : ''}
-    </div>` : '<span class="sp-snap-green-badge">✓ No open issues</span>'}
+    <div class="sp-snap-label">Open Rocks</div>
+    ${rocks.length ? `<div class="sp-snap-issues-strip">
+      ${highRocks.map(i=>`<span class="sp-snap-issue-chip">⚠ ${i.rock.substring(0,50)}${i.rock.length>50?'…':''}</span>`).join('')}
+      ${rocks.length > highRocks.length ? `<span style="font-size:12px;color:var(--sp-muted);padding:4px 8px;">${rocks.length - highRocks.length} more (med/low)</span>` : ''}
+    </div>` : '<span class="sp-snap-green-badge">✓ No open rocks</span>'}
     <div class="sp-snap-label" style="margin-top:20px;">Scorecard Reds</div>
     ${redRows.length ? `<div style="display:flex;flex-direction:column;gap:6px;">
       ${redRows.map(r=>`<div style="background:#fdecea;border:1px solid #ef9a9a;border-radius:4px;padding:8px 12px;font-size:13px;"><strong>${r.metric}</strong> <span style="color:var(--sp-muted);font-size:11px;">Owner: ${r.owner} &middot; Goal: ${r.goal}</span></div>`).join('')}
     </div>` : '<span class="sp-snap-green-badge">✓ No reds</span>'}
-    <div class="sp-snap-label" style="margin-top:20px;">Rocks Detail</div>
+    <div class="sp-snap-label" style="margin-top:20px;">Boulders Detail</div>
     <div class="sp-snap-rocks-2col">
       <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Company Rocks</div>
-        ${rocks.filter(r=>r.type==='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Company Boulders</div>
+        ${boulders.filter(r=>r.type==='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
       </div>
       <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Individual Rocks</div>
-        ${rocks.filter(r=>r.type!=='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Individual Boulders</div>
+        ${boulders.filter(r=>r.type!=='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
       </div>
     </div>
     <div class="sp-snap-ts">
@@ -4115,8 +4115,8 @@ function staffRenderSnapshot(data) {
 function staffRenderL10(data) {
   const el = document.getElementById('sp-l10');
   if (!el) return;
-  const rocks = data.rocks || [];
-  const issues = (data.issues || []).filter(i => i.status === 'open' || !i.status);
+  const boulders = data.boulders || [];
+  const rocks = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
   const redSc = (data.scorecard || []).filter(r => r.status === 'red');
   const q = (data.meta && data.meta.quarter) || 'Q2 2026';
   const today = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
@@ -4145,10 +4145,10 @@ function staffRenderL10(data) {
     </div>
     <div class="sp-l10-sec">
       <div class="sp-l10-sec-hdr">
-        <h4>Rock Review</h4>
+        <h4>Boulder Review</h4>
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; On Track or Off Track only</span>
       </div>
-      ${rocks.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('')}
+      ${boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('')}
     </div>
     <div class="sp-l10-sec">
       <div class="sp-l10-sec-hdr"><h4>Headlines</h4><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; customer/people</span></div>
@@ -4160,12 +4160,12 @@ function staffRenderL10(data) {
     </div>
     <div class="sp-l10-sec">
       <div class="sp-l10-sec-hdr">
-        <h4>IDS &mdash; Issues</h4>
-        <span class="sp-l10-badge ${issues.length ? 'red' : 'green'}">${issues.length} Issue${issues.length!==1?'s':''}</span>
+        <h4>IDS &mdash; Rocks</h4>
+        <span class="sp-l10-badge ${rocks.length ? 'red' : 'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">60 min &mdash; Identify, Discuss, Solve</span>
       </div>
-      ${issues.map((i,idx)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${idx+1}</span><div><div style="font-size:13px;">${i.issue}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input class="sp-l10-inp" placeholder="To-do / resolution…"><input class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
-      ${!issues.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open issues. Discuss anything that came up in scorecard or rocks reviews.</div>' : ''}
+      ${rocks.map((i,idx)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${idx+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input class="sp-l10-inp" placeholder="To-do / resolution…"><input class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
+      ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks. Discuss anything that came up in scorecard or boulders reviews.</div>' : ''}
     </div>
     <div class="sp-l10-conclude">
       <h4>Conclude &mdash; 5 min</h4>
@@ -4183,22 +4183,22 @@ function staffRenderVolLeads(data) {
   if (!el) return;
   const volKeywords = ['vol','serv','stepping stones','leader launch','cg leader','staffing'];
   const volMetrics = (data.scorecard || []).filter(r => volKeywords.some(k => r.metric.toLowerCase().includes(k)));
-  const volRocks = (data.rocks || []).filter(r => volKeywords.some(k => r.title.toLowerCase().includes(k)));
-  const volIssues = (data.issues || []).filter(i => (i.status === 'open' || !i.status) && volKeywords.some(k => i.issue.toLowerCase().includes(k)));
+  const volBoulders = (data.boulders || []).filter(r => volKeywords.some(k => r.title.toLowerCase().includes(k)));
+  const volRocks = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && volKeywords.some(k => i.rock.toLowerCase().includes(k)));
 
   el.innerHTML = `
     <div class="sp-section-header">
       <div class="sp-eyebrow">Volunteer &amp; Leadership Focus</div>
       <h2>Vol Leads View</h2>
-      <p>Volunteer and leadership metrics, rocks, and issues filtered for quick weekly review with Geoffrey, Adam, and volunteer team leads.</p>
+      <p>Volunteer and leadership metrics, boulders, and rocks filtered for quick weekly review with Geoffrey, Adam, and volunteer team leads.</p>
     </div>
-    <div class="sp-vl-note">This view filters scorecard, rocks, and issues to volunteer and leadership-related items. Update data in the Google Sheet to keep it current.</div>
+    <div class="sp-vl-note">This view filters scorecard, boulders, and rocks to volunteer and leadership-related items. Update data in the Google Sheet to keep it current.</div>
     <div class="sp-vl-stat-grid">
       ${volMetrics.map(r=>{const border=r.status==='red'?'red-border':r.status==='green'?'green-border':'';return`<div class="sp-vl-stat-card ${border}"><div class="sp-vl-stat-label">${(m=>{const p=m.split('—');return p[1]?p[1].trim().substring(0,32):p[0].trim().replace(/^(Active Church |Community Groups? |Stepping Stones )/,'').substring(0,32)})(r.metric)}</div><div class="sp-vl-stat-value ${r.current?'':'empty'}">${r.current||'—'}</div><div class="sp-vl-stat-meta">Goal: ${r.goal}</div></div>`;}).join('')}
       ${!volMetrics.length ? '<div class="sp-vl-stat-card" style="grid-column:1/-1;"><div class="sp-vl-stat-label">Scorecard</div><div class="sp-vl-stat-value empty">Enter current values in the Google Sheet</div></div>' : ''}
     </div>
-    ${volRocks.length ? `<div class="sp-snap-label">Volunteer &amp; Leader Rocks</div>${volRocks.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'Set Status'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner} &middot; ${r.quarter}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}` : ''}
-    ${volIssues.length ? `<div class="sp-snap-label" style="margin-top:20px;">Volunteer &amp; Leader Issues</div>${volIssues.map(i=>`<div class="sp-vl-action-card"><div style="font-size:13px;">${i.issue}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:4px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div>`).join('')}` : ''}
+    ${volBoulders.length ? `<div class="sp-snap-label">Volunteer &amp; Leader Boulders</div>${volBoulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'Set Status'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner} &middot; ${r.quarter}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}` : ''}
+    ${volRocks.length ? `<div class="sp-snap-label" style="margin-top:20px;">Volunteer &amp; Leader Rocks</div>${volRocks.map(i=>`<div class="sp-vl-action-card"><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:4px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div>`).join('')}` : ''}
     <div class="sp-vl-win-card">
       <h3>The Volunteer Win</h3>
       <p>"The church is the people, and people serve people. When volunteers are healthy, loved, and deployed in their gifting — the whole body thrives."</p>
@@ -4457,7 +4457,7 @@ function staffRenderIDS(data) {
   el.innerHTML = `
     <div class="sp-section-header">
       <div class="sp-eyebrow">Tool 08</div>
-      <h2>${esc(ids.title||'Issues List & IDS Process')}</h2>
+      <h2>${esc(ids.title||'Rocks List & IDS Process')}</h2>
       <p>${esc(ids.description||'')}</p>
     </div>
     <div class="sp-highlight-box">
@@ -4467,11 +4467,11 @@ function staffRenderIDS(data) {
     <div class="sp-grid-2">
       <div>
         <div class="sp-card" style="margin-bottom:16px;">
-          <div class="sp-card-title">Current Issues List <span class="sp-badge">Live</span></div>
-          <div class="sp-card-subtitle">Add issues in the Google Sheet — this list updates automatically</div>
+          <div class="sp-card-title">Current Rocks List <span class="sp-badge">Live</span></div>
+          <div class="sp-card-subtitle">Add rocks in the Google Sheet — this list updates automatically</div>
           <table class="sp-scorecard-table">
-            <thead><tr><th>Issue</th><th>Added By</th><th>Priority</th></tr></thead>
-            <tbody id="sp-issues-tbody"></tbody>
+            <thead><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
+            <tbody id="sp-rocks-tbody"></tbody>
           </table>
         </div>
         <div class="sp-ids-box"><h4>The 3-Step IDS Process</h4><ul>${steps}</ul></div>
@@ -4479,8 +4479,8 @@ function staffRenderIDS(data) {
       <div>
         <div class="sp-ids-box"><h4>LS-Specific IDS Culture Notes</h4><ul>${culture}</ul></div>
         <div class="sp-card">
-          <div class="sp-card-title">IDS to Rock Escalation <span class="sp-badge">Rule of 3</span></div>
-          <div class="sp-card-subtitle">When an issue keeps coming back, it needs a Rock, not just a To-Do</div>
+          <div class="sp-card-title">IDS to Boulder Escalation <span class="sp-badge">Rule of 3</span></div>
+          <div class="sp-card-subtitle">When a rock keeps coming back, it needs a Boulder, not just a To-Do</div>
           <ul class="sp-metric-list">${esc_rules}</ul>
         </div>
       </div>
