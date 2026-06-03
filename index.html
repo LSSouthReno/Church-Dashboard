@@ -3941,6 +3941,8 @@ function staffRenderAll(data) {
   staffRenderVTO(data);
   staffRenderCulture(data);
   staffRenderAccChart(data);
+  staffRenderMeetings(data);
+  staffRenderIDS(data);
   staffRenderScorecard(data);
   staffRenderRocks(data);
   staffRenderIssues(data);
@@ -4405,6 +4407,84 @@ function staffRenderAccChart(data) {
       <div class="sp-org-row" style="margin-bottom:0;gap:10px;flex-wrap:wrap;">${orgNodes}</div>
     </div>
     <div class="sp-grid-3">${dirCards}</div>`;
+}
+
+function staffRenderMeetings(data) {
+  if (!data.meetings) return;
+  const el = document.getElementById('sp-meetings');
+  if (!el) return;
+  const m = data.meetings;
+  const esc = t => String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const meetingCards = (m.meetings||[]).map(mtg => {
+    const agenda = (mtg.agenda||[]).map(a =>
+      `<div class="sp-agenda-item"><div class="sp-agenda-time">${esc(a.time)}</div><div>${esc(a.item)}</div></div>`
+    ).join('');
+    return `<div class="sp-meeting-card"><h3>${esc(mtg.title)}</h3><div class="sp-freq">${esc(mtg.freq)}</div>${agenda}</div>`;
+  }).join('');
+
+  const addons = (m.addons||[]).map(a =>
+    `<li><strong>${esc(a.label)}</strong> ${esc(a.text)}</li>`
+  ).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Tool 07</div>
+      <h2>${esc(m.title||'Meeting Pulse')}</h2>
+      <p>${esc(m.description||'')}</p>
+    </div>
+    <div class="sp-grid-2">${meetingCards}</div>
+    <div class="sp-card" style="margin-top:20px;">
+      <div class="sp-card-title">LS-Specific Meeting Add-Ons <span class="sp-badge">Church Context</span></div>
+      <div class="sp-card-subtitle">EOS doesn't replace these — it runs alongside them</div>
+      <ul class="sp-metric-list">${addons}</ul>
+    </div>`;
+}
+
+function staffRenderIDS(data) {
+  if (!data.ids) return;
+  const el = document.getElementById('sp-ids');
+  if (!el) return;
+  const ids = data.ids;
+  const esc = t => String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const steps = (ids.steps||[]).map(s =>
+    `<li><strong>${esc(s.label)}</strong> — ${esc(s.text)}</li>`
+  ).join('');
+  const culture = (ids.culture_notes||[]).map(n => `<li>${esc(n)}</li>`).join('');
+  const esc_rules = (ids.escalation||[]).map(r => `<li>${esc(r)}</li>`).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Tool 08</div>
+      <h2>${esc(ids.title||'Issues List & IDS Process')}</h2>
+      <p>${esc(ids.description||'')}</p>
+    </div>
+    <div class="sp-highlight-box">
+      <h3>${esc(ids.rule_title||'The IDS Rule')}</h3>
+      <p>${esc(ids.rule_text||'')}</p>
+    </div>
+    <div class="sp-grid-2">
+      <div>
+        <div class="sp-card" style="margin-bottom:16px;">
+          <div class="sp-card-title">Current Issues List <span class="sp-badge">Live</span></div>
+          <div class="sp-card-subtitle">Add issues in the Google Sheet — this list updates automatically</div>
+          <table class="sp-scorecard-table">
+            <thead><tr><th>Issue</th><th>Added By</th><th>Priority</th></tr></thead>
+            <tbody id="sp-issues-tbody"></tbody>
+          </table>
+        </div>
+        <div class="sp-ids-box"><h4>The 3-Step IDS Process</h4><ul>${steps}</ul></div>
+      </div>
+      <div>
+        <div class="sp-ids-box"><h4>LS-Specific IDS Culture Notes</h4><ul>${culture}</ul></div>
+        <div class="sp-card">
+          <div class="sp-card-title">IDS to Rock Escalation <span class="sp-badge">Rule of 3</span></div>
+          <div class="sp-card-subtitle">When an issue keeps coming back, it needs a Rock, not just a To-Do</div>
+          <ul class="sp-metric-list">${esc_rules}</ul>
+        </div>
+      </div>
+    </div>`;
 }
 
 function staffUpdateFunnelRates() {
