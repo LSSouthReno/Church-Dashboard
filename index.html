@@ -1557,7 +1557,7 @@
     <nav class="sp-nav-tabs">
       <div class="sp-nav-tab sp-active" onclick="staffShowSection('sp-snapshot',this)">Snapshot</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-vto',this)">V/TO</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-vot',this)">VOT</div>
+      <div class="sp-nav-tab" onclick="staffShowSection('sp-vot',this)">Culture</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-acc-chart',this)">Acc Chart</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-scorecard',this)">Scorecard</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-vol-leads',this)">Vol Leads</div>
@@ -1567,7 +1567,6 @@
       <div class="sp-nav-tab" onclick="staffShowSection('sp-meetings',this)">Meeting Pulse</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-l10',this)">L10 Feed</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-ids',this)">IDS</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-setup',this)">Setup</div>
     </nav>
     <div class="sp-main-wrap">
       <div class="sp-main">
@@ -1696,15 +1695,15 @@
           </div>
         </div>
 
-        <!-- VOT -->
+        <!-- CULTURE -->
         <div class="sp-section" id="sp-vot">
           <div class="sp-section-header">
             <div class="sp-eyebrow">Tool 02</div>
-            <h2>Values, Observable, Teachable (VOT)</h2>
+            <h2>Culture</h2>
             <p>For each of the four core values — Humble, Hungry, Happy, Honest — here are the observable behaviors we can hire by, coach to, and reward. Use this in every 1-on-1 and quarterly review.</p>
           </div>
           <div class="sp-highlight-box">
-            <h3>How to Use the VOT</h3>
+            <h3>How to Use the Culture Guide</h3>
             <p>In every quarterly 1-on-1 and annual review, score each staff member on all four values using a 1–5 scale. A "Right Person" lives these values naturally. A "Right Seat" question is separate — someone can be a great fit to our culture but wrong for the role. Both matter.</p>
           </div>
           <div class="sp-grid-2" style="margin-bottom:20px;">
@@ -1758,7 +1757,7 @@
             </div>
           </div>
           <div class="sp-card">
-            <div class="sp-card-title">VOT Scoring Guide <span class="sp-badge">Quarterly Review</span></div>
+            <div class="sp-card-title">Culture Scoring Guide <span class="sp-badge">Quarterly Review</span></div>
             <div class="sp-card-subtitle">Use this in quarterly 1-on-1s and annual reviews with each direct report</div>
             <table class="sp-scorecard-table">
               <thead><tr><th>Score</th><th>What It Means</th><th>Next Step</th></tr></thead>
@@ -1973,7 +1972,7 @@
               <div class="sp-freq">Quarterly &middot; Full Day &middot; Off Campus</div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">AM</div><div>Review prior quarter — rocks complete? What did we learn?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">AM</div><div>Review V/TO — vision still clear and shared? Any updates?</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">Mid</div><div>People review — right people, right seats? VOT check-in</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">Mid</div><div>People review — right people, right seats? Culture check-in</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>IDS biggest issues entering next quarter</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">PM</div><div>Set rocks for next quarter — company first, then individual</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">End</div><div>Team health + celebrate wins from the past quarter</div></div>
@@ -1982,7 +1981,7 @@
               <h3>Quarterly 1-on-1 (People Chat)</h3>
               <div class="sp-freq">Quarterly &middot; 60 Minutes &middot; Brad with each Director</div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Personal check-in — life, soul, family, energy</div></div>
-              <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>VOT review — score each of the 4 values together honestly</div></div>
+              <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>Culture review — score each of the 4 values together honestly</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">15 min</div><div>Rocks and measurables — are they hitting their numbers?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Development — what do they want to grow in this next quarter?</div></div>
               <div class="sp-agenda-item"><div class="sp-agenda-time">10 min</div><div>Forward — what is their rock for next quarter?</div></div>
@@ -2067,163 +2066,6 @@
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- SETUP -->
-        <div class="sp-section" id="sp-setup">
-          <div class="sp-section-header">
-            <div class="sp-eyebrow">Tool 09 — Admin</div>
-            <h2>Google Sheets Setup &amp; Live Data</h2>
-            <p>This page can pull live data from a Google Sheet via GitHub. Follow these steps once to connect everything. After that, just update the Sheet — the page updates automatically.</p>
-          </div>
-          <div class="sp-highlight-box">
-            <h3>How It Works</h3>
-            <p>Google Sheet (you edit) → Apps Script (auto-runs) → GitHub JSON file → This dashboard (fetches on load). You enter data in the Sheet. The Script pushes it to a JSON file in your GitHub repo. This page reads that JSON every time the Staff panel opens.</p>
-          </div>
-          <div class="sp-setup-step">
-            <h4>Step 1 — Create the Google Sheet</h4>
-            <p>Create a new Google Sheet named <strong>"LS South Reno Staff OS"</strong> with these tabs:</p>
-            <ol>
-              <li><strong>Scorecard</strong> — Columns: Metric | Owner | Goal | Current | Status (green/red/yellow) | Notes</li>
-              <li><strong>Rocks</strong> — Columns: Title | Owner | Quarter | Status (on-track/off-track/complete) | Type (company/individual) | Notes</li>
-              <li><strong>Issues</strong> — Columns: Issue | AddedBy | Priority (high/med/low) | Status (open/resolved)</li>
-              <li><strong>VTO</strong> — Columns: Key | Value (for any V/TO fields you want to update live)</li>
-            </ol>
-          </div>
-          <div class="sp-setup-step">
-            <h4>Step 2 — Create a GitHub Repository</h4>
-            <ol>
-              <li>Create a new GitHub repo (e.g., <strong>lssr-staff-os</strong>) and enable GitHub Pages</li>
-              <li>Add a folder called <strong>data/</strong> and create a file <strong>data/eos-data.json</strong> with content: <code>{}</code></li>
-              <li>Generate a GitHub Personal Access Token (Settings → Developer Settings → Tokens) with <strong>repo</strong> scope</li>
-              <li>Note your repo in the format: <strong>LSSouthReno/lssr-staff-os</strong></li>
-            </ol>
-          </div>
-          <div class="sp-setup-step">
-            <h4>Step 3 — Add Apps Script to the Google Sheet</h4>
-            <p>In the Google Sheet, go to <strong>Extensions → Apps Script</strong> and paste this code:</p>
-          </div>
-          <div style="position:relative;">
-            <button class="sp-copy-btn" onclick="staffCopyScript()">Copy Script</button>
-            <div class="sp-code-block" id="sp-gas-code">// LS South Reno Staff OS — Google Apps Script
-// Paste into Extensions → Apps Script in your Google Sheet
-// Set GITHUB_TOKEN in Script Properties (Project Settings → Script Properties)
-
-const GITHUB_REPO = 'LSSouthReno/lssr-staff-os';
-const GITHUB_FILE = 'data/eos-data.json';
-
-function getSpreadsheet() {
-  let ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) {
-    const id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
-    if (id) ss = SpreadsheetApp.openById(id);
-  }
-  if (!ss) throw new Error('Cannot find spreadsheet. Open this script from Extensions → Apps Script inside your sheet, or add SPREADSHEET_ID to Script Properties.');
-  return ss;
-}
-
-function pushToGitHub() {
-  const ss = getSpreadsheet();
-  const data = {
-    meta: {
-      lastUpdated: new Date().toISOString().split('T')[0],
-      quarter: getCell(ss, 'VTO', 'quarter') || 'Q2 2026'
-    },
-    scorecard: getSheetData(ss, 'Scorecard', ['metric','owner','goal','current','status','notes']),
-    rocks:     getSheetData(ss, 'Rocks',     ['title','owner','quarter','status','type','notes']),
-    issues:    getSheetData(ss, 'Issues',    ['issue','addedBy','priority','status'])
-  };
-
-  const token = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
-  if (!token) { Logger.log('ERROR: Set GITHUB_TOKEN in Script Properties'); return; }
-
-  const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
-  const getRes = UrlFetchApp.fetch(getUrl, {
-    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' },
-    muteHttpExceptions: true
-  });
-  const sha = JSON.parse(getRes.getContentText()).sha || null;
-
-  const body = {
-    message: `Update EOS data — ${data.meta.lastUpdated}`,
-    content: Utilities.base64Encode(JSON.stringify(data, null, 2)),
-    sha: sha
-  };
-
-  const putRes = UrlFetchApp.fetch(getUrl, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${token}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json'
-    },
-    payload: JSON.stringify(body),
-    muteHttpExceptions: true
-  });
-
-  const result = JSON.parse(putRes.getContentText());
-  Logger.log(result.commit ? '✅ Pushed to GitHub: ' + result.commit.sha : '❌ Error: ' + JSON.stringify(result));
-}
-
-function getSheetData(ss, sheetName, headers) {
-  const sheet = ss.getSheetByName(sheetName);
-  if (!sheet) { Logger.log('Sheet not found: ' + sheetName); return []; }
-  const rows = sheet.getDataRange().getValues();
-  return rows.slice(1)
-    .filter(r => r[0] && r[0].toString().trim() !== '')
-    .map(r => {
-      const obj = {};
-      headers.forEach((h, i) => { obj[h] = r[i] ? r[i].toString().trim() : ''; });
-      return obj;
-    });
-}
-
-function getCell(ss, sheetName, key) {
-  const sheet = ss.getSheetByName(sheetName);
-  if (!sheet) return null;
-  const data = sheet.getDataRange().getValues();
-  for (const row of data) {
-    if (row[0] && row[0].toString().toLowerCase() === key.toLowerCase()) return row[1].toString();
-  }
-  return null;
-}
-
-function createTrigger() {
-  ScriptApp.newTrigger('pushToGitHub').timeBased().everyHours(1).create();
-  Logger.log('Trigger created — will push every hour');
-}
-
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('🏛 Staff OS')
-    .addItem('Push to GitHub Now', 'pushToGitHub')
-    .addItem('Set Up Hourly Auto-Push', 'createTrigger')
-    .addToUi();
-}</div>
-          </div>
-          <div class="sp-setup-step">
-            <h4>Step 4 — Set Script Properties</h4>
-            <ol>
-              <li>In Apps Script editor, click <strong>Project Settings (⚙)</strong> → <strong>Script Properties</strong></li>
-              <li>Add property: Key = <strong>GITHUB_TOKEN</strong>, Value = your GitHub personal access token</li>
-              <li>The <strong>GITHUB_REPO</strong> constant is already set to <code>LSSouthReno/lssr-staff-os</code></li>
-              <li>Click <strong>Run → pushToGitHub</strong> to test. Check the Execution Log.</li>
-            </ol>
-          </div>
-          <div class="sp-setup-step">
-            <h4>Step 5 — You're Live</h4>
-            <p>The dashboard is already connected. The data URL is:</p>
-            <div style="background:#1e1e1e;color:#d4d4d4;font-family:'DM Mono',monospace;font-size:12px;padding:12px 16px;border-radius:4px;margin:10px 0;">https://lssouthreno.github.io/lssr-staff-os/data/eos-data.json</div>
-            <p>Every time the Staff panel opens, it fetches the latest data. The green dot in the Snapshot tab confirms live data is loaded.</p>
-          </div>
-          <div class="sp-card">
-            <div class="sp-card-title">Sharing With the Team <span class="sp-badge">Access</span></div>
-            <ul class="sp-metric-list">
-              <li>The Staff panel is password-protected (password: see Brad) — no separate hosting needed</li>
-              <li>This dashboard already lives on GitHub Pages; the Staff panel opens as an overlay</li>
-              <li>Data stays in your Google Sheet — only aggregated JSON is pushed to GitHub, no names in issues by default</li>
-              <li>For sensitive personnel issues, keep them in a private tab that is NOT included in the getSheetData calls</li>
-            </ul>
           </div>
         </div>
 
