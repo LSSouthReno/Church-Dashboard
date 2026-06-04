@@ -4120,61 +4120,82 @@ function staffRenderSnapshot(data) {
 function staffRenderL10(data) {
   const el = document.getElementById('sp-l10');
   if (!el) return;
+
   const boulders = data.boulders || [];
-  const rocks = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
-  const redSc = (data.scorecard || []).filter(r => r.status === 'red');
-  const q = (data.meta && data.meta.quarter) || 'Q2 2026';
-  const today = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  const rocks    = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
+  const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
+  const q        = (data.meta && data.meta.quarter) || 'Q2 2026';
+  const today    = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+  // Pull the first meeting from Page Content data (Staff Sync / L10)
+  const mtg    = data.meetings && data.meetings.meetings && data.meetings.meetings[0];
+  const title  = mtg ? mtg.title  : 'Staff Sync';
+  const freq   = mtg ? mtg.freq   : 'Weekly';
+  const agenda = mtg ? (mtg.agenda || []) : [];
+
+  const agendaSections = agenda.map(a => {
+    const t  = (a.item || '').toLowerCase();
+    const isScorecard = t.includes('scorecard');
+    const isBoulder   = t.includes('boulder');
+    const isIDS       = t.includes('ids') || (t.includes('identify') && t.includes('discuss'));
+
+    if (isScorecard) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span class="sp-l10-badge ${redSc.length?'red':'green'}">${redSc.length ? redSc.length+' Red'+(redSc.length>1?'s':'') : 'All Green'}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        ${redSc.length ? redSc.map(r=>`<div class="sp-l10-reds-row"><div style="font-size:13px;font-weight:600;">${r.metric}</div><div style="font-size:12px;color:var(--sp-muted);">Owner: ${r.owner} &middot; Goal: ${r.goal} &middot; Current: ${r.current||'—'}</div></div>`).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No red metrics this week. Move on.</div>'}
+      </div>`;
+
+    if (isBoulder) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        ${boulders.length ? boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No boulders set yet.</div>'}
+      </div>`;
+
+    if (isIDS) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        ${rocks.map((i,idx)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${idx+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input class="sp-l10-inp" placeholder="To-do / resolution…"><input class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
+        ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
+      </div>`;
+
+    // Generic section — show the item text as heading with a notes area
+    return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        <div class="sp-l10-input-row" style="margin-top:8px;">
+          <input class="sp-l10-inp" style="width:100%;" placeholder="Notes…">
+        </div>
+      </div>`;
+  }).join('');
 
   el.innerHTML = `
     <div class="sp-section-header">
-      <div class="sp-eyebrow">L10 Meeting Runner</div>
-      <h2>Level 10 Meeting</h2>
-      <p>90-minute weekly meeting guide. Work through each section in order. IDS gets the most time. Rate the meeting at the end.</p>
+      <div class="sp-eyebrow">Meeting Runner</div>
+      <h2>${title}</h2>
+      <p>${freq}</p>
     </div>
     <div class="sp-l10-hdr">
-      <div><h3>L10 Meeting</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
-      <div style="font-size:13px;color:rgba(245,240,232,0.6);">90 min &middot; Same day &amp; time every week</div>
+      <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
+      <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
     </div>
-    <div class="sp-l10-segue">
-      <p>Segue &mdash; 5 min</p>
-      <p style="font-size:13px;color:var(--sp-muted);margin-top:6px;">Go around the room: one good news personally, one good news professionally. No discussion — just good news.</p>
-    </div>
-    <div class="sp-l10-sec">
-      <div class="sp-l10-sec-hdr">
-        <h4>Scorecard Review</h4>
-        <span class="sp-l10-badge ${redSc.length ? 'red' : 'green'}">${redSc.length ? redSc.length + ' Red' + (redSc.length>1?'s':'') : 'All Green'}</span>
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; note reds, no discussion</span>
-      </div>
-      ${redSc.length ? redSc.map(r=>`<div class="sp-l10-reds-row"><div style="font-size:13px;font-weight:600;">${r.metric}</div><div style="font-size:12px;color:var(--sp-muted);">Owner: ${r.owner} &middot; Goal: ${r.goal} &middot; Current: ${r.current||'—'}</div></div>`).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No red metrics this week. Move on.</div>'}
-    </div>
-    <div class="sp-l10-sec">
-      <div class="sp-l10-sec-hdr">
-        <h4>Boulder Review</h4>
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; On Track or Off Track only</span>
-      </div>
-      ${boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('')}
-    </div>
-    <div class="sp-l10-sec">
-      <div class="sp-l10-sec-hdr"><h4>Headlines</h4><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; customer/people</span></div>
-      <div class="sp-l10-issue-row" style="color:var(--sp-muted);font-size:13px;font-style:italic;">Share any guest or staff headlines this week. Surface anything that needs attention before IDS.</div>
-    </div>
-    <div class="sp-l10-sec">
-      <div class="sp-l10-sec-hdr"><h4>To-Do Review</h4><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">5 min &mdash; check last week's 7-day actions</span></div>
-      <div class="sp-l10-issue-row" style="color:var(--sp-muted);font-size:13px;font-style:italic;">Review any open to-dos from last week. Each should be done or have a clear update.</div>
-    </div>
-    <div class="sp-l10-sec">
-      <div class="sp-l10-sec-hdr">
-        <h4>IDS &mdash; Rocks</h4>
-        <span class="sp-l10-badge ${rocks.length ? 'red' : 'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">60 min &mdash; Identify, Discuss, Solve</span>
-      </div>
-      ${rocks.map((i,idx)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${idx+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input class="sp-l10-inp" placeholder="To-do / resolution…"><input class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
-      ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks. Discuss anything that came up in scorecard or boulders reviews.</div>' : ''}
-    </div>
+    ${agendaSections}
     <div class="sp-l10-conclude">
-      <h4>Conclude &mdash; 5 min</h4>
-      <div style="font-size:13px;color:var(--sp-muted);margin-bottom:14px;">Recap to-dos. Recap decisions made. Rate the meeting 1&ndash;10.</div>
+      <h4>Conclude</h4>
+      <div style="font-size:13px;color:var(--sp-muted);margin-bottom:14px;">Recap to-dos and decisions. Rate the meeting 1&ndash;10.</div>
       <div class="sp-l10-ratings">
         ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" onclick="this.parentElement.querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');">${n}</button>`).join('')}
       </div>
