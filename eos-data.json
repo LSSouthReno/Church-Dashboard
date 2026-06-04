@@ -1,13 +1,13 @@
 {
   "meta": {
-    "lastUpdated": "2026-06-03",
+    "lastUpdated": "2026-06-04",
     "quarter": "Q2 2026"
   },
   "tabs": [
     {
       "id": "sp-snapshot",
       "label": "Snapshot",
-      "visible": true
+      "visible": false
     },
     {
       "id": "sp-vto",
@@ -27,7 +27,7 @@
     {
       "id": "sp-team",
       "label": "Team Genius",
-      "visible": true
+      "visible": false
     },
     {
       "id": "sp-scorecard",
@@ -40,7 +40,7 @@
       "visible": true
     },
     {
-      "id": "sp-rocks",
+      "id": "sp-boulders",
       "label": "Boulders",
       "visible": true
     },
@@ -63,7 +63,7 @@
   "header": {
     "title": "Running on",
     "title_highlight": "Traction",
-    "subtitle": "EOS adapted for Living Stones South Reno. Humble - Hungry - Happy - Honest.",
+    "subtitle": "Staff OS adapted for Living Stones South Reno. Humble - Hungry - Happy - Honest.",
     "scripture": "The horse is made ready for the day of battle, but the victory belongs to the LORD. - Prov 21:31",
     "footer": "Living Stones South Reno - Staff Operating System - Humble - Hungry - Happy - Honest",
     "org_tag": "Living Stones South Reno - Staff Operating System"
@@ -181,7 +181,7 @@
           "Generosity: Hit All-In goal of $8,500,000",
           "Leadership Dev: 25 Leader Launch grads, 2+ new EITs, 10 new deacons",
           "Church Planting: Begin seeking and vetting a new church planter",
-          "EOS: L10s running in all departments, scorecard reviewed weekly",
+          "Staff OS: L10s running in all departments, scorecard reviewed weekly",
           "Building: 3 viable sites identified, financial model presented to Elders"
         ],
         "secondary_items": [],
@@ -276,7 +276,7 @@
       "org_wg": "WG: Tenacity + Invention - The Methodical Architect",
       "items": [
         "Executes and filters vision into operations and systems",
-        "Owns the Level 10 meeting pulse and EOS implementation",
+        "Owns the Level 10 meeting pulse and Staff OS implementation",
         "Manages and develops all department directors",
         "Budget ownership, financial health, building search",
         "Holds team accountable to boulders, scorecard, and values",
@@ -320,7 +320,7 @@
         "subtitle": "Wins when every touchpoint reflects the mission clearly and beautifully",
         "org_wg": "Wins when every touchpoint reflects the mission clearly and beautifully",
         "items": [
-          "Sermon series graphics, bumper videos, event graphics",
+          "Sermon series graphics, bumper vidStaff OS, event graphics",
           "Church app, website, and social media content",
           "Weekly email graphics, First-to-Know video, sermon clips",
           "Environmental design: lobby, stage, signage, kids spaces",
@@ -350,7 +350,7 @@
         "items": [
           "Create curriculum that teaches children Bible truths pointing to Jesus",
           "Resource classroom teachers with materials and activity instructions",
-          "Set up curriculum documents and videos ready for each Sunday",
+          "Set up curriculum documents and vidStaff OS ready for each Sunday",
           "Ensure snacks stocked, rooms clean and classroom-ready",
           "Evaluate and implement approved improvements to curriculum"
         ]
@@ -382,20 +382,46 @@
           "Evaluate and implement improvements to volunteer systems",
           "Weekly Email Communication to Church"
         ]
+      },
+      {
+        "name": "Keith Primus",
+        "role": "Benevolence Director (Volunteer)",
+        "wg": "",
+        "subtitle": "Wins when the right people get connected to the right financial help at the right time",
+        "org_wg": "Wins when the right people get connected to the right financial help at the right time",
+        "items": [
+          "Benevolence request intake, assessment, and coordination",
+          "Financial assistance distribution and fund stewardship",
+          "Connects families in need to church and external resources",
+          "Maintains confidentiality and pastoral care standards throughout",
+          "Partners with Brad and Rachel on extra office & church needs"
+        ]
       }
     ]
   },
   "meetings": {
     "title": "Meeting Pulse",
-    "description": "EOS replaces random meetings with a predictable, productive rhythm. Every meeting has a clear purpose, agenda, and time limit. Stop having meetings about meetings.",
+    "description": "Staff OS replaces random meetings with a predictable, productive rhythm. Every meeting has a clear purpose, agenda, and time limit. Stop having meetings about meetings.",
     "meetings": [
       {
-        "title": "Level 10 Meeting (L10)",
-        "freq": "Weekly - 90 Minutes - Same Day and Time Every Week",
+        "title": "Staff Sync",
+        "freq": "Weekly - 90 Minutes - Mondays at 12pm at LSSR Office",
         "agenda": [
           {
             "time": "5 min",
-            "item": "Segue - one good news personally, one professionally"
+            "item": "Prayer (for building & church)"
+          },
+          {
+            "time": "30 min",
+            "item": "Staff Development - Book/Article/Podast Discussion"
+          },
+          {
+            "time": "5 min",
+            "item": "Segue - one good news personally, one good thing from Sunday"
+          },
+          {
+            "time": "10 min",
+            "item": "Joy Bombs"
           },
           {
             "time": "5 min",
@@ -403,33 +429,25 @@
           },
           {
             "time": "5 min",
-            "item": "Rock review - each person: On Track or Off Track only"
+            "item": "Boulder review - each person: On Track or Off Track only"
           },
           {
-            "time": "5 min",
-            "item": "Customer / People Headlines - guest or staff issues to surface"
-          },
-          {
-            "time": "5 min",
-            "item": "To-Do list review - check prior weeks 7-day actions"
-          },
-          {
-            "time": "60 min",
+            "time": "20 min",
             "item": "IDS - Identify, Discuss, Solve the top 3 issues (prioritized)"
           },
           {
-            "time": "5 min",
-            "item": "Conclude - rate the meeting 1-10; recap to-dos"
+            "time": "10 min",
+            "item": "Calendar Planning & Sidebars (what's coming up, who needs to collaborate)"
           }
         ]
       },
       {
-        "title": "Quarterly Business Owners Meeting (QBOP)",
-        "freq": "Quarterly - Full Day - Off Campus",
+        "title": "Quarterly Ownership Meeting (QOM)",
+        "freq": "Quarterly - Full Day",
         "agenda": [
           {
             "time": "AM",
-            "item": "Review prior quarter - rocks complete? What did we learn?"
+            "item": "Review prior quarter - boulders complete? What did we learn?"
           },
           {
             "time": "AM",
@@ -445,7 +463,7 @@
           },
           {
             "time": "PM",
-            "item": "Set rocks for next quarter - company first, then individual"
+            "item": "Set boulders for next quarter - company first, then individual"
           },
           {
             "time": "End",
@@ -467,7 +485,7 @@
           },
           {
             "time": "15 min",
-            "item": "Rocks and measurables - are they hitting their numbers?"
+            "item": "Boulders and measurables - are they hitting their numbers?"
           },
           {
             "time": "10 min",
@@ -475,7 +493,7 @@
           },
           {
             "time": "10 min",
-            "item": "Forward - what is their rock for next quarter?"
+            "item": "Forward - what are their boulders for next quarter?"
           }
         ]
       },
@@ -493,7 +511,7 @@
           },
           {
             "time": "Day 2",
-            "item": "Set Q1 rocks for all seats; budget and calendar alignment"
+            "item": "Set Q1 boulders for all seats; budget and calendar alignment"
           },
           {
             "time": "Day 2",
@@ -530,7 +548,7 @@
     ]
   },
   "ids": {
-    "title": "Issues List and IDS Process",
+    "title": "Boulders List and IDS Process",
     "description": "IDS - Identify, Discuss, Solve - is how you actually fix problems instead of talking around them forever. The Issues List is the shared, visible list of everything getting in the way.",
     "rule_title": "The IDS Rule",
     "rule_text": "Whoever identifies an issue owns putting it on the list - not solving it alone. The team solves it together in the L10. Issues are prioritized by impact, not urgency. An issue that recurs 3x becomes a Rock to fix systemically.",
@@ -553,7 +571,7 @@
       "Issues belong to the team, not the person who raised them. No retaliation culture.",
       "Never escalate to Ryan what Brad can solve. Never escalate to Brad what a director can solve.",
       "IDS is not a venting session. Time-box discussion.",
-      "The Stepping Stones transition (post-Feb 2025) created systemic issues - these are Rocks, not just IDS items.",
+      "The Stepping Stones transition (post-Feb 2025) created systemic issues - these are boulders, not just IDS items.",
       "The Wonder gap means issues may not surface until critical. Build in What are we missing? as a standing L10 prompt."
     ],
     "escalation": [
@@ -561,7 +579,7 @@
       "Issue reappears for 2nd time - escalate priority; examine root cause",
       "Issue appears for 3rd time - becomes a company Rock next quarter",
       "Issues involving Right Person / Right Seat - always escalate to Brad for private 1-on-1",
-      "Building / facility issues - Ryan + Brad own together; surface at every QBOP"
+      "Building / facility issues - Ryan + Brad own together; surface at every QOM"
     ]
   },
   "scorecard": [
@@ -617,7 +635,7 @@
       "metric": "Community Group Members (Active)",
       "owner": "Adam Carp",
       "goal": "500+",
-      "current": "458",
+      "current": "456",
       "status": "grey",
       "notes": "Current: 387 members (Jan 2026)"
     },
@@ -728,7 +746,7 @@
   ],
   "boulders": [
     {
-      "title": "StaffOS Rhythm Established: Clarity & Accountability",
+      "title": "Staff OS Rhythm Established: Clarity & Accountability",
       "owner": "Brad Borowski",
       "quarter": "Q3 2026",
       "status": "on-track",
@@ -889,55 +907,70 @@
       "type": "individual"
     },
     {
-      "title": "Improve on StaffOS system for LSSR",
-      "owner": "",
+      "title": "Improve on Staff OS system for LSSR",
+      "owner": "Brad Borowski",
       "quarter": "Q3 2026",
       "status": "tbd",
       "type": "individual"
+    },
+    {
+      "title": "Team Wonder/Galvanizing gap — build structured What-are-we-missing time into Weekly/Quarterly Meetings",
+      "owner": "Brad Borowski",
+      "quarter": "Q3 2026",
+      "status": "tbd",
+      "type": "company"
+    },
+    {
+      "title": "Stanchions Issue finally solved",
+      "owner": "Brad Borowski",
+      "quarter": "Q3 2026",
+      "status": "tbd",
+      "type": "company"
     }
   ],
   "rocks": [
     {
+      "rock": "Students Leader Schedule System Fixed",
       "addedBy": "Katie & Isaac",
       "priority": "high",
-      "status": "open",
-      "rock": "Students Leader Schedule System Fixed"
+      "status": "open"
     },
     {
+      "rock": "Define Boulders",
       "addedBy": "Brad",
       "priority": "high",
-      "status": "open",
-      "rock": "Define Boulders"
+      "status": "open"
     },
     {
+      "rock": "Class Organization Recreated",
       "addedBy": "Geoffrey",
       "priority": "high",
-      "status": "open",
-      "rock": "Class Organization Recreated"
+      "status": "open"
     },
     {
+      "rock": "Creative asset lead times compressed — info from pastoral team often arrives too late",
       "addedBy": "John Conelea",
       "priority": "med",
-      "status": "open",
-      "rock": "Creative asset lead times compressed — info from pastoral team often arrives too late"
+      "status": "open"
     },
     {
-      "addedBy": "Adam Carp",
+      "rock": "First Few Staff OS Months: Review System/Dashboard, Make Improvements",
+      "addedBy": "Brad",
       "priority": "med",
-      "status": "open",
-      "rock": "CG attendance rate at 50% vs 75%+ goal - engagement strategy needed"
-    },
-    {
-      "addedBy": "Brad",
-      "priority": "low",
-      "status": "open",
-      "rock": "Team Wonder/Galvanizing gap — build structured What-are-we-missing time into Weekly/Quarterly Meetings"
-    },
-    {
-      "addedBy": "Brad",
-      "priority": "low",
-      "status": "open",
-      "rock": "Stanchions Issue finally solved"
+      "status": "open"
     }
-  ]
+  ],
+  "funnel": {
+    "guest": 0,
+    "attender": 0,
+    "member": 0,
+    "group": 0,
+    "leader": 0,
+    "missionary": 0,
+    "asOf": "2026-06-04"
+  },
+  "calendar": {
+    "events": [],
+    "asOf": "2026-06-04"
+  }
 }
