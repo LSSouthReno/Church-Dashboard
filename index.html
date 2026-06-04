@@ -3805,6 +3805,11 @@ function cgFilterTable() {
 const STAFF_HASH = 'ac7f5a10683437edf6618ad90f38b43db60dd2b43a4e23fbae0dc9d58bda56f8';
 const STAFF_SESSION_KEY = 'staff_unlocked';
 const STAFF_DATA_URL = 'https://lssouthreno.github.io/lssr-staff-os/data/eos-data.json';
+
+// ── Meeting minutes sync — fill in after deploying the Apps Script web app ──
+const MEETING_WEBAPP_URL  = ''; // paste your /exec URL here
+const MEETING_EDITOR_HASH = ''; // paste hash from setMeetingEditorPassword() here
+const MEETING_SESS_KEY    = 'lssr_meeting_edit';
 let staffRendered = false;
 
 const STAFF_DEFAULT_DATA = {
@@ -3940,6 +3945,7 @@ async function staffLoadData() {
 
 function staffRenderAll(data) {
   staffRendered = true;
+  window._staffLastData = data;
   staffRenderMeta(data);
   staffRenderTabs(data);
   staffRenderVTO(data);
@@ -4117,9 +4123,10 @@ function staffRenderSnapshot(data) {
     </div>`;
 }
 
-// ── MEETING MINUTES — localStorage helpers ────────────────────────────────────
+// ── MEETING MINUTES — multi-device sync + localStorage fallback ────────────────
 const L10_CUR_KEY  = 'lssr_staffsync_current';
 const L10_HIST_KEY = 'lssr_staffsync_history';
+let   l10SyncTimer_ = null;
 
 function l10MonKey_() {
   const d = new Date(), day = d.getDay();
@@ -4128,6 +4135,37 @@ function l10MonKey_() {
   mon.setHours(0,0,0,0);
   return mon.toISOString().split('T')[0];
 }
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+function staffMeetingIsUnlocked() {
+  return sessionStorage.getItem(MEETING_SESS_KEY) === '1';
+}
+async function staffMeetingDoUnlock() {
+  const input = document.getElementById('meeting-pw-input');
+  const errEl = document.getElementById('meeting-pw-err');
+  if (!input) return;
+  const pw = input.value;
+  errEl.style.display = 'none';
+
+  // If no hash is configured, any password unlocks (localhost/dev mode)
+  if (!MEETING_EDITOR_HASH) {
+    sessionStorage.setItem(MEETING_SESS_KEY, '1');
+    staffRenderAll(window._staffLastData || {});
+    return;
+  }
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex  = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hex === MEETING_EDITOR_HASH) {
+    sessionStorage.setItem(MEETING_SESS_KEY, '1');
+    staffRenderAll(window._staffLastData || {});
+  } else {
+    errEl.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+// ── localStorage helpers ──────────────────────────────────────────────────────
 function l10Load_() {
   try { return JSON.parse(localStorage.getItem(L10_CUR_KEY) || 'null') || {}; } catch(e) { return {}; }
 }
@@ -4135,8 +4173,9 @@ function l10Patch_(obj) {
   const n = l10Load_();
   Object.assign(n, obj, { weekKey: l10MonKey_() });
   try { localStorage.setItem(L10_CUR_KEY, JSON.stringify(n)); } catch(e) {}
+  l10QueueRemoteSync_();
 }
-function l10Archive_(session) {
+function l10LocalArchive_(session) {
   if (!session || !Object.keys(session).filter(k => k !== 'weekKey').length) return;
   try {
     const h = JSON.parse(localStorage.getItem(L10_HIST_KEY) || '[]');
@@ -4149,17 +4188,96 @@ function l10CheckReset_() {
   const saved = l10Load_();
   if (!saved.weekKey) return false;
   if (new Date(saved.weekKey) < new Date(l10MonKey_())) {
-    l10Archive_(saved);
+    l10LocalArchive_(saved);
     try { localStorage.removeItem(L10_CUR_KEY); } catch(e) {}
     return true;
   }
   return false;
 }
-function staffL10SaveMeeting() {
+
+// ── Remote sync (Google Sheets via Apps Script web app) ───────────────────────
+function l10QueueRemoteSync_() {
+  if (!MEETING_WEBAPP_URL || !staffMeetingIsUnlocked()) return;
+  clearTimeout(l10SyncTimer_);
+  l10SyncTimer_ = setTimeout(l10RemoteSave_, 4000);
+}
+async function l10RemoteSave_() {
+  if (!MEETING_WEBAPP_URL) return;
+  const pwHash = await l10PwHash_();
+  const data   = l10Load_();
+  try {
+    fetch(MEETING_WEBAPP_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'save_current', pwHash, data }),
+      mode: 'no-cors'
+    });
+  } catch(e) {}
+}
+async function l10RemoteLoad_() {
+  if (!MEETING_WEBAPP_URL) return null;
+  try {
+    const res = await fetch(MEETING_WEBAPP_URL + '?action=all&t=' + Date.now());
+    if (!res.ok) return null;
+    return await res.json();
+  } catch(e) { return null; }
+}
+async function l10PwHash_() {
+  const pw = sessionStorage.getItem(MEETING_SESS_KEY + '_pw') || '';
+  if (!pw) return '';
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// Unlock also stores the raw pw (session-only) for signing remote requests
+async function staffMeetingDoUnlockFull() {
+  const input = document.getElementById('meeting-pw-input');
+  const errEl = document.getElementById('meeting-pw-err');
+  if (!input) return;
+  const pw = input.value;
+  errEl.style.display = 'none';
+  if (!MEETING_EDITOR_HASH) {
+    sessionStorage.setItem(MEETING_SESS_KEY, '1');
+    sessionStorage.setItem(MEETING_SESS_KEY + '_pw', pw);
+    await l10LoadAndRender_(); return;
+  }
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex  = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hex === MEETING_EDITOR_HASH) {
+    sessionStorage.setItem(MEETING_SESS_KEY, '1');
+    sessionStorage.setItem(MEETING_SESS_KEY + '_pw', pw);
+    await l10LoadAndRender_();
+  } else {
+    errEl.style.display = 'block';
+    input.value = ''; input.focus();
+  }
+}
+async function l10LoadAndRender_() {
+  // Pull remote data and merge into localStorage, then re-render
+  const remote = await l10RemoteLoad_();
+  if (remote) {
+    if (remote.current && Object.keys(remote.current).length) {
+      try { localStorage.setItem(L10_CUR_KEY, JSON.stringify(remote.current)); } catch(e) {}
+    }
+    if (remote.history && remote.history.length) {
+      try { localStorage.setItem(L10_HIST_KEY, JSON.stringify(remote.history)); } catch(e) {}
+    }
+  }
+  staffRenderAll(window._staffLastData || {});
+}
+
+// ── UI actions ─────────────────────────────────────────────────────────────────
+async function staffL10SaveMeeting() {
   const n = l10Load_();
   n._savedAt = new Date().toISOString();
-  l10Archive_(n);
+  l10LocalArchive_(n);
   try { localStorage.removeItem(L10_CUR_KEY); } catch(e) {}
+
+  // Remote archive
+  if (MEETING_WEBAPP_URL && staffMeetingIsUnlocked()) {
+    const pwHash = await l10PwHash_();
+    try { fetch(MEETING_WEBAPP_URL, { method:'POST', body: JSON.stringify({action:'archive', pwHash, data: n}), mode:'no-cors' }); } catch(e) {}
+  }
+
   const btn = document.getElementById('sp-l10-save-btn');
   if (btn) { btn.textContent = '✓ Archived!'; btn.disabled = true; btn.style.background = '#2e5e3a'; }
   const el = document.getElementById('sp-l10');
@@ -4230,6 +4348,35 @@ function staffRenderL10(data) {
   const el = document.getElementById('sp-l10');
   if (!el) return;
 
+  // If not unlocked, show the password gate + read-only history
+  if (!staffMeetingIsUnlocked()) {
+    const hist = (() => { try { return JSON.parse(localStorage.getItem(L10_HIST_KEY)||'[]'); } catch(e) { return []; } })();
+    el.innerHTML = `
+      <div class="sp-section-header">
+        <div class="sp-eyebrow">Meeting Runner</div>
+        <h2>Staff Sync</h2>
+        <p>Enter the meeting editor password to take notes and archive this session.</p>
+      </div>
+      <div class="tmod-lockcard" style="max-width:400px;margin:0 auto 40px;">
+        <div class="tmod-lockicon">&#9997;&#65039;</div>
+        <div class="tmod-lockttl">Meeting Editor</div>
+        <div class="tmod-lockmsg">Enter the meeting password to unlock editing on this device.</div>
+        <input type="password" id="meeting-pw-input" placeholder="Meeting password" autocomplete="off"
+          onkeydown="if(event.key==='Enter')staffMeetingDoUnlockFull()">
+        <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px"
+          onclick="staffMeetingDoUnlockFull()">Unlock for This Session</button>
+        <div id="meeting-pw-err" class="tmod-lockerr" style="display:none;">Incorrect password.</div>
+      </div>
+      ${hist.length ? `
+        <div style="border-top:1px solid var(--sp-border);padding-top:28px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:16px;">Past Meetings</div>
+          <div id="sp-l10-history"></div>
+        </div>` : ''}`;
+    if (hist.length) staffL10RenderHistory();
+    setTimeout(() => { const i = document.getElementById('meeting-pw-input'); if(i) i.focus(); }, 100);
+    return;
+  }
+
   const wasReset = l10CheckReset_();
   const boulders = data.boulders || [];
   const rocks    = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
@@ -4298,6 +4445,11 @@ function staffRenderL10(data) {
       <div class="sp-eyebrow">Meeting Runner</div>
       <h2>${title}</h2>
       <p>${freq}</p>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:#6fcf97;">🔓 Editing unlocked on this device</span>
+        ${MEETING_WEBAPP_URL ? `<span style="font-size:12px;color:var(--sp-muted);">☁ Syncing to Google Sheet</span>` : `<span style="font-size:12px;color:var(--sp-muted);">💾 Local only — <a href="#" onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});return false;" style="color:var(--sp-gold);">configure web app to sync</a></span>`}
+        <button onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});" style="font-size:11px;padding:3px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Lock</button>
+      </div>
     </div>
     <div class="sp-l10-hdr">
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
