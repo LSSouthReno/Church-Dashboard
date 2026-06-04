@@ -1177,13 +1177,24 @@
       </div>
     </div>
 
-    <div class="card" id="baptismsCard">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-        <h2 style="margin:0;">Baptisms</h2>
-        <span id="baptismsTotalBadge" style="font-size:13px;color:#818cf8;font-weight:700;padding-top:2px;"></span>
+    <div class="stack">
+      <div class="card" id="baptismsCard">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+          <h2 style="margin:0;">Baptisms</h2>
+          <span id="baptismsTotalBadge" style="font-size:13px;color:#818cf8;font-weight:700;padding-top:2px;"></span>
+        </div>
+        <div class="card-sub">PCO baptism records · grouped by year</div>
+        <div class="chart-wrap"><div class="chart-inner"><canvas id="baptismsChart"></canvas></div></div>
       </div>
-      <div class="card-sub">PCO baptism records · grouped by year</div>
-      <div class="chart-wrap"><div class="chart-inner"><canvas id="baptismsChart"></canvas></div></div>
+
+      <div class="card" id="membersGrowthCard">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+          <h2 style="margin:0;">Church Members</h2>
+          <span id="membersTotalBadge" style="font-size:13px;color:#34d399;font-weight:700;padding-top:2px;"></span>
+        </div>
+        <div class="card-sub">PCO membership records · new members grouped by year</div>
+        <div class="chart-wrap"><div class="chart-inner"><canvas id="membersChart"></canvas></div></div>
+      </div>
     </div>
   </div>
 
@@ -2102,6 +2113,7 @@ function normalizeDashboardData() {
   DASHBOARD_DATA.communityGroups = DASHBOARD_DATA.communityGroups || { months: [], counts: [] };
   DASHBOARD_DATA.communityGroupMembers = DASHBOARD_DATA.communityGroupMembers || { months: [], counts: [] };
   DASHBOARD_DATA.baptisms = DASHBOARD_DATA.baptisms || { months: [], counts: [], total: 0 };
+  DASHBOARD_DATA.members  = DASHBOARD_DATA.members  || { years: [], counts: [], current: 0 };
   DASHBOARD_DATA.communityGroupsDetailed = DASHBOARD_DATA.communityGroupsDetailed || {};
   DASHBOARD_DATA.budget   = DASHBOARD_DATA.budget   || null;
   DASHBOARD_DATA.missions = DASHBOARD_DATA.missions || null;
@@ -2826,6 +2838,50 @@ function renderBaptisms() {
   });
 }
 
+function renderMembersGrowth() {
+  const raw = DASHBOARD_DATA.members || { years: [], counts: [], current: 0 };
+  const years  = (raw.years  || []).map(String);
+  const counts = (raw.counts || []).map(Number);
+  const current = Number(raw.current) || 0;
+
+  const badge = document.getElementById('membersTotalBadge');
+  if (badge) badge.textContent = current > 0 ? current + ' members' : '';
+
+  prepScrollableChart('membersChart', years.length);
+  const ctx = document.getElementById('membersChart');
+  if (!ctx) return;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'New Members',
+        data: counts,
+        backgroundColor: counts.map((v, i) => {
+          const alpha = 0.50 + (i / Math.max(years.length - 1, 1)) * 0.45;
+          return `rgba(52,211,153,${alpha.toFixed(2)})`;
+        }),
+        borderRadius: 6,
+        borderSkipped: false,
+        maxBarThickness: 60
+      }]
+    },
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...baseTooltip, callbacks: { label: (ctx) => '  ' + ctx.parsed.y + ' new member' + (ctx.parsed.y !== 1 ? 's' : '') } }
+      },
+      scales: {
+        x: { ...baseGridOpts, grid: { display: false }, ticks: { ...baseGridOpts.ticks, autoSkip: false, maxRotation: 0 } },
+        y: { ...baseGridOpts, beginAtZero: true, ticks: { ...baseGridOpts.ticks, precision: 0, stepSize: 1 } }
+      }
+    }
+  });
+}
+
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, (m) => ({
     '&': '&amp;',
@@ -2849,6 +2905,7 @@ loadDashboardData()
     renderCGCount();
     renderCGMembers();
     renderBaptisms();
+    renderMembersGrowth();
   })
   .catch(showDashboardError);
 
