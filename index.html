@@ -4117,24 +4117,133 @@ function staffRenderSnapshot(data) {
     </div>`;
 }
 
+// ── MEETING MINUTES — localStorage helpers ────────────────────────────────────
+const L10_CUR_KEY  = 'lssr_staffsync_current';
+const L10_HIST_KEY = 'lssr_staffsync_history';
+
+function l10MonKey_() {
+  const d = new Date(), day = d.getDay();
+  const mon = new Date(d);
+  mon.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
+  mon.setHours(0,0,0,0);
+  return mon.toISOString().split('T')[0];
+}
+function l10Load_() {
+  try { return JSON.parse(localStorage.getItem(L10_CUR_KEY) || 'null') || {}; } catch(e) { return {}; }
+}
+function l10Patch_(obj) {
+  const n = l10Load_();
+  Object.assign(n, obj, { weekKey: l10MonKey_() });
+  try { localStorage.setItem(L10_CUR_KEY, JSON.stringify(n)); } catch(e) {}
+}
+function l10Archive_(session) {
+  if (!session || !Object.keys(session).filter(k => k !== 'weekKey').length) return;
+  try {
+    const h = JSON.parse(localStorage.getItem(L10_HIST_KEY) || '[]');
+    h.unshift(Object.assign({ _archivedAt: new Date().toISOString() }, session));
+    h.splice(52);
+    localStorage.setItem(L10_HIST_KEY, JSON.stringify(h));
+  } catch(e) {}
+}
+function l10CheckReset_() {
+  const saved = l10Load_();
+  if (!saved.weekKey) return false;
+  if (new Date(saved.weekKey) < new Date(l10MonKey_())) {
+    l10Archive_(saved);
+    try { localStorage.removeItem(L10_CUR_KEY); } catch(e) {}
+    return true;
+  }
+  return false;
+}
+function staffL10SaveMeeting() {
+  const n = l10Load_();
+  n._savedAt = new Date().toISOString();
+  l10Archive_(n);
+  try { localStorage.removeItem(L10_CUR_KEY); } catch(e) {}
+  const btn = document.getElementById('sp-l10-save-btn');
+  if (btn) { btn.textContent = '✓ Archived!'; btn.disabled = true; btn.style.background = '#2e5e3a'; }
+  const el = document.getElementById('sp-l10');
+  if (el) {
+    el.querySelectorAll('[data-sk]').forEach(i => i.value = '');
+    el.querySelectorAll('.sp-l10-rating').forEach(b => b.classList.remove('selected'));
+  }
+  setTimeout(() => {
+    if (btn) { btn.textContent = 'Save & Archive Meeting'; btn.disabled = false; btn.style.background = ''; }
+    staffL10RenderHistory();
+  }, 1800);
+}
+function staffL10CopyMinutes() {
+  const n = l10Load_();
+  const lines = [`STAFF SYNC — Week of ${n.weekKey || l10MonKey_()}`,''];
+  if (n._rating) lines.push(`Meeting Rating: ${n._rating}/10`, '');
+  Object.keys(n).filter(k => !k.startsWith('_') && k !== 'weekKey' && n[k] && String(n[k]).trim())
+    .forEach(k => lines.push(`${k}:`, String(n[k]), ''));
+  if (n._notes) lines.push('Notes:', n._notes);
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('sp-l10-copy-btn');
+    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => { if(btn) btn.textContent = 'Copy Minutes'; }, 2000); }
+  });
+}
+function staffL10BindAndRestore() {
+  const n = l10Load_(), el = document.getElementById('sp-l10');
+  if (!el) return;
+  el.querySelectorAll('[data-sk]').forEach(inp => {
+    const k = inp.dataset.sk;
+    if (n[k] !== undefined) inp.value = n[k];
+    inp.addEventListener('input', function() { l10Patch_({ [k]: this.value }); });
+  });
+  if (n._rating) {
+    const btn = el.querySelector(`.sp-l10-rating[data-n="${n._rating}"]`);
+    if (btn) btn.classList.add('selected');
+  }
+}
+function staffL10RenderHistory() {
+  const el = document.getElementById('sp-l10-history');
+  if (!el) return;
+  let hist;
+  try { hist = JSON.parse(localStorage.getItem(L10_HIST_KEY) || '[]'); } catch(e) { hist = []; }
+  if (!hist.length) {
+    el.innerHTML = '<p style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No archived meetings yet. Meetings auto-archive each Monday when you open the runner.</p>';
+    return;
+  }
+  el.innerHTML = hist.slice(0,12).map(m => {
+    const ts = m._savedAt || m._archivedAt;
+    const dateStr = ts ? new Date(ts).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) : 'Week of '+(m.weekKey||'?');
+    const rating  = m._rating ? ` &middot; Rating: ${m._rating}/10` : '';
+    const dataKeys = Object.keys(m).filter(k => !k.startsWith('_') && k !== 'weekKey' && m[k] && String(m[k]).trim());
+    const notes = m._notes || '';
+    return `<details style="border:1px solid var(--sp-border);border-radius:4px;margin-bottom:8px;background:var(--sp-card-bg);">
+      <summary style="padding:12px 16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">${dateStr}</span>
+        <span style="font-size:12px;color:var(--sp-muted);">${rating}</span>
+      </summary>
+      <div style="padding:0 16px 16px;border-top:1px solid var(--sp-border);">
+        ${notes ? `<div style="margin:12px 0;"><div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:6px;">Meeting Notes</div><div style="font-size:13px;color:var(--sp-muted);white-space:pre-wrap;">${notes}</div></div>` : ''}
+        ${dataKeys.map(k=>`<div style="margin-top:10px;"><div style="font-size:11px;color:var(--sp-muted);margin-bottom:3px;">${k}</div><div style="font-size:13px;">${String(m[k])}</div></div>`).join('')}
+        ${!notes && !dataKeys.length ? '<p style="color:var(--sp-muted);font-size:13px;margin-top:10px;">No notes recorded for this meeting.</p>' : ''}
+      </div>
+    </details>`;
+  }).join('');
+}
+// ── MEETING RUNNER ─────────────────────────────────────────────────────────────
 function staffRenderL10(data) {
   const el = document.getElementById('sp-l10');
   if (!el) return;
 
+  const wasReset = l10CheckReset_();
   const boulders = data.boulders || [];
   const rocks    = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
   const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
   const q        = (data.meta && data.meta.quarter) || 'Q2 2026';
   const today    = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
 
-  // Pull the first meeting from Page Content data (Staff Sync / L10)
   const mtg    = data.meetings && data.meetings.meetings && data.meetings.meetings[0];
-  const title  = mtg ? mtg.title  : 'Staff Sync';
-  const freq   = mtg ? mtg.freq   : 'Weekly';
+  const title  = mtg ? mtg.title : 'Staff Sync';
+  const freq   = mtg ? mtg.freq  : 'Weekly';
   const agenda = mtg ? (mtg.agenda || []) : [];
 
-  const agendaSections = agenda.map(a => {
-    const t  = (a.item || '').toLowerCase();
+  const agendaSections = agenda.map((a, ai) => {
+    const t = (a.item || '').toLowerCase();
     const isScorecard = t.includes('scorecard');
     const isBoulder   = t.includes('boulder');
     const isIDS       = t.includes('ids') || (t.includes('identify') && t.includes('discuss'));
@@ -4147,6 +4256,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         ${redSc.length ? redSc.map(r=>`<div class="sp-l10-reds-row"><div style="font-size:13px;font-weight:600;">${r.metric}</div><div style="font-size:12px;color:var(--sp-muted);">Owner: ${r.owner} &middot; Goal: ${r.goal} &middot; Current: ${r.current||'—'}</div></div>`).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No red metrics this week. Move on.</div>'}
+        <input data-sk="sc_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Scorecard notes…">
       </div>`;
 
     if (isBoulder) return `
@@ -4156,6 +4266,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         ${boulders.length ? boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No boulders set yet.</div>'}
+        <input data-sk="bl_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Boulder notes…">
       </div>`;
 
     if (isIDS) return `
@@ -4165,11 +4276,10 @@ function staffRenderL10(data) {
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
-        ${rocks.map((i,idx)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${idx+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input class="sp-l10-inp" placeholder="To-do / resolution…"><input class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
+        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
         ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
       </div>`;
 
-    // Generic section — show the item text as heading with a notes area
     return `
       <div class="sp-l10-sec">
         <div class="sp-l10-sec-hdr">
@@ -4177,12 +4287,13 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         <div class="sp-l10-input-row" style="margin-top:8px;">
-          <input class="sp-l10-inp" style="width:100%;" placeholder="Notes…">
+          <input data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…">
         </div>
       </div>`;
   }).join('');
 
   el.innerHTML = `
+    ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
     <div class="sp-section-header">
       <div class="sp-eyebrow">Meeting Runner</div>
       <h2>${title}</h2>
@@ -4197,11 +4308,21 @@ function staffRenderL10(data) {
       <h4>Conclude</h4>
       <div style="font-size:13px;color:var(--sp-muted);margin-bottom:14px;">Recap to-dos and decisions. Rate the meeting 1&ndash;10.</div>
       <div class="sp-l10-ratings">
-        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" onclick="this.parentElement.querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');">${n}</button>`).join('')}
+        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" data-n="${n}" onclick="this.closest('.sp-l10-ratings').querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');l10Patch_({_rating:${n}});">${n}</button>`).join('')}
       </div>
-      <textarea class="sp-l10-textarea" placeholder="Notes, to-dos, and decisions from this meeting…"></textarea>
-      <button class="sp-l10-print-btn" onclick="window.print()">Print / Export Meeting Notes</button>
+      <textarea data-sk="_notes" class="sp-l10-textarea" placeholder="Notes, to-dos, and decisions from this meeting…"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+        <button id="sp-l10-save-btn" class="sp-l10-print-btn" style="flex:1;" onclick="staffL10SaveMeeting()">Save &amp; Archive Meeting</button>
+        <button id="sp-l10-copy-btn" class="sp-l10-print-btn" style="flex:1;background:transparent;border:1px solid var(--sp-border);" onclick="staffL10CopyMinutes()">Copy Minutes</button>
+      </div>
+    </div>
+    <div style="margin-top:40px;border-top:1px solid var(--sp-border);padding-top:28px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:16px;">Past Meetings</div>
+      <div id="sp-l10-history"></div>
     </div>`;
+
+  staffL10BindAndRestore();
+  staffL10RenderHistory();
 }
 
 function staffRenderVolLeads(data) {
