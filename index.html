@@ -1086,8 +1086,14 @@
   .sp-l10-issue-row { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; }
   .sp-l10-input-row { display: grid; grid-template-columns: 1fr 180px; gap: 6px; margin-top: 6px; }
   @media (max-width: 600px) { .sp-l10-input-row { grid-template-columns: 1fr; } }
-  .sp-l10-inp { border: 1px solid var(--sp-border); border-radius: 3px; padding: 5px 9px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); width: 100%; }
+  .sp-l10-inp { border: 1px solid var(--sp-border); border-radius: 3px; padding: 5px 9px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); width: 100%; resize: vertical; min-height: 38px; line-height: 1.5; }
   .sp-l10-inp:focus { outline: none; border-color: var(--sp-gold); }
+  .sp-boulder-owner { border: 1px solid var(--sp-border); border-radius: 4px; margin-bottom: 8px; overflow: hidden; }
+  .sp-boulder-owner summary { padding: 8px 14px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; background: var(--sp-card-bg); }
+  .sp-boulder-owner summary::-webkit-details-marker { display: none; }
+  .sp-boulder-owner summary::before { content: '▶'; font-size: 9px; color: var(--sp-muted); transition: transform 0.2s; }
+  .sp-boulder-owner[open] summary::before { transform: rotate(90deg); }
+  .sp-boulder-owner-inner { padding: 8px 14px 12px; }
   .sp-l10-conclude { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-top: 3px solid var(--sp-gold); border-radius: 0 0 4px 4px; padding: 20px 24px; margin-bottom: 20px; }
   .sp-l10-conclude h4 { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 10px; color: var(--sp-ink); }
   .sp-l10-ratings { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
@@ -4326,6 +4332,10 @@ async function l10LoadAndRender_() {
 async function staffL10SaveMeeting() {
   const n = l10Load_();
   n._savedAt = new Date().toISOString();
+  // Store agenda labels so history can show readable field names
+  const d = window._staffLastData || {};
+  const agd = d.meetings && d.meetings.meetings && d.meetings.meetings[0] && d.meetings.meetings[0].agenda || [];
+  if (agd.length) n._agendaLabels = agd.reduce((acc,a,i) => { acc[i]=a.item; return acc; }, {});
   l10LocalArchive_(n);
   try { localStorage.removeItem(L10_CUR_KEY); } catch(e) {}
 
@@ -4372,6 +4382,20 @@ function staffL10BindAndRestore() {
     if (btn) btn.classList.add('selected');
   }
 }
+function l10KeyToLabel_(k, agendaLabels) {
+  if (k === 'sc_notes') return 'Scorecard Notes';
+  if (k === 'bl_notes') return 'Boulder Notes';
+  const m1 = k.match(/^ids_(\d+)_res$/);
+  if (m1) return `Rock #${+m1[1]+1} — Resolution`;
+  const m2 = k.match(/^ids_(\d+)_own$/);
+  if (m2) return `Rock #${+m2[1]+1} — Owner`;
+  const m3 = k.match(/^item_(\d+)$/);
+  if (m3) {
+    const idx = +m3[1];
+    return (agendaLabels && agendaLabels[idx]) ? agendaLabels[idx] : `Agenda Item ${idx+1}`;
+  }
+  return k.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+}
 function staffL10RenderHistory() {
   const el = document.getElementById('sp-l10-history');
   if (!el) return;
@@ -4385,6 +4409,7 @@ function staffL10RenderHistory() {
     const ts = m._savedAt || m._archivedAt;
     const dateStr = ts ? new Date(ts).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) : 'Week of '+(m.weekKey||'?');
     const rating  = m._rating ? ` &middot; Rating: ${m._rating}/10` : '';
+    const agLabels = m._agendaLabels || null;
     const dataKeys = Object.keys(m).filter(k => !k.startsWith('_') && k !== 'weekKey' && m[k] && String(m[k]).trim());
     const notes = m._notes || '';
     return `<details style="border:1px solid var(--sp-border);border-radius:4px;margin-bottom:8px;background:var(--sp-card-bg);">
@@ -4394,7 +4419,7 @@ function staffL10RenderHistory() {
       </summary>
       <div style="padding:0 16px 16px;border-top:1px solid var(--sp-border);">
         ${notes ? `<div style="margin:12px 0;"><div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:6px;">Meeting Notes</div><div style="font-size:13px;color:var(--sp-muted);white-space:pre-wrap;">${notes}</div></div>` : ''}
-        ${dataKeys.map(k=>`<div style="margin-top:10px;"><div style="font-size:11px;color:var(--sp-muted);margin-bottom:3px;">${k}</div><div style="font-size:13px;">${String(m[k])}</div></div>`).join('')}
+        ${dataKeys.map(k=>`<div style="margin-top:10px;"><div style="font-size:11px;font-weight:600;color:var(--sp-muted);margin-bottom:3px;">${l10KeyToLabel_(k,agLabels)}</div><div style="font-size:13px;white-space:pre-wrap;">${String(m[k])}</div></div>`).join('')}
         ${!notes && !dataKeys.length ? '<p style="color:var(--sp-muted);font-size:13px;margin-top:10px;">No notes recorded for this meeting.</p>' : ''}
       </div>
     </details>`;
@@ -4420,11 +4445,54 @@ function staffRenderL10(data) {
   const agenda = mtg ? (mtg.agenda || []) : [];
   const dis    = locked ? ' disabled' : '';
 
+  // Build label map for history (item_N → agenda label)
+  const agendaLabels = agenda.reduce((acc, a, ai) => { acc[ai] = a.item; return acc; }, {});
+
+  // Build boulders section grouped by owner (rendered after rocks)
+  const bouldersSection = (() => {
+    const bouldersAgItem = agenda.find(a => (a.item||'').toLowerCase().includes('boulder'));
+    const bTime = bouldersAgItem ? bouldersAgItem.time : '5 min';
+    const byOwner = {};
+    boulders.forEach(b => {
+      const o = b.owner || 'Unassigned';
+      if (!byOwner[o]) byOwner[o] = [];
+      byOwner[o].push(b);
+    });
+    const owners = Object.keys(byOwner);
+    const statusLabel = {'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'};
+    return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>Boulder Review</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${bTime}</span>
+        </div>
+        ${!boulders.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No boulders set yet.</div>' :
+          owners.map(owner => {
+            const obs = byOwner[owner];
+            const hasOffTrack = obs.some(b => b.status === 'off-track');
+            return `<details class="sp-boulder-owner">
+              <summary>
+                <span style="flex:1;color:var(--sp-ink);">${owner}</span>
+                <span style="font-size:10px;color:${hasOffTrack?'var(--sp-red)':'var(--sp-muted)'};">${hasOffTrack ? '⚠ Off Track' : obs.length+' boulder'+(obs.length!==1?'s':'')}</span>
+              </summary>
+              <div class="sp-boulder-owner-inner">
+                ${obs.map(r => {const s=r.status||'tbd';const l=statusLabel[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.quarter}${r.type?' &middot; '+r.type:''}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('')}
+              </div>
+            </details>`;
+          }).join('')}
+        <textarea data-sk="bl_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Boulder notes…"${dis}></textarea>
+      </div>`;
+  })();
+
   const agendaSections = agenda.map((a, ai) => {
     const t = (a.item || '').toLowerCase();
     const isScorecard = t.includes('scorecard');
     const isBoulder   = t.includes('boulder');
     const isIDS       = t.includes('ids') || (t.includes('identify') && t.includes('discuss'));
+    const isCalendar  = t.includes('calendar');
+
+    // Boulders are now rendered after rocks — skip here
+    if (isBoulder) return '';
 
     if (isScorecard) return `
       <div class="sp-l10-sec">
@@ -4434,17 +4502,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         ${redSc.length ? redSc.map(r=>`<div class="sp-l10-reds-row"><div style="font-size:13px;font-weight:600;">${r.metric}</div><div style="font-size:12px;color:var(--sp-muted);">Owner: ${r.owner} &middot; Goal: ${r.goal} &middot; Current: ${r.current||'—'}</div></div>`).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No red metrics this week. Move on.</div>'}
-        <input data-sk="sc_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Scorecard notes…"${dis}>
-      </div>`;
-
-    if (isBoulder) return `
-      <div class="sp-l10-sec">
-        <div class="sp-l10-sec-hdr">
-          <h4>${a.item}</h4>
-          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
-        </div>
-        ${boulders.length ? boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No boulders set yet.</div>'}
-        <input data-sk="bl_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Boulder notes…"${dis}>
+        <textarea data-sk="sc_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Scorecard notes…"${dis}></textarea>
       </div>`;
 
     if (isIDS) return `
@@ -4454,8 +4512,22 @@ function staffRenderL10(data) {
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
-        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"${dis}><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner"${dis}></div></div>`).join('')}
+        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><textarea data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"${dis}></textarea><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner" style="height:38px;"${dis}></div></div>`).join('')}
         ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
+      </div>
+      ${bouldersSection}`;
+
+    // Calendar item: notes field + PCO calendar events below
+    if (isCalendar) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        <div style="margin-top:8px;">
+          <textarea data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}></textarea>
+        </div>
+        ${calSection}
       </div>`;
 
     return `
@@ -4465,7 +4537,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         <div class="sp-l10-input-row" style="margin-top:8px;">
-          <input data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}>
+          <textarea data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}></textarea>
         </div>
       </div>`;
   }).join('');
@@ -4529,22 +4601,13 @@ function staffRenderL10(data) {
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
     </div>
-    ${calSection}
     ${agendaSections}
-    <div class="sp-l10-conclude">
-      <h4>Conclude</h4>
-      <div style="font-size:13px;color:var(--sp-muted);margin-bottom:14px;">Recap to-dos and decisions. Rate the meeting 1&ndash;10.</div>
-      <div class="sp-l10-ratings">
-        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" data-n="${n}"${locked ? ' disabled style="opacity:0.4;cursor:default;"' : ` onclick="this.closest('.sp-l10-ratings').querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');l10Patch_({_rating:${n}});"`}>${n}</button>`).join('')}
-      </div>
-      <textarea data-sk="_notes" class="sp-l10-textarea" placeholder="Notes, to-dos, and decisions from this meeting…"${dis}></textarea>
-      ${locked ? '' : `
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <button id="sp-l10-save-btn" class="sp-l10-print-btn" style="flex:1;" onclick="staffL10SaveMeeting()">Save &amp; Archive Meeting</button>
-        <button id="sp-l10-copy-btn" class="sp-l10-print-btn" style="flex:1;background:transparent;border:1px solid var(--sp-border);" onclick="staffL10CopyMinutes()">Copy Minutes</button>
-      </div>`}
-    </div>
-    <div style="margin-top:40px;border-top:1px solid var(--sp-border);padding-top:28px;">
+    ${locked ? '' : `
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;margin-bottom:32px;">
+      <button id="sp-l10-save-btn" class="sp-l10-print-btn" style="flex:1;" onclick="staffL10SaveMeeting()">Save &amp; Archive Meeting</button>
+      <button id="sp-l10-copy-btn" class="sp-l10-print-btn" style="flex:1;background:transparent;border:1px solid var(--sp-border);" onclick="staffL10CopyMinutes()">Copy Minutes</button>
+    </div>`}
+    <div style="margin-top:20px;border-top:1px solid var(--sp-border);padding-top:28px;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:16px;">Past Meetings</div>
       <div id="sp-l10-history"></div>
     </div>`;
