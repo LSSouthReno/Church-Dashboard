@@ -3919,9 +3919,10 @@ async function staffLoadData() {
     if (res.ok) {
       const liveData = await res.json();
       const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
-      if (liveData.scorecard && liveData.scorecard.length) merged.scorecard = liveData.scorecard;
-      if (liveData.boulders && liveData.boulders.length) merged.boulders = liveData.boulders;
-      if (liveData.rocks && liveData.rocks.length) merged.rocks = liveData.rocks;
+      // For arrays, live data wins only when non-empty — otherwise keep the hardcoded fallback
+      merged.scorecard = (liveData.scorecard && liveData.scorecard.length) ? liveData.scorecard : STAFF_DEFAULT_DATA.scorecard;
+      merged.boulders  = (liveData.boulders  && liveData.boulders.length)  ? liveData.boulders  : STAFF_DEFAULT_DATA.boulders;
+      merged.rocks     = (liveData.rocks     && liveData.rocks.length)     ? liveData.rocks     : STAFF_DEFAULT_DATA.rocks;
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
@@ -3984,8 +3985,9 @@ function staffRenderBoulders(data) {
   const companyEl = document.getElementById('sp-company-boulders');
   const indivEl = document.getElementById('sp-individual-boulders');
   if (!companyEl || !indivEl) return;
-  const company = data.boulders.filter(r => r.type === 'company');
-  const individual = data.boulders.filter(r => r.type !== 'company');
+  const allBoulders = data.boulders || [];
+  const company = allBoulders.filter(r => r.type === 'company');
+  const individual = allBoulders.filter(r => r.type !== 'company');
   const boulderHtml = (boulders) => boulders.map(r => {
     const status = r.status || 'tbd';
     const label = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' }[status] || status;
