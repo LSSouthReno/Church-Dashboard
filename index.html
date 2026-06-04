@@ -4448,6 +4448,34 @@ function staffRenderL10(data) {
   // Build label map for history (item_N → agenda label)
   const agendaLabels = agenda.reduce((acc, a, ai) => { acc[ai] = a.item; return acc; }, {});
 
+  // ── Calendar: group events by month ── (must be defined before agendaSections)
+  const calSection = (() => {
+    if (!calEvents.length) return '';
+    const byMonth = {};
+    calEvents.forEach(ev => {
+      const d = new Date(ev.dateKey + 'T12:00:00');
+      const monthLabel = d.toLocaleDateString('en-US', {month:'long', year:'numeric'});
+      if (!byMonth[monthLabel]) byMonth[monthLabel] = [];
+      byMonth[monthLabel].push(ev);
+    });
+    const months = Object.keys(byMonth);
+    return `
+      <div style="margin-top:14px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Coming Up · PCO Calendar</div>
+        ${months.map(month => `
+          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--sp-muted);margin:12px 0 6px;">${month}</div>
+          ${byMonth[month].map(ev => `
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--sp-border);">
+              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:68px;padding-top:1px;">${ev.dayOfWeek} ${ev.date}</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--sp-ink);">${ev.name}</div>
+                <div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">${ev.time}${ev.location ? ' &middot; ' + ev.location : ''}</div>
+              </div>
+            </div>`).join('')}
+        `).join('')}
+      </div>`;
+  })();
+
   // Build boulders section grouped by owner (rendered after rocks)
   const bouldersSection = (() => {
     const bouldersAgItem = agenda.find(a => (a.item||'').toLowerCase().includes('boulder'));
@@ -4557,37 +4585,7 @@ function staffRenderL10(data) {
       <button onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});" style="font-size:11px;padding:3px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Lock</button>
     </div>`;
 
-  // ── Calendar: group events by month ──────────────────────────────────────
-  const calSection = (() => {
-    if (!calEvents.length) return '';
-    // Group by month label (e.g. "June 2026")
-    const byMonth = {};
-    calEvents.forEach(ev => {
-      const d = new Date(ev.dateKey + 'T12:00:00');
-      const monthLabel = d.toLocaleDateString('en-US', {month:'long', year:'numeric'});
-      if (!byMonth[monthLabel]) byMonth[monthLabel] = [];
-      byMonth[monthLabel].push(ev);
-    });
-    const months = Object.keys(byMonth);
-    return `
-      <div class="sp-l10-sec">
-        <div class="sp-l10-sec-hdr">
-          <h4>Coming Up</h4>
-          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">Next 2 months · PCO Calendar</span>
-        </div>
-        ${months.map(month => `
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--sp-gold);margin:14px 0 8px;">${month}</div>
-          ${byMonth[month].map(ev => `
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--sp-border);">
-              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:68px;padding-top:1px;">${ev.dayOfWeek} ${ev.date}</div>
-              <div style="flex:1;">
-                <div style="font-size:13px;font-weight:600;color:var(--sp-ink);">${ev.name}</div>
-                <div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">${ev.time}${ev.location ? ' &middot; ' + ev.location : ''}</div>
-              </div>
-            </div>`).join('')}
-        `).join('')}
-      </div>`;
-  })();
+  // calSection is defined earlier (before agendaSections) to avoid temporal dead zone
 
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
