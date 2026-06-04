@@ -4412,6 +4412,7 @@ function staffRenderL10(data) {
   const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
   const q        = (data.meta && data.meta.quarter) || 'Q2 2026';
   const today    = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  const calEvents = (data.calendar && data.calendar.events) ? data.calendar.events : [];
 
   const mtg    = data.meetings && data.meetings.meetings && data.meetings.meetings[0];
   const title  = mtg ? mtg.title : 'Staff Sync';
@@ -4484,6 +4485,38 @@ function staffRenderL10(data) {
       <button onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});" style="font-size:11px;padding:3px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Lock</button>
     </div>`;
 
+  // ── Calendar: group events by month ──────────────────────────────────────
+  const calSection = (() => {
+    if (!calEvents.length) return '';
+    // Group by month label (e.g. "June 2026")
+    const byMonth = {};
+    calEvents.forEach(ev => {
+      const d = new Date(ev.dateKey + 'T12:00:00');
+      const monthLabel = d.toLocaleDateString('en-US', {month:'long', year:'numeric'});
+      if (!byMonth[monthLabel]) byMonth[monthLabel] = [];
+      byMonth[monthLabel].push(ev);
+    });
+    const months = Object.keys(byMonth);
+    return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>Coming Up</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">Next 2 months · PCO Calendar</span>
+        </div>
+        ${months.map(month => `
+          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--sp-gold);margin:14px 0 8px;">${month}</div>
+          ${byMonth[month].map(ev => `
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--sp-border);">
+              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:68px;padding-top:1px;">${ev.dayOfWeek} ${ev.date}</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--sp-ink);">${ev.name}</div>
+                <div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">${ev.time}${ev.location ? ' &middot; ' + ev.location : ''}</div>
+              </div>
+            </div>`).join('')}
+        `).join('')}
+      </div>`;
+  })();
+
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
     <div class="sp-section-header">
@@ -4496,6 +4529,7 @@ function staffRenderL10(data) {
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
     </div>
+    ${calSection}
     ${agendaSections}
     <div class="sp-l10-conclude">
       <h4>Conclude</h4>
