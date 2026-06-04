@@ -4348,36 +4348,8 @@ function staffRenderL10(data) {
   const el = document.getElementById('sp-l10');
   if (!el) return;
 
-  // If not unlocked, show the password gate + read-only history
-  if (!staffMeetingIsUnlocked()) {
-    const hist = (() => { try { return JSON.parse(localStorage.getItem(L10_HIST_KEY)||'[]'); } catch(e) { return []; } })();
-    el.innerHTML = `
-      <div class="sp-section-header">
-        <div class="sp-eyebrow">Meeting Runner</div>
-        <h2>Staff Sync</h2>
-        <p>Enter the meeting editor password to take notes and archive this session.</p>
-      </div>
-      <div class="tmod-lockcard" style="max-width:400px;margin:0 auto 40px;">
-        <div class="tmod-lockicon">&#9997;&#65039;</div>
-        <div class="tmod-lockttl">Meeting Editor</div>
-        <div class="tmod-lockmsg">Enter the meeting password to unlock editing on this device.</div>
-        <input type="password" id="meeting-pw-input" placeholder="Meeting password" autocomplete="off"
-          onkeydown="if(event.key==='Enter')staffMeetingDoUnlockFull()">
-        <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px"
-          onclick="staffMeetingDoUnlockFull()">Unlock for This Session</button>
-        <div id="meeting-pw-err" class="tmod-lockerr" style="display:none;">Incorrect password.</div>
-      </div>
-      ${hist.length ? `
-        <div style="border-top:1px solid var(--sp-border);padding-top:28px;">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:16px;">Past Meetings</div>
-          <div id="sp-l10-history"></div>
-        </div>` : ''}`;
-    if (hist.length) staffL10RenderHistory();
-    setTimeout(() => { const i = document.getElementById('meeting-pw-input'); if(i) i.focus(); }, 100);
-    return;
-  }
-
-  const wasReset = l10CheckReset_();
+  const locked = !staffMeetingIsUnlocked();
+  const wasReset = locked ? false : l10CheckReset_();
   const boulders = data.boulders || [];
   const rocks    = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
   const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
@@ -4388,6 +4360,7 @@ function staffRenderL10(data) {
   const title  = mtg ? mtg.title : 'Staff Sync';
   const freq   = mtg ? mtg.freq  : 'Weekly';
   const agenda = mtg ? (mtg.agenda || []) : [];
+  const dis    = locked ? ' disabled' : '';
 
   const agendaSections = agenda.map((a, ai) => {
     const t = (a.item || '').toLowerCase();
@@ -4403,7 +4376,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         ${redSc.length ? redSc.map(r=>`<div class="sp-l10-reds-row"><div style="font-size:13px;font-weight:600;">${r.metric}</div><div style="font-size:12px;color:var(--sp-muted);">Owner: ${r.owner} &middot; Goal: ${r.goal} &middot; Current: ${r.current||'—'}</div></div>`).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No red metrics this week. Move on.</div>'}
-        <input data-sk="sc_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Scorecard notes…">
+        <input data-sk="sc_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Scorecard notes…"${dis}>
       </div>`;
 
     if (isBoulder) return `
@@ -4413,7 +4386,7 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         ${boulders.length ? boulders.map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track ✓','off-track':'Off Track ✗','complete':'Complete ●','tbd':'Set Status'}[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.owner} &middot; ${r.quarter}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('') : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No boulders set yet.</div>'}
-        <input data-sk="bl_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Boulder notes…">
+        <input data-sk="bl_notes" class="sp-l10-inp" style="width:100%;margin-top:10px;" placeholder="Boulder notes…"${dis}>
       </div>`;
 
     if (isIDS) return `
@@ -4423,7 +4396,7 @@ function staffRenderL10(data) {
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
-        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner"></div></div>`).join('')}
+        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><input data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"${dis}><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner"${dis}></div></div>`).join('')}
         ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
       </div>`;
 
@@ -4434,10 +4407,25 @@ function staffRenderL10(data) {
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
         <div class="sp-l10-input-row" style="margin-top:8px;">
-          <input data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…">
+          <input data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}>
         </div>
       </div>`;
   }).join('');
+
+  const editControls = locked ? `
+    <div style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span style="font-size:13px;color:var(--sp-muted);">&#9997;&#65039; Note-taking is locked.</span>
+      <input type="password" id="meeting-pw-input" placeholder="Meeting password" autocomplete="off"
+        onkeydown="if(event.key==='Enter')staffMeetingDoUnlockFull()"
+        style="padding:5px 10px;border:1px solid var(--sp-border);border-radius:3px;background:var(--sp-card-bg);color:var(--sp-ink);font-size:13px;width:160px;">
+      <button onclick="staffMeetingDoUnlockFull()" style="padding:5px 14px;background:var(--sp-ink);color:var(--sp-gold);border:none;border-radius:3px;font-size:12px;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:1px;">Unlock Editing</button>
+      <span id="meeting-pw-err" style="color:#ef9a9a;font-size:12px;display:none;">Incorrect password.</span>
+    </div>` : `
+    <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:#6fcf97;">🔓 Editing unlocked on this device</span>
+      ${MEETING_WEBAPP_URL ? `<span style="font-size:12px;color:var(--sp-muted);">☁ Syncing to Google Sheet</span>` : `<span style="font-size:12px;color:var(--sp-muted);">💾 Local only — <a href="#" onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});return false;" style="color:var(--sp-gold);">configure web app to sync</a></span>`}
+      <button onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});" style="font-size:11px;padding:3px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Lock</button>
+    </div>`;
 
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
@@ -4445,11 +4433,7 @@ function staffRenderL10(data) {
       <div class="sp-eyebrow">Meeting Runner</div>
       <h2>${title}</h2>
       <p>${freq}</p>
-      <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:#6fcf97;">🔓 Editing unlocked on this device</span>
-        ${MEETING_WEBAPP_URL ? `<span style="font-size:12px;color:var(--sp-muted);">☁ Syncing to Google Sheet</span>` : `<span style="font-size:12px;color:var(--sp-muted);">💾 Local only — <a href="#" onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});return false;" style="color:var(--sp-gold);">configure web app to sync</a></span>`}
-        <button onclick="sessionStorage.removeItem('${MEETING_SESS_KEY}');sessionStorage.removeItem('${MEETING_SESS_KEY}_pw');staffRenderAll(window._staffLastData||{});" style="font-size:11px;padding:3px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Lock</button>
-      </div>
+      ${editControls}
     </div>
     <div class="sp-l10-hdr">
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
@@ -4460,20 +4444,21 @@ function staffRenderL10(data) {
       <h4>Conclude</h4>
       <div style="font-size:13px;color:var(--sp-muted);margin-bottom:14px;">Recap to-dos and decisions. Rate the meeting 1&ndash;10.</div>
       <div class="sp-l10-ratings">
-        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" data-n="${n}" onclick="this.closest('.sp-l10-ratings').querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');l10Patch_({_rating:${n}});">${n}</button>`).join('')}
+        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="sp-l10-rating" data-n="${n}"${locked ? ' disabled style="opacity:0.4;cursor:default;"' : ` onclick="this.closest('.sp-l10-ratings').querySelectorAll('.sp-l10-rating').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');l10Patch_({_rating:${n}});"`}>${n}</button>`).join('')}
       </div>
-      <textarea data-sk="_notes" class="sp-l10-textarea" placeholder="Notes, to-dos, and decisions from this meeting…"></textarea>
+      <textarea data-sk="_notes" class="sp-l10-textarea" placeholder="Notes, to-dos, and decisions from this meeting…"${dis}></textarea>
+      ${locked ? '' : `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
         <button id="sp-l10-save-btn" class="sp-l10-print-btn" style="flex:1;" onclick="staffL10SaveMeeting()">Save &amp; Archive Meeting</button>
         <button id="sp-l10-copy-btn" class="sp-l10-print-btn" style="flex:1;background:transparent;border:1px solid var(--sp-border);" onclick="staffL10CopyMinutes()">Copy Minutes</button>
-      </div>
+      </div>`}
     </div>
     <div style="margin-top:40px;border-top:1px solid var(--sp-border);padding-top:28px;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:16px;">Past Meetings</div>
       <div id="sp-l10-history"></div>
     </div>`;
 
-  staffL10BindAndRestore();
+  if (!locked) staffL10BindAndRestore();
   staffL10RenderHistory();
 }
 
