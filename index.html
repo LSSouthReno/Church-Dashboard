@@ -4208,9 +4208,21 @@ function sundayBuildContent(plan, calEvents) {
         </div>`}
       </div>
 
-      ${teamKeys.length ? `
+      ${teamKeys.length ? (() => {
+        const allVols  = teamKeys.flatMap(k => teamMap[k]);
+        const confirmed = allVols.filter(v => v.status === 'C').length;
+        const pending   = allVols.filter(v => v.status === 'U').length;
+        const total     = allVols.length;
+        const allGood   = confirmed === total;
+        const summaryColor = allGood ? 'var(--green,#4caf50)' : 'var(--yellow-2,#c9a84c)';
+        return `
       <div class="sd-section">
-        <div class="sd-section-title">Volunteer Teams</div>
+        <div class="sd-section-title" style="display:flex;align-items:baseline;gap:12px;">
+          Volunteer Teams
+          <span style="font-size:11px;font-family:'DM Mono',monospace;font-weight:400;letter-spacing:.05em;color:${summaryColor};text-transform:none;">
+            ${confirmed}/${total} confirmed${pending > 0 ? ` · ${pending} pending` : ''}
+          </span>
+        </div>
         <div class="sd-teams-grid">
           ${teamKeys.map(team => `
             <div class="sd-team-card">
@@ -4225,7 +4237,7 @@ function sundayBuildContent(plan, calEvents) {
               </div>
             </div>`).join('')}
         </div>
-      </div>` : ''}
+      </div>`; })() : ''}
 
     </div>`;
 }
@@ -4237,6 +4249,8 @@ function sundayBuildOrderHTML(orderItems, services) {
     if (n.includes('8am')  || n.includes('8 am'))  return { h: 8,  m: 0 };
     if (n.includes('9:30') || n.includes('9am'))    return { h: 9,  m: 30 };
     if (n.includes('11am') || n.includes('11 am'))  return { h: 11, m: 0 };
+    // Single generic service type (e.g. "SERVICES") — default to 9:30 AM
+    if (services.length === 1) return { h: 9, m: 30 };
     return null;
   }
 
@@ -4266,7 +4280,9 @@ function sundayBuildOrderHTML(orderItems, services) {
   return starts.map((start, si) => {
     let cumMin = start.h * 60 + start.m;
     const endMin = cumMin + totalMin;
-    const svcLabel = services[si] ? services[si].serviceType : '';
+    const rawLabel = services[si] ? services[si].serviceType : '';
+    const svcLabel = rawLabel && !['services','service','worship','gathering'].includes(rawLabel.toLowerCase())
+      ? rawLabel : 'All Services';
     let html = `
       <div class="sd-order-svc-hdr" ${si > 0 ? 'style="margin-top:18px;"' : ''}>
         <span class="sd-order-svc-name">${svcLabel}</span>
