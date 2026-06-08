@@ -4178,24 +4178,27 @@ function sundayBuildContent(plan, calEvents) {
       <div class="sd-section">
         <div class="sd-section-title">Service Captains</div>
         <div class="sd-captains-row">
-          ${services.map(svc => `
+          ${services.map(svc => {
+            const stLabel = svc.serviceType && !['services','service','worship','gathering'].includes(svc.serviceType.toLowerCase())
+              ? svc.serviceType : 'All Services';
+            return `
             <div class="sd-captain-card">
-              <div class="sd-captain-service">${svc.serviceType}</div>
+              <div class="sd-captain-service">${stLabel}</div>
               <div class="sd-captain-names">${
                 svc.captains && svc.captains.length
                   ? svc.captains.join(', ')
                   : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
               }</div>
-            </div>`).join('')}
+            </div>`;
+          }).join('')}
         </div>
       </div>` : ''}
 
       <div class="sd-section">
         <div class="sd-section-title">Order of Service</div>
-        ${preacher ? `
+        ${(preacher || sermonTitle || seriesTtl) ? `
         <div class="sd-preacher-block">
-          <span class="sd-preacher-lbl">Preaching</span>
-          <span class="sd-preacher-name">${preacher}</span>
+          ${preacher ? `<span class="sd-preacher-lbl">Preaching</span><span class="sd-preacher-name">${preacher}</span>` : ''}
           ${sermonTitle ? `<span class="sd-preacher-sermon">&ldquo;${sermonTitle}&rdquo;</span>` : ''}
           ${seriesTtl && seriesTtl !== sermonTitle ? `<span class="sd-preacher-text">${seriesTtl}</span>` : ''}
         </div>` : ''}
