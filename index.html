@@ -1145,6 +1145,76 @@
     .staff-panel, .sp-main-wrap { overflow: visible !important; height: auto !important; }
     body { background: white !important; }
   }
+
+  /* ── Staff Sync calendar grid ─────────────────────────────────── */
+  .sp-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin-top:6px; }
+  .sp-cal-dayheader { font-family:'DM Mono',monospace; font-size:9px; text-align:center; padding:5px 0; color:var(--sp-muted); text-transform:uppercase; letter-spacing:.06em; }
+  .sp-cal-cell { min-height:58px; padding:4px 3px; border-radius:3px; background:var(--sp-section-bg); box-sizing:border-box; }
+  .sp-cal-cell.empty { background:transparent; }
+  .sp-cal-cell.today { background:rgba(212,175,55,.13); outline:1px solid var(--sp-gold); }
+  .sp-cal-day { font-family:'DM Mono',monospace; font-size:10px; color:var(--sp-muted); line-height:1; margin-bottom:3px; }
+  .sp-cal-cell.today .sp-cal-day { color:var(--sp-gold); font-weight:700; }
+  .sp-cal-evt { font-size:8.5px; color:var(--sp-ink); background:rgba(212,175,55,.18); border-radius:2px; padding:1px 4px; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.4; }
+  .sp-cal-month-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--sp-muted); margin-bottom:2px; }
+  .sp-cal-nav-btn { padding:3px 12px; background:transparent; border:1px solid var(--sp-border); border-radius:3px; color:var(--sp-muted); cursor:pointer; font-size:13px; font-family:'DM Mono',monospace; transition:color .15s,border-color .15s; }
+  .sp-cal-nav-btn:hover { color:var(--sp-gold); border-color:var(--sp-gold); }
+
+  /* ── Sunday One-sheet modal ───────────────────────────────────── */
+  #sundayModal .tmod-body { padding:0; }
+  .sd-week-bar { display:flex; align-items:center; gap:12px; padding:14px 28px; border-bottom:1px solid var(--card-border); background:var(--bg); flex-shrink:0; flex-wrap:wrap; }
+  .sd-week-label { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; color:var(--text-muted); letter-spacing:.05em; white-space:nowrap; }
+  .sd-week-select { padding:7px 12px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; color:var(--text); font-family:'Montserrat',sans-serif; font-size:13px; cursor:pointer; min-width:220px; }
+  .sd-print-btn { margin-left:auto; padding:6px 14px; background:transparent; border:1px solid #3a3a3a; border-radius:6px; color:var(--text-muted); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; letter-spacing:.04em; white-space:nowrap; }
+  .sd-print-btn:hover { border-color:var(--yellow-2); color:var(--yellow-2); }
+  .sd-scroll { flex:1; overflow-y:auto; padding:28px 32px 60px; }
+  .sd-scroll::-webkit-scrollbar { width:8px; }
+  .sd-scroll::-webkit-scrollbar-track { background:var(--bg); }
+  .sd-scroll::-webkit-scrollbar-thumb { background:#444; border-radius:4px; }
+  .sd-sheet { max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
+  .sd-section { background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:20px 22px; }
+  .sd-section-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--yellow-2); margin-bottom:14px; }
+  .sd-special-list { display:flex; flex-wrap:wrap; gap:8px; }
+  .sd-special-item { display:flex; align-items:center; gap:8px; background:rgba(212,175,55,.08); border:1px solid rgba(212,175,55,.25); border-radius:20px; padding:6px 14px; }
+  .sd-special-name { font-size:13px; font-weight:600; color:var(--text); }
+  .sd-special-time,.sd-special-loc { font-size:11px; color:var(--text-muted); }
+  .sd-captains-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
+  .sd-captain-card { background:var(--bg); border:1px solid var(--card-border); border-radius:7px; padding:12px 14px; }
+  .sd-captain-service { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:5px; }
+  .sd-captain-names { font-size:13px; font-weight:600; color:var(--text); }
+  .sd-preacher-block { background:var(--bg); border:1px solid var(--card-border); border-radius:7px; padding:14px 16px; margin-bottom:14px; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; }
+  .sd-preacher-lbl { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); }
+  .sd-preacher-name { font-size:15px; font-weight:700; color:var(--text); }
+  .sd-preacher-sermon { font-size:13px; color:var(--text-muted); font-style:italic; }
+  .sd-preacher-text { font-size:12px; color:var(--yellow-2); font-family:'DM Mono',monospace; }
+  .sd-order-svc-hdr { display:flex; justify-content:space-between; align-items:baseline; padding:8px 0 4px; border-bottom:2px solid var(--card-border); margin-bottom:4px; }
+  .sd-order-svc-name { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); }
+  .sd-order-svc-end { font-size:11px; color:var(--text-dim); }
+  .sd-order-row { display:grid; grid-template-columns:72px 1fr 52px; gap:8px; align-items:baseline; padding:6px 4px; border-bottom:1px solid rgba(255,255,255,.04); }
+  .sd-order-row:last-child { border-bottom:none; }
+  .sd-order-row.is-header { padding:10px 4px 4px; }
+  .sd-order-row.is-header .sd-order-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); grid-column:1/-1; }
+  .sd-order-time { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-dim); white-space:nowrap; }
+  .sd-order-title { font-size:13px; color:var(--text); }
+  .sd-order-dur { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-dim); text-align:right; white-space:nowrap; }
+  .sd-transition-row { display:flex; align-items:center; gap:8px; padding:8px 4px; color:var(--text-dim); font-size:11px; font-family:'DM Mono',monospace; }
+  .sd-transition-line { flex:1; height:1px; background:var(--card-border); }
+  .sd-teams-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
+  .sd-team-card { background:var(--bg); border:1px solid var(--card-border); border-radius:7px; padding:12px 14px; }
+  .sd-team-name { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--yellow-2); margin-bottom:8px; }
+  .sd-vol-row { display:flex; align-items:baseline; gap:6px; padding:3px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+  .sd-vol-row:last-child { border-bottom:none; }
+  .sd-vol-name { flex:1; font-size:12px; color:var(--text); }
+  .sd-vol-pos { font-size:10px; color:var(--text-dim); font-style:italic; }
+  .sd-vol-status { font-size:10px; font-family:'DM Mono',monospace; }
+  .sd-vol-status.c { color:#6fcf97; }
+  .sd-vol-status.u { color:var(--text-dim); }
+  .sd-empty-state { text-align:center; padding:60px 24px; color:var(--text-dim); font-size:14px; }
+
+  @media print {
+    #sundayModal .tmod-header, #sundayModal .sd-week-bar .sd-print-btn { display:none !important; }
+    #sundayModal { position:static !important; overflow:visible !important; }
+    .sd-scroll { overflow:visible !important; padding:0 !important; }
+  }
 </style>
 </head>
 <body>
@@ -1156,6 +1226,7 @@
       <div class="subtitle">Living Stones Church, South Reno</div>
     </div>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
+      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()">☀ Sunday</button>
       <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()">🏛 Staff</button>
       <button class="members-btn" id="membersBtnHeader" onclick="mmClick()">🔐 Members</button>
       <div class="updated">
@@ -2093,6 +2164,32 @@
     </div>
   </div>
 </div><!-- /staffModal overlay -->
+
+<!-- ☀ Sunday One-sheet Modal -->
+<div class="tmod-overlay" id="sundayModal" aria-hidden="true">
+  <div class="tmod-header">
+    <button class="tmod-back" onclick="closeSundayModal()">&#8592; Dashboard</button>
+    <div class="tmod-titles">
+      <div class="tmod-title">☀ Sunday One-sheet</div>
+      <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; SOUTH RENO</div>
+    </div>
+    <div class="tmod-meta" id="sundayModalMeta"></div>
+  </div>
+  <!-- Week selector bar -->
+  <div class="sd-week-bar">
+    <span class="sd-week-label">WEEK</span>
+    <select class="sd-week-select" id="sd-week-select" onchange="sundaySelectWeek(this.value)">
+      <option value="">Loading Sunday plans…</option>
+    </select>
+    <button class="sd-print-btn" onclick="window.print()">Print / Save PDF</button>
+  </div>
+  <!-- Scrollable content -->
+  <div class="sd-scroll">
+    <div id="sd-content">
+      <div class="sd-empty-state">Loading Sunday data from Planning Center…</div>
+    </div>
+  </div>
+</div><!-- /sundayModal -->
 
 <script>
 let DASHBOARD_DATA = null;
@@ -3939,6 +4036,315 @@ function staffIsUnlocked() {
   return sessionStorage.getItem(STAFF_SESSION_KEY) === '1';
 }
 
+/* =========================================================
+   SUNDAY ONE-SHEET
+   Reads sundayPlans from dashboard-data.json and calendar
+   events from eos-data.json to build a per-Sunday view.
+========================================================= */
+
+let _sundayPlans   = null;  // array from dashboard-data.json
+let _sundayEosCal  = null;  // calendar events from eos-data.json
+
+const SD_BLOCKED = new Set([
+  '8am worship gathering', '9:30am worship gathering', '11am worship gathering',
+  'grief share', 'worship rehearsal'
+]);
+
+function openSundayModal() {
+  const modal = document.getElementById('sundayModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (!_sundayPlans) sundayLoadData();
+}
+
+function closeSundayModal() {
+  const modal = document.getElementById('sundayModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+async function sundayLoadData() {
+  document.getElementById('sd-content').innerHTML =
+    '<div class="sd-empty-state">Loading Sunday data from Planning Center…</div>';
+  try {
+    // Fetch dashboard-data (has sundayPlans) and eos-data (has calendar events)
+    const [dashRes, eosRes] = await Promise.all([
+      fetch(DATA_URL + '?v=' + Date.now(), { cache: 'no-store' }),
+      fetch('https://lssouthreno.github.io/Church-Dashboard/eos-data.json?v=' + Date.now(), { cache: 'no-store' })
+    ]);
+    if (dashRes.ok) {
+      const dash = await dashRes.json();
+      _sundayPlans = dash.sundayPlans || [];
+      const meta = document.getElementById('sundayModalMeta');
+      if (meta && dash.lastUpdated) {
+        meta.innerHTML = '<b>Last synced</b>' + new Date(dash.lastUpdated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+      }
+    }
+    if (eosRes.ok) {
+      const eos = await eosRes.json();
+      _sundayEosCal = (eos.calendar && eos.calendar.events) ? eos.calendar.events : [];
+    }
+  } catch(e) {
+    console.error('Sunday load error:', e);
+  }
+  sundayBuildSelector();
+}
+
+function sundayBuildSelector() {
+  const sel = document.getElementById('sd-week-select');
+  if (!sel) return;
+  if (!_sundayPlans || !_sundayPlans.length) {
+    sel.innerHTML = '<option value="">No upcoming Sunday data yet — sync pending</option>';
+    document.getElementById('sd-content').innerHTML =
+      '<div class="sd-empty-state">Sunday plan data will appear here after the next hourly sync from Planning Center.<br><br>' +
+      'If you just set this up, run <strong>syncDashboard</strong> from the Apps Script to populate.</div>';
+    return;
+  }
+  sel.innerHTML = _sundayPlans.map(p =>
+    `<option value="${p.date}">${p.ds}</option>`
+  ).join('');
+
+  // Default to the nearest upcoming Sunday
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  let best = _sundayPlans[0].date;
+  for (const p of _sundayPlans) {
+    if (new Date(p.date + 'T00:00:00') >= today) { best = p.date; break; }
+  }
+  sel.value = best;
+  sundaySelectWeek(best);
+}
+
+function sundaySelectWeek(dateKey) {
+  const container = document.getElementById('sd-content');
+  if (!dateKey || !_sundayPlans) {
+    container.innerHTML = '<div class="sd-empty-state">Select a week above.</div>';
+    return;
+  }
+  const plan = _sundayPlans.find(p => p.date === dateKey);
+  if (!plan) {
+    container.innerHTML = '<div class="sd-empty-state">No plan data for this week yet.</div>';
+    return;
+  }
+  const calEventsToday = (_sundayEosCal || []).filter(ev =>
+    ev.dateKey === dateKey && !SD_BLOCKED.has((ev.name||'').toLowerCase().trim())
+  );
+  container.innerHTML = sundayBuildContent(plan, calEventsToday);
+}
+
+function sundayBuildContent(plan, calEvents) {
+  const services = plan.services || [];
+
+  // Collect all confirmed/pending volunteers across all services, deduplicated by name+team
+  const teamMap = {};
+  services.forEach(svc => {
+    (svc.volunteers || []).forEach(v => {
+      const key = v.team || 'Other';
+      if (!teamMap[key]) teamMap[key] = [];
+      if (!teamMap[key].find(x => x.name === v.name)) teamMap[key].push(v);
+    });
+  });
+
+  // Get preacher from the first service that has one
+  const preacher    = services.map(s => s.preacher).find(p => p) || '';
+  const sermonTitle = services.map(s => s.title).find(t => t) || '';
+  const seriesTtl   = services.map(s => s.series).find(s => s) || '';
+
+  // Get order of service from first service with items
+  const orderItems = services.reduce((acc, s) => acc.length ? acc : (s.orderItems || []), []);
+
+  const teamKeys = Object.keys(teamMap).sort();
+
+  return `
+    <div class="sd-sheet">
+
+      ${calEvents.length ? `
+      <div class="sd-section">
+        <div class="sd-section-title">✦ Special Today</div>
+        <div class="sd-special-list">
+          ${calEvents.map(ev => `
+            <div class="sd-special-item">
+              <span class="sd-special-name">${ev.name}</span>
+              ${ev.time && ev.time !== '12:00 AM' ? `<span class="sd-special-time">&middot; ${ev.time}</span>` : ''}
+              ${ev.location ? `<span class="sd-special-loc">&middot; ${ev.location.split(',')[0]}</span>` : ''}
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${services.length ? `
+      <div class="sd-section">
+        <div class="sd-section-title">Service Captains</div>
+        <div class="sd-captains-row">
+          ${services.map(svc => `
+            <div class="sd-captain-card">
+              <div class="sd-captain-service">${svc.serviceType}</div>
+              <div class="sd-captain-names">${
+                svc.captains && svc.captains.length
+                  ? svc.captains.join(', ')
+                  : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
+              }</div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="sd-section">
+        <div class="sd-section-title">Order of Service</div>
+        ${preacher ? `
+        <div class="sd-preacher-block">
+          <span class="sd-preacher-lbl">Preaching</span>
+          <span class="sd-preacher-name">${preacher}</span>
+          ${sermonTitle ? `<span class="sd-preacher-sermon">&ldquo;${sermonTitle}&rdquo;</span>` : ''}
+          ${seriesTtl && seriesTtl !== sermonTitle ? `<span class="sd-preacher-text">${seriesTtl}</span>` : ''}
+        </div>` : ''}
+        ${orderItems.length ? sundayBuildOrderHTML(orderItems, services) : `
+        <div style="color:var(--text-dim);font-size:13px;padding:8px 0;">
+          Order of service will appear here once your PCO plans are synced.
+        </div>`}
+      </div>
+
+      ${teamKeys.length ? `
+      <div class="sd-section">
+        <div class="sd-section-title">Volunteer Teams</div>
+        <div class="sd-teams-grid">
+          ${teamKeys.map(team => `
+            <div class="sd-team-card">
+              <div class="sd-team-name">${team || 'Unassigned'}</div>
+              <div class="sd-team-members">
+                ${teamMap[team].map(v => `
+                  <div class="sd-vol-row">
+                    <span class="sd-vol-name">${v.name}</span>
+                    ${v.pos ? `<span class="sd-vol-pos">${v.pos}</span>` : ''}
+                    <span class="sd-vol-status ${(v.status||'').toLowerCase()}">${v.status === 'C' ? '✓' : '?'}</span>
+                  </div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+    </div>`;
+}
+
+function sundayBuildOrderHTML(orderItems, services) {
+  // Map service type names to start hours/minutes
+  function parseStart(svcTypeName) {
+    const n = (svcTypeName || '').toLowerCase();
+    if (n.includes('8am')  || n.includes('8 am'))  return { h: 8,  m: 0 };
+    if (n.includes('9:30') || n.includes('9am'))    return { h: 9,  m: 30 };
+    if (n.includes('11am') || n.includes('11 am'))  return { h: 11, m: 0 };
+    return null;
+  }
+
+  const starts = services.map(s => parseStart(s.serviceType)).filter(Boolean);
+  if (!starts.length) {
+    // No known start times — just list items with no clock
+    return orderItems.map(item => `
+      <div class="sd-order-row${item.type === 'header' ? ' is-header' : ''}">
+        ${item.type === 'header'
+          ? `<div class="sd-order-title" style="grid-column:1/-1">${item.title}</div>`
+          : `<div class="sd-order-time"></div>
+             <div class="sd-order-title">${item.title}</div>
+             <div class="sd-order-dur">${item.lengthMin ? item.lengthMin + ' min' : ''}</div>`}
+      </div>`).join('');
+  }
+
+  const totalMin = orderItems.reduce((s, i) => s + (i.lengthMin || 0), 0);
+
+  function fmtTime(totalMinutes) {
+    const h = Math.floor(totalMinutes / 60) % 24;
+    const m = totalMinutes % 60;
+    const ap = totalMinutes >= 12 * 60 ? 'PM' : 'AM';
+    const hh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+    return hh + ':' + String(m).padStart(2, '0') + ' ' + ap;
+  }
+
+  return starts.map((start, si) => {
+    let cumMin = start.h * 60 + start.m;
+    const endMin = cumMin + totalMin;
+    const svcLabel = services[si] ? services[si].serviceType : '';
+    let html = `
+      <div class="sd-order-svc-hdr" ${si > 0 ? 'style="margin-top:18px;"' : ''}>
+        <span class="sd-order-svc-name">${svcLabel}</span>
+        <span class="sd-order-svc-end">ends ~${fmtTime(endMin)}</span>
+      </div>`;
+    orderItems.forEach(item => {
+      if (item.type === 'header') {
+        html += `<div class="sd-order-row is-header"><div class="sd-order-title" style="grid-column:1/-1">${item.title}</div></div>`;
+      } else {
+        html += `<div class="sd-order-row">
+          <div class="sd-order-time">${fmtTime(cumMin)}</div>
+          <div class="sd-order-title">${item.title}</div>
+          <div class="sd-order-dur">${item.lengthMin ? item.lengthMin + ' min' : ''}</div>
+        </div>`;
+        cumMin += (item.lengthMin || 0);
+      }
+    });
+    if (si < starts.length - 1) {
+      html += `<div class="sd-transition-row">
+        <div class="sd-transition-line"></div>
+        <span>Transition → ${services[si+1] ? services[si+1].serviceType : 'next service'}</span>
+        <div class="sd-transition-line"></div>
+      </div>`;
+    }
+    return html;
+  }).join('');
+}
+
+/* =========================================================
+   STAFF SYNC CALENDAR GRID HELPERS
+========================================================= */
+
+const SP_CAL_BLOCKED = new Set([
+  '8am worship gathering', '9:30am worship gathering', '11am worship gathering',
+  'grief share', 'worship rehearsal'
+]);
+
+function buildSpCalMonthGrid(monthStart, eventsByDate) {
+  const today    = new Date();
+  const todayKey = today.toISOString().slice(0, 10);
+  const year     = monthStart.getFullYear();
+  const month    = monthStart.getMonth();
+  const label    = monthStart.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const firstDay = new Date(year, month, 1).getDay();
+  const days     = new Date(year, month + 1, 0).getDate();
+  const headers  = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  let cells = '';
+  for (let i = 0; i < firstDay; i++) cells += '<div class="sp-cal-cell empty"></div>';
+  for (let d = 1; d <= days; d++) {
+    const dk  = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+    const evs = eventsByDate[dk] || [];
+    const cls = (dk === todayKey ? ' today' : '') + (evs.length ? ' has-event' : '');
+    cells += `<div class="sp-cal-cell${cls}">
+      <div class="sp-cal-day">${d}</div>
+      ${evs.map(ev => `<div class="sp-cal-evt" title="${ev.name}">${ev.name}${ev.time && ev.time !== '12:00 AM' ? ' · ' + ev.time : ''}</div>`).join('')}
+    </div>`;
+  }
+
+  return `<div>
+    <div class="sp-cal-month-label">${label}</div>
+    <div class="sp-cal-grid">
+      ${headers.map(h => `<div class="sp-cal-dayheader">${h}</div>`).join('')}
+      ${cells}
+    </div>
+  </div>`;
+}
+
+function spCalNav(dir) {
+  if (!window._spCalData) return;
+  const max = window._spCalData.months.length - 1;
+  window._spCalIdx = Math.max(0, Math.min(max, (window._spCalIdx || 0) + dir));
+  const container = document.getElementById('sp-cal-grid-container');
+  if (container) {
+    container.innerHTML = buildSpCalMonthGrid(
+      new Date(window._spCalData.months[window._spCalIdx]),
+      window._spCalData.events
+    );
+  }
+}
+
 function openStaffModal() {
   const modal = document.getElementById('staffModal');
   modal.classList.add('open');
@@ -4448,31 +4854,39 @@ function staffRenderL10(data) {
   // Build label map for history (item_N → agenda label)
   const agendaLabels = agenda.reduce((acc, a, ai) => { acc[ai] = a.item; return acc; }, {});
 
-  // ── Calendar: group events by month ── (must be defined before agendaSections)
+  // ── Calendar: 5-month grid, Sunday-first, blocked events filtered ── (must be defined before agendaSections)
   const calSection = (() => {
-    if (!calEvents.length) return '';
-    const byMonth = {};
-    calEvents.forEach(ev => {
-      const d = new Date(ev.dateKey + 'T12:00:00');
-      const monthLabel = d.toLocaleDateString('en-US', {month:'long', year:'numeric'});
-      if (!byMonth[monthLabel]) byMonth[monthLabel] = [];
-      byMonth[monthLabel].push(ev);
+    // Filter out recurring service/rehearsal events
+    const filtered = calEvents.filter(ev => !SP_CAL_BLOCKED.has((ev.name || '').toLowerCase().trim()));
+    if (!filtered.length) return '';
+
+    // Build lookup: dateKey → [events]
+    const evByDate = {};
+    filtered.forEach(ev => {
+      if (!evByDate[ev.dateKey]) evByDate[ev.dateKey] = [];
+      evByDate[ev.dateKey].push(ev);
     });
-    const months = Object.keys(byMonth);
+
+    // Build month array: current month through current+4
+    const now = new Date();
+    const calMonths = [];
+    for (let i = 0; i < 5; i++) {
+      calMonths.push(new Date(now.getFullYear(), now.getMonth() + i, 1).toISOString());
+    }
+    // Store globally so spCalNav can navigate
+    window._spCalData = { events: evByDate, months: calMonths };
+    window._spCalIdx  = 0;
+
     return `
-      <div style="margin-top:14px;">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Coming Up · PCO Calendar</div>
-        ${months.map(month => `
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--sp-muted);margin:12px 0 6px;">${month}</div>
-          ${byMonth[month].map(ev => `
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--sp-border);">
-              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:68px;padding-top:1px;">${ev.dayOfWeek} ${ev.date}</div>
-              <div style="flex:1;">
-                <div style="font-size:13px;font-weight:600;color:var(--sp-ink);">${ev.name}</div>
-                <div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">${ev.time}${ev.location ? ' &middot; ' + ev.location : ''}</div>
-              </div>
-            </div>`).join('')}
-        `).join('')}
+      <div style="margin-top:14px;" id="sp-cal-wrap">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);">Coming Up · PCO Calendar</div>
+          <div style="display:flex;gap:6px;">
+            <button class="sp-cal-nav-btn" onclick="spCalNav(-1)">&#8249;</button>
+            <button class="sp-cal-nav-btn" onclick="spCalNav(1)">&#8250;</button>
+          </div>
+        </div>
+        <div id="sp-cal-grid-container">${buildSpCalMonthGrid(new Date(calMonths[0]), evByDate)}</div>
       </div>`;
   })();
 
