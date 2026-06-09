@@ -4256,10 +4256,23 @@ function sundayBuildContent(plan, calEvents) {
   const seriesTtl   = services.map(s => s.series).find(s => s) || '';
   const orderItems  = services.reduce((acc, s) => acc.length ? acc : (s.orderItems || []), []);
 
-  // Helper: parse "9:30 AM" → minutes for chronological sort
+  // Helper: parse "9:30 AM" or range-start "6:30–10am" → minutes for chronological sort
   function parseTimeMin(t) {
-    const m = (t || '').match(/(\d+)(?::(\d+))?\s*(am|pm)/i);
-    if (!m) return 9999;
+    // For ranges like "6:30–10am" or "10am–1pm", use the START time only
+    const rangePart = (t || '').split(/\s*[–\-]\s*/)[0].trim();
+    // Use range start if it has am/pm, otherwise try full string for am/pm
+    const src = /am|pm/i.test(rangePart) ? rangePart : (t || '');
+    const m = src.match(/(\d+)(?::(\d+))?\s*(am|pm)/i);
+    if (!m) {
+      // No am/pm — parse the range-start as a plain number like "6:30"
+      const mNum = rangePart.match(/^(\d+)(?::(\d+))?$/);
+      if (mNum) {
+        let h = +mNum[1], mn = +(mNum[2] || 0);
+        if (h < 7) h += 12; // treat 1–6 as afternoon if no am/pm context
+        return h * 60 + mn;
+      }
+      return 9999;
+    }
     let h = +m[1], mn = +(m[2] || 0);
     const ap = (m[3] || '').toLowerCase();
     if (ap === 'pm' && h !== 12) h += 12;
@@ -4311,8 +4324,8 @@ function sundayBuildContent(plan, calEvents) {
     ? groupBySvcTime(teamMap[captainKey])
     : null; // null → fall back to services[].captains flat list
 
-  // Teams for volunteer grid (exclude Presiders — shown in OoS section)
-  const skipTeams = new Set([presiderKey].filter(Boolean));
+  // Teams for volunteer grid (exclude Presiders and Service Captains — shown in dedicated sections)
+  const skipTeams = new Set([presiderKey, captainKey].filter(Boolean));
   const gridTeamKeys = Object.keys(teamMap).filter(k => !skipTeams.has(k)).sort();
 
   // Volunteer counts (include all teams, including presiders, in totals)
@@ -4351,17 +4364,8 @@ function sundayBuildContent(plan, calEvents) {
                   <div class="sd-captain-names">${g.vols.map(v => v.name).join(', ')}</div>
                 </div>`).join('');
             }
-            // Priority 2: flat list — assign positional time windows (2 captains = early/late)
-            const CAP_SLOTS = ['6:30–10am', '10am–1pm', '1pm–close'];
+            // Priority 2: no service-time data — list captains together (can't assign shifts without PCO data)
             const allCaps = [...new Set(services.flatMap(s => s.captains || []))];
-            if (allCaps.length >= 2) {
-              return allCaps.map((name, i) => `
-                <div class="sd-captain-card">
-                  <div class="sd-captain-service">${CAP_SLOTS[i] || `Shift ${i + 1}`}</div>
-                  <div class="sd-captain-names">${name}</div>
-                </div>`).join('');
-            }
-            // Priority 3: single captain or none
             return `
               <div class="sd-captain-card">
                 <div class="sd-captain-service">All Services</div>
