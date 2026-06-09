@@ -2867,7 +2867,7 @@ function renderCGCount() {
       }]
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -2900,7 +2900,7 @@ function renderCGMembers() {
       }]
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -2964,7 +2964,7 @@ function renderBaptisms() {
       }]
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3007,7 +3007,7 @@ function renderMembersGrowth() {
       }]
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3048,12 +3048,12 @@ loadDashboardData()
   })
   .catch(showDashboardError);
 
-// Re-render the two scrollable charts (responsive:false) when the layout
-// breakpoint is crossed. matchMedia fires exactly once at the threshold —
-// no continuous polling, no stale clientWidth reads mid-drag.
+// Re-render all charts when the layout breakpoint is crossed.
+// matchMedia fires exactly once at the threshold — CSS layout is already
+// applied at that moment so getBoundingClientRect() returns accurate values.
 window.matchMedia('(max-width: 1200px)').addEventListener('change', () => {
   if (!DASHBOARD_DATA) return;
-  ['attendanceChart', 'givingChart'].forEach(id => {
+  ['attendanceChart','givingChart','baptismsChart','membersChart','cgCountChart','cgMembersChart'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     const c = Chart.getChart(el);
@@ -3061,6 +3061,10 @@ window.matchMedia('(max-width: 1200px)').addEventListener('change', () => {
   });
   renderAttendance();
   renderGiving();
+  renderBaptisms();
+  renderMembersGrowth();
+  renderCGCount();
+  renderCGMembers();
 });
 
 /* ============================================================
