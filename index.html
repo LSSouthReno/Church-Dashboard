@@ -1208,6 +1208,17 @@
   .sd-vol-status { font-size:10px; font-family:'DM Mono',monospace; }
   .sd-vol-status.c { color:#6fcf97; }
   .sd-vol-status.u { color:var(--text-dim); }
+  .sd-vol-role-tag { font-size:10px; color:var(--text-dim); font-style:italic; flex-shrink:0; }
+  .sd-vol-svctime-hdr { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); padding:7px 0 2px; border-top:1px solid rgba(255,255,255,.06); margin-top:3px; }
+  .sd-vol-svctime-hdr.first { border-top:none; margin-top:0; padding-top:0; }
+  /* Presiders block inside OoS */
+  .sd-presider-block { width:100%; border-top:1px solid var(--card-border); margin-top:10px; padding-top:10px; display:flex; gap:32px; flex-wrap:wrap; }
+  .sd-presider-group { min-width:180px; }
+  .sd-presider-lbl { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:6px; }
+  .sd-presider-row { display:flex; align-items:baseline; gap:8px; padding:3px 0; }
+  .sd-presider-time { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); min-width:56px; flex-shrink:0; }
+  .sd-presider-name { font-size:12px; color:var(--text); flex:1; }
+  .sd-presider-role { font-size:10px; color:var(--text-dim); font-style:italic; }
   .sd-empty-state { text-align:center; padding:60px 24px; color:var(--text-dim); font-size:14px; }
 
   @media print {
@@ -4138,25 +4149,87 @@ function sundaySelectWeek(dateKey) {
 function sundayBuildContent(plan, calEvents) {
   const services = plan.services || [];
 
-  // Collect all confirmed/pending volunteers across all services, deduplicated by name+team
+  // Collect volunteers; dedup by name+team+serviceTime so multi-service people show once per slot
   const teamMap = {};
   services.forEach(svc => {
     (svc.volunteers || []).forEach(v => {
       const key = v.team || 'Other';
       if (!teamMap[key]) teamMap[key] = [];
-      if (!teamMap[key].find(x => x.name === v.name)) teamMap[key].push(v);
+      if (!teamMap[key].find(x => x.name === v.name && (x.serviceTime||'') === (v.serviceTime||'')))
+        teamMap[key].push(v);
     });
   });
 
-  // Get preacher from the first service that has one
   const preacher    = services.map(s => s.preacher).find(p => p) || '';
   const sermonTitle = services.map(s => s.title).find(t => t) || '';
   const seriesTtl   = services.map(s => s.series).find(s => s) || '';
+  const orderItems  = services.reduce((acc, s) => acc.length ? acc : (s.orderItems || []), []);
 
-  // Get order of service from first service with items
-  const orderItems = services.reduce((acc, s) => acc.length ? acc : (s.orderItems || []), []);
+  // Helper: parse "9:30 AM" → minutes for chronological sort
+  function parseTimeMin(t) {
+    const m = (t || '').match(/(\d+)(?::(\d+))?\s*(am|pm)/i);
+    if (!m) return 9999;
+    let h = +m[1], mn = +(m[2] || 0);
+    const ap = (m[3] || '').toLowerCase();
+    if (ap === 'pm' && h !== 12) h += 12;
+    if (ap === 'am' && h === 12) h = 0;
+    return h * 60 + mn;
+  }
 
-  const teamKeys = Object.keys(teamMap).sort();
+  // Helper: group volunteer list by serviceTime, sorted chronologically; no-time last
+  function groupBySvcTime(vols) {
+    const groups = {};
+    vols.forEach(v => { const k = v.serviceTime || ''; if (!groups[k]) groups[k] = []; groups[k].push(v); });
+    return Object.keys(groups)
+      .sort((a, b) => !a && !b ? 0 : !a ? 1 : !b ? -1 : parseTimeMin(a) - parseTimeMin(b))
+      .map(k => ({ time: k, vols: groups[k] }));
+  }
+
+  // Helper: render volunteer rows for a team card (with service-time sub-headers, optional role tags)
+  function renderVolGroups(vols, showRole) {
+    const groups = groupBySvcTime(vols);
+    const hasServiceTimes = groups.some(g => g.time);
+    return groups.map((g, gi) => `
+      ${hasServiceTimes ? `<div class="sd-vol-svctime-hdr${gi === 0 ? ' first' : ''}">${g.time}</div>` : ''}
+      ${g.vols.map(v => `
+        <div class="sd-vol-row">
+          <span class="sd-vol-name">${v.name}</span>
+          ${showRole && v.pos ? `<span class="sd-vol-role-tag">${v.pos}</span>` : ''}
+          <span class="sd-vol-status ${(v.status||'').toLowerCase()}">${v.status === 'C' ? '✓' : '?'}</span>
+        </div>`).join('')}
+    `).join('');
+  }
+
+  // Presiders: pull to top of OoS; group by role (pos), then by service time within each role
+  const presiderKey = Object.keys(teamMap).find(k => /presider/i.test(k)) || '';
+  const presiderVols = presiderKey ? teamMap[presiderKey] : [];
+  const presiderRoleMap = {};
+  presiderVols.forEach(v => {
+    const role = v.pos || 'Presiders';
+    if (!presiderRoleMap[role]) presiderRoleMap[role] = [];
+    presiderRoleMap[role].push(v);
+  });
+  const presiderRoleKeys = Object.keys(presiderRoleMap);
+  const presiderRoles = presiderRoleKeys.length === 1 && presiderRoleKeys[0] === 'Presiders'
+    ? [{ label: 'Presiders', groups: groupBySvcTime(presiderVols) }]
+    : presiderRoleKeys.map(role => ({ label: role, groups: groupBySvcTime(presiderRoleMap[role]) }));
+
+  // Service Captains: use teamMap data for service-time breakdown if available
+  const captainKey = Object.keys(teamMap).find(k => /captain/i.test(k)) || '';
+  const captainGroups = captainKey && teamMap[captainKey].some(v => v.serviceTime)
+    ? groupBySvcTime(teamMap[captainKey])
+    : null; // null → fall back to services[].captains flat list
+
+  // Teams for volunteer grid (exclude Presiders — shown in OoS section)
+  const skipTeams = new Set([presiderKey].filter(Boolean));
+  const gridTeamKeys = Object.keys(teamMap).filter(k => !skipTeams.has(k)).sort();
+
+  // Volunteer counts (include all teams, including presiders, in totals)
+  const allVols        = Object.values(teamMap).flat();
+  const totalConfirmed = allVols.filter(v => v.status === 'C').length;
+  const totalPending   = allVols.filter(v => v.status === 'U').length;
+  const totalVols      = allVols.length;
+  const summaryColor   = totalConfirmed === totalVols ? 'var(--green,#4caf50)' : 'var(--yellow-2,#c9a84c)';
 
   return `
     <div class="sd-sheet">
@@ -4178,29 +4251,49 @@ function sundayBuildContent(plan, calEvents) {
       <div class="sd-section">
         <div class="sd-section-title">Service Captains</div>
         <div class="sd-captains-row">
-          ${services.map(svc => {
-            const stLabel = svc.serviceType && !['services','service','worship','gathering'].includes(svc.serviceType.toLowerCase())
-              ? svc.serviceType : 'All Services';
-            return `
-            <div class="sd-captain-card">
-              <div class="sd-captain-service">${stLabel}</div>
-              <div class="sd-captain-names">${
-                svc.captains && svc.captains.length
-                  ? svc.captains.join(', ')
-                  : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
-              }</div>
-            </div>`;
-          }).join('')}
+          ${captainGroups
+            ? captainGroups.map(g => `
+              <div class="sd-captain-card">
+                <div class="sd-captain-service">${g.time || 'All Services'}</div>
+                <div class="sd-captain-names">${g.vols.map(v => v.name).join(', ')}</div>
+              </div>`).join('')
+            : services.map(svc => {
+                const stLabel = svc.serviceType && !['services','service','worship','gathering'].includes(svc.serviceType.toLowerCase())
+                  ? svc.serviceType : 'All Services';
+                return `
+                <div class="sd-captain-card">
+                  <div class="sd-captain-service">${stLabel}</div>
+                  <div class="sd-captain-names">${
+                    svc.captains && svc.captains.length
+                      ? svc.captains.join(', ')
+                      : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
+                  }</div>
+                </div>`;
+              }).join('')}
         </div>
       </div>` : ''}
 
       <div class="sd-section">
         <div class="sd-section-title">Order of Service</div>
-        ${(preacher || sermonTitle || seriesTtl) ? `
+        ${(preacher || sermonTitle || seriesTtl || presiderVols.length) ? `
         <div class="sd-preacher-block">
           ${preacher ? `<span class="sd-preacher-lbl">Preaching</span><span class="sd-preacher-name">${preacher}</span>` : ''}
           ${sermonTitle ? `<span class="sd-preacher-sermon">&ldquo;${sermonTitle}&rdquo;</span>` : ''}
           ${seriesTtl && seriesTtl !== sermonTitle ? `<span class="sd-preacher-text">${seriesTtl}</span>` : ''}
+          ${presiderVols.length ? `
+          <div class="sd-presider-block">
+            ${presiderRoles.map(roleGroup => `
+              <div class="sd-presider-group">
+                <div class="sd-presider-lbl">${roleGroup.label}</div>
+                ${roleGroup.groups.map(g => g.vols.map(v => `
+                  <div class="sd-presider-row">
+                    ${g.time ? `<span class="sd-presider-time">${g.time}</span>` : ''}
+                    <span class="sd-presider-name">${v.name}</span>
+                    ${v.pos && v.pos !== roleGroup.label ? `<span class="sd-presider-role">${v.pos}</span>` : ''}
+                    <span class="sd-vol-status ${(v.status||'').toLowerCase()}">${v.status === 'C' ? '✓' : '?'}</span>
+                  </div>`).join('')).join('')}
+              </div>`).join('')}
+          </div>` : ''}
         </div>` : ''}
         ${orderItems.length ? sundayBuildOrderHTML(orderItems, services) : `
         <div style="color:var(--text-dim);font-size:13px;padding:8px 0;">
@@ -4208,36 +4301,24 @@ function sundayBuildContent(plan, calEvents) {
         </div>`}
       </div>
 
-      ${teamKeys.length ? (() => {
-        const allVols  = teamKeys.flatMap(k => teamMap[k]);
-        const confirmed = allVols.filter(v => v.status === 'C').length;
-        const pending   = allVols.filter(v => v.status === 'U').length;
-        const total     = allVols.length;
-        const allGood   = confirmed === total;
-        const summaryColor = allGood ? 'var(--green,#4caf50)' : 'var(--yellow-2,#c9a84c)';
-        return `
+      ${gridTeamKeys.length ? `
       <div class="sd-section">
         <div class="sd-section-title" style="display:flex;align-items:baseline;gap:12px;">
           Volunteer Teams
           <span style="font-size:11px;font-family:'DM Mono',monospace;font-weight:400;letter-spacing:.05em;color:${summaryColor};text-transform:none;">
-            ${confirmed}/${total} confirmed${pending > 0 ? ` · ${pending} pending` : ''}
+            ${totalConfirmed}/${totalVols} confirmed${totalPending > 0 ? ` · ${totalPending} pending` : ''}
           </span>
         </div>
         <div class="sd-teams-grid">
-          ${teamKeys.map(team => `
+          ${gridTeamKeys.map(team => `
             <div class="sd-team-card">
               <div class="sd-team-name">${team || 'Unassigned'}</div>
               <div class="sd-team-members">
-                ${teamMap[team].map(v => `
-                  <div class="sd-vol-row">
-                    <span class="sd-vol-name">${v.name}</span>
-                    ${v.pos ? `<span class="sd-vol-pos">${v.pos}</span>` : ''}
-                    <span class="sd-vol-status ${(v.status||'').toLowerCase()}">${v.status === 'C' ? '✓' : '?'}</span>
-                  </div>`).join('')}
+                ${renderVolGroups(teamMap[team], /stepping.?stone/i.test(team))}
               </div>
             </div>`).join('')}
         </div>
-      </div>`; })() : ''}
+      </div>` : ''}
 
     </div>`;
 }
