@@ -131,6 +131,22 @@
     gap: 24px;
   }
 
+  /* Two-column masonry-style layout — no row-gap dead zones */
+  .main-cols {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .main-left,
+  .main-right {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
   .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -406,6 +422,7 @@
   @media (max-width: 1200px) {
     .dashboard { padding: 24px 20px 50px; }
     .grid { grid-template-columns: 1fr; }
+    .main-cols { flex-direction: column; }
     .header {
       flex-direction: column;
       align-items: flex-start;
@@ -1247,25 +1264,65 @@
     </div>
   </div>
 
-  <!-- Row 1: Attendance | Baptisms -->
-  <div class="grid">
-    <div class="card">
-      <h2>Weekend Attendance</h2>
-      <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
-      <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
-      <div class="avg-row">
-        <div class="avg-box">
-          <div class="avg-label">3-Month Average</div>
-          <div class="avg-value" id="avg3">0</div>
-        </div>
-        <div class="avg-box">
-          <div class="avg-label">6-Month Average</div>
-          <div class="avg-value" id="avg6">0</div>
+  <!-- Main two-column layout — independent stacks, no row-gap dead zones -->
+  <div class="main-cols">
+
+    <!-- LEFT COLUMN: Attendance → Serve Teams → Community Groups -->
+    <div class="main-left">
+
+      <div class="card">
+        <h2>Weekend Attendance</h2>
+        <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
+        <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
+        <div class="avg-row">
+          <div class="avg-box">
+            <div class="avg-label">3-Month Average</div>
+            <div class="avg-value" id="avg3">0</div>
+          </div>
+          <div class="avg-box">
+            <div class="avg-label">6-Month Average</div>
+            <div class="avg-value" id="avg6">0</div>
+          </div>
         </div>
       </div>
+
+      <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail (members only)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+          <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
+          <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Members only →</span>
+        </div>
+        <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
+        <div class="teams-summary">
+          <div class="stat">
+            <div class="stat-label">Positions Filled</div>
+            <div class="stat-value have" id="totalHave">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Total Needed</div>
+            <div class="stat-value need" id="totalNeed">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Gap</div>
+            <div class="stat-value gap" id="totalGap">0</div>
+          </div>
+        </div>
+        <div class="team-list" id="teamList"></div>
+      </div>
+
+      <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+          <h2 style="margin:0;">Community Groups</h2>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+        </div>
+        <div class="card-sub">Total groups · click for full CG detail</div>
+        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
+      </div>
+
     </div>
 
-    <div class="stack">
+    <!-- RIGHT COLUMN: Baptisms → Members → Giving → Pledge → CG Members -->
+    <div class="main-right">
+
       <div class="card" id="baptismsCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Baptisms</h2>
@@ -1283,35 +1340,7 @@
         <div class="card-sub">PCO "Member Since" field · new members grouped by year</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="membersChart"></canvas></div></div>
       </div>
-    </div>
-  </div>
 
-  <!-- Row 2: Serve Teams | Giving + Pledge -->
-  <div class="grid" style="margin-top:24px;">
-    <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail (members only)">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-        <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
-        <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Members only →</span>
-      </div>
-      <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
-      <div class="teams-summary">
-        <div class="stat">
-          <div class="stat-label">Positions Filled</div>
-          <div class="stat-value have" id="totalHave">0</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Total Needed</div>
-          <div class="stat-value need" id="totalNeed">0</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Gap</div>
-          <div class="stat-value gap" id="totalGap">0</div>
-        </div>
-      </div>
-      <div class="team-list" id="teamList"></div>
-    </div>
-
-    <div class="stack">
       <div class="card">
         <h2>Average Giving by Month</h2>
         <div class="card-sub">Full history · scroll horizontally for older months</div>
@@ -1349,10 +1378,19 @@
         </div>
       </div>
 
+      <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+          <h2 style="margin:0;">Community Group Members</h2>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+        </div>
+        <div class="card-sub">Total members · click for full CG detail</div>
+        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgMembersChart"></canvas></div></div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Budget Allocation — full-width row -->
+  <!-- Budget Allocation — full-width, members-only -->
   <div class="card" id="budgetPieCard" style="display:none;margin-top:24px;">
     <h2>Budget Allocation</h2>
     <div class="card-sub">% of income by category</div>
@@ -1370,26 +1408,6 @@
         <div id="missionsList" style="display:flex;flex-direction:column;gap:6px;"></div>
         <div id="missionsTotal" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--card-border);font-size:13px;font-weight:700;display:flex;justify-content:space-between;"></div>
       </div>
-    </div>
-  </div>
-
-  <!-- Row 3: Community Groups -->
-  <div class="grid" style="margin-top:24px;">
-    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-        <h2 style="margin:0;">Community Groups</h2>
-        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
-      </div>
-      <div class="card-sub">Total groups · click for full CG detail</div>
-      <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
-    </div>
-    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-        <h2 style="margin:0;">Community Group Members</h2>
-        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
-      </div>
-      <div class="card-sub">Total members · click for full CG detail</div>
-      <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgMembersChart"></canvas></div></div>
     </div>
   </div>
 
