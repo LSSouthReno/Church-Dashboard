@@ -2424,14 +2424,14 @@ function syncSundayPlansData_() {
       var planId   = String(plan.id);
       var planAttr = plan.attributes || {};
 
-      // ── Team members: include=team,plan_times to resolve team names + service times
-      // PCO v2 uses "plan_times" (not "times") as the relationship key for TeamMember
+      // ── Team members: include=team,times,service_times
+      // PCO v2 relationship keys on TeamMember are "times" and "service_times"
       var tmResult = { data: [], included: [] };
       try {
         tmResult = pcoGetAllWithIncluded_(
           '/services/v2/service_types/' + typeId +
           '/plans/' + planId +
-          '/team_members?per_page=100&include=team,plan_times'
+          '/team_members?per_page=100&include=team,times,service_times'
         );
       } catch(e) {
         Logger.log('     team_members error for plan ' + planId + ': ' + e.message);
@@ -2447,68 +2447,45 @@ function syncSundayPlansData_() {
         Logger.log('     [DEBUG] first TM sample: ' + JSON.stringify(_first).substring(0, 600));
       }
 
-      // Build team id -> name and plan_time id -> display label lookups from included
+      // Build team id -> name lookup from included
       var includedTeams = {};
-      var includedTimes = {};
       (tmResult.included || []).forEach(function(inc) {
         if (inc.type === 'Team') {
           includedTeams[String(inc.id)] = String((inc.attributes && inc.attributes.name) || '').trim();
-        } else if (inc.type === 'PlanTime' || inc.type === 'ServiceTime' || inc.type === 'Time') {
-          // PCO may return service times with different type names depending on API version
-          var ta = inc.attributes || {};
-          var timeName = String(ta.name || ta.time_name || ta.starts_at_time_of_day || '').trim();
-          if (!timeName && ta.starts_at) {
-            var d = new Date(ta.starts_at);
-            var hh = d.getHours(), mm = d.getMinutes();
-            var ap = hh >= 12 ? 'PM' : 'AM';
-            var h12 = hh > 12 ? hh - 12 : (hh === 0 ? 12 : hh);
-            timeName = h12 + (mm > 0 ? ':' + String(mm).padStart(2,'0') : '') + ' ' + ap;
-          }
-          includedTimes[String(inc.id)] = timeName;
         }
       });
 
-      // FALLBACK: if no plan times came through the include, fetch plan_times directly
-      // and build a teamMemberId -> serviceTime map by fetching per-time team members
-      var memberTimeMap = {};
-      if (Object.keys(includedTimes).length === 0) {
-        try {
-          var ptResult = pcoGetAllWithIncluded_(
-            '/services/v2/service_types/' + typeId +
-            '/plans/' + planId +
-            '/plan_times?per_page=100'
-          );
-          (ptResult.data || []).forEach(function(pt) {
-            var pa = pt.attributes || {};
-            var tname = String(pa.name || pa.time_name || pa.starts_at_time_of_day || '').trim();
-            if (!tname && pa.starts_at) {
-              var d = new Date(pa.starts_at);
-              var hh = d.getHours(), mm = d.getMinutes();
-              var ap = hh >= 12 ? 'PM' : 'AM';
-              var h12 = hh > 12 ? hh - 12 : (hh === 0 ? 12 : hh);
-              tname = h12 + (mm > 0 ? ':' + String(mm).padStart(2,'0') : '') + ' ' + ap;
-            }
-            if (!tname) return;
-            // Try to get team members for this specific plan time
-            try {
-              var ptMems = pcoGetAllWithIncluded_(
-                '/services/v2/service_types/' + typeId +
-                '/plans/' + planId +
-                '/plan_times/' + String(pt.id) +
-                '/team_members?per_page=100'
-              );
-              (ptMems.data || []).forEach(function(ptm) {
-                memberTimeMap[String(ptm.id)] = tname;
-              });
-              Logger.log('     [DEBUG] plan_time "' + tname + '" (' + pt.id + '): ' + (ptMems.data || []).length + ' members');
-            } catch(e2) {
-              Logger.log('     [DEBUG] plan_time team_members not available: ' + e2.message);
-            }
-          });
-        } catch(e) {
-          Logger.log('     plan_times fallback error: ' + e.message);
-        }
+      // Pre-fetch plan_times to build a planTimeId -> displayName lookup.
+      // This is always done separately because PCO does not support including
+      // PlanTime objects via the team_members include parameter.
+      // We then resolve each team member's time by cross-referencing their
+      // relationships.times.data IDs against this map.
+      var planTimeMap = {}; // planTimeId -> display name
+      try {
+        var ptResult = pcoGetAllWithIncluded_(
+          '/services/v2/service_types/' + typeId +
+          '/plans/' + planId +
+          '/plan_times?per_page=100'
+        );
+        (ptResult.data || []).forEach(function(pt) {
+          var pa = pt.attributes || {};
+          var tname = String(pa.name || pa.time_name || pa.starts_at_time_of_day || '').trim();
+          if (!tname && pa.starts_at) {
+            var d = new Date(pa.starts_at);
+            var hh = d.getHours(), mm = d.getMinutes();
+            var ap = hh >= 12 ? 'PM' : 'AM';
+            var h12 = hh > 12 ? hh - 12 : (hh === 0 ? 12 : hh);
+            tname = h12 + (mm > 0 ? ':' + String(mm).padStart(2,'0') : '') + ' ' + ap;
+          }
+          if (tname) {
+            planTimeMap[String(pt.id)] = tname;
+            Logger.log('     [plan_time] ' + tname + ' (id=' + pt.id + ')');
+          }
+        });
+      } catch(e) {
+        Logger.log('     plan_times fetch error: ' + e.message);
       }
+      Logger.log('     planTimeMap keys: ' + Object.keys(planTimeMap).length);
 
       // Preacher from plan-level attribute (set directly in PCO plan editor)
       var preacher    = String(planAttr.preacher || '').trim();
@@ -2545,10 +2522,9 @@ function syncSundayPlansData_() {
                        pl.includes('preach') || pl.includes('message') ||
                        pl.includes('sermon');
 
-        // Captain detection: role named "captain", "host", "service leader"
-        var isCaptain = tl.includes('captain') || tl.includes('host') ||
-                        pl.includes('captain') || pl.includes('service lead') ||
-                        pl.includes('host');
+        // Captain detection: ONLY match team named "captain" or position named "captain"
+        // Do NOT match "host" — that is a regular Hospitality volunteer role, not a service captain
+        var isCaptain = tl.includes('captain') || pl.includes('captain');
 
         if (isPreach && !preacher) {
           preacher = name;
@@ -2559,25 +2535,21 @@ function syncSundayPlansData_() {
         }
 
         // Resolve assigned service time(s):
-        // 1. via relationships.plan_times (PCO v2 correct key)
-        // 2. via relationships.times (legacy / alternate key)
-        // 3. via memberTimeMap built from per-plan-time team member fetch
-        // 4. via direct attributes
-        // 5. via position name if it looks like a time
+        // Cross-reference team member's relationships.times / relationships.service_times IDs
+        // against the planTimeMap pre-fetched from /plan_times.
+        // PCO does not support including PlanTime objects via the include param, so we
+        // fetch plan_times separately and look up by ID.
         var timeIds = [];
-        var relPT = (tm.relationships && tm.relationships.plan_times && tm.relationships.plan_times.data)
-                    ? tm.relationships.plan_times.data
-                    : null;
         var relT  = (tm.relationships && tm.relationships.times && tm.relationships.times.data)
-                    ? tm.relationships.times.data
-                    : null;
-        if (relPT) {
-          timeIds = [].concat(relPT).map(function(t) { return String(t.id || ''); });
-        } else if (relT) {
+                    ? tm.relationships.times.data : null;
+        var relST = (tm.relationships && tm.relationships.service_times && tm.relationships.service_times.data)
+                    ? tm.relationships.service_times.data : null;
+        if (relT && [].concat(relT).length > 0) {
           timeIds = [].concat(relT).map(function(t) { return String(t.id || ''); });
+        } else if (relST && [].concat(relST).length > 0) {
+          timeIds = [].concat(relST).map(function(t) { return String(t.id || ''); });
         }
-        var serviceTime = timeIds.map(function(id) { return includedTimes[id] || ''; }).filter(Boolean).join(', ')
-                       || memberTimeMap[String(tm.id)]
+        var serviceTime = timeIds.map(function(id) { return planTimeMap[id] || ''; }).filter(Boolean).join(', ')
                        || String(a.service_time_name || a.scheduled_time || '').trim();
         // If still empty, check whether the position name looks like a service time
         // (some churches encode shift times as team positions, e.g. "8 AM", "9:30 AM", "10am-1pm")
@@ -2625,14 +2597,21 @@ function syncSundayPlansData_() {
       // Temporary debug info — remove after service time issue is resolved
       var _firstRelKeys = tmResult.data && tmResult.data[0]
         ? Object.keys(tmResult.data[0].relationships || {}).join(',') : '';
+      var _firstTimeIds = tmResult.data && tmResult.data[0] && tmResult.data[0].relationships
+        ? JSON.stringify(
+            (tmResult.data[0].relationships.times && tmResult.data[0].relationships.times.data) ||
+            (tmResult.data[0].relationships.service_times && tmResult.data[0].relationships.service_times.data) ||
+            []
+          ).substring(0, 200)
+        : '';
       var _incTypesUniq = [...new Set((tmResult.included||[]).map(function(i){return i.type;}))].join(',');
       var _volsWithTime = volunteers.filter(function(v){return v.serviceTime;}).length;
-      var _memberTimeMapSize = Object.keys(memberTimeMap).length;
       var _debugInfo = {
         incTypes: _incTypesUniq,
         firstRelKeys: _firstRelKeys,
-        includedTimesCount: Object.keys(includedTimes).length,
-        memberTimeMapCount: _memberTimeMapSize,
+        firstTimeIds: _firstTimeIds,
+        planTimeMapCount: Object.keys(planTimeMap).length,
+        planTimeNames: Object.values(planTimeMap).join(', '),
         volsWithServiceTime: _volsWithTime,
         totalVols: volunteers.length
       };
