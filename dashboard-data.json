@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-09T21:45:22.138Z",
+  "lastUpdated": "2026-06-09T21:57:00.585Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5909,7 +5909,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 9, 2026, 2:45 PM",
+    "refreshed": "Jun 9, 2026, 2:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8483,6 +8483,20 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tiffany Jackson",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Teylor Baskharoon",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -8640,8 +8654,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350358\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
@@ -10387,7 +10401,7 @@
               "name": "Tiffany Jackson",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -10966,6 +10980,13 @@
               "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tiffany Jackson",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10975,8 +10996,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 26,
-            "totalVols": 26
+            "volsWithServiceTime": 27,
+            "totalVols": 27
           }
         }
       ]
