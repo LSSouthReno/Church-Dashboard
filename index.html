@@ -2841,7 +2841,6 @@ function renderBudgetPie() {
 function renderCGCount() {
   const raw = DASHBOARD_DATA.communityGroups;
   const { months, counts } = trimEmptySeries(raw.months, raw.counts);
-  prepScrollableChart('cgCountChart', months.length);
   const ctx = document.getElementById('cgCountChart');
 
   new Chart(ctx, {
@@ -2858,7 +2857,7 @@ function renderCGCount() {
       }]
     },
     options: {
-      responsive: false,
+      responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -2875,7 +2874,6 @@ function renderCGCount() {
 function renderCGMembers() {
   const raw = DASHBOARD_DATA.communityGroupMembers;
   const { months, counts } = trimEmptySeries(raw.months, raw.counts);
-  prepScrollableChart('cgMembersChart', months.length);
   const ctx = document.getElementById('cgMembersChart');
 
   new Chart(ctx, {
@@ -2892,7 +2890,7 @@ function renderCGMembers() {
       }]
     },
     options: {
-      responsive: false,
+      responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -2956,7 +2954,7 @@ function renderBaptisms() {
       }]
     },
     options: {
-      responsive: false,
+      responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -2979,7 +2977,6 @@ function renderMembersGrowth() {
   const badge = document.getElementById('membersTotalBadge');
   if (badge) badge.textContent = current > 0 ? current + ' members' : '';
 
-  prepScrollableChart('membersChart', years.length);
   const ctx = document.getElementById('membersChart');
   if (!ctx) return;
 
@@ -3000,7 +2997,7 @@ function renderMembersGrowth() {
       }]
     },
     options: {
-      responsive: false,
+      responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3038,59 +3035,23 @@ loadDashboardData()
     renderCGMembers();
     renderBaptisms();
     renderMembersGrowth();
-    setupChartResizeObserver(); // must be last — charts must exist before observing
   })
   .catch(showDashboardError);
 
-// Chart resize handling via ResizeObserver — fires AFTER layout is committed, so
-// wrap.clientWidth is always accurate (unlike window.resize which races the engine).
-function setupChartResizeObserver() {
-  const CHART_RENDERS = [
-    ['attendanceChart', renderAttendance],
-    ['givingChart',     renderGiving],
-    ['baptismsChart',   renderBaptisms],
-    ['membersChart',    renderMembersGrowth],
-    ['cgCountChart',    renderCGCount],
-    ['cgMembersChart',  renderCGMembers]
-  ];
-
-  let _rt;
-  function reRenderAll() {
-    if (!DASHBOARD_DATA) return;
-    CHART_RENDERS.forEach(([id]) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const c = Chart.getChart(el);
-      if (c) c.destroy();
-    });
-    CHART_RENDERS.forEach(([, fn]) => fn());
-  }
-
-  // Collect unique chart-wrap containers
-  const wraps = [];
-  CHART_RENDERS.forEach(([id]) => {
-    const canvas = document.getElementById(id);
-    if (!canvas) return;
-    const w = canvas.closest('.chart-wrap');
-    if (w && !wraps.includes(w)) wraps.push(w);
+// Re-render the two scrollable charts (responsive:false) when the layout
+// breakpoint is crossed. matchMedia fires exactly once at the threshold —
+// no continuous polling, no stale clientWidth reads mid-drag.
+window.matchMedia('(max-width: 1200px)').addEventListener('change', () => {
+  if (!DASHBOARD_DATA) return;
+  ['attendanceChart', 'givingChart'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const c = Chart.getChart(el);
+    if (c) c.destroy();
   });
-  if (!wraps.length) return;
-
-  // ResizeObserver fires once immediately on observe() — skip those initial callbacks
-  const initialFired = new Set();
-  const ro = new ResizeObserver(entries => {
-    let anyReal = false;
-    for (const entry of entries) {
-      if (!initialFired.has(entry.target)) { initialFired.add(entry.target); continue; }
-      anyReal = true;
-    }
-    if (!anyReal) return;
-    clearTimeout(_rt);
-    _rt = setTimeout(reRenderAll, 100);
-  });
-
-  wraps.forEach(w => ro.observe(w));
-}
+  renderAttendance();
+  renderGiving();
+});
 
 /* ============================================================
    TEAMS FULL-SCREEN MODAL
