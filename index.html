@@ -3038,39 +3038,59 @@ loadDashboardData()
     renderCGMembers();
     renderBaptisms();
     renderMembersGrowth();
+    setupChartResizeObserver(); // must be last — charts must exist before observing
   })
   .catch(showDashboardError);
 
-// Resize handler: destroy + re-render all responsive:false charts when window changes size.
-// These charts use prepScrollableChart which hard-codes canvas dimensions at init time.
-// Double-buffered: setTimeout lets CSS reflow finish, then rAF waits for the actual paint
-// cycle so wrap.clientWidth is accurate before we size the canvas.
-(function() {
-  const RESIZE_CHART_IDS = [
-    'attendanceChart', 'givingChart',
-    'baptismsChart',   'membersChart',
-    'cgCountChart',    'cgMembersChart'
+// Chart resize handling via ResizeObserver — fires AFTER layout is committed, so
+// wrap.clientWidth is always accurate (unlike window.resize which races the engine).
+function setupChartResizeObserver() {
+  const CHART_RENDERS = [
+    ['attendanceChart', renderAttendance],
+    ['givingChart',     renderGiving],
+    ['baptismsChart',   renderBaptisms],
+    ['membersChart',    renderMembersGrowth],
+    ['cgCountChart',    renderCGCount],
+    ['cgMembersChart',  renderCGMembers]
   ];
-  function reRenderCharts() {
-    if (!DASHBOARD_DATA) return;
-    RESIZE_CHART_IDS.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { const c = Chart.getChart(el); if (c) c.destroy(); }
-    });
-    renderAttendance();
-    renderGiving();
-    renderBaptisms();
-    renderMembersGrowth();
-    renderCGCount();
-    renderCGMembers();
-  }
+
   let _rt;
-  window.addEventListener('resize', () => {
-    clearTimeout(_rt);
-    // Wait for CSS reflow (150ms), then wait for paint (rAF) before reading clientWidth
-    _rt = setTimeout(() => requestAnimationFrame(reRenderCharts), 150);
+  function reRenderAll() {
+    if (!DASHBOARD_DATA) return;
+    CHART_RENDERS.forEach(([id]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const c = Chart.getChart(el);
+      if (c) c.destroy();
+    });
+    CHART_RENDERS.forEach(([, fn]) => fn());
+  }
+
+  // Collect unique chart-wrap containers
+  const wraps = [];
+  CHART_RENDERS.forEach(([id]) => {
+    const canvas = document.getElementById(id);
+    if (!canvas) return;
+    const w = canvas.closest('.chart-wrap');
+    if (w && !wraps.includes(w)) wraps.push(w);
   });
-})();
+  if (!wraps.length) return;
+
+  // ResizeObserver fires once immediately on observe() — skip those initial callbacks
+  const initialFired = new Set();
+  const ro = new ResizeObserver(entries => {
+    let anyReal = false;
+    for (const entry of entries) {
+      if (!initialFired.has(entry.target)) { initialFired.add(entry.target); continue; }
+      anyReal = true;
+    }
+    if (!anyReal) return;
+    clearTimeout(_rt);
+    _rt = setTimeout(reRenderAll, 100);
+  });
+
+  wraps.forEach(w => ro.observe(w));
+}
 
 /* ============================================================
    TEAMS FULL-SCREEN MODAL
