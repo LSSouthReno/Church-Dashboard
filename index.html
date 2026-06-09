@@ -2313,19 +2313,29 @@ function prepScrollableChart(canvasId, labelCount) {
   const wrap = canvas.closest('.chart-wrap');
   if (!inner || !wrap) return;
 
-  const visibleWidth = Math.max(320, wrap.clientWidth || 320);
+  // getBoundingClientRect() forces a synchronous layout flush so we always
+  // get accurate dimensions, even when called during a Promise callback or
+  // after a CSS layout change. clientWidth/clientHeight can return 0 if the
+  // browser hasn't committed layout yet for this element.
+  const rect = wrap.getBoundingClientRect();
+  const visibleWidth = Math.max(320, rect.width || wrap.clientWidth || 320);
+  // Clamp height: .chart-wrap is 300px (260px on mobile) — never let it go
+  // below 100 or canvas.height underflows to a huge invalid number.
+  const wrapH = Math.max(100, rect.height || wrap.clientHeight || 300);
+
   const perMonth = window.innerWidth <= 650 ? 58 : 72;
   const desiredWidth = Math.max(visibleWidth, (labelCount || 1) * perMonth);
+  const canvasH = wrapH - 18;
 
-  inner.style.width = desiredWidth + 'px';
-  canvas.width = desiredWidth;
-  canvas.height = wrap.clientHeight - 18;
-  canvas.style.width = desiredWidth + 'px';
-  canvas.style.height = (wrap.clientHeight - 18) + 'px';
+  inner.style.width  = desiredWidth + 'px';
+  canvas.width       = desiredWidth;
+  canvas.height      = canvasH;
+  canvas.style.width  = desiredWidth + 'px';
+  canvas.style.height = canvasH + 'px';
 
-  requestAnimationFrame(() => {
-    wrap.scrollLeft = wrap.scrollWidth;
-  });
+  // setTimeout(0) fires after Chart.js finishes its initial render pass,
+  // ensuring scrollWidth reflects the full canvas width before we set scrollLeft.
+  setTimeout(() => { if (wrap) wrap.scrollLeft = wrap.scrollWidth; }, 0);
 }
 
 const fmtMoney = (n) => '$' + Math.round(Number(n) || 0).toLocaleString();
