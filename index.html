@@ -3041,6 +3041,33 @@ loadDashboardData()
   })
   .catch(showDashboardError);
 
+// Resize handler: destroy + re-render all responsive:false charts when window changes size.
+// These charts use prepScrollableChart which hard-codes canvas dimensions at init time.
+(function() {
+  const RESIZE_CHART_IDS = [
+    'attendanceChart', 'givingChart',
+    'baptismsChart',   'membersChart',
+    'cgCountChart',    'cgMembersChart'
+  ];
+  let _rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(_rt);
+    _rt = setTimeout(() => {
+      if (!DASHBOARD_DATA) return;
+      RESIZE_CHART_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { const c = Chart.getChart(el); if (c) c.destroy(); }
+      });
+      renderAttendance();
+      renderGiving();
+      renderBaptisms();
+      renderMembersGrowth();
+      renderCGCount();
+      renderCGMembers();
+    }, 200);
+  });
+})();
+
 /* ============================================================
    TEAMS FULL-SCREEN MODAL
    Admin password: same hash as the standalone teams dashboard.
