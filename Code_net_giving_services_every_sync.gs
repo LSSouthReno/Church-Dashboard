@@ -2622,6 +2622,21 @@ function syncSundayPlansData_() {
           orderItems.length + ' order items, preacher="' + preacher + '"');
       }
 
+      // Temporary debug info — remove after service time issue is resolved
+      var _firstRelKeys = tmResult.data && tmResult.data[0]
+        ? Object.keys(tmResult.data[0].relationships || {}).join(',') : '';
+      var _incTypesUniq = [...new Set((tmResult.included||[]).map(function(i){return i.type;}))].join(',');
+      var _volsWithTime = volunteers.filter(function(v){return v.serviceTime;}).length;
+      var _memberTimeMapSize = Object.keys(memberTimeMap).length;
+      var _debugInfo = {
+        incTypes: _incTypesUniq,
+        firstRelKeys: _firstRelKeys,
+        includedTimesCount: Object.keys(includedTimes).length,
+        memberTimeMapCount: _memberTimeMapSize,
+        volsWithServiceTime: _volsWithTime,
+        totalVols: volunteers.length
+      };
+
       if (!plansByDate[datePart]) plansByDate[datePart] = [];
       plansByDate[datePart].push({
         serviceType: typeName,
@@ -2631,7 +2646,8 @@ function syncSundayPlansData_() {
         preacher:    preacher,
         captains:    captains,
         volunteers:  volunteers,
-        orderItems:  orderItems
+        orderItems:  orderItems,
+        _debug:      _debugInfo
       });
     });
   });
