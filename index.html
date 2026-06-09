@@ -3043,28 +3043,32 @@ loadDashboardData()
 
 // Resize handler: destroy + re-render all responsive:false charts when window changes size.
 // These charts use prepScrollableChart which hard-codes canvas dimensions at init time.
+// Double-buffered: setTimeout lets CSS reflow finish, then rAF waits for the actual paint
+// cycle so wrap.clientWidth is accurate before we size the canvas.
 (function() {
   const RESIZE_CHART_IDS = [
     'attendanceChart', 'givingChart',
     'baptismsChart',   'membersChart',
     'cgCountChart',    'cgMembersChart'
   ];
+  function reRenderCharts() {
+    if (!DASHBOARD_DATA) return;
+    RESIZE_CHART_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { const c = Chart.getChart(el); if (c) c.destroy(); }
+    });
+    renderAttendance();
+    renderGiving();
+    renderBaptisms();
+    renderMembersGrowth();
+    renderCGCount();
+    renderCGMembers();
+  }
   let _rt;
   window.addEventListener('resize', () => {
     clearTimeout(_rt);
-    _rt = setTimeout(() => {
-      if (!DASHBOARD_DATA) return;
-      RESIZE_CHART_IDS.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { const c = Chart.getChart(el); if (c) c.destroy(); }
-      });
-      renderAttendance();
-      renderGiving();
-      renderBaptisms();
-      renderMembersGrowth();
-      renderCGCount();
-      renderCGMembers();
-    }, 200);
+    // Wait for CSS reflow (150ms), then wait for paint (rAF) before reading clientWidth
+    _rt = setTimeout(() => requestAnimationFrame(reRenderCharts), 150);
   });
 })();
 
