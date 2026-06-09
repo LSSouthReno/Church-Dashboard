@@ -4268,7 +4268,7 @@ function sundayBuildContent(plan, calEvents) {
       const mNum = rangePart.match(/^(\d+)(?::(\d+))?$/);
       if (mNum) {
         let h = +mNum[1], mn = +(mNum[2] || 0);
-        if (h < 7) h += 12; // treat 1–6 as afternoon if no am/pm context
+        // Church service times are always morning/early afternoon — no PM adjustment needed
         return h * 60 + mn;
       }
       return 9999;
