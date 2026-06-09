@@ -4320,25 +4320,36 @@ function sundayBuildContent(plan, calEvents) {
       <div class="sd-section">
         <div class="sd-section-title">Service Captains</div>
         <div class="sd-captains-row">
-          ${captainGroups
-            ? captainGroups.map(g => `
-              <div class="sd-captain-card">
-                <div class="sd-captain-service">${g.time || 'All Services'}</div>
-                <div class="sd-captain-names">${g.vols.map(v => v.name).join(', ')}</div>
-              </div>`).join('')
-            : services.map(svc => {
-                const stLabel = svc.serviceType && !['services','service','worship','gathering'].includes(svc.serviceType.toLowerCase())
-                  ? svc.serviceType : 'All Services';
-                return `
+          ${(() => {
+            // Priority 1: PCO serviceTime data available → grouped by time
+            if (captainGroups) {
+              return captainGroups.map(g => `
                 <div class="sd-captain-card">
-                  <div class="sd-captain-service">${stLabel}</div>
-                  <div class="sd-captain-names">${
-                    svc.captains && svc.captains.length
-                      ? svc.captains.join(', ')
-                      : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
-                  }</div>
-                </div>`;
-              }).join('')}
+                  <div class="sd-captain-service">${g.time || 'All Services'}</div>
+                  <div class="sd-captain-names">${g.vols.map(v => v.name).join(', ')}</div>
+                </div>`).join('');
+            }
+            // Priority 2: flat list — assign positional time windows (2 captains = early/late)
+            const CAP_SLOTS = ['6:30–10am', '10am–1pm', '1pm–close'];
+            const allCaps = [...new Set(services.flatMap(s => s.captains || []))];
+            if (allCaps.length >= 2) {
+              return allCaps.map((name, i) => `
+                <div class="sd-captain-card">
+                  <div class="sd-captain-service">${CAP_SLOTS[i] || `Shift ${i + 1}`}</div>
+                  <div class="sd-captain-names">${name}</div>
+                </div>`).join('');
+            }
+            // Priority 3: single captain or none
+            return `
+              <div class="sd-captain-card">
+                <div class="sd-captain-service">All Services</div>
+                <div class="sd-captain-names">${
+                  allCaps.length
+                    ? allCaps.join(', ')
+                    : '<span style="color:var(--text-dim);font-weight:400">Not assigned yet</span>'
+                }</div>
+              </div>`;
+          })()}
         </div>
       </div>` : ''}
 
