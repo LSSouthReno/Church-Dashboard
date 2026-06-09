@@ -4291,7 +4291,23 @@ function sundayBuildContent(plan, calEvents) {
 
   // Helper: render volunteer rows for a team card (with service-time sub-headers, optional role tags)
   function renderVolGroups(vols, showRole) {
-    const groups = groupBySvcTime(vols);
+    // Deduplicate by name: merge service times across duplicate PCO entries; strip rehearsal-only times
+    const merged = {};
+    vols.forEach(v => {
+      if (!merged[v.name]) merged[v.name] = { ...v, _times: [] };
+      (v.serviceTime || '').split(/,\s*/).forEach(t => {
+        const t2 = t.trim();
+        if (t2 && !/rehearsal/i.test(t2) && !merged[v.name]._times.includes(t2))
+          merged[v.name]._times.push(t2);
+      });
+    });
+    const dedupedVols = Object.values(merged).map(v => {
+      const times = v._times.sort((a, b) => parseTimeMin(a) - parseTimeMin(b));
+      // 3+ distinct service times = serves all services → no time-specific sub-header
+      return { ...v, serviceTime: times.length >= 3 ? '' : times.join(', ') };
+    });
+
+    const groups = groupBySvcTime(dedupedVols);
     const hasServiceTimes = groups.some(g => g.time);
     return groups.map((g, gi) => `
       ${hasServiceTimes ? `<div class="sd-vol-svctime-hdr${gi === 0 ? ' first' : ''}">${g.time}</div>` : ''}
@@ -4306,7 +4322,19 @@ function sundayBuildContent(plan, calEvents) {
 
   // Presiders: pull to top of OoS; group by role (pos), then by service time within each role
   const presiderKey = Object.keys(teamMap).find(k => /presider/i.test(k)) || '';
-  const presiderVols = presiderKey ? teamMap[presiderKey] : [];
+  // Deduplicate presiders by name (PCO may schedule same person at each service time as separate entries)
+  const _presiderRaw = presiderKey ? teamMap[presiderKey] : [];
+  const _presiderByName = {};
+  _presiderRaw.forEach(v => {
+    if (!_presiderByName[v.name]) _presiderByName[v.name] = { ...v, _times: [] };
+    (v.serviceTime || '').split(/,\s*/).forEach(t => {
+      const t2 = t.trim();
+      if (t2 && !_presiderByName[v.name]._times.includes(t2)) _presiderByName[v.name]._times.push(t2);
+    });
+  });
+  const presiderVols = Object.values(_presiderByName).map(v => ({
+    ...v, serviceTime: v._times.sort((a, b) => parseTimeMin(a) - parseTimeMin(b)).join(', ')
+  }));
   const presiderRoleMap = {};
   presiderVols.forEach(v => {
     const role = v.pos || 'Presiders';
