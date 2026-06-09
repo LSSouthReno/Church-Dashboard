@@ -1264,65 +1264,26 @@
     </div>
   </div>
 
-  <!-- Main two-column layout — independent stacks, no row-gap dead zones -->
-  <div class="main-cols">
+  <!-- Row 1: Weekend Attendance | Baptisms + Members Growth -->
+  <div class="grid">
 
-    <!-- LEFT COLUMN: Attendance → Serve Teams → Community Groups -->
-    <div class="main-left">
-
-      <div class="card">
-        <h2>Weekend Attendance</h2>
-        <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
-        <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
-        <div class="avg-row">
-          <div class="avg-box">
-            <div class="avg-label">3-Month Average</div>
-            <div class="avg-value" id="avg3">0</div>
-          </div>
-          <div class="avg-box">
-            <div class="avg-label">6-Month Average</div>
-            <div class="avg-value" id="avg6">0</div>
-          </div>
+    <div class="card">
+      <h2>Weekend Attendance</h2>
+      <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
+      <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
+      <div class="avg-row">
+        <div class="avg-box">
+          <div class="avg-label">3-Month Average</div>
+          <div class="avg-value" id="avg3">0</div>
+        </div>
+        <div class="avg-box">
+          <div class="avg-label">6-Month Average</div>
+          <div class="avg-value" id="avg6">0</div>
         </div>
       </div>
-
-      <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail (members only)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-          <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
-          <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Members only →</span>
-        </div>
-        <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
-        <div class="teams-summary">
-          <div class="stat">
-            <div class="stat-label">Positions Filled</div>
-            <div class="stat-value have" id="totalHave">0</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Total Needed</div>
-            <div class="stat-value need" id="totalNeed">0</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Gap</div>
-            <div class="stat-value gap" id="totalGap">0</div>
-          </div>
-        </div>
-        <div class="team-list" id="teamList"></div>
-      </div>
-
-      <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-          <h2 style="margin:0;">Community Groups</h2>
-          <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
-        </div>
-        <div class="card-sub">Total groups · click for full CG detail</div>
-        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
-      </div>
-
     </div>
 
-    <!-- RIGHT COLUMN: Baptisms → Members → Giving → Pledge → CG Members -->
-    <div class="main-right">
-
+    <div class="stack">
       <div class="card" id="baptismsCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Baptisms</h2>
@@ -1340,7 +1301,37 @@
         <div class="card-sub">PCO "Member Since" field · new members grouped by year</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="membersChart"></canvas></div></div>
       </div>
+    </div>
 
+  </div>
+
+  <!-- Row 2: Serve Teams | Giving + Pledge -->
+  <div class="grid" style="margin-top:24px;">
+
+    <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail (members only)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+        <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
+        <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Members only →</span>
+      </div>
+      <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
+      <div class="teams-summary">
+        <div class="stat">
+          <div class="stat-label">Positions Filled</div>
+          <div class="stat-value have" id="totalHave">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Total Needed</div>
+          <div class="stat-value need" id="totalNeed">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Gap</div>
+          <div class="stat-value gap" id="totalGap">0</div>
+        </div>
+      </div>
+      <div class="team-list" id="teamList"></div>
+    </div>
+
+    <div class="stack">
       <div class="card">
         <h2>Average Giving by Month</h2>
         <div class="card-sub">Full history · scroll horizontally for older months</div>
@@ -1377,17 +1368,8 @@
           <span>May 2027</span>
         </div>
       </div>
-
-      <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
-          <h2 style="margin:0;">Community Group Members</h2>
-          <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
-        </div>
-        <div class="card-sub">Total members · click for full CG detail</div>
-        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgMembersChart"></canvas></div></div>
-      </div>
-
     </div>
+
   </div>
 
   <!-- Budget Allocation — full-width, members-only -->
@@ -1409,6 +1391,29 @@
         <div id="missionsTotal" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--card-border);font-size:13px;font-weight:700;display:flex;justify-content:space-between;"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Row 3: Community Groups Count | Community Group Members -->
+  <div class="grid" style="margin-top:24px;">
+
+    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+        <h2 style="margin:0;">Community Groups</h2>
+        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+      </div>
+      <div class="card-sub">Total groups · click for full CG detail</div>
+      <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
+    </div>
+
+    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
+        <h2 style="margin:0;">Community Group Members</h2>
+        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+      </div>
+      <div class="card-sub">Total members · click for full CG detail</div>
+      <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgMembersChart"></canvas></div></div>
+    </div>
+
   </div>
 
   <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno</div>
@@ -2338,6 +2343,23 @@ function prepScrollableChart(canvasId, labelCount) {
   setTimeout(() => { if (wrap) wrap.scrollLeft = wrap.scrollWidth; }, 0);
 }
 
+// Size a fixed (non-scrollable) chart canvas to exactly fill its .chart-wrap.
+// Uses getBoundingClientRect() to force a synchronous layout flush so we always
+// get accurate post-layout dimensions regardless of when the render function fires.
+function prepFixedChart(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const wrap = canvas.closest('.chart-wrap');
+  if (!wrap) return;
+  const rect = wrap.getBoundingClientRect();
+  const w = Math.max(200, rect.width  || wrap.clientWidth  || 300);
+  const h = Math.max(100, rect.height || wrap.clientHeight || 300);
+  canvas.width        = w;
+  canvas.height       = h - 18;
+  canvas.style.width  = w + 'px';
+  canvas.style.height = (h - 18) + 'px';
+}
+
 const fmtMoney = (n) => '$' + Math.round(Number(n) || 0).toLocaleString();
 const fmtMoneyShort = (n) => {
   n = Number(n) || 0;
@@ -2851,6 +2873,7 @@ function renderBudgetPie() {
 function renderCGCount() {
   const raw = DASHBOARD_DATA.communityGroups;
   const { months, counts } = trimEmptySeries(raw.months, raw.counts);
+  prepFixedChart('cgCountChart');
   const ctx = document.getElementById('cgCountChart');
 
   new Chart(ctx, {
@@ -2884,6 +2907,7 @@ function renderCGCount() {
 function renderCGMembers() {
   const raw = DASHBOARD_DATA.communityGroupMembers;
   const { months, counts } = trimEmptySeries(raw.months, raw.counts);
+  prepFixedChart('cgMembersChart');
   const ctx = document.getElementById('cgMembersChart');
 
   new Chart(ctx, {
@@ -2943,7 +2967,7 @@ function renderBaptisms() {
   const badge = document.getElementById('baptismsTotalBadge');
   if (badge) badge.textContent = total > 0 ? total + ' total' : '';
 
-  prepScrollableChart('baptismsChart', years.length);
+  prepFixedChart('baptismsChart');
   const ctx = document.getElementById('baptismsChart');
   if (!ctx) return;
 
@@ -2987,6 +3011,7 @@ function renderMembersGrowth() {
   const badge = document.getElementById('membersTotalBadge');
   if (badge) badge.textContent = current > 0 ? current + ' members' : '';
 
+  prepFixedChart('membersChart');
   const ctx = document.getElementById('membersChart');
   if (!ctx) return;
 
@@ -3048,11 +3073,32 @@ loadDashboardData()
   })
   .catch(showDashboardError);
 
-// Re-render all charts when the layout breakpoint is crossed.
+// Re-render all charts when the 1200px layout breakpoint is crossed.
 // matchMedia fires exactly once at the threshold — CSS layout is already
 // applied at that moment so getBoundingClientRect() returns accurate values.
 window.matchMedia('(max-width: 1200px)').addEventListener('change', () => {
   if (!DASHBOARD_DATA) return;
+  _reRenderAllCharts();
+});
+
+// Debounced resize handler: re-renders all charts 300ms after the user stops
+// resizing. getBoundingClientRect() in prepFixedChart / prepScrollableChart
+// forces a synchronous layout flush, so dimensions are always accurate.
+let _resizeDebounce = null;
+let _lastRenderWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeDebounce);
+  _resizeDebounce = setTimeout(() => {
+    if (!DASHBOARD_DATA) return;
+    const newWidth = window.innerWidth;
+    // Skip if width barely changed (e.g. mobile address-bar appearing/hiding)
+    if (Math.abs(newWidth - _lastRenderWidth) < 16) return;
+    _lastRenderWidth = newWidth;
+    _reRenderAllCharts();
+  }, 300);
+});
+
+function _reRenderAllCharts() {
   ['attendanceChart','givingChart','baptismsChart','membersChart','cgCountChart','cgMembersChart'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -3065,7 +3111,7 @@ window.matchMedia('(max-width: 1200px)').addEventListener('change', () => {
   renderMembersGrowth();
   renderCGCount();
   renderCGMembers();
-});
+}
 
 /* ============================================================
    TEAMS FULL-SCREEN MODAL
