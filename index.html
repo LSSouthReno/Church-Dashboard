@@ -4310,7 +4310,7 @@ function sundayBuildContent(plan, calEvents) {
     const groups = groupBySvcTime(dedupedVols);
     const hasServiceTimes = groups.some(g => g.time);
     return groups.map((g, gi) => `
-      ${hasServiceTimes ? `<div class="sd-vol-svctime-hdr${gi === 0 ? ' first' : ''}">${g.time}</div>` : ''}
+      ${hasServiceTimes && g.time ? `<div class="sd-vol-svctime-hdr${gi === 0 ? ' first' : ''}">${g.time}</div>` : ''}
       ${g.vols.map(v => `
         <div class="sd-vol-row">
           <span class="sd-vol-name">${v.name}</span>
