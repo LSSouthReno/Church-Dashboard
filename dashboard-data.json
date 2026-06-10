@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-09T23:45:51.080Z",
+  "lastUpdated": "2026-06-10T00:00:21.791Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5909,7 +5909,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 9, 2026, 4:45 PM",
+    "refreshed": "Jun 9, 2026, 5:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7340,7 +7340,7 @@
         25,
         24,
         24,
-        11,
+        12,
         null,
         null,
         null,
@@ -7387,7 +7387,7 @@
         8,
         17,
         20,
-        9,
+        10,
         null,
         null,
         null,
@@ -7536,6 +7536,14 @@
         "attPct": 59
       },
       {
+        "name": "Howes/Peissner Community Group",
+        "members": 17,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 8,
+        "attPct": 47
+      },
+      {
         "name": "Colonna/Mavros Community Group",
         "members": 16,
         "leaders": 2,
@@ -7556,14 +7564,6 @@
         "members": 16,
         "leaders": 1,
         "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
-        "avgAttended": 8,
-        "attPct": 50
-      },
-      {
-        "name": "Howes/Peissner Community Group",
-        "members": 16,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
         "avgAttended": 8,
         "attPct": 50
       },
@@ -7769,7 +7769,7 @@
         {
           "serviceType": "SERVICES",
           "planId": "86873418",
-          "title": "Friends Like Jesus (15:14-17)",
+          "title": "Friends Like Jesus (15:12-17)",
           "series": "Beyond Religion: Part 2",
           "preacher": "Kathy McAlpine",
           "captains": [
@@ -8547,7 +8547,7 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: WE PRAISE YOU"
             },
             {
               "seq": 9,
@@ -8560,7 +8560,7 @@
               "seq": 10,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 2,
               "description": ""
             },
             {
@@ -8582,7 +8582,7 @@
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
-              "description": "End Underscore:"
+              "description": "End Underscore: GROUNDED IN HIM"
             },
             {
               "seq": 14,
@@ -8610,7 +8610,7 @@
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
-              "description": "Underscore:"
+              "description": ""
             },
             {
               "seq": 18,
@@ -8621,20 +8621,27 @@
             },
             {
               "seq": 19,
+              "title": "DEACON COMMISSIONING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 20,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 22,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
