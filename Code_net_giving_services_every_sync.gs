@@ -2517,10 +2517,11 @@ function syncSundayPlansData_() {
         var nl = name.toLowerCase();
 
         // Preacher detection: team named "preach", "message", "sermon", "teaching"
+        // NOTE: do NOT use pl.includes('sermon') or pl.includes('message') — too broad;
+        // "Sermon Text Reader" is a Presider role, not a preacher
         var isPreach = tl.includes('preach') || tl.includes('message') ||
                        tl.includes('sermon') || tl.includes('teaching') ||
-                       pl.includes('preach') || pl.includes('message') ||
-                       pl.includes('sermon');
+                       pl.includes('preach');
 
         // Captain detection: ONLY match team named "captain" or position named "captain"
         // Do NOT match "host" — that is a regular Hospitality volunteer role, not a service captain
