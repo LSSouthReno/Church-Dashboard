@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11T23:45:16.758Z",
+  "lastUpdated": "2026-06-11T23:57:45.454Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3056,7 +3056,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 104,
+      "current": 103,
       "needed": 150
     },
     {
@@ -3076,7 +3076,7 @@
     },
     {
       "name": "Enrichment",
-      "current": 57,
+      "current": 58,
       "needed": 85
     },
     {
@@ -5909,7 +5909,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 11, 2026, 4:45 PM",
+    "refreshed": "Jun 11, 2026, 4:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7716,8 +7716,8 @@
         "members": 7,
         "leaders": 4,
         "schedule": "Meets weekly on Wednesdays from 5-7pm",
-        "avgAttended": 5,
-        "attPct": 71
+        "avgAttended": 4,
+        "attPct": 57
       },
       {
         "name": "Borowski Community Group",
@@ -9400,7 +9400,7 @@
               "name": "Ryan Griffin",
               "team": "Preachers",
               "pos": "Preacher",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
@@ -10158,7 +10158,7 @@
               "name": "Ryan Griffin",
               "team": "Preachers",
               "pos": "Preacher",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
@@ -10184,7 +10184,7 @@
           "planId": "88124976",
           "title": "The Spirit Guides (16:12-15)",
           "series": "Beyond Religion: Part 2",
-          "preacher": "",
+          "preacher": "Bradley Borowski",
           "captains": [],
           "volunteers": [
             {
@@ -10424,6 +10424,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bradley Borowski",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10433,8 +10440,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676327\"},{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 34,
-            "totalVols": 34
+            "volsWithServiceTime": 35,
+            "totalVols": 35
           }
         }
       ]
@@ -10448,7 +10455,7 @@
           "planId": "88124977",
           "title": "Sorrow Will Turn to Joy (John 16:16-33)",
           "series": "Beyond Religion: Part 2",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [],
           "volunteers": [
             {
@@ -10765,6 +10772,13 @@
               "pos": "Hawks Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10774,8 +10788,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 45,
-            "totalVols": 45
+            "volsWithServiceTime": 46,
+            "totalVols": 46
           }
         }
       ]
@@ -10789,7 +10803,7 @@
           "planId": "88124978",
           "title": "The High Priestly Prayer Part I: Jesus Prays for Himself (John 17:1-5)",
           "series": "Beyond Religion: Part 2",
-          "preacher": "",
+          "preacher": "Adam Carp",
           "captains": [],
           "volunteers": [
             {
@@ -10994,6 +11008,13 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Adam Carp",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11003,8 +11024,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 29,
-            "totalVols": 29
+            "volsWithServiceTime": 30,
+            "totalVols": 30
           }
         }
       ]
@@ -11018,7 +11039,7 @@
           "planId": "88124979",
           "title": "The High Priestly Prayer Part II: Jesus Prays for His Disciples (John 17:6-19)",
           "series": "Beyond Religion: Part 2",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [],
           "volunteers": [
             {
@@ -11132,6 +11153,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11141,8 +11169,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 16,
-            "totalVols": 16
+            "volsWithServiceTime": 17,
+            "totalVols": 17
           }
         }
       ]
