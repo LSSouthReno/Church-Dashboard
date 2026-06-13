@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T16:45:23.335Z",
+  "lastUpdated": "2026-06-13T16:57:15.502Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 13, 2026, 9:45 AM",
+    "refreshed": "Jun 13, 2026, 9:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8472,6 +8472,13 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Christian Olson",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -8636,8 +8643,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350358\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
