@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T19:45:13.577Z",
+  "lastUpdated": "2026-06-13T19:56:26.262Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 13, 2026, 12:45 PM",
+    "refreshed": "Jun 13, 2026, 12:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7987,7 +7987,7 @@
               "name": "Reuben Lefler",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -8180,13 +8180,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Teylor Baskharoon (Hinzman)",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Amber Brown",
               "team": "Safety Team",
               "pos": "Safety Monitor",
@@ -8297,13 +8290,6 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "John Turcich",
-              "team": "Prayer Team",
-              "pos": "Service Prayer",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Ginger King",
@@ -8479,6 +8465,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Peggy Hart",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -8643,8 +8636,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350358\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 104,
-            "totalVols": 104
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
