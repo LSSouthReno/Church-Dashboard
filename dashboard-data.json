@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T14:46:22.555Z",
+  "lastUpdated": "2026-06-14T15:45:23.982Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -207,12 +207,12 @@
       284174,
       323920,
       343205,
-      127160
+      129217
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 4408725
+    "raised": 4410782
   },
   "attendance": {
     "months": [
@@ -613,7 +613,7 @@
       768,
       993,
       742,
-      772
+      477
     ],
     "kids": [
       0,
@@ -813,7 +813,7 @@
       123,
       142,
       114,
-      126
+      71
     ]
   },
   "attendanceWeekly": {
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 14, 2026, 7:46 AM",
+    "refreshed": "Jun 14, 2026, 8:45 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10420,6 +10420,13 @@
               "pos": "Preacher",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tonshai Hatcher",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -10429,8 +10436,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676327\"},{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 35,
-            "totalVols": 35
+            "volsWithServiceTime": 36,
+            "totalVols": 36
           }
         }
       ]
@@ -10451,7 +10458,7 @@
               "name": "Breanne Read",
               "team": "Coffee Team",
               "pos": "Coffee Setup",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11004,6 +11011,13 @@
               "pos": "Preacher",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tonshai Hatcher",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11013,8 +11027,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 30,
-            "totalVols": 30
+            "volsWithServiceTime": 31,
+            "totalVols": 31
           }
         }
       ]
@@ -11276,7 +11290,7 @@
               "name": "Breanne Read",
               "team": "Coffee Team",
               "pos": "Coffee Setup",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11440,7 +11454,7 @@
               "name": "Breanne Read",
               "team": "Coffee Team",
               "pos": "Coffee Setup",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
