@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T16:45:14.258Z",
+  "lastUpdated": "2026-06-14T16:55:58.953Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3054,7 +3054,7 @@
       {
         "week": "Jun 14",
         "adults": 181,
-        "kids": 16
+        "kids": 50
       }
     ]
   },
@@ -5889,7 +5889,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 14, 2026, 9:45 AM",
+    "refreshed": "Jun 14, 2026, 9:56 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8477,6 +8477,13 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Mark Meich",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8641,8 +8648,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350358\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
