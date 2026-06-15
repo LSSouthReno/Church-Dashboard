@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T23:45:33.386Z",
+  "lastUpdated": "2026-06-15T23:58:27.845Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3061,7 +3061,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 103,
+      "current": 104,
       "needed": 150
     },
     {
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 15, 2026, 4:45 PM",
+    "refreshed": "Jun 15, 2026, 4:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8537,8 +8537,29 @@
               "name": "Rachel Primus",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jennie Roccuzzo",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8609,7 +8630,7 @@
               "seq": 10,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 3,
+              "lengthMin": 4,
               "description": ""
             },
             {
@@ -8696,8 +8717,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
@@ -9297,6 +9318,20 @@
               "pos": "Parking Czar",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Judy McCarthy",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9306,8 +9341,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 83,
-            "totalVols": 83
+            "volsWithServiceTime": 85,
+            "totalVols": 85
           }
         }
       ]
@@ -9575,6 +9610,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Judy McCarthy",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9584,8 +9626,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676327\"},{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 36,
-            "totalVols": 36
+            "volsWithServiceTime": 37,
+            "totalVols": 37
           }
         }
       ]
@@ -9909,6 +9951,20 @@
               "pos": "Preacher",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9918,8 +9974,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 44,
-            "totalVols": 44
+            "volsWithServiceTime": 46,
+            "totalVols": 46
           }
         }
       ]
