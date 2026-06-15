@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T22:48:18.102Z",
+  "lastUpdated": "2026-06-15T23:11:55.528Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 15, 2026, 3:48 PM",
+    "refreshed": "Jun 15, 2026, 4:11 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7361,7 +7361,7 @@
         25,
         24,
         24,
-        11,
+        13,
         null,
         null,
         null,
@@ -7408,7 +7408,7 @@
         8,
         15,
         20,
-        9,
+        11,
         null,
         null,
         null,
@@ -7533,6 +7533,14 @@
         "attPct": 42
       },
       {
+        "name": "Howes/Peissner Community Group",
+        "members": 19,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 8,
+        "attPct": 42
+      },
+      {
         "name": "Wampler/Colonna Community Group",
         "members": 18,
         "leaders": 2,
@@ -7555,14 +7563,6 @@
         "schedule": "Meets weekly on Thursdays from 6:45-8am",
         "avgAttended": 10,
         "attPct": 59
-      },
-      {
-        "name": "Howes/Peissner Community Group",
-        "members": 17,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
-        "avgAttended": 8,
-        "attPct": 47
       },
       {
         "name": "Colonna/Mavros Community Group",
@@ -8261,13 +8261,6 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Jennie Roccuzzo",
-              "team": "Presiders",
-              "pos": "Presider",
-              "status": "U",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
               "name": "Larry Sheats",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -8532,6 +8525,20 @@
               "pos": "Preacher",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Rachel Primus",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8595,14 +8602,14 @@
               "seq": 9,
               "title": "FIRST TO KNOW",
               "type": "item",
-              "lengthMin": 2,
+              "lengthMin": 1,
               "description": ""
             },
             {
               "seq": 10,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 3,
               "description": ""
             },
             {
@@ -8623,7 +8630,7 @@
               "seq": 13,
               "title": "SERMON",
               "type": "item",
-              "lengthMin": 30,
+              "lengthMin": 33,
               "description": "FATHERS DAY PRESENTATION DURING\nEnd Underscore: LOVE MINDSET"
             },
             {
@@ -8689,8 +8696,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 105,
-            "totalVols": 105
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
