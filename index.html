@@ -5265,6 +5265,27 @@ function staffRenderL10(data) {
 
   // calSection is defined earlier (before agendaSections) to avoid temporal dead zone
 
+  // ── BambooHR time off block (South Reno staff only) ─────────────────────
+  const _toItems = (data.staffTimeOff || []);
+  const _todayStr = new Date().toISOString().split('T')[0];
+  const _fmtDate = s => { const d = new Date(s + 'T12:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+  const l10TimeOffSection = _toItems.length
+    ? `<div class="sp-timeoff-wrap">
+        <div class="sp-snap-label" style="margin-bottom:8px;">Staff Time Off</div>
+        <div class="sp-timeoff-list">
+          ${_toItems.map(item => {
+            const isOut = item.start <= _todayStr && item.end >= _todayStr;
+            const dateLabel = item.start === item.end ? _fmtDate(item.start) : _fmtDate(item.start) + ' – ' + _fmtDate(item.end);
+            return `<div class="sp-timeoff-item">
+              <span class="sp-timeoff-name">${item.name}</span>
+              <span class="sp-timeoff-dates">${dateLabel}</span>
+              ${isOut ? '<span class="sp-timeoff-badge">Out Now</span>' : ''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`
+    : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
+
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
     <div class="sp-section-header">
@@ -5273,6 +5294,7 @@ function staffRenderL10(data) {
       <p>${freq}</p>
       ${editControls}
     </div>
+    ${l10TimeOffSection}
     <div class="sp-l10-hdr">
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>

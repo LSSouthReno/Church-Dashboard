@@ -3338,7 +3338,7 @@ function pcoHeaders_() {
   };
 }
 
-// ── BambooHR: fetch upcoming staff time off ────────────────────────────────
+// ── BambooHR: fetch upcoming staff time off (South Reno only) ──────────────
 function fetchBambooHRTimeOff_() {
   try {
     var key = (typeof BAMBOOHR_API_KEY !== 'undefined' && BAMBOOHR_API_KEY)
@@ -3347,26 +3347,38 @@ function fetchBambooHRTimeOff_() {
     var company = (typeof BAMBOOHR_COMPANY !== 'undefined' && BAMBOOHR_COMPANY)
                   || 'livingstoneschurch';
     if (!key) { Logger.log('BambooHR: no API key'); return []; }
-
-    var now = new Date();
-    var end = new Date(now); end.setDate(now.getDate() + 90);
+    var authHeader = 'Basic ' + Utilities.base64Encode(key + ':x');
     var fmt = function(d) { return Utilities.formatDate(d, 'America/Los_Angeles', 'yyyy-MM-dd'); };
 
-    var url = 'https://api.bamboohr.com/api/gateway.php/' + company +
-              '/v1/time_off/whos_out/?start=' + fmt(now) + '&end=' + fmt(end);
-
-    var resp = UrlFetchApp.fetch(url, {
-      headers: { Authorization: 'Basic ' + Utilities.base64Encode(key + ':x'), Accept: 'application/json' },
+    // Step 1: employee directory → build set of South Reno employee IDs
+    var dirResp = UrlFetchApp.fetch('https://api.bamboohr.com/api/gateway.php/' + company + '/v1/employees/directory', {
+      headers: { Authorization: authHeader, Accept: 'application/json' },
       muteHttpExceptions: true
     });
+    if (dirResp.getResponseCode() !== 200) {
+      Logger.log('BambooHR directory returned ' + dirResp.getResponseCode());
+      return [];
+    }
+    var srIds = {};
+    ((JSON.parse(dirResp.getContentText()) || {}).employees || []).forEach(function(e) {
+      if ((e.location || '') === 'South Reno') srIds[String(e.id)] = true;
+    });
+    Logger.log('BambooHR: ' + Object.keys(srIds).length + ' South Reno employees');
 
+    // Step 2: who's out → filter to South Reno only
+    var now = new Date();
+    var end = new Date(now); end.setDate(now.getDate() + 90);
+    var resp = UrlFetchApp.fetch('https://api.bamboohr.com/api/gateway.php/' + company +
+              '/v1/time_off/whos_out/?start=' + fmt(now) + '&end=' + fmt(end), {
+      headers: { Authorization: authHeader, Accept: 'application/json' },
+      muteHttpExceptions: true
+    });
     if (resp.getResponseCode() !== 200) {
       Logger.log('BambooHR whos_out returned ' + resp.getResponseCode());
       return [];
     }
-
     return (JSON.parse(resp.getContentText()) || [])
-      .filter(function(i) { return i.type === 'timeOff'; })
+      .filter(function(i) { return i.type === 'timeOff' && srIds[String(i.employeeId)]; })
       .map(function(i) { return { name: i.name, start: i.start, end: i.end }; })
       .sort(function(a, b) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; });
   } catch (e) {
