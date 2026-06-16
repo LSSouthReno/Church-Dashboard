@@ -1176,6 +1176,14 @@
   .sp-cal-nav-btn { padding:3px 12px; background:transparent; border:1px solid var(--sp-border); border-radius:3px; color:var(--sp-muted); cursor:pointer; font-size:13px; font-family:'DM Mono',monospace; transition:color .15s,border-color .15s; }
   .sp-cal-nav-btn:hover { color:var(--sp-gold); border-color:var(--sp-gold); }
 
+  /* ── BambooHR Staff Time Off ─────────────────────────────────── */
+  .sp-timeoff-wrap { margin-bottom: 20px; }
+  .sp-timeoff-list { display: flex; flex-direction: column; gap: 4px; }
+  .sp-timeoff-item { display: flex; align-items: center; gap: 10px; padding: 9px 13px; background: var(--sp-section-bg); border-radius: 4px; border: 1px solid var(--sp-border); }
+  .sp-timeoff-name { font-size: 13px; font-weight: 600; color: var(--sp-ink); flex: 1; }
+  .sp-timeoff-dates { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--sp-muted); }
+  .sp-timeoff-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; background: rgba(239,68,68,.1); color: #c62828; border: 1px solid rgba(239,68,68,.25); }
+
   /* ── Sunday One-sheet modal ───────────────────────────────────── */
   #sundayModal .tmod-body { padding:0; }
   .sd-week-bar { display:flex; align-items:center; gap:12px; padding:14px 28px; border-bottom:1px solid var(--card-border); background:var(--bg); flex-shrink:0; flex-wrap:wrap; }
@@ -4771,12 +4779,34 @@ function staffRenderSnapshot(data) {
   const updated = (data.meta && data.meta.lastUpdated) || '';
   const notSet = total - complete - onTrack - offTrack;
 
+  // ── BambooHR time off block ──────────────────────────────────────────────
+  const timeOffItems = (data.staffTimeOff || []);
+  const todayStr = new Date().toISOString().split('T')[0];
+  const fmtDate = s => { const d = new Date(s + 'T12:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+  const timeOffSection = timeOffItems.length
+    ? `<div class="sp-timeoff-wrap">
+        <div class="sp-snap-label" style="margin-bottom:8px;">Staff Time Off</div>
+        <div class="sp-timeoff-list">
+          ${timeOffItems.map(item => {
+            const isOut = item.start <= todayStr && item.end >= todayStr;
+            const dateLabel = item.start === item.end ? fmtDate(item.start) : fmtDate(item.start) + ' – ' + fmtDate(item.end);
+            return `<div class="sp-timeoff-item">
+              <span class="sp-timeoff-name">${item.name}</span>
+              <span class="sp-timeoff-dates">${dateLabel}</span>
+              ${isOut ? '<span class="sp-timeoff-badge">Out Now</span>' : ''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`
+    : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
+
   el.innerHTML = `
     <div class="sp-section-header">
       <div class="sp-eyebrow">Quick View</div>
       <h2>${q} Snapshot</h2>
       <p>At-a-glance status across boulders, scorecard, and rocks. Jump to any tab for details.</p>
     </div>
+    ${timeOffSection}
     <div class="sp-snap-kpi-row">
       ${kpiRows.length ? kpiRows.map(r => `
         <div class="sp-snap-kpi">

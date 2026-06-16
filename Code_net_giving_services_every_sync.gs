@@ -1130,7 +1130,8 @@ function buildDashboardDataFromSheet_(ss) {
       current: memberRows.length ? (Number(memberRows[memberRows.length - 1][2]) || 0) : 0
     },
     communityGroupsDetailed: buildCGDetailed_(ss, groupRows),
-    sundayPlans: getSundayPlans_()
+    sundayPlans: getSundayPlans_(),
+    staffTimeOff: fetchBambooHRTimeOff_()
   };
 }
 
@@ -3335,6 +3336,43 @@ function pcoHeaders_() {
     Authorization: 'Basic ' + Utilities.base64Encode(getProp_('PCO_APP_ID') + ':' + getProp_('PCO_SECRET')),
     Accept: 'application/json'
   };
+}
+
+// ── BambooHR: fetch upcoming staff time off ────────────────────────────────
+function fetchBambooHRTimeOff_() {
+  try {
+    var key = (typeof BAMBOOHR_API_KEY !== 'undefined' && BAMBOOHR_API_KEY)
+              || PropertiesService.getScriptProperties().getProperty('BAMBOOHR_API_KEY')
+              || '';
+    var company = (typeof BAMBOOHR_COMPANY !== 'undefined' && BAMBOOHR_COMPANY)
+                  || 'livingstoneschurch';
+    if (!key) { Logger.log('BambooHR: no API key'); return []; }
+
+    var now = new Date();
+    var end = new Date(now); end.setDate(now.getDate() + 90);
+    var fmt = function(d) { return Utilities.formatDate(d, 'America/Los_Angeles', 'yyyy-MM-dd'); };
+
+    var url = 'https://api.bamboohr.com/api/gateway.php/' + company +
+              '/v1/time_off/whos_out/?start=' + fmt(now) + '&end=' + fmt(end);
+
+    var resp = UrlFetchApp.fetch(url, {
+      headers: { Authorization: 'Basic ' + Utilities.base64Encode(key + ':x'), Accept: 'application/json' },
+      muteHttpExceptions: true
+    });
+
+    if (resp.getResponseCode() !== 200) {
+      Logger.log('BambooHR whos_out returned ' + resp.getResponseCode());
+      return [];
+    }
+
+    return (JSON.parse(resp.getContentText()) || [])
+      .filter(function(i) { return i.type === 'timeOff'; })
+      .map(function(i) { return { name: i.name, start: i.start, end: i.end }; })
+      .sort(function(a, b) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; });
+  } catch (e) {
+    Logger.log('BambooHR fetch error: ' + e.message);
+    return [];
+  }
 }
 
 function relId_(item, relName) {
