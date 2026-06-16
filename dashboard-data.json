@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T17:45:33.074Z",
+  "lastUpdated": "2026-06-16T17:59:26.745Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3126,7 +3126,7 @@
     },
     {
       "name": "First impressions",
-      "current": 32,
+      "current": 31,
       "needed": 40
     }
   ],
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 16, 2026, 10:45 AM",
+    "refreshed": "Jun 16, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7361,7 +7361,7 @@
         25,
         24,
         24,
-        13,
+        11,
         null,
         null,
         null,
@@ -7408,7 +7408,7 @@
         8,
         15,
         20,
-        11,
+        9,
         null,
         null,
         null,
@@ -7565,14 +7565,6 @@
         "attPct": 59
       },
       {
-        "name": "Colonna/Mavros Community Group",
-        "members": 16,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 38
-      },
-      {
         "name": "Thompson/Primus Community Group",
         "members": 16,
         "leaders": 2,
@@ -7587,6 +7579,14 @@
         "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
         "avgAttended": 8,
         "attPct": 50
+      },
+      {
+        "name": "Colonna/Mavros Community Group",
+        "members": 15,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 40
       },
       {
         "name": "Men’s Tuesday Night: Better Call Paul",
@@ -7749,20 +7749,20 @@
         "attPct": 57
       },
       {
-        "name": "Men's Recovery Community Group",
-        "members": 6,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-7:30pm",
-        "avgAttended": 1,
-        "attPct": 17
-      },
-      {
         "name": "Febo/Sanchez Community Group (Spanish Speaking)",
         "members": 6,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 5-6pm",
         "avgAttended": 3,
         "attPct": 50
+      },
+      {
+        "name": "Men's Recovery Community Group",
+        "members": 5,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-7:30pm",
+        "avgAttended": 1,
+        "attPct": 20
       },
       {
         "name": "Coan Community Group",
@@ -8002,20 +8002,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Mikayla Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Brianna Sanchez",
               "team": "Stepping Stones",
               "pos": "Guide WP, Hawks, Mustangs",
@@ -8044,30 +8030,16 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Isabella Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Deana Griffin",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Fredy Bridges",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Geoffrey Caliger",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -8081,7 +8053,7 @@
             {
               "name": "Holly Graham",
               "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
+              "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -8112,13 +8084,6 @@
               "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Alexander Franklin",
-              "team": "Stepping Stones",
-              "pos": "Lead Guide WP, Hawks, Mustangs",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Becky Hunt",
@@ -8560,6 +8525,20 @@
               "pos": "Presider",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Natalie Christopher",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8717,8 +8696,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 109,
-            "totalVols": 109
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
@@ -9680,13 +9659,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Isabella Sanchez",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
@@ -9967,8 +9939,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 46,
-            "totalVols": 46
+            "volsWithServiceTime": 45,
+            "totalVols": 45
           }
         }
       ]
