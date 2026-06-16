@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T20:45:15.702Z",
+  "lastUpdated": "2026-06-16T20:56:00.608Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3096,7 +3096,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 23,
+      "current": 24,
       "needed": 23
     },
     {
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 16, 2026, 1:45 PM",
+    "refreshed": "Jun 16, 2026, 1:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9958,6 +9958,34 @@
               "pos": "Offering Counter",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tonya Lowry",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Julie Serpa",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jim Kellames",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Stephanie Kellames",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -9967,8 +9995,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 45,
-            "totalVols": 45
+            "volsWithServiceTime": 49,
+            "totalVols": 49
           }
         }
       ]
@@ -10243,6 +10271,104 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ashley Murad",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Autumn Blattman",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Natalie Christopher",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Fredy Bridges",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Carlos Perez",
+              "team": "Stepping Stones",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Addi Bowman",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michelle DePaoli",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Holly O Connor",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Clayton Sheldon",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Abby Wampler",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lisa Morris",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nicole Leach",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -10252,8 +10378,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 37,
-            "totalVols": 37
+            "volsWithServiceTime": 51,
+            "totalVols": 51
           }
         }
       ]
@@ -10308,7 +10434,7 @@
             {
               "name": "Karis Sellman",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
+              "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
             },
@@ -10374,6 +10500,118 @@
               "pos": "Preacher",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ruth Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bradford Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Isla Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Niah Morris",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sarah Jones",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Savannah Caliger",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Annalissa Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Brianna Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Isabella Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kellan Coan",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Baskharoon",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10383,8 +10621,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 15,
-            "totalVols": 15
+            "volsWithServiceTime": 31,
+            "totalVols": 31
           }
         }
       ]
