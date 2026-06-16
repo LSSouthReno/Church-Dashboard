@@ -1183,6 +1183,18 @@
   .sp-timeoff-name { font-size: 13px; font-weight: 600; color: var(--sp-ink); flex: 1; }
   .sp-timeoff-dates { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--sp-muted); }
   .sp-timeoff-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; background: rgba(239,68,68,.1); color: #c62828; border: 1px solid rgba(239,68,68,.25); }
+  /* ── Rocks & Boulders editing ── */
+  .sp-rock-resolve-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .5px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--sp-green); color: var(--sp-green); background: transparent; cursor: pointer; white-space: nowrap; }
+  .sp-rock-resolve-btn:hover { background: rgba(58,122,74,.1); }
+  .sp-boulder-status-btn { cursor: pointer; font-family: inherit; border: none; }
+  .sp-boulder-status-btn:hover { opacity: 0.75; }
+  .sp-add-rock-form { display: grid; grid-template-columns: 1fr 130px 90px auto; gap: 6px; margin-top: 10px; align-items: center; }
+  @media (max-width: 600px) { .sp-add-rock-form { grid-template-columns: 1fr 1fr; } }
+  .sp-add-rock-inp { border: 1px solid var(--sp-border); border-radius: 3px; padding: 5px 9px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); width: 100%; box-sizing: border-box; }
+  .sp-add-rock-inp:focus { outline: none; border-color: var(--sp-gold); }
+  .sp-add-rock-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .5px; padding: 5px 12px; background: var(--sp-ink); color: var(--sp-gold); border: none; border-radius: 3px; cursor: pointer; white-space: nowrap; }
+  .sp-add-rock-btn:hover { opacity: 0.85; }
+  .sp-rock-local-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--sp-muted); text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
 
   /* ── Sunday One-sheet modal ───────────────────────────────────── */
   #sundayModal .tmod-body { padding:0; }
@@ -2160,11 +2172,21 @@
             <div>
               <div class="sp-card" style="margin-bottom:16px;">
                 <div class="sp-card-title">Current Rocks List <span class="sp-badge">Live</span></div>
-                <div class="sp-card-subtitle">Add rocks in the Google Sheet — this list updates automatically</div>
+                <div class="sp-card-subtitle" id="sp-rocks-subtitle">Unlock editing above to add or resolve rocks.</div>
                 <table class="sp-scorecard-table">
-                  <thead><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
+                  <thead id="sp-rocks-thead"><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
                   <tbody id="sp-rocks-tbody"><!-- populated by JS --></tbody>
                 </table>
+                <div id="sp-resolved-rocks-wrap" style="display:none;margin-top:8px;"></div>
+                <div id="sp-add-rock-wrap" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--sp-border);">
+                  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);margin-bottom:8px;">Add Rock</div>
+                  <div class="sp-add-rock-form">
+                    <input id="sp-add-rock-text" class="sp-add-rock-inp" placeholder="Describe the rock…" onkeydown="if(event.key==='Enter')rockAdd()">
+                    <input id="sp-add-rock-by" class="sp-add-rock-inp" placeholder="Your name">
+                    <select id="sp-add-rock-pri" class="sp-add-rock-inp"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+                    <button class="sp-add-rock-btn" onclick="rockAdd()">+ Add Rock</button>
+                  </div>
+                </div>
               </div>
               <div class="sp-ids-box">
                 <h4>The 3-Step IDS Process</h4>
@@ -4080,6 +4102,8 @@ const STAFF_DATA_URL = 'https://lssouthreno.github.io/Church-Dashboard/eos-data.
 const MEETING_WEBAPP_URL  = 'https://script.google.com/macros/s/AKfycbyAvuf8TpNq7mfXJ3VSj_krVsJRBYvTndq2GGX_kTq0D1wrGw5CpQ3wnc308xTFJ9qD/exec';
 const MEETING_EDITOR_HASH = 'e336e93bf3bbff5b9a839f6e635b0d8de175648e95dadad997ebdefc0ef75259';
 const MEETING_SESS_KEY    = 'lssr_meeting_edit';
+const ROCKS_LS_KEY        = 'lssr_rocks_edits';
+const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
 let staffRendered = false;
 
 const STAFF_DEFAULT_DATA = {
@@ -4647,6 +4671,14 @@ async function staffLoadData() {
         const dashData = await dashRes.json();
         if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
       }
+      // Load remote rock/boulder overrides if web app is configured
+      const rbRemote = await rbRemoteLoad_();
+      if (rbRemote) {
+        if (rbRemote.rocks && (!rocksEditsLoad_().ts || rbRemote.rocks.ts > rocksEditsLoad_().ts))
+          try { localStorage.setItem(ROCKS_LS_KEY, JSON.stringify(rbRemote.rocks)); } catch(e) {}
+        if (rbRemote.boulders && (!bouldersEditsLoad_().ts || rbRemote.boulders.ts > bouldersEditsLoad_().ts))
+          try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify(rbRemote.boulders)); } catch(e) {}
+      }
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
@@ -4706,34 +4738,207 @@ function staffRenderScorecard(data) {
   }).join('');
 }
 
+// ── Rocks & Boulders localStorage helpers ─────────────────────────────────
+function rocksEditsLoad_() {
+  try { return JSON.parse(localStorage.getItem(ROCKS_LS_KEY) || 'null') || { closed: {}, added: [] }; } catch(e) { return { closed: {}, added: [] }; }
+}
+function rocksEditsSave_(edits) {
+  try { localStorage.setItem(ROCKS_LS_KEY, JSON.stringify({ ...edits, ts: Date.now() })); } catch(e) {}
+  rbQueueRemoteSync_();
+}
+function bouldersEditsLoad_() {
+  try { return JSON.parse(localStorage.getItem(BOULDERS_LS_KEY) || 'null') || { statuses: {} }; } catch(e) { return { statuses: {} }; }
+}
+function bouldersEditsSave_(edits) {
+  try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify({ ...edits, ts: Date.now() })); } catch(e) {}
+  rbQueueRemoteSync_();
+}
+function boulderKey_(b) { return (b.owner || '') + '::' + (b.title || ''); }
+function applyBoulderOverrides_(boulders) {
+  const statuses = (bouldersEditsLoad_().statuses) || {};
+  return boulders.map(b => { const k = boulderKey_(b); return statuses[k] ? { ...b, status: statuses[k] } : b; });
+}
+const _rbEsc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+// ── Remote sync (extends existing MEETING_WEBAPP_URL with save_rb / rb actions)
+let rbSyncTimer_ = null;
+function rbQueueRemoteSync_() {
+  if (!MEETING_WEBAPP_URL || !staffMeetingIsUnlocked()) return;
+  clearTimeout(rbSyncTimer_);
+  rbSyncTimer_ = setTimeout(rbRemoteSave_, 4000);
+}
+async function rbRemoteSave_() {
+  if (!MEETING_WEBAPP_URL) return;
+  const pwHash = await l10PwHash_();
+  try {
+    fetch(MEETING_WEBAPP_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'save_rb', pwHash, rocks: rocksEditsLoad_(), boulders: bouldersEditsLoad_() }),
+      mode: 'no-cors'
+    });
+  } catch(e) {}
+}
+async function rbRemoteLoad_() {
+  if (!MEETING_WEBAPP_URL) return null;
+  try {
+    const res = await fetch(MEETING_WEBAPP_URL + '?action=rb&t=' + Date.now());
+    if (!res.ok) return null;
+    return await res.json();
+  } catch(e) { return null; }
+}
+
+// ── UI action handlers ─────────────────────────────────────────────────────
+function boulderCycleStatus(btn) {
+  if (!staffMeetingIsUnlocked()) return;
+  const order = ['tbd', 'on-track', 'off-track', 'complete'];
+  const labels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
+  const cur = order.find(s => btn.classList.contains(s)) || 'tbd';
+  const next = order[(order.indexOf(cur) + 1) % order.length];
+  // Update all badges with this key (Boulders tab + L10) immediately
+  const key = btn.dataset.key;
+  document.querySelectorAll(`.sp-boulder-status-btn[data-key="${CSS.escape(key)}"]`).forEach(el => {
+    order.forEach(s => el.classList.remove(s));
+    el.classList.add(next);
+    el.textContent = labels[next];
+  });
+  // Persist
+  const edits = bouldersEditsLoad_();
+  edits.statuses = edits.statuses || {};
+  edits.statuses[key] = next;
+  bouldersEditsSave_(edits);
+  // Re-render Boulders tab and Snapshot (not L10 — would wipe meeting notes)
+  staffRenderBoulders(window._staffLastData || {});
+  staffRenderSnapshot(window._staffLastData || {});
+}
+function rockResolve(btn) {
+  if (!staffMeetingIsUnlocked()) return;
+  const rock = btn.dataset.rock;
+  const edits = rocksEditsLoad_();
+  edits.closed = edits.closed || {};
+  edits.closed[rock] = true;
+  rocksEditsSave_(edits);
+  staffRenderRocks(window._staffLastData || {});
+  staffRenderSnapshot(window._staffLastData || {});
+}
+function rockAdd() {
+  if (!staffMeetingIsUnlocked()) return;
+  const rockInput = document.getElementById('sp-add-rock-text');
+  const byInput   = document.getElementById('sp-add-rock-by');
+  const priSel    = document.getElementById('sp-add-rock-pri');
+  const rock = (rockInput?.value || '').trim();
+  if (!rock) { rockInput?.focus(); return; }
+  const addedBy  = (byInput?.value || '').trim() || 'Staff';
+  const priority = priSel?.value || 'medium';
+  const edits = rocksEditsLoad_();
+  edits.added = edits.added || [];
+  edits.added.push({ rock, addedBy, priority, _local: true, ts: Date.now() });
+  rocksEditsSave_(edits);
+  if (rockInput) rockInput.value = '';
+  staffRenderRocks(window._staffLastData || {});
+}
+function rockUnresolve(btn) {
+  if (!staffMeetingIsUnlocked()) return;
+  const rock = btn.dataset.rock;
+  const edits = rocksEditsLoad_();
+  if (edits.closed) delete edits.closed[rock];
+  // If it was a locally-added rock, also remove it from added list
+  edits.added = (edits.added || []).filter(r => r.rock !== rock || !r._local);
+  rocksEditsSave_(edits);
+  staffRenderRocks(window._staffLastData || {});
+}
+
 function staffRenderBoulders(data) {
   const companyEl = document.getElementById('sp-company-boulders');
   const indivEl = document.getElementById('sp-individual-boulders');
   if (!companyEl || !indivEl) return;
-  const allBoulders = data.boulders || [];
-  const company = allBoulders.filter(r => r.type === 'company');
+  const unlocked = staffMeetingIsUnlocked();
+  const allBoulders = applyBoulderOverrides_(data.boulders || []);
+  const company    = allBoulders.filter(r => r.type === 'company');
   const individual = allBoulders.filter(r => r.type !== 'company');
+  const labels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
   const boulderHtml = (boulders) => boulders.map(r => {
     const status = r.status || 'tbd';
-    const label = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' }[status] || status;
+    const label  = labels[status] || status;
+    const key    = boulderKey_(r);
+    const badge  = unlocked
+      ? `<button class="sp-rock-status ${status} sp-boulder-status-btn" data-key="${_rbEsc(key)}" onclick="boulderCycleStatus(this)" title="Click to cycle status">${label}</button>`
+      : `<span class="sp-rock-status ${status}">${label}</span>`;
     return `<div class="sp-rock-item">
-      <div><strong>Owner: ${r.owner} · ${r.quarter}</strong> ${r.title}</div>
-      <span class="sp-rock-status ${status}">${label}</span>
+      <div><strong>Owner: ${_rbEsc(r.owner)} · ${_rbEsc(r.quarter)}</strong> ${_rbEsc(r.title)}</div>
+      ${badge}
     </div>`;
-  }).join('');
+  }).join('') || '<div style="color:var(--sp-muted);font-size:13px;padding:6px 0;">None set yet.</div>';
   companyEl.innerHTML = boulderHtml(company);
-  indivEl.innerHTML = boulderHtml(individual);
+  indivEl.innerHTML   = boulderHtml(individual);
 }
 
 function staffRenderRocks(data) {
-  const tbody = document.getElementById('sp-rocks-tbody');
+  const tbody    = document.getElementById('sp-rocks-tbody');
+  const thead    = document.getElementById('sp-rocks-thead');
+  const subtitle = document.getElementById('sp-rocks-subtitle');
+  const formWrap = document.getElementById('sp-add-rock-wrap');
+  const closedWrap = document.getElementById('sp-resolved-rocks-wrap');
   if (!tbody) return;
-  const open = data.rocks.filter(i => i.status === 'open' || !i.status);
-  tbody.innerHTML = open.map(i => `<tr>
-    <td>${i.rock}</td>
-    <td><span class="sp-owner-tag">${i.addedBy}</span></td>
-    <td><span class="sp-priority ${i.priority}">${i.priority}</span></td>
-  </tr>`).join('');
+  const unlocked = staffMeetingIsUnlocked();
+  const edits    = rocksEditsLoad_();
+  const closed   = edits.closed || {};
+  const added    = edits.added  || [];
+
+  const baseOpen   = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !closed[i.rock]);
+  const localOpen  = added.filter(i => !closed[i.rock]);
+  const allOpen    = [...baseOpen, ...localOpen];
+  const closedList = [
+    ...(data.rocks || []).filter(i => closed[i.rock]),
+    ...added.filter(i => closed[i.rock])
+  ];
+
+  // Table header
+  if (thead) thead.innerHTML = unlocked
+    ? '<tr><th>Rock</th><th>Added By</th><th>Priority</th><th></th></tr>'
+    : '<tr><th>Rock</th><th>Added By</th><th>Priority</th></tr>';
+
+  // Table rows
+  tbody.innerHTML = allOpen.map(i => {
+    const localBadge = i._local ? '<span class="sp-rock-local-badge">local</span>' : '';
+    const resolveBtn = unlocked
+      ? `<td><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" onclick="rockResolve(this)">✓ Resolve</button></td>`
+      : '<td></td>';
+    return `<tr>
+      <td>${_rbEsc(i.rock)}${localBadge}</td>
+      <td><span class="sp-owner-tag">${_rbEsc(i.addedBy)}</span></td>
+      <td><span class="sp-priority ${i.priority}">${i.priority}</span></td>
+      ${unlocked ? resolveBtn : ''}
+    </tr>`;
+  }).join('') || `<tr><td colspan="${unlocked ? 4 : 3}" style="color:var(--sp-muted);font-style:italic;padding:10px;">No open rocks.</td></tr>`;
+
+  // Subtitle
+  if (subtitle) subtitle.textContent = unlocked
+    ? 'Click ✓ Resolve to close a rock. Add new rocks below.'
+    : 'Unlock editing above to add or resolve rocks.';
+
+  // Add-rock form
+  if (formWrap) formWrap.style.display = unlocked ? 'block' : 'none';
+
+  // Resolved rocks
+  if (closedWrap) {
+    if (closedList.length) {
+      closedWrap.style.display = 'block';
+      closedWrap.innerHTML = `<details>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);cursor:pointer;list-style:none;padding:6px 0;">
+          ▶ ${closedList.length} Resolved Rock${closedList.length !== 1 ? 's' : ''}
+        </summary>
+        <div style="margin-top:6px;">
+          ${closedList.map(i => `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--sp-border);">
+            <span style="font-size:12px;text-decoration:line-through;color:var(--sp-muted);flex:1;">${_rbEsc(i.rock)}</span>
+            ${unlocked ? `<button class="sp-rock-resolve-btn" style="border-color:var(--sp-muted);color:var(--sp-muted);" data-rock="${_rbEsc(i.rock)}" onclick="rockUnresolve(this)">↩ Reopen</button>` : ''}
+          </div>`).join('')}
+        </div>
+      </details>`;
+    } else {
+      closedWrap.style.display = 'none';
+      closedWrap.innerHTML = '';
+    }
+  }
 }
 
 function staffRenderTeam() {
@@ -4774,12 +4979,14 @@ function staffCopyScript() {
 function staffRenderSnapshot(data) {
   const el = document.getElementById('sp-snapshot');
   if (!el) return;
-  const boulders = data.boulders || [];
+  const boulders = applyBoulderOverrides_(data.boulders || []);
   const onTrack = boulders.filter(r => r.status === 'on-track').length;
   const offTrack = boulders.filter(r => r.status === 'off-track').length;
   const complete = boulders.filter(r => r.status === 'complete').length;
   const total = boulders.length;
-  const rocks = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
+  const _closedRocks = (rocksEditsLoad_().closed) || {};
+  const rocks = [...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !_closedRocks[i.rock]),
+                 ...(rocksEditsLoad_().added || []).filter(i => !_closedRocks[i.rock])];
   const highRocks = rocks.filter(i => i.priority === 'high');
   const redRows = (data.scorecard || []).filter(r => r.status === 'red');
   const kpiRows = (data.scorecard || []).filter(r => r.current).slice(0, 4);
@@ -5110,8 +5317,8 @@ function staffRenderL10(data) {
 
   const locked = !staffMeetingIsUnlocked();
   const wasReset = locked ? false : l10CheckReset_();
-  const boulders = data.boulders || [];
-  const rocks    = (data.rocks || []).filter(i => i.status === 'open' || !i.status);
+  const boulders = applyBoulderOverrides_(data.boulders || []);
+  const rocks    = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !(rocksEditsLoad_().closed || {})[i.rock]);
   const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
   const q        = (data.meta && data.meta.quarter) || 'Q2 2026';
   const today    = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
@@ -5190,7 +5397,7 @@ function staffRenderL10(data) {
                 <span style="font-size:10px;color:${hasOffTrack?'var(--sp-red)':'var(--sp-muted)'};">${hasOffTrack ? '⚠ Off Track' : obs.length+' boulder'+(obs.length!==1?'s':'')}</span>
               </summary>
               <div class="sp-boulder-owner-inner">
-                ${obs.map(r => {const s=r.status||'tbd';const l=statusLabel[s]||s;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.quarter}${r.type?' &middot; '+r.type:''}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div><span class="sp-rock-status ${s}">${l}</span></div></div>`;}).join('')}
+                ${obs.map(r => {const s=r.status||'tbd';const l=statusLabel[s]||s;const bk=_rbEsc(boulderKey_(r));const badge=!locked?`<button class="sp-rock-status ${s} sp-boulder-status-btn" data-key="${bk}" onclick="boulderCycleStatus(this)" title="Click to update">${l}</button>`:`<span class="sp-rock-status ${s}">${l}</span>`;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.quarter}${r.type?' &middot; '+r.type:''}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div>${badge}</div></div>`;}).join('')}
               </div>
             </details>`;
           }).join('')}
@@ -5327,7 +5534,7 @@ function staffRenderVolLeads(data) {
   if (!el) return;
   const volKeywords = ['vol','serv','stepping stones','leader launch','cg leader','staffing'];
   const volMetrics = (data.scorecard || []).filter(r => volKeywords.some(k => r.metric.toLowerCase().includes(k)));
-  const volBoulders = (data.boulders || []).filter(r => volKeywords.some(k => r.title.toLowerCase().includes(k)));
+  const volBoulders = applyBoulderOverrides_(data.boulders || []).filter(r => volKeywords.some(k => r.title.toLowerCase().includes(k)));
   const volRocks = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && volKeywords.some(k => i.rock.toLowerCase().includes(k)));
 
   el.innerHTML = `
@@ -5666,11 +5873,21 @@ function staffRenderIDS(data) {
       <div>
         <div class="sp-card" style="margin-bottom:16px;">
           <div class="sp-card-title">Current Rocks List <span class="sp-badge">Live</span></div>
-          <div class="sp-card-subtitle">Add rocks in the Google Sheet — this list updates automatically</div>
+          <div class="sp-card-subtitle" id="sp-rocks-subtitle">Unlock editing above to add or resolve rocks.</div>
           <table class="sp-scorecard-table">
-            <thead><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
+            <thead id="sp-rocks-thead"><tr><th>Rock</th><th>Added By</th><th>Priority</th></tr></thead>
             <tbody id="sp-rocks-tbody"></tbody>
           </table>
+          <div id="sp-resolved-rocks-wrap" style="display:none;margin-top:8px;"></div>
+          <div id="sp-add-rock-wrap" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--sp-border);">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);margin-bottom:8px;">Add Rock</div>
+            <div class="sp-add-rock-form">
+              <input id="sp-add-rock-text" class="sp-add-rock-inp" placeholder="Describe the rock…" onkeydown="if(event.key==='Enter')rockAdd()">
+              <input id="sp-add-rock-by" class="sp-add-rock-inp" placeholder="Your name">
+              <select id="sp-add-rock-pri" class="sp-add-rock-inp"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+              <button class="sp-add-rock-btn" onclick="rockAdd()">+ Add Rock</button>
+            </div>
+          </div>
         </div>
         <div class="sp-ids-box"><h4>The 3-Step IDS Process</h4><ul>${steps}</ul></div>
       </div>
