@@ -4335,13 +4335,18 @@ function sundayBuildContent(plan, calEvents) {
           merged[v.name]._times.push(t2);
       });
     });
-    const dedupedVols = Object.values(merged).map(v => {
+    // Expand multi-service volunteers: one entry per service time so each appears under its own header
+    const expandedVols = [];
+    Object.values(merged).forEach(v => {
       const times = v._times.sort((a, b) => parseTimeMin(a) - parseTimeMin(b));
-      // 3+ distinct service times = serves all services → no time-specific sub-header
-      return { ...v, serviceTime: times.length >= 3 ? '' : times.join(', ') };
+      if (times.length === 0) {
+        expandedVols.push({ ...v, serviceTime: '' });
+      } else {
+        times.forEach(t => expandedVols.push({ ...v, serviceTime: t }));
+      }
     });
 
-    const groups = groupBySvcTime(dedupedVols);
+    const groups = groupBySvcTime(expandedVols);
     const hasServiceTimes = groups.some(g => g.time);
     return groups.map((g, gi) => `
       ${hasServiceTimes && g.time ? `<div class="sd-vol-svctime-hdr${gi === 0 ? ' first' : ''}">${g.time}</div>` : ''}
