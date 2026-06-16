@@ -4101,6 +4101,8 @@ const STAFF_DATA_URL = 'https://lssouthreno.github.io/Church-Dashboard/eos-data.
 // ── Meeting minutes sync — fill in after deploying the Apps Script web app ──
 const MEETING_WEBAPP_URL  = 'https://script.google.com/macros/s/AKfycbyAvuf8TpNq7mfXJ3VSj_krVsJRBYvTndq2GGX_kTq0D1wrGw5CpQ3wnc308xTFJ9qD/exec';
 const MEETING_EDITOR_HASH = 'e336e93bf3bbff5b9a839f6e635b0d8de175648e95dadad997ebdefc0ef75259';
+// ── EOS Rocks/Boulders web app — writes rock/boulder changes to Google Sheet ─
+let EOS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyp0eSbkgx0US4CulP0fkep0UFZqzsu4-tTbemPuQSipkfC5rZdrGQcNqcKvzZeZTE5IA/exec';
 const MEETING_SESS_KEY    = 'lssr_meeting_edit';
 const ROCKS_LS_KEY        = 'lssr_rocks_edits';
 const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
@@ -4763,7 +4765,7 @@ const _rbEsc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 // ── Remote sync (extends existing MEETING_WEBAPP_URL with save_rb / rb actions)
 let rbSyncTimer_ = null;
 function rbQueueRemoteSync_() {
-  if (!MEETING_WEBAPP_URL || !staffMeetingIsUnlocked()) return;
+  if (!MEETING_WEBAPP_URL) return;
   clearTimeout(rbSyncTimer_);
   rbSyncTimer_ = setTimeout(rbRemoteSave_, 4000);
 }
@@ -4787,9 +4789,14 @@ async function rbRemoteLoad_() {
   } catch(e) { return null; }
 }
 
+// ── EOS webapp POST helper ─────────────────────────────────────────────────
+function eosPost_(payload) {
+  if (!EOS_WEBAPP_URL) return;
+  fetch(EOS_WEBAPP_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' }).catch(() => {});
+}
+
 // ── UI action handlers ─────────────────────────────────────────────────────
 function boulderCycleStatus(btn) {
-  if (!staffMeetingIsUnlocked()) return;
   const order = ['tbd', 'on-track', 'off-track', 'complete'];
   const labels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
   const cur = order.find(s => btn.classList.contains(s)) || 'tbd';
@@ -4801,43 +4808,48 @@ function boulderCycleStatus(btn) {
     el.classList.add(next);
     el.textContent = labels[next];
   });
-  // Persist
+  // Persist locally
   const edits = bouldersEditsLoad_();
   edits.statuses = edits.statuses || {};
   edits.statuses[key] = next;
   bouldersEditsSave_(edits);
+  // Sync to Google Sheet
+  const data = window._staffLastData || {};
+  const boulder = (data.boulders || []).find(b => boulderKey_(b) === key);
+  if (boulder) eosPost_({ action: 'boulder_status', title: boulder.title, owner: boulder.owner, status: next });
   // Re-render Boulders tab and Snapshot (not L10 — would wipe meeting notes)
   staffRenderBoulders(window._staffLastData || {});
   staffRenderSnapshot(window._staffLastData || {});
 }
 function rockResolve(btn) {
-  if (!staffMeetingIsUnlocked()) return;
   const rock = btn.dataset.rock;
   const edits = rocksEditsLoad_();
   edits.closed = edits.closed || {};
-  edits.closed[rock] = true;
+  edits.closed[rock] = { ts: Date.now() };
   rocksEditsSave_(edits);
+  // Sync to Google Sheet
+  eosPost_({ action: 'rock_resolve', rock });
   staffRenderRocks(window._staffLastData || {});
   staffRenderSnapshot(window._staffLastData || {});
 }
 function rockAdd() {
-  if (!staffMeetingIsUnlocked()) return;
   const rockInput = document.getElementById('sp-add-rock-text');
   const byInput   = document.getElementById('sp-add-rock-by');
   const priSel    = document.getElementById('sp-add-rock-pri');
   const rock = (rockInput?.value || '').trim();
   if (!rock) { rockInput?.focus(); return; }
   const addedBy  = (byInput?.value || '').trim() || 'Staff';
-  const priority = priSel?.value || 'medium';
+  const priority = priSel?.value || 'med';
   const edits = rocksEditsLoad_();
   edits.added = edits.added || [];
   edits.added.push({ rock, addedBy, priority, _local: true, ts: Date.now() });
   rocksEditsSave_(edits);
   if (rockInput) rockInput.value = '';
+  // Sync to Google Sheet
+  eosPost_({ action: 'rock_add', rock, addedBy, priority });
   staffRenderRocks(window._staffLastData || {});
 }
 function rockUnresolve(btn) {
-  if (!staffMeetingIsUnlocked()) return;
   const rock = btn.dataset.rock;
   const edits = rocksEditsLoad_();
   if (edits.closed) delete edits.closed[rock];
@@ -4846,12 +4858,48 @@ function rockUnresolve(btn) {
   rocksEditsSave_(edits);
   staffRenderRocks(window._staffLastData || {});
 }
+// ── Resolve/Add from L10 IDS section ──────────────────────────────────────
+function rockResolveFromL10(btn) {
+  const rock = btn.dataset.rock;
+  const ri   = btn.dataset.ri;
+  const resEl = document.querySelector(`[data-sk="ids_${ri}_res"]`);
+  const ownEl = document.querySelector(`[data-sk="ids_${ri}_own"]`);
+  const resolution = resEl ? resEl.value.trim() : '';
+  const owner      = ownEl ? ownEl.value.trim() : '';
+  const edits = rocksEditsLoad_();
+  edits.closed = edits.closed || {};
+  edits.closed[rock] = { ts: Date.now(), resolution, owner };
+  rocksEditsSave_(edits);
+  // Sync to Google Sheet (resolution notes stay in meeting log)
+  eosPost_({ action: 'rock_resolve', rock });
+  // Re-render — L10 re-render will reset the textarea, so skip it here
+  staffRenderRocks(window._staffLastData || {});
+  staffRenderSnapshot(window._staffLastData || {});
+  staffRenderL10(window._staffLastData || {});
+}
+function rockAddFromL10() {
+  const textEl = document.getElementById('sp-l10-add-rock-text');
+  const byEl   = document.getElementById('sp-l10-add-rock-by');
+  const priEl  = document.getElementById('sp-l10-add-rock-pri');
+  const rock     = textEl ? textEl.value.trim() : '';
+  if (!rock) { textEl?.focus(); return; }
+  const addedBy  = (byEl?.value || '').trim() || 'Staff';
+  const priority = priEl?.value || 'med';
+  const edits = rocksEditsLoad_();
+  edits.added = edits.added || [];
+  edits.added.push({ rock, addedBy, priority, _local: true, ts: Date.now() });
+  rocksEditsSave_(edits);
+  if (textEl) textEl.value = '';
+  // Sync to Google Sheet
+  eosPost_({ action: 'rock_add', rock, addedBy, priority });
+  staffRenderRocks(window._staffLastData || {});
+  staffRenderL10(window._staffLastData || {});
+}
 
 function staffRenderBoulders(data) {
   const companyEl = document.getElementById('sp-company-boulders');
   const indivEl = document.getElementById('sp-individual-boulders');
   if (!companyEl || !indivEl) return;
-  const unlocked = staffMeetingIsUnlocked();
   const allBoulders = applyBoulderOverrides_(data.boulders || []);
   const company    = allBoulders.filter(r => r.type === 'company');
   const individual = allBoulders.filter(r => r.type !== 'company');
@@ -4860,9 +4908,7 @@ function staffRenderBoulders(data) {
     const status = r.status || 'tbd';
     const label  = labels[status] || status;
     const key    = boulderKey_(r);
-    const badge  = unlocked
-      ? `<button class="sp-rock-status ${status} sp-boulder-status-btn" data-key="${_rbEsc(key)}" onclick="boulderCycleStatus(this)" title="Click to cycle status">${label}</button>`
-      : `<span class="sp-rock-status ${status}">${label}</span>`;
+    const badge  = `<button class="sp-rock-status ${status} sp-boulder-status-btn" data-key="${_rbEsc(key)}" onclick="boulderCycleStatus(this)" title="Click to cycle status">${label}</button>`;
     return `<div class="sp-rock-item">
       <div><strong>Owner: ${_rbEsc(r.owner)} · ${_rbEsc(r.quarter)}</strong> ${_rbEsc(r.title)}</div>
       ${badge}
@@ -4879,7 +4925,6 @@ function staffRenderRocks(data) {
   const formWrap = document.getElementById('sp-add-rock-wrap');
   const closedWrap = document.getElementById('sp-resolved-rocks-wrap');
   if (!tbody) return;
-  const unlocked = staffMeetingIsUnlocked();
   const edits    = rocksEditsLoad_();
   const closed   = edits.closed || {};
   const added    = edits.added  || [];
@@ -4892,32 +4937,25 @@ function staffRenderRocks(data) {
     ...added.filter(i => closed[i.rock])
   ];
 
-  // Table header
-  if (thead) thead.innerHTML = unlocked
-    ? '<tr><th>Rock</th><th>Added By</th><th>Priority</th><th></th></tr>'
-    : '<tr><th>Rock</th><th>Added By</th><th>Priority</th></tr>';
+  // Table header — always show Resolve column
+  if (thead) thead.innerHTML = '<tr><th>Rock</th><th>Added By</th><th>Priority</th><th></th></tr>';
 
-  // Table rows
+  // Table rows — always show Resolve button
   tbody.innerHTML = allOpen.map(i => {
     const localBadge = i._local ? '<span class="sp-rock-local-badge">local</span>' : '';
-    const resolveBtn = unlocked
-      ? `<td><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" onclick="rockResolve(this)">✓ Resolve</button></td>`
-      : '<td></td>';
     return `<tr>
       <td>${_rbEsc(i.rock)}${localBadge}</td>
       <td><span class="sp-owner-tag">${_rbEsc(i.addedBy)}</span></td>
       <td><span class="sp-priority ${i.priority}">${i.priority}</span></td>
-      ${unlocked ? resolveBtn : ''}
+      <td><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" onclick="rockResolve(this)">✓ Resolve</button></td>
     </tr>`;
-  }).join('') || `<tr><td colspan="${unlocked ? 4 : 3}" style="color:var(--sp-muted);font-style:italic;padding:10px;">No open rocks.</td></tr>`;
+  }).join('') || '<tr><td colspan="4" style="color:var(--sp-muted);font-style:italic;padding:10px;">No open rocks.</td></tr>';
 
   // Subtitle
-  if (subtitle) subtitle.textContent = unlocked
-    ? 'Click ✓ Resolve to close a rock. Add new rocks below.'
-    : 'Unlock editing above to add or resolve rocks.';
+  if (subtitle) subtitle.textContent = 'Click ✓ Resolve to close a rock. Add new rocks below.';
 
-  // Add-rock form
-  if (formWrap) formWrap.style.display = unlocked ? 'block' : 'none';
+  // Add-rock form — always visible
+  if (formWrap) formWrap.style.display = 'block';
 
   // Resolved rocks
   if (closedWrap) {
@@ -4930,7 +4968,7 @@ function staffRenderRocks(data) {
         <div style="margin-top:6px;">
           ${closedList.map(i => `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--sp-border);">
             <span style="font-size:12px;text-decoration:line-through;color:var(--sp-muted);flex:1;">${_rbEsc(i.rock)}</span>
-            ${unlocked ? `<button class="sp-rock-resolve-btn" style="border-color:var(--sp-muted);color:var(--sp-muted);" data-rock="${_rbEsc(i.rock)}" onclick="rockUnresolve(this)">↩ Reopen</button>` : ''}
+            <button class="sp-rock-resolve-btn" style="border-color:var(--sp-muted);color:var(--sp-muted);" data-rock="${_rbEsc(i.rock)}" onclick="rockUnresolve(this)">↩ Reopen</button>
           </div>`).join('')}
         </div>
       </details>`;
@@ -5318,7 +5356,12 @@ function staffRenderL10(data) {
   const locked = !staffMeetingIsUnlocked();
   const wasReset = locked ? false : l10CheckReset_();
   const boulders = applyBoulderOverrides_(data.boulders || []);
-  const rocks    = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !(rocksEditsLoad_().closed || {})[i.rock]);
+  const _l10Edits = rocksEditsLoad_();
+  const _l10Closed = _l10Edits.closed || {};
+  const rocks    = [
+    ...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !_l10Closed[i.rock]),
+    ...(_l10Edits.added || []).filter(i => !_l10Closed[i.rock])
+  ];
   const redSc    = (data.scorecard || []).filter(r => r.status === 'red');
   const q        = (data.meta && data.meta.quarter) || 'Q2 2026';
   const today    = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
@@ -5397,7 +5440,7 @@ function staffRenderL10(data) {
                 <span style="font-size:10px;color:${hasOffTrack?'var(--sp-red)':'var(--sp-muted)'};">${hasOffTrack ? '⚠ Off Track' : obs.length+' boulder'+(obs.length!==1?'s':'')}</span>
               </summary>
               <div class="sp-boulder-owner-inner">
-                ${obs.map(r => {const s=r.status||'tbd';const l=statusLabel[s]||s;const bk=_rbEsc(boulderKey_(r));const badge=!locked?`<button class="sp-rock-status ${s} sp-boulder-status-btn" data-key="${bk}" onclick="boulderCycleStatus(this)" title="Click to update">${l}</button>`:`<span class="sp-rock-status ${s}">${l}</span>`;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.quarter}${r.type?' &middot; '+r.type:''}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div>${badge}</div></div>`;}).join('')}
+                ${obs.map(r => {const s=r.status||'tbd';const l=statusLabel[s]||s;const bk=_rbEsc(boulderKey_(r));const badge=`<button class="sp-rock-status ${s} sp-boulder-status-btn" data-key="${bk}" onclick="boulderCycleStatus(this)" title="Click to update">${l}</button>`;return`<div class="sp-l10-issue-row" style="${s==='off-track'?'border-left:3px solid var(--sp-red);':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><div style="font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${r.quarter}${r.type?' &middot; '+r.type:''}</div><div style="font-size:13px;margin-top:3px;">${r.title}</div></div>${badge}</div></div>`;}).join('')}
               </div>
             </details>`;
           }).join('')}
@@ -5433,8 +5476,15 @@ function staffRenderL10(data) {
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
-        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><textarea data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="To-do / resolution…"${dis}></textarea><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner" style="height:38px;"${dis}></div></div>`).join('')}
+        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div style="flex:1"><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><textarea data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="Resolution notes…"></textarea><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner" style="height:38px;"><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" data-ri="${ri}" onclick="rockResolveFromL10(this)" style="height:38px;white-space:nowrap;flex-shrink:0;">✓ Resolve</button></div></div>`).join('')}
         ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--sp-border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;white-space:nowrap;">+ ADD ROCK</span>
+          <input id="sp-l10-add-rock-text" class="sp-l10-inp" placeholder="Describe the rock…" style="flex:1;min-width:160px;" onkeydown="if(event.key==='Enter')rockAddFromL10()">
+          <input id="sp-l10-add-rock-by" class="sp-l10-inp" placeholder="Added by" style="width:100px;">
+          <select id="sp-l10-add-rock-pri" class="sp-l10-inp" style="width:70px;height:38px;"><option value="high">High</option><option value="med" selected>Med</option><option value="low">Low</option></select>
+          <button class="sp-add-rock-btn" onclick="rockAddFromL10()">+ Add</button>
+        </div>
       </div>
       ${bouldersSection}`;
 
