@@ -4631,14 +4631,22 @@ async function staffDoUnlock() {
 
 async function staffLoadData() {
   try {
-    const res = await fetch(STAFF_DATA_URL + '?t=' + Date.now());
-    if (res.ok) {
-      const liveData = await res.json();
+    const [eosRes, dashRes] = await Promise.all([
+      fetch(STAFF_DATA_URL + '?t=' + Date.now()),
+      fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+    ]);
+    if (eosRes.ok) {
+      const liveData = await eosRes.json();
       const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
       // For arrays, live data wins only when non-empty — otherwise keep the hardcoded fallback
       merged.scorecard = (liveData.scorecard && liveData.scorecard.length) ? liveData.scorecard : STAFF_DEFAULT_DATA.scorecard;
       merged.boulders  = (liveData.boulders  && liveData.boulders.length)  ? liveData.boulders  : STAFF_DEFAULT_DATA.boulders;
       merged.rocks     = (liveData.rocks     && liveData.rocks.length)     ? liveData.rocks     : STAFF_DEFAULT_DATA.rocks;
+      // Pull staffTimeOff from dashboard-data.json (written by giving/services sync)
+      if (dashRes.ok) {
+        const dashData = await dashRes.json();
+        if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
+      }
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
