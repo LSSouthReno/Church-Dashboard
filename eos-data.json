@@ -548,7 +548,7 @@
     ]
   },
   "ids": {
-    "title": "Boulders List and IDS Process",
+    "title": "Rocks List and IDS Process",
     "description": "IDS - Identify, Discuss, Solve - is how you actually fix problems instead of talking around them forever. The Issues List is the shared, visible list of everything getting in the way.",
     "rule_title": "The IDS Rule",
     "rule_text": "Whoever identifies an issue owns putting it on the list - not solving it alone. The team solves it together in the L10. Issues are prioritized by impact, not urgency. An issue that recurs 3x becomes a Rock to fix systemically.",
@@ -635,7 +635,7 @@
       "metric": "Community Group Members (Active)",
       "owner": "Adam Carp",
       "goal": "500+",
-      "current": "420",
+      "current": "418",
       "status": "grey",
       "notes": "Current: 387 members (Jan 2026)"
     },
@@ -964,8 +964,8 @@
     "guest": 0,
     "attender": 0,
     "member": 354,
-    "group": 3038,
-    "leader": 265,
+    "group": 3052,
+    "leader": 269,
     "missionary": 2,
     "asOf": "2026-06-16"
   },
@@ -1585,6 +1585,22 @@
         "dayOfWeek": "Sun",
         "date": "Aug 16",
         "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "LS Students MS",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "1:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
       }
     ],
