@@ -4324,7 +4324,7 @@ function sundayBuildContent(plan, calEvents) {
   }
 
   // Helper: render volunteer rows for a team card (with service-time sub-headers, optional role tags)
-  function renderVolGroups(vols, showRole) {
+  function renderVolGroups(vols, showRole, consolidate) {
     // Deduplicate by name: merge service times across duplicate PCO entries; strip rehearsal-only times
     const merged = {};
     vols.forEach(v => {
@@ -4335,11 +4335,12 @@ function sundayBuildContent(plan, calEvents) {
           merged[v.name]._times.push(t2);
       });
     });
-    // Expand multi-service volunteers: one entry per service time so each appears under its own header
+    // consolidate=true (Worship, Preaching): show each person once, no service-time sub-headers
+    // otherwise expand: one entry per service time so each person appears under the right header
     const expandedVols = [];
     Object.values(merged).forEach(v => {
       const times = v._times.sort((a, b) => parseTimeMin(a) - parseTimeMin(b));
-      if (times.length === 0) {
+      if (consolidate || times.length === 0) {
         expandedVols.push({ ...v, serviceTime: '' });
       } else {
         times.forEach(t => expandedVols.push({ ...v, serviceTime: t }));
@@ -4487,7 +4488,7 @@ function sundayBuildContent(plan, calEvents) {
             <div class="sd-team-card">
               <div class="sd-team-name">${team || 'Unassigned'}</div>
               <div class="sd-team-members">
-                ${renderVolGroups(teamMap[team], /stepping.?stone/i.test(team))}
+                ${renderVolGroups(teamMap[team], /stepping.?stone/i.test(team), /worship|preaching/i.test(team))}
               </div>
             </div>`).join('')}
         </div>
@@ -4531,8 +4532,12 @@ function sundayBuildOrderHTML(orderItems, services) {
     return hh + ':' + String(m).padStart(2, '0') + ' ' + ap;
   }
 
+  // Pre-service offset: find "SERVICE BEGINS" header and subtract everything before it
+  const _sbIdx = orderItems.findIndex(i => i.type === 'header' && /service begins/i.test(i.title));
+  const _preMin = _sbIdx > 0 ? orderItems.slice(0, _sbIdx).reduce((s, i) => s + (i.lengthMin || 0), 0) : 0;
+
   return starts.map((start, si) => {
-    let cumMin = start.h * 60 + start.m;
+    let cumMin = start.h * 60 + start.m - _preMin;
     const endMin = cumMin + totalMin;
     const rawLabel = services[si] ? services[si].serviceType : '';
     const svcLabel = rawLabel && !['services','service','worship','gathering'].includes(rawLabel.toLowerCase())
