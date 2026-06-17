@@ -5753,7 +5753,7 @@ function staffRenderVolLeads(data) {
   const el = document.getElementById('sp-vol-leads');
   if (!el) return;
   const volKeywords = ['vol','serv','stepping stones','leader launch','cg leader','staffing'];
-  const volMetrics = (data.scorecard || []).filter(r => volKeywords.some(k => r.metric.toLowerCase().includes(k)));
+  const volMetrics = (data.scorecard || []).filter(r => r.metric && volKeywords.some(k => r.metric.toLowerCase().includes(k)));
   const volBoulders = applyBoulderOverrides_(data.boulders || []).filter(r => volKeywords.some(k => r.title.toLowerCase().includes(k)));
   const volRocks = (data.rocks || []).filter(i => (i.status === 'open' || !i.status) && volKeywords.some(k => i.rock.toLowerCase().includes(k)));
 
