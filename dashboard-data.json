@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T22:57:21.108Z",
+  "lastUpdated": "2026-06-17T23:46:15.740Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5931,7 +5931,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 17, 2026, 3:57 PM",
+    "refreshed": "Jun 17, 2026, 4:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11912,22 +11912,22 @@
     }
   ],
   "studentMinistry": {
-    "error": "sync_exception",
-    "detail": "PCO request failed: 404 — https://api.planningcenteronline.com/check-ins/v2/events/925788/event_times?order=-starts_at&per_page=8 — {\"errors\":[{\"status\":\"404\",\"title\":\"Not Found\",\"detail\":\"The resource you requested could not be found\"}]}"
+    "error": "stale_event_id",
+    "cachedId": "925788"
   },
   "newAdults30d": {
     "count30d": 40,
     "weeklyAvg": 9,
     "totalFetched": 6860,
     "since": "2026-05-18",
-    "asOf": "2026-06-17T22:44:31.135Z"
+    "asOf": "2026-06-17T23:44:37.323Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.23300970873786409,
-    "avgOpenRate3": 0.3920593574867787,
-    "latestCampaign": "LS Weekly Update",
-    "latestSentAt": "2026-06-17T17:26:06+00:00",
+    "latestOpenRate": 0.26537216828478966,
+    "avgOpenRate3": 0.2716317807485224,
+    "latestCampaign": "Stepping Stones Weekly Bulletin",
+    "latestSentAt": "2026-06-17T22:55:34+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-17T22:44:32.269Z"
+    "asOf": "2026-06-17T23:44:38.642Z"
   }
 }
