@@ -1067,25 +1067,43 @@
   .sp-priority.low { background: var(--sp-section-bg); color: var(--sp-muted); border: 1px solid var(--sp-border); }
 
   /* ---- Snapshot tab ---- */
-  .sp-snap-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
-  @media (max-width: 768px) { .sp-snap-kpi-row { grid-template-columns: repeat(2, 1fr); } }
-  .sp-snap-kpi { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 18px; text-align: center; }
-  .sp-snap-kpi-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--sp-muted); margin-bottom: 8px; }
-  .sp-snap-kpi-value { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; color: var(--sp-ink); line-height: 1; }
-  .sp-snap-kpi-value.empty { color: var(--sp-muted); font-size: 20px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-  .sp-snap-kpi-note { font-size: 11px; color: var(--sp-muted); margin-top: 6px; font-style: italic; }
-  .sp-snap-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sp-muted); margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--sp-border); }
+  .sp-snap-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sp-muted); margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--sp-border); display: flex; align-items: center; justify-content: space-between; }
   .sp-snap-rocks-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin: 8px 0 6px; gap: 2px; }
   .sp-snap-rocks-bar .seg { height: 100%; border-radius: 3px; }
   .sp-snap-rocks-summary { font-size: 12px; color: var(--sp-muted); }
-  .sp-snap-issues-strip { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-  .sp-snap-issue-chip { background: #fdecea; border: 1px solid #ef9a9a; color: var(--sp-red); font-size: 11px; padding: 3px 10px; border-radius: 12px; }
   .sp-snap-green-badge { display: inline-flex; align-items: center; gap: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; color: var(--sp-green); font-size: 12px; padding: 4px 12px; border-radius: 12px; font-weight: 600; }
   .sp-snap-rocks-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
   @media (max-width: 700px) { .sp-snap-rocks-2col { grid-template-columns: 1fr; } }
   .sp-snap-ts { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--sp-muted); margin-top: 20px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
   .sp-snap-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #ccc; display: inline-block; }
   .sp-snap-live-dot.green { background: #4caf50; }
+  /* Dark scorecard goals section */
+  .sp-snap-dark-wrap { background: #1e1912; border-radius: 6px; padding: 22px 22px 14px; margin: 12px 0 20px; }
+  .sp-snap-cat-hdr { display: flex; align-items: center; gap: 10px; margin: 16px 0 10px; }
+  .sp-snap-cat-hdr:first-child { margin-top: 0; }
+  .sp-snap-cat-pill { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; font-weight: 700; white-space: nowrap; }
+  .sp-snap-cat-line { flex: 1; height: 1px; }
+  .sp-snap-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 8px; }
+  .sp-snap-metric-card { background: #2a2318; border-radius: 4px; padding: 14px 13px 10px; border-top: 3px solid transparent; }
+  .sp-snap-metric-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 7px; line-height: 1.45; }
+  .sp-snap-metric-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #f5f0e8; line-height: 1; display: flex; align-items: center; gap: 5px; }
+  .sp-snap-metric-val.empty { color: rgba(245,240,232,0.2); font-size: 17px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  .sp-snap-metric-goal { font-size: 9px; color: rgba(245,240,232,0.28); margin: 4px 0 7px; }
+  .sp-snap-metric-bar-wrap { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .sp-snap-metric-bar { height: 100%; border-radius: 2px; }
+  .sp-snap-metric-note { font-size: 9px; color: rgba(245,240,232,0.28); margin-top: 4px; }
+  .sp-snap-sdot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .sp-snap-sdot.green { background: #4caf50; } .sp-snap-sdot.yellow { background: #f9a825; } .sp-snap-sdot.red { background: #ef5350; } .sp-snap-sdot.grey { background: rgba(255,255,255,0.15); }
+  /* Rocks list */
+  .sp-snap-rock-list { display: flex; flex-direction: column; gap: 5px; margin: 10px 0 4px; }
+  .sp-snap-rock-row { display: flex; align-items: flex-start; gap: 10px; background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 9px 13px; }
+  .sp-snap-rock-pri { font-family: 'DM Mono', monospace; font-size: 7px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+  .sp-snap-rock-pri.high { background: #fdecea; color: #c62828; border: 1px solid #ef9a9a; }
+  .sp-snap-rock-pri.med  { background: #fff8e1; color: #b87a20; border: 1px solid #ffe082; }
+  .sp-snap-rock-pri.low  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .sp-snap-rock-text { font-size: 13px; color: var(--sp-ink); line-height: 1.45; }
+  .sp-snap-rocks-tab-btn { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--sp-gold); cursor: pointer; padding: 4px 10px; border: 1px solid var(--sp-gold); border-radius: 2px; background: none; white-space: nowrap; transition: all 0.15s; }
+  .sp-snap-rocks-tab-btn:hover { background: var(--sp-gold); color: var(--sp-ink); }
 
   /* ---- L10 Feed tab ---- */
   .sp-l10-hdr { background: var(--sp-ink); color: var(--sp-parchment); border-radius: 4px; padding: 22px 26px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
@@ -5187,28 +5205,79 @@ function staffCopyScript() {
 function staffRenderSnapshot(data) {
   const el = document.getElementById('sp-snapshot');
   if (!el) return;
+
+  // ── Boulders ────────────────────────────────────────────────────────────
   const boulders = applyBoulderOverrides_(data.boulders || []);
-  const onTrack = boulders.filter(r => r.status === 'on-track').length;
+  const onTrack  = boulders.filter(r => r.status === 'on-track').length;
   const offTrack = boulders.filter(r => r.status === 'off-track').length;
   const complete = boulders.filter(r => r.status === 'complete').length;
-  const total = boulders.length;
-  const _closedRocks = (rocksEditsLoad_().closed) || {};
-  const rocks = [...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !_closedRocks[i.rock]),
-                 ...(rocksEditsLoad_().added || []).filter(i => !_closedRocks[i.rock])];
-  const highRocks = rocks.filter(i => i.priority === 'high');
-  const redRows = (data.scorecard || []).filter(r => r.status === 'red');
-  const kpiRows = (data.scorecard || []).filter(r => r.current).slice(0, 4);
-  const q = (data.meta && data.meta.quarter) || 'Q2 2026';
-  const updated = (data.meta && data.meta.lastUpdated) || '';
-  const notSet = total - complete - onTrack - offTrack;
+  const total    = boulders.length;
+  const notSet   = total - complete - onTrack - offTrack;
 
-  // ── BambooHR time off block ──────────────────────────────────────────────
+  // ── Rocks (all open, sorted high→med→low) ───────────────────────────────
+  const _closedRocks = (rocksEditsLoad_().closed) || {};
+  const rocks = [
+    ...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !_closedRocks[i.rock]),
+    ...(rocksEditsLoad_().added || []).filter(i => !_closedRocks[i.rock])
+  ];
+  const priOrd = { high: 0, med: 1, low: 2 };
+  rocks.sort((a, b) => (priOrd[a.priority] ?? 1) - (priOrd[b.priority] ?? 1));
+
+  const q       = (data.meta && data.meta.quarter) || 'Q2 2026';
+  const updated = (data.meta && data.meta.lastUpdated) || '';
+
+  // ── Live scorecard values ────────────────────────────────────────────────
+  let lv = {};
+  try { lv = scorecardLiveValues_(data._dash || {}); } catch(e) {}
+  const dash = data._dash || {};
+
+  // Category accent colors
+  const C = { reach: '#e87040', disc: '#5b8dd9', serv: '#5ab86c', give: '#c9963a', comm: '#9b59b6' };
+
+  // Build a dark metric card
+  function mCard(key, label, goal, col, pct) {
+    const m   = lv[key] || {};
+    const val = m.display || '';
+    const st  = m.status  || 'grey';
+    const nt  = m.note    || '';
+    const barW = pct != null ? Math.min(Math.max(pct, 0), 100) : null;
+    return `<div class="sp-snap-metric-card" style="border-top-color:${col};">
+      <div class="sp-snap-metric-label">${label}</div>
+      <div class="sp-snap-metric-val${val ? '' : ' empty'}">${val || '—'}<span class="sp-snap-sdot ${st}"></span></div>
+      <div class="sp-snap-metric-goal">Goal: ${goal}</div>
+      ${barW != null ? `<div class="sp-snap-metric-bar-wrap"><div class="sp-snap-metric-bar" style="width:${barW}%;background:${col};opacity:0.75;"></div></div>` : ''}
+      ${nt ? `<div class="sp-snap-metric-note">${nt}</div>` : ''}
+    </div>`;
+  }
+
+  // Compute progress percentages for metrics with numeric goals
+  const avgAdults  = parseInt(String((lv.att_adults       || {}).display).replace(/,/g,'')) || 0;
+  const avgKids    = parseInt(String((lv.att_kids         || {}).display).replace(/,/g,'')) || 0;
+  const smAvg      = (dash.studentMinistry || {}).weeklyAvg30d;
+  const bapYtd     = parseInt((lv.baptisms_ytd   || {}).display) || 0;
+  const members    = parseInt(String((lv.members         || {}).display).replace(/,/g,'')) || 0;
+  const cgGroups   = parseInt((lv.cg_groups      || {}).display) || 0;
+  const cgMembers  = parseInt((lv.cg_members     || {}).display) || 0;
+  const cgFmPct    = parseInt((lv.cg_fm_pct      || {}).display) || 0;
+  const cgAtt      = parseInt((lv.cg_att_rate    || {}).display) || 0;
+  const cgLeaders  = parseInt((lv.cg_leaders_ytd || {}).display) || 0;
+  const serving    = parseInt(String((lv.people_serving  || {}).display).replace(/,/g,'')) || 0;
+  const ssFill     = parseInt((lv.ss_fill_rate   || {}).display) || 0;
+  const emailOpen  = parseInt((lv.email_open     || {}).display) || 0;
+  // Giving: % of annual pace extracted from note "NN% of YTD pace"
+  const givingNoteMatch  = ((lv.giving_ytd || {}).note || '').match(/(\d+)%/);
+  const givingPct        = givingNoteMatch ? parseInt(givingNoteMatch[1]) : null;
+  // All-In: % extracted from display "$X.XXM (NN%)"
+  const allInMatch       = ((lv.all_in || {}).display || '').match(/\((\d+)%\)/);
+  const allInPct         = allInMatch ? parseInt(allInMatch[1]) : null;
+
+  // ── Time off ─────────────────────────────────────────────────────────────
   const timeOffItems = (data.staffTimeOff || []);
   const todayStr = new Date().toISOString().split('T')[0];
   const fmtDate = s => { const d = new Date(s + 'T12:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
   const timeOffSection = timeOffItems.length
     ? `<div class="sp-timeoff-wrap">
-        <div class="sp-snap-label" style="margin-bottom:8px;">Staff Time Off</div>
+        <div class="sp-snap-label" style="margin-bottom:8px;border-bottom:none;">Staff Time Off</div>
         <div class="sp-timeoff-list">
           ${timeOffItems.map(item => {
             const isOut = item.start <= todayStr && item.end >= todayStr;
@@ -5221,58 +5290,112 @@ function staffRenderSnapshot(data) {
           }).join('')}
         </div>
       </div>`
-    : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
+    : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;border-bottom:none;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
+
+  // ── Boulder status label helper ───────────────────────────────────────────
+  const bLabel = s => ({ 'on-track': 'On Track', 'off-track': 'Off Track', complete: 'Complete', tbd: '—' }[s] || s);
 
   el.innerHTML = `
     <div class="sp-section-header">
       <div class="sp-eyebrow">Quick View</div>
       <h2>${q} Snapshot</h2>
-      <p>At-a-glance status across boulders, scorecard, and rocks. Jump to any tab for details.</p>
+      <p>Live scorecard · boulders · open rocks. Tap any tab for full detail.</p>
     </div>
+
     ${timeOffSection}
-    <div class="sp-snap-kpi-row">
-      ${kpiRows.length ? kpiRows.map(r => `
-        <div class="sp-snap-kpi">
-          <div class="sp-snap-kpi-label">${(m=>{const p=m.split('—');return p[1]?p[1].trim().substring(0,28):p[0].trim().substring(0,28)})(r.metric)}</div>
-          <div class="sp-snap-kpi-value">${r.current}</div>
-          <div class="sp-snap-kpi-note">Goal: ${r.goal}</div>
-        </div>`).join('') : `
-        <div class="sp-snap-kpi" style="grid-column:1/-1;">
-          <div class="sp-snap-kpi-label">Scorecard KPIs</div>
-          <div class="sp-snap-kpi-value empty">Update scorecard current values to see KPIs here</div>
-        </div>`}
+
+    <!-- ── V/TO Scorecard Goals ─────────────────────────────────────── -->
+    <div class="sp-snap-label">V/TO Scorecard Goals</div>
+    <div class="sp-snap-dark-wrap">
+
+      <div class="sp-snap-cat-hdr">
+        <span class="sp-snap-cat-pill" style="background:rgba(232,112,64,0.18);color:${C.reach};border:1px solid rgba(232,112,64,0.35);">Reach</span>
+        <div class="sp-snap-cat-line" style="background:rgba(232,112,64,0.18);"></div>
+      </div>
+      <div class="sp-snap-metric-grid">
+        ${mCard('att_adults',    'Weekend Adults',       '900+',      C.reach, avgAdults  ? Math.round(avgAdults /900 *100) : null)}
+        ${mCard('att_kids',      'Kids (SS)',            '200+',      C.reach, avgKids    ? Math.round(avgKids   /200 *100) : null)}
+        ${mCard('student_min',   'Students 30-day avg',  '65+/wk',   C.reach, smAvg != null ? Math.round(smAvg/65*100) : null)}
+        ${mCard('baptisms_ytd',  'Baptisms YTD',         '80+',       C.reach, bapYtd    ? Math.round(bapYtd   /80  *100) : null)}
+        ${mCard('new_adults',    'New Adults',            'weekly avg',C.reach, null)}
+      </div>
+
+      <div class="sp-snap-cat-hdr">
+        <span class="sp-snap-cat-pill" style="background:rgba(91,141,217,0.18);color:${C.disc};border:1px solid rgba(91,141,217,0.35);">Discipleship</span>
+        <div class="sp-snap-cat-line" style="background:rgba(91,141,217,0.18);"></div>
+      </div>
+      <div class="sp-snap-metric-grid">
+        ${mCard('members',        'Active Members',       '462+',      C.disc, members    ? Math.round(members  /462 *100) : null)}
+        ${mCard('cg_groups',      'CG Groups',            '50+',       C.disc, cgGroups   ? Math.round(cgGroups /50  *100) : null)}
+        ${mCard('cg_members',     'CG Members',           '500+',      C.disc, cgMembers  ? Math.round(cgMembers/500 *100) : null)}
+        ${mCard('cg_fm_pct',      '% Families in CG',    '75%+',      C.disc, cgFmPct    ? Math.round(cgFmPct  /75  *100) : null)}
+        ${mCard('cg_att_rate',    'CG Att Rate',          '75%+',      C.disc, cgAtt      ? Math.round(cgAtt    /75  *100) : null)}
+        ${mCard('cg_leaders_ytd', 'New CG Leaders YTD',  '20',        C.disc, cgLeaders  ? Math.round(cgLeaders/20  *100) : null)}
+      </div>
+
+      <div class="sp-snap-cat-hdr">
+        <span class="sp-snap-cat-pill" style="background:rgba(90,184,108,0.18);color:${C.serv};border:1px solid rgba(90,184,108,0.35);">Serving</span>
+        <div class="sp-snap-cat-line" style="background:rgba(90,184,108,0.18);"></div>
+      </div>
+      <div class="sp-snap-metric-grid">
+        ${mCard('people_serving', 'People Serving',       '400+',      C.serv, serving    ? Math.round(serving  /400 *100) : null)}
+        ${mCard('ss_fill_rate',   'SS Vol Fill Rate',     '95%+',      C.serv, ssFill     ? Math.round(ssFill   /95  *100) : null)}
+      </div>
+
+      <div class="sp-snap-cat-hdr">
+        <span class="sp-snap-cat-pill" style="background:rgba(201,150,58,0.18);color:${C.give};border:1px solid rgba(201,150,58,0.35);">Giving</span>
+        <div class="sp-snap-cat-line" style="background:rgba(201,150,58,0.18);"></div>
+      </div>
+      <div class="sp-snap-metric-grid">
+        ${mCard('giving_ytd', 'YTD Giving',          '≥ Pace',        C.give, givingPct)}
+        ${mCard('all_in',     'All-In Campaign',     '$8.5M total',   C.give, allInPct)}
+      </div>
+
+      <div class="sp-snap-cat-hdr">
+        <span class="sp-snap-cat-pill" style="background:rgba(155,89,182,0.18);color:${C.comm};border:1px solid rgba(155,89,182,0.35);">Communications</span>
+        <div class="sp-snap-cat-line" style="background:rgba(155,89,182,0.18);"></div>
+      </div>
+      <div class="sp-snap-metric-grid">
+        ${mCard('email_open', 'Email Open Rate', '50%+', C.comm, emailOpen ? Math.round(emailOpen/50*100) : null)}
+      </div>
+
     </div>
+
+    <!-- ── Boulders ─────────────────────────────────────────────────── -->
     <div class="sp-snap-label">Boulders — ${q}</div>
     <div class="sp-snap-rocks-bar">
       ${total ? `
         <div class="seg" style="width:${Math.round(complete/total*100)}%;background:#3949ab;"></div>
-        <div class="seg" style="width:${Math.round(onTrack/total*100)}%;background:#4caf50;"></div>
+        <div class="seg" style="width:${Math.round(onTrack /total*100)}%;background:#4caf50;"></div>
         <div class="seg" style="width:${Math.round(offTrack/total*100)}%;background:#f44336;"></div>
-        <div class="seg" style="width:${Math.round(notSet/total*100)}%;background:#9e9e9e;"></div>
+        <div class="seg" style="width:${Math.round(notSet  /total*100)}%;background:#9e9e9e;"></div>
       ` : '<div class="seg" style="width:100%;background:#9e9e9e;border-radius:5px;"></div>'}
     </div>
     <div class="sp-snap-rocks-summary">${complete} complete &nbsp;&middot;&nbsp; ${onTrack} on track &nbsp;&middot;&nbsp; ${offTrack} off track &nbsp;&middot;&nbsp; ${notSet} not set &nbsp;&middot;&nbsp; ${total} total</div>
-    <div class="sp-snap-label">Open Rocks</div>
-    ${rocks.length ? `<div class="sp-snap-issues-strip">
-      ${highRocks.map(i=>`<span class="sp-snap-issue-chip">⚠ ${i.rock.substring(0,50)}${i.rock.length>50?'…':''}</span>`).join('')}
-      ${rocks.length > highRocks.length ? `<span style="font-size:12px;color:var(--sp-muted);padding:4px 8px;">${rocks.length - highRocks.length} more (med/low)</span>` : ''}
-    </div>` : '<span class="sp-snap-green-badge">✓ No open rocks</span>'}
-    <div class="sp-snap-label" style="margin-top:20px;">Scorecard Reds</div>
-    ${redRows.length ? `<div style="display:flex;flex-direction:column;gap:6px;">
-      ${redRows.map(r=>`<div style="background:#fdecea;border:1px solid #ef9a9a;border-radius:4px;padding:8px 12px;font-size:13px;"><strong>${r.metric}</strong> <span style="color:var(--sp-muted);font-size:11px;">Owner: ${r.owner} &middot; Goal: ${r.goal}</span></div>`).join('')}
-    </div>` : '<span class="sp-snap-green-badge">✓ No reds</span>'}
-    <div class="sp-snap-label" style="margin-top:20px;">Boulders Detail</div>
-    <div class="sp-snap-rocks-2col">
+    <div class="sp-snap-rocks-2col" style="margin-top:14px;">
       <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Company Boulders</div>
-        ${boulders.filter(r=>r.type==='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Company</div>
+        ${boulders.filter(r=>r.type==='company').map(r => { const s=r.status||'tbd'; return `<div class="sp-rock-item"><div><strong>${r.owner}:</strong> ${r.title}</div><span class="sp-rock-status ${s}">${bLabel(s)}</span></div>`; }).join('')}
       </div>
       <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Individual Boulders</div>
-        ${boulders.filter(r=>r.type!=='company').map(r=>{const s=r.status||'tbd';const l={'on-track':'On Track','off-track':'Off Track','complete':'Complete','tbd':'—'}[s]||s;return`<div class="sp-rock-item"><div><strong>Owner: ${r.owner}</strong> ${r.title}</div><span class="sp-rock-status ${s}">${l}</span></div>`;}).join('')}
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:10px;">Individual</div>
+        ${boulders.filter(r=>r.type!=='company').map(r => { const s=r.status||'tbd'; return `<div class="sp-rock-item"><div><strong>${r.owner}:</strong> ${r.title}</div><span class="sp-rock-status ${s}">${bLabel(s)}</span></div>`; }).join('')}
       </div>
     </div>
-    <div class="sp-snap-ts">
+
+    <!-- ── Open Rocks ───────────────────────────────────────────────── -->
+    <div class="sp-snap-label">
+      <span>Open Rocks (${rocks.length})</span>
+      <button class="sp-snap-rocks-tab-btn" onclick="staffShowSection('sp-boulders', document.querySelector('.sp-nav-tab[onclick*=sp-boulders]'))">→ Boulders Tab</button>
+    </div>
+    ${rocks.length ? `<div class="sp-snap-rock-list">
+      ${rocks.map(i => `<div class="sp-snap-rock-row">
+        <span class="sp-snap-rock-pri ${i.priority||'med'}">${(i.priority||'med').toUpperCase()}</span>
+        <div class="sp-snap-rock-text">${i.rock}</div>
+      </div>`).join('')}
+    </div>` : '<span class="sp-snap-green-badge" style="margin-top:8px;">✓ No open rocks</span>'}
+
+    <div class="sp-snap-ts" style="margin-top:24px;">
       <span class="sp-snap-live-dot" id="sp-live-dot"></span>
       <span id="sp-data-source-label">loading data…</span>
       ${updated ? `<span>Updated: ${updated}</span>` : ''}
