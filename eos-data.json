@@ -948,14 +948,655 @@
   "funnel": {
     "guest": 0,
     "attender": 0,
-    "member": 0,
-    "group": 0,
-    "leader": 0,
-    "missionary": 0,
+    "member": 354,
+    "group": 3078,
+    "leader": 273,
+    "missionary": 2,
     "asOf": "2026-06-17"
   },
   "calendar": {
-    "events": [],
+    "events": [
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-06-18",
+        "dayOfWeek": "Thu",
+        "date": "Jun 18",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "Deana Griffin ",
+        "dateKey": "2026-06-19",
+        "dayOfWeek": "Fri",
+        "date": "Jun 19",
+        "time": "4:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Fathers Day",
+        "dateKey": "2026-06-21",
+        "dayOfWeek": "Sun",
+        "date": "Jun 21",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-06-21",
+        "dayOfWeek": "Sun",
+        "date": "Jun 21",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-06-21",
+        "dayOfWeek": "Sun",
+        "date": "Jun 21",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-06-21",
+        "dayOfWeek": "Sun",
+        "date": "Jun 21",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-06-22",
+        "dayOfWeek": "Mon",
+        "date": "Jun 22",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-06-22",
+        "dayOfWeek": "Mon",
+        "date": "Jun 22",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Man Camp",
+        "dateKey": "2026-06-24",
+        "dayOfWeek": "Wed",
+        "date": "Jun 24",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Veterans Celebration of Life",
+        "dateKey": "2026-06-24",
+        "dayOfWeek": "Wed",
+        "date": "Jun 24",
+        "time": "4:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-06-25",
+        "dayOfWeek": "Thu",
+        "date": "Jun 25",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Deacons: Deacon meeting",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "8:00 AM",
+        "location": "Yosh’s Deli - 85 Foothill Rd, Reno, NV 89511"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Prayer Team: Prayer Team Meeting",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "1:00 PM",
+        "location": "South Reno Building - 95 Foothill Rd, Reno, NV 89511"
+      },
+      {
+        "name": "Elders: Business Meeting",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "1:00 PM",
+        "location": "Los Compadres - 25 Foothill Rd, Reno, NV 89511"
+      },
+      {
+        "name": "LS Students Worship Night ",
+        "dateKey": "2026-06-28",
+        "dayOfWeek": "Sun",
+        "date": "Jun 28",
+        "time": "3:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-06-29",
+        "dayOfWeek": "Mon",
+        "date": "Jun 29",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-06-29",
+        "dayOfWeek": "Mon",
+        "date": "Jun 29",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-07-02",
+        "dayOfWeek": "Thu",
+        "date": "Jul 2",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "Baptisms",
+        "dateKey": "2026-07-05",
+        "dayOfWeek": "Sun",
+        "date": "Jul 5",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-07-05",
+        "dayOfWeek": "Sun",
+        "date": "Jul 5",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-07-05",
+        "dayOfWeek": "Sun",
+        "date": "Jul 5",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-07-05",
+        "dayOfWeek": "Sun",
+        "date": "Jul 5",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "LS Students High School Camp ",
+        "dateKey": "2026-07-06",
+        "dayOfWeek": "Mon",
+        "date": "Jul 6",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-07-06",
+        "dayOfWeek": "Mon",
+        "date": "Jul 6",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-07-06",
+        "dayOfWeek": "Mon",
+        "date": "Jul 6",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-07-09",
+        "dayOfWeek": "Thu",
+        "date": "Jul 9",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-07-12",
+        "dayOfWeek": "Sun",
+        "date": "Jul 12",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-07-12",
+        "dayOfWeek": "Sun",
+        "date": "Jul 12",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-07-12",
+        "dayOfWeek": "Sun",
+        "date": "Jul 12",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "BBQ Fundraiser for Marlene and Tony",
+        "dateKey": "2026-07-12",
+        "dayOfWeek": "Sun",
+        "date": "Jul 12",
+        "time": "1:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-07-13",
+        "dayOfWeek": "Mon",
+        "date": "Jul 13",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-07-13",
+        "dayOfWeek": "Mon",
+        "date": "Jul 13",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-07-16",
+        "dayOfWeek": "Thu",
+        "date": "Jul 16",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "LS Spanish Springs Missions Concert",
+        "dateKey": "2026-07-17",
+        "dayOfWeek": "Fri",
+        "date": "Jul 17",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Stepping Stones Mtg",
+        "dateKey": "2026-07-18",
+        "dayOfWeek": "Sat",
+        "date": "Jul 18",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-07-19",
+        "dayOfWeek": "Sun",
+        "date": "Jul 19",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-07-19",
+        "dayOfWeek": "Sun",
+        "date": "Jul 19",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-07-19",
+        "dayOfWeek": "Sun",
+        "date": "Jul 19",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Team Leader Mtg",
+        "dateKey": "2026-07-19",
+        "dayOfWeek": "Sun",
+        "date": "Jul 19",
+        "time": "1:00 PM",
+        "location": ""
+      },
+      {
+        "name": "Elders: Business Meeting",
+        "dateKey": "2026-07-19",
+        "dayOfWeek": "Sun",
+        "date": "Jul 19",
+        "time": "1:00 PM",
+        "location": "Los Compadres - 25 Foothill Rd\nReno, NV 89511"
+      },
+      {
+        "name": "LS Students Middle School Camp",
+        "dateKey": "2026-07-20",
+        "dayOfWeek": "Mon",
+        "date": "Jul 20",
+        "time": "11:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-07-20",
+        "dayOfWeek": "Mon",
+        "date": "Jul 20",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-07-20",
+        "dayOfWeek": "Mon",
+        "date": "Jul 20",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-07-23",
+        "dayOfWeek": "Thu",
+        "date": "Jul 23",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "Italy Mission Trip",
+        "dateKey": "2026-07-24",
+        "dayOfWeek": "Fri",
+        "date": "Jul 24",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Financial Update ",
+        "dateKey": "2026-07-26",
+        "dayOfWeek": "Sun",
+        "date": "Jul 26",
+        "time": "7:30 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-07-26",
+        "dayOfWeek": "Sun",
+        "date": "Jul 26",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-07-26",
+        "dayOfWeek": "Sun",
+        "date": "Jul 26",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-07-26",
+        "dayOfWeek": "Sun",
+        "date": "Jul 26",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-07-27",
+        "dayOfWeek": "Mon",
+        "date": "Jul 27",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-07-27",
+        "dayOfWeek": "Mon",
+        "date": "Jul 27",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-07-30",
+        "dayOfWeek": "Thu",
+        "date": "Jul 30",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "Baptisms",
+        "dateKey": "2026-08-02",
+        "dayOfWeek": "Sun",
+        "date": "Aug 2",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-08-02",
+        "dayOfWeek": "Sun",
+        "date": "Aug 2",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-08-02",
+        "dayOfWeek": "Sun",
+        "date": "Aug 2",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-08-02",
+        "dayOfWeek": "Sun",
+        "date": "Aug 2",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Christmas Planning ",
+        "dateKey": "2026-08-03",
+        "dayOfWeek": "Mon",
+        "date": "Aug 3",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-08-03",
+        "dayOfWeek": "Mon",
+        "date": "Aug 3",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Grief Share ",
+        "dateKey": "2026-08-03",
+        "dayOfWeek": "Mon",
+        "date": "Aug 3",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-08-06",
+        "dayOfWeek": "Thu",
+        "date": "Aug 6",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "Deana Griffin - Celebration of Life ",
+        "dateKey": "2026-08-08",
+        "dayOfWeek": "Sat",
+        "date": "Aug 8",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Summer  Surprise Water ",
+        "dateKey": "2026-08-09",
+        "dayOfWeek": "Sun",
+        "date": "Aug 9",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-08-09",
+        "dayOfWeek": "Sun",
+        "date": "Aug 9",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-08-09",
+        "dayOfWeek": "Sun",
+        "date": "Aug 9",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-08-09",
+        "dayOfWeek": "Sun",
+        "date": "Aug 9",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "First Day of School",
+        "dateKey": "2026-08-10",
+        "dayOfWeek": "Mon",
+        "date": "Aug 10",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2026-08-10",
+        "dayOfWeek": "Mon",
+        "date": "Aug 10",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA"
+      },
+      {
+        "name": "Last Grief Share Meeting for the year ",
+        "dateKey": "2026-08-10",
+        "dayOfWeek": "Mon",
+        "date": "Aug 10",
+        "time": "6:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2026-08-13",
+        "dayOfWeek": "Thu",
+        "date": "Aug 13",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA"
+      },
+      {
+        "name": "WACCS Clothing Event",
+        "dateKey": "2026-08-15",
+        "dayOfWeek": "Sat",
+        "date": "Aug 15",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "Jordan Missionaries Presentation?",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "12:00 AM",
+        "location": ""
+      },
+      {
+        "name": "8am Worship Gathering",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "Agua Viva Taco Fundraiser",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "8:30 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "9:30am Worship Gathering",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "9:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "11am Worship Gathering",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "11:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "LS Students MS",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "1:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      },
+      {
+        "name": "LS Students HS ",
+        "dateKey": "2026-08-16",
+        "dayOfWeek": "Sun",
+        "date": "Aug 16",
+        "time": "3:30 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521"
+      }
+    ],
     "asOf": "2026-06-17"
   }
 }
