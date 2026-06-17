@@ -1078,31 +1078,34 @@
   .sp-snap-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #ccc; display: inline-block; }
   .sp-snap-live-dot.green { background: #4caf50; }
   /* Dark scorecard goals section */
-  .sp-snap-dark-wrap { background: #1e1912; border-radius: 6px; padding: 22px 22px 14px; margin: 12px 0 20px; }
-  .sp-snap-cat-hdr { display: flex; align-items: center; gap: 10px; margin: 16px 0 10px; }
+  .sp-snap-dark-wrap { background: #252016; border-radius: 6px; padding: 22px 22px 16px; margin: 12px 0 20px; }
+  .sp-snap-cat-hdr { display: flex; align-items: center; gap: 12px; margin: 20px 0 10px; }
   .sp-snap-cat-hdr:first-child { margin-top: 0; }
-  .sp-snap-cat-pill { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; font-weight: 700; white-space: nowrap; }
+  .sp-snap-cat-pill { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 3px; font-weight: 700; white-space: nowrap; }
   .sp-snap-cat-line { flex: 1; height: 1px; }
-  .sp-snap-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 8px; }
-  .sp-snap-metric-card { background: #2a2318; border-radius: 4px; padding: 14px 13px 10px; border-top: 3px solid transparent; }
-  .sp-snap-metric-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 7px; line-height: 1.45; }
-  .sp-snap-metric-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #f5f0e8; line-height: 1; display: flex; align-items: center; gap: 5px; }
-  .sp-snap-metric-val.empty { color: rgba(245,240,232,0.2); font-size: 17px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-  .sp-snap-metric-goal { font-size: 9px; color: rgba(245,240,232,0.28); margin: 4px 0 7px; }
-  .sp-snap-metric-bar-wrap { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .sp-snap-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 6px; }
+  .sp-snap-metric-card { background: #332b1c; border-radius: 5px; padding: 16px 15px 12px; border-top: 3px solid transparent; }
+  .sp-snap-metric-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: rgba(245,240,232,0.6); margin-bottom: 8px; line-height: 1.35; text-transform: none; letter-spacing: 0; }
+  .sp-snap-metric-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #f5f0e8; line-height: 1; display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .sp-snap-metric-val.empty { color: rgba(245,240,232,0.25); font-size: 18px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  .sp-snap-metric-goal { font-size: 11px; color: rgba(245,240,232,0.45); margin-bottom: 8px; }
+  .sp-snap-metric-bar-wrap { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 2px; }
   .sp-snap-metric-bar { height: 100%; border-radius: 2px; }
-  .sp-snap-metric-note { font-size: 9px; color: rgba(245,240,232,0.28); margin-top: 4px; }
-  .sp-snap-sdot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-  .sp-snap-sdot.green { background: #4caf50; } .sp-snap-sdot.yellow { background: #f9a825; } .sp-snap-sdot.red { background: #ef5350; } .sp-snap-sdot.grey { background: rgba(255,255,255,0.15); }
+  .sp-snap-metric-note { font-size: 10px; color: rgba(245,240,232,0.45); margin-top: 5px; }
+  .sp-snap-sdot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .sp-snap-sdot.green { background: #4caf50; box-shadow: 0 0 4px rgba(76,175,80,0.6); }
+  .sp-snap-sdot.yellow { background: #f9a825; box-shadow: 0 0 4px rgba(249,168,37,0.5); }
+  .sp-snap-sdot.red { background: #ef5350; box-shadow: 0 0 4px rgba(239,83,80,0.5); }
+  .sp-snap-sdot.grey { background: rgba(255,255,255,0.2); }
   /* Rocks list */
-  .sp-snap-rock-list { display: flex; flex-direction: column; gap: 5px; margin: 10px 0 4px; }
-  .sp-snap-rock-row { display: flex; align-items: flex-start; gap: 10px; background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 9px 13px; }
-  .sp-snap-rock-pri { font-family: 'DM Mono', monospace; font-size: 7px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+  .sp-snap-rock-list { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4px; }
+  .sp-snap-rock-row { display: flex; align-items: flex-start; gap: 11px; background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 10px 14px; }
+  .sp-snap-rock-pri { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; white-space: nowrap; margin-top: 1px; flex-shrink: 0; font-weight: 700; }
   .sp-snap-rock-pri.high { background: #fdecea; color: #c62828; border: 1px solid #ef9a9a; }
   .sp-snap-rock-pri.med  { background: #fff8e1; color: #b87a20; border: 1px solid #ffe082; }
   .sp-snap-rock-pri.low  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-  .sp-snap-rock-text { font-size: 13px; color: var(--sp-ink); line-height: 1.45; }
-  .sp-snap-rocks-tab-btn { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--sp-gold); cursor: pointer; padding: 4px 10px; border: 1px solid var(--sp-gold); border-radius: 2px; background: none; white-space: nowrap; transition: all 0.15s; }
+  .sp-snap-rock-text { font-size: 13px; color: var(--sp-ink); line-height: 1.5; }
+  .sp-snap-rocks-tab-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--sp-gold); cursor: pointer; padding: 4px 11px; border: 1px solid var(--sp-gold); border-radius: 2px; background: none; white-space: nowrap; transition: all 0.15s; font-weight: 600; }
   .sp-snap-rocks-tab-btn:hover { background: var(--sp-gold); color: var(--sp-ink); }
 
   /* ---- L10 Feed tab ---- */
