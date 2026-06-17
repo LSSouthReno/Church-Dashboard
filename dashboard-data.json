@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T14:45:21.138Z",
+  "lastUpdated": "2026-06-17T14:59:11.942Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 17, 2026, 7:45 AM",
+    "refreshed": "Jun 17, 2026, 7:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9977,7 +9977,7 @@
               "name": "Tonya Lowry",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -10914,7 +10914,7 @@
               "name": "Jackie Lewis",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11150,7 +11150,7 @@
               "name": "Tonya Lowry",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11590,6 +11590,13 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Tonya Lowry",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11599,8 +11606,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 4,
-            "totalVols": 4
+            "volsWithServiceTime": 5,
+            "totalVols": 5
           }
         }
       ]
