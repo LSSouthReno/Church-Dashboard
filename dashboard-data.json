@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T21:56:51.042Z",
+  "lastUpdated": "2026-06-17T22:45:57.526Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3130,6 +3130,7 @@
       "needed": 40
     }
   ],
+  "uniqueVolunteers": 0,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5930,7 +5931,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 17, 2026, 2:56 PM",
+    "refreshed": "Jun 17, 2026, 3:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11922,18 +11923,18 @@
     "detail": "PCO request failed: 404 — https://api.planningcenteronline.com/check-ins/v2/events/925788/event_times?order=-starts_at&per_page=8 — {\"errors\":[{\"status\":\"404\",\"title\":\"Not Found\",\"detail\":\"The resource you requested could not be found\"}]}"
   },
   "newAdults30d": {
-    "count30d": 41,
-    "weeklyAvg": 10,
+    "count30d": 40,
+    "weeklyAvg": 9,
     "totalFetched": 6860,
     "since": "2026-05-18",
-    "asOf": "2026-06-17T21:48:04.667Z"
+    "asOf": "2026-06-17T22:44:31.135Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.21888790820829657,
-    "avgOpenRate3": 0.3873520906435896,
+    "latestOpenRate": 0.23300970873786409,
+    "avgOpenRate3": 0.3920593574867787,
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-06-17T17:26:06+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-17T21:48:06.957Z"
+    "asOf": "2026-06-17T22:44:32.269Z"
   }
 }
