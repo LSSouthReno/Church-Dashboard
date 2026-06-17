@@ -2044,7 +2044,7 @@
           <div class="sp-card">
             <div style="float:right;margin-bottom:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);letter-spacing:1px;">Baseline: 550 adults &middot; 100 kids &middot; 245 members &middot; 254 CG members (2024)</span></div>
             <table class="sp-scorecard-table" id="sp-scorecard-table">
-              <thead><tr><th></th><th>Measurable</th><th>Owner</th><th>Goal</th><th>Current</th><th>Why It Matters</th></tr></thead>
+              <thead><tr><th></th><th>Measurable</th><th>Owner</th><th>Goal</th><th>Current</th><th>Notes</th></tr></thead>
               <tbody id="sp-scorecard-tbody"><!-- populated by JS --></tbody>
             </table>
           </div>
@@ -4111,26 +4111,32 @@ let staffRendered = false;
 const STAFF_DEFAULT_DATA = {
   meta: { quarter: 'Q2 2026', lastUpdated: '2026-05-20' },
   scorecard: [
-    { metric: 'AWA — Adults (Weekend Attendance)', owner: 'Ryan Griffin', goal: '900+', current: '', status: 'grey', notes: 'Current: 800 (Jan 2026)' },
-    { metric: 'AWA — Stepping Stones (Kids)', owner: 'Geoffrey Caliger', goal: '200+', current: '', status: 'grey', notes: 'Current: 130 (Jan 2026)' },
-    { metric: 'First-Time Guests', owner: 'Brad Borowski', goal: '[set goal]', current: '', status: 'grey', notes: 'Track in Planning Center' },
-    { metric: 'Guest Follow-Up Rate (within 48 hrs)', owner: 'Adam Carp', goal: '100%', current: '', status: 'grey', notes: 'Critical front-door metric' },
-    { metric: 'Active Church Members', owner: 'Rachel Primus', goal: '462+', current: '', status: 'grey', notes: 'Current: 362 (Jan 2026); goal 75% active in serving/giving/group' },
-    { metric: 'Community Groups Active', owner: 'Adam Carp', goal: '50+', current: '', status: 'grey', notes: 'Current: 33 groups (Jan 2026)' },
-    { metric: 'Community Group Members (Active)', owner: 'Adam Carp', goal: '500+', current: '', status: 'grey', notes: 'Current: 387 members (Jan 2026)' },
-    { metric: 'CG Attendance Rate', owner: 'Adam Carp', goal: '75%+', current: '', status: 'grey', notes: 'Current: 50% (Jan 2026)' },
-    { metric: 'Active CG Leaders', owner: 'Adam Carp', goal: '50+', current: '', status: 'grey', notes: '17 new CG leaders launched in 2025' },
-    { metric: 'People Serving (Total)', owner: 'Brad Borowski', goal: '325+', current: '', status: 'grey', notes: 'Current: 254 people, 60% of members (Jan 2026)' },
-    { metric: 'Stepping Stones Vol. Fill Rate', owner: 'Geoffrey Caliger', goal: '95%+', current: '', status: 'grey', notes: 'Target: 32+ trained volunteers in rotation' },
-    { metric: 'All-In Giving YTD vs. $3,675,000 Goal', owner: 'Rachel Primus', goal: '≥ Pace', current: '', status: 'grey', notes: '2-year All-In campaign' },
-    { metric: 'Weekly Giving vs. Budget', owner: 'Rachel Primus', goal: '≥ Budget pace', current: '', status: 'grey', notes: '' },
-    { metric: 'Sunday Production Issues', owner: 'Gordon Fava', goal: '0', current: '', status: 'grey', notes: 'Any tech/production fail that affects the service' },
-    { metric: 'Weekly Email Open Rate', owner: 'John Conelea', goal: '≥ 30%', current: '', status: 'grey', notes: 'Industry avg ~22%; 30%+ is healthy for church email' },
-    { metric: 'Social Media Reach (Weekly)', owner: 'John Conelea', goal: '[set goal]', current: '', status: 'grey', notes: '' },
-    { metric: 'Student Ministry Attendance (Weekly)', owner: 'Isaac Griffin', goal: '65+', current: '', status: 'grey', notes: 'Current: ~50/week (Jan 2026)' },
-    { metric: 'Baptisms (YTD)', owner: 'Ryan Griffin', goal: '80+', current: '', status: 'grey', notes: 'Goal = 10% of avg attendance; 75 baptisms in 2025' },
-    { metric: 'Leader Launch Graduates (YTD)', owner: 'Brad Borowski', goal: '25', current: '', status: 'grey', notes: '18 grads in 2025; goal 25 new grads in 2026' },
-    { metric: 'Staff 1-on-1 Completion Rate', owner: 'Brad Borowski', goal: '100% quarterly', current: '', status: 'grey', notes: '' }
+    { _section: 'REACH' },
+    { metric: 'Weekend Attendance — Adults',          _key: 'att_adults',      owner: 'Ryan Griffin',                  goal: '900+',          current: '', status: 'grey' },
+    { metric: 'Stepping Stones — Kids',               _key: 'att_kids',        owner: 'Geoffrey Caliger',              goal: '200+',          current: '', status: 'grey' },
+    { metric: 'Student Ministry (30-day avg)',         _key: 'student_min',     owner: 'Katie Thompson & Isaac Griffin', goal: '65+',           current: '', status: 'grey', notes: 'Avg weekly check-ins from PCO (LS Students event)' },
+    { metric: 'Baptisms (YTD)',                        _key: 'baptisms_ytd',    owner: 'Ryan Griffin',                  goal: '80+',           current: '', status: 'grey', notes: '75 baptisms in 2025' },
+    { metric: 'New Adult Profiles (weekly avg)',        _key: 'new_adults',      owner: 'Brad Borowski',                 goal: '—',             current: '', status: 'grey', notes: '30-day rolling avg of new adult PCO profiles' },
+    { _section: 'DISCIPLESHIP' },
+    { metric: 'Active Church Members',                 _key: 'members',         owner: 'Rachel Primus',                 goal: '462+',          current: '', status: 'grey' },
+    { metric: 'Active Community Groups',               _key: 'cg_groups',       owner: 'Adam Carp',                     goal: '50+',           current: '', status: 'grey' },
+    { metric: 'CG Members (Active)',                   _key: 'cg_members',      owner: 'Adam Carp',                     goal: '500+',          current: '', status: 'grey' },
+    { metric: '% Families in a CG',                   _key: 'cg_fm_pct',       owner: 'Adam Carp',                     goal: '75%+',          current: '', status: 'grey' },
+    { metric: 'CG Attendance Rate',                    _key: 'cg_att_rate',     owner: 'Adam Carp',                     goal: '75%+',          current: '', status: 'grey' },
+    { metric: 'New CG Leaders (YTD)',                  _key: 'cg_leaders_ytd',  owner: 'Adam Carp',                     goal: '20',            current: '', status: 'grey' },
+    { _section: 'SERVING' },
+    { metric: 'People Serving (Total)',                _key: 'people_serving',  owner: 'Brad Borowski',                 goal: '400+',          current: '', status: 'grey' },
+    { metric: 'Stepping Stones Vol. Fill Rate',        _key: 'ss_fill_rate',    owner: 'Geoffrey Caliger',              goal: '95%+',          current: '', status: 'grey' },
+    { _section: 'GIVING' },
+    { metric: 'Giving YTD vs. $4,250,000 Goal',        _key: 'giving_ytd',      owner: 'Rachel Primus',                 goal: '≥ Pace',        current: '', status: 'grey' },
+    { metric: 'All-In Campaign Progress',              _key: 'all_in',          owner: 'Brad Borowski',                 goal: '$8.5M total',   current: '', status: 'grey' },
+    { _section: 'COMMUNICATIONS' },
+    { metric: 'Weekly Email Open Rate',                _key: 'email_open',      owner: 'John Conelea',                  goal: '≥ 50%',         current: '', status: 'grey', notes: 'Avg of last 3 Mailchimp campaigns' },
+    { metric: 'Social Media Reach (Weekly)',            _key: null,              owner: 'John Conelea',                  goal: 'FB 2k+ · IG 1k+', current: '', status: 'grey', notes: 'Manual — API setup pending (Meta Developer App)' },
+    { _section: 'PRODUCTION & OPERATIONS' },
+    { metric: 'Sunday Production Issues',              _key: null,              owner: 'Gordon Fava',                   goal: '0',             current: '', status: 'grey', notes: 'Manual — any tech/production fail affecting service' },
+    { metric: 'Leader Launch Graduates (YTD)',         _key: null,              owner: 'Brad Borowski',                 goal: '25',            current: '', status: 'grey', notes: 'Manual — 18 grads in 2025' },
+    { metric: 'Staff 1-on-1 Completion Rate',          _key: null,              owner: 'Brad Borowski',                 goal: '100% quarterly', current: '', status: 'grey', notes: 'Manual — quarterly check' },
   ],
   boulders: [
     { title: 'EOS Rhythm Established: L10 meetings running for all directors, scorecard live and reviewed weekly', owner: 'Brad Borowski', quarter: 'Q2 2026', status: 'on-track', type: 'company' },
@@ -4675,13 +4681,21 @@ async function staffLoadData() {
       const liveData = await eosRes.json();
       const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
       // For arrays, live data wins only when non-empty — otherwise keep the hardcoded fallback
-      merged.scorecard = (liveData.scorecard && liveData.scorecard.length) ? liveData.scorecard : STAFF_DEFAULT_DATA.scorecard;
+      // Scorecard: code owns structure+keys; eos-data.json can only override goal/owner per metric name
+      const _scLive = {};
+      (liveData.scorecard || []).forEach(r => { if (r.metric) _scLive[r.metric] = r; });
+      merged.scorecard = STAFF_DEFAULT_DATA.scorecard.map(r => {
+        if (r._section) return r;
+        const ov = _scLive[r.metric] || {};
+        return { ...r, goal: ov.goal || r.goal, owner: ov.owner || r.owner };
+      });
       merged.boulders  = (liveData.boulders  && liveData.boulders.length)  ? liveData.boulders  : STAFF_DEFAULT_DATA.boulders;
       merged.rocks     = (liveData.rocks     && liveData.rocks.length)     ? liveData.rocks     : STAFF_DEFAULT_DATA.rocks;
-      // Pull staffTimeOff from dashboard-data.json (written by giving/services sync)
+      // Pull live data from dashboard-data.json (giving/services sync)
       if (dashRes.ok) {
         const dashData = await dashRes.json();
         if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
+        merged._dash = dashData;  // full dashboard data for scorecard live-value computation
       }
       // Load remote rock/boulder overrides if web app is configured
       const rbRemote = await rbRemoteLoad_();
@@ -4736,18 +4750,156 @@ function staffRenderMeta(data) {
 function staffRenderScorecard(data) {
   const tbody = document.getElementById('sp-scorecard-tbody');
   if (!tbody) return;
-  tbody.innerHTML = data.scorecard.map(row => {
-    const dotClass = 'sp-status-' + (row.status || 'grey');
-    const currentDisplay = row.current || '<span style="color:var(--sp-muted);font-size:11px;">—</span>';
+  const live = scorecardLiveValues_(data._dash || {});
+  tbody.innerHTML = (data.scorecard || []).map(row => {
+    if (row._section) return `
+      <tr><td colspan="6" style="padding:10px 14px 4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);border-bottom:1px solid var(--sp-border);background:transparent;">${row._section}</td></tr>`;
+    const lv   = row._key ? live[row._key] : null;
+    const cur  = lv ? lv.display : (row.current || '');
+    const stat = lv ? lv.status  : (row.status  || 'grey');
     return `<tr>
-      <td><span class="sp-status-dot ${dotClass}"></span></td>
+      <td><span class="sp-status-dot sp-status-${stat}"></span></td>
       <td><strong>${row.metric}</strong>${row.notes ? `<br><span style="font-size:11px;color:var(--sp-muted);">${row.notes}</span>` : ''}</td>
-      <td><span class="sp-owner-tag">${row.owner.split(' ').map(w=>w[0]).join('').substring(0,4)}</span></td>
-      <td style="font-family:'DM Mono',monospace;font-size:12px;">${row.goal}</td>
-      <td class="sp-current-val">${currentDisplay}</td>
-      <td style="font-size:12px;color:var(--sp-muted);">${row.notes || ''}</td>
+      <td><span class="sp-owner-tag">${(row.owner||'').split(' ').map(w=>w[0]).join('').substring(0,4)}</span></td>
+      <td style="font-family:'DM Mono',monospace;font-size:12px;">${row.goal||''}</td>
+      <td class="sp-current-val">${cur || '<span style="color:var(--sp-muted);font-size:11px;">—</span>'}</td>
+      <td style="font-size:11px;color:var(--sp-muted);">${lv && lv.note ? lv.note : (row.notes || '')}</td>
     </tr>`;
   }).join('');
+}
+
+function scorecardLiveValues_(dash) {
+  const lv = {};
+
+  // ── REACH ──────────────────────────────────────────────────────────────────
+  const aw = dash.attendanceWeekly || {};
+  const awKeys = Object.keys(aw).sort();
+  let lastAdults = 0, lastKids = 0, lastWeekLabel = '';
+  if (awKeys.length) {
+    const weeks = aw[awKeys[awKeys.length - 1]] || [];
+    if (weeks.length) {
+      const w = weeks[weeks.length - 1];
+      lastAdults = w.adults || 0;
+      lastKids   = w.kids   || 0;
+      lastWeekLabel = w.week || '';
+    }
+  }
+  lv.att_adults = {
+    display: lastAdults ? lastAdults.toLocaleString() : '',
+    note:    lastWeekLabel ? 'Week of ' + lastWeekLabel : '',
+    status:  !lastAdults ? 'grey' : lastAdults >= 900 ? 'green' : lastAdults >= 720 ? 'yellow' : 'red'
+  };
+  lv.att_kids = {
+    display: lastKids ? lastKids.toLocaleString() : '',
+    note:    lastWeekLabel ? 'Week of ' + lastWeekLabel : '',
+    status:  !lastKids ? 'grey' : lastKids >= 200 ? 'green' : lastKids >= 150 ? 'yellow' : 'red'
+  };
+
+  const sm = dash.studentMinistry || {};
+  lv.student_min = {
+    display: sm.weeklyAvg30d != null ? String(sm.weeklyAvg30d) : '',
+    note:    sm.eventCount   ? sm.eventCount + ' sessions avg' : '',
+    status:  sm.weeklyAvg30d == null ? 'grey' : sm.weeklyAvg30d >= 65 ? 'green' : sm.weeklyAvg30d >= 50 ? 'yellow' : 'red'
+  };
+
+  const bap = dash.baptisms || {};
+  const bapYtd = (bap.months || []).reduce((s, m, i) => s + (String(m).includes("'26") ? ((bap.counts||[])[i]||0) : 0), 0);
+  lv.baptisms_ytd = {
+    display: bapYtd ? String(bapYtd) : '',
+    status:  !bapYtd ? 'grey' : bapYtd >= 80 ? 'green' : bapYtd >= 56 ? 'yellow' : 'red'
+  };
+
+  const na = dash.newAdults30d || {};
+  lv.new_adults = {
+    display: na.weeklyAvg != null ? na.weeklyAvg + '/wk' : '',
+    note:    na.count30d  != null ? na.count30d + ' in last 30 days' : '',
+    status:  'grey'
+  };
+
+  // ── DISCIPLESHIP ───────────────────────────────────────────────────────────
+  const mem = (dash.members || {}).current || 0;
+  lv.members = {
+    display: mem ? mem.toLocaleString() : '',
+    status:  !mem ? 'grey' : mem >= 462 ? 'green' : mem >= 370 ? 'yellow' : 'red'
+  };
+
+  const cgd = (dash.communityGroupsDetailed || {}).current || {};
+  lv.cg_groups = {
+    display: cgd.groups ? String(cgd.groups) : '',
+    status:  !cgd.groups ? 'grey' : cgd.groups >= 50 ? 'green' : cgd.groups >= 40 ? 'yellow' : 'red'
+  };
+  lv.cg_members = {
+    display: cgd.members ? String(cgd.members) : '',
+    status:  !cgd.members ? 'grey' : cgd.members >= 500 ? 'green' : cgd.members >= 400 ? 'yellow' : 'red'
+  };
+  lv.cg_fm_pct = {
+    display: cgd.fmInGroupsPct ? cgd.fmInGroupsPct + '%' : '',
+    status:  !cgd.fmInGroupsPct ? 'grey' : cgd.fmInGroupsPct >= 75 ? 'green' : cgd.fmInGroupsPct >= 55 ? 'yellow' : 'red'
+  };
+
+  const cgAtt = (dash.communityGroupsDetailed || {}).groupAttendance || [];
+  const cgPcts = cgAtt.filter(g => g.attPct > 0).map(g => g.attPct);
+  const cgAvg  = cgPcts.length ? Math.round(cgPcts.reduce((s, x) => s + x, 0) / cgPcts.length) : 0;
+  lv.cg_att_rate = {
+    display: cgAvg ? cgAvg + '%' : '',
+    note:    cgPcts.length ? 'avg across ' + cgPcts.length + ' groups' : '',
+    status:  !cgAvg ? 'grey' : cgAvg >= 75 ? 'green' : cgAvg >= 55 ? 'yellow' : 'red'
+  };
+
+  const cgL = ((dash.communityGroupsDetailed || {}).leadersAdded || {}).total2026 || 0;
+  lv.cg_leaders_ytd = {
+    display: cgL ? String(cgL) : '',
+    status:  !cgL ? 'grey' : cgL >= 20 ? 'green' : cgL >= 13 ? 'yellow' : 'red'
+  };
+
+  // ── SERVING ────────────────────────────────────────────────────────────────
+  const teams = dash.serveTeams || [];
+  const totalServing = teams.reduce((s, t) => s + (t.current || 0), 0);
+  lv.people_serving = {
+    display: totalServing ? totalServing.toLocaleString() : '',
+    status:  !totalServing ? 'grey' : totalServing >= 400 ? 'green' : totalServing >= 300 ? 'yellow' : 'red'
+  };
+
+  const ss = teams.find(t => /stepping.stone/i.test(t.name)) || {};
+  const ssFill = ss.current && ss.needed ? Math.round(100 * ss.current / ss.needed) : 0;
+  lv.ss_fill_rate = {
+    display: ssFill ? ssFill + '%' : '',
+    note:    ss.current ? ss.current + ' of ' + ss.needed + ' needed' : '',
+    status:  !ssFill ? 'grey' : ssFill >= 95 ? 'green' : ssFill >= 75 ? 'yellow' : 'red'
+  };
+
+  // ── GIVING ─────────────────────────────────────────────────────────────────
+  const giving  = dash.giving || {};
+  const gMo     = giving.months  || [];
+  const gAmt    = giving.amounts || [];
+  const ytd26   = gMo.reduce((s, m, i) => s + (String(m).includes("'26") ? (gAmt[i]||0) : 0), 0);
+  const GIVING_GOAL = 4250000;
+  const now    = new Date();
+  const pace   = GIVING_GOAL * ((now.getMonth() * 30 + now.getDate()) / 365);
+  const givingPct = pace > 0 ? Math.round(ytd26 / pace * 100) : 0;
+  lv.giving_ytd = {
+    display: ytd26 ? '$' + (ytd26 >= 1e6 ? (ytd26/1e6).toFixed(2) + 'M' : Math.round(ytd26/1000) + 'K') : '',
+    note:    ytd26 && pace ? givingPct + '% of YTD pace' : '',
+    status:  !ytd26 ? 'grey' : givingPct >= 95 ? 'green' : givingPct >= 80 ? 'yellow' : 'red'
+  };
+
+  const pledge = dash.pledge || {};
+  const allInPct = pledge.target ? Math.round(pledge.raised / pledge.target * 100) : 0;
+  lv.all_in = {
+    display: pledge.raised ? '$' + (pledge.raised/1e6).toFixed(2) + 'M (' + allInPct + '%)' : '',
+    status:  !pledge.raised ? 'grey' : allInPct >= 100 ? 'green' : allInPct >= 75 ? 'yellow' : 'red'
+  };
+
+  // ── COMMUNICATIONS ─────────────────────────────────────────────────────────
+  const em = dash.emailStats || {};
+  const rate = em.avgOpenRate3 != null ? Math.round(em.avgOpenRate3 * 100) : null;
+  lv.email_open = {
+    display: rate != null ? rate + '%' : '',
+    note:    em.latestCampaign ? 'Latest: "' + em.latestCampaign.substring(0, 40) + (em.latestCampaign.length > 40 ? '…' : '') + '"' : '',
+    status:  rate == null ? 'grey' : rate >= 50 ? 'green' : rate >= 35 ? 'yellow' : 'red'
+  };
+
+  return lv;
 }
 
 // ── Rocks & Boulders localStorage helpers ─────────────────────────────────
