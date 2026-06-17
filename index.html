@@ -4672,11 +4672,17 @@ async function staffDoUnlock() {
 }
 
 async function staffLoadData() {
+  // Always try to load dashboard-data.json for scorecard live values, independent of eos-data
+  let dashData = null;
   try {
-    const [eosRes, dashRes] = await Promise.all([
-      fetch(STAFF_DATA_URL + '?t=' + Date.now()),
-      fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
-    ]);
+    const dashRes = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (dashRes.ok) dashData = await dashRes.json();
+  } catch(e) {
+    console.warn('Staff OS: dashboard data fetch error:', e.message);
+  }
+
+  try {
+    const eosRes = await fetch(STAFF_DATA_URL + '?t=' + Date.now());
     if (eosRes.ok) {
       const liveData = await eosRes.json();
       const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
@@ -4687,15 +4693,13 @@ async function staffLoadData() {
       merged.scorecard = STAFF_DEFAULT_DATA.scorecard.map(r => {
         if (r._section) return r;
         const ov = _scLive[r.metric] || {};
-        return { ...r, goal: ov.goal || r.goal, owner: ov.owner || r.owner };
+        return { ...r, goal: ov.goal || r.goal, owner: ov.owner || r.owner, current: ov.current || r.current };
       });
       merged.boulders  = (liveData.boulders  && liveData.boulders.length)  ? liveData.boulders  : STAFF_DEFAULT_DATA.boulders;
       merged.rocks     = (liveData.rocks     && liveData.rocks.length)     ? liveData.rocks     : STAFF_DEFAULT_DATA.rocks;
-      // Pull live data from dashboard-data.json (giving/services sync)
-      if (dashRes.ok) {
-        const dashData = await dashRes.json();
+      if (dashData) {
         if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
-        merged._dash = dashData;  // full dashboard data for scorecard live-value computation
+        merged._dash = dashData;
       }
       // Load remote rock/boulder overrides if web app is configured
       const rbRemote = await rbRemoteLoad_();
@@ -4715,7 +4719,10 @@ async function staffLoadData() {
   } catch(e) {
     console.warn('Staff OS: could not fetch live data, using defaults:', e.message);
   }
-  staffRenderAll(STAFF_DEFAULT_DATA);
+  // eos-data failed — still render with dashboard scorecard values if available
+  const fallback = Object.assign({}, STAFF_DEFAULT_DATA);
+  if (dashData) fallback._dash = dashData;
+  staffRenderAll(fallback);
   const lbl = document.getElementById('sp-data-source-label');
   if (lbl) lbl.textContent = 'local data';
 }
@@ -4750,7 +4757,8 @@ function staffRenderMeta(data) {
 function staffRenderScorecard(data) {
   const tbody = document.getElementById('sp-scorecard-tbody');
   if (!tbody) return;
-  const live = scorecardLiveValues_(data._dash || {});
+  let live = {};
+  try { live = scorecardLiveValues_(data._dash || {}); } catch(e) { console.warn('Staff OS scorecard compute error:', e); }
   tbody.innerHTML = (data.scorecard || []).map(row => {
     if (row._section) return `
       <tr><td colspan="6" style="padding:10px 14px 4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);border-bottom:1px solid var(--sp-border);background:transparent;">${row._section}</td></tr>`;
