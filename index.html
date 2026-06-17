@@ -4780,27 +4780,25 @@ function scorecardLiveValues_(dash) {
   const lv = {};
 
   // ── REACH ──────────────────────────────────────────────────────────────────
+  // 3-month rolling average (excludes outlier weeks >1200 adults, e.g. Easter)
   const aw = dash.attendanceWeekly || {};
   const awKeys = Object.keys(aw).sort();
-  let lastAdults = 0, lastKids = 0, lastWeekLabel = '';
-  if (awKeys.length) {
-    const weeks = aw[awKeys[awKeys.length - 1]] || [];
-    if (weeks.length) {
-      const w = weeks[weeks.length - 1];
-      lastAdults = w.adults || 0;
-      lastKids   = w.kids   || 0;
-      lastWeekLabel = w.week || '';
-    }
-  }
+  const last3Keys = awKeys.slice(-3);
+  let allWeeks = [];
+  last3Keys.forEach(k => { allWeeks = allWeeks.concat(aw[k] || []); });
+  const validWeeks = allWeeks.filter(w => w.adults > 0 && w.adults <= 1200);
+  const avgAdults = validWeeks.length ? Math.round(validWeeks.reduce((s, w) => s + (w.adults || 0), 0) / validWeeks.length) : 0;
+  const avgKids   = validWeeks.length ? Math.round(validWeeks.reduce((s, w) => s + (w.kids   || 0), 0) / validWeeks.length) : 0;
+  const weekCount = validWeeks.length;
   lv.att_adults = {
-    display: lastAdults ? lastAdults.toLocaleString() : '',
-    note:    lastWeekLabel ? 'Week of ' + lastWeekLabel : '',
-    status:  !lastAdults ? 'grey' : lastAdults >= 900 ? 'green' : lastAdults >= 720 ? 'yellow' : 'red'
+    display: avgAdults ? avgAdults.toLocaleString() : '',
+    note:    weekCount ? weekCount + '-wk avg' : '',
+    status:  !avgAdults ? 'grey' : avgAdults >= 900 ? 'green' : avgAdults >= 720 ? 'yellow' : 'red'
   };
   lv.att_kids = {
-    display: lastKids ? lastKids.toLocaleString() : '',
-    note:    lastWeekLabel ? 'Week of ' + lastWeekLabel : '',
-    status:  !lastKids ? 'grey' : lastKids >= 200 ? 'green' : lastKids >= 150 ? 'yellow' : 'red'
+    display: avgKids ? avgKids.toLocaleString() : '',
+    note:    weekCount ? weekCount + '-wk avg' : '',
+    status:  !avgKids ? 'grey' : avgKids >= 200 ? 'green' : avgKids >= 150 ? 'yellow' : 'red'
   };
 
   const sm = dash.studentMinistry || {};
@@ -4862,9 +4860,11 @@ function scorecardLiveValues_(dash) {
 
   // ── SERVING ────────────────────────────────────────────────────────────────
   const teams = dash.serveTeams || [];
-  const totalServing = teams.reduce((s, t) => s + (t.current || 0), 0);
+  // Use unique volunteer count (deduplicated across teams) when available; fall back to roster sum
+  const totalServing = dash.uniqueVolunteers || teams.reduce((s, t) => s + (t.current || 0), 0);
   lv.people_serving = {
     display: totalServing ? totalServing.toLocaleString() : '',
+    note:    dash.uniqueVolunteers ? 'unique volunteers' : '',
     status:  !totalServing ? 'grey' : totalServing >= 400 ? 'green' : totalServing >= 300 ? 'yellow' : 'red'
   };
 
