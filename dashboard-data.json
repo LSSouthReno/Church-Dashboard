@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T21:45:18.442Z",
+  "lastUpdated": "2026-06-17T21:56:51.042Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5930,7 +5930,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 17, 2026, 2:45 PM",
+    "refreshed": "Jun 17, 2026, 2:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8163,13 +8163,6 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Gordon Fava",
-              "team": "Worship Team",
-              "pos": "Electric Guitar",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Adelyn Gibson",
               "team": "Worship Team",
               "pos": "Piano",
@@ -8539,6 +8532,20 @@
               "pos": "Wolf Pack Lead Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "C",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Caleb Frink",
+              "team": "Worship Team",
+              "pos": "Electric Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -8696,8 +8703,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ]
@@ -9332,6 +9339,13 @@
               "pos": "Mustangs Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Louie Quiroz",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9341,8 +9355,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 88,
-            "totalVols": 88
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
@@ -9631,6 +9645,83 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jimmy Pierce",
+              "team": "Worship Team",
+              "pos": "Drums",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Megan Wampler",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Scarlett Fava",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Scarlett Fava",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "April Libby",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Caleb Frink",
+              "team": "Worship Team",
+              "pos": "Electric Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Aaron Carl",
+              "team": "Tech",
+              "pos": "Sound",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Bob Needham",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Nathen Ross",
+              "team": "Tech",
+              "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -9640,8 +9731,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676327\"},{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 39,
-            "totalVols": 39
+            "volsWithServiceTime": 50,
+            "totalVols": 50
           }
         }
       ]
@@ -10000,6 +10091,83 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Gavin Au",
+              "team": "Worship Team",
+              "pos": "Drums",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Savannah Caliger",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Louie Quiroz",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Worship Team",
+              "pos": "Piano",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Cory Hunt",
+              "team": "Tech",
+              "pos": "Sound",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Bruce Rector",
+              "team": "Tech",
+              "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -10009,8 +10177,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 49,
-            "totalVols": 49
+            "volsWithServiceTime": 60,
+            "totalVols": 60
           }
         }
       ]
@@ -10376,6 +10544,41 @@
               "pos": "Hawks Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lance Jauron",
+              "team": "Tech",
+              "pos": "Sound",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Jaime Tibaduiza",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Tom McDonald",
+              "team": "Tech",
+              "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -10385,8 +10588,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 50,
-            "totalVols": 50
+            "volsWithServiceTime": 55,
+            "totalVols": 55
           }
         }
       ]
@@ -10696,6 +10899,90 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gavin Au",
+              "team": "Worship Team",
+              "pos": "Drums",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Scarlett Fava",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Caleb Frink",
+              "team": "Worship Team",
+              "pos": "Electric Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Adelyn Gibson",
+              "team": "Worship Team",
+              "pos": "Piano",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Corinne Baker",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Stephanie Fava",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Emery Fava",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Aaron Carl",
+              "team": "Tech",
+              "pos": "Sound",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "David Castro",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Nathen Ross",
+              "team": "Tech",
+              "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -10705,8 +10992,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 42,
-            "totalVols": 42
+            "volsWithServiceTime": 54,
+            "totalVols": 54
           }
         }
       ]
@@ -11631,12 +11918,22 @@
     }
   ],
   "studentMinistry": {
-    "error": "property_null"
+    "error": "sync_exception",
+    "detail": "PCO request failed: 404 — https://api.planningcenteronline.com/check-ins/v2/events/925788/event_times?order=-starts_at&per_page=8 — {\"errors\":[{\"status\":\"404\",\"title\":\"Not Found\",\"detail\":\"The resource you requested could not be found\"}]}"
   },
   "newAdults30d": {
-    "error": "property_null"
+    "count30d": 41,
+    "weeklyAvg": 10,
+    "totalFetched": 6860,
+    "since": "2026-05-18",
+    "asOf": "2026-06-17T21:48:04.667Z"
   },
   "emailStats": {
-    "error": "property_null"
+    "latestOpenRate": 0.21888790820829657,
+    "avgOpenRate3": 0.3873520906435896,
+    "latestCampaign": "LS Weekly Update",
+    "latestSentAt": "2026-06-17T17:26:06+00:00",
+    "campaignCount": 5,
+    "asOf": "2026-06-17T21:48:06.957Z"
   }
 }
