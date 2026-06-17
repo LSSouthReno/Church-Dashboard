@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T22:45:57.526Z",
+  "lastUpdated": "2026-06-17T22:57:21.108Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3130,7 +3130,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 0,
+  "uniqueVolunteers": 366,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5931,7 +5931,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 17, 2026, 3:45 PM",
+    "refreshed": "Jun 17, 2026, 3:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9707,7 +9707,7 @@
               "name": "Aaron Carl",
               "team": "Tech",
               "pos": "Sound",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
@@ -10146,7 +10146,7 @@
               "name": "Lisa Castaneda",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -10578,7 +10578,7 @@
               "name": "Tom McDonald",
               "team": "Tech",
               "pos": "Slides",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
@@ -10961,14 +10961,14 @@
               "name": "Emery Fava",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Aaron Carl",
               "team": "Tech",
               "pos": "Sound",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
@@ -11463,13 +11463,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Tina Faker",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Lead Guide WP, Hawks, Mustangs",
@@ -11589,8 +11582,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 40,
-            "totalVols": 40
+            "volsWithServiceTime": 39,
+            "totalVols": 39
           }
         }
       ]
