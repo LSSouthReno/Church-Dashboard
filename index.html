@@ -1107,6 +1107,15 @@
   .sp-snap-rock-text { font-size: 14px; color: var(--sp-ink); line-height: 1.5; }
   .sp-snap-rocks-tab-btn { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--sp-gold); cursor: pointer; padding: 5px 13px; border: 1px solid var(--sp-gold); border-radius: 3px; background: none; white-space: nowrap; transition: all 0.15s; font-weight: 700; }
   .sp-snap-rocks-tab-btn:hover { background: var(--sp-gold); color: var(--sp-ink); }
+  /* Quarter timeline */
+  .sp-snap-qtl { margin: 14px 0 24px; }
+  .sp-snap-qtl-row { display: flex; align-items: center; gap: 12px; }
+  .sp-snap-qtl-edge { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--sp-muted); white-space: nowrap; }
+  .sp-snap-qtl-track { flex: 1; height: 6px; background: var(--sp-border); border-radius: 3px; position: relative; margin: 16px 0 8px; }
+  .sp-snap-qtl-fill { height: 100%; background: var(--sp-gold); border-radius: 3px; }
+  .sp-snap-qtl-knob { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background: var(--sp-gold); border: 2px solid var(--sp-parchment); border-radius: 50%; box-shadow: 0 1px 5px rgba(0,0,0,0.25); }
+  .sp-snap-qtl-today { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 9px; color: var(--sp-gold); white-space: nowrap; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .sp-snap-qtl-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--sp-muted); padding: 0 2px; }
 
   /* ---- L10 Feed tab ---- */
   .sp-l10-hdr { background: var(--sp-ink); color: var(--sp-parchment); border-radius: 4px; padding: 22px 26px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
@@ -5226,8 +5235,26 @@ function staffRenderSnapshot(data) {
   const priOrd = { high: 0, med: 1, low: 2 };
   rocks.sort((a, b) => (priOrd[a.priority] ?? 1) - (priOrd[b.priority] ?? 1));
 
-  const q       = (data.meta && data.meta.quarter) || 'Q2 2026';
   const updated = (data.meta && data.meta.lastUpdated) || '';
+
+  // ── Auto-compute current quarter from today ──────────────────────────────
+  (function() {
+    const now = new Date(), m = now.getMonth(), y = now.getFullYear();
+    let qNum, qStart, qEnd;
+    if      (m < 3)  { qNum=1; qStart=new Date(y,0,1);  qEnd=new Date(y,2,31);  }
+    else if (m < 6)  { qNum=2; qStart=new Date(y,3,1);  qEnd=new Date(y,5,30);  }
+    else if (m < 9)  { qNum=3; qStart=new Date(y,6,1);  qEnd=new Date(y,8,30);  }
+    else             { qNum=4; qStart=new Date(y,9,1);   qEnd=new Date(y,11,31); }
+    staffRenderSnapshot._qtr = {
+      label: 'Q' + qNum + ' ' + y,
+      pct:   Math.min(100, Math.max(0, Math.round((now - qStart) / (qEnd - qStart + 86400000) * 100))),
+      start: qStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      end:   qEnd.toLocaleDateString('en-US',   { month: 'short', day: 'numeric' }),
+      daysLeft: Math.max(0, Math.round((qEnd - now) / 86400000))
+    };
+  })();
+  const qtr = staffRenderSnapshot._qtr;
+  const q   = qtr.label;
 
   // ── Live scorecard values ────────────────────────────────────────────────
   let lv = {};
@@ -5302,7 +5329,23 @@ function staffRenderSnapshot(data) {
     <div class="sp-section-header">
       <div class="sp-eyebrow">Quick View</div>
       <h2>${q} Snapshot</h2>
-      <p>Live scorecard · boulders · open rocks. Tap any tab for full detail.</p>
+      <p>Live Scorecard, Open Rocks, Boulders</p>
+    </div>
+    <div class="sp-snap-qtl">
+      <div class="sp-snap-qtl-row">
+        <span class="sp-snap-qtl-edge">${qtr.start}</span>
+        <div class="sp-snap-qtl-track">
+          <div class="sp-snap-qtl-fill" style="width:${qtr.pct}%;"></div>
+          <div class="sp-snap-qtl-knob" style="left:${qtr.pct}%;">
+            <div class="sp-snap-qtl-today">Today</div>
+          </div>
+        </div>
+        <span class="sp-snap-qtl-edge">${qtr.end}</span>
+      </div>
+      <div class="sp-snap-qtl-meta">
+        <span>${qtr.pct}% through ${q}</span>
+        <span>${qtr.daysLeft} days remaining</span>
+      </div>
     </div>
 
     ${timeOffSection}
@@ -5364,8 +5407,20 @@ function staffRenderSnapshot(data) {
 
     </div>
 
+    <!-- ── Open Rocks ───────────────────────────────────────────────── -->
+    <div class="sp-snap-label">
+      <span>Open Rocks (${rocks.length})</span>
+      <button class="sp-snap-rocks-tab-btn" onclick="staffShowSection('sp-boulders', document.querySelector('.sp-nav-tab[onclick*=sp-boulders]'))">→ Boulders Tab</button>
+    </div>
+    ${rocks.length ? `<div class="sp-snap-rock-list">
+      ${rocks.map(i => `<div class="sp-snap-rock-row">
+        <span class="sp-snap-rock-pri ${i.priority||'med'}">${(i.priority||'med').toUpperCase()}</span>
+        <div class="sp-snap-rock-text">${i.rock}</div>
+      </div>`).join('')}
+    </div>` : '<span class="sp-snap-green-badge" style="margin-top:8px;">✓ No open rocks</span>'}
+
     <!-- ── Boulders ─────────────────────────────────────────────────── -->
-    <div class="sp-snap-label">Boulders — ${q}</div>
+    <div class="sp-snap-label" style="margin-top:24px;">Boulders — ${q}</div>
     <div class="sp-snap-rocks-bar">
       ${total ? `
         <div class="seg" style="width:${Math.round(complete/total*100)}%;background:#3949ab;"></div>
@@ -5385,18 +5440,6 @@ function staffRenderSnapshot(data) {
         ${boulders.filter(r=>r.type!=='company').map(r => { const s=r.status||'tbd'; return `<div class="sp-rock-item"><div><strong>${r.owner}:</strong> ${r.title}</div><span class="sp-rock-status ${s}">${bLabel(s)}</span></div>`; }).join('')}
       </div>
     </div>
-
-    <!-- ── Open Rocks ───────────────────────────────────────────────── -->
-    <div class="sp-snap-label">
-      <span>Open Rocks (${rocks.length})</span>
-      <button class="sp-snap-rocks-tab-btn" onclick="staffShowSection('sp-boulders', document.querySelector('.sp-nav-tab[onclick*=sp-boulders]'))">→ Boulders Tab</button>
-    </div>
-    ${rocks.length ? `<div class="sp-snap-rock-list">
-      ${rocks.map(i => `<div class="sp-snap-rock-row">
-        <span class="sp-snap-rock-pri ${i.priority||'med'}">${(i.priority||'med').toUpperCase()}</span>
-        <div class="sp-snap-rock-text">${i.rock}</div>
-      </div>`).join('')}
-    </div>` : '<span class="sp-snap-green-badge" style="margin-top:8px;">✓ No open rocks</span>'}
 
     <div class="sp-snap-ts" style="margin-top:24px;">
       <span class="sp-snap-live-dot" id="sp-live-dot"></span>
