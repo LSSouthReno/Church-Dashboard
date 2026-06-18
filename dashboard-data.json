@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-18T16:46:41.670Z",
+  "lastUpdated": "2026-06-18T16:58:46.051Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5931,7 +5931,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 18, 2026, 9:46 AM",
+    "refreshed": "Jun 18, 2026, 9:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9342,7 +9342,155 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "FIRST TO KNOW",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 30,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 14,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "OFFERING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -9718,7 +9866,155 @@
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "FIRST TO KNOW",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 30,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 14,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "OFFERING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -10101,13 +10397,6 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Savannah Caliger",
-              "team": "Worship Team",
-              "pos": "Worship Leader",
-              "status": "U",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Anna Sawyer",
               "team": "Worship Team",
               "pos": "Vocals",
@@ -10162,9 +10451,164 @@
               "pos": "Slides",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "FIRST TO KNOW",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 30,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 14,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "OFFERING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -10533,20 +10977,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Gordon Fava",
-              "team": "Worship Team",
-              "pos": "Worship Leader",
-              "status": "U",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Gordon Fava",
-              "team": "Worship Team",
-              "pos": "Acoustic Guitar",
-              "status": "U",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Lance Jauron",
               "team": "Tech",
               "pos": "Sound",
@@ -10566,17 +10996,200 @@
               "pos": "Slides",
               "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Savannah Caliger",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Drums",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Keith Primus",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Savannah Wilson",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Worship Team",
+              "pos": "Piano",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "FIRST TO KNOW",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 30,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 14,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "OFFERING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 54,
-            "totalVols": 54
+            "volsWithServiceTime": 57,
+            "totalVols": 57
           }
         }
       ]
@@ -10972,7 +11585,155 @@
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "FIRST TO KNOW",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 30,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 14,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "OFFERING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
