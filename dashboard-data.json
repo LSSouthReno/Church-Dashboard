@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T16:46:09.979Z",
+  "lastUpdated": "2026-06-19T16:59:19.750Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5931,7 +5931,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 19, 2026, 9:46 AM",
+    "refreshed": "Jun 19, 2026, 9:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8321,7 +8321,7 @@
               "name": "Bob Watson",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -8372,13 +8372,6 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Chuck Grimm",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Jack Jauron",
@@ -8697,8 +8690,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 105,
+            "totalVols": 105
           }
         }
       ]
