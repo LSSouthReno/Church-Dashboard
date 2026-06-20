@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T20:46:01.302Z",
+  "lastUpdated": "2026-06-20T20:57:09.422Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5914,7 +5914,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 20, 2026, 1:46 PM",
+    "refreshed": "Jun 20, 2026, 1:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8192,7 +8192,7 @@
               "name": "Ray Brown",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -10993,6 +10993,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Matt Sweitzer",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11150,8 +11157,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 58,
-            "totalVols": 58
+            "volsWithServiceTime": 59,
+            "totalVols": 59
           }
         }
       ]
