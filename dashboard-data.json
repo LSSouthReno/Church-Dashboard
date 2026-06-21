@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T15:52:06.214Z",
+  "lastUpdated": "2026-06-21T16:46:11.803Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -207,12 +207,12 @@
       284174,
       323920,
       343205,
-      270708
+      271867
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 4552273
+    "raised": 4553432
   },
   "attendance": {
     "months": [
@@ -813,7 +813,7 @@
       123,
       142,
       114,
-      75
+      96
     ]
   },
   "attendanceWeekly": {
@@ -3058,8 +3058,8 @@
       },
       {
         "week": "Jun 21",
-        "adults": 0,
-        "kids": 3
+        "adults": 200,
+        "kids": 14
       }
     ]
   },
@@ -5919,7 +5919,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 21, 2026, 8:52 AM",
+    "refreshed": "Jun 21, 2026, 9:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9328,6 +9328,13 @@
               "pos": "Back Right Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Annette Breach",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9485,8 +9492,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 89,
-            "totalVols": 89
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
@@ -10480,6 +10487,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Annette Breach",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10637,8 +10651,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 63,
-            "totalVols": 63
+            "volsWithServiceTime": 64,
+            "totalVols": 64
           }
         }
       ]
@@ -11382,23 +11396,9 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Ruth Skinner",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Bradford Skinner",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Isla Skinner",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
             },
@@ -11810,8 +11810,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 56,
-            "totalVols": 56
+            "volsWithServiceTime": 54,
+            "totalVols": 54
           }
         }
       ]
@@ -11912,7 +11912,7 @@
               "name": "Erich Brenner",
               "team": "Service Captains",
               "pos": "Service Captain",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
@@ -12425,7 +12425,7 @@
               "name": "Danny Rotter",
               "team": "Service Captains",
               "pos": "Service Captain",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
@@ -12609,7 +12609,7 @@
               "name": "Erich Brenner",
               "team": "Service Captains",
               "pos": "Service Captain",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
@@ -12870,7 +12870,7 @@
     "weeklyAvg": 10,
     "totalFetched": 6864,
     "since": "2026-05-22",
-    "asOf": "2026-06-21T15:45:47.826Z"
+    "asOf": "2026-06-21T16:44:38.398Z"
   },
   "emailStats": {
     "latestOpenRate": 0.26506024096385544,
@@ -12878,6 +12878,6 @@
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-06-19T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-21T15:45:50.897Z"
+    "asOf": "2026-06-21T16:44:39.661Z"
   }
 }
