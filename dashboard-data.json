@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T13:47:11.773Z",
+  "lastUpdated": "2026-06-21T13:59:45.768Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5914,7 +5914,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 21, 2026, 6:47 AM",
+    "refreshed": "Jun 21, 2026, 6:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8016,7 +8016,7 @@
             {
               "name": "Holly Graham",
               "team": "Stepping Stones",
-              "pos": "Wolf Pack Guide",
+              "pos": "Wolf Pack Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -8056,17 +8056,10 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Courtney Rumbaugh",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Kelly Coan",
               "team": "Service Captains",
               "pos": "Service Captain",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8385,13 +8378,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Aliyah Ramirez",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
@@ -8507,6 +8493,34 @@
               "name": "Jennifer Jauron",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Emma Baskharoon",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
               "status": "C",
               "serviceTime": "11 AM"
             }
@@ -8666,8 +8680,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350367\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 104,
-            "totalVols": 104
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
@@ -9482,7 +9496,10 @@
           "title": "The Spirit Guides (John 16:12-15)",
           "series": "Beyond Religion: Part 2",
           "preacher": "Bradley Borowski",
-          "captains": [],
+          "captains": [
+            "Matt Gardner",
+            "Sam Griffin"
+          ],
           "volunteers": [
             {
               "name": "Bill Salcido",
@@ -9819,6 +9836,27 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sam Griffin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9976,8 +10014,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 46,
-            "totalVols": 48
+            "volsWithServiceTime": 49,
+            "totalVols": 51
           }
         }
       ]
@@ -9992,7 +10030,10 @@
           "title": "Sorrow Will Turn to Joy (John 16:16-33)",
           "series": "Beyond Religion: Part 2",
           "preacher": "Ryan Griffin",
-          "captains": [],
+          "captains": [
+            "Thomas Peregrin",
+            "Manuel Sanchez"
+          ],
           "volunteers": [
             {
               "name": "Breanne Read",
@@ -10420,6 +10461,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Thomas Peregrin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10577,8 +10632,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 61,
-            "totalVols": 61
+            "volsWithServiceTime": 63,
+            "totalVols": 63
           }
         }
       ]
@@ -10593,7 +10648,10 @@
           "title": "The High Priestly Prayer Part I: Jesus Prays for Himself (John 17:1-5)",
           "series": "Beyond Religion: Part 2",
           "preacher": "Adam Carp",
-          "captains": [],
+          "captains": [
+            "Timothy Milligan",
+            "Matt Bowman"
+          ],
           "volunteers": [
             {
               "name": "Paulette Thompson",
@@ -11007,6 +11065,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Timothy Milligan",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Matt Bowman",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -11164,8 +11236,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 59,
-            "totalVols": 59
+            "volsWithServiceTime": 61,
+            "totalVols": 61
           }
         }
       ]
@@ -11180,7 +11252,10 @@
           "title": "The High Priestly Prayer Part II: Jesus Prays for His Disciples (John 17:6-19)",
           "series": "Beyond Religion: Part 2",
           "preacher": "Ryan Griffin",
-          "captains": [],
+          "captains": [
+            "Matt Gardner",
+            "Garrett Kooyers"
+          ],
           "volunteers": [
             {
               "name": "Lydia Perlich",
@@ -11552,6 +11627,27 @@
               "pos": "Slides",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Garrett Kooyers",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [
@@ -11709,8 +11805,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 53,
-            "totalVols": 53
+            "volsWithServiceTime": 56,
+            "totalVols": 56
           }
         }
       ]
@@ -11725,7 +11821,10 @@
           "title": "The High Priestly Prayer Part III: Jesus Prays for the Church (John 17:20-26)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Erich Brenner",
+            "Kelly Coan"
+          ],
           "volunteers": [
             {
               "name": "Paulette Thompson",
@@ -11803,6 +11902,20 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Erich Brenner",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Kelly Coan",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11812,8 +11925,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 11,
-            "totalVols": 11
+            "volsWithServiceTime": 13,
+            "totalVols": 13
           }
         }
       ]
@@ -11828,7 +11941,10 @@
           "title": "Jesus' Arrest & Peter's Denials (John 18:1-27)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Thomas Peregrin",
+            "Sam Griffin"
+          ],
           "volunteers": [
             {
               "name": "Breanne Read",
@@ -11983,6 +12099,20 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Peregrin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Sam Griffin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11992,8 +12122,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 22,
-            "totalVols": 22
+            "volsWithServiceTime": 24,
+            "totalVols": 24
           }
         }
       ]
@@ -12008,7 +12138,10 @@
           "title": "The King on Trial (John 18:28-40)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Danny Rotter",
+            "Manuel Sanchez"
+          ],
           "volunteers": [
             {
               "name": "Lauren Smith",
@@ -12282,6 +12415,20 @@
               "pos": "Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Danny Rotter",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -12291,8 +12438,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 39,
-            "totalVols": 39
+            "volsWithServiceTime": 41,
+            "totalVols": 41
           }
         }
       ]
@@ -12307,7 +12454,10 @@
           "title": "The Lamb Slain & Resurrected (John 19:1-20:18)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Matt Gardner",
+            "Matt Bowman"
+          ],
           "volunteers": [
             {
               "name": "Casey Shull",
@@ -12350,6 +12500,27 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Matt Bowman",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -12359,8 +12530,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 6,
-            "totalVols": 6
+            "volsWithServiceTime": 9,
+            "totalVols": 9
           }
         }
       ]
@@ -12375,7 +12546,10 @@
           "title": "Risen Jesus Recreates People (John 20:19-21:14)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Erich Brenner",
+            "Kelly Coan"
+          ],
           "volunteers": [
             {
               "name": "Lauren Smith",
@@ -12425,6 +12599,20 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Erich Brenner",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Kelly Coan",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -12434,8 +12622,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 7,
-            "totalVols": 7
+            "volsWithServiceTime": 9,
+            "totalVols": 9
           }
         }
       ]
@@ -12450,7 +12638,10 @@
           "title": "Follow Me! (John 21:15-25)",
           "series": "Beyond Religion: Part 2",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Garrett Kooyers",
+            "Timothy Milligan"
+          ],
           "volunteers": [
             {
               "name": "Darren Wilford",
@@ -12472,6 +12663,20 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Garrett Kooyers",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Timothy Milligan",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -12481,8 +12686,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 3,
-            "totalVols": 3
+            "volsWithServiceTime": 5,
+            "totalVols": 5
           }
         }
       ]
@@ -12497,7 +12702,10 @@
           "title": "",
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Thomas Peregrin",
+            "Sam Griffin"
+          ],
           "volunteers": [
             {
               "name": "Lauren Smith",
@@ -12526,6 +12734,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Thomas Peregrin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Sam Griffin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -12535,8 +12757,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 4,
-            "totalVols": 4
+            "volsWithServiceTime": 6,
+            "totalVols": 6
           }
         }
       ]
@@ -12551,7 +12773,9 @@
           "title": "",
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "",
-          "captains": [],
+          "captains": [
+            "Manuel Sanchez"
+          ],
           "volunteers": [
             {
               "name": "Frances Munoz",
@@ -12587,6 +12811,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -12596,8 +12827,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 5,
-            "totalVols": 5
+            "volsWithServiceTime": 6,
+            "totalVols": 6
           }
         }
       ]
