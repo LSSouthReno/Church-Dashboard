@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T17:46:10.977Z",
+  "lastUpdated": "2026-06-21T17:58:28.388Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3058,8 +3058,8 @@
       },
       {
         "week": "Jun 21",
-        "adults": 200,
-        "kids": 76
+        "adults": 493,
+        "kids": 82
       }
     ]
   },
@@ -5919,7 +5919,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 21, 2026, 10:46 AM",
+    "refreshed": "Jun 21, 2026, 10:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11098,6 +11098,13 @@
               "pos": "Service Captain",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -11255,8 +11262,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 61,
-            "totalVols": 61
+            "volsWithServiceTime": 62,
+            "totalVols": 62
           }
         }
       ]
@@ -11921,6 +11928,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11930,8 +11944,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 13,
-            "totalVols": 13
+            "volsWithServiceTime": 14,
+            "totalVols": 14
           }
         }
       ]
