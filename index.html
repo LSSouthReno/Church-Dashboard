@@ -6440,10 +6440,15 @@ function openStaffProfile(rawName) {
   const allBoulders = (typeof applyBoulderOverrides_ === 'function')
     ? applyBoulderOverrides_(data.boulders || [])
     : (data.boulders || []);
+  const pname = norm(person.name);
   const personBoulders = allBoulders.filter(b => {
     const ow = norm(b.owner || '');
-    return ow.includes(firstName) || ow.includes(lastName) ||
-           norm(person.name).includes(ow.split(' ')[0]) || ow === norm(person.name);
+    if (!ow) return false;
+    // Exact match or owner string contains person's full name
+    if (ow === pname || ow.includes(pname)) return true;
+    // Compound owners like "Brad + Ryan" — match by first name word (≥4 chars)
+    const owWords = ow.split(/[\s+,&]+/).filter(Boolean);
+    return firstName.length >= 4 && owWords.some(w => w === firstName);
   });
 
   // ── Time off: match by our name or BambooHR display name ─────────────────
