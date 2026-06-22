@@ -75,6 +75,12 @@ function syncDashboard() {
   setupCacheSheets_(ss);
   const months = getRecentMonths_(DASHBOARD_CONFIG.RECENT_MONTHS_TO_REFRESH);
 
+  // 0. Scorecard live metrics — run FIRST so Script Properties are set before any buildDashboardDataFromSheet_ call
+  //    (refreshDashboardMonths_ calls buildDashboardDataFromSheet_ internally; we need these set by then)
+  safeRun_('Student Ministry',  () => { syncStudentMinistry_(); });
+  safeRun_('New Adult Profiles', () => { syncNewAdultProfiles_(); });
+  safeRun_('Mailchimp Stats',   () => { syncMailchimpStats_(); });
+
   // 1. Pull giving, attendance (monthly), community groups
   refreshDashboardMonths_(months, 'recent refresh');
 
@@ -1101,6 +1107,10 @@ function buildDashboardDataFromSheet_(ss) {
     },
     attendanceWeekly: attendanceWeekly,
     serveTeams: getServeTeams_(),
+    uniqueVolunteers: (function() {
+      var v = PropertiesService.getScriptProperties().getProperty('UNIQUE_VOLUNTEERS');
+      return v ? parseInt(v) : 0;
+    })(),
     budget: getBudgetData_(),
     missions: getMissionsData_(),
     teamsLeaderForms: getTeamsLeaderFormsDetailed_(),
@@ -1131,7 +1141,20 @@ function buildDashboardDataFromSheet_(ss) {
     },
     communityGroupsDetailed: buildCGDetailed_(ss, groupRows),
     sundayPlans: getSundayPlans_(),
-    staffTimeOff: fetchBambooHRTimeOff_()
+    staffTimeOff: fetchBambooHRTimeOff_(),
+    // Live scorecard metrics — populated by syncStudentMinistry_/syncNewAdultProfiles_/syncMailchimpStats_
+    studentMinistry: (function() {
+      var p = PropertiesService.getScriptProperties().getProperty('SCORECARD_STUDENT_MINISTRY');
+      return p ? JSON.parse(p) : { error: 'property_null' };
+    })(),
+    newAdults30d: (function() {
+      var p = PropertiesService.getScriptProperties().getProperty('SCORECARD_NEW_ADULTS');
+      return p ? JSON.parse(p) : { error: 'property_null' };
+    })(),
+    emailStats: (function() {
+      var p = PropertiesService.getScriptProperties().getProperty('SCORECARD_EMAIL_STATS');
+      return p ? JSON.parse(p) : { error: 'property_null' };
+    })()
   };
 }
 
@@ -2165,6 +2188,7 @@ function syncServicesTeamsData_() {
 
   const rows = [];
   const updatedAt = new Date().toISOString();
+  const allPersonIds = new Set(); // track unique people across all teams
 
   teams.forEach(team => {
     const teamId = String(team.id);
@@ -2172,6 +2196,7 @@ function syncServicesTeamsData_() {
     if (!teamName) return;
 
     const result = countServicesTeamVolunteers_(teamId);
+    result.personIds.forEach(id => allPersonIds.add(id));
     rows.push([
       teamId,
       teamName,
@@ -2182,6 +2207,10 @@ function syncServicesTeamsData_() {
 
     Logger.log('     ' + teamName + ': ' + result.count + ' volunteers (' + result.source + ')');
   });
+
+  // Store unique volunteer count (deduped across teams) in Script Properties
+  PropertiesService.getScriptProperties().setProperty('UNIQUE_VOLUNTEERS', String(allPersonIds.size));
+  Logger.log('   Unique volunteers across all teams: ' + allPersonIds.size + ' (vs roster sum ' + rows.reduce(function(s,r){return s+(r[2]||0);},0) + ')');
 
   rows.sort((a, b) => String(a[1]).localeCompare(String(b[1])));
 
@@ -2218,6 +2247,7 @@ function countServicesTeamVolunteers_(teamId) {
 
     return {
       count: Object.keys(uniqueIds).length,
+      personIds: Object.keys(uniqueIds),
       source: c.source
     };
   }
@@ -2225,6 +2255,7 @@ function countServicesTeamVolunteers_(teamId) {
   Logger.log('     ! Could not count volunteers for Services team id=' + teamId + '. All candidate endpoints failed.');
   return {
     count: 0,
+    personIds: [],
     source: 'not found'
   };
 }
@@ -3057,9 +3088,13 @@ function syncStaffOSFunnelAndCalendar_() {
     } catch(e) { currentData = {}; }
   }
 
-  // Merge funnel + calendar into existing data
+  // Fetch fresh BambooHR staff profiles (photo URLs + IDs for South Reno)
+  const staffProfiles = syncBambooHRProfiles_();
+
+  // Merge funnel + calendar + staff_profiles into existing data
   const merged = Object.assign({}, currentData, { funnel: funnel, calendar: calendar });
-  const payload = { message: 'Update funnel & calendar data', branch: branch,
+  if (staffProfiles.length) merged.staff_profiles = staffProfiles;
+  const payload = { message: 'Update funnel, calendar & staff profiles', branch: branch,
                     content: Utilities.base64Encode(JSON.stringify(merged, null, 2), Utilities.Charset.UTF_8) };
   if (sha) payload.sha = sha;
 
@@ -3070,7 +3105,45 @@ function syncStaffOSFunnelAndCalendar_() {
   if (code < 200 || code >= 300) {
     throw new Error('EOS merge-push failed: ' + code + ' — ' + res.getContentText().substring(0,200));
   }
-  Logger.log('✓  Staff OS Funnel+Calendar pushed to ' + owner + '/' + repo + '/' + path);
+  Logger.log('✓  Staff OS Funnel+Calendar+Profiles pushed to ' + owner + '/' + repo + '/' + path);
+}
+
+// ── BambooHR: fetch South Reno staff photo URLs for profile modal ───────────
+function syncBambooHRProfiles_() {
+  try {
+    var key = (typeof BAMBOOHR_API_KEY !== 'undefined' && BAMBOOHR_API_KEY)
+              || PropertiesService.getScriptProperties().getProperty('BAMBOOHR_API_KEY')
+              || '';
+    var company = (typeof BAMBOOHR_COMPANY !== 'undefined' && BAMBOOHR_COMPANY)
+                  || 'livingstoneschurch';
+    if (!key) { Logger.log('BambooHR profiles: no API key'); return []; }
+    var authHeader = 'Basic ' + Utilities.base64Encode(key + ':x');
+    var dirResp = UrlFetchApp.fetch(
+      'https://api.bamboohr.com/api/gateway.php/' + company + '/v1/employees/directory',
+      { headers: { Authorization: authHeader, Accept: 'application/json' }, muteHttpExceptions: true }
+    );
+    if (dirResp.getResponseCode() !== 200) {
+      Logger.log('BambooHR profiles: directory returned ' + dirResp.getResponseCode());
+      return [];
+    }
+    var employees = (JSON.parse(dirResp.getContentText()) || {}).employees || [];
+    var profiles = employees
+      .filter(function(e) { return (e.location || '') === 'South Reno'; })
+      .map(function(e) {
+        var photo = e.photoUrl || '';
+        return {
+          bambooId: String(e.id),
+          name:     e.displayName || '',
+          photoUrl: photo.indexOf('images7.bamboohr.com') !== -1 ? photo : null,
+          jobTitle: e.jobTitle || ''
+        };
+      });
+    Logger.log('BambooHR profiles: synced ' + profiles.length + ' South Reno staff');
+    return profiles;
+  } catch(e) {
+    Logger.log('BambooHR profiles error: ' + e.message);
+    return [];
+  }
 }
 
 // Helper: fast count using per_page=1 and meta.total_count
@@ -3524,4 +3597,230 @@ function rebuildDashboardJsonFromCacheOnly() {
 function debugCachePreview() {
   const data = buildDashboardDataFromSheet_(SpreadsheetApp.getActiveSpreadsheet());
   Logger.log(JSON.stringify(data, null, 2));
+}
+
+/* =========================================================
+   SCORECARD LIVE METRICS
+   Each function fetches fresh data, stores in Script Properties,
+   and buildDashboardDataFromSheet_ reads them into the JSON output.
+========================================================= */
+
+// ── Student Ministry Check-Ins ────────────────────────────────────────────────
+// Finds the "LS Students" event in PCO Check-Ins, caches its ID, then counts
+// total check-ins across all event_times in the last 30 days and averages by week.
+
+function syncStudentMinistry_() {
+  var result;
+  try { result = computeStudentMinistry30d_(); } catch(e) {
+    result = { error: 'sync_exception', detail: e.message };
+    Logger.log('syncStudentMinistry_ threw: ' + e.message);
+  }
+  PropertiesService.getScriptProperties().setProperty('SCORECARD_STUDENT_MINISTRY', JSON.stringify(result));
+  Logger.log('Student Ministry 30d avg: ' + (result.weeklyAvg30d != null ? result.weeklyAvg30d : 'n/a') + (result.error ? ' ERR:' + result.error : ''));
+}
+
+function computeStudentMinistry30d_(retried_) {
+  var props = PropertiesService.getScriptProperties();
+
+  // Cache event ID after first discovery so we don't search every run
+  var eventId = props.getProperty('LS_STUDENTS_EVENT_ID');
+  if (!eventId) {
+    var events = [];
+    try {
+      events = pcoGetAll_('/check-ins/v2/events?per_page=100');
+    } catch(err) {
+      Logger.log('PCO Check-Ins events fetch failed: ' + err.message);
+      return { error: 'pco_checkins_unavailable', detail: err.message };
+    }
+    var found = null;
+    var allNames = [];
+    events.forEach(function(e) {
+      var attrs = e.attributes || {};
+      var nm = String(attrs.name || '').toLowerCase();
+      allNames.push(nm + (attrs.archived ? '[archived]' : ''));
+      // Require "ls student" specifically (not just any "student") to avoid wrong events
+      // Also skip archived events
+      if (!found && !attrs.archived && nm.indexOf('ls student') >= 0) found = e;
+    });
+    if (!found) {
+      // Second pass: any non-archived event with "student" in the name
+      events.forEach(function(e) {
+        var attrs = e.attributes || {};
+        var nm = String(attrs.name || '').toLowerCase();
+        if (!found && !attrs.archived && nm.indexOf('student') >= 0) found = e;
+      });
+    }
+    if (!found) {
+      Logger.log('No student event found in PCO Check-Ins. Available: ' + allNames.join(' | '));
+      return { error: 'event_not_found', availableEvents: allNames };
+    }
+    eventId = found.id;
+    props.setProperty('LS_STUDENTS_EVENT_ID', eventId);
+    Logger.log('Cached LS Students event id=' + eventId + ' (' + found.attributes.name + ')');
+  }
+
+  // All event_times for this event, most recent first (8 covers ~2 months of Sundays)
+  var allTimes;
+  try {
+    allTimes = pcoGetAll_('/check-ins/v2/events/' + eventId + '/event_times?order=-starts_at&per_page=8');
+  } catch(err) {
+    if (err.message.indexOf('404') >= 0) {
+      // Cached event ID is stale — clear it and retry discovery this same run
+      props.deleteProperty('LS_STUDENTS_EVENT_ID');
+      Logger.log('LS Students event ' + eventId + ' returned 404 — cache cleared, retrying discovery');
+      if (!retried_) return computeStudentMinistry30d_(true);
+      return { error: 'stale_event_id', cachedId: eventId };
+    }
+    throw err;
+  }
+
+  // Keep only those in the last 30 days
+  var cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 30);
+  var recentTimes = allTimes.filter(function(et) {
+    var s = (et.attributes || {}).starts_at;
+    return s && new Date(s) >= cutoff;
+  });
+
+  if (!recentTimes.length) {
+    return { weeklyAvg30d: 0, eventCount: 0, asOf: new Date().toISOString() };
+  }
+
+  var totalCheckins = 0;
+  recentTimes.forEach(function(et) {
+    var attrs = et.attributes || {};
+    // Use total_count attribute if PCO provides it; otherwise count individual check-ins
+    var cnt = Number(attrs.total_count || attrs.total || 0);
+    if (!cnt) {
+      try {
+        var checkins = pcoGetAll_('/check-ins/v2/event_times/' + et.id + '/check_ins?per_page=100');
+        cnt = checkins.length;
+      } catch(err) {
+        Logger.log('check_ins fetch error for et ' + et.id + ': ' + err.message);
+      }
+    }
+    totalCheckins += cnt;
+  });
+
+  return {
+    weeklyAvg30d: Math.round(totalCheckins / recentTimes.length),
+    eventCount: recentTimes.length,
+    totalCheckins: totalCheckins,
+    asOf: new Date().toISOString()
+  };
+}
+
+// Manual reset if the event gets renamed or recreated in PCO
+function resetLsStudentsEventId() {
+  PropertiesService.getScriptProperties().deleteProperty('LS_STUDENTS_EVENT_ID');
+  Logger.log('LS Students event ID cache cleared — next sync will re-discover it.');
+}
+
+// ── New Adult Profiles (30-day rolling) ───────────────────────────────────────
+// Counts PCO People profiles created in the last 30 days where child=false.
+// Divides by 4.3 to get a weekly average.
+
+function syncNewAdultProfiles_() {
+  var result = computeNewAdultProfiles_();
+  PropertiesService.getScriptProperties().setProperty('SCORECARD_NEW_ADULTS', JSON.stringify(result));
+  Logger.log('New adult profiles 30d: count=' + result.count30d + ' weeklyAvg=' + result.weeklyAvg);
+}
+
+function computeNewAdultProfiles_() {
+  var since = new Date();
+  since.setDate(since.getDate() - 30);
+  var sinceISO = since.toISOString();
+
+  try {
+    // Fetch newest people first; PCO doesn't reliably support where[child] or date-range where filters
+    var people = pcoGetAll_('/people/v2/people?order=-created_at&per_page=100');
+    var count = 0;
+    people.forEach(function(p) {
+      var attrs = p.attributes || {};
+      var createdAt = attrs.created_at ? new Date(attrs.created_at) : null;
+      var isChild = attrs.child === true;
+      if (createdAt && createdAt >= since && !isChild) count++;
+    });
+    Logger.log('New adults 30d: checked ' + people.length + ' people, found ' + count + ' new adults since ' + sinceISO.split('T')[0]);
+    return {
+      count30d:   count,
+      weeklyAvg:  Math.round(count / 4.3),
+      totalFetched: people.length,
+      since:      sinceISO.split('T')[0],
+      asOf:       new Date().toISOString()
+    };
+  } catch(err) {
+    Logger.log('computeNewAdultProfiles_ error: ' + err.message);
+    return { error: err.message };
+  }
+}
+
+// ── Mailchimp Email Stats ─────────────────────────────────────────────────────
+// Fetches the last 5 sent campaigns and averages open rate across the most recent 3.
+// Requires MAILCHIMP_API_KEY defined in Code_mailchimp_config.gs (gitignored).
+
+function syncMailchimpStats_() {
+  var result = computeMailchimpStats_();
+  PropertiesService.getScriptProperties().setProperty('SCORECARD_EMAIL_STATS', JSON.stringify(result));
+  Logger.log('Mailchimp: avgOpenRate3=' + (result.avgOpenRate3 != null ? Math.round(result.avgOpenRate3 * 100) + '%' : 'n/a'));
+}
+
+function computeMailchimpStats_() {
+  // Read from Script Property first; fall back to code-level variable; persist for future runs
+  var props  = PropertiesService.getScriptProperties();
+  var apiKey = props.getProperty('MAILCHIMP_API_KEY') || null;
+  if (!apiKey) {
+    try { if (MAILCHIMP_API_KEY) apiKey = MAILCHIMP_API_KEY; } catch(e) {}
+  }
+  if (apiKey) {
+    try { props.setProperty('MAILCHIMP_API_KEY', apiKey); } catch(e) {}
+  }
+  if (!apiKey) {
+    Logger.log('Mailchimp: MAILCHIMP_API_KEY not available (code var type=' + (typeof MAILCHIMP_API_KEY) + ')');
+    return { error: 'no_api_key', keyVarType: typeof MAILCHIMP_API_KEY };
+  }
+
+  var server  = apiKey.split('-').pop();
+  var baseUrl = 'https://' + server + '.api.mailchimp.com/3.0';
+  var auth    = 'Basic ' + Utilities.base64Encode('apikey:' + apiKey);
+  var opts    = { headers: { Authorization: auth, Accept: 'application/json' }, muteHttpExceptions: true };
+
+  try {
+    var resp = UrlFetchApp.fetch(
+      baseUrl + '/campaigns?status=sent&sort_field=send_time&sort_dir=DESC&count=5',
+      opts
+    );
+    var httpCode = resp.getResponseCode();
+    if (httpCode !== 200) {
+      Logger.log('Mailchimp /campaigns returned HTTP ' + httpCode + ': ' + resp.getContentText().slice(0, 200));
+      return { error: 'http_' + httpCode };
+    }
+
+    var parsed    = JSON.parse(resp.getContentText('UTF-8'));
+    var campaigns = (parsed || {}).campaigns || [];
+    if (!campaigns.length) return { error: 'no_campaigns' };
+
+    var rates = [];
+    campaigns.slice(0, 3).forEach(function(c) {
+      var or = (c.report_summary || {}).open_rate;
+      if (or != null) rates.push(Number(or));
+    });
+
+    var avgRate = rates.length ? rates.reduce(function(s, r) { return s + r; }, 0) / rates.length : null;
+    var latest  = campaigns[0];
+    var rs      = latest.report_summary || {};
+
+    Logger.log('Mailchimp: ' + campaigns.length + ' campaigns, avg open rate 3=' + (avgRate != null ? Math.round(avgRate * 100) + '%' : 'n/a'));
+    return {
+      latestOpenRate: Number(rs.open_rate || 0),
+      avgOpenRate3:   avgRate,
+      latestCampaign: (latest.settings || {}).subject_line || '',
+      latestSentAt:   latest.send_time || '',
+      campaignCount:  campaigns.length,
+      asOf:           new Date().toISOString()
+    };
+  } catch(err) {
+    Logger.log('computeMailchimpStats_ error: ' + err.message);
+    return { error: err.message };
+  }
 }

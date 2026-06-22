@@ -1293,6 +1293,84 @@
     #sundayModal { position:static !important; overflow:visible !important; }
     .sd-scroll { overflow:visible !important; padding:0 !important; }
   }
+
+  /* ── Staff Profile Modal ─────────────────────────────────────────────── */
+  #staffProfileModal {
+    display: none; position: fixed; inset: 0; z-index: 2100;
+    background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 20px;
+  }
+  #staffProfileModal.open { display: flex; }
+  .sp-prof-box {
+    background: var(--sp-parchment); color: var(--sp-ink); border-radius: 6px;
+    width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  }
+  .sp-prof-topbar {
+    background: var(--sp-ink); padding: 13px 20px; display: flex;
+    justify-content: space-between; align-items: center;
+    border-radius: 6px 6px 0 0; position: sticky; top: 0; z-index: 1;
+  }
+  .sp-prof-topbar-title {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--sp-gold);
+  }
+  .sp-prof-close {
+    background: none; border: none; color: var(--sp-parchment); font-size: 20px;
+    cursor: pointer; padding: 0 4px; opacity: 0.7; line-height: 1;
+  }
+  .sp-prof-close:hover { opacity: 1; }
+  .sp-prof-body { padding: 24px; }
+  .sp-prof-hdr {
+    display: flex; gap: 18px; align-items: flex-start; margin-bottom: 20px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--sp-border);
+  }
+  .sp-prof-photo {
+    width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--sp-gold); flex-shrink: 0; background: var(--sp-card-bg);
+  }
+  .sp-prof-avatar {
+    width: 80px; height: 80px; border-radius: 50%; background: var(--sp-ink);
+    color: var(--sp-gold); font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; border: 2px solid var(--sp-gold);
+  }
+  .sp-prof-name {
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+    color: var(--sp-ink); line-height: 1.2; margin-bottom: 4px;
+  }
+  .sp-prof-role { font-size: 13px; color: var(--sp-muted); margin-bottom: 10px; font-style: italic; }
+  .sp-prof-bamboo {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--sp-rust); text-decoration: none;
+    border: 1px solid var(--sp-rust); padding: 4px 10px; border-radius: 2px; transition: all 0.15s;
+  }
+  .sp-prof-bamboo:hover { background: var(--sp-rust); color: var(--sp-parchment); }
+  .sp-prof-section { margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--sp-border); }
+  .sp-prof-section:last-child { border-bottom: none; margin-bottom: 0; }
+  .sp-prof-sec-label {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--sp-gold); margin-bottom: 10px;
+  }
+  .sp-prof-wg-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+  .sp-prof-wg-note { font-size: 11px; color: var(--sp-muted); font-style: italic; }
+  .sp-prof-row {
+    display: flex; gap: 10px; align-items: flex-start; padding: 6px 0;
+    border-bottom: 1px solid var(--sp-border); font-size: 13px; line-height: 1.4;
+  }
+  .sp-prof-row:last-child { border-bottom: none; }
+  .sp-prof-empty { font-size: 12px; color: var(--sp-muted); font-style: italic; padding: 4px 0; }
+  .sp-prof-to-type {
+    font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 6px;
+    border-radius: 2px; background: var(--sp-card-bg); border: 1px solid var(--sp-border);
+    color: var(--sp-muted); white-space: nowrap; flex-shrink: 0;
+  }
+  /* Clickable name spans — used everywhere names appear in Staff OS */
+  .sp-name-link {
+    cursor: pointer; border-bottom: 1px dashed rgba(201,150,58,0.5);
+    transition: color 0.12s, border-color 0.12s; white-space: nowrap;
+  }
+  .sp-name-link:hover { color: var(--sp-rust) !important; border-bottom-color: var(--sp-rust); }
 </style>
 </head>
 <body>
@@ -1953,7 +2031,7 @@
           <div class="sp-vi-split">
             <div class="sp-vi-box vis">
               <div class="sp-vi-label">Visionary (V)</div>
-              <h3>Ryan Griffin — Lead Pastor</h3>
+              <h3><span class="sp-name-link" onclick="openStaffProfile('Ryan Griffin')">Ryan Griffin</span> — Lead Pastor</h3>
               <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(201,150,58,0.6);margin-bottom:12px;letter-spacing:1px;">WG: Galvanizing + Discernment &middot; The Intuitive Activator</div>
               <ul class="sp-vi-list">
                 <li>Casts and protects the vision of LSSR</li>
@@ -1967,7 +2045,7 @@
             </div>
             <div class="sp-vi-box int">
               <div class="sp-vi-label">Integrator (I)</div>
-              <h3>Brad Borowski — Executive Pastor</h3>
+              <h3><span class="sp-name-link" onclick="openStaffProfile('Brad Borowski')">Brad Borowski</span> — Executive Pastor</h3>
               <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--sp-rust);margin-bottom:12px;letter-spacing:1px;">WG: Tenacity + Invention &middot; The Methodical Architect</div>
               <ul class="sp-vi-list">
                 <li>Executes and filters vision into operations and systems</li>
@@ -1983,26 +2061,26 @@
           <div class="sp-org-chart">
             <div class="sp-org-line" style="height:8px;"></div>
             <div class="sp-org-row" style="margin-bottom:0;gap:10px;flex-wrap:wrap;">
-              <div class="sp-org-node"><div class="sp-org-role">Discipleship Pastor</div><div class="sp-org-name">Adam Carp</div><div class="sp-org-wg">WG: Invention &middot; Wonder</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Worship Director</div><div class="sp-org-name">Gordon Fava</div><div class="sp-org-wg">WG: Wonder &middot; Tenacity</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Creative Director</div><div class="sp-org-name">John Conelea</div><div class="sp-org-wg">WG: Tenacity &middot; Invention</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Administrative Director</div><div class="sp-org-name">Rachel Primus</div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name">Isaac Griffin</div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">SS Curriculum Director</div><div class="sp-org-name">Deana Griffin</div><div class="sp-org-wg">WG: Discernment &middot; Wonder</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name">Katie Thompson</div><div class="sp-org-wg">WG: Discernment &middot; Galvanizing</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">SS Staffing Director</div><div class="sp-org-name">Geoffrey Caliger</div><div class="sp-org-wg">WG: Tenacity &middot; Wonder</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Benevolence Director</div><div class="sp-org-name">Keith Primus</div><div class="sp-org-wg">WG: Discernment &middot; Enablement</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Discipleship Pastor</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Adam Carp')">Adam Carp</span></div><div class="sp-org-wg">WG: Invention &middot; Wonder</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Worship Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Gordon Fava')">Gordon Fava</span></div><div class="sp-org-wg">WG: Wonder &middot; Tenacity</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Creative Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('John Conelea')">John Conelea</span></div><div class="sp-org-wg">WG: Tenacity &middot; Invention</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Administrative Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Rachel Primus')">Rachel Primus</span></div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span></div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">SS Curriculum Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Deana Griffin')">Deana Griffin</span></div><div class="sp-org-wg">WG: Discernment &middot; Wonder</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-org-wg">WG: Discernment &middot; Galvanizing</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">SS Staffing Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Geoffrey Caliger')">Geoffrey Caliger</span></div><div class="sp-org-wg">WG: Tenacity &middot; Wonder</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Benevolence Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Keith Primus')">Keith Primus</span></div><div class="sp-org-wg">WG: Discernment &middot; Enablement</div></div>
             </div>
           </div>
           <div class="sp-grid-3">
-            <div class="sp-card"><div class="sp-card-title">Adam Carp</div><div class="sp-card-subtitle">Discipleship Pastor — Wins when people move from rows to roots to mission</div><ul class="sp-metric-list"><li>Community Group strategy, health, and multiplication</li><li>CG Leader coaching methodology and quarterly bootcamps</li><li>Discipleship pathway design (Guest → Member → Leader → Missionary)</li><li>Leader Launch execution (monthly)</li><li>Membership and Starting Point class oversight</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Gordon Fava</div><div class="sp-card-subtitle">Worship Director — Wins when Sunday is an encounter, not just a concert</div><ul class="sp-metric-list"><li>Weekly liturgy planning under Lead Pastor oversight</li><li>Worship team recruiting, leading, and developing</li><li>Tech team: Sound, Media, lighting - startup to shutdown</li><li>Music catalog process and song selection</li><li>Pre-gathering briefings with Worship, Tech, + Presiding Teams</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">John Conelea</div><div class="sp-card-subtitle">Creative Director — Wins when every touchpoint reflects the mission clearly and beautifully</div><ul class="sp-metric-list"><li>Sermon series graphics, bumper videos, event graphics</li><li>Church app, website, and social media content</li><li>Weekly email graphics monthly First-to-Know video, sermon clips</li><li>Environmental design: lobby, stage, signage, kids spaces</li><li>Testimony and promo video production</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Rachel Primus</div><div class="sp-card-subtitle">Administrative Director — Wins when the machine runs clean and the team never hits a wall</div><ul class="sp-metric-list"><li>Financial organization, deposits, donation management</li><li>Email & Leader Communication & Coordination</li><li>Planning Center data accuracy and database health</li><li>Vendor management and facilities coordination</li><li>Office & Staff Support</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Deana Griffin</div><div class="sp-card-subtitle">SS Curriculum Director — Wins when every kid encounters Jesus through great teaching</div><ul class="sp-metric-list"><li>Create curriculum that teaches children Bible truths pointing to Jesus</li><li>Resource classroom teachers with materials and activity instructions</li><li>Set up curriculum documents and videos ready for each Sunday</li><li>Ensure snacks stocked, rooms clean and classroom-ready</li><li>Evaluate and implement approved improvements to curriculum</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Isaac Griffin / Katie Thompson</div><div class="sp-card-subtitle">Student Ministry — Wins when LS Students grows 25%+ YOY and students feel known</div><ul class="sp-metric-list"><li>Sunday LS Students services and environments</li><li>Student team scheduling, training, and leadership development</li><li>Parent communication and student planning calendars</li><li>Summer camp planning, registration, and logistics</li><li>Student events, parties, and fundraisers</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Geoffrey Caliger</div><div class="sp-card-subtitle">SS Staffing Director & Pastoral Support — Wins when every Sunday slot is covered with trained, joyful volunteers</div><ul class="sp-metric-list"><li>Volunteer recruiting and scheduling (target: 8–12 weeks out)</li><li>Teacher training: onboarding and ongoing</li><li>Fill rate for declines and last-minute cancellations</li><li>Evaluate and implement improvements to volunteer systems</li><li>Weekly Email Communication to Church</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title">Keith Primus</div><div class="sp-card-subtitle">Benevolence Director (Volunteer) — Wins when the right people get connected to the right financial help at the right time</div><ul class="sp-metric-list"><li>Benevolence request intake, assessment, and coordination</li><li>Financial assistance distribution and fund stewardship</li><li>Connects families in need to church and external resources</li><li>Maintains confidentiality and pastoral care standards throughout</li><li>Partners with Brad and Rachel on financial decisions and budget</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Adam Carp')">Adam Carp</span></div><div class="sp-card-subtitle">Discipleship Pastor — Wins when people move from rows to roots to mission</div><ul class="sp-metric-list"><li>Community Group strategy, health, and multiplication</li><li>CG Leader coaching methodology and quarterly bootcamps</li><li>Discipleship pathway design (Guest → Member → Leader → Missionary)</li><li>Leader Launch execution (monthly)</li><li>Membership and Starting Point class oversight</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Gordon Fava')">Gordon Fava</span></div><div class="sp-card-subtitle">Worship Director — Wins when Sunday is an encounter, not just a concert</div><ul class="sp-metric-list"><li>Weekly liturgy planning under Lead Pastor oversight</li><li>Worship team recruiting, leading, and developing</li><li>Tech team: Sound, Media, lighting - startup to shutdown</li><li>Music catalog process and song selection</li><li>Pre-gathering briefings with Worship, Tech, + Presiding Teams</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('John Conelea')">John Conelea</span></div><div class="sp-card-subtitle">Creative Director — Wins when every touchpoint reflects the mission clearly and beautifully</div><ul class="sp-metric-list"><li>Sermon series graphics, bumper videos, event graphics</li><li>Church app, website, and social media content</li><li>Weekly email graphics monthly First-to-Know video, sermon clips</li><li>Environmental design: lobby, stage, signage, kids spaces</li><li>Testimony and promo video production</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Rachel Primus')">Rachel Primus</span></div><div class="sp-card-subtitle">Administrative Director — Wins when the machine runs clean and the team never hits a wall</div><ul class="sp-metric-list"><li>Financial organization, deposits, donation management</li><li>Email & Leader Communication & Coordination</li><li>Planning Center data accuracy and database health</li><li>Vendor management and facilities coordination</li><li>Office & Staff Support</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Deana Griffin')">Deana Griffin</span></div><div class="sp-card-subtitle">SS Curriculum Director — Wins when every kid encounters Jesus through great teaching</div><ul class="sp-metric-list"><li>Create curriculum that teaches children Bible truths pointing to Jesus</li><li>Resource classroom teachers with materials and activity instructions</li><li>Set up curriculum documents and videos ready for each Sunday</li><li>Ensure snacks stocked, rooms clean and classroom-ready</li><li>Evaluate and implement approved improvements to curriculum</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span> / <span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-card-subtitle">Student Ministry — Wins when LS Students grows 25%+ YOY and students feel known</div><ul class="sp-metric-list"><li>Sunday LS Students services and environments</li><li>Student team scheduling, training, and leadership development</li><li>Parent communication and student planning calendars</li><li>Summer camp planning, registration, and logistics</li><li>Student events, parties, and fundraisers</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Geoffrey Caliger')">Geoffrey Caliger</span></div><div class="sp-card-subtitle">SS Staffing Director & Pastoral Support — Wins when every Sunday slot is covered with trained, joyful volunteers</div><ul class="sp-metric-list"><li>Volunteer recruiting and scheduling (target: 8–12 weeks out)</li><li>Teacher training: onboarding and ongoing</li><li>Fill rate for declines and last-minute cancellations</li><li>Evaluate and implement improvements to volunteer systems</li><li>Weekly Email Communication to Church</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Keith Primus')">Keith Primus</span></div><div class="sp-card-subtitle">Benevolence Director (Volunteer) — Wins when the right people get connected to the right financial help at the right time</div><ul class="sp-metric-list"><li>Benevolence request intake, assessment, and coordination</li><li>Financial assistance distribution and fund stewardship</li><li>Connects families in need to church and external resources</li><li>Maintains confidentiality and pastoral care standards throughout</li><li>Partners with Brad and Rachel on financial decisions and budget</li></ul></div>
           </div>
           <!-- WORKING GENIUS (merged from Team/WG tab) -->
           <div style="margin-top:40px;border-top:1px solid var(--sp-border);padding-top:32px;">
@@ -4191,17 +4269,17 @@ const STAFF_DEFAULT_DATA = {
 };
 
 const STAFF_TEAM_DATA = [
-  { name: 'Ryan Griffin', role: 'Lead Pastor (Visionary)', genius: ['Galvanizing', 'Discernment'], competency: ['Invention', 'Tenacity'], frustration: ['Enablement', 'Wonder'], pairing: 'GD | DG — The Intuitive Activator', pairingDesc: 'An instinctive and confident decision-maker. Able to assess situations quickly and marshal people to act.' },
-  { name: 'Brad Borowski', role: 'Executive Pastor (Integrator)', genius: ['Tenacity', 'Invention'], competency: ['Discernment', 'Galvanizing'], frustration: ['Wonder', 'Enablement'], pairing: 'TI | IT — The Methodical Architect', pairingDesc: 'A precise, reliable, and planful solver of problems. Combines innovative thinking with practical implementation.' },
-  { name: 'Adam Carp', role: 'Discipleship Pastor', genius: ['Invention', 'Wonder'], competency: ['Tenacity', 'Discernment'], frustration: ['Enablement', 'Galvanizing'], pairing: 'IW | WI — The Creative Dreamer', pairingDesc: 'A passionate idealist with an endless stream of big questions and ideas to consider. Comfortable with open-ended exploration.' },
-  { name: 'Gordon Fava', role: 'Worship Director', genius: ['Wonder', 'Tenacity'], competency: ['Discernment', 'Galvanizing'], frustration: ['Invention', 'Enablement'], pairing: 'WT | TW — The Careful Implementer', pairingDesc: 'A thorough, practical, and careful contributor. A unique combination of steady reliability and quiet depth.' },
-  { name: 'John Conelea', role: 'Creative Director', genius: ['Tenacity', 'Invention'], competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Wonder'], pairing: 'TI | IT — The Methodical Architect', pairingDesc: 'A precise, reliable, and planful solver of problems. Gets creative work done — on time, on brief, every time.' },
-  { name: 'Katie Thompson', role: 'Student Ministry Director', genius: ['Discernment', 'Galvanizing'], competency: ['Tenacity', 'Invention'], frustration: ['Enablement', 'Wonder'], pairing: 'DG | GD — The Intuitive Activator', pairingDesc: 'An instinctive and confident decision-maker who can assess and marshal people to act. Strong for student ministry leadership.' },
-  { name: 'Geoffrey Caliger', role: 'Stepping Stones Staffing Director', genius: ['Tenacity', 'Wonder'], competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Invention'], pairing: 'TW | WT — The Persistent Questioner', pairingDesc: "Pairs big-picture curiosity with relentless follow-through. Asks the right questions and doesn't stop until the work is done." },
-  { name: 'Isaac Griffin', role: 'Student Ministry Director', genius: ['Enablement', 'Tenacity'], competency: ['Galvanizing', 'Wonder'], frustration: ['Discernment', 'Invention'], pairing: 'ET | TE — The Loyal Finisher', pairingDesc: 'Responsive, supportive, and determined to push work over the finish line. Shows up for people and sees commitments through.' },
-  { name: 'Deana Griffin', role: 'Stepping Stones Curriculum Director', genius: ['Discernment', 'Wonder'], competency: ['Invention', 'Enablement'], frustration: ['Galvanizing', 'Tenacity'], pairing: 'DW | WD — The Reflective Visionary', pairingDesc: 'A deep thinker who pairs curiosity with strong instincts. Asks the right questions and trusts what\'s true.' },
-  { name: 'Keith Primus', role: 'Benevolence Leader (Volunteer)', genius: ['Discernment', 'Enablement'], competency: ['Galvanizing', 'Wonder'], frustration: ['Tenacity', 'Invention'], pairing: 'DE | ED — The Insightful Collaborator', pairingDesc: 'An intuitive, empathic advisor and team player. Selfless in providing others with what they need in the right way.' },
-  { name: 'Rachel Primus', role: 'Administrative Director', genius: ['Enablement', 'Tenacity'], competency: ['Wonder', 'Discernment'], frustration: ['Invention', 'Galvanizing'], pairing: 'ET | TE — The Loyal Finisher', pairingDesc: 'A responsive, dependable doer. Willing to step up when something is needed and determined to fulfill commitments.' }
+  { name: 'Ryan Griffin',    bambooId: '133', role: 'Lead Pastor (Visionary)',              genius: ['Galvanizing', 'Discernment'], competency: ['Invention', 'Tenacity'],    frustration: ['Enablement', 'Wonder'],    pairing: 'GD | DG — The Intuitive Activator',     pairingDesc: 'An instinctive and confident decision-maker. Able to assess situations quickly and marshal people to act.' },
+  { name: 'Brad Borowski',   bambooId: '121', bambooDisplayName: 'Bradley Borowski', role: 'Executive Pastor (Integrator)',        genius: ['Tenacity', 'Invention'],     competency: ['Discernment', 'Galvanizing'], frustration: ['Wonder', 'Enablement'],    pairing: 'TI | IT — The Methodical Architect',    pairingDesc: 'A precise, reliable, and planful solver of problems. Combines innovative thinking with practical implementation.' },
+  { name: 'Adam Carp',       bambooId: '123', role: 'Discipleship Pastor',                 genius: ['Invention', 'Wonder'],       competency: ['Tenacity', 'Discernment'],  frustration: ['Enablement', 'Galvanizing'], pairing: 'IW | WI — The Creative Dreamer',         pairingDesc: 'A passionate idealist with an endless stream of big questions and ideas to consider. Comfortable with open-ended exploration.' },
+  { name: 'Gordon Fava',     bambooId: '165', role: 'Worship Director',                    genius: ['Wonder', 'Tenacity'],        competency: ['Discernment', 'Galvanizing'], frustration: ['Invention', 'Enablement'],  pairing: 'WT | TW — The Careful Implementer',     pairingDesc: 'A thorough, practical, and careful contributor. A unique combination of steady reliability and quiet depth.' },
+  { name: 'John Conelea',    bambooId: '179', role: 'Creative Director',                   genius: ['Tenacity', 'Invention'],     competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Wonder'],    pairing: 'TI | IT — The Methodical Architect',    pairingDesc: 'A precise, reliable, and planful solver of problems. Gets creative work done — on time, on brief, every time.' },
+  { name: 'Katie Thompson',  bambooId: '177', role: 'Student Ministry Director',            genius: ['Discernment', 'Galvanizing'], competency: ['Tenacity', 'Invention'],   frustration: ['Enablement', 'Wonder'],    pairing: 'DG | GD — The Intuitive Activator',     pairingDesc: 'An instinctive and confident decision-maker who can assess and marshal people to act. Strong for student ministry leadership.' },
+  { name: 'Geoffrey Caliger',bambooId: '182', role: 'Stepping Stones Staffing Director',   genius: ['Tenacity', 'Wonder'],        competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Invention'], pairing: 'TW | WT — The Persistent Questioner',   pairingDesc: "Pairs big-picture curiosity with relentless follow-through. Asks the right questions and doesn't stop until the work is done." },
+  { name: 'Isaac Griffin',   bambooId: '176', role: 'Student Ministry Director',            genius: ['Enablement', 'Tenacity'],    competency: ['Galvanizing', 'Wonder'],    frustration: ['Discernment', 'Invention'], pairing: 'ET | TE — The Loyal Finisher',          pairingDesc: 'Responsive, supportive, and determined to push work over the finish line. Shows up for people and sees commitments through.' },
+  { name: 'Deana Griffin',   bambooId: '173', role: 'Stepping Stones Curriculum Director',  genius: ['Discernment', 'Wonder'],     competency: ['Invention', 'Enablement'],  frustration: ['Galvanizing', 'Tenacity'],  pairing: 'DW | WD — The Reflective Visionary',    pairingDesc: 'A deep thinker who pairs curiosity with strong instincts. Asks the right questions and trusts what\'s true.' },
+  { name: 'Keith Primus',    bambooId: null,  role: 'Benevolence Leader (Volunteer)',       genius: ['Discernment', 'Enablement'], competency: ['Galvanizing', 'Wonder'],    frustration: ['Tenacity', 'Invention'],   pairing: 'DE | ED — The Insightful Collaborator', pairingDesc: 'An intuitive, empathic advisor and team player. Selfless in providing others with what they need in the right way.' },
+  { name: 'Rachel Primus',   bambooId: '118', bambooDisplayName: 'Rachel Bartosz', role: 'Administrative Director',             genius: ['Enablement', 'Tenacity'],    competency: ['Wonder', 'Discernment'],    frustration: ['Invention', 'Galvanizing'],  pairing: 'ET | TE — The Loyal Finisher',          pairingDesc: 'A responsive, dependable doer. Willing to step up when something is needed and determined to fulfill commitments.' }
 ];
 
 function staffIsUnlocked() {
@@ -4798,7 +4876,7 @@ function staffRenderScorecard(data) {
     return `<tr>
       <td><span class="sp-status-dot sp-status-${stat}"></span></td>
       <td><strong>${row.metric}</strong>${row.notes ? `<br><span style="font-size:11px;color:var(--sp-muted);">${row.notes}</span>` : ''}</td>
-      <td><span class="sp-owner-tag">${(row.owner||'').split(' ').map(w=>w[0]).join('').substring(0,4)}</span></td>
+      <td><span class="sp-owner-tag sp-name-link" onclick="openStaffProfile('${(row.owner||'').replace(/'/g,'')}')" title="${row.owner||''}">${(row.owner||'').split(' ').map(w=>w[0]).join('').substring(0,4)}</span></td>
       <td style="font-family:'DM Mono',monospace;font-size:12px;">${row.goal||''}</td>
       <td class="sp-current-val">${cur || '<span style="color:var(--sp-muted);font-size:11px;">—</span>'}</td>
       <td style="font-size:11px;color:var(--sp-muted);">${lv && lv.note ? lv.note : (row.notes || '')}</td>
@@ -5109,8 +5187,9 @@ function staffRenderBoulders(data) {
     const label  = labels[status] || status;
     const key    = boulderKey_(r);
     const badge  = `<button class="sp-rock-status ${status} sp-boulder-status-btn" data-key="${_rbEsc(key)}" onclick="boulderCycleStatus(this)" title="Click to cycle status">${label}</button>`;
+    const ownerLink = `<span class="sp-name-link" onclick="openStaffProfile('${_rbEsc(r.owner)}')">${_rbEsc(r.owner)}</span>`;
     return `<div class="sp-rock-item">
-      <div><strong>Owner: ${_rbEsc(r.owner)} · ${_rbEsc(r.quarter)}</strong> ${_rbEsc(r.title)}</div>
+      <div><strong>Owner: ${ownerLink} · ${_rbEsc(r.quarter)}</strong> ${_rbEsc(r.title)}</div>
       ${badge}
     </div>`;
   }).join('') || '<div style="color:var(--sp-muted);font-size:13px;padding:6px 0;">None set yet.</div>';
@@ -5145,7 +5224,7 @@ function staffRenderRocks(data) {
     const localBadge = i._local ? '<span class="sp-rock-local-badge">local</span>' : '';
     return `<tr>
       <td>${_rbEsc(i.rock)}${localBadge}</td>
-      <td><span class="sp-owner-tag">${_rbEsc(i.addedBy)}</span></td>
+      <td><span class="sp-owner-tag sp-name-link" onclick="openStaffProfile('${_rbEsc(i.addedBy)}')" title="${_rbEsc(i.addedBy)}">${_rbEsc(i.addedBy)}</span></td>
       <td><span class="sp-priority ${i.priority}">${i.priority}</span></td>
       <td><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" onclick="rockResolve(this)">✓ Resolve</button></td>
     </tr>`;
@@ -5184,7 +5263,7 @@ function staffRenderTeam() {
   if (!grid) return;
   grid.innerHTML = STAFF_TEAM_DATA.map(p => `
     <div class="sp-wg-card">
-      <div class="sp-wg-card-name">${p.name}</div>
+      <div class="sp-wg-card-name sp-name-link" onclick="openStaffProfile('${p.name}')">${p.name}</div>
       <div class="sp-wg-card-role">${p.role}</div>
       <div class="sp-wg-pairing">${p.pairing}</div>
       <div style="font-size:12px;color:var(--sp-muted);margin-bottom:10px;font-style:italic;">${p.pairingDesc}</div>
@@ -5313,7 +5392,7 @@ function staffRenderSnapshot(data) {
             const isOut = item.start <= todayStr && item.end >= todayStr;
             const dateLabel = item.start === item.end ? fmtDate(item.start) : fmtDate(item.start) + ' – ' + fmtDate(item.end);
             return `<div class="sp-timeoff-item">
-              <span class="sp-timeoff-name">${item.name}</span>
+              <span class="sp-timeoff-name sp-name-link" onclick="openStaffProfile('${item.name}')">${item.name}</span>
               <span class="sp-timeoff-dates">${dateLabel}</span>
               ${isOut ? '<span class="sp-timeoff-badge">Out Now</span>' : ''}
             </div>`;
@@ -5775,7 +5854,7 @@ function staffRenderL10(data) {
             const hasOffTrack = obs.some(b => b.status === 'off-track');
             return `<details class="sp-boulder-owner">
               <summary>
-                <span style="flex:1;color:var(--sp-ink);">${owner}</span>
+                <span class="sp-name-link" style="flex:1;color:var(--sp-ink);" onclick="openStaffProfile('${owner}')">${owner}</span>
                 <span style="font-size:10px;color:${hasOffTrack?'var(--sp-red)':'var(--sp-muted)'};">${hasOffTrack ? '⚠ Off Track' : obs.length+' boulder'+(obs.length!==1?'s':'')}</span>
               </summary>
               <div class="sp-boulder-owner-inner">
@@ -5881,7 +5960,7 @@ function staffRenderL10(data) {
             const isOut = item.start <= _todayStr && item.end >= _todayStr;
             const dateLabel = item.start === item.end ? _fmtDate(item.start) : _fmtDate(item.start) + ' – ' + _fmtDate(item.end);
             return `<div class="sp-timeoff-item">
-              <span class="sp-timeoff-name">${item.name}</span>
+              <span class="sp-timeoff-name sp-name-link" onclick="openStaffProfile('${item.name}')">${item.name}</span>
               <span class="sp-timeoff-dates">${dateLabel}</span>
               ${isOut ? '<span class="sp-timeoff-badge">Out Now</span>' : ''}
             </div>`;
@@ -6316,7 +6395,164 @@ function mmUpdatePledgeDetails() {
   if (raisedEl)    raisedEl.textContent    = fmtMoney(raised) + ' raised of ' + fmtMoney(safeTarget);
   if (remainingEl) remainingEl.textContent = fmtMoney(remaining) + ' remaining';
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STAFF PROFILE MODAL
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openStaffProfile(rawName) {
+  const norm = s => (s || '').toLowerCase().trim();
+  const nraw = norm(rawName);
+
+  // Find staff person — exact match first, then bambooDisplayName, then first/last name
+  let person = STAFF_TEAM_DATA.find(p =>
+    norm(p.name) === nraw || norm(p.bambooDisplayName || '') === nraw
+  );
+  if (!person) {
+    const parts = nraw.split(/\s+/).filter(p => p.length > 2);
+    person = STAFF_TEAM_DATA.find(p => {
+      const pparts = norm(p.name).split(/\s+/);
+      return parts.some(part => pparts.some(pp => pp === part));
+    });
+  }
+  if (!person) return;
+
+  const data  = window._staffLastData || {};
+  const edits = (typeof rocksEditsLoad_ === 'function') ? rocksEditsLoad_() : { closed: {}, added: [] };
+  const closed = edits.closed || {};
+
+  // ── Rocks this person added ───────────────────────────────────────────────
+  const allRocks = [
+    ...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !closed[i.rock]),
+    ...(edits.added || []).filter(i => !closed[i.rock])
+  ];
+  const firstName = norm(person.name).split(' ')[0];
+  const lastName  = norm(person.name).split(' ').pop();
+  const personRocks = allRocks.filter(r => {
+    const ab = norm(r.addedBy || '');
+    return ab === norm(person.name) || ab === firstName ||
+           norm(person.name).startsWith(ab) || ab.includes(lastName);
+  });
+  const priOrd = { high: 0, med: 1, medium: 1, low: 2 };
+  personRocks.sort((a, b) => (priOrd[a.priority] ?? 1) - (priOrd[b.priority] ?? 1));
+
+  // ── Boulders owned by this person ────────────────────────────────────────
+  const allBoulders = (typeof applyBoulderOverrides_ === 'function')
+    ? applyBoulderOverrides_(data.boulders || [])
+    : (data.boulders || []);
+  const personBoulders = allBoulders.filter(b => {
+    const ow = norm(b.owner || '');
+    return ow.includes(firstName) || ow.includes(lastName) ||
+           norm(person.name).includes(ow.split(' ')[0]) || ow === norm(person.name);
+  });
+
+  // ── Time off: match by our name or BambooHR display name ─────────────────
+  const toItems = (data.staffTimeOff || []).filter(t => {
+    const tn = norm(t.name || '');
+    return tn === norm(person.bambooDisplayName || person.name) ||
+           tn === norm(person.name) || tn.includes(lastName);
+  });
+  const todayStr = new Date().toISOString().split('T')[0];
+  const fmtD = s => new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  // ── Photo from eos-data staff_profiles ───────────────────────────────────
+  const profiles  = data.staff_profiles || [];
+  const bProfile  = person.bambooId ? profiles.find(p => String(p.bambooId) === String(person.bambooId)) : null;
+  const photoUrl  = bProfile && bProfile.photoUrl ? bProfile.photoUrl : null;
+  const initials  = person.name.split(' ').map(w => w[0]).join('');
+  const avatar    = photoUrl
+    ? `<img src="${photoUrl}" class="sp-prof-photo" alt="${person.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sp-prof-avatar" style="display:none">${initials}</div>`
+    : `<div class="sp-prof-avatar">${initials}</div>`;
+
+  // ── BambooHR link ─────────────────────────────────────────────────────────
+  const bambooHtml = person.bambooId
+    ? `<a href="https://livingstoneschurch.bamboohr.com/employees/employee.php?id=${person.bambooId}" target="_blank" rel="noopener" class="sp-prof-bamboo">BambooHR →</a>`
+    : `<span style="font-size:11px;color:var(--sp-muted);font-style:italic;">Volunteer — not in BambooHR</span>`;
+
+  // ── Working Genius ────────────────────────────────────────────────────────
+  const wgHtml = `<div class="sp-prof-section">
+    <div class="sp-prof-sec-label">Working Genius</div>
+    <div class="sp-prof-wg-row">
+      ${person.genius.map(g => `<span class="sp-wg-badge genius">${g}</span>`).join('')}
+      <span style="color:var(--sp-muted);font-size:11px;padding:0 3px;">·</span>
+      ${person.competency.map(g => `<span class="sp-wg-badge competency">${g}</span>`).join('')}
+      <span style="color:var(--sp-muted);font-size:11px;padding:0 3px;">·</span>
+      ${person.frustration.map(g => `<span class="sp-wg-badge frustration">${g}</span>`).join('')}
+    </div>
+    <div class="sp-prof-wg-note" style="margin-top:6px;">${person.pairing}</div>
+    <div class="sp-prof-wg-note" style="margin-top:3px;">${person.pairingDesc}</div>
+  </div>`;
+
+  // ── Time off ──────────────────────────────────────────────────────────────
+  const toHtml = `<div class="sp-prof-section">
+    <div class="sp-prof-sec-label">Time Off</div>
+    ${toItems.length
+      ? toItems.map(t => {
+          const out = t.start <= todayStr && t.end >= todayStr;
+          const dl  = t.start === t.end ? fmtD(t.start) : fmtD(t.start) + ' – ' + fmtD(t.end);
+          return `<div class="sp-prof-row">
+            <span class="sp-prof-to-type">${out ? 'Out Now' : 'Upcoming'}</span>
+            <span>${dl}</span>
+          </div>`;
+        }).join('')
+      : '<div class="sp-prof-empty">No upcoming time off on record.</div>'}
+  </div>`;
+
+  // ── Rocks ─────────────────────────────────────────────────────────────────
+  const rocksHtml = `<div class="sp-prof-section">
+    <div class="sp-prof-sec-label">Active Rocks</div>
+    ${personRocks.length
+      ? personRocks.map(r => `<div class="sp-prof-row">
+          <span class="sp-priority ${r.priority}" style="flex-shrink:0;">${r.priority}</span>
+          <span>${_rbEsc(r.rock)}</span>
+        </div>`).join('')
+      : '<div class="sp-prof-empty">No open rocks added by this person.</div>'}
+  </div>`;
+
+  // ── Boulders ──────────────────────────────────────────────────────────────
+  const bLabel = { 'on-track': 'On Track', 'off-track': 'Off Track', complete: 'Complete', tbd: '—' };
+  const bouldersHtml = `<div class="sp-prof-section">
+    <div class="sp-prof-sec-label">Boulders This Quarter</div>
+    ${personBoulders.length
+      ? personBoulders.map(b => `<div class="sp-prof-row">
+          <span class="sp-rock-status ${b.status || 'tbd'}" style="cursor:default;font-size:10px;flex-shrink:0;">${bLabel[b.status] || b.status || '—'}</span>
+          <span>${_rbEsc(b.title)}</span>
+        </div>`).join('')
+      : '<div class="sp-prof-empty">No boulders assigned this quarter.</div>'}
+  </div>`;
+
+  document.getElementById('sp-prof-content').innerHTML = `
+    <div class="sp-prof-hdr">
+      <div style="flex-shrink:0;">${avatar}</div>
+      <div>
+        <div class="sp-prof-name">${person.name}</div>
+        <div class="sp-prof-role">${person.role}</div>
+        ${bambooHtml}
+      </div>
+    </div>
+    ${wgHtml}${toHtml}${rocksHtml}${bouldersHtml}`;
+
+  const modal = document.getElementById('staffProfileModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeStaffProfile() {
+  const m = document.getElementById('staffProfileModal');
+  if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+}
 </script>
+
+<!-- Staff Profile Modal -->
+<div id="staffProfileModal" role="dialog" aria-modal="true" aria-label="Staff Profile" onclick="if(event.target===this)closeStaffProfile()">
+  <div class="sp-prof-box">
+    <div class="sp-prof-topbar">
+      <div class="sp-prof-topbar-title">Staff Profile</div>
+      <button class="sp-prof-close" onclick="closeStaffProfile()" aria-label="Close">✕</button>
+    </div>
+    <div class="sp-prof-body" id="sp-prof-content"></div>
+  </div>
+</div>
 
 </body>
 </html>
