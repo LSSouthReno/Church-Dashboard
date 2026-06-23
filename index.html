@@ -6046,14 +6046,7 @@ function staffRenderL10(data) {
     // Boulders are now rendered after rocks — skip here
     if (isBoulder) return '';
 
-    if (isJoyBombs) return `
-      <div class="sp-l10-sec">
-        <div class="sp-l10-sec-hdr">
-          <h4>${a.item}</h4>
-          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
-        </div>
-        ${joyBombRenderSection_()}
-      </div>`;
+    if (isJoyBombs) return joyBombRenderSection_();
 
     if (isScorecard) return `
       <div class="sp-l10-sec">
