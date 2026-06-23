@@ -1283,8 +1283,9 @@
   /* ── Ministry Lead Role Banner ── */
   .sp-role-banner { background: linear-gradient(90deg, #2a1810 0%, #3d2415 100%); color: var(--sp-parchment); padding: 10px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; flex-shrink: 0; border-bottom: 1px solid rgba(168,76,47,0.4); }
   .sp-role-banner strong { color: #f5c88a; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
-  .sp-role-banner-link { color: rgba(245,240,232,0.6); text-decoration: underline; cursor: pointer; font-size: 12px; background: none; border: none; font-family: inherit; padding: 0; }
-  .sp-role-banner-link:hover { color: var(--sp-parchment); }
+  .sp-role-banner-idle { background: rgba(26,21,16,0.55); color: var(--sp-parchment); padding: 7px 32px; display: flex; align-items: center; gap: 12px; font-size: 12px; flex-shrink: 0; border-bottom: 1px solid rgba(216,205,184,0.12); }
+  .sp-role-banner-link { text-decoration: none; cursor: pointer; font-size: 12px; background: none; border: none; font-family: 'DM Mono', monospace; letter-spacing: 0.5px; padding: 0; }
+  .sp-role-banner-link:hover { opacity: 1 !important; text-decoration: underline; }
 
   /* ── Sunday One-sheet modal ───────────────────────────────────── */
   #sundayModal .tmod-body { padding:0; }
@@ -4976,22 +4977,9 @@ async function staffDoUnlock() {
     if (!staffRendered) staffLoadData();
     return;
   }
-  // Check ministry lead passwords
-  let matchedRole = null;
-  for (const [key, role] of Object.entries(MINISTRY_ROLES)) {
-    if (role.hash && hex === role.hash) { matchedRole = key; break; }
-  }
-  if (matchedRole) {
-    sessionStorage.setItem(STAFF_SESSION_KEY, '1');
-    sessionStorage.setItem(MINISTRY_SESS_KEY, matchedRole);
-    document.getElementById('staffModLocked').style.display = 'none';
-    document.getElementById('staffModContent').style.display = 'flex';
-    if (!staffRendered) staffLoadData();
-  } else {
-    errEl.style.display = 'block';
-    document.getElementById('staffPwInput').value = '';
-    document.getElementById('staffPwInput').focus();
-  }
+  errEl.style.display = 'block';
+  document.getElementById('staffPwInput').value = '';
+  document.getElementById('staffPwInput').focus();
 }
 
 async function staffLoadData() {
@@ -5043,7 +5031,8 @@ async function staffLoadData() {
   } catch(e) {
     console.warn('Staff OS: could not fetch live data, using defaults:', e.message);
   }
-  // eos-data failed — still render with dashboard scorecard values if available
+  // eos-data failed — still load async data then render with dashboard scorecard values if available
+  await Promise.all([joyBombsLoad_(), pathwayLoad_()]);
   const fallback = Object.assign({}, STAFF_DEFAULT_DATA);
   if (dashData) fallback._dash = dashData;
   staffRenderAll(fallback);
@@ -6851,7 +6840,7 @@ function ministryRenderBanner() {
       banner.className = 'sp-role-banner';
       content.insertBefore(banner, content.firstChild);
     }
-    banner.innerHTML = `<span>Viewing as: <strong>${role.label} — ${role.name}</strong></span><button class="sp-role-banner-link" onclick="ministryLogout()">Switch to full view →</button>`;
+    banner.innerHTML = `<span>Viewing as: <strong>${role.label} — ${role.name}</strong></span><button class="sp-role-banner-link" onclick="ministryLogout()">← Back to full view</button>`;
     const nav = content.querySelector('.sp-nav-tabs');
     if (nav && role.tabs) {
       nav.querySelectorAll('.sp-nav-tab').forEach(tab => {
@@ -6861,9 +6850,68 @@ function ministryRenderBanner() {
       });
     }
   } else {
-    if (banner) banner.remove();
+    if (banner) {
+      banner.className = 'sp-role-banner-idle';
+      banner.innerHTML = `<span style="color:rgba(245,240,232,0.45);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;">STAFF VIEW</span><button class="sp-role-banner-link" onclick="ministryShowSwitchModal()" style="color:rgba(201,150,58,0.7);margin-left:auto;">Ministry View →</button>`;
+    } else {
+      banner = document.createElement('div');
+      banner.id = 'sp-role-banner';
+      banner.className = 'sp-role-banner-idle';
+      banner.innerHTML = `<span style="color:rgba(245,240,232,0.45);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;">STAFF VIEW</span><button class="sp-role-banner-link" onclick="ministryShowSwitchModal()" style="color:rgba(201,150,58,0.7);margin-left:auto;">Ministry View →</button>`;
+      content.insertBefore(banner, content.firstChild);
+    }
     const nav = content ? content.querySelector('.sp-nav-tabs') : null;
     if (nav) nav.querySelectorAll('.sp-nav-tab').forEach(t => { t.style.display = ''; });
+  }
+}
+
+async function ministryShowSwitchModal() {
+  const existing = document.getElementById('sp-ministry-modal');
+  if (existing) { existing.style.display = 'flex'; return; }
+  const roleOpts = Object.entries(MINISTRY_ROLES).map(([k, r]) =>
+    `<option value="${k}">${r.label} — ${r.name}</option>`).join('');
+  const m = document.createElement('div');
+  m.id = 'sp-ministry-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.82);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.innerHTML = `
+    <div style="background:var(--sp-parchment);border-radius:6px;padding:28px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--sp-ink);">Ministry View</div>
+      <div style="font-size:13px;color:var(--sp-muted);margin-bottom:20px;">Enter your ministry password to switch to your filtered view.</div>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Role</label>
+        <select id="ministry-role-sel" style="width:100%;padding:9px 10px;border:1px solid var(--sp-border);border-radius:3px;background:var(--sp-card-bg);color:var(--sp-ink);font-size:14px;">${roleOpts}</select>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Password</label>
+        <input id="ministry-pw-inp" type="password" autocomplete="off" style="width:100%;padding:9px 10px;border:1px solid var(--sp-border);border-radius:3px;background:var(--sp-card-bg);color:var(--sp-ink);font-size:14px;" onkeydown="if(event.key==='Enter')ministryConfirmSwitch()">
+      </div>
+      <div id="ministry-modal-err" style="display:none;color:var(--sp-red);font-size:12px;margin-bottom:10px;">Incorrect password. Try again.</div>
+      <div style="display:flex;gap:10px;">
+        <button onclick="ministryConfirmSwitch()" style="flex:1;padding:10px;background:var(--sp-ink);color:var(--sp-gold);border:none;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:700;">Enter Ministry View</button>
+        <button onclick="document.getElementById('sp-ministry-modal').remove()" style="padding:10px 16px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;color:var(--sp-muted);">Cancel</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  setTimeout(() => { const inp = document.getElementById('ministry-pw-inp'); if (inp) inp.focus(); }, 50);
+}
+
+async function ministryConfirmSwitch() {
+  const roleKey = (document.getElementById('ministry-role-sel')||{}).value || '';
+  const pw = (document.getElementById('ministry-pw-inp')||{}).value || '';
+  const errEl = document.getElementById('ministry-modal-err');
+  if (!roleKey || !pw) return;
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  const role = MINISTRY_ROLES[roleKey];
+  if (role && role.hash && hex === role.hash) {
+    sessionStorage.setItem(MINISTRY_SESS_KEY, roleKey);
+    const modal = document.getElementById('sp-ministry-modal');
+    if (modal) modal.remove();
+    if (window._staffLastData) staffRenderAll(window._staffLastData);
+  } else {
+    if (errEl) errEl.style.display = 'block';
+    const inp = document.getElementById('ministry-pw-inp');
+    if (inp) { inp.value = ''; inp.focus(); }
   }
 }
 
