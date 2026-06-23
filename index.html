@@ -1297,74 +1297,98 @@
   /* ── Staff Profile Modal ─────────────────────────────────────────────── */
   #staffProfileModal {
     display: none; position: fixed; inset: 0; z-index: 2100;
-    background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 20px;
+    background: rgba(10,8,5,0.96);
+    align-items: center; justify-content: center; padding: 24px;
   }
   #staffProfileModal.open { display: flex; }
   .sp-prof-box {
-    background: var(--sp-parchment); color: var(--sp-ink); border-radius: 6px;
-    width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    display: flex; flex-direction: column;
+    background: var(--sp-parchment); color: var(--sp-ink);
+    border-radius: 6px; width: 100%; max-width: 540px; max-height: 88vh;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(201,150,58,0.18);
   }
   .sp-prof-topbar {
-    background: var(--sp-ink); padding: 13px 20px; display: flex;
-    justify-content: space-between; align-items: center;
-    border-radius: 6px 6px 0 0; position: sticky; top: 0; z-index: 1;
+    flex-shrink: 0; background: #1a1510;
+    padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(201,150,58,0.15);
   }
   .sp-prof-topbar-title {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--sp-gold);
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 3px; text-transform: uppercase; color: rgba(201,150,58,0.45);
   }
   .sp-prof-close {
-    background: none; border: none; color: var(--sp-parchment); font-size: 20px;
-    cursor: pointer; padding: 0 4px; opacity: 0.7; line-height: 1;
+    background: none; border: none; color: rgba(245,240,232,0.4);
+    font-size: 18px; cursor: pointer; padding: 2px 4px; line-height: 1; transition: color 0.12s;
   }
-  .sp-prof-close:hover { opacity: 1; }
-  .sp-prof-body { padding: 24px; }
-  .sp-prof-hdr {
-    display: flex; gap: 18px; align-items: flex-start; margin-bottom: 20px;
-    padding-bottom: 18px; border-bottom: 1px solid var(--sp-border);
+  .sp-prof-close:hover { color: var(--sp-parchment); }
+  .sp-prof-hero {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #1a1510 0%, #2a2018 100%);
+    padding: 22px 26px; display: flex; gap: 20px; align-items: center;
+    border-bottom: 2px solid var(--sp-gold);
   }
   .sp-prof-photo {
-    width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
-    border: 2px solid var(--sp-gold); flex-shrink: 0; background: var(--sp-card-bg);
+    width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--sp-gold); flex-shrink: 0; background: #2a2018;
   }
   .sp-prof-avatar {
-    width: 80px; height: 80px; border-radius: 50%; background: var(--sp-ink);
+    width: 76px; height: 76px; border-radius: 50%;
+    background: rgba(201,150,58,0.12); border: 2px solid var(--sp-gold);
     color: var(--sp-gold); font-family: 'Playfair Display', serif;
     font-size: 26px; font-weight: 700; display: flex; align-items: center;
-    justify-content: center; flex-shrink: 0; border: 2px solid var(--sp-gold);
+    justify-content: center; flex-shrink: 0;
+  }
+  .sp-prof-hero-info { flex: 1; }
+  .sp-prof-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(201,150,58,0.5); margin-bottom: 5px;
   }
   .sp-prof-name {
-    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
-    color: var(--sp-ink); line-height: 1.2; margin-bottom: 4px;
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    color: var(--sp-parchment); line-height: 1.15; margin-bottom: 3px;
   }
-  .sp-prof-role { font-size: 13px; color: var(--sp-muted); margin-bottom: 10px; font-style: italic; }
+  .sp-prof-role { font-size: 13px; color: rgba(245,240,232,0.5); margin-bottom: 14px; font-style: italic; }
   .sp-prof-bamboo {
     display: inline-flex; align-items: center; gap: 5px;
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--sp-rust); text-decoration: none;
-    border: 1px solid var(--sp-rust); padding: 4px 10px; border-radius: 2px; transition: all 0.15s;
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--sp-gold); text-decoration: none;
+    border: 1px solid rgba(201,150,58,0.4); padding: 5px 12px; border-radius: 2px;
+    background: rgba(201,150,58,0.08); transition: all 0.15s;
   }
-  .sp-prof-bamboo:hover { background: var(--sp-rust); color: var(--sp-parchment); }
-  .sp-prof-section { margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--sp-border); }
-  .sp-prof-section:last-child { border-bottom: none; margin-bottom: 0; }
+  .sp-prof-bamboo:hover { background: var(--sp-gold); color: var(--sp-ink); border-color: var(--sp-gold); }
+  .sp-prof-scrollbody { flex: 1; overflow-y: auto; }
+  .sp-prof-section { padding: 18px 26px; border-bottom: 1px solid var(--sp-border); }
+  .sp-prof-section:last-child { border-bottom: none; }
   .sp-prof-sec-label {
-    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--sp-gold); margin-bottom: 10px;
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--sp-gold); margin-bottom: 12px;
   }
-  .sp-prof-wg-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
-  .sp-prof-wg-note { font-size: 11px; color: var(--sp-muted); font-style: italic; }
+  .sp-prof-wg-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+  .sp-prof-wg-note { font-size: 12px; color: var(--sp-muted); font-style: italic; margin-top: 2px; }
   .sp-prof-row {
-    display: flex; gap: 10px; align-items: flex-start; padding: 6px 0;
-    border-bottom: 1px solid var(--sp-border); font-size: 13px; line-height: 1.4;
+    display: flex; gap: 10px; align-items: flex-start; padding: 7px 0;
+    border-bottom: 1px solid var(--sp-section-bg); font-size: 13px; line-height: 1.4;
   }
   .sp-prof-row:last-child { border-bottom: none; }
   .sp-prof-empty { font-size: 12px; color: var(--sp-muted); font-style: italic; padding: 4px 0; }
   .sp-prof-to-type {
-    font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 6px;
-    border-radius: 2px; background: var(--sp-card-bg); border: 1px solid var(--sp-border);
+    font-family: 'DM Mono', monospace; font-size: 9px; padding: 3px 7px;
+    border-radius: 2px; background: var(--sp-section-bg); border: 1px solid var(--sp-border);
     color: var(--sp-muted); white-space: nowrap; flex-shrink: 0;
   }
+  .sp-prof-to-type.out { background: rgba(168,76,47,0.1); border-color: rgba(168,76,47,0.3); color: var(--sp-rust); }
+  .sp-prof-rock-item {
+    background: var(--sp-section-bg); border-left: 2px solid var(--sp-gold);
+    padding: 8px 12px; margin-bottom: 6px; border-radius: 0 3px 3px 0;
+    font-size: 13px; display: flex; gap: 8px; align-items: flex-start;
+  }
+  .sp-prof-rock-item:last-child { margin-bottom: 0; }
+  .sp-prof-boulder-item {
+    display: flex; gap: 8px; align-items: flex-start; padding: 7px 0;
+    border-bottom: 1px solid var(--sp-section-bg); font-size: 13px; line-height: 1.4;
+  }
+  .sp-prof-boulder-item:last-child { border-bottom: none; }
   /* Clickable name spans — used everywhere names appear in Staff OS */
   .sp-name-link {
     cursor: pointer; border-bottom: 1px dashed rgba(201,150,58,0.5);
@@ -6477,14 +6501,13 @@ function openStaffProfile(rawName) {
   // ── Working Genius ────────────────────────────────────────────────────────
   const wgHtml = `<div class="sp-prof-section">
     <div class="sp-prof-sec-label">Working Genius</div>
-    <div class="sp-prof-wg-row">
-      ${person.genius.map(g => `<span class="sp-wg-badge genius">${g}</span>`).join('')}
-      <span style="color:var(--sp-muted);font-size:11px;padding:0 3px;">·</span>
-      ${person.competency.map(g => `<span class="sp-wg-badge competency">${g}</span>`).join('')}
-      <span style="color:var(--sp-muted);font-size:11px;padding:0 3px;">·</span>
-      ${person.frustration.map(g => `<span class="sp-wg-badge frustration">${g}</span>`).join('')}
-    </div>
-    <div class="sp-prof-wg-note" style="margin-top:6px;">${person.pairing}</div>
+    <div style="margin-bottom:3px;"><span class="sp-wg-label genius-label">Genius</span></div>
+    <div class="sp-prof-wg-row" style="margin-bottom:10px;">${person.genius.map(g => `<span class="sp-wg-badge genius">${g}</span>`).join('')}</div>
+    <div style="margin-bottom:3px;"><span class="sp-wg-label comp-label">Competency</span></div>
+    <div class="sp-prof-wg-row" style="margin-bottom:10px;">${person.competency.map(g => `<span class="sp-wg-badge competency">${g}</span>`).join('')}</div>
+    <div style="margin-bottom:3px;"><span class="sp-wg-label frust-label">Frustration</span></div>
+    <div class="sp-prof-wg-row" style="margin-bottom:12px;">${person.frustration.map(g => `<span class="sp-wg-badge frustration">${g}</span>`).join('')}</div>
+    <div class="sp-prof-wg-note">${person.pairing}</div>
     <div class="sp-prof-wg-note" style="margin-top:3px;">${person.pairingDesc}</div>
   </div>`;
 
@@ -6496,7 +6519,7 @@ function openStaffProfile(rawName) {
           const out = t.start <= todayStr && t.end >= todayStr;
           const dl  = t.start === t.end ? fmtD(t.start) : fmtD(t.start) + ' – ' + fmtD(t.end);
           return `<div class="sp-prof-row">
-            <span class="sp-prof-to-type">${out ? 'Out Now' : 'Upcoming'}</span>
+            <span class="sp-prof-to-type${out ? ' out' : ''}">${out ? 'Out Now' : 'Upcoming'}</span>
             <span>${dl}</span>
           </div>`;
         }).join('')
@@ -6507,7 +6530,7 @@ function openStaffProfile(rawName) {
   const rocksHtml = `<div class="sp-prof-section">
     <div class="sp-prof-sec-label">Active Rocks</div>
     ${personRocks.length
-      ? personRocks.map(r => `<div class="sp-prof-row">
+      ? personRocks.map(r => `<div class="sp-prof-rock-item">
           <span class="sp-priority ${r.priority}" style="flex-shrink:0;">${r.priority}</span>
           <span>${_rbEsc(r.rock)}</span>
         </div>`).join('')
@@ -6519,7 +6542,7 @@ function openStaffProfile(rawName) {
   const bouldersHtml = `<div class="sp-prof-section">
     <div class="sp-prof-sec-label">Boulders This Quarter</div>
     ${personBoulders.length
-      ? personBoulders.map(b => `<div class="sp-prof-row">
+      ? personBoulders.map(b => `<div class="sp-prof-boulder-item">
           <span class="sp-rock-status ${b.status || 'tbd'}" style="cursor:default;font-size:10px;flex-shrink:0;">${bLabel[b.status] || b.status || '—'}</span>
           <span>${_rbEsc(b.title)}</span>
         </div>`).join('')
@@ -6527,15 +6550,22 @@ function openStaffProfile(rawName) {
   </div>`;
 
   document.getElementById('sp-prof-content').innerHTML = `
-    <div class="sp-prof-hdr">
+    <div class="sp-prof-topbar">
+      <span class="sp-prof-topbar-title">Staff Profile</span>
+      <button class="sp-prof-close" onclick="closeStaffProfile()" aria-label="Close">✕</button>
+    </div>
+    <div class="sp-prof-hero">
       <div style="flex-shrink:0;">${avatar}</div>
-      <div>
+      <div class="sp-prof-hero-info">
+        <div class="sp-prof-eyebrow">Living Stones · South Reno</div>
         <div class="sp-prof-name">${person.name}</div>
         <div class="sp-prof-role">${person.role}</div>
         ${bambooHtml}
       </div>
     </div>
-    ${wgHtml}${toHtml}${rocksHtml}${bouldersHtml}`;
+    <div class="sp-prof-scrollbody">
+      ${wgHtml}${toHtml}${rocksHtml}${bouldersHtml}
+    </div>`;
 
   const modal = document.getElementById('staffProfileModal');
   modal.classList.add('open');
@@ -6550,13 +6580,7 @@ function closeStaffProfile() {
 
 <!-- Staff Profile Modal -->
 <div id="staffProfileModal" role="dialog" aria-modal="true" aria-label="Staff Profile" onclick="if(event.target===this)closeStaffProfile()">
-  <div class="sp-prof-box">
-    <div class="sp-prof-topbar">
-      <div class="sp-prof-topbar-title">Staff Profile</div>
-      <button class="sp-prof-close" onclick="closeStaffProfile()" aria-label="Close">✕</button>
-    </div>
-    <div class="sp-prof-body" id="sp-prof-content"></div>
-  </div>
+  <div class="sp-prof-box" id="sp-prof-content"></div>
 </div>
 
 </body>
