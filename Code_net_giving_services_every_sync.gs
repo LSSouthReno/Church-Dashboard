@@ -3044,11 +3044,23 @@ function syncStaffOSFunnelAndCalendar_() {
       const nl = name.toLowerCase();
       if (nl.includes('community group') || nl.startsWith('cg ') || nl.includes('small group')) return;
       const startsAt = (inst.attributes && inst.attributes.starts_at) || '';
+      const endsAt   = (inst.attributes && inst.attributes.ends_at)   || '';
       if (!startsAt) return;
       const d = new Date(startsAt);
+      // For multi-day events PCO sets ends_at to midnight of the exclusive end day;
+      // back off one day so endKey is the actual last day of the event.
+      var endKey = null;
+      if (endsAt) {
+        var endD = new Date(endsAt);
+        if (endsAt.indexOf('T00:00:00') !== -1) endD.setDate(endD.getDate() - 1);
+        var endStr = Utilities.formatDate(endD, tz, 'yyyy-MM-dd');
+        var startStr = Utilities.formatDate(d, tz, 'yyyy-MM-dd');
+        if (endStr !== startStr) endKey = endStr;
+      }
       calEvents.push({
         name:      name,
         dateKey:   Utilities.formatDate(d, tz, 'yyyy-MM-dd'),
+        endKey:    endKey,
         dayOfWeek: Utilities.formatDate(d, tz, 'EEE'),
         date:      Utilities.formatDate(d, tz, 'MMM d'),
         time:      Utilities.formatDate(d, tz, 'h:mm a'),

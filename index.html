@@ -1287,6 +1287,20 @@
   .sd-presider-name { font-size:12px; color:var(--text); flex:1; }
   .sd-presider-role { font-size:10px; color:var(--text-dim); font-style:italic; }
   .sd-empty-state { text-align:center; padding:60px 24px; color:var(--text-dim); font-size:14px; }
+  /* Sunday Master Schedule */
+  .sd-sched-row { display:grid; grid-template-columns:100px 1fr 1fr; gap:10px; align-items:baseline; padding:7px 8px; border-bottom:1px solid rgba(255,255,255,.04); }
+  .sd-sched-row:last-child { border-bottom:none; }
+  .sd-sched-row.svc-start { background:rgba(212,175,55,.07); border:1px solid rgba(212,175,55,.18); border-radius:5px; margin:3px 0; padding:9px 10px; }
+  .sd-sched-row.cleanup { background:rgba(212,175,55,.05); border-radius:4px; }
+  .sd-sched-time { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); white-space:nowrap; }
+  .sd-sched-row.svc-start .sd-sched-time { color:var(--yellow-2); font-weight:600; }
+  .sd-sched-what { font-size:12px; color:var(--text); }
+  .sd-sched-row.svc-start .sd-sched-what { color:var(--yellow-2); font-weight:700; font-size:13px; }
+  .sd-sched-row.cleanup .sd-sched-what { color:var(--yellow-2); font-weight:600; }
+  .sd-sched-who { font-size:11px; color:var(--text-muted); }
+  .sd-sched-hdr { display:grid; grid-template-columns:100px 1fr 1fr; gap:10px; padding:0 8px 6px; border-bottom:1px solid var(--card-border); margin-bottom:4px; }
+  .sd-sched-hdr span { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); }
+  @media (max-width:600px) { .sd-sched-row,.sd-sched-hdr { grid-template-columns:80px 1fr; } .sd-sched-who { display:none; } }
 
   @media print {
     #sundayModal .tmod-header, #sundayModal .sd-week-bar .sd-print-btn { display:none !important; }
@@ -4636,6 +4650,37 @@ function sundayBuildContent(plan, calEvents) {
         </div>`}
       </div>
 
+      <div class="sd-section">
+        <div class="sd-section-title">Sunday Master Schedule</div>
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:12px;">Team timing reference · 3 services · Talk to your serve team leader for position-specific details.</div>
+        <div class="sd-sched-hdr"><span>Time</span><span>What</span><span>Who</span></div>
+        ${[
+          {t:'7:00–7:20 AM', w:'Pre-Service Prayer',              h:'Anyone! Pastors &amp; 8am Volunteers especially'},
+          {t:'7:20–7:25 AM', w:'Pastors Prayer',                  h:'Pastors &amp; EITs, Preacher'},
+          {t:'7:30 AM',      w:'Production Meeting (completed)',   h:'Tech, Worship, Presider, Preacher'},
+          {t:'7:30 AM',      w:'Prepped &amp; Ready — 8am',       h:'ALL 8am Teams'},
+          {t:'8:00 AM',      w:'☀ Service Starts — On Time',      h:'',                                    svc:true},
+          {t:'8:15 AM',      w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
+          {t:'9:05 AM',      w:'Service Ends',                    h:'Greeters, Connections, Hospitality at posts'},
+          {t:'9:15 AM',      w:'Reset for Next Service',          h:'Enrichment (communion) · Service Captain (stanchions)'},
+          {t:'9:15 AM',      w:'Prepped &amp; Ready — 9:30am',    h:'ALL 9:30 Teams'},
+          {t:'9:30 AM',      w:'☀ Service Starts — On Time',      h:'',                                    svc:true},
+          {t:'9:45 AM',      w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
+          {t:'10:35 AM',     w:'Service Ends',                    h:'Greeters, Connections at posts'},
+          {t:'10:45 AM',     w:'Reset for Next Service',          h:'Enrichment (communion) · Service Captain (stanchions)'},
+          {t:'10:45 AM',     w:'Prepped &amp; Ready — 11am',      h:'ALL 11am Teams'},
+          {t:'11:00 AM',     w:'☀ Service Starts — 5 min delay',  h:'',                                    svc:true},
+          {t:'11:15 AM',     w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
+          {t:'12:15 PM',     w:'Service Ends',                    h:'Greeters, Connections at posts'},
+          {t:'12:30 PM',     w:'Clean Up &amp; Put Away All Sunday Items', h:'Service Captain &amp; All Volunteers', cleanup:true},
+          {t:'~12:45 PM',    w:'Dismissed After People Clear Out',h:'All Volunteers'},
+        ].map(r => `<div class="sd-sched-row${r.svc?' svc-start':r.cleanup?' cleanup':''}">
+          <div class="sd-sched-time">${r.t}</div>
+          <div class="sd-sched-what">${r.w}</div>
+          <div class="sd-sched-who">${r.h}</div>
+        </div>`).join('')}
+      </div>
+
       ${gridTeamKeys.length ? `
       <div class="sd-section">
         <div class="sd-section-title" style="display:flex;align-items:baseline;gap:12px;">
@@ -5849,11 +5894,16 @@ function staffRenderL10(data) {
     const filtered = calEvents.filter(ev => !SP_CAL_BLOCKED.has((ev.name || '').toLowerCase().trim()));
     if (!filtered.length) return '';
 
-    // Build lookup: dateKey → [events]
+    // Build lookup: dateKey → [events], expanding multi-day events across all their days
     const evByDate = {};
     filtered.forEach(ev => {
-      if (!evByDate[ev.dateKey]) evByDate[ev.dateKey] = [];
-      evByDate[ev.dateKey].push(ev);
+      const startD = new Date(ev.dateKey + 'T12:00:00');
+      const endD   = new Date((ev.endKey || ev.dateKey) + 'T12:00:00');
+      for (let d = new Date(startD); d <= endD; d.setDate(d.getDate() + 1)) {
+        const dk = d.toISOString().slice(0, 10);
+        if (!evByDate[dk]) evByDate[dk] = [];
+        if (!evByDate[dk].find(x => x.name === ev.name)) evByDate[dk].push(ev);
+      }
     });
 
     // Build month array: current month through current+4
