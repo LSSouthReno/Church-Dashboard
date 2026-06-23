@@ -1389,6 +1389,29 @@
     border-bottom: 1px solid var(--sp-section-bg); font-size: 13px; line-height: 1.4;
   }
   .sp-prof-boulder-item:last-child { border-bottom: none; }
+  .sp-prof-add-row {
+    display: flex; gap: 7px; align-items: center;
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--sp-border);
+  }
+  .sp-prof-add-inp {
+    flex: 1; height: 32px; padding: 0 10px; border: 1px solid var(--sp-border);
+    border-radius: 3px; font-size: 12px; font-family: 'DM Sans', sans-serif;
+    color: var(--sp-ink); background: var(--sp-card-bg); outline: none; min-width: 0;
+  }
+  .sp-prof-add-inp:focus { border-color: var(--sp-gold); box-shadow: 0 0 0 2px rgba(201,150,58,0.12); }
+  .sp-prof-add-sel {
+    height: 32px; padding: 0 6px; border: 1px solid var(--sp-border);
+    border-radius: 3px; font-size: 11px; font-family: 'DM Mono', monospace;
+    color: var(--sp-ink); background: var(--sp-card-bg); outline: none; flex-shrink: 0;
+  }
+  .sp-prof-add-btn {
+    height: 32px; padding: 0 13px; border: 1px solid rgba(201,150,58,0.5);
+    border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-gold);
+    background: rgba(201,150,58,0.07); cursor: pointer; white-space: nowrap;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .sp-prof-add-btn:hover { background: var(--sp-gold); color: var(--sp-ink); border-color: var(--sp-gold); }
   /* Clickable name spans — used everywhere names appear in Staff OS */
   .sp-name-link {
     cursor: pointer; border-bottom: 1px dashed rgba(201,150,58,0.5);
@@ -5051,7 +5074,7 @@ function rocksEditsSave_(edits) {
   rbQueueRemoteSync_();
 }
 function bouldersEditsLoad_() {
-  try { return JSON.parse(localStorage.getItem(BOULDERS_LS_KEY) || 'null') || { statuses: {} }; } catch(e) { return { statuses: {} }; }
+  try { return JSON.parse(localStorage.getItem(BOULDERS_LS_KEY) || 'null') || { statuses: {}, added: [] }; } catch(e) { return { statuses: {}, added: [] }; }
 }
 function bouldersEditsSave_(edits) {
   try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify({ ...edits, ts: Date.now() })); } catch(e) {}
@@ -5059,8 +5082,10 @@ function bouldersEditsSave_(edits) {
 }
 function boulderKey_(b) { return (b.owner || '') + '::' + (b.title || ''); }
 function applyBoulderOverrides_(boulders) {
-  const statuses = (bouldersEditsLoad_().statuses) || {};
-  return boulders.map(b => { const k = boulderKey_(b); return statuses[k] ? { ...b, status: statuses[k] } : b; });
+  const edits = bouldersEditsLoad_();
+  const statuses = edits.statuses || {};
+  const localAdded = edits.added || [];
+  return [...boulders, ...localAdded].map(b => { const k = boulderKey_(b); return statuses[k] ? { ...b, status: statuses[k] } : b; });
 }
 const _rbEsc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
@@ -6440,6 +6465,7 @@ function openStaffProfile(rawName) {
     });
   }
   if (!person) return;
+  window._spCurrentPerson = person;
 
   const data  = window._staffLastData || {};
   const edits = (typeof rocksEditsLoad_ === 'function') ? rocksEditsLoad_() : { closed: {}, added: [] };
@@ -6527,26 +6553,39 @@ function openStaffProfile(rawName) {
   </div>`;
 
   // ── Rocks ─────────────────────────────────────────────────────────────────
-  const rocksHtml = `<div class="sp-prof-section">
+  const rocksHtml = `<div class="sp-prof-section" id="sp-prof-rocks-section">
     <div class="sp-prof-sec-label">Active Rocks</div>
     ${personRocks.length
       ? personRocks.map(r => `<div class="sp-prof-rock-item">
           <span class="sp-priority ${r.priority}" style="flex-shrink:0;">${r.priority}</span>
           <span>${_rbEsc(r.rock)}</span>
         </div>`).join('')
-      : '<div class="sp-prof-empty">No open rocks added by this person.</div>'}
+      : '<div class="sp-prof-empty">No open rocks yet.</div>'}
+    <div class="sp-prof-add-row">
+      <input id="sp-prof-rock-inp" class="sp-prof-add-inp" placeholder="Describe the rock…" onkeydown="if(event.key==='Enter')profileRockAdd()">
+      <select id="sp-prof-rock-pri" class="sp-prof-add-sel">
+        <option value="high">High</option>
+        <option value="med" selected>Med</option>
+        <option value="low">Low</option>
+      </select>
+      <button class="sp-prof-add-btn" onclick="profileRockAdd()">+ Add</button>
+    </div>
   </div>`;
 
   // ── Boulders ──────────────────────────────────────────────────────────────
   const bLabel = { 'on-track': 'On Track', 'off-track': 'Off Track', complete: 'Complete', tbd: '—' };
-  const bouldersHtml = `<div class="sp-prof-section">
+  const bouldersHtml = `<div class="sp-prof-section" id="sp-prof-boulders-section">
     <div class="sp-prof-sec-label">Boulders This Quarter</div>
     ${personBoulders.length
       ? personBoulders.map(b => `<div class="sp-prof-boulder-item">
           <span class="sp-rock-status ${b.status || 'tbd'}" style="cursor:default;font-size:10px;flex-shrink:0;">${bLabel[b.status] || b.status || '—'}</span>
           <span>${_rbEsc(b.title)}</span>
         </div>`).join('')
-      : '<div class="sp-prof-empty">No boulders assigned this quarter.</div>'}
+      : '<div class="sp-prof-empty">No boulders yet.</div>'}
+    <div class="sp-prof-add-row">
+      <input id="sp-prof-boulder-inp" class="sp-prof-add-inp" placeholder="Describe the boulder…" onkeydown="if(event.key==='Enter')profileBoulderAdd()">
+      <button class="sp-prof-add-btn" onclick="profileBoulderAdd()">+ Add</button>
+    </div>
   </div>`;
 
   document.getElementById('sp-prof-content').innerHTML = `
@@ -6575,6 +6614,38 @@ function openStaffProfile(rawName) {
 function closeStaffProfile() {
   const m = document.getElementById('staffProfileModal');
   if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+}
+function profileRockAdd() {
+  const person = window._spCurrentPerson;
+  if (!person) return;
+  const inp = document.getElementById('sp-prof-rock-inp');
+  const pri = document.getElementById('sp-prof-rock-pri');
+  const rock = (inp?.value || '').trim();
+  if (!rock) { inp?.focus(); return; }
+  const priority = pri?.value || 'med';
+  const edits = rocksEditsLoad_();
+  edits.added = edits.added || [];
+  edits.added.push({ rock, addedBy: person.name, priority, _local: true, ts: Date.now() });
+  rocksEditsSave_(edits);
+  eosPost_({ action: 'rock_add', rock, addedBy: person.name, priority });
+  staffRenderRocks(window._staffLastData || {});
+  openStaffProfile(person.name);
+}
+function profileBoulderAdd() {
+  const person = window._spCurrentPerson;
+  if (!person) return;
+  const inp = document.getElementById('sp-prof-boulder-inp');
+  const title = (inp?.value || '').trim();
+  if (!title) { inp?.focus(); return; }
+  const d = new Date();
+  const quarter = `Q${Math.ceil((d.getMonth()+1)/3)} ${d.getFullYear()}`;
+  const edits = bouldersEditsLoad_();
+  edits.added = edits.added || [];
+  edits.added.push({ owner: person.name, title, quarter, status: 'tbd', type: 'individual', _local: true, ts: Date.now() });
+  bouldersEditsSave_(edits);
+  eosPost_({ action: 'boulder_add', owner: person.name, title, quarter });
+  staffRenderBoulders(window._staffLastData || {});
+  openStaffProfile(person.name);
 }
 </script>
 
