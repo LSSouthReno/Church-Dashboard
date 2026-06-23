@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T15:46:13.101Z",
+  "lastUpdated": "2026-06-23T15:57:45.054Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 23, 2026, 8:46 AM",
+    "refreshed": "Jun 23, 2026, 8:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8961,7 +8961,7 @@
               "team": "Hospitality Team",
               "pos": "Host",
               "status": "C",
-              "serviceTime": "11 AM"
+              "serviceTime": "9:30 AM, 11 AM"
             },
             {
               "name": "Matt Gardner",
@@ -9615,6 +9615,13 @@
               "pos": "Back Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Peggy Hart",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9772,8 +9779,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 64,
-            "totalVols": 64
+            "volsWithServiceTime": 65,
+            "totalVols": 65
           }
         }
       ]
