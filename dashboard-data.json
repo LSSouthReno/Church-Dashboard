@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T21:46:43.100Z",
+  "lastUpdated": "2026-06-23T22:01:30.272Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3131,7 +3131,7 @@
     },
     {
       "name": "First impressions",
-      "current": 27,
+      "current": 25,
       "needed": 40
     }
   ],
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 23, 2026, 2:46 PM",
+    "refreshed": "Jun 23, 2026, 3:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7954,20 +7954,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Ellie Walker",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Niah Morris",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
               "pos": "Check In",
@@ -8318,13 +8304,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Molly Bell",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Shiona Dykins",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
@@ -8404,9 +8383,9 @@
             {
               "name": "Annalissa Sanchez",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
             },
             {
               "name": "Josie Nerska",
@@ -8421,13 +8400,6 @@
               "pos": "Lead Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Geoffrey Caliger",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Lead Guide",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Louie Quiroz",
@@ -8496,7 +8468,7 @@
               "name": "Tim Martin",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -8517,14 +8489,14 @@
               "name": "Cheryl O'Gorman",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
               "name": "Aaron Marinucci",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8538,7 +8510,42 @@
               "name": "Richard Price",
               "team": "First Impressions",
               "pos": "Greeter",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Baskharoon",
+              "team": "First Impressions",
+              "pos": "Greeter",
               "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Mikayla Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Abby Wampler",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
               "serviceTime": "9:30 AM"
             }
           ],
@@ -8697,8 +8704,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
@@ -9074,6 +9081,62 @@
               "pos": "Connect Desk Host (A Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jed Ingalls",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Douglas Drake",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Baskharoon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeffrey Janakus",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cheryl O'Gorman",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Aaron Marinucci",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Wandishin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9231,8 +9294,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 49,
-            "totalVols": 51
+            "volsWithServiceTime": 57,
+            "totalVols": 59
           }
         }
       ]
@@ -9706,6 +9769,97 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Renee Peregrin",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Pat Peregrin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Sarah Rawlins",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jed Ingalls",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Douglas Drake",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Baskharoon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tim Martin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeffrey Janakus",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Aaron Marinucci",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cheryl O'Gorman",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Wandishin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9863,8 +10017,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 65,
-            "totalVols": 65
+            "volsWithServiceTime": 78,
+            "totalVols": 78
           }
         }
       ]
@@ -9925,20 +10079,6 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Michael France",
-              "team": "Parking Team",
-              "pos": "Parking Czar",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Wende Schwake",
-              "team": "Parking Team",
-              "pos": "Parking Czar",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Jeff Bridges",
@@ -10317,6 +10457,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Renee Peregrin",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -10474,8 +10621,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 62,
-            "totalVols": 62
+            "volsWithServiceTime": 61,
+            "totalVols": 61
           }
         }
       ]
@@ -10618,13 +10765,6 @@
               "name": "Bradford Skinner",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Niah Morris",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
             },
@@ -11029,8 +11169,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 54,
-            "totalVols": 54
+            "volsWithServiceTime": 53,
+            "totalVols": 53
           }
         }
       ]
@@ -11752,6 +11892,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Karis Sellman",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11761,8 +11908,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 9,
-            "totalVols": 9
+            "volsWithServiceTime": 10,
+            "totalVols": 10
           }
         }
       ]
@@ -11844,6 +11991,13 @@
               "pos": "Service Captain",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Karis Sellman",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11853,8 +12007,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 9,
-            "totalVols": 9
+            "volsWithServiceTime": 10,
+            "totalVols": 10
           }
         }
       ]
