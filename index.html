@@ -1226,6 +1226,66 @@
   .sp-add-rock-btn:hover { opacity: 0.85; }
   .sp-rock-local-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--sp-muted); text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
 
+  /* ── IDS Log ── */
+  .sp-ids-log-card { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 14px 18px; margin-bottom: 8px; }
+  .sp-ids-log-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .sp-ids-log-meta { font-size: 11px; color: var(--sp-muted); font-family: 'DM Mono', monospace; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .sp-ids-log-desc { font-size: 13px; color: var(--sp-ink); line-height: 1.5; }
+  .sp-ids-log-status { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
+  .sp-ids-log-status.open { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .sp-ids-log-status.in-discussion { background: #fff8e1; color: var(--sp-yellow); border: 1px solid #ffe082; }
+  .sp-ids-log-status.solved { background: #e8f5e9; color: var(--sp-green); border: 1px solid #a5d6a7; }
+  .sp-ids-log-status.dropped { background: var(--sp-section-bg); color: var(--sp-muted); border: 1px solid var(--sp-border); }
+  .sp-ids-log-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .sp-ids-log-btn { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; cursor: pointer; border: 1px solid var(--sp-border); background: transparent; color: var(--sp-ink); }
+  .sp-ids-log-btn:hover { background: var(--sp-ink); color: var(--sp-gold); border-color: var(--sp-ink); }
+  .sp-ids-log-btn.primary { background: var(--sp-ink); color: var(--sp-gold); border-color: var(--sp-ink); }
+  .sp-ids-log-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .sp-ids-log-filter input, .sp-ids-log-filter select { border: 1px solid var(--sp-border); border-radius: 3px; padding: 5px 9px; font-size: 12px; font-family: 'DM Sans', sans-serif; background: var(--sp-card-bg); color: var(--sp-ink); }
+  .sp-ids-log-filter input:focus, .sp-ids-log-filter select:focus { outline: none; border-color: var(--sp-gold); }
+  .sp-ids-log-empty { color: var(--sp-muted); font-size: 13px; padding: 20px; text-align: center; background: var(--sp-section-bg); border-radius: 4px; }
+
+  /* ── Joy Bombs ── */
+  .sp-joy-section { margin-bottom: 22px; }
+  .sp-joy-sec-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--sp-border); flex-wrap: wrap; }
+  .sp-joy-sec-hdr h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--sp-ink); }
+  .sp-joy-card { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 14px 18px; margin-bottom: 8px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .sp-joy-card-name { font-size: 15px; font-weight: 700; font-family: 'Playfair Display', serif; margin-bottom: 3px; }
+  .sp-joy-card-meta { font-size: 11px; color: var(--sp-muted); font-family: 'DM Mono', monospace; display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sp-joy-card-phone a { color: var(--sp-rust); text-decoration: none; }
+  .sp-joy-card-phone a:hover { text-decoration: underline; }
+  .sp-joy-bomb-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 7px 14px; background: var(--sp-gold); color: var(--sp-ink); border: none; border-radius: 3px; cursor: pointer; white-space: nowrap; font-weight: 700; flex-shrink: 0; }
+  .sp-joy-bomb-btn:hover { background: var(--sp-gold-light); }
+  .sp-joy-empty { background: linear-gradient(135deg, var(--sp-ink) 0%, #2a2018 100%); border-radius: 4px; padding: 22px; text-align: center; color: var(--sp-gold); font-family: 'Playfair Display', serif; font-size: 15px; margin-bottom: 12px; border: 1px solid rgba(201,150,58,0.2); }
+  .sp-joy-add-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; background: transparent; border: 1px solid var(--sp-gold); color: var(--sp-gold); border-radius: 3px; cursor: pointer; }
+  .sp-joy-add-btn:hover { background: var(--sp-gold); color: var(--sp-ink); }
+  .sp-joy-history-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--sp-border); font-size: 13px; }
+  .sp-joy-history-item:last-child { border-bottom: none; }
+
+  /* ── Pathway Tab ── */
+  .sp-pathway-funnel { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 28px; align-items: stretch; }
+  .sp-pathway-stage { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 18px 20px; flex: 1; min-width: 110px; cursor: pointer; transition: all 0.15s; }
+  .sp-pathway-stage:hover { border-color: var(--sp-gold); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .sp-pathway-stage.health-yellow { border-top: 3px solid var(--sp-yellow); }
+  .sp-pathway-stage.health-red { border-top: 3px solid var(--sp-red); }
+  .sp-pathway-stage.health-green { border-top: 3px solid var(--sp-green); }
+  .sp-pathway-stage-name { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--sp-muted); margin-bottom: 8px; }
+  .sp-pathway-stage-count { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--sp-ink); line-height: 1; margin-bottom: 4px; }
+  .sp-pathway-stage-pct { font-size: 12px; color: var(--sp-muted); }
+  .sp-pathway-arrow { display: flex; align-items: center; justify-content: center; padding: 0 3px; color: var(--sp-border); font-size: 16px; flex-shrink: 0; margin-top: 36px; }
+  .sp-pathway-sum-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 800px) { .sp-pathway-sum-grid { grid-template-columns: 1fr 1fr; } .sp-pathway-funnel { gap: 6px; } }
+  .sp-pathway-sum-card { background: var(--sp-section-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 14px 16px; text-align: center; }
+  .sp-pathway-sum-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--sp-ink); }
+  .sp-pathway-sum-label { font-size: 11px; color: var(--sp-muted); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .sp-pathway-setup { background: var(--sp-section-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 32px 28px; text-align: center; }
+
+  /* ── Ministry Lead Role Banner ── */
+  .sp-role-banner { background: linear-gradient(90deg, #2a1810 0%, #3d2415 100%); color: var(--sp-parchment); padding: 10px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; flex-shrink: 0; border-bottom: 1px solid rgba(168,76,47,0.4); }
+  .sp-role-banner strong { color: #f5c88a; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .sp-role-banner-link { color: rgba(245,240,232,0.6); text-decoration: underline; cursor: pointer; font-size: 12px; background: none; border: none; font-family: inherit; padding: 0; }
+  .sp-role-banner-link:hover { color: var(--sp-parchment); }
+
   /* ── Sunday One-sheet modal ───────────────────────────────────── */
   #sundayModal .tmod-body { padding:0; }
   .sd-week-bar { display:flex; align-items:center; gap:12px; padding:14px 28px; border-bottom:1px solid var(--card-border); background:var(--bg); flex-shrink:0; flex-wrap:wrap; }
@@ -1877,6 +1937,7 @@
       <div class="sp-nav-tab" onclick="staffShowSection('sp-meetings',this)">Meeting Pulse</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-l10',this)">L10 Feed</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-ids',this)">IDS</div>
+      <div class="sp-nav-tab" onclick="staffShowSection('sp-pathway',this)">Pathway</div>
     </nav>
     <div class="sp-main-wrap">
       <div class="sp-main">
@@ -2392,6 +2453,9 @@
             </div>
           </div>
         </div>
+
+        <!-- Pathway Tracker (rendered by staffRenderPathway) -->
+        <div class="sp-section" id="sp-pathway"></div>
 
       </div>
     </div>
@@ -4275,6 +4339,51 @@ let EOS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby82X64_1Pty8PDklG
 const MEETING_SESS_KEY    = 'lssr_meeting_edit';
 const ROCKS_LS_KEY        = 'lssr_rocks_edits';
 const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
+// ⚙️ CONFIGURE: Deploy Code_ids_joy_webapp.gs and paste the exec URL here
+const IDS_WEBAPP_URL      = '';
+const JOY_BOMBS_DATA_URL  = 'https://lssouthreno.github.io/Church-Dashboard/joy_bombs.json';
+const PATHWAY_DATA_URL    = 'https://lssouthreno.github.io/Church-Dashboard/pathway.json';
+const IDS_LS_KEY          = 'lssr_ids_log';
+const JOY_BOMBS_LS_KEY    = 'lssr_joy_bombs';
+const MINISTRY_SESS_KEY   = 'lssr_ministry_role';
+
+// ⚙️ CONFIGURE: Ministry Leads — set hash for each role's password
+// Generate hash in browser console: crypto.subtle.digest('SHA-256',new TextEncoder().encode('pw')).then(b=>Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')).then(console.log)
+const MINISTRY_ROLES = {
+  worship: {
+    label: 'Worship Director', name: 'Gordon Fava',
+    hash: '', // ⚙️ CONFIGURE: paste SHA-256 hash of Gordon's password here
+    area: 'worship',
+    scopeTeams: ['worship', 'tech', 'production'],
+    scorecardOwners: ['Gordon Fava'],
+    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
+  },
+  discipleship: {
+    label: 'Discipleship Pastor', name: 'Adam Carp',
+    hash: '', // ⚙️ CONFIGURE: paste SHA-256 hash of Adam's password here
+    area: 'discipleship',
+    scopeTeams: ['community groups', 'cg', 'groups'],
+    scorecardOwners: ['Adam Carp'],
+    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10', 'sp-pathway', 'sp-funnel']
+  },
+  stepping_stones: {
+    label: 'Stepping Stones Director', name: 'Geoffrey Caliger',
+    hash: '', // ⚙️ CONFIGURE: paste SHA-256 hash of Geoffrey's password here
+    area: 'stepping_stones',
+    scopeTeams: ['stepping stones', 'kids', 'children'],
+    scorecardOwners: ['Geoffrey Caliger', 'Deana Griffin'],
+    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
+  },
+  student_ministry: {
+    label: 'Student Ministry Director', name: 'Katie Thompson',
+    hash: '', // ⚙️ CONFIGURE: paste SHA-256 hash of Katie's password here
+    area: 'student_ministry',
+    scopeTeams: ['student', 'students'],
+    scorecardOwners: ['Katie Thompson', 'Isaac Griffin'],
+    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
+  }
+};
+
 let staffRendered = false;
 
 const STAFF_DEFAULT_DATA = {
@@ -4861,6 +4970,20 @@ async function staffDoUnlock() {
   const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
   if (hex === STAFF_HASH) {
     sessionStorage.setItem(STAFF_SESSION_KEY, '1');
+    sessionStorage.removeItem(MINISTRY_SESS_KEY);
+    document.getElementById('staffModLocked').style.display = 'none';
+    document.getElementById('staffModContent').style.display = 'flex';
+    if (!staffRendered) staffLoadData();
+    return;
+  }
+  // Check ministry lead passwords
+  let matchedRole = null;
+  for (const [key, role] of Object.entries(MINISTRY_ROLES)) {
+    if (role.hash && hex === role.hash) { matchedRole = key; break; }
+  }
+  if (matchedRole) {
+    sessionStorage.setItem(STAFF_SESSION_KEY, '1');
+    sessionStorage.setItem(MINISTRY_SESS_KEY, matchedRole);
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
@@ -4909,6 +5032,7 @@ async function staffLoadData() {
         if (rbRemote.boulders && (!bouldersEditsLoad_().ts || rbRemote.boulders.ts > bouldersEditsLoad_().ts))
           try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify(rbRemote.boulders)); } catch(e) {}
       }
+      await Promise.all([joyBombsLoad_(), pathwayLoad_()]);
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
@@ -4945,6 +5069,8 @@ function staffRenderAll(data) {
   staffRenderL10(data);
   staffRenderVolLeads(data);
   staffRenderFunnel(data);
+  staffRenderPathway(data);
+  ministryRenderBanner();
 }
 
 function staffRenderMeta(data) {
@@ -5993,7 +6119,7 @@ function staffRenderL10(data) {
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
-        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div style="flex:1"><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><textarea data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="Resolution notes…"></textarea><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner" style="height:38px;"><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" data-ri="${ri}" onclick="rockResolveFromL10(this)" style="height:38px;white-space:nowrap;flex-shrink:0;">✓ Resolve</button></div></div>`).join('')}
+        ${rocks.map((i,ri)=>`<div class="sp-l10-issue-row"><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;"><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);min-width:24px;">#${ri+1}</span><div style="flex:1"><div style="font-size:13px;">${i.rock}</div><div style="font-size:11px;color:var(--sp-muted);margin-top:2px;">Added by: ${i.addedBy} &middot; <span class="sp-priority ${i.priority}">${i.priority}</span></div></div></div><div class="sp-l10-input-row"><textarea data-sk="ids_${ri}_res" class="sp-l10-inp" placeholder="Resolution notes…"></textarea><input data-sk="ids_${ri}_own" class="sp-l10-inp" placeholder="Owner" style="height:38px;"><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" data-ri="${ri}" onclick="rockResolveFromL10(this)" style="height:38px;white-space:nowrap;flex-shrink:0;">✓ Resolve</button><button class="sp-rock-resolve-btn" data-rock="${_rbEsc(i.rock)}" onclick="idsAddFromRock(this.dataset.rock)" style="height:38px;white-space:nowrap;flex-shrink:0;background:transparent;border:1px solid var(--sp-border);color:var(--sp-muted);" title="Save to IDS Log">→ Log</button></div></div>`).join('')}
         ${!rocks.length ? '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No open rocks — discuss anything surfaced from scorecard or boulders.</div>' : ''}
         <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--sp-border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <span style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;white-space:nowrap;">+ ADD ROCK</span>
@@ -6068,6 +6194,8 @@ function staffRenderL10(data) {
       </div>`
     : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
 
+  const joyBombsSection = joyBombRenderSection_();
+  const idsLogSection = idsRenderFullSection();
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
     <div class="sp-section-header">
@@ -6082,6 +6210,8 @@ function staffRenderL10(data) {
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
     </div>
     ${agendaSections}
+    ${joyBombsSection}
+    ${idsLogSection}
     ${locked ? '' : `
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;margin-bottom:32px;">
       <button id="sp-l10-save-btn" class="sp-l10-print-btn" style="flex:1;" onclick="staffL10SaveMeeting()">Save &amp; Archive Meeting</button>
@@ -6094,6 +6224,8 @@ function staffRenderL10(data) {
 
   if (!locked) staffL10BindAndRestore();
   staffL10RenderHistory();
+  const _idsLogEl = document.getElementById('sp-l10-ids-log');
+  if (_idsLogEl) idsRefreshList_(_idsLogEl);
 }
 
 function staffRenderVolLeads(data) {
@@ -6696,6 +6828,467 @@ function profileBoulderAdd() {
   eosPost_({ action: 'boulder_add', owner: person.name, title, quarter });
   staffRenderBoulders(window._staffLastData || {});
   openStaffProfile(person.name);
+}
+
+// ── Ministry Lead helpers ─────────────────────────────────────────────────
+function ministryGetRole() {
+  const key = sessionStorage.getItem(MINISTRY_SESS_KEY);
+  return (key && MINISTRY_ROLES[key]) ? MINISTRY_ROLES[key] : null;
+}
+function ministryLogout() {
+  sessionStorage.removeItem(MINISTRY_SESS_KEY);
+  if (window._staffLastData) staffRenderAll(window._staffLastData);
+}
+function ministryRenderBanner() {
+  const role = ministryGetRole();
+  const content = document.getElementById('staffModContent');
+  if (!content) return;
+  let banner = document.getElementById('sp-role-banner');
+  if (role) {
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'sp-role-banner';
+      banner.className = 'sp-role-banner';
+      content.insertBefore(banner, content.firstChild);
+    }
+    banner.innerHTML = `<span>Viewing as: <strong>${role.label} — ${role.name}</strong></span><button class="sp-role-banner-link" onclick="ministryLogout()">Switch to full view →</button>`;
+    const nav = content.querySelector('.sp-nav-tabs');
+    if (nav && role.tabs) {
+      nav.querySelectorAll('.sp-nav-tab').forEach(tab => {
+        const oc = tab.getAttribute('onclick') || '';
+        const m = oc.match(/'([^']+)'/);
+        if (m) tab.style.display = role.tabs.includes(m[1]) ? '' : 'none';
+      });
+    }
+  } else {
+    if (banner) banner.remove();
+    const nav = content ? content.querySelector('.sp-nav-tabs') : null;
+    if (nav) nav.querySelectorAll('.sp-nav-tab').forEach(t => { t.style.display = ''; });
+  }
+}
+
+// ── IDS Log ───────────────────────────────────────────────────────────────
+function idsLoad_() {
+  try { return JSON.parse(localStorage.getItem(IDS_LS_KEY)||'null') || { issues:[] }; } catch(e) { return { issues:[] }; }
+}
+function idsSave_(data) {
+  try { localStorage.setItem(IDS_LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+function idsNextId_() { return 'ids_' + Date.now() + '_' + Math.random().toString(36).slice(2,6); }
+function idsPost_(payload) {
+  if (!IDS_WEBAPP_URL) return;
+  fetch(IDS_WEBAPP_URL, { method:'POST', body:JSON.stringify(payload), mode:'no-cors' }).catch(()=>{});
+}
+function idsAddIssue_(title, desc, by, owner, due) {
+  if (!title.trim()) return false;
+  const data = idsLoad_();
+  const issue = { id:idsNextId_(), title:title.trim(), description:(desc||'').trim(), raisedBy:(by||'').trim(), owner:(owner||'').trim(), dueDate:due||'', status:'open', decision:'', dateRaised:new Date().toISOString().split('T')[0], dateResolved:'' };
+  data.issues.unshift(issue);
+  idsSave_(data);
+  idsPost_({ action:'ids_add', ...issue });
+  return true;
+}
+function idsUpdateIssue_(id, updates) {
+  const data = idsLoad_();
+  const idx = data.issues.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  data.issues[idx] = { ...data.issues[idx], ...updates };
+  if (['solved','dropped'].includes(updates.status) && !data.issues[idx].dateResolved)
+    data.issues[idx].dateResolved = new Date().toISOString().split('T')[0];
+  idsSave_(data);
+  idsPost_({ action:'ids_update', id, ...updates });
+}
+function idsAddFromRock(rockText) {
+  const title = (rockText||'').length > 80 ? rockText.slice(0,77)+'…' : (rockText||'');
+  idsAddIssue_(title, 'Promoted from live L10 rocks: ' + (rockText||''), '', '', '');
+  const container = document.getElementById('sp-l10-ids-log');
+  if (container) idsRefreshList_(container);
+}
+function idsQuickStatus(id, status) {
+  idsUpdateIssue_(id, { status });
+  const container = document.getElementById('sp-l10-ids-log');
+  if (container) idsRefreshList_(container);
+}
+function idsRefreshList_(container) {
+  if (!container) return;
+  const data = idsLoad_();
+  const isHistory = container.dataset.view === 'history';
+  const issues = isHistory ? data.issues : data.issues.filter(i => ['open','in-discussion'].includes(i.status));
+  const searchVal = (container.querySelector('.sp-ids-log-search')||{}).value||'';
+  const ownerVal  = (container.querySelector('.sp-ids-log-owner-sel')||{}).value||'';
+  const statusVal = (container.querySelector('.sp-ids-log-status-sel')||{}).value||'';
+  const fmtDate = s => s ? new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
+  const statusLabel = { open:'Open', 'in-discussion':'In Discussion', solved:'Solved', dropped:'Dropped' };
+  const filtered = issues.filter(i => {
+    if (searchVal && !(i.title+' '+i.description).toLowerCase().includes(searchVal.toLowerCase())) return false;
+    if (ownerVal && i.owner !== ownerVal) return false;
+    if (statusVal && i.status !== statusVal) return false;
+    return true;
+  });
+  const listEl = container.querySelector('.sp-ids-log-list');
+  if (!listEl) return;
+  listEl.innerHTML = filtered.length ? filtered.map(issue => `
+    <div class="sp-ids-log-card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px;">
+        <div class="sp-ids-log-title">${_rbEsc(issue.title)}</div>
+        <span class="sp-ids-log-status ${issue.status}">${statusLabel[issue.status]||issue.status}</span>
+      </div>
+      <div class="sp-ids-log-meta">
+        ${issue.raisedBy?`<span>Raised by: ${_rbEsc(issue.raisedBy)}</span>`:''}
+        ${issue.owner?`<span>Owner: ${_rbEsc(issue.owner)}</span>`:''}
+        ${issue.dateRaised?`<span>${fmtDate(issue.dateRaised)}</span>`:''}
+        ${issue.dueDate?`<span>Due: ${fmtDate(issue.dueDate)}</span>`:''}
+      </div>
+      ${issue.description?`<div class="sp-ids-log-desc">${_rbEsc(issue.description)}</div>`:''}
+      ${issue.decision?`<div style="margin-top:6px;font-size:12px;font-style:italic;color:var(--sp-muted);">Decision: ${_rbEsc(issue.decision)}</div>`:''}
+      <div class="sp-ids-log-actions">
+        ${issue.status!=='solved'?`<button class="sp-ids-log-btn" onclick="idsQuickStatus('${issue.id}','solved')">✓ Solved</button>`:''}
+        ${!['in-discussion','solved'].includes(issue.status)?`<button class="sp-ids-log-btn" onclick="idsQuickStatus('${issue.id}','in-discussion')">→ Discuss</button>`:''}
+        ${issue.status!=='dropped'?`<button class="sp-ids-log-btn" onclick="idsQuickStatus('${issue.id}','dropped')">✕ Drop</button>`:''}
+      </div>
+    </div>`).join('') : `<div class="sp-ids-log-empty">${isHistory?'No issues logged yet.':'No active issues — great work! 🎉'}</div>`;
+}
+function idsToggleView(btn) {
+  const container = document.getElementById('sp-l10-ids-log');
+  if (!container) return;
+  const isHistory = container.dataset.view === 'history';
+  container.dataset.view = isHistory ? 'active' : 'history';
+  btn.textContent = isHistory ? '▾ Full History' : '▴ Active Only';
+  idsRefreshList_(container);
+}
+function idsShowAddForm() {
+  const existing = document.getElementById('sp-ids-add-modal');
+  if (existing) { existing.style.display='flex'; return; }
+  const staffOpts = STAFF_TEAM_DATA.map(s=>`<option>${_rbEsc(s.name)}</option>`).join('');
+  const m = document.createElement('div');
+  m.id = 'sp-ids-add-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.78);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.innerHTML = `
+    <div style="background:var(--sp-parchment);border-radius:6px;padding:28px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;">Log New Issue</div>
+      <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Title *</label>
+      <input id="ids-f-title" class="sp-l10-inp" placeholder="Issue title…" style="margin-bottom:12px;width:100%;">
+      <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Description</label>
+      <textarea id="ids-f-desc" class="sp-l10-inp" placeholder="Details…" style="margin-bottom:12px;width:100%;min-height:56px;"></textarea>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Raised By</label>
+          <select id="ids-f-by" class="sp-l10-inp" style="height:38px;width:100%;"><option value="">—</option>${staffOpts}</select>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Owner</label>
+          <select id="ids-f-owner" class="sp-l10-inp" style="height:38px;width:100%;"><option value="">—</option>${staffOpts}</select>
+        </div>
+      </div>
+      <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Due Date</label>
+      <input id="ids-f-due" type="date" class="sp-l10-inp" style="margin-bottom:20px;width:100%;">
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button class="sp-ids-log-btn" onclick="document.getElementById('sp-ids-add-modal').style.display='none'">Cancel</button>
+        <button class="sp-ids-log-btn primary" onclick="idsFormSubmit_()">Log Issue</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  document.getElementById('ids-f-title').focus();
+}
+function idsFormSubmit_() {
+  const title = (document.getElementById('ids-f-title')||{}).value||'';
+  const desc  = (document.getElementById('ids-f-desc')||{}).value||'';
+  const by    = (document.getElementById('ids-f-by')||{}).value||'';
+  const owner = (document.getElementById('ids-f-owner')||{}).value||'';
+  const due   = (document.getElementById('ids-f-due')||{}).value||'';
+  if (!title.trim()) { document.getElementById('ids-f-title').focus(); return; }
+  idsAddIssue_(title, desc, by, owner, due);
+  const modal = document.getElementById('sp-ids-add-modal');
+  if (modal) modal.remove();
+  const container = document.getElementById('sp-l10-ids-log');
+  if (container) idsRefreshList_(container);
+}
+function idsRenderFullSection() {
+  const staffOpts = STAFF_TEAM_DATA.map(s=>`<option value="${_rbEsc(s.name)}">${_rbEsc(s.name)}</option>`).join('');
+  return `
+    <div class="sp-l10-sec" style="margin-top:24px;">
+      <div class="sp-l10-sec-hdr">
+        <h4>IDS Log</h4>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">Persistent Issues History</span>
+        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="sp-ids-log-btn primary" onclick="idsShowAddForm()">+ Log New Issue</button>
+          <button class="sp-ids-log-btn" onclick="idsToggleView(this)">▾ Full History</button>
+        </div>
+      </div>
+      <div id="sp-l10-ids-log" data-view="active">
+        <div class="sp-ids-log-filter">
+          <input class="sp-ids-log-search" placeholder="Search issues…" oninput="idsRefreshList_(document.getElementById('sp-l10-ids-log'))">
+          <select class="sp-ids-log-owner-sel" onchange="idsRefreshList_(document.getElementById('sp-l10-ids-log'))"><option value="">All owners</option>${staffOpts}</select>
+          <select class="sp-ids-log-status-sel" onchange="idsRefreshList_(document.getElementById('sp-l10-ids-log'))">
+            <option value="">All statuses</option><option value="open">Open</option><option value="in-discussion">In Discussion</option><option value="solved">Solved</option><option value="dropped">Dropped</option>
+          </select>
+        </div>
+        <div class="sp-ids-log-list"></div>
+      </div>
+    </div>`;
+}
+
+// ── Joy Bombs ─────────────────────────────────────────────────────────────
+let _joyBombsServerData = null;
+async function joyBombsLoad_() {
+  try {
+    const res = await fetch(JOY_BOMBS_DATA_URL + '?t=' + Date.now(), { cache:'no-store' });
+    if (res.ok) _joyBombsServerData = await res.json();
+  } catch(e) { /* not yet deployed */ }
+}
+function joyBombsLsLoad_() {
+  try { return JSON.parse(localStorage.getItem(JOY_BOMBS_LS_KEY)||'null') || { bombed:{}, added:[] }; } catch(e) { return { bombed:{}, added:[] }; }
+}
+function joyBombsLsSave_(data) {
+  try { localStorage.setItem(JOY_BOMBS_LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+function joyBombsGetAll_() {
+  const server = _joyBombsServerData || { pending:[], completed:[] };
+  const local  = joyBombsLsLoad_();
+  const all = [
+    ...server.pending.map(e => local.bombed[e.id] ? {...e, status:'bombed', bombedDate:local.bombed[e.id].date, bombedBy:local.bombed[e.id].by} : e),
+    ...server.completed.map(e => local.bombed[e.id] ? {...e, ...local.bombed[e.id]} : e),
+    ...(local.added||[])
+  ];
+  const seen = new Set();
+  return all.filter(e => { if (seen.has(e.id)) return false; seen.add(e.id); return true; });
+}
+function joyBombMarkBombed_(id) {
+  const card = document.querySelector(`[data-jb-id="${id}"]`);
+  if (!card) return;
+  const staffOpts = STAFF_TEAM_DATA.map(s=>`<option>${_rbEsc(s.name)}</option>`).join('');
+  const today = new Date().toISOString().split('T')[0];
+  card.innerHTML = `
+    <div style="flex:1;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;">Who sent the Joy Bomb?</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+        <select id="jb-by-${id}" class="sp-l10-inp" style="height:36px;min-width:140px;flex:1;"><option value="">Who bombed?</option>${staffOpts}</select>
+        <input id="jb-date-${id}" type="date" class="sp-l10-inp" value="${today}" style="height:36px;width:150px;">
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="sp-joy-bomb-btn" style="background:var(--sp-green);color:#fff;" onclick="joyBombConfirm_('${id}')">💣 Confirm!</button>
+        <button class="sp-ids-log-btn" onclick="staffRenderL10(window._staffLastData||{})">Cancel</button>
+      </div>
+    </div>`;
+}
+function joyBombConfirm_(id) {
+  const by   = (document.getElementById('jb-by-'+id)||{}).value||'';
+  const date = (document.getElementById('jb-date-'+id)||{}).value||new Date().toISOString().split('T')[0];
+  const local = joyBombsLsLoad_();
+  local.bombed[id] = { by, date };
+  joyBombsLsSave_(local);
+  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_mark',id,by,date}),mode:'no-cors'}).catch(()=>{});
+  const card = document.querySelector(`[data-jb-id="${id}"]`);
+  if (card) {
+    card.style.transition = 'opacity 0.4s, max-height 0.5s';
+    card.style.opacity = '0';
+    card.style.overflow = 'hidden';
+    card.style.maxHeight = card.offsetHeight + 'px';
+    requestAnimationFrame(() => { card.style.maxHeight = '0'; });
+    setTimeout(() => staffRenderL10(window._staffLastData||{}), 550);
+  }
+}
+function joyBombManualAdd_() {
+  const existing = document.getElementById('sp-jb-add-modal');
+  if (existing) { existing.style.display='flex'; return; }
+  const today = new Date().toISOString().split('T')[0];
+  const m = document.createElement('div');
+  m.id = 'sp-jb-add-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.78);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.innerHTML = `
+    <div style="background:var(--sp-parchment);border-radius:6px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;">＋ Add Joy Bomb Manually</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Name *</label>
+          <input id="jb-f-name" class="sp-l10-inp" placeholder="Volunteer name" style="width:100%;">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Team</label>
+          <input id="jb-f-team" class="sp-l10-inp" placeholder="Team name" style="width:100%;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Phone</label>
+          <input id="jb-f-phone" class="sp-l10-inp" placeholder="555-000-0000" style="width:100%;">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">First Serve Date</label>
+          <input id="jb-f-date" type="date" class="sp-l10-inp" value="${today}" style="width:100%;">
+        </div>
+      </div>
+      <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Notes</label>
+      <textarea id="jb-f-notes" class="sp-l10-inp" placeholder="Any notes…" style="width:100%;min-height:48px;margin-bottom:20px;"></textarea>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button class="sp-ids-log-btn" onclick="document.getElementById('sp-jb-add-modal').remove()">Cancel</button>
+        <button class="sp-ids-log-btn primary" onclick="joyBombFormSubmit_()">Add Entry</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  document.getElementById('jb-f-name').focus();
+}
+function joyBombFormSubmit_() {
+  const name  = (document.getElementById('jb-f-name')||{}).value||'';
+  const team  = (document.getElementById('jb-f-team')||{}).value||'';
+  const phone = (document.getElementById('jb-f-phone')||{}).value||'';
+  const date  = (document.getElementById('jb-f-date')||{}).value||'';
+  const notes = (document.getElementById('jb-f-notes')||{}).value||'';
+  if (!name.trim()) { document.getElementById('jb-f-name').focus(); return; }
+  const local = joyBombsLsLoad_();
+  const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), phone:phone.trim(), firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
+  (local.added = local.added||[]).push(entry);
+  joyBombsLsSave_(local);
+  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_add',...entry}),mode:'no-cors'}).catch(()=>{});
+  const modal = document.getElementById('sp-jb-add-modal');
+  if (modal) modal.remove();
+  staffRenderL10(window._staffLastData||{});
+}
+function joyBombRenderSection_() {
+  const all = joyBombsGetAll_();
+  const role = ministryGetRole();
+  const visible = (role && role.scopeTeams && role.scopeTeams.length)
+    ? all.filter(e => !e.team || role.scopeTeams.some(t => (e.team||'').toLowerCase().includes(t)))
+    : all;
+  const pending   = visible.filter(e => e.status !== 'bombed').sort((a,b) => (a.firstServeDate||'').localeCompare(b.firstServeDate||''));
+  const completed = visible.filter(e => e.status === 'bombed').sort((a,b) => (b.bombedDate||'').localeCompare(a.bombedDate||''));
+  const fmtDate = s => s ? new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
+  const pendingHtml = pending.length
+    ? pending.map(e => `
+      <div class="sp-joy-card" data-jb-id="${e.id}">
+        <div style="flex:1;">
+          <div class="sp-joy-card-name">${_rbEsc(e.name)}</div>
+          <div class="sp-joy-card-meta">
+            ${e.team?`<span>Team: ${_rbEsc(e.team)}</span>`:''}
+            ${e.firstServeDate?`<span>First served: ${fmtDate(e.firstServeDate)}</span>`:''}
+            ${e.source==='manual'?`<span style="opacity:.6;">manual</span>`:''}
+          </div>
+          <div class="sp-joy-card-phone" style="font-size:13px;">
+            ${e.phone?`<a href="tel:${_rbEsc(e.phone)}">${_rbEsc(e.phone)}</a>`:'<span style="color:var(--sp-muted);font-style:italic;font-size:12px;">No phone on file ⚠</span>'}
+          </div>
+          ${e.notes?`<div style="font-size:12px;color:var(--sp-muted);margin-top:4px;">${_rbEsc(e.notes)}</div>`:''}
+        </div>
+        <button class="sp-joy-bomb-btn" onclick="joyBombMarkBombed_('${e.id}')">💣 Bombed!</button>
+      </div>`).join('')
+    : `<div class="sp-joy-empty">No pending joy bombs — you're all caught up! 🎉</div>`;
+  const completedHtml = completed.length
+    ? completed.map(e => `
+      <div class="sp-joy-history-item">
+        <div style="flex:1;"><strong>${_rbEsc(e.name)}</strong>${e.team?` — ${_rbEsc(e.team)}`:''}
+          <div style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-top:2px;">First served: ${fmtDate(e.firstServeDate)} · Bombed: ${fmtDate(e.bombedDate||e.bombedAt)}${e.bombedBy?' by '+_rbEsc(e.bombedBy):''}</div>
+          ${e.notes?`<div style="font-size:12px;color:var(--sp-muted);">${_rbEsc(e.notes)}</div>`:''}
+        </div>
+      </div>`).join('')
+    : '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No completed joy bombs yet.</div>';
+  return `
+    <div class="sp-l10-sec">
+      <div class="sp-joy-sec-hdr">
+        <h4>Joy Bombs 🎉</h4>
+        <span class="sp-l10-badge ${pending.length?'red':'green'}">${pending.length} Pending</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">First-Time Servers</span>
+        <button class="sp-joy-add-btn" style="margin-left:auto;" onclick="joyBombManualAdd_()">＋ Add Manually</button>
+      </div>
+      <div class="sp-joy-section">
+        ${pendingHtml}
+        <details style="margin-top:10px;">
+          <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:6px 0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-muted);user-select:none;">&#9658; Completed Joy Bombs (${completed.length})</summary>
+          <div style="padding:8px 0 4px;">${completedHtml}</div>
+        </details>
+      </div>
+    </div>`;
+}
+
+// ── Discipleship Pathway Tracker ──────────────────────────────────────────
+let _pathwayData = null;
+async function pathwayLoad_() {
+  try {
+    const res = await fetch(PATHWAY_DATA_URL + '?t=' + Date.now(), { cache:'no-store' });
+    if (res.ok) _pathwayData = await res.json();
+  } catch(e) { /* not yet deployed */ }
+}
+function staffRenderPathway(data) {
+  const el = document.getElementById('sp-pathway');
+  if (!el) return;
+  const pathway = _pathwayData || data.pathway || null;
+  if (!pathway) {
+    el.innerHTML = `
+      <div class="sp-section-header">
+        <div class="sp-eyebrow">Discipleship Pathway</div>
+        <h2>Pathway Tracker</h2>
+        <p>Pipeline view of where members are in their discipleship journey — making the invisible visible before people go inactive.</p>
+      </div>
+      <div class="sp-pathway-setup">
+        <div style="font-size:40px;margin-bottom:14px;">🗺</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--sp-ink);margin-bottom:10px;">Pathway data not yet configured</div>
+        <div style="font-size:13px;color:var(--sp-muted);max-width:500px;margin:0 auto 18px;line-height:1.7;">Deploy <code style="font-family:'DM Mono',monospace;background:rgba(0,0,0,.06);padding:2px 6px;border-radius:2px;">Code_pathway_sync.gs</code> and set a hourly trigger. It will push <code style="font-family:'DM Mono',monospace;background:rgba(0,0,0,.06);padding:2px 6px;border-radius:2px;">pathway.json</code> to the GitHub repo automatically.</div>
+        <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--sp-muted);word-break:break-all;">${PATHWAY_DATA_URL}</div>
+      </div>`;
+    return;
+  }
+  const stages = pathway.stages||[];
+  const total  = stages.length ? Math.max(stages[0].count||0, 1) : 1;
+  const healthClass = (stage, idx) => {
+    if ((stage.avgDaysStuck||0) > 90) return 'health-red';
+    if (idx > 0 && stages[idx-1].count) {
+      if ((stages[idx-1].count - stage.count) / stages[idx-1].count > 0.4) return 'health-yellow';
+    }
+    return 'health-green';
+  };
+  const sumCards = [
+    { val:pathway.totalMembers||0, label:'Total Members' },
+    { val:pathway.pctInGroup!=null?Math.round(pathway.pctInGroup)+'%':'—', label:'% In A Group' },
+    { val:pathway.pctServing!=null?Math.round(pathway.pctServing)+'%':'—', label:'% Serving' },
+    { val:pathway.pctLeadership!=null?Math.round(pathway.pctLeadership)+'%':'—', label:'Leadership Track' }
+  ];
+  el.innerHTML = `
+    <div class="sp-section-header">
+      <div class="sp-eyebrow">Discipleship Pathway</div>
+      <h2>Pathway Tracker</h2>
+      <p>Pipeline view showing where members are in their discipleship journey. Click any stage to see the person list.</p>
+    </div>
+    <div class="sp-pathway-sum-grid">
+      ${sumCards.map(c=>`<div class="sp-pathway-sum-card"><div class="sp-pathway-sum-val">${c.val}</div><div class="sp-pathway-sum-label">${c.label}</div></div>`).join('')}
+    </div>
+    <div class="sp-pathway-funnel">
+      ${stages.map((stage,i)=>`${i>0?'<div class="sp-pathway-arrow">&rsaquo;</div>':''}<div class="sp-pathway-stage ${healthClass(stage,i)}" onclick="pathwayShowStageModal('${_rbEsc(stage.name)}')"><div class="sp-pathway-stage-name">${_rbEsc(stage.name)}</div><div class="sp-pathway-stage-count">${stage.count||0}</div><div class="sp-pathway-stage-pct">${total?Math.round((stage.count||0)/total*100):0}% of members</div>${(stage.avgDaysStuck||0)>90?`<div style="font-size:11px;color:var(--sp-red);font-family:'DM Mono',monospace;margin-top:4px;">&#9888; ${Math.round(stage.avgDaysStuck)}d avg</div>`:''}</div>`).join('')}
+    </div>
+    <div style="display:flex;gap:16px;font-size:12px;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-bottom:20px;flex-wrap:wrap;">
+      <span><span style="color:var(--sp-green);">&#9644;</span> Healthy</span>
+      <span><span style="color:var(--sp-yellow);">&#9644;</span> Large drop-off (&gt;40%)</span>
+      <span><span style="color:var(--sp-red);">&#9644;</span> Stalled (&gt;90d avg)</span>
+    </div>
+    ${pathway.lastUpdated?`<div style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;">Last synced: ${new Date(pathway.lastUpdated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</div>`:''}`;
+}
+function pathwayShowStageModal(stageName) {
+  if (!_pathwayData) return;
+  const stage = (_pathwayData.stages||[]).find(s => s.name === stageName);
+  if (!stage) return;
+  const people = stage.people||[];
+  const fmtDate = s => s ? new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—';
+  const m = document.createElement('div');
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.78);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.onclick = e => { if (e.target===m) m.remove(); };
+  m.innerHTML = `
+    <div style="background:var(--sp-parchment);border-radius:6px;max-width:560px;width:100%;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <div style="padding:20px 24px;border-bottom:1px solid var(--sp-border);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:4px;">Stage</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;">${_rbEsc(stageName)} (${stage.count||people.length})</div>
+        </div>
+        <button onclick="this.closest('div[style]').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--sp-muted);line-height:1;">&times;</button>
+      </div>
+      <div style="overflow-y:auto;padding:16px 24px;flex:1;">
+        ${people.length ? `<table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead><tr>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid var(--sp-border);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);font-weight:400;">Name</th>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid var(--sp-border);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);font-weight:400;">Last Activity</th>
+            <th style="text-align:right;padding:8px 0;border-bottom:1px solid var(--sp-border);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-muted);font-weight:400;">Days in Stage</th>
+          </tr></thead>
+          <tbody>${people.map(p=>`<tr><td style="padding:9px 0;border-bottom:1px solid var(--sp-section-bg);">${p.pcoId?`<a href="https://people.planningcenteronline.com/people/${p.pcoId}" target="_blank" rel="noopener" style="color:var(--sp-ink);text-decoration:none;font-weight:600;">${_rbEsc(p.name)}</a>`:`<strong>${_rbEsc(p.name)}</strong>`}</td><td style="padding:9px 0;border-bottom:1px solid var(--sp-section-bg);color:var(--sp-muted);">${fmtDate(p.lastActivity)}</td><td style="padding:9px 0;border-bottom:1px solid var(--sp-section-bg);text-align:right;font-family:'DM Mono',monospace;">${p.daysInStage!=null?p.daysInStage+'d':'—'}</td></tr>`).join('')}</tbody>
+        </table>` : '<div style="color:var(--sp-muted);font-size:14px;padding:20px 0;text-align:center;">No people data for this stage yet.</div>'}
+      </div>
+    </div>`;
+  document.body.appendChild(m);
 }
 </script>
 
