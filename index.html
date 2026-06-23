@@ -1281,11 +1281,6 @@
   .sp-pathway-setup { background: var(--sp-section-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 32px 28px; text-align: center; }
 
   /* ── Ministry Lead Role Banner ── */
-  .sp-role-banner { background: linear-gradient(90deg, #2a1810 0%, #3d2415 100%); color: var(--sp-parchment); padding: 10px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; flex-shrink: 0; border-bottom: 1px solid rgba(168,76,47,0.4); }
-  .sp-role-banner strong { color: #f5c88a; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
-  .sp-role-banner-idle { background: rgba(26,21,16,0.55); color: var(--sp-parchment); padding: 7px 32px; display: flex; align-items: center; gap: 12px; font-size: 12px; flex-shrink: 0; border-bottom: 1px solid rgba(216,205,184,0.12); }
-  .sp-role-banner-link { text-decoration: none; cursor: pointer; font-size: 12px; background: none; border: none; font-family: 'DM Mono', monospace; letter-spacing: 0.5px; padding: 0; }
-  .sp-role-banner-link:hover { opacity: 1 !important; text-decoration: underline; }
 
   /* ── Sunday One-sheet modal ───────────────────────────────────── */
   #sundayModal .tmod-body { padding:0; }
@@ -4346,44 +4341,6 @@ const JOY_BOMBS_DATA_URL  = 'https://lssouthreno.github.io/Church-Dashboard/joy_
 const PATHWAY_DATA_URL    = 'https://lssouthreno.github.io/Church-Dashboard/pathway.json';
 const IDS_LS_KEY          = 'lssr_ids_log';
 const JOY_BOMBS_LS_KEY    = 'lssr_joy_bombs';
-const MINISTRY_SESS_KEY   = 'lssr_ministry_role';
-
-// ⚙️ CONFIGURE: Ministry Leads — set hash for each role's password
-// Generate hash in browser console: crypto.subtle.digest('SHA-256',new TextEncoder().encode('pw')).then(b=>Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')).then(console.log)
-const MINISTRY_ROLES = {
-  worship: {
-    label: 'Worship Director', name: 'Gordon Fava',
-    hash: 'bba00b1891afe83daa29a9639a61da57c02c7bd4e381830c7ac765b79bf69542',
-    area: 'worship',
-    scopeTeams: ['worship', 'tech', 'production'],
-    scorecardOwners: ['Gordon Fava'],
-    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
-  },
-  discipleship: {
-    label: 'Discipleship Pastor', name: 'Adam Carp',
-    hash: '5729409e8dc3b9146ca1ce8a33748ae998c06ed8a5a460bfad57b0e452701a9b',
-    area: 'discipleship',
-    scopeTeams: ['community groups', 'cg', 'groups'],
-    scorecardOwners: ['Adam Carp'],
-    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10', 'sp-pathway', 'sp-funnel']
-  },
-  stepping_stones: {
-    label: 'Stepping Stones Director', name: 'Geoffrey Caliger',
-    hash: 'dee34d918efca02eb20208cc9f7e57e177be908661318d84adc7351d36c46fb0',
-    area: 'stepping_stones',
-    scopeTeams: ['stepping stones', 'kids', 'children'],
-    scorecardOwners: ['Geoffrey Caliger', 'Deana Griffin'],
-    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
-  },
-  student_ministry: {
-    label: 'Student Ministry Director', name: 'Katie Thompson',
-    hash: 'dac4970ce624959fa71d118f9e23bedc55491c36620f301c34f189b853a83f24',
-    area: 'student_ministry',
-    scopeTeams: ['student', 'students'],
-    scorecardOwners: ['Katie Thompson', 'Isaac Griffin'],
-    tabs: ['sp-snapshot', 'sp-scorecard', 'sp-boulders', 'sp-ids', 'sp-l10']
-  }
-};
 
 let staffRendered = false;
 
@@ -4971,7 +4928,6 @@ async function staffDoUnlock() {
   const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
   if (hex === STAFF_HASH) {
     sessionStorage.setItem(STAFF_SESSION_KEY, '1');
-    sessionStorage.removeItem(MINISTRY_SESS_KEY);
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
@@ -5059,7 +5015,6 @@ function staffRenderAll(data) {
   staffRenderVolLeads(data);
   staffRenderFunnel(data);
   staffRenderPathway(data);
-  ministryRenderBanner();
 }
 
 function staffRenderMeta(data) {
@@ -6086,9 +6041,19 @@ function staffRenderL10(data) {
     const isBoulder   = t.includes('boulder');
     const isIDS       = t.includes('ids') || (t.includes('identify') && t.includes('discuss'));
     const isCalendar  = t.includes('calendar');
+    const isJoyBombs  = t.includes('joy bomb');
 
     // Boulders are now rendered after rocks — skip here
     if (isBoulder) return '';
+
+    if (isJoyBombs) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        ${joyBombRenderSection_()}
+      </div>`;
 
     if (isScorecard) return `
       <div class="sp-l10-sec">
@@ -6183,7 +6148,6 @@ function staffRenderL10(data) {
       </div>`
     : `<div class="sp-timeoff-wrap"><div class="sp-snap-label" style="margin-bottom:6px;">Staff Time Off</div><span class="sp-snap-green-badge">✓ No upcoming time off on record</span></div>`;
 
-  const joyBombsSection = joyBombRenderSection_();
   const idsLogSection = idsRenderFullSection();
   el.innerHTML = `
     ${wasReset ? `<div style="background:#2e3f2e;border:1px solid #4a7a4a;border-radius:4px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#9fd49f;">↻ Last week's meeting was auto-archived. Starting fresh.</div>` : ''}
@@ -6199,7 +6163,6 @@ function staffRenderL10(data) {
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
     </div>
     ${agendaSections}
-    ${joyBombsSection}
     ${idsLogSection}
     ${locked ? '' : `
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;margin-bottom:32px;">
@@ -6819,102 +6782,6 @@ function profileBoulderAdd() {
   openStaffProfile(person.name);
 }
 
-// ── Ministry Lead helpers ─────────────────────────────────────────────────
-function ministryGetRole() {
-  const key = sessionStorage.getItem(MINISTRY_SESS_KEY);
-  return (key && MINISTRY_ROLES[key]) ? MINISTRY_ROLES[key] : null;
-}
-function ministryLogout() {
-  sessionStorage.removeItem(MINISTRY_SESS_KEY);
-  if (window._staffLastData) staffRenderAll(window._staffLastData);
-}
-function ministryRenderBanner() {
-  const role = ministryGetRole();
-  const content = document.getElementById('staffModContent');
-  if (!content) return;
-  let banner = document.getElementById('sp-role-banner');
-  if (role) {
-    if (!banner) {
-      banner = document.createElement('div');
-      banner.id = 'sp-role-banner';
-      banner.className = 'sp-role-banner';
-      content.insertBefore(banner, content.firstChild);
-    }
-    banner.innerHTML = `<span>Viewing as: <strong>${role.label} — ${role.name}</strong></span><button class="sp-role-banner-link" onclick="ministryLogout()">← Back to full view</button>`;
-    const nav = content.querySelector('.sp-nav-tabs');
-    if (nav && role.tabs) {
-      nav.querySelectorAll('.sp-nav-tab').forEach(tab => {
-        const oc = tab.getAttribute('onclick') || '';
-        const m = oc.match(/'([^']+)'/);
-        if (m) tab.style.display = role.tabs.includes(m[1]) ? '' : 'none';
-      });
-    }
-  } else {
-    if (banner) {
-      banner.className = 'sp-role-banner-idle';
-      banner.innerHTML = `<span style="color:rgba(245,240,232,0.45);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;">STAFF VIEW</span><button class="sp-role-banner-link" onclick="ministryShowSwitchModal()" style="color:rgba(201,150,58,0.7);margin-left:auto;">Ministry View →</button>`;
-    } else {
-      banner = document.createElement('div');
-      banner.id = 'sp-role-banner';
-      banner.className = 'sp-role-banner-idle';
-      banner.innerHTML = `<span style="color:rgba(245,240,232,0.45);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;">STAFF VIEW</span><button class="sp-role-banner-link" onclick="ministryShowSwitchModal()" style="color:rgba(201,150,58,0.7);margin-left:auto;">Ministry View →</button>`;
-      content.insertBefore(banner, content.firstChild);
-    }
-    const nav = content ? content.querySelector('.sp-nav-tabs') : null;
-    if (nav) nav.querySelectorAll('.sp-nav-tab').forEach(t => { t.style.display = ''; });
-  }
-}
-
-async function ministryShowSwitchModal() {
-  const existing = document.getElementById('sp-ministry-modal');
-  if (existing) { existing.style.display = 'flex'; return; }
-  const roleOpts = Object.entries(MINISTRY_ROLES).map(([k, r]) =>
-    `<option value="${k}">${r.label} — ${r.name}</option>`).join('');
-  const m = document.createElement('div');
-  m.id = 'sp-ministry-modal';
-  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.82);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
-  m.innerHTML = `
-    <div style="background:var(--sp-parchment);border-radius:6px;padding:28px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--sp-ink);">Ministry View</div>
-      <div style="font-size:13px;color:var(--sp-muted);margin-bottom:20px;">Enter your ministry password to switch to your filtered view.</div>
-      <div style="margin-bottom:12px;">
-        <label style="display:block;font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Role</label>
-        <select id="ministry-role-sel" style="width:100%;padding:9px 10px;border:1px solid var(--sp-border);border-radius:3px;background:var(--sp-card-bg);color:var(--sp-ink);font-size:14px;">${roleOpts}</select>
-      </div>
-      <div style="margin-bottom:16px;">
-        <label style="display:block;font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Password</label>
-        <input id="ministry-pw-inp" type="password" autocomplete="off" style="width:100%;padding:9px 10px;border:1px solid var(--sp-border);border-radius:3px;background:var(--sp-card-bg);color:var(--sp-ink);font-size:14px;" onkeydown="if(event.key==='Enter')ministryConfirmSwitch()">
-      </div>
-      <div id="ministry-modal-err" style="display:none;color:var(--sp-red);font-size:12px;margin-bottom:10px;">Incorrect password. Try again.</div>
-      <div style="display:flex;gap:10px;">
-        <button onclick="ministryConfirmSwitch()" style="flex:1;padding:10px;background:var(--sp-ink);color:var(--sp-gold);border:none;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:700;">Enter Ministry View</button>
-        <button onclick="document.getElementById('sp-ministry-modal').remove()" style="padding:10px 16px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;color:var(--sp-muted);">Cancel</button>
-      </div>
-    </div>`;
-  document.body.appendChild(m);
-  setTimeout(() => { const inp = document.getElementById('ministry-pw-inp'); if (inp) inp.focus(); }, 50);
-}
-
-async function ministryConfirmSwitch() {
-  const roleKey = (document.getElementById('ministry-role-sel')||{}).value || '';
-  const pw = (document.getElementById('ministry-pw-inp')||{}).value || '';
-  const errEl = document.getElementById('ministry-modal-err');
-  if (!roleKey || !pw) return;
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-  const role = MINISTRY_ROLES[roleKey];
-  if (role && role.hash && hex === role.hash) {
-    sessionStorage.setItem(MINISTRY_SESS_KEY, roleKey);
-    const modal = document.getElementById('sp-ministry-modal');
-    if (modal) modal.remove();
-    if (window._staffLastData) staffRenderAll(window._staffLastData);
-  } else {
-    if (errEl) errEl.style.display = 'block';
-    const inp = document.getElementById('ministry-pw-inp');
-    if (inp) { inp.value = ''; inp.focus(); }
-  }
-}
-
 // ── IDS Log ───────────────────────────────────────────────────────────────
 function idsLoad_() {
   try { return JSON.parse(localStorage.getItem(IDS_LS_KEY)||'null') || { issues:[] }; } catch(e) { return { issues:[] }; }
@@ -7194,12 +7061,8 @@ function joyBombFormSubmit_() {
 }
 function joyBombRenderSection_() {
   const all = joyBombsGetAll_();
-  const role = ministryGetRole();
-  const visible = (role && role.scopeTeams && role.scopeTeams.length)
-    ? all.filter(e => !e.team || role.scopeTeams.some(t => (e.team||'').toLowerCase().includes(t)))
-    : all;
-  const pending   = visible.filter(e => e.status !== 'bombed').sort((a,b) => (a.firstServeDate||'').localeCompare(b.firstServeDate||''));
-  const completed = visible.filter(e => e.status === 'bombed').sort((a,b) => (b.bombedDate||'').localeCompare(a.bombedDate||''));
+  const pending   = all.filter(e => e.status !== 'bombed').sort((a,b) => (a.firstServeDate||'').localeCompare(b.firstServeDate||''));
+  const completed = all.filter(e => e.status === 'bombed').sort((a,b) => (b.bombedDate||'').localeCompare(a.bombedDate||''));
   const fmtDate = s => s ? new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
   const pendingHtml = pending.length
     ? pending.map(e => `

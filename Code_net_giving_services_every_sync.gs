@@ -118,6 +118,9 @@ function syncDashboard() {
 
   // 7. Push funnel + calendar data to Staff OS eos-data.json
   safeRun_('Staff OS Funnel+Calendar', () => { syncStaffOSFunnelAndCalendar_(); });
+
+  // 8. Detect first-time servers and push joy_bombs.json
+  safeRun_('Joy Bombs', () => { syncJoyBombs(ss); });
 }
 
 function syncRecentDashboardData() {
