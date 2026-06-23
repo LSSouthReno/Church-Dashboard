@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T17:46:14.028Z",
+  "lastUpdated": "2026-06-23T18:02:30.740Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3131,11 +3131,11 @@
     },
     {
       "name": "First impressions",
-      "current": 31,
+      "current": 30,
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 366,
+  "uniqueVolunteers": 365,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 23, 2026, 10:46 AM",
+    "refreshed": "Jun 23, 2026, 11:02 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7587,6 +7587,14 @@
         "attPct": 59
       },
       {
+        "name": "Bridges Community Group",
+        "members": 16,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
+        "avgAttended": 8,
+        "attPct": 50
+      },
+      {
         "name": "Thompson/Primus Community Group",
         "members": 16,
         "leaders": 2,
@@ -7607,14 +7615,6 @@
         "members": 14,
         "leaders": 2,
         "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 8,
-        "attPct": 57
-      },
-      {
-        "name": "Bridges Community Group",
-        "members": 14,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
         "avgAttended": 8,
         "attPct": 57
       },
@@ -8456,6 +8456,90 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Yost",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Pat Peregrin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Sarah Rawlins",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Renee Peregrin",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Douglas Drake",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tim Martin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jed Ingalls",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeffrey Janakus",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cheryl O'Gorman",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Aaron Marinucci",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Wandishin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8613,8 +8697,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 91,
-            "totalVols": 91
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
