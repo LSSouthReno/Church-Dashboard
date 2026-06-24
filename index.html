@@ -4954,22 +4954,28 @@ async function staffDoUnlock() {
 }
 
 async function staffLoadData() {
-  // Always try to load dashboard-data.json for scorecard live values, independent of eos-data
+  // Fetch all static GitHub Pages files in parallel — no sequential blocking.
+  // The Apps Script web app (rbRemoteLoad_) is NOT awaited here; it runs in
+  // the background after the first render so its cold-start (~5-10s) is invisible.
+  const t = Date.now();
+  const [dashRes, eosRes] = await Promise.all([
+    fetch(DATA_URL       + '?t=' + t, { cache: 'no-store' }).catch(() => null),
+    fetch(STAFF_DATA_URL + '?t=' + t).catch(() => null),
+    joyBombsLoad_(),
+    pathwayLoad_(),
+    absencesLoadServer_()
+  ]);
+
   let dashData = null;
-  try {
-    const dashRes = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
-    if (dashRes.ok) dashData = await dashRes.json();
-  } catch(e) {
-    console.warn('Staff OS: dashboard data fetch error:', e.message);
-  }
+  try { if (dashRes && dashRes.ok) dashData = await dashRes.json(); } catch(e) {}
+
+  let merged = Object.assign({}, STAFF_DEFAULT_DATA);
+  let hasLive = false;
 
   try {
-    const eosRes = await fetch(STAFF_DATA_URL + '?t=' + Date.now());
-    if (eosRes.ok) {
+    if (eosRes && eosRes.ok) {
       const liveData = await eosRes.json();
-      const merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
-      // For arrays, live data wins only when non-empty — otherwise keep the hardcoded fallback
-      // Scorecard: code owns structure+keys; eos-data.json can only override goal/owner per metric name
+      merged = Object.assign({}, STAFF_DEFAULT_DATA, liveData);
       const _scLive = {};
       (liveData.scorecard || []).forEach(r => { if (r.metric) _scLive[r.metric] = r; });
       merged.scorecard = STAFF_DEFAULT_DATA.scorecard.map(r => {
@@ -4977,38 +4983,48 @@ async function staffLoadData() {
         const ov = _scLive[r.metric] || {};
         return { ...r, goal: ov.goal || r.goal, owner: ov.owner || r.owner, current: ov.current || r.current };
       });
-      merged.boulders  = (liveData.boulders  && liveData.boulders.length)  ? liveData.boulders  : STAFF_DEFAULT_DATA.boulders;
-      merged.rocks     = (liveData.rocks     && liveData.rocks.length)     ? liveData.rocks     : STAFF_DEFAULT_DATA.rocks;
-      if (dashData) {
-        if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
-        merged._dash = dashData;
-      }
-      // Load remote rock/boulder overrides if web app is configured
-      const rbRemote = await rbRemoteLoad_();
-      if (rbRemote) {
-        if (rbRemote.rocks && (!rocksEditsLoad_().ts || rbRemote.rocks.ts > rocksEditsLoad_().ts))
-          try { localStorage.setItem(ROCKS_LS_KEY, JSON.stringify(rbRemote.rocks)); } catch(e) {}
-        if (rbRemote.boulders && (!bouldersEditsLoad_().ts || rbRemote.boulders.ts > bouldersEditsLoad_().ts))
-          try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify(rbRemote.boulders)); } catch(e) {}
-      }
-      await Promise.all([joyBombsLoad_(), pathwayLoad_(), absencesLoadServer_()]);
-      staffRenderAll(merged);
-      const dot = document.getElementById('sp-live-dot');
-      const lbl = document.getElementById('sp-data-source-label');
-      if (dot) dot.classList.add('green');
-      if (lbl) lbl.textContent = 'live data';
-      return;
+      merged.boulders = (liveData.boulders && liveData.boulders.length) ? liveData.boulders : STAFF_DEFAULT_DATA.boulders;
+      merged.rocks    = (liveData.rocks    && liveData.rocks.length)    ? liveData.rocks    : STAFF_DEFAULT_DATA.rocks;
+      hasLive = true;
     }
   } catch(e) {
-    console.warn('Staff OS: could not fetch live data, using defaults:', e.message);
+    console.warn('Staff OS: eos-data parse error:', e.message);
   }
-  // eos-data failed — still load async data then render with dashboard scorecard values if available
-  await Promise.all([joyBombsLoad_(), pathwayLoad_()]);
-  const fallback = Object.assign({}, STAFF_DEFAULT_DATA);
-  if (dashData) fallback._dash = dashData;
-  staffRenderAll(fallback);
+
+  if (dashData) {
+    if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
+    merged._dash = dashData;
+  }
+
+  // Render immediately with the data we have — tabs + content appear right away
+  staffRenderAll(merged);
+  const dot = document.getElementById('sp-live-dot');
   const lbl = document.getElementById('sp-data-source-label');
-  if (lbl) lbl.textContent = 'local data';
+  if (dot && hasLive) dot.classList.add('green');
+  if (lbl) lbl.textContent = hasLive ? 'live data' : 'local data';
+
+  // Now fetch rocks/boulders from Apps Script in the background.
+  // Cold start is 5-10s but the page is already fully rendered so users don't notice.
+  rbRemoteLoad_().then(rbRemote => {
+    if (!rbRemote) return;
+    let changed = false;
+    if (rbRemote.rocks && (!rocksEditsLoad_().ts || rbRemote.rocks.ts > rocksEditsLoad_().ts)) {
+      try { localStorage.setItem(ROCKS_LS_KEY, JSON.stringify(rbRemote.rocks)); } catch(e) {}
+      changed = true;
+    }
+    if (rbRemote.boulders && (!bouldersEditsLoad_().ts || rbRemote.boulders.ts > bouldersEditsLoad_().ts)) {
+      try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify(rbRemote.boulders)); } catch(e) {}
+      changed = true;
+    }
+    if (changed) {
+      // Only re-render the sections that use rocks/boulders — not the full page
+      const d = window._staffLastData || merged;
+      staffRenderBoulders(d);
+      staffRenderRocks(d);
+      staffRenderSnapshot(d);
+      staffRenderL10(d);
+    }
+  }).catch(() => {});
 }
 
 function staffRenderAll(data) {
@@ -6972,39 +6988,21 @@ function joyBombsLsSave_(data) {
 function joyBombsGetAll_() {
   const server = _joyBombsServerData || { pending:[], completed:[] };
   const local  = joyBombsLsLoad_();
+  const applyBombed = e => local.bombed[e.id] ? {...e, status:'bombed', bombedDate:local.bombed[e.id].date, bombedBy:local.bombed[e.id].by} : e;
   const all = [
-    ...server.pending.map(e => local.bombed[e.id] ? {...e, status:'bombed', bombedDate:local.bombed[e.id].date, bombedBy:local.bombed[e.id].by} : e),
-    ...server.completed.map(e => local.bombed[e.id] ? {...e, ...local.bombed[e.id]} : e),
-    ...(local.added||[])
+    ...server.pending.map(applyBombed),
+    ...server.completed.map(applyBombed),
+    ...(local.added||[]).map(applyBombed)
   ];
   const seen = new Set();
   return all.filter(e => { if (seen.has(e.id)) return false; seen.add(e.id); return true; });
 }
 function joyBombMarkBombed_(id) {
-  const card = document.querySelector(`[data-jb-id="${id}"]`);
-  if (!card) return;
-  const staffOpts = STAFF_TEAM_DATA.map(s=>`<option>${_rbEsc(s.name)}</option>`).join('');
-  const today = new Date().toISOString().split('T')[0];
-  card.innerHTML = `
-    <div style="flex:1;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:10px;">Who sent the Joy Bomb?</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
-        <select id="jb-by-${id}" class="sp-l10-inp" style="height:36px;min-width:140px;flex:1;"><option value="">Who bombed?</option>${staffOpts}</select>
-        <input id="jb-date-${id}" type="date" class="sp-l10-inp" value="${today}" style="height:36px;width:150px;">
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button class="sp-joy-bomb-btn" style="background:var(--sp-green);color:#fff;" onclick="joyBombConfirm_('${id}')">💣 Confirm!</button>
-        <button class="sp-ids-log-btn" onclick="staffRenderL10(window._staffLastData||{})">Cancel</button>
-      </div>
-    </div>`;
-}
-function joyBombConfirm_(id) {
-  const by   = (document.getElementById('jb-by-'+id)||{}).value||'';
-  const date = (document.getElementById('jb-date-'+id)||{}).value||new Date().toISOString().split('T')[0];
+  const date  = new Date().toISOString().split('T')[0];
   const local = joyBombsLsLoad_();
-  local.bombed[id] = { by, date };
+  local.bombed[id] = { date };
   joyBombsLsSave_(local);
-  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_mark',id,by,date}),mode:'no-cors'}).catch(()=>{});
+  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_mark',id,by:'',date}),mode:'no-cors'}).catch(()=>{});
   const card = document.querySelector(`[data-jb-id="${id}"]`);
   if (card) {
     card.style.transition = 'opacity 0.4s, max-height 0.5s';
@@ -7035,15 +7033,9 @@ function joyBombManualAdd_() {
           <input id="jb-f-team" class="sp-l10-inp" placeholder="Team name" style="width:100%;">
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-        <div>
-          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Phone</label>
-          <input id="jb-f-phone" class="sp-l10-inp" placeholder="555-000-0000" style="width:100%;">
-        </div>
-        <div>
-          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">First Serve Date</label>
-          <input id="jb-f-date" type="date" class="sp-l10-inp" value="${today}" style="width:100%;">
-        </div>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">First Serve Date</label>
+        <input id="jb-f-date" type="date" class="sp-l10-inp" value="${today}" style="width:100%;">
       </div>
       <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Notes</label>
       <textarea id="jb-f-notes" class="sp-l10-inp" placeholder="Any notes…" style="width:100%;min-height:48px;margin-bottom:20px;"></textarea>
@@ -7058,12 +7050,11 @@ function joyBombManualAdd_() {
 function joyBombFormSubmit_() {
   const name  = (document.getElementById('jb-f-name')||{}).value||'';
   const team  = (document.getElementById('jb-f-team')||{}).value||'';
-  const phone = (document.getElementById('jb-f-phone')||{}).value||'';
   const date  = (document.getElementById('jb-f-date')||{}).value||'';
   const notes = (document.getElementById('jb-f-notes')||{}).value||'';
   if (!name.trim()) { document.getElementById('jb-f-name').focus(); return; }
   const local = joyBombsLsLoad_();
-  const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), phone:phone.trim(), firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
+  const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), phone:'', firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
   (local.added = local.added||[]).push(entry);
   joyBombsLsSave_(local);
   if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_add',...entry}),mode:'no-cors'}).catch(()=>{});
@@ -7098,7 +7089,7 @@ function joyBombRenderSection_() {
     ? completed.map(e => `
       <div class="sp-joy-history-item">
         <div style="flex:1;"><strong>${_rbEsc(e.name)}</strong>${e.team?` — ${_rbEsc(e.team)}`:''}
-          <div style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-top:2px;">First served: ${fmtDate(e.firstServeDate)} · Bombed: ${fmtDate(e.bombedDate||e.bombedAt)}${e.bombedBy?' by '+_rbEsc(e.bombedBy):''}</div>
+          <div style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-top:2px;">First served: ${fmtDate(e.firstServeDate)} · Bombed: ${fmtDate(e.bombedDate||e.bombedAt)}</div>
           ${e.notes?`<div style="font-size:12px;color:var(--sp-muted);">${_rbEsc(e.notes)}</div>`:''}
         </div>
       </div>`).join('')
