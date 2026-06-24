@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T00:46:21.016Z",
+  "lastUpdated": "2026-06-24T01:02:37.715Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 23, 2026, 5:46 PM",
+    "refreshed": "Jun 23, 2026, 6:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7383,7 +7383,7 @@
         25,
         24,
         24,
-        19,
+        20,
         null,
         null,
         null,
@@ -7430,7 +7430,7 @@
         8,
         15,
         19,
-        11,
+        12,
         null,
         null,
         null,
@@ -7723,20 +7723,20 @@
         "attPct": 70
       },
       {
+        "name": "Geoffrey Caliger Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 50
+      },
+      {
         "name": "Dykins Community Group",
         "members": 9,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 7,
         "attPct": 78
-      },
-      {
-        "name": "Geoffrey Caliger Community Group",
-        "members": 9,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 56
       },
       {
         "name": "Sikora Community Group",
@@ -7817,7 +7817,7 @@
           "preacher": "Ryan Griffin",
           "captains": [
             "Garrett Kooyers",
-            "Danny Rotter"
+            "Manuel Sanchez"
           ],
           "volunteers": [
             {
@@ -7917,13 +7917,6 @@
               "pos": "Service Captain",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Danny Rotter",
-              "team": "Service Captains",
-              "pos": "Service Captain",
-              "status": "C",
-              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Whitney Maidens",
@@ -8547,6 +8540,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [
@@ -11510,8 +11510,7 @@
           "series": "Beyond Religion: Part 2",
           "preacher": "",
           "captains": [
-            "Danny Rotter",
-            "Manuel Sanchez"
+            "Danny Rotter"
           ],
           "volunteers": [
             {
@@ -11792,14 +11791,7 @@
               "team": "Service Captains",
               "pos": "Service Captain",
               "status": "C",
-              "serviceTime": "8 AM, 9:30 AM"
-            },
-            {
-              "name": "Manuel Sanchez",
-              "team": "Service Captains",
-              "pos": "Service Captain",
-              "status": "U",
-              "serviceTime": "11 AM"
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11809,8 +11801,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 41,
-            "totalVols": 41
+            "volsWithServiceTime": 40,
+            "totalVols": 40
           }
         }
       ]
