@@ -1213,6 +1213,20 @@
   .sp-timeoff-name { font-size: 13px; font-weight: 600; color: var(--sp-ink); flex: 1; }
   .sp-timeoff-dates { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--sp-muted); }
   .sp-timeoff-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; background: rgba(239,68,68,.1); color: #c62828; border: 1px solid rgba(239,68,68,.25); }
+  /* ── Away / Offsite absences ── */
+  .sp-away-wrap { margin-bottom: 20px; }
+  .sp-away-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .sp-away-add-btn { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: .05em; padding: 3px 10px; background: transparent; border: 1px solid var(--sp-border); border-radius: 3px; color: var(--sp-muted); cursor: pointer; }
+  .sp-away-add-btn:hover { color: var(--sp-ink); border-color: var(--sp-gold); }
+  .sp-away-form { background: var(--sp-section-bg); border: 1px solid var(--sp-border); border-radius: 4px; padding: 12px; margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+  .sp-away-form-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sp-away-form input { flex: 1; min-width: 120px; padding: 6px 8px; background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 3px; color: var(--sp-ink); font-size: 12px; font-family: inherit; }
+  .sp-away-save-btn { padding: 5px 14px; background: var(--sp-gold); color: #1a1a1a; border: none; border-radius: 3px; font-size: 12px; font-family: 'DM Mono', monospace; cursor: pointer; font-weight: 700; }
+  .sp-away-cancel-btn { padding: 5px 12px; background: transparent; border: 1px solid var(--sp-border); border-radius: 3px; font-size: 12px; color: var(--sp-muted); cursor: pointer; }
+  .sp-away-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; background: rgba(99,102,241,.12); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+  .sp-away-reason { font-size: 11px; color: var(--sp-muted); font-family: 'DM Mono', monospace; flex: 1; }
+  .sp-away-del-btn { font-size: 11px; padding: 1px 6px; background: transparent; border: 1px solid var(--sp-border); border-radius: 3px; color: var(--sp-muted); cursor: pointer; opacity: .5; line-height: 1.6; }
+  .sp-away-del-btn:hover { opacity: 1; color: #ef9a9a; border-color: rgba(239,68,68,.4); }
   /* ── Rocks & Boulders editing ── */
   .sp-rock-resolve-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .5px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--sp-green); color: var(--sp-green); background: transparent; cursor: pointer; white-space: nowrap; }
   .sp-rock-resolve-btn:hover { background: rgba(58,122,74,.1); }
@@ -4339,6 +4353,7 @@ const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
 const IDS_WEBAPP_URL      = '';
 const JOY_BOMBS_DATA_URL  = 'https://lssouthreno.github.io/Church-Dashboard/joy_bombs.json';
 const PATHWAY_DATA_URL    = 'https://lssouthreno.github.io/Church-Dashboard/pathway.json';
+const ABSENCES_DATA_URL   = 'https://lssouthreno.github.io/Church-Dashboard/absences.json';
 const IDS_LS_KEY          = 'lssr_ids_log';
 const JOY_BOMBS_LS_KEY    = 'lssr_joy_bombs';
 
@@ -4976,7 +4991,7 @@ async function staffLoadData() {
         if (rbRemote.boulders && (!bouldersEditsLoad_().ts || rbRemote.boulders.ts > bouldersEditsLoad_().ts))
           try { localStorage.setItem(BOULDERS_LS_KEY, JSON.stringify(rbRemote.boulders)); } catch(e) {}
       }
-      await Promise.all([joyBombsLoad_(), pathwayLoad_()]);
+      await Promise.all([joyBombsLoad_(), pathwayLoad_(), absencesLoadServer_()]);
       staffRenderAll(merged);
       const dot = document.getElementById('sp-live-dot');
       const lbl = document.getElementById('sp-data-source-label');
@@ -5592,6 +5607,7 @@ function staffRenderSnapshot(data) {
     </div>
 
     ${timeOffSection}
+    <div id="sp-away-snap"></div>
 
     <!-- ── V/TO Scorecard Goals ─────────────────────────────────────── -->
     <div class="sp-snap-label">V/TO Scorecard Goals</div>
@@ -5689,6 +5705,7 @@ function staffRenderSnapshot(data) {
       <span id="sp-data-source-label">loading data…</span>
       ${updated ? `<span>Updated: ${updated}</span>` : ''}
     </div>`;
+  absencesRenderSection_('sp-away-snap');
 }
 
 // ── MEETING MINUTES — multi-device sync + localStorage fallback ────────────────
@@ -6151,6 +6168,7 @@ function staffRenderL10(data) {
       ${editControls}
     </div>
     ${l10TimeOffSection}
+    <div id="sp-away-l10"></div>
     <div class="sp-l10-hdr">
       <div><h3>${title}</h3><div class="sp-l10-date">${today} &middot; ${q}</div></div>
       <div style="font-size:13px;color:rgba(245,240,232,0.6);">${freq}</div>
@@ -6171,6 +6189,7 @@ function staffRenderL10(data) {
   staffL10RenderHistory();
   const _idsLogEl = document.getElementById('sp-l10-ids-log');
   if (_idsLogEl) idsRefreshList_(_idsLogEl);
+  absencesRenderSection_('sp-away-l10');
 }
 
 function staffRenderVolLeads(data) {
@@ -7193,6 +7212,126 @@ function pathwayShowStageModal(stageName) {
       </div>
     </div>`;
   document.body.appendChild(m);
+}
+
+// ── Away / Offsite Absences ───────────────────────────────────────────────────
+const ABSENCES_LS_KEY = 'lssr_staff_absences';
+let _absencesServerData = null;
+
+async function absencesLoadServer_() {
+  try {
+    const r = await fetch(ABSENCES_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) _absencesServerData = await r.json();
+  } catch(e) {}
+}
+
+function absencesGetAll_() {
+  const local  = (() => { try { return JSON.parse(localStorage.getItem(ABSENCES_LS_KEY) || '[]'); } catch(e) { return []; } })();
+  const server = (_absencesServerData && _absencesServerData.absences) || [];
+  // Union: server is source of truth; local holds optimistic adds not yet in server
+  const merged = [...server];
+  local.forEach(la => { if (!merged.find(s => s.id === la.id)) merged.push(la); });
+  const today = new Date().toISOString().split('T')[0];
+  return merged.filter(a => a.end >= today).sort((a, b) => a.start.localeCompare(b.start));
+}
+
+function absencesSaveLocal_(list) {
+  try { localStorage.setItem(ABSENCES_LS_KEY, JSON.stringify(list)); } catch(e) {}
+}
+
+function absencesPost_(payload) {
+  if (!IDS_WEBAPP_URL) return;
+  fetch(IDS_WEBAPP_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' }).catch(() => {});
+}
+
+function absenceAdd_(containerId) {
+  const form   = document.getElementById('sp-away-form-' + containerId);
+  const name   = (form.querySelector('[data-f="name"]').value || '').trim();
+  const start  = form.querySelector('[data-f="start"]').value;
+  const end    = form.querySelector('[data-f="end"]').value;
+  const reason = (form.querySelector('[data-f="reason"]').value || '').trim();
+  if (!name || !start || !end) return;
+  if (end < start) { alert('End date must be on or after start date.'); return; }
+  const entry = {
+    id: 'abs_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5),
+    name, start, end,
+    reason: reason || 'Away',
+    addedDate: new Date().toISOString().split('T')[0]
+  };
+  const cur = absencesGetAll_();
+  cur.push(entry);
+  absencesSaveLocal_(cur);
+  absencesPost_({ action: 'absence_add', ...entry });
+  absencesRenderSection_('sp-away-snap');
+  absencesRenderSection_('sp-away-l10');
+}
+
+function absenceRemove_(id) {
+  const local = (() => { try { return JSON.parse(localStorage.getItem(ABSENCES_LS_KEY) || '[]'); } catch(e) { return []; } })();
+  absencesSaveLocal_(local.filter(a => a.id !== id));
+  if (_absencesServerData && _absencesServerData.absences)
+    _absencesServerData.absences = _absencesServerData.absences.filter(a => a.id !== id);
+  absencesPost_({ action: 'absence_remove', id });
+  absencesRenderSection_('sp-away-snap');
+  absencesRenderSection_('sp-away-l10');
+}
+
+function absencesShowForm_(containerId) {
+  const form = document.getElementById('sp-away-form-' + containerId);
+  const btn  = document.getElementById('sp-away-addbtn-' + containerId);
+  if (form) form.style.display = 'flex';
+  if (btn)  btn.style.display  = 'none';
+}
+
+function absencesHideForm_(containerId) {
+  const form = document.getElementById('sp-away-form-' + containerId);
+  const btn  = document.getElementById('sp-away-addbtn-' + containerId);
+  if (form) { form.style.display = 'none'; form.querySelectorAll('input').forEach(i => i.value = ''); }
+  if (btn)  btn.style.display  = '';
+}
+
+function absencesRenderSection_(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const absences = absencesGetAll_();
+  const today    = new Date().toISOString().split('T')[0];
+  const fmtD     = s => new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  const itemsHtml = absences.map(a => {
+    const isAway    = a.start <= today && a.end >= today;
+    const dateLabel = a.start === a.end ? fmtD(a.start) : fmtD(a.start) + ' – ' + fmtD(a.end);
+    return `<div class="sp-timeoff-item">
+      <span class="sp-timeoff-name">${a.name}</span>
+      <span class="sp-away-reason">${a.reason || ''}</span>
+      <span class="sp-timeoff-dates">${dateLabel}</span>
+      ${isAway ? '<span class="sp-away-badge">Away</span>' : ''}
+      <button class="sp-away-del-btn" onclick="absenceRemove_('${a.id}')" title="Remove">✕</button>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `<div class="sp-away-wrap">
+    <div class="sp-away-hdr">
+      <div class="sp-snap-label" style="border-bottom:none;margin-bottom:0;">Away / Offsite</div>
+      <button id="sp-away-addbtn-${containerId}" class="sp-away-add-btn" onclick="absencesShowForm_('${containerId}')">+ Add</button>
+    </div>
+    ${absences.length
+      ? `<div class="sp-timeoff-list" style="margin-top:8px;">${itemsHtml}</div>`
+      : `<div style="margin-top:6px;"><span class="sp-snap-green-badge">✓ No upcoming away time on record</span></div>`}
+    <div id="sp-away-form-${containerId}" class="sp-away-form" style="display:none;flex-direction:column;gap:8px;">
+      <div class="sp-away-form-row">
+        <input data-f="name"   type="text" placeholder="Staff name" style="flex:1.2;">
+        <input data-f="reason" type="text" placeholder="Reason (Mission Trip, Offsite Meeting…)" style="flex:2;">
+      </div>
+      <div class="sp-away-form-row">
+        <input data-f="start" type="date" style="flex:1;">
+        <input data-f="end"   type="date" style="flex:1;">
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="sp-away-save-btn"   onclick="absenceAdd_('${containerId}')">Save</button>
+        <button class="sp-away-cancel-btn" onclick="absencesHideForm_('${containerId}')">Cancel</button>
+      </div>
+    </div>
+  </div>`;
 }
 </script>
 
