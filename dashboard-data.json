@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T19:51:38.817Z",
+  "lastUpdated": "2026-06-24T20:45:56.827Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -207,12 +207,12 @@
       284174,
       323920,
       343205,
-      302776
+      302894
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 4584341
+    "raised": 4584459
   },
   "attendance": {
     "months": [
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 24, 2026, 12:51 PM",
+    "refreshed": "Jun 24, 2026, 1:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8568,6 +8568,20 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeana Rehberger",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael Rehberger",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8725,8 +8739,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 107,
-            "totalVols": 107
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
@@ -12273,16 +12287,16 @@
   "newAdults30d": {
     "count30d": 41,
     "weeklyAvg": 10,
-    "totalFetched": 6872,
+    "totalFetched": 6873,
     "since": "2026-05-25",
-    "asOf": "2026-06-24T19:45:51.254Z"
+    "asOf": "2026-06-24T20:44:29.099Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.09620476610767872,
-    "avgOpenRate3": 0.3293224186019617,
+    "latestOpenRate": 0.15092674315975288,
+    "avgOpenRate3": 0.34864885394939577,
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-06-24T19:22:28+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-24T19:45:53.955Z"
+    "asOf": "2026-06-24T20:44:29.986Z"
   }
 }
