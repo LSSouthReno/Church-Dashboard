@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T01:45:59.322Z",
+  "lastUpdated": "2026-06-24T01:56:00.907Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 23, 2026, 6:46 PM",
+    "refreshed": "Jun 23, 2026, 6:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7383,7 +7383,7 @@
         25,
         24,
         24,
-        20,
+        21,
         null,
         null,
         null,
@@ -7430,7 +7430,7 @@
         8,
         15,
         19,
-        12,
+        13,
         null,
         null,
         null,
@@ -7531,6 +7531,14 @@
         "attPct": 62
       },
       {
+        "name": "Howes/Peissner Community Group",
+        "members": 20,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 8,
+        "attPct": 40
+      },
+      {
         "name": "Bell Community Group",
         "members": 19,
         "leaders": 2,
@@ -7551,14 +7559,6 @@
         "members": 19,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 8,
-        "attPct": 42
-      },
-      {
-        "name": "Howes/Peissner Community Group",
-        "members": 19,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
         "avgAttended": 8,
         "attPct": 42
       },
@@ -8547,6 +8547,27 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Emory Breach",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jennie Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lauren Johnson",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8704,8 +8725,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 104,
-            "totalVols": 104
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ]
