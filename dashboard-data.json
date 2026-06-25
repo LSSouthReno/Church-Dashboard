@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T02:49:00.955Z",
+  "lastUpdated": "2026-06-25T03:47:56.120Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 24, 2026, 7:49 PM",
+    "refreshed": "Jun 24, 2026, 8:48 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9172,6 +9172,13 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Alex Buckwalter",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9329,8 +9336,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 57,
-            "totalVols": 59
+            "volsWithServiceTime": 58,
+            "totalVols": 60
           }
         }
       ]
@@ -9601,13 +9608,6 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Alex Buckwalter",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Bill Caraway",
@@ -10059,8 +10059,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 79,
-            "totalVols": 79
+            "volsWithServiceTime": 78,
+            "totalVols": 78
           }
         }
       ]
@@ -10203,13 +10203,6 @@
               "name": "Diane Dale",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Alex Buckwalter",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
             },
@@ -10656,8 +10649,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 60,
-            "totalVols": 60
+            "volsWithServiceTime": 59,
+            "totalVols": 59
           }
         }
       ]
@@ -10762,13 +10755,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Alex Buckwalter",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Sandra Pazen",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
@@ -10863,13 +10849,6 @@
               "name": "Jenn Ferguson",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Carlos Flores",
-              "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
               "status": "U",
               "serviceTime": "11 AM"
             },
@@ -11225,8 +11204,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 56,
-            "totalVols": 56
+            "volsWithServiceTime": 54,
+            "totalVols": 54
           }
         }
       ]
@@ -12303,14 +12282,14 @@
     "weeklyAvg": 9,
     "totalFetched": 6872,
     "since": "2026-05-26",
-    "asOf": "2026-06-25T02:45:13.638Z"
+    "asOf": "2026-06-25T03:45:09.833Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.2744924977934687,
-    "avgOpenRate3": 0.3941805441476051,
+    "latestOpenRate": 0.293909973521624,
+    "avgOpenRate3": 0.4017388123870662,
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-06-24T19:22:28+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-25T02:45:15.323Z"
+    "asOf": "2026-06-25T03:45:11.511Z"
   }
 }
