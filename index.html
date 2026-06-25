@@ -1568,7 +1568,7 @@
 
   /* Team health bars */
   .tlh-team-row {
-    display: grid; grid-template-columns: 130px 1fr 56px;
+    display: grid; grid-template-columns: 130px 1fr 72px 56px;
     align-items: center; gap: 10px;
     padding: 7px 0;
     border-bottom: 1px solid var(--card-border);
@@ -7538,11 +7538,8 @@ function absencesRenderSection_(containerId) {
         <a href="https://services.planningcenteronline.com" target="_blank" class="tlh-link-btn">
           <span class="tlh-link-icon">📅</span> Planning Center Services
         </a>
-        <a href="https://app.churchcenter.com" target="_blank" class="tlh-link-btn">
+        <a href="https://lssr.churchcenter.com" target="_blank" class="tlh-link-btn">
           <span class="tlh-link-icon">⛪</span> Church Center
-        </a>
-        <a href="https://people.planningcenteronline.com" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">👤</span> PCO People
         </a>
         <a href="https://groups.planningcenteronline.com" target="_blank" class="tlh-link-btn">
           <span class="tlh-link-icon">💬</span> PCO Groups / Chat
@@ -7550,8 +7547,17 @@ function absencesRenderSection_(containerId) {
         <a href="team-onboarding-generator.html" target="_blank" class="tlh-link-btn">
           <span class="tlh-link-icon">📋</span> Onboarding Generator
         </a>
-        <a href="https://lschurches.com" target="_blank" class="tlh-link-btn">
+        <a href="https://lschurches.com/southreno" target="_blank" class="tlh-link-btn">
           <span class="tlh-link-icon">🌐</span> Church Website
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/892107" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📝</span> Point Leader Update Form
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/869271" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">💛</span> Joy Bomb Form
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/808945" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📦</span> Inventory Request Form
         </a>
       </div>
     </div>
@@ -7610,26 +7616,30 @@ function tlhBuildHealth() {
   });
 
   let html = '';
+  let totalGap = 0;
   sorted.forEach(t => {
     const pct = t.needed ? Math.round((t.current / t.needed) * 100) : 100;
     const cls = pct >= 90 ? 'health-green' : pct >= 70 ? 'health-yellow' : 'health-red';
     const label = pct >= 100 ? '✓ Full' : pct + '%';
+    const teamGap = Math.max(0, (t.needed || 0) - (t.current || 0));
     html += `<div class="tlh-team-row">
       <div class="tlh-team-name" title="${t.name}">${t.name}</div>
       <div class="tlh-bar-track"><div class="tlh-bar-fill ${cls}" style="width:${Math.min(pct,100)}%"></div></div>
+      <div style="font-size:11px;color:var(--text-muted);text-align:right;white-space:nowrap;">${t.current}/${t.needed}</div>
       <div class="tlh-pct ${cls}">${label}</div>
     </div>`;
     totalFilled += t.current;
     totalNeeded += t.needed || t.current;
+    totalGap += teamGap;
   });
 
   document.getElementById('tlh-health-rows').innerHTML = html;
 
-  // Snapshot stats
+  // Snapshot stats — gap matches main dashboard (per-team Math.max(0,...) sum)
   const uniq = (DASHBOARD_DATA.uniqueVolunteers) || '—';
   document.getElementById('tlh-s-total').textContent  = typeof uniq === 'number' ? uniq : '—';
   document.getElementById('tlh-s-filled').textContent = totalFilled;
-  document.getElementById('tlh-s-gap').textContent    = Math.max(0, totalNeeded - totalFilled);
+  document.getElementById('tlh-s-gap').textContent    = totalGap;
 }
 
 // ── CHECKLIST ──
