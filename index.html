@@ -1642,6 +1642,85 @@
   .tlh-link-btn:hover { border-color: #c49a2e; color: #c49a2e; }
   .tlh-link-icon { font-size: 1.2rem; flex-shrink: 0; }
 
+  /* ── Volunteer Sunday Checklist Modal ── */
+  #volChecklistModal {
+    position: fixed; inset: 0; z-index: 3000;
+    background: rgba(0,0,0,.75); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #volChecklistModal.open { display: flex; }
+  .vcl-box {
+    background: #1e1c1b; border: 1px solid #3a3734;
+    border-radius: 16px; width: 100%; max-width: 540px;
+    max-height: 88vh; display: flex; flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+  }
+  .vcl-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #2e2c2a;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .vcl-team-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: #c49a2e; display: flex; align-items: center;
+    justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+  }
+  .vcl-team-name { font-size: 1rem; font-weight: 800; color: #f0ece8; }
+  .vcl-team-sub  { font-size: 11px; color: #9a9490; margin-top: 2px; letter-spacing:.04em; }
+  .vcl-close {
+    margin-left: auto; background: none; border: 1px solid #3a3734;
+    color: #9a9490; font-size: 16px; width: 32px; height: 32px;
+    border-radius: 8px; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .vcl-close:hover { border-color: #c49a2e; color: #c49a2e; }
+  .vcl-body { overflow-y: auto; padding: 16px 24px 24px; }
+  .vcl-phase {
+    font-size: 9px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .14em; color: #c49a2e;
+    margin: 18px 0 8px; padding-bottom: 6px;
+    border-bottom: 1px solid #2e2c2a;
+  }
+  .vcl-phase:first-child { margin-top: 4px; }
+  .vcl-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #252320;
+    cursor: pointer;
+  }
+  .vcl-item:last-child { border-bottom: none; }
+  .vcl-chk {
+    width: 18px; height: 18px; flex-shrink: 0;
+    border: 1.5px solid #555; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; margin-top: 1px; transition: all .15s;
+  }
+  .vcl-item.done .vcl-chk { background: #22c55e; border-color: #22c55e; color: #fff; }
+  .vcl-item.done .vcl-text { text-decoration: line-through; color: #555; }
+  .vcl-text { font-size: 13px; color: #d4d0cb; line-height: 1.5; flex: 1; }
+  .vcl-time {
+    font-size: 10px; font-weight: 700; color: #6b6866;
+    white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+  }
+  .vcl-footer {
+    padding: 12px 24px; border-top: 1px solid #2e2c2a;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+  }
+  .vcl-progress-wrap { flex: 1; }
+  .vcl-progress-label { font-size: 10px; color: #6b6866; margin-bottom: 4px; }
+  .vcl-progress-track { height: 5px; background: #2e2c2a; border-radius: 99px; overflow: hidden; }
+  .vcl-progress-fill  { height: 100%; background: #22c55e; border-radius: 99px; transition: width .3s; }
+  .vcl-reset-btn {
+    background: none; border: 1px solid #3a3734; color: #6b6866;
+    font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .07em;
+    padding: 5px 12px; border-radius: 6px; cursor: pointer;
+    transition: all .15s;
+  }
+  .vcl-reset-btn:hover { border-color: #c49a2e; color: #c49a2e; }
   /* Admin panel */
   .tlh-adm-btn {
     background: #2a2825; border: 1px solid #444; color: #d4d0cb;
@@ -1688,10 +1767,10 @@
       <div class="subtitle">Living Stones Church, South Reno</div>
     </div>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
-      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()" style="border-color:#3b82f6;color:#3b82f6;">☀ Sunday</button>
+      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()" style="border-color:#3b82f6;color:#fff;">☀ Sunday</button>
       <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()" style="border-color:#d4d0cb;color:#d4d0cb;">🏛 Staff</button>
       <button class="members-btn" id="membersBtnHeader" onclick="mmClick()">🔐 Members</button>
-      <button class="members-btn" id="tlBtnHeader" onclick="openTLHub()" style="border-color:#c49a2e;color:#c49a2e;">👥 Team Leaders</button>
+      <button class="members-btn" id="tlBtnHeader" onclick="openTLHub()" style="border-color:#c49a2e;color:#fff;">👥 Team Leaders</button>
       <div class="updated">
         <div><span class="pulse"></span><span class="stamp" id="updatedStamp">Loading…</span></div>
         <div style="margin-top:4px;">Refreshes hourly</div>
@@ -1888,7 +1967,7 @@
   <div class="tmod-header">
     <button class="tmod-back" onclick="closeTeamsModal()">&#8592; Dashboard</button>
     <div class="tmod-titles">
-      <div class="tmod-title">Team Health</div>
+      <div class="tmod-title">Team Dashboard</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; VOLUNTEER OPERATIONS</div>
     </div>
     <div class="tmod-meta" id="tmodMeta"><b>Loading&hellip;</b></div>
@@ -1897,7 +1976,6 @@
     <div class="tmod-metrics" id="tmodMetrics"></div>
     <div class="tmod-tabs">
       <button class="tmod-tab on" onclick="tmTab('teams',this)">Teams</button>
-      <button class="tmod-tab" onclick="tmTab('vols',this)">Volunteers</button>
       <button class="tmod-tab" onclick="tmTab('svcs',this)">Services</button>
       <button class="tmod-tab" id="tmAdminBtn" onclick="tmTab('admin',this)">&#128274; Admin</button>
     </div>
@@ -1914,39 +1992,6 @@
       </div>
       <div class="tmod-tgrid" id="tmTG"></div>
       <div class="tmod-drawer" id="tmDR"></div>
-    </div>
-
-    <!-- Volunteers tab -->
-    <div class="tmod-tp" id="tmod-tab-vols">
-      <div class="tmod-ctrls">
-        <input type="text" id="tmvs" placeholder="Search name or team&hellip;" oninput="tmVP=0;tmRV()">
-        <select id="tmvf" onchange="tmVP=0;tmRV()">
-          <option value="all">All volunteers</option>
-          <option value="concern">Concern (many declines)</option>
-          <option value="unresp">Unresponsive (many pending)</option>
-          <option value="rel">Reliable</option>
-          <option value="inactive">Inactive</option>
-        </select>
-        <select id="tmvs2" onchange="tmVP=0;tmRV()">
-          <option value="az">Sort: name A&ndash;Z</option>
-          <option value="cd">Sort: most confirmed</option>
-          <option value="dd">Sort: most declined</option>
-          <option value="pd">Sort: most pending</option>
-          <option value="ra">Sort: lowest reliability</option>
-          <option value="rd">Sort: highest reliability</option>
-        </select>
-      </div>
-      <div class="tmod-table-wrap">
-        <table class="tmod-table">
-          <thead><tr><th>Name</th><th>Team</th><th>Confirmed</th><th>Declined</th><th>Pending</th><th>Reliability</th><th>Status</th></tr></thead>
-          <tbody id="tmVB"></tbody>
-        </table>
-      </div>
-      <div class="tmod-pager">
-        <span id="tmVI"></span>
-        <button id="tmVPb" onclick="tmVP--;tmRV()">&lsaquo; Prev</button>
-        <button id="tmVNb" onclick="tmVP++;tmRV()">Next &rsaquo;</button>
-      </div>
     </div>
 
     <!-- Services tab -->
@@ -1989,6 +2034,37 @@
         </div>
         <div class="tmod-slabel">Full leader feedback &mdash; by team</div>
         <div id="tmAdminTeams"></div>
+
+        <div class="tmod-slabel" style="margin-top:2rem;">Volunteer roster &mdash; all PCO volunteers</div>
+        <div class="tmod-ctrls">
+          <input type="text" id="tmvs" placeholder="Search name or team&hellip;" oninput="tmVP=0;tmRV()">
+          <select id="tmvf" onchange="tmVP=0;tmRV()">
+            <option value="all">All volunteers</option>
+            <option value="concern">Concern (many declines)</option>
+            <option value="unresp">Unresponsive (many pending)</option>
+            <option value="rel">Reliable</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <select id="tmvs2" onchange="tmVP=0;tmRV()">
+            <option value="az">Sort: name A&ndash;Z</option>
+            <option value="cd">Sort: most confirmed</option>
+            <option value="dd">Sort: most declined</option>
+            <option value="pd">Sort: most pending</option>
+            <option value="ra">Sort: lowest reliability</option>
+            <option value="rd">Sort: highest reliability</option>
+          </select>
+        </div>
+        <div class="tmod-table-wrap">
+          <table class="tmod-table">
+            <thead><tr><th>Name</th><th>Team</th><th>Confirmed</th><th>Declined</th><th>Pending</th><th>Reliability</th><th>Status</th></tr></thead>
+            <tbody id="tmVB"></tbody>
+          </table>
+        </div>
+        <div class="tmod-pager">
+          <span id="tmVI"></span>
+          <button id="tmVPb" onclick="tmVP--;tmRV()">&lsaquo; Prev</button>
+          <button id="tmVNb" onclick="tmVP++;tmRV()">Next &rsaquo;</button>
+        </div>
       </div>
     </div>
 
@@ -3732,7 +3808,7 @@ function tmRT() {
     const scoreCls = hs >= 8 ? 'tmod-sg' : hs >= 6 ? 'tmod-sa' : 'tmod-sr';
     const flagCls  = gap >= 30 ? 'tmod-fr' : gap > 5 ? 'tmod-fa' : 'tmod-fg';
     const flagTxt  = gap === 0 ? 'fully staffed' : 'gap: ' + gap;
-    return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="tmTD(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
+    return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
       '<div class="tmod-ttop">' +
         '<div><div class="tmod-tname">' + escapeHtml(t.n) + '</div>' +
         '<div class="tmod-tleader' + (!t.l || t.l === '—' ? ' tbd' : '') + '">' + escapeHtml(t.l || 'No leader on file') + '</div></div>' +
@@ -3747,7 +3823,10 @@ function tmRT() {
         '<div class="tmod-flabels"><span>Staffing ' + have + '/' + st.needed + '</span><span>' + fp + '%</span></div>' +
         '<div class="tmod-ftrack"><div class="tmod-ffill" style="width:' + fp + '%;background:' + tmFc(gap) + '"></div></div>' +
       '</div>' +
-      '<div class="tmod-flags"><span class="tmod-flag ' + flagCls + '">' + flagTxt + '</span></div>' +
+      '<div class="tmod-flags">' +
+        '<span class="tmod-flag ' + flagCls + '">' + flagTxt + '</span>' +
+        '<span class="tmod-flag" style="background:#1e1e1e;color:#9a9a9a;border:1px solid #333;cursor:pointer;" onclick="event.stopPropagation();tmTD(this.closest(\'[data-n]\').dataset.n)">&#128202; Stats</span>' +
+      '</div>' +
     '</div>';
   }).join('');
 }
@@ -7508,6 +7587,30 @@ function absencesRenderSection_(containerId) {
 </div>
 
 <!-- ════════════════════════════════════════
+     VOLUNTEER SUNDAY CHECKLIST MODAL
+════════════════════════════════════════ -->
+<div id="volChecklistModal" onclick="if(event.target===this)closeVolChecklist()">
+  <div class="vcl-box">
+    <div class="vcl-header">
+      <div class="vcl-team-icon" id="vcl-icon">📋</div>
+      <div>
+        <div class="vcl-team-name" id="vcl-team-name">Team</div>
+        <div class="vcl-team-sub">SUNDAY VOLUNTEER CHECKLIST</div>
+      </div>
+      <button class="vcl-close" onclick="closeVolChecklist()">✕</button>
+    </div>
+    <div class="vcl-body" id="vcl-body"></div>
+    <div class="vcl-footer">
+      <div class="vcl-progress-wrap">
+        <div class="vcl-progress-label" id="vcl-progress-label">0 of 0 complete</div>
+        <div class="vcl-progress-track"><div class="vcl-progress-fill" id="vcl-progress-fill" style="width:0%"></div></div>
+      </div>
+      <button class="vcl-reset-btn" onclick="vclReset()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
      TEAM LEADER HUB MODAL
 ════════════════════════════════════════ -->
 <div class="tmod-overlay" id="tlHub" aria-hidden="true">
@@ -7621,6 +7724,314 @@ function absencesRenderSection_(containerId) {
 </div><!-- /tlHub -->
 
 <script>
+// ════════════════════════════════════════
+// VOLUNTEER SUNDAY CHECKLISTS
+// ════════════════════════════════════════
+
+const VCL_KEY = 'vcl_done_v1'; // { 'teamname|idx': true }
+
+const TEAM_ICONS = {
+  'worship team': '🎸', 'tech': '🎬', 'first impressions': '👋',
+  'hospitality team': '☕', 'parking': '🚗', 'stepping stones': '🧒',
+  'enrichment': '🍼', 'ls students': '🎒', 'breakfast team': '🍳',
+  'coffee team': '☕', 'safety': '🛡️', 'prayer team': '🙏',
+  'service captains': '📋', 'connect': '🤝', 'presiders team': '🎤',
+  'default': '⭐'
+};
+
+// Each team: array of { phase, time, text }
+const TEAM_CHECKLISTS = {
+  'first impressions': [
+    { phase:'Arrival', time:'60 min before', text:'Arrive and check in with your FI team lead' },
+    { phase:'Arrival', time:'55 min before', text:'Put on your lanyard/badge so guests can find you' },
+    { phase:'Setup', time:'50 min before', text:'Set up exterior welcome flags and directional signage' },
+    { phase:'Setup', time:'45 min before', text:'Prop open entry doors and verify all door positions are covered' },
+    { phase:'Setup', time:'40 min before', text:'Confirm the lobby is clean, clear, and welcoming' },
+    { phase:'Pre-Service', time:'30 min before', text:'Take your assigned door or greeting position' },
+    { phase:'Pre-Service', time:'20 min before', text:'Begin actively greeting every person who enters' },
+    { phase:'Pre-Service', time:'10 min before', text:'Ensure no one is standing alone — introduce yourself' },
+    { phase:'During Service', time:'Service starts', text:'Transition to lobby coverage for latecomers' },
+    { phase:'During Service', time:'During service', text:'Be available to answer questions or help guests find seats' },
+    { phase:'Post-Service', time:'Service ends', text:'Return to doors and hold position for exiting guests' },
+    { phase:'Post-Service', time:'After service', text:'Be approachable — smile, say goodbye, invite people back' },
+    { phase:'Post-Service', time:'15 min after', text:'Return flags and signage to storage' },
+    { phase:'Teardown', time:'20 min after', text:'Restock any connection cards or info racks' },
+    { phase:'Teardown', time:'Final', text:'Check out with team lead before leaving' },
+  ],
+  'parking': [
+    { phase:'Arrival', time:'60 min before', text:'Arrive and get your orange vest and radio/flag' },
+    { phase:'Setup', time:'55 min before', text:'Set up traffic cones at lot entrances and key intersections' },
+    { phase:'Setup', time:'50 min before', text:'Confirm all parking team members are in their positions' },
+    { phase:'Pre-Service', time:'45 min before', text:'Begin directing vehicles to open spaces' },
+    { phase:'Pre-Service', time:'30 min before', text:'Monitor overflow areas and open them if primary lots fill' },
+    { phase:'Pre-Service', time:'15 min before', text:'Radio team lead if any issues (full lot, traffic backup, etc.)' },
+    { phase:'During Service', time:'Service starts', text:'Stay at post — latecomers still arriving' },
+    { phase:'During Service', time:'Mid-service', text:'Check in with team lead; assist with any stragglers' },
+    { phase:'Post-Service', time:'Service ends', text:'Return to positions to direct exiting traffic' },
+    { phase:'Post-Service', time:'After service', text:'Assist guests safely exiting the parking areas' },
+    { phase:'Teardown', time:'Lot clear', text:'Retrieve all cones and return to storage' },
+    { phase:'Teardown', time:'Final', text:'Return vest and radio to team lead' },
+  ],
+  'worship team': [
+    { phase:'Arrival', time:'90 min before', text:'Arrive with your instrument/gear ready to go' },
+    { phase:'Setup', time:'85 min before', text:'Set up your station on stage' },
+    { phase:'Soundcheck', time:'80 min before', text:'Run your individual soundcheck with the tech team' },
+    { phase:'Soundcheck', time:'70 min before', text:'Full band soundcheck — run through all song transitions' },
+    { phase:'Soundcheck', time:'60 min before', text:'Confirm monitor mixes are dialed in for everyone' },
+    { phase:'Pre-Service', time:'30 min before', text:'Attend pre-service prayer with the team' },
+    { phase:'Pre-Service', time:'15 min before', text:'Run through the setlist order one more time mentally' },
+    { phase:'Pre-Service', time:'5 min before', text:'Take your position on stage; be ready to begin' },
+    { phase:'Service', time:'Service starts', text:'Lead worship with energy, presence, and authenticity' },
+    { phase:'Service', time:'During set', text:'Watch the worship leader for any cues or changes' },
+    { phase:'Post-Service', time:'Service ends', text:'Stay available for altar ministry or post-service prayer' },
+    { phase:'Teardown', time:'After prayer', text:'Break down your gear and clear the stage' },
+    { phase:'Teardown', time:'Final', text:'Store cables and gear properly; leave stage clean' },
+  ],
+  'tech': [
+    { phase:'Arrival', time:'90 min before', text:'Arrive and power on all AV systems (console, amps, screens)' },
+    { phase:'Setup', time:'85 min before', text:'Check all cable runs, DI boxes, and stage connections' },
+    { phase:'Setup', time:'80 min before', text:'Load the ProPresenter/lyric slides for today\'s service' },
+    { phase:'Setup', time:'75 min before', text:'Set up and test livestream connection and cameras' },
+    { phase:'Soundcheck', time:'70 min before', text:'Run individual soundchecks with worship team members' },
+    { phase:'Soundcheck', time:'60 min before', text:'Full band mix — FOH and monitors dialed in' },
+    { phase:'Soundcheck', time:'50 min before', text:'Test and balance worship, video, and announcement levels' },
+    { phase:'Pre-Service', time:'30 min before', text:'Confirm slides are correct and in order; test video cues' },
+    { phase:'Pre-Service', time:'15 min before', text:'Start pre-service music/slides; confirm stream is live' },
+    { phase:'Pre-Service', time:'5 min before', text:'Confirm all operators at their stations (slides, cameras, FOH)' },
+    { phase:'Service', time:'During service', text:'Run slides, audio, and cameras — stay focused and anticipate cues' },
+    { phase:'Service', time:'During service', text:'Monitor stream quality; troubleshoot any issues quietly' },
+    { phase:'Post-Service', time:'Service ends', text:'Fade to post-service music; archive livestream if applicable' },
+    { phase:'Teardown', time:'After service', text:'Power down systems in correct sequence' },
+    { phase:'Teardown', time:'Final', text:'Coil cables, store mics, and leave booth clean and organized' },
+  ],
+  'stepping stones': [
+    { phase:'Arrival', time:'45 min before', text:'Arrive and check in with the Stepping Stones director' },
+    { phase:'Setup', time:'40 min before', text:'Set up your classroom — chairs, activities, lesson materials' },
+    { phase:'Setup', time:'35 min before', text:'Review the lesson plan and any key teaching points' },
+    { phase:'Setup', time:'30 min before', text:'Prepare the craft/activity supplies needed for your group' },
+    { phase:'Check-In', time:'25 min before', text:'Check-in station ready — security tags, allergy stickers' },
+    { phase:'Check-In', time:'20 min before', text:'Welcome families as they arrive; greet kids by name' },
+    { phase:'Service', time:'Service starts', text:'Begin your opening activity or worship with your group' },
+    { phase:'Service', time:'Mid-service', text:'Teach the lesson; keep kids engaged and safe' },
+    { phase:'Service', time:'During service', text:'Maintain a 2-adult rule in every room at all times' },
+    { phase:'Post-Service', time:'Service ends', text:'Prepare for check-out — confirm proper ID pickup only' },
+    { phase:'Post-Service', time:'Pickup', text:'Release children to verified guardians only' },
+    { phase:'Teardown', time:'After pickup', text:'Sanitize toys, tables, and high-touch surfaces' },
+    { phase:'Teardown', time:'Final', text:'Return supplies, restock consumables, leave room tidy' },
+  ],
+  'enrichment': [
+    { phase:'Arrival', time:'45 min before', text:'Arrive and check in with the Enrichment team lead' },
+    { phase:'Setup', time:'40 min before', text:'Set up the room: mats, toys, and activity stations' },
+    { phase:'Setup', time:'35 min before', text:'Sanitize all toys and surfaces from prior use' },
+    { phase:'Setup', time:'30 min before', text:'Confirm diaper supplies and check-in materials are stocked' },
+    { phase:'Check-In', time:'20 min before', text:'Welcome families; collect allergy info and emergency contacts' },
+    { phase:'Service', time:'Service starts', text:'Care for children — keep activities safe and age-appropriate' },
+    { phase:'Service', time:'During service', text:'If a child needs a parent, use the alert system (text/screen)' },
+    { phase:'Post-Service', time:'Service ends', text:'Prepare for pickup; have each child\'s belongings ready' },
+    { phase:'Post-Service', time:'Pickup', text:'Release children to verified guardians with matching security tag' },
+    { phase:'Teardown', time:'After pickup', text:'Wipe down all surfaces and sanitize toys again' },
+    { phase:'Teardown', time:'Final', text:'Take out any trash; leave room fully reset for next service' },
+  ],
+  'ls students': [
+    { phase:'Arrival', time:'30 min before', text:'Arrive and connect with the Students director' },
+    { phase:'Setup', time:'25 min before', text:'Set up the student space: chairs, game area, tech' },
+    { phase:'Setup', time:'20 min before', text:'Confirm the game, talk outline, and small group discussion questions' },
+    { phase:'Pre-Service', time:'15 min before', text:'Be visible and welcoming as students start to arrive' },
+    { phase:'Pre-Service', time:'10 min before', text:'Engage students by name — greet new faces especially' },
+    { phase:'Service', time:'Service starts', text:'Facilitate the opening game or activity' },
+    { phase:'Service', time:'During service', text:'Support the communicator and assist with any tech/supplies' },
+    { phase:'Service', time:'Small groups', text:'Lead or co-lead your assigned small group discussion' },
+    { phase:'Post-Service', time:'Service ends', text:'Stay for connection time — don\'t disappear when programming ends' },
+    { phase:'Post-Service', time:'After service', text:'Pray with any student who needs it' },
+    { phase:'Teardown', time:'Final', text:'Reset space, return supplies, and debrief with director' },
+  ],
+  'breakfast team': [
+    { phase:'Arrival', time:'90 min before', text:'Arrive and confirm the menu and all food supplies are on hand' },
+    { phase:'Setup', time:'85 min before', text:'Set up food stations, serving equipment, and warmers' },
+    { phase:'Prep', time:'75 min before', text:'Begin cooking/preparing food — follow all food safety guidelines' },
+    { phase:'Prep', time:'60 min before', text:'Prepare serving trays and utensils; label any items with allergens' },
+    { phase:'Service', time:'45 min before', text:'Begin serving — be warm and generous with guests' },
+    { phase:'Service', time:'Between services', text:'Restock food trays; clear dirty plates and cups' },
+    { phase:'Service', time:'Between services', text:'Wipe down tables and maintain a clean serving area' },
+    { phase:'Post-Service', time:'Final service ends', text:'Stop serving; begin breaking down the food station' },
+    { phase:'Teardown', time:'After service', text:'Store or discard remaining food per food safety guidelines' },
+    { phase:'Teardown', time:'Final', text:'Clean all surfaces, trays, and equipment; take out trash' },
+  ],
+  'coffee team': [
+    { phase:'Arrival', time:'60 min before', text:'Arrive and confirm all coffee supplies are stocked' },
+    { phase:'Setup', time:'55 min before', text:'Set up coffee stations — urns, cups, cream/sugar, napkins' },
+    { phase:'Prep', time:'45 min before', text:'Brew the first round of coffee; have ready before doors open' },
+    { phase:'Service', time:'30 min before', text:'Begin serving — greet guests warmly as they get coffee' },
+    { phase:'Service', time:'During service', text:'Monitor coffee levels; brew more as needed' },
+    { phase:'Service', time:'Between services', text:'Restock cups, napkins, cream, and sugar' },
+    { phase:'Service', time:'Between services', text:'Clean up spills and keep the station tidy' },
+    { phase:'Post-Service', time:'Final service ends', text:'Stop serving; begin breaking down the coffee station' },
+    { phase:'Teardown', time:'Final', text:'Clean urns, dispose of grounds, wipe down tables' },
+  ],
+  'hospitality team': [
+    { phase:'Arrival', time:'45 min before', text:'Arrive and check in with the Hospitality team lead' },
+    { phase:'Setup', time:'40 min before', text:'Set up any food or snack areas in the lobby' },
+    { phase:'Setup', time:'35 min before', text:'Ensure the lobby space looks warm and inviting' },
+    { phase:'Pre-Service', time:'20 min before', text:'Take your position and begin greeting arriving guests' },
+    { phase:'Service', time:'During service', text:'Monitor the lobby; replenish snacks or drinks as needed' },
+    { phase:'Service', time:'During service', text:'Be available to assist anyone who seems lost or has a need' },
+    { phase:'Post-Service', time:'Service ends', text:'Re-engage the lobby — be warm and conversational' },
+    { phase:'Post-Service', time:'After service', text:'Offer refreshments to anyone lingering' },
+    { phase:'Teardown', time:'After second service', text:'Break down snack/food areas and clean surfaces' },
+    { phase:'Teardown', time:'Final', text:'Take out trash and leave lobby clean' },
+  ],
+  'safety': [
+    { phase:'Arrival', time:'45 min before', text:'Arrive and check in with the Safety team lead' },
+    { phase:'Setup', time:'40 min before', text:'Confirm all team members have radios and know their zones' },
+    { phase:'Setup', time:'35 min before', text:'Walk the perimeter — check all exterior doors and parking' },
+    { phase:'Setup', time:'30 min before', text:'Locate and confirm access to first aid kits and AEDs' },
+    { phase:'Pre-Service', time:'20 min before', text:'Take your assigned position; maintain awareness of your zone' },
+    { phase:'Service', time:'Service starts', text:'Maintain calm, unobtrusive presence — scan your area regularly' },
+    { phase:'Service', time:'During service', text:'Monitor all exits and entry points' },
+    { phase:'Service', time:'During service', text:'Report any concerns to team lead via radio immediately' },
+    { phase:'Post-Service', time:'Service ends', text:'Stay visible as crowd exits — watch for any incidents' },
+    { phase:'Post-Service', time:'After service', text:'Assist with directing traffic flow out of the building' },
+    { phase:'Teardown', time:'Final', text:'Final walkthrough of the building; confirm all clear' },
+    { phase:'Teardown', time:'Final', text:'Return radio and check out with team lead' },
+  ],
+  'prayer team': [
+    { phase:'Arrival', time:'30 min before', text:'Arrive and join the pre-service prayer gathering' },
+    { phase:'Pre-Service', time:'25 min before', text:'Pray for the service, the message, and the people attending' },
+    { phase:'Pre-Service', time:'15 min before', text:'Take your position in the designated prayer area' },
+    { phase:'Service', time:'During service', text:'Pray quietly over the congregation during worship and message' },
+    { phase:'Service', time:'During altar call', text:'Move to your altar ministry position; be approachable' },
+    { phase:'Service', time:'Altar time', text:'Pray with anyone who comes forward — listen before you speak' },
+    { phase:'Service', time:'Altar time', text:'If someone needs extended care, connect them with a pastor' },
+    { phase:'Post-Service', time:'Service ends', text:'Remain available in the designated area for 15 minutes' },
+    { phase:'Post-Service', time:'After service', text:'Pray with anyone who approaches you in the lobby' },
+    { phase:'Teardown', time:'Final', text:'Brief debrief with prayer team lead; share any significant moments' },
+  ],
+  'service captains': [
+    { phase:'Arrival', time:'60 min before', text:'Arrive and do a full pre-service walkthrough of all areas' },
+    { phase:'Pre-Service', time:'55 min before', text:'Confirm every team is present and in position' },
+    { phase:'Pre-Service', time:'50 min before', text:'Check in with Kids, Worship, Tech, and Hospitality leads' },
+    { phase:'Pre-Service', time:'40 min before', text:'Confirm the run-of-show with the service producer/pastor' },
+    { phase:'Pre-Service', time:'30 min before', text:'Attend pre-service prayer' },
+    { phase:'Pre-Service', time:'15 min before', text:'Final check — any last-minute issues or gaps to fill?' },
+    { phase:'Service', time:'Service starts', text:'Monitor service flow from the back of the room' },
+    { phase:'Service', time:'During service', text:'Troubleshoot any issues quietly without disrupting the service' },
+    { phase:'Service', time:'Between services', text:'Communicate any adjustments to team leads' },
+    { phase:'Post-Service', time:'Service ends', text:'Coordinate cleanup — ensure all teams do their teardown' },
+    { phase:'Teardown', time:'After service', text:'Walk the building — confirm all spaces are clean and reset' },
+    { phase:'Teardown', time:'Final', text:'Lock up any secured areas; final debrief with key leads' },
+  ],
+  'connect': [
+    { phase:'Arrival', time:'15 min before', text:'Arrive and get your Connect team badge/lanyard' },
+    { phase:'Pre-Service', time:'10 min before', text:'Position yourself in the lobby to greet new faces' },
+    { phase:'Service', time:'Service starts', text:'Attend the service — watch for new or unfamiliar visitors' },
+    { phase:'Post-Service', time:'Service ends', text:'Move to the lobby immediately to engage with guests' },
+    { phase:'Post-Service', time:'After service', text:'Introduce yourself to any new faces you spot' },
+    { phase:'Post-Service', time:'After service', text:'Collect connection cards from the Welcome Center' },
+    { phase:'Post-Service', time:'After service', text:'Invite first-time visitors to the Connect Corner/table' },
+    { phase:'Post-Service', time:'After service', text:'Pray for any guest who is open to it' },
+    { phase:'Follow-Up', time:'This week', text:'Enter connection card info into Planning Center' },
+    { phase:'Follow-Up', time:'This week', text:'Send a personal follow-up text or email to first-time guests' },
+  ],
+  'presiders team': [
+    { phase:'Arrival', time:'30 min before', text:'Arrive and confirm your role for today\'s service' },
+    { phase:'Pre-Service', time:'25 min before', text:'Review any announcements, transitions, or scripts with producer' },
+    { phase:'Pre-Service', time:'15 min before', text:'Confirm tech team has your mic ready and levels checked' },
+    { phase:'Pre-Service', time:'10 min before', text:'Walk through the stage — know where you\'ll stand and move' },
+    { phase:'Service', time:'Service starts', text:'Be present on stage with calm, confident energy' },
+    { phase:'Service', time:'During service', text:'Execute transitions, announcements, and communion hosting with clarity' },
+    { phase:'Service', time:'Communion', text:'Lead communion reverently — know the script and the posture' },
+    { phase:'Post-Service', time:'Service ends', text:'Close the service warmly and with clear next steps for guests' },
+    { phase:'Teardown', time:'Final', text:'Return mic, debrief with producer on what went well/adjust' },
+  ],
+};
+
+// Fallback default for teams without a specific checklist
+TEAM_CHECKLISTS['default'] = [
+  { phase:'Arrival', time:'45 min before', text:'Arrive and check in with your team lead' },
+  { phase:'Setup', time:'40 min before', text:'Set up your area and confirm all supplies are ready' },
+  { phase:'Pre-Service', time:'20 min before', text:'Take your assigned position and be ready to serve' },
+  { phase:'Service', time:'During service', text:'Serve with excellence — represent Living Stones well' },
+  { phase:'Post-Service', time:'After service', text:'Help with post-service needs or teardown' },
+  { phase:'Teardown', time:'Final', text:'Leave your area clean and check out with your team lead' },
+];
+
+let vclCurrentTeam = null;
+
+function openVolChecklist(teamName) {
+  vclCurrentTeam = teamName;
+  const key = teamName.toLowerCase();
+  const items = TEAM_CHECKLISTS[key] || TEAM_CHECKLISTS['default'];
+  const icon  = TEAM_ICONS[key] || TEAM_ICONS['default'];
+  const done  = JSON.parse(localStorage.getItem(VCL_KEY) || '{}');
+
+  document.getElementById('vcl-icon').textContent   = icon;
+  document.getElementById('vcl-team-name').textContent = teamName;
+
+  // Group by phase
+  const phases = [];
+  items.forEach((item, idx) => {
+    if (!phases.length || phases[phases.length-1].phase !== item.phase) {
+      phases.push({ phase: item.phase, items: [] });
+    }
+    phases[phases.length-1].items.push({ ...item, idx });
+  });
+
+  const doneKey = k => teamName + '|' + k;
+  let html = '';
+  phases.forEach(p => {
+    html += `<div class="vcl-phase">${p.phase}</div>`;
+    p.items.forEach(item => {
+      const isDone = done[doneKey(item.idx)];
+      html += `<div class="vcl-item${isDone ? ' done' : ''}" onclick="vclToggle('${teamName}',${item.idx},this)">
+        <div class="vcl-chk">${isDone ? '✓' : ''}</div>
+        <div class="vcl-text">${item.text}</div>
+        <div class="vcl-time">${item.time}</div>
+      </div>`;
+    });
+  });
+
+  document.getElementById('vcl-body').innerHTML = html;
+  vclUpdateProgress(teamName, items.length);
+  document.getElementById('volChecklistModal').classList.add('open');
+}
+
+function closeVolChecklist() {
+  document.getElementById('volChecklistModal').classList.remove('open');
+}
+
+function vclToggle(teamName, idx, el) {
+  const done = JSON.parse(localStorage.getItem(VCL_KEY) || '{}');
+  const k = teamName + '|' + idx;
+  done[k] = !done[k];
+  localStorage.setItem(VCL_KEY, JSON.stringify(done));
+  el.classList.toggle('done', done[k]);
+  el.querySelector('.vcl-chk').textContent = done[k] ? '✓' : '';
+  const key = teamName.toLowerCase();
+  const total = (TEAM_CHECKLISTS[key] || TEAM_CHECKLISTS['default']).length;
+  vclUpdateProgress(teamName, total);
+}
+
+function vclUpdateProgress(teamName, total) {
+  const done = JSON.parse(localStorage.getItem(VCL_KEY) || '{}');
+  let count = 0;
+  for (let i = 0; i < total; i++) {
+    if (done[teamName + '|' + i]) count++;
+  }
+  const pct = total ? Math.round(count / total * 100) : 0;
+  document.getElementById('vcl-progress-label').textContent = count + ' of ' + total + ' complete';
+  document.getElementById('vcl-progress-fill').style.width = pct + '%';
+}
+
+function vclReset() {
+  if (!vclCurrentTeam) return;
+  const done = JSON.parse(localStorage.getItem(VCL_KEY) || '{}');
+  const key = vclCurrentTeam.toLowerCase();
+  const total = (TEAM_CHECKLISTS[key] || TEAM_CHECKLISTS['default']).length;
+  for (let i = 0; i < total; i++) delete done[vclCurrentTeam + '|' + i];
+  localStorage.setItem(VCL_KEY, JSON.stringify(done));
+  openVolChecklist(vclCurrentTeam);
+}
+
 // ════════════════════════════════════════
 // TEAM LEADER HUB
 // ════════════════════════════════════════
