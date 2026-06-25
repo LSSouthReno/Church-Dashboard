@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T17:47:55.484Z",
+  "lastUpdated": "2026-06-25T18:07:49.355Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 25, 2026, 10:47 AM",
+    "refreshed": "Jun 25, 2026, 11:07 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7356,7 +7356,7 @@
         null,
         null,
         6,
-        79,
+        78,
         14,
         18,
         4,
@@ -7403,7 +7403,7 @@
         null,
         null,
         2,
-        29,
+        28,
         10,
         4,
         2,
@@ -7635,18 +7635,18 @@
         "attPct": 64
       },
       {
-        "name": "Colonna/Mavros Community Group",
-        "members": 14,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 43
-      },
-      {
         "name": "Lattin Community Group",
         "members": 13,
         "leaders": 3,
         "schedule": "Meets weekly on Mondays from 6-7:30am",
+        "avgAttended": 6,
+        "attPct": 46
+      },
+      {
+        "name": "Colonna/Mavros Community Group",
+        "members": 13,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 6,
         "attPct": 46
       },
@@ -8507,13 +8507,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Kathy Herndon",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Mikayla Sanchez",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
@@ -8559,7 +8552,7 @@
               "name": "Lauren Johnson",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -8732,8 +8725,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ]
@@ -9789,7 +9782,7 @@
               "team": "Hospitality Team",
               "pos": "Host",
               "status": "C",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Renee Peregrin",
@@ -9816,7 +9809,7 @@
               "name": "Kathy Herndon",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
