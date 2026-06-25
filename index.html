@@ -1642,6 +1642,33 @@
   .tlh-link-btn:hover { border-color: #c49a2e; color: #c49a2e; }
   .tlh-link-icon { font-size: 1.2rem; flex-shrink: 0; }
 
+  /* Admin panel */
+  .tlh-adm-btn {
+    background: #2a2825; border: 1px solid #444; color: #d4d0cb;
+    font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 6px; cursor: pointer;
+    transition: all .15s;
+  }
+  .tlh-adm-btn:hover { border-color: #c49a2e; color: #c49a2e; }
+  .tlh-adm-btn-red { border-color: #7f1d1d; color: #f87171; }
+  .tlh-adm-btn-red:hover { border-color: #ef4444; color: #ef4444; }
+  .tlh-edit-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .tlh-edit-row input, .tlh-edit-row select, .tlh-edit-row textarea {
+    background: #1a1a1a; border: 1px solid #444; color: #f0f0f0;
+    font-family: 'Montserrat', sans-serif; font-size: 12px;
+    padding: 5px 8px; border-radius: 5px; flex: 1;
+  }
+  .tlh-edit-row textarea { resize: vertical; min-height: 60px; }
+  .tlh-edit-row select { flex: 0 0 auto; width: 100px; }
+  .tlh-adm-icon-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; padding: 2px 4px; opacity: .6;
+    transition: opacity .15s;
+  }
+  .tlh-adm-icon-btn:hover { opacity: 1; }
+  .tlh-check-list li.admin-mode { cursor: default; }
+  .tlh-tmpl.admin-mode .tlh-copy-btn { display: none; }
   /* Stats row */
   .tlh-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .tlh-stat {
@@ -1661,8 +1688,8 @@
       <div class="subtitle">Living Stones Church, South Reno</div>
     </div>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
-      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()">☀ Sunday</button>
-      <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()">🏛 Staff</button>
+      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()" style="border-color:#3b82f6;color:#3b82f6;">☀ Sunday</button>
+      <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()" style="border-color:#d4d0cb;color:#d4d0cb;">🏛 Staff</button>
       <button class="members-btn" id="membersBtnHeader" onclick="mmClick()">🔐 Members</button>
       <button class="members-btn" id="tlBtnHeader" onclick="openTLHub()" style="border-color:#c49a2e;color:#c49a2e;">👥 Team Leaders</button>
       <div class="updated">
@@ -7491,7 +7518,25 @@ function absencesRenderSection_(containerId) {
       <div class="tmod-title">Team Leader Hub</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;·&nbsp; SOUTH RENO</div>
     </div>
-    <div class="tmod-meta" style="font-size:11px;color:#9a9a9a;" id="tlh-updated"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="tmod-meta" style="font-size:11px;color:#9a9a9a;" id="tlh-updated"></div>
+      <button id="tlh-admin-btn" onclick="tlhAdminToggle()" style="
+        background:none;border:1px solid #444;color:#666;
+        font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
+        letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;
+        border-radius:20px;cursor:pointer;transition:all .15s;white-space:nowrap;
+      ">⚙ Admin</button>
+    </div>
+  </div>
+
+  <!-- ── ADMIN PANEL ── -->
+  <div id="tlh-admin-panel" style="display:none;background:#1a1614;border-bottom:1px solid #3a3a3a;padding:20px 40px;gap:20px;flex-wrap:wrap;" class="tlh-admin-wrap">
+    <div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap;">
+      <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#c49a2e;">Admin Mode Active</span>
+      <button onclick="tlhAdminAddCheck()" class="tlh-adm-btn">+ Add Checklist Item</button>
+      <button onclick="tlhAdminAddTemplate()" class="tlh-adm-btn">+ Add Message Template</button>
+      <button onclick="tlhAdminLock()" class="tlh-adm-btn tlh-adm-btn-red">Lock Admin</button>
+    </div>
   </div>
 
   <div class="tlh-body" id="tlh-body">
@@ -7642,47 +7687,157 @@ function tlhBuildHealth() {
   document.getElementById('tlh-s-gap').textContent    = totalGap;
 }
 
+// ── ADMIN ──
+const TLH_ADMIN_PW = 'passw0rd';
+let tlhAdminUnlocked = false;
+
+function tlhAdminToggle() {
+  if (tlhAdminUnlocked) { tlhAdminLock(); return; }
+  const pw = prompt('Enter admin password:');
+  if (pw === TLH_ADMIN_PW) {
+    tlhAdminUnlocked = true;
+    const btn = document.getElementById('tlh-admin-btn');
+    btn.textContent = '⚙ Admin ✓';
+    btn.style.borderColor = '#c49a2e';
+    btn.style.color = '#c49a2e';
+    document.getElementById('tlh-admin-panel').style.display = 'flex';
+    tlhBuildChecklist();
+    tlhBuildTemplates();
+  } else if (pw !== null) {
+    alert('Incorrect password.');
+  }
+}
+
+function tlhAdminLock() {
+  tlhAdminUnlocked = false;
+  const btn = document.getElementById('tlh-admin-btn');
+  btn.textContent = '⚙ Admin';
+  btn.style.borderColor = '#444';
+  btn.style.color = '#666';
+  document.getElementById('tlh-admin-panel').style.display = 'none';
+  tlhBuildChecklist();
+  tlhBuildTemplates();
+}
+
 // ── CHECKLIST ──
-const TLH_CHECKLIST_KEY = 'tlh_checklist_v1';
-const TLH_CHECKLIST = [
-  { id:'c1',  text:'Review your PCO schedule for this Sunday',          badge:'badge-sunday',  label:'Sunday'  },
-  { id:'c2',  text:'Confirm all volunteer positions are filled',         badge:'badge-sunday',  label:'Sunday'  },
-  { id:'c3',  text:'Follow up with any unconfirmed volunteers',          badge:'badge-weekly',  label:'Weekly'  },
-  { id:'c4',  text:'Send a word of encouragement to your team',          badge:'badge-weekly',  label:'Weekly'  },
-  { id:'c5',  text:'Check for any new schedule requests to accept',      badge:'badge-weekly',  label:'Weekly'  },
-  { id:'c6',  text:'Reach out to any volunteer who missed last Sunday',  badge:'badge-weekly',  label:'Weekly'  },
-  { id:'c7',  text:'Review your team\'s fill rate and identify gaps',    badge:'badge-monthly', label:'Monthly' },
-  { id:'c8',  text:'Onboard any new volunteers (assign a mentor)',       badge:'badge-monthly', label:'Monthly' },
-  { id:'c9',  text:'Send a personal thank-you to a team standout',       badge:'badge-monthly', label:'Monthly' },
-  { id:'c10', text:'Check in with each volunteer: how are they doing?',  badge:'badge-monthly', label:'Monthly' },
+const TLH_CHECKLIST_KEY    = 'tlh_checklist_v1';
+const TLH_CHECKLIST_DONE   = 'tlh_checklist_done_v1';
+const TLH_CHECKLIST_CUSTOM = 'tlh_checklist_custom_v1';
+
+const TLH_CHECKLIST_DEFAULT = [
+  { id:'c1',  text:'Review your PCO schedule for this Sunday',          freq:'sunday'  },
+  { id:'c2',  text:'Confirm all volunteer positions are filled',         freq:'sunday'  },
+  { id:'c3',  text:'Follow up with any unconfirmed volunteers',          freq:'weekly'  },
+  { id:'c4',  text:'Send a word of encouragement to your team',          freq:'weekly'  },
+  { id:'c5',  text:'Check for any new schedule requests to accept',      freq:'weekly'  },
+  { id:'c6',  text:'Reach out to any volunteer who missed last Sunday',  freq:'weekly'  },
+  { id:'c7',  text:'Review your team\'s fill rate and identify gaps',    freq:'monthly' },
+  { id:'c8',  text:'Onboard any new volunteers (assign a mentor)',       freq:'monthly' },
+  { id:'c9',  text:'Send a personal thank-you to a team standout',       freq:'monthly' },
+  { id:'c10', text:'Check in with each volunteer: how are they doing?',  freq:'monthly' },
 ];
 
+const FREQ_META = {
+  sunday:  { badge:'badge-sunday',  label:'Sunday'  },
+  weekly:  { badge:'badge-weekly',  label:'Weekly'  },
+  monthly: { badge:'badge-monthly', label:'Monthly' },
+};
+
+function tlhGetChecklist() {
+  const saved = localStorage.getItem(TLH_CHECKLIST_CUSTOM);
+  return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(TLH_CHECKLIST_DEFAULT));
+}
+
+function tlhSaveChecklist(items) {
+  localStorage.setItem(TLH_CHECKLIST_CUSTOM, JSON.stringify(items));
+}
+
 function tlhBuildChecklist() {
-  const done = JSON.parse(localStorage.getItem(TLH_CHECKLIST_KEY) || '{}');
-  const ul = document.getElementById('tlh-checklist');
-  ul.innerHTML = TLH_CHECKLIST.map(item => `
-    <li class="${done[item.id] ? 'done' : ''}" onclick="tlhToggleCheck('${item.id}',this)">
-      <span class="chk-box">${done[item.id] ? '✓' : ''}</span>
-      <span style="flex:1">${item.text}</span>
-      <span class="tlh-check-badge ${item.badge}">${item.label}</span>
-    </li>`).join('');
+  const items = tlhGetChecklist();
+  const done  = JSON.parse(localStorage.getItem(TLH_CHECKLIST_DONE) || '{}');
+  const ul    = document.getElementById('tlh-checklist');
+
+  if (tlhAdminUnlocked) {
+    ul.innerHTML = items.map((item, idx) => {
+      const fm = FREQ_META[item.freq] || FREQ_META.weekly;
+      return `<li class="admin-mode" style="flex-direction:column;align-items:stretch;gap:6px;cursor:default;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="tlh-check-badge ${fm.badge}" style="pointer-events:none;">${fm.label}</span>
+          <span style="flex:1;font-size:13px;color:var(--text-muted);">${item.text}</span>
+          <button class="tlh-adm-icon-btn" title="Edit" onclick="tlhAdminEditCheck(${idx})">✏️</button>
+          <button class="tlh-adm-icon-btn" title="Delete" onclick="tlhAdminDeleteCheck(${idx})">🗑️</button>
+        </div>
+        <div class="tlh-edit-row" id="tlh-check-edit-${idx}" style="display:none;">
+          <input type="text" value="${item.text.replace(/"/g,'&quot;')}" id="tlh-ci-text-${idx}" placeholder="Checklist item text" />
+          <select id="tlh-ci-freq-${idx}">
+            <option value="sunday"  ${item.freq==='sunday'  ?'selected':''}>Sunday</option>
+            <option value="weekly"  ${item.freq==='weekly'  ?'selected':''}>Weekly</option>
+            <option value="monthly" ${item.freq==='monthly' ?'selected':''}>Monthly</option>
+          </select>
+          <button class="tlh-adm-btn" onclick="tlhAdminSaveCheck(${idx})">Save</button>
+          <button class="tlh-adm-icon-btn" onclick="document.getElementById('tlh-check-edit-${idx}').style.display='none'">✕</button>
+        </div>
+      </li>`;
+    }).join('');
+  } else {
+    ul.innerHTML = items.map(item => {
+      const fm = FREQ_META[item.freq] || FREQ_META.weekly;
+      return `<li class="${done[item.id] ? 'done' : ''}" onclick="tlhToggleCheck('${item.id}',this)">
+        <span class="chk-box">${done[item.id] ? '✓' : ''}</span>
+        <span style="flex:1">${item.text}</span>
+        <span class="tlh-check-badge ${fm.badge}">${fm.label}</span>
+      </li>`;
+    }).join('');
+  }
 }
 
 function tlhToggleCheck(id, el) {
-  const done = JSON.parse(localStorage.getItem(TLH_CHECKLIST_KEY) || '{}');
+  const done = JSON.parse(localStorage.getItem(TLH_CHECKLIST_DONE) || '{}');
   done[id] = !done[id];
-  localStorage.setItem(TLH_CHECKLIST_KEY, JSON.stringify(done));
+  localStorage.setItem(TLH_CHECKLIST_DONE, JSON.stringify(done));
   el.classList.toggle('done', done[id]);
   el.querySelector('.chk-box').textContent = done[id] ? '✓' : '';
 }
 
 function tlhResetChecklist() {
-  localStorage.removeItem(TLH_CHECKLIST_KEY);
+  localStorage.removeItem(TLH_CHECKLIST_DONE);
   tlhBuildChecklist();
 }
 
+function tlhAdminEditCheck(idx) {
+  const row = document.getElementById(`tlh-check-edit-${idx}`);
+  row.style.display = row.style.display === 'none' ? 'flex' : 'none';
+}
+
+function tlhAdminSaveCheck(idx) {
+  const items = tlhGetChecklist();
+  items[idx].text = document.getElementById(`tlh-ci-text-${idx}`).value.trim() || items[idx].text;
+  items[idx].freq = document.getElementById(`tlh-ci-freq-${idx}`).value;
+  tlhSaveChecklist(items);
+  tlhBuildChecklist();
+}
+
+function tlhAdminDeleteCheck(idx) {
+  if (!confirm('Delete this checklist item?')) return;
+  const items = tlhGetChecklist();
+  items.splice(idx, 1);
+  tlhSaveChecklist(items);
+  tlhBuildChecklist();
+}
+
+function tlhAdminAddCheck() {
+  const items = tlhGetChecklist();
+  items.push({ id: 'c_' + Date.now(), text: 'New checklist item', freq: 'weekly' });
+  tlhSaveChecklist(items);
+  tlhBuildChecklist();
+  // auto-open the edit row for the new item
+  setTimeout(() => tlhAdminEditCheck(items.length - 1), 50);
+}
+
 // ── MESSAGE TEMPLATES ──
-const TLH_TEMPLATES = [
+const TLH_TEMPLATES_CUSTOM = 'tlh_templates_custom_v1';
+
+const TLH_TEMPLATES_DEFAULT = [
   {
     label: 'Recruiting a New Volunteer',
     text: `Hey [Name]! I've been thinking about you and wanted to reach out. We have a spot on the [Team Name] team at Living Stones that I think would be a perfect fit for you. It's a great group of people and a really meaningful way to get plugged in. Would you be open to chatting about it this Sunday? No pressure at all — just wanted to plant the seed! 😊`
@@ -7709,25 +7864,90 @@ const TLH_TEMPLATES = [
   },
 ];
 
+function tlhGetTemplates() {
+  const saved = localStorage.getItem(TLH_TEMPLATES_CUSTOM);
+  return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(TLH_TEMPLATES_DEFAULT));
+}
+
+function tlhSaveTemplates(items) {
+  localStorage.setItem(TLH_TEMPLATES_CUSTOM, JSON.stringify(items));
+}
+
 function tlhBuildTemplates() {
+  const items = tlhGetTemplates();
   const el = document.getElementById('tlh-templates');
-  el.innerHTML = TLH_TEMPLATES.map((t,i) => `
-    <div class="tlh-tmpl">
-      <div class="tlh-tmpl-label">${t.label}</div>
-      <div class="tlh-tmpl-text">${t.text}</div>
-      <button class="tlh-copy-btn" id="tlh-copy-${i}" onclick="tlhCopy(${i},this)">Copy</button>
-    </div>`).join('');
+
+  if (tlhAdminUnlocked) {
+    el.innerHTML = items.map((t, i) => `
+      <div class="tlh-tmpl admin-mode">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div class="tlh-tmpl-label" style="flex:1;">${t.label}</div>
+          <button class="tlh-adm-icon-btn" onclick="tlhAdminEditTmpl(${i})">✏️</button>
+          <button class="tlh-adm-icon-btn" onclick="tlhAdminDeleteTmpl(${i})">🗑️</button>
+        </div>
+        <div class="tlh-tmpl-text" id="tlh-tmpl-preview-${i}">${t.text}</div>
+        <div class="tlh-edit-row" id="tlh-tmpl-edit-${i}" style="display:none;flex-direction:column;gap:6px;">
+          <input type="text" value="${t.label.replace(/"/g,'&quot;')}" id="tlh-ti-label-${i}" placeholder="Template title" style="width:100%" />
+          <textarea id="tlh-ti-text-${i}" style="width:100%">${t.text}</textarea>
+          <div style="display:flex;gap:8px;">
+            <button class="tlh-adm-btn" onclick="tlhAdminSaveTmpl(${i})">Save</button>
+            <button class="tlh-adm-icon-btn" onclick="tlhAdminCloseTmpl(${i})">✕ Cancel</button>
+          </div>
+        </div>
+      </div>`).join('');
+  } else {
+    el.innerHTML = items.map((t, i) => `
+      <div class="tlh-tmpl">
+        <div class="tlh-tmpl-label">${t.label}</div>
+        <div class="tlh-tmpl-text">${t.text}</div>
+        <button class="tlh-copy-btn" id="tlh-copy-${i}" onclick="tlhCopy(${i},this)">Copy</button>
+      </div>`).join('');
+  }
+}
+
+function tlhAdminEditTmpl(i) {
+  document.getElementById(`tlh-tmpl-preview-${i}`).style.display = 'none';
+  document.getElementById(`tlh-tmpl-edit-${i}`).style.display = 'flex';
+}
+
+function tlhAdminCloseTmpl(i) {
+  document.getElementById(`tlh-tmpl-preview-${i}`).style.display = '';
+  document.getElementById(`tlh-tmpl-edit-${i}`).style.display = 'none';
+}
+
+function tlhAdminSaveTmpl(i) {
+  const items = tlhGetTemplates();
+  items[i].label = document.getElementById(`tlh-ti-label-${i}`).value.trim() || items[i].label;
+  items[i].text  = document.getElementById(`tlh-ti-text-${i}`).value.trim()  || items[i].text;
+  tlhSaveTemplates(items);
+  tlhBuildTemplates();
+}
+
+function tlhAdminDeleteTmpl(i) {
+  if (!confirm('Delete this template?')) return;
+  const items = tlhGetTemplates();
+  items.splice(i, 1);
+  tlhSaveTemplates(items);
+  tlhBuildTemplates();
+}
+
+function tlhAdminAddTemplate() {
+  const items = tlhGetTemplates();
+  items.push({ label: 'New Template', text: 'Write your message here…' });
+  tlhSaveTemplates(items);
+  tlhBuildTemplates();
+  setTimeout(() => tlhAdminEditTmpl(items.length - 1), 50);
 }
 
 function tlhCopy(i, btn) {
-  navigator.clipboard.writeText(TLH_TEMPLATES[i].text).then(() => {
+  const text = tlhGetTemplates()[i].text;
+  navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied ✓';
     btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
   }).catch(() => {
-    // fallback for non-secure contexts
     const ta = document.createElement('textarea');
-    ta.value = TLH_TEMPLATES[i].text;
+    ta.value = text;
     document.body.appendChild(ta);
     ta.select(); document.execCommand('copy');
     document.body.removeChild(ta);
