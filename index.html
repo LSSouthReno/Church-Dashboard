@@ -1502,6 +1502,154 @@
     transition: color 0.12s, border-color 0.12s; white-space: nowrap;
   }
   .sp-name-link:hover { color: var(--sp-rust) !important; border-bottom-color: var(--sp-rust); }
+
+  /* ════════════════════════════════════════
+     TEAM LEADER HUB
+  ════════════════════════════════════════ */
+  #tlHub { font-family: 'Montserrat', sans-serif; }
+  .tlh-body {
+    flex: 1; overflow-y: auto;
+    padding: 32px 40px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-content: start;
+  }
+  @media (max-width: 900px) { .tlh-body { grid-template-columns: 1fr; padding: 20px 20px 60px; } }
+
+  .tlh-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .tlh-card.full { grid-column: 1 / -1; }
+  .tlh-card.accent-top { border-top: 3px solid #c49a2e; }
+
+  .tlh-card-title {
+    font-size: 10px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: #c49a2e; margin-bottom: 14px;
+  }
+  .tlh-card-sub { font-size: 12px; color: var(--text-muted); margin-top: -10px; margin-bottom: 14px; }
+
+  /* Onboarding hero card */
+  .tlh-onboard-hero {
+    background: linear-gradient(135deg, #1e1c1b 0%, #2e2a26 100%);
+    border: 1px solid #4a4744;
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .tlh-onboard-icon {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: #c49a2e;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+  }
+  .tlh-onboard-text h3 { font-size: 1rem; font-weight: 800; color: #f0ece8; margin-bottom: 4px; }
+  .tlh-onboard-text p  { font-size: .8rem; color: #9a9490; line-height: 1.6; }
+  .tlh-onboard-btn {
+    margin-left: auto; flex-shrink: 0;
+    padding: .65rem 1.4rem;
+    background: #c49a2e; color: #1a1814;
+    border: none; border-radius: 8px;
+    font-size: .8rem; font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: .4rem;
+    transition: background .15s;
+  }
+  .tlh-onboard-btn:hover { background: #e0b84a; }
+  @media (max-width: 650px) { .tlh-onboard-hero { flex-direction: column; align-items: flex-start; } .tlh-onboard-btn { margin-left: 0; } }
+
+  /* Team health bars */
+  .tlh-team-row {
+    display: grid; grid-template-columns: 130px 1fr 56px;
+    align-items: center; gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .tlh-team-row:last-child { border-bottom: none; }
+  .tlh-team-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tlh-bar-track { height: 7px; background: #333; border-radius: 99px; overflow: hidden; }
+  .tlh-bar-fill  { height: 100%; border-radius: 99px; transition: width .4s; }
+  .tlh-pct { font-size: 11px; font-weight: 700; text-align: right; }
+  .health-green  { background: #22c55e; color: #22c55e; }
+  .health-yellow { background: #facc15; color: #facc15; }
+  .health-red    { background: #ef4444; color: #ef4444; }
+
+  /* Checklist */
+  .tlh-check-list { list-style: none; }
+  .tlh-check-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--card-border);
+    font-size: 13px; color: var(--text-muted);
+    cursor: pointer; transition: color .15s;
+  }
+  .tlh-check-list li:last-child { border-bottom: none; }
+  .tlh-check-list li.done { color: var(--text-dim); text-decoration: line-through; }
+  .tlh-check-list li .chk-box {
+    width: 17px; height: 17px; flex-shrink: 0;
+    border: 1.5px solid #555; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; margin-top: 1px; transition: all .15s;
+  }
+  .tlh-check-list li.done .chk-box { background: #22c55e; border-color: #22c55e; color: #fff; }
+  .tlh-check-badge {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; padding: 2px 7px; border-radius: 99px;
+    flex-shrink: 0; margin-left: auto; margin-top: 1px;
+  }
+  .badge-weekly { background: #1d4ed8; color: #93c5fd; }
+  .badge-sunday { background: #7c2d12; color: #fb923c; }
+  .badge-monthly { background: #14532d; color: #4ade80; }
+  .tlh-reset-btn { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; background: none; border: 1px solid #444; color: var(--text-dim); padding: 4px 10px; border-radius: 5px; cursor: pointer; float: right; margin-top: -4px; }
+  .tlh-reset-btn:hover { border-color: #c49a2e; color: #c49a2e; }
+
+  /* Templates */
+  .tlh-tmpl-list { display: flex; flex-direction: column; gap: 10px; }
+  .tlh-tmpl {
+    background: #1e1e1e; border: 1px solid var(--card-border);
+    border-radius: 8px; padding: 12px 14px; position: relative;
+  }
+  .tlh-tmpl-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #c49a2e; margin-bottom: 5px; }
+  .tlh-tmpl-text { font-size: 12px; color: var(--text-muted); line-height: 1.6; white-space: pre-wrap; }
+  .tlh-copy-btn {
+    position: absolute; top: 10px; right: 10px;
+    background: #333; border: none; color: var(--text-muted);
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+    padding: 4px 10px; border-radius: 5px; cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all .15s;
+  }
+  .tlh-copy-btn:hover { background: #c49a2e; color: #1a1814; }
+  .tlh-copy-btn.copied { background: #22c55e; color: #fff; }
+
+  /* Quick links */
+  .tlh-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tlh-link-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: #1e1e1e; border: 1px solid var(--card-border);
+    border-radius: 8px; padding: 12px 14px;
+    text-decoration: none; color: var(--text);
+    font-size: 12px; font-weight: 600;
+    transition: border-color .15s;
+  }
+  .tlh-link-btn:hover { border-color: #c49a2e; color: #c49a2e; }
+  .tlh-link-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+  /* Stats row */
+  .tlh-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tlh-stat {
+    background: #1e1e1e; border-radius: 8px; padding: 14px;
+    text-align: center; border: 1px solid var(--card-border);
+  }
+  .tlh-stat-val { font-size: 1.6rem; font-weight: 900; color: #f0f0f0; line-height: 1; }
+  .tlh-stat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 5px; }
 </style>
 </head>
 <body>
@@ -1516,6 +1664,7 @@
       <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()">☀ Sunday</button>
       <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()">🏛 Staff</button>
       <button class="members-btn" id="membersBtnHeader" onclick="mmClick()">🔐 Members</button>
+      <button class="members-btn" id="tlBtnHeader" onclick="openTLHub()" style="border-color:#c49a2e;color:#c49a2e;">👥 Team Leaders</button>
       <div class="updated">
         <div><span class="pulse"></span><span class="stamp" id="updatedStamp">Loading…</span></div>
         <div style="margin-top:4px;">Refreshes hourly</div>
@@ -7330,6 +7479,253 @@ function absencesRenderSection_(containerId) {
 <div id="staffProfileModal" role="dialog" aria-modal="true" aria-label="Staff Profile" onclick="if(event.target===this)closeStaffProfile()">
   <div class="sp-prof-box" id="sp-prof-content"></div>
 </div>
+
+<!-- ════════════════════════════════════════
+     TEAM LEADER HUB MODAL
+════════════════════════════════════════ -->
+<div class="tmod-overlay" id="tlHub" aria-hidden="true">
+
+  <div class="tmod-header">
+    <button class="tmod-back" onclick="closeTLHub()">← Dashboard</button>
+    <div class="tmod-titles">
+      <div class="tmod-title">Team Leader Hub</div>
+      <div class="tmod-sub">LIVING STONES CHURCH &nbsp;·&nbsp; SOUTH RENO</div>
+    </div>
+    <div class="tmod-meta" style="font-size:11px;color:#9a9a9a;" id="tlh-updated"></div>
+  </div>
+
+  <div class="tlh-body" id="tlh-body">
+
+    <!-- ── ONBOARDING GUIDE HERO ── -->
+    <div class="tlh-onboard-hero">
+      <div class="tlh-onboard-icon">📋</div>
+      <div class="tlh-onboard-text">
+        <h3>Volunteer Onboarding Guide Generator</h3>
+        <p>Fill out a short form and generate a custom PDF to hand your new volunteers — covers communication, PCO scheduling, day-of details, the Four H's, and more.</p>
+      </div>
+      <a href="team-onboarding-generator.html" target="_blank" class="tlh-onboard-btn">Open Generator →</a>
+    </div>
+
+    <!-- ── TEAM HEALTH ── -->
+    <div class="tlh-card accent-top">
+      <div class="tlh-card-title">Team Health — Volunteer Fill Rate</div>
+      <div class="tlh-card-sub" id="tlh-health-sub">Based on current PCO schedule data</div>
+      <div id="tlh-health-rows">
+        <div style="color:var(--text-dim);font-size:12px;">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ── WEEKLY CHECKLIST ── -->
+    <div class="tlh-card accent-top">
+      <div class="tlh-card-title">
+        Team Leader Checklist
+        <button class="tlh-reset-btn" onclick="tlhResetChecklist()">Reset</button>
+      </div>
+      <ul class="tlh-check-list" id="tlh-checklist"></ul>
+    </div>
+
+    <!-- ── MESSAGE TEMPLATES ── -->
+    <div class="tlh-card full accent-top">
+      <div class="tlh-card-title">Message Templates — Copy &amp; Send</div>
+      <div class="tlh-card-sub">Ready-to-send messages for common team leader situations</div>
+      <div class="tlh-tmpl-list" id="tlh-templates"></div>
+    </div>
+
+    <!-- ── QUICK LINKS ── -->
+    <div class="tlh-card">
+      <div class="tlh-card-title">Quick Links</div>
+      <div class="tlh-links">
+        <a href="https://services.planningcenteronline.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📅</span> Planning Center Services
+        </a>
+        <a href="https://app.churchcenter.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">⛪</span> Church Center
+        </a>
+        <a href="https://people.planningcenteronline.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">👤</span> PCO People
+        </a>
+        <a href="https://groups.planningcenteronline.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">💬</span> PCO Groups / Chat
+        </a>
+        <a href="team-onboarding-generator.html" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📋</span> Onboarding Generator
+        </a>
+        <a href="https://lschurches.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">🌐</span> Church Website
+        </a>
+      </div>
+    </div>
+
+    <!-- ── VOLUNTEER SNAPSHOT ── -->
+    <div class="tlh-card">
+      <div class="tlh-card-title">Volunteer Snapshot</div>
+      <div class="tlh-stat-row" id="tlh-stats">
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-total">—</div><div class="tlh-stat-lbl">Total Volunteers</div></div>
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-filled">—</div><div class="tlh-stat-lbl">Positions Filled</div></div>
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-gap" style="color:#ef4444">—</div><div class="tlh-stat-lbl">Total Gap</div></div>
+      </div>
+    </div>
+
+  </div><!-- /tlh-body -->
+</div><!-- /tlHub -->
+
+<script>
+// ════════════════════════════════════════
+// TEAM LEADER HUB
+// ════════════════════════════════════════
+
+function openTLHub() {
+  document.getElementById('tlHub').classList.add('open');
+  document.getElementById('tlHub').setAttribute('aria-hidden','false');
+  tlhBuild();
+}
+function closeTLHub() {
+  document.getElementById('tlHub').classList.remove('open');
+  document.getElementById('tlHub').setAttribute('aria-hidden','true');
+}
+
+// ── BUILD ──
+function tlhBuild() {
+  tlhBuildHealth();
+  tlhBuildChecklist();
+  tlhBuildTemplates();
+  // updated stamp
+  if (DASHBOARD_DATA && DASHBOARD_DATA.lastUpdated) {
+    const d = new Date(DASHBOARD_DATA.lastUpdated);
+    document.getElementById('tlh-updated').textContent =
+      'Data updated ' + d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  }
+}
+
+// ── TEAM HEALTH ──
+function tlhBuildHealth() {
+  const teams = (DASHBOARD_DATA && DASHBOARD_DATA.serveTeams) || [];
+  if (!teams.length) { document.getElementById('tlh-health-rows').innerHTML = '<div style="color:var(--text-dim);font-size:12px;">No team data available.</div>'; return; }
+
+  let totalFilled = 0, totalNeeded = 0;
+  const sorted = [...teams].sort((a,b) => {
+    const pa = a.needed ? a.current/a.needed : 1;
+    const pb = b.needed ? b.current/b.needed : 1;
+    return pa - pb; // worst first
+  });
+
+  let html = '';
+  sorted.forEach(t => {
+    const pct = t.needed ? Math.round((t.current / t.needed) * 100) : 100;
+    const cls = pct >= 90 ? 'health-green' : pct >= 70 ? 'health-yellow' : 'health-red';
+    const label = pct >= 100 ? '✓ Full' : pct + '%';
+    html += `<div class="tlh-team-row">
+      <div class="tlh-team-name" title="${t.name}">${t.name}</div>
+      <div class="tlh-bar-track"><div class="tlh-bar-fill ${cls}" style="width:${Math.min(pct,100)}%"></div></div>
+      <div class="tlh-pct ${cls}">${label}</div>
+    </div>`;
+    totalFilled += t.current;
+    totalNeeded += t.needed || t.current;
+  });
+
+  document.getElementById('tlh-health-rows').innerHTML = html;
+
+  // Snapshot stats
+  const uniq = (DASHBOARD_DATA.uniqueVolunteers) || '—';
+  document.getElementById('tlh-s-total').textContent  = typeof uniq === 'number' ? uniq : '—';
+  document.getElementById('tlh-s-filled').textContent = totalFilled;
+  document.getElementById('tlh-s-gap').textContent    = Math.max(0, totalNeeded - totalFilled);
+}
+
+// ── CHECKLIST ──
+const TLH_CHECKLIST_KEY = 'tlh_checklist_v1';
+const TLH_CHECKLIST = [
+  { id:'c1',  text:'Review your PCO schedule for this Sunday',          badge:'badge-sunday',  label:'Sunday'  },
+  { id:'c2',  text:'Confirm all volunteer positions are filled',         badge:'badge-sunday',  label:'Sunday'  },
+  { id:'c3',  text:'Follow up with any unconfirmed volunteers',          badge:'badge-weekly',  label:'Weekly'  },
+  { id:'c4',  text:'Send a word of encouragement to your team',          badge:'badge-weekly',  label:'Weekly'  },
+  { id:'c5',  text:'Check for any new schedule requests to accept',      badge:'badge-weekly',  label:'Weekly'  },
+  { id:'c6',  text:'Reach out to any volunteer who missed last Sunday',  badge:'badge-weekly',  label:'Weekly'  },
+  { id:'c7',  text:'Review your team\'s fill rate and identify gaps',    badge:'badge-monthly', label:'Monthly' },
+  { id:'c8',  text:'Onboard any new volunteers (assign a mentor)',       badge:'badge-monthly', label:'Monthly' },
+  { id:'c9',  text:'Send a personal thank-you to a team standout',       badge:'badge-monthly', label:'Monthly' },
+  { id:'c10', text:'Check in with each volunteer: how are they doing?',  badge:'badge-monthly', label:'Monthly' },
+];
+
+function tlhBuildChecklist() {
+  const done = JSON.parse(localStorage.getItem(TLH_CHECKLIST_KEY) || '{}');
+  const ul = document.getElementById('tlh-checklist');
+  ul.innerHTML = TLH_CHECKLIST.map(item => `
+    <li class="${done[item.id] ? 'done' : ''}" onclick="tlhToggleCheck('${item.id}',this)">
+      <span class="chk-box">${done[item.id] ? '✓' : ''}</span>
+      <span style="flex:1">${item.text}</span>
+      <span class="tlh-check-badge ${item.badge}">${item.label}</span>
+    </li>`).join('');
+}
+
+function tlhToggleCheck(id, el) {
+  const done = JSON.parse(localStorage.getItem(TLH_CHECKLIST_KEY) || '{}');
+  done[id] = !done[id];
+  localStorage.setItem(TLH_CHECKLIST_KEY, JSON.stringify(done));
+  el.classList.toggle('done', done[id]);
+  el.querySelector('.chk-box').textContent = done[id] ? '✓' : '';
+}
+
+function tlhResetChecklist() {
+  localStorage.removeItem(TLH_CHECKLIST_KEY);
+  tlhBuildChecklist();
+}
+
+// ── MESSAGE TEMPLATES ──
+const TLH_TEMPLATES = [
+  {
+    label: 'Recruiting a New Volunteer',
+    text: `Hey [Name]! I've been thinking about you and wanted to reach out. We have a spot on the [Team Name] team at Living Stones that I think would be a perfect fit for you. It's a great group of people and a really meaningful way to get plugged in. Would you be open to chatting about it this Sunday? No pressure at all — just wanted to plant the seed! 😊`
+  },
+  {
+    label: 'Schedule Reminder (Pre-Sunday)',
+    text: `Hey team! 👋 Just a reminder that we're serving together this Sunday. Please plan to arrive by [arrival time] and head to [location]. Looking forward to seeing you all! Let me know if anything has come up. — [Your name]`
+  },
+  {
+    label: 'Missed Sunday Follow-Up',
+    text: `Hey [Name] — missed you on Sunday! Just wanted to check in and make sure everything is okay. Life happens and we totally get it. If something's going on or you need to talk through your schedule, I'm here. Hope to see you soon! — [Your name]`
+  },
+  {
+    label: 'Welcome to the Team',
+    text: `Hey [Name]! 🎉 So glad you're officially on the [Team Name] team! Here's what to know: we communicate through [communication method], schedules come through Planning Center (check your email for the invite), and your first Sunday you'll shadow [mentor name]. Don't hesitate to text me any time. Can't wait to serve with you! — [Your name]`
+  },
+  {
+    label: 'Volunteer Appreciation',
+    text: `Hey [Name] — I just wanted to take a second to say thank you. What you do every week on the [Team Name] team makes a real difference, and I don't always say that enough. You show up, you give your best, and people's experience at Living Stones is genuinely better because of you. Grateful for you! — [Your name]`
+  },
+  {
+    label: 'Asking for a Sub / Coverage',
+    text: `Hey team — we're a little short this Sunday for [service/time]. Would anyone be able to step in or swap? You'd be a huge help and I'd owe you one 😄 Reply here or text me directly. Thanks! — [Your name]`
+  },
+];
+
+function tlhBuildTemplates() {
+  const el = document.getElementById('tlh-templates');
+  el.innerHTML = TLH_TEMPLATES.map((t,i) => `
+    <div class="tlh-tmpl">
+      <div class="tlh-tmpl-label">${t.label}</div>
+      <div class="tlh-tmpl-text">${t.text}</div>
+      <button class="tlh-copy-btn" id="tlh-copy-${i}" onclick="tlhCopy(${i},this)">Copy</button>
+    </div>`).join('');
+}
+
+function tlhCopy(i, btn) {
+  navigator.clipboard.writeText(TLH_TEMPLATES[i].text).then(() => {
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+  }).catch(() => {
+    // fallback for non-secure contexts
+    const ta = document.createElement('textarea');
+    ta.value = TLH_TEMPLATES[i].text;
+    document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+  });
+}
+</script>
 
 </body>
 </html>
