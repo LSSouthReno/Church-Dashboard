@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T23:46:56.672Z",
+  "lastUpdated": "2026-06-25T00:02:21.740Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 24, 2026, 4:47 PM",
+    "refreshed": "Jun 24, 2026, 5:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7695,8 +7695,8 @@
         "members": 10,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 10am-12pm",
-        "avgAttended": 6,
-        "attPct": 60
+        "avgAttended": 7,
+        "attPct": 70
       },
       {
         "name": "Gardner Community Group",
@@ -8125,7 +8125,7 @@
               "name": "Nicole Leach",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -9221,7 +9221,7 @@
               "seq": 7,
               "title": "Holy Spirit",
               "type": "song",
-              "lengthMin": 8,
+              "lengthMin": 7,
               "description": ""
             },
             {
@@ -9229,7 +9229,7 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: HOW GREAT THOU ART"
             },
             {
               "seq": 9,
@@ -9264,7 +9264,7 @@
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
-              "description": "End Underscore:"
+              "description": "End Underscore: INCREASING FAITH"
             },
             {
               "seq": 14,
@@ -9614,7 +9614,7 @@
               "team": "Safety Team",
               "pos": "Safety Monitor",
               "status": "C",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Teylor Baskharoon (Hinzman)",
@@ -10218,14 +10218,14 @@
               "team": "Safety Team",
               "pos": "Safety Monitor",
               "status": "C",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "9:30 AM, 11 AM"
             },
             {
               "name": "Bill Caraway",
               "team": "Safety Team",
               "pos": "Safety Monitor",
               "status": "C",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "9:30 AM, 11 AM"
             },
             {
               "name": "McKayla Leggett",
@@ -11054,6 +11054,20 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Bill Caraway",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -11211,8 +11225,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 54,
-            "totalVols": 54
+            "volsWithServiceTime": 56,
+            "totalVols": 56
           }
         }
       ]
