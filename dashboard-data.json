@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-26T15:46:30.774Z",
+  "lastUpdated": "2026-06-26T15:58:48.355Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5952,7 +5952,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 26, 2026, 8:46 AM",
+    "refreshed": "Jun 26, 2026, 8:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8922,13 +8922,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Anita Irwin",
-              "team": "Stepping Stones",
-              "pos": "Check In",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Tiffany Jackson",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
@@ -9315,8 +9308,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 57,
-            "totalVols": 59
+            "volsWithServiceTime": 56,
+            "totalVols": 58
           }
         }
       ]
@@ -11054,6 +11047,13 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anita Irwin",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11211,8 +11211,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 57,
-            "totalVols": 57
+            "volsWithServiceTime": 58,
+            "totalVols": 58
           }
         }
       ]
@@ -11329,6 +11329,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anita Irwin",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jackie Lewis",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11338,8 +11352,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 14,
-            "totalVols": 14
+            "volsWithServiceTime": 16,
+            "totalVols": 16
           }
         }
       ]
