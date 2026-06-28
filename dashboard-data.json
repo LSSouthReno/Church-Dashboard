@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T16:46:13.788Z",
+  "lastUpdated": "2026-06-28T17:01:08.242Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3064,7 +3064,7 @@
       {
         "week": "Jun 28",
         "adults": 186,
-        "kids": 13
+        "kids": 64
       }
     ]
   },
@@ -5916,7 +5916,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 28, 2026, 9:46 AM",
+    "refreshed": "Jun 28, 2026, 10:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6749,9 +6749,9 @@
       7,
       8,
       3,
-      4
+      5
     ],
-    "total": 311
+    "total": 312
   },
   "members": {
     "years": [
@@ -8560,6 +8560,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Dante Sellman",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8717,8 +8724,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"214350372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 111,
-            "totalVols": 111
+            "volsWithServiceTime": 112,
+            "totalVols": 112
           }
         }
       ]
@@ -9185,6 +9192,13 @@
               "pos": "Back Right Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Alexis Durham",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9342,8 +9356,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 62,
-            "totalVols": 64
+            "volsWithServiceTime": 63,
+            "totalVols": 65
           }
         }
       ]
@@ -9978,6 +9992,13 @@
               "pos": "Back Left Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Alexis Durham",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10135,8 +10156,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 88,
-            "totalVols": 88
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
