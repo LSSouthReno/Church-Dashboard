@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T17:46:46.156Z",
+  "lastUpdated": "2026-06-28T18:01:10.888Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3063,8 +3063,8 @@
       },
       {
         "week": "Jun 28",
-        "adults": 186,
-        "kids": 64
+        "adults": 480,
+        "kids": 66
       }
     ]
   },
@@ -5916,7 +5916,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 28, 2026, 10:46 AM",
+    "refreshed": "Jun 28, 2026, 11:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9199,6 +9199,20 @@
               "pos": "Back Left Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Melissa Peterson",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Melissa Peterson",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9356,8 +9370,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 63,
-            "totalVols": 65
+            "volsWithServiceTime": 65,
+            "totalVols": 67
           }
         }
       ]
@@ -9999,6 +10013,13 @@
               "pos": "Back Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Morna Edmunds",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10156,8 +10177,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 89,
-            "totalVols": 89
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
@@ -10659,6 +10680,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Morna Edmunds",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10816,8 +10844,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ]
@@ -11326,6 +11354,13 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Morna Edmunds",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -11483,8 +11518,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 70
+            "volsWithServiceTime": 71,
+            "totalVols": 71
           }
         }
       ]
