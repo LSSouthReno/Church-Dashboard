@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T15:46:18.603Z",
+  "lastUpdated": "2026-06-29T15:57:21.346Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 8:46 AM",
+    "refreshed": "Jun 29, 2026, 8:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9783,7 +9783,7 @@
               "name": "Kathy Frank",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -9869,6 +9869,13 @@
               "pos": "Connect Desk Host (A Team)",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [
@@ -10026,8 +10033,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 77,
-            "totalVols": 77
+            "volsWithServiceTime": 78,
+            "totalVols": 78
           }
         }
       ]
@@ -10578,6 +10585,27 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Tony Farson",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Matt Sweitzer",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10735,8 +10763,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 76,
-            "totalVols": 76
+            "volsWithServiceTime": 79,
+            "totalVols": 79
           }
         }
       ]
@@ -10874,6 +10902,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10883,8 +10918,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 17,
-            "totalVols": 17
+            "volsWithServiceTime": 18,
+            "totalVols": 18
           }
         }
       ]
@@ -11078,6 +11113,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11087,8 +11129,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 26,
+            "totalVols": 26
           }
         }
       ]
@@ -11386,6 +11428,20 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Tony Farson",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11395,8 +11451,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 40,
-            "totalVols": 40
+            "volsWithServiceTime": 42,
+            "totalVols": 42
           }
         }
       ]
@@ -11754,6 +11810,13 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tony Farson",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11763,8 +11826,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 7,
-            "totalVols": 7
+            "volsWithServiceTime": 8,
+            "totalVols": 8
           }
         }
       ]
