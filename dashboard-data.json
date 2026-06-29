@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T18:50:16.138Z",
+  "lastUpdated": "2026-06-29T19:06:00.980Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 11:50 AM",
+    "refreshed": "Jun 29, 2026, 12:06 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8318,6 +8318,13 @@
               "pos": "Back Left Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bruce Rector",
+              "team": "Tech",
+              "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [
@@ -8368,11 +8375,11 @@
               "title": "BAPTISMS",
               "type": "item",
               "lengthMin": 5,
-              "description": ""
+              "description": "Underscore: WE LOVE HIME"
             },
             {
               "seq": 8,
-              "title": "Holy Spirit",
+              "title": "Make Room",
               "type": "song",
               "lengthMin": 6,
               "description": ""
@@ -8388,14 +8395,14 @@
               "seq": 10,
               "title": "FIRST TO KNOW",
               "type": "item",
-              "lengthMin": 2,
+              "lengthMin": 1,
               "description": ""
             },
             {
               "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 3,
               "description": ""
             },
             {
@@ -8417,7 +8424,7 @@
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
-              "description": "End Underscore: INCREASING FAITH"
+              "description": "End Underscore: THE LIFE ITSELF"
             },
             {
               "seq": 15,
@@ -8449,7 +8456,7 @@
             },
             {
               "seq": 19,
-              "title": "Christ Be Magnified",
+              "title": "Abandoned",
               "type": "song",
               "lengthMin": 5,
               "description": ""
@@ -8482,8 +8489,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 74
+            "volsWithServiceTime": 73,
+            "totalVols": 75
           }
         }
       ]
@@ -9738,13 +9745,6 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Peggy Hart",
-              "team": "Hospitality Team",
-              "pos": "Host",
-              "status": "C",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Matt Sweitzer",
               "team": "Safety Team",
               "pos": "Safety Monitor",
@@ -9911,6 +9911,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -10068,8 +10082,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 78,
-            "totalVols": 78
+            "volsWithServiceTime": 79,
+            "totalVols": 79
           }
         }
       ]
