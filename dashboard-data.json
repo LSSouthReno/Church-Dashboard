@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T17:46:02.394Z",
+  "lastUpdated": "2026-06-29T17:56:27.813Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 10:46 AM",
+    "refreshed": "Jun 29, 2026, 10:56 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8290,6 +8290,34 @@
               "pos": "Service Prayer",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Brandon Perlich",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sarah Perlich",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Janet Frederick",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Timothy Frederick",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8337,104 +8365,111 @@
             },
             {
               "seq": 7,
-              "title": "Holy Spirit",
-              "type": "song",
-              "lengthMin": 7,
+              "title": "BAPTISMS",
+              "type": "item",
+              "lengthMin": 5,
               "description": ""
             },
             {
               "seq": 8,
+              "title": "Holy Spirit",
+              "type": "song",
+              "lengthMin": 6,
+              "description": ""
+            },
+            {
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore: HOW GREAT THOU ART"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "FIRST TO KNOW",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
               "description": "End Underscore: INCREASING FAITH"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "OFFERING",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "Christ Be Magnified",
               "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 22,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -8447,8 +8482,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 70
+            "volsWithServiceTime": 72,
+            "totalVols": 74
           }
         }
       ]
