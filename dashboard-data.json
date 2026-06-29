@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T21:46:08.466Z",
+  "lastUpdated": "2026-06-29T21:58:13.923Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3140,7 +3140,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 362,
+  "uniqueVolunteers": 364,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 2:46 PM",
+    "refreshed": "Jun 29, 2026, 2:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7361,10 +7361,10 @@
       "2026": [
         55,
         26,
+        24,
+        24,
+        24,
         25,
-        24,
-        24,
-        24,
         null,
         null,
         null,
@@ -7411,7 +7411,7 @@
         8,
         15,
         19,
-        14,
+        15,
         null,
         null,
         null,
@@ -7608,20 +7608,20 @@
         "attPct": 64
       },
       {
+        "name": "Colonna/Mavros Community Group",
+        "members": 14,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 7,
+        "attPct": 50
+      },
+      {
         "name": "Lattin Community Group",
         "members": 13,
         "leaders": 3,
         "schedule": "Meets weekly on Mondays from 6-7:30am",
         "avgAttended": 6,
         "attPct": 46
-      },
-      {
-        "name": "Colonna/Mavros Community Group",
-        "members": 13,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 7,
-        "attPct": 54
       },
       {
         "name": "Maidens Community Group",
@@ -7640,14 +7640,6 @@
         "attPct": 67
       },
       {
-        "name": "Flores/Norton Community Group",
-        "members": 12,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 10am-12pm",
-        "avgAttended": 8,
-        "attPct": 67
-      },
-      {
         "name": "Murad Community Group",
         "members": 12,
         "leaders": 1,
@@ -7662,6 +7654,14 @@
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 6,
         "attPct": 55
+      },
+      {
+        "name": "Flores/Norton Community Group",
+        "members": 11,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 10am-12pm",
+        "avgAttended": 8,
+        "attPct": 73
       },
       {
         "name": "Brown/Frank Community Group",
@@ -8292,18 +8292,25 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Timothy Frederick",
-              "team": "Enrichment Teams",
-              "pos": "Back Left Communion Server",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Bruce Rector",
               "team": "Tech",
               "pos": "Slides",
               "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Katie Thompson",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Brandon Thompson",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -8468,8 +8475,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 72
+            "volsWithServiceTime": 71,
+            "totalVols": 73
           }
         }
       ]
@@ -9174,6 +9181,41 @@
               "pos": "Slides",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Audrey Hawkins",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shannon Coan",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Hailey Prahm",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9331,8 +9373,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 98,
-            "totalVols": 98
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
@@ -9904,6 +9946,27 @@
               "pos": "Acoustic Guitar",
               "status": "U",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jackie Smith",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Simone Roccuzzo",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jennie Roccuzzo",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10053,6 +10116,13 @@
               "type": "item",
               "lengthMin": 10,
               "description": ""
+            },
+            {
+              "seq": 22,
+              "title": "e",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
             }
           ],
           "_debug": {
@@ -10061,8 +10131,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 79,
-            "totalVols": 79
+            "volsWithServiceTime": 82,
+            "totalVols": 82
           }
         }
       ]
