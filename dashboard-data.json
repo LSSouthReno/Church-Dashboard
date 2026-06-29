@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T22:45:58.332Z",
+  "lastUpdated": "2026-06-29T22:56:08.354Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 3:46 PM",
+    "refreshed": "Jun 29, 2026, 3:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8311,6 +8311,13 @@
               "pos": "Sermon Text Reader",
               "status": "U",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8475,8 +8482,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 73
+            "volsWithServiceTime": 72,
+            "totalVols": 74
           }
         }
       ]
@@ -9200,7 +9207,7 @@
               "name": "Shannon Coan",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
@@ -9214,8 +9221,22 @@
               "name": "Teylor Baskharoon (Hinzman)",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ryan Aiazzi",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -9373,8 +9394,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 105,
+            "totalVols": 105
           }
         }
       ]
@@ -10704,6 +10725,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10861,8 +10889,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 79,
-            "totalVols": 79
+            "volsWithServiceTime": 80,
+            "totalVols": 80
           }
         }
       ]
@@ -11007,6 +11035,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11016,8 +11051,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 18,
-            "totalVols": 18
+            "volsWithServiceTime": 19,
+            "totalVols": 19
           }
         }
       ]
@@ -11646,6 +11681,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11655,8 +11697,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 11,
-            "totalVols": 11
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
