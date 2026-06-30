@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T21:48:00.547Z",
+  "lastUpdated": "2026-06-30T22:46:12.132Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 30, 2026, 2:48 PM",
+    "refreshed": "Jun 30, 2026, 3:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8353,6 +8353,20 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jack Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lance Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8517,8 +8531,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 77,
-            "totalVols": 79
+            "volsWithServiceTime": 79,
+            "totalVols": 81
           }
         }
       ]
@@ -12274,11 +12288,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 40,
+    "count30d": 39,
     "weeklyAvg": 9,
     "totalFetched": 6884,
     "since": "2026-05-31",
-    "asOf": "2026-06-30T21:45:15.666Z"
+    "asOf": "2026-06-30T22:44:35.946Z"
   },
   "emailStats": {
     "latestOpenRate": 0.25609756097560976,
@@ -12286,6 +12300,6 @@
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-06-25T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-06-30T21:45:17.066Z"
+    "asOf": "2026-06-30T22:44:37.243Z"
   }
 }
