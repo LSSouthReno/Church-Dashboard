@@ -4604,8 +4604,9 @@ let EOS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby82X64_1Pty8PDklG
 const MEETING_SESS_KEY    = 'lssr_meeting_edit';
 const ROCKS_LS_KEY        = 'lssr_rocks_edits';
 const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
-// ⚙️ CONFIGURE: Deploy Code_ids_joy_webapp.gs and paste the exec URL here
-const IDS_WEBAPP_URL      = '';
+// Code_ids_joy_webapp.gs is deployed as part of the same web app as EOS_WEBAPP_URL
+// (Code_eos_webapp.gs's doPost/doGet dispatch ids/joy_bomb/absence actions to it).
+const IDS_WEBAPP_URL      = EOS_WEBAPP_URL;
 const JOY_BOMBS_DATA_URL  = 'https://lssouthreno.github.io/Church-Dashboard/joy_bombs.json';
 const PATHWAY_DATA_URL    = 'https://lssouthreno.github.io/Church-Dashboard/pathway.json';
 const ABSENCES_DATA_URL   = 'https://lssouthreno.github.io/Church-Dashboard/absences.json';
@@ -6330,11 +6331,24 @@ function staffRenderL10(data) {
     const isIDS       = t.includes('ids') || (t.includes('identify') && t.includes('discuss'));
     const isCalendar  = t.includes('calendar');
     const isJoyBombs  = t.includes('joy bomb');
+    const isStaffDev  = t.includes('staff development');
 
     // Boulders are now rendered after rocks — skip here
     if (isBoulder) return '';
 
     if (isJoyBombs) return joyBombRenderSection_();
+
+    if (isStaffDev) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        <div class="sp-l10-input-row" style="margin-top:8px;">
+          <textarea data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}></textarea>
+        </div>
+        <div id="sp-staffdev-wrap" style="margin-top:10px;">${staffDevSectionHtml_(data.staffDevNote || '', locked)}</div>
+      </div>`;
 
     if (isScorecard) return `
       <div class="sp-l10-sec">
@@ -7365,6 +7379,32 @@ function joyBombRenderSection_() {
         </details>
       </div>
     </div>`;
+}
+
+// ── Staff Development reading note ──────────────────────────────────────────
+// Persisted separately from the weekly meeting notes (does NOT clear on Save & Archive),
+// synced to the EOS_StaffDev Google Sheet tab via EOS_WEBAPP_URL so it's visible to everyone.
+function staffDevSectionHtml_(note, locked) {
+  const esc = _rbEsc(note || '');
+  if (locked) {
+    return `<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:4px;">This Week's Reading</div>
+      <div style="font-size:13px;white-space:pre-wrap;${note ? 'color:var(--sp-ink);' : 'color:var(--sp-muted);font-style:italic;'}">${note ? esc : 'Nothing assigned yet.'}</div>`;
+  }
+  return `<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:4px;">This Week's Reading <span style="color:var(--sp-muted);text-transform:none;letter-spacing:0;">(saves separately — stays on the page)</span></div>
+    <textarea id="sp-staffdev-inp" class="sp-l10-inp" style="width:100%;min-height:50px;" placeholder="e.g. Chapters 4–5 of [Book Title]">${esc}</textarea>
+    <div style="margin-top:6px;display:flex;align-items:center;gap:10px;">
+      <button class="sp-ids-log-btn primary" onclick="staffDevSave_()">Save Reading</button>
+      <span id="sp-staffdev-saved" style="font-size:12px;color:#6fcf97;display:none;">Saved ✓</span>
+    </div>`;
+}
+function staffDevSave_() {
+  const ta = document.getElementById('sp-staffdev-inp');
+  if (!ta) return;
+  const note = ta.value;
+  if (window._staffLastData) window._staffLastData.staffDevNote = note;
+  const savedEl = document.getElementById('sp-staffdev-saved');
+  if (savedEl) { savedEl.style.display = 'inline'; setTimeout(() => { if (savedEl) savedEl.style.display = 'none'; }, 2000); }
+  eosPost_({ action: 'staffdev_save', note });
 }
 
 // ── Discipleship Pathway Tracker ──────────────────────────────────────────
