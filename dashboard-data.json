@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T00:46:12.481Z",
+  "lastUpdated": "2026-06-30T00:57:45.647Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 5:46 PM",
+    "refreshed": "Jun 29, 2026, 5:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7966,7 +7966,7 @@
               "name": "Kayleen Hagstrand",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -11953,8 +11953,15 @@
               "name": "Anna Sawyer",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11964,8 +11971,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 16,
-            "totalVols": 16
+            "volsWithServiceTime": 17,
+            "totalVols": 17
           }
         }
       ]
