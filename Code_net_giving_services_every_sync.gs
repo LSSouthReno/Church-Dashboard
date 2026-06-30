@@ -2993,11 +2993,11 @@ function syncStaffOSFunnelAndCalendar_() {
   Logger.log('▶  Staff OS Funnel+Calendar — starting');
 
   // ── Funnel counts ──────────────────────────────────────────────────────
-  const guestCount    = pcoCount1_('/people/v2/people?where[membership]=Guest');
-  const attenderCount = pcoCount1_('/people/v2/people?where[membership]=Regular+Attender');
-  const memberCount   = pcoCount1_('/people/v2/people?where[membership]=Member');
-  const groupCount    = pcoCount1_('/groups/v2/memberships');
-  const leaderCount   = pcoCount1_('/groups/v2/memberships?where[role]=leader');
+  // attender/group/leader are now computed by the daily syncFunnelAndGroups_() job
+  // (Code_funnel_groups_sync.gs) with stricter, more accurate criteria — this hourly job
+  // only owns missionary, and merges into funnel.* (not a full replace) so it never
+  // clobbers what the daily job wrote. member is read by the client directly from
+  // dashboard-data.json (members.current), not from here.
 
   // Missionaries: look for a group whose name includes "mission"
   let missionaryCount = 0;
@@ -3011,12 +3011,10 @@ function syncStaffOSFunnelAndCalendar_() {
   } catch(e) { Logger.log('   Missionary lookup failed: ' + e.message); }
 
   const funnel = {
-    guest: guestCount, attender: attenderCount, member: memberCount,
-    group: groupCount, leader: leaderCount, missionary: missionaryCount,
+    missionary: missionaryCount,
     asOf: Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd')
   };
-  Logger.log('   Funnel: guests=' + guestCount + ' members=' + memberCount +
-             ' inGroup=' + groupCount + ' leaders=' + leaderCount);
+  Logger.log('   Funnel: missionary=' + missionaryCount);
 
   // ── Calendar events (next 2 months) ───────────────────────────────────
   const tz   = Session.getScriptTimeZone();
@@ -3106,8 +3104,11 @@ function syncStaffOSFunnelAndCalendar_() {
   // Fetch fresh BambooHR staff profiles (photo URLs + IDs for South Reno)
   const staffProfiles = syncBambooHRProfiles_();
 
-  // Merge funnel + calendar + staff_profiles into existing data
-  const merged = Object.assign({}, currentData, { funnel: funnel, calendar: calendar });
+  // Merge funnel + calendar + staff_profiles into existing data. funnel is sub-merged
+  // (not replaced) so this hourly job's missionary update can't clobber the attender/
+  // group/leader fields the daily syncFunnelAndGroups_() job owns, or vice versa.
+  const mergedFunnel = Object.assign({}, currentData.funnel, funnel);
+  const merged = Object.assign({}, currentData, { funnel: mergedFunnel, calendar: calendar });
   if (staffProfiles.length) merged.staff_profiles = staffProfiles;
   const payload = { message: 'Update funnel, calendar & staff profiles', branch: branch,
                     content: Utilities.base64Encode(JSON.stringify(merged, null, 2), Utilities.Charset.UTF_8) };

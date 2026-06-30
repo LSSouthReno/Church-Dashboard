@@ -1185,6 +1185,12 @@
   .sp-funnel-notes { width: 100%; border: 1px solid var(--sp-border); border-radius: 3px; padding: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); min-height: 70px; resize: vertical; }
   .sp-funnel-notes:focus { outline: none; border-color: var(--sp-gold); }
 
+  .sp-allgroup-card { border: 1px solid var(--sp-border); border-radius: 4px; margin-bottom: 6px; background: var(--sp-card-bg); }
+  .sp-allgroup-card summary { padding: 10px 14px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; }
+  .sp-allgroup-card summary::-webkit-details-marker { display: none; }
+  .sp-allgroup-members { padding: 4px 14px 12px; border-top: 1px solid var(--sp-border); display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 4px 12px; }
+  .sp-allgroup-member { font-size: 12px; color: var(--sp-muted); padding: 3px 0; }
+
   /* Print: show only L10 tab content */
   @media print {
     .tmod-header, .sp-nav-tabs, .sp-section:not(.sp-active) { display: none !important; }
@@ -6559,22 +6565,27 @@ function staffRenderFunnel(data) {
   const el = document.getElementById('sp-funnel');
   if (!el) return;
   const f = data.funnel || {};
+  // Members comes straight from the main dashboard's own count (dashboard-data.json),
+  // so it always matches the badge shown there — not recomputed here.
+  const memberCount = (data._dash && data._dash.members && data._dash.members.current) || 0;
+  const asOfLine = f.asOf ? `<div style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);margin-top:-16px;margin-bottom:20px;">Attenders / In a Group / Active Leaders as of ${_rbEsc(f.asOf)} &middot; synced nightly from PCO</div>` : '';
 
   el.innerHTML = `
     <div class="sp-section-header">
       <div class="sp-eyebrow">Discipleship Funnel</div>
       <h2>Ministry Funnel</h2>
-      <p>The discipleship pathway: Guest → Member → Leader → Missionary. Track how people move through each stage. Enter current counts to see conversion rates.</p>
+      <p>The discipleship pathway: Attender → Member → Group → Leader → Missionary. Attenders, In a Group, and Active Leaders are computed automatically from Planning Center; Missionaries is entered manually.</p>
     </div>
     <div class="sp-funnel-outer">
-      <div class="sp-funnel-stage" style="width:100%"><div class="sp-funnel-stage-label">Sunday Guests</div><input class="sp-funnel-inp" id="spf-guest" value="${f.guest||''}" placeholder="—" oninput="staffUpdateFunnelRates()"></div>
-      <div class="sp-funnel-stage" style="width:86%"><div class="sp-funnel-stage-label">Active Members</div><input class="sp-funnel-inp" id="spf-member" value="${f.member||''}" placeholder="—" oninput="staffUpdateFunnelRates()"></div>
-      <div class="sp-funnel-stage" style="width:72%"><div class="sp-funnel-stage-label">In a Group</div><input class="sp-funnel-inp" id="spf-group" value="${f.group||''}" placeholder="—" oninput="staffUpdateFunnelRates()"></div>
-      <div class="sp-funnel-stage" style="width:58%"><div class="sp-funnel-stage-label">Active Leaders</div><input class="sp-funnel-inp" id="spf-leader" value="${f.leader||''}" placeholder="—" oninput="staffUpdateFunnelRates()"></div>
+      <div class="sp-funnel-stage" style="width:100%"><div class="sp-funnel-stage-label">Attenders</div><div class="sp-funnel-stage-val" id="spf-attender">${f.attender ?? '—'}</div></div>
+      <div class="sp-funnel-stage" style="width:86%"><div class="sp-funnel-stage-label">Active Members</div><div class="sp-funnel-stage-val" id="spf-member">${memberCount || '—'}</div></div>
+      <div class="sp-funnel-stage" style="width:72%"><div class="sp-funnel-stage-label">In a Group</div><div class="sp-funnel-stage-val" id="spf-group">${f.group ?? '—'}</div></div>
+      <div class="sp-funnel-stage" style="width:58%"><div class="sp-funnel-stage-label">Active Leaders</div><div class="sp-funnel-stage-val" id="spf-leader">${f.leader ?? '—'}</div></div>
       <div class="sp-funnel-stage" style="width:44%"><div class="sp-funnel-stage-label">Missionaries</div><input class="sp-funnel-inp" id="spf-missionary" value="${f.missionary||''}" placeholder="—" oninput="staffUpdateFunnelRates()"></div>
     </div>
+    ${asOfLine}
     <div class="sp-funnel-rates">
-      <div class="sp-funnel-rate-tile"><div class="sp-funnel-rate-label">Guest → Member</div><div class="sp-funnel-rate-value" id="spf-rate1">—</div></div>
+      <div class="sp-funnel-rate-tile"><div class="sp-funnel-rate-label">Attender → Member</div><div class="sp-funnel-rate-value" id="spf-rate1">—</div></div>
       <div class="sp-funnel-rate-tile"><div class="sp-funnel-rate-label">Member → Leader</div><div class="sp-funnel-rate-value" id="spf-rate2">—</div></div>
       <div class="sp-funnel-rate-tile"><div class="sp-funnel-rate-label">In Group Rate</div><div class="sp-funnel-rate-value" id="spf-rate3">—</div></div>
     </div>
@@ -6590,9 +6601,53 @@ function staffRenderFunnel(data) {
         <li><strong>Discover &amp; Deploy in a Serving Team</strong> &mdash; Goal: 325+ people serving, 75% of members</li>
         <li><strong>Multiply &mdash; own a mission</strong> &mdash; Local, global, or plant a group; goal: 25 Leader Launch grads</li>
       </ul>
-    </div>`;
+    </div>
+    <div id="sp-all-groups"></div>`;
 
   staffUpdateFunnelRates();
+  staffRenderAllGroups_(data);
+}
+
+// ── Every PCO group + its members, grouped by group type ───────────────────
+function staffRenderAllGroups_(data) {
+  const el = document.getElementById('sp-all-groups');
+  if (!el) return;
+  const groups = data.allGroups || [];
+  if (!groups.length) {
+    el.innerHTML = `<div class="sp-card" style="margin-top:20px;"><div class="sp-card-title">All PCO Groups &amp; Members</div><div class="sp-card-subtitle">No group roster synced yet — runs nightly.</div></div>`;
+    return;
+  }
+
+  const byType = {};
+  groups.forEach(g => { (byType[g.type] = byType[g.type] || []).push(g); });
+
+  const totalMembers = new Set();
+  groups.forEach(g => g.members.forEach(m => totalMembers.add(m.name)));
+
+  const sectionsHtml = Object.keys(byType).sort().map(type => {
+    const groupsOfType = byType[type];
+    const groupCards = groupsOfType.map(g => {
+      const memberRows = g.members.length
+        ? g.members.map(m => `<div class="sp-allgroup-member">${_rbEsc(m.name)}${m.role === 'leader' ? ' <span class="sp-badge" style="font-size:9px;">LEADER</span>' : ''}</div>`).join('')
+        : '<div class="sp-allgroup-member" style="color:var(--sp-muted);font-style:italic;">No current members</div>';
+      return `<details class="sp-allgroup-card">
+        <summary><span>${_rbEsc(g.name)}</span><span style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${g.members.length} member${g.members.length!==1?'s':''}</span></summary>
+        <div class="sp-allgroup-members">${memberRows}</div>
+      </details>`;
+    }).join('');
+    return `<div style="margin-top:18px;">
+      <div class="sp-snap-label" style="margin-bottom:8px;">${_rbEsc(type)} <span style="color:var(--sp-muted);font-weight:400;">(${groupsOfType.length})</span></div>
+      ${groupCards}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header" style="margin-top:32px;">
+      <div class="sp-eyebrow">Planning Center Groups</div>
+      <h2>All Groups &amp; Members</h2>
+      <p>Every group in Planning Center Groups, organized by type, with current membership. ${groups.length} groups &middot; ${totalMembers.size} distinct people &middot; synced nightly.</p>
+    </div>
+    ${sectionsHtml}`;
 }
 
 // ── SHEET-DRIVEN RENDER FUNCTIONS ─────────────────────────────────────────────
@@ -6901,10 +6956,10 @@ function staffRenderIDS(data) {
 }
 
 function staffUpdateFunnelRates() {
-  const g = parseFloat((document.getElementById('spf-guest') || {}).value) || 0;
-  const m = parseFloat((document.getElementById('spf-member') || {}).value) || 0;
-  const gr = parseFloat((document.getElementById('spf-group') || {}).value) || 0;
-  const l = parseFloat((document.getElementById('spf-leader') || {}).value) || 0;
+  const g  = parseFloat((document.getElementById('spf-attender') || {}).textContent) || 0;
+  const m  = parseFloat((document.getElementById('spf-member')   || {}).textContent) || 0;
+  const gr = parseFloat((document.getElementById('spf-group')    || {}).textContent) || 0;
+  const l  = parseFloat((document.getElementById('spf-leader')   || {}).textContent) || 0;
   const r1 = document.getElementById('spf-rate1');
   const r2 = document.getElementById('spf-rate2');
   const r3 = document.getElementById('spf-rate3');
