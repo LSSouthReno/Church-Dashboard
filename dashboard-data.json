@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T22:46:12.132Z",
+  "lastUpdated": "2026-06-30T22:57:34.082Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 30, 2026, 3:46 PM",
+    "refreshed": "Jun 30, 2026, 3:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7364,7 +7364,7 @@
         24,
         24,
         24,
-        25,
+        26,
         null,
         null,
         null,
@@ -7411,7 +7411,7 @@
         8,
         15,
         19,
-        15,
+        16,
         null,
         null,
         null,
@@ -7656,6 +7656,14 @@
         "attPct": 55
       },
       {
+        "name": "Ryan Griffin Community Group",
+        "members": 11,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6:15-7:15am",
+        "avgAttended": 7,
+        "attPct": 64
+      },
+      {
         "name": "Flores/Norton Community Group",
         "members": 11,
         "leaders": 2,
@@ -7694,14 +7702,6 @@
         "schedule": "Meets weekly on Wednesdays from 6:30-8pm",
         "avgAttended": 6,
         "attPct": 60
-      },
-      {
-        "name": "Ryan Griffin Community Group",
-        "members": 10,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6:15-7:15am",
-        "avgAttended": 7,
-        "attPct": 70
       },
       {
         "name": "Dykins Community Group",
@@ -9293,6 +9293,27 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Stacey Corletto",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Dennis Brinson",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jane Brinson",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -9450,8 +9471,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
@@ -9906,13 +9927,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Ray Brown",
-              "team": "Hospitality Team",
-              "pos": "Host",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Kathy Frank",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -10044,6 +10058,20 @@
               "pos": "Presider",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jane Brinson",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Dennis Brinson",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -10208,8 +10236,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 82,
-            "totalVols": 82
+            "volsWithServiceTime": 83,
+            "totalVols": 83
           }
         }
       ]
