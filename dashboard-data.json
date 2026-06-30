@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T23:46:51.455Z",
+  "lastUpdated": "2026-06-30T00:01:27.520Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3140,7 +3140,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 364,
+  "uniqueVolunteers": 366,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jun 29, 2026, 4:46 PM",
+    "refreshed": "Jun 29, 2026, 5:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7524,16 +7524,16 @@
         "members": 19,
         "leaders": 2,
         "schedule": "Meets weekly on Sundays from 4-6pm",
-        "avgAttended": 8,
-        "attPct": 42
+        "avgAttended": 7,
+        "attPct": 37
       },
       {
         "name": "Castaneda Community Group",
         "members": 19,
         "leaders": 3,
         "schedule": "Meets weekly on Mondays from 3-5pm",
-        "avgAttended": 11,
-        "attPct": 58
+        "avgAttended": 12,
+        "attPct": 63
       },
       {
         "name": "High School Community Group",
@@ -8302,7 +8302,7 @@
               "name": "Katie Thompson",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
@@ -8316,6 +8316,13 @@
               "name": "Michael Poleselli",
               "team": "Safety Team",
               "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Michael Marchese",
+              "team": "Stepping Stones",
+              "pos": "Check In",
               "status": "C",
               "serviceTime": "11 AM"
             }
@@ -8482,8 +8489,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676328\"},{\"type\":\"PlanTime\",\"id\":\"217676329\"}]",
             "planTimeMapCount": 6,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 74
+            "volsWithServiceTime": 73,
+            "totalVols": 75
           }
         }
       ]
@@ -9237,6 +9244,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Kellan Coan",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9394,8 +9408,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 105,
-            "totalVols": 105
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
@@ -10732,6 +10746,34 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Amber Brown",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Ava Palmer",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ava Palmer",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Justice JB",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -10889,8 +10931,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 80,
-            "totalVols": 80
+            "volsWithServiceTime": 84,
+            "totalVols": 84
           }
         }
       ]
@@ -11042,6 +11084,34 @@
               "pos": "Safety Lead",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Stacey Corletto",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Stacey Corletto",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ashleigh Cummings",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Faith Howes",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11051,8 +11121,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 19,
-            "totalVols": 19
+            "volsWithServiceTime": 23,
+            "totalVols": 23
           }
         }
       ]
@@ -11253,6 +11323,34 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Kathy McAlpine",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kathy McAlpine",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Charlene Carp",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "C",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11262,8 +11360,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 26,
-            "totalVols": 26
+            "volsWithServiceTime": 30,
+            "totalVols": 30
           }
         }
       ]
@@ -11688,6 +11786,34 @@
               "pos": "Safety Lead",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Deana Griffin",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11697,8 +11823,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 16,
+            "totalVols": 16
           }
         }
       ]
@@ -11801,6 +11927,34 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Isaac Griffin",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11810,8 +11964,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 16,
+            "totalVols": 16
           }
         }
       ]
