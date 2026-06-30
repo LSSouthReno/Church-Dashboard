@@ -5285,6 +5285,17 @@ async function staffLoadData() {
   if (dot && hasLive) dot.classList.add('green');
   if (lbl) lbl.textContent = hasLive ? 'live data' : 'local data';
 
+  // Apply closedRocks/addedRocks/boulderStatuses overlay from eos-data.json immediately.
+  // This is the cross-device path: the EOS webapp writes these fields; MEETING_WEBAPP_URL
+  // (rb/save_rb) is the secondary path that still runs below if it has even newer data.
+  if (merged.closedRocks || merged.addedRocks || merged.boulderStatuses) {
+    if (applyEosOverlayToLocalEdits_(merged)) {
+      staffRenderRocks(merged);
+      staffRenderSnapshot(merged);
+      staffRenderL10(merged);
+    }
+  }
+
   // Now fetch rocks/boulders from Apps Script in the background.
   // Cold start is 5-10s but the page is already fully rendered so users don't notice.
   rbRemoteLoad_().then(rbRemote => {
@@ -5491,6 +5502,52 @@ function scorecardLiveValues_(dash) {
   };
 
   return lv;
+}
+
+// ── eos-data.json overlay → local edits merge ────────────────────────────────
+// Called on every page load after eos-data.json is fetched, to apply any closedRocks /
+// addedRocks / boulderStatuses that were written by the EOS webapp's rock_resolve,
+// rock_add, and boulder_status actions. This is the cross-device persistence path for
+// those actions, since MEETING_WEBAPP_URL's rb/save_rb may not always be reliable.
+function applyEosOverlayToLocalEdits_(data) {
+  let changed = false;
+  const rEdits = rocksEditsLoad_();
+
+  // Merge closedRocks: each key is rock text, value is {ts, resolution, owner}
+  if (data.closedRocks && Object.keys(data.closedRocks).length) {
+    const closed = rEdits.closed || {};
+    Object.keys(data.closedRocks).forEach(k => {
+      const remote = data.closedRocks[k];
+      const local  = closed[k];
+      if (!local || (remote.ts && remote.ts > (local.ts || 0))) {
+        closed[k] = remote;
+        changed = true;
+      }
+    });
+    if (changed) rEdits.closed = closed;
+  }
+
+  // Merge addedRocks: deduplicate by rock text
+  if (data.addedRocks && data.addedRocks.length) {
+    const added = rEdits.added || [];
+    const existing = new Set(added.map(r => r.rock));
+    data.addedRocks.forEach(r => {
+      if (!existing.has(r.rock)) { added.push(r); existing.add(r.rock); changed = true; }
+    });
+    if (changed) rEdits.added = added;
+  }
+
+  if (changed) rocksEditsSave_(rEdits);
+
+  // Merge boulderStatuses: key is 'title|owner', value is status string
+  if (data.boulderStatuses && Object.keys(data.boulderStatuses).length) {
+    const bEdits = bouldersEditsLoad_();
+    bEdits.statuses = Object.assign({}, data.boulderStatuses, bEdits.statuses || {});
+    bouldersEditsSave_(bEdits);
+    changed = true;
+  }
+
+  return changed;
 }
 
 // ── Rocks & Boulders localStorage helpers ─────────────────────────────────
@@ -6420,7 +6477,7 @@ function staffRenderL10(data) {
     if (isIDS) return `
       <div class="sp-l10-sec">
         <div class="sp-l10-sec-hdr">
-          <h4>${a.item}</h4>
+          <h4>${a.item.replace(/^IDS\b/i, 'Rocks')}</h4>
           <span class="sp-l10-badge ${rocks.length?'red':'green'}">${rocks.length} Rock${rocks.length!==1?'s':''}</span>
           <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
         </div>
@@ -6568,7 +6625,14 @@ function staffRenderFunnel(data) {
   // Members comes straight from the main dashboard's own count (dashboard-data.json),
   // so it always matches the badge shown there — not recomputed here.
   const memberCount = (data._dash && data._dash.members && data._dash.members.current) || 0;
-  const asOfLine = f.asOf ? `<div style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);margin-top:-16px;margin-bottom:20px;">Attenders / In a Group / Active Leaders as of ${_rbEsc(f.asOf)} &middot; synced nightly from PCO</div>` : '';
+
+  // Average weekly adult attendance over the last 6 months — the broad "reach" metric.
+  // Source: DASHBOARD_DATA.attendance.adults (monthly average adult counts per Sunday).
+  const _attAdults = (typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA.attendance && DASHBOARD_DATA.attendance.adults) || [];
+  const _att6 = _attAdults.slice(-6).filter(v => Number(v) > 0);
+  const avgWeeklyAttenders = _att6.length ? Math.round(_att6.reduce((s, v) => s + Number(v), 0) / _att6.length) : 0;
+
+  const asOfLine = f.asOf ? `<div style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);margin-top:-16px;margin-bottom:20px;">Avg Attenders / In a Group / Active Leaders synced nightly from PCO &middot; new attenders as of ${_rbEsc(f.asOf)}</div>` : '';
 
   el.innerHTML = `
     <div class="sp-section-header">
@@ -6577,7 +6641,12 @@ function staffRenderFunnel(data) {
       <p>The discipleship pathway: Attender → Member → Group → Leader → Missionary. Attenders, In a Group, and Active Leaders are computed automatically from Planning Center; Missionaries is entered manually.</p>
     </div>
     <div class="sp-funnel-outer">
-      <div class="sp-funnel-stage" style="width:100%"><div class="sp-funnel-stage-label">Attenders</div><div class="sp-funnel-stage-val" id="spf-attender">${f.attender ?? '—'}</div></div>
+      <div class="sp-funnel-stage" style="width:100%">
+        <div class="sp-funnel-stage-label">Attenders</div>
+        <div class="sp-funnel-stage-val" id="spf-attender">${avgWeeklyAttenders || '—'}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.7;margin-top:1px;">avg/wk (6mo)</div>
+        ${(f.attender != null) ? `<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.7;margin-top:3px;">${f.attender} new (6–12mo)</div>` : ''}
+      </div>
       <div class="sp-funnel-stage" style="width:86%"><div class="sp-funnel-stage-label">Active Members</div><div class="sp-funnel-stage-val" id="spf-member">${memberCount || '—'}</div></div>
       <div class="sp-funnel-stage" style="width:72%"><div class="sp-funnel-stage-label">In a Group</div><div class="sp-funnel-stage-val" id="spf-group">${f.group ?? '—'}</div></div>
       <div class="sp-funnel-stage" style="width:58%"><div class="sp-funnel-stage-label">Active Leaders</div><div class="sp-funnel-stage-val" id="spf-leader">${f.leader ?? '—'}</div></div>
