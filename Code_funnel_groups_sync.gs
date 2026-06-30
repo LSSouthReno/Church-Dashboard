@@ -15,18 +15,34 @@
  *   Members = NOT computed here — the dashboard pulls that number directly from
  *             dashboard-data.json (members.current) so it always matches the main dashboard badge.
  *
- * This does substantially more PCO work than the hourly sync (group rosters across every group
- * type + 6 months of check-ins/households), so it runs on its own DAILY trigger rather than
- * riding along with syncDashboard(). After deploying, run installFunnelGroupsDailyTrigger() once
- * from the Apps Script editor (Run menu) to schedule it.
+ * Fans out the heavy parts (group memberships, 6 months of check-ins, household lookups) as
+ * CONCURRENT batches via UrlFetchApp.fetchAll(). All PCO calls also run against a hard TIME
+ * BUDGET (FG_TIME_BUDGET_MS) measured from the start of the run: a script killed by Apps
+ * Script's 6-minute execution cap never gets to push its results and fails completely silent,
+ * so every expensive loop checks the budget and stops early (working with whatever it already
+ * has) well before that cap, rather than risk the whole run vanishing with no trace. 429s are
+ * retried once with a short backoff, not the long 21s used by the slow, sequential hourly sync
+ * — a job making hundreds of concurrent calls hits the rate limit often enough that a 21s wait
+ * per occurrence would blow the time budget on its own.
  *
- * Shares PCO_APP_ID/PCO_SECRET/GITHUB_* script properties and the pcoGetAll_/pcoHeaders_/getProp_
- * helpers already defined in Code_net_giving_services_every_sync.gs (same Apps Script project).
+ * Runs on its own DAILY trigger rather than riding along with the hourly syncDashboard(), since
+ * it does substantially more PCO work. After deploying, run installFunnelGroupsDailyTrigger()
+ * once from the Apps Script editor (Run menu) to schedule it.
+ *
+ * Shares PCO_APP_ID/PCO_SECRET/GITHUB_* script properties and the pcoHeaders_/getProp_ helpers
+ * already defined in Code_net_giving_services_every_sync.gs (same Apps Script project).
  */
 
 const FUNNEL_ENGAGE_LOOKBACK_MONTHS = 6;
 const FUNNEL_ATTENDER_MIN_MONTHS    = 6;   // profile must be at least this old
 const FUNNEL_ATTENDER_MAX_MONTHS    = 12;  // and no older than this
+const FG_BATCH_SIZE                 = 12;  // concurrent requests per fetchAll() chunk
+const FG_BATCH_PAUSE_MS             = 600; // pause between chunks (keeps us under PCO's 100req/20s)
+const FG_RETRY_BACKOFF_MS           = 3000; // short backoff for a single 429 retry (not 21s)
+const FG_TIME_BUDGET_MS             = 4.5 * 60 * 1000; // stop expensive loops after 4.5 min
+
+function fgElapsed_(startMs) { return new Date().getTime() - startMs; }
+function fgOverBudget_(startMs) { return fgElapsed_(startMs) > FG_TIME_BUDGET_MS; }
 
 function syncFunnelAndGroups_() {
   Logger.log('▶ Funnel + Groups — starting');
@@ -37,12 +53,15 @@ function syncFunnelAndGroups_() {
   Logger.log('   Group types found: ' + groupTypes.length);
 
   const byType = {};
-  groupTypes.forEach(function(t) {
+  for (let gi = 0; gi < groupTypes.length; gi++) {
+    if (fgOverBudget_(startMs)) { Logger.log('   ! time budget hit during group roster build — stopping early'); break; }
+    const t = groupTypes[gi];
     const typeName = (t.attributes && t.attributes.name) || ('Group Type ' + t.id);
-    byType[typeName] = fgGroupTypeMembership_(t.id);
+    byType[typeName] = fgGroupTypeMembership_(t.id, startMs);
     Logger.log('   ' + typeName + ': ' + byType[typeName].groups.length + ' groups, ' +
-               byType[typeName].memberIds.size + ' unique members');
-  });
+               byType[typeName].memberIds.size + ' unique members (' +
+               Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
+  }
 
   const communityData = byType['Community Group'] || fgEmptyTypeData_();
   const serveData     = byType['Serve Teams']      || fgEmptyTypeData_();
@@ -56,7 +75,7 @@ function syncFunnelAndGroups_() {
   serveData.leaderIds.forEach(function(id) { leaderIds.add(id); });
 
   // ── 2. Attenders ────────────────────────────────────────────────────────
-  const attenderCount = fgComputeAttenders_(excludeFromAttenders);
+  const attenderCount = fgComputeAttenders_(excludeFromAttenders, startMs);
 
   const funnel = {
     attender: attenderCount,
@@ -95,7 +114,7 @@ function syncFunnelAndGroups_() {
 
   fgMergePushToGitHub_(funnel, allGroups);
 
-  const elapsedSec = Math.round((new Date().getTime() - startMs) / 1000);
+  const elapsedSec = Math.round(fgElapsed_(startMs) / 1000);
   Logger.log('✓ Funnel + Groups — done in ' + elapsedSec + 's. groupsListed=' + allGroups.length);
 }
 
@@ -103,13 +122,69 @@ function fgEmptyTypeData_() {
   return { memberIds: new Set(), leaderIds: new Set(), groups: [] };
 }
 
+// ── Concurrent batched fetch ──────────────────────────────────────────────────
+// Fires up to FG_BATCH_SIZE PCO requests at once via UrlFetchApp.fetchAll(), chunked to
+// respect PCO's 100-req/20s rate limit, with a SHORT single retry on 429 (not the slow
+// sequential job's 21s — see file header). Stops issuing new chunks once the shared time
+// budget is exceeded; any paths not yet fetched are simply left null in the result.
+// Returns parsed JSON bodies in the same order as `paths` (null for any failed/unfetched request).
+function fgBatchFetch_(paths, startMs) {
+  const out = new Array(paths.length).fill(null);
+  for (let i = 0; i < paths.length; i += FG_BATCH_SIZE) {
+    if (fgOverBudget_(startMs)) {
+      Logger.log('   ! time budget hit mid-batch (' + i + '/' + paths.length + ') — leaving remainder unfetched');
+      break;
+    }
+    const chunkPaths = paths.slice(i, i + FG_BATCH_SIZE);
+    const requests = chunkPaths.map(function(p) {
+      return {
+        url: p.indexOf('http') === 0 ? p : 'https://api.planningcenteronline.com' + p,
+        method: 'get', muteHttpExceptions: true, headers: pcoHeaders_()
+      };
+    });
+    let responses;
+    try {
+      responses = UrlFetchApp.fetchAll(requests);
+    } catch (e) {
+      Logger.log('   ! batch fetch threw: ' + e.message);
+      continue;
+    }
+    const retryIdx = [];
+    responses.forEach(function(res, j) {
+      const code = res.getResponseCode();
+      if (code === 429) { retryIdx.push(j); return; }
+      if (code >= 200 && code < 300) {
+        try { out[i + j] = JSON.parse(res.getContentText()); } catch (e) { out[i + j] = null; }
+      }
+    });
+    if (retryIdx.length && !fgOverBudget_(startMs)) {
+      Utilities.sleep(FG_RETRY_BACKOFF_MS);
+      retryIdx.forEach(function(j) {
+        try {
+          const res = UrlFetchApp.fetch(requests[j].url, { method: 'get', muteHttpExceptions: true, headers: pcoHeaders_() });
+          if (res.getResponseCode() >= 200 && res.getResponseCode() < 300) out[i + j] = JSON.parse(res.getContentText());
+        } catch (e) {}
+      });
+    }
+    if (i + FG_BATCH_SIZE < paths.length) Utilities.sleep(FG_BATCH_PAUSE_MS);
+  }
+  return out;
+}
+
 // One group type → its groups → each group's current (non-departed) membership.
-function fgGroupTypeMembership_(groupTypeId) {
+function fgGroupTypeMembership_(groupTypeId, startMs) {
   const groups = pcoGetAll_('/groups/v2/group_types/' + groupTypeId + '/groups?per_page=100') || [];
   const memberIds = new Set(), leaderIds = new Set();
   const groupRows = [];
-  groups.forEach(function(g) {
-    const memberships = pcoGetAll_('/groups/v2/groups/' + g.id + '/memberships?per_page=100') || [];
+  if (!groups.length) return { memberIds: memberIds, leaderIds: leaderIds, groups: groupRows };
+
+  const membershipPages = fgBatchFetch_(
+    groups.map(function(g) { return '/groups/v2/groups/' + g.id + '/memberships?per_page=100'; }),
+    startMs
+  );
+
+  groups.forEach(function(g, i) {
+    const memberships = (membershipPages[i] && membershipPages[i].data) || [];
     const rows = [];
     memberships.forEach(function(m) {
       const attr = m.attributes || {};
@@ -147,15 +222,16 @@ function fgResolveNames_(personIds) {
 }
 
 // ── Attenders ──────────────────────────────────────────────────────────────────
-function fgComputeAttenders_(excludeIds) {
+function fgComputeAttenders_(excludeIds, startMs) {
   const now = new Date();
   const olderBoundary = new Date(now); olderBoundary.setMonth(olderBoundary.getMonth() - FUNNEL_ATTENDER_MAX_MONTHS); // 12mo ago
   const newerBoundary = new Date(now); newerBoundary.setMonth(newerBoundary.getMonth() - FUNNEL_ATTENDER_MIN_MONTHS); // 6mo ago
   const engageSince   = new Date(now); engageSince.setMonth(engageSince.getMonth() - FUNNEL_ENGAGE_LOOKBACK_MONTHS);
 
-  const candidates = fgPeopleCreatedInWindow_(olderBoundary, newerBoundary);
+  const candidates = fgPeopleCreatedInWindow_(olderBoundary, newerBoundary, startMs);
   Logger.log('   Attender candidates (adults, created ' + FUNNEL_ATTENDER_MIN_MONTHS + '-' +
-             FUNNEL_ATTENDER_MAX_MONTHS + 'mo ago): ' + candidates.length);
+             FUNNEL_ATTENDER_MAX_MONTHS + 'mo ago): ' + candidates.length +
+             ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
 
   const candidateIds = candidates.filter(function(c) { return !excludeIds.has(c.id); })
                                   .map(function(c) { return c.id; });
@@ -163,11 +239,12 @@ function fgComputeAttenders_(excludeIds) {
   if (!candidateIds.length) return 0;
 
   const giverIds = fgDonorIdsSince_(engageSince);
-  Logger.log('   Distinct donors in last ' + FUNNEL_ENGAGE_LOOKBACK_MONTHS + 'mo: ' + giverIds.size);
+  Logger.log('   Distinct donors in last ' + FUNNEL_ENGAGE_LOOKBACK_MONTHS + 'mo: ' + giverIds.size +
+             ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
 
-  const checkedInAdultIds = fgAdultsWhoCheckedInChildSince_(engageSince);
+  const checkedInAdultIds = fgAdultsWhoCheckedInChildSince_(engageSince, startMs);
   Logger.log('   Adults credited with a child check-in in last ' + FUNNEL_ENGAGE_LOOKBACK_MONTHS +
-             'mo: ' + checkedInAdultIds.size);
+             'mo: ' + checkedInAdultIds.size + ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
 
   let count = 0;
   candidateIds.forEach(function(id) {
@@ -177,15 +254,23 @@ function fgComputeAttenders_(excludeIds) {
 }
 
 // Pages people newest-first, keeps adults created within [olderBoundary, newerBoundary], and
-// stops once an entire page predates olderBoundary — PCO doesn't reliably support combining
-// where[child] with date-range where[] filters, so this filters client-side instead.
-function fgPeopleCreatedInWindow_(olderBoundary, newerBoundary) {
+// stops once an entire page predates olderBoundary OR the time budget is hit — PCO doesn't
+// reliably support combining where[child] with date-range where[] filters, so this filters
+// client-side instead.
+function fgPeopleCreatedInWindow_(olderBoundary, newerBoundary, startMs) {
   const out = [];
   let url = 'https://api.planningcenteronline.com/people/v2/people?order=-created_at&per_page=100';
   let pages = 0;
   while (url && pages < 200) {
+    if (fgOverBudget_(startMs)) { Logger.log('   ! time budget hit during people pagination — stopping early'); break; }
     pages++;
-    const json = fgFetchPage_(url);
+    let json;
+    try {
+      json = fgFetchPage_(url);
+    } catch (e) {
+      Logger.log('   ! people page fetch failed, stopping pagination: ' + e.message);
+      break;
+    }
     const rows = json.data || [];
     if (!rows.length) break;
 
@@ -206,14 +291,13 @@ function fgPeopleCreatedInWindow_(olderBoundary, newerBoundary) {
   return out;
 }
 
+// Short retry (not 21s) — a single page fetch that's rate-limited backs off briefly once and
+// gives up rather than risking the whole run's time budget on one request.
 function fgFetchPage_(url) {
-  let res = null, attempts = 0;
-  while (attempts < 5) {
-    attempts++;
-    Utilities.sleep(DASHBOARD_CONFIG.PCO_REQUEST_DELAY_MS || 250);
+  let res = UrlFetchApp.fetch(url, { method: 'get', muteHttpExceptions: true, headers: pcoHeaders_() });
+  if (res.getResponseCode() === 429) {
+    Utilities.sleep(FG_RETRY_BACKOFF_MS);
     res = UrlFetchApp.fetch(url, { method: 'get', muteHttpExceptions: true, headers: pcoHeaders_() });
-    if (res.getResponseCode() !== 429) break;
-    Utilities.sleep(DASHBOARD_CONFIG.PCO_RATE_LIMIT_SLEEP_MS || 21000);
   }
   const code = res.getResponseCode();
   if (code < 200 || code >= 300) throw new Error('PCO request failed: ' + code + ' — ' + url);
@@ -234,7 +318,9 @@ function fgDonorIdsSince_(sinceDate) {
 }
 
 // ── Child check-in engagement (via household — see file header) ─────────────────
-function fgAdultsWhoCheckedInChildSince_(sinceDate) {
+// All three expensive steps (check-ins per event time, household per child, members per
+// household) are fanned out as concurrent batches, each respecting the shared time budget.
+function fgAdultsWhoCheckedInChildSince_(sinceDate, startMs) {
   const tz = Session.getScriptTimeZone();
   const sinceStr = Utilities.formatDate(sinceDate, tz, 'yyyy-MM-dd');
   const nowStr   = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd');
@@ -247,39 +333,61 @@ function fgAdultsWhoCheckedInChildSince_(sinceDate) {
     const d = et.relationships && et.relationships.event && et.relationships.event.data;
     return d && String(d.id) === String(DASHBOARD_CONFIG.CHECKINS_EVENT_ID);
   });
-  Logger.log('   Kids event times in window: ' + kidsEventTimes.length);
+  Logger.log('   Kids event times in window: ' + kidsEventTimes.length +
+             ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
 
+  const checkinPages = fgBatchFetch_(
+    kidsEventTimes.map(function(et) { return '/check-ins/v2/event_times/' + et.id + '/check_ins?per_page=100'; }),
+    startMs
+  );
   const childIds = new Set();
-  kidsEventTimes.forEach(function(et) {
-    const checks = pcoGetAll_('/check-ins/v2/event_times/' + et.id + '/check_ins?per_page=100') || [];
-    checks.forEach(function(c) {
+  checkinPages.forEach(function(page) {
+    ((page && page.data) || []).forEach(function(c) {
       const pid = c.relationships && c.relationships.person &&
                   c.relationships.person.data && c.relationships.person.data.id;
       if (pid) childIds.add(pid);
     });
   });
-  Logger.log('   Distinct children checked in: ' + childIds.size);
+  Logger.log('   Distinct children checked in: ' + childIds.size +
+             ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
+
+  if (fgOverBudget_(startMs)) {
+    Logger.log('   ! time budget hit before household lookups — skipping child check-in credit this run');
+    return new Set();
+  }
+
+  const childIdList = Array.from(childIds);
+  const householdPages = fgBatchFetch_(
+    childIdList.map(function(cid) { return '/people/v2/people/' + cid + '/households?per_page=5'; }),
+    startMs
+  );
+
+  const householdIdSet = new Set();
+  childIdList.forEach(function(cid, i) {
+    ((householdPages[i] && householdPages[i].data) || []).forEach(function(h) { householdIdSet.add(h.id); });
+  });
+  Logger.log('   Distinct households resolved: ' + householdIdSet.size +
+             ' (' + Math.round(fgElapsed_(startMs) / 1000) + 's elapsed)');
+
+  if (fgOverBudget_(startMs)) {
+    Logger.log('   ! time budget hit before household member lookups — skipping child check-in credit this run');
+    return new Set();
+  }
+
+  const householdIdList = Array.from(householdIdSet);
+  const memberPages = fgBatchFetch_(
+    householdIdList.map(function(hid) { return '/people/v2/households/' + hid + '/people?per_page=20'; }),
+    startMs
+  );
 
   const adultIds = new Set();
-  let withHousehold = 0;
-  Array.from(childIds).forEach(function(childId) {
-    try {
-      const households = pcoGetAll_('/people/v2/people/' + childId + '/households?per_page=5') || [];
-      if (!households.length) return;
-      withHousehold++;
-      households.forEach(function(h) {
-        const members = pcoGetAll_('/people/v2/households/' + h.id + '/people?per_page=20') || [];
-        members.forEach(function(p) {
-          if (p.id === childId) return;
-          if ((p.attributes || {}).child === true) return; // only credit adults
-          adultIds.add(p.id);
-        });
-      });
-    } catch (e) {
-      Logger.log('   ! household lookup failed for a child: ' + e.message);
-    }
+  memberPages.forEach(function(page) {
+    ((page && page.data) || []).forEach(function(p) {
+      if (childIds.has(p.id)) return;          // skip the child(ren) themselves
+      if ((p.attributes || {}).child === true) return; // only credit adults
+      adultIds.add(p.id);
+    });
   });
-  Logger.log('   Children with a resolvable household: ' + withHousehold + ' of ' + childIds.size);
   return adultIds;
 }
 
