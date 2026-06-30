@@ -1200,14 +1200,16 @@
   }
 
   /* ── Staff Sync calendar grid ─────────────────────────────────── */
-  .sp-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin-top:6px; }
-  .sp-cal-dayheader { font-family:'DM Mono',monospace; font-size:9px; text-align:center; padding:5px 0; color:var(--sp-muted); text-transform:uppercase; letter-spacing:.06em; }
-  .sp-cal-cell { min-height:58px; padding:4px 3px; border-radius:3px; background:var(--sp-section-bg); box-sizing:border-box; }
+  .sp-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin-top:6px; min-width:0; }
+  .sp-cal-dayheader { font-family:'DM Mono',monospace; font-size:9px; text-align:center; padding:5px 0; color:var(--sp-muted); text-transform:uppercase; letter-spacing:.06em; min-width:0; overflow:hidden; }
+  .sp-cal-cell { min-height:58px; padding:4px 3px; border-radius:3px; background:var(--sp-section-bg); box-sizing:border-box; min-width:0; overflow:hidden; }
   .sp-cal-cell.empty { background:transparent; }
   .sp-cal-cell.today { background:rgba(212,175,55,.13); outline:1px solid var(--sp-gold); }
   .sp-cal-day { font-family:'DM Mono',monospace; font-size:10px; color:var(--sp-muted); line-height:1; margin-bottom:3px; }
   .sp-cal-cell.today .sp-cal-day { color:var(--sp-gold); font-weight:700; }
-  .sp-cal-evt { font-size:8.5px; color:var(--sp-ink); background:rgba(212,175,55,.18); border-radius:2px; padding:1px 4px; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.4; }
+  #sp-cal-wrap { overflow:hidden; width:100%; }
+  #sp-cal-grid-container { overflow:hidden; width:100%; }
+  .sp-cal-evt { font-size:8.5px; color:var(--sp-ink); background:rgba(212,175,55,.18); border-radius:2px; padding:1px 4px; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.4; max-width:100%; }
   .sp-cal-month-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--sp-muted); margin-bottom:2px; }
   .sp-cal-nav-btn { padding:3px 12px; background:transparent; border:1px solid var(--sp-border); border-radius:3px; color:var(--sp-muted); cursor:pointer; font-size:13px; font-family:'DM Mono',monospace; transition:color .15s,border-color .15s; }
   .sp-cal-nav-btn:hover { color:var(--sp-gold); border-color:var(--sp-gold); }
@@ -1363,20 +1365,28 @@
   .sd-presider-name { font-size:12px; color:var(--text); flex:1; }
   .sd-presider-role { font-size:10px; color:var(--text-dim); font-style:italic; }
   .sd-empty-state { text-align:center; padding:60px 24px; color:var(--text-dim); font-size:14px; }
-  /* Sunday Master Schedule */
-  .sd-sched-row { display:grid; grid-template-columns:100px 1fr 1fr; gap:10px; align-items:baseline; padding:7px 8px; border-bottom:1px solid rgba(255,255,255,.04); }
-  .sd-sched-row:last-child { border-bottom:none; }
-  .sd-sched-row.svc-start { background:rgba(212,175,55,.07); border:1px solid rgba(212,175,55,.18); border-radius:5px; margin:3px 0; padding:9px 10px; }
-  .sd-sched-row.cleanup { background:rgba(212,175,55,.05); border-radius:4px; }
-  .sd-sched-time { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); white-space:nowrap; }
-  .sd-sched-row.svc-start .sd-sched-time { color:var(--yellow-2); font-weight:600; }
-  .sd-sched-what { font-size:12px; color:var(--text); }
-  .sd-sched-row.svc-start .sd-sched-what { color:var(--yellow-2); font-weight:700; font-size:13px; }
-  .sd-sched-row.cleanup .sd-sched-what { color:var(--yellow-2); font-weight:600; }
-  .sd-sched-who { font-size:11px; color:var(--text-muted); }
-  .sd-sched-hdr { display:grid; grid-template-columns:100px 1fr 1fr; gap:10px; padding:0 8px 6px; border-bottom:1px solid var(--card-border); margin-bottom:4px; }
-  .sd-sched-hdr span { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); }
-  @media (max-width:600px) { .sd-sched-row,.sd-sched-hdr { grid-template-columns:80px 1fr; } .sd-sched-who { display:none; } }
+  /* Sunday Master Schedule — duty matrix */
+  .sd-duty-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .sd-duty-table { border-collapse:separate; border-spacing:2px; }
+  .sd-dt-th-team { width:36px; text-align:center; vertical-align:bottom; padding:0 0 6px; }
+  .sd-dt-abbr { display:block; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:.04em; text-transform:uppercase; color:var(--text-dim); white-space:nowrap; text-align:center; }
+  .sd-dt-th-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); text-align:left; padding:0 4px 6px; vertical-align:bottom; }
+  .sd-dt-time-cell { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); white-space:nowrap; padding:6px 6px; vertical-align:middle; }
+  .sd-dt-event-cell { font-size:11px; color:var(--text); padding:6px 6px; vertical-align:middle; min-width:110px; max-width:180px; }
+  .sd-dt-row.svc-row { background:rgba(212,175,55,.07); }
+  .sd-dt-row.svc-row .sd-dt-time-cell,
+  .sd-dt-row.svc-row .sd-dt-event-cell { color:var(--yellow-2); font-weight:700; }
+  .sd-dt-row.cleanup-row .sd-dt-event-cell { color:var(--yellow-2); font-weight:600; }
+  .sd-dt-duty-cell { width:36px; text-align:center; vertical-align:middle; padding:4px 2px; font-size:11px; line-height:1; border-radius:3px; }
+  .sd-dt-duty-cell.on  { background:rgba(212,175,55,.25); color:#c49a2e; }
+  .sd-dt-duty-cell.in  { background:rgba(59,130,246,.15); color:#5ba0f5; font-size:10px; }
+  .sd-dt-duty-cell.re  { outline:1px solid rgba(212,175,55,.3); background:rgba(212,175,55,.06); color:rgba(212,175,55,.55); font-size:10px; }
+  .sd-duty-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; padding-top:10px; border-top:1px solid var(--card-border); }
+  .sd-duty-leg { display:flex; align-items:center; gap:5px; font-size:10px; font-family:'DM Mono',monospace; color:var(--text-muted); letter-spacing:.04em; }
+  .sd-duty-leg-swatch { width:16px; height:16px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:9px; }
+  .sd-duty-leg-swatch.on { background:rgba(212,175,55,.25); color:#c49a2e; }
+  .sd-duty-leg-swatch.in { background:rgba(59,130,246,.15); color:#5ba0f5; }
+  .sd-duty-leg-swatch.re { outline:1px solid rgba(212,175,55,.3); background:rgba(212,175,55,.06); color:rgba(212,175,55,.55); }
 
   @media print {
     #sundayModal .tmod-header, #sundayModal .sd-week-bar .sd-print-btn { display:none !important; }
@@ -5016,33 +5026,66 @@ function sundayBuildContent(plan, calEvents) {
 
       <div class="sd-section">
         <div class="sd-section-title">Sunday Master Schedule</div>
-        <div style="font-size:11px;color:var(--text-dim);margin-bottom:12px;">Team timing reference · 3 services · Talk to your serve team leader for position-specific details.</div>
-        <div class="sd-sched-hdr"><span>Time</span><span>What</span><span>Who</span></div>
-        ${[
-          {t:'7:00–7:20 AM', w:'Pre-Service Prayer',              h:'Anyone! Pastors &amp; 8am Volunteers especially'},
-          {t:'7:20–7:25 AM', w:'Pastors Prayer',                  h:'Pastors &amp; EITs, Preacher'},
-          {t:'7:30 AM',      w:'Production Meeting (completed)',   h:'Tech, Worship, Presider, Preacher'},
-          {t:'7:30 AM',      w:'Prepped &amp; Ready — 8am',       h:'ALL 8am Teams'},
-          {t:'8:00 AM',      w:'☀ Service Starts — On Time',      h:'',                                    svc:true},
-          {t:'8:15 AM',      w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
-          {t:'9:05 AM',      w:'Service Ends',                    h:'Greeters, Connections, Hospitality at posts'},
-          {t:'9:15 AM',      w:'Reset for Next Service',          h:'Enrichment (communion) · Service Captain (stanchions)'},
-          {t:'9:15 AM',      w:'Prepped &amp; Ready — 9:30am',    h:'ALL 9:30 Teams'},
-          {t:'9:30 AM',      w:'☀ Service Starts — On Time',      h:'',                                    svc:true},
-          {t:'9:45 AM',      w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
-          {t:'10:35 AM',     w:'Service Ends',                    h:'Greeters, Connections at posts'},
-          {t:'10:45 AM',     w:'Reset for Next Service',          h:'Enrichment (communion) · Service Captain (stanchions)'},
-          {t:'10:45 AM',     w:'Prepped &amp; Ready — 11am',      h:'ALL 11am Teams'},
-          {t:'11:00 AM',     w:'☀ Service Starts — 5 min delay',  h:'',                                    svc:true},
-          {t:'11:15 AM',     w:'Dismissed to Service',            h:'Greeters, Connections, Hospitality'},
-          {t:'12:15 PM',     w:'Service Ends',                    h:'Greeters, Connections at posts'},
-          {t:'12:30 PM',     w:'Clean Up &amp; Put Away All Sunday Items', h:'Service Captain &amp; All Volunteers', cleanup:true},
-          {t:'~12:45 PM',    w:'Dismissed After People Clear Out',h:'All Volunteers'},
-        ].map(r => `<div class="sd-sched-row${r.svc?' svc-start':r.cleanup?' cleanup':''}">
-          <div class="sd-sched-time">${r.t}</div>
-          <div class="sd-sched-what">${r.w}</div>
-          <div class="sd-sched-who">${r.h}</div>
-        </div>`).join('')}
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:14px;">When each team is <span style="background:rgba(212,175,55,.25);color:#c49a2e;padding:1px 5px;border-radius:2px;font-family:'DM Mono',monospace;font-size:9px;">●</span> on duty throughout the morning. Tap any row for details.</div>
+        ${(() => {
+          // Columns: GR=Greeters, CN=Connections, HP=Hospitality, EN=Enrichment, SC=Svc Captain, WT=Worship+Tech, KD=Kids
+          const cols = [
+            {k:'GR', label:'Greeters'},
+            {k:'CN', label:'Connect'},
+            {k:'HP', label:'Hosp.'},
+            {k:'EN', label:'Enrichment'},
+            {k:'SC', label:'Svc Capt'},
+            {k:'WT', label:'Worship+Tech'},
+            {k:'KD', label:'Kids/SS'},
+          ];
+          // on=at post ●  in=dismissed to service ↓  re=resetting ↻  ''=not applicable
+          const rows = [
+            {t:'7:00 AM', w:'Pre-Service Prayer — Everyone Welcome', GR:'',  CN:'',  HP:'',  EN:'',  WT:'',  SC:'',  KD:''},
+            {t:'7:30 AM', w:'Prepped &amp; Ready — 8am',           GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
+            {t:'8:00 AM', w:'☀ 8am Service Starts',    svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'8:15 AM', w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'9:05 AM', w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
+            {t:'9:15 AM', w:'Reset + Prepped &amp; Ready — 9:30am', GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
+            {t:'9:30 AM', w:'☀ 9:30am Service Starts', svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'9:45 AM', w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'10:35 AM',w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
+            {t:'10:45 AM',w:'Reset + Prepped &amp; Ready — 11am',   GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
+            {t:'11:00 AM',w:'☀ 11am Service Starts',   svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'11:15 AM',w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'12:15 PM',w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
+            {t:'12:30 PM',w:'Clean Up &amp; Put Away',  cleanup:true, GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
+            {t:'~12:45',  w:'Dismissed — Done!',                    GR:'',  CN:'',  HP:'',  EN:'',  SC:'',  WT:'',  KD:''},
+          ];
+          const sym = {on:'●', in:'↓', re:'↻', '':''};
+          const thCols = cols.map(c => `<th class="sd-dt-th-team"><span class="sd-dt-abbr">${c.label.split('+').map(w=>w.slice(0,5)).join('+')}</span></th>`).join('');
+          const bodyRows = rows.map(r => {
+            const cls = r.svc ? ' svc-row' : r.cleanup ? ' cleanup-row' : '';
+            const cells = cols.map(c => {
+              const st = r[c.k] || '';
+              return `<td class="sd-dt-duty-cell${st?' '+st:''}">${sym[st]||''}</td>`;
+            }).join('');
+            return `<tr class="sd-dt-row${cls}">
+              <td class="sd-dt-time-cell">${r.t}</td>
+              <td class="sd-dt-event-cell">${r.w}</td>
+              ${cells}
+            </tr>`;
+          }).join('');
+          return `<div class="sd-duty-wrap">
+            <table class="sd-duty-table">
+              <thead><tr>
+                <th class="sd-dt-th-label" style="width:68px;">Time</th>
+                <th class="sd-dt-th-label">Event</th>
+                ${thCols}
+              </tr></thead>
+              <tbody>${bodyRows}</tbody>
+            </table>
+          </div>
+          <div class="sd-duty-legend">
+            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch on">●</div>At Post / On Duty</div>
+            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch in">↓</div>Dismissed to Service</div>
+            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch re">↻</div>Resetting / Transitioning</div>
+          </div>`;
+        })()}
       </div>
 
       ${gridTeamKeys.length ? `
@@ -6845,11 +6888,41 @@ function staffRenderAccChart(data) {
   const lis = arr => (arr||[]).map(i=>`<li>${esc(i)}</li>`).join('');
   const v = a.visionary||{}, int = a.integrator||{};
 
-  const orgNodes = (a.directors||[]).map(d =>
+  // Expand any stale combined entry left by the Staff OS Sheet script before
+  // Katie and Isaac were split into distinct roles.
+  const expandDirectors = dirs => {
+    const out = [];
+    (dirs || []).forEach(d => {
+      if ((d.name||'').includes('/') && /student ministry/i.test(d.role||'')) {
+        out.push({ name:'Katie Thompson', role:'Executive & Students Coordinator',
+          org_wg:'WG: Discernment · Galvanizing',
+          subtitle:'Wins when the Pastors\' time is protected and LS Students grows 25%+ YOY',
+          items:['Executive support to Lead & Executive Pastors — calendars, scheduling, correspondence, meeting prep',
+                 'Primary planner for church-wide events — gatekeeper for event prioritization & requirements',
+                 'LS Students co-leadership — scheduling, curriculum, Team Leader meetings & trainings',
+                 'Owns HS & MS Student Summer Camp planning, registration, and logistics',
+                 'Student fundraisers and parent communication'] });
+        out.push({ name:'Isaac Griffin', role:'Service & Students Coordinator',
+          org_wg:'WG: Enablement · Tenacity',
+          subtitle:'Wins when Sunday is distraction-free and students are known, loved, and growing',
+          items:['Tech Team: sound, lights, and media — startup to shutdown every Sunday',
+                 'Weekly liturgy guide — composed and distributed under Lead Pastor oversight',
+                 'Pre-service briefings for Presiding, Worship, and Tech Teams',
+                 'LS Students co-leadership — known presence, co-leads Sunday services and events',
+                 'Tech Team & LS Students scheduling in Planning Center (8+ weeks out)'] });
+      } else {
+        out.push(d);
+      }
+    });
+    return out;
+  };
+  const directors = expandDirectors(a.directors);
+
+  const orgNodes = directors.map(d =>
     `<div class="sp-org-node"><div class="sp-org-role">${esc(d.role)}</div><div class="sp-org-name">${esc(d.name)}</div><div class="sp-org-wg">${esc(d.org_wg||d.wg||'')}</div></div>`
   ).join('');
 
-  const dirCards = (a.directors||[]).map(d =>
+  const dirCards = directors.map(d =>
     `<div class="sp-card"><div class="sp-card-title">${esc(d.name)}</div>
      <div class="sp-card-subtitle">${esc(d.role)} &mdash; ${esc(d.subtitle||'')}</div>
      <ul class="sp-metric-list">${lis(d.items)}</ul></div>`
