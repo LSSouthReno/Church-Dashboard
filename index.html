@@ -1721,6 +1721,26 @@
     transition: all .15s;
   }
   .vcl-reset-btn:hover { border-color: #c49a2e; color: #c49a2e; }
+  .vcl-gallery-title {
+    font-size: 9px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .14em; color: #c49a2e;
+    margin: 18px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid #2e2c2a;
+  }
+  .vcl-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .vcl-gallery-item { cursor: pointer; }
+  .vcl-gallery-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid #3a3734; display: block; transition: border-color .15s; }
+  .vcl-gallery-item:hover .vcl-gallery-img { border-color: #c49a2e; }
+  .vcl-gallery-cap { font-size: 10px; color: #9a9490; margin-top: 4px; line-height: 1.3; }
+  .vcl-lightbox {
+    position: fixed; inset: 0; z-index: 3200;
+    background: rgba(0,0,0,.92); display: none;
+    align-items: center; justify-content: center; padding: 24px; cursor: zoom-out;
+  }
+  .vcl-lightbox.open { display: flex; }
+  .vcl-lightbox-inner { max-width: 100%; max-height: 100%; text-align: center; }
+  .vcl-lightbox img { max-width: 100%; max-height: 80vh; border-radius: 8px; }
+  .vcl-lightbox-cap { color: #f0ece8; text-align: center; margin-top: 12px; font-size: 13px; font-family: 'Montserrat', sans-serif; }
   /* Admin panel */
   .tlh-adm-btn {
     background: #2a2825; border: 1px solid #444; color: #d4d0cb;
@@ -2449,9 +2469,9 @@
               <div class="sp-org-node"><div class="sp-org-role">Worship Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Gordon Fava')">Gordon Fava</span></div><div class="sp-org-wg">WG: Wonder &middot; Tenacity</div></div>
               <div class="sp-org-node"><div class="sp-org-role">Creative Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('John Conelea')">John Conelea</span></div><div class="sp-org-wg">WG: Tenacity &middot; Invention</div></div>
               <div class="sp-org-node"><div class="sp-org-role">Administrative Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Rachel Primus')">Rachel Primus</span></div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span></div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Service &amp; Students Coordinator</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span></div><div class="sp-org-wg">WG: Enablement &middot; Tenacity</div></div>
               <div class="sp-org-node"><div class="sp-org-role">SS Curriculum Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Deana Griffin')">Deana Griffin</span></div><div class="sp-org-wg">WG: Discernment &middot; Wonder</div></div>
-              <div class="sp-org-node"><div class="sp-org-role">Student Ministry Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-org-wg">WG: Discernment &middot; Galvanizing</div></div>
+              <div class="sp-org-node"><div class="sp-org-role">Executive &amp; Students Coordinator</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-org-wg">WG: Discernment &middot; Galvanizing</div></div>
               <div class="sp-org-node"><div class="sp-org-role">SS Staffing Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Geoffrey Caliger')">Geoffrey Caliger</span></div><div class="sp-org-wg">WG: Tenacity &middot; Wonder</div></div>
               <div class="sp-org-node"><div class="sp-org-role">Benevolence Director</div><div class="sp-org-name"><span class="sp-name-link" onclick="openStaffProfile('Keith Primus')">Keith Primus</span></div><div class="sp-org-wg">WG: Discernment &middot; Enablement</div></div>
             </div>
@@ -2462,7 +2482,8 @@
             <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('John Conelea')">John Conelea</span></div><div class="sp-card-subtitle">Creative Director — Wins when every touchpoint reflects the mission clearly and beautifully</div><ul class="sp-metric-list"><li>Sermon series graphics, bumper videos, event graphics</li><li>Church app, website, and social media content</li><li>Weekly email graphics monthly First-to-Know video, sermon clips</li><li>Environmental design: lobby, stage, signage, kids spaces</li><li>Testimony and promo video production</li></ul></div>
             <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Rachel Primus')">Rachel Primus</span></div><div class="sp-card-subtitle">Administrative Director — Wins when the machine runs clean and the team never hits a wall</div><ul class="sp-metric-list"><li>Financial organization, deposits, donation management</li><li>Email & Leader Communication & Coordination</li><li>Planning Center data accuracy and database health</li><li>Vendor management and facilities coordination</li><li>Office & Staff Support</li></ul></div>
             <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Deana Griffin')">Deana Griffin</span></div><div class="sp-card-subtitle">SS Curriculum Director — Wins when every kid encounters Jesus through great teaching</div><ul class="sp-metric-list"><li>Create curriculum that teaches children Bible truths pointing to Jesus</li><li>Resource classroom teachers with materials and activity instructions</li><li>Set up curriculum documents and videos ready for each Sunday</li><li>Ensure snacks stocked, rooms clean and classroom-ready</li><li>Evaluate and implement approved improvements to curriculum</li></ul></div>
-            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span> / <span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-card-subtitle">Student Ministry — Wins when LS Students grows 25%+ YOY and students feel known</div><ul class="sp-metric-list"><li>Sunday LS Students services and environments</li><li>Student team scheduling, training, and leadership development</li><li>Parent communication and student planning calendars</li><li>Summer camp planning, registration, and logistics</li><li>Student events, parties, and fundraisers</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Katie Thompson')">Katie Thompson</span></div><div class="sp-card-subtitle">Executive &amp; Students Coordinator — Wins when the Pastors' time is protected and LS Students grows 25%+ YOY</div><ul class="sp-metric-list"><li>Executive support to Lead &amp; Executive Pastors — calendars, scheduling, correspondence, meeting prep</li><li>Primary planner for church-wide events — gatekeeper for event prioritization &amp; requirements</li><li>LS Students co-leadership — scheduling, curriculum, Team Leader meetings &amp; trainings</li><li>Owns HS &amp; MS Student Summer Camp planning, registration, and logistics</li><li>Student fundraisers and parent communication</li></ul></div>
+            <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Isaac Griffin')">Isaac Griffin</span></div><div class="sp-card-subtitle">Service &amp; Students Coordinator — Wins when Sunday is distraction-free and students are known, loved, and growing</div><ul class="sp-metric-list"><li>Tech Team: sound, lights, and media — startup to shutdown every Sunday</li><li>Weekly liturgy guide — composed and distributed under Lead Pastor oversight</li><li>Pre-service briefings for Presiding, Worship, and Tech Teams</li><li>LS Students co-leadership — known presence, co-leads Sunday services and events</li><li>Tech Team &amp; LS Students scheduling in Planning Center (8+ weeks out)</li></ul></div>
             <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Geoffrey Caliger')">Geoffrey Caliger</span></div><div class="sp-card-subtitle">SS Staffing Director & Pastoral Support — Wins when every Sunday slot is covered with trained, joyful volunteers</div><ul class="sp-metric-list"><li>Volunteer recruiting and scheduling (target: 8–12 weeks out)</li><li>Teacher training: onboarding and ongoing</li><li>Fill rate for declines and last-minute cancellations</li><li>Evaluate and implement improvements to volunteer systems</li><li>Weekly Email Communication to Church</li></ul></div>
             <div class="sp-card"><div class="sp-card-title"><span class="sp-name-link" onclick="openStaffProfile('Keith Primus')">Keith Primus</span></div><div class="sp-card-subtitle">Benevolence Director (Volunteer) — Wins when the right people get connected to the right financial help at the right time</div><ul class="sp-metric-list"><li>Benevolence request intake, assessment, and coordination</li><li>Financial assistance distribution and fund stewardship</li><li>Connects families in need to church and external resources</li><li>Maintains confidentiality and pastoral care standards throughout</li><li>Partners with Brad and Rachel on financial decisions and budget</li></ul></div>
           </div>
@@ -4652,12 +4673,11 @@ const STAFF_DEFAULT_DATA = {
     { title: 'Creative Calendar: All Sunday creative assets delivered 6 weeks in advance with zero last-minute requests', owner: 'John Conelea', quarter: 'Q2 2026', status: 'tbd', type: 'company' },
     { title: 'Stepping Stones: 32+ trained volunteers in active rotation; all Sunday slots covered 8+ weeks out', owner: 'Geoffrey Caliger', quarter: 'Q2 2026', status: 'off-track', type: 'individual' },
     { title: 'Music Catalog: Process documented; 3 stale songs removed and 3 new songs submitted to Ryan for approval', owner: 'Gordon Fava', quarter: 'Q2 2026', status: 'tbd', type: 'individual' },
-    { title: 'Student Summer Camp: Fully planned, promoted, and registration open by June 1', owner: 'Isaac Griffin', quarter: 'Q2 2026', status: 'tbd', type: 'individual' },
+    { title: 'Student Summer Camp: Fully planned, promoted, and registration open by June 1', owner: 'Katie Thompson', quarter: 'Q2 2026', status: 'tbd', type: 'individual' },
     { title: 'Financial Dashboard: Weekly giving + budget variance report live and automated by end of quarter', owner: 'Rachel Primus', quarter: 'Q2 2026', status: 'tbd', type: 'individual' },
     { title: 'CG Growth: 3 new community groups launched with trained leaders in place', owner: 'Adam Carp', quarter: 'Q2 2026', status: 'tbd', type: 'individual' }
   ],
   rocks: [
-    { rock: 'Two "Student Ministry Director" titles in org chart — role clarity and seat definition needed between Isaac and Katie', addedBy: 'Brad', priority: 'high', status: 'open' },
     { rock: 'Building search has no clear week-to-week owner or defined decision framework — risk of drift', addedBy: 'Brad', priority: 'high', status: 'open' },
     { rock: 'Stepping Stones volunteer numbers still rebuilding post-transition (Feb 2025) — fill rate below target', addedBy: 'Geoffrey', priority: 'high', status: 'open' },
     { rock: 'Creative asset lead times compressed — pastoral team often provides series info too late for quality work', addedBy: 'John Conelea', priority: 'med', status: 'open' },
@@ -4673,9 +4693,9 @@ const STAFF_TEAM_DATA = [
   { name: 'Adam Carp',       bambooId: '123', role: 'Discipleship Pastor',                 genius: ['Invention', 'Wonder'],       competency: ['Tenacity', 'Discernment'],  frustration: ['Enablement', 'Galvanizing'], pairing: 'IW | WI — The Creative Dreamer',         pairingDesc: 'A passionate idealist with an endless stream of big questions and ideas to consider. Comfortable with open-ended exploration.' },
   { name: 'Gordon Fava',     bambooId: '165', role: 'Worship Director',                    genius: ['Wonder', 'Tenacity'],        competency: ['Discernment', 'Galvanizing'], frustration: ['Invention', 'Enablement'],  pairing: 'WT | TW — The Careful Implementer',     pairingDesc: 'A thorough, practical, and careful contributor. A unique combination of steady reliability and quiet depth.' },
   { name: 'John Conelea',    bambooId: '179', role: 'Creative Director',                   genius: ['Tenacity', 'Invention'],     competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Wonder'],    pairing: 'TI | IT — The Methodical Architect',    pairingDesc: 'A precise, reliable, and planful solver of problems. Gets creative work done — on time, on brief, every time.' },
-  { name: 'Katie Thompson',  bambooId: '177', role: 'Student Ministry Director',            genius: ['Discernment', 'Galvanizing'], competency: ['Tenacity', 'Invention'],   frustration: ['Enablement', 'Wonder'],    pairing: 'DG | GD — The Intuitive Activator',     pairingDesc: 'An instinctive and confident decision-maker who can assess and marshal people to act. Strong for student ministry leadership.' },
+  { name: 'Katie Thompson',  bambooId: '177', role: 'Executive & Students Coordinator',     genius: ['Discernment', 'Galvanizing'], competency: ['Tenacity', 'Invention'],   frustration: ['Enablement', 'Wonder'],    pairing: 'DG | GD — The Intuitive Activator',     pairingDesc: 'An instinctive and confident decision-maker who can assess and marshal people to act. Strong for student ministry leadership.' },
   { name: 'Geoffrey Caliger',bambooId: '182', role: 'Stepping Stones Staffing Director',   genius: ['Tenacity', 'Wonder'],        competency: ['Discernment', 'Enablement'], frustration: ['Galvanizing', 'Invention'], pairing: 'TW | WT — The Persistent Questioner',   pairingDesc: "Pairs big-picture curiosity with relentless follow-through. Asks the right questions and doesn't stop until the work is done." },
-  { name: 'Isaac Griffin',   bambooId: '176', role: 'Student Ministry Director',            genius: ['Enablement', 'Tenacity'],    competency: ['Galvanizing', 'Wonder'],    frustration: ['Discernment', 'Invention'], pairing: 'ET | TE — The Loyal Finisher',          pairingDesc: 'Responsive, supportive, and determined to push work over the finish line. Shows up for people and sees commitments through.' },
+  { name: 'Isaac Griffin',   bambooId: '176', role: 'Service & Students Coordinator',       genius: ['Enablement', 'Tenacity'],    competency: ['Galvanizing', 'Wonder'],    frustration: ['Discernment', 'Invention'], pairing: 'ET | TE — The Loyal Finisher',          pairingDesc: 'Responsive, supportive, and determined to push work over the finish line. Shows up for people and sees commitments through.' },
   { name: 'Deana Griffin',   bambooId: '173', role: 'Stepping Stones Curriculum Director',  genius: ['Discernment', 'Wonder'],     competency: ['Invention', 'Enablement'],  frustration: ['Galvanizing', 'Tenacity'],  pairing: 'DW | WD — The Reflective Visionary',    pairingDesc: 'A deep thinker who pairs curiosity with strong instincts. Asks the right questions and trusts what\'s true.' },
   { name: 'Keith Primus',    bambooId: null,  role: 'Benevolence Leader (Volunteer)',       genius: ['Discernment', 'Enablement'], competency: ['Galvanizing', 'Wonder'],    frustration: ['Tenacity', 'Invention'],   pairing: 'DE | ED — The Insightful Collaborator', pairingDesc: 'An intuitive, empathic advisor and team player. Selfless in providing others with what they need in the right way.' },
   { name: 'Rachel Primus',   bambooId: '118', bambooDisplayName: 'Rachel Bartosz', role: 'Administrative Director',             genius: ['Enablement', 'Tenacity'],    competency: ['Wonder', 'Discernment'],    frustration: ['Invention', 'Galvanizing'],  pairing: 'ET | TE — The Loyal Finisher',          pairingDesc: 'A responsive, dependable doer. Willing to step up when something is needed and determined to fulfill commitments.' }
@@ -6032,8 +6052,18 @@ function l10Patch_(obj) {
   try { localStorage.setItem(L10_CUR_KEY, JSON.stringify(n)); } catch(e) {}
   l10QueueRemoteSync_();
 }
+// True only if at least one real note/rating field has non-empty content — excludes
+// bookkeeping keys (weekKey, _agendaLabels, _savedAt) so an empty session never archives.
+function l10HasContent_(session) {
+  if (!session) return false;
+  return Object.keys(session).some(k => {
+    if (k === 'weekKey' || k === '_agendaLabels' || k === '_savedAt') return false;
+    const v = session[k];
+    return typeof v === 'string' ? v.trim().length > 0 : !!v;
+  });
+}
 function l10LocalArchive_(session) {
-  if (!session || !Object.keys(session).filter(k => k !== 'weekKey').length) return;
+  if (!l10HasContent_(session)) return;
   try {
     const h = JSON.parse(localStorage.getItem(L10_HIST_KEY) || '[]');
     h.unshift(Object.assign({ _archivedAt: new Date().toISOString() }, session));
@@ -6125,6 +6155,16 @@ async function l10LoadAndRender_() {
 // ── UI actions ─────────────────────────────────────────────────────────────────
 async function staffL10SaveMeeting() {
   const n = l10Load_();
+  if (!l10HasContent_(n)) {
+    const btn = document.getElementById('sp-l10-save-btn');
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'Nothing to save';
+      btn.disabled = true;
+      setTimeout(() => { if (btn) { btn.textContent = orig; btn.disabled = false; } }, 1500);
+    }
+    return;
+  }
   n._savedAt = new Date().toISOString();
   // Store agenda labels so history can show readable field names
   const d = window._staffLastData || {};
@@ -6199,7 +6239,7 @@ function staffL10RenderHistory() {
     el.innerHTML = '<p style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No archived meetings yet. Meetings auto-archive each Monday when you open the runner.</p>';
     return;
   }
-  el.innerHTML = hist.slice(0,12).map(m => {
+  el.innerHTML = hist.slice(0,12).map((m, i) => {
     const ts = m._savedAt || m._archivedAt;
     const dateStr = ts ? new Date(ts).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) : 'Week of '+(m.weekKey||'?');
     const rating  = m._rating ? ` &middot; Rating: ${m._rating}/10` : '';
@@ -6209,7 +6249,10 @@ function staffL10RenderHistory() {
     return `<details style="border:1px solid var(--sp-border);border-radius:4px;margin-bottom:8px;background:var(--sp-card-bg);">
       <summary style="padding:12px 16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
         <span style="font-weight:600;font-size:14px;">${dateStr}</span>
-        <span style="font-size:12px;color:var(--sp-muted);">${rating}</span>
+        <span style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:12px;color:var(--sp-muted);">${rating}</span>
+          <button onclick="event.preventDefault();event.stopPropagation();l10HistDeleteEntry_(${i})" style="font-size:11px;padding:2px 8px;background:transparent;border:1px solid var(--sp-border);border-radius:3px;color:var(--sp-muted);cursor:pointer;">Delete</button>
+        </span>
       </summary>
       <div style="padding:0 16px 16px;border-top:1px solid var(--sp-border);">
         ${notes ? `<div style="margin:12px 0;"><div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sp-gold);margin-bottom:6px;">Meeting Notes</div><div style="font-size:13px;color:var(--sp-muted);white-space:pre-wrap;">${notes}</div></div>` : ''}
@@ -6218,6 +6261,13 @@ function staffL10RenderHistory() {
       </div>
     </details>`;
   }).join('');
+}
+function l10HistDeleteEntry_(i) {
+  let hist;
+  try { hist = JSON.parse(localStorage.getItem(L10_HIST_KEY) || '[]'); } catch(e) { hist = []; }
+  hist.splice(i, 1);
+  try { localStorage.setItem(L10_HIST_KEY, JSON.stringify(hist)); } catch(e) {}
+  staffL10RenderHistory();
 }
 // ── MEETING RUNNER ─────────────────────────────────────────────────────────────
 function staffRenderL10(data) {
@@ -7288,7 +7338,7 @@ function joyBombManualAdd_() {
   const today = new Date().toISOString().split('T')[0];
   const m = document.createElement('div');
   m.id = 'sp-jb-add-modal';
-  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.78);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(10,8,5,0.94);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
   m.innerHTML = `
     <div style="background:var(--sp-parchment);border-radius:6px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
       <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;">＋ Add Joy Bomb Manually</div>
@@ -7650,6 +7700,13 @@ function absencesRenderSection_(containerId) {
   </div>
 </div>
 
+<div id="vclLightbox" class="vcl-lightbox" onclick="vclCloseLightbox()">
+  <div class="vcl-lightbox-inner">
+    <img id="vcl-lightbox-img" src="" alt="">
+    <div class="vcl-lightbox-cap" id="vcl-lightbox-cap"></div>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════
      TEAM LEADER HUB MODAL
 ════════════════════════════════════════ -->
@@ -7910,16 +7967,60 @@ const TEAM_CHECKLISTS = {
   ],
 
   'service captains': [
-    { phase:'Pre-Service Setup', time:'Early arrival', text:'Set up all chairs in the auditorium' },
-    { phase:'Pre-Service Setup', time:'Early arrival', text:'Open all doors throughout the building' },
-    { phase:'Pre-Service Setup', time:'Early arrival', text:'Put out all signage' },
-    { phase:'Pre-Service Setup', time:'Early arrival', text:'Ensure patio and entryway are clean and clear' },
-    { phase:'Pre-Service', time:'30 min before', text:'Attend pre-service prayer' },
-    { phase:'During Service', time:'Service starts', text:'Monitor service flow and be available to troubleshoot' },
-    { phase:'Between Services (Reset)', time:'9:15 / 10:45 AM', text:'Reset stanchions immediately after service ends — people enter as others leave, so act quickly' },
-    { phase:'After Last Service', time:'12:30 PM', text:'Coordinate cleanup — ensure all teams complete their teardown' },
-    { phase:'After Last Service', time:'Final', text:'Walk the building to confirm all spaces are clean and reset' },
-    { phase:'After Last Service', time:'~12:45 PM', text:'Dismissed after people clear out' },
+    { phase:'Team & Access', time:'—', text:'Team: Matt Bowman, Erich Brenner, Kelly Coan, Matt Gardner, Sam Griffin, Thomas Peregrin, Danny Rotter, Tim Milligan, Manuel Sanchez' },
+    { phase:'Team & Access', time:'—', text:'All pad locks and alarm code: 9591' },
+    { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Trash bags 28x45' },
+    { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Toilet paper / seat covers' },
+    { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Trifold paper towels' },
+    { phase:'Setup — Arrival', time:'6:30 AM', text:'Unlock Patio Gate' },
+    { phase:'Setup — Arrival', time:'6:30 AM', text:'*Summer/Baptism Day* Fill waterfall (1 chlorine tablet if needed)' },
+    { phase:'Setup — Arrival', time:'6:30 AM', text:'Stanchions blocking rocks/bridge' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'A-frame at S. Virginia & Foothill and on corner sidewalk by church' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'Flag by stop sign on Foothill and corner of parking lot' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'Connect With Us sign — middle of entrance just off sidewalk' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'Sermon series banner by right double door' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:"Mustangs @ Yosh's — A-frame by door + 2 flags on each side of crosswalk" },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'Blow front entrance and patios' },
+    { phase:'Setup — Signage & Flags', time:'6:30 AM', text:'Spot check for any stains or trash, resolve if so' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'6:30 AM', text:'Trash cans on each side of entry' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'6:30 AM', text:'Trash can by coffee bar' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'6:30 AM', text:'Handicap signs' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'6:30 AM', text:'New Guest signs' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'6:30 AM', text:'Parking cones out' },
+    { phase:'Setup — Parking Lot & Trash Cans', time:'*Winter*', text:'Set up heaters' },
+    { phase:'Setup — Plastic Seating Section', time:'6:30 AM', text:'Open glass accordion doors, gate, and plastic door flap' },
+    { phase:'Setup — Plastic Seating Section', time:'6:30 AM', text:'Set up chairs extending into patio for service' },
+    { phase:'Setup — Plastic Seating Section', time:'6:30 AM', text:'Confirm front and back side doors are open for entire morning' },
+    { phase:'Setup — Inside', time:'6:30 AM', text:'Kids check-in signs / stanchions' },
+    { phase:'Setup — Inside', time:'6:30 AM', text:'Stanchions blocking off back rows' },
+    { phase:'Setup — Inside', time:'6:30 AM', text:'Check bathrooms (toilet paper/paper towels if needed)' },
+    { phase:'Setup — Inside', time:'6:30 AM', text:'Seat back pockets (pens, giving envelopes, etc. if needed)' },
+    { phase:'Pre-Service Prayer', time:'7:00 AM', text:'Gather with the team for pre-service prayer' },
+    { phase:'During Services — Between Services', time:'Between services', text:'Fireplace off between services' },
+    { phase:'During Services — Between Services', time:'Between services', text:'Check in with greeters / team leads' },
+    { phase:'During Services — Between Services', time:'Between services', text:'Remove family seat signs' },
+    { phase:'During Services — Between Services', time:'Between services', text:'Check bathrooms' },
+    { phase:'During Services — Between Services', time:'*Winter*', text:'Turn on 60-min overhead patio heater every hour' },
+    { phase:'During Services — Plastic Section (Per Service)', time:'First-to-Know video', text:'Close flap and latch patio gate' },
+    { phase:'During Services — Plastic Section (Per Service)', time:'During offering', text:'Open flap' },
+    { phase:'During Services — Plastic Section (Per Service)', time:'Benediction', text:'Open patio gate' },
+    { phase:'During Services — Headcount', time:'8:00 AM', text:'Count worship/tech/pastor + all in sanctuary (incl. children) and lobby' },
+    { phase:'During Services — Headcount', time:'9:30 AM', text:'Count sanctuary only (incl. children) + lobby single-service attendees' },
+    { phase:'During Services — Headcount', time:'11:00 AM', text:'Count sanctuary only (incl. children) + lobby single-service attendees' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:"Take out trash (don't forget small trash behind both stage doors)" },
+    { phase:'Teardown — End of Last Service', time:'*Summer/Baptism Day*', text:'Turn off waterfall' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'A-frames taken down (Virginia/Foothill, Mustangs)' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Main flags stored in south patio closet' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:"Mustang's flags broken down in bags — stored in breakfast area by A-frames" },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Connect With Us / sermon pop-up inside main doors' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Handicap / New Here rolling signs — breakfast area' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Plastic section: move chairs, close and lock glass accordion doors' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:"Lock side doors / patio gate (or check with LS Student Leaders/Rachel if they're using patio)" },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Close main entrance and lock top and bottom' },
+    { phase:'Teardown — End of Last Service', time:'After 11am service', text:'Lock breakfast area gate (top and bottom)' },
+    { phase:'Teardown — If Needed', time:'If needed', text:'Grab and clean communion trays behind screen' },
+    { phase:'Teardown — If Needed', time:'If needed', text:'Breakfast area: trash out, crockpots off and covered, condiments to inside fridge, utensils washed' },
+    { phase:'Teardown — If Needed', time:'If needed', text:'Coffee station: empty pots, wash and leave to dry, cups & lids to outside cupboard, sugar & creamers to kitchen cabinets' },
   ],
 
   'parking': [
@@ -7996,6 +8097,30 @@ const TEAM_CHECKLISTS = {
 
 };
 
+// Reference photos shown at the bottom of a team's checklist modal (click to enlarge)
+const TEAM_CHECKLIST_PHOTOS = {
+  'service captains': [
+    { src:'assets/service-captain/connect-with-us-sign.jpg', caption:'Connect With Us Sign' },
+    { src:'assets/service-captain/sermon-banner-kids-checkin-stanchions.jpg', caption:'Sermon Series Banner / Kids Check-in Stanchions' },
+    { src:'assets/service-captain/welcome-guests-signs.jpg', caption:'Welcome Guests Rolling Signs' },
+    { src:'assets/service-captain/handicap-rolling-signs.jpg', caption:'Handicap Rolling Signs' },
+    { src:'assets/service-captain/turn-right-foothill-banner-flag.jpg', caption:'Turn Right / Foothill Banner Flag' },
+    { src:'assets/service-captain/sidewalk-corner-aframe.jpg', caption:'Sidewalk Corner A-Frame' },
+    { src:'assets/service-captain/parking-cones-corner-banner-flag.jpg', caption:'Parking Cones / Corner Banner Flag' },
+    { src:'assets/service-captain/mustangs-banner-flags.jpg', caption:'Mustangs Banner Flags' },
+    { src:'assets/service-captain/mustangs-aframe.jpg', caption:'Mustangs A-Frame' },
+    { src:'assets/service-captain/trash-communion-cup-patio.jpg', caption:'Trash / Communion Cup Recycle (Patio)' },
+    { src:'assets/service-captain/trash-communion-cup-inside.jpg', caption:'Trash / Communion Cup Recycle (Inside)' },
+    { src:'assets/service-captain/coffee-bar-trash-can.jpg', caption:'Coffee Bar Trash Can' },
+    { src:'assets/service-captain/giving-box.jpg', caption:'Giving Box' },
+    { src:'assets/service-captain/back-row-stanchions.jpg', caption:'Back Row Stanchions / Please Move Forward' },
+    { src:'assets/service-captain/kids-checkin-stanchions.jpg', caption:'Kids Check-In Stanchions' },
+    { src:'assets/service-captain/mustangs-worship-stanchions.jpg', caption:'Mustangs Worship Stanchions' },
+    { src:'assets/service-captain/outdoor-chair-setup.jpg', caption:'Outdoor Chair Set-up (make sure the full stage is visible from every chair!)' },
+    { src:'assets/service-captain/waterfall-stanchion-setup.jpg', caption:'Waterfall Stanchion Set-up' },
+  ],
+};
+
 // Fallback default for teams without a specific checklist
 TEAM_CHECKLISTS['default'] = [
   { phase:'Arrival', time:'45 min before', text:'Arrive and check in with your team lead' },
@@ -8041,9 +8166,31 @@ function openVolChecklist(teamName) {
     });
   });
 
+  const photos = TEAM_CHECKLIST_PHOTOS[key];
+  if (photos && photos.length) {
+    html += `<div class="vcl-gallery-title">Reference Photos</div>
+      <div class="vcl-gallery">
+        ${photos.map((p, pi) => `
+          <div class="vcl-gallery-item" onclick="vclOpenLightbox('${key}',${pi})">
+            <img class="vcl-gallery-img" src="${p.src}" alt="${_rbEsc(p.caption)}" loading="lazy">
+            <div class="vcl-gallery-cap">${_rbEsc(p.caption)}</div>
+          </div>`).join('')}
+      </div>`;
+  }
+
   document.getElementById('vcl-body').innerHTML = html;
   vclUpdateProgress(teamName, items.length);
   document.getElementById('volChecklistModal').classList.add('open');
+}
+function vclOpenLightbox(key, idx) {
+  const photos = TEAM_CHECKLIST_PHOTOS[key];
+  if (!photos || !photos[idx]) return;
+  document.getElementById('vcl-lightbox-img').src = photos[idx].src;
+  document.getElementById('vcl-lightbox-cap').textContent = photos[idx].caption;
+  document.getElementById('vclLightbox').classList.add('open');
+}
+function vclCloseLightbox() {
+  document.getElementById('vclLightbox').classList.remove('open');
 }
 
 function closeVolChecklist() {
