@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T07:01:36.610Z",
+  "lastUpdated": "2026-07-01T07:46:15.413Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -103,7 +103,8 @@
       "Mar '26",
       "Apr '26",
       "May '26",
-      "Jun '26"
+      "Jun '26",
+      "Jul '26"
     ],
     "amounts": [
       0,
@@ -207,7 +208,8 @@
       284174,
       323920,
       343205,
-      363775
+      363775,
+      0
     ]
   },
   "pledge": {
@@ -413,7 +415,8 @@
       "2026-03",
       "2026-04",
       "2026-05",
-      "2026-06"
+      "2026-06",
+      "2026-07"
     ],
     "adults": [
       0,
@@ -613,7 +616,8 @@
       768,
       993,
       742,
-      691
+      691,
+      0
     ],
     "kids": [
       0,
@@ -813,7 +817,8 @@
       123,
       142,
       114,
-      109
+      109,
+      0
     ]
   },
   "attendanceWeekly": {
@@ -5933,7 +5938,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 1, 2026, 12:01 AM",
+    "refreshed": "Jul 1, 2026, 12:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6136,7 +6141,8 @@
       "Mar '26",
       "Apr '26",
       "May '26",
-      "Jun '26"
+      "Jun '26",
+      "Jul '26"
     ],
     "counts": [
       0,
@@ -6333,6 +6339,7 @@
       29,
       33,
       34,
+      36,
       36,
       36,
       36,
@@ -6538,7 +6545,8 @@
       "Mar '26",
       "Apr '26",
       "May '26",
-      "Jun '26"
+      "Jun '26",
+      "Jul '26"
     ],
     "counts": [
       0,
@@ -6738,7 +6746,8 @@
       406,
       376,
       399,
-      419
+      419,
+      420
     ]
   },
   "baptisms": {
@@ -6800,10 +6809,10 @@
     },
     "current": {
       "groups": 36,
-      "members": 419,
+      "members": 420,
       "groupSize": 12,
       "fmInGroupsPct": 54,
-      "asOfMonth": "Jun '26"
+      "asOfMonth": "Jul '26"
     },
     "groupCountsByYear": {
       "2010": [
@@ -7037,7 +7046,7 @@
         36,
         36,
         36,
-        null,
+        36,
         null,
         null,
         null,
@@ -7277,7 +7286,7 @@
         376,
         399,
         419,
-        null,
+        420,
         null,
         null,
         null,
@@ -12320,7 +12329,7 @@
     "weeklyAvg": 10,
     "totalFetched": 6891,
     "since": "2026-06-01",
-    "asOf": "2026-07-01T06:44:45.572Z"
+    "asOf": "2026-07-01T07:44:40.987Z"
   },
   "emailStats": {
     "latestOpenRate": 0.25609756097560976,
@@ -12328,6 +12337,6 @@
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-06-25T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-01T06:44:46.804Z"
+    "asOf": "2026-07-01T07:44:42.143Z"
   }
 }
