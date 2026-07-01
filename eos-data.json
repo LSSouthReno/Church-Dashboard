@@ -947,10 +947,10 @@
   ],
   "funnel": {
     "guest": 0,
-    "attender": 62,
+    "attender": 61,
     "member": 356,
-    "group": 419,
-    "leader": 83,
+    "group": 420,
+    "leader": 84,
     "missionary": 2,
     "asOf": "2026-07-01"
   },
@@ -3402,6 +3402,10 @@
           "role": "leader"
         },
         {
+          "name": "Timothy Milligan",
+          "role": "member"
+        },
+        {
           "name": "Todd Jaksick",
           "role": "member"
         }
@@ -4049,7 +4053,7 @@
         },
         {
           "name": "Jackie Smith",
-          "role": "member"
+          "role": "leader"
         },
         {
           "name": "Jed Ingalls",
@@ -4091,7 +4095,7 @@
         },
         {
           "name": "Carlos Flores",
-          "role": "member"
+          "role": "leader"
         },
         {
           "name": "David Peissner",
@@ -4157,7 +4161,7 @@
         },
         {
           "name": "Evven Gardner",
-          "role": "member"
+          "role": "leader"
         },
         {
           "name": "Geoffrey Caliger",
@@ -4215,7 +4219,7 @@
         },
         {
           "name": "Janet Frederick",
-          "role": "member"
+          "role": "leader"
         },
         {
           "name": "Jennifer Jauron",
@@ -7147,6 +7151,48 @@
     },
     {
       "type": "Serve Teams",
+      "name": "8am Enrichment Team (Early Birds)",
+      "members": [
+        {
+          "name": "Bill Salcido",
+          "role": "member"
+        },
+        {
+          "name": "Cathy Cappini",
+          "role": "leader"
+        },
+        {
+          "name": "David Peissner",
+          "role": "leader"
+        },
+        {
+          "name": "Douglas Drake",
+          "role": "member"
+        },
+        {
+          "name": "Grace Peissner",
+          "role": "leader"
+        },
+        {
+          "name": "Janet Frederick",
+          "role": "member"
+        },
+        {
+          "name": "Mark Meich",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Aiazzi",
+          "role": "member"
+        },
+        {
+          "name": "Tina Watson",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Serve Teams",
       "name": "9:30am Enrichment Team",
       "members": [
         {
@@ -7364,46 +7410,45 @@
     {
       "type": "Serve Teams",
       "name": "Content Team",
-      "members": []
-    },
-    {
-      "type": "Serve Teams",
-      "name": "Early Birds (8am Enrichment Team)",
       "members": [
         {
-          "name": "Bill Salcido",
+          "name": "Andrew Hess",
           "role": "member"
         },
         {
-          "name": "Cathy Cappini",
-          "role": "leader"
+          "name": "Ashleigh Cummings",
+          "role": "member"
         },
         {
-          "name": "David Peissner",
-          "role": "leader"
+          "name": "Bob Watson",
+          "role": "member"
         },
         {
-          "name": "Douglas Drake",
+          "name": "Charlene Carp",
           "role": "member"
         },
         {
           "name": "Grace Peissner",
+          "role": "member"
+        },
+        {
+          "name": "John Conelea",
           "role": "leader"
         },
         {
-          "name": "Janet Frederick",
+          "name": "Lauren Johnson",
           "role": "member"
         },
         {
-          "name": "Mark Meich",
+          "name": "Megan McKinley",
           "role": "member"
         },
         {
-          "name": "Ryan Aiazzi",
+          "name": "Michelle DePaoli",
           "role": "member"
         },
         {
-          "name": "Tina Watson",
+          "name": "Teylor Baskharoon (Hinzman)",
           "role": "member"
         }
       ]
@@ -7891,7 +7936,16 @@
     {
       "type": "Serve Teams",
       "name": "Lead Guide's Stepping Stones",
-      "members": []
+      "members": [
+        {
+          "name": "Bradley Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "Serve Teams",
@@ -8179,6 +8233,10 @@
       "members": [
         {
           "name": "Adam Carp",
+          "role": "leader"
+        },
+        {
+          "name": "Bradley Borowski",
           "role": "leader"
         },
         {
@@ -10281,100 +10339,6 @@
         },
         {
           "name": "Wende Schwake",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Unique Groups",
-      "name": "Refuge Montana Trip 2026",
-      "members": [
-        {
-          "name": "Adam Carp",
-          "role": "member"
-        },
-        {
-          "name": "Bill Salcido",
-          "role": "member"
-        },
-        {
-          "name": "Bob Watson",
-          "role": "member"
-        },
-        {
-          "name": "Bradley Borowski",
-          "role": "leader"
-        },
-        {
-          "name": "Chris Padgett",
-          "role": "member"
-        },
-        {
-          "name": "Dave Wagner",
-          "role": "member"
-        },
-        {
-          "name": "Garrett Kooyers",
-          "role": "member"
-        },
-        {
-          "name": "Geoffrey Caliger",
-          "role": "member"
-        },
-        {
-          "name": "Isaac Griffin",
-          "role": "member"
-        },
-        {
-          "name": "Jed Ingalls",
-          "role": "member"
-        },
-        {
-          "name": "Joe Chaulklin",
-          "role": "member"
-        },
-        {
-          "name": "John Conelea",
-          "role": "member"
-        },
-        {
-          "name": "John Munk",
-          "role": "member"
-        },
-        {
-          "name": "Keith Primus",
-          "role": "member"
-        },
-        {
-          "name": "Ken Van Gelder",
-          "role": "member"
-        },
-        {
-          "name": "Manuel Sanchez",
-          "role": "member"
-        },
-        {
-          "name": "Matt Bowman",
-          "role": "member"
-        },
-        {
-          "name": "Michael Rehberger",
-          "role": "member"
-        },
-        {
-          "name": "Nick Colonna",
-          "role": "member"
-        },
-        {
-          "name": "Richard Price",
-          "role": "member"
-        },
-        {
-          "name": "Ryan Griffin",
-          "role": "leader"
-        },
-        {
-          "name": "Timothy Milligan",
           "role": "member"
         }
       ]
