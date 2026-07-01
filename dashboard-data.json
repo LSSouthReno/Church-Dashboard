@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T16:45:57.380Z",
+  "lastUpdated": "2026-07-01T16:56:46.601Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5938,7 +5938,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 1, 2026, 9:46 AM",
+    "refreshed": "Jul 1, 2026, 9:56 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7359,7 +7359,7 @@
         5,
         22,
         13,
-        6,
+        5,
         4,
         5,
         26,
@@ -7406,7 +7406,7 @@
         3,
         8,
         8,
-        2,
+        1,
         null,
         2,
         15,
@@ -7665,14 +7665,6 @@
         "attPct": 55
       },
       {
-        "name": "Ryan Griffin Community Group",
-        "members": 11,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6:15-7:15am",
-        "avgAttended": 7,
-        "attPct": 64
-      },
-      {
         "name": "Flores/Norton Community Group",
         "members": 11,
         "leaders": 2,
@@ -7711,6 +7703,14 @@
         "schedule": "Meets weekly on Wednesdays from 6:30-8pm",
         "avgAttended": 6,
         "attPct": 60
+      },
+      {
+        "name": "Ryan Griffin Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6:15-7:15am",
+        "avgAttended": 7,
+        "attPct": 70
       },
       {
         "name": "Dykins Community Group",
@@ -9323,6 +9323,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -9480,8 +9487,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 109,
-            "totalVols": 109
+            "volsWithServiceTime": 110,
+            "totalVols": 110
           }
         }
       ]
@@ -10081,6 +10088,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10245,8 +10259,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 83,
-            "totalVols": 83
+            "volsWithServiceTime": 84,
+            "totalVols": 84
           }
         }
       ]
@@ -10853,6 +10867,13 @@
               "pos": "Sermon Text Reader",
               "status": "U",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -11010,8 +11031,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 84,
-            "totalVols": 84
+            "volsWithServiceTime": 85,
+            "totalVols": 85
           }
         }
       ]
@@ -11191,6 +11212,20 @@
               "pos": "Sermon Text Reader",
               "status": "U",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11200,8 +11235,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 23,
-            "totalVols": 23
+            "volsWithServiceTime": 25,
+            "totalVols": 25
           }
         }
       ]
@@ -11575,7 +11610,7 @@
               "name": "Anna Sawyer",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11752,6 +11787,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11761,8 +11803,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 42,
-            "totalVols": 42
+            "volsWithServiceTime": 43,
+            "totalVols": 43
           }
         }
       ]
