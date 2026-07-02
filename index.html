@@ -1386,27 +1386,20 @@
   .sd-tl-badge.on { background:rgba(212,175,55,.18); color:#c49a2e; }
   .sd-tl-badge.in { background:rgba(59,130,246,.15); color:#5ba0f5; }
   .sd-tl-badge.re { background:rgba(212,175,55,.06); color:rgba(212,175,55,.6); outline:1px solid rgba(212,175,55,.3); }
-  /* two-column: event timeline (left) + duration gantt (right) */
-  .sd-ms-cols { display:flex; gap:28px; align-items:flex-start; }
-  .sd-ms-left { flex:1 1 46%; min-width:0; }
-  .sd-ms-right { flex:1 1 54%; min-width:0; position:sticky; top:8px; }
-  .sd-gantt-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); margin-bottom:12px; }
-  .sd-gantt-row { display:grid; grid-template-columns:132px 1fr; align-items:center; gap:10px; min-height:30px; }
-  .sd-gantt-label { text-align:right; line-height:1.15; display:flex; flex-direction:column; align-items:flex-end; }
-  .sd-gantt-name { font-size:12px; color:var(--text); font-weight:600; }
-  .sd-gantt-dur { font-family:'DM Mono',monospace; font-size:9px; color:var(--text-dim); margin-top:1px; }
-  .sd-gantt-track { position:relative; height:18px; background:rgba(255,255,255,.03); border-radius:3px; }
-  .sd-gantt-gridline { position:absolute; top:0; bottom:0; width:1px; background:rgba(255,255,255,.06); }
-  .sd-gantt-bar { position:absolute; top:2px; bottom:2px; border-radius:3px; }
-  .sd-gantt-bar.on { background:rgba(212,175,55,.55); }
-  .sd-gantt-bar.in { background:rgba(59,130,246,.55); }
-  .sd-gantt-bar.re { background:rgba(212,175,55,.15); outline:1px solid rgba(212,175,55,.35); }
-  .sd-gantt-axisrow { min-height:18px; margin-top:4px; }
-  .sd-gantt-axis { position:relative; height:14px; background:transparent; }
-  .sd-gantt-tick { position:absolute; top:0; transform:translateX(-50%); font-family:'DM Mono',monospace; font-size:9px; color:var(--text-dim); white-space:nowrap; }
-  @media (max-width:760px) {
-    .sd-ms-cols { flex-direction:column; gap:22px; }
-    .sd-ms-right { position:static; width:100%; }
+  /* real per-service roster woven into the timeline */
+  .sd-ms-sub { font-size:11px; color:var(--text-dim); margin:-4px 0 16px; line-height:1.5; }
+  .sd-svc-window { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); font-weight:400; margin-left:10px; letter-spacing:.03em; white-space:nowrap; }
+  .sd-roster { margin-top:9px; display:flex; flex-direction:column; gap:8px; }
+  .sd-roster-team { display:grid; grid-template-columns:148px 1fr; gap:14px; align-items:baseline; }
+  .sd-roster-team-name { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--yellow-2); text-align:right; line-height:1.35; }
+  .sd-roster-team-name .cnt { color:var(--text-dim); margin-left:5px; }
+  .sd-roster-names { font-size:13px; color:var(--text); line-height:1.55; }
+  .sd-roster-names .pend { color:var(--text-dim); font-style:italic; }
+  .sd-allmorning { margin-top:24px; padding-top:16px; border-top:1px solid var(--card-border); }
+  .sd-allmorning-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  @media (max-width:640px) {
+    .sd-roster-team { grid-template-columns:1fr; gap:2px; }
+    .sd-roster-team-name { text-align:left; }
   }
   .sd-duty-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:16px; padding-top:10px; border-top:1px solid var(--card-border); }
   .sd-duty-leg { display:flex; align-items:center; gap:5px; font-size:10px; font-family:'DM Mono',monospace; color:var(--text-muted); letter-spacing:.04em; }
@@ -5048,123 +5041,99 @@ function sundayBuildContent(plan, calEvents) {
 
       <div class="sd-section">
         <div class="sd-section-title">Sunday Master Schedule</div>
-        <div style="font-size:11px;color:var(--text-dim);margin-bottom:14px;">The morning at a glance — event timeline on the left, and each team's total serving window on the right.</div>
         ${(() => {
-          const cols = [
-            {k:'GR', label:'Greeters'},
-            {k:'CN', label:'Connections'},
-            {k:'HP', label:'Hospitality'},
-            {k:'EN', label:'Enrichment'},
-            {k:'SC', label:'Service Captains'},
-            {k:'WT', label:'Worship &amp; Tech'},
-            {k:'KD', label:'Kids / Sunday School'},
-          ];
-          // t=display label, m=minutes-from-midnight (drives proportional spacing)
-          // on=at post ●  in=dismissed to service ↓  re=resetting ↻  ''=off/not serving
-          // NOTE: Worship & Tech stay ON DUTY through the service (they lead it),
-          // so WT is 'on' during services, never 'in' (dismissed).
-          const rows = [
-            {t:'7:00 AM', m:420, w:'Pre-Service Prayer — Everyone Welcome', GR:'',  CN:'',  HP:'',  EN:'',  WT:'',  SC:'',  KD:''},
-            {t:'7:30 AM', m:450, w:'Prepped &amp; Ready — 8am',           GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'8:00 AM', m:480, w:'☀ 8am Service Starts',    svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'8:15 AM', m:495, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'9:05 AM', m:545, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
-            {t:'9:15 AM', m:555, w:'Reset + Prepped &amp; Ready — 9:30am', GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
-            {t:'9:30 AM', m:570, w:'☀ 9:30am Service Starts', svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'9:45 AM', m:585, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'10:35 AM',m:635, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
-            {t:'10:45 AM',m:645, w:'Reset + Prepped &amp; Ready — 11am',   GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
-            {t:'11:00 AM',m:660, w:'☀ 11am Service Starts',   svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'11:15 AM',m:675, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'12:15 PM',m:735, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
-            {t:'12:30 PM',m:750, w:'Clean Up &amp; Put Away',  cleanup:true, GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:''},
-            {t:'~12:45',  m:765, w:'Dismissed — Done!',                    GR:'',  CN:'',  HP:'',  EN:'',  SC:'',  WT:'',  KD:''},
-          ];
-          const sym = {on:'●', in:'↓', re:'↻'};
-          const grpLabel = {on:'On Duty', in:'Dismissed to Service', re:'Resetting'};
-          const PX_PER_MIN = 2.2, MIN_GAP = 58;
+          // ── Build the schedule from THIS WEEK's real PCO assignments ──
+          // Each volunteer has a serviceTime like "9:30 AM", "11 AM", "9:30 AM, 11 AM",
+          // or rehearsal-only text. Split teams serve one service; Worship/Tech/etc. serve all.
+          const EXACT = /\d{1,2}(?::\d{2})?\s*[ap]m/ig;
+          const norm = t => t.trim().toUpperCase().replace(/\s+/g, ' ');
+          const svcTimesOf = v => [...new Set(((v.serviceTime || '').match(EXACT) || []).map(norm))];
 
-          // ── LEFT: vertical event timeline ──
-          const items = rows.map((r, i) => {
-            const cls = r.svc ? ' svc' : r.cleanup ? ' cleanup' : '';
-            const gapMin = i === 0 ? 0 : r.m - rows[i - 1].m;
-            const gapPx = i === 0 ? 0 : Math.max(MIN_GAP, Math.round(gapMin * PX_PER_MIN));
-            const byStatus = {};
-            cols.forEach(c => {
-              const st = r[c.k];
-              if (!st) return;
-              (byStatus[st] = byStatus[st] || []).push(c.label);
+          const allVols = [];
+          services.forEach(s => (s.volunteers || []).forEach(v => allVols.push(v)));
+          if (!allVols.length) {
+            return `<div style="color:var(--text-dim);font-size:13px;padding:8px 0;">Team assignments will appear here once this week's PCO plans are synced.</div>`;
+          }
+
+          // Discover this week's actual service times, chronologically
+          const timeCount = {};
+          allVols.forEach(v => svcTimesOf(v).forEach(t => timeCount[t] = (timeCount[t] || 0) + 1));
+          const serviceTimes = Object.keys(timeCount).sort((a, b) => parseTimeMin(a) - parseTimeMin(b));
+          const nSvc = serviceTimes.length;
+
+          // Team display order + label tidy
+          const TEAM_ORDER = ['First Impressions', 'Hospitality', 'Parking', 'Safety', 'Connection', 'Enrichment', 'Stepping Stones', 'Prayer', 'Service Captains', 'Coffee', 'Counting', 'Breakfast', 'Worship', 'Tech', 'Presiders', 'Preachers'];
+          const teamRank = t => { const i = TEAM_ORDER.findIndex(o => t.toLowerCase().startsWith(o.toLowerCase())); return i < 0 ? 99 : i; };
+          const teamLabel = t => (t || 'Other').replace(/\s*Teams?\b/i, '').trim() || (t || 'Other');
+          const sortPeople = arr => arr.slice().sort((a, b) => {
+            const al = /lead/i.test(a.pos || '') ? 0 : 1, bl = /lead/i.test(b.pos || '') ? 0 : 1;
+            return al - bl || (a.name || '').localeCompare(b.name || '');
+          });
+          const nameHtml = v => v.status === 'C' ? v.name : `<span class="pend">${v.name} (?)</span>`;
+          const teamRoster = teamObj => Object.keys(teamObj)
+            .sort((a, b) => teamRank(a) - teamRank(b) || a.localeCompare(b))
+            .map(t => {
+              const people = sortPeople(teamObj[t]);
+              return `<div class="sd-roster-team">
+                <div class="sd-roster-team-name">${teamLabel(t)}<span class="cnt">${people.length}</span></div>
+                <div class="sd-roster-names">${people.map(nameHtml).join(', ')}</div>
+              </div>`;
+            }).join('');
+
+          // Bucket people: single-service → that service; serves-all or untimed → all-morning
+          const per = {}; serviceTimes.forEach(t => per[t] = {});
+          const allm = {};
+          const pushUniq = (obj, team, v) => { obj[team] = obj[team] || []; if (!obj[team].find(p => p.name === v.name)) obj[team].push(v); };
+          allVols.forEach(v => {
+            const ts = svcTimesOf(v), team = v.team || 'Other';
+            if (ts.length === 0 || ts.length >= nSvc) pushUniq(allm, team, v);
+            else ts.forEach(t => { per[t] = per[t] || {}; pushUniq(per[t], team, v); });
+          });
+
+          // Day timeline milestones derived from the real service times
+          const DUR = 65; // approx service length
+          const fmtClock = min => { let h = Math.floor(min / 60), m = min % 60; const ap = h >= 12 ? 'PM' : 'AM'; let hh = h % 12; if (hh === 0) hh = 12; return `${hh}:${String(m).padStart(2, '0')} ${ap}`; };
+          const starts = serviceTimes.map(parseTimeMin);
+          const nodes = [];
+          if (starts.length) {
+            nodes.push({ t: fmtClock(starts[0] - 30), title: 'Teams Arrive &amp; Prep' });
+            nodes.push({ t: fmtClock(starts[0] - 15), title: 'Doors Open' });
+            serviceTimes.forEach((st, i) => {
+              const startMin = starts[i], endMin = startMin + DUR;
+              nodes.push({
+                t: st, svc: true, title: `☀ ${st} Service`,
+                window: `${fmtClock(startMin)} – ${fmtClock(endMin)} · ${DUR} min`,
+                roster: (per[st] && Object.keys(per[st]).length)
+                  ? teamRoster(per[st])
+                  : `<div class="sd-roster-names" style="color:var(--text-dim)">All teams this service serve both — see “All Morning” below.</div>`
+              });
+              nodes.push({ t: fmtClock(endMin), title: i < serviceTimes.length - 1 ? 'Service Ends → Reset for next' : 'Service Ends' });
             });
-            const badges = Object.keys(byStatus).map(st =>
-              `<span class="sd-tl-badge ${st}"><b>${sym[st]} ${grpLabel[st]}</b>${byStatus[st].join(', ')}</span>`
-            ).join('');
-            const gapLabel = (i > 0 && gapMin >= 25)
-              ? `<div class="sd-tl-gap" style="top:${-Math.round(gapPx / 2) - 8}px;">${gapMin} min</div>`
-              : '';
-            return `<div class="sd-tl-item${cls}" style="${i === 0 ? '' : `margin-top:${gapPx}px;`}">
-              ${gapLabel}
+            const lastEnd = starts[starts.length - 1] + DUR;
+            nodes.push({ t: fmtClock(lastEnd + 10), title: 'Clean Up &amp; Put Away', cleanup: true });
+            nodes.push({ t: fmtClock(lastEnd + 40), title: 'Dismissed — Done!' });
+          }
+          const timelineHtml = nodes.map(r => `<div class="sd-tl-item${r.svc ? ' svc' : r.cleanup ? ' cleanup' : ''}" style="margin-top:20px;">
               <div class="sd-tl-time">${r.t}</div>
               <div class="sd-tl-dot"></div>
-              <div class="sd-tl-title">${r.w}</div>
-              ${badges ? `<div class="sd-tl-badges">${badges}</div>` : ''}
-            </div>`;
-          }).join('');
+              <div class="sd-tl-title">${r.title}${r.window ? `<span class="sd-svc-window">${r.window}</span>` : ''}</div>
+              ${r.roster ? `<div class="sd-roster">${r.roster}</div>` : ''}
+            </div>`).join('');
 
-          // ── RIGHT: per-team duration gantt (7 AM – 1 PM axis) ──
-          const AX_START = 420, AX_END = 780, AX_RANGE = AX_END - AX_START;
-          const pct = m => ((m - AX_START) / AX_RANGE) * 100;
-          const fmtDur = mins => {
-            const h = Math.floor(mins / 60), mm = mins % 60;
-            return (h ? h + 'h' : '') + (mm ? (h ? ' ' : '') + mm + 'm' : (h ? '' : '0m'));
-          };
-          // Build merged serving segments per team from consecutive rows.
-          const segsFor = k => {
-            const segs = [];
-            for (let i = 0; i < rows.length - 1; i++) {
-              const st = rows[i][k];
-              if (!st) continue;
-              const start = rows[i].m, end = rows[i + 1].m;
-              const last = segs[segs.length - 1];
-              if (last && last.st === st && last.end === start) last.end = end;
-              else segs.push({ st, start, end });
-            }
-            return segs;
-          };
-          const ticks = [420, 480, 540, 600, 660, 720, 780];
-          const tickLbl = { 420:'7a', 480:'8a', 540:'9a', 600:'10a', 660:'11a', 720:'12p', 780:'1p' };
-          const gridlines = ticks.map(t => `<div class="sd-gantt-gridline" style="left:${pct(t)}%;"></div>`).join('');
-          const ganttRows = cols.map(c => {
-            const segs = segsFor(c.k);
-            const activeMin = segs.reduce((a, s) => a + (s.end - s.start), 0);
-            const bars = segs.map(s =>
-              `<div class="sd-gantt-bar ${s.st}" style="left:${pct(s.start)}%;width:${(s.end - s.start) / AX_RANGE * 100}%;" title="${grpLabel[s.st]} ${fmtDur(s.end - s.start)}"></div>`
-            ).join('');
-            return `<div class="sd-gantt-row">
-              <div class="sd-gantt-label">
-                <span class="sd-gantt-name">${c.label}</span>
-                <span class="sd-gantt-dur">${activeMin ? fmtDur(activeMin) + ' serving' : '—'}</span>
-              </div>
-              <div class="sd-gantt-track">${gridlines}${bars}</div>
-            </div>`;
-          }).join('');
-          const axisRow = `<div class="sd-gantt-row sd-gantt-axisrow">
-            <div class="sd-gantt-label"></div>
-            <div class="sd-gantt-axis">${ticks.map(t => `<span class="sd-gantt-tick" style="left:${pct(t)}%;">${tickLbl[t]}</span>`).join('')}</div>
-          </div>`;
+          const allmHtml = Object.keys(allm).length ? `
+            <div class="sd-allmorning">
+              <div class="sd-allmorning-title">Serving All Morning · ${nSvc > 1 ? 'Every Service' : 'Whole Service'}</div>
+              <div class="sd-roster">${teamRoster(allm)}</div>
+            </div>` : '';
 
-          return `<div class="sd-ms-cols">
-            <div class="sd-ms-left"><div class="sd-timeline">${items}</div></div>
-            <div class="sd-ms-right">
-              <div class="sd-gantt-title">Team Serving Windows</div>
-              ${ganttRows}
-              ${axisRow}
-            </div>
-          </div>
-          <div class="sd-duty-legend">
-            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch on">●</div>At Post / On Duty</div>
-            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch in">↓</div>Dismissed to Service</div>
-            <div class="sd-duty-leg"><div class="sd-duty-leg-swatch re">↻</div>Resetting / Transitioning</div>
-          </div>`;
+          const totalPeople = new Set(allVols.map(v => v.name)).size;
+          return `<div class="sd-ms-sub">Auto-built from this week's PCO assignments · ${totalPeople} people · ${nSvc} service${nSvc > 1 ? 's' : ''}${serviceTimes.length ? ` (${serviceTimes.join(', ')})` : ''}. Split teams are listed under the service they serve; continuous teams appear under “All Morning.” Service length &amp; arrival times are approximate.</div>
+            <div class="sd-timeline">${timelineHtml}</div>
+            ${allmHtml}
+            <div class="sd-duty-legend">
+              <div class="sd-duty-leg"><span style="color:var(--yellow-2)">●</span> Service start</div>
+              <div class="sd-duty-leg"><span class="pend" style="font-style:italic">Name (?)</span> = not yet confirmed in PCO</div>
+            </div>`;
         })()}
       </div>
 
