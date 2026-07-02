@@ -1365,23 +1365,27 @@
   .sd-presider-name { font-size:12px; color:var(--text); flex:1; }
   .sd-presider-role { font-size:10px; color:var(--text-dim); font-style:italic; }
   .sd-empty-state { text-align:center; padding:60px 24px; color:var(--text-dim); font-size:14px; }
-  /* Sunday Master Schedule — duty matrix */
-  .sd-duty-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  .sd-duty-table { border-collapse:separate; border-spacing:2px; }
-  .sd-dt-th-team { width:36px; text-align:center; vertical-align:bottom; padding:0 0 6px; }
-  .sd-dt-abbr { display:block; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:.04em; text-transform:uppercase; color:var(--text-dim); white-space:nowrap; text-align:center; }
-  .sd-dt-th-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); text-align:left; padding:0 4px 6px; vertical-align:bottom; }
-  .sd-dt-time-cell { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); white-space:nowrap; padding:6px 6px; vertical-align:middle; }
-  .sd-dt-event-cell { font-size:11px; color:var(--text); padding:6px 6px; vertical-align:middle; min-width:110px; max-width:180px; }
-  .sd-dt-row.svc-row { background:rgba(212,175,55,.07); }
-  .sd-dt-row.svc-row .sd-dt-time-cell,
-  .sd-dt-row.svc-row .sd-dt-event-cell { color:var(--yellow-2); font-weight:700; }
-  .sd-dt-row.cleanup-row .sd-dt-event-cell { color:var(--yellow-2); font-weight:600; }
-  .sd-dt-duty-cell { width:36px; text-align:center; vertical-align:middle; padding:4px 2px; font-size:11px; line-height:1; border-radius:3px; }
-  .sd-dt-duty-cell.on  { background:rgba(212,175,55,.25); color:#c49a2e; }
-  .sd-dt-duty-cell.in  { background:rgba(59,130,246,.15); color:#5ba0f5; font-size:10px; }
-  .sd-dt-duty-cell.re  { outline:1px solid rgba(212,175,55,.3); background:rgba(212,175,55,.06); color:rgba(212,175,55,.55); font-size:10px; }
-  .sd-duty-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; padding-top:10px; border-top:1px solid var(--card-border); }
+  /* Sunday Master Schedule — day timeline */
+  .sd-timeline { position:relative; padding:4px 0; }
+  .sd-timeline::before { content:''; position:absolute; left:64px; top:6px; bottom:6px; width:2px; background:var(--card-border); }
+  .sd-tl-item { position:relative; padding-left:88px; min-height:20px; }
+  .sd-tl-item:first-child { margin-top:0 !important; }
+  .sd-tl-gap { position:absolute; left:65px; transform:translate(-50%,0); font-family:'DM Mono',monospace; font-size:9px; color:var(--text-dim); background:var(--card-bg); padding:1px 7px; border-radius:8px; white-space:nowrap; }
+  .sd-tl-time { position:absolute; left:0; top:1px; width:56px; text-align:right; font-family:'DM Mono',monospace; font-size:10px; color:var(--text-dim); white-space:nowrap; }
+  .sd-tl-dot { position:absolute; left:58px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:2px solid #555; z-index:1; box-sizing:border-box; }
+  .sd-tl-item.svc .sd-tl-time,
+  .sd-tl-item.cleanup .sd-tl-time { color:var(--yellow-2); }
+  .sd-tl-item.svc .sd-tl-dot,
+  .sd-tl-item.cleanup .sd-tl-dot { border-color:var(--yellow-2); background:var(--yellow-2); }
+  .sd-tl-title { font-size:13px; color:var(--text); font-weight:600; line-height:1.3; }
+  .sd-tl-item.svc .sd-tl-title { color:var(--yellow-2); font-weight:700; }
+  .sd-tl-item.cleanup .sd-tl-title { color:var(--yellow-2); font-weight:600; }
+  .sd-tl-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
+  .sd-tl-badge { display:inline-flex; align-items:center; gap:3px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.03em; padding:2px 8px; border-radius:20px; white-space:nowrap; }
+  .sd-tl-badge.on { background:rgba(212,175,55,.18); color:#c49a2e; }
+  .sd-tl-badge.in { background:rgba(59,130,246,.15); color:#5ba0f5; }
+  .sd-tl-badge.re { background:rgba(212,175,55,.06); color:rgba(212,175,55,.6); outline:1px solid rgba(212,175,55,.3); }
+  .sd-duty-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:16px; padding-top:10px; border-top:1px solid var(--card-border); }
   .sd-duty-leg { display:flex; align-items:center; gap:5px; font-size:10px; font-family:'DM Mono',monospace; color:var(--text-muted); letter-spacing:.04em; }
   .sd-duty-leg-swatch { width:16px; height:16px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:9px; }
   .sd-duty-leg-swatch.on { background:rgba(212,175,55,.25); color:#c49a2e; }
@@ -5030,56 +5034,62 @@ function sundayBuildContent(plan, calEvents) {
         ${(() => {
           // Columns: GR=Greeters, CN=Connections, HP=Hospitality, EN=Enrichment, SC=Svc Captain, WT=Worship+Tech, KD=Kids
           const cols = [
-            {k:'GR', label:'Greeters'},
-            {k:'CN', label:'Connect'},
-            {k:'HP', label:'Hosp.'},
-            {k:'EN', label:'Enrichment'},
-            {k:'SC', label:'Svc Capt'},
-            {k:'WT', label:'Worship+Tech'},
-            {k:'KD', label:'Kids/SS'},
+            {k:'GR', label:'GR'},
+            {k:'CN', label:'CN'},
+            {k:'HP', label:'HP'},
+            {k:'EN', label:'EN'},
+            {k:'SC', label:'SC'},
+            {k:'WT', label:'WT'},
+            {k:'KD', label:'KD'},
           ];
+          // t=display label, m=minutes-from-midnight (drives proportional spacing)
           // on=at post ●  in=dismissed to service ↓  re=resetting ↻  ''=not applicable
           const rows = [
-            {t:'7:00 AM', w:'Pre-Service Prayer — Everyone Welcome', GR:'',  CN:'',  HP:'',  EN:'',  WT:'',  SC:'',  KD:''},
-            {t:'7:30 AM', w:'Prepped &amp; Ready — 8am',           GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
-            {t:'8:00 AM', w:'☀ 8am Service Starts',    svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'8:15 AM', w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'9:05 AM', w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
-            {t:'9:15 AM', w:'Reset + Prepped &amp; Ready — 9:30am', GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
-            {t:'9:30 AM', w:'☀ 9:30am Service Starts', svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'9:45 AM', w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'10:35 AM',w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
-            {t:'10:45 AM',w:'Reset + Prepped &amp; Ready — 11am',   GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
-            {t:'11:00 AM',w:'☀ 11am Service Starts',   svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'11:15 AM',w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
-            {t:'12:15 PM',w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
-            {t:'12:30 PM',w:'Clean Up &amp; Put Away',  cleanup:true, GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
-            {t:'~12:45',  w:'Dismissed — Done!',                    GR:'',  CN:'',  HP:'',  EN:'',  SC:'',  WT:'',  KD:''},
+            {t:'7:00 AM', m:420, w:'Pre-Service Prayer — Everyone Welcome', GR:'',  CN:'',  HP:'',  EN:'',  WT:'',  SC:'',  KD:''},
+            {t:'7:30 AM', m:450, w:'Prepped &amp; Ready — 8am',           GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'on', KD:'on'},
+            {t:'8:00 AM', m:480, w:'☀ 8am Service Starts',    svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'8:15 AM', m:495, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'9:05 AM', m:545, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:'on'},
+            {t:'9:15 AM', m:555, w:'Reset + Prepped &amp; Ready — 9:30am', GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
+            {t:'9:30 AM', m:570, w:'☀ 9:30am Service Starts', svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'9:45 AM', m:585, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'10:35 AM',m:635, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
+            {t:'10:45 AM',m:645, w:'Reset + Prepped &amp; Ready — 11am',   GR:'on', CN:'on', HP:'on', EN:'re', SC:'re', WT:'on', KD:'on'},
+            {t:'11:00 AM',m:660, w:'☀ 11am Service Starts',   svc:true,   GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'11:15 AM',m:675, w:'Dismissed to Service',                 GR:'in', CN:'in', HP:'in', EN:'on', SC:'on', WT:'in', KD:'on'},
+            {t:'12:15 PM',m:735, w:'Service Ends → Back at Posts',         GR:'on', CN:'on', HP:'',  EN:'on', SC:'on', WT:'',  KD:''},
+            {t:'12:30 PM',m:750, w:'Clean Up &amp; Put Away',  cleanup:true, GR:'on', CN:'on', HP:'on', EN:'on', SC:'on', WT:'',  KD:''},
+            {t:'~12:45',  m:765, w:'Dismissed — Done!',                    GR:'',  CN:'',  HP:'',  EN:'',  SC:'',  WT:'',  KD:''},
           ];
-          const sym = {on:'●', in:'↓', re:'↻', '':''};
-          const thCols = cols.map(c => `<th class="sd-dt-th-team"><span class="sd-dt-abbr">${c.label.split('+').map(w=>w.slice(0,5)).join('+')}</span></th>`).join('');
-          const bodyRows = rows.map(r => {
-            const cls = r.svc ? ' svc-row' : r.cleanup ? ' cleanup-row' : '';
-            const cells = cols.map(c => {
-              const st = r[c.k] || '';
-              return `<td class="sd-dt-duty-cell${st?' '+st:''}">${sym[st]||''}</td>`;
-            }).join('');
-            return `<tr class="sd-dt-row${cls}">
-              <td class="sd-dt-time-cell">${r.t}</td>
-              <td class="sd-dt-event-cell">${r.w}</td>
-              ${cells}
-            </tr>`;
+          const sym = {on:'●', in:'↓', re:'↻'};
+          const grpLabel = {on:'On Duty', in:'Dismissed', re:'Resetting'};
+          const PX_PER_MIN = 2.2, MIN_GAP = 58;
+          const items = rows.map((r, i) => {
+            const cls = r.svc ? ' svc' : r.cleanup ? ' cleanup' : '';
+            const gapMin = i === 0 ? 0 : r.m - rows[i - 1].m;
+            const gapPx = i === 0 ? 0 : Math.max(MIN_GAP, Math.round(gapMin * PX_PER_MIN));
+            // group teams on this row by status so duty info reads as a couple short badges, not 7 columns
+            const byStatus = {};
+            cols.forEach(c => {
+              const st = r[c.k];
+              if (!st) return;
+              (byStatus[st] = byStatus[st] || []).push(c.label);
+            });
+            const badges = Object.keys(byStatus).map(st =>
+              `<span class="sd-tl-badge ${st}">${sym[st]} ${grpLabel[st]}: ${byStatus[st].join(' ')}</span>`
+            ).join('');
+            const gapLabel = (i > 0 && gapMin >= 25)
+              ? `<div class="sd-tl-gap" style="top:${-Math.round(gapPx / 2) - 8}px;">${gapMin} min</div>`
+              : '';
+            return `<div class="sd-tl-item${cls}" style="${i === 0 ? '' : `margin-top:${gapPx}px;`}">
+              ${gapLabel}
+              <div class="sd-tl-time">${r.t}</div>
+              <div class="sd-tl-dot"></div>
+              <div class="sd-tl-title">${r.w}</div>
+              ${badges ? `<div class="sd-tl-badges">${badges}</div>` : ''}
+            </div>`;
           }).join('');
-          return `<div class="sd-duty-wrap">
-            <table class="sd-duty-table">
-              <thead><tr>
-                <th class="sd-dt-th-label" style="width:68px;">Time</th>
-                <th class="sd-dt-th-label">Event</th>
-                ${thCols}
-              </tr></thead>
-              <tbody>${bodyRows}</tbody>
-            </table>
-          </div>
+          return `<div class="sd-timeline">${items}</div>
           <div class="sd-duty-legend">
             <div class="sd-duty-leg"><div class="sd-duty-leg-swatch on">●</div>At Post / On Duty</div>
             <div class="sd-duty-leg"><div class="sd-duty-leg-swatch in">↓</div>Dismissed to Service</div>
