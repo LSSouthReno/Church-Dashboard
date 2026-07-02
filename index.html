@@ -1885,12 +1885,12 @@
   <!-- Row 2: Serve Teams | Giving + Pledge -->
   <div class="grid" style="margin-top:24px;">
 
-    <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail (members only)">
+    <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
         <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
-        <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Members only →</span>
+        <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">Click for detail →</span>
       </div>
-      <div class="card-sub">Auto-sorted by greatest need · members: click for volunteers, services &amp; admin</div>
+      <div class="card-sub">Auto-sorted by greatest need · click for volunteers &amp; services</div>
       <div class="teams-summary">
         <div class="stat">
           <div class="stat-label">Positions Filled</div>
@@ -3722,11 +3722,8 @@ let tmAdminUnlocked = false;
 /* ---- open / close ---- */
 function openTeamsModal() {
   if (!DASHBOARD_DATA) return;
-  // Require members login to see full team detail
-  if (!mmIsUnlocked()) {
-    mmShowPrompt(() => openTeamsModal());
-    return;
-  }
+  // Open to everyone — no members login required to view team detail.
+  // (Admin actions inside the modal remain gated separately via tm_admin.)
   const modal = document.getElementById('teamsModal');
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
@@ -4236,9 +4233,7 @@ function mmApplyState() {
     btn.title = 'Members area';
   }
 
-  // Update teams card lock badge
-  const badge = document.getElementById('teamsCardLockBadge');
-  if (badge) badge.textContent = unlocked ? '🔓 Full detail →' : '🔐 Members only →';
+  // Teams card is always open to everyone now — badge stays static ("Click for detail →").
 
   // Re-render giving chart (tooltip on/off) and pledge details
   const givingCanvas = document.getElementById('givingChart');
