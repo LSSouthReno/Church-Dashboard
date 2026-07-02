@@ -14,7 +14,6 @@ permissions:
 # in progress supersede each other (only the latest waits), but we do NOT
 # cancel an in-progress deploy — cancelling mid-publish leaves GitHub's Pages
 # backend finalizing and makes the next deploy fail with "try again later".
-# This is GitHub's recommended setting for the frequent data-sync pushes.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -34,6 +33,35 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-      - name: Deploy to GitHub Pages
+
+      # The frequent data-sync pushes land within a few seconds of each other, and
+      # GitHub Pages briefly rejects a new deploy while a prior one is finalizing
+      # ("Deployment failed, try again later"). Retry up to 3 times so that
+      # transient conflict self-heals and the run finishes green (no failure email).
+      # The site is never broken by the conflict — retrying just publishes the same
+      # artifact once GitHub is ready.
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: deploy1
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Wait before retry
+        if: steps.deploy1.outcome == 'failure'
+        run: sleep 45
+
+      - name: Deploy to GitHub Pages (attempt 2)
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Wait before final retry
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        run: sleep 90
+
+      # Final attempt has no continue-on-error: if it still fails after 3 tries,
+      # that's a real problem worth a notification.
+      - name: Deploy to GitHub Pages (attempt 3)
         id: deployment
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v4
