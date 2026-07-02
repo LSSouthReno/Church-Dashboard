@@ -1613,10 +1613,14 @@
   .tlh-team-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .tlh-bar-track { height: 7px; background: #333; border-radius: 99px; overflow: hidden; }
   .tlh-bar-fill  { height: 100%; border-radius: 99px; transition: width .4s; }
-  .tlh-pct { font-size: 11px; font-weight: 700; text-align: right; }
   .health-green  { background: #22c55e; color: #22c55e; }
   .health-yellow { background: #facc15; color: #facc15; }
   .health-red    { background: #ef4444; color: #ef4444; }
+  /* right-hand pill: shows how many over / under needed, with readable text */
+  .tlh-gap { font-size: 11px; font-weight: 800; text-align: center; padding: 3px 0; border-radius: 5px; letter-spacing: .02em; }
+  .tlh-gap.health-red    { background: #ef4444; color: #fff; }
+  .tlh-gap.health-yellow { background: #facc15; color: #3a2e05; }
+  .tlh-gap.health-green  { background: #22c55e; color: #08260f; }
 
   /* Checklist */
   .tlh-check-list { list-style: none; }
@@ -8521,13 +8525,15 @@ function tlhBuildHealth() {
   sorted.forEach(t => {
     const pct = t.needed ? Math.round((t.current / t.needed) * 100) : 100;
     const cls = pct >= 90 ? 'health-green' : pct >= 70 ? 'health-yellow' : 'health-red';
-    const label = pct >= 100 ? '✓ Full' : pct + '%';
+    const diff = (t.current || 0) - (t.needed || 0);
+    // over/under needed: +N over, −N short, ✓ exactly met
+    const gapLabel = diff > 0 ? '+' + diff : diff < 0 ? '−' + Math.abs(diff) : '✓';
     const teamGap = Math.max(0, (t.needed || 0) - (t.current || 0));
     html += `<div class="tlh-team-row">
       <div class="tlh-team-name" title="${t.name}">${t.name}</div>
       <div class="tlh-bar-track"><div class="tlh-bar-fill ${cls}" style="width:${Math.min(pct,100)}%"></div></div>
       <div style="font-size:11px;color:var(--text-muted);text-align:right;white-space:nowrap;">${t.current}/${t.needed}</div>
-      <div class="tlh-pct ${cls}">${label}</div>
+      <div class="tlh-gap ${cls}" title="${diff < 0 ? Math.abs(diff) + ' under needed' : diff > 0 ? diff + ' over needed' : 'fully staffed'}">${gapLabel}</div>
     </div>`;
     totalFilled += t.current;
     totalNeeded += t.needed || t.current;
