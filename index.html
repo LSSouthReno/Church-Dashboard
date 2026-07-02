@@ -8489,10 +8489,50 @@ function openTLHub() {
   document.getElementById('tlHub').classList.add('open');
   document.getElementById('tlHub').setAttribute('aria-hidden','false');
   tlhBuild();
+  tlhLoadRemote_(); // pull shared checklist/templates from eos-data.json, then re-render
 }
 function closeTLHub() {
   document.getElementById('tlHub').classList.remove('open');
   document.getElementById('tlHub').setAttribute('aria-hidden','true');
+}
+
+// ── Shared checklist/templates sync (durable across devices via eos-data.json) ──
+// The EOS web app's tlh_save action commits these as overlay fields; the merge-safe
+// funnel/calendar sync preserves them. Last-write-wins by timestamp vs local cache.
+let TLH_REMOTE = null; // { checklist, checklistTs, templates, templatesTs }
+
+function tlhPost_(payload) {
+  if (!EOS_WEBAPP_URL) return;
+  try { fetch(EOS_WEBAPP_URL, { method:'POST', body:JSON.stringify(payload), mode:'no-cors' }).catch(()=>{}); } catch(e) {}
+}
+
+async function tlhLoadRemote_() {
+  try {
+    const res = await fetch(STAFF_DATA_URL + '?t=' + Date.now(), { cache:'no-store' });
+    if (!res.ok) return;
+    const d = await res.json();
+    TLH_REMOTE = {
+      checklist:    Array.isArray(d.tlhChecklist) ? d.tlhChecklist : null,
+      checklistTs:  Number(d.tlhChecklistTs) || 0,
+      templates:    Array.isArray(d.tlhTemplates) ? d.tlhTemplates : null,
+      templatesTs:  Number(d.tlhTemplatesTs) || 0,
+    };
+    if (document.getElementById('tlHub').classList.contains('open')) {
+      tlhBuildChecklist();
+      tlhBuildTemplates();
+    }
+  } catch(e) { /* offline / not yet published — fall back to local cache */ }
+}
+
+// Read a {items, ts} local cache, tolerating the legacy raw-array format.
+function tlhReadLocal_(key) {
+  const raw = localStorage.getItem(key);
+  if (!raw) return { items: null, ts: 0 };
+  try {
+    const p = JSON.parse(raw);
+    if (Array.isArray(p)) return { items: p, ts: 0 };          // legacy format
+    return { items: p.items || null, ts: Number(p.ts) || 0 };
+  } catch(e) { return { items: null, ts: 0 }; }
 }
 
 // ── BUILD ──
@@ -8606,12 +8646,20 @@ const FREQ_META = {
 };
 
 function tlhGetChecklist() {
-  const saved = localStorage.getItem(TLH_CHECKLIST_CUSTOM);
-  return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(TLH_CHECKLIST_DEFAULT));
+  const local = tlhReadLocal_(TLH_CHECKLIST_CUSTOM);
+  const remItems = TLH_REMOTE && TLH_REMOTE.checklist;
+  const remTs    = (TLH_REMOTE && TLH_REMOTE.checklistTs) || 0;
+  // Prefer whichever is newer; remote wins ties (it's the shared source of truth).
+  if (remItems && remTs >= local.ts) return remItems;
+  if (local.items) return local.items;
+  return JSON.parse(JSON.stringify(TLH_CHECKLIST_DEFAULT));
 }
 
 function tlhSaveChecklist(items) {
-  localStorage.setItem(TLH_CHECKLIST_CUSTOM, JSON.stringify(items));
+  const ts = Date.now();
+  localStorage.setItem(TLH_CHECKLIST_CUSTOM, JSON.stringify({ items, ts }));
+  if (TLH_REMOTE) { TLH_REMOTE.checklist = items; TLH_REMOTE.checklistTs = ts; }
+  tlhPost_({ action:'tlh_save', checklist: items, checklistTs: ts });
 }
 
 function tlhBuildChecklist() {
@@ -8727,12 +8775,19 @@ const TLH_TEMPLATES_DEFAULT = [
 ];
 
 function tlhGetTemplates() {
-  const saved = localStorage.getItem(TLH_TEMPLATES_CUSTOM);
-  return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(TLH_TEMPLATES_DEFAULT));
+  const local = tlhReadLocal_(TLH_TEMPLATES_CUSTOM);
+  const remItems = TLH_REMOTE && TLH_REMOTE.templates;
+  const remTs    = (TLH_REMOTE && TLH_REMOTE.templatesTs) || 0;
+  if (remItems && remTs >= local.ts) return remItems;
+  if (local.items) return local.items;
+  return JSON.parse(JSON.stringify(TLH_TEMPLATES_DEFAULT));
 }
 
 function tlhSaveTemplates(items) {
-  localStorage.setItem(TLH_TEMPLATES_CUSTOM, JSON.stringify(items));
+  const ts = Date.now();
+  localStorage.setItem(TLH_TEMPLATES_CUSTOM, JSON.stringify({ items, ts }));
+  if (TLH_REMOTE) { TLH_REMOTE.templates = items; TLH_REMOTE.templatesTs = ts; }
+  tlhPost_({ action:'tlh_save', templates: items, templatesTs: ts });
 }
 
 function tlhBuildTemplates() {
