@@ -9779,5 +9779,58 @@
   "boulderStatuses": {
     "Discipleship Pathway: Guest → Member → Leader → Missionary fully documented with clear criteria|Adam Carp": "complete",
     "Christmas Festival Plan On Track|Brad Borowski": "on-track"
-  }
+  },
+  "tlhChecklist": [
+    {
+      "id": "c1",
+      "text": "Review your PCO schedule for this Sunday",
+      "freq": "sunday"
+    },
+    {
+      "id": "c2",
+      "text": "Confirm all volunteer positions are filled",
+      "freq": "sunday"
+    },
+    {
+      "id": "c3",
+      "text": "Follow up with any unconfirmed volunteers",
+      "freq": "weekly"
+    },
+    {
+      "id": "c4",
+      "text": "Send a word of encouragement to your team",
+      "freq": "weekly"
+    },
+    {
+      "id": "c5",
+      "text": "Check for any new schedule requests to accept",
+      "freq": "weekly"
+    },
+    {
+      "id": "c6",
+      "text": "Reach out to any volunteer who missed last Sunday",
+      "freq": "weekly"
+    },
+    {
+      "id": "c7",
+      "text": "Review your team's fill rate and identify gaps",
+      "freq": "monthly"
+    },
+    {
+      "id": "c8",
+      "text": "Onboard any new volunteers (assign a mentor)",
+      "freq": "monthly"
+    },
+    {
+      "id": "c9",
+      "text": "Send a personal thank-you to a team standout",
+      "freq": "monthly"
+    },
+    {
+      "id": "c10",
+      "text": "Check in with each volunteer: how are they doing?",
+      "freq": "monthly"
+    }
+  ],
+  "tlhChecklistTs": 1783032504783
 }
