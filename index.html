@@ -1397,6 +1397,17 @@
   .sd-roster-names .pend { color:var(--text-dim); font-style:italic; }
   .sd-allmorning { margin-top:24px; padding-top:16px; border-top:1px solid var(--card-border); }
   .sd-allmorning-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  /* call-sheet: team + action verb + people, under a timeline moment */
+  .sd-cs-team { margin-top:9px; }
+  .sd-cs-team-hd { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+  .sd-cs-team-hd b { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--yellow-2); font-weight:700; }
+  .sd-cs-action { font-size:11px; color:var(--text-muted); font-style:italic; }
+  .sd-cs-names { font-size:13px; color:var(--text); line-height:1.5; margin-top:2px; }
+  .sd-cs-names .pend { color:var(--text-dim); font-style:italic; }
+  .sd-cs-duty { margin-top:8px; font-size:12.5px; color:var(--text-muted); line-height:1.6; }
+  .sd-cs-duty div { margin-top:3px; }
+  .sd-cs-duty b { color:var(--text); font-weight:600; }
+  .sd-cs-duty .lead { color:var(--yellow-2); }
   @media (max-width:640px) {
     .sd-roster-team { grid-template-columns:1fr; gap:2px; }
     .sd-roster-team-name { text-align:left; }
@@ -5094,24 +5105,76 @@ function sundayBuildContent(plan, calEvents) {
             else ts.forEach(t => { per[t] = per[t] || {}; pushUniq(per[t], team, v); });
           });
 
-          // Day timeline milestones derived from the real service times
+          // ── Team → what they do, and whether they stay on-post THROUGH the service ──
+          const teamAction = t => {
+            const s = (t || '').toLowerCase();
+            if (/first impression|greet/.test(s)) return 'greeting at the doors';
+            if (/connection/.test(s))             return 'connections table';
+            if (/hospitality/.test(s))            return 'coffee & hospitality';
+            if (/coffee/.test(s))                 return 'coffee station';
+            if (/breakfast/.test(s))              return 'breakfast ready';
+            if (/parking/.test(s))                return 'parking & lot';
+            if (/stepping stone/.test(s))         return 'kids check-in & classrooms';
+            if (/enrichment/.test(s))             return 'kids classrooms';
+            if (/student/.test(s))                return 'students room';
+            if (/worship/.test(s))                return 'soundcheck, then leading worship';
+            if (/tech/.test(s))                   return 'booth — audio / video / slides';
+            if (/prayer/.test(s))                 return 'prayer';
+            if (/safety/.test(s))                 return 'safety & coverage';
+            if (/captain/.test(s))                return 'service captain — oversight';
+            if (/count/.test(s))                  return 'offering count';
+            if (/presider/.test(s))               return 'presiding';
+            if (/preacher/.test(s))               return 'preaching';
+            return 'serving';
+          };
+          const servesDuring = t => /worship|tech|stepping stone|enrichment|student|kids|safety|captain|prayer|presider|preacher|count/i.test(t || '');
+
+          // Render a crew (team→people) as call-sheet lines: team · what they do · who
+          const crewSheet = teamObj => Object.keys(teamObj)
+            .sort((a, b) => teamRank(a) - teamRank(b) || a.localeCompare(b))
+            .map(t => {
+              const people = sortPeople(teamObj[t]);
+              return `<div class="sd-cs-team">
+                <div class="sd-cs-team-hd"><b>${teamLabel(t)}</b><span class="sd-cs-action">${teamAction(t)}</span></div>
+                <div class="sd-cs-names">${people.map(nameHtml).join(', ')}</div>
+              </div>`;
+            }).join('');
+
+          // At a service start: who holds their post vs. who hands off and joins the service
+          const dutySummary = svcTime => {
+            const here = {};
+            Object.keys(per[svcTime] || {}).forEach(t => here[t] = 1);
+            Object.keys(allm).forEach(t => here[t] = 1);
+            const labels = list => [...new Set(list.map(teamLabel))].sort((a, b) => teamRank(a) - teamRank(b) || a.localeCompare(b));
+            const during = labels(Object.keys(here).filter(servesDuring));
+            const attend = labels(Object.keys(here).filter(t => !servesDuring(t)));
+            let html = '';
+            if (during.length) html += `<div><b class="lead">On post through the service:</b> ${during.join(' · ')}</div>`;
+            if (attend.length) html += `<div><b>Hand off &amp; join the service:</b> ${attend.join(' · ')}</div>`;
+            return `<div class="sd-cs-duty">${html}</div>`;
+          };
+
+          // ── Build timeline moments from the real service times ──
           const DUR = 65; // approx service length
           const fmtClock = min => { let h = Math.floor(min / 60), m = min % 60; const ap = h >= 12 ? 'PM' : 'AM'; let hh = h % 12; if (hh === 0) hh = 12; return `${hh}:${String(m).padStart(2, '0')} ${ap}`; };
           const starts = serviceTimes.map(parseTimeMin);
           const nodes = [];
           if (starts.length) {
-            nodes.push({ t: fmtClock(starts[0] - 30), title: 'Teams Arrive &amp; Prep' });
-            nodes.push({ t: fmtClock(starts[0] - 15), title: 'Doors Open' });
-            serviceTimes.forEach((st, i) => {
-              const startMin = starts[i], endMin = startMin + DUR;
-              nodes.push({
-                t: st, svc: true, title: `☀ ${st} Service`,
-                window: `${fmtClock(startMin)} – ${fmtClock(endMin)} · ${DUR} min`,
-                roster: (per[st] && Object.keys(per[st]).length)
-                  ? teamRoster(per[st])
-                  : `<div class="sd-roster-names" style="color:var(--text-dim)">All teams this service serve both — see “All Morning” below.</div>`
-              });
-              nodes.push({ t: fmtClock(endMin), title: i < serviceTimes.length - 1 ? 'Service Ends → Reset for next' : 'Service Ends' });
+            starts.forEach((startMin, i) => {
+              const endMin = startMin + DUR, st = serviceTimes[i];
+              const crew = (per[st] && Object.keys(per[st]).length) ? crewSheet(per[st]) : '';
+              if (i === 0) {
+                nodes.push({ t: fmtClock(startMin - 30), title: 'Teams Arrive &amp; Prep', roster: crew });
+                nodes.push({ t: fmtClock(startMin - 15), title: 'Doors Open — greeters &amp; hosts at posts' });
+              }
+              nodes.push({ t: st, svc: true, title: `☀ ${st} Service Begins`, window: `${fmtClock(startMin)} – ${fmtClock(endMin)}`, duty: dutySummary(st) });
+              if (i < starts.length - 1) {
+                const nextSt = serviceTimes[i + 1];
+                const nextCrew = (per[nextSt] && Object.keys(per[nextSt]).length) ? crewSheet(per[nextSt]) : '';
+                nodes.push({ t: fmtClock(endMin), title: `Service Ends → Reset · ${nextSt} crew takes posts`, roster: nextCrew });
+              } else {
+                nodes.push({ t: fmtClock(endMin), title: 'Service Ends' });
+              }
             });
             const lastEnd = starts[starts.length - 1] + DUR;
             nodes.push({ t: fmtClock(lastEnd + 10), title: 'Clean Up &amp; Put Away', cleanup: true });
@@ -5121,17 +5184,18 @@ function sundayBuildContent(plan, calEvents) {
               <div class="sd-tl-time">${r.t}</div>
               <div class="sd-tl-dot"></div>
               <div class="sd-tl-title">${r.title}${r.window ? `<span class="sd-svc-window">${r.window}</span>` : ''}</div>
-              ${r.roster ? `<div class="sd-roster">${r.roster}</div>` : ''}
+              ${r.duty || ''}
+              ${r.roster ? `<div>${r.roster}</div>` : ''}
             </div>`).join('');
 
           const allmHtml = Object.keys(allm).length ? `
             <div class="sd-allmorning">
               <div class="sd-allmorning-title">Serving All Morning · ${nSvc > 1 ? 'Every Service' : 'Whole Service'}</div>
-              <div class="sd-roster">${teamRoster(allm)}</div>
+              ${crewSheet(allm)}
             </div>` : '';
 
           const totalPeople = new Set(allVols.map(v => v.name)).size;
-          return `<div class="sd-ms-sub">Auto-built from this week's PCO assignments · ${totalPeople} people · ${nSvc} service${nSvc > 1 ? 's' : ''}${serviceTimes.length ? ` (${serviceTimes.join(', ')})` : ''}. Split teams are listed under the service they serve; continuous teams appear under “All Morning.” Service length &amp; arrival times are approximate.</div>
+          return `<div class="sd-ms-sub">Auto-built from this week's PCO assignments · ${totalPeople} people · ${nSvc} service${nSvc > 1 ? 's' : ''}${serviceTimes.length ? ` (${serviceTimes.join(', ')})` : ''}. Names are who's on for each service — split teams differ by service. Arrival, service length &amp; reset times are approximate.</div>
             <div class="sd-timeline">${timelineHtml}</div>
             ${allmHtml}
             <div class="sd-duty-legend">
