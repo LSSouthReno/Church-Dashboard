@@ -9832,5 +9832,32 @@
       "freq": "monthly"
     }
   ],
-  "tlhChecklistTs": 1783032504783
+  "tlhChecklistTs": 1783032504783,
+  "tlhTemplates": [
+    {
+      "label": "Recruiting a New Volunteer",
+      "text": "Hey [Name]! I've been thinking about you and wanted to reach out. We have a spot on the [Team Name] team at Living Stones that I think would be a perfect fit for you. It's a great group of people and a really meaningful way to get plugged in. Would you be open to chatting about it this Sunday? No pressure at all — just wanted to plant the seed! 😊"
+    },
+    {
+      "label": "Schedule Reminder (Pre-Sunday)",
+      "text": "Hey team! 👋 Just a reminder that we're serving together this Sunday. Please plan to arrive by [arrival time] and head to [location]. Looking forward to seeing you all! Let me know if anything has come up. — [Your name]"
+    },
+    {
+      "label": "Missed Sunday Follow-Up",
+      "text": "Hey [Name] — missed you on Sunday! Just wanted to check in and make sure everything is okay. Life happens and we totally get it. If something's going on or you need to talk through your schedule, I'm here. Hope to see you soon! — [Your name]"
+    },
+    {
+      "label": "Welcome to the Team",
+      "text": "Hey [Name]! 🎉 So glad you're officially on the [Team Name] team! Here's what to know: we communicate through [communication method], schedules come through Planning Center (check your email for the invite), and your first Sunday you'll shadow [mentor name]. Don't hesitate to text me any time. Can't wait to serve with you! — [Your name]"
+    },
+    {
+      "label": "Volunteer Appreciation",
+      "text": "Hey [Name] — I just wanted to take a second to say thank you. What you do every week on the [Team Name] team makes a real difference, and I don't always say that enough. You show up, you give your best, and people's experience at Living Stones is genuinely better because of you. Grateful for you! — [Your name]"
+    },
+    {
+      "label": "Asking for a Sub / Coverage",
+      "text": "Hey team — we're a little short this Sunday for [service/time]. Would anyone be able to step in or swap? You'd be a huge help and I'd owe you one 😄 Reply here or text me directly. Thanks! — [Your name]"
+    }
+  ],
+  "tlhTemplatesTs": 1783032605525
 }
