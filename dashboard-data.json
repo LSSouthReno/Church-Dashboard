@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-04T17:46:14.547Z",
+  "lastUpdated": "2026-07-04T17:59:46.954Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5848,7 +5848,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 4, 2026, 10:46 AM",
+    "refreshed": "Jul 4, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11236,6 +11236,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anna Faker",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11245,8 +11259,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 27,
+            "totalVols": 27
           }
         }
       ]
@@ -11475,6 +11489,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "John Turcich",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11484,8 +11505,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 30,
-            "totalVols": 30
+            "volsWithServiceTime": 31,
+            "totalVols": 31
           }
         }
       ]
@@ -12093,6 +12114,13 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "John Turcich",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -12102,8 +12130,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 17,
-            "totalVols": 17
+            "volsWithServiceTime": 18,
+            "totalVols": 18
           }
         }
       ]
