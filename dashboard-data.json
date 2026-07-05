@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-05T16:46:41.062Z",
+  "lastUpdated": "2026-07-05T17:02:02.096Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3071,6 +3071,13 @@
         "adults": 716,
         "kids": 99
       }
+    ],
+    "2026-07": [
+      {
+        "week": "Jul 5",
+        "adults": 0,
+        "kids": 35
+      }
     ]
   },
   "serveTeams": [
@@ -5848,7 +5855,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 5, 2026, 9:46 AM",
+    "refreshed": "Jul 5, 2026, 10:02 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6672,7 +6679,8 @@
       "Mar '26",
       "Apr '26",
       "May '26",
-      "Jun '26"
+      "Jun '26",
+      "Jul '26"
     ],
     "counts": [
       30,
@@ -6685,9 +6693,10 @@
       7,
       8,
       3,
-      5
+      5,
+      2
     ],
-    "total": 312
+    "total": 314
   },
   "members": {
     "years": [
@@ -9270,6 +9279,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ed Griggs",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Anthony Azzam",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9427,8 +9450,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 110,
+            "totalVols": 110
           }
         }
       ]
