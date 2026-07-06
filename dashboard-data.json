@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-06T22:47:20.764Z",
+  "lastUpdated": "2026-07-06T23:47:10.291Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3083,7 +3083,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 103,
+      "current": 101,
       "needed": 150
     },
     {
@@ -3133,7 +3133,7 @@
     },
     {
       "name": "Safety",
-      "current": 45,
+      "current": 44,
       "needed": 39
     },
     {
@@ -3152,7 +3152,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 369,
+  "uniqueVolunteers": 367,
   "budget": [
     {
       "label": "Network & Missions",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 6, 2026, 3:47 PM",
+    "refreshed": "Jul 6, 2026, 4:47 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7358,7 +7358,7 @@
         24,
         24,
         26,
-        3,
+        4,
         null,
         null,
         null,
@@ -7405,7 +7405,7 @@
         15,
         19,
         16,
-        2,
+        3,
         null,
         null,
         null,
@@ -7506,6 +7506,14 @@
         "attPct": 62
       },
       {
+        "name": "Castaneda Community Group",
+        "members": 20,
+        "leaders": 3,
+        "schedule": "Meets weekly on Mondays from 3-5pm",
+        "avgAttended": 12,
+        "attPct": 60
+      },
+      {
         "name": "Howes/Peissner Community Group",
         "members": 20,
         "leaders": 2,
@@ -7520,14 +7528,6 @@
         "schedule": "Meets weekly on Sundays from 4-6pm",
         "avgAttended": 7,
         "attPct": 37
-      },
-      {
-        "name": "Castaneda Community Group",
-        "members": 19,
-        "leaders": 3,
-        "schedule": "Meets weekly on Mondays from 3-5pm",
-        "avgAttended": 12,
-        "attPct": 63
       },
       {
         "name": "High School Community Group",
@@ -7642,20 +7642,20 @@
         "attPct": 42
       },
       {
-        "name": "Turcich Community Group",
-        "members": 11,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 55
-      },
-      {
         "name": "Brown/Frank Community Group",
         "members": 11,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 5,
         "attPct": 45
+      },
+      {
+        "name": "Turcich Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 60
       },
       {
         "name": "Durham Community Group",
@@ -7976,13 +7976,6 @@
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
               "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Alex Buckwalter",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
-              "status": "U",
               "serviceTime": "11 AM"
             },
             {
@@ -8579,6 +8572,48 @@
               "pos": "Vocals",
               "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jaimie Sullivan",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Tiffany Jackson",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ana Loftin",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Autumn Blattman",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Emory Breach",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lauren Johnson",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8729,8 +8764,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 111,
-            "totalVols": 111
+            "volsWithServiceTime": 116,
+            "totalVols": 116
           }
         }
       ]
@@ -11741,7 +11776,7 @@
     "weeklyAvg": 10,
     "totalFetched": 6900,
     "since": "2026-06-06",
-    "asOf": "2026-07-06T22:44:50.363Z"
+    "asOf": "2026-07-06T23:44:54.853Z"
   },
   "emailStats": {
     "latestOpenRate": 0.5264550264550265,
@@ -11749,6 +11784,6 @@
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-01T16:23:10+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-06T22:44:52.319Z"
+    "asOf": "2026-07-06T23:44:56.504Z"
   }
 }
