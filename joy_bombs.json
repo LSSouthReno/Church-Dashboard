@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_1782842535447",
-      "name": "Bob Watson",
-      "pcoPersonId": "",
-      "team": "Launched CG",
-      "phone": "",
-      "firstServeDate": "2026-06-25",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "manual",
-      "position": ""
-    },
-    {
       "id": "jb_151512774_20260705",
       "name": "Jeremy Peterson",
       "pcoPersonId": "151512774",
@@ -99,7 +85,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bass"
+    },
+    {
+      "id": "jb_1782842535447",
+      "name": "Bob Watson",
+      "pcoPersonId": "",
+      "team": "Launched CG",
+      "phone": "",
+      "firstServeDate": "2026-06-25",
+      "status": "bombed",
+      "bombedDate": "2026-07-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "manual",
+      "position": ""
     }
   ],
-  "lastUpdated": "2026-07-06T20:24:14.103Z"
+  "lastUpdated": "2026-07-06T20:25:03.336Z"
 }
