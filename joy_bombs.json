@@ -55,20 +55,6 @@
       "notes": "",
       "source": "auto",
       "position": "Host"
-    },
-    {
-      "id": "jb_1783369717855",
-      "name": "Melissa Peterson",
-      "pcoPersonId": "",
-      "team": "",
-      "phone": "",
-      "firstServeDate": "2026-07-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "manual",
-      "position": ""
     }
   ],
   "completed": [
@@ -127,7 +113,21 @@
       "notes": "",
       "source": "manual",
       "position": ""
+    },
+    {
+      "id": "jb_1783369717855",
+      "name": "Melissa Peterson",
+      "pcoPersonId": "",
+      "team": "",
+      "phone": "",
+      "firstServeDate": "2026-07-06",
+      "status": "bombed",
+      "bombedDate": "2026-07-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "manual",
+      "position": ""
     }
   ],
-  "lastUpdated": "2026-07-06T20:28:39.906Z"
+  "lastUpdated": "2026-07-06T20:28:42.516Z"
 }
