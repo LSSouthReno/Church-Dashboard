@@ -27,20 +27,6 @@
       "notes": "",
       "source": "auto",
       "position": "Greeter"
-    },
-    {
-      "id": "jb_187058382_20260705",
-      "name": "Megan McKinley",
-      "pcoPersonId": "187058382",
-      "team": "Hospitality Team",
-      "phone": "14089815167",
-      "firstServeDate": "2026-07-05",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Host"
     }
   ],
   "completed": [
@@ -87,6 +73,20 @@
       "position": "Greeter"
     },
     {
+      "id": "jb_187058382_20260705",
+      "name": "Megan McKinley",
+      "pcoPersonId": "187058382",
+      "team": "Hospitality Team",
+      "phone": "14089815167",
+      "firstServeDate": "2026-07-05",
+      "status": "bombed",
+      "bombedDate": "2026-07-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Host"
+    },
+    {
       "id": "jb_1783369529381",
       "name": "Kelly Coan",
       "pcoPersonId": "",
@@ -115,5 +115,5 @@
       "position": ""
     }
   ],
-  "lastUpdated": "2026-07-06T20:29:02.445Z"
+  "lastUpdated": "2026-07-06T20:34:24.597Z"
 }
