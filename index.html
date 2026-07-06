@@ -1278,6 +1278,9 @@
   .sp-joy-card-phone a:hover { text-decoration: underline; }
   .sp-joy-bomb-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 7px 14px; background: var(--sp-gold); color: var(--sp-ink); border: none; border-radius: 3px; cursor: pointer; white-space: nowrap; font-weight: 700; flex-shrink: 0; }
   .sp-joy-bomb-btn:hover { background: var(--sp-gold-light); }
+  .sp-joy-actions { display: flex; flex-direction: column; gap: 6px; align-items: stretch; flex-shrink: 0; }
+  .sp-joy-remove-btn { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; background: transparent; color: var(--sp-muted); border: 1px solid var(--sp-border); border-radius: 3px; cursor: pointer; white-space: nowrap; }
+  .sp-joy-remove-btn:hover { border-color: var(--sp-rust); color: var(--sp-rust); }
   .sp-joy-empty { background: linear-gradient(135deg, var(--sp-ink) 0%, #2a2018 100%); border-radius: 4px; padding: 22px; text-align: center; color: var(--sp-gold); font-family: 'Playfair Display', serif; font-size: 15px; margin-bottom: 12px; border: 1px solid rgba(201,150,58,0.2); }
   .sp-joy-add-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; background: transparent; border: 1px solid var(--sp-gold); color: var(--sp-gold); border-radius: 3px; cursor: pointer; }
   .sp-joy-add-btn:hover { background: var(--sp-gold); color: var(--sp-ink); }
@@ -7613,7 +7616,10 @@ async function joyBombsLoad_() {
   } catch(e) { /* not yet deployed */ }
 }
 function joyBombsLsLoad_() {
-  try { return JSON.parse(localStorage.getItem(JOY_BOMBS_LS_KEY)||'null') || { bombed:{}, added:[] }; } catch(e) { return { bombed:{}, added:[] }; }
+  try {
+    const d = JSON.parse(localStorage.getItem(JOY_BOMBS_LS_KEY)||'null') || {};
+    return { bombed:d.bombed||{}, added:d.added||[], dismissed:d.dismissed||{} };
+  } catch(e) { return { bombed:{}, added:[], dismissed:{} }; }
 }
 function joyBombsLsSave_(data) {
   try { localStorage.setItem(JOY_BOMBS_LS_KEY, JSON.stringify(data)); } catch(e) {}
@@ -7627,8 +7633,13 @@ function joyBombsGetAll_() {
     ...server.completed.map(applyBombed),
     ...(local.added||[]).map(applyBombed)
   ];
+  const dismissed = local.dismissed || {};
   const seen = new Set();
-  return all.filter(e => { if (seen.has(e.id)) return false; seen.add(e.id); return true; });
+  return all.filter(e => {
+    if (seen.has(e.id)) return false; seen.add(e.id);
+    if (dismissed[e.id]) return false;   // removed / held off locally
+    return true;
+  });
 }
 function joyBombMarkBombed_(id) {
   const date  = new Date().toISOString().split('T')[0];
@@ -7636,6 +7647,23 @@ function joyBombMarkBombed_(id) {
   local.bombed[id] = { date };
   joyBombsLsSave_(local);
   if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_mark',id,by:'',date}),mode:'no-cors'}).catch(()=>{});
+  joyBombAnimateOut_(id);
+}
+// Remove / hold off on a joy bomb (person was on the list incorrectly, or not ready
+// to bomb yet). Hides it locally and tells the sheet to mark it 'dismissed' so the
+// nightly detection sync won't re-add them.
+function joyBombDismiss_(id) {
+  const card = document.querySelector(`[data-jb-id="${id}"]`);
+  const nm   = card ? (card.querySelector('.sp-joy-card-name')||{}).textContent||'' : '';
+  if (!confirm(`Remove ${nm||'this person'} from Joy Bombs?\n\nThey won't be suggested again.`)) return;
+  const local = joyBombsLsLoad_();
+  local.dismissed[id] = { date: new Date().toISOString().split('T')[0] };
+  local.added = (local.added||[]).filter(e => e.id !== id);   // drop if it was a local manual add
+  joyBombsLsSave_(local);
+  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_dismiss',id}),mode:'no-cors'}).catch(()=>{});
+  joyBombAnimateOut_(id);
+}
+function joyBombAnimateOut_(id) {
   const card = document.querySelector(`[data-jb-id="${id}"]`);
   if (card) {
     card.style.transition = 'opacity 0.4s, max-height 0.5s';
@@ -7643,8 +7671,8 @@ function joyBombMarkBombed_(id) {
     card.style.overflow = 'hidden';
     card.style.maxHeight = card.offsetHeight + 'px';
     requestAnimationFrame(() => { card.style.maxHeight = '0'; });
-    setTimeout(() => staffRenderL10(window._staffLastData||{}), 550);
   }
+  setTimeout(() => staffRenderL10(window._staffLastData||{}), 550);
 }
 function joyBombManualAdd_() {
   const existing = document.getElementById('sp-jb-add-modal');
@@ -7663,12 +7691,18 @@ function joyBombManualAdd_() {
         </div>
         <div>
           <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Team</label>
-          <input id="jb-f-team" class="sp-l10-inp" placeholder="Team name" style="width:100%;">
+          <input id="jb-f-team" class="sp-l10-inp" placeholder="e.g. Guest Services" style="width:100%;">
         </div>
       </div>
-      <div style="margin-bottom:12px;">
-        <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">First Serve Date</label>
-        <input id="jb-f-date" type="date" class="sp-l10-inp" value="${today}" style="width:100%;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Position</label>
+          <input id="jb-f-position" class="sp-l10-inp" placeholder="e.g. Greeter" style="width:100%;">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">First Serve Date</label>
+          <input id="jb-f-date" type="date" class="sp-l10-inp" value="${today}" style="width:100%;">
+        </div>
       </div>
       <label style="display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:var(--sp-muted);margin-bottom:4px;">Notes</label>
       <textarea id="jb-f-notes" class="sp-l10-inp" placeholder="Any notes…" style="width:100%;min-height:48px;margin-bottom:20px;"></textarea>
@@ -7683,11 +7717,12 @@ function joyBombManualAdd_() {
 function joyBombFormSubmit_() {
   const name  = (document.getElementById('jb-f-name')||{}).value||'';
   const team  = (document.getElementById('jb-f-team')||{}).value||'';
+  const position = (document.getElementById('jb-f-position')||{}).value||'';
   const date  = (document.getElementById('jb-f-date')||{}).value||'';
   const notes = (document.getElementById('jb-f-notes')||{}).value||'';
   if (!name.trim()) { document.getElementById('jb-f-name').focus(); return; }
   const local = joyBombsLsLoad_();
-  const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), phone:'', firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
+  const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), position:position.trim(), phone:'', firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
   (local.added = local.added||[]).push(entry);
   joyBombsLsSave_(local);
   if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_add',...entry}),mode:'no-cors'}).catch(()=>{});
@@ -7707,6 +7742,7 @@ function joyBombRenderSection_() {
           <div class="sp-joy-card-name">${_rbEsc(e.name)}</div>
           <div class="sp-joy-card-meta">
             ${e.team?`<span>Team: ${_rbEsc(e.team)}</span>`:''}
+            ${e.position?`<span>Position: ${_rbEsc(e.position)}</span>`:''}
             ${e.firstServeDate?`<span>First served: ${fmtDate(e.firstServeDate)}</span>`:''}
             ${e.source==='manual'?`<span style="opacity:.6;">manual</span>`:''}
           </div>
@@ -7715,13 +7751,16 @@ function joyBombRenderSection_() {
           </div>
           ${e.notes?`<div style="font-size:12px;color:var(--sp-muted);margin-top:4px;">${_rbEsc(e.notes)}</div>`:''}
         </div>
-        <button class="sp-joy-bomb-btn" onclick="joyBombMarkBombed_('${e.id}')">💣 Bombed!</button>
+        <div class="sp-joy-actions">
+          <button class="sp-joy-bomb-btn" onclick="joyBombMarkBombed_('${e.id}')">💣 Bombed!</button>
+          <button class="sp-joy-remove-btn" onclick="joyBombDismiss_('${e.id}')">✕ Remove</button>
+        </div>
       </div>`).join('')
     : `<div class="sp-joy-empty">No pending joy bombs — you're all caught up! 🎉</div>`;
   const completedHtml = completed.length
     ? completed.map(e => `
       <div class="sp-joy-history-item">
-        <div style="flex:1;"><strong>${_rbEsc(e.name)}</strong>${e.team?` — ${_rbEsc(e.team)}`:''}
+        <div style="flex:1;"><strong>${_rbEsc(e.name)}</strong>${e.team?` — ${_rbEsc(e.team)}`:''}${e.position?` · ${_rbEsc(e.position)}`:''}
           <div style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;margin-top:2px;">First served: ${fmtDate(e.firstServeDate)} · Bombed: ${fmtDate(e.bombedDate||e.bombedAt)}</div>
           ${e.notes?`<div style="font-size:12px;color:var(--sp-muted);">${_rbEsc(e.notes)}</div>`:''}
         </div>
