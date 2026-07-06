@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151514867_20260705",
-      "name": "Liz Suto",
-      "pcoPersonId": "151514867",
-      "team": "First Impressions",
-      "phone": "16238101273",
-      "firstServeDate": "2026-07-05",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Greeter"
-    },
-    {
       "id": "jb_165421490_20260705",
       "name": "Anabel Dito",
       "pcoPersonId": "165421490",
@@ -113,7 +99,21 @@
       "notes": "",
       "source": "manual",
       "position": ""
+    },
+    {
+      "id": "jb_151514867_20260705",
+      "name": "Liz Suto",
+      "pcoPersonId": "151514867",
+      "team": "First Impressions",
+      "phone": "16238101273",
+      "firstServeDate": "2026-07-05",
+      "status": "bombed",
+      "bombedDate": "2026-07-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Greeter"
     }
   ],
-  "lastUpdated": "2026-07-06T21:07:54.152Z"
+  "lastUpdated": "2026-07-06T21:24:49.848Z"
 }
