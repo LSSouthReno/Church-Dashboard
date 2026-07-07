@@ -804,7 +804,7 @@
   .cg-rate-high  { background: rgba(74,222,128,0.15);  color: #4ade80; }  /* Healthy: 7-12 */
   .cg-rate-mid   { background: rgba(251,191,36,0.15);  color: #fbbf24; }  /* Growing (4-6) or Large (13-18) */
   .cg-rate-low   { background: rgba(248,113,113,0.15); color: #f87171; }  /* Tiny: <4 */
-  .cg-rate-split { background: rgba(249,115,22,0.15);  color: #fb923c; }  /* Needs Split: >18 */
+  .cg-rate-split { background: rgba(249,115,22,0.15);  color: #fb923c; }  /* Needs to Multiply: >18 */
 
   .cg-pipeline-phase { margin-bottom: 18px; }
   .cg-pipeline-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
@@ -3145,6 +3145,26 @@ function getAttendanceWeeklyForMonth(monthLabel) {
   }
   return null;
 }
+// Average of the actual per-week attendance numbers over the last N calendar
+// months — more accurate than averaging the monthly per-Sunday averages, because
+// it weights each individual weekend equally (a 5-Sunday month counts its 5 weeks,
+// a partial current month counts only its weeks so far).
+// pick: 'adults' | 'kids' | 'total'. Returns null if no weekly data is available.
+function attendanceWeeklyAvg(nMonths, pick) {
+  const rawMonths = (DASHBOARD_DATA.attendance && DASHBOARD_DATA.attendance.months) || [];
+  const vals = [];
+  rawMonths.slice(-nMonths).forEach(m => {
+    const rows = getAttendanceWeeklyForMonth(m);
+    if (!rows) return;
+    rows.forEach(r => {
+      const a = Number(r.adults) || 0, k = Number(r.kids) || 0;
+      const v = pick === 'adults' ? a : pick === 'kids' ? k : (a + k);
+      if (v > 0) vals.push(v);
+    });
+  });
+  if (!vals.length) return null;
+  return Math.round(vals.reduce((s, v) => s + v, 0) / vals.length);
+}
 function openAttendanceModal(monthLabel, weeklyRows) {
   if (!weeklyRows || !weeklyRows.length) return;
 
@@ -3253,14 +3273,17 @@ function renderAttendance() {
   prepScrollableChart('attendanceChart', months.length);
 
   const totals = adults.map((a, i) => (Number(a) || 0) + (Number(kids[i]) || 0));
+  // Fallback (older data with no weekly breakdown): average the monthly per-Sunday totals.
   const avg = (arr, n) => {
     const slice = arr.slice(-n).filter(v => Number(v) > 0);
     if (!slice.length) return 0;
     return Math.round(slice.reduce((s, v) => s + v, 0) / slice.length);
   };
-
-  document.getElementById('avg3').textContent = fmtNum(avg(totals, 3));
-  document.getElementById('avg6').textContent = fmtNum(avg(totals, 6));
+  // Prefer averaging the actual weekly totals over the last N months for accuracy.
+  const avg3w = attendanceWeeklyAvg(3, 'total');
+  const avg6w = attendanceWeeklyAvg(6, 'total');
+  document.getElementById('avg3').textContent = fmtNum(avg3w != null ? avg3w : avg(totals, 3));
+  document.getElementById('avg6').textContent = fmtNum(avg6w != null ? avg6w : avg(totals, 6));
 
   const canvas = document.getElementById('attendanceChart');
   const attendanceChart = new Chart(canvas, {
@@ -4635,9 +4658,9 @@ function cgFilterTable() {
   if (!tbody) return;
   tbody.innerHTML = rows.map(r => {
     // Size-health bucketing based on member count vs. 10-person target
-    // >18 = needs split, 13-18 = large, 7-12 = healthy, 4-6 = small, <4 = tiny
+    // >18 = needs to multiply, 13-18 = large, 7-12 = healthy, 4-6 = small, <4 = tiny
     let cls, label;
-    if      (r.members > 18) { cls = 'cg-rate-split'; label = 'Needs Split'; }
+    if      (r.members > 18) { cls = 'cg-rate-split'; label = 'Needs to Multiply'; }
     else if (r.members >= 13) { cls = 'cg-rate-mid';   label = 'Large';       }
     else if (r.members >= 7)  { cls = 'cg-rate-high';  label = 'Healthy';     }
     else if (r.members >= 4)  { cls = 'cg-rate-mid';   label = 'Small';       }
@@ -6790,10 +6813,13 @@ function staffRenderFunnel(data) {
   const memberCount = (data._dash && data._dash.members && data._dash.members.current) || 0;
 
   // Average weekly adult attendance over the last 6 months — the broad "reach" metric.
-  // Source: DASHBOARD_DATA.attendance.adults (monthly average adult counts per Sunday).
+  // Prefer the actual per-week numbers (accurate); fall back to the monthly per-Sunday
+  // averages only if weekly data isn't available.
   const _attAdults = (typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA.attendance && DASHBOARD_DATA.attendance.adults) || [];
+  const _wk6 = (typeof attendanceWeeklyAvg === 'function') ? attendanceWeeklyAvg(6, 'adults') : null;
   const _att6 = _attAdults.slice(-6).filter(v => Number(v) > 0);
-  const avgWeeklyAttenders = _att6.length ? Math.round(_att6.reduce((s, v) => s + Number(v), 0) / _att6.length) : 0;
+  const avgWeeklyAttenders = _wk6 != null ? _wk6
+    : (_att6.length ? Math.round(_att6.reduce((s, v) => s + Number(v), 0) / _att6.length) : 0);
 
   const asOfLine = f.asOf ? `<div style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--sp-muted);margin-top:-16px;margin-bottom:20px;">Avg Attenders / In a Group / Active Leaders synced nightly from PCO &middot; new attenders as of ${_rbEsc(f.asOf)}</div>` : '';
 
