@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-07T00:46:49.106Z",
+  "lastUpdated": "2026-07-07T01:00:29.208Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 6, 2026, 5:46 PM",
+    "refreshed": "Jul 6, 2026, 6:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7356,9 +7356,9 @@
         28,
         24,
         24,
-        24,
+        23,
         26,
-        4,
+        6,
         null,
         null,
         null,
@@ -7367,7 +7367,7 @@
       ]
     },
     "leadersAdded": {
-      "total2026": 13
+      "total2026": 15
     },
     "outsidersInsiders": {
       "2024": [
@@ -7482,9 +7482,11 @@
           "Savannah Caliger",
           "Gina Rankin",
           "Amber Brown",
-          "Kathy Frank"
+          "Kathy Frank",
+          "Brianna Mick",
+          "Megan McKinley"
         ],
-        "count": 65
+        "count": 67
       }
     ],
     "leaderPipeline": [],
@@ -7522,14 +7524,6 @@
         "attPct": 35
       },
       {
-        "name": "Bell Community Group",
-        "members": 19,
-        "leaders": 2,
-        "schedule": "Meets weekly on Sundays from 4-6pm",
-        "avgAttended": 7,
-        "attPct": 37
-      },
-      {
         "name": "High School Community Group",
         "members": 19,
         "leaders": 2,
@@ -7544,6 +7538,14 @@
         "schedule": "Meets weekly on Fridays from 12:30-2:30pm",
         "avgAttended": 6,
         "attPct": 33
+      },
+      {
+        "name": "Bell Community Group",
+        "members": 18,
+        "leaders": 2,
+        "schedule": "Meets weekly on Sundays from 4-6pm",
+        "avgAttended": 7,
+        "attPct": 39
       },
       {
         "name": "Griffin Community Group",
@@ -7782,6 +7784,14 @@
         "members": 4,
         "leaders": 1,
         "schedule": "Meets weekly on Thursdays from 6:15-7:30am",
+        "avgAttended": 0,
+        "attPct": 0
+      },
+      {
+        "name": "Mick/McKinley Community Group",
+        "members": 2,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 6-8pm",
         "avgAttended": 0,
         "attPct": 0
       }
@@ -8102,63 +8112,63 @@
               "team": "Worship Team",
               "pos": "Drums",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Anna Sawyer",
               "team": "Worship Team",
               "pos": "Vocals",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Louie Quiroz",
               "team": "Worship Team",
               "pos": "Bass",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Anita Bigger",
               "team": "Worship Team",
               "pos": "Piano",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Lisa Castaneda",
               "team": "Worship Team",
               "pos": "Vocals",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Cory Hunt",
               "team": "Tech",
               "pos": "Sound",
               "status": "C",
-              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+              "serviceTime": "Pre Service Tech Rehearsal"
             },
             {
               "name": "Thomas Lloyd",
               "team": "Tech",
               "pos": "Lights",
               "status": "C",
-              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+              "serviceTime": "Pre Service Tech Rehearsal"
             },
             {
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Worship Leader",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Matt Sweitzer",
@@ -8438,7 +8448,7 @@
               "team": "Tech",
               "pos": "Slides",
               "status": "C",
-              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+              "serviceTime": "Pre Service Tech Rehearsal"
             },
             {
               "name": "Matt Gardner",
@@ -8550,14 +8560,14 @@
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Alan Charles",
               "team": "Worship Team",
               "pos": "Vocals",
               "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Jaimie Sullivan",
@@ -8755,8 +8765,8 @@
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
-            "planTimeMapCount": 7,
-            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "planTimeMapCount": 5,
+            "planTimeNames": "Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
             "volsWithServiceTime": 115,
             "totalVols": 115
           }
@@ -10571,7 +10581,7 @@
               "name": "Stacey Corletto",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -11828,6 +11838,60 @@
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
             "volsWithServiceTime": 8,
             "totalVols": 8
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "ds": "Sunday, September 27, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90255115",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Ashleigh Cummings",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ashleigh Cummings",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ray Brown",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Charlene Carp",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "C",
+              "serviceTime": "9:30 AM, 11 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 4,
+            "totalVols": 4
           }
         }
       ]
