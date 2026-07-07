@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-07T19:46:11.043Z",
+  "lastUpdated": "2026-07-07T19:59:27.731Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 7, 2026, 12:46 PM",
+    "refreshed": "Jul 7, 2026, 12:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7942,9 +7942,9 @@
             {
               "name": "Shiona Dykins",
               "team": "Stepping Stones",
-              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "pos": "Wolf Pack Lead Guide",
               "status": "C",
-              "serviceTime": "8 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Mikayla Sanchez",
@@ -7984,9 +7984,9 @@
             {
               "name": "Evven Gardner",
               "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
               "status": "C",
-              "serviceTime": "11 AM"
+              "serviceTime": "8 AM"
             },
             {
               "name": "Richard Price",
@@ -8624,6 +8624,13 @@
               "pos": "Front Left Communion Server",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Fredy Bridges",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8774,8 +8781,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 5,
             "planTimeNames": "Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 116,
-            "totalVols": 116
+            "volsWithServiceTime": 117,
+            "totalVols": 117
           }
         }
       ]
@@ -9513,8 +9520,8 @@
             },
             {
               "seq": 5,
-              "title": "SONG 2",
-              "type": "item",
+              "title": "King Of Kings",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -9527,8 +9534,8 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
+              "title": "Jesus We Love You",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -9604,37 +9611,23 @@
             },
             {
               "seq": 18,
-              "title": "Holy Forever",
-              "type": "song",
-              "lengthMin": 8,
-              "description": ""
-            },
-            {
-              "seq": 19,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 19,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 20,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
-              "description": ""
-            },
-            {
-              "seq": 22,
-              "title": "e",
-              "type": "item",
-              "lengthMin": 0,
               "description": ""
             }
           ],
@@ -11792,13 +11785,6 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Kelly Farson",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11808,8 +11794,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 13,
-            "totalVols": 13
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
