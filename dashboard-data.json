@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-07T20:46:08.166Z",
+  "lastUpdated": "2026-07-07T20:57:46.647Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 7, 2026, 1:46 PM",
+    "refreshed": "Jul 7, 2026, 1:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8629,7 +8629,14 @@
               "name": "Fredy Bridges",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
-              "status": "U",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
               "serviceTime": "11 AM"
             }
           ],
@@ -8673,7 +8680,7 @@
               "seq": 6,
               "title": "CONFESSION / ASSURANCE",
               "type": "item",
-              "lengthMin": 2,
+              "lengthMin": 3,
               "description": ""
             },
             {
@@ -8688,7 +8695,7 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: WE PRAISE YOU"
             },
             {
               "seq": 9,
@@ -8723,7 +8730,7 @@
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
-              "description": "End Underscore:"
+              "description": "End Underscore: GLIMPSES OF HEAVEN"
             },
             {
               "seq": 14,
@@ -8781,8 +8788,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 5,
             "planTimeNames": "Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 117,
-            "totalVols": 117
+            "volsWithServiceTime": 118,
+            "totalVols": 118
           }
         }
       ]
@@ -9513,9 +9520,9 @@
             },
             {
               "seq": 4,
-              "title": "The Joy",
+              "title": "Great Things",
               "type": "song",
-              "lengthMin": 7,
+              "lengthMin": 5,
               "description": ""
             },
             {
@@ -9534,7 +9541,7 @@
             },
             {
               "seq": 7,
-              "title": "Jesus We Love You",
+              "title": "All Hail King Jesus",
               "type": "song",
               "lengthMin": 5,
               "description": ""
@@ -11573,6 +11580,13 @@
               "pos": "Safety Lead",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Courtney Rumbaugh",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -11582,8 +11596,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 18,
-            "totalVols": 18
+            "volsWithServiceTime": 19,
+            "totalVols": 19
           }
         }
       ]
