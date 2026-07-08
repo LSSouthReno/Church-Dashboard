@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-08T22:46:07.770Z",
+  "lastUpdated": "2026-07-08T22:59:53.381Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 8, 2026, 3:46 PM",
+    "refreshed": "Jul 8, 2026, 3:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7358,7 +7358,7 @@
         24,
         23,
         26,
-        6,
+        7,
         null,
         null,
         null,
@@ -7405,7 +7405,7 @@
         15,
         19,
         16,
-        2,
+        3,
         null,
         null,
         null,
@@ -7792,6 +7792,14 @@
         "members": 2,
         "leaders": 2,
         "schedule": "Meets weekly on Mondays from 6-8pm",
+        "avgAttended": 0,
+        "attPct": 0
+      },
+      {
+        "name": "Flores Community Group",
+        "members": 1,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 0,
         "attPct": 0
       }
@@ -9356,20 +9364,6 @@
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
-              "name": "Simone Roccuzzo",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Jennie Roccuzzo",
-              "team": "Presiders",
-              "pos": "Presider",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Jane Brinson",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -9494,6 +9488,20 @@
               "pos": "Offering Counter",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Isabella Peissner",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
