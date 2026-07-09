@@ -947,9 +947,9 @@
   ],
   "funnel": {
     "guest": 0,
-    "attender": 63,
+    "attender": 62,
     "member": 356,
-    "group": 421,
+    "group": 422,
     "leader": 87,
     "missionary": 2,
     "asOf": "2026-07-09"
@@ -1962,6 +1962,10 @@
           "role": "member"
         },
         {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
           "name": "Kathy Frank",
           "role": "leader"
         },
@@ -2022,7 +2026,7 @@
       "name": "Castaneda Community Group",
       "members": [
         {
-          "name": "Allise Fava",
+          "name": "Allie Fava",
           "role": "member"
         },
         {
@@ -2364,6 +2368,16 @@
         {
           "name": "Keyvan Hernández",
           "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
+      "name": "Flores Community Group",
+      "members": [
+        {
+          "name": "Carlos Flores",
+          "role": "leader"
         }
       ]
     },
@@ -3520,7 +3534,7 @@
           "role": "member"
         },
         {
-          "name": "Angela T Kavert",
+          "name": "Angie Kavert",
           "role": "member"
         },
         {
@@ -5811,7 +5825,7 @@
     },
     {
       "type": "LS Kids Class Groups",
-      "name": "Checkin Team",
+      "name": "Check-in Team",
       "members": [
         {
           "name": "Abby Wampler",
@@ -7324,6 +7338,11 @@
           "role": "member"
         }
       ]
+    },
+    {
+      "type": "Serve Teams",
+      "name": "Chair Crew",
+      "members": []
     },
     {
       "type": "Serve Teams",
