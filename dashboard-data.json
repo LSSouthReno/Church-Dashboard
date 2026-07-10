@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-10T05:46:00.210Z",
+  "lastUpdated": "2026-07-10T05:57:07.242Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 9, 2026, 10:46 PM",
+    "refreshed": "Jul 9, 2026, 10:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8604,6 +8604,20 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Janet Frederick",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Timothy Frederick",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -8754,8 +8768,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 5,
             "planTimeNames": "Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 112,
-            "totalVols": 112
+            "volsWithServiceTime": 114,
+            "totalVols": 114
           }
         }
       ]
