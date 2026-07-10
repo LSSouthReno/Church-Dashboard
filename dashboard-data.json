@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-10T01:46:44.350Z",
+  "lastUpdated": "2026-07-10T01:57:57.753Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 9, 2026, 6:46 PM",
+    "refreshed": "Jul 9, 2026, 6:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8291,13 +8291,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Kim Conrad",
-              "team": "Hospitality Team",
-              "pos": "Host",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Michael Fitzsimmons",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -8754,8 +8747,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676334\"}]",
             "planTimeMapCount": 5,
             "planTimeNames": "Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 112,
-            "totalVols": 112
+            "volsWithServiceTime": 111,
+            "totalVols": 111
           }
         }
       ]
@@ -11961,33 +11954,7 @@
       ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-07-12",
-      "end": "2026-07-12"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-07-19",
-      "end": "2026-07-19"
-    },
-    {
-      "name": "Adam Carp",
-      "start": "2026-07-21",
-      "end": "2026-07-25"
-    },
-    {
-      "name": "John Conelea",
-      "start": "2026-07-27",
-      "end": "2026-07-30"
-    },
-    {
-      "name": "Katie Thompson",
-      "start": "2026-08-20",
-      "end": "2026-08-24"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
