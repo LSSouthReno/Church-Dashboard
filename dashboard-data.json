@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-10T01:57:57.753Z",
+  "lastUpdated": "2026-07-10T02:45:51.342Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 9, 2026, 6:58 PM",
+    "refreshed": "Jul 9, 2026, 7:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11954,7 +11954,33 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-12",
+      "end": "2026-07-12"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-19",
+      "end": "2026-07-19"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-07-21",
+      "end": "2026-07-25"
+    },
+    {
+      "name": "John Conelea",
+      "start": "2026-07-27",
+      "end": "2026-07-30"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -11964,7 +11990,7 @@
     "weeklyAvg": 8,
     "totalFetched": 6900,
     "since": "2026-06-10",
-    "asOf": "2026-07-10T01:44:51.880Z"
+    "asOf": "2026-07-10T02:44:31.702Z"
   },
   "emailStats": {
     "latestOpenRate": 0.5150442477876106,
@@ -11972,6 +11998,6 @@
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-09T02:54:58+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-10T01:44:53.392Z"
+    "asOf": "2026-07-10T02:44:33.061Z"
   }
 }
