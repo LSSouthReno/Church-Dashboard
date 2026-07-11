@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T18:00:06.317Z",
+  "lastUpdated": "2026-07-11T18:55:18.132Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5879,7 +5879,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 11, 2026, 11:00 AM",
+    "refreshed": "Jul 11, 2026, 11:55 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11990,7 +11990,33 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-12",
+      "end": "2026-07-12"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-19",
+      "end": "2026-07-19"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-07-21",
+      "end": "2026-07-25"
+    },
+    {
+      "name": "John Conelea",
+      "start": "2026-07-27",
+      "end": "2026-07-30"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -12000,7 +12026,7 @@
     "weeklyAvg": 8,
     "totalFetched": 6900,
     "since": "2026-06-11",
-    "asOf": "2026-07-11T17:44:51.540Z"
+    "asOf": "2026-07-11T18:47:35.923Z"
   },
   "emailStats": {
     "latestOpenRate": 0.2,
@@ -12008,6 +12034,6 @@
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-07-10T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-11T17:44:53.354Z"
+    "asOf": "2026-07-11T18:47:40.214Z"
   }
 }
