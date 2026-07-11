@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T01:46:21.863Z",
+  "lastUpdated": "2026-07-11T02:02:07.283Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5920,7 +5920,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 10, 2026, 6:46 PM",
+    "refreshed": "Jul 10, 2026, 7:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -12010,7 +12010,33 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-12",
+      "end": "2026-07-12"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-19",
+      "end": "2026-07-19"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-07-21",
+      "end": "2026-07-25"
+    },
+    {
+      "name": "John Conelea",
+      "start": "2026-07-27",
+      "end": "2026-07-30"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
