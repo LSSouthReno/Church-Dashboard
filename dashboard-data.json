@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T17:46:27.043Z",
+  "lastUpdated": "2026-07-12T17:59:55.647Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3080,8 +3080,8 @@
       },
       {
         "week": "Jul 12",
-        "adults": 189,
-        "kids": 62
+        "adults": 433,
+        "kids": 69
       }
     ]
   },
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 12, 2026, 10:46 AM",
+    "refreshed": "Jul 12, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10273,6 +10273,20 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jenn Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10430,8 +10444,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 88,
-            "totalVols": 88
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
