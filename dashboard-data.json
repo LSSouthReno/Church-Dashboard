@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T02:45:44.083Z",
+  "lastUpdated": "2026-07-12T02:56:08.596Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5879,7 +5879,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 11, 2026, 7:45 PM",
+    "refreshed": "Jul 11, 2026, 7:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9482,6 +9482,13 @@
               "pos": "Back Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9632,8 +9639,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
