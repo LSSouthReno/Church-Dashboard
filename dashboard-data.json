@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T18:46:24.472Z",
+  "lastUpdated": "2026-07-12T18:59:28.858Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -3080,8 +3080,8 @@
       },
       {
         "week": "Jul 12",
-        "adults": 433,
-        "kids": 69
+        "adults": 657,
+        "kids": 91
       }
     ]
   },
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 12, 2026, 11:46 AM",
+    "refreshed": "Jul 12, 2026, 11:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10287,6 +10287,13 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lauren Johnson",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10444,8 +10451,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -12037,7 +12044,33 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-12",
+      "end": "2026-07-12"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-19",
+      "end": "2026-07-19"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-07-21",
+      "end": "2026-07-25"
+    },
+    {
+      "name": "John Conelea",
+      "start": "2026-07-27",
+      "end": "2026-07-30"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
