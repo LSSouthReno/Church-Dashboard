@@ -44,6 +44,55 @@
     overflow-x: hidden;
   }
 
+  /* ---- Global top nav (always visible) ---- */
+  :root { --nav-h: 58px; }
+  body { padding-top: var(--nav-h); }
+  #topNav {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+    z-index: 2050;
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 24px;
+    background: rgba(22,22,22,0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 11px; min-width: 0; flex-shrink: 0; }
+  .nav-brand img { height: 34px; width: 34px; display: block; }
+  .nav-brand-txt { line-height: 1.15; }
+  .nav-title { font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: var(--text); white-space: nowrap; }
+  .nav-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; margin-top: 2px; }
+  .nav-tabs {
+    display: flex; align-items: stretch; gap: 2px; height: 100%;
+    margin-left: 18px; flex: 1;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    appearance: none; background: none; border: none; cursor: pointer;
+    font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em; color: var(--text-muted);
+    padding: 0 16px; display: flex; align-items: center; gap: 6px;
+    border-bottom: 2px solid transparent; border-top: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: #fff; }
+  .nav-tab[data-tab="metrics"].active { border-bottom-color: var(--yellow-2); }
+  .nav-tab[data-tab="sunday"].active  { border-bottom-color: var(--blue-adults); }
+  .nav-tab[data-tab="staff"].active   { border-bottom-color: #d4d0cb; }
+  .nav-tab[data-tab="leaders"].active { border-bottom-color: #c49a2e; }
+  @media (max-width: 560px) {
+    #topNav { padding: 0 12px; }
+    .nav-brand-txt { display: none; }
+    .nav-tabs { margin-left: 4px; }
+    .nav-tab { padding: 0 11px; font-size: 12px; }
+  }
+  @media print {
+    #topNav { display: none !important; }
+    body { padding-top: 0 !important; }
+  }
+
   .dashboard {
     width: 100%;
     max-width: 1800px;
@@ -534,6 +583,7 @@
   .tmod-overlay {
     position: fixed;
     inset: 0;
+    top: var(--nav-h); /* keep the global top nav visible above every section */
     background: var(--bg);
     z-index: 2000;
     display: none;
@@ -861,7 +911,7 @@
 
   /* ---- Members password prompt (small centred modal) ---- */
   #mmPrompt {
-    display: none; position: fixed; inset: 0; z-index: 1800;
+    display: none; position: fixed; inset: 0; z-index: 2600;
     background: rgba(0,0,0,0.65); backdrop-filter: blur(3px);
     align-items: center; justify-content: center;
   }
@@ -1836,17 +1886,30 @@
 </head>
 <body>
 
+<nav id="topNav">
+  <div class="nav-brand">
+    <img src="assets/ls-logo-white.png" alt="Living Stones South Reno" />
+    <div class="nav-brand-txt">
+      <div class="nav-title">Church Dashboard</div>
+      <div class="nav-sub">Living Stones &middot; South Reno</div>
+    </div>
+  </div>
+  <div class="nav-tabs" role="tablist">
+    <button class="nav-tab active" data-tab="metrics" onclick="navGo('metrics')">Metrics</button>
+    <button class="nav-tab" data-tab="sunday" onclick="navGo('sunday')">Sunday</button>
+    <button class="nav-tab" data-tab="staff" onclick="navGo('staff')">Staff</button>
+    <button class="nav-tab" data-tab="leaders" onclick="navGo('leaders')">Leaders</button>
+  </div>
+</nav>
+
 <div class="dashboard">
   <div class="header">
     <div>
-      <h1>Church Dashboard</h1>
+      <h1>Metrics</h1>
       <div class="subtitle">Living Stones Church, South Reno</div>
     </div>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
-      <button class="members-btn" id="sundayBtnHeader" onclick="openSundayModal()" style="border-color:#3b82f6;color:#fff;">☀ Sunday</button>
-      <button class="members-btn" id="staffBtnHeader" onclick="openStaffModal()" style="border-color:#d4d0cb;color:#d4d0cb;">🏛 Staff</button>
       <button class="members-btn" id="membersBtnHeader" onclick="mmClick()">🔐 Members</button>
-      <button class="members-btn" id="tlBtnHeader" onclick="openTLHub()" style="border-color:#c49a2e;color:#fff;">👥 Team Leaders</button>
       <div class="updated">
         <div><span class="pulse"></span><span class="stamp" id="updatedStamp">Loading…</span></div>
         <div style="margin-top:4px;">Refreshes hourly</div>
@@ -2243,7 +2306,6 @@
 <!-- Staff OS Full-Screen Modal -->
 <div class="tmod-overlay" id="staffModal" aria-hidden="true">
   <div class="tmod-header">
-    <button class="tmod-back" onclick="closeStaffModal()">&#8592; Dashboard</button>
     <div class="tmod-titles">
       <div class="tmod-title">Staff OS</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; RUNNING ON TRACTION</div>
@@ -2804,7 +2866,6 @@
 <!-- ☀ Sunday One-sheet Modal -->
 <div class="tmod-overlay" id="sundayModal" aria-hidden="true">
   <div class="tmod-header">
-    <button class="tmod-back" onclick="closeSundayModal()">&#8592; Dashboard</button>
     <div class="tmod-titles">
       <div class="tmod-title">☀ Sunday One-sheet</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; SOUTH RENO</div>
@@ -4793,20 +4854,44 @@ const SD_BLOCKED = new Set([
   'grief share', 'worship rehearsal'
 ]);
 
+// ── Global top-nav tabs ─────────────────────────────────────────
+function navSetActive(tab) {
+  document.querySelectorAll('#topNav .nav-tab').forEach(b =>
+    b.classList.toggle('active', b.dataset.tab === tab));
+}
+
+function navGo(tab) {
+  // Close whichever full-screen sections are open (each close syncs the tab back to Metrics)
+  if (tab !== 'sunday')  closeSundayModal();
+  if (tab !== 'staff')   closeStaffModal();
+  if (tab !== 'leaders') closeTLHub();
+  if (tab === 'metrics') {
+    if (typeof closeTeamsModal === 'function') closeTeamsModal();
+    if (typeof closeCGModal === 'function') closeCGModal();
+    if (typeof closeAttendanceModal === 'function') closeAttendanceModal();
+  }
+  if (tab === 'sunday')       openSundayModal();
+  else if (tab === 'staff')   openStaffModal();
+  else if (tab === 'leaders') openTLHub();
+  navSetActive(tab);
+}
+
 function openSundayModal() {
   const modal = document.getElementById('sundayModal');
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  navSetActive('sunday');
   if (!_sundayPlans) sundayLoadData();
 }
 
 function closeSundayModal() {
   const modal = document.getElementById('sundayModal');
-  if (!modal) return;
+  if (!modal || !modal.classList.contains('open')) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  navSetActive('metrics');
 }
 
 async function sundayLoadData() {
@@ -5386,6 +5471,7 @@ function openStaffModal() {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  navSetActive('staff');
   if (staffIsUnlocked()) {
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
@@ -5399,10 +5485,11 @@ function openStaffModal() {
 
 function closeStaffModal() {
   const modal = document.getElementById('staffModal');
-  if (!modal) return;
+  if (!modal || !modal.classList.contains('open')) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  navSetActive('metrics');
 }
 
 async function staffDoUnlock() {
@@ -8141,7 +8228,6 @@ function absencesRenderSection_(containerId) {
 <div class="tmod-overlay" id="tlHub" aria-hidden="true">
 
   <div class="tmod-header">
-    <button class="tmod-back" onclick="closeTLHub()">← Dashboard</button>
     <div class="tmod-titles">
       <div class="tmod-title">Team Leader Hub</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;·&nbsp; SOUTH RENO</div>
@@ -8666,12 +8752,16 @@ function vclReset() {
 function openTLHub() {
   document.getElementById('tlHub').classList.add('open');
   document.getElementById('tlHub').setAttribute('aria-hidden','false');
+  navSetActive('leaders');
   tlhBuild();
   tlhLoadRemote_(); // pull shared checklist/templates from eos-data.json, then re-render
 }
 function closeTLHub() {
-  document.getElementById('tlHub').classList.remove('open');
-  document.getElementById('tlHub').setAttribute('aria-hidden','true');
+  const hub = document.getElementById('tlHub');
+  if (!hub || !hub.classList.contains('open')) return;
+  hub.classList.remove('open');
+  hub.setAttribute('aria-hidden','true');
+  navSetActive('metrics');
 }
 
 // ── Shared checklist/templates sync (durable across devices via eos-data.json) ──
