@@ -1,34 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_155535083_20260712",
-      "name": "Tonya Lowry",
-      "pcoPersonId": "155535083",
-      "team": "Stepping Stones",
-      "phone": "17758461407",
-      "firstServeDate": "2026-07-12",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Guide"
-    },
-    {
-      "id": "jb_164313888_20260712",
-      "name": "Audrey Hawkins",
-      "pcoPersonId": "164313888",
-      "team": "Presiders",
-      "phone": "17758153227",
-      "firstServeDate": "2026-07-12",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Sermon Text Reader"
-    },
-    {
       "id": "jb_191410550_20260712",
       "name": "Breanne Read",
       "pcoPersonId": "191410550",
@@ -185,6 +157,34 @@
       "position": "Back Left Communion Server"
     },
     {
+      "id": "jb_155535083_20260712",
+      "name": "Tonya Lowry",
+      "pcoPersonId": "155535083",
+      "team": "Stepping Stones",
+      "phone": "17758461407",
+      "firstServeDate": "2026-07-12",
+      "status": "bombed",
+      "bombedDate": "2026-07-13",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Guide"
+    },
+    {
+      "id": "jb_164313888_20260712",
+      "name": "Audrey Hawkins",
+      "pcoPersonId": "164313888",
+      "team": "Presiders",
+      "phone": "17758153227",
+      "firstServeDate": "2026-07-12",
+      "status": "bombed",
+      "bombedDate": "2026-07-13",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
+    },
+    {
       "id": "jb_1783975527328",
       "name": "Anna Sawyer",
       "pcoPersonId": "",
@@ -199,5 +199,5 @@
       "position": "Vocals"
     }
   ],
-  "lastUpdated": "2026-07-13T20:51:25.506Z"
+  "lastUpdated": "2026-07-13T20:56:22.465Z"
 }
