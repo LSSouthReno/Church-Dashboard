@@ -1,34 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_191410550_20260712",
-      "name": "Breanne Read",
-      "pcoPersonId": "191410550",
-      "team": "Coffee Team",
-      "phone": "17752328119",
-      "firstServeDate": "2026-07-12",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Coffee Setup"
-    },
-    {
-      "id": "jb_1783975582695",
-      "name": "Teylor Baskharoon",
-      "pcoPersonId": "",
-      "team": "Presider",
-      "phone": "",
-      "firstServeDate": "2026-07-13",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "manual",
-      "position": "Sermon Text Reader"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -185,6 +156,20 @@
       "position": "Sermon Text Reader"
     },
     {
+      "id": "jb_191410550_20260712",
+      "name": "Breanne Read",
+      "pcoPersonId": "191410550",
+      "team": "Coffee Team",
+      "phone": "17752328119",
+      "firstServeDate": "2026-07-12",
+      "status": "bombed",
+      "bombedDate": "2026-07-13",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Coffee Setup"
+    },
+    {
       "id": "jb_1783975527328",
       "name": "Anna Sawyer",
       "pcoPersonId": "",
@@ -197,7 +182,21 @@
       "notes": "",
       "source": "manual",
       "position": "Vocals"
+    },
+    {
+      "id": "jb_1783975582695",
+      "name": "Teylor Baskharoon",
+      "pcoPersonId": "",
+      "team": "Presider",
+      "phone": "",
+      "firstServeDate": "2026-07-13",
+      "status": "bombed",
+      "bombedDate": "2026-07-13",
+      "bombedBy": "",
+      "notes": "",
+      "source": "manual",
+      "position": "Sermon Text Reader"
     }
   ],
-  "lastUpdated": "2026-07-13T20:56:22.465Z"
+  "lastUpdated": "2026-07-13T20:56:24.595Z"
 }
