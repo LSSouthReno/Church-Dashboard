@@ -69,20 +69,6 @@
       "notes": "",
       "source": "auto",
       "position": "Coffee Setup"
-    },
-    {
-      "id": "jb_1783975527328",
-      "name": "Anna Sawyer",
-      "pcoPersonId": "",
-      "team": "Worship Team",
-      "phone": "",
-      "firstServeDate": "2026-07-13",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "manual",
-      "position": "Vocals"
     }
   ],
   "completed": [
@@ -183,7 +169,21 @@
       "notes": "",
       "source": "auto",
       "position": "Greeter"
+    },
+    {
+      "id": "jb_1783975527328",
+      "name": "Anna Sawyer",
+      "pcoPersonId": "",
+      "team": "Worship Team",
+      "phone": "",
+      "firstServeDate": "2026-07-13",
+      "status": "bombed",
+      "bombedDate": "2026-07-13",
+      "bombedBy": "",
+      "notes": "",
+      "source": "manual",
+      "position": "Vocals"
     }
   ],
-  "lastUpdated": "2026-07-13T20:45:30.655Z"
+  "lastUpdated": "2026-07-13T20:45:32.699Z"
 }
