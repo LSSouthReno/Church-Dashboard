@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-13T14:46:08.158Z",
+  "lastUpdated": "2026-07-13T14:58:22.446Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 13, 2026, 7:46 AM",
+    "refreshed": "Jul 13, 2026, 7:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7371,7 +7371,7 @@
         24,
         23,
         26,
-        8,
+        9,
         null,
         null,
         null,
@@ -7418,7 +7418,7 @@
         15,
         19,
         16,
-        3,
+        4,
         null,
         null,
         null,
@@ -7729,6 +7729,14 @@
         "attPct": 67
       },
       {
+        "name": "Caliger/Rankin Community Group",
+        "members": 9,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 5-7pm",
+        "avgAttended": 4,
+        "attPct": 44
+      },
+      {
         "name": "Turcich Community Group",
         "members": 8,
         "leaders": 1,
@@ -7741,14 +7749,6 @@
         "members": 8,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-7:30am",
-        "avgAttended": 4,
-        "attPct": 50
-      },
-      {
-        "name": "Caliger/Rankin Community Group",
-        "members": 8,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 5-7pm",
         "avgAttended": 4,
         "attPct": 50
       },
@@ -10008,6 +10008,20 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Janet Frederick",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anna Ferguson",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -10017,8 +10031,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 32,
-            "totalVols": 32
+            "volsWithServiceTime": 34,
+            "totalVols": 34
           }
         }
       ]
@@ -10337,6 +10351,20 @@
               "pos": "Back Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ashley Peregrin",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Brenda Milligan",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -10346,8 +10374,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 43,
-            "totalVols": 43
+            "volsWithServiceTime": 45,
+            "totalVols": 45
           }
         }
       ]
@@ -10520,6 +10548,20 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Janet Frederick",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anna Ferguson",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -10529,8 +10571,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 22,
-            "totalVols": 22
+            "volsWithServiceTime": 24,
+            "totalVols": 24
           }
         }
       ]
@@ -10670,13 +10712,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "John Turcich",
-              "team": "Safety Team",
-              "pos": "Safety Lead",
-              "status": "C",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Courtney Rumbaugh",
               "team": "Stepping Stones",
               "pos": "Check In",
@@ -10712,8 +10747,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 22,
-            "totalVols": 22
+            "volsWithServiceTime": 21,
+            "totalVols": 21
           }
         }
       ]
