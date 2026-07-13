@@ -57,11 +57,11 @@
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--card-border);
   }
-  .nav-brand { display: flex; align-items: center; gap: 11px; min-width: 0; flex-shrink: 0; }
-  .nav-brand img { height: 34px; width: 34px; display: block; }
-  .nav-brand-txt { line-height: 1.15; }
-  .nav-title { font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: var(--text); white-space: nowrap; }
-  .nav-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; margin-top: 2px; }
+  .nav-brand { display: flex; align-items: center; gap: 14px; min-width: 0; flex-shrink: 0; }
+  .nav-lockup { height: 30px; display: block; }
+  .nav-mark { height: 34px; width: 34px; display: none; }
+  .nav-brand-txt { line-height: 1.15; border-left: 1px solid #3a3a3a; padding-left: 14px; }
+  .nav-title { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; color: var(--text-muted); white-space: nowrap; }
   .nav-tabs {
     display: flex; align-items: stretch; gap: 2px; height: 100%;
     margin-left: 18px; flex: 1;
@@ -82,9 +82,13 @@
   .nav-tab[data-tab="sunday"].active  { border-bottom-color: var(--blue-adults); }
   .nav-tab[data-tab="staff"].active   { border-bottom-color: #d4d0cb; }
   .nav-tab[data-tab="leaders"].active { border-bottom-color: #c49a2e; }
+  @media (max-width: 760px) {
+    .nav-brand-txt { display: none; }
+  }
   @media (max-width: 560px) {
     #topNav { padding: 0 12px; }
-    .nav-brand-txt { display: none; }
+    .nav-lockup { display: none; }
+    .nav-mark { display: block; }
     .nav-tabs { margin-left: 4px; }
     .nav-tab { padding: 0 11px; font-size: 12px; }
   }
@@ -1888,10 +1892,10 @@
 
 <nav id="topNav">
   <div class="nav-brand">
-    <img src="assets/ls-logo-white.png" alt="Living Stones South Reno" />
+    <img class="nav-lockup" src="assets/ls-lockup-white.png" alt="Living Stones South Reno" />
+    <img class="nav-mark" src="assets/ls-logo-white.png" alt="Living Stones South Reno" />
     <div class="nav-brand-txt">
       <div class="nav-title">Church Dashboard</div>
-      <div class="nav-sub">Living Stones &middot; South Reno</div>
     </div>
   </div>
   <div class="nav-tabs" role="tablist">
