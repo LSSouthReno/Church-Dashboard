@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T23:47:20.097Z",
+  "lastUpdated": "2026-07-13T00:04:52.599Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5884,7 +5884,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 12, 2026, 4:47 PM",
+    "refreshed": "Jul 12, 2026, 5:04 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7305,7 +7305,7 @@
         5,
         7,
         5,
-        22,
+        21,
         13,
         5,
         4,
@@ -7352,7 +7352,7 @@
         4,
         2,
         3,
-        8,
+        7,
         8,
         1,
         null,
@@ -7672,20 +7672,20 @@
         "attPct": 50
       },
       {
-        "name": "Turcich Community Group",
-        "members": 9,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 56
-      },
-      {
         "name": "Sikora Community Group",
         "members": 9,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-7:30pm",
         "avgAttended": 6,
         "attPct": 67
+      },
+      {
+        "name": "Turcich Community Group",
+        "members": 8,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 63
       },
       {
         "name": "Borowski Community Group",
@@ -8901,13 +8901,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Sandra Pazen",
-              "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -9471,14 +9464,7 @@
               "name": "Jennifer Jauron",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Lance Jauron",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -9487,6 +9473,13 @@
               "pos": "Back Left Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jack Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9637,8 +9630,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 102,
+            "totalVols": 102
           }
         }
       ]
