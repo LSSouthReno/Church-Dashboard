@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T17:46:16.351Z",
+  "lastUpdated": "2026-07-14T17:59:18.027Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 14, 2026, 10:46 AM",
+    "refreshed": "Jul 14, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8554,6 +8554,27 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jenn Ferguson",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Carlos Flores",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Holly Graham",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8711,8 +8732,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
@@ -8827,7 +8848,7 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Team Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -8883,7 +8904,7 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Lead Guide WP, Hawks, Mustangs",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -8920,13 +8941,6 @@
               "pos": "Hawks Guide",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Anita Irwin",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Kayleen Hagstrand",
@@ -9071,7 +9085,7 @@
             {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
+              "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             },
@@ -9525,8 +9539,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 91,
-            "totalVols": 91
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
