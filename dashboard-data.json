@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T04:46:50.880Z",
+  "lastUpdated": "2026-07-14T05:01:24.979Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 13, 2026, 9:46 PM",
+    "refreshed": "Jul 13, 2026, 10:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10050,6 +10050,13 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jeff Conrad",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10059,8 +10066,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 35,
-            "totalVols": 35
+            "volsWithServiceTime": 36,
+            "totalVols": 36
           }
         }
       ]
@@ -10766,6 +10773,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Jeff Conrad",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10775,8 +10789,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 21,
-            "totalVols": 21
+            "volsWithServiceTime": 22,
+            "totalVols": 22
           }
         }
       ]
