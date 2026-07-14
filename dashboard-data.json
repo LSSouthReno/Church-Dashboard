@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-13T23:46:22.590Z",
+  "lastUpdated": "2026-07-14T00:02:25.995Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 13, 2026, 4:46 PM",
+    "refreshed": "Jul 13, 2026, 5:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9347,6 +9347,20 @@
               "pos": "Safety Lead",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -9504,8 +9518,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 89,
-            "totalVols": 89
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
