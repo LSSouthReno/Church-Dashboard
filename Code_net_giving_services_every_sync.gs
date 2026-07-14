@@ -2989,6 +2989,9 @@ function syncMembersOverTime_() {
    Merge-writes funnel and calendar into eos-data.json so the
    EOS script's own push (scorecard, boulders, etc.) is preserved.
 ========================================================= */
+// Public wrapper so the calendar push can be run on demand (clasp run / editor).
+function runStaffOSFunnelAndCalendarNow() { syncStaffOSFunnelAndCalendar_(); }
+
 function syncStaffOSFunnelAndCalendar_() {
   Logger.log('▶  Staff OS Funnel+Calendar — starting');
 
@@ -3016,10 +3019,10 @@ function syncStaffOSFunnelAndCalendar_() {
   };
   Logger.log('   Funnel: missionary=' + missionaryCount);
 
-  // ── Calendar events (next 2 months) ───────────────────────────────────
+  // ── Calendar events (next 6 months — Calendar tab shows all 6) ────────
   const tz   = Session.getScriptTimeZone();
   const now  = new Date();
-  const end  = new Date(now); end.setMonth(now.getMonth() + 2);
+  const end  = new Date(now); end.setMonth(now.getMonth() + 6);
   const calEvents = [];
 
   try {
@@ -3041,9 +3044,11 @@ function syncStaffOSFunnelAndCalendar_() {
       const evRel  = inst.relationships && inst.relationships.event && inst.relationships.event.data;
       const name   = evRel ? (eventNameById[evRel.id] || '') : '';
       if (!name) return;
-      if (name.toUpperCase().includes('RBD')) return;
       const nl = name.toLowerCase();
       if (nl.includes('community group') || nl.startsWith('cg ') || nl.includes('small group')) return;
+      // RBD events are kept for the Calendar tab but flagged so the Staff OS
+      // "Coming Up" grid and Sunday one-sheet can keep hiding them.
+      const isRbd = name.toUpperCase().includes('RBD');
       const startsAt = (inst.attributes && inst.attributes.starts_at) || '';
       const endsAt   = (inst.attributes && inst.attributes.ends_at)   || '';
       if (!startsAt) return;
@@ -3058,7 +3063,7 @@ function syncStaffOSFunnelAndCalendar_() {
         var startStr = Utilities.formatDate(d, tz, 'yyyy-MM-dd');
         if (endStr !== startStr) endKey = endStr;
       }
-      calEvents.push({
+      const evt = {
         name:      name,
         dateKey:   Utilities.formatDate(d, tz, 'yyyy-MM-dd'),
         endKey:    endKey,
@@ -3066,7 +3071,9 @@ function syncStaffOSFunnelAndCalendar_() {
         date:      Utilities.formatDate(d, tz, 'MMM d'),
         time:      Utilities.formatDate(d, tz, 'h:mm a'),
         location:  (inst.attributes && inst.attributes.location) || ''
-      });
+      };
+      if (isRbd) evt.rbd = true;
+      calEvents.push(evt);
     });
     Logger.log('   Calendar: ' + calEvents.length + ' events (filtered from ' + instances.length + ')');
   } catch(e) {

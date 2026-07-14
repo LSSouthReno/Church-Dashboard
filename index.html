@@ -82,6 +82,7 @@
   .nav-tab[data-tab="sunday"].active  { border-bottom-color: var(--blue-adults); }
   .nav-tab[data-tab="staff"].active   { border-bottom-color: #d4d0cb; }
   .nav-tab[data-tab="leaders"].active { border-bottom-color: #c49a2e; }
+  .nav-tab[data-tab="calendar"].active { border-bottom-color: #e5484d; }
   @media (max-width: 760px) {
     .nav-brand-txt { display: none; }
   }
@@ -1917,6 +1918,7 @@
     <button class="nav-tab" data-tab="sunday" onclick="navGo('sunday')">Sunday</button>
     <button class="nav-tab" data-tab="staff" onclick="navGo('staff')">Staff</button>
     <button class="nav-tab" data-tab="leaders" onclick="navGo('leaders')">Leaders</button>
+    <button class="nav-tab" data-tab="calendar" onclick="navGo('calendar')">Calendar</button>
   </div>
 </nav>
 
@@ -2905,6 +2907,249 @@
     </div>
   </div>
 </div><!-- /sundayModal -->
+
+<!-- ═══════════════ CALENDAR TAB (6-month wall calendar) ═══════════════ -->
+<style>
+  .cal6-header {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    padding: clamp(10px, 0.7vw, 24px) clamp(16px, 1.2vw, 40px);
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-title { font-size: clamp(18px, 1.15vw, 40px); font-weight: 700; letter-spacing: -0.3px; }
+  .cal6-range { font-size: clamp(11px, 0.6vw, 20px); color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .cal6-legend { display: flex; gap: clamp(10px, 0.7vw, 26px); flex-wrap: wrap; margin-left: auto; }
+  .cal6-leg { display: flex; align-items: center; gap: clamp(5px, 0.35vw, 12px); font-size: clamp(10px, 0.55vw, 19px); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .cal6-leg i { width: clamp(10px, 0.6vw, 20px); height: clamp(10px, 0.6vw, 20px); border-radius: 3px; flex-shrink: 0; }
+  .cal6-asof { flex-basis: 100%; text-align: right; font-size: clamp(9px, 0.5vw, 16px); color: var(--text-dim); margin-top: -4px; }
+
+  .cal6-body {
+    flex: 1; min-height: 0; overflow: auto;
+    padding: clamp(10px, 0.8vw, 28px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: clamp(10px, 0.8vw, 26px);
+  }
+  @media (max-width: 1500px) {
+    .cal6-body { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: minmax(440px, auto); }
+  }
+  @media (max-width: 980px) {
+    .cal6-body { grid-template-columns: 1fr; }
+  }
+
+  .cal6-month {
+    display: flex; flex-direction: column; min-height: 0; min-width: 0;
+    background: #161616; border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
+  }
+  .cal6-mname {
+    text-align: center; padding: clamp(6px, 0.45vw, 16px);
+    font-weight: 700; font-size: clamp(13px, 0.85vw, 30px);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-dow { display: grid; grid-template-columns: repeat(7, 1fr); flex-shrink: 0; border-bottom: 1px solid #242424; }
+  .cal6-dow span { text-align: center; padding: clamp(2px, 0.2vw, 8px) 0; font-size: clamp(9px, 0.5vw, 17px); font-weight: 700; color: var(--text-dim); letter-spacing: 0.1em; }
+  .cal6-weeks { flex: 1; min-height: 0; display: grid; grid-template-rows: repeat(6, minmax(0, 1fr)); }
+  .cal6-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); min-height: 0; border-top: 1px solid #202020; }
+  .cal6-week:first-child { border-top: none; }
+  .cal6-day {
+    border-left: 1px solid #202020; min-width: 0; min-height: 0; overflow: hidden;
+    padding: clamp(1px, 0.15vw, 6px) clamp(2px, 0.2vw, 7px);
+    display: flex; flex-direction: column; gap: clamp(1px, 0.12vw, 5px);
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 10px), transparent);
+            mask-image: linear-gradient(#000 calc(100% - 10px), transparent);
+  }
+  .cal6-day:first-child { border-left: none; }
+  .cal6-day.out { background: #101010; }
+  .cal6-dnum { font-size: clamp(9px, 0.55vw, 19px); color: var(--text-dim); font-weight: 600; line-height: 1.3; flex-shrink: 0; }
+  .cal6-day.today { box-shadow: inset 0 0 0 2px #e5484d; border-radius: 4px; }
+  .cal6-day.today .cal6-dnum { color: #fff; }
+  .cal6-ev {
+    font-size: clamp(8px, 0.5vw, 17px); line-height: 1.3; font-weight: 600; color: #f0ede8;
+    padding: clamp(0px, 0.08vw, 3px) clamp(3px, 0.25vw, 9px);
+    border-left: clamp(2px, 0.18vw, 6px) solid;
+    border-radius: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+  .cal6-empty { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-dim); font-size: 15px; padding: 60px 20px; }
+</style>
+
+<div class="tmod-overlay" id="calModal" aria-hidden="true">
+  <div class="cal6-header">
+    <div>
+      <div class="cal6-title">🗓 Church Calendar</div>
+      <div class="cal6-range" id="cal6Range"></div>
+    </div>
+    <div class="cal6-legend" id="cal6Legend"></div>
+    <div class="cal6-asof" id="cal6AsOf"></div>
+  </div>
+  <div class="cal6-body" id="cal6Body">
+    <div class="cal6-empty">Loading calendar from Planning Center…</div>
+  </div>
+</div><!-- /calModal -->
+
+<script>
+/* =========================================================
+   CALENDAR TAB — 6-month color-coded wall calendar
+   Reads calendar.events from eos-data.json (PCO Calendar,
+   next 6 months, community groups excluded at sync time).
+========================================================= */
+
+// Category rules — first match wins. RBD is flagged by the sync (ev.rbd).
+const CAL6_CATS = [
+  { key:'rbd',      label:'RBD',                color:'#e5484d', match:(n,ev)=> !!ev.rbd || /\brbd\b/i.test(n) },
+  { key:'baptism',  label:'Baptisms',           color:'#4c9aff', match:n=>/baptism/i.test(n) },
+  { key:'students', label:'Students',           color:'#a06ee1', match:n=>/student|youth/i.test(n) },
+  { key:'kids',     label:'Kids',               color:'#e558a4', match:n=>/\bkids?\b|\bvbs\b|child|stepping stones/i.test(n) },
+  { key:'worship',  label:'Worship Gatherings', color:'#f5822a', match:n=>/worship gathering|worship night|christmas eve|christmas ser|good friday|easter/i.test(n) },
+  { key:'missions', label:'Missions',           color:'#2bb8a3', match:n=>/mission/i.test(n) },
+  { key:'care',     label:'Care & Classes',     color:'#57b85f', match:n=>/grief ?share|golden stones|regroup|celebration of life|premarital|pathfinders|class\b/i.test(n) },
+  { key:'staff',    label:'Staff & Leadership', color:'#9aa4b2', match:n=>/staff|elders|leader|rehearsal|planning|business meeting|financial update/i.test(n) },
+  { key:'event',    label:'Church Events',      color:'#d8b64a', match:()=>true },
+];
+
+function cal6Cat(ev) {
+  const n = ev.name || '';
+  for (const c of CAL6_CATS) { if (c.match(n, ev)) return c; }
+  return CAL6_CATS[CAL6_CATS.length - 1];
+}
+
+function cal6Esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Parse "6:00 PM" → minutes for intra-day sort
+function cal6Mins(t) {
+  const m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec((t || '').trim());
+  if (!m) return 0;
+  let h = parseInt(m[1], 10) % 12;
+  if (/pm/i.test(m[3])) h += 12;
+  return h * 60 + parseInt(m[2], 10);
+}
+
+function openCalTab() {
+  const modal = document.getElementById('calModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  navSetActive('calendar');
+  cal6Load();
+}
+
+function closeCalTab() {
+  const modal = document.getElementById('calModal');
+  if (!modal || !modal.classList.contains('open')) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  navSetActive('metrics');
+}
+
+async function cal6Load() {
+  try {
+    const res = await fetch(STAFF_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('eos-data fetch ' + res.status);
+    const d = await res.json();
+    const cal = d.calendar || {};
+    cal6Render(cal.events || [], cal.asOf || '');
+  } catch (e) {
+    console.error('Calendar tab load error:', e);
+    document.getElementById('cal6Body').innerHTML =
+      '<div class="cal6-empty">Could not load calendar data. Check your connection and try again.</div>';
+  }
+}
+
+function cal6Render(events, asOf) {
+  // Safety net: exclude community groups even if one slips past the sync filter
+  const usable = events.filter(ev => {
+    const n = (ev.name || '').toLowerCase();
+    return !(n.includes('community group') || n.startsWith('cg ') || n.includes('small group'));
+  });
+
+  // dateKey → [events], expanding multi-day events across each of their days
+  const byDate = {};
+  usable.forEach(ev => {
+    const startD = new Date(ev.dateKey + 'T12:00:00');
+    const endD   = new Date((ev.endKey || ev.dateKey) + 'T12:00:00');
+    for (let d = new Date(startD); d <= endD; d.setDate(d.getDate() + 1)) {
+      const dk = d.toISOString().slice(0, 10);
+      if (!byDate[dk]) byDate[dk] = [];
+      if (!byDate[dk].find(x => x.name === ev.name)) byDate[dk].push(ev);
+    }
+  });
+  Object.values(byDate).forEach(list => list.sort((a, b) => cal6Mins(a.time) - cal6Mins(b.time)));
+
+  // Collapse the recurring same-day service times ("8am/9:30am/11am Worship
+  // Gathering") into a single chip so Sundays don't overflow their day cell.
+  Object.keys(byDate).forEach(dk => {
+    const list = byDate[dk];
+    const svc  = list.filter(ev => /worship gathering/i.test(ev.name || ''));
+    if (svc.length < 2) return;
+    const times = svc.map(ev => (ev.name.match(/^([\d:]+(?:am|pm)?)/i) || [,''])[1].replace(/am|pm/i,'')).filter(Boolean);
+    byDate[dk] = [{
+      name: 'Worship Gatherings' + (times.length ? ' · ' + times.join(' · ') : ' ×' + svc.length),
+      time: svc[0].time, dateKey: dk, location: svc[0].location || ''
+    }].concat(list.filter(ev => !/worship gathering/i.test(ev.name || '')));
+  });
+
+  const now      = new Date();
+  const todayKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+  const dows     = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const usedCats = new Set();
+  let monthsHtml = '';
+
+  for (let i = 0; i < 6; i++) {
+    const first  = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    const mLabel = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+    const lead   = first.getDay();  // Sunday-first offset
+
+    const dayCells = [];
+    for (let slot = 0; slot < 42; slot++) {
+      const dayNum = slot - lead + 1;
+      if (dayNum < 1 || dayNum > daysIn) { dayCells.push('<div class="cal6-day out"></div>'); continue; }
+      const dk = first.getFullYear() + '-' + String(first.getMonth()+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      const evs = byDate[dk] || [];
+      const chips = evs.map(ev => {
+        const cat = cal6Cat(ev);
+        usedCats.add(cat.key);
+        const tip = cal6Esc(ev.name.trim() + (ev.time ? ' · ' + ev.time : '') + (ev.location ? ' · ' + ev.location.split('\n')[0] : ''));
+        return '<div class="cal6-ev" style="border-left-color:' + cat.color + ';background:' + cat.color + '2b;" title="' + tip + '">' + cal6Esc(ev.name.trim()) + '</div>';
+      }).join('');
+      dayCells.push('<div class="cal6-day' + (dk === todayKey ? ' today' : '') + '"><div class="cal6-dnum">' + dayNum + '</div>' + chips + '</div>');
+    }
+
+    let weeks = '';
+    for (let w = 0; w < 6; w++) {
+      weeks += '<div class="cal6-week">' + dayCells.slice(w*7, w*7+7).join('') + '</div>';
+    }
+
+    monthsHtml +=
+      '<div class="cal6-month">' +
+        '<div class="cal6-mname">' + mLabel + '</div>' +
+        '<div class="cal6-dow">' + dows.map(d => '<span>' + d + '</span>').join('') + '</div>' +
+        '<div class="cal6-weeks">' + weeks + '</div>' +
+      '</div>';
+  }
+
+  document.getElementById('cal6Body').innerHTML = monthsHtml ||
+    '<div class="cal6-empty">No upcoming events found.</div>';
+
+  // Header: range, legend (only categories in use), as-of
+  const rangeEnd = new Date(now.getFullYear(), now.getMonth() + 5, 1);
+  document.getElementById('cal6Range').textContent =
+    now.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + ' — ' +
+    rangeEnd.toLocaleDateString('en-US', { month:'long', year:'numeric' });
+  document.getElementById('cal6Legend').innerHTML = CAL6_CATS
+    .filter(c => usedCats.has(c.key))
+    .map(c => '<div class="cal6-leg"><i style="background:' + c.color + '"></i>' + c.label + '</div>')
+    .join('');
+  document.getElementById('cal6AsOf').textContent = asOf
+    ? 'Synced from PCO Calendar · ' + asOf + ' · Community Groups not shown'
+    : 'Synced from PCO Calendar · Community Groups not shown';
+}
+</script>
 
 <script>
 let DASHBOARD_DATA = null;
@@ -4880,17 +5125,19 @@ function navSetActive(tab) {
 
 function navGo(tab) {
   // Close whichever full-screen sections are open (each close syncs the tab back to Metrics)
-  if (tab !== 'sunday')  closeSundayModal();
-  if (tab !== 'staff')   closeStaffModal();
-  if (tab !== 'leaders') closeTLHub();
+  if (tab !== 'sunday')   closeSundayModal();
+  if (tab !== 'staff')    closeStaffModal();
+  if (tab !== 'leaders')  closeTLHub();
+  if (tab !== 'calendar') closeCalTab();
   if (tab === 'metrics') {
     if (typeof closeTeamsModal === 'function') closeTeamsModal();
     if (typeof closeCGModal === 'function') closeCGModal();
     if (typeof closeAttendanceModal === 'function') closeAttendanceModal();
   }
-  if (tab === 'sunday')       openSundayModal();
-  else if (tab === 'staff')   openStaffModal();
-  else if (tab === 'leaders') openTLHub();
+  if (tab === 'sunday')        openSundayModal();
+  else if (tab === 'staff')    openStaffModal();
+  else if (tab === 'leaders')  openTLHub();
+  else if (tab === 'calendar') openCalTab();
   navSetActive(tab);
 }
 
@@ -4976,7 +5223,7 @@ function sundaySelectWeek(dateKey) {
     return;
   }
   const calEventsToday = (_sundayEosCal || []).filter(ev =>
-    ev.dateKey === dateKey && !SD_BLOCKED.has((ev.name||'').toLowerCase().trim())
+    ev.dateKey === dateKey && !ev.rbd && !SD_BLOCKED.has((ev.name||'').toLowerCase().trim())
   );
   container.innerHTML = sundayBuildContent(plan, calEventsToday);
 }
@@ -6702,7 +6949,7 @@ function staffRenderL10(data) {
   // ── Calendar: 5-month grid, Sunday-first, blocked events filtered ── (must be defined before agendaSections)
   const calSection = (() => {
     // Filter out recurring service/rehearsal events
-    const filtered = calEvents.filter(ev => !SP_CAL_BLOCKED.has((ev.name || '').toLowerCase().trim()));
+    const filtered = calEvents.filter(ev => !ev.rbd && !SP_CAL_BLOCKED.has((ev.name || '').toLowerCase().trim()));
     if (!filtered.length) return '';
 
     // Build lookup: dateKey → [events], expanding multi-day events across all their days
