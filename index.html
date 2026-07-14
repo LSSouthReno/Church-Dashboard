@@ -2981,65 +2981,122 @@
     background: #161616; border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
   }
   .cal6-mname {
-    text-align: center; padding: clamp(6px, 0.45vw, 16px);
-    font-weight: 700; font-size: clamp(13px, 0.85vw, 30px);
+    text-align: center; padding: clamp(5px, 0.32vw, 12px);
+    font-weight: 700; font-size: clamp(13px, 0.75vw, 26px);
     letter-spacing: 0.14em; text-transform: uppercase;
     border-bottom: 1px solid var(--card-border); flex-shrink: 0;
   }
   .cal6-dow { display: grid; grid-template-columns: repeat(7, 1fr); flex-shrink: 0; border-bottom: 1px solid #242424; }
-  .cal6-dow span { text-align: center; padding: clamp(2px, 0.2vw, 8px) 0; font-size: clamp(9px, 0.5vw, 17px); font-weight: 700; color: var(--text-dim); letter-spacing: 0.1em; }
-  .cal6-weeks { flex: 1; min-height: 0; display: grid; grid-template-rows: repeat(6, minmax(0, 1fr)); }
-  .cal6-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); min-height: 0; border-top: 1px solid #202020; }
+  .cal6-dow span { text-align: center; padding: clamp(2px, 0.15vw, 6px) 0; font-size: clamp(9px, 0.45vw, 16px); font-weight: 700; color: var(--text-dim); letter-spacing: 0.1em; }
+  /* Week rows size to their content in every view: busy weeks grow, empty
+     weeks shrink, so no event is ever clipped or hidden. If a whole month
+     outgrows its card, the weeks column scrolls. */
+  .cal6-weeks { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: thin; }
+  .cal6-weeks::-webkit-scrollbar { width: 6px; }
+  .cal6-weeks::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 3px; }
+  .cal6-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); flex: 1 0 auto; border-top: 1px solid #202020; }
   .cal6-week:first-child { border-top: none; }
   .cal6-day {
-    border-left: 1px solid #202020; min-width: 0; min-height: 0; overflow: hidden;
-    padding: clamp(1px, 0.15vw, 6px) clamp(2px, 0.2vw, 7px);
-    display: flex; flex-direction: column; gap: clamp(1px, 0.12vw, 5px);
-    -webkit-mask-image: linear-gradient(#000 calc(100% - 10px), transparent);
-            mask-image: linear-gradient(#000 calc(100% - 10px), transparent);
+    border-left: 1px solid #202020; min-width: 0; min-height: 0;
+    padding: clamp(1px, 0.1vw, 4px) clamp(2px, 0.2vw, 7px);
+    display: flex; flex-direction: column; gap: clamp(1px, 0.07vw, 3px);
   }
   .cal6-day:first-child { border-left: none; }
   .cal6-day.out { background: #101010; }
-  .cal6-dnum { font-size: clamp(9px, 0.55vw, 19px); color: var(--text-dim); font-weight: 600; line-height: 1.3; flex-shrink: 0; }
+  .cal6-dnum { font-size: clamp(10px, 0.55vw, 20px); color: var(--text-dim); font-weight: 600; line-height: 1.1; flex-shrink: 0; }
   .cal6-day.today { box-shadow: inset 0 0 0 2px #e5484d; border-radius: 4px; }
   .cal6-day.today .cal6-dnum { color: #fff; }
   .cal6-ev {
-    font-size: clamp(8px, 0.5vw, 17px); line-height: 1.3; font-weight: 600; color: #f0ede8;
-    padding: clamp(0px, 0.08vw, 3px) clamp(3px, 0.25vw, 9px);
-    border-left: clamp(2px, 0.18vw, 6px) solid;
+    font-size: clamp(9px, 0.55vw, 20px); line-height: 1.2; font-weight: 600; color: #f0ede8;
+    padding: clamp(0px, 0.05vw, 2px) clamp(3px, 0.28vw, 10px);
+    border-left: clamp(2px, 0.2vw, 7px) solid;
     border-radius: 3px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     flex-shrink: 0;
+    cursor: pointer;
   }
+  .cal6-ev:hover { filter: brightness(1.4); }
 
   /* 3-month view: bigger type, time prefix, wrap up to 2 lines */
   .mode-3 .cal6-ev {
-    font-size: clamp(9px, 0.68vw, 23px);
+    font-size: clamp(10px, 0.75vw, 26px);
     white-space: normal;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
-  .mode-3 .cal6-dnum { font-size: clamp(10px, 0.65vw, 22px); }
+  .mode-3 .cal6-dnum { font-size: clamp(11px, 0.7vw, 24px); }
   .cal6-evtime { opacity: 0.7; font-weight: 700; font-size: 0.82em; }
 
-  /* 1-month view: full-detail event cards. Week rows grow to fit their
-     content (min 1/7th of the grid) so no event is ever cut off; the month
-     scrolls only if a week is unusually packed. */
-  .mode-1 .cal6-weeks { display: flex; flex-direction: column; overflow-y: auto; }
-  .mode-1 .cal6-week { flex: 1 0 auto; }
-  .mode-1 .cal6-day { -webkit-mask-image: none; mask-image: none; }
-  .mode-1 .cal6-dnum { font-size: clamp(11px, 0.75vw, 26px); }
+  /* 1-month view: full-detail event cards */
+  .mode-1 .cal6-dnum { font-size: clamp(12px, 0.8vw, 28px); }
   .cal6-card {
     border-left: clamp(3px, 0.25vw, 8px) solid;
     border-radius: 5px;
     padding: clamp(2px, 0.22vw, 8px) clamp(4px, 0.35vw, 12px);
     overflow: hidden; flex-shrink: 0;
+    cursor: pointer;
   }
-  .cal6-card-name { font-weight: 700; font-size: clamp(9px, 0.68vw, 23px); line-height: 1.25; color: #f5f2ec; }
+  .cal6-card:hover { filter: brightness(1.4); }
+  .cal6-card-name { font-weight: 700; font-size: clamp(10px, 0.75vw, 26px); line-height: 1.25; color: #f5f2ec; }
   .cal6-card-meta {
-    font-size: clamp(8px, 0.55vw, 18px); line-height: 1.35; color: var(--text-muted);
+    font-size: clamp(9px, 0.6vw, 20px); line-height: 1.4; color: var(--text-muted);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .cal6-empty { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-dim); font-size: 15px; padding: 60px 20px; }
+
+  /* ── Event detail popup ─────────────────────────────────────── */
+  .cal6-dm-bg {
+    position: fixed; inset: 0; z-index: 2600;
+    background: rgba(0, 0, 0, 0.68);
+    display: none; align-items: center; justify-content: center;
+    padding: clamp(16px, 2vw, 60px);
+  }
+  .cal6-dm-bg.open { display: flex; }
+  .cal6-dm {
+    position: relative;
+    background: #191919; border: 1px solid #333; border-radius: 14px;
+    width: min(94vw, clamp(360px, 36vw, 1100px));
+    max-height: 88vh; overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+  }
+  .cal6-dm-x {
+    position: absolute; top: clamp(10px, 0.7vw, 22px); right: clamp(10px, 0.7vw, 22px);
+    appearance: none; background: rgba(20,20,20,0.85); border: 1px solid #444; color: #ddd;
+    width: clamp(30px, 1.8vw, 56px); height: clamp(30px, 1.8vw, 56px); border-radius: 50%;
+    font-size: clamp(16px, 1vw, 30px); line-height: 1; cursor: pointer;
+  }
+  .cal6-dm-x:hover { background: #333; color: #fff; }
+  .cal6-dm-img { width: 100%; max-height: clamp(150px, 15vw, 400px); object-fit: cover; display: block; border-radius: 13px 13px 0 0; }
+  .cal6-dm-pad { padding: clamp(18px, 1.5vw, 48px); }
+  .cal6-dm-cat {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-family: 'DM Mono', monospace; font-size: clamp(10px, 0.6vw, 19px);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: clamp(6px, 0.5vw, 16px);
+  }
+  .cal6-dm-cat i { width: 1em; height: 1em; border-radius: 3px; flex-shrink: 0; }
+  .cal6-dm-name { font-size: clamp(20px, 1.4vw, 46px); font-weight: 700; line-height: 1.2; margin-bottom: clamp(10px, 0.8vw, 24px); padding-right: clamp(34px, 2vw, 64px); }
+  .cal6-dm-row { font-size: clamp(13px, 0.75vw, 25px); color: var(--text-muted); line-height: 1.5; margin: clamp(3px, 0.28vw, 9px) 0; }
+  .cal6-dm-row b { color: var(--text); font-weight: 600; margin-right: 0.4em; }
+  .cal6-dm-desc { font-size: clamp(12px, 0.68vw, 22px); color: var(--text-muted); line-height: 1.55; margin-top: clamp(10px, 0.8vw, 24px); }
+  .cal6-dm-svc {
+    display: flex; align-items: center; gap: 0.7em; flex-wrap: wrap;
+    font-size: clamp(13px, 0.75vw, 25px); color: var(--text);
+    padding: clamp(6px, 0.45vw, 14px) 0; border-top: 1px solid #262626;
+  }
+  .cal6-dm-svc:first-of-type { border-top: none; }
+  .cal6-dm-svc a { color: #7db3ff; text-decoration: none; font-size: 0.85em; }
+  .cal6-dm-svc a:hover { text-decoration: underline; }
+  .cal6-dm-links { display: flex; gap: clamp(8px, 0.6vw, 18px); flex-wrap: wrap; margin-top: clamp(16px, 1.1vw, 34px); }
+  .cal6-dm-btn {
+    display: inline-block; text-decoration: none; font-weight: 700;
+    font-size: clamp(13px, 0.72vw, 24px);
+    padding: clamp(9px, 0.6vw, 20px) clamp(18px, 1.1vw, 38px);
+    border-radius: 9px;
+  }
+  .cal6-dm-btn.primary { background: #e5484d; color: #fff; }
+  .cal6-dm-btn.primary:hover { background: #f05a5f; }
+  .cal6-dm-btn.secondary { background: #262626; color: var(--text); border: 1px solid #3a3a3a; }
+  .cal6-dm-btn.secondary:hover { background: #333; }
 </style>
 
 <div class="tmod-overlay" id="calModal" aria-hidden="true">
@@ -3063,6 +3120,9 @@
   </div>
   <div class="cal6-body mode-6" id="cal6Body">
     <div class="cal6-empty">Loading calendar from Planning Center…</div>
+  </div>
+  <div class="cal6-dm-bg" id="cal6DmBg" onclick="if(event.target===this)cal6HideDetail()">
+    <div class="cal6-dm" id="cal6Dm"></div>
   </div>
 </div><!-- /calModal -->
 
@@ -3115,6 +3175,7 @@ function openCalTab() {
 }
 
 function closeCalTab() {
+  cal6HideDetail();
   const modal = document.getElementById('calModal');
   if (!modal || !modal.classList.contains('open')) return;
   modal.classList.remove('open');
@@ -3169,6 +3230,7 @@ function cal6FmtDay(dk) {
 
 function cal6Render() {
   if (!_cal6Events) return;
+  _cal6ChipReg = [];
 
   // Safety net: exclude community groups even if one slips past the sync filter
   const usable = _cal6Events.filter(ev => {
@@ -3200,7 +3262,8 @@ function cal6Render() {
       const times = svc.map(ev => (ev.name.match(/^([\d:]+(?:am|pm)?)/i) || [,''])[1].replace(/am|pm/i,'')).filter(Boolean);
       byDate[dk] = [{
         name: 'Worship Gatherings' + (times.length ? ' · ' + times.join(' · ') : ' ×' + svc.length),
-        time: svc[0].time, dateKey: dk, location: svc[0].location || ''
+        time: svc[0].time, dateKey: dk, location: svc[0].location || '',
+        _group: svc
       }].concat(list.filter(ev => !/worship gathering/i.test(ev.name || '')));
     });
   }
@@ -3273,22 +3336,27 @@ function cal6Render() {
     : 'Synced from PCO Calendar · Community Groups not shown';
 }
 
-// One event chip/card, sized to the current view mode.
+// Registry mapping rendered chips back to their event, for the detail popup.
+let _cal6ChipReg = [];
+
+// One event chip/card, sized to the current view mode. Every chip is
+// clickable and opens the full-detail popup.
 function cal6Chip(ev, cat, dk) {
   const name = cal6Esc((ev.name || '').trim());
   const tint = 'border-left-color:' + cat.color + ';background:' + cat.color + '2b;';
   const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
   const locShort  = (ev.location || '').split('\n')[0].split(' - ')[0].trim();
   const multiDay  = ev.endKey ? cal6FmtDay(ev.dateKey) + ' – ' + cal6FmtDay(ev.endKey) : '';
+  const click = ' onclick="cal6ShowDetail(' + (_cal6ChipReg.push({ ev: ev, cat: cat }) - 1) + ')"';
 
   if (_cal6Mode === 6) {
     const tip = cal6Esc((ev.name||'').trim() + (ev.time ? ' · ' + ev.time : '') + (locShort ? ' · ' + locShort : ''));
-    return '<div class="cal6-ev" style="' + tint + '" title="' + tip + '">' + name + '</div>';
+    return '<div class="cal6-ev" style="' + tint + '"' + click + ' title="' + tip + '">' + name + '</div>';
   }
 
   if (_cal6Mode === 3) {
     const tip = cal6Esc((ev.name||'').trim() + ' · ' + timeRange + (locShort ? ' · ' + locShort : '') + (ev.owner ? ' · ' + ev.owner : ''));
-    return '<div class="cal6-ev" style="' + tint + '" title="' + tip + '">' +
+    return '<div class="cal6-ev" style="' + tint + '"' + click + ' title="' + tip + '">' +
       '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' + name + '</div>';
   }
 
@@ -3300,14 +3368,63 @@ function cal6Chip(ev, cat, dk) {
   if (ev.owner) who.push('👤 ' + cal6Esc(ev.owner));
   if (ev.resources && ev.resources.length) who.push('🏷 ' + cal6Esc(ev.resources.join(', ')));
   if (who.length) meta += '<div class="cal6-card-meta">' + who.join(' · ') + '</div>';
-  const tipFull = cal6Esc((ev.name||'').trim() + ' · ' + timeRange +
-    (ev.location ? ' · ' + ev.location.split('\n').join(', ') : '') +
-    (ev.owner ? ' · Owner: ' + ev.owner : '') +
-    (ev.resources && ev.resources.length ? ' · Resources: ' + ev.resources.join(', ') : '') +
-    (ev.summary ? ' · ' + ev.summary : ''));
-  return '<div class="cal6-card" style="' + tint + '" title="' + tipFull + '">' +
+  return '<div class="cal6-card" style="' + tint + '"' + click + '>' +
     '<div class="cal6-card-name">' + name + '</div>' + meta + '</div>';
 }
+
+// ── Event detail popup ─────────────────────────────────────────
+function cal6ShowDetail(idx) {
+  const entry = _cal6ChipReg[idx];
+  if (!entry) return;
+  const ev  = entry.ev, cat = entry.cat;
+  const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
+  const dateLong = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  const dateLine = ev.endKey ? dateLong(ev.dateKey) + '  –  ' + dateLong(ev.endKey) : dateLong(ev.dateKey);
+
+  let h = '<button class="cal6-dm-x" onclick="cal6HideDetail()" aria-label="Close">✕</button>';
+  if (ev.img) h += '<img class="cal6-dm-img" src="' + cal6Esc(ev.img) + '" alt="" onerror="this.style.display=\'none\'">';
+  h += '<div class="cal6-dm-pad">';
+  h += '<div class="cal6-dm-cat"><i style="background:' + cat.color + '"></i>' + cal6Esc(cat.label) + '</div>';
+  h += '<div class="cal6-dm-name">' + cal6Esc((ev.name || '').trim()) + '</div>';
+  h += '<div class="cal6-dm-row"><b>📅 When</b>' + cal6Esc(dateLine) + '</div>';
+  h += '<div class="cal6-dm-row"><b>🕐 Time</b>' + cal6Esc(timeRange) + '</div>';
+  if (ev.location)  h += '<div class="cal6-dm-row"><b>📍 Where</b>' + cal6Esc(ev.location.split('\n').join(', ')) + '</div>';
+  if (ev.owner)     h += '<div class="cal6-dm-row"><b>👤 Owner</b>' + cal6Esc(ev.owner) + '</div>';
+  if (ev.resources && ev.resources.length)
+                    h += '<div class="cal6-dm-row"><b>🏷 Resources</b>' + cal6Esc(ev.resources.join(', ')) + '</div>';
+
+  // Collapsed "Worship Gatherings" chip → list each service with its link
+  if (ev._group && ev._group.length) {
+    h += '<div style="margin-top:clamp(10px,0.8vw,24px)">';
+    ev._group.forEach(svc => {
+      h += '<div class="cal6-dm-svc"><b>' + cal6Esc(svc.time) + '</b> ' + cal6Esc((svc.name || '').trim()) +
+        (svc.url ? ' <a href="' + cal6Esc(svc.url) + '" target="_blank" rel="noopener">Church Center ↗</a>' : '') +
+        '</div>';
+    });
+    h += '</div>';
+  }
+
+  const blurb = ev.desc || ev.summary || '';
+  if (blurb) h += '<div class="cal6-dm-desc">' + cal6Esc(blurb) + '</div>';
+
+  const links = [];
+  if (ev.reg) links.push('<a class="cal6-dm-btn primary" href="' + cal6Esc(ev.reg) + '" target="_blank" rel="noopener">Register / Sign Up ↗</a>');
+  if (ev.url) links.push('<a class="cal6-dm-btn ' + (ev.reg ? 'secondary' : 'primary') + '" href="' + cal6Esc(ev.url) + '" target="_blank" rel="noopener">View on Church Center ↗</a>');
+  if (links.length) h += '<div class="cal6-dm-links">' + links.join('') + '</div>';
+  h += '</div>';
+
+  document.getElementById('cal6Dm').innerHTML = h;
+  document.getElementById('cal6DmBg').classList.add('open');
+}
+
+function cal6HideDetail() {
+  const bg = document.getElementById('cal6DmBg');
+  if (bg) bg.classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cal6HideDetail();
+});
 </script>
 
 <script>

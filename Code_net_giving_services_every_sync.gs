@@ -3126,6 +3126,14 @@ function syncStaffOSFunnelAndCalendar_() {
       if (evAttr.summary)    evt.summary = String(evAttr.summary).replace(/<[^>]*>/g, '').substring(0, 200);
       const rbList = resByInstance[inst.id];
       if (rbList && rbList.length) evt.resources = rbList;
+      // Links + rich detail for the Calendar tab's click-through popup
+      const ccUrl = (inst.attributes && inst.attributes.church_center_url) || '';
+      if (ccUrl && evAttr.visible_in_church_center !== false) evt.url = ccUrl;
+      if (evAttr.registration_url) evt.reg = evAttr.registration_url;
+      if (evAttr.image_url)        evt.img = evAttr.image_url;
+      if (evAttr.description) {
+        evt.desc = String(evAttr.description).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 600);
+      }
       calEvents.push(evt);
     });
     Logger.log('   Calendar: ' + calEvents.length + ' events (filtered from ' + instances.length + ')');
