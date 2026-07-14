@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T22:46:25.994Z",
+  "lastUpdated": "2026-07-14T22:59:48.038Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 14, 2026, 3:46 PM",
+    "refreshed": "Jul 14, 2026, 3:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8108,13 +8108,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Abby Wampler",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Lisa Morris",
               "team": "Stepping Stones",
               "pos": "Hawks Guide",
@@ -8574,6 +8567,13 @@
               "team": "Hospitality Team",
               "pos": "Host",
               "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Allison Wallace",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
               "serviceTime": "9:30 AM"
             }
           ],
@@ -10374,13 +10374,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Ellie Wampler",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Tonya Lowry",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
@@ -10563,8 +10556,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 44,
-            "totalVols": 44
+            "volsWithServiceTime": 43,
+            "totalVols": 43
           }
         }
       ]
