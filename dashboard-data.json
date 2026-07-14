@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T03:46:25.118Z",
+  "lastUpdated": "2026-07-14T03:59:00.940Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 13, 2026, 8:46 PM",
+    "refreshed": "Jul 13, 2026, 8:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10041,8 +10041,15 @@
               "name": "Anna Ferguson",
               "team": "Connection Team",
               "pos": "Connect Desk Host (B Team)",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kevin Moore",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10052,8 +10059,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 34,
-            "totalVols": 34
+            "volsWithServiceTime": 35,
+            "totalVols": 35
           }
         }
       ]
