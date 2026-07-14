@@ -1,5 +1,34 @@
 {
-  "pending": [],
+  "pending": [
+    {
+      "id": "jb_165421490_20260705_firstimpression",
+      "name": "Anabel Dito",
+      "pcoPersonId": "165421490",
+      "team": "First Impressions",
+      "phone": "12102604401",
+      "firstServeDate": "2026-07-05",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Greeter"
+    },
+    {
+      "id": "jb_172933506_20260712_hospitalityteam",
+      "name": "Holly Graham",
+      "pcoPersonId": "172933506",
+      "team": "Hospitality Team",
+      "phone": "17755315641",
+      "firstServeDate": "2026-07-12",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Host"
+    }
+  ],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -198,5 +227,5 @@
       "position": "Sermon Text Reader"
     }
   ],
-  "lastUpdated": "2026-07-13T21:58:39.246Z"
+  "lastUpdated": "2026-07-14T00:04:15.393Z"
 }
