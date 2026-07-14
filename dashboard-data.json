@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T19:46:02.345Z",
+  "lastUpdated": "2026-07-14T19:58:04.222Z",
   "giving": {
     "months": [
       "Jan '18",
@@ -5933,7 +5933,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 14, 2026, 12:46 PM",
+    "refreshed": "Jul 14, 2026, 12:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8566,7 +8566,7 @@
               "name": "Carlos Flores",
               "team": "Stepping Stones",
               "pos": "Mustangs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -9848,13 +9848,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Clare Lattin",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Ruth Skinner",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Lead Guide",
@@ -9876,13 +9869,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Lisa Morris",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Elmer Alegre",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
@@ -9900,20 +9886,13 @@
               "name": "Tonshai Hatcher",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
               "name": "Natalie Christopher",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Janet Colonna",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Lead Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
             },
@@ -9967,8 +9946,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 52,
-            "totalVols": 52
+            "volsWithServiceTime": 49,
+            "totalVols": 49
           }
         }
       ]
@@ -10772,6 +10751,13 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lydia Perlich",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10781,8 +10767,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 24,
-            "totalVols": 24
+            "volsWithServiceTime": 25,
+            "totalVols": 25
           }
         }
       ]
