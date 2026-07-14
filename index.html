@@ -2922,19 +2922,58 @@
   .cal6-leg i { width: clamp(10px, 0.6vw, 20px); height: clamp(10px, 0.6vw, 20px); border-radius: 3px; flex-shrink: 0; }
   .cal6-asof { flex-basis: 100%; text-align: right; font-size: clamp(9px, 0.5vw, 16px); color: var(--text-dim); margin-top: -4px; }
 
+  .cal6-toolbar {
+    display: flex; align-items: center; gap: clamp(6px, 0.4vw, 14px);
+    padding: clamp(8px, 0.5vw, 18px) clamp(16px, 1.2vw, 40px);
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-toolbar-label {
+    font-family: 'DM Mono', monospace; font-size: clamp(9px, 0.5vw, 16px);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+    margin-right: clamp(4px, 0.3vw, 10px);
+  }
+  .cal6-vbtn {
+    appearance: none; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(11px, 0.6vw, 20px);
+    padding: clamp(5px, 0.35vw, 12px) clamp(12px, 0.8vw, 28px);
+    border-radius: 999px; cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .cal6-vbtn:hover { color: var(--text); background: #2a2a2a; }
+  .cal6-vbtn.on { background: #e5484d; border-color: #e5484d; color: #fff; }
+  .cal6-mnav { display: flex; gap: 6px; margin-left: clamp(8px, 0.6vw, 22px); }
+  .cal6-nbtn {
+    appearance: none; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text-muted);
+    font-size: clamp(15px, 0.85vw, 28px); line-height: 1;
+    padding: clamp(3px, 0.25vw, 9px) clamp(11px, 0.7vw, 24px);
+    border-radius: 7px; cursor: pointer;
+  }
+  .cal6-nbtn:hover:not(:disabled) { color: var(--text); background: #2a2a2a; }
+  .cal6-nbtn:disabled { opacity: 0.3; cursor: default; }
+
   .cal6-body {
     flex: 1; min-height: 0; overflow: auto;
     padding: clamp(10px, 0.8vw, 28px);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
     gap: clamp(10px, 0.8vw, 26px);
   }
+  .cal6-body.mode-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+  .cal6-body.mode-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .cal6-body.mode-1 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
   @media (max-width: 1500px) {
-    .cal6-body { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: minmax(440px, auto); }
+    .cal6-body.mode-6, .cal6-body.mode-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: minmax(440px, auto); }
   }
   @media (max-width: 980px) {
-    .cal6-body { grid-template-columns: 1fr; }
+    .cal6-body.mode-6, .cal6-body.mode-3 { grid-template-columns: 1fr; }
+    .cal6-body.mode-1 { grid-auto-rows: minmax(560px, auto); grid-template-rows: none; }
   }
 
   .cal6-month {
@@ -2972,6 +3011,34 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     flex-shrink: 0;
   }
+
+  /* 3-month view: bigger type, time prefix, wrap up to 2 lines */
+  .mode-3 .cal6-ev {
+    font-size: clamp(9px, 0.68vw, 23px);
+    white-space: normal;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .mode-3 .cal6-dnum { font-size: clamp(10px, 0.65vw, 22px); }
+  .cal6-evtime { opacity: 0.7; font-weight: 700; font-size: 0.82em; }
+
+  /* 1-month view: full-detail event cards. Week rows grow to fit their
+     content (min 1/7th of the grid) so no event is ever cut off; the month
+     scrolls only if a week is unusually packed. */
+  .mode-1 .cal6-weeks { display: flex; flex-direction: column; overflow-y: auto; }
+  .mode-1 .cal6-week { flex: 1 0 auto; }
+  .mode-1 .cal6-day { -webkit-mask-image: none; mask-image: none; }
+  .mode-1 .cal6-dnum { font-size: clamp(11px, 0.75vw, 26px); }
+  .cal6-card {
+    border-left: clamp(3px, 0.25vw, 8px) solid;
+    border-radius: 5px;
+    padding: clamp(2px, 0.22vw, 8px) clamp(4px, 0.35vw, 12px);
+    overflow: hidden; flex-shrink: 0;
+  }
+  .cal6-card-name { font-weight: 700; font-size: clamp(9px, 0.68vw, 23px); line-height: 1.25; color: #f5f2ec; }
+  .cal6-card-meta {
+    font-size: clamp(8px, 0.55vw, 18px); line-height: 1.35; color: var(--text-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
   .cal6-empty { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-dim); font-size: 15px; padding: 60px 20px; }
 </style>
 
@@ -2984,7 +3051,17 @@
     <div class="cal6-legend" id="cal6Legend"></div>
     <div class="cal6-asof" id="cal6AsOf"></div>
   </div>
-  <div class="cal6-body" id="cal6Body">
+  <div class="cal6-toolbar">
+    <span class="cal6-toolbar-label">View</span>
+    <button class="cal6-vbtn on" data-vmode="6" onclick="cal6SetMode(6)">6 Months</button>
+    <button class="cal6-vbtn" data-vmode="3" onclick="cal6SetMode(3)">3 Months</button>
+    <button class="cal6-vbtn" data-vmode="1" onclick="cal6SetMode(1)">1 Month</button>
+    <div class="cal6-mnav" id="cal6MNav" style="display:none;">
+      <button class="cal6-nbtn" id="cal6NavBack" onclick="cal6Nav(-1)" title="Earlier month">&#8249;</button>
+      <button class="cal6-nbtn" id="cal6NavFwd" onclick="cal6Nav(1)" title="Later month">&#8250;</button>
+    </div>
+  </div>
+  <div class="cal6-body mode-6" id="cal6Body">
     <div class="cal6-empty">Loading calendar from Planning Center…</div>
   </div>
 </div><!-- /calModal -->
@@ -3046,13 +3123,20 @@ function closeCalTab() {
   navSetActive('metrics');
 }
 
+let _cal6Events = null;   // raw events from eos-data.json
+let _cal6AsOf   = '';
+let _cal6Mode   = 6;      // 6 | 3 | 1 months visible
+let _cal6Off    = 0;      // start-month offset from current month (0..6-mode)
+
 async function cal6Load() {
   try {
     const res = await fetch(STAFF_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('eos-data fetch ' + res.status);
     const d = await res.json();
     const cal = d.calendar || {};
-    cal6Render(cal.events || [], cal.asOf || '');
+    _cal6Events = cal.events || [];
+    _cal6AsOf   = cal.asOf || '';
+    cal6Render();
   } catch (e) {
     console.error('Calendar tab load error:', e);
     document.getElementById('cal6Body').innerHTML =
@@ -3060,9 +3144,34 @@ async function cal6Load() {
   }
 }
 
-function cal6Render(events, asOf) {
+function cal6SetMode(m) {
+  _cal6Mode = m;
+  if (_cal6Off > 6 - m) _cal6Off = 6 - m;
+  cal6Render();
+}
+
+function cal6Nav(dir) {
+  const max  = 6 - _cal6Mode;
+  const next = Math.max(0, Math.min(max, _cal6Off + dir));
+  if (next === _cal6Off) return;
+  _cal6Off = next;
+  cal6Render();
+}
+
+// Short time for dense views: "9:30 AM" → "9:30a", "6:00 PM" → "6p"
+function cal6TimeShort(t) {
+  return (t || '').replace(':00', '').replace(/\s*AM/i, 'a').replace(/\s*PM/i, 'p');
+}
+
+function cal6FmtDay(dk) {
+  return new Date(dk + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function cal6Render() {
+  if (!_cal6Events) return;
+
   // Safety net: exclude community groups even if one slips past the sync filter
-  const usable = events.filter(ev => {
+  const usable = _cal6Events.filter(ev => {
     const n = (ev.name || '').toLowerCase();
     return !(n.includes('community group') || n.startsWith('cg ') || n.includes('small group'));
   });
@@ -3080,18 +3189,21 @@ function cal6Render(events, asOf) {
   });
   Object.values(byDate).forEach(list => list.sort((a, b) => cal6Mins(a.time) - cal6Mins(b.time)));
 
-  // Collapse the recurring same-day service times ("8am/9:30am/11am Worship
-  // Gathering") into a single chip so Sundays don't overflow their day cell.
-  Object.keys(byDate).forEach(dk => {
-    const list = byDate[dk];
-    const svc  = list.filter(ev => /worship gathering/i.test(ev.name || ''));
-    if (svc.length < 2) return;
-    const times = svc.map(ev => (ev.name.match(/^([\d:]+(?:am|pm)?)/i) || [,''])[1].replace(/am|pm/i,'')).filter(Boolean);
-    byDate[dk] = [{
-      name: 'Worship Gatherings' + (times.length ? ' · ' + times.join(' · ') : ' ×' + svc.length),
-      time: svc[0].time, dateKey: dk, location: svc[0].location || ''
-    }].concat(list.filter(ev => !/worship gathering/i.test(ev.name || '')));
-  });
+  // In the 6- and 3-month views, collapse the recurring same-day service times
+  // ("8am/9:30am/11am Worship Gathering") into one chip so Sundays don't
+  // overflow their day cell. The 1-month view shows each service separately.
+  if (_cal6Mode > 1) {
+    Object.keys(byDate).forEach(dk => {
+      const list = byDate[dk];
+      const svc  = list.filter(ev => /worship gathering/i.test(ev.name || ''));
+      if (svc.length < 2) return;
+      const times = svc.map(ev => (ev.name.match(/^([\d:]+(?:am|pm)?)/i) || [,''])[1].replace(/am|pm/i,'')).filter(Boolean);
+      byDate[dk] = [{
+        name: 'Worship Gatherings' + (times.length ? ' · ' + times.join(' · ') : ' ×' + svc.length),
+        time: svc[0].time, dateKey: dk, location: svc[0].location || ''
+      }].concat(list.filter(ev => !/worship gathering/i.test(ev.name || '')));
+    });
+  }
 
   const now      = new Date();
   const todayKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
@@ -3099,7 +3211,8 @@ function cal6Render(events, asOf) {
   const usedCats = new Set();
   let monthsHtml = '';
 
-  for (let i = 0; i < 6; i++) {
+  for (let k = 0; k < _cal6Mode; k++) {
+    const i      = _cal6Off + k;
     const first  = new Date(now.getFullYear(), now.getMonth() + i, 1);
     const mLabel = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
@@ -3114,8 +3227,7 @@ function cal6Render(events, asOf) {
       const chips = evs.map(ev => {
         const cat = cal6Cat(ev);
         usedCats.add(cat.key);
-        const tip = cal6Esc(ev.name.trim() + (ev.time ? ' · ' + ev.time : '') + (ev.location ? ' · ' + ev.location.split('\n')[0] : ''));
-        return '<div class="cal6-ev" style="border-left-color:' + cat.color + ';background:' + cat.color + '2b;" title="' + tip + '">' + cal6Esc(ev.name.trim()) + '</div>';
+        return cal6Chip(ev, cat, dk);
       }).join('');
       dayCells.push('<div class="cal6-day' + (dk === todayKey ? ' today' : '') + '"><div class="cal6-dnum">' + dayNum + '</div>' + chips + '</div>');
     }
@@ -3133,21 +3245,68 @@ function cal6Render(events, asOf) {
       '</div>';
   }
 
-  document.getElementById('cal6Body').innerHTML = monthsHtml ||
-    '<div class="cal6-empty">No upcoming events found.</div>';
+  const body = document.getElementById('cal6Body');
+  body.className = 'cal6-body mode-' + _cal6Mode;
+  body.innerHTML = monthsHtml || '<div class="cal6-empty">No upcoming events found.</div>';
+
+  // Toolbar state: active view button + month nav (hidden in 6-month view)
+  document.querySelectorAll('.cal6-vbtn').forEach(b =>
+    b.classList.toggle('on', Number(b.dataset.vmode) === _cal6Mode));
+  const nav = document.getElementById('cal6MNav');
+  nav.style.display = _cal6Mode === 6 ? 'none' : 'flex';
+  document.getElementById('cal6NavBack').disabled = _cal6Off <= 0;
+  document.getElementById('cal6NavFwd').disabled  = _cal6Off >= 6 - _cal6Mode;
 
   // Header: range, legend (only categories in use), as-of
-  const rangeEnd = new Date(now.getFullYear(), now.getMonth() + 5, 1);
-  document.getElementById('cal6Range').textContent =
-    now.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + ' — ' +
-    rangeEnd.toLocaleDateString('en-US', { month:'long', year:'numeric' });
+  const rangeStart = new Date(now.getFullYear(), now.getMonth() + _cal6Off, 1);
+  const rangeEnd   = new Date(now.getFullYear(), now.getMonth() + _cal6Off + _cal6Mode - 1, 1);
+  document.getElementById('cal6Range').textContent = _cal6Mode === 1
+    ? rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' })
+    : rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + ' — ' +
+      rangeEnd.toLocaleDateString('en-US', { month:'long', year:'numeric' });
   document.getElementById('cal6Legend').innerHTML = CAL6_CATS
     .filter(c => usedCats.has(c.key))
     .map(c => '<div class="cal6-leg"><i style="background:' + c.color + '"></i>' + c.label + '</div>')
     .join('');
-  document.getElementById('cal6AsOf').textContent = asOf
-    ? 'Synced from PCO Calendar · ' + asOf + ' · Community Groups not shown'
+  document.getElementById('cal6AsOf').textContent = _cal6AsOf
+    ? 'Synced from PCO Calendar · ' + _cal6AsOf + ' · Community Groups not shown'
     : 'Synced from PCO Calendar · Community Groups not shown';
+}
+
+// One event chip/card, sized to the current view mode.
+function cal6Chip(ev, cat, dk) {
+  const name = cal6Esc((ev.name || '').trim());
+  const tint = 'border-left-color:' + cat.color + ';background:' + cat.color + '2b;';
+  const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
+  const locShort  = (ev.location || '').split('\n')[0].split(' - ')[0].trim();
+  const multiDay  = ev.endKey ? cal6FmtDay(ev.dateKey) + ' – ' + cal6FmtDay(ev.endKey) : '';
+
+  if (_cal6Mode === 6) {
+    const tip = cal6Esc((ev.name||'').trim() + (ev.time ? ' · ' + ev.time : '') + (locShort ? ' · ' + locShort : ''));
+    return '<div class="cal6-ev" style="' + tint + '" title="' + tip + '">' + name + '</div>';
+  }
+
+  if (_cal6Mode === 3) {
+    const tip = cal6Esc((ev.name||'').trim() + ' · ' + timeRange + (locShort ? ' · ' + locShort : '') + (ev.owner ? ' · ' + ev.owner : ''));
+    return '<div class="cal6-ev" style="' + tint + '" title="' + tip + '">' +
+      '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' + name + '</div>';
+  }
+
+  // 1-month view: full detail card (two compact meta lines)
+  let meta = '';
+  const when = multiDay ? multiDay + ' · ' + ev.time : timeRange;
+  meta += '<div class="cal6-card-meta">' + cal6Esc(when) + (locShort ? ' · 📍 ' + cal6Esc(locShort) : '') + '</div>';
+  const who = [];
+  if (ev.owner) who.push('👤 ' + cal6Esc(ev.owner));
+  if (ev.resources && ev.resources.length) who.push('🏷 ' + cal6Esc(ev.resources.join(', ')));
+  if (who.length) meta += '<div class="cal6-card-meta">' + who.join(' · ') + '</div>';
+  const tipFull = cal6Esc((ev.name||'').trim() + ' · ' + timeRange +
+    (ev.location ? ' · ' + ev.location.split('\n').join(', ') : '') +
+    (ev.owner ? ' · Owner: ' + ev.owner : '') +
+    (ev.resources && ev.resources.length ? ' · Resources: ' + ev.resources.join(', ') : '') +
+    (ev.summary ? ' · ' + ev.summary : ''));
+  return '<div class="cal6-card" style="' + tint + '" title="' + tipFull + '">' +
+    '<div class="cal6-card-name">' + name + '</div>' + meta + '</div>';
 }
 </script>
 

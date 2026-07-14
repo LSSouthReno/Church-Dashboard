@@ -3035,14 +3035,60 @@ function syncStaffOSFunnelAndCalendar_() {
     const instances = result.data || [];
     const included  = result.included || [];
 
-    const eventNameById = {};
+    const eventById = {};
     included.forEach(function(inc) {
-      if (inc.type === 'Event') eventNameById[inc.id] = (inc.attributes && inc.attributes.name) || '';
+      if (inc.type === 'Event') eventById[inc.id] = inc.attributes || {};
     });
+
+    // Event owners (owner is a relationship on Event, not an attribute) →
+    // eventId → owner person name, via one pass over future events.
+    const ownerByEventId = {};
+    try {
+      const evRes = pcoGetAllWithIncluded_('/calendar/v2/events?filter=future&per_page=100&include=owner');
+      const personById = {};
+      (evRes.included || []).forEach(function(inc) {
+        if (inc.type === 'Person') {
+          personById[inc.id] = ((inc.attributes && inc.attributes.name) ||
+            (((inc.attributes && inc.attributes.first_name) || '') + ' ' +
+             ((inc.attributes && inc.attributes.last_name)  || '')).trim());
+        }
+      });
+      (evRes.data || []).forEach(function(evd) {
+        const ow = evd.relationships && evd.relationships.owner && evd.relationships.owner.data;
+        if (ow && personById[ow.id]) ownerByEventId[evd.id] = personById[ow.id];
+      });
+      Logger.log('   Event owners: ' + Object.keys(ownerByEventId).length);
+    } catch(e) { Logger.log('   Event owners fetch failed: ' + e.message); }
+
+    // Resource bookings for the same window → instanceId → [resource names]
+    // (used by the Calendar tab's detailed 1-month view)
+    const resByInstance = {};
+    try {
+      const rbRes = pcoGetAllWithIncluded_(
+        '/calendar/v2/resource_bookings?per_page=100&include=resource' +
+        '&where[starts_at][gte]=' + encodeURIComponent(now.toISOString()) +
+        '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString())
+      );
+      const resNameById = {};
+      (rbRes.included || []).forEach(function(inc) {
+        if (inc.type === 'Resource') resNameById[inc.id] = (inc.attributes && inc.attributes.name) || '';
+      });
+      (rbRes.data || []).forEach(function(b) {
+        const ei = b.relationships && b.relationships.event_instance && b.relationships.event_instance.data;
+        const rr = b.relationships && b.relationships.resource && b.relationships.resource.data;
+        if (!ei || !rr) return;
+        const rn = resNameById[rr.id];
+        if (!rn) return;
+        if (!resByInstance[ei.id]) resByInstance[ei.id] = [];
+        if (resByInstance[ei.id].indexOf(rn) === -1) resByInstance[ei.id].push(rn);
+      });
+      Logger.log('   Resource bookings: ' + Object.keys(resByInstance).length + ' instances with resources');
+    } catch(e) { Logger.log('   Resource bookings fetch failed: ' + e.message); }
 
     instances.forEach(function(inst) {
       const evRel  = inst.relationships && inst.relationships.event && inst.relationships.event.data;
-      const name   = evRel ? (eventNameById[evRel.id] || '') : '';
+      const evAttr = evRel ? (eventById[evRel.id] || {}) : {};
+      const name   = evAttr.name || '';
       if (!name) return;
       const nl = name.toLowerCase();
       if (nl.includes('community group') || nl.startsWith('cg ') || nl.includes('small group')) return;
@@ -3073,6 +3119,13 @@ function syncStaffOSFunnelAndCalendar_() {
         location:  (inst.attributes && inst.attributes.location) || ''
       };
       if (isRbd) evt.rbd = true;
+      // Detail fields for the Calendar tab's 1-month view
+      if (endsAt && !endKey) evt.timeEnd = Utilities.formatDate(new Date(endsAt), tz, 'h:mm a');
+      const ownerName = evRel ? ownerByEventId[evRel.id] : '';
+      if (ownerName) evt.owner = ownerName;
+      if (evAttr.summary)    evt.summary = String(evAttr.summary).replace(/<[^>]*>/g, '').substring(0, 200);
+      const rbList = resByInstance[inst.id];
+      if (rbList && rbList.length) evt.resources = rbList;
       calEvents.push(evt);
     });
     Logger.log('   Calendar: ' + calEvents.length + ' events (filtered from ' + instances.length + ')');
