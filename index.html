@@ -178,6 +178,18 @@
     gap: 24px;
   }
 
+  /* Card that stretches to fill its grid row; its chart absorbs the extra height */
+  .card.fill-row {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+  .card.fill-row .chart-wrap {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 300px;
+  }
+
   .right-col {
     display: flex;
     flex-direction: column;
@@ -475,6 +487,8 @@
   @media (max-width: 1200px) {
     .dashboard { padding: 24px 20px 50px; }
     .grid { grid-template-columns: 1fr; }
+    .card.fill-row { align-self: auto; display: block; }
+    .card.fill-row .chart-wrap { height: 300px; min-height: 0; }
     .main-cols { flex-direction: column; }
     .header {
       flex-direction: column;
@@ -1924,7 +1938,7 @@
   <!-- Row 1: Weekend Attendance | Baptisms + Members Growth -->
   <div class="grid">
 
-    <div class="card">
+    <div class="card fill-row">
       <h2>Weekend Attendance</h2>
       <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
       <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
