@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-15T20:45:59.229Z",
+  "lastUpdated": "2026-07-15T20:56:43.223Z",
   "sectionDescriptions": {
     "Weekend Attendance": "How many adults and kids are in the room on a typical weekend — the pulse of who we are reaching.",
     "Baptisms": "People publicly declaring faith in Jesus each year — our clearest picture of life change.",
@@ -3204,7 +3204,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 101,
+      "current": 100,
       "needed": 150
     },
     {
@@ -3273,7 +3273,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 367,
+  "uniqueVolunteers": 366,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 15, 2026, 1:46 PM",
+    "refreshed": "Jul 15, 2026, 1:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7487,7 +7487,7 @@
         24,
         23,
         26,
-        11,
+        12,
         null,
         null,
         null,
@@ -7534,7 +7534,7 @@
         15,
         18,
         16,
-        6,
+        7,
         null,
         null,
         null,
@@ -7782,11 +7782,11 @@
       },
       {
         "name": "Durham Community Group",
-        "members": 10,
+        "members": 11,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 10am-12pm",
         "avgAttended": 7,
-        "attPct": 70
+        "attPct": 64
       },
       {
         "name": "Gardner Community Group",
@@ -8227,7 +8227,7 @@
               "name": "Nicole Leach",
               "team": "Stepping Stones",
               "pos": "Hawks Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8954,13 +8954,6 @@
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Teylor Baskharoon (Hinzman)",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "C",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Sarah Jones",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
@@ -9510,8 +9503,29 @@
               "name": "Fredy Bridges",
               "team": "Stepping Stones",
               "pos": "Mustangs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -9669,8 +9683,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 94,
-            "totalVols": 94
+            "volsWithServiceTime": 96,
+            "totalVols": 96
           }
         }
       ]
@@ -9985,25 +9999,11 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Nick Colonna",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Ashley Murad",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Nicole Leach",
-              "team": "Stepping Stones",
-              "pos": "Wolf Pack Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Jorie Hetland",
@@ -10018,6 +10018,41 @@
               "pos": "Wolf Pack Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Evven Gardner",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Holly Graham",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Valerie Seno",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Hannah Christopher",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10027,8 +10062,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 47,
-            "totalVols": 47
+            "volsWithServiceTime": 50,
+            "totalVols": 50
           }
         }
       ]
@@ -10299,6 +10334,13 @@
               "pos": "Safety Lead",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -10308,8 +10350,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 36,
-            "totalVols": 36
+            "volsWithServiceTime": 37,
+            "totalVols": 37
           }
         }
       ]
@@ -11348,7 +11390,7 @@
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
-              "name": "Simone Roccuzzo",
+              "name": "Fredy Bridges",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
               "status": "U",
