@@ -228,6 +228,18 @@
     letter-spacing: 0.3px;
   }
 
+  /* One-sentence interpretive description, editable in the SectionDescriptions
+     sheet. Sized between the h2 title (18/600) and the card-sub (13/500). */
+  .card-desc {
+    display: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 2px 0 6px;
+  }
+  .card-desc.on { display: block; }
+
   .card .card-sub {
     color: var(--text-muted);
     font-size: 13px;
@@ -1942,6 +1954,7 @@
 
     <div class="card fill-row">
       <h2>Weekend Attendance</h2>
+      <div class="card-desc" data-sec="Weekend Attendance"></div>
       <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
       <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
       <div class="avg-row">
@@ -1962,6 +1975,7 @@
           <h2 style="margin:0;">Baptisms</h2>
           <span id="baptismsTotalBadge" style="font-size:13px;color:#818cf8;font-weight:700;padding-top:2px;"></span>
         </div>
+        <div class="card-desc" data-sec="Baptisms"></div>
         <div class="card-sub">PCO baptism records · grouped by year</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="baptismsChart"></canvas></div></div>
       </div>
@@ -1971,6 +1985,7 @@
           <h2 style="margin:0;">Church Members</h2>
           <span id="membersTotalBadge" style="font-size:13px;color:#34d399;font-weight:700;padding-top:2px;"></span>
         </div>
+        <div class="card-desc" data-sec="Church Members"></div>
         <div class="card-sub">PCO "Member Since" field · new members grouped by year</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="membersChart"></canvas></div></div>
       </div>
@@ -1986,6 +2001,7 @@
         <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
         <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">Click for detail →</span>
       </div>
+      <div class="card-desc" data-sec="Serve Teams"></div>
       <div class="card-sub">Auto-sorted by greatest need · click for volunteers &amp; services</div>
       <div class="teams-summary">
         <div class="stat">
@@ -2007,12 +2023,14 @@
     <div class="stack">
       <div class="card">
         <h2>Average Giving by Month</h2>
+        <div class="card-desc" data-sec="Average Giving by Month"></div>
         <div class="card-sub">Full history · scroll horizontally for older months</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="givingChart"></canvas></div></div>
       </div>
 
       <div class="card progress-card">
         <h2>ALL-IN Pledge Progress</h2>
+        <div class="card-desc" data-sec="ALL-IN Pledge Progress"></div>
         <div class="card-sub">General Giving + Building fund donations</div>
 
         <div class="pledge-row">
@@ -2048,6 +2066,7 @@
   <!-- Budget Allocation — full-width, members-only -->
   <div class="card" id="budgetPieCard" style="display:none;margin-top:24px;">
     <h2>Budget Allocation</h2>
+    <div class="card-desc" data-sec="Budget Allocation"></div>
     <div class="card-sub">% of income by category</div>
     <div style="display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;">
       <!-- Left: chart + legend at natural width -->
@@ -2079,6 +2098,7 @@
         <h2 style="margin:0;">Community Groups</h2>
         <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
       </div>
+      <div class="card-desc" data-sec="Community Groups"></div>
       <div class="card-sub">Total groups · click for full CG detail</div>
       <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
     </div>
@@ -2088,6 +2108,7 @@
         <h2 style="margin:0;">Community Group Members</h2>
         <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
       </div>
+      <div class="card-desc" data-sec="Community Group Members"></div>
       <div class="card-sub">Total members · click for full CG detail</div>
       <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgMembersChart"></canvas></div></div>
     </div>
@@ -3598,6 +3619,17 @@ const baseTooltip = {
   boxPadding: 6
 };
 
+// Fill each card's interpretive description from the SectionDescriptions
+// sheet (synced into dashboard-data.json hourly). Empty rows stay hidden.
+function applySectionDescriptions() {
+  const map = (DASHBOARD_DATA && DASHBOARD_DATA.sectionDescriptions) || {};
+  document.querySelectorAll('.card-desc[data-sec]').forEach(el => {
+    const txt = String(map[el.dataset.sec] || '').trim();
+    el.textContent = txt;
+    el.classList.toggle('on', !!txt);
+  });
+}
+
 function renderUpdated() {
   const d = new Date(DASHBOARD_DATA.lastUpdated);
   const opts = { weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' };
@@ -4346,6 +4378,7 @@ loadDashboardData()
   .then(() => {
     initAttendanceModalEvents();
     renderUpdated();
+    applySectionDescriptions();
     mmApplyState();   // restore unlock state before rendering giving chart
     renderPledge();
     mmUpdatePledgeDetails();

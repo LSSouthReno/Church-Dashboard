@@ -63,7 +63,23 @@ const SHEETS = {
   cgAttendance: 'CGGroupAttendance',
   cgPipeline:   'CGLeaderPipeline',
   cgFunnel:     'CGJoinFunnel',
-  cgOutsiders:  'CGOutsiders'
+  cgOutsiders:  'CGOutsiders',
+  descriptions: 'SectionDescriptions'
+};
+
+// Metrics-page sections that can carry a one-sentence interpretive description,
+// edited in the SectionDescriptions sheet (col A = section, col B = description).
+// Seeded once with these defaults; after that the sheet is the source of truth.
+const SECTION_DESC_DEFAULTS_ = {
+  'Weekend Attendance':       'How many adults and kids are in the room on a typical weekend — the pulse of who we are reaching.',
+  'Baptisms':                 'People publicly declaring faith in Jesus each year — our clearest picture of life change.',
+  'Church Members':           'How many people have made Living Stones their home by becoming members.',
+  'Serve Teams':              'Where we most need volunteers right now — full teams are healthy, gaps are invitations.',
+  'Average Giving by Month':  'Monthly general giving compared to the monthly need line — how God is providing.',
+  'ALL-IN Pledge Progress':   'How far we have come toward the ALL-IN campaign goal, and how much runway remains.',
+  'Budget Allocation':        'Where every dollar given actually goes, including each church plant and mission we support.',
+  'Community Groups':         'How many active community groups we have — the front door to real relationships.',
+  'Community Group Members':  'How many people are doing life together in a community group.'
 };
 
 /* =========================================================
@@ -507,6 +523,28 @@ function setupCacheSheets_(ss) {
   ensureSheet_(ss, SHEETS.cgPipeline,    ['Type', 'Phase', 'Label', 'Name', 'AddedIn2026']);
   ensureSheet_(ss, SHEETS.cgFunnel,      ['MonthKey', 'Month', 'Applied', 'Joined']);
   ensureSheet_(ss, SHEETS.cgOutsiders,   ['MonthKey', 'Month', 'Count']);
+  ensureSheet_(ss, SHEETS.descriptions,  ['Section', 'Description (shown under the section title on the dashboard)']);
+}
+
+// Reads (and seeds, on first run) the editable per-section descriptions.
+// Returns { sectionName: descriptionText }.
+function readSectionDescriptions_(ss) {
+  const sh = ensureSheet_(ss, SHEETS.descriptions,
+    ['Section', 'Description (shown under the section title on the dashboard)']);
+  const values = sh.getDataRange().getValues();
+  const have = {};
+  for (let i = 1; i < values.length; i++) {
+    const key = String(values[i][0] || '').trim();
+    if (key) have[key] = String(values[i][1] || '').trim();
+  }
+  // Seed rows for any sections missing from the sheet so they are editable.
+  Object.keys(SECTION_DESC_DEFAULTS_).forEach(key => {
+    if (!(key in have)) {
+      sh.appendRow([key, SECTION_DESC_DEFAULTS_[key]]);
+      have[key] = SECTION_DESC_DEFAULTS_[key];
+    }
+  });
+  return have;
 }
 
 function ensureSheet_(ss, name, headers) {
@@ -1095,6 +1133,7 @@ function buildDashboardDataFromSheet_(ss) {
 
   return {
     lastUpdated: new Date().toISOString(),
+    sectionDescriptions: readSectionDescriptions_(ss),
     giving: {
       months: givingRows.map(r => r[1]),
       amounts: givingRows.map(r => Number(r[2]) || 0), // General Giving only; Building still counts toward pledge
