@@ -401,7 +401,7 @@ function finishBackfillDashboardData_() {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   setupCacheSheets_(ss);
-  cleanMonthlySheet_(ss.getSheetByName(SHEETS.giving), 5);
+  cleanMonthlySheet_(ss.getSheetByName(SHEETS.giving), 6);
   cleanMonthlySheet_(ss.getSheetByName(SHEETS.attendance), 4);
   cleanMonthlySheet_(ss.getSheetByName(SHEETS.groups), 4);
 
@@ -442,7 +442,7 @@ function cancelBackfillDashboardData() {
 function cleanAndRebuildDashboardCache() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   setupCacheSheets_(ss);
-  cleanMonthlySheet_(ss.getSheetByName(SHEETS.giving), 5);
+  cleanMonthlySheet_(ss.getSheetByName(SHEETS.giving), 6);
   cleanMonthlySheet_(ss.getSheetByName(SHEETS.attendance), 4);
   cleanMonthlySheet_(ss.getSheetByName(SHEETS.groups), 4);
   const data = buildDashboardDataFromSheet_(ss);
@@ -460,7 +460,7 @@ function refreshDashboardMonths_(months, label) {
 
   safeRun_('Giving', () => {
     const rows = getGivingRowsForMonths_(months);
-    upsertMonthlyRows_(ss.getSheetByName(SHEETS.giving), rows, 5);
+    upsertMonthlyRows_(ss.getSheetByName(SHEETS.giving), rows, 6);
   });
 
   safeRun_('Attendance', () => {
@@ -495,7 +495,7 @@ function safeRun_(label, fn) {
 ========================================================= */
 
 function setupCacheSheets_(ss) {
-  ensureSheet_(ss, SHEETS.giving, ['MonthKey', 'Month', 'General Giving', 'Building', 'Total']);
+  ensureSheet_(ss, SHEETS.giving, ['MonthKey', 'Month', 'General Giving', 'Building', 'Total', 'Donors']);
   ensureSheet_(ss, SHEETS.attendance, ['MonthKey', 'Month', 'Adults', 'Kids']);
   ensureSheet_(ss, SHEETS.attendanceWeekly, ['MonthKey', 'DateKey', 'Week', 'Adults', 'Kids']);
   ensureSheet_(ss, SHEETS.groups, ['MonthKey', 'Month', 'Groups', 'Members']);
@@ -1071,7 +1071,7 @@ function buildDashboardDataFromSheet_(ss) {
   setupCacheSheets_(ss);
 
   // Export ALL cached history. The dashboard will make the charts horizontally scrollable.
-  const givingRows = readRows_(ss.getSheetByName(SHEETS.giving), 5);
+  const givingRows = readRows_(ss.getSheetByName(SHEETS.giving), 6);
   const attendanceRows = readRows_(ss.getSheetByName(SHEETS.attendance), 4);
   const groupRows = readRows_(ss.getSheetByName(SHEETS.groups), 4);
 
@@ -1097,7 +1097,8 @@ function buildDashboardDataFromSheet_(ss) {
     lastUpdated: new Date().toISOString(),
     giving: {
       months: givingRows.map(r => r[1]),
-      amounts: givingRows.map(r => Number(r[2]) || 0) // General Giving only; Building still counts toward pledge
+      amounts: givingRows.map(r => Number(r[2]) || 0), // General Giving only; Building still counts toward pledge
+      donors:  givingRows.map(r => Number(r[5]) || 0)  // distinct donors per month
     },
     pledge: {
       target: DASHBOARD_CONFIG.PLEDGE_TARGET,
@@ -1356,8 +1357,10 @@ function writeDashboardJsonToSheet_(ss, data) {
 
 function getGivingRowsForMonths_(months) {
   const totals = {};
+  const donorsByMonth = {};
   months.forEach(m => {
     totals[m.key] = { general: 0, building: 0 };
+    donorsByMonth[m.key] = {};
   });
 
   let totalDonations = 0;
@@ -1397,6 +1400,12 @@ function getGivingRowsForMonths_(months) {
       if (!donationCountsForNet_(d)) return;
       const date = d.attributes.received_at || d.attributes.created_at;
       if (date) donationDates[d.id] = { date, monthKey: monthKey_(new Date(date)), attrs: d.attributes || {} };
+      // Distinct donors per month (same donation sweep — no extra API calls)
+      if (date) {
+        const mk = monthKey_(new Date(date));
+        const pid = relId_(d, 'person');
+        if (pid && donorsByMonth[mk]) donorsByMonth[mk][pid] = true;
+      }
     });
 
     const countedIds = {};
@@ -1455,8 +1464,9 @@ function getGivingRowsForMonths_(months) {
   return months.map(m => {
     const general = Math.round(totals[m.key].general);
     const building = Math.round(totals[m.key].building);
-    Logger.log('     ' + m.label + ': general=$' + general.toLocaleString() + ', building=$' + building.toLocaleString());
-    return [m.key, monthLabelFromKey_(m.key), general, building, general + building];
+    const donors = Object.keys(donorsByMonth[m.key] || {}).length;
+    Logger.log('     ' + m.label + ': general=$' + general.toLocaleString() + ', building=$' + building.toLocaleString() + ', donors=' + donors);
+    return [m.key, monthLabelFromKey_(m.key), general, building, general + building, donors];
   });
 }
 
@@ -1589,6 +1599,104 @@ function debugGivingMonth(monthStart, monthEnd) {
 function debugGivingMay()   { debugGivingMonth('2026-05-01','2026-05-31'); }
 function debugGivingApril() { debugGivingMonth('2026-04-01','2026-04-30'); }
 function debugGivingMarch() { debugGivingMonth('2026-03-01','2026-03-31'); }
+
+/* =========================================================
+   DONOR COUNT BACKFILL — resumable, one year per run
+   Populates the Donors column (col 6) of GivingMonthly for all
+   history without touching the cached giving dollar amounts.
+   Kick off with backfillAllDonorCounts(); it schedules itself.
+========================================================= */
+
+function backfillAllDonorCounts() {
+  const props = PropertiesService.getScriptProperties();
+  props.setProperty('DONOR_BACKFILL_YEAR', '2018');
+  removeDonorBackfillTriggers_();
+  Logger.log('Starting donor count backfill from 2018...');
+  continueDonorCountsBackfill();
+}
+
+function continueDonorCountsBackfill() {
+  const props = PropertiesService.getScriptProperties();
+  const year = Number(props.getProperty('DONOR_BACKFILL_YEAR') || '2018');
+  const currentYear = new Date().getFullYear();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  if (year > currentYear) {
+    removeDonorBackfillTriggers_();
+    props.deleteProperty('DONOR_BACKFILL_YEAR');
+    const data = buildDashboardDataFromSheet_(ss);
+    writeDashboardJsonToSheet_(ss, data);
+    pushJsonToGitHub_(data);
+    Logger.log('✅ Donor count backfill complete through ' + currentYear + '. JSON rebuilt and pushed.');
+    return;
+  }
+
+  const endDate = year === currentYear
+    ? Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd')
+    : year + '-12-31';
+  const months = getMonthsBetween_(year + '-01-01', endDate);
+  Logger.log('Donor backfill: year ' + year + ' (' + months.length + ' months)');
+
+  const counts = {};
+  months.forEach(m => {
+    const donations = pcoGetAll_(
+      '/giving/v2/donations' +
+      '?where[received_at][gte]=' + m.start +
+      '&where[received_at][lte]=' + m.end +
+      '&per_page=100'
+    ) || [];
+    const donors = {};
+    donations.forEach(d => {
+      if (!donationCountsForNet_(d)) return;
+      const pid = relId_(d, 'person');
+      if (pid) donors[pid] = true;
+    });
+    counts[m.key] = Object.keys(donors).length;
+    Logger.log('   ' + m.label + ': ' + donations.length + ' donations, ' + counts[m.key] + ' distinct donors');
+  });
+
+  writeDonorCountsToSheet_(ss, counts);
+
+  props.setProperty('DONOR_BACKFILL_YEAR', String(year + 1));
+  removeDonorBackfillTriggers_();
+  ScriptApp.newTrigger('continueDonorCountsBackfill').timeBased().after(90 * 1000).create();
+  Logger.log('Year ' + year + ' done. Continuation for ' + (year + 1) + ' scheduled in 90 seconds.');
+}
+
+// Writes counts (monthKey → n) into the Donors column of existing GivingMonthly
+// rows. Never touches the giving dollar columns; months with no cached giving
+// row yet are skipped (the giving backfill owns row creation).
+function writeDonorCountsToSheet_(ss, counts) {
+  const sh = ensureSheet_(ss, SHEETS.giving,
+    ['MonthKey', 'Month', 'General Giving', 'Building', 'Total', 'Donors']);
+  const values = sh.getDataRange().getValues();
+  let written = 0, skipped = 0;
+  const rowByKey = {};
+  for (let i = 1; i < values.length; i++) {
+    const key = normalizeMonthKey_(values[i][0], values[i][1]);
+    if (key) rowByKey[key] = i + 1;
+  }
+  Object.keys(counts).forEach(key => {
+    const rowNum = rowByKey[key];
+    if (rowNum) { sh.getRange(rowNum, 6).setValue(counts[key]); written++; }
+    else { skipped++; Logger.log('   (no giving row yet for ' + key + ' — skipped)'); }
+  });
+  Logger.log('   Donor counts written: ' + written + (skipped ? ', skipped: ' + skipped : ''));
+}
+
+function removeDonorBackfillTriggers_() {
+  ScriptApp.getProjectTriggers().forEach(t => {
+    if (t.getHandlerFunction() === 'continueDonorCountsBackfill') {
+      ScriptApp.deleteTrigger(t);
+    }
+  });
+}
+
+function cancelDonorCountsBackfill() {
+  removeDonorBackfillTriggers_();
+  PropertiesService.getScriptProperties().deleteProperty('DONOR_BACKFILL_YEAR');
+  Logger.log('Donor count backfill cancelled.');
+}
 
 function donationCountsForNet_(donation) {
   const attrs = (donation && donation.attributes) || {};

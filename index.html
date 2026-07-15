@@ -2063,6 +2063,11 @@
         <div id="missionsList" style="display:flex;flex-direction:column;gap:4px;"></div>
         <div id="missionsTotal" style="margin-top:10px;padding-top:8px;border-top:1px solid var(--card-border);font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;"></div>
       </div>
+      <!-- Far right: donors-per-month chart fills the remaining space -->
+      <div id="donorsBlock" style="flex:1 1 340px;min-width:320px;border-left:1px solid var(--card-border);padding-left:32px;margin-left:32px;display:none;">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;">Number of Donors &middot; Monthly</div>
+        <div class="chart-wrap" style="height:240px;"><div class="chart-inner"><canvas id="donorsChart"></canvas></div></div>
+      </div>
     </div>
   </div>
 
@@ -3702,6 +3707,61 @@ function renderGiving() {
   });
 }
 
+// Donors-per-month bar chart (inside the Budget Allocation card).
+// Same pattern as the giving chart: yellow bars, horizontally scrollable back
+// to the first month with data, counts on hover only when Members is unlocked.
+function renderDonors() {
+  const block = document.getElementById('donorsBlock');
+  if (!block) return;
+  const g = DASHBOARD_DATA.giving || {};
+  const allDonors = g.donors || [];
+  if (!allDonors.some(v => v > 0)) { block.style.display = 'none'; return; }
+  block.style.display = '';
+
+  // Trim leading months with no donor data (history the backfill hasn't
+  // reached yet, or months before PCO Giving records begin).
+  const first = allDonors.findIndex(v => v > 0);
+  const months = normalizeMonthArray(g.months).slice(first);
+  const donors = allDonors.slice(first);
+
+  prepScrollableChart('donorsChart', months.length);
+  const ctx = document.getElementById('donorsChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Donors',
+        data: donors,
+        backgroundColor: donors.map((_, i) => {
+          const palette = ['#fde047','#facc15','#eab308','#fbbf24','#fcd34d','#f59e0b'];
+          const color = palette[i % palette.length];
+          return i === donors.length - 1 ? makeCurrentMonthStripePattern(color) : color;
+        }),
+        borderRadius: 6,
+        borderSkipped: false,
+        maxBarThickness: 48
+      }]
+    },
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        // Donor counts show on hover only when Members is unlocked
+        tooltip: mmIsUnlocked()
+          ? { ...baseTooltip, callbacks: { label: (ctx) => '  ' + fmtNum(ctx.parsed.y) + ' donors' } }
+          : { enabled: false }
+      },
+      scales: {
+        x: { ...baseGridOpts, grid: { display: false }, ticks: { ...baseGridOpts.ticks, autoSkip: false, maxRotation: 45, minRotation: 45 } },
+        y: { ...baseGridOpts, beginAtZero: true, ticks: { ...baseGridOpts.ticks, precision: 0 } }
+      }
+    }
+  });
+}
+
 function renderPledge() {
   const { target, raised } = DASHBOARD_DATA.pledge;
   const safeTarget = Number(target) || 1;
@@ -4325,7 +4385,7 @@ window.addEventListener('resize', () => {
 });
 
 function _reRenderAllCharts() {
-  ['attendanceChart','givingChart','baptismsChart','membersChart','cgCountChart','cgMembersChart'].forEach(id => {
+  ['attendanceChart','givingChart','donorsChart','baptismsChart','membersChart','cgCountChart','cgMembersChart'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     const c = Chart.getChart(el);
@@ -4333,6 +4393,7 @@ function _reRenderAllCharts() {
   });
   renderAttendance();
   renderGiving();
+  renderDonors();
   renderBaptisms();
   renderMembersGrowth();
   renderCGCount();
@@ -4871,11 +4932,15 @@ function mmApplyState() {
 
   // Teams card is always open to everyone now — badge stays static ("Click for detail →").
 
-  // Re-render giving chart (tooltip on/off) and pledge details
+  // Re-render giving + donors charts (tooltip on/off) and pledge details
   const givingCanvas = document.getElementById('givingChart');
   const existingChart = givingCanvas && Chart.getChart(givingCanvas);
   if (existingChart) existingChart.destroy();
   renderGiving();
+  const donorsCanvas = document.getElementById('donorsChart');
+  const existingDonors = donorsCanvas && Chart.getChart(donorsCanvas);
+  if (existingDonors) existingDonors.destroy();
+  renderDonors();
   mmUpdatePledgeDetails();
 
   // Re-render missions amounts (blur/unblur on lock state change)
@@ -4887,8 +4952,8 @@ function mmApplyState() {
       const amtHtml = unlocked
         ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
         : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
-      return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;margin-bottom:2px;">' +
-        '<span style="color:var(--text);flex:1;line-height:1.3;">' + escapeHtml(m.name) + '</span>' +
+      return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;">' +
+        '<span style="color:var(--text);flex:1;min-width:0;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="' + escapeHtml(m.name) + '">' + escapeHtml(m.name) + '</span>' +
         amtHtml + '</div>';
     }).join('');
     const totalAmt = missions.total || 0;
