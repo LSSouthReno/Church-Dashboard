@@ -2050,15 +2050,15 @@
     <h2>Budget Allocation</h2>
     <div class="card-sub">% of income by category</div>
     <div style="display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;">
-      <!-- Left: chart + legend (majority of the card) -->
-      <div style="display:flex;align-items:center;gap:28px;flex:1 1 auto;min-width:300px;padding-right:28px;flex-wrap:wrap;">
+      <!-- Left: chart + legend at natural width -->
+      <div style="display:flex;align-items:center;gap:28px;flex:0 0 auto;padding-right:40px;">
         <div style="width:220px;height:220px;flex-shrink:0;">
           <canvas id="budgetPieChart"></canvas>
         </div>
         <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:10px;"></div>
       </div>
-      <!-- Right: missions panel (compact) -->
-      <div id="missionsPanel" style="flex:0 1 360px;min-width:260px;border-left:1px solid var(--card-border);padding-left:24px;display:none;">
+      <!-- Right: missions panel sits directly beside the legend, not pushed to the card edge -->
+      <div id="missionsPanel" style="flex:0 1 420px;min-width:280px;border-left:1px solid var(--card-border);padding-left:32px;display:none;">
         <div style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;">Church Plants &amp; Missions</div>
         <div id="missionsList" style="display:flex;flex-direction:column;gap:4px;"></div>
         <div id="missionsTotal" style="margin-top:10px;padding-top:8px;border-top:1px solid var(--card-border);font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;"></div>
