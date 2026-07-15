@@ -2051,17 +2051,17 @@
     <div class="card-sub">% of income by category</div>
     <div style="display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;">
       <!-- Left: chart + legend (majority of the card) -->
-      <div style="display:flex;align-items:center;gap:32px;flex:1 1 auto;min-width:300px;padding-right:28px;flex-wrap:wrap;">
-        <div style="width:280px;height:280px;flex-shrink:0;">
+      <div style="display:flex;align-items:center;gap:28px;flex:1 1 auto;min-width:300px;padding-right:28px;flex-wrap:wrap;">
+        <div style="width:220px;height:220px;flex-shrink:0;">
           <canvas id="budgetPieChart"></canvas>
         </div>
-        <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:12px;"></div>
+        <div id="budgetPieLegend" style="display:flex;flex-direction:column;gap:10px;"></div>
       </div>
       <!-- Right: missions panel (compact) -->
-      <div id="missionsPanel" style="flex:0 1 300px;min-width:240px;border-left:1px solid var(--card-border);padding-left:20px;display:none;">
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;">Church Plants &amp; Missions</div>
-        <div id="missionsList" style="display:flex;flex-direction:column;gap:3px;"></div>
-        <div id="missionsTotal" style="margin-top:8px;padding-top:7px;border-top:1px solid var(--card-border);font-size:12px;font-weight:700;display:flex;justify-content:space-between;"></div>
+      <div id="missionsPanel" style="flex:0 1 360px;min-width:260px;border-left:1px solid var(--card-border);padding-left:24px;display:none;">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;">Church Plants &amp; Missions</div>
+        <div id="missionsList" style="display:flex;flex-direction:column;gap:4px;"></div>
+        <div id="missionsTotal" style="margin-top:10px;padding-top:8px;border-top:1px solid var(--card-border);font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;"></div>
       </div>
     </div>
   </div>
@@ -4054,10 +4054,10 @@ function renderBudgetPie() {
   const legend = document.getElementById('budgetPieLegend');
   if (legend) {
     legend.innerHTML = budget.map(function(b) {
-      return '<div style="display:flex;align-items:center;gap:9px;">' +
-        '<span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:' + b.color + ';flex-shrink:0;"></span>' +
-        '<span style="color:var(--text-muted);font-size:14px;">' + escapeHtml(b.label) + '</span>' +
-        '<span style="font-weight:700;font-size:14px;margin-left:8px;color:var(--text);">' + b.pct.toFixed(1) + '%</span>' +
+      return '<div style="display:flex;align-items:center;gap:8px;">' +
+        '<span style="display:inline-block;width:11px;height:11px;border-radius:2px;background:' + b.color + ';flex-shrink:0;"></span>' +
+        '<span style="color:var(--text-muted);font-size:13px;">' + escapeHtml(b.label) + '</span>' +
+        '<span style="font-weight:700;font-size:13px;margin-left:7px;color:var(--text);">' + b.pct.toFixed(1) + '%</span>' +
       '</div>';
     }).join('');
   }
@@ -4081,7 +4081,7 @@ function renderBudgetPie() {
     const amtHtml = unlocked
       ? '<span style="font-weight:600;color:var(--green);white-space:nowrap;">$' + fmtNum(m.amount) + '</span>'
       : '<span style="color:#444;filter:blur(4px);user-select:none;font-weight:600;">$' + fmtNum(m.amount || 0) + '</span>';
-    return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11.5px;">' +
+    return '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;">' +
       '<span style="color:var(--text);flex:1;min-width:0;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="' + escapeHtml(m.name) + '">' + escapeHtml(m.name) + '</span>' +
       amtHtml +
     '</div>';
