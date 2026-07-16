@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-16T15:46:02.001Z",
+  "lastUpdated": "2026-07-16T15:56:59.956Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see a drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 16, 2026, 8:46 AM",
+    "refreshed": "Jul 16, 2026, 8:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8567,13 +8567,6 @@
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Michelle LaGrange",
-              "team": "Counting Team",
-              "pos": "Offering Counter",
-              "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Manuel Sanchez",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
@@ -8661,6 +8654,34 @@
               "name": "Holly Graham",
               "team": "Hospitality Team",
               "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Tonya Lowry",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Josie Nerska",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Carlos Flores",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             }
@@ -8820,8 +8841,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 102,
-            "totalVols": 102
+            "volsWithServiceTime": 105,
+            "totalVols": 105
           }
         }
       ]
@@ -9388,13 +9409,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Judy McCarthy",
-              "team": "Counting Team",
-              "pos": "Offering Counter",
-              "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Thomas Adams",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
@@ -9505,6 +9519,13 @@
               "pos": "Guide WP, Hawks, Mustangs",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Michelle LaGrange",
+              "team": "Counting Team",
+              "pos": "Offering Counter",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
