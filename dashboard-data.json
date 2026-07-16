@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-16T22:47:22.999Z",
+  "lastUpdated": "2026-07-16T22:58:17.130Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3239,7 +3239,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 22,
+      "current": 21,
       "needed": 23
     },
     {
@@ -3273,7 +3273,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 366,
+  "uniqueVolunteers": 365,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 16, 2026, 3:47 PM",
+    "refreshed": "Jul 16, 2026, 3:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7965,13 +7965,6 @@
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Darren Wilford",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -8663,6 +8656,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Stephanie Tompkins",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -9036,20 +9036,6 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Stephanie Tompkins",
-              "team": "Stepping Stones",
-              "pos": "Check In",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Gordon Fava",
@@ -9662,8 +9648,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 95,
-            "totalVols": 95
+            "volsWithServiceTime": 93,
+            "totalVols": 93
           }
         }
       ]
@@ -9696,13 +9682,6 @@
               "pos": "Coffee Setup",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Darren Wilford",
@@ -10041,8 +10020,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 50,
-            "totalVols": 50
+            "volsWithServiceTime": 49,
+            "totalVols": 49
           }
         }
       ]
@@ -10196,13 +10175,6 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Thomas Peregrin",
               "team": "Service Captains",
               "pos": "Service Captain",
@@ -10322,8 +10294,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 36,
-            "totalVols": 36
+            "volsWithServiceTime": 35,
+            "totalVols": 35
           }
         }
       ]
@@ -10362,13 +10334,6 @@
               "pos": "Coffee Setup",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Darren Wilford",
@@ -10644,8 +10609,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 42,
-            "totalVols": 42
+            "volsWithServiceTime": 41,
+            "totalVols": 41
           }
         }
       ]
@@ -10697,13 +10662,6 @@
               "name": "Jaimie Sullivan",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
             },
@@ -10848,8 +10806,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 24,
+            "totalVols": 24
           }
         }
       ]
@@ -10889,13 +10847,6 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Darren Wilford",
@@ -11024,8 +10975,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 21,
-            "totalVols": 21
+            "volsWithServiceTime": 20,
+            "totalVols": 20
           }
         }
       ]
@@ -11058,13 +11009,6 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Garrett Kooyers",
@@ -11137,8 +11081,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 11,
+            "totalVols": 11
           }
         }
       ]
@@ -11164,13 +11108,6 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Darren Wilford",
@@ -11257,8 +11194,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 13,
-            "totalVols": 13
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
@@ -11297,13 +11234,6 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Mark Buckwalter",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Tonya Lowry",
@@ -11369,8 +11299,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 11,
+            "totalVols": 11
           }
         }
       ]
