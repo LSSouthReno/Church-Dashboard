@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-16T19:47:59.297Z",
+  "lastUpdated": "2026-07-16T20:12:40.666Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 16, 2026, 12:48 PM",
+    "refreshed": "Jul 16, 2026, 1:12 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7487,7 +7487,7 @@
         24,
         23,
         26,
-        15,
+        16,
         null,
         null,
         null,
@@ -7534,7 +7534,7 @@
         15,
         18,
         16,
-        8,
+        9,
         null,
         null,
         null,
@@ -7702,11 +7702,11 @@
       },
       {
         "name": "Isaac Griffin Community Group",
-        "members": 15,
+        "members": 16,
         "leaders": 1,
         "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
         "avgAttended": 8,
-        "attPct": 53
+        "attPct": 50
       },
       {
         "name": "Men’s Tuesday Night: Better Call Paul",
@@ -8367,7 +8367,7 @@
               "name": "Valerie Ridgers",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8518,13 +8518,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Anabel Dito",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "David Wandishin",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -8577,7 +8570,7 @@
               "name": "Jeana Rehberger",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -8649,13 +8642,6 @@
               "pos": "Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Josie Nerska",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Carlos Flores",
@@ -8827,8 +8813,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676341\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ]
@@ -10025,6 +10011,20 @@
               "pos": "Hawks Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Aliyah Ramirez",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -10034,8 +10034,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 48,
-            "totalVols": 48
+            "volsWithServiceTime": 50,
+            "totalVols": 50
           }
         }
       ]
@@ -11423,28 +11423,7 @@
       ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-07-19",
-      "end": "2026-07-19"
-    },
-    {
-      "name": "Adam Carp",
-      "start": "2026-07-21",
-      "end": "2026-07-25"
-    },
-    {
-      "name": "John Conelea",
-      "start": "2026-07-27",
-      "end": "2026-07-30"
-    },
-    {
-      "name": "Katie Thompson",
-      "start": "2026-08-20",
-      "end": "2026-08-24"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
