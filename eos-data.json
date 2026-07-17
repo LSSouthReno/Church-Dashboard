@@ -947,9 +947,9 @@
   ],
   "funnel": {
     "guest": 0,
-    "attender": 63,
+    "attender": 64,
     "member": 356,
-    "group": 425,
+    "group": 429,
     "leader": 87,
     "missionary": 2,
     "asOf": "2026-07-17"
@@ -5072,6 +5072,10 @@
       "name": "Colonna/Mavros Community Group",
       "members": [
         {
+          "name": "Aaron Owens",
+          "role": "member"
+        },
+        {
           "name": "Antonio Cendana",
           "role": "member"
         },
@@ -5737,6 +5741,10 @@
         },
         {
           "name": "Justice JB",
+          "role": "member"
+        },
+        {
+          "name": "Ken Croker",
           "role": "member"
         },
         {
@@ -6746,7 +6754,19 @@
           "role": "leader"
         },
         {
+          "name": "Cory Hunt",
+          "role": "member"
+        },
+        {
           "name": "Daniel Frank",
+          "role": "member"
+        },
+        {
+          "name": "Dean Allman",
+          "role": "member"
+        },
+        {
+          "name": "Gary Berge",
           "role": "member"
         },
         {
@@ -10240,10 +10260,6 @@
           "role": "member"
         },
         {
-          "name": "Mark Buckwalter",
-          "role": "member"
-        },
-        {
           "name": "Morna Edmunds",
           "role": "member"
         },
@@ -10272,7 +10288,12 @@
     {
       "type": "Serve Teams",
       "name": "Chair Crew",
-      "members": []
+      "members": [
+        {
+          "name": "David Castro",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "Serve Teams",
@@ -10345,10 +10366,6 @@
           "role": "member"
         },
         {
-          "name": "Heather Niel",
-          "role": "member"
-        },
-        {
           "name": "Heidi Flores",
           "role": "member"
         },
@@ -10370,10 +10387,6 @@
         },
         {
           "name": "Mike McCarthy",
-          "role": "member"
-        },
-        {
-          "name": "Natalie Christopher",
           "role": "member"
         },
         {
