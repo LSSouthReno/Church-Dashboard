@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-17T10:57:11.518Z",
+  "lastUpdated": "2026-07-17T11:49:35.313Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 17, 2026, 3:57 AM",
+    "refreshed": "Jul 17, 2026, 4:49 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6858,7 +6858,7 @@
       376,
       395,
       415,
-      429
+      430
     ]
   },
   "baptisms": {
@@ -6922,7 +6922,7 @@
     },
     "current": {
       "groups": 39,
-      "members": 429,
+      "members": 430,
       "groupSize": 11,
       "fmInGroupsPct": 55,
       "asOfMonth": "Jul '26"
@@ -7399,7 +7399,7 @@
         376,
         395,
         415,
-        429,
+        430,
         null,
         null,
         null,
@@ -11388,7 +11388,28 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-07-19",
+      "end": "2026-07-19"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-07-21",
+      "end": "2026-07-25"
+    },
+    {
+      "name": "John Conelea",
+      "start": "2026-07-27",
+      "end": "2026-07-30"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -11398,7 +11419,7 @@
     "weeklyAvg": 9,
     "totalFetched": 6914,
     "since": "2026-06-17",
-    "asOf": "2026-07-17T10:44:34.562Z"
+    "asOf": "2026-07-17T11:45:16.583Z"
   },
   "emailStats": {
     "latestOpenRate": 0.5284191829484902,
@@ -11406,6 +11427,6 @@
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-15T21:56:42+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-17T10:44:35.564Z"
+    "asOf": "2026-07-17T11:45:18.771Z"
   }
 }
