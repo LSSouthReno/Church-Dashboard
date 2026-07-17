@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-17T13:50:21.727Z",
+  "lastUpdated": "2026-07-17T14:46:22.135Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6049,7 +6049,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 17, 2026, 6:50 AM",
+    "refreshed": "Jul 17, 2026, 7:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6856,9 +6856,9 @@
       380,
       406,
       376,
-      395,
-      415,
-      430
+      394,
+      414,
+      429
     ]
   },
   "baptisms": {
@@ -6922,7 +6922,7 @@
     },
     "current": {
       "groups": 39,
-      "members": 430,
+      "members": 429,
       "groupSize": 11,
       "fmInGroupsPct": 55,
       "asOfMonth": "Jul '26"
@@ -7397,9 +7397,9 @@
         380,
         406,
         376,
-        395,
-        415,
-        430,
+        394,
+        414,
+        429,
         null,
         null,
         null,
@@ -8668,14 +8668,14 @@
               "name": "Barbara Drake",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
               "name": "Douglas Drake",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -10046,6 +10046,13 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Linda Poleselli",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -10055,8 +10062,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 49,
-            "totalVols": 49
+            "volsWithServiceTime": 50,
+            "totalVols": 50
           }
         }
       ]
@@ -11426,14 +11433,14 @@
     "weeklyAvg": 9,
     "totalFetched": 6914,
     "since": "2026-06-17",
-    "asOf": "2026-07-17T13:45:20.134Z"
+    "asOf": "2026-07-17T14:44:42.037Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.5293072824156305,
-    "avgOpenRate3": 0.46080734550466373,
+    "latestOpenRate": 0.5301953818827708,
+    "avgOpenRate3": 0.46110337866037715,
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-15T21:56:42+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-17T13:45:22.027Z"
+    "asOf": "2026-07-17T14:44:43.339Z"
   }
 }
