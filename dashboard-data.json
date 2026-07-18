@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-18T18:47:07.093Z",
+  "lastUpdated": "2026-07-18T19:00:20.477Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6024,7 +6024,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 18, 2026, 11:47 AM",
+    "refreshed": "Jul 18, 2026, 12:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6899,7 +6899,7 @@
       "groups": 39,
       "members": 426,
       "groupSize": 11,
-      "fmInGroupsPct": 55,
+      "fmInGroupsPct": 54,
       "asOfMonth": "Jul '26"
     },
     "groupCountsByYear": {
@@ -7434,7 +7434,7 @@
         null,
         null,
         6,
-        77,
+        75,
         14,
         17,
         3,
@@ -7453,7 +7453,7 @@
         26,
         23,
         20,
-        13
+        12
       ],
       "2026": [
         55,
@@ -7500,7 +7500,7 @@
         15,
         11,
         13,
-        6
+        5
       ],
       "2026": [
         34,
@@ -7604,14 +7604,6 @@
         "attPct": 54
       },
       {
-        "name": "McCarthy Community Group",
-        "members": 21,
-        "leaders": 1,
-        "schedule": "Meets every other week on Mondays from 6:30-8pm",
-        "avgAttended": 13,
-        "attPct": 62
-      },
-      {
         "name": "Castaneda Community Group",
         "members": 20,
         "leaders": 3,
@@ -7642,6 +7634,14 @@
         "schedule": "Meets weekly on Fridays from 12:30-2:30pm",
         "avgAttended": 6,
         "attPct": 33
+      },
+      {
+        "name": "McCarthy Community Group",
+        "members": 18,
+        "leaders": 1,
+        "schedule": "Meets every other week on Mondays from 6:30-8pm",
+        "avgAttended": 13,
+        "attPct": 72
       },
       {
         "name": "Bell Community Group",
@@ -8342,7 +8342,7 @@
               "name": "Morna Edmunds",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8549,13 +8549,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Jennifer Jauron",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Richard Price",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
@@ -8689,17 +8682,24 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Amanda Hess",
+              "name": "Melissa Peterson",
               "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
+              "pos": "Back Right Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
             },
             {
-              "name": "Alexis Durham",
+              "name": "Amanda Hess",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jennifer Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
               "serviceTime": "11 AM"
             }
           ],
