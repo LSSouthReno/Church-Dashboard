@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-19T15:55:05.939Z",
+  "lastUpdated": "2026-07-19T16:46:14.419Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -220,7 +220,7 @@
       323920,
       343205,
       363983,
-      259093
+      261822
     ],
     "donors": [
       0,
@@ -325,12 +325,12 @@
       374,
       411,
       362,
-      290
+      292
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 4904641
+    "raised": 4907370
   },
   "attendance": {
     "months": [
@@ -934,7 +934,7 @@
       142,
       114,
       109,
-      58
+      70
     ]
   },
   "attendanceWeekly": {
@@ -3198,6 +3198,11 @@
         "week": "Jul 12",
         "adults": 657,
         "kids": 91
+      },
+      {
+        "week": "Jul 19",
+        "adults": 216,
+        "kids": 16
       }
     ]
   },
@@ -6024,7 +6029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 19, 2026, 8:55 AM",
+    "refreshed": "Jul 19, 2026, 9:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9219,7 +9224,7 @@
               "name": "Damian Smith",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11511,9 +11516,9 @@
   "newAdults30d": {
     "count30d": 40,
     "weeklyAvg": 9,
-    "totalFetched": 6917,
+    "totalFetched": 6929,
     "since": "2026-06-19",
-    "asOf": "2026-07-19T15:46:40.512Z"
+    "asOf": "2026-07-19T16:44:38.541Z"
   },
   "emailStats": {
     "latestOpenRate": 0.32926829268292684,
@@ -11521,6 +11526,6 @@
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-07-17T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-19T15:46:42.883Z"
+    "asOf": "2026-07-19T16:44:39.480Z"
   }
 }
