@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-19T18:48:35.586Z",
+  "lastUpdated": "2026-07-19T19:46:15.601Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -220,7 +220,7 @@
       323920,
       343205,
       363983,
-      263514
+      263733
     ],
     "donors": [
       0,
@@ -325,12 +325,12 @@
       374,
       411,
       362,
-      298
+      299
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 4909062
+    "raised": 4909281
   },
   "attendance": {
     "months": [
@@ -3201,8 +3201,8 @@
       },
       {
         "week": "Jul 19",
-        "adults": 540,
-        "kids": 58
+        "adults": 743,
+        "kids": 88
       }
     ]
   },
@@ -6029,7 +6029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 19, 2026, 11:48 AM",
+    "refreshed": "Jul 19, 2026, 12:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9462,7 +9462,7 @@
               "name": "Anita Bigger",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -9527,6 +9527,20 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Simone Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jennie Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9684,8 +9698,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 92,
-            "totalVols": 92
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ]
@@ -10685,6 +10699,13 @@
               "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10694,8 +10715,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 43,
-            "totalVols": 43
+            "volsWithServiceTime": 44,
+            "totalVols": 44
           }
         }
       ]
@@ -11086,6 +11107,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11095,8 +11123,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 21,
-            "totalVols": 21
+            "volsWithServiceTime": 22,
+            "totalVols": 22
           }
         }
       ]
@@ -11199,6 +11227,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11208,8 +11243,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 13,
+            "totalVols": 13
           }
         }
       ]
@@ -11424,6 +11459,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11433,8 +11475,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 13,
+            "totalVols": 13
           }
         }
       ]
@@ -11521,18 +11563,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 40,
-    "weeklyAvg": 9,
-    "totalFetched": 6930,
+    "count30d": 42,
+    "weeklyAvg": 10,
+    "totalFetched": 6932,
     "since": "2026-06-19",
-    "asOf": "2026-07-19T18:45:14.348Z"
+    "asOf": "2026-07-19T19:44:35.741Z"
   },
   "emailStats": {
     "latestOpenRate": 0.32926829268292684,
-    "avgOpenRate3": 0.500946927327352,
+    "avgOpenRate3": 0.5023358566579289,
     "latestCampaign": "Have You Seen This Weeks Stepping Stones Weekly Bulletin?",
     "latestSentAt": "2026-07-17T15:00:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-19T18:45:16.049Z"
+    "asOf": "2026-07-19T19:44:37.063Z"
   }
 }
