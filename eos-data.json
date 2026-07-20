@@ -957,32 +957,6 @@
   "calendar": {
     "events": [
       {
-        "name": "LS Students Middle School Camp",
-        "dateKey": "2026-07-20",
-        "endKey": "2026-07-25",
-        "dayOfWeek": "Mon",
-        "date": "Jul 20",
-        "time": "11:00 AM",
-        "location": "",
-        "owner": "Katie Thompson",
-        "summary": "LS Students Middle School Summer Camp. Registration now open!!",
-        "url": "https://lssr.churchcenter.com/calendar/event/210202268",
-        "reg": "https://lssr.churchcenter.com/registrations/events/3601064",
-        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1785571199&key=uploads%2F447155%2F9c1diwc1dvelpo0ihmgdybbbncwe&thumb=960x540%23&signature=7caec95d88fc2a6911ed16f193667efa3c8857fc6f840cb5473eb364c803c0c5",
-        "desc": "Mission: Promise Royal 2026 This summer, trade your \"what-ifs\" for God’s \"already-dones.\" Inspired by the secret mission in Numbers 13:31 , we’re heading to Elevate Camps to discover that while fear lies, faith listens. Join us for a high-octane week of epic competitions, powerful worship, and life-changing community. Don’t let the \"giants\" in your life hold you back—discover the God who is bigger than them all. Accept the mission. Register now for the best week of your summer. Fear Lies. Faith Listens. [REGISTER HERE]"
-      },
-      {
-        "name": "Staff Meeting ",
-        "dateKey": "2026-07-20",
-        "endKey": null,
-        "dayOfWeek": "Mon",
-        "date": "Jul 20",
-        "time": "12:00 PM",
-        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
-        "timeEnd": "2:00 PM",
-        "owner": "Rachel Primus"
-      },
-      {
         "name": "Grief Share ",
         "dateKey": "2026-07-20",
         "endKey": null,
@@ -1051,17 +1025,6 @@
         "owner": "Lindsay Congdon"
       },
       {
-        "name": "Financial Update ",
-        "dateKey": "2026-07-26",
-        "endKey": null,
-        "dayOfWeek": "Sun",
-        "date": "Jul 26",
-        "time": "7:30 AM",
-        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
-        "timeEnd": "11:00 AM",
-        "owner": "Rachel Primus"
-      },
-      {
         "name": "8am Worship Gathering",
         "dateKey": "2026-07-26",
         "endKey": null,
@@ -1107,6 +1070,17 @@
         "url": "https://lssr.churchcenter.com/calendar/event/161818894",
         "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1785571199&key=uploads%2F447155%2F8hvgzumrtnmednejno44f3rb26vx&thumb=960x540%23&signature=8bc33fd0b45848746643b7d23e548cf01396d25fe87d0b6f73eea0090a4f9582",
         "desc": "Group: All attendees of South Reno Church Campus: South Reno Church"
+      },
+      {
+        "name": "Safety Meeting ",
+        "dateKey": "2026-07-26",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Jul 26",
+        "time": "1:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "2:00 PM",
+        "owner": "Rachel Primus"
       },
       {
         "name": "Coffee Team: Coffe Team Summer BBQ",
@@ -1483,6 +1457,17 @@
         "desc": "Group: South Reno | Worship Team Campus: South Reno Church"
       },
       {
+        "name": "Waterfill maintenance Day",
+        "dateKey": "2026-08-15",
+        "endKey": null,
+        "dayOfWeek": "Sat",
+        "date": "Aug 15",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "11:59 PM",
+        "owner": "Katie Thompson"
+      },
+      {
         "name": "Jordan Missionaries Presentation?",
         "dateKey": "2026-08-16",
         "endKey": null,
@@ -1785,6 +1770,17 @@
         "reg": "https://lssr.churchcenter.com/registrations/events/3457131",
         "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1785571199&key=uploads%2F447155%2F283avpe2mgr8khrlak47ysxeluq3&thumb=960x540%23&signature=3e29489a83bcddf2be406c6be742e73cc28bf62bd9f45d45e98c4db270b3ff16",
         "desc": "Zephyr Cove Lake Tahoe -&nbsp; Beyond the Noise,&nbsp; Living Stones South Reno Women’s Retreat at Beautiful Lake Tahoe &nbsp; Thursday, August 27 – Saturday, August 30 &nbsp; Zephyr Point Presbyterian Conference Center Life is full of noise, distractions, and constant input. &nbsp;Beyond the Noise is an invitation to step away from all of that and simply be. This weekend is about creating space. Space to unplug, slow down, and rest in the presence of God. It is a time to set aside the distractions of everyday life and sit with His truth, allowing it to quiet our minds and steady our hearts. A"
+      },
+      {
+        "name": "Church Work Day",
+        "dateKey": "2026-08-29",
+        "endKey": null,
+        "dayOfWeek": "Sat",
+        "date": "Aug 29",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "11:59 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "8am Worship Gathering",
@@ -4592,13 +4588,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MDI0NH0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTYyMjU0fX19XX0_&Signature=nLdzeRnT~aO5XYscCpBN8QWssKdg-jKq3naknpPC6PbguUqVKIonlqvj8o1V9e94LOrgpMHA8aKJKBv9mIhdnnpdOzeyfCNNVVmntLCqTSOml0DTFICA9dLtLm9Px90AMlt0TmVZPoSovhFeS~ZmtExdQsDuYEHGcF5c~tgYdwThip1pMotqyQKF5fc4yzDgrlfk2I12Jup9N-rxyEwfBAbsz5rsR-ChKy6gqrF1UzP3JK9HN7Rvj84QnetsXkvJonvhNdhdLHPorPUIV2BzzQwjXap3x9orp91kRypD6Chz-qQ~iHFzn6kCvJHxUrozaLSPEdfArz6Q0c9SWhayyg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MzY5Nn0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTY1NzA2fX19XX0_&Signature=cpLeus3T9FQfoF~1wcwxrlekYUNkPEctxkjrx4bML7~-BWjJD4auJhKw3CopbEg~OWitPa2-Bjxpo~C5q5U~AAPn~fO7GmSYmV89klRt7BDl~9CE2pqiamRAkq5LF3MRHG-tLvmCChojmmV6k52JeZP9xlrLQ9qx3jNCphXXNjU9gGAzAvIpvcihYEeIaIyee8bEtqT07rFheHdZQVMwcdYg8Tlccjz3zEtGMFD4aaw2CSBHUqkfrtmpVHBNDZS1sex4xaHauytyShzIwIHYmBinD-AqBJuvNZFvcf8-O7UW6yguajv4WOIBFPPeNlTzEEJ6cfO-gSg3L3gUra7xVg__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MDI0NH0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTYyMjU0fX19XX0_&Signature=nLdzeRnT~aO5XYscCpBN8QWssKdg-jKq3naknpPC6PbguUqVKIonlqvj8o1V9e94LOrgpMHA8aKJKBv9mIhdnnpdOzeyfCNNVVmntLCqTSOml0DTFICA9dLtLm9Px90AMlt0TmVZPoSovhFeS~ZmtExdQsDuYEHGcF5c~tgYdwThip1pMotqyQKF5fc4yzDgrlfk2I12Jup9N-rxyEwfBAbsz5rsR-ChKy6gqrF1UzP3JK9HN7Rvj84QnetsXkvJonvhNdhdLHPorPUIV2BzzQwjXap3x9orp91kRypD6Chz-qQ~iHFzn6kCvJHxUrozaLSPEdfArz6Q0c9SWhayyg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MzY5Nn0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTY1NzA2fX19XX0_&Signature=cpLeus3T9FQfoF~1wcwxrlekYUNkPEctxkjrx4bML7~-BWjJD4auJhKw3CopbEg~OWitPa2-Bjxpo~C5q5U~AAPn~fO7GmSYmV89klRt7BDl~9CE2pqiamRAkq5LF3MRHG-tLvmCChojmmV6k52JeZP9xlrLQ9qx3jNCphXXNjU9gGAzAvIpvcihYEeIaIyee8bEtqT07rFheHdZQVMwcdYg8Tlccjz3zEtGMFD4aaw2CSBHUqkfrtmpVHBNDZS1sex4xaHauytyShzIwIHYmBinD-AqBJuvNZFvcf8-O7UW6yguajv4WOIBFPPeNlTzEEJ6cfO-gSg3L3gUra7xVg__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -4610,7 +4606,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MDI0NH0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTYyMjU0fX19XX0_&Signature=nLdzeRnT~aO5XYscCpBN8QWssKdg-jKq3naknpPC6PbguUqVKIonlqvj8o1V9e94LOrgpMHA8aKJKBv9mIhdnnpdOzeyfCNNVVmntLCqTSOml0DTFICA9dLtLm9Px90AMlt0TmVZPoSovhFeS~ZmtExdQsDuYEHGcF5c~tgYdwThip1pMotqyQKF5fc4yzDgrlfk2I12Jup9N-rxyEwfBAbsz5rsR-ChKy6gqrF1UzP3JK9HN7Rvj84QnetsXkvJonvhNdhdLHPorPUIV2BzzQwjXap3x9orp91kRypD6Chz-qQ~iHFzn6kCvJHxUrozaLSPEdfArz6Q0c9SWhayyg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MzY5Nn0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTY1NzA2fX19XX0_&Signature=cpLeus3T9FQfoF~1wcwxrlekYUNkPEctxkjrx4bML7~-BWjJD4auJhKw3CopbEg~OWitPa2-Bjxpo~C5q5U~AAPn~fO7GmSYmV89klRt7BDl~9CE2pqiamRAkq5LF3MRHG-tLvmCChojmmV6k52JeZP9xlrLQ9qx3jNCphXXNjU9gGAzAvIpvcihYEeIaIyee8bEtqT07rFheHdZQVMwcdYg8Tlccjz3zEtGMFD4aaw2CSBHUqkfrtmpVHBNDZS1sex4xaHauytyShzIwIHYmBinD-AqBJuvNZFvcf8-O7UW6yguajv4WOIBFPPeNlTzEEJ6cfO-gSg3L3gUra7xVg__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -4640,7 +4636,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MDI0NH0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTYyMjU0fX19XX0_&Signature=nLdzeRnT~aO5XYscCpBN8QWssKdg-jKq3naknpPC6PbguUqVKIonlqvj8o1V9e94LOrgpMHA8aKJKBv9mIhdnnpdOzeyfCNNVVmntLCqTSOml0DTFICA9dLtLm9Px90AMlt0TmVZPoSovhFeS~ZmtExdQsDuYEHGcF5c~tgYdwThip1pMotqyQKF5fc4yzDgrlfk2I12Jup9N-rxyEwfBAbsz5rsR-ChKy6gqrF1UzP3JK9HN7Rvj84QnetsXkvJonvhNdhdLHPorPUIV2BzzQwjXap3x9orp91kRypD6Chz-qQ~iHFzn6kCvJHxUrozaLSPEdfArz6Q0c9SWhayyg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvKiIsIkNvbmRpdGlvbiI6eyJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDU3MzY5Nn0sIkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MTY1NzA2fX19XX0_&Signature=cpLeus3T9FQfoF~1wcwxrlekYUNkPEctxkjrx4bML7~-BWjJD4auJhKw3CopbEg~OWitPa2-Bjxpo~C5q5U~AAPn~fO7GmSYmV89klRt7BDl~9CE2pqiamRAkq5LF3MRHG-tLvmCChojmmV6k52JeZP9xlrLQ9qx3jNCphXXNjU9gGAzAvIpvcihYEeIaIyee8bEtqT07rFheHdZQVMwcdYg8Tlccjz3zEtGMFD4aaw2CSBHUqkfrtmpVHBNDZS1sex4xaHauytyShzIwIHYmBinD-AqBJuvNZFvcf8-O7UW6yguajv4WOIBFPPeNlTzEEJ6cfO-gSg3L3gUra7xVg__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
