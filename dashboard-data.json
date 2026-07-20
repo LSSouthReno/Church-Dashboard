@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-20T16:46:03.911Z",
+  "lastUpdated": "2026-07-20T16:57:01.649Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 20, 2026, 9:46 AM",
+    "refreshed": "Jul 20, 2026, 9:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8638,16 +8638,16 @@
             },
             {
               "seq": 4,
-              "title": "This Is Amazing Grace",
+              "title": "You've Already Won",
               "type": "song",
-              "lengthMin": 5,
+              "lengthMin": 6,
               "description": ""
             },
             {
               "seq": 5,
-              "title": "Who You Say I Am",
+              "title": "Firm Foundation (He Won't)",
               "type": "song",
-              "lengthMin": 5,
+              "lengthMin": 6,
               "description": ""
             },
             {
@@ -8659,9 +8659,9 @@
             },
             {
               "seq": 7,
-              "title": "I Belong To Jesus",
+              "title": "Gratitude",
               "type": "song",
-              "lengthMin": 4,
+              "lengthMin": 6,
               "description": ""
             },
             {
@@ -8669,7 +8669,7 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: FIRM FOUNDATION"
             },
             {
               "seq": 9,
@@ -8682,7 +8682,7 @@
               "seq": 10,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 2,
               "description": ""
             },
             {
@@ -8703,7 +8703,7 @@
               "seq": 13,
               "title": "SERMON",
               "type": "item",
-              "lengthMin": 30,
+              "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
@@ -8715,48 +8715,34 @@
             },
             {
               "seq": 15,
-              "title": "COMMUNION",
+              "title": "COMMUNION / OFFERING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 5,
               "description": ""
             },
             {
               "seq": 16,
-              "title": "OFFERING",
-              "type": "item",
-              "lengthMin": 3,
-              "description": ""
-            },
-            {
-              "seq": 17,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
-              "title": "Gratitude",
-              "type": "song",
-              "lengthMin": 6,
-              "description": ""
-            },
-            {
-              "seq": 19,
+              "seq": 17,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 18,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 19,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -9441,6 +9427,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Scarlett Fava",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9450,8 +9443,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 38,
-            "totalVols": 38
+            "volsWithServiceTime": 39,
+            "totalVols": 39
           }
         }
       ]
@@ -9770,6 +9763,48 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Savannah Caliger",
+              "team": "Worship Team",
+              "pos": "Worship Leader",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Corinne Baker",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lisa Castaneda",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Alan Charles",
+              "team": "Worship Team",
+              "pos": "Acoustic Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Sam England",
+              "team": "Worship Team",
+              "pos": "Bass",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -9779,8 +9814,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 43,
-            "totalVols": 43
+            "volsWithServiceTime": 49,
+            "totalVols": 49
           }
         }
       ]
