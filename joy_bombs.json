@@ -1,20 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_172933506_20260712_hospitalityteam",
-      "name": "Holly Graham",
-      "pcoPersonId": "172933506",
-      "team": "Hospitality Team",
-      "phone": "17755315641",
-      "firstServeDate": "2026-07-12",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Host"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -211,7 +196,21 @@
       "notes": "",
       "source": "manual",
       "position": "Sermon Text Reader"
+    },
+    {
+      "id": "jb_172933506_20260712_hospitalityteam",
+      "name": "Holly Graham",
+      "pcoPersonId": "172933506",
+      "team": "Hospitality Team",
+      "phone": "17755315641",
+      "firstServeDate": "2026-07-12",
+      "status": "bombed",
+      "bombedDate": "2026-07-20",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Host"
     }
   ],
-  "lastUpdated": "2026-07-20T19:59:33.560Z"
+  "lastUpdated": "2026-07-20T20:19:48.280Z"
 }
