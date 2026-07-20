@@ -1450,122 +1450,303 @@ if (document.readyState === 'loading') {
 }
 
 // ═══════════════════════════════════════════════
-//  WORD EXPORT — editable .doc that opens in
-//  Microsoft Word or Google Docs
+//  WORD EXPORT — real .docx (OOXML), editable in
+//  Microsoft Word, Apple Pages, and Google Docs.
+//  Styled to mirror the PDF. Library loads on demand.
 // ═══════════════════════════════════════════════
-function downloadWord() {
-  const team = currentTeamName();
-  const gold = '#c49a2e', ink = '#2e2a26', mut = '#8a847e';
-
-  const h2 = t => '<h2 style="font-family:Montserrat,Calibri,sans-serif;font-size:12pt;letter-spacing:2px;text-transform:uppercase;color:' + gold + ';border-bottom:2px solid ' + gold + ';padding-bottom:4px;margin:22pt 0 8pt">' + t + '</h2>';
-  const p = t => t ? '<p style="margin:0 0 8pt;color:' + ink + '">' + esc(t) + '</p>' : '';
-  const lbl = (l, t) => t ? '<p style="margin:0 0 8pt;color:' + ink + '"><b>' + l + ':</b> ' + esc(t) + '</p>' : '';
-  const list = arr => '<ul style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ul>';
-  const olist = arr => '<ol style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ol>';
-  const subhead = t => '<p style="margin:8pt 0 4pt;color:' + ink + '"><b>' + t + '</b></p>';
-  const linesToList = t => list(t.split('\n').filter(l => l.trim()).map(l => esc(l.trim().replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/, ''))));
-
-  let b = '';
-  b += '<p style="color:' + gold + ';letter-spacing:3px;font-size:8pt;text-transform:uppercase;margin:0"><b>Living Stones Church · South Reno</b></p>';
-  b += '<h1 style="font-family:Montserrat,Calibri,sans-serif;font-size:26pt;color:#1a1814;margin:2pt 0 0">' + esc(team) + '</h1>';
-  b += '<p style="color:' + mut + ';margin:2pt 0 14pt">Volunteer Onboarding Guide · Led by ' + esc(val('leader-name') || 'Your Team Leader') + '</p>';
-
-  b += '<p style="background:#f7f4ef;border-left:3px solid ' + gold + ';padding:8pt 10pt;color:' + ink + '">'
-    + esc(val('welcome-message') || ('Welcome to the ' + team + "! We're so glad you're here. This guide covers everything you need to know to get started serving with us.")) + '</p>';
-
-  b += h2('About This Team');
-  b += p(val('team-purpose') || 'This team serves Living Stones Church with excellence and joy.');
-  if (val('team-great')) b += subhead("Why it's great to serve here") + p(val('team-great'));
-
-  b += h2('Your Key Contacts');
-  const rows = [];
-  if (val('leader-name'))  rows.push(['Team Leader', val('leader-name')]);
-  if (val('leader-phone')) rows.push(['Phone / Text', val('leader-phone')]);
-  if (val('leader-email')) rows.push(['Email', val('leader-email')]);
-  if (document.getElementById('has-secondary').checked) {
-    if (val('secondary-contact')) rows.push(['Secondary Contact', val('secondary-contact')]);
-    if (val('secondary-phone'))   rows.push(['Secondary Phone', val('secondary-phone')]);
-    if (val('secondary-email'))   rows.push(['Secondary Email', val('secondary-email')]);
-  }
-  b += rows.length
-    ? '<table cellpadding="6" style="border-collapse:collapse">' + rows.map(r => '<tr><td style="border:1px solid #ddd;background:#f7f4ef;color:' + mut + ';font-size:9pt"><b>' + r[0] + '</b></td><td style="border:1px solid #ddd;color:' + ink + '">' + esc(r[1]) + '</td></tr>').join('') + '</table>'
-    : p('See your team leader for details.');
-
-  b += h2('How We Communicate');
-  const commM = checked('comm-methods');
-  if (commM.length) b += lbl('Platforms we use', commM.join(', '));
-  b += lbl('How to access / join', val('comm-join'));
-  b += p(val('comm-details'));
-  if (!commM.length && !val('comm-join') && !val('comm-details')) b += p('Your leader will walk you through how we stay in touch.');
-
-  b += h2('When We Serve');
-  b += lbl('Service days & times', val('service-days'));
-  b += lbl('Arrival time', val('arrival-time'));
-  b += lbl('Where to go on arrival', val('gather-spot'));
-  b += lbl('Check-in process', val('check-in'));
-  b += lbl('Rehearsals / team meetings', val('rehearsals'));
-  b += lbl('What to wear', val('dress-code'));
-  b += lbl('Pre-service prayer / huddle', val('huddle'));
-  b += lbl('Parking', val('parking'));
-  b += lbl('What to bring', val('bring-items'));
-  if (val('typical-day')) b += subhead('A typical service day') + linesToList(val('typical-day'));
-
-  b += h2('Planning Center — Your Schedule');
-  b += subhead('Getting set up') + olist([
-    'Check your email for an invite from Planning Center — click the link to accept it and create your account.',
-    'Download the <b>Church Center app</b> (iOS or Android) and sign in with the same account.',
-    "Once you're set up, your team leader will add you to the schedule."
-  ]);
-  if (val('sched-advance')) b += lbl('Schedules are posted', val('sched-advance').toLowerCase());
-  b += subhead('Accepting or declining a schedule request') + olist([
-    "When you're scheduled, you'll get a <b>push notification + email</b> from Planning Center.",
-    'Open the <b>Church Center app</b> or click the link in the email.',
-    '<b>Accept or Decline within 48 hours</b> — this helps us fill gaps fast.',
-    'After accepting, tap into the plan to see notes, set lists, or service details.'
-  ]);
-  if (val('sched-resources')) b += lbl('Resources in your schedule', val('sched-resources'));
-  b += subhead("How to block out dates you're unavailable") + olist([
-    'Open the <b>Church Center app</b> and tap your profile picture (top right).',
-    'Tap <b>Serving</b> → then <b>Block Out Dates</b>.',
-    "Select the dates you're unavailable and tap <b>Save</b>.",
-    "We'll see your blocked dates when we build the schedule — no manual follow-up needed!"
-  ]);
-  if (val('sched-notes')) b += lbl('Additional notes', val('sched-notes'));
-
-  b += h2("Can't Make It? Getting Started?");
-  b += lbl("If you can't make it", val('absence-policy'));
-  b += lbl('Background check', val('background-check'));
-  b += lbl('Training process', val('training'));
-  b += lbl('Timeline to serve independently', val('onboard-timeline'));
-  if (!val('absence-policy') && !val('training')) b += p("Communicate with your team leader as early as possible if you can't make it.");
-
-  b += h2("Our Staff Values — The Four H's");
-  b += list([
-    '<b>Humble</b> — We serve others before ourselves, never seeking the spotlight.',
-    '<b>Hungry</b> — Always growing, always learning, never settling for good enough.',
-    '<b>Healthy</b> — We lead from a whole heart — emotionally, spiritually, and relationally.',
-    "<b>Honorable</b> — We do the right thing on and off the stage, even when no one's watching."
-  ]);
-
-  if (val('anything-else')) b += h2('Good to Know') + p(val('anything-else'));
-
-  if (uploadedFiles.length) {
-    b += h2('Supplementary Documents');
-    uploadedFiles.forEach(f => {
-      b += '<p style="margin:6pt 0 2pt;color:' + ink + '">📄 ' + esc(f.name) + '</p>';
-      if (f.dataUrl) b += '<img src="' + f.dataUrl + '" style="width:100%" />';
+let _docxLibPromise = null;
+function loadDocxLib() {
+  if (window.docx) return Promise.resolve(window.docx);
+  if (!_docxLibPromise) {
+    _docxLibPromise = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = () => window.docx ? resolve(window.docx) : reject(new Error('docx global missing'));
+      s.onerror = () => { _docxLibPromise = null; reject(new Error('docx lib failed to load')); };
+      document.head.appendChild(s);
     });
   }
+  return _docxLibPromise;
+}
 
-  b += '<p style="margin-top:24pt;color:' + mut + ';font-size:8pt;letter-spacing:2px;text-transform:uppercase"><b>' + esc(team) + ' — Volunteer Onboarding Guide · Living Stones Church · South Reno</b></p>';
+function dataUrlBytes(dataUrl) {
+  const bin = atob(dataUrl.split(',')[1]);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return arr;
+}
 
-  const doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
-    + '<head><meta charset="utf-8"><title>' + esc(team) + ' Onboarding Guide</title>'
-    + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
-    + "<style>@page{size:8.5in 11.0in;margin:1.0in} body{font-family:Calibri,'Montserrat',sans-serif;font-size:11pt;line-height:1.5}</style>"
-    + '</head><body>' + b + '</body></html>';
+function imgDims(dataUrl) {
+  return new Promise(res => {
+    const im = new Image();
+    im.onload = () => res({ w: im.naturalWidth, h: im.naturalHeight });
+    im.onerror = () => res(null);
+    im.src = dataUrl;
+  });
+}
 
-  downloadBlob(new Blob(['﻿', doc], { type: 'application/msword' }), safeFilename(team) + ' - Onboarding Guide (editable).doc');
+async function fetchLogoBytes() {
+  try {
+    const r = await fetch(new URL('assets/ls-logo-white.png', location.href).href);
+    if (!r.ok) return null;
+    return new Uint8Array(await r.arrayBuffer());
+  } catch (e) { return null; }
+}
+
+async function downloadWord() {
+  let d;
+  try { d = await loadDocxLib(); }
+  catch (e) { alert('Could not load the Word builder — check your internet connection and try again.'); return; }
+
+  const { Document, Packer, Paragraph, TextRun, ImageRun, Table, TableRow, TableCell,
+          WidthType, BorderStyle, AlignmentType, VerticalAlign } = d;
+
+  const GOLD = 'C49A2E', GOLD2 = 'E0B84A', DARK = '1E1C1B', INK = '2E2A26',
+        MUT = '9A9490', CREAM = 'F7F4EF', BOX = 'F2F0EC', GREY = 'B8B2AB';
+  const NB = { style: BorderStyle.NIL };
+  const NO_BORDERS = { top: NB, bottom: NB, left: NB, right: NB, insideHorizontal: NB, insideVertical: NB };
+  const CELL_PAD = { top: 200, bottom: 200, left: 260, right: 260 };
+
+  const team    = currentTeamName();
+  const leader  = val('leader-name') || 'Your Team Leader';
+  const lines   = t => t.split('\n').filter(l => l.trim()).map(l => l.trim().replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/, ''));
+
+  // ── building blocks ──
+  const run  = (text, o) => new TextRun(Object.assign({ text: text, font: 'Montserrat', size: 21, color: INK }, o || {}));
+  const body = (text, o) => new Paragraph(Object.assign({ children: [run(text)], spacing: { after: 140, line: 300 } }, o || {}));
+  const lbl  = (label, text) => !text ? null : new Paragraph({
+    spacing: { after: 140, line: 300 },
+    children: [run(label + ':  ', { bold: true }), run(text)]
+  });
+  const secHead = text => new Paragraph({
+    keepNext: true,
+    spacing: { before: 400, after: 200 },
+    border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 4 } },
+    children: [run(text.toUpperCase(), { bold: true, color: GOLD, size: 17, characterSpacing: 40 })]
+  });
+  const subHead = text => new Paragraph({
+    keepNext: true, spacing: { before: 160, after: 100 },
+    children: [run(text.toUpperCase(), { bold: true, color: MUT, size: 15, characterSpacing: 30 })]
+  });
+  const bullet = text => new Paragraph({
+    spacing: { after: 90, line: 290 }, indent: { left: 260, hanging: 260 },
+    children: [run('▸  ', { bold: true, color: GOLD }), run(text)]
+  });
+  const step = (n, text) => new Paragraph({
+    spacing: { after: 90, line: 290 }, indent: { left: 300, hanging: 300 },
+    children: [run(n + '.  ', { bold: true, color: GOLD }), run(text)]
+  });
+  const shadedBox = children => new Table({
+    width: { size: 100, type: WidthType.PERCENTAGE }, borders: NO_BORDERS,
+    rows: [new TableRow({ children: [new TableCell({ shading: { fill: BOX }, margins: CELL_PAD, children: children })] })]
+  });
+  const gap = (pts) => new Paragraph({ spacing: { after: pts || 120 }, children: [] });
+
+  const kids = [];
+
+  // ── COVER — dark band: logo left, team name + Onboarding Guide right ──
+  const logoBytes = await fetchLogoBytes();
+  const coverRight = [
+    new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 160 },
+      children: [run('LIVING STONES CHURCH · SOUTH RENO', { bold: true, color: GOLD, size: 14, characterSpacing: 50 })] }),
+    new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 60 },
+      children: [run(team, { bold: true, color: 'FFFFFF', size: 54 })] }),
+    new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 220 },
+      children: [run('Onboarding Guide', { italics: true, color: GOLD2, size: 30, font: 'Georgia' })] }),
+    new Paragraph({ alignment: AlignmentType.RIGHT,
+      children: [run('👋 Led by ' + leader, { bold: true, color: GOLD, size: 19 })] })
+  ];
+  const coverCells = [];
+  if (logoBytes) {
+    coverCells.push(new TableCell({
+      width: { size: 24, type: WidthType.PERCENTAGE }, shading: { fill: DARK },
+      verticalAlign: VerticalAlign.CENTER, margins: { top: 340, bottom: 340, left: 340, right: 100 },
+      children: [new Paragraph({ children: [new ImageRun({ data: logoBytes, transformation: { width: 96, height: 96 } })] })]
+    }));
+  }
+  coverCells.push(new TableCell({
+    width: { size: logoBytes ? 76 : 100, type: WidthType.PERCENTAGE }, shading: { fill: DARK },
+    verticalAlign: VerticalAlign.CENTER, margins: { top: 340, bottom: 340, left: 200, right: 340 },
+    children: coverRight
+  }));
+  kids.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: NO_BORDERS,
+    rows: [new TableRow({ children: coverCells })] }));
+  kids.push(gap(200));
+
+  // ── WELCOME ──
+  const welcomeTxt = val('welcome-message') ||
+    ('Welcome to the ' + team + "! We're so glad you're here. This guide covers everything you need to know to get started serving with us.");
+  kids.push(new Paragraph({
+    shading: { fill: CREAM },
+    border: { left: { style: BorderStyle.SINGLE, size: 24, color: GOLD, space: 8 } },
+    spacing: { before: 200, after: 200, line: 320 },
+    indent: { left: 200, right: 200 },
+    children: [run(welcomeTxt)]
+  }));
+
+  // ── ABOUT ──
+  kids.push(secHead('About This Team'));
+  kids.push(body(val('team-purpose') || 'This team serves Living Stones Church with excellence and joy.'));
+  if (val('team-great')) { kids.push(subHead("Why It's Great to Serve Here")); kids.push(body(val('team-great'))); }
+
+  // ── CONTACTS — 2-up cards like the PDF ──
+  kids.push(secHead('Your Key Contacts'));
+  const contacts = [];
+  if (val('leader-name'))  contacts.push(['Team Leader', val('leader-name')]);
+  if (val('leader-phone')) contacts.push(['Phone / Text', val('leader-phone')]);
+  if (val('leader-email')) contacts.push(['Email', val('leader-email')]);
+  if (document.getElementById('has-secondary').checked) {
+    if (val('secondary-contact')) contacts.push(['Secondary Contact', val('secondary-contact')]);
+    if (val('secondary-phone'))   contacts.push(['Secondary Phone', val('secondary-phone')]);
+    if (val('secondary-email'))   contacts.push(['Secondary Email', val('secondary-email')]);
+  }
+  if (!contacts.length) contacts.push(['Contact', 'See your team leader for details']);
+  const cardCell = c => new TableCell({
+    width: { size: 50, type: WidthType.PERCENTAGE },
+    shading: { fill: c ? CREAM : 'FFFFFF' },
+    borders: c ? { top: NB, bottom: NB, right: NB, left: { style: BorderStyle.SINGLE, size: 24, color: GOLD } } : { top: NB, bottom: NB, right: NB, left: NB },
+    margins: { top: 140, bottom: 140, left: 220, right: 160 },
+    children: c ? [
+      new Paragraph({ spacing: { after: 30 }, children: [run(c[0].toUpperCase(), { bold: true, color: MUT, size: 13, characterSpacing: 30 })] }),
+      new Paragraph({ children: [run(c[1], { bold: true, size: 20 })] })
+    ] : [new Paragraph({ children: [] })]
+  });
+  const cardRows = [];
+  for (let i = 0; i < contacts.length; i += 2) {
+    cardRows.push(new TableRow({ children: [cardCell(contacts[i]), cardCell(contacts[i + 1] || null)] }));
+  }
+  kids.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: NO_BORDERS, rows: cardRows }));
+
+  // ── COMMUNICATION ──
+  kids.push(secHead('How We Communicate'));
+  const commM = checked('comm-methods');
+  let anyComm = false;
+  if (commM.length) { kids.push(subHead('Platforms We Use')); commM.forEach(m => kids.push(bullet(m))); anyComm = true; }
+  if (val('comm-join'))    { kids.push(lbl('How to Access / Join', val('comm-join'))); anyComm = true; }
+  if (val('comm-details')) { kids.push(body(val('comm-details'))); anyComm = true; }
+  if (!anyComm) kids.push(body('Your leader will walk you through how we stay in touch.'));
+
+  // ── WHEN WE SERVE ──
+  kids.push(secHead('When We Serve'));
+  [['Service Days & Times', 'service-days'], ['Arrival Time', 'arrival-time'],
+   ['Where to Go on Arrival', 'gather-spot'], ['Check-In Process', 'check-in'],
+   ['Rehearsals / Team Meetings', 'rehearsals'], ['What to Wear', 'dress-code'],
+   ['Pre-Service Prayer / Huddle', 'huddle'], ['Parking', 'parking'],
+   ['What to Bring', 'bring-items']].forEach(pair => {
+    const p = lbl(pair[0], val(pair[1]));
+    if (p) kids.push(p);
+  });
+  if (val('typical-day')) {
+    kids.push(subHead('A Typical Service Day'));
+    lines(val('typical-day')).forEach(l => kids.push(bullet(l)));
+  }
+
+  // ── PLANNING CENTER ──
+  kids.push(secHead('Planning Center — Your Schedule'));
+  kids.push(shadedBox([subHead('Getting Set Up')].concat([
+    'Check your email for an invite from Planning Center — click the link to accept it and create your account.',
+    'Download the Church Center app (iOS or Android) and sign in with the same account.',
+    "Once you're set up, your team leader will add you to the schedule."
+  ].map((s, i) => step(i + 1, s)))));
+  kids.push(gap());
+  if (val('sched-advance')) kids.push(lbl('Schedules Are Posted', val('sched-advance').toLowerCase()));
+  kids.push(shadedBox([subHead('Accepting or Declining a Schedule Request')].concat([
+    "When you're scheduled, you'll get a push notification + email from Planning Center.",
+    'Open the Church Center app or click the link in the email.',
+    'Accept or Decline within 48 hours — this helps us fill gaps fast.',
+    'After accepting, tap into the plan to see notes, set lists, or service details.'
+  ].map((s, i) => step(i + 1, s)))));
+  kids.push(gap());
+  if (val('sched-resources')) kids.push(lbl('Resources in Your Schedule', val('sched-resources')));
+  kids.push(shadedBox([subHead("How to Block Out Dates You're Unavailable")].concat([
+    'Open the Church Center app and tap your profile picture (top right).',
+    'Tap Serving → then Block Out Dates.',
+    "Select the dates you're unavailable and tap Save.",
+    "We'll see your blocked dates when we build the schedule — no manual follow-up needed!"
+  ].map((s, i) => step(i + 1, s)))));
+  if (val('sched-notes')) { kids.push(gap()); kids.push(lbl('Additional Notes', val('sched-notes'))); }
+
+  // ── ABSENCES + TRAINING ──
+  kids.push(secHead("Can't Make It? Getting Started?"));
+  let anyAb = false;
+  [["If You Can't Make It", 'absence-policy'], ['Background Check', 'background-check'],
+   ['Training Process', 'training'], ['Timeline to Serve Independently', 'onboard-timeline']].forEach(pair => {
+    const p = lbl(pair[0], val(pair[1]));
+    if (p) { kids.push(p); anyAb = true; }
+  });
+  if (!anyAb) kids.push(body("Communicate with your team leader as early as possible if you can't make it."));
+
+  // ── FOUR H'S — 2×2 dark cards ──
+  kids.push(secHead("Our Staff Values — The Four H's"));
+  const hs = [
+    ['Humble', 'We serve others before ourselves, never seeking the spotlight.'],
+    ['Hungry', 'Always growing, always learning, never settling for good enough.'],
+    ['Healthy', 'We lead from a whole heart — emotionally, spiritually, and relationally.'],
+    ['Honorable', "We do the right thing on and off the stage, even when no one's watching."]
+  ];
+  const hCell = h => new TableCell({
+    width: { size: 50, type: WidthType.PERCENTAGE }, shading: { fill: DARK },
+    borders: { top: { style: BorderStyle.SINGLE, size: 6, color: 'FFFFFF' }, bottom: { style: BorderStyle.SINGLE, size: 6, color: 'FFFFFF' }, left: { style: BorderStyle.SINGLE, size: 6, color: 'FFFFFF' }, right: { style: BorderStyle.SINGLE, size: 6, color: 'FFFFFF' } },
+    margins: { top: 200, bottom: 200, left: 260, right: 260 },
+    children: [
+      new Paragraph({ spacing: { after: 40 }, children: [run('H', { bold: true, color: GOLD, size: 34 })] }),
+      new Paragraph({ spacing: { after: 60 }, children: [run(h[0].toUpperCase(), { bold: true, color: 'FFFFFF', size: 17, characterSpacing: 40 })] }),
+      new Paragraph({ children: [run(h[1], { color: GREY, size: 17 })] })
+    ]
+  });
+  kids.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: NO_BORDERS,
+    rows: [new TableRow({ children: [hCell(hs[0]), hCell(hs[1])] }),
+           new TableRow({ children: [hCell(hs[2]), hCell(hs[3])] })] }));
+
+  // ── GOOD TO KNOW ──
+  if (val('anything-else')) { kids.push(secHead('Good to Know')); kids.push(body(val('anything-else'))); }
+
+  // ── ATTACHMENTS ──
+  if (uploadedFiles.length) {
+    kids.push(secHead('Supplementary Documents'));
+    for (const f of uploadedFiles) {
+      kids.push(new Paragraph({ keepNext: true, spacing: { before: 120, after: 60 },
+        children: [run((f.dataUrl ? '' : '📄 ') + f.name, { bold: true, color: MUT, size: 15, characterSpacing: 30 })] }));
+      if (f.dataUrl) {
+        try {
+          const dims = await imgDims(f.dataUrl);
+          if (dims) {
+            const scale = Math.min(1, 600 / dims.w);
+            kids.push(new Paragraph({ spacing: { after: 140 }, children: [new ImageRun({
+              data: dataUrlBytes(f.dataUrl),
+              transformation: { width: Math.round(dims.w * scale), height: Math.round(dims.h * scale) }
+            })] }));
+          }
+        } catch (e) { /* skip unembeddable image, name stays listed */ }
+      }
+    }
+  }
+
+  // ── FOOTER ──
+  kids.push(gap(200));
+  kids.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: NO_BORDERS,
+    rows: [new TableRow({ children: [
+      new TableCell({ width: { size: 55, type: WidthType.PERCENTAGE }, shading: { fill: BOX }, margins: { top: 140, bottom: 140, left: 220, right: 120 },
+        children: [new Paragraph({ children: [run(team + ' — Volunteer Onboarding Guide', { bold: true, color: MUT, size: 14 })] })] }),
+      new TableCell({ width: { size: 45, type: WidthType.PERCENTAGE }, shading: { fill: BOX }, margins: { top: 140, bottom: 140, left: 120, right: 220 },
+        children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [run('LIVING STONES CHURCH · SOUTH RENO', { bold: true, color: GOLD, size: 14, characterSpacing: 30 })] })] })
+    ] })] }));
+
+  const doc = new Document({
+    styles: { default: { document: { run: { font: 'Montserrat', size: 21, color: INK } } } },
+    sections: [{
+      properties: { page: { margin: { top: 850, bottom: 850, left: 1000, right: 1000 } } },
+      children: kids
+    }]
+  });
+
+  try {
+    const blob = await Packer.toBlob(doc);
+    downloadBlob(blob, safeFilename(team) + ' - Onboarding Guide.docx');
+  } catch (e) {
+    console.error('docx build failed:', e);
+    alert('Something went wrong building the Word file. Try again, or use Print / Save PDF.');
+  }
 }
 </script>
 </body>
