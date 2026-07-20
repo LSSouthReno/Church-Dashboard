@@ -6,7 +6,7 @@
 <title>Team Onboarding Guide · Living Stones Church</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -273,6 +273,13 @@
     );
     pointer-events: none;
   }
+  .doc-cover-row {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+  }
+  .doc-logo { width: 104px; height: auto; flex-shrink: 0; }
+  .doc-cover-right { text-align: right; min-width: 0; }
   .doc-eyebrow {
     font-size: .62rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: .18em;
@@ -283,8 +290,18 @@
     line-height: 1.1; color: #fff;
     letter-spacing: -.01em;
   }
-  .doc-subtitle { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: .35rem; font-weight: 400; }
-  .doc-gold-bar { width: 48px; height: 3px; background: #c49a2e; border-radius: 2px; margin: 1.3rem 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .doc-subtitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic; font-weight: 500;
+    font-size: 1.35rem; color: #e0b84a;
+    margin-top: .35rem; letter-spacing: .03em;
+  }
+  .doc-cover-foot {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: 1.7rem;
+  }
+  .doc-gold-bar { width: 48px; height: 3px; background: #c49a2e; border-radius: 2px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .doc-leader-pill {
     display: inline-flex; align-items: center; gap: .5rem;
     background: rgba(196,154,46,.15);
@@ -455,8 +472,13 @@
     #preview-overlay.open { position: static; background: #fff; padding: 0; overflow: visible; }
     #preview-overlay.open > div { max-width: 100%; }
     #pdf-doc { max-width: 100%; border-radius: 0; overflow: visible; }
-    .doc-card, .h-card, .doc-step-box, .doc-tip, .doc-welcome { break-inside: avoid; }
-    @page { margin: 0; size: letter; }
+    .doc-sec { break-inside: avoid; }
+    .doc-sec:has(#d-schedule), .doc-sec:has(#d-pco), .doc-sec:has(#d-attachments) { break-inside: auto; }
+    .doc-sec-title { break-after: avoid; }
+    .doc-card, .h-card, .h-grid, .doc-cards, .doc-step-box, .doc-tip, .doc-welcome, .doc-list li, .doc-steps li { break-inside: avoid; }
+    p, li { orphans: 3; widows: 3; }
+    @page { margin: 0.5in 0 0.55in; size: letter; }
+    @page :first { margin-top: 0; }
   }
 </style>
 </head>
@@ -807,11 +829,18 @@
       <!-- COVER -->
       <div class="doc-cover">
         <div class="doc-cover-pattern"></div>
-        <div class="doc-eyebrow">Living Stones Church · South Reno</div>
-        <div class="doc-team-name" id="d-team-name">Team Onboarding Guide</div>
-        <div class="doc-subtitle" id="d-subtitle"></div>
-        <div class="doc-gold-bar"></div>
-        <div class="doc-leader-pill">👋 Led by <strong id="d-leader-cover" style="margin-left:.3rem"></strong></div>
+        <div class="doc-cover-row">
+          <img class="doc-logo" id="d-logo" src="assets/ls-logo-white.png" alt="Living Stones Church">
+          <div class="doc-cover-right">
+            <div class="doc-eyebrow">Living Stones Church · South Reno</div>
+            <div class="doc-team-name" id="d-team-name">Team Name</div>
+            <div class="doc-subtitle" id="d-subtitle">Onboarding Guide</div>
+          </div>
+        </div>
+        <div class="doc-cover-foot">
+          <div class="doc-gold-bar"></div>
+          <div class="doc-leader-pill">👋 Led by <strong id="d-leader-cover" style="margin-left:.3rem"></strong></div>
+        </div>
       </div>
 
       <!-- BODY -->
@@ -995,7 +1024,9 @@ function bullets(text) {
 function bulletLines(text) {
   if (!text.trim()) return '';
   const lines = text.split('\n').filter(l=>l.trim());
-  return '<ul class="doc-list">'+lines.map(l=>'<li>'+esc(l.replace(/^[•\-\*0-9\.\s]*/,''))+'</li>').join('')+'</ul>';
+  // Strip only bullet markers ("• ", "- ", "* ", "1. ", "1) ") — never digits
+  // that are part of the content, like the "9" in "9:10 - At Post".
+  return '<ul class="doc-list">'+lines.map(l=>'<li>'+esc(l.trim().replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/,''))+'</li>').join('')+'</ul>';
 }
 function card(lbl,v) {
   if (!v) return '';
@@ -1050,13 +1081,14 @@ function openPreview() {
 
   // COVER
   document.getElementById('d-team-name').textContent = team;
-  document.getElementById('d-subtitle').textContent  = 'Volunteer Onboarding Guide';
   document.getElementById('d-leader-cover').textContent = lName || 'Your Team Leader';
+  // Absolute URL so the logo also resolves inside the print frame
+  document.getElementById('d-logo').src = new URL('assets/ls-logo-white.png', location.href).href;
 
   // WELCOME
   document.getElementById('d-welcome').innerHTML = welcome
-    ? '💌 '+esc(welcome)
-    : '💌 Welcome to the '+esc(team)+'! We\'re so glad you\'re here. This guide covers everything you need to know to get started serving with us.';
+    ? esc(welcome)
+    : 'Welcome to the '+esc(team)+'! We\'re so glad you\'re here. This guide covers everything you need to know to get started serving with us.';
 
   // PURPOSE + GREAT
   document.getElementById('d-purpose').textContent = purpose || 'This team serves Living Stones Church with excellence and joy.';
@@ -1194,7 +1226,7 @@ function printGuide() {
   const idoc = iframe.contentDocument;
   idoc.open();
   idoc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(title) + '</title>'
-    + '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">'
+    + '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">'
     + '<style>'
     + '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}'
     + 'html,body{background:#fff}'
@@ -1202,9 +1234,18 @@ function printGuide() {
     + document.getElementById('doc-styles').innerHTML
     + '#pdf-doc{max-width:100% !important;border-radius:0 !important;overflow:visible !important}'
     + '.doc-cover{border-radius:0}'
-    + '.doc-card,.h-card,.doc-step-box,.doc-tip,.doc-welcome,.doc-attach-img,.doc-attach-list li,.doc-list li,.doc-steps li{break-inside:avoid;page-break-inside:avoid}'
-    + '.doc-sec-title{break-after:avoid}'
-    + '@page{size:letter;margin:0}'
+    // Page-break aesthetics: keep each section as one block (long form-driven
+    // sections may still break, but never right after their heading), keep
+    // cards/steps/list rows whole, and never strand a lone line of a paragraph.
+    + '.doc-sec{break-inside:avoid;page-break-inside:avoid}'
+    + '.doc-sec:has(#d-schedule),.doc-sec:has(#d-pco),.doc-sec:has(#d-attachments){break-inside:auto;page-break-inside:auto}'
+    + '.doc-sec-title{break-after:avoid;page-break-after:avoid}'
+    + '.doc-divider{break-after:avoid}'
+    + '.doc-card,.h-card,.h-grid,.doc-cards,.doc-step-box,.doc-tip,.doc-welcome,.doc-attach-img,.doc-attach-list li,.doc-list li,.doc-steps li{break-inside:avoid;page-break-inside:avoid}'
+    + '.doc-cover,.doc-footer{break-inside:avoid;page-break-inside:avoid}'
+    + 'p,li{orphans:3;widows:3}'
+    + '@page{size:letter;margin:0.5in 0 0.55in}'
+    + '@page :first{margin-top:0}'
     + '</style></head><body>'
     + document.getElementById('pdf-doc').outerHTML
     + '</body></html>');
@@ -1214,9 +1255,14 @@ function printGuide() {
     iframe.contentWindow.print();
     setTimeout(() => iframe.remove(), 60000);
   };
+  const imagesReady = () =>
+    Promise.all([...idoc.images].map(img =>
+      img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })));
   const waitReady = () => {
     if (idoc.readyState === 'complete') {
-      (idoc.fonts && idoc.fonts.ready ? idoc.fonts.ready : Promise.resolve()).then(() => setTimeout(fire, 200));
+      (idoc.fonts && idoc.fonts.ready ? idoc.fonts.ready : Promise.resolve())
+        .then(imagesReady)
+        .then(() => setTimeout(fire, 200));
     } else {
       setTimeout(waitReady, 100);
     }
@@ -1417,7 +1463,7 @@ function downloadWord() {
   const list = arr => '<ul style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ul>';
   const olist = arr => '<ol style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ol>';
   const subhead = t => '<p style="margin:8pt 0 4pt;color:' + ink + '"><b>' + t + '</b></p>';
-  const linesToList = t => list(t.split('\n').filter(l => l.trim()).map(l => esc(l.replace(/^[•\-\*0-9\.\s]*/, ''))));
+  const linesToList = t => list(t.split('\n').filter(l => l.trim()).map(l => esc(l.trim().replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/, ''))));
 
   let b = '';
   b += '<p style="color:' + gold + ';letter-spacing:3px;font-size:8pt;text-transform:uppercase;margin:0"><b>Living Stones Church · South Reno</b></p>';
