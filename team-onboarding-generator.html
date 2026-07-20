@@ -196,9 +196,52 @@
   .btn-close  { background: var(--card2); color: var(--muted); border: 1px solid var(--border); }
   .btn-close:hover  { color: var(--text); }
 
-  /* ══════════════════════════════════════════
-     PDF DOCUMENT
-  ══════════════════════════════════════════ */
+  /* ── SAVED GUIDES / ACTION BUTTONS ── */
+  .btn-secondary {
+    padding: .7rem 1rem;
+    background: var(--card2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color .15s, color .15s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent2); }
+  .save-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: .8rem; }
+  @media (max-width: 560px) { .save-row { grid-template-columns: 1fr; } }
+  .saved-bar { display: flex; gap: .6rem; }
+  .saved-bar select { flex: 1; }
+  .saved-bar .btn-secondary { flex-shrink: 0; padding: .55rem .9rem; }
+  .saved-hint { font-size: .74rem; color: var(--muted); margin-top: .45rem; line-height: 1.5; }
+  .draft-note {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: .7rem 1rem;
+    font-size: .8rem;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; justify-content: space-between; gap: .8rem;
+  }
+  .draft-note button {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer; padding: .3rem .7rem;
+    font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .draft-note button:hover { color: var(--text); border-color: var(--accent); }
+</style>
+
+<!-- Styles for the generated document itself. Kept in a separate tag so the
+     print frame and exports can reuse them verbatim (single source of truth). -->
+<style id="doc-styles">
   #pdf-doc {
     background: #ffffff;
     width: 100%; max-width: 740px;
@@ -367,7 +410,9 @@
     print-color-adjust: exact;
   }
   .doc-attach-img { width: 100%; border-radius: 7px; margin-bottom: .6rem; display: block; }
+</style>
 
+<style>
   /* Upload zone in form */
   .upload-zone {
     border: 2px dashed var(--border);
@@ -400,13 +445,17 @@
   }
   .file-list li button:hover { color: var(--danger); }
 
-  /* ── PRINT ── */
+  /* ── PRINT (fallback for Cmd/Ctrl+P — the Print button uses a dedicated
+        clean frame via printGuide(), which is the reliable path) ── */
   @media print {
-    body * { visibility: hidden; }
-    #pdf-doc, #pdf-doc * { visibility: visible; }
-    #pdf-doc { position: absolute; inset: 0; max-width: 100%; border-radius: 0; }
-    #preview-overlay { display: block !important; overflow: visible; padding: 0; }
-    .preview-toolbar { display: none !important; }
+    body { background: #fff !important; }
+    body:has(#preview-overlay.open) .app-header,
+    body:has(#preview-overlay.open) .container,
+    body:has(#preview-overlay.open) .preview-toolbar { display: none !important; }
+    #preview-overlay.open { position: static; background: #fff; padding: 0; overflow: visible; }
+    #preview-overlay.open > div { max-width: 100%; }
+    #pdf-doc { max-width: 100%; border-radius: 0; overflow: visible; }
+    .doc-card, .h-card, .doc-step-box, .doc-tip, .doc-welcome { break-inside: avoid; }
     @page { margin: 0; size: letter; }
   }
 </style>
@@ -422,6 +471,26 @@
 </header>
 
 <div class="container">
+
+  <div class="draft-note" id="draft-note" style="display:none">
+    <span>✔ We restored your work-in-progress from last time. Keep going, or start over.</span>
+    <button onclick="clearDraft()">Start Fresh</button>
+  </div>
+
+  <!-- ════════════════ SAVED GUIDES ════════════════ -->
+  <div class="sec-title">Saved Guides</div>
+
+  <div class="field">
+    <label>Open a previously saved guide</label>
+    <div class="saved-bar">
+      <select id="saved-select">
+        <option value="">— No saved guides in this browser yet —</option>
+      </select>
+      <button class="btn-secondary" onclick="loadSelectedGuide()">Load</button>
+      <button class="btn-secondary" onclick="deleteSelectedGuide()">Delete</button>
+    </div>
+    <p class="saved-hint">Guides save to <strong>this browser on this computer</strong>. To edit a guide on a different computer (or hand it to someone else), use <strong>Export Guide File</strong> at the bottom of the form and send them the file — they can import it here and pick up where you left off.</p>
+  </div>
 
   <!-- ════════════════ TEAM INFO ════════════════ -->
   <div class="sec-title">Team Info</div>
@@ -707,6 +776,16 @@
 
   <button class="generate-btn" onclick="openPreview()">Generate Onboarding Guide →</button>
 
+  <div class="save-row">
+    <button class="btn-secondary" onclick="saveGuide()">💾 Save to This Browser</button>
+    <button class="btn-secondary" onclick="exportGuideFile()">⬇ Export Guide File</button>
+    <label class="btn-secondary">
+      📂 Import Guide File
+      <input type="file" accept=".json,application/json" style="display:none" onchange="importGuideFile(this.files[0]); this.value='';">
+    </label>
+  </div>
+  <p class="saved-hint">Your work also auto-saves in this browser as you type, so a closed tab won't lose anything.</p>
+
 </div>
 
 <!-- ════════════════════════════════════════
@@ -717,7 +796,8 @@
     <div class="preview-toolbar">
       <h3>ONBOARDING GUIDE PREVIEW</h3>
       <div class="tb-btns">
-        <button class="btn-sm btn-print" onclick="window.print()">🖨 Print / Save PDF</button>
+        <button class="btn-sm btn-print" onclick="printGuide()">🖨 Print / Save PDF</button>
+        <button class="btn-sm btn-close" onclick="downloadWord()" style="color:var(--accent2)">⬇ Word (Editable)</button>
         <button class="btn-sm btn-close" onclick="closePreview()">✕ Close</button>
       </div>
     </div>
@@ -851,18 +931,20 @@ function handleFiles(files) {
     const entry = { name: file.name, type: file.type, dataUrl: null };
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
-      reader.onload = e => { entry.dataUrl = e.target.result; renderFileList(); };
+      reader.onload = e => { entry.dataUrl = e.target.result; renderFileList(); scheduleDraftSave(); };
       reader.readAsDataURL(file);
     }
     uploadedFiles.push(entry);
     renderFileList();
   });
+  scheduleDraftSave();
 }
 
 function removeFile(name) {
   const i = uploadedFiles.findIndex(f => f.name === name);
   if (i > -1) uploadedFiles.splice(i, 1);
   renderFileList();
+  scheduleDraftSave();
 }
 
 function renderFileList() {
@@ -881,7 +963,7 @@ function handleTeamSelect(v) {
 }
 
 // drag-and-drop on upload zone
-document.addEventListener('DOMContentLoaded', () => {
+function initDropZone() {
   const zone = document.getElementById('upload-zone');
   zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--accent)'; });
   zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
@@ -890,11 +972,11 @@ document.addEventListener('DOMContentLoaded', () => {
     zone.style.borderColor = '';
     handleFiles(e.dataTransfer.files);
   });
-});
+}
 
 function val(id) { return (document.getElementById(id)||{}).value||''; }
 function checked(id) { return [...document.querySelectorAll('#'+id+' input:checked')].map(c=>c.value); }
-function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function block(label, text) {
   if (!text.trim()) return '';
@@ -1098,6 +1180,347 @@ function closePreview() {
 document.getElementById('preview-overlay').addEventListener('click', function(e) {
   if (e.target === this) closePreview();
 });
+
+// ═══════════════════════════════════════════════
+//  PRINT — renders the guide into a clean, white,
+//  print-only frame so page backgrounds never bleed in
+// ═══════════════════════════════════════════════
+function printGuide() {
+  const title = currentTeamName() + ' — Onboarding Guide';
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('aria-hidden', 'true');
+  iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;';
+  document.body.appendChild(iframe);
+  const idoc = iframe.contentDocument;
+  idoc.open();
+  idoc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(title) + '</title>'
+    + '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">'
+    + '<style>'
+    + '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}'
+    + 'html,body{background:#fff}'
+    + "body{font-family:'Montserrat',system-ui,sans-serif;line-height:1.6;color:#1a1814;-webkit-print-color-adjust:exact;print-color-adjust:exact}"
+    + document.getElementById('doc-styles').innerHTML
+    + '#pdf-doc{max-width:100% !important;border-radius:0 !important;overflow:visible !important}'
+    + '.doc-cover{border-radius:0}'
+    + '.doc-card,.h-card,.doc-step-box,.doc-tip,.doc-welcome,.doc-attach-img,.doc-attach-list li,.doc-list li,.doc-steps li{break-inside:avoid;page-break-inside:avoid}'
+    + '.doc-sec-title{break-after:avoid}'
+    + '@page{size:letter;margin:0}'
+    + '</style></head><body>'
+    + document.getElementById('pdf-doc').outerHTML
+    + '</body></html>');
+  idoc.close();
+  const fire = () => {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+    setTimeout(() => iframe.remove(), 60000);
+  };
+  const waitReady = () => {
+    if (idoc.readyState === 'complete') {
+      (idoc.fonts && idoc.fonts.ready ? idoc.fonts.ready : Promise.resolve()).then(() => setTimeout(fire, 200));
+    } else {
+      setTimeout(waitReady, 100);
+    }
+  };
+  waitReady();
+}
+
+// ═══════════════════════════════════════════════
+//  SAVE / LOAD / EXPORT / IMPORT + DRAFT AUTOSAVE
+// ═══════════════════════════════════════════════
+const STORE_KEY = 'lssr-onboarding-guides';
+const DRAFT_KEY = 'lssr-onboarding-draft';
+const TEXT_FIELDS = ['team-name','team-name-other','team-purpose','team-great','leader-name','leader-phone','leader-email','secondary-contact','secondary-phone','secondary-email','comm-join','comm-details','service-days','arrival-time','gather-spot','check-in','rehearsals','typical-day','dress-code','parking','huddle','bring-items','sched-advance','sched-resources','sched-notes','absence-policy','training','background-check','onboard-timeline','welcome-message','anything-else'];
+
+function collectFormData() {
+  const data = {
+    fields: {},
+    hasSecondary: document.getElementById('has-secondary').checked,
+    commMethods: checked('comm-methods'),
+    files: uploadedFiles.map(f => ({ name: f.name, type: f.type, dataUrl: f.dataUrl }))
+  };
+  TEXT_FIELDS.forEach(id => data.fields[id] = val(id));
+  return data;
+}
+
+function applyFormData(d) {
+  if (!d) return;
+  TEXT_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = (d.fields && d.fields[id]) || '';
+  });
+  handleTeamSelect(val('team-name'));
+  if (d.fields && d.fields['team-name-other']) document.getElementById('team-name-other').value = d.fields['team-name-other'];
+  document.getElementById('has-secondary').checked = !!d.hasSecondary;
+  document.getElementById('secondary-fields').style.display = d.hasSecondary ? '' : 'none';
+  document.querySelectorAll('#comm-methods input').forEach(c => c.checked = (d.commMethods || []).includes(c.value));
+  uploadedFiles.length = 0;
+  (d.files || []).forEach(f => uploadedFiles.push(f));
+  renderFileList();
+}
+
+function hasContent(d) {
+  return !!(d && ((d.fields && Object.values(d.fields).some(v => v && v.trim())) || (d.files && d.files.length)));
+}
+
+function currentTeamName() {
+  const t = val('team-name');
+  return t === 'Other' ? (val('team-name-other') || 'Team') : (t || 'Team');
+}
+
+function getStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
+
+function saveGuide() {
+  const name = prompt('Save this guide as:', currentTeamName() + ' Onboarding Guide');
+  if (!name) return;
+  const store = getStore();
+  store[name] = { savedAt: new Date().toISOString(), data: collectFormData() };
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  } catch (e) {
+    // Storage quota — retry without embedded images
+    store[name].data.files = store[name].data.files.map(f => ({ name: f.name, type: f.type, dataUrl: null }));
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      renderSavedList();
+      alert('Saved — but your uploaded images were too large to keep in browser storage. Re-attach them after loading, or use Export Guide File (it keeps images).');
+      return;
+    } catch (e2) {
+      alert('Could not save — browser storage is full. Use Export Guide File instead.');
+      return;
+    }
+  }
+  renderSavedList();
+  document.getElementById('saved-select').value = name;
+  alert('Saved! "' + name + '" will be waiting in the Saved Guides list next time you open this page in this browser.');
+}
+
+function renderSavedList() {
+  const store = getStore();
+  const names = Object.keys(store).sort((a, b) => (store[b].savedAt || '').localeCompare(store[a].savedAt || ''));
+  const sel = document.getElementById('saved-select');
+  sel.innerHTML = '<option value="">'
+    + (names.length ? '— Select a saved guide —' : '— No saved guides in this browser yet —')
+    + '</option>'
+    + names.map(n => '<option value="' + esc(n) + '">' + esc(n) + '  ·  saved ' + new Date(store[n].savedAt).toLocaleDateString() + '</option>').join('');
+}
+
+function loadSelectedGuide() {
+  const name = document.getElementById('saved-select').value;
+  if (!name) { alert('Choose a saved guide from the dropdown first.'); return; }
+  const entry = getStore()[name];
+  if (!entry) { alert('That guide could not be found.'); renderSavedList(); return; }
+  applyFormData(entry.data);
+  scheduleDraftSave();
+  document.getElementById('draft-note').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function deleteSelectedGuide() {
+  const name = document.getElementById('saved-select').value;
+  if (!name) { alert('Choose a saved guide from the dropdown first.'); return; }
+  if (!confirm('Delete "' + name + '" from this browser? This can\'t be undone.')) return;
+  const store = getStore();
+  delete store[name];
+  localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  renderSavedList();
+}
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
+function safeFilename(s) { return s.replace(/[\\\/:*?"<>|]+/g, '').trim() || 'Onboarding Guide'; }
+
+function exportGuideFile() {
+  const payload = { app: 'lssr-onboarding-guide', version: 1, exportedAt: new Date().toISOString(), data: collectFormData() };
+  downloadBlob(
+    new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }),
+    safeFilename(currentTeamName()) + ' - Onboarding Guide (editable).json'
+  );
+}
+
+function importGuideFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      const d = parsed && parsed.app === 'lssr-onboarding-guide' ? parsed.data : parsed;
+      if (!hasContent(d)) throw new Error('empty');
+      applyFormData(d);
+      scheduleDraftSave();
+      document.getElementById('draft-note').style.display = 'none';
+      alert('Guide imported! Review the form, make your edits, then hit Generate.');
+    } catch (err) {
+      alert("That file doesn't look like an exported guide file.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+// Draft autosave — everything typed is kept in this browser automatically
+let draftTimer = null;
+function scheduleDraftSave() {
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(() => {
+    const d = collectFormData();
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+    } catch (e) {
+      d.files = d.files.map(f => ({ name: f.name, type: f.type, dataUrl: null }));
+      try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); } catch (e2) {}
+    }
+  }, 600);
+}
+document.addEventListener('input', scheduleDraftSave);
+document.addEventListener('change', scheduleDraftSave);
+
+function clearDraft() {
+  localStorage.removeItem(DRAFT_KEY);
+  location.reload();
+}
+
+function initGenerator() {
+  initDropZone();
+  renderSavedList();
+  try {
+    const draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+    if (hasContent(draft)) {
+      applyFormData(draft);
+      document.getElementById('draft-note').style.display = '';
+    }
+  } catch (e) {}
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGenerator);
+} else {
+  initGenerator();
+}
+
+// ═══════════════════════════════════════════════
+//  WORD EXPORT — editable .doc that opens in
+//  Microsoft Word or Google Docs
+// ═══════════════════════════════════════════════
+function downloadWord() {
+  const team = currentTeamName();
+  const gold = '#c49a2e', ink = '#2e2a26', mut = '#8a847e';
+
+  const h2 = t => '<h2 style="font-family:Montserrat,Calibri,sans-serif;font-size:12pt;letter-spacing:2px;text-transform:uppercase;color:' + gold + ';border-bottom:2px solid ' + gold + ';padding-bottom:4px;margin:22pt 0 8pt">' + t + '</h2>';
+  const p = t => t ? '<p style="margin:0 0 8pt;color:' + ink + '">' + esc(t) + '</p>' : '';
+  const lbl = (l, t) => t ? '<p style="margin:0 0 8pt;color:' + ink + '"><b>' + l + ':</b> ' + esc(t) + '</p>' : '';
+  const list = arr => '<ul style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ul>';
+  const olist = arr => '<ol style="margin:0 0 8pt">' + arr.map(x => '<li style="color:' + ink + ';margin-bottom:3pt">' + x + '</li>').join('') + '</ol>';
+  const subhead = t => '<p style="margin:8pt 0 4pt;color:' + ink + '"><b>' + t + '</b></p>';
+  const linesToList = t => list(t.split('\n').filter(l => l.trim()).map(l => esc(l.replace(/^[•\-\*0-9\.\s]*/, ''))));
+
+  let b = '';
+  b += '<p style="color:' + gold + ';letter-spacing:3px;font-size:8pt;text-transform:uppercase;margin:0"><b>Living Stones Church · South Reno</b></p>';
+  b += '<h1 style="font-family:Montserrat,Calibri,sans-serif;font-size:26pt;color:#1a1814;margin:2pt 0 0">' + esc(team) + '</h1>';
+  b += '<p style="color:' + mut + ';margin:2pt 0 14pt">Volunteer Onboarding Guide · Led by ' + esc(val('leader-name') || 'Your Team Leader') + '</p>';
+
+  b += '<p style="background:#f7f4ef;border-left:3px solid ' + gold + ';padding:8pt 10pt;color:' + ink + '">'
+    + esc(val('welcome-message') || ('Welcome to the ' + team + "! We're so glad you're here. This guide covers everything you need to know to get started serving with us.")) + '</p>';
+
+  b += h2('About This Team');
+  b += p(val('team-purpose') || 'This team serves Living Stones Church with excellence and joy.');
+  if (val('team-great')) b += subhead("Why it's great to serve here") + p(val('team-great'));
+
+  b += h2('Your Key Contacts');
+  const rows = [];
+  if (val('leader-name'))  rows.push(['Team Leader', val('leader-name')]);
+  if (val('leader-phone')) rows.push(['Phone / Text', val('leader-phone')]);
+  if (val('leader-email')) rows.push(['Email', val('leader-email')]);
+  if (document.getElementById('has-secondary').checked) {
+    if (val('secondary-contact')) rows.push(['Secondary Contact', val('secondary-contact')]);
+    if (val('secondary-phone'))   rows.push(['Secondary Phone', val('secondary-phone')]);
+    if (val('secondary-email'))   rows.push(['Secondary Email', val('secondary-email')]);
+  }
+  b += rows.length
+    ? '<table cellpadding="6" style="border-collapse:collapse">' + rows.map(r => '<tr><td style="border:1px solid #ddd;background:#f7f4ef;color:' + mut + ';font-size:9pt"><b>' + r[0] + '</b></td><td style="border:1px solid #ddd;color:' + ink + '">' + esc(r[1]) + '</td></tr>').join('') + '</table>'
+    : p('See your team leader for details.');
+
+  b += h2('How We Communicate');
+  const commM = checked('comm-methods');
+  if (commM.length) b += lbl('Platforms we use', commM.join(', '));
+  b += lbl('How to access / join', val('comm-join'));
+  b += p(val('comm-details'));
+  if (!commM.length && !val('comm-join') && !val('comm-details')) b += p('Your leader will walk you through how we stay in touch.');
+
+  b += h2('When We Serve');
+  b += lbl('Service days & times', val('service-days'));
+  b += lbl('Arrival time', val('arrival-time'));
+  b += lbl('Where to go on arrival', val('gather-spot'));
+  b += lbl('Check-in process', val('check-in'));
+  b += lbl('Rehearsals / team meetings', val('rehearsals'));
+  b += lbl('What to wear', val('dress-code'));
+  b += lbl('Pre-service prayer / huddle', val('huddle'));
+  b += lbl('Parking', val('parking'));
+  b += lbl('What to bring', val('bring-items'));
+  if (val('typical-day')) b += subhead('A typical service day') + linesToList(val('typical-day'));
+
+  b += h2('Planning Center — Your Schedule');
+  b += subhead('Getting set up') + olist([
+    'Check your email for an invite from Planning Center — click the link to accept it and create your account.',
+    'Download the <b>Church Center app</b> (iOS or Android) and sign in with the same account.',
+    "Once you're set up, your team leader will add you to the schedule."
+  ]);
+  if (val('sched-advance')) b += lbl('Schedules are posted', val('sched-advance').toLowerCase());
+  b += subhead('Accepting or declining a schedule request') + olist([
+    "When you're scheduled, you'll get a <b>push notification + email</b> from Planning Center.",
+    'Open the <b>Church Center app</b> or click the link in the email.',
+    '<b>Accept or Decline within 48 hours</b> — this helps us fill gaps fast.',
+    'After accepting, tap into the plan to see notes, set lists, or service details.'
+  ]);
+  if (val('sched-resources')) b += lbl('Resources in your schedule', val('sched-resources'));
+  b += subhead("How to block out dates you're unavailable") + olist([
+    'Open the <b>Church Center app</b> and tap your profile picture (top right).',
+    'Tap <b>Serving</b> → then <b>Block Out Dates</b>.',
+    "Select the dates you're unavailable and tap <b>Save</b>.",
+    "We'll see your blocked dates when we build the schedule — no manual follow-up needed!"
+  ]);
+  if (val('sched-notes')) b += lbl('Additional notes', val('sched-notes'));
+
+  b += h2("Can't Make It? Getting Started?");
+  b += lbl("If you can't make it", val('absence-policy'));
+  b += lbl('Background check', val('background-check'));
+  b += lbl('Training process', val('training'));
+  b += lbl('Timeline to serve independently', val('onboard-timeline'));
+  if (!val('absence-policy') && !val('training')) b += p("Communicate with your team leader as early as possible if you can't make it.");
+
+  b += h2("Our Staff Values — The Four H's");
+  b += list([
+    '<b>Humble</b> — We serve others before ourselves, never seeking the spotlight.',
+    '<b>Hungry</b> — Always growing, always learning, never settling for good enough.',
+    '<b>Healthy</b> — We lead from a whole heart — emotionally, spiritually, and relationally.',
+    "<b>Honorable</b> — We do the right thing on and off the stage, even when no one's watching."
+  ]);
+
+  if (val('anything-else')) b += h2('Good to Know') + p(val('anything-else'));
+
+  if (uploadedFiles.length) {
+    b += h2('Supplementary Documents');
+    uploadedFiles.forEach(f => {
+      b += '<p style="margin:6pt 0 2pt;color:' + ink + '">📄 ' + esc(f.name) + '</p>';
+      if (f.dataUrl) b += '<img src="' + f.dataUrl + '" style="width:100%" />';
+    });
+  }
+
+  b += '<p style="margin-top:24pt;color:' + mut + ';font-size:8pt;letter-spacing:2px;text-transform:uppercase"><b>' + esc(team) + ' — Volunteer Onboarding Guide · Living Stones Church · South Reno</b></p>';
+
+  const doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+    + '<head><meta charset="utf-8"><title>' + esc(team) + ' Onboarding Guide</title>'
+    + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
+    + "<style>@page{size:8.5in 11.0in;margin:1.0in} body{font-family:Calibri,'Montserrat',sans-serif;font-size:11pt;line-height:1.5}</style>"
+    + '</head><body>' + b + '</body></html>';
+
+  downloadBlob(new Blob(['﻿', doc], { type: 'application/msword' }), safeFilename(team) + ' - Onboarding Guide (editable).doc');
+}
 </script>
 </body>
 </html>
