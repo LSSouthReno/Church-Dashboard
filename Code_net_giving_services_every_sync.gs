@@ -106,6 +106,16 @@ function syncDashboard() {
     upsertWeeklyAttendanceRows_(ss.getSheetByName(SHEETS.attendanceWeekly), rows);
   });
 
+  // 2c. Pull Point Leader Update Form submissions from PCO into the Leader Forms
+  //     tab so the serve-team "needed" numbers auto-update. Update-only and
+  //     idempotent (see Code_leader_forms_sync.gs).
+  safeRun_('Leader Forms Import', () => {
+    const r = importLeaderFormsFromPCO_(false);
+    Logger.log('   Leader Forms import: ' + (r.rowsUpdated || 0) + ' team(s) updated' +
+               (r.newTeamsSeen && r.newTeamsSeen.length ? '; new teams seen (not added): ' +
+                r.newTeamsSeen.map(function(t){return t.team;}).join(', ') : ''));
+  });
+
   // 3. Pull serve teams once, then rebuild and push final JSON
   safeRun_('Services Teams', () => { syncServicesTeamsData_(); });
 
