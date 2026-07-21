@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-21T21:46:38.633Z",
+  "lastUpdated": "2026-07-21T21:58:50.624Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3209,7 +3209,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 100,
+      "current": 98,
       "needed": 150
     },
     {
@@ -3278,7 +3278,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 362,
+  "uniqueVolunteers": 361,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 21, 2026, 2:46 PM",
+    "refreshed": "Jul 21, 2026, 2:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8061,21 +8061,7 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Brianna Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Isabella Sanchez",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
               "status": "U",
@@ -8705,11 +8691,32 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
               "name": "Aaron Marinucci",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Autumn Blattman",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Lauren Smith",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8853,8 +8860,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
@@ -9384,6 +9391,13 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -9393,8 +9407,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 73,
-            "totalVols": 73
+            "volsWithServiceTime": 74,
+            "totalVols": 74
           }
         }
       ]
@@ -11072,7 +11086,7 @@
               "name": "Tom McDonald",
               "team": "Tech",
               "pos": "Slides",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
