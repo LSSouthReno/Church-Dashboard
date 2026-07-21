@@ -65,7 +65,66 @@
     transition: border-color .15s, color .15s;
   }
   .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
-  @media print { .back-btn { display: none; } }
+  .admin-btn {
+    margin-left: auto; flex-shrink: 0;
+    padding: .5rem .95rem;
+    background: var(--card2); border: 1px solid var(--border); border-radius: 999px;
+    color: var(--muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: .74rem; font-weight: 700; letter-spacing: .04em;
+    cursor: pointer; white-space: nowrap;
+    transition: border-color .15s, color .15s;
+  }
+  .admin-btn:hover { border-color: var(--accent); color: var(--accent2); }
+  @media print { .back-btn, .admin-btn { display: none; } }
+
+  /* ── ADMIN OVERLAY ── */
+  #adminOverlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.72);
+    align-items: flex-start; justify-content: center;
+    padding: 3rem 1rem;
+    overflow-y: auto;
+  }
+  #adminOverlay.open { display: flex; }
+  .adm-box {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%; max-width: 560px;
+    padding: 1.6rem 1.5rem;
+  }
+  .adm-x {
+    position: absolute; top: .9rem; right: .9rem;
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer;
+    width: 28px; height: 28px; font-size: .8rem;
+  }
+  .adm-x:hover { color: var(--text); border-color: var(--accent); }
+  .adm-title { font-size: 1rem; font-weight: 800; letter-spacing: .02em; margin-bottom: .25rem; padding-right: 2rem; }
+  .adm-sub { font-size: .78rem; color: var(--muted); line-height: 1.5; margin-bottom: 1.2rem; }
+  .adm-label { display: block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: .35rem; }
+  .adm-pwrow { display: flex; gap: .55rem; }
+  .adm-pwrow input {
+    flex: 1; padding: .6rem .85rem;
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 7px;
+    color: var(--text); font-family: 'Montserrat', sans-serif; font-size: .85rem; outline: none;
+  }
+  .adm-pwrow input:focus { border-color: var(--accent); }
+  .adm-pwrow .btn-secondary { padding: .6rem 1.1rem; }
+  .adm-err { color: var(--danger); font-size: .78rem; margin-top: .5rem; font-weight: 600; }
+  .adm-note { font-size: .82rem; color: var(--muted); line-height: 1.6; padding: .6rem 0; }
+  .adm-row {
+    display: flex; align-items: center; justify-content: space-between; gap: .8rem;
+    background: var(--card2); border: 1px solid var(--border); border-radius: 8px;
+    padding: .7rem .9rem; margin-bottom: .5rem;
+  }
+  .adm-team { font-size: .88rem; font-weight: 700; color: var(--text); }
+  .adm-meta { font-size: .72rem; color: var(--muted); margin-top: .15rem; }
+  .adm-row .btn-secondary { padding: .45rem .9rem; font-size: .72rem; }
+  .adm-del { padding: .45rem .7rem !important; }
+  .adm-del:hover { border-color: var(--danger); color: var(--danger); }
 
   /* ── LAYOUT ── */
   .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
@@ -507,7 +566,30 @@
     <h1>Team Onboarding Guide Generator</h1>
     <p>Living Stones Church · South Reno</p>
   </div>
+  <button class="admin-btn" onclick="openAdmin()" title="Staff only — view guides saved by all team leaders">🔒 Admin</button>
 </header>
+
+<!-- ════════ ADMIN — all saved guides ════════ -->
+<div id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
+  <div class="adm-box">
+    <button class="adm-x" onclick="closeAdmin()" title="Close">✕</button>
+    <div class="adm-title">Saved Onboarding Guides</div>
+    <div class="adm-sub">Every guide a team leader generates is saved here — one current guide per team.</div>
+
+    <div id="admLocked">
+      <label class="adm-label">Admin password</label>
+      <div class="adm-pwrow">
+        <input type="password" id="admPw" placeholder="Enter password" onkeydown="if(event.key==='Enter')admUnlock()">
+        <button class="btn-secondary" onclick="admUnlock()">Unlock</button>
+      </div>
+      <div class="adm-err" id="admErr" style="display:none">That password didn't work.</div>
+    </div>
+
+    <div id="admContent" style="display:none">
+      <div id="admList"></div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
 
@@ -541,6 +623,7 @@
       <option>Worship Team</option>
       <option>Tech Team</option>
       <option>First Impressions</option>
+      <option>Connection Team</option>
       <option>Hospitality Team</option>
       <option>Presiders Team</option>
       <option>Stepping Stones (Kids)</option>
@@ -1052,6 +1135,12 @@ function card(lbl,v) {
 function tip(icon, text) {
   return '<div class="doc-tip"><span style="flex-shrink:0">'+icon+'</span><span>'+esc(text)+'</span></div>';
 }
+// Same tip box, but with a bold lead-in label so the value has context
+// (e.g. "Background check: No — not required for this team").
+function tipLabeled(icon, label, text) {
+  return '<div class="doc-tip"><span style="flex-shrink:0">'+icon+'</span>' +
+         '<span><strong>'+esc(label)+':</strong> '+esc(text)+'</span></div>';
+}
 function stepBox(title, steps) {
   return '<div class="doc-step-box"><div class="doc-step-box-title">'+title+'</div><ol class="doc-steps">'+steps.map((s,i)=>'<li><span class="step-n">'+(i+1)+'</span><span>'+s+'</span></li>').join('')+'</ol></div>';
 }
@@ -1180,7 +1269,7 @@ function openPreview() {
   // ABSENCES + TRAINING
   let ab = '';
   if (absence)  ab += blockArea("If You Can't Make It", absence);
-  if (bgCheck)  ab += tip('📋', bgCheck);
+  if (bgCheck)  ab += tipLabeled('📋', 'Background check', bgCheck);
   if (training) ab += blockArea('Training Process', training);
   if (timeline) ab += block('Timeline to Serve Independently', timeline);
   document.getElementById('d-absence').innerHTML = ab || '<p class="doc-text">Communicate with your team leader as early as possible if you can\'t make it.</p>';
@@ -1221,6 +1310,9 @@ function openPreview() {
 
   document.getElementById('preview-overlay').classList.add('open');
   document.getElementById('preview-overlay').scrollTop = 0;
+
+  // Save a copy centrally so staff can see every team's current guide.
+  ogSaveToServer();
 }
 
 function closePreview() {
@@ -1285,6 +1377,114 @@ function printGuide() {
     }
   };
   waitReady();
+}
+
+// ═══════════════════════════════════════════════
+//  CENTRAL STORE — every generated guide is saved
+//  to the church's Apps Script backend (one current
+//  guide per team) so staff can view them all.
+// ═══════════════════════════════════════════════
+const OG_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzW1ie-pEVvIZ8OlwnRo-SizsFKITd8xmtfqKeJPdPJ-1uzsz5KpGWDc1aBs6PURqFfww/exec';
+// Same admin password as the dashboard's Admin tab (SHA-256).
+const OG_ADMIN_HASH = 'b89b95790b740ffc4317734a8c456eb680d6a19dea09131b0b513943794e9fa6';
+let _ogPw = '';
+let _admGuides = [];
+
+async function sha256Hex(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Fire-and-forget save. Image data is stripped so the payload stays small;
+// the author's own copy (browser save / export file) keeps the images.
+function ogSaveToServer() {
+  try {
+    const team = currentTeamName();
+    if (!team || team === 'Team') return;
+    const data = collectFormData();
+    data.files = (data.files || []).map(f => ({ name: f.name, type: f.type, dataUrl: null }));
+    fetch(OG_WEBAPP_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'og_save', team: team, leader: val('leader-name'), data: data }),
+      mode: 'no-cors'
+    }).catch(function() {});
+  } catch (e) { /* never block the preview on a save failure */ }
+}
+
+function openAdmin()  { document.getElementById('adminOverlay').classList.add('open'); }
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
+
+async function admUnlock() {
+  const pw = document.getElementById('admPw').value;
+  if (!pw) return;
+  const h = await sha256Hex(pw);
+  if (h !== OG_ADMIN_HASH) { document.getElementById('admErr').style.display = ''; return; }
+  _ogPw = h;
+  document.getElementById('admPw').value = '';
+  document.getElementById('admErr').style.display = 'none';
+  document.getElementById('admLocked').style.display = 'none';
+  document.getElementById('admContent').style.display = '';
+  admLoadList();
+}
+
+async function admLoadList() {
+  const el = document.getElementById('admList');
+  el.innerHTML = '<p class="adm-note">Loading saved guides…</p>';
+  try {
+    const res = await fetch(OG_WEBAPP_URL + '?action=og_list&pw=' + encodeURIComponent(_ogPw) + '&t=' + Date.now());
+    const j = await res.json();
+    if (!j.ok) throw new Error(j.error || 'failed');
+    _admGuides = j.guides || [];
+    if (!_admGuides.length) {
+      el.innerHTML = '<p class="adm-note">No guides saved yet. A guide appears here as soon as a team leader clicks <strong>Generate Onboarding Guide</strong>.</p>';
+      return;
+    }
+    el.innerHTML = _admGuides.map(function(g, i) {
+      const when = g.saved ? new Date(g.saved).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) : '—';
+      return '<div class="adm-row"><div><div class="adm-team">' + esc(g.team) + '</div>' +
+             '<div class="adm-meta">' + esc(g.leader || 'No leader listed') + ' · saved ' + when + '</div></div>' +
+             '<div style="display:flex;gap:.4rem;flex-shrink:0">' +
+               '<button class="btn-secondary" onclick="admLoad(' + i + ')">Open</button>' +
+               '<button class="btn-secondary adm-del" onclick="admDelete(' + i + ')" title="Remove this guide">✕</button>' +
+             '</div></div>';
+    }).join('');
+  } catch (e) {
+    el.innerHTML = '<p class="adm-note">Could not load saved guides. Check your connection and try again.</p>';
+  }
+}
+
+async function admDelete(i) {
+  const g = _admGuides[i];
+  if (!g) return;
+  if (!confirm('Remove the saved guide for "' + g.team + '"? The team leader\'s own copy is not affected.')) return;
+  try {
+    const res = await fetch(OG_WEBAPP_URL + '?action=og_delete&pw=' + encodeURIComponent(_ogPw) +
+                            '&team=' + encodeURIComponent(g.team) + '&t=' + Date.now());
+    const j = await res.json();
+    if (!j.ok) throw new Error(j.error || 'failed');
+    admLoadList();
+  } catch (e) {
+    alert('Could not remove that guide.');
+  }
+}
+
+async function admLoad(i) {
+  const g = _admGuides[i];
+  if (!g) return;
+  try {
+    const res = await fetch(OG_WEBAPP_URL + '?action=og_get&pw=' + encodeURIComponent(_ogPw) +
+                            '&team=' + encodeURIComponent(g.team) + '&t=' + Date.now());
+    const j = await res.json();
+    if (!j.ok) throw new Error(j.error || 'failed');
+    applyFormData(j.data);
+    scheduleDraftSave();
+    document.getElementById('draft-note').style.display = 'none';
+    closeAdmin();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    alert('Loaded "' + j.team + '". Review or edit it below, then hit Generate to view or print it.');
+  } catch (e) {
+    alert('Could not open that guide.');
+  }
 }
 
 // ═══════════════════════════════════════════════

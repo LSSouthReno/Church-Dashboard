@@ -766,6 +766,17 @@
   .tmod-flabels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim); margin-bottom: 3px; }
   .tmod-ftrack { height: 4px; background: #1a1a1a; border-radius: 2px; overflow: hidden; }
   .tmod-ffill { height: 100%; border-radius: 2px; transition: width 0.4s; }
+  /* Card footer hint — clicking any team card opens its Sunday Checklist */
+  .tmod-tcta {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing: .01em;
+    color: var(--text-dim);
+    border-top: 1px solid var(--card-border);
+    padding-top: 8px; margin-top: 2px;
+    transition: color .15s;
+  }
+  .tmod-tcta span { font-size: 12px; }
+  .tmod-tcard:hover .tmod-tcta { color: var(--sp-gold, #c49a2e); }
   .tmod-flags { display: flex; flex-wrap: wrap; gap: 4px; }
   .tmod-flag { font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--card-border); color: var(--text-dim); font-weight: 500; }
   .tmod-fr { border-color: rgba(239,68,68,.35); color: var(--red); background: rgba(239,68,68,.08); }
@@ -4646,8 +4657,6 @@ function tmRT() {
     const fp   = st.needed > 0 ? Math.round(have / st.needed * 100) : 100;
     const hs   = tmScore(t);
     const scoreCls = hs >= 8 ? 'tmod-sg' : hs >= 6 ? 'tmod-sa' : 'tmod-sr';
-    const flagCls  = gap >= 30 ? 'tmod-fr' : gap > 5 ? 'tmod-fa' : 'tmod-fg';
-    const flagTxt  = gap === 0 ? 'fully staffed' : 'gap: ' + gap;
     return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
       '<div class="tmod-ttop">' +
         '<div><div class="tmod-tname">' + escapeHtml(t.n) + '</div>' +
@@ -4663,10 +4672,7 @@ function tmRT() {
         '<div class="tmod-flabels"><span>Staffing ' + have + '/' + st.needed + '</span><span>' + fp + '%</span></div>' +
         '<div class="tmod-ftrack"><div class="tmod-ffill" style="width:' + fp + '%;background:' + tmFc(gap) + '"></div></div>' +
       '</div>' +
-      '<div class="tmod-flags">' +
-        '<span class="tmod-flag ' + flagCls + '">' + flagTxt + '</span>' +
-        '<span class="tmod-flag" style="background:#1e1e1e;color:#9a9a9a;border:1px solid #333;cursor:pointer;" onclick="event.stopPropagation();tmTD(this.closest(\'[data-n]\').dataset.n)">&#128202; Stats</span>' +
-      '</div>' +
+      '<div class="tmod-tcta"><span>&#128203;</span> Click for this team&rsquo;s Sunday Checklist</div>' +
     '</div>';
   }).join('');
 }

@@ -65,6 +65,20 @@ function doGet(e) {
       // Read-only: dump the Leader Forms tab's headers + recent rows.
       return eosWaJson_(dumpLeaderFormsTab_());
     }
+    if (action === 'og_list') {
+      // Onboarding guides — list saved guides (admin hash required).
+      return eosWaJson_(ogListGuides_((e && e.parameter && e.parameter.pw) || ''));
+    }
+    if (action === 'og_get') {
+      // Onboarding guides — fetch one team's guide payload (admin hash required).
+      return eosWaJson_(ogGetGuide_((e && e.parameter && e.parameter.pw) || '',
+                                    (e && e.parameter && e.parameter.team) || ''));
+    }
+    if (action === 'og_delete') {
+      // Onboarding guides — remove a team's saved guide (admin hash required).
+      return eosWaJson_(ogDeleteGuide_((e && e.parameter && e.parameter.pw) || '',
+                                       (e && e.parameter && e.parameter.team) || ''));
+    }
     if (action === 'run_import_leader_forms') {
       // Pulls Point Leader Update Form submissions into the Leader Forms tab.
       // dry=1 (default) reports what it WOULD write without writing.
@@ -83,6 +97,9 @@ function doPost(e) {
     var action = body.action || '';
 
     if (EOS_IDSJOY_POST_ACTIONS_.indexOf(action) !== -1) return idsJoyDoPost_(e);
+
+    // Onboarding generator saves each generated guide here (one row per team).
+    if (action === 'og_save') return eosWaJson_(ogSaveGuide_(body));
 
     // Rock resolve, add, and boulder status now write lightweight overlay fields
     // directly into eos-data.json rather than reading from the EOS sheet (a different
