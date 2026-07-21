@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-21T00:46:31.616Z",
+  "lastUpdated": "2026-07-21T00:59:11.590Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 20, 2026, 5:46 PM",
+    "refreshed": "Jul 20, 2026, 5:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8624,7 +8624,7 @@
               "name": "Bart Wallace",
               "team": "Parking Team",
               "pos": "Parking Czar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8643,13 +8643,6 @@
             },
             {
               "name": "Rachelle Wright",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Jeremy Peterson",
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
@@ -8710,13 +8703,6 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Kathy Herndon",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Aaron Marinucci",
@@ -8867,8 +8853,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 110,
-            "totalVols": 110
+            "volsWithServiceTime": 108,
+            "totalVols": 108
           }
         }
       ]
@@ -9270,7 +9256,7 @@
               "name": "Megan Wampler",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -9365,13 +9351,6 @@
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
-              "name": "Liz Suto",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Maddox Morris",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -9421,8 +9400,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 75,
-            "totalVols": 75
+            "volsWithServiceTime": 74,
+            "totalVols": 74
           }
         }
       ]
@@ -9814,13 +9793,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Kathy Herndon",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Rachelle Wright",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -9926,8 +9898,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 68
+            "volsWithServiceTime": 67,
+            "totalVols": 67
           }
         }
       ]
@@ -10335,14 +10307,14 @@
               "name": "Stephen W Harris",
               "team": "Parking Team",
               "pos": "Parking Czar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Bart Wallace",
               "team": "Parking Team",
               "pos": "Parking Czar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -10679,7 +10651,7 @@
               "name": "Anna Sawyer",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11205,13 +11177,6 @@
             {
               "name": "Faith Howes",
               "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Faith Howes",
-              "team": "Presiders",
               "pos": "Presider",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
@@ -11256,6 +11221,13 @@
               "team": "Parking Team",
               "pos": "Parking Czar",
               "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Damian Smith",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             }
           ],
