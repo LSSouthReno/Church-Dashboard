@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-22T22:47:38.436Z",
+  "lastUpdated": "2026-07-22T23:07:25.835Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 22, 2026, 3:47 PM",
+    "refreshed": "Jul 22, 2026, 4:07 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8439,13 +8439,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Doretta Brown",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Thomas Adams",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
@@ -8470,7 +8463,7 @@
               "name": "Nathan Meredith",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -8568,14 +8561,14 @@
               "name": "Simone Roccuzzo",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Jennie Roccuzzo",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -8846,8 +8839,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 107,
-            "totalVols": 107
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
@@ -9747,7 +9740,7 @@
               "name": "Thomas Lloyd",
               "team": "Tech",
               "pos": "Lights",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
@@ -10367,13 +10360,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Gavin Au",
-              "team": "Worship Team",
-              "pos": "Drums",
-              "status": "U",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Jeff Bridges",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
@@ -10451,8 +10437,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 71
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ]
@@ -10870,6 +10856,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Gavin Au",
+              "team": "Worship Team",
+              "pos": "Drums",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -10879,8 +10872,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 57,
-            "totalVols": 57
+            "volsWithServiceTime": 58,
+            "totalVols": 58
           }
         }
       ]
@@ -11048,13 +11041,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Thomas Lloyd",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
               "pos": "Mustangs Guide",
@@ -11128,7 +11114,7 @@
               "name": "Thomas Lloyd",
               "team": "Tech",
               "pos": "Lights",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
@@ -11195,8 +11181,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 41,
-            "totalVols": 41
+            "volsWithServiceTime": 40,
+            "totalVols": 40
           }
         }
       ]
