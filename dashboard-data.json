@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-23T19:46:35.298Z",
+  "lastUpdated": "2026-07-23T20:01:25.296Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 23, 2026, 12:46 PM",
+    "refreshed": "Jul 23, 2026, 1:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9410,8 +9410,8 @@
             },
             {
               "seq": 4,
-              "title": "SONG 1",
-              "type": "item",
+              "title": "This Is Amazing Grace",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -9431,9 +9431,9 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Reckless Love",
+              "type": "song",
+              "lengthMin": 6,
               "description": ""
             },
             {
@@ -9832,7 +9832,7 @@
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Worship Leader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -9846,14 +9846,14 @@
               "name": "Anita Bigger",
               "team": "Worship Team",
               "pos": "Piano",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -10070,15 +10070,15 @@
             },
             {
               "seq": 4,
-              "title": "SONG 1",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "House Of The Lord",
+              "type": "song",
+              "lengthMin": 4,
               "description": ""
             },
             {
               "seq": 5,
-              "title": "SONG 2",
-              "type": "item",
+              "title": "Christ Be Magnified",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -10091,8 +10091,8 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
+              "title": "Build My Life",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -11074,7 +11074,7 @@
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Worship Leader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11102,7 +11102,7 @@
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11298,16 +11298,16 @@
             },
             {
               "seq": 4,
-              "title": "SONG 1",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Glorious Day",
+              "type": "song",
+              "lengthMin": 4,
               "description": ""
             },
             {
               "seq": 5,
-              "title": "SONG 2",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Same God",
+              "type": "song",
+              "lengthMin": 7,
               "description": ""
             },
             {
@@ -11319,8 +11319,8 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
+              "title": "Jesus We Love You",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -11601,7 +11601,7 @@
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Worship Leader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11636,7 +11636,7 @@
               "name": "Gordon Fava",
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11755,16 +11755,16 @@
             },
             {
               "seq": 4,
-              "title": "SONG 1",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "House Of The Lord",
+              "type": "song",
+              "lengthMin": 4,
               "description": ""
             },
             {
               "seq": 5,
-              "title": "SONG 2",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Holy Spirit Come",
+              "type": "song",
+              "lengthMin": 4,
               "description": ""
             },
             {
@@ -11776,90 +11776,97 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Peace Be Still",
+              "type": "song",
+              "lengthMin": 8,
               "description": ""
             },
             {
               "seq": 8,
+              "title": "Worthy Of It All",
+              "type": "song",
+              "lengthMin": 6,
+              "description": ""
+            },
+            {
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore:"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "FIRST TO KNOW",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
               "description": "End Underscore:"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
