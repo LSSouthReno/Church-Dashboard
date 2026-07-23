@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-23T22:57:40.535Z",
+  "lastUpdated": "2026-07-23T23:45:27.985Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 23, 2026, 3:57 PM",
+    "refreshed": "Jul 23, 2026, 4:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -12349,11 +12349,7 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 46,
-    "weeklyAvg": 11,
-    "totalFetched": 6936,
-    "since": "2026-06-23",
-    "asOf": "2026-07-23T22:44:38.926Z"
+    "error": "PCO request failed: 502 — https://api.planningcenteronline.com/people/v2/people?order=-created_at&per_page=100 — <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n"
   },
   "emailStats": {
     "latestOpenRate": 0.5285714285714286,
@@ -12361,6 +12357,6 @@
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-22T21:13:15+00:00",
     "campaignCount": 5,
-    "asOf": "2026-07-23T22:44:40.025Z"
+    "asOf": "2026-07-23T23:43:56.999Z"
   }
 }
