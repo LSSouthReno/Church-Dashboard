@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-23T17:46:34.095Z",
+  "lastUpdated": "2026-07-23T18:06:11.501Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6054,7 +6054,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 23, 2026, 10:46 AM",
+    "refreshed": "Jul 23, 2026, 11:06 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7539,7 +7539,7 @@
         15,
         17,
         16,
-        14,
+        13,
         null,
         null,
         null,
@@ -8540,7 +8540,7 @@
               "name": "Richard Price",
               "team": "Stepping Stones",
               "pos": "Guide WP, Hawks, Mustangs",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -8607,13 +8607,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Rachelle Wright",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "David Wandishin",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -8626,13 +8619,6 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Renee Peregrin",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Sarah Rawlins",
@@ -8649,13 +8635,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Pat Peregrin",
-              "team": "First Impressions",
-              "pos": "First Impressions Lead",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Daniel Akre",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -8666,7 +8645,7 @@
               "name": "Richard Price",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
@@ -8701,6 +8680,13 @@
               "name": "Emily LeBlanc",
               "team": "Breakfast Team",
               "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ashley Murad",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
             }
@@ -8846,8 +8832,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676349\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 107,
-            "totalVols": 107
+            "volsWithServiceTime": 105,
+            "totalVols": 105
           }
         }
       ]
@@ -9347,7 +9333,7 @@
               "name": "Richard Price",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
@@ -9796,7 +9782,7 @@
               "name": "Richard Price",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11320,6 +11306,13 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Ana Loftin",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11329,8 +11322,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 14,
-            "totalVols": 14
+            "volsWithServiceTime": 15,
+            "totalVols": 15
           }
         }
       ]
