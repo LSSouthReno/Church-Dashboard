@@ -34,34 +34,56 @@ jobs:
         with:
           path: '.'
 
-      # The frequent data-sync pushes land within a few seconds of each other, and
-      # GitHub Pages briefly rejects a new deploy while a prior one is finalizing
-      # ("Deployment failed, try again later"). Retry up to 3 times so that
-      # transient conflict self-heals and the run finishes green (no failure email).
-      # The site is never broken by the conflict — retrying just publishes the same
-      # artifact once GitHub is ready.
+      # The frequent data-sync pushes land within a few seconds of each other. When
+      # they cluster, GitHub Pages rejects a new deploy with a 400 "due to in progress
+      # deployment" — either a prior deploy is still finalizing, or a superseded run
+      # left a deployment stuck "in progress" (a zombie). deploy-pages@v4 does NOT
+      # wait/retry on this 400 — it fails immediately. The blocking deployment always
+      # clears on its own, but that can take several minutes (we've observed a run
+      # self-heal only after ~10 min of waiting). So we retry with cumulative backoff
+      # that covers the full self-heal window (~13 min) instead of giving up early.
+      # The site is never broken by the conflict — each retry just re-publishes the
+      # same artifact once GitHub is ready, so the run finishes green (no failure email).
       - name: Deploy to GitHub Pages (attempt 1)
         id: deploy1
         uses: actions/deploy-pages@v4
         continue-on-error: true
 
-      - name: Wait before retry
+      - name: Wait before attempt 2
         if: steps.deploy1.outcome == 'failure'
         run: sleep 45
-
       - name: Deploy to GitHub Pages (attempt 2)
         id: deploy2
         if: steps.deploy1.outcome == 'failure'
         uses: actions/deploy-pages@v4
         continue-on-error: true
 
-      - name: Wait before final retry
+      - name: Wait before attempt 3
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         run: sleep 90
-
-      # Final attempt has no continue-on-error: if it still fails after 3 tries,
-      # that's a real problem worth a notification.
       - name: Deploy to GitHub Pages (attempt 3)
-        id: deployment
+        id: deploy3
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Wait before attempt 4
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure'
+        run: sleep 180
+      - name: Deploy to GitHub Pages (attempt 4)
+        id: deploy4
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Wait before final attempt
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure' && steps.deploy4.outcome == 'failure'
+        run: sleep 300
+
+      # Final attempt (~13 min of cumulative backoff elapsed) has no continue-on-error:
+      # if it STILL fails, the blocker is not clearing and that's a real problem worth
+      # an email notification.
+      - name: Deploy to GitHub Pages (attempt 5)
+        id: deployment
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure' && steps.deploy4.outcome == 'failure'
         uses: actions/deploy-pages@v4
