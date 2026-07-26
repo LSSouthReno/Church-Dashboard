@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-26T15:48:35.388Z",
+  "lastUpdated": "2026-07-26T16:09:53.966Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3206,8 +3206,8 @@
       },
       {
         "week": "Jul 26",
-        "adults": 0,
-        "kids": 3
+        "adults": 183,
+        "kids": 19
       }
     ]
   },
@@ -6026,7 +6026,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 26, 2026, 8:48 AM",
+    "refreshed": "Jul 26, 2026, 9:09 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11650,6 +11650,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Tonshai Hatcher",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Tonshai Hatcher",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11793,8 +11807,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 70
+            "volsWithServiceTime": 72,
+            "totalVols": 72
           }
         }
       ]
