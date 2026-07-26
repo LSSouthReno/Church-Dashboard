@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-26T18:46:01.904Z",
+  "lastUpdated": "2026-07-26T18:57:00.476Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3206,8 +3206,8 @@
       },
       {
         "week": "Jul 26",
-        "adults": 456,
-        "kids": 62
+        "adults": 658,
+        "kids": 87
       }
     ]
   },
@@ -6026,7 +6026,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 26, 2026, 11:46 AM",
+    "refreshed": "Jul 26, 2026, 11:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7498,7 +7498,7 @@
         8,
         1,
         null,
-        2,
+        1,
         15,
         11,
         13,
@@ -7614,20 +7614,20 @@
         "attPct": 55
       },
       {
-        "name": "Howes/Peissner Community Group",
-        "members": 20,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
-        "avgAttended": 7,
-        "attPct": 35
-      },
-      {
         "name": "High School Community Group",
         "members": 19,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 8,
         "attPct": 42
+      },
+      {
+        "name": "Howes/Peissner Community Group",
+        "members": 19,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 7,
+        "attPct": 37
       },
       {
         "name": "McCarthy Community Group",
@@ -8663,13 +8663,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Jennifer Jauron",
-              "team": "Enrichment Teams",
-              "pos": "Back Left Communion Server",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Deborah Vydra",
               "team": "Stepping Stones",
               "pos": "Check In",
@@ -8689,6 +8682,13 @@
               "pos": "Back Right Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jude Adams",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
