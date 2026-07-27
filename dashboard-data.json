@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-27T22:46:47.658Z",
+  "lastUpdated": "2026-07-27T23:01:34.536Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 27, 2026, 3:46 PM",
+    "refreshed": "Jul 27, 2026, 4:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8653,6 +8653,13 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cathy Cappini",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -8803,8 +8810,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 98,
-            "totalVols": 98
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -8863,13 +8870,6 @@
               "name": "Layne Christopher",
               "team": "Safety Team",
               "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Sandra Pazen",
-              "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -9568,8 +9568,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 85,
-            "totalVols": 85
+            "volsWithServiceTime": 84,
+            "totalVols": 84
           }
         }
       ]
@@ -12014,6 +12014,13 @@
               "pos": "Presider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Audrey Hawkins",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -12023,8 +12030,228 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 4,
+            "totalVols": 4
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "ds": "Sunday, October 4, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90727665",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Fredy Bridges",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Fredy Bridges",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 2,
+            "totalVols": 2
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "ds": "Sunday, October 11, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90727691",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Shannon Coan",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shannon Coan",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Deana Griffin",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Ashleigh Cummings",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 4,
+            "totalVols": 4
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "ds": "Sunday, October 18, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90727709",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Jackie Smith",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jackie Smith",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Brandon Thompson",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 4,
+            "totalVols": 4
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-25",
+      "ds": "Sunday, October 25, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90727711",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy McAlpine",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Simone Roccuzzo",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jennie Roccuzzo",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
             "volsWithServiceTime": 3,
             "totalVols": 3
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "ds": "Sunday, November 1, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "90727717",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "",
+            "firstRelKeys": "",
+            "firstTimeIds": "",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 0,
+            "totalVols": 0
           }
         }
       ]
