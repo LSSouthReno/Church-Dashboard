@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-27T18:46:08.967Z",
+  "lastUpdated": "2026-07-27T18:57:40.979Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 27, 2026, 11:46 AM",
+    "refreshed": "Jul 27, 2026, 11:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8326,13 +8326,6 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Keith Primus",
-              "team": "Worship Team",
-              "pos": "Vocals",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Megan Wampler",
               "team": "Worship Team",
               "pos": "Vocals",
@@ -8632,6 +8625,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Keith Primus",
+              "team": "Worship Team",
+              "pos": "Vocals",
+              "status": "C",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -8682,7 +8682,7 @@
               "title": "Reckless Love",
               "type": "song",
               "lengthMin": 6,
-              "description": ""
+              "description": "BAPTISM OR GREETING RELEASE AFTER SONG"
             },
             {
               "seq": 8,
@@ -8696,11 +8696,11 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: HOMECOMING"
             },
             {
               "seq": 10,
-              "title": "FIRST TO KNOW",
+              "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
@@ -8730,8 +8730,8 @@
               "seq": 14,
               "title": "SERMON",
               "type": "item",
-              "lengthMin": 30,
-              "description": "End Underscore:"
+              "lengthMin": 35,
+              "description": "End Underscore: KING OF KINGS"
             },
             {
               "seq": 15,
@@ -11273,13 +11273,6 @@
               "serviceTime": "8 AM, 11 AM"
             },
             {
-              "name": "Corinne Baker",
-              "team": "Worship Team",
-              "pos": "Vocals",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Sam England",
               "team": "Worship Team",
               "pos": "Bass",
@@ -11505,8 +11498,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 50,
-            "totalVols": 50
+            "volsWithServiceTime": 49,
+            "totalVols": 49
           }
         }
       ]
