@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-27T17:46:03.628Z",
+  "lastUpdated": "2026-07-27T17:57:03.645Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 27, 2026, 10:46 AM",
+    "refreshed": "Jul 27, 2026, 10:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8686,83 +8686,90 @@
             },
             {
               "seq": 8,
+              "title": "BAPTISMS",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore:"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "FIRST TO KNOW",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 30,
               "description": "End Underscore:"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
