@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-27T19:46:13.187Z",
+  "lastUpdated": "2026-07-27T20:00:07.186Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 27, 2026, 12:46 PM",
+    "refreshed": "Jul 27, 2026, 1:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8632,6 +8632,20 @@
               "pos": "Vocals",
               "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8782,8 +8796,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676356\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 95,
-            "totalVols": 95
+            "volsWithServiceTime": 97,
+            "totalVols": 97
           }
         }
       ]
@@ -10166,8 +10180,22 @@
               "name": "Candy Bennett",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Peggy Hart",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Layne Christopher",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10194,16 +10222,16 @@
             },
             {
               "seq": 4,
-              "title": "SONG 1",
-              "type": "item",
+              "title": "Hallelujah For The Cross",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
               "seq": 5,
-              "title": "SONG 2",
-              "type": "item",
-              "lengthMin": 5,
+              "title": "Jesus Paid It All",
+              "type": "song",
+              "lengthMin": 7,
               "description": ""
             },
             {
@@ -10311,8 +10339,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 87,
-            "totalVols": 87
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
@@ -10842,6 +10870,27 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Peggy Hart",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Gina Rankin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10985,8 +11034,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 73,
-            "totalVols": 73
+            "volsWithServiceTime": 76,
+            "totalVols": 76
           }
         }
       ]
@@ -11329,13 +11378,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Gina Rankin",
-              "team": "Prayer Team",
-              "pos": "Service Prayer",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Candy Bennett",
               "team": "Prayer Team",
               "pos": "Service Prayer",
@@ -11348,6 +11390,34 @@
               "pos": "Connect Desk Host (A Team)",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Peggy Hart",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Gina Rankin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ginger King",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11498,8 +11568,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 49,
-            "totalVols": 49
+            "volsWithServiceTime": 52,
+            "totalVols": 52
           }
         }
       ]
