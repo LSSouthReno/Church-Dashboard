@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-28T21:46:26.961Z",
+  "lastUpdated": "2026-07-28T21:59:47.527Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3249,7 +3249,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 21,
+      "current": 20,
       "needed": 23
     },
     {
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 28, 2026, 2:46 PM",
+    "refreshed": "Jul 28, 2026, 2:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7505,7 +7505,7 @@
         24,
         21,
         26,
-        27,
+        28,
         null,
         null,
         null,
@@ -7514,7 +7514,7 @@
       ]
     },
     "leadersAdded": {
-      "total2026": 16
+      "total2026": 17
     },
     "outsidersInsiders": {
       "2024": [
@@ -7631,9 +7631,10 @@
           "Kathy Frank",
           "Brianna Mick",
           "Megan McKinley",
-          "Carlos Flores"
+          "Carlos Flores",
+          "Anna Moore"
         ],
-        "count": 67
+        "count": 68
       }
     ],
     "leaderPipeline": [],
@@ -7947,6 +7948,14 @@
         "members": 2,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 0,
+        "attPct": 0
+      },
+      {
+        "name": "Moore Community Group",
+        "members": 1,
+        "leaders": 1,
+        "schedule": "Meets weekly on Mondays from 3-5pm",
         "avgAttended": 0,
         "attPct": 0
       }
@@ -9493,7 +9502,7 @@
               "name": "Tonya Lowry",
               "team": "Stepping Stones",
               "pos": "Water Party Attendant",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -9525,13 +9534,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "McKayla Leggett",
-              "team": "Stepping Stones",
-              "pos": "Water Party Attendant",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Molly Bell",
               "team": "Stepping Stones",
               "pos": "Water Party Attendant",
@@ -9542,7 +9544,7 @@
               "name": "Savannah Caliger",
               "team": "Stepping Stones",
               "pos": "Water Party Attendant",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -9565,6 +9567,13 @@
               "pos": "Back Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Dave Norton",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -11882,6 +11891,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Sandy Norton",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11891,8 +11907,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 17,
-            "totalVols": 17
+            "volsWithServiceTime": 18,
+            "totalVols": 18
           }
         }
       ]
@@ -12002,6 +12018,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Sandy Norton",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -12011,8 +12034,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 13,
-            "totalVols": 13
+            "volsWithServiceTime": 14,
+            "totalVols": 14
           }
         }
       ]
