@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-28T22:46:18.326Z",
+  "lastUpdated": "2026-07-28T23:02:30.054Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 28, 2026, 3:46 PM",
+    "refreshed": "Jul 28, 2026, 4:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6942,7 +6942,7 @@
       "groups": 39,
       "members": 416,
       "groupSize": 11,
-      "fmInGroupsPct": 55,
+      "fmInGroupsPct": 53,
       "asOfMonth": "Jul '26"
     },
     "groupCountsByYear": {
@@ -7477,25 +7477,25 @@
         null,
         null,
         6,
-        74,
-        14,
-        16,
-        3,
+        73,
+        11,
+        13,
+        1,
         7,
         2
       ],
       "2025": [
-        5,
+        4,
         7,
         5,
-        21,
+        19,
         13,
         5,
         4,
-        5,
+        3,
         26,
-        23,
-        20,
+        22,
+        17,
         12
       ],
       "2026": [
@@ -7503,7 +7503,7 @@
         28,
         24,
         24,
-        21,
+        20,
         26,
         28,
         null,
@@ -7525,24 +7525,24 @@
         null,
         2,
         27,
-        10,
-        4,
+        8,
         2,
+        null,
         6,
         null
       ],
       "2025": [
-        4,
+        3,
         2,
         3,
-        7,
+        6,
         8,
         1,
         null,
-        1,
+        null,
         15,
         11,
-        13,
+        11,
         5
       ],
       "2026": [
@@ -7550,7 +7550,7 @@
         20,
         7,
         15,
-        16,
+        15,
         16,
         16,
         null,
@@ -7599,8 +7599,6 @@
           "Lisa Castaneda",
           "Anita Bigger",
           "Whitney Maidens",
-          "Edward Jones",
-          "Sarah Jones",
           "Matt Gardner",
           "Evven Gardner",
           "Jere England",
@@ -7634,7 +7632,7 @@
           "Carlos Flores",
           "Anna Moore"
         ],
-        "count": 68
+        "count": 66
       }
     ],
     "leaderPipeline": [],
@@ -7660,14 +7658,6 @@
         "members": 19,
         "leaders": 1,
         "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
-        "avgAttended": 8,
-        "attPct": 42
-      },
-      {
-        "name": "High School Community Group",
-        "members": 19,
-        "leaders": 2,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 8,
         "attPct": 42
       },
@@ -7763,7 +7753,7 @@
         "name": "Lattin Community Group",
         "members": 13,
         "leaders": 3,
-        "schedule": "Meets weekly on Mondays from 6-7:30am",
+        "schedule": "Meets weekly on Wednesdays from 6-7:30am",
         "avgAttended": 6,
         "attPct": 46
       },
@@ -9447,7 +9437,7 @@
               "team": "Stepping Stones",
               "pos": "Water Party Attendant",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "11 AM"
             },
             {
               "name": "Ellie Wampler",
@@ -9482,7 +9472,7 @@
               "team": "Stepping Stones",
               "pos": "Water Party Attendant",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "11 AM"
             },
             {
               "name": "Lily Perry",
@@ -9518,13 +9508,6 @@
               "pos": "Water Party Attendant",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Brianna Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Water Party Attendant",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Cindy Lefler",
@@ -9574,6 +9557,20 @@
               "pos": "Breakfast Provider",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shawn Stoddard",
+              "team": "Stepping Stones",
+              "pos": "Water Party Attendant",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Gina Rankin",
+              "team": "Stepping Stones",
+              "pos": "Water Party Attendant",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9724,8 +9721,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 105,
-            "totalVols": 105
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
