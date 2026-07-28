@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-27T23:46:12.270Z",
+  "lastUpdated": "2026-07-28T00:01:40.701Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 27, 2026, 4:46 PM",
+    "refreshed": "Jul 27, 2026, 5:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8766,7 +8766,7 @@
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
-              "description": ""
+              "description": "PRESIDER MIC AT 9:30 AND 11"
             },
             {
               "seq": 16,
@@ -8780,24 +8780,31 @@
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
-              "description": ""
+              "description": "PRESIDER MIC AT 9:30 AND 11"
             },
             {
               "seq": 18,
+              "title": "QUICK ANNOUNCEMENTS",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "PRESIDER MIC AT 9:30 AND 11"
+            },
+            {
+              "seq": 19,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -12160,7 +12167,7 @@
               "name": "Karynn Sucaldito",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
