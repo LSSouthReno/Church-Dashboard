@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-30T01:46:33.993Z",
+  "lastUpdated": "2026-07-30T02:01:58.223Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6067,7 +6067,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Jul 29, 2026, 6:46 PM",
+    "refreshed": "Jul 29, 2026, 7:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7771,6 +7771,14 @@
         "attPct": 46
       },
       {
+        "name": "Durham Community Group",
+        "members": 12,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
+        "avgAttended": 7,
+        "attPct": 58
+      },
+      {
         "name": "Murad Community Group",
         "members": 12,
         "leaders": 1,
@@ -7785,14 +7793,6 @@
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 5,
         "attPct": 42
-      },
-      {
-        "name": "Durham Community Group",
-        "members": 11,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
-        "avgAttended": 7,
-        "attPct": 64
       },
       {
         "name": "Gardner Community Group",
@@ -8668,14 +8668,14 @@
               "name": "Jeana Rehberger",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Michael Rehberger",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -9617,6 +9617,27 @@
               "pos": "Water Party Attendant",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Dante Sellman",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ed Griggs",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9767,8 +9788,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676364\"},{\"type\":\"PlanTime\",\"id\":\"217676365\"},{\"type\":\"PlanTime\",\"id\":\"217676366\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
