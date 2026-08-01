@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-01T14:56:50.786Z",
+  "lastUpdated": "2026-08-01T15:45:52.375Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -222,7 +222,7 @@
       343205,
       363983,
       406957,
-      8412
+      11176
     ],
     "donors": [
       0,
@@ -328,12 +328,12 @@
       411,
       362,
       365,
-      15
+      27
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5080917
+    "raised": 5083681
   },
   "attendance": {
     "months": [
@@ -6024,7 +6024,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 1, 2026, 7:56 AM",
+    "refreshed": "Aug 1, 2026, 8:45 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -12586,7 +12586,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "error": "PCO request failed: 502 — https://api.planningcenteronline.com/people/v2/people?offset=4100&order=-created_at&per_page=100 — <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n"
+    "count30d": 45,
+    "weeklyAvg": 10,
+    "totalFetched": 6953,
+    "since": "2026-07-02",
+    "asOf": "2026-08-01T15:44:33.291Z"
   },
   "emailStats": {
     "latestOpenRate": 0.5294117647058824,
@@ -12594,6 +12598,6 @@
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-07-29T16:01:52+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-01T14:44:19.025Z"
+    "asOf": "2026-08-01T15:44:34.462Z"
   }
 }
