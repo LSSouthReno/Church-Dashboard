@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-02T15:46:13.862Z",
+  "lastUpdated": "2026-08-02T15:59:00.936Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3219,8 +3219,8 @@
     "2026-08": [
       {
         "week": "Aug 2",
-        "adults": 0,
-        "kids": 3
+        "adults": 185,
+        "kids": 19
       }
     ]
   },
@@ -6031,7 +6031,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 2, 2026, 8:46 AM",
+    "refreshed": "Aug 2, 2026, 8:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9254,7 +9254,7 @@
               "name": "Jed Ingalls",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -9289,7 +9289,7 @@
               "name": "Renee Peregrin",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -9443,7 +9443,7 @@
               "name": "Carlos Perez",
               "team": "Stepping Stones",
               "pos": "Lead Guide WP, Hawks, Mustangs",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -10200,7 +10200,7 @@
               "name": "Jed Ingalls",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -10438,7 +10438,7 @@
               "name": "Liz Suto",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -10452,7 +10452,7 @@
               "name": "Jed Ingalls",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             }
           ],
@@ -10944,7 +10944,7 @@
               "name": "Jed Ingalls",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -11189,7 +11189,7 @@
               "name": "Liz Suto",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
@@ -11727,13 +11727,6 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
-              "name": "Liz Suto",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Sarah Rawlins",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -11931,8 +11924,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 61,
-            "totalVols": 61
+            "volsWithServiceTime": 60,
+            "totalVols": 60
           }
         }
       ]
