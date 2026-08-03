@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-03T20:49:02.192Z",
+  "lastUpdated": "2026-08-03T21:07:38.308Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6072,7 +6072,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 3, 2026, 1:49 PM",
+    "refreshed": "Aug 3, 2026, 2:07 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8792,21 +8792,21 @@
             },
             {
               "seq": 6,
+              "title": "All Hail King Jesus",
+              "type": "song",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
               "title": "CONFESSION / ASSURANCE",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 7,
-              "title": "Build My Life",
-              "type": "song",
-              "lengthMin": 5,
-              "description": ""
-            },
-            {
               "seq": 8,
-              "title": "All Hail King Jesus",
+              "title": "King Of Kings",
               "type": "song",
               "lengthMin": 5,
               "description": ""
@@ -9579,6 +9579,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jennifer Janakus",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -9722,8 +9729,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 93,
-            "totalVols": 93
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ]
@@ -10920,6 +10927,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Judy McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -11070,8 +11091,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 61,
-            "totalVols": 61
+            "volsWithServiceTime": 63,
+            "totalVols": 63
           }
         }
       ]
@@ -11230,6 +11251,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anna Ferguson",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11239,8 +11267,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 20,
-            "totalVols": 20
+            "volsWithServiceTime": 21,
+            "totalVols": 21
           }
         }
       ]
@@ -11830,23 +11858,7 @@
       ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Katie Thompson",
-      "start": "2026-08-20",
-      "end": "2026-08-24"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-08-20",
-      "end": "2026-08-20"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-09-08",
-      "end": "2026-09-10"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
