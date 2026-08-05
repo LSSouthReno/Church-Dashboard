@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-05T19:47:32.120Z",
+  "lastUpdated": "2026-08-05T20:05:01.274Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3232,7 +3232,7 @@
     },
     {
       "name": "Coffee Team",
-      "current": 20,
+      "current": 21,
       "needed": 14
     },
     {
@@ -3296,7 +3296,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 364,
+  "uniqueVolunteers": 365,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6072,7 +6072,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 5, 2026, 12:47 PM",
+    "refreshed": "Aug 5, 2026, 1:05 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11408,6 +11408,13 @@
               "pos": "Coffee Setup",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Karis Sellman",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11417,8 +11424,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 16,
-            "totalVols": 16
+            "volsWithServiceTime": 17,
+            "totalVols": 17
           }
         }
       ]
@@ -11555,6 +11562,13 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Karis Sellman",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11564,8 +11578,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 17,
-            "totalVols": 17
+            "volsWithServiceTime": 18,
+            "totalVols": 18
           }
         }
       ]
@@ -11944,7 +11958,28 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-08-11",
+      "end": "2026-08-12"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-08-20",
+      "end": "2026-08-24"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-08-20",
+      "end": "2026-08-20"
+    },
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-09-08",
+      "end": "2026-09-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
