@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-06T04:47:01.972Z",
+  "lastUpdated": "2026-08-06T05:08:57.651Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6072,7 +6072,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 5, 2026, 9:47 PM",
+    "refreshed": "Aug 5, 2026, 10:09 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7517,7 +7517,7 @@
         20,
         26,
         30,
-        9,
+        10,
         null,
         null,
         null,
@@ -7928,20 +7928,20 @@
         "attPct": 20
       },
       {
+        "name": "Flores Community Group",
+        "members": 5,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 2,
+        "attPct": 40
+      },
+      {
         "name": "Saddle Ridge Community Group",
         "members": 4,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 5:30-7pm",
         "avgAttended": 0,
         "attPct": 0
-      },
-      {
-        "name": "Flores Community Group",
-        "members": 4,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 2,
-        "attPct": 50
       },
       {
         "name": "Mick/McKinley Community Group",
@@ -9593,20 +9593,13 @@
               "name": "Michael Rehberger",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Jeana Rehberger",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Thomas Adams",
-              "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
             }
@@ -9752,8 +9745,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 98,
-            "totalVols": 98
+            "volsWithServiceTime": 97,
+            "totalVols": 97
           }
         }
       ]
@@ -10352,7 +10345,7 @@
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
               "status": "C",
-              "serviceTime": "11 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Kadyn Skolnick",
