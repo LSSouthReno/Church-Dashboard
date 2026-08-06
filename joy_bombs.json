@@ -43,20 +43,6 @@
       "position": "Offering Counter"
     },
     {
-      "id": "jb_152311070_20260726_firstimpression",
-      "name": "Daniel Akre",
-      "pcoPersonId": "152311070",
-      "team": "First Impressions",
-      "phone": "19162766465",
-      "firstServeDate": "2026-07-26",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Greeter"
-    },
-    {
       "id": "jb_151513183_20260726_enrichmentteam",
       "name": "Jude Adams",
       "pcoPersonId": "151513183",
@@ -323,7 +309,21 @@
       "notes": "",
       "source": "auto",
       "position": "Host"
+    },
+    {
+      "id": "jb_152311070_20260726_firstimpression",
+      "name": "Daniel Akre",
+      "pcoPersonId": "152311070",
+      "team": "First Impressions",
+      "phone": "19162766465",
+      "firstServeDate": "2026-07-26",
+      "status": "bombed",
+      "bombedDate": "2026-08-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Greeter"
     }
   ],
-  "lastUpdated": "2026-08-06T22:06:09.668Z"
+  "lastUpdated": "2026-08-06T22:17:30.360Z"
 }
