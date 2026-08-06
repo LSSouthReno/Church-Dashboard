@@ -2956,7 +2956,12 @@ function getBaptismSchedule_() {
     if (r.some(function(c) { return QUEUE_RE.test(String(c || '')); })) break;
 
     var name     = String(r[1] || '').trim(); // B
-    var service  = String(r[2] || '').trim(); // C
+    // C (service time) is often a time-formatted cell → getValue returns a Date
+    // (epoch Dec 30 1899). Format such cells back to "9:30 AM"; else use as text.
+    var svcRaw   = r[2];
+    var service  = (svcRaw instanceof Date && !isNaN(svcRaw.getTime()))
+      ? Utilities.formatDate(svcRaw, tz, 'h:mm a')
+      : String(svcRaw || '').trim();
     var baptizer = String(r[3] || '').trim(); // D
     var adultChild = String(r[5] || '').trim(); // F
     if (!name || !service) continue; // must have both a name and a service time
