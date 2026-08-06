@@ -1419,6 +1419,12 @@
   .sd-special-item { display:flex; align-items:center; gap:8px; background:rgba(212,175,55,.08); border:1px solid rgba(212,175,55,.25); border-radius:20px; padding:6px 14px; }
   .sd-special-name { font-size:13px; font-weight:600; color:var(--text); }
   .sd-special-time,.sd-special-loc { font-size:11px; color:var(--text-muted); }
+  .sd-baptism-groups { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+  .sd-baptism-svc { background:rgba(76,154,255,.07); border:1px solid rgba(76,154,255,.28); border-radius:12px; padding:12px 14px; }
+  .sd-baptism-svc-hdr { font-family:'DM Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.08em; color:#4c9aff; margin-bottom:8px; }
+  .sd-baptism-row { display:flex; align-items:baseline; flex-wrap:wrap; gap:6px; padding:3px 0; }
+  .sd-baptism-name { font-size:13px; font-weight:600; color:var(--text); }
+  .sd-baptism-by { font-size:11px; color:var(--text-muted); }
   .sd-captains-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
   .sd-captain-card { background:var(--bg); border:1px solid var(--card-border); border-radius:7px; padding:12px 14px; }
   .sd-captain-service { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:5px; }
@@ -5801,6 +5807,22 @@ function sundayBuildContent(plan, calEvents) {
               <span class="sd-special-name">${ev.name}</span>
               ${ev.time && ev.time !== '12:00 AM' ? `<span class="sd-special-time">&middot; ${ev.time}</span>` : ''}
               ${ev.location ? `<span class="sd-special-loc">&middot; ${ev.location.split(',')[0]}</span>` : ''}
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${plan.baptisms && plan.baptisms.byService && plan.baptisms.byService.length ? `
+      <div class="sd-section">
+        <div class="sd-section-title">🌊 Baptisms</div>
+        <div class="sd-baptism-groups">
+          ${plan.baptisms.byService.map(g => `
+            <div class="sd-baptism-svc">
+              <div class="sd-baptism-svc-hdr">${g.service}</div>
+              ${g.people.map(pp => `
+                <div class="sd-baptism-row">
+                  <span class="sd-baptism-name">${pp.name}</span>
+                  ${pp.baptizer ? `<span class="sd-baptism-by">baptized by ${pp.baptizer}</span>` : ''}
+                </div>`).join('')}
             </div>`).join('')}
         </div>
       </div>` : ''}

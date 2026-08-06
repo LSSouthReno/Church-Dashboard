@@ -26,6 +26,12 @@ const DASHBOARD_CONFIG = {
   CHECKINS_EVENT_ID: '760446',
   COMMUNITY_GROUP_TYPE_ID: '441907',
 
+  // Baptism scheduling sheet (separate spreadsheet, maintained by staff).
+  // Read live at JSON-build time by getBaptismSchedule_() to populate the
+  // Sunday one-sheet. Layout: C1:D1 (merged) = baptism date; data from row 3:
+  // B=Name, C=Service time, D=Baptizer, E=Status, F=Adult/Child.
+  BAPTISM_SCHEDULE_SHEET_ID: '1mzKaJH8U48RoPsbeFvsPkPnPAwa2HpJ1r7nWTwKTFi0',
+
   TEAMS_TAB_NAME: 'Leader Forms',
 
   PLEDGE_TARGET: 8500000,
@@ -1193,7 +1199,7 @@ function buildDashboardDataFromSheet_(ss) {
       current: memberRows.length ? (Number(memberRows[memberRows.length - 1][2]) || 0) : 0
     },
     communityGroupsDetailed: buildCGDetailed_(ss, groupRows),
-    sundayPlans: getSundayPlans_(),
+    sundayPlans: attachBaptisms_(getSundayPlans_()),
     staffTimeOff: fetchBambooHRTimeOff_(),
     // Live scorecard metrics — populated by syncStudentMinistry_/syncNewAdultProfiles_/syncMailchimpStats_
     studentMinistry: (function() {
@@ -2882,6 +2888,107 @@ function getSundayPlans_() {
 
 function refreshSundayPlans() {
   syncSundayPlansData_();
+}
+
+/* =========================================================
+   BAPTISM SCHEDULE → Sunday one-sheet
+   Reads the staff-maintained baptism scheduling spreadsheet live at
+   JSON-build time and attaches the names to the matching Sunday plan.
+
+   Source layout (DASHBOARD_CONFIG.BAPTISM_SCHEDULE_SHEET_ID, first tab):
+     • C1:D1 (merged) = baptism date, e.g. "September 6, 2026"
+     • Row 2          = headers
+     • Row 3 → down   = B: Name, C: Service time, D: Baptizer,
+                        E: Status, F: Adult/Child
+     • A merged A–G row reading "In Baptism Queue (Not Scheduled Yet)"
+       marks the end of the scheduled list — everyone at/below it is
+       omitted. Its position is not fixed, so we detect it by text.
+
+   Gating: baptisms only appear on a Sunday whose date === the sheet's
+   C1:D1 date. Since sundayPlans holds only *future* Sundays, a stale
+   leftover date from a previous month simply won't match any upcoming
+   Sunday, so old names never show — exactly the desired behavior.
+========================================================= */
+
+function baptismDateKey_(v, tz) {
+  if (v instanceof Date && !isNaN(v.getTime())) return Utilities.formatDate(v, tz, 'yyyy-MM-dd');
+  var s = String(v || '').trim();
+  if (!s) return '';
+  var d = new Date(s);
+  if (isNaN(d.getTime())) return '';
+  return Utilities.formatDate(d, tz, 'yyyy-MM-dd');
+}
+
+// Parse a service-time label ("8:00 AM", "9:30 AM", "11:00 AM") → minutes for sorting.
+function baptismTimeMin_(t) {
+  var m = String(t || '').match(/(\d+)(?::(\d+))?\s*(am|pm)?/i);
+  if (!m) return 9999;
+  var h = +m[1], mn = +(m[2] || 0), ap = (m[3] || '').toLowerCase();
+  if (ap === 'pm' && h !== 12) h += 12;
+  if (ap === 'am' && h === 12) h = 0;
+  return h * 60 + mn;
+}
+
+function getBaptismSchedule_() {
+  var id = DASHBOARD_CONFIG.BAPTISM_SCHEDULE_SHEET_ID;
+  if (!id) return null;
+  var bss = SpreadsheetApp.openById(id);
+  var tz  = bss.getSpreadsheetTimeZone();
+  var sh  = bss.getSheets()[0];
+  var lastRow = sh.getLastRow();
+  var dateVal = sh.getRange(1, 3).getValue(); // C1 (top-left of merged C1:D1)
+  var dateKey = baptismDateKey_(dateVal, tz);
+  if (!dateKey || lastRow < 3) return null;
+
+  var label = (dateVal instanceof Date)
+    ? Utilities.formatDate(dateVal, tz, 'MMMM d, yyyy')
+    : String(dateVal).trim();
+
+  // Read A..F from row 3 down. Column A is needed to see the merged
+  // "In Baptism Queue" divider (a merged cell only stores its value in A).
+  var data = sh.getRange(3, 1, lastRow - 2, 6).getValues();
+  var groups = {};
+  var QUEUE_RE = /in\s*baptism\s*queue|not\s*scheduled/i;
+
+  for (var i = 0; i < data.length; i++) {
+    var r = data[i];
+    // Stop at the "In Baptism Queue (Not Scheduled Yet)" divider — omit it and everything below.
+    if (r.some(function(c) { return QUEUE_RE.test(String(c || '')); })) break;
+
+    var name     = String(r[1] || '').trim(); // B
+    var service  = String(r[2] || '').trim(); // C
+    var baptizer = String(r[3] || '').trim(); // D
+    var adultChild = String(r[5] || '').trim(); // F
+    if (!name || !service) continue; // must have both a name and a service time
+
+    if (!groups[service]) groups[service] = [];
+    groups[service].push({ name: name, baptizer: baptizer, adultChild: adultChild });
+  }
+
+  var byService = Object.keys(groups)
+    .sort(function(a, b) { return baptismTimeMin_(a) - baptismTimeMin_(b); })
+    .map(function(s) { return { service: s, people: groups[s] }; });
+
+  return { date: dateKey, label: label, byService: byService };
+}
+
+// Attach baptism names to the Sunday plan whose date matches the sheet's C1:D1 date.
+// Never throws — a failure just leaves plans unchanged so the rest of the JSON is fine.
+function attachBaptisms_(plans) {
+  try {
+    var bap = getBaptismSchedule_();
+    if (!bap || !bap.date || !bap.byService.length) return plans;
+    (plans || []).forEach(function(p) {
+      if (p && p.date === bap.date) {
+        p.baptisms = { label: bap.label, byService: bap.byService };
+      }
+    });
+    Logger.log('✓  Baptisms attached to Sunday ' + bap.date + ' (' +
+      bap.byService.reduce(function(s, g) { return s + g.people.length; }, 0) + ' people)');
+  } catch (e) {
+    Logger.log('⚠  attachBaptisms_ error: ' + e.message);
+  }
+  return plans;
 }
 
 /* =========================================================
