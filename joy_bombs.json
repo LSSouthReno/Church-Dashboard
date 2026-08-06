@@ -15,20 +15,6 @@
       "position": "Vocals"
     },
     {
-      "id": "jb_185811615_20260726_presider",
-      "name": "Justice JB",
-      "pcoPersonId": "185811615",
-      "team": "Presiders",
-      "phone": "17026002491",
-      "firstServeDate": "2026-07-26",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Sermon Text Reader"
-    },
-    {
       "id": "jb_151513183_20260726_enrichmentteam",
       "name": "Jude Adams",
       "pcoPersonId": "151513183",
@@ -297,6 +283,20 @@
       "position": "Host"
     },
     {
+      "id": "jb_185811615_20260726_presider",
+      "name": "Justice JB",
+      "pcoPersonId": "185811615",
+      "team": "Presiders",
+      "phone": "17026002491",
+      "firstServeDate": "2026-07-26",
+      "status": "bombed",
+      "bombedDate": "2026-08-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
+    },
+    {
       "id": "jb_152311070_20260726_firstimpression",
       "name": "Daniel Akre",
       "pcoPersonId": "152311070",
@@ -311,5 +311,5 @@
       "position": "Greeter"
     }
   ],
-  "lastUpdated": "2026-08-06T22:19:10.609Z"
+  "lastUpdated": "2026-08-06T22:20:51.893Z"
 }
