@@ -26,7 +26,7 @@ permissions:
 # publish leaves GitHub's Pages backend finalizing and makes the next deploy fail).
 # Group renamed off the old "pages" group that a zombie run had deadlocked.
 concurrency:
-  group: pages-publish
+  group: pages-publish-2
   cancel-in-progress: false
 
 jobs:
