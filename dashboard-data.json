@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-06T03:45:47.030Z",
+  "lastUpdated": "2026-08-06T04:06:29.496Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6072,7 +6072,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 5, 2026, 8:45 PM",
+    "refreshed": "Aug 5, 2026, 9:06 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -6953,7 +6953,7 @@
       "groups": 40,
       "members": 424,
       "groupSize": 11,
-      "fmInGroupsPct": 54,
+      "fmInGroupsPct": 55,
       "asOfMonth": "Aug '26"
     },
     "groupCountsByYear": {
@@ -7517,7 +7517,7 @@
         20,
         26,
         30,
-        7,
+        9,
         null,
         null,
         null,
@@ -7936,18 +7936,18 @@
         "attPct": 0
       },
       {
+        "name": "Flores Community Group",
+        "members": 4,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 2,
+        "attPct": 50
+      },
+      {
         "name": "Mick/McKinley Community Group",
         "members": 2,
         "leaders": 2,
         "schedule": "Meets weekly on Mondays from 6-8pm",
-        "avgAttended": 0,
-        "attPct": 0
-      },
-      {
-        "name": "Flores Community Group",
-        "members": 2,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 0,
         "attPct": 0
       },
@@ -8689,14 +8689,14 @@
               "name": "Ed Griggs",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Jenn Meredith",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -9574,6 +9574,41 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jenny Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Simone Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael Rehberger",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeana Rehberger",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Thomas Adams",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9717,8 +9752,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 93,
-            "totalVols": 93
+            "volsWithServiceTime": 98,
+            "totalVols": 98
           }
         }
       ]
