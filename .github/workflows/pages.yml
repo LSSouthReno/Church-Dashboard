@@ -92,3 +92,5 @@ jobs:
         id: deployment
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure' && steps.deploy4.outcome == 'failure'
         uses: actions/deploy-pages@v4
+
+# Deploy pipeline last reviewed 2026-08-06.
