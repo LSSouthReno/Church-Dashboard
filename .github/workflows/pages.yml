@@ -1,21 +1,32 @@
 name: Deploy to GitHub Pages
 
+# Publishing strategy (rev. 2026-08-06):
+# The GAS sync pushes a data commit to main every few minutes. Deploying Pages on
+# *every* commit made the deploys pile up on one concurrency group and jam — on
+# 2026-07-29 a run got stuck in "waiting" for 8 days, deadlocking the group so
+# nothing published (site frozen at Jul 29). Fix: DON'T deploy per data-commit.
+# Deploy on a ~15-min schedule (picks up whatever's in main), plus a manual button,
+# plus a self-trigger whenever this workflow file itself changes. The concurrency
+# group was renamed (pages -> pages-publish) so new runs never wait behind the old
+# jammed group. 15-min freshness comfortably satisfies the "refreshes hourly" promise.
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: '*/15 * * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/pages.yml'
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment. Newer pushes queued while a deploy is
-# in progress supersede each other (only the latest waits), but we do NOT
-# cancel an in-progress deploy — cancelling mid-publish leaves GitHub's Pages
-# backend finalizing and makes the next deploy fail with "try again later".
+# One deployment at a time; never cancel an in-progress publish (cancelling mid-
+# publish leaves GitHub's Pages backend finalizing and makes the next deploy fail).
+# Group renamed off the old "pages" group that a zombie run had deadlocked.
 concurrency:
-  group: pages
+  group: pages-publish
   cancel-in-progress: false
 
 jobs:
@@ -34,16 +45,11 @@ jobs:
         with:
           path: '.'
 
-      # The frequent data-sync pushes land within a few seconds of each other. When
-      # they cluster, GitHub Pages rejects a new deploy with a 400 "due to in progress
-      # deployment" — either a prior deploy is still finalizing, or a superseded run
-      # left a deployment stuck "in progress" (a zombie). deploy-pages@v4 does NOT
-      # wait/retry on this 400 — it fails immediately. The blocking deployment always
-      # clears on its own, but that can take several minutes (we've observed a run
-      # self-heal only after ~10 min of waiting). So we retry with cumulative backoff
-      # that covers the full self-heal window (~13 min) instead of giving up early.
-      # The site is never broken by the conflict — each retry just re-publishes the
-      # same artifact once GitHub is ready, so the run finishes green (no failure email).
+      # deploy-pages@v4 fails immediately on a 400 "deployment in progress" (a prior
+      # deploy still finalizing, or a superseded run left a zombie deployment). The
+      # blocker always clears on its own, but that can take several minutes. Retry with
+      # cumulative backoff (~13 min) instead of giving up early. Each retry just
+      # re-publishes the same artifact once GitHub is ready, so the run finishes green.
       - name: Deploy to GitHub Pages (attempt 1)
         id: deploy1
         uses: actions/deploy-pages@v4
@@ -80,9 +86,8 @@ jobs:
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure' && steps.deploy4.outcome == 'failure'
         run: sleep 300
 
-      # Final attempt (~13 min of cumulative backoff elapsed) has no continue-on-error:
-      # if it STILL fails, the blocker is not clearing and that's a real problem worth
-      # an email notification.
+      # Final attempt (~13 min cumulative backoff): no continue-on-error, so if it
+      # STILL fails that's a real problem worth an email notification.
       - name: Deploy to GitHub Pages (attempt 5)
         id: deployment
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure' && steps.deploy3.outcome == 'failure' && steps.deploy4.outcome == 'failure'
