@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_169453679_20260726_worshipteam",
-      "name": "Corinne Baker",
-      "pcoPersonId": "169453679",
-      "team": "Worship Team",
-      "phone": "17032326565",
-      "firstServeDate": "2026-07-26",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Vocals"
-    },
-    {
       "id": "jb_151513183_20260726_enrichmentteam",
       "name": "Jude Adams",
       "pcoPersonId": "151513183",
@@ -283,6 +269,20 @@
       "position": "Host"
     },
     {
+      "id": "jb_169453679_20260726_worshipteam",
+      "name": "Corinne Baker",
+      "pcoPersonId": "169453679",
+      "team": "Worship Team",
+      "phone": "17032326565",
+      "firstServeDate": "2026-07-26",
+      "status": "bombed",
+      "bombedDate": "2026-08-06",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Vocals"
+    },
+    {
       "id": "jb_185811615_20260726_presider",
       "name": "Justice JB",
       "pcoPersonId": "185811615",
@@ -311,5 +311,5 @@
       "position": "Greeter"
     }
   ],
-  "lastUpdated": "2026-08-06T22:20:51.893Z"
+  "lastUpdated": "2026-08-06T22:21:30.550Z"
 }
