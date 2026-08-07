@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-07T03:49:35.729Z",
+  "lastUpdated": "2026-08-07T04:48:15.113Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6072,7 +6072,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 6, 2026, 8:49 PM",
+    "refreshed": "Aug 6, 2026, 9:48 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8668,7 +8668,7 @@
               "name": "Dante Sellman",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -9623,6 +9623,13 @@
               "pos": "Back Right Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -9766,8 +9773,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676372\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 96,
-            "totalVols": 96
+            "volsWithServiceTime": 97,
+            "totalVols": 97
           }
         }
       ]
@@ -12109,14 +12116,14 @@
     "weeklyAvg": 13,
     "totalFetched": 6972,
     "since": "2026-07-08",
-    "asOf": "2026-08-07T03:45:09.349Z"
+    "asOf": "2026-08-07T04:45:20.780Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.5125,
-    "avgOpenRate3": 0.5380729564553094,
+    "latestOpenRate": 0.5142857142857142,
+    "avgOpenRate3": 0.5386681945505475,
     "latestCampaign": "LS Weekly Update",
     "latestSentAt": "2026-08-05T18:39:13+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-07T03:45:11.016Z"
+    "asOf": "2026-08-07T04:45:23.297Z"
   }
 }
