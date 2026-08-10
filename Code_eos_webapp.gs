@@ -44,6 +44,17 @@ function doGet(e) {
       pushJsonToGitHub_(dataJr);
       return eosWaJson_({ ok: true, ran: 'json_rebuild' });
     }
+    if (action === 'run_dump_headcounts') {
+      // Read-only: dump recent Sunday event_times with their headcounts and
+      // attendance_type names — for verifying kids/adults classification.
+      return eosWaJson_(dumpRecentHeadcounts_());
+    }
+    if (action === 'run_attendance_resync') {
+      // Re-pulls recent attendance from PCO (kids-type headcounts → Kids) and
+      // pushes updated dashboard-data.json.
+      resyncRecentAttendance();
+      return eosWaJson_({ ok: true, ran: 'resyncRecentAttendance' });
+    }
     if (action === 'run_donor_backfill') {
       // Kicks off the resumable donor-count backfill (2018 → now). It processes
       // one year, then self-schedules continuation triggers every 90s.

@@ -165,6 +165,76 @@ function refreshServicesTeams() {
   syncServicesTeamsData_();
 }
 
+function dumpRecentHeadcounts_() {
+  // Read-only debug: recent event_times + headcounts + attendance_type names.
+  const since = new Date(Date.now() - 14 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+  const result = pcoGetAllWithIncluded_(
+    '/check-ins/v2/event_times' +
+    '?where[starts_at][gte]=' + since +
+    '&include=headcounts' +
+    '&per_page=100'
+  );
+
+  const typeNames = {};
+  try {
+    pcoGetAll_('/check-ins/v2/events/' + DASHBOARD_CONFIG.CHECKINS_EVENT_ID + '/attendance_types?per_page=100')
+      .forEach(t => { typeNames[String(t.id)] = (t.attributes || {}).name || ''; });
+  } catch (err) {
+    typeNames.__error = err.message;
+  }
+
+  const etById = {};
+  (result.data || []).forEach(et => {
+    etById[et.id] = {
+      eventId: relId_(et, 'event'),
+      startsAt: (et.attributes || {}).starts_at,
+      isSundayService: relId_(et, 'event') === String(DASHBOARD_CONFIG.CHECKINS_EVENT_ID)
+    };
+  });
+
+  const headcounts = [];
+  (result.included || []).forEach(inc => {
+    if (inc.type !== 'Headcount') return;
+    const etId = relId_(inc, 'event_time');
+    const typeId = relId_(inc, 'attendance_type');
+    headcounts.push({
+      eventTime: etById[etId] || null,
+      total: (inc.attributes || {}).total,
+      attrs: inc.attributes,
+      attendanceTypeId: typeId,
+      attendanceTypeName: typeNames[typeId] || null,
+      classifiedAsKids: isKidsHeadcount_(inc)
+    });
+  });
+
+  return { since: since, attendanceTypes: typeNames, headcounts: headcounts };
+}
+
+function resyncRecentAttendance() {
+  // On-demand re-pull of attendance only (monthly + weekly) for recent months,
+  // then rebuild + push dashboard-data.json. Remote-triggered via
+  // ?action=run_attendance_resync — used to re-count already-synced Sundays
+  // after attendance classification changes (e.g. Kids Party → Kids).
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  setupCacheSheets_(ss);
+  const months = getRecentMonths_(DASHBOARD_CONFIG.RECENT_MONTHS_TO_REFRESH);
+
+  safeRun_('Attendance resync (monthly)', () => {
+    const rows = getAttendanceRowsForMonths_(months);
+    upsertMonthlyRows_(ss.getSheetByName(SHEETS.attendance), rows, 4);
+  });
+
+  safeRun_('Attendance resync (weekly)', () => {
+    const rows = getAttendanceWeeklyRowsForMonths_(months);
+    upsertWeeklyAttendanceRows_(ss.getSheetByName(SHEETS.attendanceWeekly), rows);
+  });
+
+  const data = buildDashboardDataFromSheet_(ss);
+  writeDashboardJsonToSheet_(ss, data);
+  pushJsonToGitHub_(data);
+  Logger.log('Attendance resync done and JSON pushed to GitHub.');
+}
+
 function syncSundayAndPublish() {
   // Re-fetches Sunday plan data from PCO, updates SundayPlans sheet,
   // rebuilds dashboard-data.json, and pushes to GitHub. ~2 min.
@@ -1773,9 +1843,41 @@ function donationCountsForNet_(donation) {
    ATTENDANCE CACHE ROWS
    Working logic preserved:
    - Adults = headcounts included on Sunday Service event_times
+     (except kids-type headcounts like "Kids Party" — see below)
    - Kids = direct check-ins attached to those same event_times
+     + kids-type headcounts (e.g. "Kids Party")
    Output rows: [MonthKey, MonthLabel, AdultsAvg, KidsAvg]
 ========================================================= */
+
+// Headcount types whose counts belong in Kids (e.g. "Kids Party"), not Adults.
+// PCO stores the headcount's name on its related attendance_type, so fetch the
+// event's attendance_types once per execution and match by id.
+var KIDS_HC_TYPE_IDS_CACHE_ = null;
+
+function kidsHeadcountTypeIds_() {
+  if (KIDS_HC_TYPE_IDS_CACHE_) return KIDS_HC_TYPE_IDS_CACHE_;
+  const ids = {};
+  try {
+    const types = pcoGetAll_('/check-ins/v2/events/' + DASHBOARD_CONFIG.CHECKINS_EVENT_ID + '/attendance_types?per_page=100');
+    types.forEach(t => {
+      const name = String((t.attributes || {}).name || '').toLowerCase();
+      if (/\bkids?\b/.test(name)) ids[String(t.id)] = name;
+    });
+    Logger.log('   Kids headcount types (counted as Kids): ' + JSON.stringify(ids));
+  } catch (err) {
+    Logger.log('   ! attendance_types fetch failed — kids-type headcounts will count as adults: ' + err.message);
+  }
+  KIDS_HC_TYPE_IDS_CACHE_ = ids;
+  return ids;
+}
+
+function isKidsHeadcount_(inc) {
+  const typeId = relId_(inc, 'attendance_type');
+  if (typeId && kidsHeadcountTypeIds_()[typeId]) return true;
+  const attrs = inc.attributes || {};
+  const name = String(attrs.name || attrs.label || attrs.headcount_type || '').toLowerCase();
+  return /\bkids?\b/.test(name);
+}
 
 function getAttendanceRowsForMonths_(months) {
   const bucket = {};
@@ -1827,6 +1929,7 @@ function getAttendanceRowsForMonths_(months) {
   });
 
   let headcountCount = 0;
+  let kidsHeadcountCount = 0;
   included.forEach(inc => {
     if (inc.type !== 'Headcount') return;
 
@@ -1838,11 +1941,18 @@ function getAttendanceRowsForMonths_(months) {
     const total = Number(attrs.total || attrs.count || attrs.quantity || attrs.value || 0);
     if (!total) return;
 
+    if (isKidsHeadcount_(inc)) {
+      bucket[info.monthKey].kidTotal += total;
+      bucket[info.monthKey].kidDates[info.dateKey] = true;
+      kidsHeadcountCount++;
+      return;
+    }
+
     bucket[info.monthKey].adultTotal += total;
     bucket[info.monthKey].adultDates[info.dateKey] = true;
     headcountCount++;
   });
-  Logger.log('   Adult headcounts counted: ' + headcountCount);
+  Logger.log('   Adult headcounts counted: ' + headcountCount + ' · kids-type headcounts: ' + kidsHeadcountCount);
 
   let kidCheckinsFetched = 0;
   eventTimes.forEach(et => {
@@ -1915,10 +2025,11 @@ function getAttendanceWeeklyRowsForMonths_(months) {
 
   Logger.log('   Weekly attendance: ' + eventTimes.length + ' event_times in window (of ' + allEventTimes.length + ' fetched)');
 
-  // Adults: sum ALL headcounts for each event_time (matches monthly attendance logic).
-  // Kids:   direct check-in count per event_time (matches monthly attendance logic).
-  // This avoids brittle headcount-name matching that fails for historical data.
+  // Adults: sum headcounts for each event_time (matches monthly attendance logic),
+  //         except kids-type headcounts (e.g. "Kids Party") which count as Kids.
+  // Kids:   direct check-in count per event_time + kids-type headcounts.
   const adultHcByEtId = {};
+  const kidsHcByEtId = {};
   const kidCheckinsByEtId = {};
 
   const headcountNamesFound = {};
@@ -1934,6 +2045,10 @@ function getAttendanceWeeklyRowsForMonths_(months) {
     headcountNamesFound[name] += total;
 
     if (!total) return;
+    if (isKidsHeadcount_(inc)) {
+      kidsHcByEtId[etId] = (kidsHcByEtId[etId] || 0) + total;
+      return;
+    }
     adultHcByEtId[etId] = (adultHcByEtId[etId] || 0) + total;
   });
   Logger.log('   Headcount names found: ' + JSON.stringify(headcountNamesFound));
@@ -1967,8 +2082,8 @@ function getAttendanceWeeklyRowsForMonths_(months) {
       byDate[dateKey] = { monthKey: monthKey, dateKey: dateKey, date: d, adults: 0, kids: 0 };
     }
 
-    byDate[dateKey].adults += adultHcByEtId[et.id]      || 0;
-    byDate[dateKey].kids   += kidCheckinsByEtId[et.id]   || 0;
+    byDate[dateKey].adults += adultHcByEtId[et.id] || 0;
+    byDate[dateKey].kids   += (kidCheckinsByEtId[et.id] || 0) + (kidsHcByEtId[et.id] || 0);
   });
 
   // Convert to sorted rows — one row per date, skip days with no data
