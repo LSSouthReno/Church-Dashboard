@@ -952,21 +952,10 @@
     "group": 420,
     "leader": 86,
     "missionary": 2,
-    "asOf": "2026-08-09"
+    "asOf": "2026-08-10"
   },
   "calendar": {
     "events": [
-      {
-        "name": "First Day of School",
-        "dateKey": "2026-08-10",
-        "endKey": null,
-        "dayOfWeek": "Mon",
-        "date": "Aug 10",
-        "time": "12:00 AM",
-        "location": "",
-        "timeEnd": "11:59 PM",
-        "owner": "Rachel Primus"
-      },
       {
         "name": "Staff Meeting ",
         "dateKey": "2026-08-10",
@@ -4057,9 +4046,20 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Ash Wednesday ",
+        "dateKey": "2027-02-10",
+        "endKey": null,
+        "dayOfWeek": "Wed",
+        "date": "Feb 10",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "11:59 PM",
+        "owner": "Katie Thompson"
       }
     ],
-    "asOf": "2026-08-09"
+    "asOf": "2026-08-10"
   },
   "staff_profiles": [
     {
