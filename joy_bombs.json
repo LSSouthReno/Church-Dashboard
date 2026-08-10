@@ -15,20 +15,6 @@
       "position": "Greeter"
     },
     {
-      "id": "jb_177793803_20260802_firstimpression",
-      "name": "Ron Moschetti",
-      "pcoPersonId": "177793803",
-      "team": "First Impressions",
-      "phone": "17753514683",
-      "firstServeDate": "2026-08-02",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Greeter"
-    },
-    {
       "id": "jb_154330067_20260802_steppingstone",
       "name": "Hunter Mannin",
       "pcoPersonId": "154330067",
@@ -351,7 +337,21 @@
       "notes": "",
       "source": "auto",
       "position": "Greeter"
+    },
+    {
+      "id": "jb_177793803_20260802_firstimpression",
+      "name": "Ron Moschetti",
+      "pcoPersonId": "177793803",
+      "team": "First Impressions",
+      "phone": "17753514683",
+      "firstServeDate": "2026-08-02",
+      "status": "bombed",
+      "bombedDate": "2026-08-10",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Greeter"
     }
   ],
-  "lastUpdated": "2026-08-10T20:03:56.453Z"
+  "lastUpdated": "2026-08-10T20:13:15.654Z"
 }
