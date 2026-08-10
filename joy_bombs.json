@@ -15,20 +15,6 @@
       "position": "Greeter"
     },
     {
-      "id": "jb_179841406_20260809_presider",
-      "name": "Alan Charles",
-      "pcoPersonId": "179841406",
-      "team": "Presiders",
-      "phone": "14809531163",
-      "firstServeDate": "2026-08-09",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Sermon Text Reader"
-    },
-    {
       "id": "jb_157000669_20260809_firstimpression",
       "name": "Shawn morris",
       "pcoPersonId": "157000669",
@@ -323,7 +309,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bluebirds Guide"
+    },
+    {
+      "id": "jb_179841406_20260809_presider",
+      "name": "Alan Charles",
+      "pcoPersonId": "179841406",
+      "team": "Presiders",
+      "phone": "14809531163",
+      "firstServeDate": "2026-08-09",
+      "status": "bombed",
+      "bombedDate": "2026-08-10",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
     }
   ],
-  "lastUpdated": "2026-08-10T20:15:20.729Z"
+  "lastUpdated": "2026-08-10T20:16:35.001Z"
 }
