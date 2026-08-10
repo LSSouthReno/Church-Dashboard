@@ -15,20 +15,6 @@
       "position": "Greeter"
     },
     {
-      "id": "jb_154330067_20260802_steppingstone",
-      "name": "Hunter Mannin",
-      "pcoPersonId": "154330067",
-      "team": "Stepping Stones",
-      "phone": "17753355893",
-      "firstServeDate": "2026-08-02",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bluebirds Guide"
-    },
-    {
       "id": "jb_179841406_20260809_presider",
       "name": "Alan Charles",
       "pcoPersonId": "179841406",
@@ -351,7 +337,21 @@
       "notes": "",
       "source": "auto",
       "position": "Greeter"
+    },
+    {
+      "id": "jb_154330067_20260802_steppingstone",
+      "name": "Hunter Mannin",
+      "pcoPersonId": "154330067",
+      "team": "Stepping Stones",
+      "phone": "17753355893",
+      "firstServeDate": "2026-08-02",
+      "status": "bombed",
+      "bombedDate": "2026-08-10",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bluebirds Guide"
     }
   ],
-  "lastUpdated": "2026-08-10T20:13:22.236Z"
+  "lastUpdated": "2026-08-10T20:14:55.682Z"
 }
