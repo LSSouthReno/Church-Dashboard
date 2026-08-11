@@ -4109,12 +4109,19 @@ function renderAttendance() {
   canvas.addEventListener('click', function(e) {
     const rect = canvas.getBoundingClientRect();
     const xClick = e.clientX - rect.left;
+    const yClick = e.clientY - rect.top;
     // chartArea coords are in Chart.js logical pixels (CSS pixels), not physical pixels.
     // Use chart.width (logical) not canvas.width (physical) to avoid Retina dpr doubling.
     const scaleX = attendanceChart.width / rect.width;
+    const scaleY = attendanceChart.height / rect.height;
     const xCanvas = xClick * scaleX;
+    const yCanvas = yClick * scaleY;
     const chartArea = attendanceChart.chartArea;
     if (!chartArea) return;
+    // Only clicks inside the plot area open the modal — clicks on the legend
+    // (Adults/Kids filter toggles above the plot) or axis labels must not.
+    if (xCanvas < chartArea.left || xCanvas > chartArea.right ||
+        yCanvas < chartArea.top || yCanvas > chartArea.bottom) return;
     const plotWidth = chartArea.right - chartArea.left;
     const n = months.length;
     if (!n) return;
