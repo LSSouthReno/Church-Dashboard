@@ -112,10 +112,56 @@ function syncFunnelAndGroups_() {
     return a.name.localeCompare(b.name);
   });
 
-  fgMergePushToGitHub_(funnel, allGroups);
+  // ── 4. Elder shepherding lists (PCO People Lists "Shepherding - [Elder]") ──
+  let shepherding = null;
+  try {
+    shepherding = fgFetchShepherding_();
+  } catch (e) {
+    Logger.log('   ! shepherding lists fetch failed (keeping previous data): ' + e.message);
+  }
+
+  fgMergePushToGitHub_(funnel, allGroups, shepherding);
 
   const elapsedSec = Math.round(fgElapsed_(startMs) / 1000);
   Logger.log('✓ Funnel + Groups — done in ' + elapsedSec + 's. groupsListed=' + allGroups.length);
+}
+
+// ── Elder shepherding lists ──────────────────────────────────────────────────
+// Every PCO People list named "Shepherding - [Elder name]" → who's on it.
+// Matching is by name prefix, so new elders' lists (e.g. Mike, Don, Carlos)
+// appear automatically once their list exists in PCO.
+function fgFetchShepherding_() {
+  const lists = pcoGetAll_('/people/v2/lists?per_page=100') || [];
+  const out = [];
+  lists.forEach(function(l) {
+    const name = String(((l.attributes || {}).name || '')).trim();
+    if (!/^shepherding\s*[-–—]/i.test(name)) return;
+    const elder = name.replace(/^shepherding\s*[-–—]\s*/i, '').trim() || name;
+    let people = [];
+    try {
+      people = (pcoGetAll_('/people/v2/lists/' + l.id + '/people?per_page=100') || [])
+        .map(function(p) {
+          const a = p.attributes || {};
+          return ((a.first_name || '') + ' ' + (a.last_name || '')).trim();
+        })
+        .filter(function(n) { return !!n; })
+        .sort(function(a, b) { return a.localeCompare(b); });
+    } catch (e) {
+      Logger.log('   ! people fetch failed for list "' + name + '": ' + e.message);
+    }
+    out.push({ elder: elder, list: name, people: people });
+  });
+  out.sort(function(a, b) { return a.elder.localeCompare(b.elder); });
+  Logger.log('   Shepherding lists: ' + out.map(function(s) { return s.elder + '=' + s.people.length; }).join(', '));
+  return out;
+}
+
+// Standalone shepherding-only sync — remote-triggered via ?action=run_shepherding_sync
+// so list changes can be published without waiting for the nightly funnel job.
+function syncShepherdingLists_() {
+  const shepherding = fgFetchShepherding_();
+  fgMergePushToGitHub_(null, null, shepherding);
+  Logger.log('✓ Shepherding lists pushed: ' + shepherding.length + ' elders');
 }
 
 function fgEmptyTypeData_() {
@@ -392,7 +438,9 @@ function fgAdultsWhoCheckedInChildSince_(sinceDate, startMs) {
 }
 
 // ── Merge-safe push to eos-data.json ─────────────────────────────────────────────
-function fgMergePushToGitHub_(funnel, allGroups) {
+// Any of funnel / allGroups / shepherding may be null — null keys are left as-is
+// in the existing file (so partial jobs never clobber the others' data).
+function fgMergePushToGitHub_(funnel, allGroups, shepherding) {
   const owner  = getProp_('GITHUB_OWNER');
   const token  = getProp_('GITHUB_TOKEN');
   const repo   = getProp_('GITHUB_REPO');
@@ -414,8 +462,10 @@ function fgMergePushToGitHub_(funnel, allGroups) {
   }
 
   // Sub-merge funnel (preserve fields this job doesn't own, e.g. missionary) + replace allGroups.
-  const mergedFunnel = Object.assign({}, currentData.funnel, funnel);
-  const merged = Object.assign({}, currentData, { funnel: mergedFunnel, allGroups: allGroups });
+  const merged = Object.assign({}, currentData);
+  if (funnel)      merged.funnel      = Object.assign({}, currentData.funnel, funnel);
+  if (allGroups)   merged.allGroups   = allGroups;
+  if (shepherding) merged.shepherding = shepherding;
 
   const payload = { message: 'Update funnel metrics & groups roster', branch: branch,
                     content: Utilities.base64Encode(JSON.stringify(merged, null, 2), Utilities.Charset.UTF_8) };

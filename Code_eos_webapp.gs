@@ -44,6 +44,12 @@ function doGet(e) {
       pushJsonToGitHub_(dataJr);
       return eosWaJson_({ ok: true, ran: 'json_rebuild' });
     }
+    if (action === 'run_shepherding_sync') {
+      // Re-pulls the elder "Shepherding - [Name]" lists from PCO People and
+      // merge-pushes them into eos-data.json.
+      syncShepherdingLists_();
+      return eosWaJson_({ ok: true, ran: 'syncShepherdingLists_' });
+    }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and
       // attendance_type names — for verifying kids/adults classification.

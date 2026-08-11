@@ -7711,10 +7711,42 @@ function staffRenderFunnel(data) {
         <li><strong>Multiply &mdash; own a mission</strong> &mdash; Local, global, or plant a group; goal: 25 Leader Launch grads</li>
       </ul>
     </div>
+    <div id="sp-shepherding"></div>
     <div id="sp-all-groups"></div>`;
 
   staffUpdateFunnelRates();
+  staffRenderShepherding_(data);
   staffRenderAllGroups_(data);
+}
+
+// ── Elder shepherding lists (PCO People Lists "Shepherding - [Elder]") ─────
+function staffRenderShepherding_(data) {
+  const el = document.getElementById('sp-shepherding');
+  if (!el) return;
+  const lists = data.shepherding || [];
+  if (!lists.length) { el.innerHTML = ''; return; }
+
+  const totalPeople = new Set();
+  lists.forEach(l => (l.people || []).forEach(p => totalPeople.add(p)));
+
+  const cards = lists.map(l => {
+    const people = l.people || [];
+    const rows = people.length
+      ? people.map(p => `<div class="sp-allgroup-member">${_rbEsc(p)}</div>`).join('')
+      : '<div class="sp-allgroup-member" style="color:var(--sp-muted);font-style:italic;">No one on this list yet</div>';
+    return `<details class="sp-allgroup-card">
+      <summary><span>${_rbEsc(l.elder)}</span><span style="font-size:11px;color:var(--sp-muted);font-family:'DM Mono',monospace;">${people.length} ${people.length === 1 ? 'person' : 'people'}</span></summary>
+      <div class="sp-allgroup-members">${rows}</div>
+    </details>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="sp-section-header" style="margin-top:32px;">
+      <div class="sp-eyebrow">Elder Shepherding</div>
+      <h2>Shepherding Lists</h2>
+      <p>Each elder's shepherding list from Planning Center People ("Shepherding - [Elder]"). ${lists.length} elder${lists.length !== 1 ? 's' : ''} &middot; ${totalPeople.size} people &middot; synced nightly.</p>
+    </div>
+    ${cards}`;
 }
 
 // ── Every PCO group + its members, grouped by group type ───────────────────
