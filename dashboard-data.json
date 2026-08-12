@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-12T21:45:48.538Z",
+  "lastUpdated": "2026-08-12T21:56:17.911Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3232,7 +3232,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 101,
+      "current": 100,
       "needed": 150
     },
     {
@@ -3267,7 +3267,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 20,
+      "current": 19,
       "needed": 23
     },
     {
@@ -3301,7 +3301,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 366,
+  "uniqueVolunteers": 365,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6069,7 +6069,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 12, 2026, 2:45 PM",
+    "refreshed": "Aug 12, 2026, 2:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11746,7 +11746,7 @@
               "name": "Jaimie Sullivan",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -11914,6 +11914,13 @@
               "pos": "Parking Czar",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -11923,8 +11930,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 8,
-            "totalVols": 8
+            "volsWithServiceTime": 9,
+            "totalVols": 9
           }
         }
       ]
