@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-12T18:46:11.683Z",
+  "lastUpdated": "2026-08-12T18:57:59.477Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3232,7 +3232,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 100,
+      "current": 101,
       "needed": 150
     },
     {
@@ -3301,7 +3301,7 @@
       "needed": 40
     }
   ],
-  "uniqueVolunteers": 365,
+  "uniqueVolunteers": 366,
   "budget": [
     {
       "label": "Network & Missions",
@@ -6069,7 +6069,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 12, 2026, 11:46 AM",
+    "refreshed": "Aug 12, 2026, 11:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7560,7 +7560,7 @@
         15,
         14,
         15,
-        17,
+        16,
         5,
         null,
         null,
@@ -8329,7 +8329,7 @@
               "name": "Bob Needham",
               "team": "Tech",
               "pos": "Lights",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
@@ -11433,6 +11433,27 @@
               "pos": "Wolf Pack Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Michael France",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Wende Schwake",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeff Bridges",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11442,8 +11463,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 50,
-            "totalVols": 50
+            "volsWithServiceTime": 53,
+            "totalVols": 53
           }
         }
       ]
@@ -11627,7 +11648,7 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Team Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -11678,6 +11699,153 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bill Wallace",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Stephen W Harris",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bart Wallace",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Annalissa Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Brianna Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Isabella Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jaimie Sullivan",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ana Loftin",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kadyn Skolnick",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Halee Frink",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "McKayla Leggett",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jackie Lewis",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Hunter Mannin",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeremy Low",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Autumn Blattman",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jenn Ferguson",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jaeley-Grace Ferguson",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cody Wright",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jorie Hetland",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lindsey Low",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11687,8 +11855,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 31,
-            "totalVols": 31
+            "volsWithServiceTime": 52,
+            "totalVols": 52
           }
         }
       ]
@@ -11732,6 +11900,34 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Michael France",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Wende Schwake",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeff Bridges",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Timothy Frederick",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11741,8 +11937,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 4,
-            "totalVols": 4
+            "volsWithServiceTime": 8,
+            "totalVols": 8
           }
         }
       ]
@@ -11800,6 +11996,13 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tom McDonald",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -11809,8 +12012,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 6,
-            "totalVols": 6
+            "volsWithServiceTime": 7,
+            "totalVols": 7
           }
         }
       ]
@@ -11875,6 +12078,27 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Bill Wallace",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Stephen W Harris",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bart Wallace",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11884,8 +12108,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 7,
-            "totalVols": 7
+            "volsWithServiceTime": 10,
+            "totalVols": 10
           }
         }
       ]
@@ -11957,6 +12181,34 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael France",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Wende Schwake",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeff Bridges",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Timothy Frederick",
+              "team": "Parking Team",
+              "pos": "Parking Czar",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -11966,8 +12218,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 8,
-            "totalVols": 8
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
