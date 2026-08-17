@@ -13,20 +13,6 @@
       "notes": "",
       "source": "auto",
       "position": "Greeter"
-    },
-    {
-      "id": "jb_190870835_20260816_firstimpression",
-      "name": "Bill Caraway",
-      "pcoPersonId": "190870835",
-      "team": "First Impressions",
-      "phone": "17756869895",
-      "firstServeDate": "2026-08-16",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Greeter"
     }
   ],
   "completed": [
@@ -325,6 +311,20 @@
       "position": "Sermon Text Reader"
     },
     {
+      "id": "jb_190870835_20260816_firstimpression",
+      "name": "Bill Caraway",
+      "pcoPersonId": "190870835",
+      "team": "First Impressions",
+      "phone": "17756869895",
+      "firstServeDate": "2026-08-16",
+      "status": "bombed",
+      "bombedDate": "2026-08-17",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Greeter"
+    },
+    {
       "id": "jb_151513183_20260816_countingteam",
       "name": "Jude Adams",
       "pcoPersonId": "151513183",
@@ -353,5 +353,5 @@
       "position": "Wolf Pack Guide"
     }
   ],
-  "lastUpdated": "2026-08-17T20:33:47.700Z"
+  "lastUpdated": "2026-08-17T20:33:49.029Z"
 }
