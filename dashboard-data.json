@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-17T22:45:58.659Z",
+  "lastUpdated": "2026-08-17T22:56:51.623Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6090,7 +6090,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 17, 2026, 3:46 PM",
+    "refreshed": "Aug 17, 2026, 3:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7506,7 +7506,7 @@
         null,
         null,
         6,
-        71,
+        70,
         11,
         13,
         1,
@@ -7553,7 +7553,7 @@
         null,
         null,
         2,
-        26,
+        25,
         8,
         2,
         null,
@@ -7731,14 +7731,6 @@
         "attPct": 53
       },
       {
-        "name": "Thompson/Primus Community Group",
-        "members": 16,
-        "leaders": 2,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 10,
-        "attPct": 63
-      },
-      {
         "name": "Isaac Griffin Community Group",
         "members": 16,
         "leaders": 1,
@@ -7761,6 +7753,14 @@
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 6,
         "attPct": 40
+      },
+      {
+        "name": "Thompson/Primus Community Group",
+        "members": 15,
+        "leaders": 2,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 10,
+        "attPct": 67
       },
       {
         "name": "Steuer Community Group",
@@ -12025,30 +12025,108 @@
           }
         }
       ]
+    },
+    {
+      "date": "2026-11-08",
+      "ds": "Sunday, November 8, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "91262243",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "ds": "Sunday, November 15, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "91262244",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "ds": "Sunday, November 22, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "91262245",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Katie Thompson",
-      "start": "2026-08-20",
-      "end": "2026-08-24"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-08-20",
-      "end": "2026-08-20"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-09-08",
-      "end": "2026-09-10"
-    },
-    {
-      "name": "Katie Thompson",
-      "start": "2026-11-08",
-      "end": "2026-11-10"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
