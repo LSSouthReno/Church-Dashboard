@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-18T19:46:09.189Z",
+  "lastUpdated": "2026-08-18T20:03:48.739Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -6090,7 +6090,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 18, 2026, 12:46 PM",
+    "refreshed": "Aug 18, 2026, 1:03 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -7535,7 +7535,7 @@
         19,
         25,
         29,
-        13,
+        14,
         null,
         null,
         null,
@@ -7582,7 +7582,7 @@
         14,
         15,
         16,
-        7,
+        8,
         null,
         null,
         null,
@@ -7859,6 +7859,14 @@
         "attPct": 50
       },
       {
+        "name": "Caliger/Rankin Community Group",
+        "members": 10,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 5-7pm",
+        "avgAttended": 4,
+        "attPct": 40
+      },
+      {
         "name": "Gardner Community Group",
         "members": 9,
         "leaders": 2,
@@ -7881,14 +7889,6 @@
         "schedule": "Meets weekly on Wednesdays from 6-7:30pm",
         "avgAttended": 6,
         "attPct": 67
-      },
-      {
-        "name": "Caliger/Rankin Community Group",
-        "members": 9,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 5-7pm",
-        "avgAttended": 4,
-        "attPct": 44
       },
       {
         "name": "Turcich Community Group",
@@ -8773,6 +8773,41 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Annalissa Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kylie Skolnick",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -8916,8 +8951,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 110,
-            "totalVols": 110
+            "volsWithServiceTime": 115,
+            "totalVols": 115
           }
         }
       ]
