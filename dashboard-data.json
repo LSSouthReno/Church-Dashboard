@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-18T20:46:59.550Z",
+  "lastUpdated": "2026-08-18T21:00:33.489Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3248,7 +3248,7 @@
     {
       "name": "Parking",
       "current": 10,
-      "needed": 20
+      "needed": 14
     },
     {
       "name": "Prayer Team",
@@ -3416,16 +3416,16 @@
     {
       "n": "Parking",
       "l": "Bradley Borowski",
-      "sub": "2026-04-22T16:34:27.000Z",
-      "subStr": "Apr 22, 2026",
-      "subC": "Apr 22",
+      "sub": "2026-08-18T20:26:26.000Z",
+      "subStr": "Aug 18, 2026",
+      "subC": "Aug 18",
       "sc": 8,
-      "mem": 10,
-      "need": 10,
-      "iss": "We need 2 per transition period. between 8 & 9:30 and 9:30 & 11. We also need one after the 11 as well, so that's 5 per Sunday. Currently, we have one volunteer wanting to serve every Sunday, another willing to serve all services once a month, and everyone else willing to serve 2x a month, so we don't need all 20 total, but thinking ahead, this is the ideal number.",
-      "more": "N/A",
-      "res": "N/A",
-      "suc": "Tim Frederick  was leading, struggled with scheduling system and availability. Tried to hand off to Bill Wallace, didn't want to deal with the scheduling system. Michael France was interested but he's not a member and won't get baptized yet for some reason. Need new blood, younger, willing to learn and lead with PCO."
+      "mem": 8,
+      "need": 6,
+      "iss": "2 per service transition x 2 transitions per Sunday. Most willing to serve twice a month, but some also serving on multiple teams. Also would be good to have 2 for callouts.",
+      "more": "Need a new leader",
+      "res": "No",
+      "suc": "Michael France probably could, but he is putting off getting baptized and becoming a member. Tom MacDonald certainly could but don't know if he wants to or how he is with technology. Bill Wallace already tried and backed out due to tech competency/willingness."
     },
     {
       "n": "Prayer Team",
@@ -6090,7 +6090,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 18, 2026, 1:47 PM",
+    "refreshed": "Aug 18, 2026, 2:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8628,13 +8628,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Niah Morris",
-              "team": "Stepping Stones",
-              "pos": "Guide WP, Hawks, Mustangs",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Natalie Christopher",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
@@ -8775,17 +8768,10 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Check In",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Kylie Skolnick",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -8808,6 +8794,13 @@
               "pos": "Hawks Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lauren Rotter",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -8951,8 +8944,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 115,
-            "totalVols": 115
+            "volsWithServiceTime": 114,
+            "totalVols": 114
           }
         }
       ]
@@ -9470,27 +9463,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Isabella Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Mikayla Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Cindy Lefler",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
@@ -9779,8 +9751,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 94,
-            "totalVols": 94
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
