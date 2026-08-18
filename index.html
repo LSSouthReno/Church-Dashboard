@@ -2051,9 +2051,9 @@
         </div>
       </div>
       <div class="teams-trend" id="teamsTrendBlock" style="margin-top:14px;">
-        <div class="card-sub" style="margin-bottom:2px;">People serving over time · all teams combined</div>
-        <div class="chart-wrap" style="height:150px;"><div class="chart-inner"><canvas id="serveTeamsTrendChart"></canvas></div></div>
-        <div class="teams-trend-note">Dashed = estimated from PCO join dates before monthly tracking began · solid = live counts</div>
+        <div class="card-sub" style="margin-bottom:2px;">People serving · all teams combined · last 12 months</div>
+        <div class="chart-wrap" style="height:160px;"><div class="chart-inner"><canvas id="serveTeamsTrendChart"></canvas></div></div>
+        <div class="teams-trend-note">White dot = current live count · earlier months estimated from PCO join dates</div>
       </div>
       <div class="team-list" id="teamList"></div>
     </div>
@@ -4212,12 +4212,36 @@ function fmtYm(d) {
   return mo + ' ’' + String(parts[0]).slice(2);
 }
 
-function renderTeamHistoryChart(canvasId, history, opts) {
-  opts = opts || {};
+// Draws the count above a point when the value changes (plus first & last), so
+// a slowly-moving series reads at a glance without a label on every point.
+const teamHistPointLabels = {
+  id: 'teamHistPointLabels',
+  afterDatasetsDraw(chart) {
+    const meta = chart.getDatasetMeta(0);
+    const data = chart.data.datasets[0].data;
+    if (!meta || !meta.data) return;
+    const ctx = chart.ctx;
+    ctx.save();
+    ctx.font = '700 10px Montserrat';
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    meta.data.forEach((pt, i) => {
+      const show = i === 0 || i === data.length - 1 || data[i] !== data[i - 1];
+      if (show) ctx.fillText(String(data[i]), pt.x, pt.y - 6);
+    });
+    ctx.restore();
+  }
+};
+
+// Rolling last-12-months line chart, sized to fit (no scroll). The live current
+// month is drawn as a bright ringed point; estimated months are muted.
+function renderTeamHistoryChart(canvasId, history) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const wrap = canvas.closest('.chart-wrap');
-  if (!history || history.length < 2) {           // nothing meaningful to plot
+  const h = (history || []).slice(-12);
+  if (h.length < 2) {                              // nothing meaningful to plot
     if (wrap) wrap.style.display = 'none';
     return;
   }
@@ -4225,42 +4249,45 @@ function renderTeamHistoryChart(canvasId, history, opts) {
   const existing = Chart.getChart(canvas);
   if (existing) existing.destroy();
 
-  const labels = history.map(p => fmtYm(p.d));
-  const data   = history.map(p => p.n);
-  const est    = history.map(p => !!p.e);         // per-point estimated flag
+  const labels = h.map(p => fmtYm(p.d));
+  const data   = h.map(p => p.n);
+  const est    = h.map(p => !!p.e);
+  const lastI  = h.length - 1;
 
-  if (opts.scrollable) prepScrollableChart(canvasId, labels.length);
-  else prepFixedChart(canvasId);
+  prepFixedChart(canvasId);
 
   new Chart(canvas, {
     type: 'line',
+    plugins: [teamHistPointLabels],
     data: {
       labels: labels,
       datasets: [{
         label: 'People', data: data,
         borderColor: '#4a9ede',
-        backgroundColor: 'rgba(74,158,222,0.12)',
-        fill: true, tension: 0.25, borderWidth: 2,
-        pointRadius: labels.length > 40 ? 0 : 2,
-        pointHoverRadius: 4,
-        // Dash a segment when the point it leads into is estimated.
-        segment: { borderDash: ctx => est[ctx.p1DataIndex] ? [5, 4] : undefined }
+        backgroundColor: 'rgba(74,158,222,0.14)',
+        fill: true, tension: 0.3, borderWidth: 2.5,
+        pointRadius:          h.map((p, i) => i === lastI ? 5 : (p.e ? 2.5 : 3.5)),
+        pointHoverRadius:     6,
+        pointBackgroundColor: h.map((p, i) => i === lastI ? '#ffffff' : (p.e ? 'rgba(74,158,222,0.5)' : '#4a9ede')),
+        pointBorderColor:     h.map((p, i) => i === lastI ? '#4a9ede' : 'transparent'),
+        pointBorderWidth:     h.map((p, i) => i === lastI ? 2 : 0)
       }]
     },
     options: {
       responsive: false, maintainAspectRatio: false,
+      layout: { padding: { top: 18, right: 10, left: 2 } },
       plugins: {
         legend: { display: false },
         tooltip: { ...baseTooltip, callbacks: {
-          label: c => '  ' + c.parsed.y + ' people' + (est[c.dataIndex] ? ' (est.)' : '')
+          label: c => '  ' + c.parsed.y + ' people' + (est[c.dataIndex] ? ' (estimated)' : ' (live)')
         } }
       },
       scales: {
         x: { ...baseGridOpts, grid: { display: false },
-             ticks: { ...baseGridOpts.ticks, autoSkip: true,
-                      maxTicksLimit: opts.scrollable ? 60 : 6, maxRotation: 45, minRotation: 45 } },
-        y: { ...baseGridOpts, beginAtZero: true,
-             ticks: { ...baseGridOpts.ticks, precision: 0 } }
+             ticks: { ...baseGridOpts.ticks, autoSkip: true, maxTicksLimit: 7,
+                      maxRotation: 45, minRotation: 45, font: { size: 10, weight: '500' } } },
+        y: { ...baseGridOpts, beginAtZero: false, grace: '12%',
+             ticks: { ...baseGridOpts.ticks, precision: 0, maxTicksLimit: 5 } }
       }
     }
   });
@@ -4298,7 +4325,7 @@ function renderServeTeamsTrend() {
   const totals = months.map(m => maps.reduce((s, mp) => s + (mp[m] != null ? mp[m] : 0), 0));
   const agg = months.map((m, i) => ({ d: m, n: totals[i], e: (firstLive === null || m < firstLive) ? 1 : undefined }));
 
-  renderTeamHistoryChart('serveTeamsTrendChart', agg, { scrollable: false });
+  renderTeamHistoryChart('serveTeamsTrendChart', agg);   // renderer slices to last 12 months
 }
 
 function renderBudgetPie() {
@@ -4800,8 +4827,8 @@ function tmRT() {
     if (history.length >= 2) chartJobs.push({ id: canvasId, history: history });
     const histBlock = history.length >= 2
       ? '<div class="tmod-histwrap" onclick="event.stopPropagation()">' +
-          '<div class="tmod-histlabel">People on team over time</div>' +
-          '<div class="chart-wrap" style="height:150px;"><div class="chart-inner"><canvas id="' + canvasId + '"></canvas></div></div>' +
+          '<div class="tmod-histlabel">People on team · last 12 months</div>' +
+          '<div class="chart-wrap" style="height:160px;"><div class="chart-inner"><canvas id="' + canvasId + '"></canvas></div></div>' +
         '</div>'
       : '';
     return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
@@ -4824,18 +4851,9 @@ function tmRT() {
     '</div>';
   }).join('');
 
-  // Render each team's scrollable size-over-time chart after the cards are in
-  // the DOM (prepScrollableChart needs real layout dimensions), then pin each
-  // to the most recent months so the current size/trend shows first.
-  chartJobs.forEach(j => renderTeamHistoryChart(j.id, j.history, { scrollable: true }));
-  const pinRight = () => chartJobs.forEach(j => {
-    const el = document.getElementById(j.id);
-    const w = el && el.closest('.chart-wrap');
-    if (w) w.scrollLeft = w.scrollWidth;
-  });
-  // Pin after the modal's open transition settles (a reflow otherwise resets scroll).
-  requestAnimationFrame(() => requestAnimationFrame(pinRight));
-  setTimeout(pinRight, 300);
+  // Render each team's last-12-months chart after the cards are in the DOM
+  // (prepFixedChart needs real layout dimensions).
+  chartJobs.forEach(j => renderTeamHistoryChart(j.id, j.history));
 }
 
 function tmTD(name) {
