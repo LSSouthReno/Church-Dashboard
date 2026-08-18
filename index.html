@@ -392,6 +392,22 @@
     border: 1px solid #2e2e2e;
   }
 
+  .teams-trend-note {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .tmod-histwrap { margin-top: 14px; }
+  .tmod-histlabel {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
   .teams-summary .stat {
     text-align: center;
     flex: 1;
@@ -2033,6 +2049,11 @@
           <div class="stat-label">Gap</div>
           <div class="stat-value gap" id="totalGap">0</div>
         </div>
+      </div>
+      <div class="teams-trend" id="teamsTrendBlock" style="margin-top:14px;">
+        <div class="card-sub" style="margin-bottom:2px;">People serving over time · all teams combined</div>
+        <div class="chart-wrap" style="height:150px;"><div class="chart-inner"><canvas id="serveTeamsTrendChart"></canvas></div></div>
+        <div class="teams-trend-note">Dashed = estimated from PCO join dates before monthly tracking began · solid = live counts</div>
       </div>
       <div class="team-list" id="teamList"></div>
     </div>
@@ -4180,6 +4201,106 @@ function renderTeams() {
   });
 }
 
+/* ---- Serve-team size-over-time charts ------------------------------------
+   Data: each serveTeams[].history is [{ d:'yyyy-MM', n:count, e:1? }] where
+   e:1 marks a point estimated from PCO join dates (before live monthly
+   tracking began). Shared renderer used by the metrics-page aggregate and
+   the per-team charts in the Teams modal. */
+function fmtYm(d) {
+  const parts = String(d).split('-');
+  const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(parts[1]) - 1] || '';
+  return mo + ' ’' + String(parts[0]).slice(2);
+}
+
+function renderTeamHistoryChart(canvasId, history, opts) {
+  opts = opts || {};
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const wrap = canvas.closest('.chart-wrap');
+  if (!history || history.length < 2) {           // nothing meaningful to plot
+    if (wrap) wrap.style.display = 'none';
+    return;
+  }
+  if (wrap) wrap.style.display = '';
+  const existing = Chart.getChart(canvas);
+  if (existing) existing.destroy();
+
+  const labels = history.map(p => fmtYm(p.d));
+  const data   = history.map(p => p.n);
+  const est    = history.map(p => !!p.e);         // per-point estimated flag
+
+  if (opts.scrollable) prepScrollableChart(canvasId, labels.length);
+  else prepFixedChart(canvasId);
+
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'People', data: data,
+        borderColor: '#4a9ede',
+        backgroundColor: 'rgba(74,158,222,0.12)',
+        fill: true, tension: 0.25, borderWidth: 2,
+        pointRadius: labels.length > 40 ? 0 : 2,
+        pointHoverRadius: 4,
+        // Dash a segment when the point it leads into is estimated.
+        segment: { borderDash: ctx => est[ctx.p1DataIndex] ? [5, 4] : undefined }
+      }]
+    },
+    options: {
+      responsive: false, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...baseTooltip, callbacks: {
+          label: c => '  ' + c.parsed.y + ' people' + (est[c.dataIndex] ? ' (est.)' : '')
+        } }
+      },
+      scales: {
+        x: { ...baseGridOpts, grid: { display: false },
+             ticks: { ...baseGridOpts.ticks, autoSkip: true,
+                      maxTicksLimit: opts.scrollable ? 60 : 6, maxRotation: 45, minRotation: 45 } },
+        y: { ...baseGridOpts, beginAtZero: true,
+             ticks: { ...baseGridOpts.ticks, precision: 0 } }
+      }
+    }
+  });
+}
+
+// Metrics-page aggregate: total people serving across all teams, per month.
+// A team contributes its count for every month it has a point (its history is
+// continuous from first join to now). A month is drawn estimated until the
+// first month any team has a live (non-estimated) point.
+function renderServeTeamsTrend() {
+  const block = document.getElementById('teamsTrendBlock');
+  const teams = (DASHBOARD_DATA.serveTeams || []).filter(t => (t.history || []).length >= 2);
+  if (!teams.length) { if (block) block.style.display = 'none'; return; }
+  if (block) block.style.display = '';
+
+  const monthSet = {};
+  let firstLive = null;
+  let startMonth = '';   // latest per-team first month → from here every team has data
+  teams.forEach(t => {
+    if (t.history[0].d > startMonth) startMonth = t.history[0].d;
+    t.history.forEach(p => {
+      monthSet[p.d] = 1;
+      if (!p.e && (firstLive === null || p.d < firstLive)) firstLive = p.d;
+    });
+  });
+  // Only show months where all teams are present, so each point is a true total
+  // (partial sums before a team's first tracked month would understate serving).
+  const months = Object.keys(monthSet).sort().filter(m => m >= startMonth);
+
+  const maps = teams.map(t => {
+    const m = {};
+    t.history.forEach(p => { m[p.d] = p.n; });
+    return m;
+  });
+  const totals = months.map(m => maps.reduce((s, mp) => s + (mp[m] != null ? mp[m] : 0), 0));
+  const agg = months.map((m, i) => ({ d: m, n: totals[i], e: (firstLive === null || m < firstLive) ? 1 : undefined }));
+
+  renderTeamHistoryChart('serveTeamsTrendChart', agg, { scrollable: false });
+}
+
 function renderBudgetPie() {
   const budget = DASHBOARD_DATA.budget;
   const card   = document.getElementById('budgetPieCard');
@@ -4457,6 +4578,7 @@ loadDashboardData()
     mmUpdatePledgeDetails();
     renderAttendance();
     renderTeams();
+    renderServeTeamsTrend();
     renderBudgetPie();
     renderCGCount();
     renderCGMembers();
@@ -4491,7 +4613,7 @@ window.addEventListener('resize', () => {
 });
 
 function _reRenderAllCharts() {
-  ['attendanceChart','givingChart','donorsChart','baptismsChart','membersChart','cgCountChart','cgMembersChart'].forEach(id => {
+  ['attendanceChart','givingChart','donorsChart','baptismsChart','membersChart','cgCountChart','cgMembersChart','serveTeamsTrendChart'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     const c = Chart.getChart(el);
@@ -4504,6 +4626,7 @@ function _reRenderAllCharts() {
   renderMembersGrowth();
   renderCGCount();
   renderCGMembers();
+  renderServeTeamsTrend();
 }
 
 /* ============================================================
@@ -4663,13 +4786,24 @@ function tmRT() {
     return;
   }
 
-  document.getElementById('tmTG').innerHTML = list.map(t => {
+  const chartJobs = [];
+  document.getElementById('tmTG').innerHTML = list.map((t, i) => {
     const st   = stForTeam(t);
     const have = st.current;
     const gap  = Math.max(0, st.needed - st.current);
     const fp   = st.needed > 0 ? Math.round(have / st.needed * 100) : 100;
     const hs   = tmScore(t);
     const scoreCls = hs >= 8 ? 'tmod-sg' : hs >= 6 ? 'tmod-sa' : 'tmod-sr';
+    const stRaw   = stLookup[t.n.toLowerCase()];
+    const history = (stRaw && stRaw.history) || [];
+    const canvasId = 'tmHist_' + i;
+    if (history.length >= 2) chartJobs.push({ id: canvasId, history: history });
+    const histBlock = history.length >= 2
+      ? '<div class="tmod-histwrap" onclick="event.stopPropagation()">' +
+          '<div class="tmod-histlabel">People on team over time</div>' +
+          '<div class="chart-wrap" style="height:150px;"><div class="chart-inner"><canvas id="' + canvasId + '"></canvas></div></div>' +
+        '</div>'
+      : '';
     return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
       '<div class="tmod-ttop">' +
         '<div><div class="tmod-tname">' + escapeHtml(t.n) + '</div>' +
@@ -4685,9 +4819,23 @@ function tmRT() {
         '<div class="tmod-flabels"><span>Staffing ' + have + '/' + st.needed + '</span><span>' + fp + '%</span></div>' +
         '<div class="tmod-ftrack"><div class="tmod-ffill" style="width:' + fp + '%;background:' + tmFc(gap) + '"></div></div>' +
       '</div>' +
+      histBlock +
       '<div class="tmod-tcta"><span>&#128203;</span> Click for this team&rsquo;s Sunday Checklist</div>' +
     '</div>';
   }).join('');
+
+  // Render each team's scrollable size-over-time chart after the cards are in
+  // the DOM (prepScrollableChart needs real layout dimensions), then pin each
+  // to the most recent months so the current size/trend shows first.
+  chartJobs.forEach(j => renderTeamHistoryChart(j.id, j.history, { scrollable: true }));
+  const pinRight = () => chartJobs.forEach(j => {
+    const el = document.getElementById(j.id);
+    const w = el && el.closest('.chart-wrap');
+    if (w) w.scrollLeft = w.scrollWidth;
+  });
+  // Pin after the modal's open transition settles (a reflow otherwise resets scroll).
+  requestAnimationFrame(() => requestAnimationFrame(pinRight));
+  setTimeout(pinRight, 300);
 }
 
 function tmTD(name) {
