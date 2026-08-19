@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-19T05:46:07.011Z",
+  "lastUpdated": "2026-08-19T05:57:42.244Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7854,7 +7854,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 18, 2026, 10:46 PM",
+    "refreshed": "Aug 18, 2026, 10:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9299,7 +9299,7 @@
         19,
         25,
         29,
-        14,
+        15,
         null,
         null,
         null,
@@ -9440,11 +9440,11 @@
       },
       {
         "name": "Men’s Tuesday Night: Better Call Paul",
-        "members": 21,
+        "members": 22,
         "leaders": 1,
         "schedule": "Meets weekly on Tuesdays from 6-8pm",
         "avgAttended": 8,
-        "attPct": 38
+        "attPct": 36
       },
       {
         "name": "Castaneda Community Group",
@@ -10391,13 +10391,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Jessica Adrian",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Jenn Ferguson",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
@@ -10707,8 +10700,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 114,
-            "totalVols": 114
+            "volsWithServiceTime": 113,
+            "totalVols": 113
           }
         }
       ]
@@ -12290,13 +12283,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Jessica Adrian",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Carlos Perez",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
@@ -12465,8 +12451,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 65,
-            "totalVols": 65
+            "volsWithServiceTime": 64,
+            "totalVols": 64
           }
         }
       ]
@@ -12608,7 +12594,7 @@
               "name": "Mike McCarthy",
               "team": "Counting Team",
               "pos": "Offering Counter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -12904,6 +12890,20 @@
               "pos": "Coffee Setup",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Judy McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -12913,8 +12913,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 60,
-            "totalVols": 60
+            "volsWithServiceTime": 62,
+            "totalVols": 62
           }
         }
       ]
@@ -13624,6 +13624,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -13633,8 +13640,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 14,
-            "totalVols": 14
+            "volsWithServiceTime": 15,
+            "totalVols": 15
           }
         }
       ]
@@ -13819,6 +13826,13 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Mike McCarthy",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -13828,8 +13842,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 1,
-            "totalVols": 1
+            "volsWithServiceTime": 2,
+            "totalVols": 2
           }
         }
       ]
