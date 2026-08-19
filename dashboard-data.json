@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-19T21:48:05.962Z",
+  "lastUpdated": "2026-08-19T22:08:34.930Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7854,7 +7854,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 19, 2026, 2:48 PM",
+    "refreshed": "Aug 19, 2026, 3:08 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9292,10 +9292,10 @@
         12
       ],
       "2026": [
-        53,
+        51,
         28,
         22,
-        23,
+        22,
         19,
         25,
         29,
@@ -9339,10 +9339,10 @@
         5
       ],
       "2026": [
-        31,
+        29,
         19,
         6,
-        14,
+        13,
         14,
         15,
         16,
@@ -9495,14 +9495,6 @@
         "attPct": 53
       },
       {
-        "name": "Isaac Griffin Community Group",
-        "members": 16,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
-        "avgAttended": 8,
-        "attPct": 50
-      },
-      {
         "name": "Wampler/Colonna Community Group",
         "members": 15,
         "leaders": 3,
@@ -9555,6 +9547,14 @@
         "members": 13,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
+        "avgAttended": 8,
+        "attPct": 62
+      },
+      {
+        "name": "Isaac Griffin Community Group",
+        "members": 13,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
         "avgAttended": 8,
         "attPct": 62
       },
@@ -10433,17 +10433,10 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Emory Breach",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Annette Breach",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -10529,6 +10522,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Latisha Hill",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11984,13 +11984,6 @@
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             },
             {
-              "name": "Bob Needham",
-              "team": "Tech",
-              "pos": "Lights",
-              "status": "U",
-              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
-            },
-            {
               "name": "Tristan McKnight",
               "team": "Worship Team",
               "pos": "Electric Guitar",
@@ -12059,6 +12052,13 @@
               "pos": "Lead Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -12631,6 +12631,13 @@
               "pos": "Vocals",
               "status": "U",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Bob Needham",
+              "team": "Tech",
+              "pos": "Lights",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
           ],
           "orderItems": [],
@@ -12640,8 +12647,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 74,
-            "totalVols": 74
+            "volsWithServiceTime": 75,
+            "totalVols": 75
           }
         }
       ]
@@ -13642,7 +13649,7 @@
               "name": "April Libby",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
