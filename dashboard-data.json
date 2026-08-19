@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-19T18:46:50.301Z",
+  "lastUpdated": "2026-08-19T19:03:07.682Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -5070,7 +5070,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 374,
+  "uniqueVolunteers": 373,
   "budget": [
     {
       "label": "Network & Missions",
@@ -7854,7 +7854,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 19, 2026, 11:46 AM",
+    "refreshed": "Aug 19, 2026, 12:03 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10436,7 +10436,7 @@
               "name": "Jeana Rehberger",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -10543,6 +10543,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anthony Azzam",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10578,7 +10585,7 @@
               "seq": 5,
               "title": "Same God",
               "type": "song",
-              "lengthMin": 7,
+              "lengthMin": 4,
               "description": ""
             },
             {
@@ -10590,90 +10597,97 @@
             },
             {
               "seq": 7,
+              "title": "Yes I Will",
+              "type": "song",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 8,
               "title": "Jesus We Love You",
               "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
-              "seq": 8,
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore: GRATITUDE"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "FIRST TO KNOW",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore: FUTURE PRESENT"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -10686,8 +10700,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 111,
-            "totalVols": 111
+            "volsWithServiceTime": 112,
+            "totalVols": 112
           }
         }
       ]
@@ -11343,6 +11357,62 @@
               "pos": "Coffee Setup",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Tina Watson",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Bob Watson",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Latisha Hill",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Simone Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jenny Roccuzzo",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jenn Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Dante Sellman",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11493,8 +11563,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 91,
-            "totalVols": 91
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -13056,7 +13126,7 @@
               "name": "Savannah Wilson",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -13327,7 +13397,7 @@
               "name": "Patricia Thomas",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
