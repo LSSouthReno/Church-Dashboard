@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-20T15:50:40.860Z",
+  "lastUpdated": "2026-08-20T16:46:24.187Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -222,7 +222,7 @@
       343205,
       363983,
       407656,
-      153532
+      153858
     ],
     "donors": [
       0,
@@ -333,7 +333,7 @@
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5226736
+    "raised": 5227062
   },
   "attendance": {
     "months": [
@@ -7854,7 +7854,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 20, 2026, 8:50 AM",
+    "refreshed": "Aug 20, 2026, 9:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8667,7 +8667,7 @@
       373,
       379,
       402,
-      414
+      415
     ]
   },
   "baptisms": {
@@ -8733,7 +8733,7 @@
     },
     "current": {
       "groups": 40,
-      "members": 414,
+      "members": 415,
       "groupSize": 10,
       "fmInGroupsPct": 54,
       "asOfMonth": "Aug '26"
@@ -9211,7 +9211,7 @@
         373,
         379,
         402,
-        414,
+        415,
         null,
         null,
         null,
@@ -9655,14 +9655,6 @@
         "attPct": 67
       },
       {
-        "name": "Turcich Community Group",
-        "members": 8,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 63
-      },
-      {
         "name": "Borowski Community Group",
         "members": 8,
         "leaders": 1,
@@ -9677,6 +9669,14 @@
         "schedule": "Meets weekly on Thursdays from 6:15-7:30am",
         "avgAttended": 5,
         "attPct": 63
+      },
+      {
+        "name": "Turcich Community Group",
+        "members": 7,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 71
       },
       {
         "name": "Taylor Community Group",
@@ -13156,6 +13156,13 @@
               "pos": "Vocals",
               "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Anna Moore",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13165,8 +13172,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 72
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -14249,14 +14256,14 @@
     "weeklyAvg": 13,
     "totalFetched": 7016,
     "since": "2026-07-21",
-    "asOf": "2026-08-20T15:45:47.621Z"
+    "asOf": "2026-08-20T16:44:43.652Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.42716711349419123,
-    "avgOpenRate3": 0.4915116104485369,
+    "latestOpenRate": 0.4334226988382484,
+    "avgOpenRate3": 0.49359680556322266,
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-20T15:45:50.437Z"
+    "asOf": "2026-08-20T16:44:45.029Z"
   }
 }
