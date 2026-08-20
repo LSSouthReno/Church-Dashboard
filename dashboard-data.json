@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-20T22:46:09.809Z",
+  "lastUpdated": "2026-08-20T22:57:53.862Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7854,7 +7854,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 20, 2026, 3:46 PM",
+    "refreshed": "Aug 20, 2026, 3:57 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9715,8 +9715,8 @@
         "members": 5,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 2,
-        "attPct": 40
+        "avgAttended": 3,
+        "attPct": 60
       },
       {
         "name": "Saddle Ridge Community Group",
@@ -9787,13 +9787,6 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Darren Wilford",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Jaimie Sullivan",
@@ -10672,8 +10665,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ]
@@ -12031,6 +12024,13 @@
               "pos": "Lights",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Bret Coggiola",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -12040,8 +12040,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ],
@@ -12617,6 +12617,13 @@
               "pos": "Sound",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Bret Coggiola",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -12626,8 +12633,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 76,
-            "totalVols": 76
+            "volsWithServiceTime": 77,
+            "totalVols": 77
           }
         }
       ]
@@ -14218,28 +14225,7 @@
       ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Katie Thompson",
-      "start": "2026-08-20",
-      "end": "2026-08-24"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-08-20",
-      "end": "2026-08-20"
-    },
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-09-08",
-      "end": "2026-09-10"
-    },
-    {
-      "name": "Katie Thompson",
-      "start": "2026-11-08",
-      "end": "2026-11-10"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
