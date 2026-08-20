@@ -957,22 +957,6 @@
   "calendar": {
     "events": [
       {
-        "name": "Worship Rehearsal",
-        "dateKey": "2026-08-20",
-        "endKey": null,
-        "dayOfWeek": "Thu",
-        "date": "Aug 20",
-        "time": "12:00 PM",
-        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA",
-        "timeEnd": "8:00 PM",
-        "owner": "Bradley Borowski",
-        "summary": "Group: South Reno | Worship Team\nCampus: South Reno Church",
-        "resources": [
-          "Main Auditorium"
-        ],
-        "desc": "Group: South Reno | Worship Team Campus: South Reno Church"
-      },
-      {
         "name": "RBD-Rehearsal ",
         "dateKey": "2026-08-21",
         "endKey": null,
@@ -2253,6 +2237,18 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "RBD-Children's Cabinet Event ",
+        "dateKey": "2026-10-27",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Oct 27",
+        "time": "7:30 AM",
+        "location": "",
+        "rbd": true,
+        "timeEnd": "2:30 PM",
+        "owner": "Lindsay Congdon"
       },
       {
         "name": "Worship Rehearsal",
@@ -4127,13 +4123,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjUyMzE1fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NDQzMjV9fX1dfQ__&Signature=i26KQUE--v1fU810nNVp9FvNxXgqvnH6BftSF8vksoURQRitA0~e94A3NIsnshyBf89szJJUdZvo2gYVbcvJy6xf8XG3tAH3lj~f1fzpaaJ8XskDr0-sweMRWYcMKW8~3Vu4bLA8U0sZaZ5QKlWrRDWMV8B0FbmhcKCJkYo8iwq7XHmCERe-WnKE7ckzBfjtqWpG1keL0GW4uM0xZodkwSSjZ7JiwdlEaN8bXP6kxgbyKpcyGqirpqJy~viqPjt~A2ujL-vSqa7P1fg4y2A7vTs6GkVtFYScPQA-lceM05edHPTOPUNMdR9vQPDpbCWMrNkZh983XMZyvzKouLsQmw__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjU4NzY4fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NTA3Nzh9fX1dfQ__&Signature=XH6njVAtGr-GPcDKF1FH5t0jOtZAFQKagUktdeZ0eo8WLKVNzy6EUlvGWptDFd4aEsdW4LaraDgn0dxQp7YQD1Xnp6-90VqEmS1VcWORamVnFyCkI02JGGb2augtU5r9AViZaYjYk-0Z-eFmGnSnePRMNKVdm3Eg251XgangBnf9pwmOiEF96V8u0EJMxsmQM85aX41xAeTIV2DUG-1kXqoBW5kbMrBqS5to8DAiAEoWGZU8C7nfrEyLrJesa~1qwXBO~3yJ1fdWqgmrCE5KUZYadN2AlTg6reA-PYlnV2PrZ9EtS0QsMna414GO8qZHWZu1JjpvH~KJs5I1M13HLw__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjUxOTUzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NDM5NjN9fX1dfQ__&Signature=QAW8ZRGcZVWCzMSAbJiIigt21CDeFfU2bqnijKV-9h-DFCBr48YlhZGtZMeuJmuWwqu0iZLgHZpeDflfdpv2zlCUTZ8y8TNti-EGaW13d7ILDL6xP1NJghaA9QiJYBqwz8Z4QDSYHeWJdiLUzzVsu~vdM5~CYo3dIzmEjz7s~AvAkIUQwjiPL7CN0gRa0Qu~QOGjIZw6nOBaXlIUACbfBPAxghQimIuoy4U~cF2itg~-fAR-RAetUiom7Rlr2NfL6nf2fcEG6gJ9Sej9xbcueIul87HD-JGOy0CQDBxRmTge8E0rDJ96rOM5XeDGR2GpRY9pP6j~pBAOwa67X1DPZQ__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjU4Njk2fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NTA3MDZ9fX1dfQ__&Signature=rfzQHU42XWN~LvxcMhRS~9Q2ne8pVdx28fQIt6CR0NY6TWRq3QUQ7PfgE~8uG7yhXb-o22YP07WYT1fV2zN2w94tpgvZ180yv8O~3YtfXaZ35OPKrDoBoDC4ZaCHaOdRG-tJ14QlP8lsYsqtTBws7z89mwA8~Tn~fjDnn-2U4hkBD3xo6g8TIrVgMHyrAiHyI5RvJm58mzOTWangmi7kdwRDCSXWTqXRseME97qXHUY5ogBjWNN9tmDbHvohnfhJP3fwGfFybRp59PrHAyAmGAJSN2HJJtT8R0lSejCpw01FaSB4scjF~qlW1jgFzMnRolyjSy9SMeUQAsMS7ofk7g__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -4145,7 +4141,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjUyMzE1fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NDQzMjV9fX1dfQ__&Signature=ELNK1x01zdryz2kF7oQAnW0yh387VjHYnT1~mvGqj2tmzcvFdLwJRQwqXPBKNJVhm-3CAFMGG4zEa3PGoZKFChMkU0TtXO7CBQ3Ovr6XasHuwRuhycvfTo1IaSa6RzcceFk3NMGr0MK7WtNMp9caXQp0HAPpRSPv8SCH2149XvV8NtKBjbP0vJB1OVThXEdAqNORLuK92zbBSDrkUg34zitHecetocB~UnfvDT8GyXQ8JgzAbhxsklPz3ytMvZHy0~qgFp2Pjh6zIfRLw0dx0n3RwtYMXbNhp1Qj6~uV62oacwSLHfTAlv88ZPcgaQqXMz~TVmD0WHt2eNMkwnY8zA__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjU4NzY4fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NTA3Nzh9fX1dfQ__&Signature=CC5jjLgGFyxvso5edW2zzMtTLa2x8lzAfcFpxA~vykDjd~VTZ1ZuUnIGYJFtgm9DNKxiiM3yeZEU6SS6SSpAo0RBhX6llgZUO~n3qToB8kkmInbGW1f53IMNauc4WBpGWA2YtuOedjBXX1Kpxnc5BXfugGaM3MJNjys42F1YfYy18Dlz2Dru43za7Z-u6TEAq0j04c2i4smmiKEW~gs~wRD8QkRF34t8rZe40PwO1RtbeLuVS7D9RkuO7fWjSk9AigrnwsjVDrWOOHyE69N2JyKQj-oNOuRG7vVuaS47r~bqhOO7MmU7IG7tDFhiQ7-S7Y~9D7AGY9ZreDWv~dR33A__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -4175,7 +4171,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjUxOTUzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NDM5NjN9fX1dfQ__&Signature=dXk-5AC-VN3DZ8VnydBSogDsnCPLOwk3p12kAzUAq9BOh~FKIx-WOlZYbs6IA5Zmhjdol94VVZ8LnKpUH2PM9OtM2eicDOHjRVg478TQuqxBZFVAqgG2NNBPGzeHjENsvr1gq-pTldNppBRfwmeSawtmQ2yhDO6U1dfgH6TtDGXWBidxieet1epqNYw9Y~3C8opWe6IxqbgpapEOlgW0HCXny5UyxjQAE9M0zUUQI8amiYXSNl15OVppATNutprghGWVTk-khVdBkYjDX2H6Yc3dHXbyZiomyPZgfmoEFdBer-KSKqyoCpMpgIU9vXHwfVD-IO1-lHuqDNc5TvaOCg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg3MjU4Njk2fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3ODk4NTA3MDZ9fX1dfQ__&Signature=k-EV04xWTIhteHUDkM8u55ZkoISE8KRcdkiDTfWeQUmUEXW9ugIKH2qVC0ezHxuN8ylfeUa1mLjU1FJ939uISbZ1bCOgXYib8KA5z6n1satMcbYumr0pPA8~tTgERpl68oVVHmGwRlr6aYPRj8FR4AsrOOHxaenTNx0mw7OJceKFJv~U1ifU1Zbp49PFgED6zg0wO8QFUQX2MXsMB5xS5tMX~l~F-8YP9uCRE3tq-ZPdP3cOowNw7JFtl7~Pz2SUnIfgaWeLBsxpNowpuXSPA7Rx6e232l3E3UuTNgBTzpAtyoZ5nPaTsBsVhc6mEQolbdtla9yGxXQMoAa-JmMSYA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
