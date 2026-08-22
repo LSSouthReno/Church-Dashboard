@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-22T21:53:42.030Z",
+  "lastUpdated": "2026-08-22T22:45:45.684Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7837,7 +7837,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 22, 2026, 2:53 PM",
+    "refreshed": "Aug 22, 2026, 3:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14251,18 +14251,14 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 54,
-    "weeklyAvg": 13,
-    "totalFetched": 7017,
-    "since": "2026-07-23",
-    "asOf": "2026-08-22T21:46:51.340Z"
+    "error": "Bandwidth quota exceeded: https://api.planningcenteronline.com/people/v2/people?offset=4800&order=-created_at&per_page=100. Try reducing the rate of data transfer."
   },
   "emailStats": {
-    "latestOpenRate": 0.47989276139410186,
-    "avgOpenRate3": 0.5093852447977462,
+    "latestOpenRate": 0.4803220035778175,
+    "avgOpenRate3": 0.5095283255256514,
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-22T21:46:53.917Z"
+    "asOf": "2026-08-22T22:44:23.177Z"
   }
 }
