@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-23T00:48:13.384Z",
+  "lastUpdated": "2026-08-23T01:46:06.085Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7837,7 +7837,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 22, 2026, 5:48 PM",
+    "refreshed": "Aug 22, 2026, 6:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11368,6 +11368,13 @@
               "pos": "Back Left Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Simon Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -11518,8 +11525,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 98,
-            "totalVols": 98
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -12621,6 +12628,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -12630,8 +12644,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 78,
-            "totalVols": 78
+            "volsWithServiceTime": 79,
+            "totalVols": 79
           }
         }
       ]
@@ -12809,20 +12823,6 @@
               "team": "Stepping Stones",
               "pos": "Check In",
               "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Simon Lefler",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Cindy Lefler",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -13169,8 +13169,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 73,
-            "totalVols": 73
+            "volsWithServiceTime": 71,
+            "totalVols": 71
           }
         }
       ]
@@ -13641,6 +13641,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13650,8 +13657,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 65,
-            "totalVols": 65
+            "volsWithServiceTime": 66,
+            "totalVols": 66
           }
         }
       ]
@@ -13730,6 +13737,20 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Simon Lefler",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13739,8 +13760,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 9,
-            "totalVols": 9
+            "volsWithServiceTime": 11,
+            "totalVols": 11
           }
         }
       ]
@@ -14255,7 +14276,7 @@
     "weeklyAvg": 13,
     "totalFetched": 7017,
     "since": "2026-07-24",
-    "asOf": "2026-08-23T00:45:14.248Z"
+    "asOf": "2026-08-23T01:44:36.335Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4803220035778175,
@@ -14263,6 +14284,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-23T00:45:15.763Z"
+    "asOf": "2026-08-23T01:44:38.137Z"
   }
 }
