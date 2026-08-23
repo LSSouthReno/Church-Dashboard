@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-23T12:48:03.361Z",
+  "lastUpdated": "2026-08-23T13:01:00.126Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7837,7 +7837,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 23, 2026, 5:48 AM",
+    "refreshed": "Aug 23, 2026, 6:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9842,13 +9842,6 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
-              "name": "Ana Loftin",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Becky Hunt",
               "team": "Stepping Stones",
               "pos": "Guide WP, Hawks, Mustangs",
@@ -9910,20 +9903,6 @@
               "pos": "Lead Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Emma Baskharoon",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Emma Baskharoon",
-              "team": "Stepping Stones",
-              "pos": "Wolf Pack Guide",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Gordon Fava",
@@ -10334,14 +10313,14 @@
             {
               "name": "Natalie Christopher",
               "team": "Stepping Stones",
-              "pos": "Lead Guide Hawks & Mustangs",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "11 AM"
             },
             {
               "name": "Hannah Christopher",
               "team": "Stepping Stones",
-              "pos": "Guide Hawks & Mustangs",
+              "pos": "Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -10446,7 +10425,7 @@
             {
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
-              "pos": "Wolf Pack Lead Guide",
+              "pos": "Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -10503,6 +10482,13 @@
               "name": "Teylor Baskharoon (Hinzman)",
               "team": "Safety Team",
               "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
             }
@@ -10655,8 +10641,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676378\"},{\"type\":\"PlanTime\",\"id\":\"217676379\"},{\"type\":\"PlanTime\",\"id\":\"217676380\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
