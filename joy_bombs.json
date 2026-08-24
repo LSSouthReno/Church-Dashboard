@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151512766_20260823_steppingstone",
-      "name": "Kylie Skolnick",
-      "pcoPersonId": "151512766",
-      "team": "Stepping Stones",
-      "phone": "17752471032",
-      "firstServeDate": "2026-08-23",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Guide"
-    },
-    {
       "id": "jb_151512383_20260823_steppingstone",
       "name": "Elizabeth Bowman",
       "pcoPersonId": "151512383",
@@ -407,7 +393,21 @@
       "notes": "",
       "source": "auto",
       "position": "Offering Counter"
+    },
+    {
+      "id": "jb_151512766_20260823_steppingstone",
+      "name": "Kylie Skolnick",
+      "pcoPersonId": "151512766",
+      "team": "Stepping Stones",
+      "phone": "17752471032",
+      "firstServeDate": "2026-08-23",
+      "status": "bombed",
+      "bombedDate": "2026-08-24",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Guide"
     }
   ],
-  "lastUpdated": "2026-08-24T19:30:35.348Z"
+  "lastUpdated": "2026-08-24T19:32:51.229Z"
 }
