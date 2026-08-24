@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151513927_20260823_countingteam",
-      "name": "Anna Moore",
-      "pcoPersonId": "151513927",
-      "team": "Counting Team",
-      "phone": "17752250126",
-      "firstServeDate": "2026-08-23",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Offering Counter"
-    },
-    {
       "id": "jb_151512766_20260823_steppingstone",
       "name": "Kylie Skolnick",
       "pcoPersonId": "151512766",
@@ -407,7 +393,21 @@
       "notes": "",
       "source": "auto",
       "position": "Sermon Text Reader"
+    },
+    {
+      "id": "jb_151513927_20260823_countingteam",
+      "name": "Anna Moore",
+      "pcoPersonId": "151513927",
+      "team": "Counting Team",
+      "phone": "17752250126",
+      "firstServeDate": "2026-08-23",
+      "status": "bombed",
+      "bombedDate": "2026-08-24",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Offering Counter"
     }
   ],
-  "lastUpdated": "2026-08-24T19:27:52.097Z"
+  "lastUpdated": "2026-08-24T19:30:09.392Z"
 }
