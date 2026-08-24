@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-24T18:46:48.026Z",
+  "lastUpdated": "2026-08-24T19:02:27.307Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 24, 2026, 11:46 AM",
+    "refreshed": "Aug 24, 2026, 12:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9335,7 +9335,7 @@
         22,
         18,
         25,
-        29,
+        28,
         17,
         null,
         null,
@@ -9604,14 +9604,6 @@
         "attPct": 38
       },
       {
-        "name": "Durham Community Group",
-        "members": 11,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
-        "avgAttended": 7,
-        "attPct": 64
-      },
-      {
         "name": "Maidens Community Group",
         "members": 11,
         "leaders": 1,
@@ -9634,6 +9626,14 @@
         "schedule": "Meets weekly on Thursdays from 6:30-8pm",
         "avgAttended": 5,
         "attPct": 45
+      },
+      {
+        "name": "Durham Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
+        "avgAttended": 7,
+        "attPct": 70
       },
       {
         "name": "Ryan Griffin Community Group",
@@ -10552,7 +10552,7 @@
               "seq": 7,
               "title": "Peace Be Still",
               "type": "song",
-              "lengthMin": 8,
+              "lengthMin": 5,
               "description": ""
             },
             {
@@ -10601,7 +10601,7 @@
               "seq": 14,
               "title": "SERMON",
               "type": "item",
-              "lengthMin": 30,
+              "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
