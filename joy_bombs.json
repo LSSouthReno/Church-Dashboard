@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_192841479_20260823_presider",
-      "name": "Karynn Sucaldito",
-      "pcoPersonId": "192841479",
-      "team": "Presiders",
-      "phone": "17758467506",
-      "firstServeDate": "2026-08-23",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Sermon Text Reader"
-    },
-    {
       "id": "jb_151513927_20260823_countingteam",
       "name": "Anna Moore",
       "pcoPersonId": "151513927",
@@ -407,7 +393,21 @@
       "notes": "",
       "source": "auto",
       "position": "Wolf Pack Guide"
+    },
+    {
+      "id": "jb_192841479_20260823_presider",
+      "name": "Karynn Sucaldito",
+      "pcoPersonId": "192841479",
+      "team": "Presiders",
+      "phone": "17758467506",
+      "firstServeDate": "2026-08-23",
+      "status": "bombed",
+      "bombedDate": "2026-08-24",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
     }
   ],
-  "lastUpdated": "2026-08-24T19:24:39.963Z"
+  "lastUpdated": "2026-08-24T19:27:52.097Z"
 }
