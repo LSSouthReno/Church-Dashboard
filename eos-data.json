@@ -949,7 +949,7 @@
     "guest": 0,
     "attender": 66,
     "member": 356,
-    "group": 415,
+    "group": 416,
     "leader": 86,
     "missionary": 2,
     "asOf": "2026-08-24"
@@ -4832,6 +4832,10 @@
       "type": "Community Group",
       "name": "Faker Community Group",
       "members": [
+        {
+          "name": "Jolie Mortensen",
+          "role": "member"
+        },
         {
           "name": "Tina Faker",
           "role": "leader"
@@ -9509,6 +9513,10 @@
           "role": "member"
         },
         {
+          "name": "Peter Sellman",
+          "role": "member"
+        },
+        {
           "name": "Sarah Tomlinson",
           "role": "member"
         },
@@ -10678,6 +10686,10 @@
         },
         {
           "name": "Julia Perlingos-Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Karynn Sucaldito",
           "role": "member"
         },
         {
