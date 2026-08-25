@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-25T21:48:32.512Z",
+  "lastUpdated": "2026-08-25T22:46:10.825Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -222,7 +222,7 @@
       343205,
       363983,
       407656,
-      186057
+      186399
     ],
     "donors": [
       0,
@@ -328,12 +328,12 @@
       411,
       362,
       365,
-      377
+      378
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5259261
+    "raised": 5259603
   },
   "attendance": {
     "months": [
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 25, 2026, 2:48 PM",
+    "refreshed": "Aug 25, 2026, 3:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10978,13 +10978,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Richard Price",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Valerie Seno",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -11053,13 +11046,6 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Richard Price",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "David Wandishin",
@@ -11315,8 +11301,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 70
+            "volsWithServiceTime": 68,
+            "totalVols": 68
           }
         }
       ],
@@ -12422,7 +12408,7 @@
               "name": "Halee Frink",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -13266,6 +13252,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Christian Olson",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -13402,8 +13395,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ]
@@ -14201,7 +14194,7 @@
     "weeklyAvg": 14,
     "totalFetched": 7033,
     "since": "2026-07-26",
-    "asOf": "2026-08-25T21:45:19.486Z"
+    "asOf": "2026-08-25T22:44:38.542Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4928443649373882,
@@ -14209,6 +14202,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-25T21:45:21.184Z"
+    "asOf": "2026-08-25T22:44:39.858Z"
   }
 }
