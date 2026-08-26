@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-26T17:08:16.752Z",
+  "lastUpdated": "2026-08-26T17:46:06.212Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 26, 2026, 10:08 AM",
+    "refreshed": "Aug 26, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14397,17 +14397,28 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-09-08",
+      "end": "2026-09-10"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 56,
+    "count30d": 55,
     "weeklyAvg": 13,
     "totalFetched": 7033,
     "since": "2026-07-27",
-    "asOf": "2026-08-26T16:45:25.930Z"
+    "asOf": "2026-08-26T17:44:36.671Z"
   },
   "emailStats": {
     "latestOpenRate": 0.49552772808586765,
@@ -14415,6 +14426,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-26T16:45:27.408Z"
+    "asOf": "2026-08-26T17:44:37.637Z"
   }
 }
