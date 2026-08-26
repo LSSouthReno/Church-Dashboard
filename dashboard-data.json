@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-26T14:52:51.687Z",
+  "lastUpdated": "2026-08-26T15:46:57.114Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 26, 2026, 7:53 AM",
+    "refreshed": "Aug 26, 2026, 8:47 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10526,6 +10526,13 @@
               "pos": "Bluebirds Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10669,8 +10676,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
@@ -11214,6 +11221,13 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jessica Adrian",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -11350,8 +11364,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 75,
-            "totalVols": 75
+            "volsWithServiceTime": 76,
+            "totalVols": 76
           }
         }
       ],
@@ -14376,7 +14390,18 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-09-08",
+      "end": "2026-09-10"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -14386,7 +14411,7 @@
     "weeklyAvg": 13,
     "totalFetched": 7033,
     "since": "2026-07-27",
-    "asOf": "2026-08-26T14:45:26.825Z"
+    "asOf": "2026-08-26T15:44:55.919Z"
   },
   "emailStats": {
     "latestOpenRate": 0.49552772808586765,
@@ -14394,6 +14419,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-26T14:45:28.939Z"
+    "asOf": "2026-08-26T15:44:57.378Z"
   }
 }
