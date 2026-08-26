@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-26T13:57:48.214Z",
+  "lastUpdated": "2026-08-26T14:52:51.687Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -222,7 +222,7 @@
       343205,
       363983,
       407656,
-      186647
+      186745
     ],
     "donors": [
       0,
@@ -333,7 +333,7 @@
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5259851
+    "raised": 5259949
   },
   "attendance": {
     "months": [
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 26, 2026, 6:57 AM",
+    "refreshed": "Aug 26, 2026, 7:53 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14376,31 +14376,24 @@
       ]
     }
   ],
-  "staffTimeOff": [
-    {
-      "name": "Geoffrey Caliger",
-      "start": "2026-09-08",
-      "end": "2026-09-10"
-    },
-    {
-      "name": "Katie Thompson",
-      "start": "2026-11-08",
-      "end": "2026-11-10"
-    }
-  ],
+  "staffTimeOff": [],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "error": "Bandwidth quota exceeded: https://api.planningcenteronline.com/people/v2/people?offset=2200&order=-created_at&per_page=100. Try reducing the rate of data transfer."
+    "count30d": 56,
+    "weeklyAvg": 13,
+    "totalFetched": 7033,
+    "since": "2026-07-27",
+    "asOf": "2026-08-26T14:45:26.825Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.49463327370304117,
-    "avgOpenRate3": 0.5151934706822544,
+    "latestOpenRate": 0.49552772808586765,
+    "avgOpenRate3": 0.5154916221431965,
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-19T20:45:54+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-26T13:44:13.851Z"
+    "asOf": "2026-08-26T14:45:28.939Z"
   }
 }
