@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-27T17:46:28.393Z",
+  "lastUpdated": "2026-08-27T17:58:15.886Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3242,7 +3242,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 107,
+      "current": 109,
       "needed": 150,
       "history": [
         {
@@ -3372,7 +3372,7 @@
         },
         {
           "d": "2026-08",
-          "n": 107
+          "n": 109
         }
       ]
     },
@@ -5075,7 +5075,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 373,
+  "uniqueVolunteers": 375,
   "budget": [
     {
       "label": "Network & Missions",
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 27, 2026, 10:46 AM",
+    "refreshed": "Aug 27, 2026, 10:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9336,7 +9336,7 @@
         17,
         25,
         27,
-        20,
+        21,
         null,
         null,
         null,
@@ -9383,7 +9383,7 @@
         12,
         15,
         16,
-        12,
+        13,
         null,
         null,
         null,
@@ -9542,6 +9542,14 @@
         "attPct": 67
       },
       {
+        "name": "Isaac Griffin Community Group",
+        "members": 15,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
+        "avgAttended": 8,
+        "attPct": 53
+      },
+      {
         "name": "Wampler/Colonna Community Group",
         "members": 14,
         "leaders": 2,
@@ -9572,14 +9580,6 @@
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 6,
         "attPct": 43
-      },
-      {
-        "name": "Isaac Griffin Community Group",
-        "members": 14,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
-        "avgAttended": 8,
-        "attPct": 57
       },
       {
         "name": "Lattin Community Group",
@@ -10300,7 +10300,7 @@
               "name": "Carlos Perez",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -11703,13 +11703,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Carlos Perez",
-              "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Carlos Flores",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
@@ -12194,8 +12187,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 92,
-            "totalVols": 92
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -13166,7 +13159,7 @@
               "name": "Shiona Dykins",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -13194,13 +13187,6 @@
               "name": "Richard Price",
               "team": "Stepping Stones",
               "pos": "Mustangs Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Carlos Perez",
-              "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
               "status": "U",
               "serviceTime": "11 AM"
             },
@@ -13612,8 +13598,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 80,
-            "totalVols": 80
+            "volsWithServiceTime": 79,
+            "totalVols": 79
           }
         }
       ]
@@ -13723,6 +13709,20 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "U",
+              "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Evven Gardner",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13732,8 +13732,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 13,
-            "totalVols": 13
+            "volsWithServiceTime": 15,
+            "totalVols": 15
           }
         }
       ]
@@ -14267,6 +14267,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14276,8 +14283,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 4,
-            "totalVols": 4
+            "volsWithServiceTime": 5,
+            "totalVols": 5
           }
         }
       ]
@@ -14338,6 +14345,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14347,8 +14361,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 6,
-            "totalVols": 6
+            "volsWithServiceTime": 7,
+            "totalVols": 7
           }
         }
       ]
@@ -14388,6 +14402,13 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "John Munk",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14397,8 +14418,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 3,
-            "totalVols": 3
+            "volsWithServiceTime": 4,
+            "totalVols": 4
           }
         }
       ]
