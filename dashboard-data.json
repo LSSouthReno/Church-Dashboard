@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-27T21:46:05.476Z",
+  "lastUpdated": "2026-08-27T21:56:52.407Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7891,7 +7891,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 27, 2026, 2:46 PM",
+    "refreshed": "Aug 27, 2026, 2:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11296,10 +11296,10 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
-              "lengthMin": 5,
-              "description": ""
+              "title": "Nothing Else",
+              "type": "song",
+              "lengthMin": 7,
+              "description": "free build"
             },
             {
               "seq": 8,
@@ -11906,23 +11906,9 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Scarlett Fava",
-              "team": "Worship Team",
-              "pos": "Vocals",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Megan Wampler",
               "team": "Worship Team",
               "pos": "Worship Leader",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Scarlett Fava",
-              "team": "Worship Team",
-              "pos": "Bass",
               "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
@@ -12119,8 +12105,8 @@
             },
             {
               "seq": 7,
-              "title": "SONG 3",
-              "type": "item",
+              "title": "Who You Say I Am",
+              "type": "song",
               "lengthMin": 5,
               "description": ""
             },
@@ -12208,8 +12194,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 91,
-            "totalVols": 91
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
@@ -13338,21 +13324,7 @@
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
-              "name": "Scarlett Fava",
-              "team": "Worship Team",
-              "pos": "Bass",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
               "name": "Emery Fava",
-              "team": "Worship Team",
-              "pos": "Vocals",
-              "status": "C",
-              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Scarlett Fava",
               "team": "Worship Team",
               "pos": "Vocals",
               "status": "C",
@@ -13626,8 +13598,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 79,
-            "totalVols": 79
+            "volsWithServiceTime": 77,
+            "totalVols": 77
           }
         }
       ]
