@@ -949,7 +949,7 @@
     "guest": 0,
     "attender": 67,
     "member": 356,
-    "group": 412,
+    "group": 415,
     "leader": 89,
     "missionary": 2,
     "asOf": "2026-08-28"
@@ -4618,6 +4618,68 @@
     },
     {
       "type": "Community Group",
+      "name": "Coan/Sellman Community Group",
+      "members": [
+        {
+          "name": "Amy Mclennan",
+          "role": "member"
+        },
+        {
+          "name": "Elyse Bozsik",
+          "role": "member"
+        },
+        {
+          "name": "Emily LeBlanc",
+          "role": "member"
+        },
+        {
+          "name": "Jaimie Sullivan",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jennifer Griffo",
+          "role": "member"
+        },
+        {
+          "name": "Jennifer Kitts",
+          "role": "member"
+        },
+        {
+          "name": "Jenny Roccuzzo",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "leader"
+        },
+        {
+          "name": "Megan Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Thomas",
+          "role": "member"
+        },
+        {
+          "name": "Samantha Phu",
+          "role": "member"
+        },
+        {
+          "name": "Shannon Coan",
+          "role": "leader"
+        },
+        {
+          "name": "Stephanie Tompkins",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
       "name": "Colonna/Mavros Community Group",
       "members": [
         {
@@ -4770,6 +4832,10 @@
         },
         {
           "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Tori Meyer",
           "role": "member"
         }
       ]
@@ -5215,6 +5281,10 @@
         {
           "name": "Isaac Griffin",
           "role": "leader"
+        },
+        {
+          "name": "Jacob Knittel",
+          "role": "member"
         },
         {
           "name": "Justice JB",
@@ -6156,68 +6226,6 @@
     },
     {
       "type": "Community Group",
-      "name": "Wampler/Colonna Community Group",
-      "members": [
-        {
-          "name": "Amy Mclennan",
-          "role": "member"
-        },
-        {
-          "name": "Elyse Bozsik",
-          "role": "member"
-        },
-        {
-          "name": "Emily LeBlanc",
-          "role": "member"
-        },
-        {
-          "name": "Jaimie Sullivan",
-          "role": "member"
-        },
-        {
-          "name": "Janet Colonna",
-          "role": "member"
-        },
-        {
-          "name": "Jennifer Griffo",
-          "role": "member"
-        },
-        {
-          "name": "Jennifer Kitts",
-          "role": "member"
-        },
-        {
-          "name": "Jenny Roccuzzo",
-          "role": "member"
-        },
-        {
-          "name": "Karis Sellman",
-          "role": "leader"
-        },
-        {
-          "name": "Megan Wampler",
-          "role": "member"
-        },
-        {
-          "name": "Melissa Thomas",
-          "role": "member"
-        },
-        {
-          "name": "Samantha Phu",
-          "role": "member"
-        },
-        {
-          "name": "Shannon Coan",
-          "role": "leader"
-        },
-        {
-          "name": "Stephanie Tompkins",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
       "name": "Watson Community Group",
       "members": [
         {
@@ -6234,6 +6242,10 @@
         },
         {
           "name": "Dean Allman",
+          "role": "member"
+        },
+        {
+          "name": "Dennis McGilvery",
           "role": "member"
         },
         {
@@ -8393,6 +8405,10 @@
           "role": "member"
         },
         {
+          "name": "Garrett Kooyers",
+          "role": "member"
+        },
+        {
           "name": "Geoffrey Caliger",
           "role": "member"
         },
@@ -8446,6 +8462,10 @@
         },
         {
           "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jennie Kooyers",
           "role": "member"
         },
         {
@@ -8839,6 +8859,10 @@
           "role": "member"
         },
         {
+          "name": "John Andreano",
+          "role": "member"
+        },
+        {
           "name": "Josie Nerska",
           "role": "member"
         },
@@ -8848,6 +8872,10 @@
         },
         {
           "name": "Karynn Sucaldito",
+          "role": "member"
+        },
+        {
+          "name": "Kate Andreano",
           "role": "member"
         },
         {
@@ -9275,6 +9303,10 @@
           "role": "member"
         },
         {
+          "name": "John Andreano",
+          "role": "member"
+        },
+        {
           "name": "Josie Nerska",
           "role": "member"
         },
@@ -9284,6 +9316,10 @@
         },
         {
           "name": "Karynn Sucaldito",
+          "role": "member"
+        },
+        {
+          "name": "Kate Andreano",
           "role": "member"
         },
         {
@@ -11295,11 +11331,11 @@
           "role": "member"
         },
         {
-          "name": "Edward Jones",
+          "name": "Diane Sikora",
           "role": "member"
         },
         {
-          "name": "Ellie Wampler",
+          "name": "Edward Jones",
           "role": "member"
         },
         {
@@ -13296,6 +13332,7 @@
         "Chelsey Shauer",
         "Christa Bowman",
         "Christina Harris",
+        "Christopher Degener",
         "Damian Smith",
         "Darrell Vydra",
         "Dave Norton",
