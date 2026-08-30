@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-30T17:46:10.299Z",
+  "lastUpdated": "2026-08-30T17:57:25.868Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3240,7 +3240,7 @@
       {
         "week": "Aug 30",
         "adults": 219,
-        "kids": 73
+        "kids": 79
       }
     ]
   },
@@ -7871,7 +7871,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 30, 2026, 10:46 AM",
+    "refreshed": "Aug 30, 2026, 10:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14590,6 +14590,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Courtney Rumbaugh",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14599,8 +14606,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 5,
-            "totalVols": 5
+            "volsWithServiceTime": 6,
+            "totalVols": 6
           }
         }
       ]
