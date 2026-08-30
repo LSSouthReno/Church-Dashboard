@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-30T16:49:28.612Z",
+  "lastUpdated": "2026-08-30T17:46:10.299Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -222,7 +222,7 @@
       343205,
       363983,
       407656,
-      213837
+      214415
     ],
     "donors": [
       0,
@@ -328,12 +328,12 @@
       411,
       362,
       365,
-      385
+      388
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5287041
+    "raised": 5287619
   },
   "attendance": {
     "months": [
@@ -940,7 +940,7 @@
       114,
       109,
       83,
-      109
+      111
     ]
   },
   "attendanceWeekly": {
@@ -3239,8 +3239,8 @@
       },
       {
         "week": "Aug 30",
-        "adults": 0,
-        "kids": 17
+        "adults": 219,
+        "kids": 73
       }
     ]
   },
@@ -7871,7 +7871,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 30, 2026, 9:49 AM",
+    "refreshed": "Aug 30, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10541,6 +10541,13 @@
               "pos": "Guide WP, Hawks, Mustangs",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Natalie Christopher",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10677,8 +10684,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676386\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 109,
+            "totalVols": 109
           }
         }
       ]
@@ -11313,6 +11320,20 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Barbara Drake",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Douglas Drake",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -11449,8 +11470,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 88,
-            "totalVols": 88
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ],
@@ -12157,6 +12178,34 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Barbara Drake",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Douglas Drake",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cathy Cappini",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Mark Meich",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -12293,8 +12342,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 94,
-            "totalVols": 94
+            "volsWithServiceTime": 98,
+            "totalVols": 98
           }
         }
       ]
@@ -14713,7 +14762,7 @@
     "weeklyAvg": 14,
     "totalFetched": 7050,
     "since": "2026-07-31",
-    "asOf": "2026-08-30T16:45:08.487Z"
+    "asOf": "2026-08-30T17:44:39.615Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4718498659517426,
@@ -14721,6 +14770,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-27T16:37:09+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-30T16:45:09.685Z"
+    "asOf": "2026-08-30T17:44:40.788Z"
   }
 }
