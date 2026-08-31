@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-31T16:49:11.694Z",
+  "lastUpdated": "2026-08-31T17:46:18.941Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7904,7 +7904,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 31, 2026, 9:49 AM",
+    "refreshed": "Aug 31, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9349,7 +9349,7 @@
         17,
         25,
         27,
-        26,
+        27,
         null,
         null,
         null,
@@ -9612,6 +9612,14 @@
         "attPct": 62
       },
       {
+        "name": "Caliger/Rankin Community Group",
+        "members": 12,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 5-7pm",
+        "avgAttended": 4,
+        "attPct": 33
+      },
+      {
         "name": "Durham Community Group",
         "members": 11,
         "leaders": 3,
@@ -9650,14 +9658,6 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 7,
         "attPct": 64
-      },
-      {
-        "name": "Caliger/Rankin Community Group",
-        "members": 11,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 5-7pm",
-        "avgAttended": 4,
-        "attPct": 36
       },
       {
         "name": "Brown/Frank Community Group",
@@ -13930,11 +13930,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 62,
-    "weeklyAvg": 14,
-    "totalFetched": 7054,
+    "count30d": 63,
+    "weeklyAvg": 15,
+    "totalFetched": 7055,
     "since": "2026-08-01",
-    "asOf": "2026-08-31T16:45:37.502Z"
+    "asOf": "2026-08-31T17:44:40.136Z"
   },
   "emailStats": {
     "latestOpenRate": 0.47942754919499103,
@@ -13942,6 +13942,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-27T16:37:09+00:00",
     "campaignCount": 5,
-    "asOf": "2026-08-31T16:45:39.582Z"
+    "asOf": "2026-08-31T17:44:42.208Z"
   }
 }
