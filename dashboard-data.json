@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-31T21:47:20.104Z",
+  "lastUpdated": "2026-08-31T22:01:23.398Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7904,7 +7904,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 31, 2026, 2:47 PM",
+    "refreshed": "Aug 31, 2026, 3:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10555,7 +10555,7 @@
               "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 2,
+              "lengthMin": 3,
               "description": ""
             },
             {
@@ -13915,7 +13915,18 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "Geoffrey Caliger",
+      "start": "2026-09-08",
+      "end": "2026-09-10"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
