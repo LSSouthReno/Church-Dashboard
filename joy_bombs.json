@@ -1,20 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_167218331_20260823_enrichmentteam",
-      "name": "Latisha Hill",
-      "pcoPersonId": "167218331",
-      "team": "Enrichment Teams",
-      "phone": "17755301575",
-      "firstServeDate": "2026-08-23",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Front Left Communion Server"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -437,6 +422,20 @@
       "position": "Bear Cubs Guide"
     },
     {
+      "id": "jb_167218331_20260823_enrichmentteam",
+      "name": "Latisha Hill",
+      "pcoPersonId": "167218331",
+      "team": "Enrichment Teams",
+      "phone": "17755301575",
+      "firstServeDate": "2026-08-23",
+      "status": "bombed",
+      "bombedDate": "2026-08-31",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Front Left Communion Server"
+    },
+    {
       "id": "jb_192714603_20260830_coffeeteam",
       "name": "Brianne Sullivan",
       "pcoPersonId": "192714603",
@@ -465,5 +464,5 @@
       "position": "Wolf Pack Guide"
     }
   ],
-  "lastUpdated": "2026-08-31T20:08:55.156Z"
+  "lastUpdated": "2026-08-31T20:09:56.038Z"
 }
