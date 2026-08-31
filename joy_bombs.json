@@ -15,20 +15,6 @@
       "position": "Front Left Communion Server"
     },
     {
-      "id": "jb_198665678_20260830_steppingstone",
-      "name": "Maggie Thetford",
-      "pcoPersonId": "198665678",
-      "team": "Stepping Stones",
-      "phone": "18703766093",
-      "firstServeDate": "2026-08-30",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Guide"
-    },
-    {
       "id": "jb_192714603_20260830_coffeeteam",
       "name": "Brianne Sullivan",
       "pcoPersonId": "192714603",
@@ -463,7 +449,21 @@
       "notes": "",
       "source": "auto",
       "position": "Presider"
+    },
+    {
+      "id": "jb_198665678_20260830_steppingstone",
+      "name": "Maggie Thetford",
+      "pcoPersonId": "198665678",
+      "team": "Stepping Stones",
+      "phone": "18703766093",
+      "firstServeDate": "2026-08-30",
+      "status": "bombed",
+      "bombedDate": "2026-08-31",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Guide"
     }
   ],
-  "lastUpdated": "2026-08-31T20:00:51.024Z"
+  "lastUpdated": "2026-08-31T20:02:13.609Z"
 }
