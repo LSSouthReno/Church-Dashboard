@@ -15,20 +15,6 @@
       "position": "Front Left Communion Server"
     },
     {
-      "id": "jb_161961038_20260830_presider",
-      "name": "Anna Sawyer",
-      "pcoPersonId": "161961038",
-      "team": "Presiders",
-      "phone": "17757428049",
-      "firstServeDate": "2026-08-30",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Presider"
-    },
-    {
       "id": "jb_198665678_20260830_steppingstone",
       "name": "Maggie Thetford",
       "pcoPersonId": "198665678",
@@ -463,7 +449,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bluebirds Guide"
+    },
+    {
+      "id": "jb_161961038_20260830_presider",
+      "name": "Anna Sawyer",
+      "pcoPersonId": "161961038",
+      "team": "Presiders",
+      "phone": "17757428049",
+      "firstServeDate": "2026-08-30",
+      "status": "bombed",
+      "bombedDate": "2026-08-31",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Presider"
     }
   ],
-  "lastUpdated": "2026-08-31T18:59:25.026Z"
+  "lastUpdated": "2026-08-31T20:00:48.832Z"
 }
