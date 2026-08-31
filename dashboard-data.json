@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-31T14:47:35.905Z",
+  "lastUpdated": "2026-08-31T15:07:01.851Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -4028,7 +4028,7 @@
     },
     {
       "name": "Connect",
-      "current": 12,
+      "current": 13,
       "needed": 15,
       "history": [
         {
@@ -4153,7 +4153,7 @@
         },
         {
           "d": "2026-08",
-          "n": 12
+          "n": 13
         }
       ]
     },
@@ -5080,7 +5080,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 376,
+  "uniqueVolunteers": 377,
   "budget": [
     {
       "label": "Network & Missions",
@@ -7904,7 +7904,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 31, 2026, 7:47 AM",
+    "refreshed": "Aug 31, 2026, 8:07 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10464,6 +10464,20 @@
               "pos": "Connect Desk Host (A Team)",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shannon Coan",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kellan Coan",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10600,8 +10614,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 92,
-            "totalVols": 92
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ],
@@ -13141,6 +13155,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shannon Coan",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -13150,8 +13171,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 19,
-            "totalVols": 19
+            "volsWithServiceTime": 20,
+            "totalVols": 20
           }
         }
       ]
@@ -13303,6 +13324,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shannon Coan",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -13312,8 +13340,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 19,
-            "totalVols": 19
+            "volsWithServiceTime": 20,
+            "totalVols": 20
           }
         }
       ]
