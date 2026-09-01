@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-01T15:46:37.521Z",
+  "lastUpdated": "2026-09-01T16:03:06.433Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 1, 2026, 8:46 AM",
+    "refreshed": "Sep 1, 2026, 9:03 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10577,18 +10577,18 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Lauren Smith",
-              "team": "Stepping Stones",
-              "pos": "Check In",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Kayleen Hagstrand",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -11475,7 +11475,7 @@
               "name": "Eric Sikora",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
@@ -13902,6 +13902,13 @@
               "pos": "Sermon Text Reader",
               "status": "U",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lauren Smith",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13911,8 +13918,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 8,
-            "totalVols": 8
+            "volsWithServiceTime": 9,
+            "totalVols": 9
           }
         }
       ]
@@ -14093,6 +14100,13 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Lauren Smith",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14102,8 +14116,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 10,
-            "totalVols": 10
+            "volsWithServiceTime": 11,
+            "totalVols": 11
           }
         }
       ]
