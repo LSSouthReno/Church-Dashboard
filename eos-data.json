@@ -949,8 +949,8 @@
     "guest": 0,
     "attender": 67,
     "member": 356,
-    "group": 418,
-    "leader": 90,
+    "group": 417,
+    "leader": 89,
     "missionary": 2,
     "asOf": "2026-09-01"
   },
@@ -4389,10 +4389,6 @@
           "role": "member"
         },
         {
-          "name": "Linda Kucia",
-          "role": "member"
-        },
-        {
           "name": "Liz Suto",
           "role": "member"
         },
@@ -4491,6 +4487,10 @@
         {
           "name": "Gina Rankin",
           "role": "leader"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
         },
         {
           "name": "Jeana Rehberger",
@@ -4868,56 +4868,6 @@
     },
     {
       "type": "Community Group",
-      "name": "England/Frederick Community Group",
-      "members": [
-        {
-          "name": "Bret Coggiola",
-          "role": "leader"
-        },
-        {
-          "name": "Bruce Rector",
-          "role": "member"
-        },
-        {
-          "name": "Dana Thorp",
-          "role": "member"
-        },
-        {
-          "name": "David Weyhenmeyer",
-          "role": "member"
-        },
-        {
-          "name": "Debbie Rowland",
-          "role": "member"
-        },
-        {
-          "name": "Janet Frederick",
-          "role": "leader"
-        },
-        {
-          "name": "Jay England",
-          "role": "member"
-        },
-        {
-          "name": "Jere England",
-          "role": "member"
-        },
-        {
-          "name": "Kara Schelin",
-          "role": "leader"
-        },
-        {
-          "name": "Timothy Frederick",
-          "role": "leader"
-        },
-        {
-          "name": "Tony Sanchez",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
       "name": "Faker Community Group",
       "members": [
         {
@@ -5024,6 +4974,56 @@
         },
         {
           "name": "Vickie Luchetti",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
+      "name": "Frederick/Coggiola/Schelin Community Group",
+      "members": [
+        {
+          "name": "Bret Coggiola",
+          "role": "leader"
+        },
+        {
+          "name": "Bruce Rector",
+          "role": "member"
+        },
+        {
+          "name": "Dana Thorp",
+          "role": "member"
+        },
+        {
+          "name": "David Weyhenmeyer",
+          "role": "member"
+        },
+        {
+          "name": "Debbie Rowland",
+          "role": "member"
+        },
+        {
+          "name": "Janet Frederick",
+          "role": "leader"
+        },
+        {
+          "name": "Jay England",
+          "role": "member"
+        },
+        {
+          "name": "Jere England",
+          "role": "member"
+        },
+        {
+          "name": "Kara Schelin",
+          "role": "leader"
+        },
+        {
+          "name": "Timothy Frederick",
+          "role": "leader"
+        },
+        {
+          "name": "Tony Sanchez",
           "role": "member"
         }
       ]
@@ -9947,6 +9947,10 @@
           "role": "member"
         },
         {
+          "name": "Heather Green",
+          "role": "member"
+        },
+        {
           "name": "Heidi Flores",
           "role": "member"
         },
@@ -9972,6 +9976,10 @@
         },
         {
           "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Nicole Sfiroudis",
           "role": "member"
         },
         {
@@ -10345,11 +10353,19 @@
           "role": "member"
         },
         {
+          "name": "Linda Kucia",
+          "role": "member"
+        },
+        {
           "name": "Liz Suto",
           "role": "member"
         },
         {
           "name": "Maddox Morris",
+          "role": "member"
+        },
+        {
+          "name": "Michael Wright",
           "role": "member"
         },
         {
@@ -10375,10 +10391,6 @@
         {
           "name": "Ron Moschetti",
           "role": "member"
-        },
-        {
-          "name": "Ryan Baskharoon",
-          "role": "leader"
         },
         {
           "name": "Sarah Rawlins",
@@ -13396,7 +13408,6 @@
         "Nicky Kammeta",
         "Paul Murad",
         "Peter Sellman",
-        "Rebecca McKnight",
         "Sandy Norton",
         "Sarah Jones",
         "Sarah Rawlins",
@@ -13406,7 +13417,6 @@
         "Stacey Corletto",
         "Teodoro Kijah Banda",
         "Timothy Milligan",
-        "Tristan McKnight",
         "Whitney Maidens"
       ]
     },
