@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-01T06:58:06.147Z",
+  "lastUpdated": "2026-09-01T07:46:12.806Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -116,7 +116,8 @@
       "May '26",
       "Jun '26",
       "Jul '26",
-      "Aug '26"
+      "Aug '26",
+      "Sep '26"
     ],
     "amounts": [
       0,
@@ -222,7 +223,8 @@
       343205,
       363983,
       407656,
-      232596
+      232596,
+      0
     ],
     "donors": [
       0,
@@ -328,7 +330,8 @@
       411,
       362,
       365,
-      395
+      395,
+      0
     ]
   },
   "pledge": {
@@ -536,7 +539,8 @@
       "2026-05",
       "2026-06",
       "2026-07",
-      "2026-08"
+      "2026-08",
+      "2026-09"
     ],
     "adults": [
       0,
@@ -738,7 +742,8 @@
       742,
       691,
       649,
-      747
+      747,
+      0
     ],
     "kids": [
       0,
@@ -940,7 +945,8 @@
       114,
       109,
       83,
-      119
+      119,
+      0
     ]
   },
   "attendanceWeekly": {
@@ -7904,7 +7910,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Aug 31, 2026, 11:58 PM",
+    "refreshed": "Sep 1, 2026, 12:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8109,7 +8115,8 @@
       "May '26",
       "Jun '26",
       "Jul '26",
-      "Aug '26"
+      "Aug '26",
+      "Sep '26"
     ],
     "counts": [
       0,
@@ -8311,6 +8318,7 @@
       36,
       36,
       39,
+      40,
       40
     ]
   },
@@ -8515,7 +8523,8 @@
       "May '26",
       "Jun '26",
       "Jul '26",
-      "Aug '26"
+      "Aug '26",
+      "Sep '26"
     ],
     "counts": [
       0,
@@ -8717,6 +8726,7 @@
       373,
       374,
       395,
+      417,
       417
     ]
   },
@@ -8786,7 +8796,7 @@
       "members": 417,
       "groupSize": 10,
       "fmInGroupsPct": 54,
-      "asOfMonth": "Aug '26"
+      "asOfMonth": "Sep '26"
     },
     "groupCountsByYear": {
       "2010": [
@@ -9022,7 +9032,7 @@
         36,
         39,
         40,
-        null,
+        40,
         null,
         null,
         null
@@ -9262,7 +9272,7 @@
         374,
         395,
         417,
-        null,
+        417,
         null,
         null,
         null
@@ -14104,7 +14114,7 @@
     "weeklyAvg": 13,
     "totalFetched": 7047,
     "since": "2026-08-02",
-    "asOf": "2026-09-01T06:44:35.987Z"
+    "asOf": "2026-09-01T07:44:39.837Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4856887298747764,
@@ -14112,6 +14122,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-27T16:37:09+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-01T06:44:37.127Z"
+    "asOf": "2026-09-01T07:44:41.118Z"
   }
 }
