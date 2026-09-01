@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-01T20:47:43.931Z",
+  "lastUpdated": "2026-09-01T21:09:14.767Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3253,7 +3253,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 112,
+      "current": 113,
       "needed": 150,
       "history": [
         {
@@ -3387,7 +3387,7 @@
         },
         {
           "d": "2026-09",
-          "n": 112
+          "n": 113
         }
       ]
     },
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 1, 2026, 1:47 PM",
+    "refreshed": "Sep 1, 2026, 2:09 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9404,7 +9404,7 @@
         12
       ],
       "2026": [
-        50,
+        49,
         28,
         22,
         21,
@@ -9786,14 +9786,6 @@
         "attPct": 63
       },
       {
-        "name": "Turcich Community Group",
-        "members": 7,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 71
-      },
-      {
         "name": "Taylor Community Group",
         "members": 7,
         "leaders": 2,
@@ -9808,6 +9800,14 @@
         "schedule": "Meets weekly on Wednesdays from 6-7:30am",
         "avgAttended": 4,
         "attPct": 57
+      },
+      {
+        "name": "Turcich Community Group",
+        "members": 6,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 83
       },
       {
         "name": "Febo/Sanchez Community Group (Spanish Speaking)",
@@ -10582,6 +10582,13 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Michael Mcnerny",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10725,8 +10732,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ],
@@ -13019,7 +13026,7 @@
               "name": "Lisa Castaneda",
               "team": "Counting Team",
               "pos": "Offering Counter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -13900,14 +13907,14 @@
               "name": "Lisa Castaneda",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
               "name": "Lisa Castaneda",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
