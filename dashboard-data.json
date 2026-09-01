@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-01T16:49:29.372Z",
+  "lastUpdated": "2026-09-01T17:46:04.266Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       232595,
-      17488
+      17539
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       365,
       395,
-      42
+      43
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5323287
+    "raised": 5323338
   },
   "attendance": {
     "months": [
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 1, 2026, 9:49 AM",
+    "refreshed": "Sep 1, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10409,13 +10409,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Savannah Caliger",
-              "team": "Hospitality Team",
-              "pos": "Host",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Ronald Crook",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -10732,8 +10725,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 100,
+            "totalVols": 100
           }
         }
       ],
@@ -11409,13 +11402,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Alla Schock",
-              "team": "Hospitality Team",
-              "pos": "Host",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Valerie Ridgers",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -11613,8 +11599,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -12249,6 +12235,13 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Dennis Brinson",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -12385,8 +12378,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 88,
-            "totalVols": 88
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
@@ -14225,11 +14218,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 57,
+    "count30d": 58,
     "weeklyAvg": 13,
-    "totalFetched": 7048,
+    "totalFetched": 7049,
     "since": "2026-08-02",
-    "asOf": "2026-09-01T16:45:27.586Z"
+    "asOf": "2026-09-01T17:44:38.226Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4874776386404293,
@@ -14237,6 +14230,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-27T16:37:09+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-01T16:45:32.092Z"
+    "asOf": "2026-09-01T17:44:39.378Z"
   }
 }
