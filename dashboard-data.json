@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-01T21:52:22.068Z",
+  "lastUpdated": "2026-09-01T22:45:55.898Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       240099,
-      22724
+      23800
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       365,
       404,
-      45
+      46
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5336027
+    "raised": 5337103
   },
   "attendance": {
     "months": [
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 1, 2026, 2:52 PM",
+    "refreshed": "Sep 1, 2026, 3:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -12212,7 +12212,7 @@
               "name": "Kathy Frank",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -12256,6 +12256,20 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Bill Caraway",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -12392,8 +12406,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 89,
-            "totalVols": 89
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -12963,7 +12977,7 @@
               "name": "Kathy Frank",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -14253,11 +14267,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 58,
+    "count30d": 57,
     "weeklyAvg": 13,
     "totalFetched": 7050,
     "since": "2026-08-02",
-    "asOf": "2026-09-01T21:46:23.853Z"
+    "asOf": "2026-09-01T22:44:36.130Z"
   },
   "emailStats": {
     "latestOpenRate": 0.49016100178890876,
@@ -14265,6 +14279,6 @@
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-08-27T16:37:09+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-01T21:46:27.054Z"
+    "asOf": "2026-09-01T22:44:37.710Z"
   }
 }
