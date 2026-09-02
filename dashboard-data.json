@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-02T16:46:27.773Z",
+  "lastUpdated": "2026-09-02T16:59:30.855Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 2, 2026, 9:46 AM",
+    "refreshed": "Sep 2, 2026, 9:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9368,7 +9368,7 @@
         0,
         0,
         0,
-        null,
+        0,
         null,
         null,
         null
@@ -9412,7 +9412,7 @@
         25,
         26,
         27,
-        null,
+        1,
         null,
         null,
         null
@@ -9459,7 +9459,7 @@
         15,
         16,
         16,
-        null,
+        1,
         null,
         null,
         null
@@ -9682,6 +9682,14 @@
         "attPct": 33
       },
       {
+        "name": "Brown/Frank Community Group",
+        "members": 12,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 42
+      },
+      {
         "name": "Durham Community Group",
         "members": 11,
         "leaders": 3,
@@ -9720,14 +9728,6 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 7,
         "attPct": 64
-      },
-      {
-        "name": "Brown/Frank Community Group",
-        "members": 11,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 45
       },
       {
         "name": "Ryan Griffin Community Group",
@@ -11510,14 +11510,14 @@
               "name": "Lisa Castaneda",
               "team": "Connection Team",
               "pos": "Connect Desk Host (A Team)",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
               "name": "Lisa Castaneda",
               "team": "Connection Team",
               "pos": "Connect Desk Host (B Team)",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             }
           ],
@@ -13119,6 +13119,13 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Teodoro Kijah Banda",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -13255,8 +13262,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 91,
-            "totalVols": 91
+            "volsWithServiceTime": 92,
+            "totalVols": 92
           }
         }
       ]
