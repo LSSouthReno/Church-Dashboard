@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-03T17:47:21.875Z",
+  "lastUpdated": "2026-09-03T18:46:00.191Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       241799,
-      29516
+      31326
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       365,
       404,
-      57
+      58
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5344519
+    "raised": 5346329
   },
   "attendance": {
     "months": [
@@ -7962,7 +7962,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 3, 2026, 10:47 AM",
+    "refreshed": "Sep 3, 2026, 11:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10080,13 +10080,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Niah Morris",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Lisa Morris",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
@@ -10594,7 +10587,7 @@
               "name": "Anthony Azzam",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -10760,8 +10753,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 105,
-            "totalVols": 105
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ],
@@ -11374,14 +11367,14 @@
               "name": "Gina Rankin",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Ginger King",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -12967,28 +12960,28 @@
               "name": "Gina Rankin",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Ginger King",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Candy Bennett",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
               "name": "Gloria Worthington",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -14367,18 +14360,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 51,
+    "count30d": 50,
     "weeklyAvg": 12,
     "totalFetched": 7050,
     "since": "2026-08-04",
-    "asOf": "2026-09-03T17:44:56.438Z"
+    "asOf": "2026-09-03T18:44:37.832Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.2060931899641577,
-    "avgOpenRate3": 0.4029255177042124,
+    "latestOpenRate": 0.26523297491039427,
+    "avgOpenRate3": 0.42263877935295796,
     "latestCampaign": "LS - Your Next Step",
     "latestSentAt": "2026-09-03T17:01:40+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-03T17:44:58.440Z"
+    "asOf": "2026-09-03T18:44:39.160Z"
   }
 }
