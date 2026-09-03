@@ -4732,12 +4732,32 @@ function tmVStatus(v) {
 }
 
 /* ---- build serveTeams lookup by normalised name (used by modal + metrics) ---- */
+// Normalise a team name the same way the backend does (lower-case, collapse any
+// run of non-alphanumerics to a single space) so "Safety Team" ↔ "Safety",
+// "Connection Team" ↔ "Connect" line up.
+function tmNormName(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
 function tmServeTeamLookup() {
   const map = {};
   (DASHBOARD_DATA.serveTeams || []).forEach(function(t) {
-    map[t.name.toLowerCase()] = t;
+    map[tmNormName(t.name)] = t;
   });
   return map;
+}
+
+// Resolve a leader-form team name to its PCO serve team, tolerating naming
+// differences: exact normalised match first, then a fuzzy contains match
+// (e.g. "connection team" ⊇ "connect", "safety team" ⊇ "safety").
+function tmResolvePco(name) {
+  const map = tmServeTeamLookup();
+  const key = tmNormName(name);
+  if (map[key]) return map[key];
+  const hit = Object.keys(map).find(function(k) {
+    return k.length >= 4 && (k.indexOf(key) >= 0 || key.indexOf(k) >= 0);
+  });
+  return hit ? map[hit] : null;
 }
 
 /* ---- summary metrics bar ---- */
@@ -4786,26 +4806,45 @@ function tmScore(t) {
 
 /* ---- Teams tab ---- */
 function tmRT() {
-  const TEAMS    = DASHBOARD_DATA.teamsLeaderForms || [];
-  const stLookup = tmServeTeamLookup();
+  const TEAMS = DASHBOARD_DATA.teamsLeaderForms || [];
+  const SERVE = DASHBOARD_DATA.serveTeams || [];
   const q  = (document.getElementById('tmts').value  || '').toLowerCase();
   const so = (document.getElementById('tmtso').value || 'gd');
 
+  // Build display cards. Each leader-form team resolves to its PCO serve team
+  // for live counts + 12-month history. "Worship & Tech" is submitted as one
+  // leader form but is two separate PCO teams, so it expands into two cards,
+  // each driven by its own PCO numbers. Card names use the canonical PCO name
+  // so the count, the chart, and the Sunday Checklist all line up.
+  const cards = [];
+  TEAMS.forEach(function(t) {
+    const norm = tmNormName(t.n);
+    if (norm === 'worship tech' || norm === 'worship and tech') {
+      const worship = SERVE.find(function(s){ const n = tmNormName(s.name); return n.indexOf('worship') >= 0 && n.indexOf('tech') < 0; });
+      const tech    = SERVE.find(function(s){ const n = tmNormName(s.name); return (n.indexOf('tech') >= 0 || n.indexOf('production') >= 0) && n.indexOf('worship') < 0; });
+      if (worship) cards.push({ form: t, pco: worship, name: worship.name });
+      if (tech)    cards.push({ form: t, pco: tech,    name: tech.name });
+      if (!worship && !tech) cards.push({ form: t, pco: null, name: t.n });
+      return;
+    }
+    const pco = tmResolvePco(t.n);
+    cards.push({ form: t, pco: pco, name: pco ? pco.name : t.n });
+  });
+
   // Merge leader form rich data with PCO-sourced current/needed numbers
-  function stForTeam(t) {
-    const st = stLookup[t.n.toLowerCase()];
-    if (st) return { current: st.current || 0, needed: st.needed || 0 };
+  function stForCard(c) {
+    if (c.pco) return { current: c.pco.current || 0, needed: c.pco.needed || 0 };
     // Fallback: reconstruct from form data
-    return { current: t.mem || 0, needed: (t.mem || 0) + (t.need || 0) };
+    return { current: c.form.mem || 0, needed: (c.form.mem || 0) + (c.form.need || 0) };
   }
 
-  let list = TEAMS.filter(t => t.n.toLowerCase().includes(q) || (t.l || '').toLowerCase().includes(q));
+  let list = cards.filter(c => c.name.toLowerCase().includes(q) || (c.form.l || '').toLowerCase().includes(q));
   list.sort((a, b) => {
-    const ga = Math.max(0, stForTeam(b).needed - stForTeam(b).current);
-    const gb = Math.max(0, stForTeam(a).needed - stForTeam(a).current);
+    const ga = Math.max(0, stForCard(b).needed - stForCard(b).current);
+    const gb = Math.max(0, stForCard(a).needed - stForCard(a).current);
     if (so === 'gd') return ga - gb;
     if (so === 'ga') return gb - ga;
-    return a.n.localeCompare(b.n);
+    return a.name.localeCompare(b.name);
   });
 
   if (!list.length) {
@@ -4814,15 +4853,15 @@ function tmRT() {
   }
 
   const chartJobs = [];
-  document.getElementById('tmTG').innerHTML = list.map((t, i) => {
-    const st   = stForTeam(t);
+  document.getElementById('tmTG').innerHTML = list.map((c, i) => {
+    const t    = c.form;
+    const st   = stForCard(c);
     const have = st.current;
     const gap  = Math.max(0, st.needed - st.current);
     const fp   = st.needed > 0 ? Math.round(have / st.needed * 100) : 100;
     const hs   = tmScore(t);
     const scoreCls = hs >= 8 ? 'tmod-sg' : hs >= 6 ? 'tmod-sa' : 'tmod-sr';
-    const stRaw   = stLookup[t.n.toLowerCase()];
-    const history = (stRaw && stRaw.history) || [];
+    const history = (c.pco && c.pco.history) || [];
     const canvasId = 'tmHist_' + i;
     if (history.length >= 2) chartJobs.push({ id: canvasId, history: history });
     const histBlock = history.length >= 2
@@ -4831,9 +4870,9 @@ function tmRT() {
           '<div class="chart-wrap" style="height:160px;"><div class="chart-inner"><canvas id="' + canvasId + '"></canvas></div></div>' +
         '</div>'
       : '';
-    return '<div class="tmod-tcard' + (tmAT === t.n ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(t.n) + '">' +
+    return '<div class="tmod-tcard' + (tmAT === c.name ? ' on' : '') + '" onclick="openVolChecklist(this.dataset.n)" data-n="' + escapeHtml(c.name) + '">' +
       '<div class="tmod-ttop">' +
-        '<div><div class="tmod-tname">' + escapeHtml(t.n) + '</div>' +
+        '<div><div class="tmod-tname">' + escapeHtml(c.name) + '</div>' +
         '<div class="tmod-tleader' + (!t.l || t.l === '—' ? ' tbd' : '') + '">' + escapeHtml(t.l || 'No leader on file') + '</div></div>' +
         '<div class="tmod-sring ' + scoreCls + '" title="Health score: staffing (60%) + leader self-assessment (40%)">' + hs + '</div>' +
       '</div>' +
@@ -4860,11 +4899,10 @@ function tmTD(name) {
   if (tmAT === name) { tmCloseDR(); return; }
   tmAT = name;
   const TEAMS    = DASHBOARD_DATA.teamsLeaderForms || [];
-  const stLookup = tmServeTeamLookup();
   const t = TEAMS.find(x => x.n === name);
   if (!t) return;
 
-  const st   = stLookup[t.n.toLowerCase()];
+  const st   = tmResolvePco(t.n);
   const have = st ? (st.current || 0) : (t.mem || 0);
   const tot  = st ? (st.needed  || 0) : ((t.mem || 0) + (t.need || 0));
   const gap  = Math.max(0, tot - have);
