@@ -2382,6 +2382,24 @@ function getServeTeams_() {
     teams.push({ name: name, current: current, needed: needed });
   });
 
+  // ── Manual staffing-gap overrides ─────────────────────────────────────────
+  // Used when a team's Leader Form is stale/missing and leadership wants the
+  // dashboard to show a specific shortfall until the next Point Leader Update
+  // Form comes in. Key = normalised team name; { addNeeded: N } forces
+  // needed = current + N (always show N short). Remove the entry once an
+  // updated form is submitted so the form-driven number takes over again.
+  const TEAM_NEEDED_OVERRIDE = {
+    'worship team': { addNeeded: 10 }  // 2026-09: no current Worship form; ~10 short
+  };
+  teams.forEach(function(t) {
+    const ov = TEAM_NEEDED_OVERRIDE[normTeamName_(t.name)];
+    if (ov && typeof ov.addNeeded === 'number') {
+      t.needed = (Number(t.current) || 0) + ov.addNeeded;
+      Logger.log('   Needed override: ' + t.name + ' → needed ' + t.needed +
+                 ' (current ' + t.current + ' + ' + ov.addNeeded + ')');
+    }
+  });
+
   Logger.log('   Teams loaded: ' + teams.length + ' (current from PCO, needed from Leader Forms)');
   return teams;
 }
@@ -2460,14 +2478,16 @@ function getBudgetData_() {
    Public function: refreshServicesTeams()
 ========================================================= */
 
-// Teams whose dashboard "Volunteer Count" should reflect only ONE position
-// rather than everyone on the team. Key = normalised PCO team name,
-// value = normalised position name to count.
-// e.g. Prayer Team has ~40+ people across several positions, but leadership
-// tracks staffing against the "Service Prayer" position only.
+// Teams whose dashboard "Volunteer Count" is counted by a position filter
+// rather than everyone on the team. Key = normalised PCO team name; value is
+//   { only:    ['pos', …] } → count only people in those positions
+//   { exclude: ['pos', …] } → count everyone EXCEPT those positions
+// e.g. Prayer Team tracks staffing against the "Service Prayer" position only;
+// Worship Team excludes people parked in the "Hiatus" position.
 // (Unique-volunteers-across-all-teams is unaffected — see below.)
-const TEAM_POSITION_ONLY = {
-  'prayer team': 'service prayer'
+const TEAM_POSITION_FILTER = {
+  'prayer team':  { only:    ['service prayer'] },
+  'worship team': { exclude: ['hiatus'] }
 };
 
 function syncServicesTeamsData_() {
@@ -2490,20 +2510,21 @@ function syncServicesTeamsData_() {
     const result = countServicesTeamVolunteers_(teamId);
     result.personIds.forEach(id => allPersonIds.add(id));
 
-    // Displayed count: for position-filtered teams, count only that position.
+    // Displayed count: some teams are counted by a position filter
+    // (only a specific position, or everyone except one).
     let displayCount = result.count;
     let source       = result.source;
-    const posFilter  = TEAM_POSITION_ONLY[normTeamName_(teamName)];
+    const posFilter  = TEAM_POSITION_FILTER[normTeamName_(teamName)];
     if (posFilter) {
-      const filtered = countTeamPositionVolunteers_(teamId, posFilter);
+      const filtered = countTeamByPositionFilter_(teamId, posFilter);
       if (filtered) {
         displayCount = filtered.count;
         source       = filtered.source;
-        Logger.log('     ' + teamName + ': showing "' + posFilter + '" count ' +
+        Logger.log('     ' + teamName + ': ' + filtered.source + ' count ' +
                    filtered.count + ' (of ' + result.count + ' on the full team)');
       } else {
-        Logger.log('     ' + teamName + ': position filter "' + posFilter +
-                   '" fetch failed — falling back to full team count');
+        Logger.log('     ' + teamName + ': position filter fetch failed — ' +
+                   'falling back to full team count');
       }
     }
 
@@ -2570,11 +2591,16 @@ function countServicesTeamVolunteers_(teamId) {
   };
 }
 
-// Count unique people assigned to ONE specific position on a Services team.
+// Count unique people on a Services team, honouring a position filter:
+//   { only:    ['pos', …] } → count only people in those positions
+//   { exclude: ['pos', …] } → count everyone except those positions
+// A person on multiple positions counts if ANY of their positions passes the
+// filter, so someone who is e.g. both "Vocals" and "Hiatus" still counts under
+// exclude:['hiatus'], while someone parked only in "Hiatus" is dropped.
 // Uses PCO PersonTeamPositionAssignment records (each ties a person to a
-// team_position). positionNorm must already be normalised via normTeamName_().
-// Returns { count, personIds, source } or null if the endpoint isn't available.
-function countTeamPositionVolunteers_(teamId, positionNorm) {
+// team_position). Returns { count, personIds, source } or null if the endpoint
+// isn't available.
+function countTeamByPositionFilter_(teamId, filter) {
   const res = pcoTryGetAllWithIncluded_(
     '/services/v2/teams/' + teamId +
     '/person_team_position_assignments?include=team_position&per_page=100'
@@ -2589,19 +2615,26 @@ function countTeamPositionVolunteers_(teamId, positionNorm) {
     }
   });
 
+  const only    = (filter.only    || []).map(function(s) { return normTeamName_(s); });
+  const exclude = (filter.exclude || []).map(function(s) { return normTeamName_(s); });
+
   const uniqueIds = {};
   (res.data || []).forEach(function(a) {
-    const posId = relId_(a, 'team_position');
-    if (posNameById[posId] === positionNorm) {
-      const personId = relId_(a, 'person');
-      if (personId) uniqueIds[personId] = true;
-    }
+    const personId = relId_(a, 'person');
+    if (!personId) return;
+    const posNorm = posNameById[relId_(a, 'team_position')] || '';
+    if (only.length    && only.indexOf(posNorm)    === -1) return; // not an included position
+    if (exclude.length && exclude.indexOf(posNorm) !== -1) return; // an excluded position
+    uniqueIds[personId] = true;
   });
 
+  const parts = [];
+  if (only.length)    parts.push('only:' + only.join('+'));
+  if (exclude.length) parts.push('excl:' + exclude.join('+'));
   return {
     count: Object.keys(uniqueIds).length,
     personIds: Object.keys(uniqueIds),
-    source: 'position:' + positionNorm
+    source: 'position(' + parts.join(',') + ')'
   };
 }
 
