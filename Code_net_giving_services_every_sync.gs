@@ -2460,6 +2460,16 @@ function getBudgetData_() {
    Public function: refreshServicesTeams()
 ========================================================= */
 
+// Teams whose dashboard "Volunteer Count" should reflect only ONE position
+// rather than everyone on the team. Key = normalised PCO team name,
+// value = normalised position name to count.
+// e.g. Prayer Team has ~40+ people across several positions, but leadership
+// tracks staffing against the "Service Prayer" position only.
+// (Unique-volunteers-across-all-teams is unaffected — see below.)
+const TEAM_POSITION_ONLY = {
+  'prayer team': 'service prayer'
+};
+
 function syncServicesTeamsData_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sh = ensureSheet_(ss, SHEETS.servicesTeams, ['Team ID', 'Team Name', 'Volunteer Count', 'Source', 'Last Updated']);
@@ -2476,17 +2486,36 @@ function syncServicesTeamsData_() {
     const teamName = String((team.attributes && team.attributes.name) || '').trim();
     if (!teamName) return;
 
+    // Full team roster — always used for the unique-volunteers-across-teams metric.
     const result = countServicesTeamVolunteers_(teamId);
     result.personIds.forEach(id => allPersonIds.add(id));
+
+    // Displayed count: for position-filtered teams, count only that position.
+    let displayCount = result.count;
+    let source       = result.source;
+    const posFilter  = TEAM_POSITION_ONLY[normTeamName_(teamName)];
+    if (posFilter) {
+      const filtered = countTeamPositionVolunteers_(teamId, posFilter);
+      if (filtered) {
+        displayCount = filtered.count;
+        source       = filtered.source;
+        Logger.log('     ' + teamName + ': showing "' + posFilter + '" count ' +
+                   filtered.count + ' (of ' + result.count + ' on the full team)');
+      } else {
+        Logger.log('     ' + teamName + ': position filter "' + posFilter +
+                   '" fetch failed — falling back to full team count');
+      }
+    }
+
     rows.push([
       teamId,
       teamName,
-      result.count,
-      result.source,
+      displayCount,
+      source,
       updatedAt
     ]);
 
-    Logger.log('     ' + teamName + ': ' + result.count + ' volunteers (' + result.source + ')');
+    Logger.log('     ' + teamName + ': ' + displayCount + ' volunteers (' + source + ')');
   });
 
   // Store unique volunteer count (deduped across teams) in Script Properties
@@ -2541,12 +2570,59 @@ function countServicesTeamVolunteers_(teamId) {
   };
 }
 
+// Count unique people assigned to ONE specific position on a Services team.
+// Uses PCO PersonTeamPositionAssignment records (each ties a person to a
+// team_position). positionNorm must already be normalised via normTeamName_().
+// Returns { count, personIds, source } or null if the endpoint isn't available.
+function countTeamPositionVolunteers_(teamId, positionNorm) {
+  const res = pcoTryGetAllWithIncluded_(
+    '/services/v2/teams/' + teamId +
+    '/person_team_position_assignments?include=team_position&per_page=100'
+  );
+  if (res === null) return null;
+
+  // team_position id → normalised position name (from included TeamPosition records)
+  const posNameById = {};
+  (res.included || []).forEach(function(inc) {
+    if (inc.type === 'TeamPosition') {
+      posNameById[String(inc.id)] = normTeamName_((inc.attributes && inc.attributes.name) || '');
+    }
+  });
+
+  const uniqueIds = {};
+  (res.data || []).forEach(function(a) {
+    const posId = relId_(a, 'team_position');
+    if (posNameById[posId] === positionNorm) {
+      const personId = relId_(a, 'person');
+      if (personId) uniqueIds[personId] = true;
+    }
+  });
+
+  return {
+    count: Object.keys(uniqueIds).length,
+    personIds: Object.keys(uniqueIds),
+    source: 'position:' + positionNorm
+  };
+}
+
 function pcoTryGetAll_(path) {
   try {
     return pcoGetAll_(path);
   } catch (err) {
     const msg = String(err.message || '');
     // Expected while probing endpoint names.
+    if (msg.indexOf('404') !== -1 || msg.indexOf('403') !== -1) {
+      return null;
+    }
+    throw err;
+  }
+}
+
+function pcoTryGetAllWithIncluded_(path) {
+  try {
+    return pcoGetAllWithIncluded_(path);
+  } catch (err) {
+    const msg = String(err.message || '');
     if (msg.indexOf('404') !== -1 || msg.indexOf('403') !== -1) {
       return null;
     }
