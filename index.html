@@ -3251,7 +3251,43 @@ function closeCalTab() {
 let _cal6Events = null;   // raw events from eos-data.json
 let _cal6AsOf   = '';
 let _cal6Mode   = 6;      // 6 | 3 | 1 months visible
-let _cal6Off    = 0;      // start-month offset from current month (0..6-mode)
+let _cal6Off    = 0;      // start-month offset from current month (negative = past)
+
+// How far the month nav can page relative to the current month. We always allow
+// at least this range (so past nav is usable the moment the wider PCO sync lands),
+// and expand to whatever the loaded events actually span.
+const CAL6_PAST_MONTHS   = 3;   // matches the sync's CAL_PAST_MONTHS window
+const CAL6_FUTURE_MONTHS = 6;
+
+// Min/max start-month offset present in the data (relative to the current month),
+// widened to the guaranteed window above. maxOff is the offset of the latest month
+// that has any event; the start offset is later clamped so the last shown month
+// never runs past it.
+function cal6Bounds() {
+  const now = new Date();
+  const baseY = now.getFullYear(), baseM = now.getMonth();
+  const offOf = dk => (+dk.slice(0,4) - baseY) * 12 + (+dk.slice(5,7) - 1 - baseM);
+  let minOff = 0, maxOff = 0;
+  (_cal6Events || []).forEach(ev => {
+    if (!ev.dateKey) return;
+    const o = offOf(ev.dateKey);
+    if (o < minOff) minOff = o;
+    if (o > maxOff) maxOff = o;
+    if (ev.endKey) { const e = offOf(ev.endKey); if (e > maxOff) maxOff = e; }
+  });
+  return {
+    minOff: Math.min(minOff, -CAL6_PAST_MONTHS),
+    maxOff: Math.max(maxOff, CAL6_FUTURE_MONTHS - 1)
+  };
+}
+
+// Allowed range for the start-month offset given the current view width.
+function cal6OffRange() {
+  const b  = cal6Bounds();
+  const lo = b.minOff;
+  const hi = Math.max(lo, b.maxOff - (_cal6Mode - 1));
+  return { lo, hi, span: b.maxOff - b.minOff + 1 };
+}
 
 async function cal6Load() {
   try {
@@ -3271,13 +3307,14 @@ async function cal6Load() {
 
 function cal6SetMode(m) {
   _cal6Mode = m;
-  if (_cal6Off > 6 - m) _cal6Off = 6 - m;
+  const { lo, hi } = cal6OffRange();
+  _cal6Off = Math.max(lo, Math.min(hi, _cal6Off));
   cal6Render();
 }
 
 function cal6Nav(dir) {
-  const max  = 6 - _cal6Mode;
-  const next = Math.max(0, Math.min(max, _cal6Off + dir));
+  const { lo, hi } = cal6OffRange();
+  const next = Math.max(lo, Math.min(hi, _cal6Off + dir));
   if (next === _cal6Off) return;
   _cal6Off = next;
   cal6Render();
@@ -3377,13 +3414,15 @@ function cal6Render() {
   body.className = 'cal6-body mode-' + _cal6Mode;
   body.innerHTML = monthsHtml || '<div class="cal6-empty">No upcoming events found.</div>';
 
-  // Toolbar state: active view button + month nav (hidden in 6-month view)
+  // Toolbar state: active view button + month nav (shown whenever the data
+  // spans more months than the current view — including past months)
   document.querySelectorAll('.cal6-vbtn').forEach(b =>
     b.classList.toggle('on', Number(b.dataset.vmode) === _cal6Mode));
+  const { lo, hi, span } = cal6OffRange();
   const nav = document.getElementById('cal6MNav');
-  nav.style.display = _cal6Mode === 6 ? 'none' : 'flex';
-  document.getElementById('cal6NavBack').disabled = _cal6Off <= 0;
-  document.getElementById('cal6NavFwd').disabled  = _cal6Off >= 6 - _cal6Mode;
+  nav.style.display = span > _cal6Mode ? 'flex' : 'none';
+  document.getElementById('cal6NavBack').disabled = _cal6Off <= lo;
+  document.getElementById('cal6NavFwd').disabled  = _cal6Off >= hi;
 
   // Header: range, legend (only categories in use), as-of
   const rangeStart = new Date(now.getFullYear(), now.getMonth() + _cal6Off, 1);

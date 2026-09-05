@@ -3535,16 +3535,20 @@ function syncStaffOSFunnelAndCalendar_() {
   };
   Logger.log('   Funnel: missionary=' + missionaryCount);
 
-  // ── Calendar events (next 6 months — Calendar tab shows all 6) ────────
+  // ── Calendar events (3 months back … 6 months ahead) ──────────────────
+  // The Calendar tab opens on the current month and lets you page back into
+  // recent months as well as forward through the next 6.
   const tz   = Session.getScriptTimeZone();
   const now  = new Date();
-  const end  = new Date(now); end.setMonth(now.getMonth() + 6);
+  const CAL_PAST_MONTHS = 3;
+  const start = new Date(now.getFullYear(), now.getMonth() - CAL_PAST_MONTHS, 1);
+  const end   = new Date(now); end.setMonth(now.getMonth() + 6);
   const calEvents = [];
 
   try {
     const result = pcoGetAllWithIncluded_(
       '/calendar/v2/event_instances?order=starts_at&per_page=100' +
-      '&where[starts_at][gte]=' + encodeURIComponent(now.toISOString()) +
+      '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
       '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString()) +
       '&include=event'
     );
@@ -3582,7 +3586,7 @@ function syncStaffOSFunnelAndCalendar_() {
     try {
       const rbRes = pcoGetAllWithIncluded_(
         '/calendar/v2/resource_bookings?per_page=100&include=resource' +
-        '&where[starts_at][gte]=' + encodeURIComponent(now.toISOString()) +
+        '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
         '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString())
       );
       const resNameById = {};
