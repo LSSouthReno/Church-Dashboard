@@ -2382,21 +2382,44 @@ function getServeTeams_() {
     teams.push({ name: name, current: current, needed: needed });
   });
 
-  // ── Manual staffing-gap overrides ─────────────────────────────────────────
-  // Used when a team's Leader Form is stale/missing and leadership wants the
-  // dashboard to show a specific shortfall until the next Point Leader Update
-  // Form comes in. Key = normalised team name; { addNeeded: N } forces
-  // needed = current + N (always show N short). Remove the entry once an
-  // updated form is submitted so the form-driven number takes over again.
+  // ── Manual "needed" overrides ─────────────────────────────────────────────
+  // Used when the Leader-Forms number for a team is stale, missing, or split
+  // wrong (e.g. the combined Worship & Tech form). Key = normalised team name:
+  //   { needed: N }    → force an absolute target (from a known current form)
+  //   { addNeeded: N } → force needed = current + N (show a fixed shortfall)
+  // Remove/adjust an entry once an updated Point Leader Update Form supersedes it.
   const TEAM_NEEDED_OVERRIDE = {
-    'worship team': { addNeeded: 10 }  // 2026-09: no current Worship form; ~10 short
+    'worship team': { addNeeded: 10 },  // 2026-09: no current Worship form; ~10 short (TEMP)
+    'tech':         { needed: 20 }      // 2026-09: latest Tech Point Leader form = 20 total
   };
   teams.forEach(function(t) {
     const ov = TEAM_NEEDED_OVERRIDE[normTeamName_(t.name)];
-    if (ov && typeof ov.addNeeded === 'number') {
+    if (!ov) return;
+    if (typeof ov.needed === 'number') {
+      t.needed = ov.needed;
+    } else if (typeof ov.addNeeded === 'number') {
       t.needed = (Number(t.current) || 0) + ov.addNeeded;
-      Logger.log('   Needed override: ' + t.name + ' → needed ' + t.needed +
-                 ' (current ' + t.current + ' + ' + ov.addNeeded + ')');
+    }
+    Logger.log('   Needed override: ' + t.name + ' → needed ' + t.needed);
+  });
+
+  // ── One-time history rebases ──────────────────────────────────────────────
+  // When a team's live metric DEFINITION changes, its older history becomes
+  // incomparable and the trend chart shows a fake cliff. For each entry, flatten
+  // every history month BEFORE `from` to `n` (marked estimate); months >= `from`
+  // keep their real recorded values, so genuine movement still shows going forward.
+  //   prayer team: switched to counting the "Service Prayer" position only (~20)
+  //   on 2026-09; the old whole-team history (climbing to 43) otherwise reads as
+  //   a ~20-person mass exodus in Sep 2026.
+  const TEAM_HISTORY_REBASE = {
+    'prayer team': { from: '2026-09', n: 20 }
+  };
+  teams.forEach(function(t) {
+    const rb = TEAM_HISTORY_REBASE[normTeamName_(t.name)];
+    if (rb && Array.isArray(t.history)) {
+      t.history = t.history.map(function(p) {
+        return p.d < rb.from ? { d: p.d, n: rb.n, e: 1 } : p;
+      });
     }
   });
 
