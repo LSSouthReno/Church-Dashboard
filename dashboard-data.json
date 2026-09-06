@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-06T20:45:53.509Z",
+  "lastUpdated": "2026-09-06T20:56:29.641Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3665,7 +3665,7 @@
     },
     {
       "name": "Prayer Team",
-      "current": 20,
+      "current": 21,
       "needed": 20,
       "history": [
         {
@@ -3795,7 +3795,7 @@
         },
         {
           "d": "2026-09",
-          "n": 20
+          "n": 21
         }
       ]
     },
@@ -5146,7 +5146,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 381,
+  "uniqueVolunteers": 382,
   "budget": [
     {
       "label": "Network & Missions",
@@ -7945,7 +7945,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 6, 2026, 1:45 PM",
+    "refreshed": "Sep 6, 2026, 1:56 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8779,7 +8779,8 @@
       "May '26",
       "Jun '26",
       "Jul '26",
-      "Aug '26"
+      "Aug '26",
+      "Sep '26"
     ],
     "counts": [
       30,
@@ -8794,9 +8795,10 @@
       3,
       5,
       11,
-      9
+      9,
+      2
     ],
-    "total": 332
+    "total": 334
   },
   "members": {
     "years": [
@@ -12108,7 +12110,7 @@
               "name": "Sam England",
               "team": "Worship Team",
               "pos": "Bass",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -12341,6 +12343,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kelly Farson",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -12477,8 +12486,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 93,
-            "totalVols": 93
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ]
@@ -12740,7 +12749,7 @@
               "name": "Lydia Perlich",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -13979,6 +13988,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Lydia Perlich",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -13988,8 +14004,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 14,
-            "totalVols": 14
+            "volsWithServiceTime": 15,
+            "totalVols": 15
           }
         }
       ]
@@ -14276,6 +14292,13 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lydia Perlich",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -14285,8 +14308,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 12,
-            "totalVols": 12
+            "volsWithServiceTime": 13,
+            "totalVols": 13
           }
         }
       ]
