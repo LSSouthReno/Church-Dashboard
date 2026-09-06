@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-06T18:45:52.517Z",
+  "lastUpdated": "2026-09-06T18:57:11.680Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -3252,8 +3252,8 @@
     "2026-09": [
       {
         "week": "Sep 6",
-        "adults": 523,
-        "kids": 70
+        "adults": 773,
+        "kids": 108
       }
     ]
   },
@@ -7945,7 +7945,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 6, 2026, 11:45 AM",
+    "refreshed": "Sep 6, 2026, 11:57 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9324,7 +9324,7 @@
         0,
         0,
         0,
-        0,
+        null,
         0,
         0
       ],
@@ -9368,7 +9368,7 @@
         67,
         11,
         13,
-        1,
+        null,
         7,
         2
       ],
@@ -9546,11 +9546,11 @@
       },
       {
         "name": "Castaneda Community Group",
-        "members": 21,
+        "members": 20,
         "leaders": 3,
         "schedule": "Meets weekly on Mondays from 3-5pm",
         "avgAttended": 12,
-        "attPct": 57
+        "attPct": 60
       },
       {
         "name": "Bridges Community Group",
@@ -10635,6 +10635,13 @@
               "pos": "Back Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jennifer Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -10778,8 +10785,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676394\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 110,
-            "totalVols": 110
+            "volsWithServiceTime": 111,
+            "totalVols": 111
           }
         }
       ],
