@@ -1,5 +1,62 @@
 {
-  "pending": [],
+  "pending": [
+    {
+      "id": "jb_133106001_20260906_presider",
+      "name": "Damian Smith",
+      "pcoPersonId": "133106001",
+      "team": "Presiders",
+      "phone": "19253545396",
+      "firstServeDate": "2026-09-06",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
+    },
+    {
+      "id": "jb_187174359_20260906_breakfastteam",
+      "name": "Casey Kline",
+      "pcoPersonId": "187174359",
+      "team": "Breakfast Team",
+      "phone": "17752405905",
+      "firstServeDate": "2026-09-06",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Breakfast Provider"
+    },
+    {
+      "id": "jb_192841479_20260906_prayerteam",
+      "name": "Karynn Sucaldito",
+      "pcoPersonId": "192841479",
+      "team": "Prayer Team",
+      "phone": "17758467506",
+      "firstServeDate": "2026-09-06",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Service Prayer"
+    },
+    {
+      "id": "jb_189708902_20260906_steppingstone",
+      "name": "John Andreano",
+      "pcoPersonId": "189708902",
+      "team": "Stepping Stones",
+      "phone": "17758309928",
+      "firstServeDate": "2026-09-06",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bluebirds Guide"
+    }
+  ],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -464,5 +521,5 @@
       "position": "Wolf Pack Guide"
     }
   ],
-  "lastUpdated": "2026-09-07T05:57:49.759Z"
+  "lastUpdated": "2026-09-07T07:04:02.548Z"
 }
