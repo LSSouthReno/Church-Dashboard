@@ -50,6 +50,13 @@ function doGet(e) {
       syncShepherdingLists_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingLists_' });
     }
+    if (action === 'run_shepherding_health_sync') {
+      // Full pastor-shepherding rebuild: pulls each shepherded person's PCO
+      // activity, computes maturity scores + congregation health, and pushes
+      // shepherding-data.json. See Code_shepherding_health_sync.gs.
+      syncShepherdingHealth_();
+      return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
+    }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and
       // attendance_type names — for verifying kids/adults classification.
