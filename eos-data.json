@@ -635,7 +635,7 @@
       "metric": "Community Group Members (Active)",
       "owner": "Adam Carp",
       "goal": "500+",
-      "current": "412",
+      "current": "405",
       "status": "yellow",
       "notes": ""
     },
@@ -651,8 +651,8 @@
       "metric": "Active Community Groups",
       "owner": "Adam Carp",
       "goal": "50+",
-      "current": "40",
-      "status": "yellow",
+      "current": "39",
+      "status": "red",
       "notes": "17 new CG leaders launched in 2025"
     },
     {
@@ -715,7 +715,7 @@
       "metric": "Baptisms (YTD)",
       "owner": "Ryan Griffin",
       "goal": "80+",
-      "current": "51",
+      "current": "52",
       "status": "red",
       "notes": "Goal = 10% of avg attendance; 75 baptisms in 2025"
     },
@@ -2954,6 +2954,18 @@
         "owner": "Rachel Primus"
       },
       {
+        "name": "Elders: Elder Business Meeting",
+        "dateKey": "2026-09-13",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Sep 13",
+        "time": "1:00 PM",
+        "location": "",
+        "timeEnd": "3:00 PM",
+        "owner": "Bradley Borowski",
+        "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2406189/medium_image-1724191165318.jpg"
+      },
+      {
         "name": "LS Students HS ",
         "dateKey": "2026-09-13",
         "endKey": null,
@@ -3050,6 +3062,20 @@
         "owner": "Rachel Primus"
       },
       {
+        "name": "Serve Team Leaders: Team Leaders Quarterly Meeting",
+        "dateKey": "2026-09-20",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Sep 20",
+        "time": "8:00 AM",
+        "location": "Yosh’s Deli - 85 Foothill Rd, Reno, NV 89511",
+        "timeEnd": "9:00 AM",
+        "owner": "Bradley Borowski",
+        "summary": "We'll meet during the 8am service at Yosh's Deli. We may start a few minutes after service starts for those serving on First Impressions, Hospitality, Connections, etc.",
+        "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2419476/medium_krakenimages-Y5bvRlcCx8k-unsplash.jpg",
+        "desc": "We'll meet during the 8am service at Yosh's Deli. We may start a few minutes after service starts for those serving on First Impressions, Hospitality, Connections, etc."
+      },
+      {
         "name": "8am Worship Gathering",
         "dateKey": "2026-09-20",
         "endKey": null,
@@ -3106,18 +3132,6 @@
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "2:30 PM",
         "owner": "Rachel Primus"
-      },
-      {
-        "name": "Elders: Elder Business Meeting",
-        "dateKey": "2026-09-20",
-        "endKey": null,
-        "dayOfWeek": "Sun",
-        "date": "Sep 20",
-        "time": "1:00 PM",
-        "location": "",
-        "timeEnd": "3:00 PM",
-        "owner": "Bradley Borowski",
-        "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2406189/medium_image-1724191165318.jpg"
       },
       {
         "name": "LS Students HS ",
@@ -6058,13 +6072,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODg1OTY1fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0Nzc5NzV9fX1dfQ__&Signature=D8bCAcw50KCmI-FVzUwl-F3ORg0azGuIPz1MIcz6cipHWduVAWHHHUeuHH7nWEGCOit5saV9sFlKmzPyGMDT0Zgt~y71xG1iF~2-rkNBKpHJbmprgNmQaLWI1PxEh62cFQ-RCR-yN4wrIoNXvQ~EaoQq7m0WaHBgl3QVawr8LtcaXECiMxd9vEqXBNZYY53uqNvLIw-BVVOwxQ~c4jC5cRi7EDJSBvK12iqNPzsjwsQqhu5AfAKFMFVyY65J17tPKbpNhB5GeMVbwsU7TWM85BjU28YgFHyOGYwPqt6HL~Vid7OZ3zv-1Ji-xrSjS~DKkffDq67JtjDhcmvOIWl6jw__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkwNTAwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODI1MTB9fX1dfQ__&Signature=LnGJm74714qHwVCnWO~xlJyVDxEJbhbISgAHDGcMGPHydrpv1J5a1hBlG2YHQ4pI1xAficM~taPabtG8fjhbi4TFluNUZVRoAqH1teEHt9Qr7uL5wc259Kg6wRTV9dayKOiUbx6pyHcyl~p9MPkWr3yS1nOlmb4Xo7QhIY7xumeHrZnxfJOg7K2z-K1ZxWCS0ylT3w6TQvsCnbh6vtjCSdQ1oYem5Xwwk2Pc0N~RYc4Nt2YyvT6NHD-vodWcp0RXFAg~yZSlBq0Mam8e0PV-zpmhojjaUhM7kpeHXjJcMrSCRI2qRcdcA~MOZ66laU81l9ycohhUiBahH8WZk3funA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODg1OTY1fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0Nzc5NzV9fX1dfQ__&Signature=oB5lSx2-QcmQmllISuFoHIJgiyAHF3yazcx16YVdEBNrvPXXLmXV3W~uo-EWeu2qpM3Mb6fFKtvY8NlfupmpZkInOV5r5bglstyHGD12wuuhBtEpZMVHEkV28mIb6RNnkF~GSg0YZ~~XBh58qoj60CvQq-vlx6kg~w~vd5JvUTVJnl9Sa8moKZZVOw1Q5BRbYutTKy00kFAN1zyyzmFtZvpvo~fAkM0q1mN307TmIcAGX~yUrR7cDPKe41g56LWblsbVPEVPwOgRjOfCMcCy905wKeYEIeI7vKcGyB5zcs91nMoNyRUqMdFSFDOSDPxe2Adoz288RQAZWO9K8hdEiw__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkwNTAwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODI1MTB9fX1dfQ__&Signature=EeJtObZsmIFLy220H0qMgyrfmoL-lFih6E6snSINbo~oOICiGnaK3t7annsMEuX9W-Q9C~11TFFbisc2p5HBh8zFeDoAb8uB6WwSZE~Vidzp5DbUzrw931haQ8kYEOAOZFohkZmn8mWY06QUrFyQQp4d0Qrh8KRUWdr2cPeJLAf3mDtUSd71227xM37~VTVXJI34H0RPfGSIgUbSV1fC2Znh9ROvSBZnpmv4SiODhDgJPB5erv0~46a7YtxrRxE-h1C1DGa2mPYCqkEy5pqUnuUxbrc81xFNmBnltqX72x0~TEdSuoRJO0bx8r-lOSLj-GLSnflEMV5rOyIfYManKA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -6076,7 +6090,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODg1OTY2fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0Nzc5NzZ9fX1dfQ__&Signature=dftTvHKXIuPrV9HDhHCoFjvaSc6mNAaqQAKLm7r2vfzS3k4tkW9ZxXjeZNIUmblcCf63~vqOl~r7jUKIto7e1OGoCPyzHHuu4C68vmfbqX6zglt9ubdLoyFdyRT8gRUIqbn5rmmCjn2z5RgABhdo8jFoJtizQCL6qN8n7-9~pMfYCjVpDKqmA4qoevVZ1d2H8xJOHsiibvnx99KrKk1AaFYzMThV-IJy98nFOhdePJaMIoNdzQIL8Qkuu1bKFjWOw9xmZYKLWPW6fBbwaCp3TPfMNS9Zcr7wjxRknh~k4M04-N6ppO6XeA7W~CQd8q7RxgbxntUFQIXcq2VnYBg2Eg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkwNTAwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODI1MTB9fX1dfQ__&Signature=ilHTrTH1FRsw0tNc-qnR0m9qYAiIFlQQ62LluAFGWCWA3zIOIF~IGxEIDFx~XLF9VMaMtMfDg8-56MyL9jhf2OfFJ5yQJRBRzBqn1MCFB5oE0dFkrjSxGCOar7GD7rFv0xP6niX7mnvIkmxyU0AKqTov~wda63co4Dg7LSCx9gecd1Op3k2xbYI8BodyhPNEyj0cQeN8ynsX~UL9c7gx872D8a~xcOgfL2tzOe-F2tHuQ0dvtZThL7-mySVEanRWjUhkMi~TMSqvyL-IgS76fqD66HFrDqogYcZpDCTXymqPpmdeYJ2GNonHYnDNI0Qe2CyB2jcLgbb7hqE2Y821aA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -6106,7 +6120,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODg1OTY2fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0Nzc5NzZ9fX1dfQ__&Signature=Pin5uUcIMu7uzohjW42iqikslsvdAMtpt1jWu~ieBmV-7PGvi7O1bzby4ISPhNqSZ5g81AUWuTdLQXomlkNl96pWEybp3hPgaYO5NTn1Pj54sFBrG4Z4UwUpvd3wgnrHu8wJkC0h0IhFPD9J3mFdgsHTV1rkHWlQhMIN-LzMXCRSQgvgA4ClwK2M8LIjKCAtvsllul94FJEqk~nbzzleqVpyaJy2RIr6GMFW-RsilM1hSBZKuVfp0nkFc82uxGrvEEsJSPTkWPt3~jdNjThUsVapxjr~Q8XXAl3zWeeRTQ5F5Zmhl2CjR0Y8b5gdOkJHhOx5FwPhd7TawFLlw4clcA__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkwNTAwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODI1MTB9fX1dfQ__&Signature=O7~fI1srKksjC25fFQVCGzhwpak8zmFoT4QWN4yRMF3RPjA6G5pthMyfhIdjViUZz9yIcps6B-gzE-AlrKkTt5LEAMlNCVTVdv7m6OtHaAFJFUaDhfOaFVNOhnbgri2shoXDdTgKDFqlWjoxlfs8YLsBfcQ-r2Jy9yktgT7hbFAsW4U2D~CC0~MNCDGpobKy9Xh5fMBwE1SfddKaF1bosN0qo6KkNzO5WiQr0eCZ1jkmfLFZIdvHHOtO5v-n0FLZ7ct87645al7D7740mdwVK4E9GNoWyJXjttUsWr9a5z9sdPlEoMPoPsQqLPVP2g4NicPVA0ALDV2jwRuq3kYnaA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
