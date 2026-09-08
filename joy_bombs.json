@@ -1,20 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_189708902_20260906_steppingstone",
-      "name": "John Andreano",
-      "pcoPersonId": "189708902",
-      "team": "Stepping Stones",
-      "phone": "17758309928",
-      "firstServeDate": "2026-09-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bluebirds Guide"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -519,7 +504,21 @@
       "notes": "",
       "source": "auto",
       "position": "Service Prayer"
+    },
+    {
+      "id": "jb_189708902_20260906_steppingstone",
+      "name": "John Andreano",
+      "pcoPersonId": "189708902",
+      "team": "Stepping Stones",
+      "phone": "17758309928",
+      "firstServeDate": "2026-09-06",
+      "status": "bombed",
+      "bombedDate": "2026-09-08",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bluebirds Guide"
     }
   ],
-  "lastUpdated": "2026-09-08T17:34:08.713Z"
+  "lastUpdated": "2026-09-08T17:39:33.976Z"
 }
