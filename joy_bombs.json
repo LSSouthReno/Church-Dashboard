@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_187174359_20260906_breakfastteam",
-      "name": "Casey Kline",
-      "pcoPersonId": "187174359",
-      "team": "Breakfast Team",
-      "phone": "17752405905",
-      "firstServeDate": "2026-09-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Breakfast Provider"
-    },
-    {
       "id": "jb_192841479_20260906_prayerteam",
       "name": "Karynn Sucaldito",
       "pcoPersonId": "192841479",
@@ -519,7 +505,21 @@
       "notes": "",
       "source": "auto",
       "position": "Sermon Text Reader"
+    },
+    {
+      "id": "jb_187174359_20260906_breakfastteam",
+      "name": "Casey Kline",
+      "pcoPersonId": "187174359",
+      "team": "Breakfast Team",
+      "phone": "17752405905",
+      "firstServeDate": "2026-09-06",
+      "status": "bombed",
+      "bombedDate": "2026-09-08",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Breakfast Provider"
     }
   ],
-  "lastUpdated": "2026-09-08T17:28:02.082Z"
+  "lastUpdated": "2026-09-08T17:29:30.784Z"
 }
