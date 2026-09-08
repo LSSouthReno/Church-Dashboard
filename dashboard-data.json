@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-08T14:47:13.128Z",
+  "lastUpdated": "2026-09-08T15:03:31.682Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 8, 2026, 7:47 AM",
+    "refreshed": "Sep 8, 2026, 8:03 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9435,7 +9435,7 @@
         20,
         21,
         17,
-        25,
+        24,
         26,
         25,
         6,
@@ -9482,7 +9482,7 @@
         5,
         12,
         12,
-        15,
+        14,
         16,
         16,
         6,
@@ -9588,14 +9588,6 @@
         "attPct": 62
       },
       {
-        "name": "Bridges Community Group",
-        "members": 19,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
-        "avgAttended": 9,
-        "attPct": 47
-      },
-      {
         "name": "Castaneda Community Group",
         "members": 19,
         "leaders": 3,
@@ -9610,6 +9602,14 @@
         "schedule": "Meets every other week on Tuesdays from 6-8pm",
         "avgAttended": 7,
         "attPct": 37
+      },
+      {
+        "name": "Bridges Community Group",
+        "members": 18,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
+        "avgAttended": 9,
+        "attPct": 50
       },
       {
         "name": "Bell Community Group",
@@ -10655,9 +10655,9 @@
             },
             {
               "seq": 5,
-              "title": "I Know A Name",
+              "title": "Made For More",
               "type": "song",
-              "lengthMin": 7,
+              "lengthMin": 6,
               "description": ""
             },
             {
@@ -10669,83 +10669,90 @@
             },
             {
               "seq": 7,
+              "title": "I Know A Name",
+              "type": "song",
+              "lengthMin": 7,
+              "description": ""
+            },
+            {
+              "seq": 8,
               "title": "Who You Say I Am",
               "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
-              "seq": 8,
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore:"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INST.",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "PROCLAIM / BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
