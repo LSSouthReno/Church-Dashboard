@@ -57,6 +57,15 @@ function doGet(e) {
       syncShepherdingHealth_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
     }
+    if (action === 'shepherding_data') {
+      // Password-gated read of the FULL sensitive shepherding data (giving,
+      // scores, pastoral notes, contact info). Never written to the public repo;
+      // returned only when the request carries the correct password hash.
+      var pw = (e && e.parameter && e.parameter.pw) || '';
+      if (pw !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      var shd = spReadPrivate_();
+      return eosWaJson_(shd || { error: 'no_data' });
+    }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and
       // attendance_type names — for verifying kids/adults classification.

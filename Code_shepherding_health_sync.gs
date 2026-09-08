@@ -36,7 +36,16 @@
 
 const SH_TIME_BUDGET_MS   = 5 * 60 * 1000;   // stop expensive loops after 5 min
 const SH_GIVING_MONTHS     = 12;             // giving look-back window
-const SH_OUTPUT_FILE       = 'shepherding-data.json';
+const SH_OUTPUT_FILE       = 'shepherding-data.json';  // PUBLIC repo file — SANITISED (safe fields only)
+const SH_PRIVATE_SHEET     = 'ShepherdingData';        // hidden tab holding the FULL sensitive JSON (chunked)
+const SH_CELL_CHUNK        = 40000;                     // chars per cell (cell hard-limit is 50k)
+
+// SHA-256 of the shepherding page password ("1peter5"). The web app only returns
+// the full sensitive data when a request presents this hash — so the private
+// shepherding data never sits in a public file. Keep in sync with PASTOR_HASH in
+// index.html. (Client-side gating: the hash lives in the page, so this ties data
+// access to the password, not to a Google login — see the deploy notes.)
+const SHEPHERDING_PW_HASH  = '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d';
 
 // Status vocabulary. Raw PCO values are normalised into one of these buckets so
 // the page can filter consistently no matter how an elder typed it.
@@ -100,7 +109,12 @@ function syncShepherdingHealth_() {
   };
   out.congregation.totalPeople = uniquePeople.length;
 
-  spPushToGitHub_(out);
+  // Full sensitive data → private (hidden sheet), served only by the
+  // password-gated web app. A SANITISED copy (names + group/serve involvement,
+  // no scores/giving/contact/status/notes) goes to the public repo so the page
+  // has a safe first paint before it authenticates.
+  spStorePrivate_(out);
+  spPushToGitHub_(spBuildPublicSeed_(out));
   Logger.log('✓ Shepherding Health — done in ' + Math.round(shElapsed_(startMs) / 1000) + 's. ' +
              'people=' + uniquePeople.length + ' avgScore=' + out.congregation.avgScore);
 }
@@ -547,7 +561,73 @@ function spSummarize_(people) {
 }
 
 /* =========================================================
-   PUSH shepherding-data.json
+   PRIVATE STORE (full sensitive data) — hidden sheet, chunked
+   Kept in the bound spreadsheet (private), never in the public repo. Read back
+   by the web app only after the password hash is verified. Chunked because a
+   single cell caps at 50k chars and the full JSON is larger.
+========================================================= */
+function spStorePrivate_(data) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName(SH_PRIVATE_SHEET);
+  if (!sh) sh = ss.insertSheet(SH_PRIVATE_SHEET);
+  try { sh.hideSheet(); } catch (e) {}
+  const json = JSON.stringify(data);
+  const chunks = [];
+  for (let i = 0; i < json.length; i += SH_CELL_CHUNK) chunks.push([json.substr(i, SH_CELL_CHUNK)]);
+  sh.clearContents();
+  if (chunks.length) sh.getRange(1, 1, chunks.length, 1).setValues(chunks);
+  Logger.log('   Stored private shepherding data: ' + json.length + ' chars in ' + chunks.length + ' cell(s)');
+}
+
+// Read + reassemble the full private JSON. Used by the web app (Code_eos_webapp.gs).
+function spReadPrivate_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = ss.getSheetByName(SH_PRIVATE_SHEET);
+  if (!sh) return null;
+  const last = sh.getLastRow();
+  if (!last) return null;
+  const vals = sh.getRange(1, 1, last, 1).getValues();
+  const json = vals.map(function(r) { return r[0]; }).join('');
+  if (!json) return null;
+  try { return JSON.parse(json); } catch (e) { Logger.log('   ! private parse failed: ' + e.message); return null; }
+}
+
+/* =========================================================
+   PUBLIC SEED (sanitised) — safe fields only for first paint
+========================================================= */
+function spBuildPublicSeed_(full) {
+  const safeFlags = { 'Not in a group': 1, 'Not serving': 1 };
+  const sanitizePerson = function(p) {
+    return {
+      id: null,
+      name: p.name, first: p.first, last: p.last,
+      email: '', phone: '', member: false,
+      status: 'unknown', statusRaw: '', shepherdNotes: '', shepherdFields: {},
+      score: null, trajectory: 'steady', pillars: null, giving: null,
+      groups: p.groups || [], serveTeams: p.serveTeams || [],
+      flags: (p.flags || []).filter(function(f) { return safeFlags[f]; }),
+      pending: true
+    };
+  };
+  const elders = (full.elders || []).map(function(e) {
+    const people = e.people.map(sanitizePerson);
+    return { elder: e.elder, list: e.list, summary: spSummarize_(people), people: people };
+  });
+  const uniq = [], seen = {};
+  elders.forEach(function(e) { e.people.forEach(function(p) {
+    if (!seen[p.name]) { seen[p.name] = 1; uniq.push(p); }
+  }); });
+  const cong = spSummarize_(uniq);
+  cong.totalPeople = uniq.length;
+  return {
+    generatedAt: full.generatedAt, asOf: full.asOf, givingMonths: full.givingMonths,
+    statusVocab: full.statusVocab, seed: true,
+    congregation: cong, elders: elders
+  };
+}
+
+/* =========================================================
+   PUSH shepherding-data.json (sanitised seed) to the public repo
 ========================================================= */
 function spPushToGitHub_(data) {
   const owner  = getProp_('GITHUB_OWNER');

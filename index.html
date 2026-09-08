@@ -10484,15 +10484,34 @@ document.addEventListener('keydown', (e) => {
 async function shepLoadData() {
   const grid = document.getElementById('shPeopleGrid');
   grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
+
+  let data = null;
+  // 1. Full sensitive data comes from the password-gated Apps Script web app
+  //    (the private data is never in a public file). PASTOR_HASH is the same
+  //    hash the user just unlocked with.
   try {
-    const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error('shepherding-data ' + res.status);
-    _shepData = await res.json();
-  } catch (e) {
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + PASTOR_HASH + '&t=' + Date.now());
+    if (res.ok) {
+      const j = await res.json();
+      if (j && !j.error && Array.isArray(j.elders)) data = j;
+    }
+  } catch (e) { /* fall through to the safe public seed */ }
+
+  // 2. Fallback: the sanitised public seed (names + group/serve only) so the
+  //    page still renders something useful if the web app is unreachable.
+  if (!data) {
+    try {
+      const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (res.ok) data = await res.json();
+    } catch (e) { /* handled below */ }
+  }
+
+  if (!data || !Array.isArray(data.elders)) {
     grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">' +
       'It publishes hourly from Planning Center once the sync is running.</span></div>';
     return;
   }
+  _shepData = data;
   _shRendered = true;
 
   // Meta stamp
