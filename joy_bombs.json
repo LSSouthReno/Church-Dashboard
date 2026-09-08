@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_133106001_20260906_presider",
-      "name": "Damian Smith",
-      "pcoPersonId": "133106001",
-      "team": "Presiders",
-      "phone": "19253545396",
-      "firstServeDate": "2026-09-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Sermon Text Reader"
-    },
-    {
       "id": "jb_187174359_20260906_breakfastteam",
       "name": "Casey Kline",
       "pcoPersonId": "187174359",
@@ -519,7 +505,21 @@
       "notes": "",
       "source": "auto",
       "position": "Wolf Pack Guide"
+    },
+    {
+      "id": "jb_133106001_20260906_presider",
+      "name": "Damian Smith",
+      "pcoPersonId": "133106001",
+      "team": "Presiders",
+      "phone": "19253545396",
+      "firstServeDate": "2026-09-06",
+      "status": "bombed",
+      "bombedDate": "2026-09-08",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Sermon Text Reader"
     }
   ],
-  "lastUpdated": "2026-09-08T17:01:48.725Z"
+  "lastUpdated": "2026-09-08T17:28:02.082Z"
 }
