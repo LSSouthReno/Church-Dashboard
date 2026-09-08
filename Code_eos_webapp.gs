@@ -51,9 +51,10 @@ function doGet(e) {
       return eosWaJson_({ ok: true, ran: 'syncShepherdingLists_' });
     }
     if (action === 'run_shepherding_health_sync') {
-      // Full pastor-shepherding rebuild: pulls each shepherded person's PCO
-      // activity, computes maturity scores + congregation health, and pushes
-      // shepherding-data.json. See Code_shepherding_health_sync.gs.
+      // Full pastor-shepherding rebuild: ensures the hourly trigger exists, then
+      // pulls each shepherded person's PCO activity, computes maturity scores +
+      // congregation health, and stores the data. See Code_shepherding_health_sync.gs.
+      spEnsureShepherdingTrigger_();
       syncShepherdingHealth_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
     }

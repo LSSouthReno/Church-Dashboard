@@ -674,3 +674,15 @@ function installShepherdingHealthTrigger() {
 function runShepherdingHealthNow() {
   syncShepherdingHealth_();
 }
+
+// Install the hourly trigger only if it isn't already there (no churn on repeat
+// calls). Used by the web-app setup action so one request wires up everything.
+function spEnsureShepherdingTrigger_() {
+  var has = ScriptApp.getProjectTriggers().some(function(t) {
+    return t.getHandlerFunction() === 'syncShepherdingHealth_';
+  });
+  if (!has) {
+    ScriptApp.newTrigger('syncShepherdingHealth_').timeBased().everyHours(1).create();
+    Logger.log('   Hourly Shepherding Health trigger installed.');
+  }
+}
