@@ -715,7 +715,7 @@
       "metric": "Baptisms (YTD)",
       "owner": "Ryan Griffin",
       "goal": "80+",
-      "current": "52",
+      "current": "53",
       "status": "red",
       "notes": "Goal = 10% of avg attendance; 75 baptisms in 2025"
     },
@@ -2942,20 +2942,6 @@
         "desc": "Group: All attendees of South Reno Church Campus: South Reno Church"
       },
       {
-        "name": "LS Students MS",
-        "dateKey": "2026-09-13",
-        "endKey": null,
-        "dayOfWeek": "Sun",
-        "date": "Sep 13",
-        "time": "1:00 PM",
-        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
-        "timeEnd": "2:30 PM",
-        "owner": "Katie Thompson",
-        "url": "https://lssr.churchcenter.com/calendar/event/230225777",
-        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F27ad74wmcg3ecyekxxk6qh6s0ild&thumb=960x540%23&signature=8f3e356e04489ea5cbf40ded087a69063c9234fd2ab2a5da7191d44ee0c0dbcb",
-        "desc": ""
-      },
-      {
         "name": "Elders: Elder Business Meeting",
         "dateKey": "2026-09-13",
         "endKey": null,
@@ -2966,6 +2952,21 @@
         "timeEnd": "3:00 PM",
         "owner": "Bradley Borowski",
         "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2406189/medium_image-1724191165318.jpg"
+      },
+      {
+        "name": "LS Students Full House",
+        "dateKey": "2026-09-13",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Sep 13",
+        "time": "2:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "4:00 PM",
+        "owner": "Katie Thompson",
+        "summary": "Attention South Reno Middle and High Schoolers! LS Students is BACK!!!! And we’re kicking off the school year with a brand-new event: LS Students FULL HOUSE! \n\nOn September 13th from 2–4 PM at Living ",
+        "url": "https://lssr.churchcenter.com/calendar/event/235710674",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2Flx6vo28bbq7nnhiosv7p99hvnhfr&thumb=960x540%23&signature=5d93cf12d5425d54567d004f6a9188304e266f29ad961afe72269839aa5e80f7",
+        "desc": "Attention South Reno Middle and High Schoolers! LS Students is BACK!!!! And we’re kicking off the school year with a brand-new event: LS Students FULL HOUSE! On September 13th from 2–4 PM at Living Stones South Reno, students, parents, and leaders are coming together for food, games, and a look at everything coming this school year! We’ll have good food, play some awesome games, introduce our journey through Ephesians, and unveil After Hours — fun events our high schoolers get to experience and our middle schoolers get to look forward to! There’s a LOT coming this year, and Full House is where"
       },
       {
         "name": "Staff Meeting ",
@@ -3136,7 +3137,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225971",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -3148,6 +3151,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-09-22",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Sep 22",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Tech Lunch",
@@ -3281,7 +3295,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225972",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -3293,6 +3309,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-09-29",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Sep 29",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -3432,7 +3459,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225973",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Fall Break ",
@@ -3585,6 +3614,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-10-13",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Oct 13",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -3751,7 +3791,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225975",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -3763,6 +3805,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-10-20",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Oct 20",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -3861,7 +3914,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225976",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -3885,6 +3940,17 @@
         "rbd": true,
         "timeEnd": "2:30 PM",
         "owner": "Lindsay Congdon"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-10-27",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Oct 27",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -4020,7 +4086,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225977",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -4043,6 +4111,17 @@
         "location": "",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-11-03",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Nov 3",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -4164,7 +4243,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225978",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -4176,6 +4257,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-11-10",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Nov 10",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Veterans Day",
@@ -4298,7 +4390,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225979",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -4310,6 +4404,17 @@
         "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
+      },
+      {
+        "name": "Moses Study",
+        "dateKey": "2026-11-17",
+        "endKey": null,
+        "dayOfWeek": "Tue",
+        "date": "Nov 17",
+        "time": "5:30 PM",
+        "location": "",
+        "timeEnd": "6:30 PM",
+        "owner": "Katie Thompson"
       },
       {
         "name": "Worship Rehearsal",
@@ -4420,7 +4525,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225980",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -4659,7 +4766,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225982",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Christmas Set-up",
@@ -4789,7 +4898,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225983",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Christmas service Set-up",
@@ -5126,7 +5237,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225986",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5237,7 +5350,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225987",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5348,7 +5463,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225988",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5447,7 +5564,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225989",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5546,7 +5665,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225990",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5669,7 +5790,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225991",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5887,7 +6010,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225993",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -5996,7 +6121,9 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
-        "owner": "Rachel Primus"
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225994",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
       },
       {
         "name": "Staff Meeting ",
@@ -6108,6 +6235,19 @@
         "time": "3:00 PM",
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "4:30 PM",
+        "owner": "Rachel Primus",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225995",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1790841599&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=1cadde42fe26b3f90c6acad1d73cbaff8d13d81edd3ac67b4672a33ebe32b270"
+      },
+      {
+        "name": "Staff Meeting ",
+        "dateKey": "2027-03-08",
+        "endKey": null,
+        "dayOfWeek": "Mon",
+        "date": "Mar 8",
+        "time": "12:00 PM",
+        "location": "Office on Double R Blvd - 9460 Double R Blvd, Reno, NV 89521, USA",
+        "timeEnd": "2:00 PM",
         "owner": "Rachel Primus"
       }
     ],
@@ -6123,13 +6263,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkzODUxfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODU4NjF9fX1dfQ__&Signature=ogwVZ-4CSwK3S3THHPruvawws8FU6FGWuuI2c-tcD6j6U2nbmdPPYrKjiHqZv96JyZGJluoVEZhpQ60rLQrWN7d48NaRGw2SADy~ZSQUBihe8NyUK8uZUVlDmJ3fdEhuQcm3dpRY9b9JftarT72NsHjtYEzUqjQ-XomuAAYTdXUEqWRI-swQzMtP~7mPHkKQNdBgctGI~cw-NCNmpJAKGdlvvwUK0Isj~nvIG2lxDAhNd42YPL9BtaIdyovpcmv-dd1AdX~mwrcnh7Fh9TCNcV35y0pECAJtKh6J-PeBVO7tsRb-pLqovdAgyBEVu3S1DRKUSzxL8a-fpS6Bndbz6g__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4OTAxMTYwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0OTMxNzB9fX1dfQ__&Signature=L3csr-GQy9YJEyslwiYffAzgpKjD0aEoXUbIKfTjfiMV2RnicXLSQr6WKZweCcA5bp-QdX4qwaGkD5gToTtJ1MR-5GFicXTjhOUmPQITtxFTcmMD~jAL9FTdtzUcz93Jgjll2pp1lgjyZ-nlljHvcGaubiR87QZf5Fc1Ke0qwi8H6Z1GtcBmcYr31RhnbGqjMnVo2Ttc1~jfjfp6YpwNAabapY0TA20xQ9QdjPqLTvbIfUW58kyllQ-Up1a2TbKnuFBT60DgLcfMyI5AtaDW-HtW7Vy0RKIuEdT5w4WqBVQuzbojb9HIDeEBEsA1XeTK-LlRuz6mVir9HGI3NKb1HA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkzODUxfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODU4NjF9fX1dfQ__&Signature=jWS9EEFvuCScoMOWJGcHWQnsm9ZC2-gcu~HzK4620pcygapvXR9bi6QXz848SGGo2FwRdyS6SepCoaevJwp7MfMKtxbPFIvGMGSTXvJwvcfq-KSmGwfsVsQQBrC5OaqnSldbuFClET~CG0wUqIFDlItJQuybOQZJDg0e9kOwtfr83DAcSfCCO9fWVGeAiiqS78XlwuMia~T8IPVK7imCqXQVOR6pgkrbOC~VLXgOYqDZ8t-LXL~4i2SNCSUSZVrUbxwpy8Tj53AcLrqcquwskYzlBlcl6wbQHyep8kC~QWAnITM0FdlBDOYLxweqU2Mk1SxTXeEEv0X5fHUYVA52xw__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4OTAwODAzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0OTI4MTN9fX1dfQ__&Signature=lG0BkEA8x58dOndGT9x3zT9krIglsxUx1fdVFJwIJlS3-KsZmiyBlaTUg~Fu-7ePezKaoprn33XPaZaCWJki8yc~zDQJ3ArOoksnrC5pRdNJehpkY3Y6rxW689sePzShWGSqfAe8nsZ11k9G8MAvhKxJF1vrGfARi0SjuT23d3Q-hYujKeRTRaTW04MnCXXeihSZ5r3NmULbgHXbPztN4RnNJRwe6YvWThlCyYRKqTGTQmXrhunn-9Nxd8UYB1P-cWN3qTC3KKCH1ctPk-Jk6ozJTRCBUdHC1co87pGbuzVFuaqk0TLlCEhyjbKTdY5NsAKzhLIVYcgCmlfQEOiBow__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -6141,7 +6281,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkzODUxfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODU4NjF9fX1dfQ__&Signature=ACs1Ag19sF73kr242pGdWf9EN2wsT6Aouw62hXoth1SFY14O0prwQv1fhoW2JZDfDe4ANglEHFXuC-z9ycymQfcndpfoRvEnapQMnqoiVUOLOvrBeATA5AxjIrUtxRw9t2ab~LDH1~gNYsB7sVPuiDmSsAXssmBecS85HcB8AeexEu~2YAeoI8UBXJXCqVLwPglQL~~QIZ6x9Aaw3QI~fyvTkpJk1lQb-3dOBCAADc3sWur8kgkL1kLA1XuzOC1LWnYQZaGEF5I-EnHEDMYbY6G9dLgbGBeJNOFA5Sb12-vtZ0j-96uTGosIZgGPVOvPvvXC3YQHYHc8r3T3OtHg1g__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4OTAxMTYwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0OTMxNzB9fX1dfQ__&Signature=ZmQb0MXV9P2s8L8QL4pn747qYu9b~eZwH~4kKHIh5AfP4kaEpKY10dHD~AXPFgncxL74IK-rZHt4HMP3yaSRvYT2CXXaDJ6okCLeN9b3h0UuABGV39C1ZLu3BR4eL934nY7KyEYaQFkGaHpyK-qWSDHXu61brLV04T41iEVs-G5GtoOsY51-jCOCMPPiP30LEMqQNFXxL9xCFLXfAXfdzX4Kellc77Bxs7wUtcvlgK5K~-wHefNZ~~NAi95GRcs2NlCDZRp638oX-VFqKpzO27JmaBYQo-zlqIcRJXyuZ5lmsmEA6ugsgcmIkL6dJhS9Rwe8vcx34Jlzc63lXvVp~A__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -6171,7 +6311,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4ODkzODUxfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0ODU4NjF9fX1dfQ__&Signature=hJDosAvREaO~mlGVEHU0oq290hWB0fdyVchm~IAPoVU1NHnkqgLY8tlFYBmPDCvJQYchG-B6QCOJSWNBVS9vEWnjFAI-o3nhkj2SJf1s2is0qXUGzvZ0nFKEFPw5H~-5yLJ3QHAN73Tpf5P3cJCzFOkeMpr8nGJRnofVagdNKdSRswM89i0oQNh-8WpA79Om5qSIyyGzkOUJHidMA9i0VijSQjWtedEibxpZn2JYkc6PGTKSLnk45y6k9HVvTyoBi8iSo5aCVedDsvricaQ6RiY-98117k4JN-NS8QIvskzJe74TiRYZS0S2yv0KWGH7cB4brZ1pMitkVqIvagKTQg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzg4OTAxMTYwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0OTMxNzB9fX1dfQ__&Signature=XT8GGM~TRDVoFYPmZDRqEI-jRQ3eoGtxOrMqlhBBwVma1De84zXLN9H8RJbiAa9~wNfF1qxz0auU2yeeAxLVobs~--SXuNPofLPSPk-qLpJEKkiGKsFQCg6oKukBTmh5NVcefAeslYmhhMtni0QVaM51XAtB4gLa2nnAjooFlbBJrI6DR0kMA3QhJVxym2UpyjVri26lwpebWKK2tIweb~371YpoCE0mL2PVMSgOw5spkq1VeHkDsFB8Y9dvKBhsxs9jMeGCYvwm~DZHqXIEyyp4jvsu3b-myZmKEUsyXH2-F~fK0XhtjSR3uLtXOOIw~s9mFWGOacm8ZIhFFBpgAA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
