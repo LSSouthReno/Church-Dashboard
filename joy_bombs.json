@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_192841479_20260906_prayerteam",
-      "name": "Karynn Sucaldito",
-      "pcoPersonId": "192841479",
-      "team": "Prayer Team",
-      "phone": "17758467506",
-      "firstServeDate": "2026-09-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Service Prayer"
-    },
-    {
       "id": "jb_189708902_20260906_steppingstone",
       "name": "John Andreano",
       "pcoPersonId": "189708902",
@@ -519,7 +505,21 @@
       "notes": "",
       "source": "auto",
       "position": "Breakfast Provider"
+    },
+    {
+      "id": "jb_192841479_20260906_prayerteam",
+      "name": "Karynn Sucaldito",
+      "pcoPersonId": "192841479",
+      "team": "Prayer Team",
+      "phone": "17758467506",
+      "firstServeDate": "2026-09-06",
+      "status": "bombed",
+      "bombedDate": "2026-09-08",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Service Prayer"
     }
   ],
-  "lastUpdated": "2026-09-08T17:29:30.784Z"
+  "lastUpdated": "2026-09-08T17:34:08.713Z"
 }
