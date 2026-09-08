@@ -279,10 +279,12 @@ function spContactByPerson_(ids, startMs) {
     const chunk = ids.slice(i, i + CHUNK);
     let res;
     try {
+      // NOTE: do NOT set fields[Person] here — restricting Person fields also
+      // drops the emails/phone_numbers RELATIONSHIPS from each person, leaving
+      // contact info blank even though the included resources are returned.
       res = pcoGetAllWithIncluded_(
         '/people/v2/people?where[id]=' + chunk.join(',') +
-        '&include=emails,phone_numbers&fields[Person]=first_name,last_name,membership' +
-        '&fields[Email]=address,primary&fields[PhoneNumber]=number,primary&per_page=' + chunk.length
+        '&include=emails,phone_numbers&per_page=' + chunk.length
       );
     } catch (e) { Logger.log('   ! contact chunk failed: ' + e.message); continue; }
 
