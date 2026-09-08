@@ -61,6 +61,7 @@ const SHEETS = {
   json: 'DashboardJSON',
   teams: 'Leader Forms',
   servicesTeams: 'ServeTeams',
+  serveTeamHistory: 'ServeTeamHistory',
   volunteers: 'Volunteers',
   plans: 'Plans',
   baptisms: 'Baptisms',
@@ -125,6 +126,12 @@ function syncDashboard() {
   // 3. Pull serve teams once, then rebuild and push final JSON
   safeRun_('Services Teams', () => { syncServicesTeamsData_(); });
 
+  // 3b. Snapshot each team's current size into the history sheet (and, on the
+  //     first run, backfill past months from PCO join dates) so the dashboard
+  //     can graph team size over time. Runs after Services Teams so it reads
+  //     fresh counts. See syncServeTeamHistory_.
+  safeRun_('Serve Team History', () => { syncServeTeamHistory_(ss); });
+
   // 4. Pull volunteer stats + service plan history from PCO Services
   safeRun_('Teams Volunteers+Plans', () => { syncTeamsDetailData_(); });
 
@@ -143,16 +150,25 @@ function syncDashboard() {
   safeRun_('CG Outsiders',        () => { syncCGOutsiders_(); });
   safeRun_('CG Leader Pipeline',  () => { syncCGLeaderPipeline_(); });
 
-  const data = buildDashboardDataFromSheet_(ss);
-  writeDashboardJsonToSheet_(ss, data);
-  pushJsonToGitHub_(data);
-  Logger.log('Final JSON (with weekly attendance + serve teams) pushed to GitHub.');
+  // Batch the three file pushes below into ONE commit so this hourly run
+  // triggers a single GitHub Pages deploy instead of three that race each
+  // other (the cause of the daily "deploy failed" emails). flush is in a
+  // finally so it always runs; it falls back to per-file pushes on error.
+  beginGitHubPushBatch_();
+  try {
+    const data = buildDashboardDataFromSheet_(ss);
+    writeDashboardJsonToSheet_(ss, data);
+    pushJsonToGitHub_(data);                                  // → dashboard-data.json (buffered)
+    Logger.log('Final JSON (with weekly attendance + serve teams) queued for GitHub.');
 
-  // 7. Push funnel + calendar data to Staff OS eos-data.json
-  safeRun_('Staff OS Funnel+Calendar', () => { syncStaffOSFunnelAndCalendar_(); });
+    // 7. Push funnel + calendar data to Staff OS eos-data.json (buffered)
+    safeRun_('Staff OS Funnel+Calendar', () => { syncStaffOSFunnelAndCalendar_(); });
 
-  // 8. Detect first-time servers and push joy_bombs.json
-  safeRun_('Joy Bombs', () => { syncJoyBombs(ss); });
+    // 8. Detect first-time servers and push joy_bombs.json (buffered)
+    safeRun_('Joy Bombs', () => { syncJoyBombs(ss); });
+  } finally {
+    flushGitHubPushBatch_();
+  }
 }
 
 function syncRecentDashboardData() {
@@ -2332,6 +2348,15 @@ function getServeTeams_() {
     return match ? pcoByNorm[match] : null;
   }
 
+  // ── Size-over-time history (keyed by PCO team name) ───────────────────────
+  const histByName = getServeTeamHistory_(ss);
+  const histNormIndex = {};
+  Object.keys(histByName).forEach(function(k) { histNormIndex[normTeamName_(k)] = histByName[k]; });
+  function histFor(pcoName) {
+    if (!pcoName) return [];
+    return histByName[pcoName] || histNormIndex[normTeamName_(pcoName)] || [];
+  }
+
   // ── Needed totals from Leader Forms tab ───────────────────────────────────
   const sh = ss.getSheetByName(SHEETS.teams);
   if (!sh) throw new Error('Could not find tab named "' + SHEETS.teams + '" in this Google Sheet.');
@@ -2367,19 +2392,21 @@ function getServeTeams_() {
       teams.push({
         name:    worshipPco ? worshipPco.name : 'Worship Team',
         current: worshipPco ? worshipPco.count : Math.round(formCurrent / 2),
-        needed:  halfNeeded
+        needed:  halfNeeded,
+        history: histFor(worshipPco ? worshipPco.name : '')
       });
       teams.push({
         name:    techPco ? techPco.name : 'Tech Team',
         current: techPco ? techPco.count : Math.floor(formCurrent / 2),
-        needed:  needed - halfNeeded
+        needed:  needed - halfNeeded,
+        history: histFor(techPco ? techPco.name : '')
       });
       return;
     }
 
     const pco     = lookupPco(name);
     const current = pco ? pco.count : formCurrent;
-    teams.push({ name: name, current: current, needed: needed });
+    teams.push({ name: name, current: current, needed: needed, history: histFor(pco ? pco.name : name) });
   });
 
   // ── Manual "needed" overrides ─────────────────────────────────────────────
@@ -2425,6 +2452,155 @@ function getServeTeams_() {
 
   Logger.log('   Teams loaded: ' + teams.length + ' (current from PCO, needed from Leader Forms)');
   return teams;
+}
+
+
+/* =========================================================
+   SERVE TEAM SIZE HISTORY — people on each team over time
+   ---------------------------------------------------------
+   Maintains a "ServeTeamHistory" sheet [Month, Team, Count, Source].
+   Each run upserts the CURRENT month's live count per team (source
+   'live'), so net changes — additions AND losses — are captured
+   going forward. On the very first run it also backfills past months
+   from PCO PersonTeamPositionAssignment.created_at (a team join date):
+   for each current member we take their earliest join month, then the
+   count at month m = number of current members who had joined by m.
+   That reconstructs how today's roster accumulated (source 'estimate')
+   but cannot see people who joined and left before tracking began, so
+   the estimated portion only rises — real churn shows once live
+   snapshots accrue. Keyed by PCO team name; attached to each
+   serveTeams[] entry as `history`.
+========================================================= */
+
+function syncServeTeamHistory_(ss) {
+  const sh = ensureSheet_(ss, SHEETS.serveTeamHistory, ['Month', 'Team', 'Count', 'Source']);
+
+  // Load existing rows → existing[team][month] = { count, source }
+  // ymStr_ coerces a cell back to 'yyyy-MM' — Sheets stores a bare "2025-08"
+  // as a Date, so reads can come back as Date objects.
+  const existing = {};
+  if (sh.getLastRow() >= 2) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues().forEach(function(r) {
+      const month = ymStr_(r[0]);
+      const team  = String(r[1] || '').trim();
+      if (!month || !team) return;
+      (existing[team] = existing[team] || {})[month] = { count: Number(r[2]) || 0, source: String(r[3] || 'live') };
+    });
+  }
+
+  const monthKey = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM');
+
+  // 1) Live snapshot from the freshly-synced ServeTeams tab (id, name, count).
+  const serveSh = ss.getSheetByName(SHEETS.servicesTeams);
+  const liveTeams = [];
+  if (serveSh && serveSh.getLastRow() >= 2) {
+    serveSh.getRange(2, 1, serveSh.getLastRow() - 1, 3).getValues().forEach(function(r) {
+      const id = String(r[0] || '').trim();
+      const name = String(r[1] || '').trim();
+      const count = Number(r[2]) || 0;
+      if (name) liveTeams.push({ id: id, name: name, count: count });
+    });
+  }
+  // Upsert this month's live point per team (overwrites an estimate if present).
+  liveTeams.forEach(function(t) {
+    (existing[t.name] = existing[t.name] || {})[monthKey] = { count: t.count, source: 'live' };
+  });
+
+  // 2) One-time backfill of past months from PCO join dates.
+  const props = PropertiesService.getScriptProperties();
+  if (props.getProperty('SERVE_HISTORY_BACKFILL_DONE') !== '1') {
+    try {
+      liveTeams.forEach(function(t) {
+        if (!t.id) return;
+        const assigns = pcoTryGetAll_('/services/v2/teams/' + t.id +
+          '/person_team_position_assignments?per_page=100');
+        if (!assigns || !assigns.length) return;
+
+        // earliest join month per current member
+        const earliest = {};
+        assigns.forEach(function(a) {
+          const pid = relId_(a, 'person');
+          const ca  = a.attributes && a.attributes.created_at;
+          if (!pid || !ca) return;
+          const m = String(ca).substring(0, 7); // 'yyyy-MM'
+          if (!earliest[pid] || m < earliest[pid]) earliest[pid] = m;
+        });
+        const joinMonths = Object.keys(earliest).map(function(p) { return earliest[p]; }).sort();
+        if (!joinMonths.length) return;
+
+        // cumulative members-joined-by-month across [firstJoin .. lastComplete]
+        let cum = 0, ji = 0;
+        monthRange_(joinMonths[0], monthKey).forEach(function(m) {
+          while (ji < joinMonths.length && joinMonths[ji] <= m) { cum++; ji++; }
+          if (m >= monthKey) return;   // current month is owned by the live snapshot
+          const cur = (existing[t.name] || {})[m];
+          if (!cur || cur.source === 'estimate') {
+            (existing[t.name] = existing[t.name] || {})[m] = { count: cum, source: 'estimate' };
+          }
+        });
+      });
+      props.setProperty('SERVE_HISTORY_BACKFILL_DONE', '1');
+      Logger.log('   Serve team history: backfill complete');
+    } catch (e) {
+      Logger.log('   Serve team history backfill failed (retries next run): ' + e.message);
+    }
+  }
+
+  // 3) Write the sheet back, sorted by team then month.
+  const out = [];
+  Object.keys(existing).sort().forEach(function(team) {
+    Object.keys(existing[team]).sort().forEach(function(m) {
+      const c = existing[team][m];
+      out.push([m, team, c.count, c.source]);
+    });
+  });
+  sh.clearContents();
+  sh.getRange(1, 1, 1, 4).setValues([['Month', 'Team', 'Count', 'Source']]);
+  // Keep the Month column as plain text so 'yyyy-MM' is never coerced to a Date.
+  sh.getRange(1, 1, out.length + 1, 1).setNumberFormat('@');
+  if (out.length) sh.getRange(2, 1, out.length, 4).setValues(out);
+  sh.setFrozenRows(1);
+  Logger.log('   Serve team history: ' + out.length + ' rows across ' + Object.keys(existing).length + ' teams');
+}
+
+// Read the history sheet → { pcoTeamName: [ { d:'yyyy-MM', n:count, e:1? }, ... ] }
+// e:1 marks an estimated (backfilled) point so the front-end can dash it.
+function getServeTeamHistory_(ss) {
+  const map = {};
+  const sh = ss.getSheetByName(SHEETS.serveTeamHistory);
+  if (!sh || sh.getLastRow() < 2) return map;
+  sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues().forEach(function(r) {
+    const month = ymStr_(r[0]);
+    const team  = String(r[1] || '').trim();
+    if (!month || !team) return;
+    const pt = { d: month, n: Number(r[2]) || 0 };
+    if (String(r[3] || '') === 'estimate') pt.e = 1;
+    (map[team] = map[team] || []).push(pt);
+  });
+  Object.keys(map).forEach(function(k) {
+    map[k].sort(function(a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
+  });
+  return map;
+}
+
+// Coerce a history Month cell to a 'yyyy-MM' string. Sheets stores a bare
+// "2025-08" as a Date, so getValues() can hand back a Date object.
+function ymStr_(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, Session.getScriptTimeZone(), 'yyyy-MM');
+  return String(v == null ? '' : v).trim().substring(0, 7);
+}
+
+// Inclusive list of 'yyyy-MM' strings from startYM to endYM.
+function monthRange_(startYM, endYM) {
+  const out = [];
+  const s = startYM.split('-'), e = endYM.split('-');
+  let y = Number(s[0]), m = Number(s[1]);
+  const ey = Number(e[0]), em = Number(e[1]);
+  while (y < ey || (y === ey && m <= em)) {
+    out.push(y + '-' + ('0' + m).slice(-2));
+    m++; if (m > 12) { m = 1; y++; }
+  }
+  return out;
 }
 
 
@@ -3508,6 +3684,189 @@ function syncMembersOverTime_() {
 // Public wrapper so the calendar push can be run on demand (clasp run / editor).
 function runStaffOSFunnelAndCalendarNow() { syncStaffOSFunnelAndCalendar_(); }
 
+/* =========================================================
+   STAFF OS — LIVE SCORECARD "current" VALUES
+   The eos-data.json scorecard used to carry hand-typed "current"
+   figures (frozen at Jan 2026), so any surface reading them raw —
+   cached/older index.html clients, and the L10 "reds" + Vol-Leads
+   views in the current client — showed stale weekend/kids/etc.
+   numbers even though the Metrics pages (dashboard-data.json) were
+   live. These helpers recompute the derivable metrics from the same
+   live data the front-end's scorecardLiveValues_() uses, and write
+   them back into the scorecard on every hourly sync so eos-data.json
+   is self-updating like everything else.
+   NOTE: keep the formulas here in sync with scorecardLiveValues_()
+   in index.html.
+========================================================= */
+
+// GAS port of the front-end scorecardLiveValues_(), limited to the metrics
+// we can confidently auto-derive. Keyed the same way (att_adults, att_kids…).
+function scorecardLiveValuesForEos_(dash) {
+  dash = dash || {};
+  var lv = {};
+
+  // ── Weekend attendance — 3-month rolling avg, excluding outlier weeks (>1200 adults, e.g. Easter)
+  var aw = dash.attendanceWeekly || {};
+  var awKeys = Object.keys(aw).sort();
+  var last3 = awKeys.slice(-3);
+  var weeks = [];
+  last3.forEach(function(k) { weeks = weeks.concat(aw[k] || []); });
+  var valid = weeks.filter(function(w) { return w.adults > 0 && w.adults <= 1200; });
+  var avgAdults = valid.length ? Math.round(valid.reduce(function(s, w) { return s + (w.adults || 0); }, 0) / valid.length) : 0;
+  var avgKids   = valid.length ? Math.round(valid.reduce(function(s, w) { return s + (w.kids   || 0); }, 0) / valid.length) : 0;
+  var wkNote = valid.length ? valid.length + '-wk avg' : '';
+  lv.att_adults = { display: avgAdults ? _eosNum_(avgAdults) : '', note: wkNote,
+    status: !avgAdults ? 'grey' : avgAdults >= 900 ? 'green' : avgAdults >= 720 ? 'yellow' : 'red' };
+  lv.att_kids = { display: avgKids ? _eosNum_(avgKids) : '', note: wkNote,
+    status: !avgKids ? 'grey' : avgKids >= 200 ? 'green' : avgKids >= 150 ? 'yellow' : 'red' };
+
+  // ── Student ministry (30-day weekly avg)
+  var sm = dash.studentMinistry || {};
+  lv.student_min = { display: sm.weeklyAvg30d != null ? String(sm.weeklyAvg30d) : '',
+    note: sm.eventCount ? sm.eventCount + ' sessions avg' : '',
+    status: sm.weeklyAvg30d == null ? 'grey' : sm.weeklyAvg30d >= 65 ? 'green' : sm.weeklyAvg30d >= 50 ? 'yellow' : 'red' };
+
+  // ── Baptisms YTD ('26)
+  var bap = dash.baptisms || {};
+  var bapYtd = (bap.months || []).reduce(function(s, m, i) {
+    return s + (String(m).indexOf("'26") !== -1 ? ((bap.counts || [])[i] || 0) : 0);
+  }, 0);
+  lv.baptisms_ytd = { display: bapYtd ? String(bapYtd) : '', note: '',
+    status: !bapYtd ? 'grey' : bapYtd >= 80 ? 'green' : bapYtd >= 56 ? 'yellow' : 'red' };
+
+  // ── Active members
+  var mem = (dash.members || {}).current || 0;
+  lv.members = { display: mem ? _eosNum_(mem) : '', note: '',
+    status: !mem ? 'grey' : mem >= 462 ? 'green' : mem >= 370 ? 'yellow' : 'red' };
+
+  // ── Community groups
+  var cgd = (dash.communityGroupsDetailed || {}).current || {};
+  lv.cg_groups = { display: cgd.groups ? String(cgd.groups) : '', note: '',
+    status: !cgd.groups ? 'grey' : cgd.groups >= 50 ? 'green' : cgd.groups >= 40 ? 'yellow' : 'red' };
+  lv.cg_members = { display: cgd.members ? String(cgd.members) : '', note: '',
+    status: !cgd.members ? 'grey' : cgd.members >= 500 ? 'green' : cgd.members >= 400 ? 'yellow' : 'red' };
+
+  var cgAtt = (dash.communityGroupsDetailed || {}).groupAttendance || [];
+  var cgPcts = cgAtt.filter(function(g) { return g.attPct > 0; }).map(function(g) { return g.attPct; });
+  var cgAvg = cgPcts.length ? Math.round(cgPcts.reduce(function(s, x) { return s + x; }, 0) / cgPcts.length) : 0;
+  lv.cg_att_rate = { display: cgAvg ? cgAvg + '%' : '', note: cgPcts.length ? 'avg across ' + cgPcts.length + ' groups' : '',
+    status: !cgAvg ? 'grey' : cgAvg >= 75 ? 'green' : cgAvg >= 55 ? 'yellow' : 'red' };
+
+  // ── People serving (unique across teams when available)
+  var teams = dash.serveTeams || [];
+  var totalServing = dash.uniqueVolunteers || teams.reduce(function(s, t) { return s + (t.current || 0); }, 0);
+  lv.people_serving = { display: totalServing ? _eosNum_(totalServing) : '',
+    note: dash.uniqueVolunteers ? 'unique volunteers' : '',
+    status: !totalServing ? 'grey' : totalServing >= 400 ? 'green' : totalServing >= 300 ? 'yellow' : 'red' };
+
+  // ── Stepping Stones volunteer fill rate
+  var ss = teams.filter(function(t) { return /stepping.stone/i.test(t.name || ''); })[0] || {};
+  var ssFill = ss.current && ss.needed ? Math.round(100 * ss.current / ss.needed) : 0;
+  lv.ss_fill_rate = { display: ssFill ? ssFill + '%' : '',
+    note: ss.current ? ss.current + ' of ' + ss.needed + ' needed' : '',
+    status: !ssFill ? 'grey' : ssFill >= 95 ? 'green' : ssFill >= 75 ? 'yellow' : 'red' };
+  // Stepping Stones volunteer headcount (raw roster count for that team)
+  lv.ss_volunteers = { display: ss.current ? String(ss.current) : '', note: '',
+    status: !ss.current ? 'grey' : ss.current >= 150 ? 'green' : ss.current >= 110 ? 'yellow' : 'red' };
+
+  // ── Email open rate (avg of last 3 Mailchimp campaigns)
+  var em = dash.emailStats || {};
+  var rate = em.avgOpenRate3 != null ? Math.round(em.avgOpenRate3 * 100) : null;
+  lv.email_open = { display: rate != null ? rate + '%' : '', note: '',
+    status: rate == null ? 'grey' : rate >= 50 ? 'green' : rate >= 35 ? 'yellow' : 'red' };
+
+  return lv;
+}
+
+function _eosNum_(n) {
+  // Thousands-separated, matching the front-end's toLocaleString()
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// Metric-name → live-key map for the eos-data scorecard rows. Matched
+// case-insensitively against each row's "metric" text.
+var EOS_SCORECARD_LIVE_MAP_ = [
+  { re: /weekend attendance.*adult|weekend.*adult/i,      key: 'att_adults' },
+  { re: /stepping stones\s*\(kids\)|weekend.*kid|kids.*\(ss\)|stepping stones.*kid/i, key: 'att_kids' },
+  { re: /student ministry/i,                              key: 'student_min' },
+  { re: /baptism/i,                                       key: 'baptisms_ytd' },
+  { re: /active church members|active members/i,          key: 'members' },
+  { re: /active community groups/i,                       key: 'cg_groups' },
+  { re: /community group members|cg members/i,            key: 'cg_members' },
+  { re: /cg attendance rate|community group attendance/i, key: 'cg_att_rate' },
+  { re: /people serving/i,                                key: 'people_serving' },
+  { re: /stepping stones vol.*fill|vol.*fill rate/i,      key: 'ss_fill_rate' },
+  { re: /stepping stones volunteers/i,                    key: 'ss_volunteers' },
+  { re: /email open/i,                                    key: 'email_open' }
+];
+
+// Return a copy of the scorecard array with current/status refreshed from live
+// data for every auto-derivable row. Leaves manual rows (giving targets, "All-In",
+// production issues, etc.) untouched. Also strips a leading stale "Current: … (… 20xx)"
+// note fragment so the fresh number isn't sitting next to an outdated one.
+function applyEosScorecardLive_(scorecard, dash) {
+  if (!Array.isArray(scorecard) || !scorecard.length) return scorecard;
+  var lv = scorecardLiveValuesForEos_(dash);
+  return scorecard.map(function(row) {
+    if (!row || !row.metric) return row;
+    for (var i = 0; i < EOS_SCORECARD_LIVE_MAP_.length; i++) {
+      if (!EOS_SCORECARD_LIVE_MAP_[i].re.test(row.metric)) continue;
+      var v = lv[EOS_SCORECARD_LIVE_MAP_[i].key];
+      if (!v || !v.display) return row;  // no live value yet — keep the manual one
+      var out = {};
+      for (var k in row) out[k] = row[k];
+      out.current = v.display;
+      out.status  = v.status || row.status || 'grey';
+      var notes = String(row.notes || '').replace(/^\s*Current:[^;]*(?:;\s*)?/i, '').trim();
+      out.notes = notes;
+      return out;
+    }
+    return row;
+  });
+}
+
+// Write the fresh current/status back into the EOS_Scorecard sheet (single source
+// of truth), so the on-edit push (eosWaPushGitHub_) and any other writer of
+// eos-data.json also emit live numbers, not just this hourly job. Guarded — a
+// failure here must never break the JSON push.
+function updateEosScorecardSheetLive_(dash) {
+  try {
+    var ssId = (typeof EOS_WA_SS_ID_ !== 'undefined' && EOS_WA_SS_ID_) || '1aSZXObUWGmo_zsyJmlocoodyiozC_SNwnqqpUcAPHU8';
+    var eosSs = SpreadsheetApp.openById(ssId);
+    var sh = eosSs.getSheetByName('EOS_Scorecard');
+    if (!sh || sh.getLastRow() < 2) return 0;
+    var lv = scorecardLiveValuesForEos_(dash);
+    var n = sh.getLastRow() - 1;
+    var metrics = sh.getRange(2, 1, n, 1).getValues();      // col A
+    var curCol  = sh.getRange(2, 4, n, 1).getValues();      // col D (current)
+    var statCol = sh.getRange(2, 5, n, 1).getValues();      // col E (status)
+    var changed = 0;
+    for (var r = 0; r < n; r++) {
+      var metric = String(metrics[r][0] || '');
+      if (!metric) continue;
+      for (var i = 0; i < EOS_SCORECARD_LIVE_MAP_.length; i++) {
+        if (!EOS_SCORECARD_LIVE_MAP_[i].re.test(metric)) continue;
+        var v = lv[EOS_SCORECARD_LIVE_MAP_[i].key];
+        if (v && v.display) {
+          curCol[r][0]  = v.display;
+          statCol[r][0] = v.status || 'grey';
+          changed++;
+        }
+        break;
+      }
+    }
+    if (changed) {
+      sh.getRange(2, 4, n, 1).setValues(curCol);
+      sh.getRange(2, 5, n, 1).setValues(statCol);
+    }
+    Logger.log('   EOS_Scorecard sheet: refreshed ' + changed + ' live rows');
+    return changed;
+  } catch (e) {
+    Logger.log('   updateEosScorecardSheetLive_ skipped: ' + e.message);
+    return 0;
+  }
+}
+
 function syncStaffOSFunnelAndCalendar_() {
   Logger.log('▶  Staff OS Funnel+Calendar — starting');
 
@@ -3676,12 +4035,11 @@ function syncStaffOSFunnelAndCalendar_() {
   const url    = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
   const hdrs   = { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' };
 
-  // Read existing eos-data.json
+  // Read existing eos-data.json (for the sub-merge below).
   const existing = UrlFetchApp.fetch(url + '?ref=' + branch, { method:'get', muteHttpExceptions:true, headers:hdrs });
-  let sha = null, currentData = {};
+  let currentData = {};
   if (existing.getResponseCode() === 200) {
     const file = JSON.parse(existing.getContentText());
-    sha = file.sha;
     try {
       currentData = JSON.parse(Utilities.newBlob(
         Utilities.base64Decode(file.content.replace(/\n/g,'')), 'text/plain', 'UTF-8'
@@ -3698,18 +4056,26 @@ function syncStaffOSFunnelAndCalendar_() {
   const mergedFunnel = Object.assign({}, currentData.funnel, funnel);
   const merged = Object.assign({}, currentData, { funnel: mergedFunnel, calendar: calendar });
   if (staffProfiles.length) merged.staff_profiles = staffProfiles;
-  const payload = { message: 'Update funnel, calendar & staff profiles', branch: branch,
-                    content: Utilities.base64Encode(JSON.stringify(merged, null, 2), Utilities.Charset.UTF_8) };
-  if (sha) payload.sha = sha;
 
-  const res = UrlFetchApp.fetch(url, { method:'put', contentType:'application/json',
-                                        muteHttpExceptions:true, headers:hdrs,
-                                        payload:JSON.stringify(payload) });
-  const code = res.getResponseCode();
-  if (code < 200 || code >= 300) {
-    throw new Error('EOS merge-push failed: ' + code + ' — ' + res.getContentText().substring(0,200));
+  // ── Live scorecard "current" values ────────────────────────────────────
+  // Refresh the auto-derivable scorecard rows (weekend adults/kids, students,
+  // members, CGs, serving, email…) from the same live data the Metrics pages
+  // use, so eos-data.json stops carrying frozen hand-typed figures. Also write
+  // them back into the EOS_Scorecard sheet so the on-edit push stays fresh too.
+  try {
+    const dashForSc = buildDashboardDataFromSheet_(SpreadsheetApp.getActiveSpreadsheet());
+    if (Array.isArray(merged.scorecard) && merged.scorecard.length) {
+      merged.scorecard = applyEosScorecardLive_(merged.scorecard, dashForSc);
+    }
+    updateEosScorecardSheetLive_(dashForSc);
+  } catch (e) {
+    Logger.log('   Scorecard live refresh skipped: ' + e.message);
   }
-  Logger.log('✓  Staff OS Funnel+Calendar+Profiles pushed to ' + owner + '/' + repo + '/' + path);
+
+  // Buffered into the sync-cycle batch when one is open (single combined
+  // commit); pushed immediately when called on its own (run_calendar_sync).
+  ghPutJson_(path, merged, 'Update funnel, calendar & staff profiles + refresh live scorecard');
+  Logger.log('✓  Staff OS Funnel+Calendar+Profiles queued for ' + owner + '/' + repo + '/' + path);
 }
 
 // ── BambooHR: fetch South Reno staff photo URLs for profile modal ───────────
@@ -3909,44 +4275,8 @@ function getTeamsLeaderFormsDetailed_() {
 ========================================================= */
 
 function pushJsonToGitHub_(data) {
-  const owner = getProp_('GITHUB_OWNER');
-  const repo = getProp_('GITHUB_REPO');
-  const token = getProp_('GITHUB_TOKEN');
-  const branch = propOptional_('GITHUB_BRANCH') || 'main';
   const path = propOptional_('GITHUB_FILE_PATH') || 'dashboard-data.json';
-
-  const url = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
-
-  const existing = UrlFetchApp.fetch(url + '?ref=' + encodeURIComponent(branch), {
-    method: 'get',
-    muteHttpExceptions: true,
-    headers: githubHeaders_(token)
-  });
-
-  let sha = null;
-  if (existing.getResponseCode() === 200) {
-    sha = JSON.parse(existing.getContentText()).sha;
-  }
-
-  const payload = {
-    message: 'Update dashboard data',
-    branch: branch,
-    content: Utilities.base64Encode(JSON.stringify(data, null, 2), Utilities.Charset.UTF_8)
-  };
-  if (sha) payload.sha = sha;
-
-  const res = UrlFetchApp.fetch(url, {
-    method: 'put',
-    contentType: 'application/json',
-    muteHttpExceptions: true,
-    headers: githubHeaders_(token),
-    payload: JSON.stringify(payload)
-  });
-
-  const code = res.getResponseCode();
-  if (code < 200 || code >= 300) {
-    throw new Error('GitHub update failed: ' + code + ' — ' + res.getContentText());
-  }
+  ghPutJson_(path, data, 'Update dashboard data');
 }
 
 function githubHeaders_(token) {
@@ -3955,6 +4285,147 @@ function githubHeaders_(token) {
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28'
   };
+}
+
+/* =========================================================
+   BATCHED GITHUB PUSH — one commit per sync cycle
+   ---------------------------------------------------------
+   syncDashboard() pushes three files (dashboard-data.json,
+   eos-data.json, joy_bombs.json) in one run. Pushed
+   individually, each is a separate commit that triggers its
+   own GitHub Pages build+deploy — and when two land inside
+   the same deploy window the second is rejected ("in progress
+   deployment"), producing the daily "Some jobs were not
+   successful" failure emails. The site still updates (the next
+   push republishes), but the noise is constant.
+
+   Fix: while a batch is open, the per-file pushers buffer their
+   {path, content} instead of committing. flushGitHubPushBatch_()
+   then writes all buffered files in ONE commit via the Git
+   Trees API → one push → one deploy → no self-collision.
+
+   Safety: if the single-commit path throws for any reason, we
+   fall back to pushing each buffered file individually (the old
+   behaviour), so the data pipeline can never be worse off than
+   before. Outside a batch, ghPutJson_ pushes immediately, so
+   on-demand callers (run_json_rebuild, etc.) are unaffected.
+========================================================= */
+
+// When this is an array, GitHub pushes are buffered into it
+// instead of being sent immediately. null = push immediately.
+var GH_PUSH_BATCH_ = null;
+
+function beginGitHubPushBatch_() { GH_PUSH_BATCH_ = []; }
+
+// Object-in pusher used by all three sync pushers. Buffers when a
+// batch is open; otherwise pushes immediately (unchanged behaviour).
+function ghPutJson_(path, dataObj, message) {
+  const contentStr = JSON.stringify(dataObj, null, 2);
+  if (GH_PUSH_BATCH_) {
+    GH_PUSH_BATCH_.push({ path: path, content: contentStr, message: message });
+    Logger.log('   [batch] queued ' + path);
+    return;
+  }
+  ghPutJsonRaw_(path, contentStr, message);
+}
+
+// Single-file contents-API PUT (pre-stringified content). This is the
+// original per-file push path, also used as the batch fallback.
+function ghPutJsonRaw_(path, contentStr, message) {
+  const owner  = getProp_('GITHUB_OWNER');
+  const repo   = getProp_('GITHUB_REPO');
+  const token  = getProp_('GITHUB_TOKEN');
+  const branch = propOptional_('GITHUB_BRANCH') || 'main';
+  const url    = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
+
+  const existing = UrlFetchApp.fetch(url + '?ref=' + encodeURIComponent(branch), {
+    method: 'get', muteHttpExceptions: true, headers: githubHeaders_(token)
+  });
+  let sha = null;
+  if (existing.getResponseCode() === 200) sha = JSON.parse(existing.getContentText()).sha;
+
+  const payload = {
+    message: message, branch: branch,
+    content: Utilities.base64Encode(contentStr, Utilities.Charset.UTF_8)
+  };
+  if (sha) payload.sha = sha;
+
+  const res = UrlFetchApp.fetch(url, {
+    method: 'put', contentType: 'application/json',
+    muteHttpExceptions: true, headers: githubHeaders_(token),
+    payload: JSON.stringify(payload)
+  });
+  const code = res.getResponseCode();
+  if (code < 200 || code >= 300) {
+    throw new Error('GitHub update failed: ' + code + ' — ' + res.getContentText());
+  }
+}
+
+// Commit every buffered file in a single commit (Git Trees API), then
+// clear the batch. Falls back to individual pushes on any error.
+function flushGitHubPushBatch_() {
+  const batch = GH_PUSH_BATCH_;
+  GH_PUSH_BATCH_ = null;             // disable batching before any fallback push
+  if (!batch || !batch.length) return;
+
+  if (batch.length === 1) {          // nothing to collapse — normal push
+    ghPutJsonRaw_(batch[0].path, batch[0].content, batch[0].message);
+    return;
+  }
+
+  try {
+    ghCommitFilesInOneCommit_(batch);
+    Logger.log('✓  Batched ' + batch.length + ' files into ONE commit → one Pages deploy');
+  } catch (e) {
+    Logger.log('⚠ Batch commit failed (' + e.message + ') — falling back to per-file pushes');
+    batch.forEach(function(f) {
+      try { ghPutJsonRaw_(f.path, f.content, f.message); }
+      catch (e2) { Logger.log('   fallback push failed for ' + f.path + ': ' + e2.message); }
+    });
+  }
+}
+
+// Low-level: create blobs → tree → commit → move the branch ref, so
+// multiple files land in a single commit (one push = one Pages deploy).
+function ghCommitFilesInOneCommit_(files) {
+  const owner  = getProp_('GITHUB_OWNER');
+  const repo   = getProp_('GITHUB_REPO');
+  const token  = getProp_('GITHUB_TOKEN');
+  const branch = propOptional_('GITHUB_BRANCH') || 'main';
+  const api    = 'https://api.github.com/repos/' + owner + '/' + repo;
+  const hdrs   = githubHeaders_(token);
+
+  function gh_(method, path, payload) {
+    const opt = { method: method, muteHttpExceptions: true, headers: hdrs };
+    if (payload) { opt.contentType = 'application/json'; opt.payload = JSON.stringify(payload); }
+    const r = UrlFetchApp.fetch(api + path, opt);
+    const c = r.getResponseCode();
+    if (c < 200 || c >= 300) {
+      throw new Error(method.toUpperCase() + ' ' + path + ' → ' + c + ' ' +
+                      r.getContentText().substring(0, 200));
+    }
+    return JSON.parse(r.getContentText());
+  }
+
+  const ref           = gh_('get', '/git/ref/heads/' + branch);
+  const baseCommitSha = ref.object.sha;
+  const baseCommit    = gh_('get', '/git/commits/' + baseCommitSha);
+  const baseTreeSha   = baseCommit.tree.sha;
+
+  const treeItems = files.map(function(f) {
+    const blob = gh_('post', '/git/blobs', {
+      content: Utilities.base64Encode(f.content, Utilities.Charset.UTF_8),
+      encoding: 'base64'
+    });
+    return { path: f.path, mode: '100644', type: 'blob', sha: blob.sha };
+  });
+
+  const tree    = gh_('post', '/git/trees', { base_tree: baseTreeSha, tree: treeItems });
+  const message = files.map(function(f) { return f.message; }).join(' + ');
+  const commit  = gh_('post', '/git/commits', {
+    message: message, tree: tree.sha, parents: [baseCommitSha]
+  });
+  gh_('patch', '/git/refs/heads/' + branch, { sha: commit.sha, force: false });
 }
 
 /* =========================================================

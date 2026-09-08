@@ -6517,6 +6517,21 @@ async function staffLoadData() {
   if (dashData) {
     if (dashData.staffTimeOff) merged.staffTimeOff = dashData.staffTimeOff;
     merged._dash = dashData;
+
+    // Fold live scorecard values into scorecard[].current/.status so that EVERY
+    // surface that reads them raw — the L10 "reds" panel, the Vol-Leads cards,
+    // and any exports — matches the live Scorecard/Snapshot (which compute the
+    // same values on the fly). Without this, keyed rows kept their frozen
+    // eos-data figures here even though the Scorecard tab showed live numbers.
+    try {
+      const _lv = scorecardLiveValues_(dashData);
+      merged.scorecard = (merged.scorecard || []).map(row => {
+        if (row._section || !row._key) return row;
+        const v = _lv[row._key];
+        if (!v || !v.display) return row;
+        return { ...row, current: v.display, status: v.status || row.status };
+      });
+    } catch (e) { console.warn('Staff OS: live scorecard fold failed:', e && e.message); }
   }
 
   // Render immediately with the data we have — tabs + content appear right away
