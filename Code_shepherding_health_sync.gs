@@ -668,3 +668,9 @@ function installShepherdingHealthTrigger() {
   ScriptApp.newTrigger('syncShepherdingHealth_').timeBased().everyHours(1).create();
   Logger.log('Hourly Shepherding Health trigger installed.');
 }
+
+// Runnable from the editor Run menu (syncShepherdingHealth_ ends in "_" so it is
+// hidden there). Use this once to populate the page immediately.
+function runShepherdingHealthNow() {
+  syncShepherdingHealth_();
+}
