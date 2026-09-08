@@ -3087,6 +3087,21 @@
     white-space: normal;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
+  /* Sparse days (1–2 events) get roomy chips: full name, and for solo days a
+     time + location line, instead of a 2-line clamp that truncates the text. */
+  .mode-3 .cal6-ev.cal6-ev-roomy {
+    display: block; overflow: hidden;
+    padding-top: clamp(1px, 0.12vw, 4px); padding-bottom: clamp(1px, 0.12vw, 4px);
+  }
+  .mode-3 .cal6-ev-roomy .cal6-ev-name {
+    display: -webkit-box; -webkit-line-clamp: var(--cal6-clamp, 4); -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mode-3 .cal6-ev-roomy .cal6-ev-meta {
+    margin-top: 0.15em; font-size: 0.82em; line-height: 1.3; font-weight: 600;
+    color: var(--text-muted);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
   .mode-3 .cal6-dnum { font-size: clamp(11px, 0.7vw, 24px); }
   .cal6-evtime { opacity: 0.7; font-weight: 700; font-size: 0.82em; }
 
@@ -3392,7 +3407,7 @@ function cal6Render() {
       const chips = evs.map(ev => {
         const cat = cal6Cat(ev);
         usedCats.add(cat.key);
-        return cal6Chip(ev, cat, dk);
+        return cal6Chip(ev, cat, dk, evs.length);
       }).join('');
       dayCells.push('<div class="cal6-day' + (dk === todayKey ? ' today' : '') + '"><div class="cal6-dnum">' + dayNum + '</div>' + chips + '</div>');
     }
@@ -3452,24 +3467,46 @@ function cal6Render() {
 function cal6FitMonth() {
   const weeks = document.querySelector('#cal6Body.mode-1 .cal6-weeks');
   if (!weeks) return;
+  // Reset to the flex-sized, un-transformed state before measuring.
   weeks.style.transform = '';
   weeks.style.width = '';
+  weeks.style.height = '';
+  weeks.style.flex = '';
   weeks.style.overflowY = '';
   if (window.innerWidth <= 980) return;
   weeks.style.transformOrigin = '0 0';
-  weeks.style.overflowY = 'hidden';
-  const MIN_SCALE = 0.45;
+  // Capture the space the weeks grid is allowed to occupy (its flex height)
+  // BEFORE we override its height below.
   const avail = weeks.clientHeight;
   if (!avail) return;
+  weeks.style.overflowY = 'hidden';
   // Displayed height grows monotonically with scale (bigger scale → narrower
   // layout → more wrapping → taller), so binary-search the largest scale
   // that still fits. ~8 relayouts of one element, only on render/resize.
+  //
+  // CRITICAL: overflow:hidden clips content at the element's OWN box height
+  // (its pre-transform layout height), and a CSS transform does not change that
+  // layout height. So we must let the box grow to its full content height
+  // (height:auto) while scaling — otherwise the last week(s) get clipped away
+  // even though the scaled result would have fit. The visual height is then
+  // scrollHeight * scale, which is what we fit against `avail`.
   const displayedAt = s => {
     weeks.style.width = s === 1 ? '' : (100 / s) + '%';
     weeks.style.transform = s === 1 ? '' : 'scale(' + s + ')';
+    // flex:0 0 auto + height:auto let the box hold its FULL content height
+    // (flex:1's 0% basis would otherwise pin it to the flex track height and
+    // overflow:hidden would lop off the last week before the transform scales it).
+    weeks.style.flex = '0 0 auto';
+    weeks.style.height = 'auto';
     return weeks.scrollHeight * s;
   };
-  if (displayedAt(1) <= avail + 1) return;  // fits natively
+  const MIN_SCALE = 0.45;
+  if (displayedAt(1) <= avail + 1) {  // fits natively — leave it flex-sized
+    weeks.style.flex = '';
+    weeks.style.height = '';
+    weeks.style.overflowY = '';
+    return;
+  }
   let lo = MIN_SCALE, hi = 1, best = 0;
   for (let i = 0; i < 7; i++) {
     const mid = (lo + hi) / 2;
@@ -3478,7 +3515,10 @@ function cal6FitMonth() {
   if (best) {
     displayedAt(best);
   } else {  // doesn't fit even at MIN_SCALE — keep it legible, allow scroll
-    displayedAt(MIN_SCALE);
+    weeks.style.width = (100 / MIN_SCALE) + '%';
+    weeks.style.transform = 'scale(' + MIN_SCALE + ')';
+    weeks.style.flex = '';         // flex-bounded again so it can scroll
+    weeks.style.height = '';
     weeks.style.overflowY = 'auto';
   }
 }
@@ -3493,7 +3533,7 @@ let _cal6ChipReg = [];
 
 // One event chip/card, sized to the current view mode. Every chip is
 // clickable and opens the full-detail popup.
-function cal6Chip(ev, cat, dk) {
+function cal6Chip(ev, cat, dk, dayCount) {
   const name = cal6Esc((ev.name || '').trim());
   const tint = 'border-left-color:' + cat.color + ';background:' + cat.color + '2b;';
   const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
@@ -3508,6 +3548,24 @@ function cal6Chip(ev, cat, dk) {
 
   if (_cal6Mode === 3) {
     const tip = cal6Esc((ev.name||'').trim() + ' · ' + timeRange + (locShort ? ' · ' + locShort : '') + (ev.owner ? ' · ' + ev.owner : ''));
+    // The fewer events share a day, the more room each chip has — so show the
+    // full name (and, for near-solo days, the time + location) instead of
+    // clamping everything to two lines and cutting the text off. Busy days stay
+    // compact so they still fit the cell.
+    const n = dayCount || 1;
+    if (n <= 2) {
+      const clamp = n <= 1 ? 6 : 4;
+      let meta = '';
+      if (n <= 1) {
+        const bits = [cal6Esc(timeRange)];
+        if (locShort) bits.push('📍 ' + cal6Esc(locShort));
+        meta = '<div class="cal6-ev-meta">' + bits.join(' · ') + '</div>';
+      }
+      return '<div class="cal6-ev cal6-ev-roomy" style="' + tint + '--cal6-clamp:' + clamp + ';"' + click + ' title="' + tip + '">' +
+        '<div class="cal6-ev-name">' +
+          (ev.time ? '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' : '') + name +
+        '</div>' + meta + '</div>';
+    }
     return '<div class="cal6-ev" style="' + tint + '"' + click + ' title="' + tip + '">' +
       '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' + name + '</div>';
   }
