@@ -1946,6 +1946,154 @@
   }
   .tlh-stat-val { font-size: 1.6rem; font-weight: 900; color: #f0f0f0; line-height: 1; }
   .tlh-stat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 5px; }
+
+  /* ======== PASTOR SHEPHERDING PAGE ======== */
+  .sh-enter-wrap { display:flex; justify-content:center; margin: 26px 0 6px; }
+  .sh-enter-btn {
+    appearance:none; background:transparent; border:1px solid var(--card-border);
+    color:var(--text-dim); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600;
+    letter-spacing:.06em; padding:9px 18px; border-radius:8px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; transition:all .18s;
+  }
+  .sh-enter-btn:hover { border-color:#7c5cd6; color:#a78bfa; background:rgba(124,92,214,0.06); }
+
+  #pastorModal .tmod-title { color:#c4b5fd; }
+  #pastorModal .tmod-lockcard .tmod-dbtn.hi { border-color:#7c5cd6; color:#c4b5fd; }
+  #pastorModal .tmod-lockcard .tmod-dbtn.hi:hover { background:rgba(124,92,214,0.1); }
+
+  /* Congregation health metric cards */
+  .sh-health-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+    gap:12px; margin-bottom:22px;
+  }
+  .sh-metric {
+    background:var(--card-bg); border:1px solid var(--card-border); border-radius:11px;
+    padding:15px 16px; position:relative; overflow:hidden;
+  }
+  .sh-metric::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:#7c5cd6; opacity:.6; }
+  .sh-metric.accent-green::before { background:var(--green); }
+  .sh-metric.accent-amber::before { background:var(--yellow-2); }
+  .sh-metric.accent-red::before { background:var(--red); }
+  .sh-metric.accent-blue::before { background:var(--blue-adults); }
+  .sh-metric-val { font-size:1.9rem; font-weight:900; line-height:1; color:var(--text); }
+  .sh-metric-val small { font-size:.9rem; font-weight:700; color:var(--text-muted); }
+  .sh-metric-lbl { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-top:7px; }
+  .sh-metric-sub { font-size:11px; color:var(--text-dim); margin-top:3px; }
+
+  .sh-section-ttl { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin:6px 0 12px; }
+
+  /* Elder tabs */
+  .sh-elder-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:16px; border-bottom:1px solid var(--card-border); scrollbar-width:none; }
+  .sh-elder-tabs::-webkit-scrollbar { display:none; }
+  .sh-elder-tab {
+    appearance:none; background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:13px; font-weight:600; white-space:nowrap;
+    padding:9px 15px; border-radius:8px; cursor:pointer; transition:all .15s; flex-shrink:0;
+  }
+  .sh-elder-tab:hover { color:var(--text); border-color:#4a4a4a; }
+  .sh-elder-tab.active { background:rgba(124,92,214,0.14); border-color:#7c5cd6; color:#c4b5fd; }
+  .sh-elder-tab .sh-elder-count { font-size:11px; color:var(--text-dim); margin-left:6px; }
+
+  /* Toolbar: filters + search + sort */
+  .sh-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
+  .sh-filters { display:flex; gap:6px; flex-wrap:wrap; }
+  .sh-chip {
+    appearance:none; background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; padding:6px 12px;
+    border-radius:20px; cursor:pointer; transition:all .15s; display:inline-flex; align-items:center; gap:6px;
+  }
+  .sh-chip:hover { color:var(--text); }
+  .sh-chip .sh-dot { width:8px; height:8px; border-radius:50%; background:currentColor; }
+  .sh-chip.active { color:#fff; }
+  .sh-chip.active[data-status="all"]       { background:#3a3a3a; border-color:#555; }
+  .sh-chip.active[data-status="healthy"]   { background:rgba(34,197,94,.16); border-color:var(--green); color:#86efac; }
+  .sh-chip.active[data-status="new"]       { background:rgba(59,130,246,.16); border-color:var(--blue-adults); color:#93c5fd; }
+  .sh-chip.active[data-status="wandering"] { background:rgba(234,179,8,.16); border-color:var(--yellow-2); color:#fde047; }
+  .sh-chip.active[data-status="weak"]      { background:rgba(249,115,22,.16); border-color:#f97316; color:#fdba74; }
+  .sh-chip.active[data-status="lost"]      { background:rgba(239,68,68,.16); border-color:var(--red); color:#fca5a5; }
+  .sh-chip.active[data-status="unknown"]   { background:#333; border-color:#555; color:#ccc; }
+  .sh-chip[data-status="healthy"]   .sh-dot { color:var(--green); }
+  .sh-chip[data-status="new"]       .sh-dot { color:var(--blue-adults); }
+  .sh-chip[data-status="wandering"] .sh-dot { color:var(--yellow-2); }
+  .sh-chip[data-status="weak"]      .sh-dot { color:#f97316; }
+  .sh-chip[data-status="lost"]      .sh-dot { color:var(--red); }
+  .sh-chip[data-status="unknown"]   .sh-dot { color:#888; }
+  .sh-search {
+    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text);
+    font-family:'Montserrat',sans-serif; font-size:13px; padding:8px 12px; border-radius:8px;
+    min-width:170px; flex:1; max-width:260px;
+  }
+  .sh-search:focus { outline:none; border-color:#7c5cd6; }
+  .sh-sort {
+    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:12px; padding:8px 10px; border-radius:8px; cursor:pointer;
+  }
+
+  /* Person cards */
+  .sh-people-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(310px,1fr)); gap:14px; }
+  .sh-person {
+    background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px;
+    padding:16px; display:flex; flex-direction:column; gap:12px; transition:border-color .15s;
+  }
+  .sh-person:hover { border-color:#4a4a4a; }
+  .sh-person-top { display:flex; align-items:flex-start; gap:12px; }
+  .sh-score {
+    width:52px; height:52px; border-radius:50%; flex-shrink:0; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sh-score-num { font-size:19px; font-weight:900; color:var(--text); position:relative; z-index:1; }
+  .sh-score-num small { font-size:10px; color:var(--text-dim); font-weight:700; }
+  .sh-person-id { flex:1; min-width:0; }
+  .sh-person-name { font-size:15.5px; font-weight:700; color:var(--text); line-height:1.2; }
+  .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
+  .sh-badge {
+    font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+    padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px;
+  }
+  .sh-badge.st-healthy   { background:rgba(34,197,94,.15); color:#86efac; }
+  .sh-badge.st-new       { background:rgba(59,130,246,.15); color:#93c5fd; }
+  .sh-badge.st-wandering { background:rgba(234,179,8,.15); color:#fde047; }
+  .sh-badge.st-weak      { background:rgba(249,115,22,.15); color:#fdba74; }
+  .sh-badge.st-lost      { background:rgba(239,68,68,.15); color:#fca5a5; }
+  .sh-badge.st-unknown   { background:#333; color:#bbb; }
+  .sh-badge.st-member    { background:rgba(167,139,250,.14); color:#c4b5fd; }
+  .sh-traj { font-size:13px; font-weight:700; }
+  .sh-traj.up { color:var(--green); } .sh-traj.down { color:var(--red); } .sh-traj.steady { color:var(--text-dim); }
+
+  .sh-pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .sh-pillar { text-align:center; background:#1c1c1c; border-radius:7px; padding:7px 4px; }
+  .sh-pillar-bar { height:4px; border-radius:3px; background:#333; margin-bottom:5px; overflow:hidden; }
+  .sh-pillar-bar > i { display:block; height:100%; border-radius:3px; background:#7c5cd6; }
+  .sh-pillar-lbl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--text-dim); }
+  .sh-pillar-val { font-size:11px; font-weight:800; color:var(--text-muted); margin-top:2px; }
+
+  .sh-facts { font-size:12px; color:var(--text-muted); line-height:1.6; }
+  .sh-facts .sh-fact { display:flex; gap:7px; align-items:flex-start; }
+  .sh-facts .sh-fact .ic { width:15px; flex-shrink:0; text-align:center; opacity:.8; }
+  .sh-flags { display:flex; flex-wrap:wrap; gap:5px; }
+  .sh-flag { font-size:10.5px; font-weight:600; color:#fca5a5; background:rgba(239,68,68,.09); border:1px solid rgba(239,68,68,.25); border-radius:6px; padding:2px 7px; }
+  .sh-notes { font-size:12px; color:var(--text-muted); font-style:italic; border-left:2px solid #7c5cd6; padding-left:10px; line-height:1.5; }
+
+  .sh-contact { display:flex; gap:7px; margin-top:auto; }
+  .sh-cbtn {
+    flex:1; appearance:none; text-decoration:none; text-align:center; cursor:pointer;
+    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; padding:9px 6px; border-radius:8px;
+    transition:all .15s; display:inline-flex; align-items:center; justify-content:center; gap:5px;
+  }
+  .sh-cbtn:hover { color:#fff; border-color:#7c5cd6; background:rgba(124,92,214,0.12); }
+  .sh-cbtn.disabled { opacity:.32; pointer-events:none; }
+
+  .sh-empty { text-align:center; color:var(--text-dim); padding:48px 20px; font-size:14px; }
+  .sh-seed-note {
+    background:rgba(124,92,214,0.08); border:1px solid rgba(124,92,214,0.3); border-radius:9px;
+    padding:12px 15px; margin-bottom:18px; font-size:12.5px; color:#c4b5fd; line-height:1.6;
+  }
+  @media (max-width:600px) {
+    .sh-people-grid { grid-template-columns:1fr; }
+    .sh-health-grid { grid-template-columns:repeat(2,1fr); }
+    #pastorModal .tmod-body { padding:16px 14px 40px; }
+  }
 </style>
 </head>
 <body>
@@ -2153,8 +2301,55 @@
 
   </div>
 
+  <div class="sh-enter-wrap">
+    <button class="sh-enter-btn" onclick="openPastorModal()" title="For pastors &amp; elders">&#128737;&#65039; Pastors</button>
+  </div>
+
   <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno</div>
 </div>
+
+<!-- ======== PASTOR SHEPHERDING (password-gated) ======== -->
+<div class="tmod-overlay" id="pastorModal" aria-hidden="true">
+  <div class="tmod-header">
+    <button class="tmod-back" onclick="closePastorModal()">&larr; Metrics</button>
+    <div class="tmod-titles">
+      <div class="tmod-title">Shepherding</div>
+      <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; PASTOR &amp; ELDER CARE</div>
+    </div>
+    <div class="tmod-meta" id="pastorModMeta"></div>
+  </div>
+  <!-- Lock screen -->
+  <div id="pastorModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
+    <div class="tmod-lockcard">
+      <div class="tmod-lockicon">&#128737;&#65039;</div>
+      <div class="tmod-lockttl">Pastor &amp; Elder Care</div>
+      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes. Enter the password to continue.</div>
+      <input type="password" id="pastorPwInput" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
+      <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="pastorDoUnlock()">Unlock</button>
+      <div id="pastorLockErr" class="tmod-lockerr">Incorrect password.</div>
+    </div>
+  </div>
+  <!-- Unlocked content -->
+  <div id="pastorModContent" class="tmod-body" style="display:none">
+    <div id="pastorSeedNote"></div>
+    <div class="sh-section-ttl">Congregation Health</div>
+    <div class="sh-health-grid" id="shHealthGrid"></div>
+
+    <div class="sh-section-ttl">Shepherding Lists</div>
+    <div class="sh-elder-tabs" id="shElderTabs"></div>
+    <div class="sh-toolbar">
+      <div class="sh-filters" id="shFilters"></div>
+      <input class="sh-search" id="shSearch" type="search" placeholder="Search a name…" oninput="shRenderPeople()">
+      <select class="sh-sort" id="shSort" onchange="shRenderPeople()">
+        <option value="score-desc">Score: high → low</option>
+        <option value="score-asc">Score: low → high</option>
+        <option value="name">Name: A → Z</option>
+        <option value="attention">Needs attention first</option>
+      </select>
+    </div>
+    <div class="sh-people-grid" id="shPeopleGrid"></div>
+  </div>
+</div><!-- /pastorModal overlay -->
 
 <!-- ======== MEMBERS PASSWORD PROMPT ======== -->
 <div id="mmPrompt" role="dialog" aria-modal="true">
@@ -5868,6 +6063,7 @@ function navSetActive(tab) {
 
 function navGo(tab) {
   // Close whichever full-screen sections are open (each close syncs the tab back to Metrics)
+  if (typeof closePastorModal === 'function') closePastorModal();
   if (tab !== 'sunday')   closeSundayModal();
   if (tab !== 'staff')    closeStaffModal();
   if (tab !== 'leaders')  closeTLHub();
@@ -10214,6 +10410,347 @@ function tlhCopy(i, btn) {
     btn.textContent = 'Copied ✓'; btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
   });
+}
+</script>
+
+<!-- ======== PASTOR SHEPHERDING PAGE ======== -->
+<script>
+const PASTOR_HASH = '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d';
+const PASTOR_SESSION_KEY = 'pastor_unlocked';
+const SHEP_DATA_URL = './shepherding-data.json';
+
+let _shepData = null;
+let _shRendered = false;
+let _shActiveElder = 'all';
+let _shActiveStatus = 'all';
+
+const SH_STATUS_LABEL = { healthy:'Healthy', new:'New', wandering:'Wandering', weak:'Weak', lost:'Lost', unknown:'Unknown' };
+const SH_STATUS_ORDER = ['all','healthy','new','wandering','weak','lost','unknown'];
+
+function pastorIsUnlocked() {
+  try { return sessionStorage.getItem(PASTOR_SESSION_KEY) === '1'; } catch (e) { return false; }
+}
+
+function openPastorModal() {
+  const modal = document.getElementById('pastorModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (pastorIsUnlocked()) {
+    document.getElementById('pastorModLocked').style.display = 'none';
+    document.getElementById('pastorModContent').style.display = 'block';
+    if (!_shRendered) shepLoadData();
+  } else {
+    document.getElementById('pastorModLocked').style.display = 'flex';
+    document.getElementById('pastorModContent').style.display = 'none';
+    setTimeout(() => { const el = document.getElementById('pastorPwInput'); if (el) el.focus(); }, 180);
+  }
+}
+
+function closePastorModal() {
+  const modal = document.getElementById('pastorModal');
+  if (!modal || !modal.classList.contains('open')) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+async function pastorDoUnlock() {
+  const pw = document.getElementById('pastorPwInput').value;
+  const errEl = document.getElementById('pastorLockErr');
+  errEl.style.display = 'none';
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  if (hex === PASTOR_HASH) {
+    try { sessionStorage.setItem(PASTOR_SESSION_KEY, '1'); } catch (e) {}
+    document.getElementById('pastorModLocked').style.display = 'none';
+    document.getElementById('pastorModContent').style.display = 'block';
+    if (!_shRendered) shepLoadData();
+    return;
+  }
+  errEl.style.display = 'block';
+  document.getElementById('pastorPwInput').value = '';
+  document.getElementById('pastorPwInput').focus();
+}
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const m = document.getElementById('pastorModal');
+    if (m && m.classList.contains('open')) closePastorModal();
+  }
+});
+
+async function shepLoadData() {
+  const grid = document.getElementById('shPeopleGrid');
+  grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
+  try {
+    const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('shepherding-data ' + res.status);
+    _shepData = await res.json();
+  } catch (e) {
+    grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">' +
+      'It publishes hourly from Planning Center once the sync is running.</span></div>';
+    return;
+  }
+  _shRendered = true;
+
+  // Meta stamp
+  const meta = document.getElementById('pastorModMeta');
+  if (meta) {
+    const when = _shepData.generatedAt || _shepData.asOf;
+    meta.innerHTML = '<b>Last synced</b>' + (when
+      ? new Date(when).toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
+      : '—');
+  }
+
+  // Seed banner
+  const noteEl = document.getElementById('pastorSeedNote');
+  noteEl.innerHTML = _shepData.seed
+    ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve-team involvement below is live, but ' +
+      'maturity scores, giving, contact info and shepherding status fill in automatically after the first Planning Center sync runs.</div>'
+    : '';
+
+  shBuildElderTabs();
+  shBuildFilters();
+  shRenderHealth();
+  shRenderPeople();
+}
+
+function shActiveElderObj() {
+  if (!_shepData) return null;
+  if (_shActiveElder === 'all') return null;
+  return (_shepData.elders || []).find(e => e.elder === _shActiveElder) || null;
+}
+
+// People in the current elder scope (deduped across lists when 'all').
+function shScopePeople() {
+  if (!_shepData) return [];
+  const eo = shActiveElderObj();
+  if (eo) return eo.people || [];
+  const seen = {}, out = [];
+  (_shepData.elders || []).forEach(e => (e.people || []).forEach(p => {
+    const k = p.id || p.name;
+    if (!seen[k]) { seen[k] = 1; out.push(p); }
+  }));
+  return out;
+}
+
+function shScopeSummary() {
+  const eo = shActiveElderObj();
+  if (eo) return eo.summary || {};
+  return (_shepData && _shepData.congregation) || {};
+}
+
+function shBuildElderTabs() {
+  const wrap = document.getElementById('shElderTabs');
+  const elders = _shepData.elders || [];
+  const total = (_shepData.congregation && _shepData.congregation.totalPeople) || 0;
+  let html = '<button class="sh-elder-tab ' + (_shActiveElder === 'all' ? 'active' : '') +
+    '" onclick="shSelectElder(\'all\')">All Elders<span class="sh-elder-count">' + total + '</span></button>';
+  elders.forEach(e => {
+    const n = (e.people || []).length;
+    html += '<button class="sh-elder-tab ' + (_shActiveElder === e.elder ? 'active' : '') +
+      '" onclick="shSelectElder(' + JSON.stringify(e.elder).replace(/"/g, '&quot;') + ')">' +
+      shEsc(e.elder) + '<span class="sh-elder-count">' + n + '</span></button>';
+  });
+  wrap.innerHTML = html;
+}
+
+function shSelectElder(elder) {
+  _shActiveElder = elder;
+  _shActiveStatus = 'all';
+  shBuildElderTabs();
+  shBuildFilters();
+  shRenderHealth();
+  shRenderPeople();
+}
+
+function shBuildFilters() {
+  const wrap = document.getElementById('shFilters');
+  const people = shScopePeople();
+  const counts = {}; SH_STATUS_ORDER.forEach(s => counts[s] = 0);
+  people.forEach(p => { const s = counts.hasOwnProperty(p.status) ? p.status : 'unknown'; counts[s]++; });
+  counts.all = people.length;
+  let html = '';
+  SH_STATUS_ORDER.forEach(s => {
+    if (s !== 'all' && !counts[s]) return; // hide empty status buckets
+    const label = s === 'all' ? 'All' : SH_STATUS_LABEL[s];
+    html += '<button class="sh-chip ' + (_shActiveStatus === s ? 'active' : '') + '" data-status="' + s +
+      '" onclick="shSelectStatus(\'' + s + '\')">' +
+      (s === 'all' ? '' : '<span class="sh-dot"></span>') + label +
+      ' <span style="opacity:.7">' + counts[s] + '</span></button>';
+  });
+  wrap.innerHTML = html;
+}
+
+function shSelectStatus(s) {
+  _shActiveStatus = s;
+  shBuildFilters();
+  shRenderPeople();
+}
+
+function shRenderHealth() {
+  const s = shScopeSummary();
+  const seed = _shepData && _shepData.seed;
+  const pct = s.pct || {};
+  const dash = '<small>—</small>';
+  const cards = [];
+  const pctStr = v => (v == null ? '—' : Math.round(v * 100) + '<small>%</small>');
+
+  cards.push(shMetric(s.totalPeople != null ? s.totalPeople : '—', 'People Shepherded', '', ''));
+  cards.push(shMetric(seed ? dash : (s.avgScore != null ? s.avgScore + '<small>/10</small>' : dash),
+    'Avg Maturity', seed ? 'after first sync' : shScoreWord(s.avgScore), ''));
+  cards.push(shMetric(pctStr(pct.inGroup), 'In a Group', (s.inGroup || 0) + ' people', 'accent-green'));
+  cards.push(shMetric(pctStr(pct.serving), 'Serving', (s.serving || 0) + ' people', 'accent-blue'));
+  cards.push(shMetric(pctStr(pct.leading), 'Leading', (s.leading || 0) + ' leaders', 'accent-blue'));
+  cards.push(shMetric(seed ? dash : pctStr(pct.givingRegular), 'Giving Regularly',
+    seed ? 'after first sync' : ((s.recurring || 0) + ' recurring'), 'accent-green'));
+  cards.push(shMetric(seed ? dash : pctStr(pct.members), 'Members', seed ? 'after first sync' : '', ''));
+  cards.push(shMetric(seed ? dash : (s.needsAttention != null ? s.needsAttention : dash), 'Needs Attention',
+    seed ? 'after first sync' : 'low score / weak / lost', 'accent-red'));
+
+  document.getElementById('shHealthGrid').innerHTML = cards.join('');
+  const ttl = document.querySelector('#pastorModContent .sh-section-ttl');
+  if (ttl) ttl.textContent = _shActiveElder === 'all' ? 'Congregation Health' : (_shActiveElder + "'s List — Health");
+}
+
+function shMetric(val, lbl, sub, accent) {
+  return '<div class="sh-metric ' + (accent || '') + '">' +
+    '<div class="sh-metric-val">' + val + '</div>' +
+    '<div class="sh-metric-lbl">' + shEsc(lbl) + '</div>' +
+    (sub ? '<div class="sh-metric-sub">' + shEsc(sub) + '</div>' : '') + '</div>';
+}
+
+function shScoreWord(avg) {
+  if (avg == null) return '';
+  if (avg >= 7.5) return 'strong overall';
+  if (avg >= 5) return 'growing';
+  if (avg >= 3.5) return 'needs care';
+  return 'at risk';
+}
+
+function shRenderPeople() {
+  if (!_shepData) return;
+  let people = shScopePeople().slice();
+  if (_shActiveStatus !== 'all') {
+    people = people.filter(p => (p.status || 'unknown') === _shActiveStatus);
+  }
+  const q = (document.getElementById('shSearch').value || '').trim().toLowerCase();
+  if (q) people = people.filter(p => (p.name || '').toLowerCase().includes(q));
+
+  const sort = document.getElementById('shSort').value;
+  const sv = p => (p.score == null ? -1 : p.score);
+  people.sort((a, b) => {
+    if (sort === 'name') return a.name.localeCompare(b.name);
+    if (sort === 'score-asc') return sv(a) - sv(b) || a.name.localeCompare(b.name);
+    if (sort === 'attention') {
+      const an = (a.score != null && a.score <= 3) || a.status === 'lost' || a.status === 'weak' ? 1 : 0;
+      const bn = (b.score != null && b.score <= 3) || b.status === 'lost' || b.status === 'weak' ? 1 : 0;
+      if (an !== bn) return bn - an;
+      return sv(a) - sv(b);
+    }
+    return sv(b) - sv(a) || a.name.localeCompare(b.name); // score-desc default
+  });
+
+  const grid = document.getElementById('shPeopleGrid');
+  if (!people.length) { grid.innerHTML = '<div class="sh-empty">No one matches these filters.</div>'; return; }
+  grid.innerHTML = people.map(shPersonCard).join('');
+}
+
+function shScoreRing(score) {
+  if (score == null) {
+    return '<div class="sh-score" style="background:#2a2a2a;border:1px solid #3a3a3a;">' +
+      '<div class="sh-score-num" style="color:#666">—</div></div>';
+  }
+  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#84cc16' : score >= 4 ? '#eab308' : score >= 3 ? '#f97316' : '#ef4444';
+  const deg = Math.round((score / 10) * 360);
+  return '<div class="sh-score" style="background:conic-gradient(' + color + ' ' + deg + 'deg, #333 ' + deg + 'deg);">' +
+    '<div style="position:absolute;inset:4px;border-radius:50%;background:var(--card-bg);"></div>' +
+    '<div class="sh-score-num" style="color:' + color + '">' + score + '<small>/10</small></div></div>';
+}
+
+function shPersonCard(p) {
+  const statusClass = 'st-' + (p.status || 'unknown');
+  const statusLabel = SH_STATUS_LABEL[p.status] || 'Unknown';
+  const traj = p.trajectory === 'up' ? '<span class="sh-traj up" title="Trending up">&#9650;</span>'
+    : p.trajectory === 'down' ? '<span class="sh-traj down" title="Trending down">&#9660;</span>'
+    : '<span class="sh-traj steady" title="Steady">&#8212;</span>';
+
+  // badges
+  let badges = '<span class="sh-badge ' + statusClass + '"><span class="sh-dot" style="width:6px;height:6px;border-radius:50%;background:currentColor;"></span>' + statusLabel + '</span>';
+  if (p.member) badges += '<span class="sh-badge st-member">Member</span>';
+
+  // pillars (only when scored)
+  let pillars = '';
+  if (p.pillars) {
+    const pl = [
+      ['Give', p.pillars.giving, 30],
+      ['Group', p.pillars.group, 30],
+      ['Serve', p.pillars.serve, 25],
+      ['Connect', p.pillars.connect, 15]
+    ];
+    pillars = '<div class="sh-pillars">' + pl.map(([lbl, val, max]) =>
+      '<div class="sh-pillar"><div class="sh-pillar-bar"><i style="width:' + Math.round((val / max) * 100) + '%"></i></div>' +
+      '<div class="sh-pillar-lbl">' + lbl + '</div></div>').join('') + '</div>';
+  }
+
+  // facts
+  const facts = [];
+  if (p.groups && p.groups.length) {
+    facts.push(fact('&#128101;', p.groups.map(g => shEsc(g.name) + (/leader/i.test(g.role) ? ' <span style="color:#c4b5fd">(leader)</span>' : '')).join(', ')));
+  }
+  if (p.serveTeams && p.serveTeams.length) {
+    facts.push(fact('&#129309;', p.serveTeams.map(g => shEsc(g.name) + (/leader/i.test(g.role) ? ' <span style="color:#c4b5fd">(leader)</span>' : '')).join(', ')));
+  }
+  if (p.giving) {
+    const g = p.giving;
+    let gtxt = '';
+    if (g.gifts === 0) gtxt = 'No giving in last ' + (_shepData.givingMonths || 12) + ' mo';
+    else {
+      gtxt = 'Gave in ' + g.monthsGiven + '/' + (_shepData.givingMonths || 12) + ' mo';
+      if (g.recurring) gtxt += ' · recurring';
+      if (g.trend === 'up') gtxt += ' · <span style="color:#86efac">growing</span>';
+      else if (g.trend === 'down') gtxt += ' · <span style="color:#fca5a5">declining</span>';
+    }
+    facts.push(fact('&#128176;', gtxt));
+  }
+  let factsHtml = facts.length ? '<div class="sh-facts">' + facts.join('') + '</div>' : '';
+
+  // flags
+  const flagsHtml = (p.flags && p.flags.length)
+    ? '<div class="sh-flags">' + p.flags.map(f => '<span class="sh-flag">' + shEsc(f) + '</span>').join('') + '</div>' : '';
+
+  // notes
+  const notesHtml = p.shepherdNotes ? '<div class="sh-notes">' + shEsc(p.shepherdNotes) + '</div>' : '';
+
+  // contact buttons
+  const email = p.email || '';
+  const digits = (p.phone || '').replace(/[^\d+]/g, '');
+  const emailBtn = email
+    ? '<a class="sh-cbtn" href="mailto:' + encodeURIComponent(email).replace(/%40/g, '@') + '">&#9993;&#65039; Email</a>'
+    : '<span class="sh-cbtn disabled">&#9993;&#65039; Email</span>';
+  const textBtn = digits
+    ? '<a class="sh-cbtn" href="sms:' + digits + '">&#128172; Text</a>'
+    : '<span class="sh-cbtn disabled">&#128172; Text</span>';
+  const callBtn = digits
+    ? '<a class="sh-cbtn" href="tel:' + digits + '">&#128222; Call</a>'
+    : '<span class="sh-cbtn disabled">&#128222; Call</span>';
+
+  return '<div class="sh-person">' +
+    '<div class="sh-person-top">' + shScoreRing(p.score) +
+      '<div class="sh-person-id"><div class="sh-person-name">' + shEsc(p.name) + ' ' + traj + '</div>' +
+      '<div class="sh-badges">' + badges + '</div></div></div>' +
+    pillars + factsHtml + notesHtml + flagsHtml +
+    '<div class="sh-contact">' + emailBtn + textBtn + callBtn + '</div>' +
+    '</div>';
+
+  function fact(ic, txt) { return '<div class="sh-fact"><span class="ic">' + ic + '</span><span>' + txt + '</span></div>'; }
+}
+
+function shEsc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
+    ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 }
 </script>
 
