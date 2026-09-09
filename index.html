@@ -2396,8 +2396,8 @@
     <div class="tmod-lockcard">
       <div class="tmod-lockicon">&#128737;&#65039;</div>
       <div class="tmod-lockttl">Pastor &amp; Elder Care</div>
-      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes.<br><br>Your password is your <b>first name + the last 4 digits of your phone</b> (e.g. <em>brad6260</em>), so the dashboard knows who's making changes.</div>
-      <input type="password" id="pastorPwInput" placeholder="e.g. brad6260" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
+      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes. Enter your password to continue.</div>
+      <input type="password" id="pastorPwInput" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
       <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="pastorDoUnlock()">Unlock</button>
       <div id="pastorLockErr" class="tmod-lockerr">Incorrect password.</div>
     </div>
