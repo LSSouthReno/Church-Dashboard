@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T02:52:13.230Z",
+  "generatedAt": "2026-09-09T03:53:59.914Z",
   "asOf": "2026-09-08",
   "givingMonths": 12,
   "statusVocab": [
@@ -5722,6 +5722,53 @@
         },
         {
           "id": null,
+          "name": "Anita Bigger",
+          "first": "Anita",
+          "last": "Bigger",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "leader"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member"
+            },
+            {
+              "name": "Presiders",
+              "role": "member"
+            },
+            {
+              "name": "Point Leaders",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Heidi Flores",
           "first": "Heidi",
           "last": "Flores",
@@ -5749,6 +5796,80 @@
           "serveTeams": [
             {
               "name": "Connection Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Anna Ferguson",
+          "first": "Anna",
+          "last": "Ferguson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Connection Team",
+              "role": "member"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Don Lattin",
+          "first": "Don",
+          "last": "Lattin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Lattin Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member"
+            },
+            {
+              "name": "Presiders",
               "role": "member"
             }
           ],
@@ -5839,9 +5960,9 @@
         },
         {
           "id": null,
-          "name": "Anita Bigger",
-          "first": "Anita",
-          "last": "Bigger",
+          "name": "Bill Salcido",
+          "first": "Bill",
+          "last": "Salcido",
           "email": "",
           "phone": "",
           "member": false,
@@ -5855,103 +5976,17 @@
           "giving": null,
           "groups": [
             {
-              "name": "Castaneda Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
+              "name": "Flores Community Group",
               "role": "member"
             }
           ],
           "serveTeams": [
             {
-              "name": "Prayer Team",
-              "role": "leader"
-            },
-            {
-              "name": "Worship Team",
+              "name": "Coffee Team",
               "role": "member"
             },
             {
-              "name": "Presiders",
-              "role": "member"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Anna Ferguson",
-          "first": "Anna",
-          "last": "Ferguson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Connection Team",
-              "role": "member"
-            },
-            {
-              "name": "Chair Crew",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Don Lattin",
-          "first": "Don",
-          "last": "Lattin",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Lattin Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member"
-            },
-            {
-              "name": "Presiders",
+              "name": "8am Enrichment Team (Early Birds)",
               "role": "member"
             }
           ],
@@ -6014,108 +6049,6 @@
           "serveTeams": [
             {
               "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bill Salcido",
-          "first": "Bill",
-          "last": "Salcido",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Flores Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Coffee Team",
-              "role": "member"
-            },
-            {
-              "name": "8am Enrichment Team (Early Birds)",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Helen Peterson",
-          "first": "Helen",
-          "last": "Peterson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Flores/Norton Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Janet Frederick",
-          "first": "Janet",
-          "last": "Frederick",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Frederick/Coggiola/Schelin Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "8am Enrichment Team (Early Birds)",
               "role": "member"
             }
           ],
@@ -6190,66 +6123,6 @@
             }
           ],
           "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Andrew Hess",
-          "first": "Andrew",
-          "last": "Hess",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "Content Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bart Wallace",
-          "first": "Bart",
-          "last": "Wallace",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
           "pending": true
         },
         {
@@ -6386,6 +6259,73 @@
         },
         {
           "id": null,
+          "name": "Helen Peterson",
+          "first": "Helen",
+          "last": "Peterson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Flores/Norton Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Janet Frederick",
+          "first": "Janet",
+          "last": "Frederick",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Frederick/Coggiola/Schelin Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "8am Enrichment Team (Early Birds)",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Jenn Meredith",
           "first": "Jenn",
           "last": "Meredith",
@@ -6452,8 +6392,40 @@
         },
         {
           "id": null,
-          "name": "Bill Wallace",
-          "first": "Bill",
+          "name": "Andrew Hess",
+          "first": "Andrew",
+          "last": "Hess",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "Content Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Bart Wallace",
+          "first": "Bart",
           "last": "Wallace",
           "email": "",
           "phone": "",
@@ -6475,38 +6447,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Chris Taylor",
-          "first": "Chris",
-          "last": "Taylor",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Lattin Community Group",
-              "role": "member"
-            },
-            {
-              "name": "Taylor Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
           ],
           "pending": true
         },
@@ -6535,62 +6475,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Ronald Crook",
-          "first": "Ronald",
-          "last": "Crook",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member"
-            },
-            {
-              "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Tamara Price",
-          "first": "Tamara",
-          "last": "Price",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
           ],
           "pending": true
         },
@@ -6660,8 +6544,8 @@
         },
         {
           "id": null,
-          "name": "Allison Wallace",
-          "first": "Allison",
+          "name": "Bill Wallace",
+          "first": "Bill",
           "last": "Wallace",
           "email": "",
           "phone": "",
@@ -6677,7 +6561,7 @@
           "groups": [],
           "serveTeams": [
             {
-              "name": "Stepping Stones Children's Ministry",
+              "name": "Parking Team",
               "role": "member"
             }
           ],
@@ -6730,6 +6614,38 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Chris Taylor",
+          "first": "Chris",
+          "last": "Taylor",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Lattin Community Group",
+              "role": "member"
+            },
+            {
+              "name": "Taylor Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
             "Not serving"
           ],
           "pending": true
@@ -6868,9 +6784,9 @@
         },
         {
           "id": null,
-          "name": "Mark Buckwalter",
-          "first": "Mark",
-          "last": "Buckwalter",
+          "name": "Melanie Wagner",
+          "first": "Melanie",
+          "last": "Wagner",
           "email": "",
           "phone": "",
           "member": false,
@@ -6968,9 +6884,9 @@
         },
         {
           "id": null,
-          "name": "Tom McDonald",
-          "first": "Tom",
-          "last": "McDonald",
+          "name": "Ronald Crook",
+          "first": "Ronald",
+          "last": "Crook",
           "email": "",
           "phone": "",
           "member": false,
@@ -6985,16 +6901,40 @@
           "groups": [],
           "serveTeams": [
             {
-              "name": "Tech Team",
+              "name": "Hospitality Team",
               "role": "member"
             },
             {
-              "name": "Parking Team",
+              "name": "Prayer Team",
               "role": "member"
             }
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tamara Price",
+          "first": "Tamara",
+          "last": "Price",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
           ],
           "pending": true
         },
@@ -7019,6 +6959,34 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Allison Wallace",
+          "first": "Allison",
+          "last": "Wallace",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -7052,33 +7020,9 @@
         },
         {
           "id": null,
-          "name": "David Misanik",
-          "first": "David",
-          "last": "Misanik",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Melanie Wagner",
-          "first": "Melanie",
-          "last": "Wagner",
+          "name": "Mark Buckwalter",
+          "first": "Mark",
+          "last": "Buckwalter",
           "email": "",
           "phone": "",
           "member": false,
@@ -7119,6 +7063,38 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tom McDonald",
+          "first": "Tom",
+          "last": "McDonald",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Tech Team",
+              "role": "member"
+            },
+            {
+              "name": "Parking Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -7172,9 +7148,57 @@
         },
         {
           "id": null,
+          "name": "David Misanik",
+          "first": "David",
+          "last": "Misanik",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Dawn Forbus",
           "first": "Dawn",
           "last": "Forbus",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Deanna Toffolla",
+          "first": "Deanna",
+          "last": "Toffolla",
           "email": "",
           "phone": "",
           "member": false,
@@ -7316,9 +7340,57 @@
         },
         {
           "id": null,
+          "name": "Jim Pescatore",
+          "first": "Jim",
+          "last": "Pescatore",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Joseph Bozsik",
           "first": "Joseph",
           "last": "Bozsik",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Linda L. McKenzie",
+          "first": "Linda L.",
+          "last": "McKenzie",
           "email": "",
           "phone": "",
           "member": false,
@@ -7412,102 +7484,6 @@
         },
         {
           "id": null,
-          "name": "Tom Bartoldo",
-          "first": "Tom",
-          "last": "Bartoldo",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Deanna Toffolla",
-          "first": "Deanna",
-          "last": "Toffolla",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jim Pescatore",
-          "first": "Jim",
-          "last": "Pescatore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Linda L. McKenzie",
-          "first": "Linda L.",
-          "last": "McKenzie",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Sherri Escobar",
           "first": "Sherri",
           "last": "Escobar",
@@ -7535,6 +7511,30 @@
           "name": "Thomas Alvarez",
           "first": "Thomas",
           "last": "Alvarez",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tom Bartoldo",
+          "first": "Tom",
+          "last": "Bartoldo",
           "email": "",
           "phone": "",
           "member": false,
@@ -7671,107 +7671,6 @@
         },
         {
           "id": null,
-          "name": "Julia Perlingos-Jackson",
-          "first": "Julia",
-          "last": "Perlingos-Jackson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Moore Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Scott Mavros",
-          "first": "Scott",
-          "last": "Mavros",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Colonna/Mavros Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Safety Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bruce Rector",
-          "first": "Bruce",
-          "last": "Rector",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Frederick/Coggiola/Schelin Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Tech Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Fredy Bridges",
           "first": "Fredy",
           "last": "Bridges",
@@ -7811,6 +7710,41 @@
         },
         {
           "id": null,
+          "name": "Julia Perlingos-Jackson",
+          "first": "Julia",
+          "last": "Perlingos-Jackson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Moore Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Natalie Shishido",
           "first": "Natalie",
           "last": "Shishido",
@@ -7834,6 +7768,45 @@
           "serveTeams": [
             {
               "name": "Enrichment Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nathan Meredith",
+          "first": "Nathan",
+          "last": "Meredith",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Bell Community Group",
+              "role": "member"
+            },
+            {
+              "name": "Isaac Griffin Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "Coffee Team",
               "role": "member"
             }
           ],
@@ -7920,9 +7893,9 @@
         },
         {
           "id": null,
-          "name": "Donna Sarazen",
-          "first": "Donna",
-          "last": "Sarazen",
+          "name": "Scott Mavros",
+          "first": "Scott",
+          "last": "Mavros",
           "email": "",
           "phone": "",
           "member": false,
@@ -7936,14 +7909,52 @@
           "giving": null,
           "groups": [
             {
-              "name": "Bridges Community Group",
+              "name": "Colonna/Mavros Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
               "role": "member"
             }
           ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
+          "serveTeams": [
+            {
+              "name": "Safety Team",
+              "role": "member"
+            }
           ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Bruce Rector",
+          "first": "Bruce",
+          "last": "Rector",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Frederick/Coggiola/Schelin Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Tech Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
@@ -7975,104 +7986,6 @@
             }
           ],
           "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kelly Farson",
-          "first": "Kelly",
-          "last": "Farson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Bridges Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Nathan Meredith",
-          "first": "Nathan",
-          "last": "Meredith",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member"
-            },
-            {
-              "name": "Isaac Griffin Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "Coffee Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Aaron Carl",
-          "first": "Aaron",
-          "last": "Carl",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Tech Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
           "pending": true
         },
         {
@@ -8140,41 +8053,6 @@
         },
         {
           "id": null,
-          "name": "Carlos Perez",
-          "first": "Carlos",
-          "last": "Perez",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Lattin Community Group",
-              "role": "member"
-            },
-            {
-              "name": "Gardner Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Carol Moschetti",
           "first": "Carol",
           "last": "Moschetti",
@@ -8192,6 +8070,69 @@
           "groups": [
             {
               "name": "Murad Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Diane Lane",
+          "first": "Diane",
+          "last": "Lane",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Taylor Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Donna Sarazen",
+          "first": "Donna",
+          "last": "Sarazen",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Bridges Community Group",
               "role": "member"
             }
           ],
@@ -8231,37 +8172,6 @@
         },
         {
           "id": null,
-          "name": "Janet Colonna",
-          "first": "Janet",
-          "last": "Colonna",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Jeff Bridges",
           "first": "Jeff",
           "last": "Bridges",
@@ -8297,9 +8207,9 @@
         },
         {
           "id": null,
-          "name": "Kathy Rector",
-          "first": "Kathy",
-          "last": "Rector",
+          "name": "Kelly Farson",
+          "first": "Kelly",
+          "last": "Farson",
           "email": "",
           "phone": "",
           "member": false,
@@ -8313,13 +8223,13 @@
           "giving": null,
           "groups": [
             {
-              "name": "Peissner Community Group",
+              "name": "Bridges Community Group",
               "role": "member"
             }
           ],
           "serveTeams": [
             {
-              "name": "Hands To Heart",
+              "name": "Prayer Team",
               "role": "member"
             }
           ],
@@ -8328,9 +8238,9 @@
         },
         {
           "id": null,
-          "name": "Michael Marchese",
-          "first": "Michael",
-          "last": "Marchese",
+          "name": "Margaret DeLong",
+          "first": "Margaret",
+          "last": "DeLong",
           "email": "",
           "phone": "",
           "member": false,
@@ -8342,15 +8252,15 @@
           "trajectory": "steady",
           "pillars": null,
           "giving": null,
-          "groups": [],
-          "serveTeams": [
+          "groups": [
             {
-              "name": "Stepping Stones Children's Ministry",
+              "name": "Durham Community Group",
               "role": "member"
             }
           ],
+          "serveTeams": [],
           "flags": [
-            "Not in a group"
+            "Not serving"
           ],
           "pending": true
         },
@@ -8391,41 +8301,6 @@
         },
         {
           "id": null,
-          "name": "Nick Steuer",
-          "first": "Nick",
-          "last": "Steuer",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Flores Community Group",
-              "role": "member"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Tony Farson",
           "first": "Tony",
           "last": "Farson",
@@ -8457,9 +8332,37 @@
         },
         {
           "id": null,
-          "name": "Bob Kosher",
-          "first": "Bob",
-          "last": "Kosher",
+          "name": "Aaron Carl",
+          "first": "Aaron",
+          "last": "Carl",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Tech Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Carlos Perez",
+          "first": "Carlos",
+          "last": "Perez",
           "email": "",
           "phone": "",
           "member": false,
@@ -8473,14 +8376,21 @@
           "giving": null,
           "groups": [
             {
-              "name": "Colonna/Mavros Community Group",
+              "name": "Lattin Community Group",
+              "role": "member"
+            },
+            {
+              "name": "Gardner Community Group",
               "role": "member"
             }
           ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
           ],
+          "flags": [],
           "pending": true
         },
         {
@@ -8549,9 +8459,9 @@
         },
         {
           "id": null,
-          "name": "Diane Lane",
-          "first": "Diane",
-          "last": "Lane",
+          "name": "Janet Colonna",
+          "first": "Janet",
+          "last": "Colonna",
           "email": "",
           "phone": "",
           "member": false,
@@ -8565,8 +8475,98 @@
           "giving": null,
           "groups": [
             {
-              "name": "Taylor Community Group",
-              "role": "leader"
+              "name": "Coan/Sellman Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kathy Rector",
+          "first": "Kathy",
+          "last": "Rector",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Peissner Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hands To Heart",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Michael Marchese",
+          "first": "Michael",
+          "last": "Marchese",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nick Steuer",
+          "first": "Nick",
+          "last": "Steuer",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Flores Community Group",
+              "role": "member"
             },
             {
               "name": "CG LEADERS",
@@ -8584,9 +8584,9 @@
         },
         {
           "id": null,
-          "name": "Margaret DeLong",
-          "first": "Margaret",
-          "last": "DeLong",
+          "name": "Bob Kosher",
+          "first": "Bob",
+          "last": "Kosher",
           "email": "",
           "phone": "",
           "member": false,
@@ -8600,60 +8600,12 @@
           "giving": null,
           "groups": [
             {
-              "name": "Durham Community Group",
+              "name": "Colonna/Mavros Community Group",
               "role": "member"
             }
           ],
           "serveTeams": [],
           "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Nettie Jenkins",
-          "first": "Nettie",
-          "last": "Jenkins",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Terry Ackeret",
-          "first": "Terry",
-          "last": "Ackeret",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
             "Not serving"
           ],
           "pending": true
@@ -8820,9 +8772,65 @@
         },
         {
           "id": null,
+          "name": "Marcy Goddard",
+          "first": "Marcy",
+          "last": "Goddard",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "Hands To Heart",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Michael Kuhn",
           "first": "Michael",
           "last": "Kuhn",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nettie Jenkins",
+          "first": "Nettie",
+          "last": "Jenkins",
           "email": "",
           "phone": "",
           "member": false,
@@ -8948,6 +8956,58 @@
         },
         {
           "id": null,
+          "name": "Terry Ackeret",
+          "first": "Terry",
+          "last": "Ackeret",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kristie Marchese",
+          "first": "Kristie",
+          "last": "Marchese",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Lauren Rotter",
           "first": "Lauren",
           "last": "Rotter",
@@ -8970,38 +9030,6 @@
             },
             {
               "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Marcy Goddard",
-          "first": "Marcy",
-          "last": "Goddard",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "Hands To Heart",
               "role": "member"
             }
           ],
@@ -9140,6 +9168,30 @@
         },
         {
           "id": null,
+          "name": "Faith Littlejohn",
+          "first": "Faith",
+          "last": "Littlejohn",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Jenni Pereza",
           "first": "Jenni",
           "last": "Pereza",
@@ -9207,34 +9259,6 @@
           "flags": [
             "Not in a group",
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kristie Marchese",
-          "first": "Kristie",
-          "last": "Marchese",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
@@ -9405,30 +9429,6 @@
             "Not serving"
           ],
           "pending": true
-        },
-        {
-          "id": null,
-          "name": "Faith Littlejohn",
-          "first": "Faith",
-          "last": "Littlejohn",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
         }
       ]
     },
@@ -9516,45 +9516,6 @@
         },
         {
           "id": null,
-          "name": "Ashleigh Cummings",
-          "first": "Ashleigh",
-          "last": "Cummings",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Brown/Frank Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member"
-            },
-            {
-              "name": "LS Students Leaders",
-              "role": "member"
-            },
-            {
-              "name": "Content Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Richard Price",
           "first": "Richard",
           "last": "Price",
@@ -9602,9 +9563,9 @@
         },
         {
           "id": null,
-          "name": "Ashley Peregrin",
-          "first": "Ashley",
-          "last": "Peregrin",
+          "name": "Anthony Azzam",
+          "first": "Anthony",
+          "last": "Azzam",
           "email": "",
           "phone": "",
           "member": false,
@@ -9618,17 +9579,56 @@
           "giving": null,
           "groups": [
             {
-              "name": "Dykins Community Group",
+              "name": "Men’s Tuesday Night: Better Call Paul",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
               "role": "member"
             }
           ],
           "serveTeams": [
             {
-              "name": "Connection Team",
+              "name": "Enrichment Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Ashleigh Cummings",
+          "first": "Ashleigh",
+          "last": "Cummings",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Brown/Frank Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Presiders",
               "role": "member"
             },
             {
-              "name": "Presiders",
+              "name": "LS Students Leaders",
+              "role": "member"
+            },
+            {
+              "name": "Content Team",
               "role": "member"
             }
           ],
@@ -9660,6 +9660,107 @@
           "serveTeams": [
             {
               "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jeremy Low",
+          "first": "Jeremy",
+          "last": "Low",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Peggy Hart",
+          "first": "Peggy",
+          "last": "Hart",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Murad Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member"
+            },
+            {
+              "name": "Prayer Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Ashley Peregrin",
+          "first": "Ashley",
+          "last": "Peregrin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Dykins Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Connection Team",
+              "role": "member"
+            },
+            {
+              "name": "Presiders",
               "role": "member"
             }
           ],
@@ -9707,37 +9808,6 @@
         },
         {
           "id": null,
-          "name": "Jeremy Low",
-          "first": "Jeremy",
-          "last": "Low",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Poleselli / McAlpine Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Jorie Hetland",
           "first": "Jorie",
           "last": "Hetland",
@@ -9761,151 +9831,6 @@
           "serveTeams": [
             {
               "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Anna Moore",
-          "first": "Anna",
-          "last": "Moore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Moore Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member"
-            },
-            {
-              "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jessica Morgan",
-          "first": "Jessica",
-          "last": "Morgan",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Bridges Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Peggy Hart",
-          "first": "Peggy",
-          "last": "Hart",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Murad Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member"
-            },
-            {
-              "name": "Prayer Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Ray Brown",
-          "first": "Ray",
-          "last": "Brown",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Ray Brown Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "leader"
-            },
-            {
-              "name": "Presiders",
-              "role": "member"
-            },
-            {
-              "name": "Point Leaders",
               "role": "member"
             }
           ],
@@ -9984,9 +9909,9 @@
         },
         {
           "id": null,
-          "name": "Anthony Azzam",
-          "first": "Anthony",
-          "last": "Azzam",
+          "name": "Anna Moore",
+          "first": "Anna",
+          "last": "Moore",
           "email": "",
           "phone": "",
           "member": false,
@@ -10000,7 +9925,7 @@
           "giving": null,
           "groups": [
             {
-              "name": "Men’s Tuesday Night: Better Call Paul",
+              "name": "Moore Community Group",
               "role": "leader"
             },
             {
@@ -10010,7 +9935,11 @@
           ],
           "serveTeams": [
             {
-              "name": "Enrichment Team",
+              "name": "Hospitality Team",
+              "role": "member"
+            },
+            {
+              "name": "Prayer Team",
               "role": "member"
             }
           ],
@@ -10047,9 +9976,9 @@
         },
         {
           "id": null,
-          "name": "Daniel Frank",
-          "first": "Daniel",
-          "last": "Frank",
+          "name": "Jerry Dorn",
+          "first": "Jerry",
+          "last": "Dorn",
           "email": "",
           "phone": "",
           "member": false,
@@ -10064,6 +9993,34 @@
           "groups": [
             {
               "name": "Watson Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jessica Morgan",
+          "first": "Jessica",
+          "last": "Morgan",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Bridges Community Group",
               "role": "member"
             }
           ],
@@ -10110,6 +10067,189 @@
         },
         {
           "id": null,
+          "name": "Kylee Capurro",
+          "first": "Kylee",
+          "last": "Capurro",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Thompson/Primus Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nancy Prahm",
+          "first": "Nancy",
+          "last": "Prahm",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Griffin/Watson Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Ray Brown",
+          "first": "Ray",
+          "last": "Brown",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Ray Brown Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "leader"
+            },
+            {
+              "name": "Presiders",
+              "role": "member"
+            },
+            {
+              "name": "Point Leaders",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tonya Lowry",
+          "first": "Tonya",
+          "last": "Lowry",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Daniel Frank",
+          "first": "Daniel",
+          "last": "Frank",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Watson Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Gary Foote",
+          "first": "Gary",
+          "last": "Foote",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Geoffrey Caliger Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Kay Tietz",
           "first": "Kay",
           "last": "Tietz",
@@ -10141,9 +10281,9 @@
         },
         {
           "id": null,
-          "name": "Kylee Capurro",
-          "first": "Kylee",
-          "last": "Capurro",
+          "name": "Kevin Moore",
+          "first": "Kevin",
+          "last": "Moore",
           "email": "",
           "phone": "",
           "member": false,
@@ -10155,15 +10295,15 @@
           "trajectory": "steady",
           "pillars": null,
           "giving": null,
-          "groups": [
+          "groups": [],
+          "serveTeams": [
             {
-              "name": "Thompson/Primus Community Group",
+              "name": "Coffee Team",
               "role": "member"
             }
           ],
-          "serveTeams": [],
           "flags": [
-            "Not serving"
+            "Not in a group"
           ],
           "pending": true
         },
@@ -10196,34 +10336,6 @@
             }
           ],
           "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Nancy Prahm",
-          "first": "Nancy",
-          "last": "Prahm",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Griffin/Watson Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
           "pending": true
         },
         {
@@ -10290,142 +10402,6 @@
         },
         {
           "id": null,
-          "name": "Tonya Lowry",
-          "first": "Tonya",
-          "last": "Lowry",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Gary Foote",
-          "first": "Gary",
-          "last": "Foote",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Geoffrey Caliger Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jerry Dorn",
-          "first": "Jerry",
-          "last": "Dorn",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Watson Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kathy Pavlich",
-          "first": "Kathy",
-          "last": "Pavlich",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kevin Moore",
-          "first": "Kevin",
-          "last": "Moore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Coffee Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Erica Edwards",
           "first": "Erica",
           "last": "Edwards",
@@ -10478,9 +10454,9 @@
         },
         {
           "id": null,
-          "name": "Julie Serpa",
-          "first": "Julie",
-          "last": "Serpa",
+          "name": "Kathy Pavlich",
+          "first": "Kathy",
+          "last": "Pavlich",
           "email": "",
           "phone": "",
           "member": false,
@@ -10493,14 +10469,10 @@
           "pillars": null,
           "giving": null,
           "groups": [],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
+          "serveTeams": [],
           "flags": [
-            "Not in a group"
+            "Not in a group",
+            "Not serving"
           ],
           "pending": true
         },
@@ -10582,30 +10554,6 @@
         },
         {
           "id": null,
-          "name": "Norman Horsley",
-          "first": "Norman",
-          "last": "Horsley",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Campbell Cummings",
           "first": "Campbell",
           "last": "Cummings",
@@ -10658,9 +10606,9 @@
         },
         {
           "id": null,
-          "name": "Elizabeth Wolfgang",
-          "first": "Elizabeth",
-          "last": "Wolfgang",
+          "name": "Julie Serpa",
+          "first": "Julie",
+          "last": "Serpa",
           "email": "",
           "phone": "",
           "member": false,
@@ -10673,10 +10621,14 @@
           "pillars": null,
           "giving": null,
           "groups": [],
-          "serveTeams": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
           "flags": [
-            "Not in a group",
-            "Not serving"
+            "Not in a group"
           ],
           "pending": true
         },
@@ -10706,9 +10658,105 @@
         },
         {
           "id": null,
+          "name": "Norman Horsley",
+          "first": "Norman",
+          "last": "Horsley",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Elizabeth Wolfgang",
+          "first": "Elizabeth",
+          "last": "Wolfgang",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Emily Smith",
           "first": "Emily",
           "last": "Smith",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Erika Maxwell",
+          "first": "Erika",
+          "last": "Maxwell",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kristina DeBerry",
+          "first": "Kristina",
+          "last": "DeBerry",
           "email": "",
           "phone": "",
           "member": false,
@@ -10826,54 +10874,6 @@
         },
         {
           "id": null,
-          "name": "Erika Maxwell",
-          "first": "Erika",
-          "last": "Maxwell",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kristina DeBerry",
-          "first": "Kristina",
-          "last": "DeBerry",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Spencer DeBerry",
           "first": "Spencer",
           "last": "DeBerry",
@@ -10939,6 +10939,49 @@
       "people": [
         {
           "id": null,
+          "name": "Deana Griffin",
+          "first": "Deana",
+          "last": "Griffin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Griffin/Watson Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "leader"
+            },
+            {
+              "name": "Presiders",
+              "role": "member"
+            },
+            {
+              "name": "Lead Guide's Stepping Stones",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Isaac Griffin",
           "first": "Isaac",
           "last": "Griffin",
@@ -10986,88 +11029,6 @@
         },
         {
           "id": null,
-          "name": "Deana Griffin",
-          "first": "Deana",
-          "last": "Griffin",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Griffin/Watson Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "leader"
-            },
-            {
-              "name": "Presiders",
-              "role": "member"
-            },
-            {
-              "name": "Lead Guide's Stepping Stones",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Geoffrey Caliger",
-          "first": "Geoffrey",
-          "last": "Caliger",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Geoffrey Caliger Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "leader"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Lisa Castaneda",
           "first": "Lisa",
           "last": "Castaneda",
@@ -11104,6 +11065,45 @@
             {
               "name": "Presiders",
               "role": "member"
+            },
+            {
+              "name": "Point Leaders",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Geoffrey Caliger",
+          "first": "Geoffrey",
+          "last": "Caliger",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Geoffrey Caliger Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "leader"
             },
             {
               "name": "Point Leaders",
@@ -11317,6 +11317,84 @@
         },
         {
           "id": null,
+          "name": "Savannah Caliger",
+          "first": "Savannah",
+          "last": "Caliger",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Caliger/Rankin Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Stephanie Fava",
+          "first": "Stephanie",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Stephanie Tompkins",
           "first": "Stephanie",
           "last": "Tompkins",
@@ -11340,6 +11418,69 @@
           "serveTeams": [
             {
               "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Annette Breach",
+          "first": "Annette",
+          "last": "Breach",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Bret Coggiola",
+          "first": "Bret",
+          "last": "Coggiola",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Frederick/Coggiola/Schelin Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Safety Team",
               "role": "member"
             }
           ],
@@ -11372,6 +11513,119 @@
           "flags": [
             "Not serving"
           ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Emery Fava",
+          "first": "Emery",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member"
+            },
+            {
+              "name": "Tech Team",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Faith Howes",
+          "first": "Faith",
+          "last": "Howes",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Howes/Peissner Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Presiders",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Gordon Fava",
+          "first": "Gordon",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Ryan Griffin Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "leader"
+            },
+            {
+              "name": "Tech Team",
+              "role": "leader"
+            },
+            {
+              "name": "Point Leaders",
+              "role": "member"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
@@ -11489,87 +11743,9 @@
         },
         {
           "id": null,
-          "name": "Savannah Caliger",
-          "first": "Savannah",
-          "last": "Caliger",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Caliger/Rankin Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member"
-            },
-            {
-              "name": "Worship Team",
-              "role": "member"
-            },
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Stephanie Fava",
-          "first": "Stephanie",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "Worship Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Annette Breach",
-          "first": "Annette",
-          "last": "Breach",
+          "name": "Sedona Shonnard",
+          "first": "Sedona",
+          "last": "Shonnard",
           "email": "",
           "phone": "",
           "member": false,
@@ -11595,9 +11771,9 @@
         },
         {
           "id": null,
-          "name": "Bret Coggiola",
-          "first": "Bret",
-          "last": "Coggiola",
+          "name": "Stefanie Martinez",
+          "first": "Stefanie",
+          "last": "Martinez",
           "email": "",
           "phone": "",
           "member": false,
@@ -11611,28 +11787,21 @@
           "giving": null,
           "groups": [
             {
-              "name": "Frederick/Coggiola/Schelin Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
+              "name": "Murad Community Group",
               "role": "member"
             }
           ],
-          "serveTeams": [
-            {
-              "name": "Safety Team",
-              "role": "member"
-            }
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
           ],
-          "flags": [],
           "pending": true
         },
         {
           "id": null,
-          "name": "Emery Fava",
-          "first": "Emery",
-          "last": "Fava",
+          "name": "Douglas Drake",
+          "first": "Douglas",
+          "last": "Drake",
           "email": "",
           "phone": "",
           "member": false,
@@ -11644,66 +11813,24 @@
           "trajectory": "steady",
           "pillars": null,
           "giving": null,
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member"
-            }
-          ],
+          "groups": [],
           "serveTeams": [
+            {
+              "name": "First Impressions Team",
+              "role": "member"
+            },
             {
               "name": "Enrichment Team",
               "role": "member"
             },
             {
-              "name": "Worship Team",
-              "role": "member"
-            },
-            {
-              "name": "Tech Team",
+              "name": "8am Enrichment Team (Early Birds)",
               "role": "member"
             }
           ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Gordon Fava",
-          "first": "Gordon",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Ryan Griffin Community Group",
-              "role": "member"
-            }
+          "flags": [
+            "Not in a group"
           ],
-          "serveTeams": [
-            {
-              "name": "Worship Team",
-              "role": "leader"
-            },
-            {
-              "name": "Tech Team",
-              "role": "leader"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -11731,6 +11858,41 @@
           "serveTeams": [
             {
               "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Laura Dykins",
+          "first": "Laura",
+          "last": "Dykins",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Dykins Community Group",
+              "role": "leader"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Presiders",
               "role": "member"
             }
           ],
@@ -11798,73 +11960,9 @@
         },
         {
           "id": null,
-          "name": "Sedona Shonnard",
-          "first": "Sedona",
-          "last": "Shonnard",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Douglas Drake",
-          "first": "Douglas",
-          "last": "Drake",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member"
-            },
-            {
-              "name": "Enrichment Team",
-              "role": "member"
-            },
-            {
-              "name": "8am Enrichment Team (Early Birds)",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Faith Howes",
-          "first": "Faith",
-          "last": "Howes",
+          "name": "Allie Fava",
+          "first": "Allie",
+          "last": "Fava",
           "email": "",
           "phone": "",
           "member": false,
@@ -11878,77 +11976,7 @@
           "giving": null,
           "groups": [
             {
-              "name": "Howes/Peissner Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Laura Dykins",
-          "first": "Laura",
-          "last": "Dykins",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Dykins Community Group",
-              "role": "leader"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Stefanie Martinez",
-          "first": "Stefanie",
-          "last": "Martinez",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Murad Community Group",
+              "name": "Castaneda Community Group",
               "role": "member"
             }
           ],
@@ -12012,34 +12040,6 @@
         },
         {
           "id": null,
-          "name": "David Wandishin",
-          "first": "David",
-          "last": "Wandishin",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "James Burns",
           "first": "James",
           "last": "Burns",
@@ -12096,34 +12096,6 @@
         },
         {
           "id": null,
-          "name": "Allie Fava",
-          "first": "Allie",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Barbara Drake",
           "first": "Barbara",
           "last": "Drake",
@@ -12142,6 +12114,34 @@
           "serveTeams": [
             {
               "name": "Enrichment Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "David Wandishin",
+          "first": "David",
+          "last": "Wandishin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "First Impressions Team",
               "role": "member"
             }
           ],
@@ -12175,6 +12175,30 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Ashley Prickett",
+          "first": "Ashley",
+          "last": "Prickett",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
           ],
           "pending": true
         },
@@ -12228,8 +12252,56 @@
         },
         {
           "id": null,
+          "name": "Christopher Oliphant",
+          "first": "Christopher",
+          "last": "Oliphant",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Rafik George Haddad",
           "first": "Rafik George",
+          "last": "Haddad",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "RG Haddad",
+          "first": "RG",
           "last": "Haddad",
           "email": "",
           "phone": "",
@@ -12255,78 +12327,6 @@
           "name": "Warren W Smith",
           "first": "Warren W",
           "last": "Smith",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Ashley Prickett",
-          "first": "Ashley",
-          "last": "Prickett",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Christopher Oliphant",
-          "first": "Christopher",
-          "last": "Oliphant",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "RG Haddad",
-          "first": "RG",
-          "last": "Haddad",
           "email": "",
           "phone": "",
           "member": false,
