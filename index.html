@@ -10720,7 +10720,7 @@ function shPersonCard(p) {
   const flagsHtml = (p.flags&&p.flags.length)?'<div class="sh-flags">'+p.flags.map(f=>'<span class="sh-flag">'+shEsc(f)+'</span>').join('')+'</div>':'';
   const contact = shContactHtml(p);
   const pid = p.id || '';
-  return '<div class="sh-person paci-'+(p.paci||'none')+'" onclick="shOpenDrawer('+JSON.stringify(pid)+')">'
+  return '<div class="sh-person paci-'+(p.paci||'none')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
     +'<div class="sh-person-top"><div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
     +'<div class="sh-badges">'+badges+'</div></div>'+shPaciBadge(p)+'</div>'
     +pillars+factsHtml+flagsHtml+contact+'</div>';
