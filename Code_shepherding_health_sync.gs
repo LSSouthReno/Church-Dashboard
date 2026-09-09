@@ -150,9 +150,13 @@ function syncShepherdingHealth_() {
     var people = l.people.map(function(p){
       var giving = givingCache[p.id] || spEmptyGiving_();
       return spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
-    }).sort(function(a,b){ return (a.score||0)-(b.score||0) || a.name.localeCompare(b.name); }); // infants first within elder
+    });
+    // "Unassigned" = Assigned-Elder FIELD is empty. Members with an elder set but
+    // not yet on the (nightly) smart list are dropped here, not mislabeled.
+    if (l.unassigned) people = people.filter(function(p){ return !p.assignedElder; });
+    people.sort(function(a,b){ return (a.score||0)-(b.score||0) || a.name.localeCompare(b.name); }); // infants first
     return { elder: l.elder, list: l.list, unassigned: !!l.unassigned, summary: spSummarize_(people), people: people };
-  });
+  }).filter(function(e){ return !(e.unassigned && !e.people.length); });  // hide empty Unassigned tab
 
   var uniq = [], seenU = {};
   eldersOut.forEach(function(e){ if (e.unassigned) return; e.people.forEach(function(p){ if (p.id && !seenU[p.id]) { seenU[p.id]=1; uniq.push(p); } }); });
