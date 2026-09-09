@@ -42,7 +42,55 @@ const SH_GIVING_LEDGER    = 'ShepherdingGivingLedger';  // church-wide 24-mo gif
 const SH_GIVING_WM_PROP   = 'SH_GIVING_WATERMARK';      // ISO created_at watermark for delta pulls
 const SH_MANUAL_SHEET     = 'ShepherdingManualMaturity'; // pid | by | date — manual maturity overrides
 const SH_CHANGELOG_SHEET  = 'ShepherdingChangeLog';      // ts | pastor | pid | field | value — audit trail
+const SH_OVERRIDES_SHEET  = 'ShepherdingPendingEdits';   // pid | field | value | by | ts — edits not yet in the hourly snapshot
 const SH_CELL_CHUNK       = 40000;
+
+// ── Pending edits: dashboard changes appear instantly (and survive reloads) by
+// overlaying them on the cached snapshot until the hourly sync catches up. ──
+function spReadOverrides_() {
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SH_OVERRIDES_SHEET);
+    if (!sh) return [];
+    var last = sh.getLastRow(); if (!last) return [];
+    return sh.getRange(1,1,last,5).getValues().filter(function(r){ return r[0]; })
+      .map(function(r){ return { pid:String(r[0]), field:String(r[1]), value:String(r[2]), by:String(r[3]||''), ts:String(r[4]||'') }; });
+  } catch (e) { return []; }
+}
+// Overlay pending edits onto a shepherding-data object (mutates it).
+function spApplyOverrides_(data) {
+  if (!data || !data.elders) return data;
+  var ov = spReadOverrides_(); if (!ov.length) return data;
+  var byId = {};
+  data.elders.forEach(function(e){ (e.people||[]).forEach(function(p){ if (p.id) byId[String(p.id)] = p; }); });
+  var today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'MM/dd/yyyy');
+  ov.forEach(function(o){
+    var p = byId[o.pid]; if (!p) return;
+    var v = o.value;
+    if (o.field==='health') { p.statusRaw=v; p.status=shNormStatus_(v); p.healthDate=today; p.healthDaysAgo=0; p.overdue = (v===''); }
+    else if (o.field==='healthDate') { p.healthDate=v; p.healthDaysAgo=spHealthDaysAgo_(v); p.overdue=(p.healthDaysAgo==null)||(p.healthDaysAgo>SH_OVERDUE_DAYS); }
+    else if (o.field==='maturity') { p.spiritualMat=v; p.maturityManual = v ? { by:o.by, date:(o.ts||'').slice(0,10) } : null; }
+    else if (o.field==='membership') { p.membershipType=v; p.member=/member|deacon|pastor/i.test(v); }
+    else if (o.field==='elder') { p.assignedElder=v; }
+    else if (o.field==='pref') { p.preferredComm=v; }
+    else if (o.field==='known') { p.known=v; }
+    else if (o.field==='deaconSupport') { p.deaconSupport=v; }
+    else if (o.field==='deaconNotes') { p.deaconNotes=v; }
+    p._edited = true;
+  });
+  return data;
+}
+// After a fresh sync (which read PCO directly), drop pending edits made before it started.
+function spClearOverridesBefore_(cutoffIso) {
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SH_OVERRIDES_SHEET);
+    if (!sh) return;
+    var last = sh.getLastRow(); if (!last) return;
+    var rows = sh.getRange(1,1,last,5).getValues();
+    var keep = rows.filter(function(r){ return r[0] && String(r[4]||'') > cutoffIso; });  // keep edits newer than cutoff
+    sh.clearContents();
+    if (keep.length) sh.getRange(1,1,keep.length,5).setValues(keep);
+  } catch (e) {}
+}
 
 // pid → {by, date} for people whose Spiritual Maturity was set from the dashboard.
 function spReadManualMaturity_() {
@@ -177,6 +225,9 @@ function syncShepherdingHealth_() {
 
   spStorePrivate_(out);
   spPushToGitHub_(spBuildPublicSeed_(out));
+  // This snapshot read PCO fresh, so pending edits made before the sync started
+  // are now baked in — drop them (keep any made mid-sync).
+  spClearOverridesBefore_(new Date(startMs).toISOString());
   Logger.log('✓ Shepherding Health — done in ' + Math.round(shElapsed_(startMs)/1000) + 's. people=' +
              uniq.length + ' avgScore=' + out.congregation.avgScore);
 }
@@ -681,7 +732,9 @@ function spSummarize_(people) {
     if (s.paciCounts.hasOwnProperty(p.paci)) s.paciCounts[p.paci]++;
     var st = s.statusCounts.hasOwnProperty(p.status) ? p.status : 'unknown';
     s.statusCounts[st]++;
-    if (p.paci==='infant' || p.status==='lost' || p.status==='weak' || p.status==='could-not-contact') s.needsAttention++;
+    // Needs attention = a pastor-assessed concern, NOT merely low activity. An
+    // "infant" who's healthy doesn't need attention. (Overdue has its own metric.)
+    if (p.status==='lost' || p.status==='weak' || p.status==='could-not-contact') s.needsAttention++;
   });
   s.avgScore = Math.round((sum/n)*10)/10;
   s.pct = { inGroup:s.inGroup/n, serving:s.serving/n, leading:s.leading/n,

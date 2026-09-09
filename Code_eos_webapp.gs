@@ -68,6 +68,7 @@ function doGet(e) {
       // (or the master password) is accepted.
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       var shd = spReadPrivate_();
+      if (shd) spApplyOverrides_(shd);   // overlay pending edits not yet in the hourly snapshot
       return eosWaJson_(shd || { error: 'no_data' });
     }
     if (action === 'shep_person_detail') {

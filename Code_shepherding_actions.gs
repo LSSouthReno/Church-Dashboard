@@ -129,7 +129,7 @@ function shepUpdate_(params) {
   if (field === 'membership') {
     var wm = shWrite_('patch', '/people/v2/people/'+pid, { data:{ type:'Person', id:pid, attributes:{ membership: value } } });
     var okm = wm.code>=200 && wm.code<300;
-    if (okm) spLogChange_(by, pid, 'membership', value);
+    if (okm) { spLogChange_(by, pid, 'membership', value); spUpsertOverride_(pid, 'membership', value, by); }
     return { field:field, ok:okm, code:wm.code, detail: okm?null:(wm.raw||'').substring(0,300) };
   }
 
@@ -144,6 +144,7 @@ function shepUpdate_(params) {
 
   if (r.ok) {
     spLogChange_(by, pid, field, value);
+    spUpsertOverride_(pid, field, value, by);   // show instantly + survive reload until next sync
     // Track that Spiritual Maturity was set manually from the dashboard (or clear it).
     if (field === 'maturity') {
       if (value) { spSetManualMaturity_(pid, by); result.maturityManual = { by:by, date: Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd') }; }
@@ -157,6 +158,21 @@ function shepUpdate_(params) {
     }
   } else result.detail = r.detail;
   return result;
+}
+
+/* ── Pending-edit overlay: one row per (pid, field), newest value wins ── */
+function spUpsertOverride_(pid, field, value, by) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName(SH_OVERRIDES_SHEET) || ss.insertSheet(SH_OVERRIDES_SHEET);
+    try { sh.hideSheet(); } catch (e) {}
+    var last = sh.getLastRow();
+    var rows = last ? sh.getRange(1,1,last,2).getValues() : [];
+    var row = 0; for (var i=0;i<rows.length;i++){ if (String(rows[i][0])===String(pid) && String(rows[i][1])===String(field)) { row=i+1; break; } }
+    var rec = [String(pid), String(field), String(value), by||'', new Date().toISOString()];
+    if (row) sh.getRange(row,1,1,5).setValues([rec]);
+    else sh.appendRow(rec);
+  } catch (e) {}
 }
 
 /* ── Change log + manual-maturity store ── */

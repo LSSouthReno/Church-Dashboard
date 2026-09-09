@@ -10593,7 +10593,7 @@ function shLoadPrefs() {
   try { const p = JSON.parse(localStorage.getItem(shPrefsKey())||'null'); return p||null; } catch (e) { return null; }
 }
 function shLogout() {
-  try { sessionStorage.removeItem(PASTOR_SESSION_KEY); } catch (e) {}
+  try { sessionStorage.removeItem(PASTOR_SESSION_KEY); sessionStorage.removeItem(shCacheKey()); } catch (e) {}
   _shPastorHash=''; _shPastorName=''; _shPastorElder=''; _shRendered=false; _shDefaultedTab=false; _shepData=null;
   document.getElementById('pastorModContent').style.display='none';
   document.getElementById('pastorModLocked').style.display='flex';
@@ -10607,29 +10607,43 @@ document.addEventListener('keydown', (e) => {
   if (m && m.classList.contains('open')) closePastorModal();
 });
 
+function shCacheKey() { return 'sh_cache_' + (_shPastorName||'x'); }
+function shReadCache() { try { const s = sessionStorage.getItem(shCacheKey()); if (!s) return null; const d = JSON.parse(s); return (d && Array.isArray(d.elders)) ? d : null; } catch (e) { return null; } }
+function shWriteCache(d) { try { sessionStorage.setItem(shCacheKey(), JSON.stringify(d)); } catch (e) {} }
+
 async function shepLoadData() {
   const grid = document.getElementById('shPeopleGrid');
-  grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
+  // 1. Instant paint from this session's cache (stale-while-revalidate).
+  const cached = shReadCache();
+  if (cached) shApplyData(cached, true);
+  else grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
+
+  // 2. Fetch fresh in the background; the gated web app first, then the public seed.
   let data = null;
   try {
     const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + '&t=' + Date.now());
     if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) data = j; }
   } catch (e) {}
-  if (!data) {
+  if (!data && !cached) {
     try { const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache:'no-store' }); if (res.ok) data = await res.json(); } catch (e) {}
   }
   if (!data || !Array.isArray(data.elders)) {
-    grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">It publishes hourly from Planning Center once the sync is running.</span></div>';
-    return;
+    if (!cached) grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">It publishes hourly from Planning Center once the sync is running.</span></div>';
+    return; // keep showing cached data if the refresh failed
   }
+  if (!data.seed) shWriteCache(data);
+  shApplyData(data, false);
+}
+
+function shApplyData(data, fromCache) {
   _shepData = data; _shRendered = true;
   const meta = document.getElementById('pastorModMeta');
   if (meta) { const when = data.generatedAt || data.asOf;
-    meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—'); }
+    meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—')
+      + (fromCache ? ' <span style="color:var(--text-dim)">· refreshing…</span>' : ''); }
   document.getElementById('pastorSeedNote').innerHTML = data.seed
     ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve involvement is live, but PACI scores, giving, contact and status fill in after the first Planning Center sync.</div>' : '';
 
-  // Personalize on first load: restore this pastor's saved view, else default to their own list.
   if (!_shDefaultedTab) {
     _shDefaultedTab = true;
     const prefs = shLoadPrefs();
@@ -10640,6 +10654,8 @@ async function shepLoadData() {
     } else if (_shPastorElder && eldersHave(_shPastorElder)) {
       _shActiveElder = _shPastorElder;
     }
+  } else if (_shActiveElder!=='all' && !(data.elders||[]).some(e=>e.elder===_shActiveElder)) {
+    _shActiveElder = 'all'; // the tab we were on vanished (e.g. Unassigned emptied)
   }
   const who = document.getElementById('shWhoami');
   if (who) who.textContent = _shPastorName ? ('Signed in: ' + _shPastorName) : '';
@@ -10717,7 +10733,7 @@ function shRenderHealth() {
   cards.push(shMetric(seed?dash:(pct.givingGrowing!=null?shPct(pct.givingGrowing):dash),'Giving Growing',seed?'':'year over year','accent-green'));
   cards.push(shMetric(seed?dash:(s.notBaptized!=null?s.notBaptized:dash),'Not Baptized',seed?'':'no baptism on file','accent-amber'));
   cards.push(shMetric(seed?dash:(s.overdue!=null?s.overdue:dash),'Check-in Overdue',seed?'':'&gt; 6 months','accent-amber'));
-  cards.push(shMetric(seed?dash:(s.needsAttention!=null?s.needsAttention:dash),'Needs Attention',seed?'':'infant / weak / lost','accent-red'));
+  cards.push(shMetric(seed?dash:(s.needsAttention!=null?s.needsAttention:dash),'Needs Attention',seed?'':'weak / lost / out of contact','accent-red'));
   document.getElementById('shHealthGrid').innerHTML = cards.join('');
   const ttl = document.querySelector('#pastorModContent .sh-section-ttl');
   if (ttl) ttl.textContent = _shActiveElder==='all' ? 'Congregation Health' : (_shActiveElder + "'s List — Health");
@@ -10890,7 +10906,8 @@ async function shSave(field, value, btn) {
           '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
           + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')+'</div>';
         if (field==='maturity') { const box=document.querySelector('#shDrawerBody .sh-d-sec'); if(box){ box.outerHTML = shEditControlsHtml(p); } }
-        if (field==='health'||field==='pref') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
+        if (field==='health'||field==='pref'||field==='membership') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
+        try { shWriteCache(_shepData); } catch(e){}  // keep the session cache in step with the edit
       }
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
