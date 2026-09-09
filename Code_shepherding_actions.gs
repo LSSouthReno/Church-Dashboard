@@ -65,7 +65,9 @@ function shepPersonDetail_(pid) {
   var cats = {};
   var nc = shGet_('/people/v2/note_categories?per_page=100');
   ((nc.json&&nc.json.data)||[]).forEach(function(c){ cats[c.id]=(c.attributes||{}).name; });
-  var nres = shGet_('/people/v2/notes?where[person_id]='+pid+'&per_page=100&order=-created_at');
+  // Person-scoped endpoint — the global /notes?where[person_id] filter is ignored
+  // by PCO and returns everyone's notes.
+  var nres = shGet_('/people/v2/people/'+pid+'/notes?per_page=100&order=-created_at');
   out.notes = (((nres.json&&nres.json.data)||[]).filter(function(nt){ return !SH_NOTE_HIDE[String((nt.attributes||{}).note_category_id||'')]; })
     .map(function(nt){ var a=nt.attributes||{}; var cid=String(a.note_category_id||'');
       return { category: cats[cid]||'General', priority: SH_NOTE_PRIORITY[cid]||1, note:a.note||'', date:a.display_date||a.created_at||'' }; })
