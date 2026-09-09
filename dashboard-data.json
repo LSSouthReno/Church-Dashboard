@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-09T16:46:33.271Z",
+  "lastUpdated": "2026-09-09T17:02:13.934Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 9, 2026, 9:46 AM",
+    "refreshed": "Sep 9, 2026, 10:02 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9438,7 +9438,7 @@
         24,
         26,
         25,
-        10,
+        11,
         null,
         null,
         null
@@ -9485,7 +9485,7 @@
         14,
         16,
         16,
-        10,
+        11,
         null,
         null,
         null
@@ -9580,11 +9580,11 @@
       },
       {
         "name": "Poleselli / McAlpine Community Group",
-        "members": 21,
+        "members": 22,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 13,
-        "attPct": 62
+        "attPct": 59
       },
       {
         "name": "Castaneda Community Group",
@@ -10606,6 +10606,41 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jenn Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Thomas Adams",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Latisha Hill",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Dante Sellman",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -10749,8 +10784,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 106,
+            "totalVols": 106
           }
         }
       ]
