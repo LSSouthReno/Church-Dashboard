@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T08:52:53.279Z",
+  "generatedAt": "2026-09-09T09:52:07.510Z",
   "asOf": "2026-09-09",
   "givingMonths": 12,
   "statusVocab": [
@@ -12,10 +12,10 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 393,
+    "totalPeople": 395,
     "avgScore": 0,
     "inGroup": 219,
-    "serving": 233,
+    "serving": 234,
     "leading": 83,
     "members": 0,
     "givingRegular": 0,
@@ -28,18 +28,18 @@
       "wandering": 0,
       "weak": 0,
       "lost": 0,
-      "unknown": 393
+      "unknown": 395
     },
     "scoreBuckets": {
-      "low": 393,
+      "low": 395,
       "mid": 0,
       "high": 0
     },
-    "needsAttention": 393,
+    "needsAttention": 395,
     "pct": {
-      "inGroup": 0.5572519083969466,
-      "serving": 0.5928753180661578,
-      "leading": 0.21119592875318066,
+      "inGroup": 0.5544303797468354,
+      "serving": 0.5924050632911393,
+      "leading": 0.21012658227848102,
       "members": 0,
       "givingRegular": 0,
       "recurring": 0,
@@ -2272,10 +2272,10 @@
       "elder": "Brad",
       "list": "Shepherding - Brad",
       "summary": {
-        "totalPeople": 57,
+        "totalPeople": 59,
         "avgScore": 0,
         "inGroup": 32,
-        "serving": 32,
+        "serving": 33,
         "leading": 10,
         "members": 0,
         "givingRegular": 0,
@@ -2288,18 +2288,18 @@
           "wandering": 0,
           "weak": 0,
           "lost": 0,
-          "unknown": 57
+          "unknown": 59
         },
         "scoreBuckets": {
-          "low": 57,
+          "low": 59,
           "mid": 0,
           "high": 0
         },
-        "needsAttention": 57,
+        "needsAttention": 59,
         "pct": {
-          "inGroup": 0.5614035087719298,
-          "serving": 0.5614035087719298,
-          "leading": 0.17543859649122806,
+          "inGroup": 0.5423728813559322,
+          "serving": 0.559322033898305,
+          "leading": 0.1694915254237288,
           "members": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -3239,6 +3239,34 @@
         },
         {
           "id": null,
+          "name": "Casey Madison",
+          "first": "Casey",
+          "last": "Madison",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Christina Harter",
           "first": "Christina",
           "last": "Harter",
@@ -3416,6 +3444,30 @@
           "name": "Steve Orr",
           "first": "Steve",
           "last": "Orr",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Zach Madison",
+          "first": "Zach",
+          "last": "Madison",
           "email": "",
           "phone": "",
           "member": false,
@@ -8263,6 +8315,37 @@
         },
         {
           "id": null,
+          "name": "Janet Colonna",
+          "first": "Janet",
+          "last": "Colonna",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "status": "unknown",
+          "statusRaw": "",
+          "shepherdNotes": "",
+          "shepherdFields": {},
+          "score": null,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "groups": [
+            {
+              "name": "Coan/Sellman Community Group",
+              "role": "member"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Jeff Bridges",
           "first": "Jeff",
           "last": "Bridges",
@@ -8541,37 +8624,6 @@
           "serveTeams": [
             {
               "name": "Enrichment Team",
-              "role": "member"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Janet Colonna",
-          "first": "Janet",
-          "last": "Colonna",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "status": "unknown",
-          "statusRaw": "",
-          "shepherdNotes": "",
-          "shepherdFields": {},
-          "score": null,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
               "role": "member"
             }
           ],
