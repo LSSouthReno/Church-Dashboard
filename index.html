@@ -1947,7 +1947,17 @@
   .tlh-stat-val { font-size: 1.6rem; font-weight: 900; color: #f0f0f0; line-height: 1; }
   .tlh-stat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 5px; }
 
-  /* ======== PASTOR SHEPHERDING PAGE ======== */
+  /* ======== PASTOR SHEPHERDING PAGE (teal/slate on charcoal) ======== */
+  #pastorModal, .sh-drawer {
+    --sh-accent:#4bb3c4; --sh-accent-dim:#2c6f7b; --sh-accent-bg:rgba(75,179,196,.12);
+    --sh-sand:#d8c59a; --sh-panel:#1f2426; --sh-panel-2:#181c1e; --sh-line:#333b3d;
+    --paci-parent:#34d399; --paci-adult:#4d9e6a; --paci-child:#eab308; --paci-infant:#ef4444;
+  }
+  #pastorModal .tmod-header { background:#15191a; border-bottom-color:var(--sh-line); }
+  #pastorModal .tmod-title { color:var(--sh-accent); font-weight:800; }
+  #pastorModal .tmod-lockcard .tmod-dbtn.hi { border-color:var(--sh-accent-dim); color:var(--sh-accent); }
+  #pastorModal .tmod-lockcard .tmod-dbtn.hi:hover { background:var(--sh-accent-bg); }
+
   .sh-enter-wrap { display:flex; justify-content:center; margin: 26px 0 6px; }
   .sh-enter-btn {
     appearance:none; background:transparent; border:1px solid var(--card-border);
@@ -1955,144 +1965,200 @@
     letter-spacing:.06em; padding:9px 18px; border-radius:8px; cursor:pointer;
     display:inline-flex; align-items:center; gap:8px; transition:all .18s;
   }
-  .sh-enter-btn:hover { border-color:#7c5cd6; color:#a78bfa; background:rgba(124,92,214,0.06); }
-
-  #pastorModal .tmod-title { color:#c4b5fd; }
-  #pastorModal .tmod-lockcard .tmod-dbtn.hi { border-color:#7c5cd6; color:#c4b5fd; }
-  #pastorModal .tmod-lockcard .tmod-dbtn.hi:hover { background:rgba(124,92,214,0.1); }
+  .sh-enter-btn:hover { border-color:#4bb3c4; color:#4bb3c4; background:rgba(75,179,196,0.06); }
 
   /* Congregation health metric cards */
-  .sh-health-grid {
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-    gap:12px; margin-bottom:22px;
-  }
-  .sh-metric {
-    background:var(--card-bg); border:1px solid var(--card-border); border-radius:11px;
-    padding:15px 16px; position:relative; overflow:hidden;
-  }
-  .sh-metric::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:#7c5cd6; opacity:.6; }
-  .sh-metric.accent-green::before { background:var(--green); }
-  .sh-metric.accent-amber::before { background:var(--yellow-2); }
-  .sh-metric.accent-red::before { background:var(--red); }
-  .sh-metric.accent-blue::before { background:var(--blue-adults); }
-  .sh-metric-val { font-size:1.9rem; font-weight:900; line-height:1; color:var(--text); }
+  .sh-health-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; margin-bottom:22px; }
+  .sh-metric { background:var(--sh-panel); border:1px solid var(--sh-line); border-radius:10px; padding:15px 16px; position:relative; overflow:hidden; }
+  .sh-metric::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--sh-accent-dim); }
+  .sh-metric.accent-green::before { background:var(--paci-adult); }
+  .sh-metric.accent-amber::before { background:var(--paci-child); }
+  .sh-metric.accent-red::before   { background:var(--paci-infant); }
+  .sh-metric.accent-teal::before  { background:var(--sh-accent); }
+  .sh-metric-val { font-size:1.85rem; font-weight:800; line-height:1; color:var(--text); }
   .sh-metric-val small { font-size:.9rem; font-weight:700; color:var(--text-muted); }
   .sh-metric-lbl { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-top:7px; }
   .sh-metric-sub { font-size:11px; color:var(--text-dim); margin-top:3px; }
+  /* PACI distribution bar inside a metric */
+  .sh-paci-bar { display:flex; height:8px; border-radius:4px; overflow:hidden; margin-top:9px; background:#111; }
+  .sh-paci-bar > i { display:block; height:100%; }
+  .sh-paci-bar .p-parent { background:var(--paci-parent); } .sh-paci-bar .p-adult { background:var(--paci-adult); }
+  .sh-paci-bar .p-child { background:var(--paci-child); } .sh-paci-bar .p-infant { background:var(--paci-infant); }
+  .sh-paci-key { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; font-size:10px; color:var(--text-muted); }
+  .sh-paci-key span { display:inline-flex; align-items:center; gap:4px; }
+  .sh-paci-key i { width:8px; height:8px; border-radius:2px; display:inline-block; }
 
   .sh-section-ttl { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin:6px 0 12px; }
 
   /* Elder tabs */
-  .sh-elder-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:16px; border-bottom:1px solid var(--card-border); scrollbar-width:none; }
+  .sh-elder-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:16px; border-bottom:1px solid var(--sh-line); scrollbar-width:none; }
   .sh-elder-tabs::-webkit-scrollbar { display:none; }
   .sh-elder-tab {
-    appearance:none; background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    appearance:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted);
     font-family:'Montserrat',sans-serif; font-size:13px; font-weight:600; white-space:nowrap;
     padding:9px 15px; border-radius:8px; cursor:pointer; transition:all .15s; flex-shrink:0;
   }
-  .sh-elder-tab:hover { color:var(--text); border-color:#4a4a4a; }
-  .sh-elder-tab.active { background:rgba(124,92,214,0.14); border-color:#7c5cd6; color:#c4b5fd; }
+  .sh-elder-tab:hover { color:var(--text); border-color:#4a5457; }
+  .sh-elder-tab.active { background:var(--sh-accent-bg); border-color:var(--sh-accent-dim); color:var(--sh-accent); }
   .sh-elder-tab .sh-elder-count { font-size:11px; color:var(--text-dim); margin-left:6px; }
 
   /* Toolbar: filters + search + sort */
   .sh-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
-  .sh-filters { display:flex; gap:6px; flex-wrap:wrap; }
+  .sh-filter-group { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .sh-filter-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); margin-right:2px; }
   .sh-chip {
-    appearance:none; background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
-    font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; padding:6px 12px;
+    appearance:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; padding:6px 11px;
     border-radius:20px; cursor:pointer; transition:all .15s; display:inline-flex; align-items:center; gap:6px;
   }
-  .sh-chip:hover { color:var(--text); }
+  .sh-chip:hover { color:var(--text); border-color:#4a5457; }
   .sh-chip .sh-dot { width:8px; height:8px; border-radius:50%; background:currentColor; }
-  .sh-chip.active { color:#fff; }
-  .sh-chip.active[data-status="all"]       { background:#3a3a3a; border-color:#555; }
-  .sh-chip.active[data-status="healthy"]   { background:rgba(34,197,94,.16); border-color:var(--green); color:#86efac; }
-  .sh-chip.active[data-status="new"]       { background:rgba(59,130,246,.16); border-color:var(--blue-adults); color:#93c5fd; }
-  .sh-chip.active[data-status="wandering"] { background:rgba(234,179,8,.16); border-color:var(--yellow-2); color:#fde047; }
-  .sh-chip.active[data-status="weak"]      { background:rgba(249,115,22,.16); border-color:#f97316; color:#fdba74; }
-  .sh-chip.active[data-status="lost"]      { background:rgba(239,68,68,.16); border-color:var(--red); color:#fca5a5; }
-  .sh-chip.active[data-status="unknown"]   { background:#333; border-color:#555; color:#ccc; }
-  .sh-chip[data-status="healthy"]   .sh-dot { color:var(--green); }
-  .sh-chip[data-status="new"]       .sh-dot { color:var(--blue-adults); }
-  .sh-chip[data-status="wandering"] .sh-dot { color:var(--yellow-2); }
-  .sh-chip[data-status="weak"]      .sh-dot { color:#f97316; }
-  .sh-chip[data-status="lost"]      .sh-dot { color:var(--red); }
-  .sh-chip[data-status="unknown"]   .sh-dot { color:#888; }
+  .sh-chip.active { color:#fff; border-color:var(--sh-accent-dim); background:var(--sh-accent-bg); }
+  /* PACI chip colors */
+  .sh-chip[data-paci="parent"] .sh-dot { color:var(--paci-parent); }
+  .sh-chip[data-paci="adult"]  .sh-dot { color:var(--paci-adult); }
+  .sh-chip[data-paci="child"]  .sh-dot { color:var(--paci-child); }
+  .sh-chip[data-paci="infant"] .sh-dot { color:var(--paci-infant); }
+  .sh-chip.active[data-paci="parent"] { background:rgba(52,211,153,.16); border-color:var(--paci-parent); color:#6ee7b7; }
+  .sh-chip.active[data-paci="adult"]  { background:rgba(77,158,106,.18); border-color:var(--paci-adult); color:#86efac; }
+  .sh-chip.active[data-paci="child"]  { background:rgba(234,179,8,.16); border-color:var(--paci-child); color:#fde047; }
+  .sh-chip.active[data-paci="infant"] { background:rgba(239,68,68,.16); border-color:var(--paci-infant); color:#fca5a5; }
+  /* health-status chip dots */
+  .sh-chip[data-status="healthy"] .sh-dot { color:var(--paci-adult); }
+  .sh-chip[data-status="weak"] .sh-dot { color:#f97316; }
+  .sh-chip[data-status="wandering"] .sh-dot { color:var(--paci-child); }
+  .sh-chip[data-status="lost"] .sh-dot { color:var(--paci-infant); }
+  .sh-chip[data-status="could-not-contact"] .sh-dot { color:#a78bfa; }
+  .sh-chip[data-status="unknown"] .sh-dot { color:#888; }
   .sh-search {
-    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text);
-    font-family:'Montserrat',sans-serif; font-size:13px; padding:8px 12px; border-radius:8px;
-    min-width:170px; flex:1; max-width:260px;
+    background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text);
+    font-family:'Montserrat',sans-serif; font-size:13px; padding:8px 12px; border-radius:8px; min-width:150px; flex:1; max-width:220px;
   }
-  .sh-search:focus { outline:none; border-color:#7c5cd6; }
-  .sh-sort {
-    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
-    font-family:'Montserrat',sans-serif; font-size:12px; padding:8px 10px; border-radius:8px; cursor:pointer;
-  }
+  .sh-search:focus { outline:none; border-color:var(--sh-accent-dim); }
+  .sh-sort { background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted);
+    font-family:'Montserrat',sans-serif; font-size:12px; padding:8px 10px; border-radius:8px; cursor:pointer; }
 
   /* Person cards */
-  .sh-people-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(310px,1fr)); gap:14px; }
+  .sh-people-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:14px; }
   .sh-person {
-    background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px;
-    padding:16px; display:flex; flex-direction:column; gap:12px; transition:border-color .15s;
+    background:var(--sh-panel); border:1px solid var(--sh-line); border-left-width:4px; border-radius:12px;
+    padding:15px 16px; display:flex; flex-direction:column; gap:11px; transition:border-color .15s, transform .1s; cursor:pointer;
   }
-  .sh-person:hover { border-color:#4a4a4a; }
-  .sh-person-top { display:flex; align-items:flex-start; gap:12px; }
-  .sh-score {
-    width:52px; height:52px; border-radius:50%; flex-shrink:0; position:relative;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .sh-score-num { font-size:19px; font-weight:900; color:var(--text); position:relative; z-index:1; }
-  .sh-score-num small { font-size:10px; color:var(--text-dim); font-weight:700; }
+  .sh-person:hover { border-color:#4a5457; }
+  .sh-person.paci-parent { border-left-color:var(--paci-parent); }
+  .sh-person.paci-adult  { border-left-color:var(--paci-adult); }
+  .sh-person.paci-child  { border-left-color:var(--paci-child); }
+  .sh-person.paci-infant { border-left-color:var(--paci-infant); }
+  .sh-person.paci-none   { border-left-color:var(--sh-line); }
+  .sh-person-top { display:flex; align-items:flex-start; gap:10px; }
   .sh-person-id { flex:1; min-width:0; }
-  .sh-person-name { font-size:15.5px; font-weight:700; color:var(--text); line-height:1.2; }
-  .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
-  .sh-badge {
-    font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
-    padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px;
+  .sh-person-name { font-size:15.5px; font-weight:700; color:var(--text); line-height:1.25; }
+  .sh-traj { font-size:12px; font-weight:700; }
+  .sh-traj.up { color:var(--paci-adult); } .sh-traj.down { color:var(--paci-infant); } .sh-traj.steady { color:var(--text-dim); }
+  .sh-paci-badge {
+    flex-shrink:0; font-size:11px; font-weight:800; letter-spacing:.03em; padding:5px 11px; border-radius:8px;
+    display:inline-flex; align-items:center; gap:6px; text-transform:uppercase;
   }
-  .sh-badge.st-healthy   { background:rgba(34,197,94,.15); color:#86efac; }
-  .sh-badge.st-new       { background:rgba(59,130,246,.15); color:#93c5fd; }
+  .sh-paci-badge::before { content:''; width:8px; height:8px; border-radius:50%; background:currentColor; }
+  .sh-paci-badge.p-parent { background:rgba(52,211,153,.15); color:#6ee7b7; box-shadow:inset 0 0 0 1px rgba(52,211,153,.4); }
+  .sh-paci-badge.p-adult  { background:rgba(77,158,106,.16); color:#86efac; box-shadow:inset 0 0 0 1px rgba(77,158,106,.4); }
+  .sh-paci-badge.p-child  { background:rgba(234,179,8,.15); color:#fde047; box-shadow:inset 0 0 0 1px rgba(234,179,8,.4); }
+  .sh-paci-badge.p-infant { background:rgba(239,68,68,.15); color:#fca5a5; box-shadow:inset 0 0 0 1px rgba(239,68,68,.4); }
+  .sh-paci-badge.p-none   { background:#2a2f31; color:#9aa; }
+
+  .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
+  .sh-badge { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
+  .sh-badge.st-healthy { background:rgba(77,158,106,.15); color:#86efac; }
+  .sh-badge.st-weak { background:rgba(249,115,22,.15); color:#fdba74; }
   .sh-badge.st-wandering { background:rgba(234,179,8,.15); color:#fde047; }
-  .sh-badge.st-weak      { background:rgba(249,115,22,.15); color:#fdba74; }
-  .sh-badge.st-lost      { background:rgba(239,68,68,.15); color:#fca5a5; }
-  .sh-badge.st-unknown   { background:#333; color:#bbb; }
-  .sh-badge.st-member    { background:rgba(167,139,250,.14); color:#c4b5fd; }
-  .sh-traj { font-size:13px; font-weight:700; }
-  .sh-traj.up { color:var(--green); } .sh-traj.down { color:var(--red); } .sh-traj.steady { color:var(--text-dim); }
+  .sh-badge.st-lost { background:rgba(239,68,68,.15); color:#fca5a5; }
+  .sh-badge.st-could-not-contact { background:rgba(167,139,250,.15); color:#c4b5fd; }
+  .sh-badge.st-unknown { background:#2a2f31; color:#9aa; }
+  .sh-badge.st-lead { background:var(--sh-accent-bg); color:var(--sh-accent); }
 
-  .sh-pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
-  .sh-pillar { text-align:center; background:#1c1c1c; border-radius:7px; padding:7px 4px; }
-  .sh-pillar-bar { height:4px; border-radius:3px; background:#333; margin-bottom:5px; overflow:hidden; }
-  .sh-pillar-bar > i { display:block; height:100%; border-radius:3px; background:#7c5cd6; }
+  .sh-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+  .sh-pillar { text-align:center; background:var(--sh-panel-2); border-radius:7px; padding:7px 4px; }
+  .sh-pillar-bar { height:4px; border-radius:3px; background:#2a2f31; margin-bottom:5px; overflow:hidden; }
+  .sh-pillar-bar > i { display:block; height:100%; border-radius:3px; background:var(--sh-accent); }
   .sh-pillar-lbl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--text-dim); }
-  .sh-pillar-val { font-size:11px; font-weight:800; color:var(--text-muted); margin-top:2px; }
 
-  .sh-facts { font-size:12px; color:var(--text-muted); line-height:1.6; }
+  .sh-facts { font-size:12px; color:var(--text-muted); line-height:1.55; display:flex; flex-direction:column; gap:4px; }
   .sh-facts .sh-fact { display:flex; gap:7px; align-items:flex-start; }
-  .sh-facts .sh-fact .ic { width:15px; flex-shrink:0; text-align:center; opacity:.8; }
+  .sh-facts .sh-fact .ic { width:15px; flex-shrink:0; text-align:center; opacity:.85; }
   .sh-flags { display:flex; flex-wrap:wrap; gap:5px; }
-  .sh-flag { font-size:10.5px; font-weight:600; color:#fca5a5; background:rgba(239,68,68,.09); border:1px solid rgba(239,68,68,.25); border-radius:6px; padding:2px 7px; }
-  .sh-notes { font-size:12px; color:var(--text-muted); font-style:italic; border-left:2px solid #7c5cd6; padding-left:10px; line-height:1.5; }
+  .sh-flag { font-size:10.5px; font-weight:600; color:#fca5a5; background:rgba(239,68,68,.09); border:1px solid rgba(239,68,68,.22); border-radius:6px; padding:2px 7px; }
 
   .sh-contact { display:flex; gap:7px; margin-top:auto; }
   .sh-cbtn {
     flex:1; appearance:none; text-decoration:none; text-align:center; cursor:pointer;
-    background:#1e1e1e; border:1px solid var(--card-border); color:var(--text-muted);
+    background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted);
     font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; padding:9px 6px; border-radius:8px;
     transition:all .15s; display:inline-flex; align-items:center; justify-content:center; gap:5px;
   }
-  .sh-cbtn:hover { color:#fff; border-color:#7c5cd6; background:rgba(124,92,214,0.12); }
-  .sh-cbtn.disabled { opacity:.32; pointer-events:none; }
+  .sh-cbtn:hover { color:#fff; border-color:var(--sh-accent-dim); background:var(--sh-accent-bg); }
+  .sh-cbtn.disabled { opacity:.3; pointer-events:none; }
+  .sh-cbtn.pref { border-color:var(--sh-accent-dim); color:var(--sh-accent); }
 
   .sh-empty { text-align:center; color:var(--text-dim); padding:48px 20px; font-size:14px; }
-  .sh-seed-note {
-    background:rgba(124,92,214,0.08); border:1px solid rgba(124,92,214,0.3); border-radius:9px;
-    padding:12px 15px; margin-bottom:18px; font-size:12.5px; color:#c4b5fd; line-height:1.6;
+  .sh-seed-note { background:var(--sh-accent-bg); border:1px solid var(--sh-accent-dim); border-radius:9px; padding:12px 15px; margin-bottom:18px; font-size:12.5px; color:var(--sh-accent); line-height:1.6; }
+
+  /* ── Detail drawer ── */
+  .sh-drawer-ov { position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:3000; opacity:0; pointer-events:none; transition:opacity .2s; }
+  .sh-drawer-ov.open { opacity:1; pointer-events:auto; }
+  .sh-drawer {
+    position:fixed; top:0; right:0; height:100%; width:min(520px,100%); background:var(--bg);
+    border-left:1px solid var(--sh-line); z-index:3001; transform:translateX(100%); transition:transform .22s ease;
+    display:flex; flex-direction:column; box-shadow:-8px 0 40px rgba(0,0,0,.4);
   }
+  .sh-drawer.open { transform:translateX(0); }
+  .sh-drawer-head { padding:18px 20px; border-bottom:1px solid var(--sh-line); display:flex; align-items:flex-start; gap:12px; background:#15191a; }
+  .sh-drawer-head .sh-person-name { font-size:19px; }
+  .sh-drawer-close { appearance:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:16px; flex-shrink:0; }
+  .sh-drawer-close:hover { color:#fff; border-color:#4a5457; }
+  .sh-drawer-body { flex:1; overflow-y:auto; padding:18px 20px 40px; }
+  .sh-drawer-body::-webkit-scrollbar { width:8px; } .sh-drawer-body::-webkit-scrollbar-thumb { background:#444; border-radius:4px; }
+  .sh-d-sec { margin-bottom:22px; }
+  .sh-d-sec h4 { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--sh-accent); margin:0 0 10px; padding-bottom:6px; border-bottom:1px solid var(--sh-line); }
+  .sh-edit-row { display:flex; gap:8px; align-items:center; margin-bottom:10px; flex-wrap:wrap; }
+  .sh-edit-row label { font-size:12px; color:var(--text-muted); width:110px; flex-shrink:0; font-weight:600; }
+  .sh-edit-row select, .sh-edit-row input {
+    flex:1; min-width:120px; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text);
+    font-family:'Montserrat',sans-serif; font-size:13px; padding:7px 9px; border-radius:7px;
+  }
+  .sh-edit-row select:focus, .sh-edit-row input:focus { outline:none; border-color:var(--sh-accent-dim); }
+  .sh-save-btn { appearance:none; background:var(--sh-accent-dim); border:1px solid var(--sh-accent); color:#eafcff; font-weight:700; font-size:12px; padding:7px 14px; border-radius:7px; cursor:pointer; font-family:'Montserrat',sans-serif; }
+  .sh-save-btn:hover { background:var(--sh-accent); color:#04222a; }
+  .sh-save-btn:disabled { opacity:.5; cursor:default; }
+  .sh-save-note { font-size:11px; margin-left:4px; }
+  .sh-save-note.ok { color:#6ee7b7; } .sh-save-note.err { color:#fca5a5; }
+  .sh-wf-steps { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+  .sh-wf-step { display:flex; align-items:center; gap:9px; font-size:12.5px; color:var(--text-muted); padding:7px 10px; border-radius:7px; background:var(--sh-panel-2); border:1px solid var(--sh-line); }
+  .sh-wf-step.current { border-color:var(--sh-accent-dim); background:var(--sh-accent-bg); color:var(--sh-accent); font-weight:700; }
+  .sh-wf-step .dot { width:9px; height:9px; border-radius:50%; background:var(--sh-line); flex-shrink:0; }
+  .sh-wf-step.current .dot { background:var(--sh-accent); }
+  .sh-wf-step.done .dot { background:var(--paci-adult); }
+  .sh-note { background:var(--sh-panel); border:1px solid var(--sh-line); border-radius:8px; padding:11px 13px; margin-bottom:9px; }
+  .sh-note .meta { font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); margin-bottom:5px; display:flex; justify-content:space-between; gap:8px; }
+  .sh-note .cat { color:var(--sh-accent); font-weight:700; }
+  .sh-note.pri .cat { color:#fca5a5; }
+  .sh-note .body { font-size:13px; color:var(--text); line-height:1.55; white-space:pre-wrap; }
+  .sh-kv { display:flex; gap:10px; font-size:12.5px; padding:5px 0; border-bottom:1px solid var(--sh-panel-2); }
+  .sh-kv .k { color:var(--text-dim); width:150px; flex-shrink:0; }
+  .sh-kv .v { color:var(--text); }
+  .sh-tabgrp { margin-bottom:14px; } .sh-tabgrp .tt { font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; }
+  .sh-form { background:var(--sh-panel); border:1px solid var(--sh-line); border-radius:8px; margin-bottom:8px; overflow:hidden; }
+  .sh-form summary { padding:10px 13px; cursor:pointer; font-size:13px; font-weight:600; color:var(--text); display:flex; justify-content:space-between; gap:8px; }
+  .sh-form summary .dt { font-size:11px; color:var(--text-dim); font-weight:500; }
+  .sh-form .ans { padding:2px 13px 12px; }
+  .sh-form .ans .q { font-size:11px; color:var(--text-dim); margin-top:8px; }
+  .sh-form .ans .a { font-size:13px; color:var(--text); }
+  .sh-d-loading { color:var(--text-dim); font-size:13px; padding:20px 0; text-align:center; }
+
   @media (max-width:600px) {
     .sh-people-grid { grid-template-columns:1fr; }
     .sh-health-grid { grid-template-columns:repeat(2,1fr); }
     #pastorModal .tmod-body { padding:16px 14px 40px; }
+    .sh-edit-row label { width:100%; }
   }
 </style>
 </head>
@@ -2337,19 +2403,30 @@
 
     <div class="sh-section-ttl">Shepherding Lists</div>
     <div class="sh-elder-tabs" id="shElderTabs"></div>
+    <div id="shFilters"></div>
     <div class="sh-toolbar">
-      <div class="sh-filters" id="shFilters"></div>
       <input class="sh-search" id="shSearch" type="search" placeholder="Search a name…" oninput="shRenderPeople()">
       <select class="sh-sort" id="shSort" onchange="shRenderPeople()">
-        <option value="score-desc">Score: high → low</option>
-        <option value="score-asc">Score: low → high</option>
-        <option value="name">Name: A → Z</option>
-        <option value="attention">Needs attention first</option>
+        <option value="infants">Sort: Infants first</option>
+        <option value="parents">Sort: Parents first</option>
+        <option value="name">Sort: Name A → Z</option>
+        <option value="giving">Sort: Giving high → low</option>
+        <option value="serving">Sort: Most serving</option>
       </select>
     </div>
     <div class="sh-people-grid" id="shPeopleGrid"></div>
   </div>
 </div><!-- /pastorModal overlay -->
+
+<!-- Person detail drawer (lazy-loaded from PCO) -->
+<div class="sh-drawer-ov" id="shDrawerOv" onclick="shCloseDrawer()"></div>
+<div class="sh-drawer" id="shDrawer" aria-hidden="true">
+  <div class="sh-drawer-head">
+    <div class="sh-person-id" id="shDrawerHead"></div>
+    <button class="sh-drawer-close" onclick="shCloseDrawer()" title="Close">&times;</button>
+  </div>
+  <div class="sh-drawer-body" id="shDrawerBody"></div>
+</div><!-- /sh-drawer -->
 
 <!-- ======== MEMBERS PASSWORD PROMPT ======== -->
 <div id="mmPrompt" role="dialog" aria-modal="true">
@@ -10422,19 +10499,24 @@ const SHEP_DATA_URL = './shepherding-data.json';
 let _shepData = null;
 let _shRendered = false;
 let _shActiveElder = 'all';
+let _shActivePaci = 'all';
 let _shActiveStatus = 'all';
+let _shToggles = { group:false, serving:false, leading:false, giving:false };
+let _shDetail = {};      // pid -> loaded detail
+let _shCurrentPid = null;
 
-const SH_STATUS_LABEL = { healthy:'Healthy', new:'New', wandering:'Wandering', weak:'Weak', lost:'Lost', unknown:'Unknown' };
-const SH_STATUS_ORDER = ['all','healthy','new','wandering','weak','lost','unknown'];
+const SH_PACI_LABEL = { parent:'Parent', adult:'Adult', child:'Child', infant:'Infant' };
+const SH_STATUS_LABEL = { healthy:'Healthy', weak:'Weak', wandering:'Wandering', lost:'Lost', 'could-not-contact':'Could Not Contact', unknown:'Unknown' };
+const SH_STATUS_ORDER = ['all','healthy','weak','wandering','lost','could-not-contact','unknown'];
+const SH_PACI_ORDER = ['all','parent','adult','child','infant'];
+const SH_HEALTH_OPTS = ['Healthy','Weak','Wandering','Lost','Could Not Contact'];
+const SH_MATURITY_OPTS = ['N/A','Infant','Child','Adult','Parent'];
 
-function pastorIsUnlocked() {
-  try { return sessionStorage.getItem(PASTOR_SESSION_KEY) === '1'; } catch (e) { return false; }
-}
+function pastorIsUnlocked() { try { return sessionStorage.getItem(PASTOR_SESSION_KEY) === '1'; } catch (e) { return false; } }
 
 function openPastorModal() {
   const modal = document.getElementById('pastorModal');
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
   if (pastorIsUnlocked()) {
     document.getElementById('pastorModLocked').style.display = 'none';
@@ -10446,331 +10528,367 @@ function openPastorModal() {
     setTimeout(() => { const el = document.getElementById('pastorPwInput'); if (el) el.focus(); }, 180);
   }
 }
-
 function closePastorModal() {
   const modal = document.getElementById('pastorModal');
   if (!modal || !modal.classList.contains('open')) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
+  shCloseDrawer();
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
 }
-
 async function pastorDoUnlock() {
   const pw = document.getElementById('pastorPwInput').value;
-  const errEl = document.getElementById('pastorLockErr');
-  errEl.style.display = 'none';
+  const errEl = document.getElementById('pastorLockErr'); errEl.style.display = 'none';
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
   if (hex === PASTOR_HASH) {
-    try { sessionStorage.setItem(PASTOR_SESSION_KEY, '1'); } catch (e) {}
+    try { sessionStorage.setItem(PASTOR_SESSION_KEY,'1'); } catch (e) {}
     document.getElementById('pastorModLocked').style.display = 'none';
     document.getElementById('pastorModContent').style.display = 'block';
     if (!_shRendered) shepLoadData();
     return;
   }
   errEl.style.display = 'block';
-  document.getElementById('pastorPwInput').value = '';
-  document.getElementById('pastorPwInput').focus();
+  document.getElementById('pastorPwInput').value = ''; document.getElementById('pastorPwInput').focus();
 }
-
-// Close on Escape
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    const m = document.getElementById('pastorModal');
-    if (m && m.classList.contains('open')) closePastorModal();
-  }
+  if (e.key !== 'Escape') return;
+  const d = document.getElementById('shDrawer');
+  if (d && d.classList.contains('open')) { shCloseDrawer(); return; }
+  const m = document.getElementById('pastorModal');
+  if (m && m.classList.contains('open')) closePastorModal();
 });
 
 async function shepLoadData() {
   const grid = document.getElementById('shPeopleGrid');
   grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
-
   let data = null;
-  // 1. Full sensitive data comes from the password-gated Apps Script web app
-  //    (the private data is never in a public file). PASTOR_HASH is the same
-  //    hash the user just unlocked with.
   try {
     const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + PASTOR_HASH + '&t=' + Date.now());
-    if (res.ok) {
-      const j = await res.json();
-      if (j && !j.error && Array.isArray(j.elders)) data = j;
-    }
-  } catch (e) { /* fall through to the safe public seed */ }
-
-  // 2. Fallback: the sanitised public seed (names + group/serve only) so the
-  //    page still renders something useful if the web app is unreachable.
+    if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) data = j; }
+  } catch (e) {}
   if (!data) {
-    try {
-      const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
-      if (res.ok) data = await res.json();
-    } catch (e) { /* handled below */ }
+    try { const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache:'no-store' }); if (res.ok) data = await res.json(); } catch (e) {}
   }
-
   if (!data || !Array.isArray(data.elders)) {
-    grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">' +
-      'It publishes hourly from Planning Center once the sync is running.</span></div>';
+    grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">It publishes hourly from Planning Center once the sync is running.</span></div>';
     return;
   }
-  _shepData = data;
-  _shRendered = true;
-
-  // Meta stamp
+  _shepData = data; _shRendered = true;
   const meta = document.getElementById('pastorModMeta');
-  if (meta) {
-    const when = _shepData.generatedAt || _shepData.asOf;
-    meta.innerHTML = '<b>Last synced</b>' + (when
-      ? new Date(when).toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
-      : '—');
-  }
-
-  // Seed banner
-  const noteEl = document.getElementById('pastorSeedNote');
-  noteEl.innerHTML = _shepData.seed
-    ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve-team involvement below is live, but ' +
-      'maturity scores, giving, contact info and shepherding status fill in automatically after the first Planning Center sync runs.</div>'
-    : '';
-
-  shBuildElderTabs();
-  shBuildFilters();
-  shRenderHealth();
-  shRenderPeople();
+  if (meta) { const when = data.generatedAt || data.asOf;
+    meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—'); }
+  document.getElementById('pastorSeedNote').innerHTML = data.seed
+    ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve involvement is live, but PACI scores, giving, contact and status fill in after the first Planning Center sync.</div>' : '';
+  shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople();
 }
 
-function shActiveElderObj() {
-  if (!_shepData) return null;
-  if (_shActiveElder === 'all') return null;
-  return (_shepData.elders || []).find(e => e.elder === _shActiveElder) || null;
-}
-
-// People in the current elder scope (deduped across lists when 'all').
+function shActiveElderObj() { if (!_shepData || _shActiveElder==='all') return null; return (_shepData.elders||[]).find(e => e.elder===_shActiveElder) || null; }
 function shScopePeople() {
   if (!_shepData) return [];
-  const eo = shActiveElderObj();
-  if (eo) return eo.people || [];
-  const seen = {}, out = [];
-  (_shepData.elders || []).forEach(e => (e.people || []).forEach(p => {
-    const k = p.id || p.name;
-    if (!seen[k]) { seen[k] = 1; out.push(p); }
-  }));
-  return out;
+  const eo = shActiveElderObj(); if (eo) return eo.people||[];
+  const seen={}, out=[]; (_shepData.elders||[]).forEach(e => (e.people||[]).forEach(p => { const k=p.id||p.name; if(!seen[k]){seen[k]=1;out.push(p);} })); return out;
 }
-
-function shScopeSummary() {
-  const eo = shActiveElderObj();
-  if (eo) return eo.summary || {};
-  return (_shepData && _shepData.congregation) || {};
-}
+function shScopeSummary() { const eo = shActiveElderObj(); return eo ? (eo.summary||{}) : ((_shepData&&_shepData.congregation)||{}); }
 
 function shBuildElderTabs() {
-  const wrap = document.getElementById('shElderTabs');
-  const elders = _shepData.elders || [];
-  const total = (_shepData.congregation && _shepData.congregation.totalPeople) || 0;
-  let html = '<button class="sh-elder-tab ' + (_shActiveElder === 'all' ? 'active' : '') +
-    '" onclick="shSelectElder(\'all\')">All Elders<span class="sh-elder-count">' + total + '</span></button>';
-  elders.forEach(e => {
-    const n = (e.people || []).length;
-    html += '<button class="sh-elder-tab ' + (_shActiveElder === e.elder ? 'active' : '') +
-      '" onclick="shSelectElder(' + JSON.stringify(e.elder).replace(/"/g, '&quot;') + ')">' +
-      shEsc(e.elder) + '<span class="sh-elder-count">' + n + '</span></button>';
-  });
+  const wrap = document.getElementById('shElderTabs'); const elders = _shepData.elders||[];
+  const total = (_shepData.congregation&&_shepData.congregation.totalPeople)||0;
+  let html = '<button class="sh-elder-tab '+(_shActiveElder==='all'?'active':'')+'" onclick="shSelectElder(\'all\')">All Elders<span class="sh-elder-count">'+total+'</span></button>';
+  elders.forEach(e => { html += '<button class="sh-elder-tab '+(_shActiveElder===e.elder?'active':'')+'" onclick="shSelectElder('+JSON.stringify(e.elder).replace(/"/g,'&quot;')+')">'+shEsc(e.elder)+'<span class="sh-elder-count">'+(e.people||[]).length+'</span></button>'; });
   wrap.innerHTML = html;
 }
-
-function shSelectElder(elder) {
-  _shActiveElder = elder;
-  _shActiveStatus = 'all';
-  shBuildElderTabs();
-  shBuildFilters();
-  shRenderHealth();
-  shRenderPeople();
-}
+function shSelectElder(el) { _shActiveElder=el; _shActivePaci='all'; _shActiveStatus='all'; _shToggles={group:false,serving:false,leading:false,giving:false}; shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople(); }
 
 function shBuildFilters() {
-  const wrap = document.getElementById('shFilters');
   const people = shScopePeople();
-  const counts = {}; SH_STATUS_ORDER.forEach(s => counts[s] = 0);
-  people.forEach(p => { const s = counts.hasOwnProperty(p.status) ? p.status : 'unknown'; counts[s]++; });
-  counts.all = people.length;
-  let html = '';
-  SH_STATUS_ORDER.forEach(s => {
-    if (s !== 'all' && !counts[s]) return; // hide empty status buckets
-    const label = s === 'all' ? 'All' : SH_STATUS_LABEL[s];
-    html += '<button class="sh-chip ' + (_shActiveStatus === s ? 'active' : '') + '" data-status="' + s +
-      '" onclick="shSelectStatus(\'' + s + '\')">' +
-      (s === 'all' ? '' : '<span class="sh-dot"></span>') + label +
-      ' <span style="opacity:.7">' + counts[s] + '</span></button>';
+  const paciC = {all:people.length,parent:0,adult:0,child:0,infant:0};
+  const statC = {}; SH_STATUS_ORDER.forEach(s=>statC[s]=0); statC.all=people.length;
+  people.forEach(p => { if (paciC.hasOwnProperty(p.paci)) paciC[p.paci]++; const s=statC.hasOwnProperty(p.status)?p.status:'unknown'; statC[s]++; });
+  let html = '<div class="sh-toolbar" style="margin-bottom:10px"><div class="sh-filter-group"><span class="sh-filter-lbl">Maturity</span>';
+  SH_PACI_ORDER.forEach(s => {
+    if (s!=='all' && !paciC[s]) return;
+    const lbl = s==='all'?'All':SH_PACI_LABEL[s];
+    html += '<button class="sh-chip '+(_shActivePaci===s?'active':'')+'" data-paci="'+s+'" onclick="shSelectPaci(\''+s+'\')">'+(s==='all'?'':'<span class="sh-dot"></span>')+lbl+' <span style="opacity:.6">'+paciC[s]+'</span></button>';
   });
-  wrap.innerHTML = html;
+  html += '</div></div>';
+  html += '<div class="sh-toolbar" style="margin-bottom:10px"><div class="sh-filter-group"><span class="sh-filter-lbl">Health</span>';
+  SH_STATUS_ORDER.forEach(s => {
+    if (s!=='all' && !statC[s]) return;
+    const lbl = s==='all'?'All':SH_STATUS_LABEL[s];
+    html += '<button class="sh-chip '+(_shActiveStatus===s?'active':'')+'" data-status="'+s+'" onclick="shSelectStatus(\''+s+'\')">'+(s==='all'?'':'<span class="sh-dot"></span>')+lbl+' <span style="opacity:.6">'+statC[s]+'</span></button>';
+  });
+  html += '</div></div>';
+  html += '<div class="sh-toolbar" style="margin-bottom:0"><div class="sh-filter-group"><span class="sh-filter-lbl">Only</span>';
+  [['group','In a group'],['serving','Serving'],['leading','Leading'],['giving','Giving']].forEach(t => {
+    html += '<button class="sh-chip '+(_shToggles[t[0]]?'active':'')+'" onclick="shToggle(\''+t[0]+'\')">'+t[1]+'</button>';
+  });
+  html += '</div></div>';
+  document.getElementById('shFilters').innerHTML = html;
 }
+function shSelectPaci(s){ _shActivePaci=s; shBuildFilters(); shRenderPeople(); }
+function shSelectStatus(s){ _shActiveStatus=s; shBuildFilters(); shRenderPeople(); }
+function shToggle(t){ _shToggles[t]=!_shToggles[t]; shBuildFilters(); shRenderPeople(); }
 
-function shSelectStatus(s) {
-  _shActiveStatus = s;
-  shBuildFilters();
-  shRenderPeople();
-}
-
+function shPct(v){ return v==null?'—':Math.round(v*100)+'<small>%</small>'; }
 function shRenderHealth() {
-  const s = shScopeSummary();
-  const seed = _shepData && _shepData.seed;
-  const pct = s.pct || {};
-  const dash = '<small>—</small>';
+  const s = shScopeSummary(); const seed = _shepData && _shepData.seed; const pct = s.pct||{};
+  const pc = s.paciCounts||{parent:0,adult:0,child:0,infant:0};
   const cards = [];
-  const pctStr = v => (v == null ? '—' : Math.round(v * 100) + '<small>%</small>');
-
-  cards.push(shMetric(s.totalPeople != null ? s.totalPeople : '—', 'People Shepherded', '', ''));
-  cards.push(shMetric(seed ? dash : (s.avgScore != null ? s.avgScore + '<small>/10</small>' : dash),
-    'Avg Maturity', seed ? 'after first sync' : shScoreWord(s.avgScore), ''));
-  cards.push(shMetric(pctStr(pct.inGroup), 'In a Group', (s.inGroup || 0) + ' people', 'accent-green'));
-  cards.push(shMetric(pctStr(pct.serving), 'Serving', (s.serving || 0) + ' people', 'accent-blue'));
-  cards.push(shMetric(pctStr(pct.leading), 'Leading', (s.leading || 0) + ' leaders', 'accent-blue'));
-  cards.push(shMetric(seed ? dash : pctStr(pct.givingRegular), 'Giving Regularly',
-    seed ? 'after first sync' : ((s.recurring || 0) + ' recurring'), 'accent-green'));
-  cards.push(shMetric(seed ? dash : pctStr(pct.members), 'Members', seed ? 'after first sync' : '', ''));
-  cards.push(shMetric(seed ? dash : (s.needsAttention != null ? s.needsAttention : dash), 'Needs Attention',
-    seed ? 'after first sync' : 'low score / weak / lost', 'accent-red'));
-
+  const dash = '<small>—</small>';
+  cards.push(shMetric((s.totalPeople!=null?s.totalPeople:'—'), 'People Shepherded', '', 'accent-teal'));
+  // PACI distribution card (full mix)
+  if (!seed) {
+    const tot = (pc.parent+pc.adult+pc.child+pc.infant)||1;
+    const bar = '<div class="sh-paci-bar">'
+      +'<i class="p-parent" style="width:'+(pc.parent/tot*100)+'%"></i>'
+      +'<i class="p-adult" style="width:'+(pc.adult/tot*100)+'%"></i>'
+      +'<i class="p-child" style="width:'+(pc.child/tot*100)+'%"></i>'
+      +'<i class="p-infant" style="width:'+(pc.infant/tot*100)+'%"></i></div>'
+      +'<div class="sh-paci-key"><span><i style="background:var(--paci-parent)"></i>'+pc.parent+' Parent</span>'
+      +'<span><i style="background:var(--paci-adult)"></i>'+pc.adult+' Adult</span>'
+      +'<span><i style="background:var(--paci-child)"></i>'+pc.child+' Child</span>'
+      +'<span><i style="background:var(--paci-infant)"></i>'+pc.infant+' Infant</span></div>';
+    cards.push('<div class="sh-metric" style="grid-column:span 2"><div class="sh-metric-lbl">Maturity Mix (PACI)</div>'+bar+'</div>');
+  }
+  cards.push(shMetric(shPct(pct.inGroup),'In a Group',(s.inGroup||0)+' people','accent-green'));
+  cards.push(shMetric(shPct(pct.serving),'Serving',(s.serving||0)+' people','accent-teal'));
+  cards.push(shMetric(shPct(pct.leading),'Leading',(s.leading||0)+' leaders','accent-teal'));
+  cards.push(shMetric(seed?dash:shPct(pct.givingRegular),'Giving Regularly',seed?'after first sync':((s.recurring||0)+' recurring'),'accent-green'));
+  cards.push(shMetric(seed?dash:(pct.givingGrowing!=null?shPct(pct.givingGrowing):dash),'Giving Growing',seed?'':'year over year','accent-green'));
+  cards.push(shMetric(seed?dash:(s.needsAttention!=null?s.needsAttention:dash),'Needs Attention',seed?'':'infant / weak / lost','accent-red'));
   document.getElementById('shHealthGrid').innerHTML = cards.join('');
   const ttl = document.querySelector('#pastorModContent .sh-section-ttl');
-  if (ttl) ttl.textContent = _shActiveElder === 'all' ? 'Congregation Health' : (_shActiveElder + "'s List — Health");
+  if (ttl) ttl.textContent = _shActiveElder==='all' ? 'Congregation Health' : (_shActiveElder + "'s List — Health");
 }
-
-function shMetric(val, lbl, sub, accent) {
-  return '<div class="sh-metric ' + (accent || '') + '">' +
-    '<div class="sh-metric-val">' + val + '</div>' +
-    '<div class="sh-metric-lbl">' + shEsc(lbl) + '</div>' +
-    (sub ? '<div class="sh-metric-sub">' + shEsc(sub) + '</div>' : '') + '</div>';
-}
-
-function shScoreWord(avg) {
-  if (avg == null) return '';
-  if (avg >= 7.5) return 'strong overall';
-  if (avg >= 5) return 'growing';
-  if (avg >= 3.5) return 'needs care';
-  return 'at risk';
-}
+function shMetric(val,lbl,sub,accent){ return '<div class="sh-metric '+(accent||'')+'"><div class="sh-metric-val">'+val+'</div><div class="sh-metric-lbl">'+shEsc(lbl)+'</div>'+(sub?'<div class="sh-metric-sub">'+shEsc(sub)+'</div>':'')+'</div>'; }
 
 function shRenderPeople() {
   if (!_shepData) return;
   let people = shScopePeople().slice();
-  if (_shActiveStatus !== 'all') {
-    people = people.filter(p => (p.status || 'unknown') === _shActiveStatus);
-  }
-  const q = (document.getElementById('shSearch').value || '').trim().toLowerCase();
-  if (q) people = people.filter(p => (p.name || '').toLowerCase().includes(q));
-
+  if (_shActivePaci!=='all') people = people.filter(p => p.paci===_shActivePaci);
+  if (_shActiveStatus!=='all') people = people.filter(p => (p.status||'unknown')===_shActiveStatus);
+  if (_shToggles.group) people = people.filter(p => p.groups && p.groups.length);
+  if (_shToggles.serving) people = people.filter(p => p.serveTeams && p.serveTeams.length);
+  if (_shToggles.leading) people = people.filter(p => p.leads);
+  if (_shToggles.giving) people = people.filter(p => p.giving && (p.giving.recurring || p.giving.monthsGiven>=6));
+  const q = (document.getElementById('shSearch').value||'').trim().toLowerCase();
+  if (q) people = people.filter(p => (p.name||'').toLowerCase().includes(q));
+  const rank = {infant:0,child:1,adult:2,parent:3};
+  const sv = p => (p.score==null?-1:p.score);
   const sort = document.getElementById('shSort').value;
-  const sv = p => (p.score == null ? -1 : p.score);
-  people.sort((a, b) => {
-    if (sort === 'name') return a.name.localeCompare(b.name);
-    if (sort === 'score-asc') return sv(a) - sv(b) || a.name.localeCompare(b.name);
-    if (sort === 'attention') {
-      const an = (a.score != null && a.score <= 3) || a.status === 'lost' || a.status === 'weak' ? 1 : 0;
-      const bn = (b.score != null && b.score <= 3) || b.status === 'lost' || b.status === 'weak' ? 1 : 0;
-      if (an !== bn) return bn - an;
-      return sv(a) - sv(b);
-    }
-    return sv(b) - sv(a) || a.name.localeCompare(b.name); // score-desc default
+  people.sort((a,b) => {
+    if (sort==='name') return a.name.localeCompare(b.name);
+    if (sort==='parents') return (rank[b.paci]||0)-(rank[a.paci]||0) || sv(b)-sv(a) || a.name.localeCompare(b.name);
+    if (sort==='giving') return ((b.giving&&b.giving.totalCents)||0)-((a.giving&&a.giving.totalCents)||0) || a.name.localeCompare(b.name);
+    if (sort==='serving') return ((b.serveTeams||[]).length)-((a.serveTeams||[]).length) || a.name.localeCompare(b.name);
+    return (rank[a.paci]||0)-(rank[b.paci]||0) || sv(a)-sv(b) || a.name.localeCompare(b.name); // infants first
   });
-
   const grid = document.getElementById('shPeopleGrid');
   if (!people.length) { grid.innerHTML = '<div class="sh-empty">No one matches these filters.</div>'; return; }
   grid.innerHTML = people.map(shPersonCard).join('');
 }
 
-function shScoreRing(score) {
-  if (score == null) {
-    return '<div class="sh-score" style="background:#2a2a2a;border:1px solid #3a3a3a;">' +
-      '<div class="sh-score-num" style="color:#666">—</div></div>';
-  }
-  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#84cc16' : score >= 4 ? '#eab308' : score >= 3 ? '#f97316' : '#ef4444';
-  const deg = Math.round((score / 10) * 360);
-  return '<div class="sh-score" style="background:conic-gradient(' + color + ' ' + deg + 'deg, #333 ' + deg + 'deg);">' +
-    '<div style="position:absolute;inset:4px;border-radius:50%;background:var(--card-bg);"></div>' +
-    '<div class="sh-score-num" style="color:' + color + '">' + score + '<small>/10</small></div></div>';
+function shPaciBadge(p) {
+  if (!p.paci) return '<span class="sh-paci-badge p-none">Pending</span>';
+  return '<span class="sh-paci-badge p-'+p.paci+'">'+SH_PACI_LABEL[p.paci]+'</span>';
 }
-
 function shPersonCard(p) {
-  const statusClass = 'st-' + (p.status || 'unknown');
-  const statusLabel = SH_STATUS_LABEL[p.status] || 'Unknown';
-  const traj = p.trajectory === 'up' ? '<span class="sh-traj up" title="Trending up">&#9650;</span>'
-    : p.trajectory === 'down' ? '<span class="sh-traj down" title="Trending down">&#9660;</span>'
-    : '<span class="sh-traj steady" title="Steady">&#8212;</span>';
-
-  // badges
-  let badges = '<span class="sh-badge ' + statusClass + '"><span class="sh-dot" style="width:6px;height:6px;border-radius:50%;background:currentColor;"></span>' + statusLabel + '</span>';
-  if (p.member) badges += '<span class="sh-badge st-member">Member</span>';
-
-  // pillars (only when scored)
+  const traj = p.trajectory==='up'?'<span class="sh-traj up" title="Giving up YoY">&#9650;</span>'
+    : p.trajectory==='down'?'<span class="sh-traj down" title="Giving down YoY">&#9660;</span>'
+    : '<span class="sh-traj steady">&#8212;</span>';
+  let badges = '';
+  if (p.status && p.status!=='unknown') badges += '<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>';
+  if (p.leads) badges += '<span class="sh-badge st-lead">Leader</span>';
   let pillars = '';
   if (p.pillars) {
-    const pl = [
-      ['Give', p.pillars.giving, 30],
-      ['Group', p.pillars.group, 30],
-      ['Serve', p.pillars.serve, 25],
-      ['Connect', p.pillars.connect, 15]
-    ];
-    pillars = '<div class="sh-pillars">' + pl.map(([lbl, val, max]) =>
-      '<div class="sh-pillar"><div class="sh-pillar-bar"><i style="width:' + Math.round((val / max) * 100) + '%"></i></div>' +
-      '<div class="sh-pillar-lbl">' + lbl + '</div></div>').join('') + '</div>';
+    const pl = [['Give',p.pillars.giving,35],['Group',p.pillars.group,35],['Serve',p.pillars.serve,30]];
+    pillars = '<div class="sh-pillars">'+pl.map(x=>'<div class="sh-pillar"><div class="sh-pillar-bar"><i style="width:'+Math.round(x[1]/x[2]*100)+'%"></i></div><div class="sh-pillar-lbl">'+x[0]+'</div></div>').join('')+'</div>';
   }
-
-  // facts
   const facts = [];
-  if (p.groups && p.groups.length) {
-    facts.push(fact('&#128101;', p.groups.map(g => shEsc(g.name) + (/leader/i.test(g.role) ? ' <span style="color:#c4b5fd">(leader)</span>' : '')).join(', ')));
-  }
-  if (p.serveTeams && p.serveTeams.length) {
-    facts.push(fact('&#129309;', p.serveTeams.map(g => shEsc(g.name) + (/leader/i.test(g.role) ? ' <span style="color:#c4b5fd">(leader)</span>' : '')).join(', ')));
-  }
+  if (p.groups && p.groups.length) facts.push(shFact('&#128101;', p.groups.map(g=>shEsc(g.name)+(/leader/i.test(g.role)?' <span style="color:var(--sh-accent)">(leader)</span>':'')).join(', ')));
+  if (p.serveTeams && p.serveTeams.length) facts.push(shFact('&#129309;', p.serveTeams.map(g=>shEsc(g.name)+(/leader/i.test(g.role)?' <span style="color:var(--sh-accent)">(leader)</span>':'')).join(', ')));
   if (p.giving) {
-    const g = p.giving;
-    let gtxt = '';
-    if (g.gifts === 0) gtxt = 'No giving in last ' + (_shepData.givingMonths || 12) + ' mo';
-    else {
-      gtxt = 'Gave in ' + g.monthsGiven + '/' + (_shepData.givingMonths || 12) + ' mo';
-      if (g.recurring) gtxt += ' · recurring';
-      if (g.trend === 'up') gtxt += ' · <span style="color:#86efac">growing</span>';
-      else if (g.trend === 'down') gtxt += ' · <span style="color:#fca5a5">declining</span>';
-    }
-    facts.push(fact('&#128176;', gtxt));
+    const g = p.giving; let t;
+    if (g.gifts===0) t = 'No giving in last '+(_shepData.givingMonths||12)+' mo';
+    else { t = 'Gave in '+Math.min(g.monthsGiven,(_shepData.givingMonths||12))+'/'+(_shepData.givingMonths||12)+' mo';
+      if (g.recurring) t += ' · recurring';
+      if (g.trend==='up') t += ' · <span style="color:#86efac">growing</span>';
+      else if (g.trend==='down') t += ' · <span style="color:#fca5a5">declining</span>'; }
+    facts.push(shFact('&#128176;', t));
   }
-  let factsHtml = facts.length ? '<div class="sh-facts">' + facts.join('') + '</div>' : '';
-
-  // flags
-  const flagsHtml = (p.flags && p.flags.length)
-    ? '<div class="sh-flags">' + p.flags.map(f => '<span class="sh-flag">' + shEsc(f) + '</span>').join('') + '</div>' : '';
-
-  // notes
-  const notesHtml = p.shepherdNotes ? '<div class="sh-notes">' + shEsc(p.shepherdNotes) + '</div>' : '';
-
-  // contact buttons
-  const email = p.email || '';
-  const digits = (p.phone || '').replace(/[^\d+]/g, '');
-  const emailBtn = email
-    ? '<a class="sh-cbtn" href="mailto:' + encodeURIComponent(email).replace(/%40/g, '@') + '">&#9993;&#65039; Email</a>'
-    : '<span class="sh-cbtn disabled">&#9993;&#65039; Email</span>';
-  const textBtn = digits
-    ? '<a class="sh-cbtn" href="sms:' + digits + '">&#128172; Text</a>'
-    : '<span class="sh-cbtn disabled">&#128172; Text</span>';
-  const callBtn = digits
-    ? '<a class="sh-cbtn" href="tel:' + digits + '">&#128222; Call</a>'
-    : '<span class="sh-cbtn disabled">&#128222; Call</span>';
-
-  return '<div class="sh-person">' +
-    '<div class="sh-person-top">' + shScoreRing(p.score) +
-      '<div class="sh-person-id"><div class="sh-person-name">' + shEsc(p.name) + ' ' + traj + '</div>' +
-      '<div class="sh-badges">' + badges + '</div></div></div>' +
-    pillars + factsHtml + notesHtml + flagsHtml +
-    '<div class="sh-contact">' + emailBtn + textBtn + callBtn + '</div>' +
-    '</div>';
-
-  function fact(ic, txt) { return '<div class="sh-fact"><span class="ic">' + ic + '</span><span>' + txt + '</span></div>'; }
+  const factsHtml = facts.length?'<div class="sh-facts">'+facts.join('')+'</div>':'';
+  const flagsHtml = (p.flags&&p.flags.length)?'<div class="sh-flags">'+p.flags.map(f=>'<span class="sh-flag">'+shEsc(f)+'</span>').join('')+'</div>':'';
+  const contact = shContactHtml(p);
+  const pid = p.id || '';
+  return '<div class="sh-person paci-'+(p.paci||'none')+'" onclick="shOpenDrawer('+JSON.stringify(pid)+')">'
+    +'<div class="sh-person-top"><div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
+    +'<div class="sh-badges">'+badges+'</div></div>'+shPaciBadge(p)+'</div>'
+    +pillars+factsHtml+flagsHtml+contact+'</div>';
+}
+function shFact(ic,txt){ return '<div class="sh-fact"><span class="ic">'+ic+'</span><span>'+txt+'</span></div>'; }
+function shContactHtml(p) {
+  const email = p.email||''; const digits = (p.phone||'').replace(/[^\d+]/g,'');
+  const pref = (p.preferredComm||'').toLowerCase();
+  const eC = 'sh-cbtn'+(pref.indexOf('email')!==-1?' pref':'');
+  const tC = 'sh-cbtn'+(pref.indexOf('text')!==-1?' pref':'');
+  const cC = 'sh-cbtn'+(pref.indexOf('phone')!==-1?' pref':'');
+  const stop = 'onclick="event.stopPropagation()"';
+  const eBtn = email?'<a class="'+eC+'" '+stop+' href="mailto:'+email.replace(/"/g,'')+'">&#9993;&#65039; Email</a>':'<span class="sh-cbtn disabled">&#9993;&#65039; Email</span>';
+  const tBtn = digits?'<a class="'+tC+'" '+stop+' href="sms:'+digits+'">&#128172; Text</a>':'<span class="sh-cbtn disabled">&#128172; Text</span>';
+  const cBtn = digits?'<a class="'+cC+'" '+stop+' href="tel:'+digits+'">&#128222; Call</a>':'<span class="sh-cbtn disabled">&#128222; Call</span>';
+  return '<div class="sh-contact">'+eBtn+tBtn+cBtn+'</div>';
 }
 
-function shEsc(s) {
-  return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
-    ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+/* ── Detail drawer ── */
+function shFindPerson(pid){ if(!_shepData||!pid) return null; for(const e of _shepData.elders){ const f=(e.people||[]).find(p=>String(p.id)===String(pid)); if(f) return f; } return null; }
+function shOpenDrawer(pid) {
+  if (!pid) return;
+  _shCurrentPid = pid;
+  const p = shFindPerson(pid); if (!p) return;
+  document.getElementById('shDrawerHead').innerHTML =
+    '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
+    + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')
+    + '</div>';
+  document.getElementById('shDrawerBody').innerHTML = shEditControlsHtml(p) + '<div class="sh-d-loading" id="shDetailLoading">Loading Planning Center details…</div>';
+  document.getElementById('shDrawer').classList.add('open');
+  document.getElementById('shDrawerOv').classList.add('open');
+  document.getElementById('shDrawer').setAttribute('aria-hidden','false');
+  shLoadDetail(pid);
 }
+function shCloseDrawer() {
+  const d=document.getElementById('shDrawer'); if(!d) return;
+  d.classList.remove('open'); d.setAttribute('aria-hidden','true');
+  document.getElementById('shDrawerOv').classList.remove('open');
+}
+function shEditControlsHtml(p) {
+  const elderOpts = (_shepData.elderOptions||[]);
+  const sel = (opts, cur) => opts.map(o=>'<option '+(String(o).toLowerCase()===String(cur||'').toLowerCase()?'selected':'')+'>'+shEsc(o)+'</option>').join('');
+  let h = '<div class="sh-d-sec"><h4>Update Shepherding</h4>';
+  h += '<div class="sh-edit-row"><label>Health status</label><select id="shEdHealth">'+sel(['— none —'].concat(SH_HEALTH_OPTS), p.statusRaw)+'</select>'
+     + '<button class="sh-save-btn" onclick="shSave(\'health\',document.getElementById(\'shEdHealth\').value,this)">Save</button><span class="sh-save-note" id="shNoteHealth"></span></div>';
+  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+' <em>(auto-set to today on save)</em></span></div>';
+  h += '<div class="sh-edit-row"><label>Spiritual maturity</label><select id="shEdMat">'+sel(SH_MATURITY_OPTS, p.spiritualMat)+'</select>'
+     + '<button class="sh-save-btn" onclick="shSave(\'maturity\',document.getElementById(\'shEdMat\').value,this)">Save</button><span class="sh-save-note" id="shNoteMaturity"></span></div>';
+  if (elderOpts.length) h += '<div class="sh-edit-row"><label>Shepherding pastor</label><select id="shEdElder">'+sel(elderOpts, p.assignedElder)+'</select>'
+     + '<button class="sh-save-btn" onclick="shSave(\'elder\',document.getElementById(\'shEdElder\').value,this)">Save</button><span class="sh-save-note" id="shNoteElder"></span></div>'
+     + '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 0 0">Reassignment moves them to the new list after Planning Center\'s nightly list refresh.</div>';
+  h += '</div>';
+  return h;
+}
+async function shSave(field, value, btn) {
+  const pid = _shCurrentPid; if (!pid) return;
+  const noteId = 'shNote'+field.charAt(0).toUpperCase()+field.slice(1);
+  const note = document.getElementById(noteId);
+  let val = value; if (field==='health' && /none/.test(val)) val = '';
+  btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Saving…'; }
+  try {
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_update&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&field='+field+'&value='+encodeURIComponent(val)+'&t='+Date.now());
+    const j = await res.json();
+    if (j && j.ok) {
+      if (note){ note.className='sh-save-note ok'; note.textContent='Saved ✓'; }
+      const p = shFindPerson(pid);
+      if (p) {
+        if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val); if (j.healthDateSet) p.healthDate=j.healthDateSet; }
+        if (field==='maturity') p.spiritualMat=val;
+        if (field==='elder') p.assignedElder=val;
+        // refresh header + card
+        document.getElementById('shDrawerHead').innerHTML =
+          '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
+          + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')+'</div>';
+        shBuildFilters(); shRenderHealth(); shRenderPeople();
+      }
+    } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
+  } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
+  btn.disabled = false;
+}
+function shNormStatusClient(raw){ const v=String(raw||'').toLowerCase(); if(!v)return 'unknown'; if(v.indexOf('healthy')!==-1)return'healthy'; if(v.indexOf('weak')!==-1)return'weak'; if(v.indexOf('wander')!==-1)return'wandering'; if(v.indexOf('lost')!==-1)return'lost'; if(v.indexOf('could')!==-1||v.indexOf('contact')!==-1)return'could-not-contact'; return 'unknown'; }
+
+async function shLoadDetail(pid) {
+  let d = _shDetail[pid];
+  if (!d) {
+    try {
+      const res = await fetch(EOS_WEBAPP_URL + '?action=shep_person_detail&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&t='+Date.now());
+      d = await res.json(); _shDetail[pid] = d;
+    } catch (e) { d = { error:'load failed' }; }
+  }
+  if (_shCurrentPid !== pid) return; // drawer changed while loading
+  const loading = document.getElementById('shDetailLoading'); if (loading) loading.remove();
+  document.getElementById('shDrawerBody').insertAdjacentHTML('beforeend', shDetailHtml(d));
+}
+function shDetailHtml(d) {
+  if (!d || d.error) return '<div class="sh-d-sec"><div class="sh-d-loading">Details unavailable.</div></div>';
+  let h = '';
+  // Workflow
+  const wf = d.workflow;
+  if (wf && !wf.error) {
+    h += '<div class="sh-d-sec"><h4>New Family Member Workflow</h4>';
+    if (wf.inWorkflow) {
+      h += '<div class="sh-wf-steps">' + (wf.steps||[]).map(s => {
+        const cur = String(s.id)===String(wf.currentStepId);
+        return '<div class="sh-wf-step '+(cur?'current':'')+'"><span class="dot"></span>'+shEsc(s.name)+'</div>';
+      }).join('') + '</div>';
+      h += '<div class="sh-edit-row"><button class="sh-save-btn" onclick="shWf(\'back\',this)">◂ Back</button>'
+         + '<button class="sh-save-btn" onclick="shWf(\'advance\',this)">Advance ▸</button>'
+         + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this)">Remove</button>'
+         + '<span class="sh-save-note" id="shNoteWf"></span></div>';
+    } else {
+      h += '<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:8px">Not currently in this workflow.</div>'
+         + '<button class="sh-save-btn" onclick="shWf(\'add\',this)">Add to workflow</button><span class="sh-save-note" id="shNoteWf"></span>';
+    }
+    h += '</div>';
+  }
+  // Notes
+  if (Array.isArray(d.notes) && d.notes.length) {
+    h += '<div class="sh-d-sec"><h4>Notes</h4>';
+    d.notes.forEach(n => {
+      const dt = n.date ? new Date(n.date).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '';
+      h += '<div class="sh-note '+(n.priority>=3?'pri':'')+'"><div class="meta"><span class="cat">'+shEsc(n.category)+'</span><span>'+dt+'</span></div><div class="body">'+shEsc(n.note)+'</div></div>';
+    });
+    h += '</div>';
+  }
+  // Forms
+  if (Array.isArray(d.forms) && d.forms.length) {
+    h += '<div class="sh-d-sec"><h4>Forms Submitted</h4>';
+    d.forms.forEach(f => {
+      const dt = f.date ? new Date(f.date).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '';
+      let ans = (f.answers||[]).map(a => '<div class="q">'+shEsc(a.label||'')+'</div><div class="a">'+shEsc(a.value)+'</div>').join('');
+      if (!ans) ans = '<div class="a" style="color:var(--text-dim)">(no readable answers)</div>';
+      h += '<details class="sh-form"><summary><span>'+shEsc(f.form)+'</span><span class="dt">'+dt+'</span></summary><div class="ans">'+ans+'</div></details>';
+    });
+    h += '</div>';
+  }
+  // Custom fields
+  if (d.fields && Object.keys(d.fields).length) {
+    h += '<div class="sh-d-sec"><h4>Profile Fields</h4>';
+    Object.keys(d.fields).sort().forEach(tab => {
+      h += '<div class="sh-tabgrp"><div class="tt">'+shEsc(tab)+'</div>';
+      d.fields[tab].forEach(kv => { h += '<div class="sh-kv"><span class="k">'+shEsc(kv.name)+'</span><span class="v">'+shEsc(kv.value)+'</span></div>'; });
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+  return h || '<div class="sh-d-sec"><div class="sh-d-loading">No additional detail on file.</div></div>';
+}
+async function shWf(op, btn) {
+  const pid = _shCurrentPid; if (!pid) return;
+  const note = document.getElementById('shNoteWf');
+  btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Working…'; }
+  try {
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&op='+op+'&t='+Date.now());
+    const j = await res.json();
+    if (j && (j.ok || (j.status && !j.error))) {
+      if (note){ note.className='sh-save-note ok'; note.textContent='Done ✓'; }
+      _shDetail[pid] = null; // force refresh
+      // re-render just the workflow section by reloading detail
+      const body = document.getElementById('shDrawerBody');
+      // strip existing detail sections (everything after the edit section) then reload
+      shOpenDrawer(pid);
+    } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
+  } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
+  btn.disabled = false;
+}
+
+function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 </script>
 
 </body>

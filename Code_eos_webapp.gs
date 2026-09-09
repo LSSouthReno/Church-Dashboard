@@ -58,6 +58,11 @@ function doGet(e) {
       syncShepherdingHealth_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
     }
+    if (action === 'run_shepherding_giving') {
+      // Heavy daily giving refresh (24-mo pull + household join → cache).
+      syncShepherdingGiving_();
+      return eosWaJson_({ ok: true, ran: 'syncShepherdingGiving_' });
+    }
     if (action === 'shepherding_data') {
       // Password-gated read of the FULL sensitive shepherding data (giving,
       // scores, pastoral notes, contact info). Never written to the public repo;
@@ -66,6 +71,18 @@ function doGet(e) {
       if (pw !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
       var shd = spReadPrivate_();
       return eosWaJson_(shd || { error: 'no_data' });
+    }
+    if (action === 'shep_person_detail') {
+      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(shepPersonDetail_((e.parameter||{}).pid || ''));
+    }
+    if (action === 'shep_update') {
+      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(shepUpdate_(e.parameter || {}));
+    }
+    if (action === 'shep_workflow') {
+      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(shepWorkflow_(e.parameter || {}));
     }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and
