@@ -37,7 +37,9 @@ const SH_TREND_HALF       = 12;   // last 12 vs prior 12
 const SH_OUTLIER_MULT     = 4;    // a gift >= 4x the person's median is a one-off
 const SH_OUTPUT_FILE      = 'shepherding-data.json';
 const SH_PRIVATE_SHEET    = 'ShepherdingData';
-const SH_GIVING_SHEET     = 'ShepherdingGiving';   // cached giving stats (pid → stats), refreshed daily
+const SH_GIVING_SHEET     = 'ShepherdingGiving';   // cached giving stats (pid → stats)
+const SH_GIVING_LEDGER    = 'ShepherdingGivingLedger';  // church-wide 24-mo gift ledger (incremental)
+const SH_GIVING_WM_PROP   = 'SH_GIVING_WATERMARK';      // ISO created_at watermark for delta pulls
 const SH_CELL_CHUNK       = 40000;
 
 // SHA-256 of the shepherding page password ("1peter5"). var (not const) so the
@@ -171,17 +173,75 @@ function syncShepherdingGiving_() {
   lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && !seen[p.id]) { seen[p.id]=1; allIds.push(p.id); } }); });
   if (!allIds.length) { Logger.log('   ! no people — abort'); return; }
 
-  var givingByPerson  = spGivingByPerson_(startMs);
+  // Incremental: only pull donations created since last run; the 24-mo window
+  // lives in a sheet ledger, so we never re-pull 24 months every night.
+  var ledger          = spUpdateGivingLedger_(startMs);   // { byPerson: {pid:[{cents,ts}]} }
   var recurring       = spRecurringDonorIds_();
   var householdAdults = spHouseholdAdultsByPerson_(allIds, startMs);
 
   var map = {};
-  allIds.forEach(function(id){ map[id] = spComputeGivingFor_(id, householdAdults[id]||[id], givingByPerson, recurring); });
+  allIds.forEach(function(id){ map[id] = spComputeGivingFor_(id, householdAdults[id]||[id], ledger.byPerson, recurring); });
   spStoreGivingCache_({ generatedAt: new Date().toISOString(), giving: map });
   Logger.log('✓ Shepherding Giving — cached ' + allIds.length + ' people in ' + Math.round(shElapsed_(startMs)/1000) + 's');
 }
+
+// Incrementally maintain a church-wide 24-month gift ledger in a hidden sheet.
+// Watermarks on created_at (monotonic) so late-entered/backdated gifts aren't
+// missed, dedupes by donation id, prunes rows older than 24 months, and returns
+// per-person gift arrays built from the full ledger.
+function spUpdateGivingLedger_(startMs) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(SH_GIVING_LEDGER) || ss.insertSheet(SH_GIVING_LEDGER);
+  try { sh.hideSheet(); } catch (e) {}
+  var props = PropertiesService.getScriptProperties();
+  var tz = Session.getScriptTimeZone();
+
+  var last = sh.getLastRow();
+  var existing = last>0 ? sh.getRange(1,1,last,4).getValues() : [];   // [id, personId, cents, receivedISO]
+  var seen = {}, rows = [];
+  existing.forEach(function(r){ if (r[0]) { seen[String(r[0])]=1; rows.push(r); } });
+
+  var wm = props.getProperty(SH_GIVING_WM_PROP);
+  var sinceStr;
+  if (wm) { var s = new Date(wm); s.setDate(s.getDate()-1); sinceStr = Utilities.formatDate(s, tz, 'yyyy-MM-dd'); }
+  else { var s0 = new Date(); s0.setMonth(s0.getMonth()-SH_GIVING_MONTHS); sinceStr = Utilities.formatDate(s0, tz, 'yyyy-MM-dd'); }
+
+  var url = 'https://api.planningcenteronline.com/giving/v2/donations?where[created_at][gte]=' + sinceStr +
+            '&per_page=100&order=created_at';
+  var maxCreated = wm ? new Date(wm).getTime() : 0;
+  var added = 0, pages = 0;
+  while (url && pages < 600) {
+    if (shOverBudget_(startMs)) { Logger.log('   ! ledger budget hit — partial'); break; }
+    pages++;
+    var json; try { json = fgFetchPage_(url); } catch (e) { Logger.log('   ! ledger page failed: ' + e.message); break; }
+    (json.data||[]).forEach(function(d){
+      var id = String(d.id); if (seen[id]) return;
+      var a = d.attributes || {};
+      var created = a.created_at ? new Date(a.created_at).getTime() : 0;
+      if (created > maxCreated) maxCreated = created;
+      if (!spDonationCounts_(a)) return;
+      var pid = relId_(d,'person'); if (!pid) return;
+      var received = a.received_at || a.completed_at || a.created_at; if (!received) return;
+      seen[id]=1; rows.push([id, pid, Number(a.amount_cents||0), received]); added++;
+    });
+    url = (json.links && json.links.next) ? json.links.next : null;
+  }
+
+  var cutoff = new Date(); cutoff.setMonth(cutoff.getMonth()-SH_GIVING_MONTHS); var cutoffTs = cutoff.getTime();
+  rows = rows.filter(function(r){ return new Date(r[3]).getTime() >= cutoffTs; });
+
+  sh.clearContents();
+  if (rows.length) sh.getRange(1,1,rows.length,4).setValues(rows);
+  if (maxCreated) props.setProperty(SH_GIVING_WM_PROP, new Date(maxCreated).toISOString());
+  Logger.log('   Ledger: +' + added + ' new, ' + rows.length + ' rows kept (' + pages + ' pages)');
+
+  var byPerson = {};
+  rows.forEach(function(r){ (byPerson[String(r[1])] = byPerson[String(r[1])] || { gifts:[] }).gifts.push({ cents:Number(r[2]), ts:new Date(r[3]).getTime() }); });
+  return { byPerson: byPerson };
+}
 function spEmptyGiving_() {
-  return { monthsGiven:0, gifts:0, totalCents:0, recurring:false, trend:'none', lastGiftAt:null, lastGiftDaysAgo:null };
+  return { monthsGiven:0, gifts:0, totalCents:0, recurring:false, trend:'none',
+           giftsEarlyHalf:0, giftsRecentHalf:0, firstGiftAt:null, lastGiftAt:null, lastGiftDaysAgo:null };
 }
 function spStoreGivingCache_(obj) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -290,15 +350,22 @@ function spComputeGivingFor_(pid, adultIds, givingByPerson, recurringSet) {
   var cents = gifts.map(function(g){ return g.cents; }).sort(function(a,b){ return a-b; });
   var median = cents.length % 2 ? cents[(cents.length-1)/2] : Math.round((cents[cents.length/2-1]+cents[cents.length/2])/2);
   var outlier = median * SH_OUTLIER_MULT;
-  var last12 = 0, prior12 = 0, last12all = 0, monthsSet = {}, lastGiftTs = 0;
+  // Split the last-12 window into an early half (12–6 mo ago) and recent half
+  // (last 6 mo) so we can tell whether giving is front-loaded or recent.
+  var recentHalf = new Date(); recentHalf.setMonth(recentHalf.getMonth() - Math.round(SH_TREND_HALF/2)); var recentTs = recentHalf.getTime();
+  var last12 = 0, prior12 = 0, last12all = 0, lastGiftTs = 0, firstGiftTs = 0;
+  var giftsEarlyHalf = 0, giftsRecentHalf = 0, last12count = 0;
   gifts.forEach(function(g){
     var isLast = g.ts >= halfTs;
-    if (isLast) { last12all += g.cents; monthsSet[Math.floor((g.ts)/1)+''] = 1; }
+    if (isLast) {
+      last12all += g.cents; last12count++;
+      if (!firstGiftTs || g.ts < firstGiftTs) firstGiftTs = g.ts;
+      if (g.ts >= recentTs) giftsRecentHalf++; else giftsEarlyHalf++;
+    }
     if (g.ts > lastGiftTs) lastGiftTs = g.ts;
     var counted = (median > 0 && g.cents >= outlier) ? 0 : g.cents; // exclude one-offs from trend
     if (isLast) last12 += counted; else prior12 += counted;
   });
-  // months given = distinct YYYY-MM in last 12
   var months = {};
   gifts.forEach(function(g){ if (g.ts >= halfTs) { var d=new Date(g.ts); months[d.getFullYear()+'-'+d.getMonth()] = 1; } });
   var trend = 'steady';
@@ -307,10 +374,13 @@ function spComputeGivingFor_(pid, adultIds, givingByPerson, recurringSet) {
   else if (last12 < prior12 * 0.85) trend = 'down';
   return {
     monthsGiven: Math.min(Object.keys(months).length, SH_TREND_HALF),
-    gifts: gifts.length,
+    gifts: last12count,
     totalCents: last12all,
     recurring: recurring,
     trend: trend,
+    giftsEarlyHalf: giftsEarlyHalf,     // 12–6 months ago
+    giftsRecentHalf: giftsRecentHalf,   // last 6 months
+    firstGiftAt: firstGiftTs ? new Date(firstGiftTs).toISOString() : null,
     lastGiftAt: lastGiftTs ? new Date(lastGiftTs).toISOString() : null,
     lastGiftDaysAgo: lastGiftTs ? Math.floor((now - lastGiftTs)/86400000) : null
   };
@@ -338,7 +408,7 @@ function spGroupInvolvementByPerson_(startMs) {
         if (attr.left_at || attr.removed_at) return;
         var pid = relId_(m,'person'); if (!pid) return;
         var rec = byPerson[pid] || (byPerson[pid]={cg:[],serve:[]});
-        rec[bucket].push({ name:gName, role:attr.role||'member' });
+        rec[bucket].push({ name:gName, role:attr.role||'member', joinedAt:attr.joined_at||'' });
       });
     });
   });
@@ -444,11 +514,13 @@ function spBuildPerson_(base, giving, grp, contact, fld) {
     status: fld.status, statusRaw: fld.statusRaw||'', healthDate: fld.healthDate||'',
     assignedElder: fld.assignedElder||'', spiritualMat: fld.spiritualMat||'',
     preferredComm: fld.preferredComm||'',
+    known: fld.known||'', deaconSupport: fld.deaconSupport||'', deaconNotes: fld.deaconNotes||'',
     score: scored.score, paci: paci, leads: leads, trajectory: trajectory,
     pillars: scored.pillars,
     giving: { monthsGiven:giving.monthsGiven, gifts:giving.gifts, totalCents:giving.totalCents,
-              recurring:giving.recurring, trend:giving.trend, lastGiftAt:giving.lastGiftAt,
-              lastGiftDaysAgo:giving.lastGiftDaysAgo },
+              recurring:giving.recurring, trend:giving.trend,
+              giftsEarlyHalf:giving.giftsEarlyHalf, giftsRecentHalf:giving.giftsRecentHalf,
+              firstGiftAt:giving.firstGiftAt, lastGiftAt:giving.lastGiftAt, lastGiftDaysAgo:giving.lastGiftDaysAgo },
     groups: grp.cg, serveTeams: grp.serve, flags: flags
   };
 }

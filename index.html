@@ -10749,7 +10749,7 @@ function shOpenDrawer(pid) {
     '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
     + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')
     + '</div>';
-  document.getElementById('shDrawerBody').innerHTML = shEditControlsHtml(p) + '<div class="sh-d-loading" id="shDetailLoading">Loading Planning Center details…</div>';
+  document.getElementById('shDrawerBody').innerHTML = shStoryHtml(p) + shEditControlsHtml(p) + '<div class="sh-d-loading" id="shDetailLoading">Loading Planning Center details…</div>';
   document.getElementById('shDrawer').classList.add('open');
   document.getElementById('shDrawerOv').classList.add('open');
   document.getElementById('shDrawer').setAttribute('aria-hidden','false');
@@ -10760,26 +10760,41 @@ function shCloseDrawer() {
   d.classList.remove('open'); d.setAttribute('aria-hidden','true');
   document.getElementById('shDrawerOv').classList.remove('open');
 }
+function shOpts(list, cur, noneLabel) {
+  let h = noneLabel ? '<option value="">'+shEsc(noneLabel)+'</option>' : '';
+  list.forEach(o => { h += '<option value="'+shEsc(o)+'"'+(String(o).toLowerCase()===String(cur||'').toLowerCase()?' selected':'')+'>'+shEsc(o)+'</option>'; });
+  return h;
+}
+function shBoolOpts(cur) {
+  const v = String(cur||'').toLowerCase();
+  return '<option value="">— unset —</option>'
+    + '<option value="true"'+(v==='true'?' selected':'')+'>Yes</option>'
+    + '<option value="false"'+(v==='false'?' selected':'')+'>No</option>';
+}
+function shRow(label, control, field, extra) {
+  return '<div class="sh-edit-row"><label>'+label+'</label>'+control
+    + '<button class="sh-save-btn" onclick="shSave(\''+field+'\',document.getElementById(\'shEd'+field+'\').value,this)">Save</button>'
+    + '<span class="sh-save-note" id="shNote'+field+'"></span></div>' + (extra||'');
+}
 function shEditControlsHtml(p) {
   const elderOpts = (_shepData.elderOptions||[]);
-  const sel = (opts, cur) => opts.map(o=>'<option '+(String(o).toLowerCase()===String(cur||'').toLowerCase()?'selected':'')+'>'+shEsc(o)+'</option>').join('');
   let h = '<div class="sh-d-sec"><h4>Update Shepherding</h4>';
-  h += '<div class="sh-edit-row"><label>Health status</label><select id="shEdHealth">'+sel(['— none —'].concat(SH_HEALTH_OPTS), p.statusRaw)+'</select>'
-     + '<button class="sh-save-btn" onclick="shSave(\'health\',document.getElementById(\'shEdHealth\').value,this)">Save</button><span class="sh-save-note" id="shNoteHealth"></span></div>';
-  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+' <em>(auto-set to today on save)</em></span></div>';
-  h += '<div class="sh-edit-row"><label>Spiritual maturity</label><select id="shEdMat">'+sel(SH_MATURITY_OPTS, p.spiritualMat)+'</select>'
-     + '<button class="sh-save-btn" onclick="shSave(\'maturity\',document.getElementById(\'shEdMat\').value,this)">Save</button><span class="sh-save-note" id="shNoteMaturity"></span></div>';
-  if (elderOpts.length) h += '<div class="sh-edit-row"><label>Shepherding pastor</label><select id="shEdElder">'+sel(elderOpts, p.assignedElder)+'</select>'
-     + '<button class="sh-save-btn" onclick="shSave(\'elder\',document.getElementById(\'shEdElder\').value,this)">Save</button><span class="sh-save-note" id="shNoteElder"></span></div>'
-     + '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 0 0">Reassignment moves them to the new list after Planning Center\'s nightly list refresh.</div>';
+  h += shRow('Health status', '<select id="shEdhealth">'+shOpts(SH_HEALTH_OPTS, p.statusRaw, '— none —')+'</select>', 'health');
+  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+' <em>(auto-set to today when you save a status)</em></span></div>';
+  h += shRow('Spiritual maturity', '<select id="shEdmaturity">'+shOpts(SH_MATURITY_OPTS, p.spiritualMat, '— none —')+'</select>', 'maturity');
+  if (elderOpts.length) h += shRow('Shepherding pastor', '<select id="shEdelder">'+shOpts(elderOpts, p.assignedElder)+'</select>', 'elder',
+     '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 6px 0">Moves them to the new list after Planning Center\'s nightly refresh.</div>');
+  h += shRow('Preferred contact', '<select id="shEdpref">'+shOpts(['Email','Phone','Text','Any/All'], p.preferredComm, '— none —')+'</select>', 'pref');
+  h += shRow('Known?', '<select id="shEdknown">'+shBoolOpts(p.known)+'</select>', 'known');
+  h += shRow('Deacon support?', '<select id="shEddeaconSupport">'+shBoolOpts(p.deaconSupport)+'</select>', 'deaconSupport');
+  h += shRow('Deacon notes', '<input id="shEddeaconNotes" type="text" value="'+shEsc(p.deaconNotes||'')+'">', 'deaconNotes');
   h += '</div>';
   return h;
 }
 async function shSave(field, value, btn) {
   const pid = _shCurrentPid; if (!pid) return;
-  const noteId = 'shNote'+field.charAt(0).toUpperCase()+field.slice(1);
-  const note = document.getElementById(noteId);
-  let val = value; if (field==='health' && /none/.test(val)) val = '';
+  const note = document.getElementById('shNote'+field);
+  const val = value; // option values are already '' for the none/unset choices
   btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Saving…'; }
   try {
     const res = await fetch(EOS_WEBAPP_URL + '?action=shep_update&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&field='+field+'&value='+encodeURIComponent(val)+'&t='+Date.now());
@@ -10789,13 +10804,17 @@ async function shSave(field, value, btn) {
       const p = shFindPerson(pid);
       if (p) {
         if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val); if (j.healthDateSet) p.healthDate=j.healthDateSet; }
-        if (field==='maturity') p.spiritualMat=val;
-        if (field==='elder') p.assignedElder=val;
-        // refresh header + card
+        else if (field==='maturity') p.spiritualMat=val;
+        else if (field==='elder') p.assignedElder=val;
+        else if (field==='pref') p.preferredComm=val;
+        else if (field==='known') p.known=val;
+        else if (field==='deaconSupport') p.deaconSupport=val;
+        else if (field==='deaconNotes') p.deaconNotes=val;
         document.getElementById('shDrawerHead').innerHTML =
           '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
           + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')+'</div>';
-        shBuildFilters(); shRenderHealth(); shRenderPeople();
+        if (field==='health') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
+        if (field==='pref') { const row=document.querySelector('#shPeopleGrid'); shRenderPeople(); } // update contact highlight
       }
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
@@ -10818,34 +10837,37 @@ async function shLoadDetail(pid) {
 function shDetailHtml(d) {
   if (!d || d.error) return '<div class="sh-d-sec"><div class="sh-d-loading">Details unavailable.</div></div>';
   let h = '';
-  // Workflow
+  // Baptism Ready
   const wf = d.workflow;
   if (wf && !wf.error) {
-    h += '<div class="sh-d-sec"><h4>New Family Member Workflow</h4>';
-    if (wf.inWorkflow) {
-      h += '<div class="sh-wf-steps">' + (wf.steps||[]).map(s => {
-        const cur = String(s.id)===String(wf.currentStepId);
-        return '<div class="sh-wf-step '+(cur?'current':'')+'"><span class="dot"></span>'+shEsc(s.name)+'</div>';
-      }).join('') + '</div>';
-      h += '<div class="sh-edit-row"><button class="sh-save-btn" onclick="shWf(\'back\',this)">◂ Back</button>'
-         + '<button class="sh-save-btn" onclick="shWf(\'advance\',this)">Advance ▸</button>'
-         + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this)">Remove</button>'
-         + '<span class="sh-save-note" id="shNoteWf"></span></div>';
+    h += '<div class="sh-d-sec"><h4>Baptism Ready</h4>';
+    if (wf.completed) {
+      const dt = wf.completedAt ? ' — ' + new Date(wf.completedAt).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '';
+      h += '<div style="font-size:13px;color:#86efac">&#10003; Completed'+dt+'</div>';
+    } else if (wf.inWorkflow) {
+      h += '<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:8px">In progress'+(wf.currentStep?' — '+shEsc(wf.currentStep):'')+'</div>'
+         + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this)">Remove</button><span class="sh-save-note" id="shNoteWf"></span>';
     } else {
-      h += '<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:8px">Not currently in this workflow.</div>'
-         + '<button class="sh-save-btn" onclick="shWf(\'add\',this)">Add to workflow</button><span class="sh-save-note" id="shNoteWf"></span>';
+      h += '<button class="sh-save-btn" onclick="shWf(\'add\',this)">Add to Baptism Ready</button><span class="sh-save-note" id="shNoteWf"></span>';
     }
     h += '</div>';
   }
-  // Notes
+  // Notes (with add-note form)
+  h += '<div class="sh-d-sec"><h4>Notes</h4>';
+  const cats = (d.noteCategories && d.noteCategories.length) ? d.noteCategories : [{id:'239853',name:'Pastoral Care'}];
+  h += '<div style="margin-bottom:14px">'
+     + '<textarea id="shNoteBody" placeholder="Write a note for this person…" style="width:100%;box-sizing:border-box;min-height:58px;background:var(--sh-panel-2);border:1px solid var(--sh-line);color:var(--text);border-radius:7px;padding:8px;font-family:inherit;font-size:13px;resize:vertical"></textarea>'
+     + '<div class="sh-edit-row" style="margin-top:6px"><select id="shNoteCat" style="flex:0 1 auto;min-width:150px">'+cats.map(c=>'<option value="'+shEsc(c.id)+'">'+shEsc(c.name)+'</option>').join('')+'</select>'
+     + '<button class="sh-save-btn" onclick="shAddNote(this)">Add note</button><span class="sh-save-note" id="shNoteAddMsg"></span></div></div>';
   if (Array.isArray(d.notes) && d.notes.length) {
-    h += '<div class="sh-d-sec"><h4>Notes</h4>';
     d.notes.forEach(n => {
       const dt = n.date ? new Date(n.date).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '';
       h += '<div class="sh-note '+(n.priority>=3?'pri':'')+'"><div class="meta"><span class="cat">'+shEsc(n.category)+'</span><span>'+dt+'</span></div><div class="body">'+shEsc(n.note)+'</div></div>';
     });
-    h += '</div>';
+  } else {
+    h += '<div style="font-size:12.5px;color:var(--text-dim)">No notes on file yet.</div>';
   }
+  h += '</div>';
   // Forms
   if (Array.isArray(d.forms) && d.forms.length) {
     h += '<div class="sh-d-sec"><h4>Forms Submitted</h4>';
@@ -10886,6 +10908,52 @@ async function shWf(op, btn) {
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
   btn.disabled = false;
+}
+
+async function shAddNote(btn) {
+  const pid = _shCurrentPid; if (!pid) return;
+  const body = (document.getElementById('shNoteBody').value||'').trim();
+  const cat = document.getElementById('shNoteCat').value;
+  const msg = document.getElementById('shNoteAddMsg');
+  if (!body) { if (msg){ msg.className='sh-save-note err'; msg.textContent='Write something first'; } return; }
+  btn.disabled = true; if (msg){ msg.className='sh-save-note'; msg.textContent='Saving…'; }
+  try {
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_add_note&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&category='+encodeURIComponent(cat)+'&body='+encodeURIComponent(body)+'&t='+Date.now());
+    const j = await res.json();
+    if (j && j.ok) { _shDetail[pid] = null; shOpenDrawer(pid); }
+    else { if (msg){ msg.className='sh-save-note err'; msg.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
+  } catch (e) { if (msg){ msg.className='sh-save-note err'; msg.textContent='Error'; } }
+  btn.disabled = false;
+}
+
+function shMon(iso){ try { return new Date(iso).toLocaleDateString('en-US',{month:'short',year:'numeric'}); } catch(e){ return ''; } }
+function shStoryHtml(p) {
+  const rows = [];
+  const g = p.giving;
+  if (g) {
+    if (!g.gifts) rows.push(['&#128176;', 'No giving recorded in the last 12 months.']);
+    else {
+      let s = 'Gave <b>'+g.gifts+'&times;</b> ($'+Math.round((g.totalCents||0)/100).toLocaleString()+') across '+g.monthsGiven+' month'+(g.monthsGiven===1?'':'s')+'.';
+      if (g.recurring) s += ' Active recurring gift.';
+      if (g.giftsRecentHalf>0 && g.giftsEarlyHalf===0) s += ' All in the last 6 months.';
+      else if (g.giftsEarlyHalf>0 && g.giftsRecentHalf===0) s += ' All in the <b>first half</b> of the year — nothing in the last 6 months.';
+      else if (g.giftsRecentHalf>g.giftsEarlyHalf) s += ' Weighted toward recent months.';
+      else if (g.giftsEarlyHalf>g.giftsRecentHalf) s += ' Weighted toward earlier in the year.';
+      if (g.lastGiftDaysAgo!=null) s += ' Last gift '+g.lastGiftDaysAgo+' day'+(g.lastGiftDaysAgo===1?'':'s')+' ago.';
+      if (g.trend==='up') s += ' <span style="color:#86efac">&#9650; Up vs last year.</span>';
+      else if (g.trend==='down') s += ' <span style="color:#fca5a5">&#9660; Down vs last year.</span>';
+      rows.push(['&#128176;', s]);
+    }
+  }
+  if (p.groups && p.groups.length)
+    rows.push(['&#128101;', p.groups.map(x=>shEsc(x.name)+' ('+(/leader/i.test(x.role)?'leader':'member')+')'+(x.joinedAt?' since '+shMon(x.joinedAt):'')).join('; ')]);
+  else rows.push(['&#128101;', 'Not in a community group.']);
+  if (p.serveTeams && p.serveTeams.length)
+    rows.push(['&#129309;', p.serveTeams.map(x=>shEsc(x.name)+' ('+(/leader/i.test(x.role)?'leader':'member')+')'+(x.joinedAt?' since '+shMon(x.joinedAt):'')).join('; ')]);
+  else rows.push(['&#129309;', 'Not on a serve team.']);
+  return '<div class="sh-d-sec"><h4>Snapshot</h4><div class="sh-facts">'
+    + rows.map(r=>'<div class="sh-fact"><span class="ic">'+r[0]+'</span><span>'+r[1]+'</span></div>').join('')
+    + '</div></div>';
 }
 
 function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }

@@ -12,9 +12,15 @@
  * (SHEPHERDING_PW_HASH). Writes go through PCO's API as the deploying user.
  */
 
-var SH_WF_NEW_FAMILY = '528798';                 // "New Family Member" workflow
+var SH_WF_BAPTISM = '528797';                    // "Baptism Ready" workflow
 var SH_NOTE_HIDE = { '286191': 1 };              // "Text In Church Activity" (auto SMS noise)
 var SH_NOTE_PRIORITY = { '239853':3, '239854':3, '234652':2, '239856':2 }; // Pastoral Care/Red Flag/Prayer/Leadership
+// Note categories offered in the drawer's "add note" dropdown (id → label).
+var SH_NOTE_CATEGORIES = [
+  { id:'239853', name:'Pastoral Care' }, { id:'234652', name:'Prayer Requests' },
+  { id:'239854', name:'Red Flag' }, { id:'239856', name:'Leadership Potential' },
+  { id:'234651', name:'General' }
+];
 
 function shApiBase_() { return 'https://api.planningcenteronline.com'; }
 
@@ -73,22 +79,30 @@ function shepPersonDetail_(pid) {
       return { category: cats[cid]||'General', priority: SH_NOTE_PRIORITY[cid]||1, note:a.note||'', date:a.display_date||a.created_at||'' }; })
     .sort(function(a,b){ return (b.priority-a.priority) || String(b.date).localeCompare(String(a.date)); })).slice(0, 50);
 
-  // Forms — recent 8 submissions; fetch their answer sets CONCURRENTLY (fgBatchFetch_)
+  // Forms — recent 8 submissions. Question LABELS live on the form's fields
+  // (include=form_field returns nothing), so fetch each unique form's fields
+  // once (concurrently) to map field id → question label, then the answer sets.
   out.forms = [];
   var fsres = shGet_('/people/v2/people/'+pid+'/form_submissions?include=form&per_page=25');
   if (fsres.json && fsres.json.data) {
     var formName = {}; (fsres.json.included||[]).forEach(function(f){ if(f.type==='Form') formName[f.id]=(f.attributes||{}).name; });
     var subs = fsres.json.data.slice(0, 8);
-    var paths = subs.map(function(sub){ var fid=(((sub.relationships||{}).form||{}).data||{}).id;
-      return '/people/v2/forms/'+fid+'/form_submissions/'+sub.id+'/form_submission_values?include=form_field&per_page=100'; });
-    var valPages = fgBatchFetch_(paths, new Date().getTime());
+    var formIds = subs.map(function(s){ return (((s.relationships||{}).form||{}).data||{}).id; })
+      .filter(function(v,i,a){ return v && a.indexOf(v)===i; });
+    // Field labels per unique form
+    var labelByForm = {};
+    var fieldPages = fgBatchFetch_(formIds.map(function(fid){ return '/people/v2/forms/'+fid+'/fields?per_page=100'; }), new Date().getTime());
+    formIds.forEach(function(fid, i){ var m={}; ((fieldPages[i]&&fieldPages[i].data)||[]).forEach(function(f){ m[f.id]=(f.attributes||{}).label; }); labelByForm[fid]=m; });
+    // Answer values per submission
+    var valPages = fgBatchFetch_(subs.map(function(sub){ var fid=(((sub.relationships||{}).form||{}).data||{}).id;
+      return '/people/v2/forms/'+fid+'/form_submissions/'+sub.id+'/form_submission_values?per_page=100'; }), new Date().getTime());
     out.forms = subs.map(function(sub, i){
       var fid=(((sub.relationships||{}).form||{}).data||{}).id;
+      var labels = labelByForm[fid]||{};
       var page = valPages[i]; var answers = [];
       if (page && page.data) {
-        var labelById={}; (page.included||[]).forEach(function(ff){ if(ff.type==='FormField') labelById[ff.id]=(ff.attributes||{}).label; });
         answers = page.data.map(function(v){ var a=v.attributes||{}; var lid=(((v.relationships||{}).form_field||{}).data||{}).id;
-          return { label: labelById[lid]||'', value: a.display_value!=null?String(a.display_value):(a.value!=null?String(a.value):'') }; })
+          return { label: labels[lid]||'', value: a.display_value!=null?String(a.display_value):(a.value!=null?String(a.value):'') }; })
           .filter(function(x){ return x.value!==''; });
       }
       return { form: formName[fid]||'Form', date:(sub.attributes||{}).created_at||'', answers: answers };
@@ -96,6 +110,7 @@ function shepPersonDetail_(pid) {
   }
 
   out.workflow = shWorkflowStatus_(pid);
+  out.noteCategories = SH_NOTE_CATEGORIES;
   return out;
 }
 
@@ -110,7 +125,7 @@ function shepUpdate_(params) {
   if (!pid || !field) return { error: 'missing pid/field' };
 
   var map = { health:SH_FIELD.healthAssess, healthDate:SH_FIELD.healthDate, elder:SH_FIELD.assignedElder,
-              maturity:SH_FIELD.spiritualMat, known:SH_FIELD.known,
+              maturity:SH_FIELD.spiritualMat, pref:SH_FIELD.preferredComm, known:SH_FIELD.known,
               deaconSupport:SH_FIELD.deaconSupport, deaconNotes:SH_FIELD.deaconNotes };
   var defId = map[field];
   if (!defId) return { error: 'unknown field ' + field };
@@ -158,26 +173,25 @@ function shSetFieldDatum_(pid, defId, value) {
 }
 
 /* =========================================================
-   WORKFLOW: New Family Member
-   params: pid, op (view|add|advance|back), cardId?
+   WORKFLOW: Baptism Ready (528797)
+   params: pid, op (view|add|remove), cardId?
 ========================================================= */
 function shWorkflowStatus_(pid) {
   try {
     var res = pcoGetAllWithIncluded_('/people/v2/people/'+pid+'/workflow_cards?include=current_step,workflow&per_page=50');
-    var stepName={}, wfName={};
-    (res.included||[]).forEach(function(x){
-      if (x.type==='WorkflowStep') stepName[x.id]=(x.attributes||{}).name;
-      if (x.type==='Workflow') wfName[x.id]=(x.attributes||{}).name;
-    });
-    var card = (res.data||[]).filter(function(c){ return String((((c.relationships||{}).workflow||{}).data||{}).id)===SH_WF_NEW_FAMILY; })[0];
-    // Steps of the workflow (for the advance UI)
-    var steps = (pcoGetAll_('/people/v2/workflows/'+SH_WF_NEW_FAMILY+'/steps?per_page=100')||[])
-      .map(function(s){ return { id:s.id, name:(s.attributes||{}).name, seq:(s.attributes||{}).sequence }; })
-      .sort(function(a,b){ return (a.seq||0)-(b.seq||0); });
-    if (!card) return { inWorkflow:false, steps:steps };
-    var curId = (((card.relationships||{}).current_step||{}).data||{}).id;
-    return { inWorkflow:true, cardId:card.id, stage:(card.attributes||{}).stage,
-             currentStep: stepName[curId]||'', currentStepId:curId, steps:steps };
+    var stepName={};
+    (res.included||[]).forEach(function(x){ if (x.type==='WorkflowStep') stepName[x.id]=(x.attributes||{}).name; });
+    var cards = (res.data||[]).filter(function(c){ return String((((c.relationships||{}).workflow||{}).data||{}).id)===SH_WF_BAPTISM; });
+    var completed = cards.some(function(c){ return String((c.attributes||{}).stage)==='completed'; });
+    var active = cards.filter(function(c){ return String((c.attributes||{}).stage)!=='completed'; })[0];
+    var out = { workflow:'Baptism Ready', inWorkflow: cards.length>0, completed: completed };
+    if (active) {
+      var curId=(((active.relationships||{}).current_step||{}).data||{}).id;
+      out.cardId=active.id; out.stage=(active.attributes||{}).stage; out.currentStep=stepName[curId]||'';
+    } else if (completed) {
+      out.completedAt = cards.filter(function(c){return String((c.attributes||{}).stage)==='completed';})[0].attributes.completed_at || '';
+    }
+    return out;
   } catch (e) { return { error: e.message }; }
 }
 
@@ -187,26 +201,32 @@ function shepWorkflow_(params) {
   if (op === 'view') return shWorkflowStatus_(pid);
 
   if (op === 'add') {
-    var w = shWrite_('post', '/people/v2/workflows/'+SH_WF_NEW_FAMILY+'/cards',
+    var w = shWrite_('post', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards',
       { data:{ relationships:{ person:{ data:{ type:'Person', id:pid } } } } });
     return { op:'add', ok:(w.code>=200&&w.code<300), code:w.code, detail:(w.code>=300?(w.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
   }
-
-  // advance / back / remove need the card id
-  var st = shWorkflowStatus_(pid);
-  var cardId = params.cardId || st.cardId;
-  if (!cardId) return { error:'no workflow card for this person', status:st };
   if (op === 'remove') {
-    var wr = shWrite_('delete', '/people/v2/workflows/'+SH_WF_NEW_FAMILY+'/cards/'+cardId, {});
-    if (wr.code === 404 || wr.code === 405) wr = shWrite_('post', '/people/v2/workflows/'+SH_WF_NEW_FAMILY+'/cards/'+cardId+'/remove', { data:{} });
+    var st = shWorkflowStatus_(pid);
+    var cardId = params.cardId || st.cardId;
+    if (!cardId) return { error:'no active card', status:st };
+    var wr = shWrite_('delete', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards/'+cardId, {});
+    if (wr.code === 404 || wr.code === 405) wr = shWrite_('post', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards/'+cardId+'/remove', { data:{} });
     return { op:'remove', ok:(wr.code>=200&&wr.code<300), code:wr.code, detail:(wr.code>=300?(wr.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
   }
-  var action = (op === 'back') ? 'go_back' : 'promote';
-  // PCO card actions are POSTed to the card's action sub-path.
-  var w2 = shWrite_('post', '/people/v2/workflows/'+SH_WF_NEW_FAMILY+'/cards/'+cardId+'/'+action, { data:{} });
-  if (w2.code === 404) {
-    // Fallback path shape
-    w2 = shWrite_('post', '/people/v2/workflow_cards/'+cardId+'/'+action, { data:{} });
-  }
-  return { op:op, ok:(w2.code>=200&&w2.code<300), code:w2.code, detail:(w2.code>=300?(w2.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
+  return { error:'unknown op ' + op };
+}
+
+/* =========================================================
+   ADD NOTE (pastoral care / other) → PCO
+   params: pid, category (note_category id), body
+========================================================= */
+function shepAddNote_(params) {
+  var pid = String(params.pid||''), catId = String(params.category||'239853'), body = String(params.body||'').trim();
+  if (!pid || !body) return { error:'missing pid/body' };
+  var payload = { data:{ attributes:{ note: body },
+    relationships:{ note_category:{ data:{ type:'NoteCategory', id: catId } } } } };
+  var w = shWrite_('post', '/people/v2/people/'+pid+'/notes', payload);
+  var ok = w.code>=200 && w.code<300;
+  return { ok:ok, code:w.code, detail: ok?null:(w.raw||'').substring(0,300),
+           note: ok && w.json && w.json.data ? { id:w.json.data.id } : null };
 }

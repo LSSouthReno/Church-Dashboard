@@ -84,6 +84,10 @@ function doGet(e) {
       if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(shepWorkflow_(e.parameter || {}));
     }
+    if (action === 'shep_add_note') {
+      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(shepAddNote_(e.parameter || {}));
+    }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and
       // attendance_type names — for verifying kids/adults classification.
