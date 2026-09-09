@@ -64,29 +64,30 @@ function doGet(e) {
       return eosWaJson_({ ok: true, ran: 'syncShepherdingGiving_' });
     }
     if (action === 'shepherding_data') {
-      // Password-gated read of the FULL sensitive shepherding data (giving,
-      // scores, pastoral notes, contact info). Never written to the public repo;
-      // returned only when the request carries the correct password hash.
-      var pw = (e && e.parameter && e.parameter.pw) || '';
-      if (pw !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      // Gated read of the FULL sensitive shepherding data. Any valid pastor login
+      // (or the master password) is accepted.
+      if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       var shd = spReadPrivate_();
       return eosWaJson_(shd || { error: 'no_data' });
     }
     if (action === 'shep_person_detail') {
-      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
+      if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(shepPersonDetail_((e.parameter||{}).pid || ''));
     }
     if (action === 'shep_update') {
-      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
-      return eosWaJson_(shepUpdate_(e.parameter || {}));
+      var byU = spPastorForHash_((e.parameter||{}).pw); if (!byU) return eosWaJson_({ error: 'unauthorized' });
+      var pU = e.parameter||{}; pU.by = byU;
+      return eosWaJson_(shepUpdate_(pU));
     }
     if (action === 'shep_workflow') {
-      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
-      return eosWaJson_(shepWorkflow_(e.parameter || {}));
+      var byW = spPastorForHash_((e.parameter||{}).pw); if (!byW) return eosWaJson_({ error: 'unauthorized' });
+      var pW = e.parameter||{}; pW.by = byW;
+      return eosWaJson_(shepWorkflow_(pW));
     }
     if (action === 'shep_add_note') {
-      if (((e.parameter||{}).pw) !== SHEPHERDING_PW_HASH) return eosWaJson_({ error: 'unauthorized' });
-      return eosWaJson_(shepAddNote_(e.parameter || {}));
+      var byN = spPastorForHash_((e.parameter||{}).pw); if (!byN) return eosWaJson_({ error: 'unauthorized' });
+      var pN = e.parameter||{}; pN.by = byN;
+      return eosWaJson_(shepAddNote_(pN));
     }
     if (action === 'run_dump_headcounts') {
       // Read-only: dump recent Sunday event_times with their headcounts and

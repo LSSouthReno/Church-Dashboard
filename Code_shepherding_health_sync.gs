@@ -40,12 +40,46 @@ const SH_PRIVATE_SHEET    = 'ShepherdingData';
 const SH_GIVING_SHEET     = 'ShepherdingGiving';   // cached giving stats (pid → stats)
 const SH_GIVING_LEDGER    = 'ShepherdingGivingLedger';  // church-wide 24-mo gift ledger (incremental)
 const SH_GIVING_WM_PROP   = 'SH_GIVING_WATERMARK';      // ISO created_at watermark for delta pulls
+const SH_MANUAL_SHEET     = 'ShepherdingManualMaturity'; // pid | by | date — manual maturity overrides
+const SH_CHANGELOG_SHEET  = 'ShepherdingChangeLog';      // ts | pastor | pid | field | value — audit trail
 const SH_CELL_CHUNK       = 40000;
+
+// pid → {by, date} for people whose Spiritual Maturity was set from the dashboard.
+function spReadManualMaturity_() {
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SH_MANUAL_SHEET);
+    if (!sh) return {};
+    var last = sh.getLastRow(); if (!last) return {};
+    var rows = sh.getRange(1,1,last,3).getValues();
+    var out = {};
+    rows.forEach(function(r){ if (r[0]) out[String(r[0])] = { by:String(r[1]||''), date:String(r[2]||'') }; });
+    return out;
+  } catch (e) { return {}; }
+}
 
 // SHA-256 of the shepherding page password ("1peter5"). var (not const) so the
 // web-app and actions files reliably see it — cross-file top-level const/let
 // sharing is unreliable in Apps Script. Keep in sync with PASTOR_HASH in index.html.
 var SHEPHERDING_PW_HASH   = '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d';
+
+// Per-pastor logins: SHA-256(firstname + last-4-of-phone) → identity. Lets the
+// dashboard know who is signed in (for change attribution + personalization).
+// "1peter5" stays as a master/admin. Keep in sync with SH_PASTORS in index.html.
+var SHEPHERDING_PASTORS = {
+  '75b088e8499b902e30e0348e32dccd5badc5146769d97799900531fac3d445a4': { name:'Adam Carp',     elder:'Adam' },
+  'af97c9ab71bee6cdef40ca8ac5571c6ddded6fb2693aeb363b62c1c5d87799b4': { name:'Brad Borowski', elder:'Brad' },
+  '97e2216c3784767313cb3161a67dabb622e7b4ec9abc0f46d427c9fef3b8dda0': { name:'Josh Wampler',  elder:'Josh' },
+  '6a71359975c01071defa0fd07dfa374ffeff87995a9bdc1a69557fc6aef01ff6': { name:'Keith Primus',  elder:'Keith' },
+  '007008de8fd721c4326810fbc7796eab66c1bbe00d5bce52e1fad27697a64bef': { name:'Nick Colonna',  elder:'Nick' },
+  'e43df0398932fe57d94c058c3821b9804be86418fb42bfbd0b136faf1042f95b': { name:'Ray Brown',     elder:'Ray' },
+  '258a074a71811b4c9184e49c95fee3fcbd3700932de36df2bbac9619798ec483': { name:'Ryan Griffin',  elder:'Ryan' },
+  '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d': { name:'Admin',         elder:'' }
+};
+// hash → pastor name (or null if not a valid login). Used to gate + attribute.
+function spPastorForHash_(hash) {
+  var p = SHEPHERDING_PASTORS[String(hash||'')];
+  return p ? p.name : null;
+}
 
 // PCO field-definition ids (discovered) — precise, no fuzzy matching.
 // var so Code_shepherding_actions.gs (write-back) reliably sees it cross-file.
@@ -57,8 +91,17 @@ var SH_FIELD = {
   preferredComm:  '789190',  // select: Email, Phone, Text, Any/All
   known:          '846717',  // boolean
   deaconSupport:  '1082241', // boolean
-  deaconNotes:    '1082244'  // text
+  deaconNotes:    '1082244', // text
+  baptized:       '790028',  // boolean
+  baptismDate:    '789176',  // date
+  salvationDate:  '789177',  // date
+  firstVisit:     '789178',  // date
+  childDedication:'789179',  // date
+  membershipStart:'789180'   // date
 };
+// Reverse map (definition id → our short key) for the bulk field_data read.
+var SH_FIELD_BY_ID = (function(){ var m={}; for (var k in SH_FIELD) m[SH_FIELD[k]]=k; return m; })();
+var SH_OVERDUE_DAYS = 183;  // ~6 months → shepherding check-in overdue
 
 const SH_STATUS_VOCAB = ['healthy', 'weak', 'wandering', 'lost', 'could-not-contact', 'unknown'];
 function shNormStatus_(raw) {
@@ -83,28 +126,36 @@ function syncShepherdingHealth_() {
   var startMs = new Date().getTime();
 
   var lists = spFetchShepherdingLists_();
-  var allIds = [], seenId = {};
-  lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && !seenId[p.id]) { seenId[p.id]=1; allIds.push(p.id); } }); });
-  Logger.log('   Elders: ' + lists.length + ' · unique people: ' + allIds.length);
+  var seenId = {};
+  lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id) seenId[p.id]=1; }); });
+
+  // Members with NO shepherding elder → "Unassigned" list (should normally be empty).
+  var unassigned = spUnassignedMembers_(seenId, startMs);
+  if (unassigned.length) { lists.push({ elder: 'Unassigned', list: 'Unassigned', people: unassigned, unassigned: true }); }
+
+  var allIds = [];
+  lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && allIds.indexOf(p.id)===-1) allIds.push(p.id); }); });
+  Logger.log('   Elders: ' + (lists.length) + ' · people: ' + allIds.length + ' · unassigned: ' + unassigned.length);
   if (!allIds.length) { Logger.log('   ! no people — aborting (keeping previous)'); return; }
 
-  // Essential, cheap reads that always complete inside the budget.
-  var groups  = spGroupInvolvementByPerson_(startMs);  // id → {cg:[],serve:[]}
-  var contact = spContactByPerson_(allIds, startMs);   // id → {email,phone,member}
-  var fields  = spFieldsByPerson_(allIds, startMs);    // id → {status,healthDate,assignedElder,spiritualMat,...}
-  // Giving comes from the daily cache (heavy 24-mo + household work runs separately).
+  // Groups (with join dates) + one reliable people read that returns contact AND
+  // field data together (include=field_data), so per-person fields never get
+  // dropped by rate-limited per-person batches (fixed the wrong-elder glitch).
+  var groups = spGroupInvolvementByPerson_(startMs);
+  var cf = spContactAndFields_(allIds, startMs);   // { contact:{}, fields:{}, membershipValues:Set }
   var givingCache = spReadGivingCache_() || {};
+  var manual = spReadManualMaturity_();            // pid → {by, date}
 
   var eldersOut = lists.map(function(l){
     var people = l.people.map(function(p){
       var giving = givingCache[p.id] || spEmptyGiving_();
-      return spBuildPerson_(p, giving, groups[p.id], contact[p.id], fields[p.id]);
+      return spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
     }).sort(function(a,b){ return (a.score||0)-(b.score||0) || a.name.localeCompare(b.name); }); // infants first within elder
-    return { elder: l.elder, list: l.list, summary: spSummarize_(people), people: people };
+    return { elder: l.elder, list: l.list, unassigned: !!l.unassigned, summary: spSummarize_(people), people: people };
   });
 
   var uniq = [], seenU = {};
-  eldersOut.forEach(function(e){ e.people.forEach(function(p){ if (p.id && !seenU[p.id]) { seenU[p.id]=1; uniq.push(p); } }); });
+  eldersOut.forEach(function(e){ if (e.unassigned) return; e.people.forEach(function(p){ if (p.id && !seenU[p.id]) { seenU[p.id]=1; uniq.push(p); } }); });
 
   var out = {
     generatedAt: new Date().toISOString(),
@@ -112,7 +163,9 @@ function syncShepherdingHealth_() {
     givingMonths: SH_TREND_HALF,
     statusVocab: SH_STATUS_VOCAB,
     paciVocab: ['parent','adult','child','infant'],
-    elderOptions: spElderOptions_(),        // for the reassign-pastor dropdown (full names)
+    elderOptions: spElderOptions_(),
+    membershipOptions: cf.membershipValues.sort(),
+    overdueDays: SH_OVERDUE_DAYS,
     congregation: spSummarize_(uniq),
     elders: eldersOut
   };
@@ -416,33 +469,56 @@ function spGroupInvolvementByPerson_(startMs) {
 }
 
 /* =========================================================
-   Contact info (email/phone/membership)
+   Contact + shepherding/important-date fields — ONE reliable read
+   include=field_data returns each person's custom fields in the same paginated,
+   429-backed-off call as their contact info, so nothing gets dropped per-person.
 ========================================================= */
-function spContactByPerson_(ids, startMs) {
-  var out = {};
+function spContactAndFields_(ids, startMs) {
+  var contact = {}, fields = {}, membershipValues = {};
   var CHUNK = 25;
   for (var i=0; i<ids.length; i+=CHUNK) {
-    if (shOverBudget_(startMs)) { Logger.log('   ! budget hit during contact — partial'); break; }
+    if (shOverBudget_(startMs)) { Logger.log('   ! budget hit during people read — partial'); break; }
     var chunk = ids.slice(i, i+CHUNK), res;
     try {
       res = pcoGetAllWithIncluded_('/people/v2/people?where[id]=' + chunk.join(',') +
-              '&include=emails,phone_numbers&per_page=' + chunk.length);
-    } catch (e) { Logger.log('   ! contact chunk failed: ' + e.message); continue; }
-    var emailById = {}, phoneById = {};
+              '&include=emails,phone_numbers,field_data&per_page=' + chunk.length);
+    } catch (e) { Logger.log('   ! people chunk failed: ' + e.message); continue; }
+    var emailById = {}, phoneById = {}, fdByPerson = {};
     (res.included||[]).forEach(function(inc){
       if (inc.type==='Email') emailById[inc.id]=inc.attributes||{};
       else if (inc.type==='PhoneNumber') phoneById[inc.id]=inc.attributes||{};
+      else if (inc.type==='FieldDatum') {
+        var pid = String((((inc.relationships||{}).customizable||{}).data||{}).id||'');
+        var defId = String((((inc.relationships||{}).field_definition||{}).data||{}).id||'');
+        var v = (inc.attributes||{}).value;
+        if (pid && defId && v != null && String(v).trim() !== '') { (fdByPerson[pid]=fdByPerson[pid]||{})[defId] = String(v).trim(); }
+      }
     });
     (res.data||[]).forEach(function(p){
-      var a = p.attributes||{}, rel = p.relationships||{};
-      out[String(p.id)] = {
+      var pid = String(p.id), a = p.attributes||{}, rel = p.relationships||{};
+      var mt = String(a.membership||'').trim();
+      if (mt) membershipValues[mt] = 1;
+      contact[pid] = {
         email: spPickPrimary_(rel.emails, emailById, 'address'),
         phone: spPickPrimary_(rel.phone_numbers, phoneById, 'number'),
-        member: /member|deacon|pastor/i.test(String(a.membership||''))
+        member: /member|deacon|pastor/i.test(mt),
+        membershipType: mt
       };
+      var byDef = fdByPerson[pid] || {};
+      var f = { statusRaw: byDef[SH_FIELD.healthAssess]||'', status: shNormStatus_(byDef[SH_FIELD.healthAssess]||''),
+        healthDate: byDef[SH_FIELD.healthDate]||'', assignedElder: byDef[SH_FIELD.assignedElder]||'',
+        spiritualMat: byDef[SH_FIELD.spiritualMat]||'', preferredComm: byDef[SH_FIELD.preferredComm]||'',
+        known: byDef[SH_FIELD.known]||'', deaconSupport: byDef[SH_FIELD.deaconSupport]||'', deaconNotes: byDef[SH_FIELD.deaconNotes]||'',
+        baptized: /true/i.test(byDef[SH_FIELD.baptized]||'') || !!byDef[SH_FIELD.baptismDate],
+        importantDates: {
+          baptism: byDef[SH_FIELD.baptismDate]||'', salvation: byDef[SH_FIELD.salvationDate]||'',
+          firstVisit: byDef[SH_FIELD.firstVisit]||'', childDedication: byDef[SH_FIELD.childDedication]||'',
+          membershipStart: byDef[SH_FIELD.membershipStart]||''
+        } };
+      fields[pid] = f;
     });
   }
-  return out;
+  return { contact: contact, fields: fields, membershipValues: Object.keys(membershipValues) };
 }
 function spPickPrimary_(relObj, byId, key) {
   try {
@@ -454,41 +530,36 @@ function spPickPrimary_(relObj, byId, key) {
 }
 
 /* =========================================================
-   Shepherding-tab fields (exact ids)
+   Unassigned members — Members/Deacons/Pastors with no Assigned Elder
 ========================================================= */
-function spFieldsByPerson_(ids, startMs) {
-  var out = {};
-  var pages = fgBatchFetch_(ids.map(function(id){ return '/people/v2/people/'+id+'/field_data?per_page=100'; }), startMs);
-  ids.forEach(function(id, i){
-    var rows = (pages[i]&&pages[i].data)||[];
-    var byDef = {};
-    rows.forEach(function(fd){
-      var defId = String((((fd.relationships||{}).field_definition||{}).data||{}).id||'');
-      var v = (fd.attributes||{}).value;
-      if (defId && v != null && String(v).trim() !== '') byDef[defId] = String(v).trim();
+function spUnassignedMembers_(assignedSet, startMs) {
+  var out = [];
+  try {
+    ['Member','Deacon','Pastor'].forEach(function(mt){
+      if (shOverBudget_(startMs)) return;
+      var url = 'https://api.planningcenteronline.com/people/v2/people?where[membership]=' + encodeURIComponent(mt) + '&per_page=100';
+      var people = pcoGetAll_(url) || [];
+      people.forEach(function(p){
+        var id = String(p.id);
+        if (assignedSet[id]) return;                 // already shepherded
+        if (out.some(function(x){ return x.id===id; })) return;
+        var a = p.attributes||{};
+        var full = ((a.first_name||'')+' '+(a.last_name||'')).trim();
+        out.push({ id:id, first:a.first_name||'', last:a.last_name||'', name:full||('Person '+id), member:true });
+      });
     });
-    out[id] = {
-      statusRaw: byDef[SH_FIELD.healthAssess] || '',
-      status: shNormStatus_(byDef[SH_FIELD.healthAssess] || ''),
-      healthDate: byDef[SH_FIELD.healthDate] || '',
-      assignedElder: byDef[SH_FIELD.assignedElder] || '',
-      spiritualMat: byDef[SH_FIELD.spiritualMat] || '',
-      preferredComm: byDef[SH_FIELD.preferredComm] || '',
-      known: byDef[SH_FIELD.known] || '',
-      deaconSupport: byDef[SH_FIELD.deaconSupport] || '',
-      deaconNotes: byDef[SH_FIELD.deaconNotes] || ''
-    };
-  });
+  } catch (e) { Logger.log('   ! unassigned fetch failed: ' + e.message); }
+  out.sort(function(a,b){ return a.name.localeCompare(b.name); });
   return out;
 }
 
 /* =========================================================
    Build person + PACI score
 ========================================================= */
-function spBuildPerson_(base, giving, grp, contact, fld) {
+function spBuildPerson_(base, giving, grp, contact, fld, manual) {
   grp = grp || {cg:[],serve:[]};
-  contact = contact || {email:'',phone:'',member:base.member};
-  fld = fld || {status:'unknown'};
+  contact = contact || {email:'',phone:'',member:base.member,membershipType:''};
+  fld = fld || {status:'unknown', importantDates:{}};
 
   var cgLeader = grp.cg.some(function(x){ return /leader/i.test(x.role); });
   var serveLeader = grp.serve.some(function(x){ return /leader/i.test(x.role); });
@@ -499,30 +570,68 @@ function spBuildPerson_(base, giving, grp, contact, fld) {
   });
   var paci = spPaci_(scored.score, leads);
   var trajectory = giving.trend==='up' ? 'up' : giving.trend==='down' ? 'down' : 'steady';
+  var healthDaysAgo = spHealthDaysAgo_(fld.healthDate);
+  var overdue = (healthDaysAgo == null) || (healthDaysAgo > SH_OVERDUE_DAYS);
+  var givesRegular = giving.recurring || giving.monthsGiven>=6;
 
   var flags = [];
   if (grp.cg.length===0) flags.push('Not in a group');
   if (grp.serve.length===0) flags.push('Not serving');
   if (giving.gifts===0) flags.push('No recent giving');
   else if (giving.trend==='down') flags.push('Giving declined');
+  if (!fld.baptized) flags.push('Not baptized');
+  if (overdue) flags.push('Check-in overdue');
   if (!contact.email && !contact.phone) flags.push('No contact info');
   if (fld.status==='lost' || fld.status==='could-not-contact') flags.push('Out of contact');
+
+  var nextStep = spComputeNextStep_({
+    status: fld.status, inCG: grp.cg.length>0, serving: grp.serve.length>0, leads: leads,
+    givesRegular: givesRegular, gaveAny: giving.gifts>0, givingTrend: giving.trend,
+    baptized: fld.baptized, paci: paci
+  });
 
   return {
     id: base.id, name: base.name, first: base.first, last: base.last,
     email: contact.email||'', phone: contact.phone||'', member: !!(contact.member||base.member),
-    status: fld.status, statusRaw: fld.statusRaw||'', healthDate: fld.healthDate||'',
+    membershipType: contact.membershipType||'',
+    status: fld.status, statusRaw: fld.statusRaw||'', healthDate: fld.healthDate||'', healthDaysAgo: healthDaysAgo, overdue: overdue,
     assignedElder: fld.assignedElder||'', spiritualMat: fld.spiritualMat||'',
+    maturityManual: manual || null,
     preferredComm: fld.preferredComm||'',
     known: fld.known||'', deaconSupport: fld.deaconSupport||'', deaconNotes: fld.deaconNotes||'',
-    score: scored.score, paci: paci, leads: leads, trajectory: trajectory,
+    baptized: !!fld.baptized, importantDates: fld.importantDates||{},
+    score: scored.score, paci: paci, leads: leads, trajectory: trajectory, nextStep: nextStep,
     pillars: scored.pillars,
     giving: { monthsGiven:giving.monthsGiven, gifts:giving.gifts, totalCents:giving.totalCents,
-              recurring:giving.recurring, trend:giving.trend,
+              recurring:giving.recurring, trend:giving.trend, givesRegular:givesRegular,
               giftsEarlyHalf:giving.giftsEarlyHalf, giftsRecentHalf:giving.giftsRecentHalf,
               firstGiftAt:giving.firstGiftAt, lastGiftAt:giving.lastGiftAt, lastGiftDaysAgo:giving.lastGiftDaysAgo },
     groups: grp.cg, serveTeams: grp.serve, flags: flags
   };
+}
+
+// Days since a MM/DD/YYYY (or ISO) health-assessment date; null if none/unparseable.
+function spHealthDaysAgo_(d) {
+  if (!d) return null;
+  var t = null;
+  var m = String(d).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m) t = new Date(+m[3], +m[1]-1, +m[2]).getTime();
+  else { var dt = new Date(d); if (!isNaN(dt.getTime())) t = dt.getTime(); }
+  if (t == null) return null;
+  return Math.floor((new Date().getTime() - t) / 86400000);
+}
+
+// The single highest-impact next step to grow this person's maturity.
+function spComputeNextStep_(x) {
+  if (x.status==='lost' || x.status==='could-not-contact') return { code:'reconnect', text:'Re-establish contact — reach out personally' };
+  if (x.status==='wandering') return { code:'reconnect', text:'Check in — they may be drifting' };
+  if (!x.baptized) return { code:'baptism', text:'Invite them toward baptism' };
+  if (!x.inCG) return { code:'group', text:'Get them into a community group' };
+  if (!x.serving) return { code:'serve', text:'Invite them onto a serve team' };
+  if (!x.gaveAny) return { code:'give', text:'Encourage first steps in generosity' };
+  if (!x.givesRegular || x.givingTrend==='down') return { code:'give', text:'Encourage consistent / recurring giving' };
+  if (x.paci==='parent' || x.leads) return { code:'lead', text:'Pour into them — they can disciple others' };
+  return { code:'lead', text:'Invite them to lead or mentor someone' };
 }
 
 // GIVING 35 + GROUP 35 + SERVE 30 → 1-10
@@ -546,22 +655,25 @@ function spPaci_(score, leads) {
 function spSummarize_(people) {
   var n = people.length;
   var s = { totalPeople:n, avgScore:0, inGroup:0, serving:0, leading:0, givingRegular:0, recurring:0,
-            givingGrowing:0, noRecentGiving:0, needsAttention:0,
+            givingGrowing:0, noRecentGiving:0, needsAttention:0, overdue:0, notBaptized:0,
+            notInGroup:0, notServing:0, notGiving:0,
             paciCounts:{parent:0,adult:0,child:0,infant:0},
             statusCounts:{healthy:0,weak:0,wandering:0,lost:0,'could-not-contact':0,unknown:0} };
   if (!n) return s;
   var sum = 0;
   people.forEach(function(p){
     sum += p.score||0;
-    if (p.groups && p.groups.length) s.inGroup++;
-    if (p.serveTeams && p.serveTeams.length) s.serving++;
+    if (p.groups && p.groups.length) s.inGroup++; else s.notInGroup++;
+    if (p.serveTeams && p.serveTeams.length) s.serving++; else s.notServing++;
     if (p.leads) s.leading++;
     if (p.giving) {
-      if (p.giving.recurring || p.giving.monthsGiven>=6) s.givingRegular++;
+      if (p.giving.givesRegular) s.givingRegular++;
       if (p.giving.recurring) s.recurring++;
       if (p.giving.trend==='up') s.givingGrowing++;
-      if (p.giving.gifts===0) s.noRecentGiving++;
+      if (p.giving.gifts===0) { s.noRecentGiving++; s.notGiving++; }
     }
+    if (p.overdue) s.overdue++;
+    if (!p.baptized) s.notBaptized++;
     if (s.paciCounts.hasOwnProperty(p.paci)) s.paciCounts[p.paci]++;
     var st = s.statusCounts.hasOwnProperty(p.status) ? p.status : 'unknown';
     s.statusCounts[st]++;
@@ -569,7 +681,8 @@ function spSummarize_(people) {
   });
   s.avgScore = Math.round((sum/n)*10)/10;
   s.pct = { inGroup:s.inGroup/n, serving:s.serving/n, leading:s.leading/n,
-            givingRegular:s.givingRegular/n, recurring:s.recurring/n, givingGrowing:s.givingGrowing/n };
+            givingRegular:s.givingRegular/n, recurring:s.recurring/n, givingGrowing:s.givingGrowing/n,
+            overdue:s.overdue/n, notBaptized:s.notBaptized/n };
   return s;
 }
 
@@ -602,12 +715,14 @@ function spReadPrivate_() {
 function spBuildPublicSeed_(full) {
   var safe = { 'Not in a group':1, 'Not serving':1 };
   function san(p){ return { id:null, name:p.name, first:p.first, last:p.last, email:'', phone:'', member:false,
-    status:'unknown', statusRaw:'', healthDate:'', assignedElder:'', spiritualMat:'', preferredComm:'',
+    membershipType:'', status:'unknown', statusRaw:'', healthDate:'', healthDaysAgo:null, overdue:false,
+    assignedElder:'', spiritualMat:'', maturityManual:null, preferredComm:'',
+    baptized:false, importantDates:{}, nextStep:null,
     score:null, paci:null, leads:!!p.leads, trajectory:'steady', pillars:null, giving:null,
     groups:p.groups||[], serveTeams:p.serveTeams||[], flags:(p.flags||[]).filter(function(f){return safe[f];}), pending:true }; }
   var elders = (full.elders||[]).map(function(e){
     var people = e.people.map(san);
-    return { elder:e.elder, list:e.list, summary:spSummarize_(people), people:people };
+    return { elder:e.elder, list:e.list, unassigned:!!e.unassigned, summary:spSummarize_(people), people:people };
   });
   var uniq=[], seen={};
   elders.forEach(function(e){ e.people.forEach(function(p){ if(!seen[p.name]){seen[p.name]=1;uniq.push(p);} }); });

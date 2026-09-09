@@ -2075,6 +2075,11 @@
   .sh-badge.st-could-not-contact { background:rgba(167,139,250,.15); color:#c4b5fd; }
   .sh-badge.st-unknown { background:#2a2f31; color:#9aa; }
   .sh-badge.st-lead { background:var(--sh-accent-bg); color:var(--sh-accent); }
+  .sh-badge.st-overdue { background:rgba(249,115,22,.16); color:#fdba74; }
+  .sh-badge.st-nobap { background:rgba(129,140,248,.15); color:#c7d2fe; }
+  .sh-next { font-size:12px; font-weight:600; color:var(--sh-accent); background:var(--sh-accent-bg); border:1px solid var(--sh-accent-dim); border-radius:7px; padding:6px 10px; line-height:1.4; }
+  .sh-whoami { font-size:11px; color:var(--text-dim); font-weight:600; }
+  .sh-manual-flag { font-size:10.5px; color:var(--sh-sand); font-style:italic; margin-left:6px; }
 
   .sh-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
   .sh-pillar { text-align:center; background:var(--sh-panel-2); border-radius:7px; padding:7px 4px; }
@@ -2383,14 +2388,16 @@
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; PASTOR &amp; ELDER CARE</div>
     </div>
     <div class="tmod-meta" id="pastorModMeta"></div>
+    <div id="shWhoami" class="sh-whoami" style="margin-left:12px"></div>
+    <button class="tmod-back" style="margin-left:8px" onclick="shLogout()" title="Sign out">Sign out</button>
   </div>
   <!-- Lock screen -->
   <div id="pastorModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
     <div class="tmod-lockcard">
       <div class="tmod-lockicon">&#128737;&#65039;</div>
       <div class="tmod-lockttl">Pastor &amp; Elder Care</div>
-      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes. Enter the password to continue.</div>
-      <input type="password" id="pastorPwInput" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
+      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes.<br><br>Your password is your <b>first name + the last 4 digits of your phone</b> (e.g. <em>brad6260</em>), so the dashboard knows who's making changes.</div>
+      <input type="password" id="pastorPwInput" placeholder="e.g. brad6260" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
       <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="pastorDoUnlock()">Unlock</button>
       <div id="pastorLockErr" class="tmod-lockerr">Incorrect password.</div>
     </div>
@@ -2406,7 +2413,7 @@
     <div id="shFilters"></div>
     <div class="sh-toolbar">
       <input class="sh-search" id="shSearch" type="search" placeholder="Search a name…" oninput="shRenderPeople()">
-      <select class="sh-sort" id="shSort" onchange="shRenderPeople()">
+      <select class="sh-sort" id="shSort" onchange="shRenderPeople();shSavePrefs()">
         <option value="infants">Sort: Infants first</option>
         <option value="parents">Sort: Parents first</option>
         <option value="name">Sort: Name A → Z</option>
@@ -10492,17 +10499,32 @@ function tlhCopy(i, btn) {
 
 <!-- ======== PASTOR SHEPHERDING PAGE ======== -->
 <script>
-const PASTOR_HASH = '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d';
-const PASTOR_SESSION_KEY = 'pastor_unlocked';
+// Per-pastor logins: SHA-256(firstname + last-4-of-phone) → identity. Keep in
+// sync with SHEPHERDING_PASTORS in Code_shepherding_health_sync.gs.
+const SH_PASTORS = {
+  '75b088e8499b902e30e0348e32dccd5badc5146769d97799900531fac3d445a4': { name:'Adam Carp',     elder:'Adam' },
+  'af97c9ab71bee6cdef40ca8ac5571c6ddded6fb2693aeb363b62c1c5d87799b4': { name:'Brad Borowski', elder:'Brad' },
+  '97e2216c3784767313cb3161a67dabb622e7b4ec9abc0f46d427c9fef3b8dda0': { name:'Josh Wampler',  elder:'Josh' },
+  '6a71359975c01071defa0fd07dfa374ffeff87995a9bdc1a69557fc6aef01ff6': { name:'Keith Primus',  elder:'Keith' },
+  '007008de8fd721c4326810fbc7796eab66c1bbe00d5bce52e1fad27697a64bef': { name:'Nick Colonna',  elder:'Nick' },
+  'e43df0398932fe57d94c058c3821b9804be86418fb42bfbd0b136faf1042f95b': { name:'Ray Brown',     elder:'Ray' },
+  '258a074a71811b4c9184e49c95fee3fcbd3700932de36df2bbac9619798ec483': { name:'Ryan Griffin',  elder:'Ryan' },
+  '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d': { name:'Admin',         elder:'' }
+};
+const PASTOR_SESSION_KEY = 'pastor_pw';   // stores the logged-in hash
 const SHEP_DATA_URL = './shepherding-data.json';
 
 let _shepData = null;
 let _shRendered = false;
+let _shPastorHash = '';   // logged-in pastor's hash (sent as pw on every request)
+let _shPastorName = '';
+let _shPastorElder = '';
+let _shDefaultedTab = false;
 let _shActiveElder = 'all';
 let _shActivePaci = 'all';
 let _shActiveStatus = 'all';
-let _shToggles = { group:false, serving:false, leading:false, giving:false };
-let _shDetail = {};      // pid -> loaded detail
+let _shFilter = 'all';    // single "needs/only" filter (see SH_FILTERS)
+let _shDetail = {};       // pid -> loaded detail
 let _shCurrentPid = null;
 
 const SH_PACI_LABEL = { parent:'Parent', adult:'Adult', child:'Child', infant:'Infant' };
@@ -10511,14 +10533,25 @@ const SH_STATUS_ORDER = ['all','healthy','weak','wandering','lost','could-not-co
 const SH_PACI_ORDER = ['all','parent','adult','child','infant'];
 const SH_HEALTH_OPTS = ['Healthy','Weak','Wandering','Lost','Could Not Contact'];
 const SH_MATURITY_OPTS = ['N/A','Infant','Child','Adult','Parent'];
+const SH_MEMBERSHIP_OPTS = ['Attender','Member','Deacon','Pastor','Child','Guest','Inactive'];
+// Single "Show" filter — includes the negative filters the pastors asked for.
+const SH_FILTERS = [
+  ['all','Everyone'], ['notgroup','Not in a group'], ['notserve','Not serving'], ['notgive','Not giving'],
+  ['notbaptized','Not baptized'], ['overdue','Check-in overdue'], ['outofcontact','Out of contact'],
+  ['ingroup','In a group'], ['serving','Serving'], ['leading','Leaders'], ['giving','Giving regularly']
+];
 
-function pastorIsUnlocked() { try { return sessionStorage.getItem(PASTOR_SESSION_KEY) === '1'; } catch (e) { return false; } }
+function pastorIsUnlocked() { try { return !!SH_PASTORS[sessionStorage.getItem(PASTOR_SESSION_KEY)]; } catch (e) { return false; } }
+function shRestoreIdentity() {
+  try { const h = sessionStorage.getItem(PASTOR_SESSION_KEY); if (h && SH_PASTORS[h]) { _shPastorHash=h; _shPastorName=SH_PASTORS[h].name; _shPastorElder=SH_PASTORS[h].elder; } } catch (e) {}
+}
 
 function openPastorModal() {
   const modal = document.getElementById('pastorModal');
   modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
   if (pastorIsUnlocked()) {
+    shRestoreIdentity();
     document.getElementById('pastorModLocked').style.display = 'none';
     document.getElementById('pastorModContent').style.display = 'block';
     if (!_shRendered) shepLoadData();
@@ -10538,10 +10571,11 @@ function closePastorModal() {
 async function pastorDoUnlock() {
   const pw = document.getElementById('pastorPwInput').value;
   const errEl = document.getElementById('pastorLockErr'); errEl.style.display = 'none';
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw.trim().toLowerCase()));
   const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-  if (hex === PASTOR_HASH) {
-    try { sessionStorage.setItem(PASTOR_SESSION_KEY,'1'); } catch (e) {}
+  if (SH_PASTORS[hex]) {
+    _shPastorHash = hex; _shPastorName = SH_PASTORS[hex].name; _shPastorElder = SH_PASTORS[hex].elder;
+    try { sessionStorage.setItem(PASTOR_SESSION_KEY, hex); } catch (e) {}
     document.getElementById('pastorModLocked').style.display = 'none';
     document.getElementById('pastorModContent').style.display = 'block';
     if (!_shRendered) shepLoadData();
@@ -10549,6 +10583,21 @@ async function pastorDoUnlock() {
   }
   errEl.style.display = 'block';
   document.getElementById('pastorPwInput').value = ''; document.getElementById('pastorPwInput').focus();
+}
+// Per-pastor remembered view (elder tab, filters, sort).
+function shPrefsKey() { return 'sh_prefs_' + (_shPastorName||'x'); }
+function shSavePrefs() {
+  try { localStorage.setItem(shPrefsKey(), JSON.stringify({ elder:_shActiveElder, paci:_shActivePaci, status:_shActiveStatus, filter:_shFilter, sort:(document.getElementById('shSort')||{}).value })); } catch (e) {}
+}
+function shLoadPrefs() {
+  try { const p = JSON.parse(localStorage.getItem(shPrefsKey())||'null'); return p||null; } catch (e) { return null; }
+}
+function shLogout() {
+  try { sessionStorage.removeItem(PASTOR_SESSION_KEY); } catch (e) {}
+  _shPastorHash=''; _shPastorName=''; _shPastorElder=''; _shRendered=false; _shDefaultedTab=false; _shepData=null;
+  document.getElementById('pastorModContent').style.display='none';
+  document.getElementById('pastorModLocked').style.display='flex';
+  const el=document.getElementById('pastorPwInput'); if(el){ el.value=''; setTimeout(()=>el.focus(),150); }
 }
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
@@ -10563,7 +10612,7 @@ async function shepLoadData() {
   grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
   let data = null;
   try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + PASTOR_HASH + '&t=' + Date.now());
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + '&t=' + Date.now());
     if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) data = j; }
   } catch (e) {}
   if (!data) {
@@ -10579,6 +10628,21 @@ async function shepLoadData() {
     meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—'); }
   document.getElementById('pastorSeedNote').innerHTML = data.seed
     ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve involvement is live, but PACI scores, giving, contact and status fill in after the first Planning Center sync.</div>' : '';
+
+  // Personalize on first load: restore this pastor's saved view, else default to their own list.
+  if (!_shDefaultedTab) {
+    _shDefaultedTab = true;
+    const prefs = shLoadPrefs();
+    const eldersHave = (n)=> (data.elders||[]).some(e=>e.elder===n);
+    if (prefs && (prefs.elder==='all' || eldersHave(prefs.elder))) {
+      _shActiveElder = prefs.elder; _shActivePaci = prefs.paci||'all'; _shActiveStatus = prefs.status||'all'; _shFilter = prefs.filter||'all';
+      if (prefs.sort) setTimeout(()=>{ const s=document.getElementById('shSort'); if(s){s.value=prefs.sort;} }, 0);
+    } else if (_shPastorElder && eldersHave(_shPastorElder)) {
+      _shActiveElder = _shPastorElder;
+    }
+  }
+  const who = document.getElementById('shWhoami');
+  if (who) who.textContent = _shPastorName ? ('Signed in: ' + _shPastorName) : '';
   shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople();
 }
 
@@ -10597,37 +10661,33 @@ function shBuildElderTabs() {
   elders.forEach(e => { html += '<button class="sh-elder-tab '+(_shActiveElder===e.elder?'active':'')+'" onclick="shSelectElder('+JSON.stringify(e.elder).replace(/"/g,'&quot;')+')">'+shEsc(e.elder)+'<span class="sh-elder-count">'+(e.people||[]).length+'</span></button>'; });
   wrap.innerHTML = html;
 }
-function shSelectElder(el) { _shActiveElder=el; _shActivePaci='all'; _shActiveStatus='all'; _shToggles={group:false,serving:false,leading:false,giving:false}; shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople(); }
+function shSelectElder(el) { _shActiveElder=el; _shActivePaci='all'; _shActiveStatus='all'; _shFilter='all'; shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople(); shSavePrefs(); }
 
+// Clean two-line filter bar: PACI colour chips on top; a "Show" dropdown (with the
+// not-in-group / not-serving / not-giving / overdue / not-baptized options) and a
+// Health dropdown below — no wall of buttons.
 function shBuildFilters() {
   const people = shScopePeople();
   const paciC = {all:people.length,parent:0,adult:0,child:0,infant:0};
-  const statC = {}; SH_STATUS_ORDER.forEach(s=>statC[s]=0); statC.all=people.length;
-  people.forEach(p => { if (paciC.hasOwnProperty(p.paci)) paciC[p.paci]++; const s=statC.hasOwnProperty(p.status)?p.status:'unknown'; statC[s]++; });
-  let html = '<div class="sh-toolbar" style="margin-bottom:10px"><div class="sh-filter-group"><span class="sh-filter-lbl">Maturity</span>';
+  people.forEach(p => { if (paciC.hasOwnProperty(p.paci)) paciC[p.paci]++; });
+  let html = '<div class="sh-toolbar" style="margin-bottom:8px"><div class="sh-filter-group">';
   SH_PACI_ORDER.forEach(s => {
     if (s!=='all' && !paciC[s]) return;
     const lbl = s==='all'?'All':SH_PACI_LABEL[s];
     html += '<button class="sh-chip '+(_shActivePaci===s?'active':'')+'" data-paci="'+s+'" onclick="shSelectPaci(\''+s+'\')">'+(s==='all'?'':'<span class="sh-dot"></span>')+lbl+' <span style="opacity:.6">'+paciC[s]+'</span></button>';
   });
   html += '</div></div>';
-  html += '<div class="sh-toolbar" style="margin-bottom:10px"><div class="sh-filter-group"><span class="sh-filter-lbl">Health</span>';
-  SH_STATUS_ORDER.forEach(s => {
-    if (s!=='all' && !statC[s]) return;
-    const lbl = s==='all'?'All':SH_STATUS_LABEL[s];
-    html += '<button class="sh-chip '+(_shActiveStatus===s?'active':'')+'" data-status="'+s+'" onclick="shSelectStatus(\''+s+'\')">'+(s==='all'?'':'<span class="sh-dot"></span>')+lbl+' <span style="opacity:.6">'+statC[s]+'</span></button>';
-  });
-  html += '</div></div>';
-  html += '<div class="sh-toolbar" style="margin-bottom:0"><div class="sh-filter-group"><span class="sh-filter-lbl">Only</span>';
-  [['group','In a group'],['serving','Serving'],['leading','Leading'],['giving','Giving']].forEach(t => {
-    html += '<button class="sh-chip '+(_shToggles[t[0]]?'active':'')+'" onclick="shToggle(\''+t[0]+'\')">'+t[1]+'</button>';
-  });
+  html += '<div class="sh-toolbar" style="margin-bottom:0"><div class="sh-filter-group">';
+  html += '<select class="sh-sort" onchange="shSetFilter(this.value)" title="Show">' +
+    SH_FILTERS.map(f=>'<option value="'+f[0]+'"'+(_shFilter===f[0]?' selected':'')+'>'+shEsc(f[1])+'</option>').join('') + '</select>';
+  html += '<select class="sh-sort" onchange="shSetStatus(this.value)" title="Health status">' +
+    SH_STATUS_ORDER.map(s=>'<option value="'+s+'"'+(_shActiveStatus===s?' selected':'')+'>'+(s==='all'?'Any health':SH_STATUS_LABEL[s])+'</option>').join('') + '</select>';
   html += '</div></div>';
   document.getElementById('shFilters').innerHTML = html;
 }
-function shSelectPaci(s){ _shActivePaci=s; shBuildFilters(); shRenderPeople(); }
-function shSelectStatus(s){ _shActiveStatus=s; shBuildFilters(); shRenderPeople(); }
-function shToggle(t){ _shToggles[t]=!_shToggles[t]; shBuildFilters(); shRenderPeople(); }
+function shSelectPaci(s){ _shActivePaci=s; shBuildFilters(); shRenderPeople(); shSavePrefs(); }
+function shSetStatus(s){ _shActiveStatus=s; shRenderPeople(); shSavePrefs(); }
+function shSetFilter(f){ _shFilter=f; shRenderPeople(); shSavePrefs(); }
 
 function shPct(v){ return v==null?'—':Math.round(v*100)+'<small>%</small>'; }
 function shRenderHealth() {
@@ -10655,6 +10715,8 @@ function shRenderHealth() {
   cards.push(shMetric(shPct(pct.leading),'Leading',(s.leading||0)+' leaders','accent-teal'));
   cards.push(shMetric(seed?dash:shPct(pct.givingRegular),'Giving Regularly',seed?'after first sync':((s.recurring||0)+' recurring'),'accent-green'));
   cards.push(shMetric(seed?dash:(pct.givingGrowing!=null?shPct(pct.givingGrowing):dash),'Giving Growing',seed?'':'year over year','accent-green'));
+  cards.push(shMetric(seed?dash:(s.notBaptized!=null?s.notBaptized:dash),'Not Baptized',seed?'':'no baptism on file','accent-amber'));
+  cards.push(shMetric(seed?dash:(s.overdue!=null?s.overdue:dash),'Check-in Overdue',seed?'':'&gt; 6 months','accent-amber'));
   cards.push(shMetric(seed?dash:(s.needsAttention!=null?s.needsAttention:dash),'Needs Attention',seed?'':'infant / weak / lost','accent-red'));
   document.getElementById('shHealthGrid').innerHTML = cards.join('');
   const ttl = document.querySelector('#pastorModContent .sh-section-ttl');
@@ -10667,10 +10729,17 @@ function shRenderPeople() {
   let people = shScopePeople().slice();
   if (_shActivePaci!=='all') people = people.filter(p => p.paci===_shActivePaci);
   if (_shActiveStatus!=='all') people = people.filter(p => (p.status||'unknown')===_shActiveStatus);
-  if (_shToggles.group) people = people.filter(p => p.groups && p.groups.length);
-  if (_shToggles.serving) people = people.filter(p => p.serveTeams && p.serveTeams.length);
-  if (_shToggles.leading) people = people.filter(p => p.leads);
-  if (_shToggles.giving) people = people.filter(p => p.giving && (p.giving.recurring || p.giving.monthsGiven>=6));
+  const F = _shFilter, reg = p => p.giving && p.giving.givesRegular;
+  if (F==='notgroup')       people = people.filter(p => !(p.groups&&p.groups.length));
+  else if (F==='notserve')  people = people.filter(p => !(p.serveTeams&&p.serveTeams.length));
+  else if (F==='notgive')   people = people.filter(p => !reg(p));
+  else if (F==='notbaptized') people = people.filter(p => !p.baptized);
+  else if (F==='overdue')   people = people.filter(p => p.overdue);
+  else if (F==='outofcontact') people = people.filter(p => p.status==='lost'||p.status==='could-not-contact');
+  else if (F==='ingroup')   people = people.filter(p => p.groups&&p.groups.length);
+  else if (F==='serving')   people = people.filter(p => p.serveTeams&&p.serveTeams.length);
+  else if (F==='leading')   people = people.filter(p => p.leads);
+  else if (F==='giving')    people = people.filter(p => reg(p));
   const q = (document.getElementById('shSearch').value||'').trim().toLowerCase();
   if (q) people = people.filter(p => (p.name||'').toLowerCase().includes(q));
   const rank = {infant:0,child:1,adult:2,parent:3};
@@ -10699,6 +10768,8 @@ function shPersonCard(p) {
   let badges = '';
   if (p.status && p.status!=='unknown') badges += '<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>';
   if (p.leads) badges += '<span class="sh-badge st-lead">Leader</span>';
+  if (p.overdue) badges += '<span class="sh-badge st-overdue">Overdue</span>';
+  if (!p.baptized && !p.pending) badges += '<span class="sh-badge st-nobap">Not baptized</span>';
   let pillars = '';
   if (p.pillars) {
     const pl = [['Give',p.pillars.giving,35],['Group',p.pillars.group,35],['Serve',p.pillars.serve,30]];
@@ -10717,13 +10788,13 @@ function shPersonCard(p) {
     facts.push(shFact('&#128176;', t));
   }
   const factsHtml = facts.length?'<div class="sh-facts">'+facts.join('')+'</div>':'';
-  const flagsHtml = (p.flags&&p.flags.length)?'<div class="sh-flags">'+p.flags.map(f=>'<span class="sh-flag">'+shEsc(f)+'</span>').join('')+'</div>':'';
+  const nextHtml = (p.nextStep && !p.pending) ? '<div class="sh-next" title="Suggested next step to grow maturity">&#128204; Next: '+shEsc(p.nextStep.text)+'</div>' : '';
   const contact = shContactHtml(p);
   const pid = p.id || '';
   return '<div class="sh-person paci-'+(p.paci||'none')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
     +'<div class="sh-person-top"><div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
     +'<div class="sh-badges">'+badges+'</div></div>'+shPaciBadge(p)+'</div>'
-    +pillars+factsHtml+flagsHtml+contact+'</div>';
+    +pillars+factsHtml+nextHtml+contact+'</div>';
 }
 function shFact(ic,txt){ return '<div class="sh-fact"><span class="ic">'+ic+'</span><span>'+txt+'</span></div>'; }
 function shContactHtml(p) {
@@ -10778,10 +10849,13 @@ function shRow(label, control, field, extra) {
 }
 function shEditControlsHtml(p) {
   const elderOpts = (_shepData.elderOptions||[]);
+  const memOpts = ((_shepData.membershipOptions&&_shepData.membershipOptions.length)?_shepData.membershipOptions:[]).concat(SH_MEMBERSHIP_OPTS).filter(function(v,i,a){return a.indexOf(v)===i;});
+  const manual = p.maturityManual ? '<span class="sh-manual-flag" title="Set from this dashboard">&#9998; set manually'+(p.maturityManual.by?(' by '+shEsc(p.maturityManual.by)):'')+(p.maturityManual.date?(' · '+shEsc(p.maturityManual.date)):'')+'</span>' : '';
   let h = '<div class="sh-d-sec"><h4>Update Shepherding</h4>';
   h += shRow('Health status', '<select id="shEdhealth">'+shOpts(SH_HEALTH_OPTS, p.statusRaw, '— none —')+'</select>', 'health');
-  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+' <em>(auto-set to today when you save a status)</em></span></div>';
-  h += shRow('Spiritual maturity', '<select id="shEdmaturity">'+shOpts(SH_MATURITY_OPTS, p.spiritualMat, '— none —')+'</select>', 'maturity');
+  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+(p.overdue?' <span style="color:#fdba74">(overdue)</span>':'')+' <em>(auto-set to today when you save a status)</em></span></div>';
+  h += shRow('Spiritual maturity', '<select id="shEdmaturity">'+shOpts(SH_MATURITY_OPTS, p.spiritualMat, '— none —')+'</select>', 'maturity', manual?('<div style="margin:-4px 0 6px 0">'+manual+'</div>'):'');
+  h += shRow('Membership', '<select id="shEdmembership">'+shOpts(memOpts, p.membershipType, '— none —')+'</select>', 'membership');
   if (elderOpts.length) h += shRow('Shepherding pastor', '<select id="shEdelder">'+shOpts(elderOpts, p.assignedElder)+'</select>', 'elder',
      '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 6px 0">Moves them to the new list after Planning Center\'s nightly refresh.</div>');
   h += shRow('Preferred contact', '<select id="shEdpref">'+shOpts(['Email','Phone','Text','Any/All'], p.preferredComm, '— none —')+'</select>', 'pref');
@@ -10797,14 +10871,16 @@ async function shSave(field, value, btn) {
   const val = value; // option values are already '' for the none/unset choices
   btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Saving…'; }
   try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_update&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&field='+field+'&value='+encodeURIComponent(val)+'&t='+Date.now());
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_update&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&field='+field+'&value='+encodeURIComponent(val)+'&t='+Date.now());
     const j = await res.json();
     if (j && j.ok) {
       if (note){ note.className='sh-save-note ok'; note.textContent='Saved ✓'; }
       const p = shFindPerson(pid);
       if (p) {
-        if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val); if (j.healthDateSet) p.healthDate=j.healthDateSet; }
-        else if (field==='maturity') p.spiritualMat=val;
+        if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val); if (j.healthDateSet) { p.healthDate=j.healthDateSet; p.healthDaysAgo=0; p.overdue=false; } }
+        else if (field==='maturity') { p.spiritualMat=val; p.maturityManual = val ? (j.maturityManual||{by:_shPastorName,date:''}) : null;
+          const md=document.querySelector('#shEdmaturity'); if(md&&md.parentElement){ /* refresh manual flag by re-rendering controls */ } }
+        else if (field==='membership') p.membershipType=val;
         else if (field==='elder') p.assignedElder=val;
         else if (field==='pref') p.preferredComm=val;
         else if (field==='known') p.known=val;
@@ -10813,8 +10889,8 @@ async function shSave(field, value, btn) {
         document.getElementById('shDrawerHead').innerHTML =
           '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
           + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')+'</div>';
-        if (field==='health') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
-        if (field==='pref') { const row=document.querySelector('#shPeopleGrid'); shRenderPeople(); } // update contact highlight
+        if (field==='maturity') { const box=document.querySelector('#shDrawerBody .sh-d-sec'); if(box){ box.outerHTML = shEditControlsHtml(p); } }
+        if (field==='health'||field==='pref') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
       }
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }
@@ -10826,7 +10902,7 @@ async function shLoadDetail(pid) {
   let d = _shDetail[pid];
   if (!d) {
     try {
-      const res = await fetch(EOS_WEBAPP_URL + '?action=shep_person_detail&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&t='+Date.now());
+      const res = await fetch(EOS_WEBAPP_URL + '?action=shep_person_detail&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&t='+Date.now());
       d = await res.json(); _shDetail[pid] = d;
     } catch (e) { d = { error:'load failed' }; }
   }
@@ -10896,7 +10972,7 @@ async function shWf(op, btn) {
   const note = document.getElementById('shNoteWf');
   btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Working…'; }
   try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&op='+op+'&t='+Date.now());
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&op='+op+'&t='+Date.now());
     const j = await res.json();
     if (j && (j.ok || (j.status && !j.error))) {
       if (note){ note.className='sh-save-note ok'; note.textContent='Done ✓'; }
@@ -10918,7 +10994,7 @@ async function shAddNote(btn) {
   if (!body) { if (msg){ msg.className='sh-save-note err'; msg.textContent='Write something first'; } return; }
   btn.disabled = true; if (msg){ msg.className='sh-save-note'; msg.textContent='Saving…'; }
   try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_add_note&pw='+PASTOR_HASH+'&pid='+encodeURIComponent(pid)+'&category='+encodeURIComponent(cat)+'&body='+encodeURIComponent(body)+'&t='+Date.now());
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_add_note&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&category='+encodeURIComponent(cat)+'&body='+encodeURIComponent(body)+'&t='+Date.now());
     const j = await res.json();
     if (j && j.ok) { _shDetail[pid] = null; shOpenDrawer(pid); }
     else { if (msg){ msg.className='sh-save-note err'; msg.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }

@@ -122,7 +122,16 @@ function shepUpdate_(params) {
   var pid = String(params.pid||'');
   var field = String(params.field||'');
   var value = params.value != null ? String(params.value) : '';
+  var by = String(params.by||'');
   if (!pid || !field) return { error: 'missing pid/field' };
+
+  // Membership status is a core Person attribute, not a custom field.
+  if (field === 'membership') {
+    var wm = shWrite_('patch', '/people/v2/people/'+pid, { data:{ type:'Person', id:pid, attributes:{ membership: value } } });
+    var okm = wm.code>=200 && wm.code<300;
+    if (okm) spLogChange_(by, pid, 'membership', value);
+    return { field:field, ok:okm, code:wm.code, detail: okm?null:(wm.raw||'').substring(0,300) };
+  }
 
   var map = { health:SH_FIELD.healthAssess, healthDate:SH_FIELD.healthDate, elder:SH_FIELD.assignedElder,
               maturity:SH_FIELD.spiritualMat, pref:SH_FIELD.preferredComm, known:SH_FIELD.known,
@@ -133,14 +142,53 @@ function shepUpdate_(params) {
   var r = shSetFieldDatum_(pid, defId, value);
   var result = { field: field, ok: r.ok, code: r.code };
 
-  // Setting health status also stamps Health Assessment Date = today (unless caller sent a date too).
-  if (field === 'health' && r.ok && !params.skipDate) {
-    var today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
-    var d = shSetFieldDatum_(pid, SH_FIELD.healthDate, today);
-    result.healthDateSet = d.ok ? today : false;
-  }
-  if (!r.ok) result.detail = r.detail;
+  if (r.ok) {
+    spLogChange_(by, pid, field, value);
+    // Track that Spiritual Maturity was set manually from the dashboard (or clear it).
+    if (field === 'maturity') {
+      if (value) { spSetManualMaturity_(pid, by); result.maturityManual = { by:by, date: Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd') }; }
+      else spClearManualMaturity_(pid);
+    }
+    // Setting health status also stamps Health Assessment Date = today.
+    if (field === 'health' && !params.skipDate) {
+      var today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+      var d = shSetFieldDatum_(pid, SH_FIELD.healthDate, today);
+      result.healthDateSet = d.ok ? today : false;
+    }
+  } else result.detail = r.detail;
   return result;
+}
+
+/* ── Change log + manual-maturity store ── */
+function spLogChange_(by, pid, field, value) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName(SH_CHANGELOG_SHEET) || ss.insertSheet(SH_CHANGELOG_SHEET);
+    try { sh.hideSheet(); } catch (e) {}
+    sh.appendRow([ new Date().toISOString(), by||'(unknown)', pid, field, String(value).substring(0,200) ]);
+  } catch (e) {}
+}
+function spSetManualMaturity_(pid, by) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName(SH_MANUAL_SHEET) || ss.insertSheet(SH_MANUAL_SHEET);
+    try { sh.hideSheet(); } catch (e) {}
+    var last = sh.getLastRow();
+    var rows = last ? sh.getRange(1,1,last,1).getValues() : [];
+    var row = 0; for (var i=0;i<rows.length;i++){ if (String(rows[i][0])===String(pid)) { row=i+1; break; } }
+    var today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    if (row) sh.getRange(row,1,1,3).setValues([[pid, by||'', today]]);
+    else sh.appendRow([pid, by||'', today]);
+  } catch (e) {}
+}
+function spClearManualMaturity_(pid) {
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SH_MANUAL_SHEET);
+    if (!sh) return;
+    var last = sh.getLastRow(); if (!last) return;
+    var rows = sh.getRange(1,1,last,1).getValues();
+    for (var i=0;i<rows.length;i++){ if (String(rows[i][0])===String(pid)) { sh.deleteRow(i+1); return; } }
+  } catch (e) {}
 }
 
 // PATCH existing datum or POST-create. Returns {ok, code, detail}.
@@ -203,7 +251,8 @@ function shepWorkflow_(params) {
   if (op === 'add') {
     var w = shWrite_('post', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards',
       { data:{ relationships:{ person:{ data:{ type:'Person', id:pid } } } } });
-    return { op:'add', ok:(w.code>=200&&w.code<300), code:w.code, detail:(w.code>=300?(w.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
+    var oka=(w.code>=200&&w.code<300); if(oka) spLogChange_(String(params.by||''), pid, 'baptism-ready', 'added');
+    return { op:'add', ok:oka, code:w.code, detail:(w.code>=300?(w.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
   }
   if (op === 'remove') {
     var st = shWorkflowStatus_(pid);
@@ -227,6 +276,7 @@ function shepAddNote_(params) {
     relationships:{ note_category:{ data:{ type:'NoteCategory', id: catId } } } } };
   var w = shWrite_('post', '/people/v2/people/'+pid+'/notes', payload);
   var ok = w.code>=200 && w.code<300;
+  if (ok) spLogChange_(String(params.by||''), pid, 'note-added', body.substring(0,60));
   return { ok:ok, code:w.code, detail: ok?null:(w.raw||'').substring(0,300),
            note: ok && w.json && w.json.data ? { id:w.json.data.id } : null };
 }
