@@ -2073,8 +2073,13 @@
   .sh-adv-big { display:block; width:100%; box-sizing:border-box; text-align:center; font-size:14px !important; font-weight:800 !important;
     padding:12px !important; background:var(--paci-child) !important; border-color:#ca8a04 !important; color:#1a1400 !important; margin-bottom:8px; }
   .sh-adv-big:hover { background:#fde047 !important; }
-  .sh-adv-sub { display:flex; gap:8px; align-items:center; }
+  .sh-adv-sub { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .sh-adv-sub button { font-size:12px; }
+  .sh-adv-big:disabled { background:#3a3f41 !important; border-color:var(--sh-line) !important; color:var(--text-dim) !important; cursor:not-allowed; }
+  .sh-req { background:var(--sh-panel-2); border:1px solid var(--sh-line); border-radius:8px; padding:10px 12px; margin-bottom:8px; }
+  .sh-req-ttl { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); margin-bottom:6px; }
+  .sh-req-item { font-size:12.5px; color:#fca5a5; padding:2px 0; }
+  .sh-req-item.ok { color:#86efac; }
 
   .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
   .sh-badge { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
@@ -10927,6 +10932,8 @@ async function shSave(field, value, btn) {
           + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')+'</div>';
         if (field==='maturity') { const box=document.querySelector('#shDrawerBody .sh-d-sec'); if(box){ box.outerHTML = shEditControlsHtml(p); } }
         if (field==='health'||field==='pref'||field==='membership') { shBuildFilters(); shRenderHealth(); shRenderPeople(); }
+        // Keep the "Membership Process" completion checklist in step with the edit.
+        if (['health','membership','elder','known'].indexOf(field)!==-1) shRefreshFamily();
         try { shWriteCache(_shepData); } catch(e){}  // keep the session cache in step with the edit
       }
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
@@ -10952,23 +10959,7 @@ function shDetailHtml(d) {
   const p = shFindPerson(_shCurrentPid) || {};
   let h = '';
   // Membership process (New Family Member workflow) — only while in-process
-  const fw = d.familyWorkflow;
-  if (fw && !fw.error && fw.inWorkflow && !fw.completed) {
-    const steps = fw.steps||[];
-    const curSeq = steps.reduce((a,s,i)=> String(s.id)===String(fw.currentStepId)?i:a, 0);
-    const nextStep = curSeq < steps.length-1 ? steps[curSeq+1] : null;
-    const advLabel = nextStep ? ('Advance to: '+nextStep.name) : 'Mark process complete';
-    h += '<div class="sh-d-sec sh-d-family"><h4>&#127881; Membership Process — In Progress</h4>'
-      + '<div style="font-size:12px;color:var(--text-dim);margin:-4px 0 8px">Still finishing the family-member process. Contact them, then step them through:</div>'
-      + '<div class="sh-wf-steps">' + steps.map((s,i) => {
-          const cur = String(s.id)===String(fw.currentStepId);
-          return '<div class="sh-wf-step '+(cur?'current':(i<curSeq?'done':''))+'"><span class="dot"></span>'+(i<curSeq?'&#10003; ':'')+shEsc(s.name)+(cur?' &nbsp;<b>(now)</b>':'')+'</div>';
-        }).join('') + '</div>'
-      + '<button class="sh-save-btn sh-adv-big" onclick="shWf(\'advance\',this,\'family\')">&#10003; '+shEsc(advLabel)+' &#9656;</button>'
-      + '<div class="sh-adv-sub">' + (curSeq>0 ? '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'back\',this,\'family\')">&#9666; Back a step</button>' : '')
-      + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this,\'family\')">Remove from process</button>'
-      + '<span class="sh-save-note" id="shNoteWffamily"></span></div></div>';
-  }
+  h += shFamilyHtml(d, p);
   // Baptism Ready — hidden as an action once they have a baptism on file
   const wf = d.workflow;
   if (wf && !wf.error) {
@@ -11025,6 +11016,55 @@ function shDetailHtml(d) {
   }
   return h || '<div class="sh-d-sec"><div class="sh-d-loading">No additional detail on file.</div></div>';
 }
+// The New Family Member "Membership Process" section — reused so it can refresh
+// live as the required fields get filled in.
+function shFamilyReqs(p) {
+  return [
+    ['Health status set', !!(p.statusRaw)],
+    ['Membership set to Member', /member|deacon|pastor/i.test(p.membershipType||'')],
+    ['Shepherding pastor assigned', !!(p.assignedElder)],
+    ['Known? set to Yes', String(p.known).toLowerCase()==='true']
+  ];
+}
+function shFamilyHtml(d, p) {
+  const fw = d && d.familyWorkflow;
+  if (!(fw && !fw.error && fw.inWorkflow && !fw.completed)) return '';
+  const steps = fw.steps||[];
+  const curSeq = steps.reduce((a,s,i)=> String(s.id)===String(fw.currentStepId)?i:a, 0);
+  const isLast = curSeq >= steps.length-1;
+  const nextStep = !isLast ? steps[curSeq+1] : null;
+  let h = '<div class="sh-d-sec sh-d-family"><h4>&#127881; Membership Process — In Progress</h4>'
+    + '<div style="font-size:12px;color:var(--text-dim);margin:-4px 0 8px">Still finishing the family-member process. Contact them, then step them through:</div>'
+    + '<div class="sh-wf-steps">' + steps.map((s,i) => {
+        const cur = String(s.id)===String(fw.currentStepId);
+        return '<div class="sh-wf-step '+(cur?'current':(i<curSeq?'done':''))+'"><span class="dot"></span>'+(i<curSeq?'&#10003; ':'')+shEsc(s.name)+(cur?' &nbsp;<b>(now)</b>':'')+'</div>';
+      }).join('') + '</div>';
+  if (isLast) {
+    const reqs = shFamilyReqs(p);
+    const missing = reqs.filter(r=>!r[1]);
+    h += '<div class="sh-req"><div class="sh-req-ttl">Required before completing membership:</div>'
+       + reqs.map(r=>'<div class="sh-req-item '+(r[1]?'ok':'')+'">'+(r[1]?'&#10003;':'&#9633;')+' '+shEsc(r[0])+'</div>').join('') + '</div>';
+    if (missing.length) {
+      h += '<button class="sh-save-btn sh-adv-big" disabled title="Fill the items above first">Complete membership &mdash; '+missing.length+' item'+(missing.length>1?'s':'')+' left</button>';
+    } else {
+      h += '<button class="sh-save-btn sh-adv-big" onclick="shWf(\'advance\',this,\'family\')">&#10003; Complete membership process</button>';
+    }
+  } else {
+    h += '<button class="sh-save-btn sh-adv-big" onclick="shWf(\'advance\',this,\'family\')">&#10003; Advance to: '+shEsc(nextStep.name)+' &#9656;</button>';
+  }
+  h += '<div class="sh-adv-sub">' + (curSeq>0 ? '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'back\',this,\'family\')">&#9666; Back a step</button>' : '')
+    + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this,\'family\')">Remove from process</button>'
+    + '<span class="sh-save-note" id="shNoteWffamily"></span></div></div>';
+  return h;
+}
+function shRefreshFamily() {
+  const pid = _shCurrentPid; const d = _shDetail[pid]; if (!d) return;
+  const p = shFindPerson(pid) || {};
+  const el = document.querySelector('#shDrawerBody .sh-d-family');
+  const html = shFamilyHtml(d, p);
+  if (el) { if (html) el.outerHTML = html; else el.remove(); }
+}
+
 async function shWf(op, btn, wf) {
   wf = wf || 'baptism';
   const pid = _shCurrentPid; if (!pid) return;
@@ -11033,9 +11073,21 @@ async function shWf(op, btn, wf) {
   try {
     const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&wf='+wf+'&op='+op+'&t='+Date.now());
     const j = await res.json();
-    if (j && (j.ok || (j.status && !j.error))) {
+    if (j && j.blocked) {
+      if (note){ note.className='sh-save-note err'; note.textContent='Set first: ' + (j.missing||[]).join(', '); }
+    } else if (j && (j.ok || (j.status && !j.error))) {
       if (note){ note.className='sh-save-note ok'; note.textContent='Done ✓'; }
-      _shDetail[pid] = null; // force refresh
+      // Instant list feedback for the family workflow (PCO already updated).
+      if (wf==='family') {
+        const p = shFindPerson(pid); const stt = j.status||{};
+        if (p) {
+          if (!stt.inWorkflow || stt.completed) { p.newFamilyMember=false; p.familyStep=''; }
+          else p.familyStep = stt.currentStep||p.familyStep;
+          try { shWriteCache(_shepData); } catch(e){}
+          shRenderPeople();
+        }
+      }
+      _shDetail[pid] = null; // force fresh detail
       shOpenDrawer(pid);
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }

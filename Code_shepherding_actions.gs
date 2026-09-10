@@ -272,6 +272,25 @@ function shWorkflowStatus_(pid, wf) {
   } catch (e) { return { error: e.message }; }
 }
 
+// Are the membership essentials in place to COMPLETE the New Family Member process?
+// Reads current PCO values (which already reflect any just-saved dashboard edits).
+function shCompletionReady_(pid) {
+  var res = shGet_('/people/v2/people/'+pid+'?include=field_data');
+  var mt = '', fd = {};
+  if (res.json && res.json.data) {
+    mt = String((res.json.data.attributes||{}).membership||'');
+    (res.json.included||[]).forEach(function(x){
+      if (x.type==='FieldDatum') { var def=(((x.relationships||{}).field_definition||{}).data||{}).id; fd[def]=(x.attributes||{}).value; }
+    });
+  }
+  var missing = [];
+  if (!fd[SH_FIELD.healthAssess]) missing.push('Health status');
+  if (!/member|deacon|pastor/i.test(mt)) missing.push('Membership = Member');
+  if (!fd[SH_FIELD.assignedElder]) missing.push('Shepherding pastor');
+  if (String(fd[SH_FIELD.known]||'').toLowerCase() !== 'true') missing.push('Known? = Yes');
+  return { ready: missing.length===0, missing: missing };
+}
+
 function shepWorkflow_(params) {
   var pid = String(params.pid||''), op = String(params.op||'view'), wf = String(params.wf||'baptism');
   var wfId = shWfId_(wf);
@@ -293,6 +312,16 @@ function shepWorkflow_(params) {
     return { op:'remove', ok:okr, code:wr.code, detail:(wr.code>=300?(wr.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid, wf) };
   }
   if (op === 'advance' || op === 'back') {
+    // Completing the FINAL step of the New Family Member process requires the
+    // membership essentials be filled in first (health, membership, pastor, Known).
+    if (op==='advance' && wf==='family') {
+      var steps = st.steps||[];
+      var curIdx = steps.reduce(function(a,s,i){ return String(s.id)===String(st.currentStepId)?i:a; }, -1);
+      if (curIdx>=0 && curIdx >= steps.length-1) {
+        var chk = shCompletionReady_(pid);
+        if (!chk.ready) return { op:op, ok:false, blocked:true, missing:chk.missing, status:st };
+      }
+    }
     var action = op==='back' ? 'go_back' : 'promote';
     var w2 = shWrite_('post', '/people/v2/workflows/'+wfId+'/cards/'+cardId+'/'+action, { data:{} });
     if (w2.code === 404) w2 = shWrite_('post', '/people/v2/workflow_cards/'+cardId+'/'+action, { data:{} });
