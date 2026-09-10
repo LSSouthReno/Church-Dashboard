@@ -181,33 +181,54 @@ function syncShepherdingHealth_() {
   var unassigned = spUnassignedMembers_(seenId, startMs);
   if (unassigned.length) { lists.push({ elder: 'Unassigned', list: 'Unassigned', people: unassigned, unassigned: true }); }
 
+  // New people IN the "New Family Member" workflow (not yet full members) — to be
+  // highlighted on their elder's list as needing contact to finalize membership.
+  var newFamily = spNewFamilyMembers_(startMs);
+
   var allIds = [];
   lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && allIds.indexOf(p.id)===-1) allIds.push(p.id); }); });
-  Logger.log('   Elders: ' + (lists.length) + ' · people: ' + allIds.length + ' · unassigned: ' + unassigned.length);
+  newFamily.forEach(function(nf){ if (nf.id && allIds.indexOf(nf.id)===-1) allIds.push(nf.id); });
+  Logger.log('   people: ' + allIds.length + ' · unassigned: ' + unassigned.length + ' · newFamily: ' + newFamily.length);
   if (!allIds.length) { Logger.log('   ! no people — aborting (keeping previous)'); return; }
 
-  // Groups (with join dates) + one reliable people read that returns contact AND
-  // field data together (include=field_data), so per-person fields never get
-  // dropped by rate-limited per-person batches (fixed the wrong-elder glitch).
   var groups = spGroupInvolvementByPerson_(startMs);
-  var cf = spContactAndFields_(allIds, startMs);   // { contact:{}, fields:{}, membershipValues:Set }
+  var cf = spContactAndFields_(allIds, startMs);   // reliable contact + field read (include=field_data)
   var givingCache = spReadGivingCache_() || {};
-  var manual = spReadManualMaturity_();            // pid → {by, date}
+  var manual = spReadManualMaturity_();
+
+  // Place each new-family person on their Assigned-Elder's list (else Unassigned).
+  if (newFamily.length) {
+    var byElder = {}; lists.forEach(function(l){ byElder[l.elder] = l; });
+    var unList = lists.filter(function(l){ return l.unassigned; })[0];
+    newFamily.forEach(function(nf){
+      var elderFull = (cf.fields[nf.id]||{}).assignedElder || '';
+      var target = elderFull ? byElder[elderFull.split(' ')[0]] : null;
+      if (!target) {
+        if (!unList) { unList = { elder:'Unassigned', list:'Unassigned', people:[], unassigned:true }; lists.push(unList); byElder['Unassigned']=unList; }
+        target = unList;
+      }
+      var existing = target.people.filter(function(p){ return String(p.id)===String(nf.id); })[0];
+      if (existing) { existing._nf=true; existing._step=nf.step; existing._cardId=nf.cardId; }
+      else target.people.push({ id:nf.id, first:nf.first, last:nf.last, name:nf.name, member:false, _nf:true, _step:nf.step, _cardId:nf.cardId });
+    });
+  }
 
   var eldersOut = lists.map(function(l){
     var people = l.people.map(function(p){
       var giving = givingCache[p.id] || spEmptyGiving_();
-      return spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
+      var rec = spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
+      if (p._nf) { rec.newFamilyMember = true; rec.familyStep = p._step || ''; rec.familyCardId = p._cardId || ''; }
+      return rec;
     });
-    // "Unassigned" = Assigned-Elder FIELD is empty. Members with an elder set but
-    // not yet on the (nightly) smart list are dropped here, not mislabeled.
-    if (l.unassigned) people = people.filter(function(p){ return !p.assignedElder; });
-    people.sort(function(a,b){ return (a.score||0)-(b.score||0) || a.name.localeCompare(b.name); }); // infants first
+    // "Unassigned" = empty Assigned-Elder field (or a new-family person not yet assigned).
+    if (l.unassigned) people = people.filter(function(p){ return !p.assignedElder || p.newFamilyMember; });
+    people.sort(function(a,b){ return (b.newFamilyMember?1:0)-(a.newFamilyMember?1:0) || (a.score||0)-(b.score||0) || a.name.localeCompare(b.name); });
     return { elder: l.elder, list: l.list, unassigned: !!l.unassigned, summary: spSummarize_(people), people: people };
-  }).filter(function(e){ return !(e.unassigned && !e.people.length); });  // hide empty Unassigned tab
+  }).filter(function(e){ return !(e.unassigned && !e.people.length); });
 
+  // Congregation stats cover the shepherded MEMBERS — exclude new-family prospects and Unassigned.
   var uniq = [], seenU = {};
-  eldersOut.forEach(function(e){ if (e.unassigned) return; e.people.forEach(function(p){ if (p.id && !seenU[p.id]) { seenU[p.id]=1; uniq.push(p); } }); });
+  eldersOut.forEach(function(e){ if (e.unassigned) return; e.people.forEach(function(p){ if (p.newFamilyMember) return; if (p.id && !seenU[p.id]) { seenU[p.id]=1; uniq.push(p); } }); });
 
   var out = {
     generatedAt: new Date().toISOString(),
@@ -585,6 +606,34 @@ function spPickPrimary_(relObj, byId, key) {
 }
 
 /* =========================================================
+   New Family Member workflow — people still in the join process (not yet members)
+========================================================= */
+var SH_WF_NEW_FAMILY_ID = '528798';
+function spNewFamilyMembers_(startMs) {
+  var out = [];
+  try {
+    var res = pcoGetAllWithIncluded_('/people/v2/workflows/' + SH_WF_NEW_FAMILY_ID + '/cards?include=person,current_step&per_page=100');
+    var stepName = {}, persons = {};
+    (res.included||[]).forEach(function(x){
+      if (x.type==='WorkflowStep') stepName[x.id] = (x.attributes||{}).name;
+      if (x.type==='Person') persons[x.id] = x.attributes||{};
+    });
+    (res.data||[]).forEach(function(c){
+      var a = c.attributes||{};
+      if (String(a.stage)==='completed') return;                    // still in process only
+      var pid = relId_(c,'person'); if (!pid) return;
+      var pa = persons[pid] || {};
+      if (/member|deacon|pastor/i.test(String(pa.membership||''))) return;  // members already finished — skip
+      var stepId = relId_(c,'current_step');
+      out.push({ id:String(pid), first:pa.first_name||'', last:pa.last_name||'',
+                 name:((pa.first_name||'')+' '+(pa.last_name||'')).trim()||('Person '+pid),
+                 membership:String(pa.membership||''), step:stepName[stepId]||'', cardId:c.id });
+    });
+  } catch (e) { Logger.log('   ! new family fetch failed: ' + e.message); }
+  return out;
+}
+
+/* =========================================================
    Unassigned members — Members/Deacons/Pastors with no Assigned Elder
 ========================================================= */
 function spUnassignedMembers_(assignedSet, startMs) {
@@ -620,7 +669,7 @@ function spBuildPerson_(base, giving, grp, contact, fld, manual) {
   var serveLeader = grp.serve.some(function(x){ return /leader/i.test(x.role); });
   var leads = cgLeader || serveLeader;
   var scored = spComputeScore_({
-    monthsGiven: giving.monthsGiven, recurring: giving.recurring,
+    monthsGiven: giving.monthsGiven, recurring: giving.recurring, totalCents: giving.totalCents,
     inCG: grp.cg.length>0, cgLeader: cgLeader, serveCount: grp.serve.length, serveLeader: serveLeader
   });
   var paci = spPaci_(scored.score, leads);
@@ -689,11 +738,17 @@ function spComputeNextStep_(x) {
   return { code:'lead', text:'Invite them to lead or mentor someone' };
 }
 
-// GIVING 35 + GROUP 35 + SERVE 30 → 1-10
+// GIVING 35 + GROUP 30 + SERVE 35 → 1-10.
+// Giving rewards CONSISTENCY *or* generous AMOUNT (whichever is stronger), so a
+// big giver who gives in only a few months isn't scored as disengaged. Serving
+// scales with number of teams. (Annual $ tiers ~ this congregation's quartiles.)
 function spComputeScore_(x) {
-  var giving = Math.min(35, (Math.min(x.monthsGiven,12)/12)*30 + (x.recurring?10:0));
-  var group = x.cgLeader ? 35 : (x.inCG ? 25 : 0);
-  var serve = x.serveLeader ? 30 : (x.serveCount>=1 ? 18 + Math.min(x.serveCount-1,2)*4 : 0);
+  var dollars = (x.totalCents||0)/100;
+  var consistency = Math.min(35, (Math.min(x.monthsGiven,12)/12)*25 + (x.recurring?10:0));
+  var amount = dollars>=15000 ? 35 : dollars>=6000 ? 28 : dollars>=2000 ? 20 : dollars>0 ? 10 : 0;
+  var giving = Math.max(consistency, amount);
+  var group = x.cgLeader ? 30 : (x.inCG ? 22 : 0);
+  var serve = x.serveLeader ? 35 : (x.serveCount>=1 ? [0,20,27,32,35][Math.min(x.serveCount,4)] : 0);
   var total = Math.max(0, Math.min(100, giving + group + serve));
   return { score: Math.max(1, Math.round(total/10)),
            pillars: { giving:Math.round(giving), group:group, serve:serve } };
@@ -776,6 +831,7 @@ function spBuildPublicSeed_(full) {
     assignedElder:'', spiritualMat:'', maturityManual:null, preferredComm:'',
     baptized:false, importantDates:{}, nextStep:null,
     score:null, paci:null, leads:!!p.leads, trajectory:'steady', pillars:null, giving:null,
+    newFamilyMember:!!p.newFamilyMember, familyStep:p.familyStep||'',
     groups:p.groups||[], serveTeams:p.serveTeams||[], flags:(p.flags||[]).filter(function(f){return safe[f];}), pending:true }; }
   var elders = (full.elders||[]).map(function(e){
     var people = e.people.map(san);

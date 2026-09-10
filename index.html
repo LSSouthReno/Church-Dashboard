@@ -2065,6 +2065,9 @@
   .sh-paci-badge.p-child  { background:rgba(234,179,8,.15); color:#fde047; box-shadow:inset 0 0 0 1px rgba(234,179,8,.4); }
   .sh-paci-badge.p-infant { background:rgba(239,68,68,.15); color:#fca5a5; box-shadow:inset 0 0 0 1px rgba(239,68,68,.4); }
   .sh-paci-badge.p-none   { background:#2a2f31; color:#9aa; }
+  .sh-paci-badge.p-new    { background:rgba(234,179,8,.2); color:#fde047; box-shadow:inset 0 0 0 1px rgba(234,179,8,.5); }
+  .sh-person.sh-newfam { border-left-color:var(--paci-child); border-color:rgba(234,179,8,.45); background:linear-gradient(180deg, rgba(234,179,8,.07), var(--sh-panel) 60px); }
+  .sh-newfam-banner { font-size:11.5px; font-weight:700; color:#fde047; background:rgba(234,179,8,.12); border:1px solid rgba(234,179,8,.3); border-radius:7px; padding:6px 10px; margin-bottom:2px; }
 
   .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
   .sh-badge { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
@@ -10760,8 +10763,10 @@ function shRenderPeople() {
   if (q) people = people.filter(p => (p.name||'').toLowerCase().includes(q));
   const rank = {infant:0,child:1,adult:2,parent:3};
   const sv = p => (p.score==null?-1:p.score);
+  const nf = p => (p.newFamilyMember?1:0);
   const sort = document.getElementById('shSort').value;
   people.sort((a,b) => {
+    if (nf(a)!==nf(b)) return nf(b)-nf(a);  // new family members always pinned to the top
     if (sort==='name') return a.name.localeCompare(b.name);
     if (sort==='parents') return (rank[b.paci]||0)-(rank[a.paci]||0) || sv(b)-sv(a) || a.name.localeCompare(b.name);
     if (sort==='giving') return ((b.giving&&b.giving.totalCents)||0)-((a.giving&&a.giving.totalCents)||0) || a.name.localeCompare(b.name);
@@ -10784,11 +10789,14 @@ function shPersonCard(p) {
   let badges = '';
   if (p.status && p.status!=='unknown') badges += '<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>';
   if (p.leads) badges += '<span class="sh-badge st-lead">Leader</span>';
-  if (p.overdue) badges += '<span class="sh-badge st-overdue">Overdue</span>';
-  if (!p.baptized && !p.pending) badges += '<span class="sh-badge st-nobap">Not baptized</span>';
+  if (p.overdue && !p.newFamilyMember) badges += '<span class="sh-badge st-overdue">Overdue</span>';
+  if (!p.baptized && !p.pending && !p.newFamilyMember) badges += '<span class="sh-badge st-nobap">Not baptized</span>';
+  const nfBanner = p.newFamilyMember
+    ? '<div class="sh-newfam-banner">&#127881; New family member — contact to finalize'+(p.familyStep?(' · <b>'+shEsc(p.familyStep)+'</b>'):'')+'</div>'
+    : '';
   let pillars = '';
-  if (p.pillars) {
-    const pl = [['Give',p.pillars.giving,35],['Group',p.pillars.group,35],['Serve',p.pillars.serve,30]];
+  if (p.pillars && !p.newFamilyMember) {
+    const pl = [['Give',p.pillars.giving,35],['Group',p.pillars.group,30],['Serve',p.pillars.serve,35]];
     pillars = '<div class="sh-pillars">'+pl.map(x=>'<div class="sh-pillar"><div class="sh-pillar-bar"><i style="width:'+Math.round(x[1]/x[2]*100)+'%"></i></div><div class="sh-pillar-lbl">'+x[0]+'</div></div>').join('')+'</div>';
   }
   const facts = [];
@@ -10804,12 +10812,14 @@ function shPersonCard(p) {
     facts.push(shFact('&#128176;', t));
   }
   const factsHtml = facts.length?'<div class="sh-facts">'+facts.join('')+'</div>':'';
-  const nextHtml = (p.nextStep && !p.pending) ? '<div class="sh-next" title="Suggested next step to grow maturity">&#128204; Next: '+shEsc(p.nextStep.text)+'</div>' : '';
+  const nextHtml = (p.nextStep && !p.pending && !p.newFamilyMember) ? '<div class="sh-next" title="Suggested next step to grow maturity">&#128204; Next: '+shEsc(p.nextStep.text)+'</div>' : '';
   const contact = shContactHtml(p);
   const pid = p.id || '';
-  return '<div class="sh-person paci-'+(p.paci||'none')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
+  const paciChip = p.newFamilyMember ? '<span class="sh-paci-badge p-new">New</span>' : shPaciBadge(p);
+  return '<div class="sh-person paci-'+(p.paci||'none')+(p.newFamilyMember?' sh-newfam':'')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
+    + nfBanner
     +'<div class="sh-person-top"><div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
-    +'<div class="sh-badges">'+badges+'</div></div>'+shPaciBadge(p)+'</div>'
+    +'<div class="sh-badges">'+badges+'</div></div>'+paciChip+'</div>'
     +pillars+factsHtml+nextHtml+contact+'</div>';
 }
 function shFact(ic,txt){ return '<div class="sh-fact"><span class="ic">'+ic+'</span><span>'+txt+'</span></div>'; }
@@ -10869,7 +10879,7 @@ function shEditControlsHtml(p) {
   const manual = p.maturityManual ? '<span class="sh-manual-flag" title="Set from this dashboard">&#9998; set manually'+(p.maturityManual.by?(' by '+shEsc(p.maturityManual.by)):'')+(p.maturityManual.date?(' · '+shEsc(p.maturityManual.date)):'')+'</span>' : '';
   let h = '<div class="sh-d-sec"><h4>Update Shepherding</h4>';
   h += shRow('Health status', '<select id="shEdhealth">'+shOpts(SH_HEALTH_OPTS, p.statusRaw, '— none —')+'</select>', 'health');
-  h += '<div class="sh-edit-row"><label>Status date</label><span style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+(p.overdue?' <span style="color:#fdba74">(overdue)</span>':'')+' <em>(auto-set to today when you save a status)</em></span></div>';
+  h += '<div class="sh-edit-row"><label>Status date</label><span id="shStatusDateVal" style="font-size:12px;color:var(--text-dim)">'+(p.healthDate?shEsc(p.healthDate):'—')+(p.overdue?' <span style="color:#fdba74">(overdue)</span>':'')+'</span> <em style="font-size:11px;color:var(--text-dim)">(set to today when you save a status)</em></div>';
   h += shRow('Spiritual maturity', '<select id="shEdmaturity">'+shOpts(SH_MATURITY_OPTS, p.spiritualMat, '— none —')+'</select>', 'maturity', manual?('<div style="margin:-4px 0 6px 0">'+manual+'</div>'):'');
   h += shRow('Membership', '<select id="shEdmembership">'+shOpts(memOpts, p.membershipType, '— none —')+'</select>', 'membership');
   if (elderOpts.length) h += shRow('Shepherding pastor', '<select id="shEdelder">'+shOpts(elderOpts, p.assignedElder)+'</select>', 'elder',
@@ -10893,7 +10903,10 @@ async function shSave(field, value, btn) {
       if (note){ note.className='sh-save-note ok'; note.textContent='Saved ✓'; }
       const p = shFindPerson(pid);
       if (p) {
-        if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val); if (j.healthDateSet) { p.healthDate=j.healthDateSet; p.healthDaysAgo=0; p.overdue=false; } }
+        if (field==='health') { p.statusRaw=val; p.status=shNormStatusClient(val);
+          if (j.healthDateSet) { const pr=String(j.healthDateSet).split('-'); const disp = pr.length===3?(pr[1]+'/'+pr[2]+'/'+pr[0]):j.healthDateSet;
+            p.healthDate=disp; p.healthDaysAgo=0; p.overdue=false;
+            const sd=document.getElementById('shStatusDateVal'); if(sd) sd.textContent=disp; } }
         else if (field==='maturity') { p.spiritualMat=val; p.maturityManual = val ? (j.maturityManual||{by:_shPastorName,date:''}) : null;
           const md=document.querySelector('#shEdmaturity'); if(md&&md.parentElement){ /* refresh manual flag by re-rendering controls */ } }
         else if (field==='membership') p.membershipType=val;
@@ -10929,19 +10942,37 @@ async function shLoadDetail(pid) {
 }
 function shDetailHtml(d) {
   if (!d || d.error) return '<div class="sh-d-sec"><div class="sh-d-loading">Details unavailable.</div></div>';
+  const p = shFindPerson(_shCurrentPid) || {};
   let h = '';
-  // Baptism Ready
+  // Membership process (New Family Member workflow) — only while in-process
+  const fw = d.familyWorkflow;
+  if (fw && !fw.error && fw.inWorkflow && !fw.completed) {
+    const curSeq = (fw.steps||[]).reduce((a,s,i)=> String(s.id)===String(fw.currentStepId)?i:a, 0);
+    h += '<div class="sh-d-sec sh-d-family"><h4>&#127881; Membership Process</h4>'
+      + '<div style="font-size:12px;color:var(--text-dim);margin:-4px 0 8px">New person finishing the family-member process — contact and walk them through.</div>'
+      + '<div class="sh-wf-steps">' + (fw.steps||[]).map((s,i) => {
+          const cur = String(s.id)===String(fw.currentStepId);
+          return '<div class="sh-wf-step '+(cur?'current':(i<curSeq?'done':''))+'"><span class="dot"></span>'+shEsc(s.name)+'</div>';
+        }).join('') + '</div>'
+      + '<div class="sh-edit-row"><button class="sh-save-btn" onclick="shWf(\'back\',this,\'family\')">&#9666; Back</button>'
+      + '<button class="sh-save-btn" onclick="shWf(\'advance\',this,\'family\')">Advance &#9656;</button>'
+      + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this,\'family\')">Remove</button>'
+      + '<span class="sh-save-note" id="shNoteWffamily"></span></div></div>';
+  }
+  // Baptism Ready — hidden as an action once they have a baptism on file
   const wf = d.workflow;
   if (wf && !wf.error) {
     h += '<div class="sh-d-sec"><h4>Baptism Ready</h4>';
-    if (wf.completed) {
+    if (p.baptized) {
+      h += '<div style="font-size:13px;color:#86efac">&#10003; Baptized'+((p.importantDates&&p.importantDates.baptism)?(' — '+shEsc(p.importantDates.baptism)):'')+'</div>';
+    } else if (wf.completed) {
       const dt = wf.completedAt ? ' — ' + new Date(wf.completedAt).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '';
       h += '<div style="font-size:13px;color:#86efac">&#10003; Completed'+dt+'</div>';
     } else if (wf.inWorkflow) {
       h += '<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:8px">In progress'+(wf.currentStep?' — '+shEsc(wf.currentStep):'')+'</div>'
-         + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this)">Remove</button><span class="sh-save-note" id="shNoteWf"></span>';
+         + '<button class="sh-save-btn" style="background:transparent;border-color:var(--sh-line);color:var(--text-muted)" onclick="shWf(\'remove\',this,\'baptism\')">Remove</button><span class="sh-save-note" id="shNoteWfbaptism"></span>';
     } else {
-      h += '<button class="sh-save-btn" onclick="shWf(\'add\',this)">Add to Baptism Ready</button><span class="sh-save-note" id="shNoteWf"></span>';
+      h += '<button class="sh-save-btn" onclick="shWf(\'add\',this,\'baptism\')">Add to Baptism Ready</button><span class="sh-save-note" id="shNoteWfbaptism"></span>';
     }
     h += '</div>';
   }
@@ -10984,19 +11015,17 @@ function shDetailHtml(d) {
   }
   return h || '<div class="sh-d-sec"><div class="sh-d-loading">No additional detail on file.</div></div>';
 }
-async function shWf(op, btn) {
+async function shWf(op, btn, wf) {
+  wf = wf || 'baptism';
   const pid = _shCurrentPid; if (!pid) return;
-  const note = document.getElementById('shNoteWf');
+  const note = document.getElementById('shNoteWf'+wf);
   btn.disabled = true; if (note){ note.className='sh-save-note'; note.textContent='Working…'; }
   try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&op='+op+'&t='+Date.now());
+    const res = await fetch(EOS_WEBAPP_URL + '?action=shep_workflow&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&wf='+wf+'&op='+op+'&t='+Date.now());
     const j = await res.json();
     if (j && (j.ok || (j.status && !j.error))) {
       if (note){ note.className='sh-save-note ok'; note.textContent='Done ✓'; }
       _shDetail[pid] = null; // force refresh
-      // re-render just the workflow section by reloading detail
-      const body = document.getElementById('shDrawerBody');
-      // strip existing detail sections (everything after the edit section) then reload
       shOpenDrawer(pid);
     } else { if (note){ note.className='sh-save-note err'; note.textContent='Failed'+(j&&j.code?(' ('+j.code+')'):''); } }
   } catch (e) { if (note){ note.className='sh-save-note err'; note.textContent='Error'; } }

@@ -83,10 +83,14 @@ function shepPersonDetail_(pid) {
   // (include=form_field returns nothing), so fetch each unique form's fields
   // once (concurrently) to map field id → question label, then the answer sets.
   out.forms = [];
-  var fsres = shGet_('/people/v2/people/'+pid+'/form_submissions?include=form&per_page=25');
+  var fsres = shGet_('/people/v2/people/'+pid+'/form_submissions?include=form&per_page=40');
   if (fsres.json && fsres.json.data) {
     var formName = {}; (fsres.json.included||[]).forEach(function(f){ if(f.type==='Form') formName[f.id]=(f.attributes||{}).name; });
-    var subs = fsres.json.data.slice(0, 8);
+    var allSubs = fsres.json.data.slice();
+    // Application forms (esp. Family Member Application) always surface first, then most recent.
+    var isApp = function(sub){ var n=formName[(((sub.relationships||{}).form||{}).data||{}).id]||''; return /application/i.test(n); };
+    allSubs.sort(function(a,b){ return (isApp(b)?1:0)-(isApp(a)?1:0); });
+    var subs = allSubs.slice(0, 10);
     var formIds = subs.map(function(s){ return (((s.relationships||{}).form||{}).data||{}).id; })
       .filter(function(v,i,a){ return v && a.indexOf(v)===i; });
     // Field labels per unique form
@@ -109,7 +113,8 @@ function shepPersonDetail_(pid) {
     });
   }
 
-  out.workflow = shWorkflowStatus_(pid);
+  out.workflow = shWorkflowStatus_(pid, 'baptism');
+  out.familyWorkflow = shWorkflowStatus_(pid, 'family');
   out.noteCategories = SH_NOTE_CATEGORIES;
   return out;
 }
@@ -237,21 +242,29 @@ function shSetFieldDatum_(pid, defId, value) {
 }
 
 /* =========================================================
-   WORKFLOW: Baptism Ready (528797)
-   params: pid, op (view|add|remove), cardId?
+   WORKFLOWS: Baptism Ready (528797) + New Family Member (528798)
+   params: pid, wf (baptism|family), op (view|add|advance|back|remove), cardId?
 ========================================================= */
-function shWorkflowStatus_(pid) {
+var SH_WF_FAMILY = '528798';
+function shWfId_(wf) { return wf==='family' ? SH_WF_FAMILY : SH_WF_BAPTISM; }
+function shWfLabel_(wf) { return wf==='family' ? 'New Family Member' : 'Baptism Ready'; }
+
+function shWorkflowStatus_(pid, wf) {
+  var wfId = shWfId_(wf);
   try {
     var res = pcoGetAllWithIncluded_('/people/v2/people/'+pid+'/workflow_cards?include=current_step,workflow&per_page=50');
     var stepName={};
     (res.included||[]).forEach(function(x){ if (x.type==='WorkflowStep') stepName[x.id]=(x.attributes||{}).name; });
-    var cards = (res.data||[]).filter(function(c){ return String((((c.relationships||{}).workflow||{}).data||{}).id)===SH_WF_BAPTISM; });
+    var cards = (res.data||[]).filter(function(c){ return String((((c.relationships||{}).workflow||{}).data||{}).id)===wfId; });
     var completed = cards.some(function(c){ return String((c.attributes||{}).stage)==='completed'; });
     var active = cards.filter(function(c){ return String((c.attributes||{}).stage)!=='completed'; })[0];
-    var out = { workflow:'Baptism Ready', inWorkflow: cards.length>0, completed: completed };
+    var steps = (pcoGetAll_('/people/v2/workflows/'+wfId+'/steps?per_page=100')||[])
+      .map(function(s){ return { id:s.id, name:(s.attributes||{}).name, seq:(s.attributes||{}).sequence }; })
+      .sort(function(a,b){ return (a.seq||0)-(b.seq||0); });
+    var out = { workflow: shWfLabel_(wf), wf: (wf||'baptism'), inWorkflow: cards.length>0, completed: completed, steps: steps };
     if (active) {
       var curId=(((active.relationships||{}).current_step||{}).data||{}).id;
-      out.cardId=active.id; out.stage=(active.attributes||{}).stage; out.currentStep=stepName[curId]||'';
+      out.cardId=active.id; out.stage=(active.attributes||{}).stage; out.currentStep=stepName[curId]||''; out.currentStepId=curId;
     } else if (completed) {
       out.completedAt = cards.filter(function(c){return String((c.attributes||{}).stage)==='completed';})[0].attributes.completed_at || '';
     }
@@ -260,23 +273,31 @@ function shWorkflowStatus_(pid) {
 }
 
 function shepWorkflow_(params) {
-  var pid = String(params.pid||''), op = String(params.op||'view');
+  var pid = String(params.pid||''), op = String(params.op||'view'), wf = String(params.wf||'baptism');
+  var wfId = shWfId_(wf);
   if (!pid) return { error:'missing pid' };
-  if (op === 'view') return shWorkflowStatus_(pid);
+  if (op === 'view') return shWorkflowStatus_(pid, wf);
 
   if (op === 'add') {
-    var w = shWrite_('post', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards',
-      { data:{ relationships:{ person:{ data:{ type:'Person', id:pid } } } } });
-    var oka=(w.code>=200&&w.code<300); if(oka) spLogChange_(String(params.by||''), pid, 'baptism-ready', 'added');
-    return { op:'add', ok:oka, code:w.code, detail:(w.code>=300?(w.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
+    var w = shWrite_('post', '/people/v2/workflows/'+wfId+'/cards', { data:{ relationships:{ person:{ data:{ type:'Person', id:pid } } } } });
+    var oka=(w.code>=200&&w.code<300); if(oka) spLogChange_(String(params.by||''), pid, wf+'-workflow', 'added');
+    return { op:'add', ok:oka, code:w.code, detail:(w.code>=300?(w.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid, wf) };
   }
+  var st = shWorkflowStatus_(pid, wf);
+  var cardId = params.cardId || st.cardId;
+  if (!cardId) return { error:'no active card', status:st };
   if (op === 'remove') {
-    var st = shWorkflowStatus_(pid);
-    var cardId = params.cardId || st.cardId;
-    if (!cardId) return { error:'no active card', status:st };
-    var wr = shWrite_('delete', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards/'+cardId, {});
-    if (wr.code === 404 || wr.code === 405) wr = shWrite_('post', '/people/v2/workflows/'+SH_WF_BAPTISM+'/cards/'+cardId+'/remove', { data:{} });
-    return { op:'remove', ok:(wr.code>=200&&wr.code<300), code:wr.code, detail:(wr.code>=300?(wr.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid) };
+    var wr = shWrite_('delete', '/people/v2/workflows/'+wfId+'/cards/'+cardId, {});
+    if (wr.code === 404 || wr.code === 405) wr = shWrite_('post', '/people/v2/workflows/'+wfId+'/cards/'+cardId+'/remove', { data:{} });
+    var okr=(wr.code>=200&&wr.code<300); if(okr) spLogChange_(String(params.by||''), pid, wf+'-workflow', 'removed');
+    return { op:'remove', ok:okr, code:wr.code, detail:(wr.code>=300?(wr.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid, wf) };
+  }
+  if (op === 'advance' || op === 'back') {
+    var action = op==='back' ? 'go_back' : 'promote';
+    var w2 = shWrite_('post', '/people/v2/workflows/'+wfId+'/cards/'+cardId+'/'+action, { data:{} });
+    if (w2.code === 404) w2 = shWrite_('post', '/people/v2/workflow_cards/'+cardId+'/'+action, { data:{} });
+    var ok2=(w2.code>=200&&w2.code<300); if(ok2) spLogChange_(String(params.by||''), pid, wf+'-workflow', op);
+    return { op:op, ok:ok2, code:w2.code, detail:(w2.code>=300?(w2.raw||'').substring(0,300):null), status: shWorkflowStatus_(pid, wf) };
   }
   return { error:'unknown op ' + op };
 }
