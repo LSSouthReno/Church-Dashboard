@@ -558,9 +558,23 @@ function spHouseholdAdultsByPerson_(ids, startMs) {
 
 // Combine gifts across a person's household adults, then compute stats.
 function spComputeGivingFor_(pid, adultIds, givingByPerson, recurringSet) {
+  // Household-joining is meant to catch a spouse whose JOINT gifts are recorded
+  // under the other spouse's name (so they'd otherwise show $0). But summing every
+  // household adult over-attributes when people share a household without giving
+  // jointly (e.g. roommates), inflating a modest giver with someone else's large
+  // gifts. So: if this person gives under their OWN name, use only their own
+  // giving; only fall back to the household when they have zero personal giving,
+  // and only for a clean 2-adult household (a couple).
+  var ownRec = givingByPerson[pid];
+  var ownGiftCount = ownRec && ownRec.gifts ? ownRec.gifts.length : 0;
+  var effectiveIds;
+  if (ownGiftCount > 0)            effectiveIds = [pid];      // gives under own name
+  else if ((adultIds||[]).length === 2) effectiveIds = adultIds; // no own giving + couple → joint fallback
+  else                            effectiveIds = [pid];      // shared/large household → own only (0)
+
   var gifts = [];
   var recurring = false;
-  adultIds.forEach(function(aid){
+  effectiveIds.forEach(function(aid){
     var rec = givingByPerson[aid];
     if (rec) gifts = gifts.concat(rec.gifts);
     if (recurringSet.has(aid)) recurring = true;
@@ -979,6 +993,21 @@ function installShepherdingHealthTrigger() {
 }
 function runShepherdingHealthNow() { syncShepherdingHealth_(); }
 function runShepherdingGivingNow() { syncShepherdingGiving_(); }
+// On-demand giving refresh via an installable trigger (~30-min limit), for when
+// the web-app path would time out. Records status + removes its own trigger.
+function shepGivingJob_() {
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty('SHEP_GIVING_STATUS', 'running:' + new Date().toISOString());
+  try {
+    syncShepherdingGiving_();
+    props.setProperty('SHEP_GIVING_STATUS', 'done:' + new Date().toISOString());
+  } catch (e) {
+    props.setProperty('SHEP_GIVING_STATUS', 'error:' + (e && e.message) + ':' + new Date().toISOString());
+  } finally {
+    try { ScriptApp.getProjectTriggers().forEach(function(t){
+      if (t.getHandlerFunction() === 'shepGivingJob_') ScriptApp.deleteTrigger(t); }); } catch (e2) {}
+  }
+}
 function spEnsureShepherdingTrigger_() {
   var ts = ScriptApp.getProjectTriggers();
   if (!ts.some(function(t){ return t.getHandlerFunction()==='syncShepherdingHealth_'; }))

@@ -2053,8 +2053,26 @@
   .sh-person.paci-child  { border-left-color:var(--paci-child); }
   .sh-person.paci-infant { border-left-color:var(--paci-infant); }
   .sh-person.paci-none   { border-left-color:var(--sh-line); }
+  .sh-person.sh-selected { border-color:var(--sh-accent); box-shadow:0 0 0 1px var(--sh-accent) inset; }
   .sh-person-top { display:flex; align-items:flex-start; gap:10px; }
+  .sh-selbox { display:flex; align-items:center; padding-top:1px; cursor:pointer; }
+  .sh-selbox input { width:17px; height:17px; cursor:pointer; accent-color:var(--sh-accent); }
   .sh-person-id { flex:1; min-width:0; }
+  #shBulkBar {
+    position:fixed; left:50%; bottom:22px; transform:translate(-50%, 140%);
+    display:flex; align-items:center; gap:10px; z-index:100000;
+    background:var(--sh-panel,#272e32); border:1px solid var(--sh-accent,#5cbccb); border-radius:12px;
+    padding:10px 14px; box-shadow:0 10px 30px rgba(0,0,0,.45); opacity:0; transition:transform .2s, opacity .2s;
+    font-size:13px; color:var(--text,#e8eef0);
+  }
+  #shBulkBar.open { transform:translate(-50%, 0); opacity:1; }
+  #shBulkBar .shbb-count { font-weight:700; margin-right:4px; white-space:nowrap; }
+  #shBulkBar .shbb-btn {
+    background:var(--sh-accent,#5cbccb); color:#0c1416; border:none; border-radius:8px;
+    padding:8px 12px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
+  }
+  #shBulkBar .shbb-btn:hover { filter:brightness(1.08); }
+  #shBulkBar .shbb-clear { background:transparent; color:var(--text-dim,#9aa4a8); border:1px solid var(--sh-line,#333c40); }
   .sh-person-name { font-size:15.5px; font-weight:700; color:var(--text); line-height:1.25; }
   .sh-traj { font-size:12px; font-weight:700; }
   .sh-traj.up { color:var(--paci-adult); } .sh-traj.down { color:var(--paci-infant); } .sh-traj.steady { color:var(--text-dim); }
@@ -6154,6 +6172,7 @@ function staffIsUnlocked() {
 
 let _sundayPlans   = null;  // array from dashboard-data.json
 let _sundayEosCal  = null;  // calendar events from eos-data.json
+let _sundayPendingDate = null;  // deep-link target (#sunday=YYYY-MM-DD), honored once on load
 
 const SD_BLOCKED = new Set([
   '8am worship gathering', '9:30am worship gathering', '11am worship gathering',
@@ -6203,6 +6222,17 @@ function closeSundayModal() {
   navSetActive('metrics');
 }
 
+// Deep link from the volunteer checklist email: #sunday or #sunday=YYYY-MM-DD
+// opens the Sunday one-sheet (on that date if given).
+function shOpenSundayFromHash() {
+  const m = (location.hash || '').match(/^#sunday(?:=(\d{4}-\d{2}-\d{2}))?/);
+  if (!m) return;
+  if (m[1]) _sundayPendingDate = m[1];
+  if (typeof navGo === 'function') navGo('sunday'); else openSundayModal();
+}
+window.addEventListener('DOMContentLoaded', shOpenSundayFromHash);
+window.addEventListener('hashchange', shOpenSundayFromHash);
+
 async function sundayLoadData() {
   document.getElementById('sd-content').innerHTML =
     '<div class="sd-empty-state">Loading Sunday data from Planning Center…</div>';
@@ -6245,13 +6275,16 @@ function sundayBuildSelector() {
     `<option value="${p.date}">${p.ds}</option>`
   ).join('');
 
-  // Default to the nearest upcoming Sunday
+  // Default to the nearest upcoming Sunday (current Sunday until midnight, else next).
   const today = new Date();
   today.setHours(0,0,0,0);
   let best = _sundayPlans[0].date;
   for (const p of _sundayPlans) {
     if (new Date(p.date + 'T00:00:00') >= today) { best = p.date; break; }
   }
+  // A deep link (#sunday=YYYY-MM-DD, e.g. from the volunteer checklist email) wins.
+  if (_sundayPendingDate && _sundayPlans.some(p => p.date === _sundayPendingDate)) best = _sundayPendingDate;
+  _sundayPendingDate = null;
   sel.value = best;
   sundaySelectWeek(best);
 }
@@ -9961,12 +9994,10 @@ const TEAM_CHECKLISTS = {
   ],
 
   'hospitality team': [
-    { phase:'Arrival', time:'Before first service', text:'Arrive and check in with the Hospitality team lead' },
-    { phase:'Setup', time:'Before service', text:'Set up any food or snack areas in the lobby; ensure the space looks warm and inviting' },
-    { phase:'During Service', time:'8:15 / 9:45 / 11:15 AM', text:'Dismissed to enjoy service' },
-    { phase:'Between Services', time:'9:05 / 10:35 / 12:15 PM', text:'Return to posts when service ends — re-engage the lobby, offer refreshments' },
-    { phase:'Between Services', time:'Between services', text:'Replenish snacks and drinks; wipe down tables; keep area clean' },
-    { phase:'Teardown', time:'After last service', text:'Break down all food/snack areas, clean surfaces, take out trash' },
+    { phase:'Before Service', time:'15 min before service', text:'Arrive 15 minutes before the start of service' },
+    { phase:'As People Arrive', time:'Before service', text:'Spread out across the worship center — welcome people, talk with them, and help them feel at home and cared about' },
+    { phase:'As People Arrive', time:'Before service', text:'Especially look for anyone sitting alone, not with or talking to someone else — go make them feel welcomed and included' },
+    { phase:'When Worship Starts', time:'Service start', text:'Once worship begins, find a seat and enjoy the service' },
   ],
 
   'coffee team': [
@@ -10587,6 +10618,7 @@ function closePastorModal() {
   const modal = document.getElementById('pastorModal');
   if (!modal || !modal.classList.contains('open')) return;
   shCloseDrawer();
+  if (typeof shClearSelect === 'function') shClearSelect();
   modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
 }
@@ -10834,10 +10866,12 @@ function shPersonCard(p) {
   const nextHtml = (p.nextStep && !p.pending && !p.newFamilyMember) ? '<div class="sh-next" title="Suggested next step to grow maturity">&#128204; Next: '+shEsc(p.nextStep.text)+'</div>' : '';
   const contact = shContactHtml(p);
   const pid = p.id || '';
+  const isSel = pid && _shSelected.has(String(pid));
+  const selBox = pid ? '<label class="sh-selbox" onclick="event.stopPropagation()" title="Select for bulk email/text"><input type="checkbox" '+(isSel?'checked':'')+' onclick="shToggleSelect('+JSON.stringify(String(pid)).replace(/"/g,'&quot;')+',this)"></label>' : '';
   const paciChip = p.newFamilyMember ? '<span class="sh-paci-badge p-new">New</span>' : shPaciBadge(p);
-  return '<div class="sh-person paci-'+(p.paci||'none')+(p.newFamilyMember?' sh-newfam':'')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
+  return '<div class="sh-person paci-'+(p.paci||'none')+(p.newFamilyMember?' sh-newfam':'')+(isSel?' sh-selected':'')+'" onclick="shOpenDrawer('+JSON.stringify(pid).replace(/"/g,'&quot;')+')">'
     + nfBanner
-    +'<div class="sh-person-top"><div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
+    +'<div class="sh-person-top">'+selBox+'<div class="sh-person-id"><div class="sh-person-name">'+shEsc(p.name)+' '+traj+'</div>'
     +'<div class="sh-badges">'+badges+'</div></div>'+paciChip+'</div>'
     +pillars+factsHtml+nextHtml+contact+'</div>';
 }
@@ -10853,6 +10887,55 @@ function shContactHtml(p) {
   const tBtn = digits?'<a class="'+tC+'" '+stop+' href="sms:'+digits+'">&#128172; Text</a>':'<span class="sh-cbtn disabled">&#128172; Text</span>';
   const cBtn = digits?'<a class="'+cC+'" '+stop+' href="tel:'+digits+'">&#128222; Call</a>':'<span class="sh-cbtn disabled">&#128222; Call</span>';
   return '<div class="sh-contact">'+eBtn+tBtn+cBtn+'</div>';
+}
+
+/* ── Bulk select: email/text several people at once ── */
+const _shSelected = new Set();
+function shToggleSelect(pid, el) {
+  pid = String(pid);
+  if (el && el.checked) _shSelected.add(pid); else _shSelected.delete(pid);
+  const card = el && el.closest ? el.closest('.sh-person') : null;
+  if (card) card.classList.toggle('sh-selected', el.checked);
+  shUpdateBulkBar();
+}
+function shClearSelect() {
+  _shSelected.clear();
+  document.querySelectorAll('.sh-person.sh-selected').forEach(c => c.classList.remove('sh-selected'));
+  document.querySelectorAll('.sh-selbox input:checked').forEach(i => { i.checked = false; });
+  shUpdateBulkBar();
+}
+function shSelectedPeople() {
+  const out = [];
+  _shSelected.forEach(pid => { const p = shFindPerson(pid); if (p) out.push(p); });
+  return out;
+}
+function shBulkEmail() {
+  const emails = [...new Set(shSelectedPeople().map(p => (p.email||'').trim()).filter(Boolean))];
+  if (!emails.length) { alert('None of the selected people have an email on file.'); return; }
+  // BCC keeps recipients private from each other.
+  window.location.href = 'mailto:?bcc=' + encodeURIComponent(emails.join(','));
+}
+function shBulkText() {
+  const nums = [...new Set(shSelectedPeople().map(p => (p.phone||'').replace(/[^\d+]/g,'')).filter(Boolean))];
+  if (!nums.length) { alert('None of the selected people have a phone on file.'); return; }
+  // Multiple recipients in one SMS draft (supported on iOS and most Android clients).
+  window.location.href = 'sms:' + nums.join(',');
+}
+function shUpdateBulkBar() {
+  let bar = document.getElementById('shBulkBar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'shBulkBar';
+    bar.innerHTML =
+      '<span class="shbb-count"></span>' +
+      '<button class="shbb-btn" onclick="shBulkEmail()">&#9993;&#65039; Email selected</button>' +
+      '<button class="shbb-btn" onclick="shBulkText()">&#128172; Text selected</button>' +
+      '<button class="shbb-btn shbb-clear" onclick="shClearSelect()">Clear</button>';
+    document.body.appendChild(bar);
+  }
+  const n = _shSelected.size;
+  bar.querySelector('.shbb-count').textContent = n + (n===1?' person selected':' people selected');
+  bar.classList.toggle('open', n > 0);
 }
 
 /* ── Detail drawer ── */

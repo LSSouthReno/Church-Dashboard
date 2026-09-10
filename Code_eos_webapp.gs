@@ -59,7 +59,20 @@ function doGet(e) {
       return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
     }
     if (action === 'run_shepherding_giving') {
-      // Heavy daily giving refresh (24-mo pull + household join → cache).
+      // Heavy daily giving refresh (24-mo pull + household join → cache). Over the
+      // full congregation this exceeds the 6-min web-app limit, so via=trigger runs
+      // it from an installable trigger (~30-min limit); via=status polls it.
+      var gVia = (e && e.parameter && e.parameter.via) || '';
+      if (gVia === 'trigger') {
+        ScriptApp.getProjectTriggers().forEach(function(t){
+          if (t.getHandlerFunction() === 'shepGivingJob_') ScriptApp.deleteTrigger(t); });
+        ScriptApp.newTrigger('shepGivingJob_').timeBased().after(10000).create();
+        PropertiesService.getScriptProperties().setProperty('SHEP_GIVING_STATUS', 'scheduled:' + new Date().toISOString());
+        return eosWaJson_({ ok:true, ran:'shep_giving_trigger_scheduled' });
+      }
+      if (gVia === 'status') {
+        return eosWaJson_({ ok:true, status: PropertiesService.getScriptProperties().getProperty('SHEP_GIVING_STATUS') || 'none' });
+      }
       syncShepherdingGiving_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingGiving_' });
     }
