@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T03:51:42.443Z",
+  "generatedAt": "2026-09-10T04:50:01.429Z",
   "asOf": "2026-09-09",
   "givingMonths": 12,
   "statusVocab": [
@@ -14014,10 +14014,10 @@
       "list": "Shepherding - Ray",
       "unassigned": false,
       "summary": {
-        "totalPeople": 50,
+        "totalPeople": 49,
         "avgScore": 0,
         "inGroup": 28,
-        "serving": 25,
+        "serving": 24,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -14025,8 +14025,8 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 50,
-        "notInGroup": 22,
+        "notBaptized": 49,
+        "notInGroup": 21,
         "notServing": 25,
         "notGiving": 0,
         "paciCounts": {
@@ -14041,12 +14041,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 50
+          "unknown": 49
         },
         "pct": {
-          "inGroup": 0.56,
-          "serving": 0.5,
-          "leading": 0.14,
+          "inGroup": 0.5714285714285714,
+          "serving": 0.4897959183673469,
+          "leading": 0.14285714285714285,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -14055,48 +14055,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Autumn Thetford",
-          "first": "Autumn",
-          "last": "Thetford",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Pastoral Meeting being scheduled/in process",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Coffee Team",
-              "role": "member",
-              "joinedAt": "2026-08-05T19:00:15Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Cheryl Devore",
@@ -18433,10 +18391,10 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 6,
+        "totalPeople": 7,
         "avgScore": 0,
         "inGroup": 4,
-        "serving": 1,
+        "serving": 2,
         "leading": 0,
         "givingRegular": 0,
         "recurring": 0,
@@ -18444,8 +18402,8 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 6,
-        "notInGroup": 2,
+        "notBaptized": 7,
+        "notInGroup": 3,
         "notServing": 5,
         "notGiving": 0,
         "paciCounts": {
@@ -18460,11 +18418,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 6
+          "unknown": 7
         },
         "pct": {
-          "inGroup": 0.6666666666666666,
-          "serving": 0.16666666666666666,
+          "inGroup": 0.5714285714285714,
+          "serving": 0.2857142857142857,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18545,6 +18503,48 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Autumn Thetford",
+          "first": "Autumn",
+          "last": "Thetford",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2026-08-05T19:00:15Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
