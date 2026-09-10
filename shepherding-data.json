@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T16:50:18.092Z",
+  "generatedAt": "2026-09-10T17:50:07.407Z",
   "asOf": "2026-09-10",
   "givingMonths": 12,
   "statusVocab": [
@@ -64,7 +64,7 @@
       "list": "Shepherding - Adam",
       "unassigned": false,
       "summary": {
-        "totalPeople": 65,
+        "totalPeople": 66,
         "avgScore": 0,
         "inGroup": 48,
         "serving": 53,
@@ -75,9 +75,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 65,
-        "notInGroup": 17,
-        "notServing": 12,
+        "notBaptized": 66,
+        "notInGroup": 18,
+        "notServing": 13,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -91,12 +91,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 65
+          "unknown": 66
         },
         "pct": {
-          "inGroup": 0.7384615384615385,
-          "serving": 0.8153846153846154,
-          "leading": 0.4,
+          "inGroup": 0.7272727272727273,
+          "serving": 0.803030303030303,
+          "leading": 0.3939393939393939,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -105,6 +105,43 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Tyler Colton",
+          "first": "Tyler",
+          "last": "Colton",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Chelsey Shauer",
@@ -5706,6 +5743,11 @@
               "name": "Point Leaders",
               "role": "leader",
               "joinedAt": "2025-01-27T19:04:11Z"
+            },
+            {
+              "name": "Lead Guide's Stepping Stones",
+              "role": "member",
+              "joinedAt": "2026-05-26T23:23:56Z"
             }
           ],
           "flags": [],
@@ -18131,6 +18173,11 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:52Z"
+            },
+            {
+              "name": "Lead Guide's Stepping Stones",
+              "role": "member",
+              "joinedAt": "2026-05-26T23:23:22Z"
             }
           ],
           "flags": [],
@@ -18265,7 +18312,7 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 9,
+        "totalPeople": 8,
         "avgScore": 0,
         "inGroup": 5,
         "serving": 2,
@@ -18276,9 +18323,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 9,
-        "notInGroup": 4,
-        "notServing": 7,
+        "notBaptized": 8,
+        "notInGroup": 3,
+        "notServing": 6,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18292,11 +18339,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 9
+          "unknown": 8
         },
         "pct": {
-          "inGroup": 0.5555555555555556,
-          "serving": 0.2222222222222222,
+          "inGroup": 0.625,
+          "serving": 0.25,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18306,43 +18353,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Tyler Colton",
-          "first": "Tyler",
-          "last": "Colton",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Ready to Meet",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Donald Hug",
