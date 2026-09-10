@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-10T20:46:12.004Z",
+  "lastUpdated": "2026-09-10T21:00:01.504Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 10, 2026, 1:46 PM",
+    "refreshed": "Sep 10, 2026, 2:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -20002,6 +20002,13 @@
               "pos": "Check In",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ed Griggs",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -20145,8 +20152,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 109,
-            "totalVols": 109
+            "volsWithServiceTime": 110,
+            "totalVols": 110
           }
         }
       ]
@@ -22671,7 +22678,7 @@
               "name": "Damian Smith",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
             }
           ],
