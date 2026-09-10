@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T17:50:07.407Z",
+  "generatedAt": "2026-09-10T18:19:14.999Z",
   "asOf": "2026-09-10",
   "givingMonths": 12,
   "statusVocab": [
@@ -11194,7 +11194,7 @@
       "list": "Shepherding - Nick",
       "unassigned": false,
       "summary": {
-        "totalPeople": 64,
+        "totalPeople": 65,
         "avgScore": 0,
         "inGroup": 33,
         "serving": 31,
@@ -11205,9 +11205,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 64,
-        "notInGroup": 31,
-        "notServing": 33,
+        "notBaptized": 65,
+        "notInGroup": 32,
+        "notServing": 34,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -11221,12 +11221,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 64
+          "unknown": 65
         },
         "pct": {
-          "inGroup": 0.515625,
-          "serving": 0.484375,
-          "leading": 0.125,
+          "inGroup": 0.5076923076923077,
+          "serving": 0.47692307692307695,
+          "leading": 0.12307692307692308,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -11235,6 +11235,43 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Donald Hug",
+          "first": "Donald",
+          "last": "Hug",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Pastoral Meeting being scheduled/in process",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Jonnie Buchanan",
@@ -14014,10 +14051,10 @@
       "list": "Shepherding - Ray",
       "unassigned": false,
       "summary": {
-        "totalPeople": 48,
+        "totalPeople": 49,
         "avgScore": 0,
         "inGroup": 27,
-        "serving": 24,
+        "serving": 25,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -14025,8 +14062,8 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 48,
-        "notInGroup": 21,
+        "notBaptized": 49,
+        "notInGroup": 22,
         "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
@@ -14041,12 +14078,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 48
+          "unknown": 49
         },
         "pct": {
-          "inGroup": 0.5625,
-          "serving": 0.5,
-          "leading": 0.14583333333333334,
+          "inGroup": 0.5510204081632653,
+          "serving": 0.5102040816326531,
+          "leading": 0.14285714285714285,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -14055,6 +14092,48 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Autumn Thetford",
+          "first": "Autumn",
+          "last": "Thetford",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Pastoral Meeting being scheduled/in process",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2026-08-05T19:00:15Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Elizabeth Wolfgang",
@@ -18312,10 +18391,10 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 8,
+        "totalPeople": 6,
         "avgScore": 0,
         "inGroup": 5,
-        "serving": 2,
+        "serving": 1,
         "leading": 0,
         "givingRegular": 0,
         "recurring": 0,
@@ -18323,9 +18402,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 8,
-        "notInGroup": 3,
-        "notServing": 6,
+        "notBaptized": 6,
+        "notInGroup": 1,
+        "notServing": 5,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18339,11 +18418,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 8
+          "unknown": 6
         },
         "pct": {
-          "inGroup": 0.625,
-          "serving": 0.25,
+          "inGroup": 0.8333333333333334,
+          "serving": 0.16666666666666666,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18353,43 +18432,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Donald Hug",
-          "first": "Donald",
-          "last": "Hug",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Mitzi Ackeret",
@@ -18424,48 +18466,6 @@
           "flags": [
             "Not in a group",
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Autumn Thetford",
-          "first": "Autumn",
-          "last": "Thetford",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Coffee Team",
-              "role": "member",
-              "joinedAt": "2026-08-05T19:00:15Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
