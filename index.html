@@ -10918,8 +10918,12 @@ function shBulkEmail() {
 function shBulkText() {
   const nums = [...new Set(shSelectedPeople().map(p => (p.phone||'').replace(/[^\d+]/g,'')).filter(Boolean))];
   if (!nums.length) { alert('None of the selected people have a phone on file.'); return; }
-  // Multiple recipients in one SMS draft (supported on iOS and most Android clients).
-  window.location.href = 'sms:' + nums.join(',');
+  // Apple Messages needs the /open?addresses= form to start ONE message to several
+  // recipients; a plain "sms:a,b" only grabs the first number. Android accepts it too.
+  const list = nums.join(',');
+  const ua = navigator.userAgent || '';
+  const url = /Android/i.test(ua) ? ('smsto:' + list) : ('sms:/open?addresses=' + list);
+  window.location.href = url;
 }
 function shUpdateBulkBar() {
   let bar = document.getElementById('shBulkBar');

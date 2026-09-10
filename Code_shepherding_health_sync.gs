@@ -224,10 +224,9 @@ function syncShepherdingHealth_() {
   if (missingGiving.length) {
     try {
       var ledgerBP = spReadGivingLedgerByPerson_();
-      var fbAdults = spHouseholdAdultsByPerson_(missingGiving, startMs);
       var fbRecur  = spRecurringDonorIds_();
       missingGiving.forEach(function(id){
-        givingFallback[id] = spComputeGivingFor_(id, fbAdults[id] || [id], ledgerBP, fbRecur);
+        givingFallback[id] = spComputeGivingFor_(id, [id], ledgerBP, fbRecur);
       });
       Logger.log('   giving fallback computed for ' + missingGiving.length + ' uncached people');
     } catch (e) { Logger.log('   ! giving fallback failed: ' + e.message); }
@@ -370,10 +369,10 @@ function syncShepherdingGiving_() {
   // lives in a sheet ledger, so we never re-pull 24 months every night.
   var ledger          = spUpdateGivingLedger_(startMs);   // { byPerson: {pid:[{cents,ts}]} }
   var recurring       = spRecurringDonorIds_();
-  var householdAdults = spHouseholdAdultsByPerson_(allIds, startMs);
 
+  // Individual giving per person (no household join — see spComputeGivingFor_).
   var map = {};
-  allIds.forEach(function(id){ map[id] = spComputeGivingFor_(id, householdAdults[id]||[id], ledger.byPerson, recurring); });
+  allIds.forEach(function(id){ map[id] = spComputeGivingFor_(id, [id], ledger.byPerson, recurring); });
   spStoreGivingCache_({ generatedAt: new Date().toISOString(), giving: map });
   Logger.log('✓ Shepherding Giving — cached ' + allIds.length + ' people in ' + Math.round(shElapsed_(startMs)/1000) + 's');
 }
@@ -558,27 +557,16 @@ function spHouseholdAdultsByPerson_(ids, startMs) {
 
 // Combine gifts across a person's household adults, then compute stats.
 function spComputeGivingFor_(pid, adultIds, givingByPerson, recurringSet) {
-  // Household-joining is meant to catch a spouse whose JOINT gifts are recorded
-  // under the other spouse's name (so they'd otherwise show $0). But summing every
-  // household adult over-attributes when people share a household without giving
-  // jointly (e.g. roommates), inflating a modest giver with someone else's large
-  // gifts. So: if this person gives under their OWN name, use only their own
-  // giving; only fall back to the household when they have zero personal giving,
-  // and only for a clean 2-adult household (a couple).
-  var ownRec = givingByPerson[pid];
-  var ownGiftCount = ownRec && ownRec.gifts ? ownRec.gifts.length : 0;
-  var effectiveIds;
-  if (ownGiftCount > 0)            effectiveIds = [pid];      // gives under own name
-  else if ((adultIds||[]).length === 2) effectiveIds = adultIds; // no own giving + couple → joint fallback
-  else                            effectiveIds = [pid];      // shared/large household → own only (0)
-
+  // Use the person's OWN individual giving. Planning Center attributes every gift
+  // to a single person and exposes NO joint-donor link in its API (households are
+  // the only grouping, and joining across them wrongly merged unrelated housemates
+  // — e.g. a roommate's large gifts inflating a modest giver). If a couple truly
+  // gives jointly, PCO records that under one person, which is that person's own
+  // giving. (adultIds is retained for signature compatibility but no longer used.)
   var gifts = [];
-  var recurring = false;
-  effectiveIds.forEach(function(aid){
-    var rec = givingByPerson[aid];
-    if (rec) gifts = gifts.concat(rec.gifts);
-    if (recurringSet.has(aid)) recurring = true;
-  });
+  var ownRec = givingByPerson[pid];
+  if (ownRec && ownRec.gifts) gifts = ownRec.gifts.slice();
+  var recurring = recurringSet.has(pid);
   if (!gifts.length) {
     return { monthsGiven:0, gifts:0, totalCents:0, recurring:recurring, trend:'none', lastGiftAt:null, lastGiftDaysAgo:null };
   }
