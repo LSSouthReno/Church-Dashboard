@@ -1949,11 +1949,14 @@
 
   /* ======== PASTOR SHEPHERDING PAGE (teal/slate on charcoal) ======== */
   #pastorModal, .sh-drawer {
-    --sh-accent:#4bb3c4; --sh-accent-dim:#2c6f7b; --sh-accent-bg:rgba(75,179,196,.12);
-    --sh-sand:#d8c59a; --sh-panel:#1f2426; --sh-panel-2:#181c1e; --sh-line:#333b3d;
-    --paci-parent:#34d399; --paci-adult:#4d9e6a; --paci-child:#eab308; --paci-infant:#ef4444;
+    --sh-accent:#5cbccb; --sh-accent-dim:#356f79; --sh-accent-bg:rgba(92,188,203,.10);
+    --sh-sand:#d8c59a; --sh-bg:#20262a; --sh-panel:#272e32; --sh-panel-2:#222a2e; --sh-line:#333c40;
+    --paci-parent:#43d9a4; --paci-adult:#5aa877; --paci-child:#e0b23c; --paci-infant:#e06b6e;
   }
-  #pastorModal .tmod-header { background:#15191a; border-bottom-color:var(--sh-line); }
+  #pastorModal { background:var(--sh-bg); }
+  .sh-drawer { background:var(--sh-bg); }
+  #pastorModal .tmod-body { background:var(--sh-bg); }
+  #pastorModal .tmod-header { background:#1b2124; border-bottom-color:var(--sh-line); }
   #pastorModal .tmod-title { color:var(--sh-accent); font-weight:800; }
   #pastorModal .tmod-lockcard .tmod-dbtn.hi { border-color:var(--sh-accent-dim); color:var(--sh-accent); }
   #pastorModal .tmod-lockcard .tmod-dbtn.hi:hover { background:var(--sh-accent-bg); }
@@ -2080,6 +2083,9 @@
   .sh-req-ttl { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); margin-bottom:6px; }
   .sh-req-item { font-size:12.5px; color:#fca5a5; padding:2px 0; }
   .sh-req-item.ok { color:#86efac; }
+  .sh-activity { font-size:12px; color:var(--text-muted); padding:5px 0; border-bottom:1px solid var(--sh-panel-2); line-height:1.5; }
+  .sh-activity .who { color:var(--sh-accent); font-weight:700; }
+  .sh-activity .when { color:var(--text-dim); float:right; font-size:11px; }
 
   .sh-badges { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
   .sh-badge { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
@@ -6208,7 +6214,8 @@ async function sundayLoadData() {
     ]);
     if (dashRes.ok) {
       const dash = await dashRes.json();
-      _sundayPlans = dash.sundayPlans || [];
+      // Past + future Sundays, oldest → newest so the week picker reads in order.
+      _sundayPlans = (dash.sundayPlans || []).slice().sort((a,b)=> String(a.date).localeCompare(String(b.date)));
       const meta = document.getElementById('sundayModalMeta');
       if (meta && dash.lastUpdated) {
         meta.innerHTML = '<b>Last synced</b>' + new Date(dash.lastUpdated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
@@ -11011,6 +11018,20 @@ function shDetailHtml(d) {
       h += '<div class="sh-tabgrp"><div class="tt">'+shEsc(tab)+'</div>';
       d.fields[tab].forEach(kv => { h += '<div class="sh-kv"><span class="k">'+shEsc(kv.name)+'</span><span class="v">'+shEsc(kv.value)+'</span></div>'; });
       h += '</div>';
+    });
+    h += '</div>';
+  }
+  // Recent dashboard activity (who changed what)
+  if (Array.isArray(d.activity) && d.activity.length) {
+    const flab = {health:'Health status', healthDate:'Status date', maturity:'Spiritual maturity', elder:'Shepherding pastor',
+      membership:'Membership', pref:'Preferred contact', known:'Known?', deaconSupport:'Deacon support', deaconNotes:'Deacon notes',
+      'note-added':'Added a note', 'baptism-workflow':'Baptism Ready', 'family-workflow':'Membership process'};
+    h += '<div class="sh-d-sec"><h4>Recent Activity</h4>';
+    d.activity.forEach(a => {
+      const when = a.ts ? new Date(a.ts).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '';
+      const label = flab[a.field] || a.field;
+      const val = /note/.test(a.field) ? '' : (a.value ? (' &rarr; <b>'+shEsc(a.value)+'</b>') : ' cleared');
+      h += '<div class="sh-activity"><span class="who">'+shEsc(a.by||'—')+'</span> '+shEsc(label)+val+'<span class="when">'+when+'</span></div>';
     });
     h += '</div>';
   }

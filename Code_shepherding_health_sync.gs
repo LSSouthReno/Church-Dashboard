@@ -92,6 +92,23 @@ function spClearOverridesBefore_(cutoffIso) {
   } catch (e) {}
 }
 
+// Recent dashboard changes for one person (newest first) — powers the drawer's
+// "Recent activity" so it's clear WHO changed what. Every write goes through
+// spLogChange_ (Code_shepherding_actions.gs) with the signed-in pastor's name.
+function spReadChangeLogFor_(pid, limit) {
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SH_CHANGELOG_SHEET);
+    if (!sh) return [];
+    var last = sh.getLastRow(); if (!last) return [];
+    var rows = sh.getRange(1,1,last,5).getValues();   // ts | pastor | pid | field | value
+    var out = [];
+    for (var i=rows.length-1; i>=0 && out.length<(limit||15); i--) {
+      if (String(rows[i][2])===String(pid)) out.push({ ts:String(rows[i][0]), by:String(rows[i][1]), field:String(rows[i][3]), value:String(rows[i][4]) });
+    }
+    return out;
+  } catch (e) { return []; }
+}
+
 // pid → {by, date} for people whose Spiritual Maturity was set from the dashboard.
 function spReadManualMaturity_() {
   try {
@@ -177,13 +194,15 @@ function syncShepherdingHealth_() {
   var seenId = {};
   lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id) seenId[p.id]=1; }); });
 
-  // Members with NO shepherding elder → "Unassigned" list (should normally be empty).
-  var unassigned = spUnassignedMembers_(seenId, startMs);
-  if (unassigned.length) { lists.push({ elder: 'Unassigned', list: 'Unassigned', people: unassigned, unassigned: true }); }
-
-  // New people IN the "New Family Member" workflow (not yet full members) — to be
-  // highlighted on their elder's list as needing contact to finalize membership.
+  // People IN the "New Family Member" workflow (still finishing the process) — to
+  // be highlighted on their card-assignee's list. Computed first so they don't
+  // also get counted as plain "Unassigned" members (e.g. Donald Hug).
   var newFamily = spNewFamilyMembers_(startMs);
+  var nfIds = {}; newFamily.forEach(function(nf){ if (nf.id) nfIds[nf.id]=1; });
+
+  // Members with NO shepherding elder (and not mid-process) → "Unassigned".
+  var unassigned = spUnassignedMembers_(seenId, startMs).filter(function(p){ return !nfIds[p.id]; });
+  if (unassigned.length) { lists.push({ elder: 'Unassigned', list: 'Unassigned', people: unassigned, unassigned: true }); }
 
   var allIds = [];
   lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && allIds.indexOf(p.id)===-1) allIds.push(p.id); }); });
@@ -630,11 +649,12 @@ function spNewFamilyMembers_(startMs) {
     });
     (res.data||[]).forEach(function(c){
       var a = c.attributes||{};
-      // Only cards that are genuinely IN PROCESS — not completed and not removed.
+      // Only cards genuinely IN PROCESS — not completed and not removed. (A person
+      // can be a Member and still be finishing the process, e.g. Donald Hug — so we
+      // key off the card state, not membership.)
       if (a.stage==='completed' || a.stage==='removed' || a.removed_at || a.completed_at) return;
       var pid = relId_(c,'person'); if (!pid) return;
       var pa = persons[pid] || {};
-      if (/member|deacon|pastor/i.test(String(pa.membership||''))) return;  // members already finished
       out.push({ id:String(pid), first:pa.first_name||'', last:pa.last_name||'',
                  name:((pa.first_name||'')+' '+(pa.last_name||'')).trim()||('Person '+pid),
                  membership:String(pa.membership||''), step:stepName[relId_(c,'current_step')]||'',

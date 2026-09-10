@@ -116,6 +116,7 @@ function shepPersonDetail_(pid) {
   out.workflow = shWorkflowStatus_(pid, 'baptism');
   out.familyWorkflow = shWorkflowStatus_(pid, 'family');
   out.noteCategories = SH_NOTE_CATEGORIES;
+  out.activity = spReadChangeLogFor_(pid, 15);   // who changed what, from the dashboard
   return out;
 }
 
