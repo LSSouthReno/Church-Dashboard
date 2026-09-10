@@ -201,8 +201,11 @@ function syncShepherdingHealth_() {
     var byElder = {}; lists.forEach(function(l){ byElder[l.elder] = l; });
     var unList = lists.filter(function(l){ return l.unassigned; })[0];
     newFamily.forEach(function(nf){
-      var elderFull = (cf.fields[nf.id]||{}).assignedElder || '';
-      var target = elderFull ? byElder[elderFull.split(' ')[0]] : null;
+      // Placement is by the workflow card's ASSIGNEE (who's responsible), falling
+      // back to the person's Assigned-Elder field, then Unassigned.
+      var shortElder = SH_ELDER_BY_PERSON[String(nf.assigneeId||'')] || '';
+      if (!shortElder) { var elderFull = (cf.fields[nf.id]||{}).assignedElder || ''; shortElder = elderFull ? elderFull.split(' ')[0] : ''; }
+      var target = shortElder ? byElder[shortElder] : null;
       if (!target) {
         if (!unList) { unList = { elder:'Unassigned', list:'Unassigned', people:[], unassigned:true }; lists.push(unList); byElder['Unassigned']=unList; }
         target = unList;
@@ -609,10 +612,17 @@ function spPickPrimary_(relObj, byId, key) {
    New Family Member workflow — people still in the join process (not yet members)
 ========================================================= */
 var SH_WF_NEW_FAMILY_ID = '528798';
+// Workflow-card assignee (person id) → shepherding elder short name. This is the
+// "who is responsible for this card" assignment that decides whose list a new
+// person appears on (NOT their Assigned-Elder profile field).
+var SH_ELDER_BY_PERSON = {
+  '144311112':'Adam', '136687145':'Brad', '151512993':'Josh', '131211575':'Keith',
+  '148888896':'Nick', '151513054':'Ray', '151513084':'Ryan'
+};
 function spNewFamilyMembers_(startMs) {
   var out = [];
   try {
-    var res = pcoGetAllWithIncluded_('/people/v2/workflows/' + SH_WF_NEW_FAMILY_ID + '/cards?include=person,current_step&per_page=100');
+    var res = pcoGetAllWithIncluded_('/people/v2/workflows/' + SH_WF_NEW_FAMILY_ID + '/cards?include=person,current_step,assignee&per_page=100');
     var stepName = {}, persons = {};
     (res.included||[]).forEach(function(x){
       if (x.type==='WorkflowStep') stepName[x.id] = (x.attributes||{}).name;
@@ -620,14 +630,15 @@ function spNewFamilyMembers_(startMs) {
     });
     (res.data||[]).forEach(function(c){
       var a = c.attributes||{};
-      if (String(a.stage)==='completed') return;                    // still in process only
+      // Only cards that are genuinely IN PROCESS — not completed and not removed.
+      if (a.stage==='completed' || a.stage==='removed' || a.removed_at || a.completed_at) return;
       var pid = relId_(c,'person'); if (!pid) return;
       var pa = persons[pid] || {};
-      if (/member|deacon|pastor/i.test(String(pa.membership||''))) return;  // members already finished — skip
-      var stepId = relId_(c,'current_step');
+      if (/member|deacon|pastor/i.test(String(pa.membership||''))) return;  // members already finished
       out.push({ id:String(pid), first:pa.first_name||'', last:pa.last_name||'',
                  name:((pa.first_name||'')+' '+(pa.last_name||'')).trim()||('Person '+pid),
-                 membership:String(pa.membership||''), step:stepName[stepId]||'', cardId:c.id });
+                 membership:String(pa.membership||''), step:stepName[relId_(c,'current_step')]||'',
+                 cardId:c.id, assigneeId:relId_(c,'assignee') });
     });
   } catch (e) { Logger.log('   ! new family fetch failed: ' + e.message); }
   return out;
