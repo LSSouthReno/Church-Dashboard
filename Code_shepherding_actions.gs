@@ -337,12 +337,17 @@ function shepWorkflow_(params) {
 ========================================================= */
 function shepAddNote_(params) {
   var pid = String(params.pid||''), catId = String(params.category||'239853'), body = String(params.body||'').trim();
+  var by = String(params.by||'').trim();
   if (!pid || !body) return { error:'missing pid/body' };
-  var payload = { data:{ attributes:{ note: body },
+  // PCO always credits the note to the API token owner (created_by_id cannot be
+  // assigned), so stamp the ACTUAL author (from their login) into the note text.
+  var noteText = body;
+  if (by && by !== 'Admin' && !/^\s*—/.test(body)) noteText = body + '\n\n— ' + by;
+  var payload = { data:{ attributes:{ note: noteText },
     relationships:{ note_category:{ data:{ type:'NoteCategory', id: catId } } } } };
   var w = shWrite_('post', '/people/v2/people/'+pid+'/notes', payload);
   var ok = w.code>=200 && w.code<300;
-  if (ok) spLogChange_(String(params.by||''), pid, 'note-added', body.substring(0,60));
+  if (ok) spLogChange_(by, pid, 'note-added', body.substring(0,60));
   return { ok:ok, code:w.code, detail: ok?null:(w.raw||'').substring(0,300),
            note: ok && w.json && w.json.data ? { id:w.json.data.id } : null };
 }
