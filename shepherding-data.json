@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T15:51:23.663Z",
+  "generatedAt": "2026-09-10T16:50:18.092Z",
   "asOf": "2026-09-10",
   "givingMonths": 12,
   "statusVocab": [
@@ -18,7 +18,7 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 403,
+    "totalPeople": 404,
     "avgScore": 0,
     "inGroup": 226,
     "serving": 236,
@@ -29,9 +29,9 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 403,
-    "notInGroup": 177,
-    "notServing": 167,
+    "notBaptized": 404,
+    "notInGroup": 178,
+    "notServing": 168,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 403
+      "unknown": 404
     },
     "pct": {
-      "inGroup": 0.5607940446650124,
-      "serving": 0.5856079404466501,
-      "leading": 0.20595533498759305,
+      "inGroup": 0.5594059405940595,
+      "serving": 0.5841584158415841,
+      "leading": 0.20544554455445543,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -5706,11 +5706,6 @@
               "name": "Point Leaders",
               "role": "leader",
               "joinedAt": "2025-01-27T19:04:11Z"
-            },
-            {
-              "name": "Lead Guide's Stepping Stones",
-              "role": "member",
-              "joinedAt": "2026-05-26T23:23:56Z"
             }
           ],
           "flags": [],
@@ -13977,9 +13972,9 @@
       "list": "Shepherding - Ray",
       "unassigned": false,
       "summary": {
-        "totalPeople": 49,
+        "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 27,
         "serving": 24,
         "leading": 7,
         "givingRegular": 0,
@@ -13988,9 +13983,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 49,
+        "notBaptized": 48,
         "notInGroup": 21,
-        "notServing": 25,
+        "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -14004,12 +13999,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 49
+          "unknown": 48
         },
         "pct": {
-          "inGroup": 0.5714285714285714,
-          "serving": 0.4897959183673469,
-          "leading": 0.14285714285714285,
+          "inGroup": 0.5625,
+          "serving": 0.5,
+          "leading": 0.14583333333333334,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -14018,48 +14013,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Cheryl Devore",
-          "first": "Cheryl",
-          "last": "Devore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Pastoral Meeting being scheduled/in process",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-26T22:26:04Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Elizabeth Wolfgang",
@@ -18178,11 +18131,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:52Z"
-            },
-            {
-              "name": "Lead Guide's Stepping Stones",
-              "role": "member",
-              "joinedAt": "2026-05-26T23:23:22Z"
             }
           ],
           "flags": [],
@@ -18317,9 +18265,9 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 7,
+        "totalPeople": 9,
         "avgScore": 0,
-        "inGroup": 4,
+        "inGroup": 5,
         "serving": 2,
         "leading": 0,
         "givingRegular": 0,
@@ -18328,9 +18276,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 7,
-        "notInGroup": 3,
-        "notServing": 5,
+        "notBaptized": 9,
+        "notInGroup": 4,
+        "notServing": 7,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18344,11 +18292,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 7
+          "unknown": 9
         },
         "pct": {
-          "inGroup": 0.5714285714285714,
-          "serving": 0.2857142857142857,
+          "inGroup": 0.5555555555555556,
+          "serving": 0.2222222222222222,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18358,6 +18306,43 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Tyler Colton",
+          "first": "Tyler",
+          "last": "Colton",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Donald Hug",
@@ -18508,6 +18493,48 @@
               "name": "Brown/Frank Community Group",
               "role": "member",
               "joinedAt": "2026-05-22T02:58:04Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Cheryl Devore",
+          "first": "Cheryl",
+          "last": "Devore",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-26T22:26:04Z"
             }
           ],
           "serveTeams": [],
