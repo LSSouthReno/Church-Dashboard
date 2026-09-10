@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T20:50:15.915Z",
+  "generatedAt": "2026-09-10T21:50:11.412Z",
   "asOf": "2026-09-10",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 404,
     "avgScore": 0,
     "inGroup": 226,
-    "serving": 236,
+    "serving": 235,
     "leading": 83,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 404,
     "notInGroup": 178,
-    "notServing": 168,
+    "notServing": 169,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5594059405940595,
-      "serving": 0.5841584158415841,
+      "serving": 0.5816831683168316,
       "leading": 0.20544554455445543,
       "givingRegular": 0,
       "recurring": 0,
@@ -16266,7 +16266,7 @@
         "totalPeople": 44,
         "avgScore": 0,
         "inGroup": 28,
-        "serving": 31,
+        "serving": 30,
         "leading": 14,
         "givingRegular": 0,
         "recurring": 0,
@@ -16276,7 +16276,7 @@
         "overdue": 0,
         "notBaptized": 44,
         "notInGroup": 16,
-        "notServing": 13,
+        "notServing": 14,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -16294,7 +16294,7 @@
         },
         "pct": {
           "inGroup": 0.6363636363636364,
-          "serving": 0.7045454545454546,
+          "serving": 0.6818181818181818,
           "leading": 0.3181818181818182,
           "givingRegular": 0,
           "recurring": 0,
@@ -17389,6 +17389,48 @@
         },
         {
           "id": null,
+          "name": "Mike Hagstrand",
+          "first": "Mike",
+          "last": "Hagstrand",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Geoffrey Caliger Community Group",
+              "role": "member",
+              "joinedAt": "2026-02-25T18:09:11Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Savannah Caliger",
           "first": "Savannah",
           "last": "Caliger",
@@ -17977,52 +18019,6 @@
               "name": "First Impressions Team",
               "role": "member",
               "joinedAt": "2026-04-28T02:32:03Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Mike Hagstrand",
-          "first": "Mike",
-          "last": "Hagstrand",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Geoffrey Caliger Community Group",
-              "role": "member",
-              "joinedAt": "2026-02-25T18:09:11Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "LS Students Leaders",
-              "role": "member",
-              "joinedAt": "2025-07-29T01:14:27Z"
             }
           ],
           "flags": [],
