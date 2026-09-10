@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-10T17:49:39.208Z",
+  "lastUpdated": "2026-09-10T18:05:58.431Z",
   "sectionDescriptions": {
     "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
     "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 10, 2026, 10:49 AM",
+    "refreshed": "Sep 10, 2026, 11:06 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9455,7 +9455,7 @@
         null,
         null,
         2,
-        21,
+        22,
         5,
         2,
         null,
@@ -10011,13 +10011,6 @@
               "pos": "Coffee Setup",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
-            },
-            {
-              "name": "Karis Sellman",
-              "team": "Stepping Stones",
-              "pos": "Check In",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Jeff Conrad",
@@ -10622,13 +10615,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Thomas Adams",
-              "team": "Enrichment Teams",
-              "pos": "Back Left Communion Server",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Latisha Hill",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
@@ -10647,6 +10633,41 @@
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
               "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Brian Merritt",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Cody Wright",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kristie Marchese",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
               "serviceTime": "11 AM"
             }
           ],
@@ -10791,8 +10812,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 107,
-            "totalVols": 107
+            "volsWithServiceTime": 110,
+            "totalVols": 110
           }
         }
       ]
