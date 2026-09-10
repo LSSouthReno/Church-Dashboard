@@ -215,6 +215,24 @@ function syncShepherdingHealth_() {
   var givingCache = spReadGivingCache_() || {};
   var manual = spReadManualMaturity_();
 
+  // Safety net: anyone the daily giving job hasn't cached yet (e.g. someone who
+  // just became Unassigned, or a new-family prospect) still gets accurate,
+  // household-joined giving straight from the ledger — so no one ever shows $0
+  // giving when they've actually given.
+  var givingFallback = {};
+  var missingGiving = allIds.filter(function(id){ return !givingCache[id]; });
+  if (missingGiving.length) {
+    try {
+      var ledgerBP = spReadGivingLedgerByPerson_();
+      var fbAdults = spHouseholdAdultsByPerson_(missingGiving, startMs);
+      var fbRecur  = spRecurringDonorIds_();
+      missingGiving.forEach(function(id){
+        givingFallback[id] = spComputeGivingFor_(id, fbAdults[id] || [id], ledgerBP, fbRecur);
+      });
+      Logger.log('   giving fallback computed for ' + missingGiving.length + ' uncached people');
+    } catch (e) { Logger.log('   ! giving fallback failed: ' + e.message); }
+  }
+
   // Place each new-family person on their Assigned-Elder's list (else Unassigned).
   if (newFamily.length) {
     var byElder = {}; lists.forEach(function(l){ byElder[l.elder] = l; });
@@ -230,16 +248,30 @@ function syncShepherdingHealth_() {
         target = unList;
       }
       var existing = target.people.filter(function(p){ return String(p.id)===String(nf.id); })[0];
-      if (existing) { existing._nf=true; existing._step=nf.step; existing._cardId=nf.cardId; }
-      else target.people.push({ id:nf.id, first:nf.first, last:nf.last, name:nf.name, member:false, _nf:true, _step:nf.step, _cardId:nf.cardId });
+      if (existing) { existing._nf=true; existing._step=nf.step; existing._cardId=nf.cardId; existing._elder=shortElder||''; }
+      else target.people.push({ id:nf.id, first:nf.first, last:nf.last, name:nf.name, member:false, _nf:true, _step:nf.step, _cardId:nf.cardId, _elder:shortElder||'' });
     });
+  }
+
+  // Resolve a short elder name (from the workflow card assignee) to the full
+  // "Shepherding Pastor" option value, so a new-family person's drawer defaults
+  // to the pastor on their card instead of the first option in the list.
+  var elderOptions = spElderOptions_();
+  function shFullElder_(shortName){
+    if (!shortName) return '';
+    var m = elderOptions.filter(function(o){ return String(o).split(' ')[0].toLowerCase() === String(shortName).toLowerCase(); })[0];
+    return m || '';
   }
 
   var eldersOut = lists.map(function(l){
     var people = l.people.map(function(p){
-      var giving = givingCache[p.id] || spEmptyGiving_();
+      var giving = givingCache[p.id] || givingFallback[p.id] || spEmptyGiving_();
       var rec = spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
-      if (p._nf) { rec.newFamilyMember = true; rec.familyStep = p._step || ''; rec.familyCardId = p._cardId || ''; }
+      if (p._nf) {
+        rec.newFamilyMember = true; rec.familyStep = p._step || ''; rec.familyCardId = p._cardId || '';
+        // Default the drawer's Shepherding Pastor to the card assignee's pastor.
+        if (!rec.assignedElder && p._elder) rec.assignedElder = shFullElder_(p._elder);
+      }
       return rec;
     });
     // "Unassigned" = empty Assigned-Elder field (or a new-family person not yet assigned).
@@ -258,7 +290,7 @@ function syncShepherdingHealth_() {
     givingMonths: SH_TREND_HALF,
     statusVocab: SH_STATUS_VOCAB,
     paciVocab: ['parent','adult','child','infant'],
-    elderOptions: spElderOptions_(),
+    elderOptions: elderOptions,
     membershipOptions: cf.membershipValues.sort(),
     overdueDays: SH_OVERDUE_DAYS,
     congregation: spSummarize_(uniq),
@@ -322,6 +354,16 @@ function syncShepherdingGiving_() {
   var lists = spFetchShepherdingLists_();
   var allIds = [], seen = {};
   lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id && !seen[p.id]) { seen[p.id]=1; allIds.push(p.id); } }); });
+  // The health sync ALSO renders Unassigned members and New-Family prospects, so
+  // their giving must be cached too — otherwise they show $0 giving in the
+  // dashboard (e.g. an unassigned deacon with years of gifts). Mirror that set.
+  var seenAssigned = {}; lists.forEach(function(l){ l.people.forEach(function(p){ if (p.id) seenAssigned[p.id]=1; }); });
+  try {
+    spUnassignedMembers_(seenAssigned, startMs).forEach(function(p){ if (p.id && !seen[p.id]) { seen[p.id]=1; allIds.push(p.id); } });
+  } catch (e) { Logger.log('   ! unassigned fetch failed in giving job: ' + e.message); }
+  try {
+    spNewFamilyMembers_(startMs).forEach(function(nf){ if (nf.id && !seen[nf.id]) { seen[nf.id]=1; allIds.push(nf.id); } });
+  } catch (e) { Logger.log('   ! new-family fetch failed in giving job: ' + e.message); }
   if (!allIds.length) { Logger.log('   ! no people — abort'); return; }
 
   // Incremental: only pull donations created since last run; the 24-mo window
@@ -393,6 +435,37 @@ function spUpdateGivingLedger_(startMs) {
 function spEmptyGiving_() {
   return { monthsGiven:0, gifts:0, totalCents:0, recurring:false, trend:'none',
            giftsEarlyHalf:0, giftsRecentHalf:0, firstGiftAt:null, lastGiftAt:null, lastGiftDaysAgo:null };
+}
+// Collapse an exact 24-mo giving total to a representative "band" value (in cents)
+// so the precise dollar figure never leaves the server. The dashboard shows only
+// the magnitude band; scoring has already consumed the exact value by this point.
+// Representatives are chosen to land squarely inside each band the UI renders.
+function spGivingBandCents_(cents) {
+  var d = Math.round((Number(cents)||0)/100);
+  if (d <= 0)    return 0;
+  if (d < 500)   return 25000;    // "under $500"
+  if (d < 2000)  return 100000;   // "$500–$2K"
+  if (d < 6000)  return 400000;   // "$2K–$6K"
+  if (d < 15000) return 1000000;  // "$6K–$15K"
+  if (d < 30000) return 2200000;  // "$15K–$30K"
+  if (d < 60000) return 4500000;  // "$30K–$60K"
+  return 7500000;                 // "$60K+"
+}
+// Read the church-wide gift ledger sheet into per-person gift arrays WITHOUT any
+// PCO pull. Used as a health-sync safety net so anyone the daily giving job
+// hasn't cached yet still shows accurate giving from the ledger.
+function spReadGivingLedgerByPerson_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(SH_GIVING_LEDGER);
+  var byPerson = {};
+  if (!sh || !sh.getLastRow()) return byPerson;
+  var vals = sh.getRange(1,1,sh.getLastRow(),4).getValues();
+  vals.forEach(function(r){
+    if (!r[0]) return;
+    var pid = String(r[1]);
+    (byPerson[pid] = byPerson[pid] || { gifts:[] }).gifts.push({ cents:Number(r[2]||0), ts:new Date(r[3]).getTime() });
+  });
+  return byPerson;
 }
 function spStoreGivingCache_(obj) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -737,7 +810,7 @@ function spBuildPerson_(base, giving, grp, contact, fld, manual) {
     baptized: !!fld.baptized, importantDates: fld.importantDates||{},
     score: scored.score, paci: paci, leads: leads, trajectory: trajectory, nextStep: nextStep,
     pillars: scored.pillars,
-    giving: { monthsGiven:giving.monthsGiven, gifts:giving.gifts, totalCents:giving.totalCents,
+    giving: { monthsGiven:giving.monthsGiven, gifts:giving.gifts, totalCents:spGivingBandCents_(giving.totalCents),
               recurring:giving.recurring, trend:giving.trend, givesRegular:givesRegular,
               giftsEarlyHalf:giving.giftsEarlyHalf, giftsRecentHalf:giving.giftsRecentHalf,
               firstGiftAt:giving.firstGiftAt, lastGiftAt:giving.lastGiftAt, lastGiftDaysAgo:giving.lastGiftDaysAgo },

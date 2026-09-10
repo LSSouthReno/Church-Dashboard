@@ -107,6 +107,33 @@ function doGet(e) {
       backfillAllDonorCounts();
       return eosWaJson_({ ok: true, ran: 'backfillAllDonorCounts' });
     }
+    if (action === 'run_sunday_resync') {
+      // One-off: re-pull Sunday plans (now incl. recent past) + rebuild/push dashboard-data.json.
+      // Split into steps to stay under the 6-min web-app limit: step=sync (default)
+      // only re-pulls plans into the sheet; step=push rebuilds+pushes dashboard-data.json.
+      var srStep = (e && e.parameter && e.parameter.step) || 'sync';
+      if (srStep === 'trigger') {
+        // Run the whole resync under an installable trigger (~30-min limit), since
+        // pulling 20+ Sundays with rosters exceeds the 6-min web-app limit.
+        ScriptApp.getProjectTriggers().forEach(function(t){
+          if (t.getHandlerFunction() === 'sundayResyncJob_') ScriptApp.deleteTrigger(t); });
+        ScriptApp.newTrigger('sundayResyncJob_').timeBased().after(15000).create();
+        PropertiesService.getScriptProperties().setProperty('SUNDAY_RESYNC_STATUS', 'scheduled:' + new Date().toISOString());
+        return eosWaJson_({ ok:true, ran:'sunday_resync_trigger_scheduled' });
+      }
+      if (srStep === 'status') {
+        return eosWaJson_({ ok:true, status: PropertiesService.getScriptProperties().getProperty('SUNDAY_RESYNC_STATUS') || 'none' });
+      }
+      if (srStep === 'push') {
+        var ssSr = SpreadsheetApp.getActiveSpreadsheet();
+        var dataSr = buildDashboardDataFromSheet_(ssSr);
+        writeDashboardJsonToSheet_(ssSr, dataSr);
+        pushJsonToGitHub_(dataSr);
+        return eosWaJson_({ ok:true, ran:'sunday_resync_push', sundayCount:(dataSr.sundayPlans||[]).length });
+      }
+      syncSundayPlansData_();
+      return eosWaJson_({ ok:true, ran:'sunday_resync_sync' });
+    }
     if (action === 'run_calendar_sync') {
       // On-demand refresh of funnel+calendar in eos-data.json (clasp run is
       // unavailable in this project, so this is the remote trigger).

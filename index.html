@@ -11132,13 +11132,26 @@ async function shAddNote(btn) {
 }
 
 function shMon(iso){ try { return new Date(iso).toLocaleDateString('en-US',{month:'short',year:'numeric'}); } catch(e){ return ''; } }
+// Giving is shown as a magnitude band, never an exact dollar figure — elders can
+// see the scale of someone's generosity without seeing the precise amount.
+function shGiveBand(cents){
+  const d = Math.round((Number(cents)||0)/100);
+  if (d <= 0)      return '';
+  if (d < 500)     return 'under $500';
+  if (d < 2000)    return '$500–$2K';
+  if (d < 6000)    return '$2K–$6K';
+  if (d < 15000)   return '$6K–$15K';
+  if (d < 30000)   return '$15K–$30K';
+  if (d < 60000)   return '$30K–$60K';
+  return '$60K+';
+}
 function shStoryHtml(p) {
   const rows = [];
   const g = p.giving;
   if (g) {
     if (!g.gifts) rows.push(['&#128176;', 'No giving recorded in the last 12 months.']);
     else {
-      let s = 'Gave <b>'+g.gifts+'&times;</b> ($'+Math.round((g.totalCents||0)/100).toLocaleString()+') across '+g.monthsGiven+' month'+(g.monthsGiven===1?'':'s')+'.';
+      let s = 'Gave <b>'+g.gifts+'&times;</b> (<b>'+shGiveBand(g.totalCents)+'</b>) across '+g.monthsGiven+' month'+(g.monthsGiven===1?'':'s')+'.';
       if (g.recurring) s += ' Active recurring gift.';
       if (g.giftsRecentHalf>0 && g.giftsEarlyHalf===0) s += ' All in the last 6 months.';
       else if (g.giftsEarlyHalf>0 && g.giftsRecentHalf===0) s += ' All in the <b>first half</b> of the year — nothing in the last 6 months.';
