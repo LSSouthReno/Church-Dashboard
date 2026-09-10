@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T09:50:21.968Z",
+  "generatedAt": "2026-09-10T10:54:20.157Z",
   "asOf": "2026-09-10",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 403,
     "avgScore": 0,
-    "inGroup": 226,
+    "inGroup": 225,
     "serving": 236,
     "leading": 83,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 403,
-    "notInGroup": 177,
+    "notInGroup": 178,
     "notServing": 167,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 403
     },
     "pct": {
-      "inGroup": 0.5607940446650124,
+      "inGroup": 0.5583126550868487,
       "serving": 0.5856079404466501,
       "leading": 0.20595533498759305,
       "givingRegular": 0,
@@ -66,7 +66,7 @@
       "summary": {
         "totalPeople": 65,
         "avgScore": 0,
-        "inGroup": 48,
+        "inGroup": 47,
         "serving": 53,
         "leading": 26,
         "givingRegular": 0,
@@ -76,7 +76,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 65,
-        "notInGroup": 17,
+        "notInGroup": 18,
         "notServing": 12,
         "notGiving": 0,
         "paciCounts": {
@@ -94,7 +94,7 @@
           "unknown": 65
         },
         "pct": {
-          "inGroup": 0.7384615384615385,
+          "inGroup": 0.7230769230769231,
           "serving": 0.8153846153846154,
           "leading": 0.4,
           "givingRegular": 0,
@@ -339,11 +339,6 @@
               "name": "Bell Community Group",
               "role": "leader",
               "joinedAt": "2024-06-11T18:13:17Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:19Z"
             }
           ],
           "serveTeams": [],
@@ -423,11 +418,6 @@
               "name": "Bell Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:37:36Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:30Z"
             }
           ],
           "serveTeams": [],
@@ -470,11 +460,6 @@
               "name": "Febo/Sanchez Community Group (Spanish Speaking)",
               "role": "leader",
               "joinedAt": "2026-01-13T18:19:59Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
             }
           ],
           "serveTeams": [],
@@ -614,11 +599,6 @@
               "name": "Mick/McKinley Community Group",
               "role": "leader",
               "joinedAt": "2026-07-07T00:03:36Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-07T10:09:34Z"
             }
           ],
           "serveTeams": [],
@@ -787,11 +767,6 @@
               "name": "Taylor Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T22:38:55Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-10-03T08:34:09Z"
             }
           ],
           "serveTeams": [],
@@ -1333,11 +1308,6 @@
               "name": "Febo/Sanchez Community Group (Spanish Speaking)",
               "role": "leader",
               "joinedAt": "2026-01-13T18:19:45Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
             }
           ],
           "serveTeams": [
@@ -1525,6 +1495,58 @@
               "name": "Tech Team",
               "role": "member",
               "joinedAt": "2026-05-18T17:55:15Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Adam Carp",
+          "first": "Adam",
+          "last": "Carp",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2024-08-12T21:38:00Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2024-08-12T18:10:44Z"
+            },
+            {
+              "name": "Preachers",
+              "role": "leader",
+              "joinedAt": "2024-08-26T20:13:54Z"
             }
           ],
           "flags": [
@@ -2010,11 +2032,6 @@
               "name": "Sikora Community Group",
               "role": "leader",
               "joinedAt": "2026-01-13T18:35:15Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
             }
           ],
           "serveTeams": [
@@ -2112,11 +2129,6 @@
               "name": "Coan/Sellman Community Group",
               "role": "leader",
               "joinedAt": "2025-02-20T15:35:34Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-11T18:49:58Z"
             }
           ],
           "serveTeams": [
@@ -2168,11 +2180,6 @@
               "name": "Mick/McKinley Community Group",
               "role": "leader",
               "joinedAt": "2026-07-07T00:03:49Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-07T10:09:34Z"
             }
           ],
           "serveTeams": [
@@ -2234,11 +2241,6 @@
               "name": "Flores/Norton Community Group",
               "role": "leader",
               "joinedAt": "2025-09-22T20:04:41Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-23T09:09:49Z"
             }
           ],
           "serveTeams": [
@@ -2428,11 +2430,6 @@
               "name": "Murad Community Group",
               "role": "leader",
               "joinedAt": "2025-10-19T19:00:50Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-08T09:29:36Z"
             }
           ],
           "serveTeams": [
@@ -2591,11 +2588,6 @@
               "name": "Sikora Community Group",
               "role": "leader",
               "joinedAt": "2026-01-13T18:34:58Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
             }
           ],
           "serveTeams": [
@@ -2703,11 +2695,6 @@
               "name": "Caliger/Rankin Community Group",
               "role": "leader",
               "joinedAt": "2026-03-29T18:22:49Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-05-12T09:07:37Z"
             }
           ],
           "serveTeams": [
@@ -2759,11 +2746,6 @@
               "name": "Howes/Peissner Community Group",
               "role": "leader",
               "joinedAt": "2025-12-30T17:01:30Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-12-31T09:39:21Z"
             }
           ],
           "serveTeams": [
@@ -2861,11 +2843,6 @@
               "name": "Thompson/Primus Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:40:05Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:19Z"
             }
           ],
           "serveTeams": [
@@ -2883,11 +2860,6 @@
               "name": "Point Leaders",
               "role": "member",
               "joinedAt": "2025-01-27T22:33:23Z"
-            },
-            {
-              "name": "Chair Crew",
-              "role": "leader",
-              "joinedAt": "2026-08-03T23:01:10Z"
             }
           ],
           "flags": [],
@@ -2927,11 +2899,6 @@
               "name": "Dykins Community Group",
               "role": "leader",
               "joinedAt": "2025-12-03T21:56:56Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-02-27T10:48:20Z"
             }
           ],
           "serveTeams": [
@@ -3034,11 +3001,6 @@
               "name": "Lattin Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T22:41:17Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-06-02T22:44:03Z"
             }
           ],
           "serveTeams": [
@@ -3090,11 +3052,6 @@
               "name": "Gardner Community Group",
               "role": "leader",
               "joinedAt": "2025-04-08T20:41:41Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-04-09T08:44:38Z"
             }
           ],
           "serveTeams": [
@@ -3156,11 +3113,6 @@
               "name": "McCarthy Community Group",
               "role": "leader",
               "joinedAt": "2024-06-11T18:19:51Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:21Z"
             }
           ],
           "serveTeams": [
@@ -3212,11 +3164,6 @@
               "name": "Maidens Community Group",
               "role": "leader",
               "joinedAt": "2024-07-30T20:09:28Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:29Z"
             }
           ],
           "serveTeams": [
@@ -3234,62 +3181,6 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-11-04T22:13:58Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Adam Carp",
-          "first": "Adam",
-          "last": "Carp",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "CG LEADERS",
-              "role": "leader",
-              "joinedAt": "2025-01-28T00:55:18Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2024-08-12T21:38:00Z"
-            },
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2024-08-12T18:10:44Z"
-            },
-            {
-              "name": "Preachers",
-              "role": "leader",
-              "joinedAt": "2024-08-26T20:13:54Z"
             }
           ],
           "flags": [],
@@ -5333,11 +5224,6 @@
               "name": "Faker Community Group",
               "role": "leader",
               "joinedAt": "2026-08-04T21:39:46Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-05T08:21:06Z"
             }
           ],
           "serveTeams": [
@@ -5450,11 +5336,6 @@
               "name": "Watson Community Group",
               "role": "leader",
               "joinedAt": "2026-02-17T20:06:38Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-02-18T10:33:29Z"
             }
           ],
           "serveTeams": [
@@ -5613,11 +5494,6 @@
               "name": "Griffin/Watson Community Group",
               "role": "leader",
               "joinedAt": "2024-09-12T15:15:20Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-30T08:47:55Z"
             }
           ],
           "serveTeams": [
@@ -5669,11 +5545,6 @@
               "name": "Borowski Community Group",
               "role": "leader",
               "joinedAt": "2026-01-15T20:10:54Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-16T10:30:37Z"
             }
           ],
           "serveTeams": [
@@ -5750,11 +5621,6 @@
               "name": "Peissner Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:35:21Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:33Z"
             }
           ],
           "serveTeams": [
@@ -5806,11 +5672,6 @@
               "name": "Peissner Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:35:32Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:32Z"
             }
           ],
           "serveTeams": [
@@ -5882,11 +5743,6 @@
               "name": "Turcich Community Group",
               "role": "leader",
               "joinedAt": "2025-05-13T20:05:55Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-04-03T08:52:16Z"
             }
           ],
           "serveTeams": [
@@ -5938,11 +5794,6 @@
               "name": "Poleselli / McAlpine Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:34:47Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:33Z"
             }
           ],
           "serveTeams": [
@@ -6469,6 +6320,48 @@
         },
         {
           "id": null,
+          "name": "Gavin Au",
+          "first": "Gavin",
+          "last": "Au",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:12Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Laurel Winchester",
           "first": "Laurel",
           "last": "Winchester",
@@ -6757,53 +6650,6 @@
           "serveTeams": [],
           "flags": [
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Gavin Au",
-          "first": "Gavin",
-          "last": "Au",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Worship Team",
-              "role": "member",
-              "joinedAt": "2025-02-03T18:51:12Z"
-            },
-            {
-              "name": "Chair Crew",
-              "role": "member",
-              "joinedAt": "2026-07-27T23:20:33Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
@@ -7519,11 +7365,6 @@
               "name": "Flores Community Group",
               "role": "leader",
               "joinedAt": "2026-07-08T22:19:56Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-08T09:29:35Z"
             }
           ],
           "serveTeams": [
@@ -8157,11 +7998,6 @@
               "name": "Coan Community Group",
               "role": "leader",
               "joinedAt": "2025-11-19T01:08:35Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-20T10:08:55Z"
             }
           ],
           "serveTeams": [
@@ -8269,11 +8105,6 @@
               "name": "Coan/Sellman Community Group",
               "role": "leader",
               "joinedAt": "2024-08-31T21:42:05Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-11T18:49:58Z"
             }
           ],
           "serveTeams": [
@@ -10197,11 +10028,6 @@
               "name": "Durham Community Group",
               "role": "leader",
               "joinedAt": "2025-02-10T19:05:09Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-25T08:55:56Z"
             }
           ],
           "serveTeams": [
@@ -10351,6 +10177,52 @@
         },
         {
           "id": null,
+          "name": "Anna Ferguson",
+          "first": "Anna",
+          "last": "Ferguson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2026-03-07T22:56:48Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Connection Team",
+              "role": "member",
+              "joinedAt": "2026-04-16T17:03:49Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Candy Bennett",
           "first": "Candy",
           "last": "Bennett",
@@ -10483,57 +10355,6 @@
               "name": "Prayer Team",
               "role": "member",
               "joinedAt": "2025-06-09T19:29:28Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Anna Ferguson",
-          "first": "Anna",
-          "last": "Ferguson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-03-07T22:56:48Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Connection Team",
-              "role": "member",
-              "joinedAt": "2026-04-16T17:03:49Z"
-            },
-            {
-              "name": "Chair Crew",
-              "role": "member",
-              "joinedAt": "2026-07-17T15:50:32Z"
             }
           ],
           "flags": [],
@@ -10721,11 +10542,6 @@
               "name": "Flores/Norton Community Group",
               "role": "leader",
               "joinedAt": "2025-09-22T20:04:24Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:28Z"
             }
           ],
           "serveTeams": [
@@ -10772,11 +10588,6 @@
               "name": "Lattin Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:32:37Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:32Z"
             }
           ],
           "serveTeams": [
@@ -10828,11 +10639,6 @@
               "name": "Frederick/Coggiola/Schelin Community Group",
               "role": "leader",
               "joinedAt": "2025-04-08T20:40:33Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:28Z"
             }
           ],
           "serveTeams": [
@@ -10940,11 +10746,6 @@
               "name": "Thompson/Primus Community Group",
               "role": "leader",
               "joinedAt": "2025-04-10T02:44:13Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-15T10:18:16Z"
             }
           ],
           "serveTeams": [
@@ -10991,11 +10792,6 @@
               "name": "Durham Community Group",
               "role": "leader",
               "joinedAt": "2024-06-11T18:19:28Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:20Z"
             }
           ],
           "serveTeams": [
@@ -11052,11 +10848,6 @@
               "name": "Castaneda Community Group",
               "role": "leader",
               "joinedAt": "2024-07-30T20:07:47Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:16Z"
             }
           ],
           "serveTeams": [
@@ -11118,11 +10909,6 @@
               "name": "Frederick/Coggiola/Schelin Community Group",
               "role": "leader",
               "joinedAt": "2025-04-08T20:40:45Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:29Z"
             }
           ],
           "serveTeams": [
@@ -12797,11 +12583,6 @@
               "name": "Taylor Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T22:38:46Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-10-03T08:34:09Z"
             }
           ],
           "serveTeams": [
@@ -13586,11 +13367,6 @@
               "name": "Moore Community Group",
               "role": "leader",
               "joinedAt": "2026-08-01T19:30:21Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-03T09:03:01Z"
             }
           ],
           "serveTeams": [
@@ -13729,11 +13505,6 @@
               "name": "McCarthy Community Group",
               "role": "leader",
               "joinedAt": "2025-10-28T16:09:09Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-27T08:37:22Z"
             }
           ],
           "serveTeams": [
@@ -13785,11 +13556,6 @@
               "name": "Castaneda Community Group",
               "role": "leader",
               "joinedAt": "2024-07-30T20:07:21Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:22Z"
             }
           ],
           "serveTeams": [
@@ -13836,11 +13602,6 @@
               "name": "Bridges Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T00:03:23Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:22Z"
             }
           ],
           "serveTeams": [
@@ -13892,11 +13653,6 @@
               "name": "Colonna/Mavros Community Group",
               "role": "leader",
               "joinedAt": "2024-06-11T18:18:46Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:20Z"
             }
           ],
           "serveTeams": [
@@ -13953,11 +13709,6 @@
               "name": "Colonna/Mavros Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T00:05:39Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:25Z"
             }
           ],
           "serveTeams": [
@@ -15291,11 +15042,6 @@
               "name": "Men’s Tuesday Night: Better Call Paul",
               "role": "leader",
               "joinedAt": "2026-05-28T00:52:08Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-31T08:48:56Z"
             }
           ],
           "serveTeams": [
@@ -15620,11 +15366,6 @@
               "name": "Brown/Frank Community Group",
               "role": "leader",
               "joinedAt": "2026-03-25T18:29:17Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-05-05T08:31:56Z"
             }
           ],
           "serveTeams": [
@@ -15921,11 +15662,6 @@
               "name": "Brown/Frank Community Group",
               "role": "leader",
               "joinedAt": "2026-03-25T18:29:03Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-03-26T09:39:43Z"
             }
           ],
           "serveTeams": [
@@ -15982,11 +15718,6 @@
               "name": "Moore Community Group",
               "role": "leader",
               "joinedAt": "2026-07-28T21:10:30Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-29T08:30:13Z"
             }
           ],
           "serveTeams": [
@@ -16038,11 +15769,6 @@
               "name": "Ray Brown Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T00:04:00Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:25Z"
             }
           ],
           "serveTeams": [
@@ -16099,11 +15825,6 @@
               "name": "Ray Brown Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:39:18Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-10-03T17:04:25Z"
             }
           ],
           "serveTeams": [
@@ -16150,11 +15871,6 @@
               "name": "Men’s Tuesday Night: Better Call Paul",
               "role": "leader",
               "joinedAt": "2025-06-14T18:37:53Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-22T18:04:41Z"
             }
           ],
           "serveTeams": [
@@ -16728,11 +16444,6 @@
               "name": "Howes/Peissner Community Group",
               "role": "leader",
               "joinedAt": "2026-01-08T23:35:35Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-09T10:05:45Z"
             }
           ],
           "serveTeams": [
@@ -16952,11 +16663,6 @@
               "name": "Frederick/Coggiola/Schelin Community Group",
               "role": "leader",
               "joinedAt": "2025-05-13T22:57:31Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-25T08:55:56Z"
             }
           ],
           "serveTeams": [
@@ -17087,11 +16793,6 @@
               "name": "Frederick/Coggiola/Schelin Community Group",
               "role": "leader",
               "joinedAt": "2025-05-13T22:57:36Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-25T08:55:57Z"
             }
           ],
           "serveTeams": [
@@ -17631,11 +17332,6 @@
               "name": "Saddle Ridge Community Group",
               "role": "leader",
               "joinedAt": "2026-07-02T18:22:37Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-03T09:25:38Z"
             }
           ],
           "serveTeams": [
@@ -17774,11 +17470,6 @@
               "name": "Caliger/Rankin Community Group",
               "role": "leader",
               "joinedAt": "2026-03-17T21:41:06Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-03-18T09:20:58Z"
             }
           ],
           "serveTeams": [
@@ -17881,11 +17572,6 @@
               "name": "Geoffrey Caliger Community Group",
               "role": "leader",
               "joinedAt": "2025-12-02T22:16:02Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-30T08:59:53Z"
             }
           ],
           "serveTeams": [
@@ -17937,11 +17623,6 @@
               "name": "Men's Recovery Community Group",
               "role": "leader",
               "joinedAt": "2026-01-07T23:16:56Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-08T09:44:56Z"
             }
           ],
           "serveTeams": [
@@ -17988,11 +17669,6 @@
               "name": "Poleselli / McAlpine Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:35:03Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:27Z"
             }
           ],
           "serveTeams": [
@@ -18044,11 +17720,6 @@
               "name": "Dykins Community Group",
               "role": "leader",
               "joinedAt": "2025-11-24T19:15:40Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:23Z"
             }
           ],
           "serveTeams": [
@@ -18095,11 +17766,6 @@
               "name": "Castaneda Community Group",
               "role": "leader",
               "joinedAt": "2024-07-30T20:07:07Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:17Z"
             }
           ],
           "serveTeams": [
@@ -18161,11 +17827,6 @@
               "name": "Griffin/Watson Community Group",
               "role": "leader",
               "joinedAt": "2024-07-18T21:36:48Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:26Z"
             }
           ],
           "serveTeams": [
@@ -18222,11 +17883,6 @@
               "name": "Isaac Griffin Community Group",
               "role": "leader",
               "joinedAt": "2025-09-16T22:55:20Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-17T08:45:57Z"
             }
           ],
           "serveTeams": [
@@ -18244,11 +17900,6 @@
               "name": "LS Students Leaders",
               "role": "leader",
               "joinedAt": "2024-08-12T19:42:31Z"
-            },
-            {
-              "name": "Chair Crew",
-              "role": "member",
-              "joinedAt": "2026-08-07T13:28:31Z"
             }
           ],
           "flags": [],
@@ -18288,11 +17939,6 @@
               "name": "Ryan Griffin Community Group",
               "role": "leader",
               "joinedAt": "2025-04-17T16:50:05Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-04-18T08:58:31Z"
             }
           ],
           "serveTeams": [
