@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-09-10T23:46:13.128Z",
+  "lastUpdated": "2026-09-10T23:58:45.673Z",
   "sectionDescriptions": {
-    "Weekend Attendance": "We're currently in the heat of summer seasonality, every year we see around a 30% drop in the summer as we're all about our summer camps, trips, and activities.",
-    "Baptisms": "Baptisms trending toward another record year, as we've seen 38 so far halfway through 2026!",
+    "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
+    "Baptisms": "Baptisms trending toward another record year!",
     "Church Members": "Member dates prior to 2024 are estimates. New process saw massive influx in 2025, and we're trending for a record 2026 so far!",
     "Serve Teams": "Where we most need volunteers right now — full teams are healthy, gaps are invitations.",
-    "Average Giving by Month": "Monthly general giving compared to the monthly need line (what we need to hit our $8.5m goal by May 2027)",
+    "Average Giving by Month": "We think the August dip had a lot to do with uncertainty and diversion of funds because of the fires in and around our city. Need line is what we need on average to hit our $8.5m goal by May 2027. We're still well above our need line on average, August included.",
     "ALL-IN Pledge Progress": "In May of 2026, we were ahead of schedule on our 7.3m goal, and when that increased to 8.5m, we are now on track to overtake the goal again.",
     "Budget Allocation": "Where every dollar given actually goes, including each church plant and mission we support.",
     "Community Groups": "How many active community groups we have — the front door to real relationships.",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 10, 2026, 4:46 PM",
+    "refreshed": "Sep 10, 2026, 4:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -19234,7 +19234,7 @@
           "planId": "88124986",
           "title": "Chosen & Adopted (Ephesians 1:1-6)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Thomas Peregrin",
             "Sam Griffin"
@@ -19944,7 +19944,7 @@
               "name": "Nathan Meredith",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -19958,7 +19958,7 @@
               "name": "Dante Sellman",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -20009,6 +20009,27 @@
               "pos": "Back Left Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Emily LeBlanc",
+              "team": "Breakfast Team",
+              "pos": "Breakfast Provider",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Morna Edmunds",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -20152,8 +20173,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676405\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 110,
-            "totalVols": 110
+            "volsWithServiceTime": 113,
+            "totalVols": 113
           }
         }
       ]
@@ -21684,76 +21705,83 @@
             },
             {
               "seq": 8,
+              "title": "King Of Kings",
+              "type": "song",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore:"
             },
             {
-              "seq": 9,
+              "seq": 10,
               "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 10,
+              "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INST.",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "PROCLAIM / BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
