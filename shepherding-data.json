@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T16:50:23.614Z",
+  "generatedAt": "2026-09-11T17:50:20.292Z",
   "asOf": "2026-09-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 403,
     "avgScore": 0,
     "inGroup": 225,
-    "serving": 235,
+    "serving": 236,
     "leading": 83,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 403,
     "notInGroup": 178,
-    "notServing": 168,
+    "notServing": 167,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5583126550868487,
-      "serving": 0.5831265508684863,
+      "serving": 0.5856079404466501,
       "leading": 0.20595533498759305,
       "givingRegular": 0,
       "recurring": 0,
@@ -18348,7 +18348,7 @@
         "totalPeople": 6,
         "avgScore": 0,
         "inGroup": 5,
-        "serving": 1,
+        "serving": 2,
         "leading": 0,
         "givingRegular": 0,
         "recurring": 0,
@@ -18358,7 +18358,7 @@
         "overdue": 0,
         "notBaptized": 6,
         "notInGroup": 1,
-        "notServing": 5,
+        "notServing": 4,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18376,7 +18376,7 @@
         },
         "pct": {
           "inGroup": 0.8333333333333334,
-          "serving": 0.16666666666666666,
+          "serving": 0.3333333333333333,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18419,48 +18419,6 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Cheryl Devore",
-          "first": "Cheryl",
-          "last": "Devore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-26T22:26:04Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
             "Not serving"
           ],
           "pending": true
@@ -18589,6 +18547,52 @@
           "flags": [
             "Not serving"
           ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Cheryl Devore",
+          "first": "Cheryl",
+          "last": "Devore",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-26T22:26:04Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2026-09-11T17:17:37Z"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
