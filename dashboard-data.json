@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-11T23:45:53.359Z",
+  "lastUpdated": "2026-09-11T23:58:01.348Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -7986,7 +7986,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 11, 2026, 4:45 PM",
+    "refreshed": "Sep 11, 2026, 4:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8873,7 +8873,7 @@
       "groups": 39,
       "members": 409,
       "groupSize": 10,
-      "fmInGroupsPct": 52,
+      "fmInGroupsPct": 51,
       "asOfMonth": "Sep '26"
     },
     "groupCountsByYear": {
@@ -9408,7 +9408,7 @@
         null,
         null,
         5,
-        60,
+        59,
         8,
         11,
         null,
@@ -9424,7 +9424,7 @@
         5,
         4,
         2,
-        22,
+        21,
         20,
         17,
         11
@@ -9433,7 +9433,7 @@
         47,
         26,
         20,
-        20,
+        19,
         17,
         24,
         26,
@@ -9480,7 +9480,7 @@
         26,
         17,
         5,
-        11,
+        10,
         12,
         14,
         16,
@@ -9651,14 +9651,6 @@
         "attPct": 53
       },
       {
-        "name": "Coan/Sellman Community Group",
-        "members": 14,
-        "leaders": 2,
-        "schedule": "Meets weekly on Fridays from 12:30-2:30pm",
-        "avgAttended": 6,
-        "attPct": 43
-      },
-      {
         "name": "Peissner Community Group",
         "members": 14,
         "leaders": 2,
@@ -9697,6 +9689,14 @@
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 6,
         "attPct": 46
+      },
+      {
+        "name": "Coan/Sellman Community Group",
+        "members": 12,
+        "leaders": 2,
+        "schedule": "Meets weekly on Fridays from 12:30-2:30pm",
+        "avgAttended": 6,
+        "attPct": 50
       },
       {
         "name": "Durham Community Group",
@@ -20188,13 +20188,6 @@
           ],
           "volunteers": [
             {
-              "name": "Frances Munoz",
-              "team": "Breakfast Team",
-              "pos": "Breakfast Provider",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Darren Wilford",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -20984,11 +20977,11 @@
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
-            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676411\"}]",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 95,
-            "totalVols": 95
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ]
