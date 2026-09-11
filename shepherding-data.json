@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T22:50:08.858Z",
+  "generatedAt": "2026-09-11T23:50:17.621Z",
   "asOf": "2026-09-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 404,
     "avgScore": 0,
-    "inGroup": 226,
+    "inGroup": 225,
     "serving": 236,
     "leading": 83,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 404,
-    "notInGroup": 178,
+    "notInGroup": 179,
     "notServing": 168,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 404
     },
     "pct": {
-      "inGroup": 0.5594059405940595,
+      "inGroup": 0.556930693069307,
       "serving": 0.5841584158415841,
       "leading": 0.20544554455445543,
       "givingRegular": 0,
@@ -11154,7 +11154,7 @@
       "summary": {
         "totalPeople": 65,
         "avgScore": 0,
-        "inGroup": 33,
+        "inGroup": 32,
         "serving": 31,
         "leading": 8,
         "givingRegular": 0,
@@ -11164,7 +11164,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 65,
-        "notInGroup": 32,
+        "notInGroup": 33,
         "notServing": 34,
         "notGiving": 0,
         "paciCounts": {
@@ -11182,7 +11182,7 @@
           "unknown": 65
         },
         "pct": {
-          "inGroup": 0.5076923076923077,
+          "inGroup": 0.49230769230769234,
           "serving": 0.47692307692307695,
           "leading": 0.12307692307692308,
           "givingRegular": 0,
@@ -11787,6 +11787,48 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Janet Colonna",
+          "first": "Janet",
+          "last": "Colonna",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-08-12T17:08:33Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -12451,52 +12493,6 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-08-12T17:07:36Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Janet Colonna",
-          "first": "Janet",
-          "last": "Colonna",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:50:27Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-08-12T17:08:33Z"
             }
           ],
           "flags": [],
