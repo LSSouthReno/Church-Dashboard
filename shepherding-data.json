@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T10:50:20.601Z",
+  "generatedAt": "2026-09-11T11:50:01.107Z",
   "asOf": "2026-09-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -1656,57 +1656,6 @@
         },
         {
           "id": null,
-          "name": "Damian Smith",
-          "first": "Damian",
-          "last": "Smith",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Ray Brown Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-16T15:05:29Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2024-08-29T01:02:33Z"
-            },
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2026-09-02T18:41:52Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Dennis Brinson",
           "first": "Dennis",
           "last": "Brinson",
@@ -1947,6 +1896,57 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2026-07-02T22:02:02Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Damian Smith",
+          "first": "Damian",
+          "last": "Smith",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Ray Brown Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-16T15:05:29Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2024-08-29T01:02:33Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2026-09-02T18:41:52Z"
             }
           ],
           "flags": [],
