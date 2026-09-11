@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T19:50:06.350Z",
+  "generatedAt": "2026-09-11T20:50:39.871Z",
   "asOf": "2026-09-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -18,9 +18,9 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 403,
+    "totalPeople": 404,
     "avgScore": 0,
-    "inGroup": 225,
+    "inGroup": 226,
     "serving": 236,
     "leading": 83,
     "givingRegular": 0,
@@ -29,9 +29,9 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 403,
+    "notBaptized": 404,
     "notInGroup": 178,
-    "notServing": 167,
+    "notServing": 168,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 403
+      "unknown": 404
     },
     "pct": {
-      "inGroup": 0.5583126550868487,
-      "serving": 0.5856079404466501,
-      "leading": 0.20595533498759305,
+      "inGroup": 0.5594059405940595,
+      "serving": 0.5841584158415841,
+      "leading": 0.20544554455445543,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -18345,9 +18345,9 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 6,
+        "totalPeople": 7,
         "avgScore": 0,
-        "inGroup": 5,
+        "inGroup": 6,
         "serving": 2,
         "leading": 0,
         "givingRegular": 0,
@@ -18356,9 +18356,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 6,
+        "notBaptized": 7,
         "notInGroup": 1,
-        "notServing": 4,
+        "notServing": 5,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18372,11 +18372,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 6
+          "unknown": 7
         },
         "pct": {
-          "inGroup": 0.8333333333333334,
-          "serving": 0.3333333333333333,
+          "inGroup": 0.8571428571428571,
+          "serving": 0.2857142857142857,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18386,6 +18386,48 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Cheri Adams",
+          "first": "Cheri",
+          "last": "Adams",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2026-09-09T21:28:07Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Mitzi Ackeret",
