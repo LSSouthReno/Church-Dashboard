@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T22:50:07.089Z",
+  "generatedAt": "2026-09-12T23:50:11.362Z",
   "asOf": "2026-09-12",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,8 +21,8 @@
     "totalPeople": 404,
     "avgScore": 0,
     "inGroup": 224,
-    "serving": 220,
-    "leading": 82,
+    "serving": 236,
+    "leading": 83,
     "givingRegular": 0,
     "recurring": 0,
     "givingGrowing": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 404,
     "notInGroup": 180,
-    "notServing": 184,
+    "notServing": 168,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,8 +49,8 @@
     },
     "pct": {
       "inGroup": 0.5544554455445545,
-      "serving": 0.5445544554455446,
-      "leading": 0.20297029702970298,
+      "serving": 0.5841584158415841,
+      "leading": 0.20544554455445543,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -67,7 +67,7 @@
         "totalPeople": 66,
         "avgScore": 0,
         "inGroup": 48,
-        "serving": 50,
+        "serving": 53,
         "leading": 26,
         "givingRegular": 0,
         "recurring": 0,
@@ -77,7 +77,7 @@
         "overdue": 0,
         "notBaptized": 66,
         "notInGroup": 18,
-        "notServing": 16,
+        "notServing": 13,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -95,7 +95,7 @@
         },
         "pct": {
           "inGroup": 0.7272727272727273,
-          "serving": 0.7575757575757576,
+          "serving": 0.803030303030303,
           "leading": 0.3939393939393939,
           "givingRegular": 0,
           "recurring": 0,
@@ -423,48 +423,6 @@
         },
         {
           "id": null,
-          "name": "Jane Brinson",
-          "first": "Jane",
-          "last": "Brinson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2024-08-23T00:05:21Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Paul Murad",
           "first": "Paul",
           "last": "Murad",
@@ -591,80 +549,6 @@
         },
         {
           "id": null,
-          "name": "Caleb Frink",
-          "first": "Caleb",
-          "last": "Frink",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Dave Norton",
-          "first": "Dave",
-          "last": "Norton",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Edward Jones",
           "first": "Edward",
           "last": "Jones",
@@ -745,6 +629,53 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-09-16T16:22:13Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jane Brinson",
+          "first": "Jane",
+          "last": "Brinson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2024-08-23T00:05:21Z"
+            },
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-22T17:42:07Z"
             }
           ],
           "flags": [
@@ -880,53 +811,6 @@
               "name": "CG LEADERS",
               "role": "member",
               "joinedAt": "2025-01-28T00:55:30Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Sandy Norton",
-          "first": "Sandy",
-          "last": "Norton",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Flores/Norton Community Group",
-              "role": "leader",
-              "joinedAt": "2025-09-22T20:04:41Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-09-23T09:09:49Z"
             }
           ],
           "serveTeams": [],
@@ -1298,52 +1182,6 @@
         },
         {
           "id": null,
-          "name": "Teodoro Kijah Banda",
-          "first": "Teodoro Kijah",
-          "last": "Banda",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Isaac Griffin Community Group",
-              "role": "member",
-              "joinedAt": "2025-12-11T02:40:28Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Connection Team",
-              "role": "member",
-              "joinedAt": "2025-12-16T01:55:50Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Autumn Blattman",
           "first": "Autumn",
           "last": "Blattman",
@@ -1488,9 +1326,9 @@
         },
         {
           "id": null,
-          "name": "Dennis Brinson",
-          "first": "Dennis",
-          "last": "Brinson",
+          "name": "Caleb Frink",
+          "first": "Caleb",
+          "last": "Frink",
           "email": "",
           "phone": "",
           "member": false,
@@ -1518,9 +1356,51 @@
           "groups": [],
           "serveTeams": [
             {
-              "name": "Hospitality Team",
+              "name": "Worship Team",
               "role": "member",
-              "joinedAt": "2024-12-12T23:23:53Z"
+              "joinedAt": "2026-05-29T09:41:34Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Dave Norton",
+          "first": "Dave",
+          "last": "Norton",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-02-16T21:31:47Z"
             }
           ],
           "flags": [
@@ -1574,6 +1454,108 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:52Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Sandy Norton",
+          "first": "Sandy",
+          "last": "Norton",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Flores/Norton Community Group",
+              "role": "leader",
+              "joinedAt": "2025-09-22T20:04:41Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2025-09-23T09:09:49Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-02-12T21:50:06Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Teodoro Kijah Banda",
+          "first": "Teodoro Kijah",
+          "last": "Banda",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Isaac Griffin Community Group",
+              "role": "member",
+              "joinedAt": "2025-12-11T02:40:28Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Connection Team",
+              "role": "member",
+              "joinedAt": "2025-12-16T01:55:50Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2026-08-12T08:38:23Z"
             }
           ],
           "flags": [],
@@ -1665,6 +1647,53 @@
               "name": "LS Students Leaders",
               "role": "leader",
               "joinedAt": "2024-08-12T17:29:34Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Dennis Brinson",
+          "first": "Dennis",
+          "last": "Brinson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2024-12-12T23:23:53Z"
+            },
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2025-01-17T04:00:44Z"
             }
           ],
           "flags": [
@@ -1874,57 +1903,6 @@
         },
         {
           "id": null,
-          "name": "Alan Charles",
-          "first": "Alan",
-          "last": "Charles",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2025-11-09T23:17:16Z"
-            },
-            {
-              "name": "Isaac Griffin Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-12T23:13:34Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2026-06-29T23:21:43Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Damian Smith",
           "first": "Damian",
           "last": "Smith",
@@ -2011,6 +1989,11 @@
             }
           ],
           "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-14T18:26:25Z"
+            },
             {
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
@@ -2246,6 +2229,62 @@
         },
         {
           "id": null,
+          "name": "Alan Charles",
+          "first": "Alan",
+          "last": "Charles",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Bell Community Group",
+              "role": "member",
+              "joinedAt": "2025-11-09T23:17:16Z"
+            },
+            {
+              "name": "Isaac Griffin Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-12T23:13:34Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2026-01-26T18:15:12Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2026-06-29T23:21:43Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Brenda Milligan",
           "first": "Brenda",
           "last": "Milligan",
@@ -2285,57 +2324,6 @@
               "name": "Connection Team",
               "role": "member",
               "joinedAt": "2024-08-06T22:18:44Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Charlene Carp",
-          "first": "Charlene",
-          "last": "Carp",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Brown/Frank Community Group",
-              "role": "member",
-              "joinedAt": "2026-06-19T03:17:34Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2024-08-12T18:10:49Z"
-            },
-            {
-              "name": "Content Team",
-              "role": "member",
-              "joinedAt": "2026-05-07T21:35:06Z"
             }
           ],
           "flags": [],
@@ -2387,57 +2375,6 @@
               "name": "First Impressions Team",
               "role": "member",
               "joinedAt": "2025-05-19T17:28:04Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Deborah Vydra",
-          "first": "Deborah",
-          "last": "Vydra",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Gardner Community Group",
-              "role": "member",
-              "joinedAt": "2025-07-06T02:51:19Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-08-12T17:23:44Z"
-            },
-            {
-              "name": "LS Students Leaders",
-              "role": "member",
-              "joinedAt": "2024-08-12T20:31:01Z"
             }
           ],
           "flags": [],
@@ -2674,62 +2611,6 @@
         },
         {
           "id": null,
-          "name": "Whitney Maidens",
-          "first": "Whitney",
-          "last": "Maidens",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Maidens Community Group",
-              "role": "leader",
-              "joinedAt": "2024-07-30T20:09:28Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:29Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Safety Team",
-              "role": "member",
-              "joinedAt": "2026-02-13T17:09:00Z"
-            },
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-11-04T22:13:58Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Ashley Murad",
           "first": "Ashley",
           "last": "Murad",
@@ -2774,6 +2655,118 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-08-12T17:16:52Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Charlene Carp",
+          "first": "Charlene",
+          "last": "Carp",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Brown/Frank Community Group",
+              "role": "member",
+              "joinedAt": "2026-06-19T03:17:34Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-14T18:26:41Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2024-08-12T18:10:49Z"
+            },
+            {
+              "name": "Content Team",
+              "role": "member",
+              "joinedAt": "2026-05-07T21:35:06Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Deborah Vydra",
+          "first": "Deborah",
+          "last": "Vydra",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Gardner Community Group",
+              "role": "member",
+              "joinedAt": "2025-07-06T02:51:19Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2024-08-16T14:18:06Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-08-12T17:23:44Z"
+            },
+            {
+              "name": "LS Students Leaders",
+              "role": "member",
+              "joinedAt": "2024-08-12T20:31:01Z"
             }
           ],
           "flags": [],
@@ -2881,6 +2874,11 @@
               "name": "Prayer Team",
               "role": "member",
               "joinedAt": "2024-08-12T20:21:14Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:18Z"
             }
           ],
           "flags": [],
@@ -3219,6 +3217,67 @@
         },
         {
           "id": null,
+          "name": "Whitney Maidens",
+          "first": "Whitney",
+          "last": "Maidens",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Maidens Community Group",
+              "role": "leader",
+              "joinedAt": "2024-07-30T20:09:28Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2025-01-28T00:55:29Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Safety Team",
+              "role": "member",
+              "joinedAt": "2026-02-13T17:09:00Z"
+            },
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-13T21:59:42Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-11-04T22:13:58Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Adam Carp",
           "first": "Adam",
           "last": "Carp",
@@ -3283,7 +3342,7 @@
         "totalPeople": 57,
         "avgScore": 0,
         "inGroup": 31,
-        "serving": 29,
+        "serving": 33,
         "leading": 10,
         "givingRegular": 0,
         "recurring": 0,
@@ -3293,7 +3352,7 @@
         "overdue": 0,
         "notBaptized": 57,
         "notInGroup": 26,
-        "notServing": 28,
+        "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3311,7 +3370,7 @@
         },
         "pct": {
           "inGroup": 0.543859649122807,
-          "serving": 0.5087719298245614,
+          "serving": 0.5789473684210527,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
           "recurring": 0,
@@ -3814,80 +3873,6 @@
         },
         {
           "id": null,
-          "name": "April Libby",
-          "first": "April",
-          "last": "Libby",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Casey Madison",
-          "first": "Casey",
-          "last": "Madison",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Chelsea Borowski",
           "first": "Chelsea",
           "last": "Borowski",
@@ -4093,48 +4078,6 @@
         },
         {
           "id": null,
-          "name": "Melinda Harrison",
-          "first": "Melinda",
-          "last": "Harrison",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Gardner Community Group",
-              "role": "member",
-              "joinedAt": "2025-09-19T14:00:50Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Christina Harter",
           "first": "Christina",
           "last": "Harter",
@@ -4288,6 +4231,90 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "April Libby",
+          "first": "April",
+          "last": "Libby",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2026-04-28T08:51:04Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Casey Madison",
+          "first": "Casey",
+          "last": "Madison",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-08-19T14:52:07Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -4451,6 +4478,52 @@
         },
         {
           "id": null,
+          "name": "Melinda Harrison",
+          "first": "Melinda",
+          "last": "Harrison",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Gardner Community Group",
+              "role": "member",
+              "joinedAt": "2025-09-19T14:00:50Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:13Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Michael Saiz",
           "first": "Michael",
           "last": "Saiz",
@@ -4487,43 +4560,6 @@
           ],
           "serveTeams": [],
           "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Paulette Thompson",
-          "first": "Paulette",
-          "last": "Thompson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
             "Not serving"
           ],
           "pending": true
@@ -4860,6 +4896,48 @@
         },
         {
           "id": null,
+          "name": "Paulette Thompson",
+          "first": "Paulette",
+          "last": "Thompson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-08-24T14:22:18Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Sheila Hlubucek",
           "first": "Sheila",
           "last": "Hlubucek",
@@ -4991,62 +5069,6 @@
               "name": "Safety Team",
               "role": "member",
               "joinedAt": "2024-08-06T22:58:28Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Anna Sawyer",
-          "first": "Anna",
-          "last": "Sawyer",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2025-08-26T20:03:07Z"
-            },
-            {
-              "name": "Howes/Peissner Community Group",
-              "role": "member",
-              "joinedAt": "2026-03-02T22:03:27Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2025-02-16T21:26:01Z"
-            },
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2026-06-29T23:39:56Z"
             }
           ],
           "flags": [],
@@ -5381,6 +5403,11 @@
           ],
           "serveTeams": [
             {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-14T18:26:34Z"
+            },
+            {
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2025-03-01T00:51:53Z"
@@ -5542,6 +5569,67 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2025-05-01T21:37:54Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Anna Sawyer",
+          "first": "Anna",
+          "last": "Sawyer",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Bell Community Group",
+              "role": "member",
+              "joinedAt": "2025-08-26T20:03:07Z"
+            },
+            {
+              "name": "Howes/Peissner Community Group",
+              "role": "member",
+              "joinedAt": "2026-03-02T22:03:27Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2026-06-02T09:46:37Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2025-02-16T21:26:01Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2026-06-29T23:39:56Z"
             }
           ],
           "flags": [],
@@ -5882,8 +5970,8 @@
         "totalPeople": 51,
         "avgScore": 0,
         "inGroup": 30,
-        "serving": 26,
-        "leading": 7,
+        "serving": 33,
+        "leading": 8,
         "givingRegular": 0,
         "recurring": 0,
         "givingGrowing": 0,
@@ -5892,7 +5980,7 @@
         "overdue": 0,
         "notBaptized": 51,
         "notInGroup": 21,
-        "notServing": 25,
+        "notServing": 18,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -5910,8 +5998,8 @@
         },
         "pct": {
           "inGroup": 0.5882352941176471,
-          "serving": 0.5098039215686274,
-          "leading": 0.13725490196078433,
+          "serving": 0.6470588235294118,
+          "leading": 0.1568627450980392,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -6036,80 +6124,6 @@
           "name": "Laurrie Brooks",
           "first": "Laurrie",
           "last": "Brooks",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Megan Brenner",
-          "first": "Megan",
-          "last": "Brenner",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Nicole Leach",
-          "first": "Nicole",
-          "last": "Leach",
           "email": "",
           "phone": "",
           "member": false,
@@ -6386,9 +6400,9 @@
         },
         {
           "id": null,
-          "name": "Megan Wampler",
+          "name": "Megan Brenner",
           "first": "Megan",
-          "last": "Wampler",
+          "last": "Brenner",
           "email": "",
           "phone": "",
           "member": false,
@@ -6413,16 +6427,58 @@
           "giving": null,
           "newFamilyMember": false,
           "familyStep": "",
-          "groups": [
+          "groups": [],
+          "serveTeams": [
             {
-              "name": "Coan/Sellman Community Group",
+              "name": "Worship Team",
               "role": "member",
-              "joinedAt": "2024-06-11T18:20:37Z"
+              "joinedAt": "2025-02-03T18:51:09Z"
             }
           ],
-          "serveTeams": [],
           "flags": [
-            "Not serving"
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nicole Leach",
+          "first": "Nicole",
+          "last": "Leach",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:16Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -6460,90 +6516,6 @@
               "name": "Saddle Ridge Community Group",
               "role": "member",
               "joinedAt": "2026-02-23T22:08:36Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Sam England",
-          "first": "Sam",
-          "last": "England",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Coan Community Group",
-              "role": "member",
-              "joinedAt": "2026-06-17T16:17:45Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Stephanie Kellames",
-          "first": "Stephanie",
-          "last": "Kellames",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "McCarthy Community Group",
-              "role": "member",
-              "joinedAt": "2025-05-13T00:36:31Z"
             }
           ],
           "serveTeams": [],
@@ -6707,48 +6679,6 @@
         },
         {
           "id": null,
-          "name": "Gavin Au",
-          "first": "Gavin",
-          "last": "Au",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Chair Crew",
-              "role": "member",
-              "joinedAt": "2026-07-27T23:20:33Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Laurel Winchester",
           "first": "Laurel",
           "last": "Winchester",
@@ -6819,6 +6749,52 @@
             "Not in a group",
             "Not serving"
           ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Megan Wampler",
+          "first": "Megan",
+          "last": "Wampler",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Coan/Sellman Community Group",
+              "role": "member",
+              "joinedAt": "2024-06-11T18:20:37Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:09Z"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
@@ -6996,6 +6972,98 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-08-12T17:01:14Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Sam England",
+          "first": "Sam",
+          "last": "England",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Coan Community Group",
+              "role": "member",
+              "joinedAt": "2026-06-17T16:17:45Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:11Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Stephanie Kellames",
+          "first": "Stephanie",
+          "last": "Kellames",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "McCarthy Community Group",
+              "role": "member",
+              "joinedAt": "2025-05-13T00:36:31Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2025-12-09T18:19:24Z"
             }
           ],
           "flags": [],
@@ -7231,6 +7299,53 @@
         },
         {
           "id": null,
+          "name": "Gavin Au",
+          "first": "Gavin",
+          "last": "Au",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:12Z"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "member",
+              "joinedAt": "2026-07-27T23:20:33Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "John Conelea",
           "first": "John",
           "last": "Conelea",
@@ -7269,57 +7384,6 @@
           "flags": [
             "Not in a group"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Macarena Ables",
-          "first": "Macarena",
-          "last": "Ables",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Griffin/Watson Community Group",
-              "role": "member",
-              "joinedAt": "2024-09-12T15:15:39Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2024-08-13T14:26:49Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2026-04-20T21:45:47Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -7408,90 +7472,6 @@
         },
         {
           "id": null,
-          "name": "Jim Kellames",
-          "first": "Jim",
-          "last": "Kellames",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "McCarthy Community Group",
-              "role": "member",
-              "joinedAt": "2025-11-01T01:54:34Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jimmy Pierce",
-          "first": "Jimmy",
-          "last": "Pierce",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Geoffrey Caliger Community Group",
-              "role": "member",
-              "joinedAt": "2026-03-04T17:33:55Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Lauren Johnson",
           "first": "Lauren",
           "last": "Johnson",
@@ -7536,6 +7516,62 @@
               "name": "Content Team",
               "role": "member",
               "joinedAt": "2026-05-07T23:40:05Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Macarena Ables",
+          "first": "Macarena",
+          "last": "Ables",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Griffin/Watson Community Group",
+              "role": "member",
+              "joinedAt": "2024-09-12T15:15:39Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2024-08-13T14:26:49Z"
+            },
+            {
+              "name": "Coffee Team",
+              "role": "leader",
+              "joinedAt": "2024-09-29T23:13:26Z"
+            },
+            {
+              "name": "Point Leaders",
+              "role": "member",
+              "joinedAt": "2026-04-20T21:45:47Z"
             }
           ],
           "flags": [],
@@ -7847,6 +7883,98 @@
               "name": "9:30am Enrichment Team",
               "role": "leader",
               "joinedAt": "2025-06-10T22:55:21Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jim Kellames",
+          "first": "Jim",
+          "last": "Kellames",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "McCarthy Community Group",
+              "role": "member",
+              "joinedAt": "2025-11-01T01:54:34Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2025-12-26T17:10:22Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jimmy Pierce",
+          "first": "Jimmy",
+          "last": "Pierce",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Geoffrey Caliger Community Group",
+              "role": "member",
+              "joinedAt": "2026-03-04T17:33:55Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:18Z"
             }
           ],
           "flags": [],
@@ -9516,52 +9644,6 @@
         },
         {
           "id": null,
-          "name": "Clare Lattin",
-          "first": "Clare",
-          "last": "Lattin",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Griffin/Watson Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:47:06Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-08-12T17:02:09Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Debbie Berge",
           "first": "Debbie",
           "last": "Berge",
@@ -9883,6 +9965,57 @@
         },
         {
           "id": null,
+          "name": "Clare Lattin",
+          "first": "Clare",
+          "last": "Lattin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Griffin/Watson Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T21:47:06Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2024-08-13T17:05:22Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-08-12T17:02:09Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Helen Peterson",
           "first": "Helen",
           "last": "Peterson",
@@ -10168,52 +10301,6 @@
         },
         {
           "id": null,
-          "name": "Bill Salcido",
-          "first": "Bill",
-          "last": "Salcido",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Flores Community Group",
-              "role": "member",
-              "joinedAt": "2026-07-15T01:01:28Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "8am Enrichment Team (Early Birds)",
-              "role": "member",
-              "joinedAt": "2025-07-07T23:36:46Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Bill Wallace",
           "first": "Bill",
           "last": "Wallace",
@@ -10455,6 +10542,57 @@
         },
         {
           "id": null,
+          "name": "Bill Salcido",
+          "first": "Bill",
+          "last": "Salcido",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Flores Community Group",
+              "role": "member",
+              "joinedAt": "2026-07-15T01:01:28Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2024-08-16T14:18:22Z"
+            },
+            {
+              "name": "8am Enrichment Team (Early Birds)",
+              "role": "member",
+              "joinedAt": "2025-07-07T23:36:46Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Gloria Worthington",
           "first": "Gloria",
           "last": "Worthington",
@@ -10649,57 +10787,6 @@
         },
         {
           "id": null,
-          "name": "Keith Primus",
-          "first": "Keith",
-          "last": "Primus",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Lattin Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-27T12:47:54Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2026-08-19T18:16:14Z"
-            },
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2024-08-12T18:10:43Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Don Lattin",
           "first": "Don",
           "last": "Lattin",
@@ -10749,6 +10836,62 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:55Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Keith Primus",
+          "first": "Keith",
+          "last": "Primus",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Lattin Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-27T12:47:54Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2026-08-19T18:16:14Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:10Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2024-08-12T18:10:43Z"
             }
           ],
           "flags": [],
@@ -10912,6 +11055,11 @@
               "name": "Prayer Team",
               "role": "leader",
               "joinedAt": "2024-07-29T23:21:23Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:10Z"
             },
             {
               "name": "Presiders",
@@ -12830,52 +12978,6 @@
         },
         {
           "id": null,
-          "name": "Morna Edmunds",
-          "first": "Morna",
-          "last": "Edmunds",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2025-09-24T18:20:06Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2026-04-14T02:10:49Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Tony Farson",
           "first": "Tony",
           "last": "Farson",
@@ -13323,6 +13425,57 @@
         },
         {
           "id": null,
+          "name": "Morna Edmunds",
+          "first": "Morna",
+          "last": "Edmunds",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2025-09-24T18:20:06Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2026-04-14T02:10:49Z"
+            },
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-03-10T16:56:02Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Natalie Shishido",
           "first": "Natalie",
           "last": "Shishido",
@@ -13413,6 +13566,11 @@
               "name": "Enrichment Team",
               "role": "member",
               "joinedAt": "2024-11-24T17:29:15Z"
+            },
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2024-09-23T01:26:52Z"
             }
           ],
           "flags": [],
@@ -13846,7 +14004,7 @@
         "totalPeople": 49,
         "avgScore": 0,
         "inGroup": 27,
-        "serving": 23,
+        "serving": 25,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -13856,7 +14014,7 @@
         "overdue": 0,
         "notBaptized": 49,
         "notInGroup": 22,
-        "notServing": 26,
+        "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -13874,7 +14032,7 @@
         },
         "pct": {
           "inGroup": 0.5510204081632653,
-          "serving": 0.46938775510204084,
+          "serving": 0.5102040816326531,
           "leading": 0.14285714285714285,
           "givingRegular": 0,
           "recurring": 0,
@@ -13914,10 +14072,15 @@
           "newFamilyMember": true,
           "familyStep": "Pastoral Meeting being scheduled/in process",
           "groups": [],
-          "serveTeams": [],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2026-08-05T19:00:15Z"
+            }
+          ],
           "flags": [
-            "Not in a group",
-            "Not serving"
+            "Not in a group"
           ],
           "pending": true
         },
@@ -14646,43 +14809,6 @@
         },
         {
           "id": null,
-          "name": "Kevin Moore",
-          "first": "Kevin",
-          "last": "Moore",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Daniel Frank",
           "first": "Daniel",
           "last": "Frank",
@@ -15216,6 +15342,48 @@
         },
         {
           "id": null,
+          "name": "Kevin Moore",
+          "first": "Kevin",
+          "last": "Moore",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Coffee Team",
+              "role": "member",
+              "joinedAt": "2025-09-14T20:46:26Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Tonya Lowry",
           "first": "Tonya",
           "last": "Lowry",
@@ -15451,6 +15619,11 @@
             }
           ],
           "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2026-04-28T08:51:04Z"
+            },
             {
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
@@ -16018,6 +16191,11 @@
               "name": "Enrichment Team",
               "role": "member",
               "joinedAt": "2025-06-30T21:41:12Z"
+            },
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2025-02-18T00:33:16Z"
             },
             {
               "name": "Stepping Stones Children's Ministry",
@@ -16899,6 +17077,11 @@
               "joinedAt": "2025-04-14T03:05:30Z"
             },
             {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-06-11T09:10:59Z"
+            },
+            {
               "name": "Tech Team",
               "role": "member",
               "joinedAt": "2025-06-11T08:28:54Z"
@@ -17079,6 +17262,11 @@
             }
           ],
           "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "leader",
+              "joinedAt": "2024-08-06T23:25:24Z"
+            },
             {
               "name": "Tech Team",
               "role": "leader",
@@ -17285,6 +17473,11 @@
               "joinedAt": "2024-12-12T23:22:55Z"
             },
             {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:12Z"
+            },
+            {
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2025-10-25T19:39:36Z"
@@ -17375,52 +17568,6 @@
           "flags": [
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Stephanie Fava",
-          "first": "Stephanie",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2024-09-26T02:33:44Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2025-07-03T01:06:27Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -17623,6 +17770,57 @@
               "name": "Preachers",
               "role": "leader",
               "joinedAt": "2024-08-26T20:13:36Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Stephanie Fava",
+          "first": "Stephanie",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2024-09-26T02:33:44Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2025-07-03T01:06:27Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:12Z"
             }
           ],
           "flags": [],
@@ -18051,6 +18249,11 @@
               "name": "Connection Team",
               "role": "leader",
               "joinedAt": "2024-07-29T23:18:47Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:10Z"
             },
             {
               "name": "Presiders",
