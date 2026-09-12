@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T23:50:17.621Z",
+  "generatedAt": "2026-09-12T00:50:21.151Z",
   "asOf": "2026-09-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 404,
     "avgScore": 0,
-    "inGroup": 225,
+    "inGroup": 224,
     "serving": 236,
     "leading": 83,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 404,
-    "notInGroup": 179,
+    "notInGroup": 180,
     "notServing": 168,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 404
     },
     "pct": {
-      "inGroup": 0.556930693069307,
+      "inGroup": 0.5544554455445545,
       "serving": 0.5841584158415841,
       "leading": 0.20544554455445543,
       "givingRegular": 0,
@@ -8300,7 +8300,7 @@
       "summary": {
         "totalPeople": 65,
         "avgScore": 0,
-        "inGroup": 23,
+        "inGroup": 22,
         "serving": 29,
         "leading": 10,
         "givingRegular": 0,
@@ -8310,7 +8310,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 65,
-        "notInGroup": 42,
+        "notInGroup": 43,
         "notServing": 36,
         "notGiving": 0,
         "paciCounts": {
@@ -8328,7 +8328,7 @@
           "unknown": 65
         },
         "pct": {
-          "inGroup": 0.35384615384615387,
+          "inGroup": 0.3384615384615385,
           "serving": 0.4461538461538462,
           "leading": 0.15384615384615385,
           "givingRegular": 0,
@@ -9049,6 +9049,48 @@
         },
         {
           "id": null,
+          "name": "Elyse Bozsik",
+          "first": "Elyse",
+          "last": "Bozsik",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-08-12T17:15:02Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Gary Berge",
           "first": "Gary",
           "last": "Berge",
@@ -9682,52 +9724,6 @@
           "flags": [
             "Not in a group"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Elyse Bozsik",
-          "first": "Elyse",
-          "last": "Bozsik",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member",
-              "joinedAt": "2025-09-12T16:29:25Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-08-12T17:15:02Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
