@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T19:50:17.710Z",
+  "generatedAt": "2026-09-13T20:50:22.230Z",
   "asOf": "2026-09-13",
   "givingMonths": 12,
   "statusVocab": [
@@ -4869,6 +4869,11 @@
               "name": "Enrichment Team",
               "role": "leader",
               "joinedAt": "2024-08-16T01:04:52Z"
+            },
+            {
+              "name": "11am Enrichment Team",
+              "role": "leader",
+              "joinedAt": "2025-06-10T22:55:57Z"
             }
           ],
           "flags": [],
@@ -5661,6 +5666,11 @@
               "name": "Tech Team",
               "role": "member",
               "joinedAt": "2026-01-27T10:06:17Z"
+            },
+            {
+              "name": "11am Enrichment Team",
+              "role": "leader",
+              "joinedAt": "2025-06-10T22:56:09Z"
             }
           ],
           "flags": [],
@@ -5859,6 +5869,11 @@
               "name": "9:30am Enrichment Team",
               "role": "leader",
               "joinedAt": "2025-06-09T21:32:43Z"
+            },
+            {
+              "name": "11am Enrichment Team",
+              "role": "leader",
+              "joinedAt": "2025-06-09T21:32:09Z"
             }
           ],
           "flags": [],
@@ -10727,62 +10742,6 @@
         },
         {
           "id": null,
-          "name": "Alexis Durham",
-          "first": "Alexis",
-          "last": "Durham",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Durham Community Group",
-              "role": "leader",
-              "joinedAt": "2024-06-11T18:19:28Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:20Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2024-08-26T00:20:21Z"
-            },
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2024-08-12T22:15:40Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Don Lattin",
           "first": "Don",
           "last": "Lattin",
@@ -10939,6 +10898,67 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:44Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Alexis Durham",
+          "first": "Alexis",
+          "last": "Durham",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Durham Community Group",
+              "role": "leader",
+              "joinedAt": "2024-06-11T18:19:28Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2025-01-28T00:55:20Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2024-08-26T00:20:21Z"
+            },
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2024-08-12T22:15:40Z"
+            },
+            {
+              "name": "11am Enrichment Team",
+              "role": "member",
+              "joinedAt": "2025-06-27T18:53:37Z"
             }
           ],
           "flags": [],
@@ -16143,9 +16163,9 @@
       "list": "Shepherding - Ryan",
       "unassigned": false,
       "summary": {
-        "totalPeople": 44,
+        "totalPeople": 43,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 27,
         "serving": 30,
         "leading": 14,
         "givingRegular": 0,
@@ -16154,9 +16174,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 44,
+        "notBaptized": 43,
         "notInGroup": 16,
-        "notServing": 14,
+        "notServing": 13,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -16170,12 +16190,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 44
+          "unknown": 43
         },
         "pct": {
-          "inGroup": 0.6363636363636364,
-          "serving": 0.6818181818181818,
-          "leading": 0.3181818181818182,
+          "inGroup": 0.627906976744186,
+          "serving": 0.6976744186046512,
+          "leading": 0.32558139534883723,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -16184,48 +16204,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Lex Adams",
-          "first": "Lex",
-          "last": "Adams",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Pastoral Meeting being scheduled/in process",
-          "groups": [
-            {
-              "name": "Poleselli / McAlpine Community Group",
-              "role": "member",
-              "joinedAt": "2026-09-09T16:25:55Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Bret Tompkins",
@@ -18262,9 +18240,9 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 7,
+        "totalPeople": 8,
         "avgScore": 0,
-        "inGroup": 6,
+        "inGroup": 7,
         "serving": 2,
         "leading": 0,
         "givingRegular": 0,
@@ -18273,9 +18251,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 7,
+        "notBaptized": 8,
         "notInGroup": 1,
-        "notServing": 5,
+        "notServing": 6,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18289,11 +18267,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 7
+          "unknown": 8
         },
         "pct": {
-          "inGroup": 0.8571428571428571,
-          "serving": 0.2857142857142857,
+          "inGroup": 0.875,
+          "serving": 0.25,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18378,6 +18356,48 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Lex Adams",
+          "first": "Lex",
+          "last": "Adams",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2026-09-09T16:25:55Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
             "Not serving"
           ],
           "pending": true
