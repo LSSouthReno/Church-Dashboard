@@ -560,34 +560,56 @@ function spRecurringDonorIds_() {
 //   • a lone parent + one adult child that happens to be a 2-adult same-surname
 //     home → caught by a 20-year age-gap guard when both birthdates are on file.
 // Anyone not matching stays on their own individual giving (unchanged behavior).
+//
+// Built from ONE church-wide sweep of /people/v2/households?include=people
+// (~a dozen paged requests) rather than a per-person household call. Firing 400+
+// individual household requests blows past Planning Center's rate limit, so most
+// came back empty and those spouses were silently left un-pooled — the sweep
+// stays well under the limit and sees every household's full membership, so the
+// pairing is reliable for the WHOLE congregation.
 function spHouseholdAdultsByPerson_(ids, startMs) {
+  var partner = spBuildCouplePartnerMap_(startMs);   // church-wide pid -> spouse pid
   var out = {};
-  var pages = fgBatchFetch_(ids.map(function(id){ return '/people/v2/people/'+id+'/households?include=people&per_page=5'; }), startMs);
-  ids.forEach(function(id, i){
-    var page = pages[i];
-    out[id] = [String(id)];                       // default: own giving only
-    if (!page || !page.included) return;
-    var self = null, members = [];
-    page.included.forEach(function(m){
+  ids.forEach(function(id){ var p = partner[String(id)]; out[id] = p ? [String(id), p] : [String(id)]; });
+  return out;
+}
+// pid -> spouse pid for every couple in the church. A couple = exactly two
+// same-surname adults in one household (roommates differ in surname; 3+ adults
+// are ambiguous and skipped), with a 20-year age-gap guard when both birthdates
+// are on file (rules out a lone parent + one adult child).
+function spBuildCouplePartnerMap_(startMs) {
+  var partner = {};
+  var url = 'https://api.planningcenteronline.com/people/v2/households?include=people&per_page=100';
+  var pages = 0, couples = 0;
+  while (url && pages < 200) {
+    if (shOverBudget_(startMs)) { Logger.log('   ! couple-map budget hit at page ' + pages); break; }
+    pages++;
+    var json; try { json = fgFetchPage_(url); } catch (e) { Logger.log('   ! households page failed: ' + e.message); break; }
+    var byId = {};
+    (json.included || []).forEach(function(m){
       if (m.type !== 'Person') return;
       var a = m.attributes || {};
-      var rec = { id:String(m.id), last:String(a.last_name||'').trim().toLowerCase(),
-                  child: a.child === true, birthdate: a.birthdate || '' };
-      if (rec.id === String(id)) self = rec;
-      members.push(rec);
+      byId[String(m.id)] = { id:String(m.id), last:String(a.last_name||'').trim().toLowerCase(),
+                             child: a.child === true, birthdate: a.birthdate || '' };
     });
-    if (!self || self.child || !self.last) return;  // no identifiable adult surname → solo
-    var sameName = members.filter(function(m){ return !m.child && m.last && m.last === self.last; });
-    if (sameName.length !== 2) return;              // only a clean two-adult couple is pooled
-    var spouse = sameName.filter(function(m){ return m.id !== String(id); })[0];
-    if (!spouse) return;
-    if (self.birthdate && spouse.birthdate) {       // 20+ yr gap ⇒ parent/adult-child, not a couple
-      var gap = Math.abs(new Date(self.birthdate).getTime() - new Date(spouse.birthdate).getTime()) / (365.25*86400000);
-      if (gap >= 20) return;
-    }
-    out[id] = [String(id), spouse.id];
-  });
-  return out;
+    (json.data || []).forEach(function(h){
+      var refs = (((h.relationships||{}).people||{}).data) || [];
+      var adults = refs.map(function(r){ return byId[String(r.id)]; })
+                       .filter(function(m){ return m && !m.child && m.last; });
+      if (adults.length !== 2) return;                         // only a clean two-adult couple
+      if (adults[0].last !== adults[1].last) return;           // same surname
+      if (adults[0].birthdate && adults[1].birthdate) {
+        var gap = Math.abs(new Date(adults[0].birthdate).getTime() - new Date(adults[1].birthdate).getTime()) / (365.25*86400000);
+        if (gap >= 20) return;                                 // parent/adult-child, not a couple
+      }
+      partner[adults[0].id] = adults[1].id;
+      partner[adults[1].id] = adults[0].id;
+      couples++;
+    });
+    url = (json.links && json.links.next) ? json.links.next : null;
+  }
+  Logger.log('   Couple map: ' + couples + ' couples across ' + pages + ' household pages');
+  return partner;
 }
 
 // Combine gifts across a person's pooled giving unit (self + spouse), then compute stats.
