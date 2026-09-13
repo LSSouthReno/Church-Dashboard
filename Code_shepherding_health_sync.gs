@@ -15,9 +15,11 @@
  * Assessment (Healthy/Weak/Wandering/Lost/Could Not Contact), which is shown and
  * filtered alongside it.
  *
- * GIVING: pulled church-wide for 24 months and joined by PCO person id. Spouses
- * are credited jointly by summing giving across the ADULT members of each PCO
- * household (kids excluded). "Growing/declining" compares the last 12 months to
+ * GIVING: pulled church-wide for 24 months and joined by PCO person id. A married
+ * couple's joint giving is pooled onto BOTH spouses (PCO records it under one
+ * donor-of-record, leaving the other at $0) — matched strictly as exactly two
+ * same-surname adults in a household, so roommates and adult children are never
+ * merged (see spHouseholdAdultsByPerson_). "Growing/declining" compares the last 12 months to
  * the prior 12, excluding any single gift >= 4x that person's median gift (so a
  * one-off asset-sale gift doesn't distort the trend).
  *
@@ -370,9 +372,19 @@ function syncShepherdingGiving_() {
   var ledger          = spUpdateGivingLedger_(startMs);   // { byPerson: {pid:[{cents,ts}]} }
   var recurring       = spRecurringDonorIds_();
 
-  // Individual giving per person (no household join — see spComputeGivingFor_).
+  // Pool giving across each married couple so joint givers show the household total
+  // on BOTH spouses (see spHouseholdAdultsByPerson_ for the strict couple test).
+  var pooledUnits = {};
+  try { pooledUnits = spHouseholdAdultsByPerson_(allIds, startMs); }
+  catch (e) { Logger.log('   ! household join failed (falling back to individual giving): ' + e.message); }
+  var pooledCount = 0;
   var map = {};
-  allIds.forEach(function(id){ map[id] = spComputeGivingFor_(id, [id], ledger.byPerson, recurring); });
+  allIds.forEach(function(id){
+    var unit = pooledUnits[id] || [id];
+    if (unit.length > 1) pooledCount++;
+    map[id] = spComputeGivingFor_(id, unit, ledger.byPerson, recurring);
+  });
+  Logger.log('   Household join: ' + pooledCount + ' people pooled with a spouse');
   spStoreGivingCache_({ generatedAt: new Date().toISOString(), giving: map });
   Logger.log('✓ Shepherding Giving — cached ' + allIds.length + ' people in ' + Math.round(shElapsed_(startMs)/1000) + 's');
 }
@@ -536,37 +548,63 @@ function spRecurringDonorIds_() {
 /* =========================================================
    Household adults (joint-giving unit) → per person
 ========================================================= */
+// Map each person id → the ids whose giving should be pooled onto their profile.
+// Planning Center attributes every gift to ONE person, so when a couple gives
+// jointly the whole household total lands on the donor-of-record and the spouse
+// shows $0. We fix that by pooling giving across a MARRIED COUPLE — but only a
+// couple, never arbitrary housemates. A couple is detected precisely as *exactly
+// two same-surname adults* sharing a household:
+//   • roommates → different surnames → never merged (the failure mode that made a
+//     previous version merge a roommate's large gifts into a modest giver);
+//   • parents + adult children → 3+ same-surname adults → left solo (ambiguous);
+//   • a lone parent + one adult child that happens to be a 2-adult same-surname
+//     home → caught by a 20-year age-gap guard when both birthdates are on file.
+// Anyone not matching stays on their own individual giving (unchanged behavior).
 function spHouseholdAdultsByPerson_(ids, startMs) {
   var out = {};
   var pages = fgBatchFetch_(ids.map(function(id){ return '/people/v2/people/'+id+'/households?include=people&per_page=5'; }), startMs);
   ids.forEach(function(id, i){
     var page = pages[i];
-    var adults = [id];
-    if (page && page.included) {
-      page.included.forEach(function(m){
-        if (m.type !== 'Person') return;
-        if ((m.attributes||{}).child === true) return;   // exclude kids
-        if (String(m.id) !== id) adults.push(String(m.id));
-      });
+    out[id] = [String(id)];                       // default: own giving only
+    if (!page || !page.included) return;
+    var self = null, members = [];
+    page.included.forEach(function(m){
+      if (m.type !== 'Person') return;
+      var a = m.attributes || {};
+      var rec = { id:String(m.id), last:String(a.last_name||'').trim().toLowerCase(),
+                  child: a.child === true, birthdate: a.birthdate || '' };
+      if (rec.id === String(id)) self = rec;
+      members.push(rec);
+    });
+    if (!self || self.child || !self.last) return;  // no identifiable adult surname → solo
+    var sameName = members.filter(function(m){ return !m.child && m.last && m.last === self.last; });
+    if (sameName.length !== 2) return;              // only a clean two-adult couple is pooled
+    var spouse = sameName.filter(function(m){ return m.id !== String(id); })[0];
+    if (!spouse) return;
+    if (self.birthdate && spouse.birthdate) {       // 20+ yr gap ⇒ parent/adult-child, not a couple
+      var gap = Math.abs(new Date(self.birthdate).getTime() - new Date(spouse.birthdate).getTime()) / (365.25*86400000);
+      if (gap >= 20) return;
     }
-    // de-dup
-    out[id] = adults.filter(function(v,ix,arr){ return arr.indexOf(v)===ix; });
+    out[id] = [String(id), spouse.id];
   });
   return out;
 }
 
-// Combine gifts across a person's household adults, then compute stats.
+// Combine gifts across a person's pooled giving unit (self + spouse), then compute stats.
 function spComputeGivingFor_(pid, adultIds, givingByPerson, recurringSet) {
-  // Use the person's OWN individual giving. Planning Center attributes every gift
-  // to a single person and exposes NO joint-donor link in its API (households are
-  // the only grouping, and joining across them wrongly merged unrelated housemates
-  // — e.g. a roommate's large gifts inflating a modest giver). If a couple truly
-  // gives jointly, PCO records that under one person, which is that person's own
-  // giving. (adultIds is retained for signature compatibility but no longer used.)
-  var gifts = [];
-  var ownRec = givingByPerson[pid];
-  if (ownRec && ownRec.gifts) gifts = ownRec.gifts.slice();
-  var recurring = recurringSet.has(pid);
+  // adultIds is the pooled giving unit from spHouseholdAdultsByPerson_ — usually
+  // just [pid], but [pid, spouseId] for a married couple so both spouses show the
+  // joint household total instead of $0 on the non-donor-of-record spouse.
+  var unit = (adultIds && adultIds.length) ? adultIds : [pid];
+  var gifts = [], recurring = false, seenGift = {};
+  unit.forEach(function(aid){
+    if (recurringSet.has(aid)) recurring = true;
+    var rec = givingByPerson[aid];
+    if (rec && rec.gifts) rec.gifts.forEach(function(g){
+      // De-dup identical gifts in case a household member appears twice.
+      var k = aid+'|'+g.ts+'|'+g.cents; if (seenGift[k]) return; seenGift[k]=1; gifts.push(g);
+    });
+  });
   if (!gifts.length) {
     return { monthsGiven:0, gifts:0, totalCents:0, recurring:recurring, trend:'none', lastGiftAt:null, lastGiftDaysAgo:null };
   }

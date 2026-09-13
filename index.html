@@ -2073,6 +2073,39 @@
   }
   #shBulkBar .shbb-btn:hover { filter:brightness(1.08); }
   #shBulkBar .shbb-clear { background:transparent; color:var(--text-dim,#9aa4a8); border:1px solid var(--sh-line,#333c40); }
+  #shBulkBar .shbb-edit { background:var(--sh-panel-2,#1c2226); color:var(--text,#e8eef0); border:1px solid var(--sh-accent,#5cbccb); }
+  /* Bulk-edit modal */
+  #shBulkEditOv { position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:100001; opacity:0; pointer-events:none; transition:opacity .18s; }
+  #shBulkEditOv.open { opacity:1; pointer-events:auto; }
+  #shBulkEdit {
+    position:fixed; left:50%; top:50%; transform:translate(-50%,-48%); z-index:100002;
+    width:min(440px, calc(100vw - 32px)); max-height:calc(100vh - 48px); overflow:auto;
+    background:var(--sh-panel,#272e32); border:1px solid var(--sh-line,#333c40); border-radius:14px;
+    box-shadow:0 24px 60px rgba(0,0,0,.55); padding:18px 20px 16px; opacity:0; pointer-events:none;
+    transition:opacity .18s, transform .18s; color:var(--text,#e8eef0);
+  }
+  #shBulkEdit.open { opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+  #shBulkEdit h3 { margin:0 0 2px; font-size:16px; }
+  #shBulkEdit .sh-be-sub { font-size:12px; color:var(--text-dim,#9aa4a8); margin-bottom:14px; }
+  #shBulkEdit .sh-be-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  #shBulkEdit .sh-be-row label { flex:0 0 130px; font-size:13px; color:var(--text-muted,#c2cbce); }
+  #shBulkEdit .sh-be-row select, #shBulkEdit .sh-be-row textarea {
+    flex:1; min-width:0; background:var(--sh-panel-2,#1c2226); border:1px solid var(--sh-line,#333c40);
+    color:var(--text,#e8eef0); border-radius:7px; padding:7px 8px; font-family:inherit; font-size:13px;
+  }
+  #shBulkEdit .sh-be-note-row { align-items:flex-start; }
+  #shBulkEdit .sh-be-note-row textarea { min-height:52px; resize:vertical; }
+  #shBulkEdit .sh-be-hint { font-size:11px; color:var(--text-dim,#9aa4a8); margin:-4px 0 12px 140px; }
+  #shBulkEdit .sh-be-actions { display:flex; align-items:center; gap:10px; margin-top:16px; }
+  #shBulkEdit .sh-be-actions .sh-be-apply {
+    background:var(--sh-accent,#5cbccb); color:#0c1416; border:none; border-radius:8px;
+    padding:9px 15px; font-size:13.5px; font-weight:700; cursor:pointer;
+  }
+  #shBulkEdit .sh-be-actions .sh-be-apply:hover { filter:brightness(1.08); }
+  #shBulkEdit .sh-be-actions .sh-be-apply:disabled { opacity:.55; cursor:default; }
+  #shBulkEdit .sh-be-actions .sh-be-cancel { background:transparent; color:var(--text-dim,#9aa4a8); border:1px solid var(--sh-line,#333c40); border-radius:8px; padding:9px 14px; font-size:13px; cursor:pointer; }
+  #shBulkEdit .sh-be-status { font-size:12.5px; color:var(--text-dim,#9aa4a8); margin-left:auto; text-align:right; }
+  #shBulkEdit .sh-be-status.ok { color:#86efac; } #shBulkEdit .sh-be-status.err { color:#fca5a5; }
   .sh-person-name { font-size:15.5px; font-weight:700; color:var(--text); line-height:1.25; }
   .sh-traj { font-size:12px; font-weight:700; }
   .sh-traj.up { color:var(--paci-adult); } .sh-traj.down { color:var(--paci-infant); } .sh-traj.steady { color:var(--text-dim); }
@@ -10934,12 +10967,122 @@ function shUpdateBulkBar() {
       '<span class="shbb-count"></span>' +
       '<button class="shbb-btn" onclick="shBulkEmail()">&#9993;&#65039; Email selected</button>' +
       '<button class="shbb-btn" onclick="shBulkText()">&#128172; Text selected</button>' +
+      '<button class="shbb-btn shbb-edit" onclick="shBulkEditOpen()">&#9998; Bulk edit</button>' +
       '<button class="shbb-btn shbb-clear" onclick="shClearSelect()">Clear</button>';
     document.body.appendChild(bar);
   }
   const n = _shSelected.size;
   bar.querySelector('.shbb-count').textContent = n + (n===1?' person selected':' people selected');
   bar.classList.toggle('open', n > 0);
+  if (n === 0) shBulkEditClose();
+}
+
+/* ── Bulk edit: change health status, maturity, membership, pastor, etc. for
+      several people at once. Reuses the per-person shep_update / shep_add_note
+      endpoints, one write per (person, field), so no backend change is needed. ── */
+const SH_BULK_NOCHANGE = ' nochange';
+function shBulkEditClose(){
+  const m=document.getElementById('shBulkEdit'), o=document.getElementById('shBulkEditOv');
+  if(m) m.classList.remove('open'); if(o) o.classList.remove('open');
+}
+function shBulkEditOpen(){
+  const people = shSelectedPeople();
+  if(!people.length){ return; }
+  const elderOpts = (_shepData&&_shepData.elderOptions)||[];
+  const memOpts = (((_shepData&&_shepData.membershipOptions&&_shepData.membershipOptions.length)?_shepData.membershipOptions:[]).concat(SH_MEMBERSHIP_OPTS)).filter(function(v,i,a){return a.indexOf(v)===i;});
+  const nc = '<option value="'+SH_BULK_NOCHANGE+'" selected>— no change —</option>';
+  const sel = (id, opts) => '<select id="'+id+'">'+nc+opts.map(o=>'<option value="'+shEsc(o)+'">'+shEsc(o)+'</option>').join('')+'</select>';
+  const boolSel = id => '<select id="'+id+'">'+nc+'<option value="true">Yes</option><option value="false">No</option></select>';
+
+  let rows = '';
+  rows += '<div class="sh-be-row"><label>Health status</label>'+sel('shBEhealth', SH_HEALTH_OPTS)+'</div>';
+  rows += '<div class="sh-be-hint">Also stamps the health update date to today for everyone changed.</div>';
+  rows += '<div class="sh-be-row"><label>Spiritual maturity</label>'+sel('shBEmaturity', SH_MATURITY_OPTS)+'</div>';
+  rows += '<div class="sh-be-row"><label>Membership</label>'+sel('shBEmembership', memOpts)+'</div>';
+  if(elderOpts.length) rows += '<div class="sh-be-row"><label>Shepherding pastor</label>'+sel('shBEelder', elderOpts)+'</div>';
+  rows += '<div class="sh-be-row"><label>Preferred contact</label>'+sel('shBEpref', ['Email','Phone','Text','Any/All'])+'</div>';
+  rows += '<div class="sh-be-row"><label>Known?</label>'+boolSel('shBEknown')+'</div>';
+  rows += '<div class="sh-be-row"><label>Deacon support?</label>'+boolSel('shBEdeaconSupport')+'</div>';
+  rows += '<div class="sh-be-row sh-be-note-row"><label>Add a note</label><textarea id="shBEnote" placeholder="Optional — same note added to everyone (e.g. &quot;Reached out during fall outreach&quot;)"></textarea></div>';
+
+  let m = document.getElementById('shBulkEdit');
+  let o = document.getElementById('shBulkEditOv');
+  if(!o){ o=document.createElement('div'); o.id='shBulkEditOv'; o.onclick=shBulkEditClose; document.body.appendChild(o); }
+  if(!m){ m=document.createElement('div'); m.id='shBulkEdit'; document.body.appendChild(m); }
+  m.innerHTML =
+    '<h3>Bulk edit '+people.length+(people.length===1?' person':' people')+'</h3>'
+    + '<div class="sh-be-sub">Only the fields you change below are applied. Leave a field on “no change” to skip it.</div>'
+    + rows
+    + '<div class="sh-be-actions">'
+    + '<button class="sh-be-apply" onclick="shBulkApply(this)">Apply changes</button>'
+    + '<button class="sh-be-cancel" onclick="shBulkEditClose()">Cancel</button>'
+    + '<span class="sh-be-status" id="shBEstatus"></span>'
+    + '</div>';
+  o.classList.add('open'); m.classList.add('open');
+}
+async function shBulkApply(btn){
+  const people = shSelectedPeople();
+  if(!people.length){ shBulkEditClose(); return; }
+  const status = document.getElementById('shBEstatus');
+  const val = id => { const el=document.getElementById(id); return el?el.value:SH_BULK_NOCHANGE; };
+  const changes = [];
+  [['health','Health status'],['maturity','Spiritual maturity'],['membership','Membership'],
+   ['elder','Shepherding pastor'],['pref','Preferred contact'],['known','Known?'],['deaconSupport','Deacon support?']
+  ].forEach(pair=>{ const v=val('shBE'+pair[0]); if(v!==SH_BULK_NOCHANGE && v!=null) changes.push({field:pair[0], value:v, label:pair[1]}); });
+  const noteEl = document.getElementById('shBEnote');
+  const noteBody = noteEl ? (noteEl.value||'').trim() : '';
+  if(!changes.length && !noteBody){
+    if(status){ status.className='sh-be-status err'; status.textContent='Pick a field or write a note first.'; }
+    return;
+  }
+  const boolLabel = v => v==='true'?'Yes':(v==='false'?'No':v);
+  const summary = changes.map(c=>c.label+' → '+((c.field==='known'||c.field==='deaconSupport')?boolLabel(c.value):c.value)).join('\n')
+    + (noteBody?('\n'+(changes.length?'':'')+'Add note: “'+noteBody.slice(0,60)+(noteBody.length>60?'…':'')+'”'):'');
+  if(!confirm('Apply to '+people.length+(people.length===1?' person':' people')+'?\n\n'+summary)) return;
+
+  btn.disabled = true;
+  document.querySelectorAll('#shBulkEdit select, #shBulkEdit textarea, #shBulkEdit .sh-be-cancel').forEach(el=>el.disabled=true);
+  let done=0, fail=0;
+  const total = people.length;
+  for(const p of people){
+    const pid = p.id;
+    for(const c of changes){
+      try{
+        const res = await fetch(EOS_WEBAPP_URL + '?action=shep_update&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&field='+c.field+'&value='+encodeURIComponent(c.value)+'&t='+Date.now());
+        const j = await res.json();
+        if(j && j.ok) shApplyLocalField(p, c.field, c.value, j); else fail++;
+      }catch(e){ fail++; }
+    }
+    if(noteBody){
+      try{
+        const res = await fetch(EOS_WEBAPP_URL + '?action=shep_add_note&pw='+_shPastorHash+'&pid='+encodeURIComponent(pid)+'&category=239853&body='+encodeURIComponent(noteBody)+'&t='+Date.now());
+        const j = await res.json(); if(!(j && j.ok)) fail++;
+      }catch(e){ fail++; }
+    }
+    _shDetail[pid] = null; // force fresh detail load next time the drawer opens
+    done++;
+    if(status){ status.className='sh-be-status'; status.textContent='Saving… '+done+'/'+total; }
+  }
+  try{ shWriteCache(_shepData); }catch(e){}
+  shBuildFilters(); shRenderHealth(); shRenderPeople(); shRefreshFamily();
+  if(status){
+    status.className = fail?'sh-be-status err':'sh-be-status ok';
+    status.textContent = fail ? ('Done — '+fail+' write'+(fail===1?'':'s')+' failed') : ('Saved ✓ '+total+(total===1?' person':' people'));
+  }
+  if(!fail){ setTimeout(()=>{ shBulkEditClose(); shClearSelect(); }, 900); }
+  else { btn.disabled=false; document.querySelectorAll('#shBulkEdit select, #shBulkEdit textarea, #shBulkEdit .sh-be-cancel').forEach(el=>el.disabled=false); }
+}
+function shApplyLocalField(p, field, val, j){
+  if(field==='health'){
+    p.statusRaw=val; p.status=shNormStatusClient(val);
+    if(j && j.healthDateSet){ const pr=String(j.healthDateSet).split('-'); const disp=pr.length===3?(pr[1]+'/'+pr[2]+'/'+pr[0]):j.healthDateSet; p.healthDate=disp; p.healthDaysAgo=0; p.overdue=false; }
+  }
+  else if(field==='maturity'){ p.spiritualMat=val; p.maturityManual = val ? ((j&&j.maturityManual)||{by:_shPastorName,date:''}) : null; }
+  else if(field==='membership') p.membershipType=val;
+  else if(field==='elder') p.assignedElder=val;
+  else if(field==='pref') p.preferredComm=val;
+  else if(field==='known') p.known=val;
+  else if(field==='deaconSupport') p.deaconSupport=val;
 }
 
 /* ── Detail drawer ── */
