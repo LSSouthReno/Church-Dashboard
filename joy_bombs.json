@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_193137738_20260906_breakfastteam",
-      "name": "Casey Madison",
-      "pcoPersonId": "193137738",
-      "team": "Breakfast Team",
-      "phone": "17752232692",
-      "firstServeDate": "2026-09-06",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Breakfast Provider"
-    },
-    {
       "id": "jb_151513933_20260913_countingteam",
       "name": "Kevin Moore",
       "pcoPersonId": "151513933",
@@ -589,7 +575,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bluebirds Guide"
+    },
+    {
+      "id": "jb_193137738_20260906_breakfastteam",
+      "name": "Casey Madison",
+      "pcoPersonId": "193137738",
+      "team": "Breakfast Team",
+      "phone": "17752232692",
+      "firstServeDate": "2026-09-06",
+      "status": "bombed",
+      "bombedDate": "2026-09-14",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Breakfast Provider"
     }
   ],
-  "lastUpdated": "2026-09-14T19:01:19.257Z"
+  "lastUpdated": "2026-09-14T19:53:07.242Z"
 }
