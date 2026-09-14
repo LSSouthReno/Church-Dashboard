@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_198317775_20260913_connectionteam",
-      "name": "Sheila Hlubucek",
-      "pcoPersonId": "198317775",
-      "team": "Connection Team",
-      "phone": "17757715833",
-      "firstServeDate": "2026-09-13",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Connect Desk Host (A Team)"
-    },
-    {
       "id": "jb_170974352_20260913_steppingstone",
       "name": "Brian Merritt",
       "pcoPersonId": "170974352",
@@ -575,7 +561,21 @@
       "notes": "",
       "source": "auto",
       "position": "Connect Desk Host (B Team)"
+    },
+    {
+      "id": "jb_198317775_20260913_connectionteam",
+      "name": "Sheila Hlubucek",
+      "pcoPersonId": "198317775",
+      "team": "Connection Team",
+      "phone": "17757715833",
+      "firstServeDate": "2026-09-13",
+      "status": "bombed",
+      "bombedDate": "2026-09-14",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Connect Desk Host (A Team)"
     }
   ],
-  "lastUpdated": "2026-09-14T20:01:36.143Z"
+  "lastUpdated": "2026-09-14T20:01:40.470Z"
 }
