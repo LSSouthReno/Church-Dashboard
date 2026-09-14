@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-14T22:47:39.362Z",
+  "lastUpdated": "2026-09-14T23:46:02.486Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       239469,
-      166557
+      166632
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       364,
       402,
-      288
+      289
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5459230
+    "raised": 5459305
   },
   "attendance": {
     "months": [
@@ -7983,7 +7983,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 14, 2026, 3:47 PM",
+    "refreshed": "Sep 14, 2026, 4:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -21446,6 +21446,13 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Sarah Jones",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -21455,8 +21462,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 24,
-            "totalVols": 24
+            "volsWithServiceTime": 25,
+            "totalVols": 25
           }
         }
       ]
@@ -22270,14 +22277,14 @@
     "weeklyAvg": 13,
     "totalFetched": 7076,
     "since": "2026-08-15",
-    "asOf": "2026-09-14T22:45:00.509Z"
+    "asOf": "2026-09-14T23:44:33.457Z"
   },
   "emailStats": {
     "latestOpenRate": 0.25,
-    "avgOpenRate3": 0.445407657357664,
+    "avgOpenRate3": 0.4457076873606643,
     "latestCampaign": "Don't miss Your Next Step!",
     "latestSentAt": "2026-09-12T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-14T22:45:02.678Z"
+    "asOf": "2026-09-14T23:44:34.727Z"
   }
 }
