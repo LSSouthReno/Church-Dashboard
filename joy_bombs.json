@@ -1,20 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_170974352_20260913_steppingstone",
-      "name": "Brian Merritt",
-      "pcoPersonId": "170974352",
-      "team": "Stepping Stones",
-      "phone": "12534311572",
-      "firstServeDate": "2026-09-13",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Mustangs Guide"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -575,7 +560,21 @@
       "notes": "",
       "source": "auto",
       "position": "Connect Desk Host (A Team)"
+    },
+    {
+      "id": "jb_170974352_20260913_steppingstone",
+      "name": "Brian Merritt",
+      "pcoPersonId": "170974352",
+      "team": "Stepping Stones",
+      "phone": "12534311572",
+      "firstServeDate": "2026-09-13",
+      "status": "bombed",
+      "bombedDate": "2026-09-14",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Mustangs Guide"
     }
   ],
-  "lastUpdated": "2026-09-14T20:01:40.470Z"
+  "lastUpdated": "2026-09-14T20:01:42.440Z"
 }
