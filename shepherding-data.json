@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T21:50:29.810Z",
+  "generatedAt": "2026-09-14T22:50:28.784Z",
   "asOf": "2026-09-14",
   "givingMonths": 12,
   "statusVocab": [
@@ -2064,6 +2064,11 @@
               "name": "Point Leaders",
               "role": "member",
               "joinedAt": "2025-01-27T22:33:23Z"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "leader",
+              "joinedAt": "2026-08-03T23:01:10Z"
             }
           ],
           "flags": [],
@@ -6600,48 +6605,6 @@
         },
         {
           "id": null,
-          "name": "Gavin Au",
-          "first": "Gavin",
-          "last": "Au",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Worship Team",
-              "role": "member",
-              "joinedAt": "2025-02-03T18:51:12Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Laurel Winchester",
           "first": "Laurel",
           "last": "Winchester",
@@ -7257,6 +7220,53 @@
           "serveTeams": [],
           "flags": [
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Gavin Au",
+          "first": "Gavin",
+          "last": "Au",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:12Z"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "member",
+              "joinedAt": "2026-07-27T23:20:33Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -10384,52 +10394,6 @@
         },
         {
           "id": null,
-          "name": "Anna Ferguson",
-          "first": "Anna",
-          "last": "Ferguson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-03-07T22:56:48Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Connection Team",
-              "role": "member",
-              "joinedAt": "2026-04-16T17:03:49Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Bill Salcido",
           "first": "Bill",
           "last": "Salcido",
@@ -10520,6 +10484,57 @@
               "name": "Prayer Team",
               "role": "member",
               "joinedAt": "2025-06-09T19:29:28Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Anna Ferguson",
+          "first": "Anna",
+          "last": "Ferguson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2026-03-07T22:56:48Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Connection Team",
+              "role": "member",
+              "joinedAt": "2026-04-16T17:03:49Z"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "member",
+              "joinedAt": "2026-07-17T15:50:32Z"
             }
           ],
           "flags": [],
@@ -17964,6 +17979,11 @@
               "name": "LS Students Leaders",
               "role": "leader",
               "joinedAt": "2024-08-12T19:42:31Z"
+            },
+            {
+              "name": "Chair Crew",
+              "role": "member",
+              "joinedAt": "2026-08-07T13:28:31Z"
             }
           ],
           "flags": [],
