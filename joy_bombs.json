@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151514241_20260913_connectionteam",
-      "name": "Natalie Christopher",
-      "pcoPersonId": "151514241",
-      "team": "Connection Team",
-      "phone": "17032582027",
-      "firstServeDate": "2026-09-13",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Connect Desk Host (B Team)"
-    },
-    {
       "id": "jb_198317775_20260913_connectionteam",
       "name": "Sheila Hlubucek",
       "pcoPersonId": "198317775",
@@ -575,7 +561,21 @@
       "notes": "",
       "source": "auto",
       "position": "Breakfast Provider"
+    },
+    {
+      "id": "jb_151514241_20260913_connectionteam",
+      "name": "Natalie Christopher",
+      "pcoPersonId": "151514241",
+      "team": "Connection Team",
+      "phone": "17032582027",
+      "firstServeDate": "2026-09-13",
+      "status": "bombed",
+      "bombedDate": "2026-09-14",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Connect Desk Host (B Team)"
     }
   ],
-  "lastUpdated": "2026-09-14T19:53:28.413Z"
+  "lastUpdated": "2026-09-14T20:01:36.143Z"
 }
