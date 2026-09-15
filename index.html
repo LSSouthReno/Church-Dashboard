@@ -221,6 +221,16 @@
     overflow: hidden;
   }
 
+  /* Inconspicuous "export this chart's data to CSV" control, auto-added to every chart card */
+  .csv-row { text-align: right; margin-top: 10px; }
+  .csv-btn {
+    background: none; border: 1px solid var(--card-border); color: var(--text-muted);
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 6px; cursor: pointer; opacity: 0.5;
+    transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .csv-btn:hover { opacity: 1; color: var(--yellow-2); border-color: var(--yellow-2); }
+
   .card h2 {
     margin: 0 0 4px;
     font-size: 18px;
@@ -5043,6 +5053,53 @@ function escapeHtml(str) {
   }[m]));
 }
 
+/* ============================================================
+   CSV EXPORT — an unobtrusive "⤓ CSV" button on every chart card.
+   Reads the data straight from the rendered Chart.js instance, so it always
+   exports exactly what's plotted (labels + every series) with no extra wiring.
+   ============================================================ */
+function csvEscape_(v){ v = (v==null ? '' : String(v)); return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+function downloadCsv_(name, rows){
+  var csv = rows.map(function(r){ return r.map(csvEscape_).join(','); }).join('\r\n');
+  var blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8'});   // BOM so Excel reads UTF-8
+  var url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+}
+function chartToRows_(chart){
+  var labels = chart.data.labels || [], ds = (chart.data.datasets || []);
+  var header = ['Label'].concat(ds.map(function(d,i){ return d.label || ('Series '+(i+1)); }));
+  var n = labels.length || ds.reduce(function(m,d){ return Math.max(m, (d.data||[]).length); }, 0);
+  var rows = [header];
+  for (var i=0;i<n;i++){
+    var row = [ labels[i]!=null ? labels[i] : (i+1) ];
+    ds.forEach(function(d){ var v=(d.data||[])[i]; if (v && typeof v==='object') v = (v.y!=null?v.y:(v.v!=null?v.v:JSON.stringify(v))); row.push(v==null?'':v); });
+    rows.push(row);
+  }
+  return rows;
+}
+function exportCardCsv_(card){
+  var canvas = card.querySelector('canvas'); if (!canvas) return;
+  var chart = (window.Chart && Chart.getChart) ? Chart.getChart(canvas) : null;
+  if (!chart){ alert('This chart isn’t loaded yet (it may be locked behind Members access). Unlock and try again.'); return; }
+  var h2 = card.querySelector('h2'); var title = (h2 ? h2.textContent : 'metrics').trim();
+  var slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'metrics';
+  downloadCsv_('ls-'+slug+'-'+new Date().toISOString().slice(0,10)+'.csv', chartToRows_(chart));
+}
+function addCsvButtons_(){
+  try{
+    document.querySelectorAll('.card').forEach(function(card){
+      if (!card.querySelector('canvas')) return;      // chart cards only
+      if (card.querySelector('.csv-btn')) return;      // idempotent
+      var row = document.createElement('div'); row.className = 'csv-row';
+      var b = document.createElement('button'); b.type='button'; b.className='csv-btn';
+      b.textContent = '⤓ CSV'; b.title = 'Export this chart’s data to CSV';
+      b.addEventListener('click', function(e){ e.stopPropagation(); exportCardCsv_(card); });
+      row.appendChild(b); card.appendChild(row);
+    });
+  }catch(e){}
+}
+
 loadDashboardData()
   .then(() => {
     initAttendanceModalEvents();
@@ -5059,6 +5116,8 @@ loadDashboardData()
     renderCGMembers();
     renderBaptisms();
     renderMembersGrowth();
+    addCsvButtons_();
+    setTimeout(addCsvButtons_, 1200);   // catch any late-rendering charts
   })
   .catch(showDashboardError);
 
@@ -5102,6 +5161,7 @@ function _reRenderAllCharts() {
   renderCGCount();
   renderCGMembers();
   renderServeTeamsTrend();
+  addCsvButtons_();
 }
 
 /* ============================================================
@@ -5695,6 +5755,7 @@ function mmApplyState() {
   if (existingDonors) existingDonors.destroy();
   renderDonors();
   mmUpdatePledgeDetails();
+  addCsvButtons_();   // giving/donor charts just became available — ensure their export buttons exist
 
   // Re-render missions amounts (blur/unblur on lock state change)
   const missionsList = document.getElementById('missionsList');
