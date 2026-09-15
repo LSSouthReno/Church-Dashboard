@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-15T20:53:49.116Z",
+  "lastUpdated": "2026-09-15T21:46:13.678Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -7983,7 +7983,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 15, 2026, 1:53 PM",
+    "refreshed": "Sep 15, 2026, 2:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8800,7 +8800,7 @@
       374,
       371,
       394,
-      409
+      410
     ]
   },
   "baptisms": {
@@ -8868,8 +8868,8 @@
     },
     "current": {
       "groups": 39,
-      "members": 409,
-      "groupSize": 10,
+      "members": 410,
+      "groupSize": 11,
       "fmInGroupsPct": 53,
       "asOfMonth": "Sep '26"
     },
@@ -9347,7 +9347,7 @@
         374,
         371,
         394,
-        409,
+        410,
         null,
         null,
         null
@@ -20057,13 +20057,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Diane Sikora",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Karynn Sucaldito",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
@@ -20240,8 +20233,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 102,
-            "totalVols": 102
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ]
@@ -22277,7 +22270,18 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-10-07",
+      "end": "2026-10-11"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -22285,9 +22289,9 @@
   "newAdults30d": {
     "count30d": 45,
     "weeklyAvg": 10,
-    "totalFetched": 7077,
+    "totalFetched": 7078,
     "since": "2026-08-16",
-    "asOf": "2026-09-15T20:46:34.765Z"
+    "asOf": "2026-09-15T21:44:40.828Z"
   },
   "emailStats": {
     "latestOpenRate": 0.26171875,
@@ -22295,6 +22299,6 @@
     "latestCampaign": "Don't miss Your Next Step!",
     "latestSentAt": "2026-09-12T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-15T20:46:37.509Z"
+    "asOf": "2026-09-15T21:44:42.241Z"
   }
 }
