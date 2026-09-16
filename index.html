@@ -2547,7 +2547,7 @@
         <button type="button" data-mode="service" class="attn-mode-btn" style="padding:6px 12px;border:none;background:transparent;color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;">By service</button>
         <button type="button" data-mode="adultskids" class="attn-mode-btn" style="padding:6px 12px;border:none;background:transparent;color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;">Adults / Kids</button>
       </div>
-      <button type="button" id="attnModalCsv" class="csv-btn" style="margin-left:auto;opacity:1;color:var(--yellow-2);border:1px solid var(--card-border);border-radius:8px;padding:6px 12px;font-weight:600;" title="Download the full week-by-week history, split by service">⤓ Weekly CSV (by service)</button>
+      <button type="button" id="attnModalCsv" class="csv-btn" style="margin-left:auto;opacity:1;color:var(--yellow-2);border:1px solid var(--card-border);border-radius:8px;padding:6px 12px;font-weight:600;" title="Download the full week-by-week history, split by service">⤓ Weekly spreadsheet (by service)</button>
     </div>
     <div class="modal-chart-wrap"><canvas id="weeklyAttendanceChart"></canvas></div>
   </div>
@@ -4537,7 +4537,7 @@ function initAttendanceModalEvents() {
     });
   });
   const csvBtn = document.getElementById('attnModalCsv');
-  if (csvBtn) csvBtn.addEventListener('click', function(){ dl_('attendance-by-service-weekly', csvAttendanceByServiceWeekly_()); });
+  if (csvBtn) csvBtn.addEventListener('click', function(){ dlAttendanceWorkbook_(); });
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeAttendanceModal();
@@ -5115,6 +5115,69 @@ function downloadCsv_(name, rows){
   a.href = url; a.download = name; document.body.appendChild(a); a.click();
   setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
 }
+// ---- self-contained styled .xlsx writer (stored zip, no external libraries) ----
+var CRC_TABLE_=(function(){var t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32_(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=CRC_TABLE_[(c^b[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zipStore_(files){
+  var enc=new TextEncoder(), parts=[], central=[], offset=0;
+  function u16(n){return [n&255,(n>>8)&255];}
+  function u32(n){n>>>=0;return [n&255,(n>>8)&255,(n>>16)&255,(n>>24)&255];}
+  files.forEach(function(f){
+    var name=enc.encode(f.name), data=(typeof f.data==='string')?enc.encode(f.data):f.data, crc=crc32_(data);
+    parts.push(new Uint8Array([].concat(u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0))),name,data);
+    central.push({hdr:new Uint8Array([].concat(u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset))),name:name});
+    offset+=30+name.length+data.length;
+  });
+  var cdStart=offset;
+  central.forEach(function(c){ parts.push(c.hdr,c.name); offset+=c.hdr.length+c.name.length; });
+  parts.push(new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(offset-cdStart),u32(cdStart),u16(0))));
+  var total=parts.reduce(function(s,a){return s+a.length;},0), out=new Uint8Array(total), p=0;
+  parts.forEach(function(a){ out.set(a,p); p+=a.length; });
+  return out;
+}
+function xesc_(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function colLetter_(i){ var s=''; i++; while(i>0){ var m=(i-1)%26; s=String.fromCharCode(65+m)+s; i=(i-(m+1))/26; } return s; }
+// Build the styled weekly-attendance workbook: bold Total Adults/Kids, bold + gold-shaded
+// Total Attendance, navy header, #,##0 numbers, frozen header. rows[0] is the header.
+function buildAttendanceXlsx_(rows){
+  function styleFor(r,c){ if(r===0) return 1; if(c===0||c===10) return 0; if(c===4||c===8) return 3; if(c===9) return 4; return 2; }
+  var sheetRows='';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var c=0;c<rows[r].length;c++){
+      var v=rows[r][c], ref=colLetter_(c)+(r+1), s=styleFor(r,c);
+      if(v===''||v==null) continue;
+      if(typeof v==='number') cells+='<c r="'+ref+'" s="'+s+'"><v>'+v+'</v></c>';
+      else cells+='<c r="'+ref+'" s="'+s+'" t="inlineStr"><is><t xml:space="preserve">'+xesc_(v)+'</t></is></c>';
+    }
+    sheetRows+='<row r="'+(r+1)+'">'+cells+'</row>';
+  }
+  var widths=[13,11,13,11,12,10,11,10,10,15,46];
+  var cols='<cols>'+widths.map(function(w,i){return '<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>';}).join('')+'</cols>';
+  var sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>'+cols+'<sheetData>'+sheetRows+'</sheetData></worksheet>';
+  var styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="#,##0"/></numFmts><fonts count="3"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font></fonts><fills count="4"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFFF2CC"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F3864"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment horizontal="left"/></xf><xf numFmtId="0" fontId="2" fillId="3" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyAlignment="1"><alignment horizontal="center"/></xf><xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1" applyAlignment="1"><alignment horizontal="center"/></xf><xf numFmtId="164" fontId="1" fillId="2" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyAlignment="1"><alignment horizontal="center"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+  return zipStore_([
+    {name:'[Content_Types].xml',data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'},
+    {name:'_rels/.rels',data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
+    {name:'xl/workbook.xml',data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Weekly Attendance" sheetId="1" r:id="rId1"/></sheets></workbook>'},
+    {name:'xl/_rels/workbook.xml.rels',data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'},
+    {name:'xl/styles.xml',data:styles},
+    {name:'xl/worksheets/sheet1.xml',data:sheet}
+  ]);
+}
+function downloadXlsx_(name, bytes){
+  var blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  var url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+}
+// Weekly attendance download: styled .xlsx, with a CSV fallback if anything fails.
+function dlAttendanceWorkbook_(){
+  var rows=csvAttendanceByServiceWeekly_();
+  var stamp=new Date().toISOString().slice(0,10);
+  try{ downloadXlsx_('ls-attendance-by-service-weekly-'+stamp+'.xlsx', buildAttendanceXlsx_(rows)); }
+  catch(e){ downloadCsv_('ls-attendance-by-service-weekly-'+stamp+'.csv', rows); }
+}
 function chartToRows_(chart){
   var labels = chart.data.labels || [], ds = (chart.data.datasets || []);
   var header = ['Label'].concat(ds.map(function(d,i){ return d.label || ('Series '+(i+1)); }));
@@ -5283,22 +5346,45 @@ function attnByServiceWeekly_(){
   });
   return { services: services, weeks: weeks, data: data };
 }
-// Attendance by service time — WEEKLY wide CSV: Date | Week | <svc> Adults/Kids | … | Total
+// "6:00 PM" -> "6pm", "4:30 PM" -> "4:30pm" (compact label for the Notes column).
+function svcShort_(s){ var m=String(s).match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i); if(!m) return String(s); var h=parseInt(m[1],10), mn=m[2], ap=(m[3]||'').toLowerCase(); return h+(mn==='00'?'':':'+mn)+ap; }
+// Sunday (yyyy-mm-dd) of the week a date falls in; Fri/Sat map forward to that weekend's Sunday.
+function svcWeekSunday_(dk){ var m=String(dk).match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return String(dk); var d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3])); d.setUTCDate(d.getUTCDate()+((7-d.getUTCDay())%7)); return d.toISOString().slice(0,10); }
+// Short weekday+date tag for a service that didn't land on the main Sunday, e.g. "Sat 12/21".
+function svcDayTag_(dk){ var m=String(dk).match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return String(dk); var d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3])); return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getUTCDay()]+' '+(+m[2])+'/'+(+m[3]); }
+// Bucket a service by start time: the 3 main Sunday columns (8 / 9:30 / 11) or 'extra'.
+// 9:00 folds into 9:30 (same column) per the range 510-599.
+function svcBucket_(s){ var mn=svcMin_(s); if(mn>=450&&mn<=509) return '8'; if(mn>=510&&mn<=599) return '930'; if(mn>=600&&mn<=719) return '11'; return 'extra'; }
+// Attendance by service — CLEAN WEEKLY CSV. One row per Sunday: the 3 main services in
+// their own columns, plus a bolded Total Adults / Total Kids and a Total Attendance.
+// Every off-schedule service (1pm/6pm, Saturday-evening & special events) is added into
+// the totals and described in a Notes column (adults/kids/total each). CSV can't carry
+// bold/shading — those render when the file is opened in a spreadsheet.
 function csvAttendanceByServiceWeekly_(){
   var a = attnByServiceWeekly_();
-  var services = a.services||[], weeks = a.weeks||[], data = a.data||{};
-  var header = ['Date','Week'];
-  services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
-  header.push('Total Adults','Total Kids');
-  var rows = [header];
+  var weeks = a.weeks||[], data = a.data||{};
+  var agg = {}, order = [];
   weeks.forEach(function(wk){
-    var row = [wk, svcWeekLabel_(wk)], ta = 0, tk = 0;
-    services.forEach(function(s){
-      var c = (data[wk] && data[wk][s]) || null;
-      row.push(c ? c.adults : '', c ? c.kids : '');
-      if (c){ ta += c.adults; tk += c.kids; }
+    var sun = svcWeekSunday_(wk);
+    if (!agg[sun]){ agg[sun] = {a8:0,k8:0,h8:false, a93:0,k93:0,h93:false, a11:0,k11:0,h11:false, aX:0,kX:0, notes:[]}; order.push(sun); }
+    var W = agg[sun], src = data[wk]||{}, tag = (wk===sun) ? '' : ' ('+svcDayTag_(wk)+')';
+    Object.keys(src).forEach(function(s){
+      var c = src[s]||{}, ad = Number(c.adults)||0, kd = Number(c.kids)||0, b = svcBucket_(s);
+      if (b==='8'){ W.a8+=ad; W.k8+=kd; W.h8=true; }
+      else if (b==='930'){ W.a93+=ad; W.k93+=kd; W.h93=true; }
+      else if (b==='11'){ W.a11+=ad; W.k11+=kd; W.h11=true; }
+      else if (ad||kd){ W.aX+=ad; W.kX+=kd; W.notes.push(svcShort_(s)+tag+': '+ad+'a/'+kd+'k/'+(ad+kd)+'t'); }
     });
-    row.push(ta, tk); rows.push(row);
+  });
+  order.sort();
+  var rows = [['Week','8am Adults','9:30am Adults','11am Adults','Total Adults','8am Kids','9:30am Kids','11am Kids','Total Kids','Total Attendance','Notes']];
+  order.forEach(function(sun){
+    var W = agg[sun];
+    var ta = W.a8+W.a93+W.a11+W.aX, tk = W.k8+W.k93+W.k11+W.kX;
+    rows.push([ svcWeekLabel_(sun),
+      W.h8?W.a8:'', W.h93?W.a93:'', W.h11?W.a11:'', ta,
+      W.h8?W.k8:'', W.h93?W.k93:'', W.h11?W.k11:'', tk,
+      ta+tk, W.notes.join('; ') ]);
   });
   return rows;
 }
@@ -5335,9 +5421,9 @@ function renderAttendanceByService(){
   }).join('');
   var note = weekly ? 'Each row above is one Sunday.' : 'Monthly average per service (weekly detail fills in shortly).';
   var csvCall = weekly
-    ? 'dl_(\'attendance-by-service-weekly\', csvAttendanceByServiceWeekly_())'
+    ? 'dlAttendanceWorkbook_()'
     : 'dl_(\'attendance-by-service\', csvAttendanceByService_())';
-  var btnLabel = weekly ? '⤓ Download weekly CSV (every Sunday, by service)' : '⤓ Download CSV';
+  var btnLabel = weekly ? '⤓ Download weekly spreadsheet (every Sunday, by service)' : '⤓ Download CSV';
   body.innerHTML =
     '<div style="overflow-x:auto;margin-top:6px;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;"><thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>'
     + '<div class="card-sub" style="margin-top:8px;color:var(--text-muted);font-size:12px;">'+note+'</div>'
