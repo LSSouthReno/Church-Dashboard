@@ -5099,10 +5099,25 @@ function gated_(slug, buildFn){
 function csvAttendance_(){
   var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
   var months = a.months||[], adults = a.adults||[], kids = a.kids||[];
+  var bs = attnByServiceNorm_();                       // per-service breakdown, clean labels
+  var services = bs.services||[], bdata = bs.data||{};
   var start = 0; while (start < months.length && !((adults[start]||0) > 0 || (kids[start]||0) > 0)) start++;
-  var rows = [['Month','Adults','Kids','Total']], ta = 0, tk = 0;
-  for (var i = start; i < months.length; i++){ var ad = adults[i]||0, kd = kids[i]||0; ta += ad; tk += kd; rows.push([months[i], ad, kd, ad+kd]); }
-  rows.push(['TOTAL', ta, tk, ta+tk]);
+  var header = ['Month','Adults','Kids','Total'];
+  services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
+  var rows = [header], ta = 0, tk = 0;
+  for (var i = start; i < months.length; i++){
+    var ad = adults[i]||0, kd = kids[i]||0; ta += ad; tk += kd;
+    var row = [months[i], ad, kd, ad+kd], md = bdata[months[i]] || null;
+    services.forEach(function(s){ var c = md && md[s]; row.push(c ? c.adults : '', c ? c.kids : ''); });
+    rows.push(row);
+  }
+  var total = ['TOTAL', ta, tk, ta+tk];
+  services.forEach(function(s){
+    var sa = 0, sk = 0;
+    Object.keys(bdata).forEach(function(mo){ var c = bdata[mo][s]; if (c){ sa += c.adults||0; sk += c.kids||0; } });
+    total.push(sa, sk);
+  });
+  rows.push(total);
   return rows;
 }
 // Average Giving by Month (members-only): drop leading empty months, add a total.
