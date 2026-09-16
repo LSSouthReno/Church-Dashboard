@@ -5097,7 +5097,7 @@ function gated_(slug, buildFn){
 }
 // Weekend Attendance: drop the empty early months, add a Total column + a totals row.
 function csvAttendance_(){
-  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
+  var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
   var months = a.months||[], adults = a.adults||[], kids = a.kids||[];
   var start = 0; while (start < months.length && !((adults[start]||0) > 0 || (kids[start]||0) > 0)) start++;
   var rows = [['Month','Adults','Kids','Total']], ta = 0, tk = 0;
@@ -5107,7 +5107,7 @@ function csvAttendance_(){
 }
 // Average Giving by Month (members-only): drop leading empty months, add a total.
 function csvGiving_(){
-  var g = (window.DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
+  var g = (DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
   var months = g.months||[], amt = g.amounts||[];
   var start = 0; while (start < amt.length && !((amt[start]||0) > 0)) start++;
   var rows = [['Month','Giving ($)']], t = 0;
@@ -5117,7 +5117,7 @@ function csvGiving_(){
 }
 // Number of Donors per month (members-only) — counts only, no budget.
 function csvDonors_(){
-  var g = (window.DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
+  var g = (DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
   var months = g.months||[], don = g.donors||[];
   var start = 0; while (start < don.length && !((don[start]||0) > 0)) start++;
   var rows = [['Month','Donors']];
@@ -5126,7 +5126,7 @@ function csvDonors_(){
 }
 // Serve Teams: volunteers by team, over time (one column per team + Total).
 function csvServeTeams_(){
-  var teams = ((window.DASHBOARD_DATA && DASHBOARD_DATA.serveTeams) || []).filter(function(t){ return (t.history||[]).length; });
+  var teams = ((DASHBOARD_DATA && DASHBOARD_DATA.serveTeams) || []).filter(function(t){ return (t.history||[]).length; });
   var mset = {}; teams.forEach(function(t){ t.history.forEach(function(p){ mset[p.d] = 1; }); });
   var months = Object.keys(mset).sort();
   var maps = teams.map(function(t){ var m = {}; t.history.forEach(function(p){ m[p.d] = p.n; }); return m; });
@@ -5138,9 +5138,47 @@ function csvServeTeams_(){
   });
   return rows;
 }
+// Normalize service labels. The sheet sometimes stored "8:00 AM" as a Date, so a
+// raw key can arrive as "Sat Dec 30 1899 08:00:00 GMT-0800 …". Pull the clock time
+// out either way and re-key the data by a clean "h:mm AM/PM" label.
+function svcClean_(s){
+  var str = String(s == null ? '' : s);
+  var m = str.match(/(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?/i);
+  if (!m) return str.trim();
+  var h = parseInt(m[1], 10), min = m[2], ap = m[3];
+  if (ap){ return h + ':' + min + ' ' + ap.toUpperCase(); }
+  ap = h >= 12 ? 'PM' : 'AM';           // 24-hour time from a date string
+  var h12 = h % 12; if (h12 === 0) h12 = 12;
+  return h12 + ':' + min + ' ' + ap;
+}
+function svcMin_(label){
+  var m = String(label).match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!m) return 9999;
+  var h = parseInt(m[1], 10) % 12; if (/PM/i.test(m[3])) h += 12;
+  return h * 60 + parseInt(m[2], 10);
+}
+function attnByServiceNorm_(){
+  var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
+  var rawServices = a.services || [], months = a.months || [], rawData = a.data || {};
+  var labelSet = {};
+  rawServices.forEach(function(s){ labelSet[svcClean_(s)] = 1; });
+  var services = Object.keys(labelSet).sort(function(x, y){ return svcMin_(x) - svcMin_(y); });
+  var data = {};
+  months.forEach(function(mo){
+    var src = rawData[mo] || {}, dst = {};
+    Object.keys(src).forEach(function(rawS){
+      var L = svcClean_(rawS), c = src[rawS] || {};
+      if (!dst[L]) dst[L] = { adults: 0, kids: 0 };
+      dst[L].adults += Number(c.adults) || 0;
+      dst[L].kids   += Number(c.kids)   || 0;
+    });
+    data[mo] = dst;
+  });
+  return { services: services, months: months, data: data };
+}
 // Attendance by service time — wide CSV: Month | <svc> Adults | <svc> Kids | … | Total Adults | Total Kids
 function csvAttendanceByService_(){
-  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
+  var a = attnByServiceNorm_();
   var services = a.services||[], months = a.months||[], data = a.data||{};
   var header = ['Month'];
   services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
@@ -5160,7 +5198,7 @@ function csvAttendanceByService_(){
 // On-page: compact table of the recent months + a CSV button for full history.
 function renderAttendanceByService(){
   var body = document.getElementById('attnByServiceBody'); if (!body) return;
-  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
+  var a = attnByServiceNorm_();
   var services = a.services||[], months = a.months||[], data = a.data||{};
   if (!services.length || !months.length){
     body.innerHTML = '<div class="card-sub" style="margin:10px 0 0;color:var(--text-muted);">Populating from Planning Center — this fills in automatically over the next few hours, then stays current.</div>';
