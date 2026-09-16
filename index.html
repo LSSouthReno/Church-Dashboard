@@ -5175,17 +5175,38 @@ function svcMin_(label){
 function attnByServiceNorm_(){
   var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
   var rawServices = a.services || [], months = a.months || [], rawData = a.data || {};
+  // Monthly per-Sunday averages are the scale of truth (the dashboard's headline
+  // attendance number is an average per service day, not a monthly sum).
+  var att = (DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
+  var mAd = {}, mKd = {};
+  (att.months || []).forEach(function(mo, i){
+    mAd[mo] = Number((att.adults || [])[i]) || 0;
+    mKd[mo] = Number((att.kids   || [])[i]) || 0;
+  });
   var labelSet = {};
   rawServices.forEach(function(s){ labelSet[svcClean_(s)] = 1; });
   var services = Object.keys(labelSet).sort(function(x, y){ return svcMin_(x) - svcMin_(y); });
   var data = {};
   months.forEach(function(mo){
-    var src = rawData[mo] || {}, dst = {};
+    var src = rawData[mo] || {}, merged = {}, sumA = 0, sumK = 0;
     Object.keys(src).forEach(function(rawS){
       var L = svcClean_(rawS), c = src[rawS] || {};
-      if (!dst[L]) dst[L] = { adults: 0, kids: 0 };
-      dst[L].adults += Number(c.adults) || 0;
-      dst[L].kids   += Number(c.kids)   || 0;
+      if (!merged[L]) merged[L] = { adults: 0, kids: 0 };
+      merged[L].adults += Number(c.adults) || 0;
+      merged[L].kids   += Number(c.kids)   || 0;
+    });
+    Object.keys(merged).forEach(function(L){ sumA += merged[L].adults; sumK += merged[L].kids; });
+    // Recover the service-day count from the data itself: sum ÷ monthly average.
+    // Converts a summed feed to per-Sunday averages, and is a no-op once the feed
+    // is already averaged (sum ≈ monthly average → divisor ≈ 1).
+    var nA = (mAd[mo] > 0 && sumA > 0) ? (sumA / mAd[mo]) : 1;
+    var nK = (mKd[mo] > 0 && sumK > 0) ? (sumK / mKd[mo]) : 1;
+    var dst = {};
+    Object.keys(merged).forEach(function(L){
+      dst[L] = {
+        adults: (mAd[mo] > 0) ? Math.round(merged[L].adults / nA) : 0,
+        kids:   (mKd[mo] > 0) ? Math.round(merged[L].kids   / nK) : 0
+      };
     });
     data[mo] = dst;
   });
