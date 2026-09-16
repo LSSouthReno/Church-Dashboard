@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T02:58:39.661Z",
+  "lastUpdated": "2026-09-16T03:47:00.079Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3264,9 +3264,9 @@
   },
   "attendanceByService": {
     "services": [
-      "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)",
-      "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)",
-      "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)"
+      "8:00 AM",
+      "9:30 AM",
+      "11:00 AM"
     ],
     "months": [
       "2018-08",
@@ -3283,91 +3283,203 @@
     ],
     "data": {
       "2026-07": {
-        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+        "11:00 AM": {
           "adults": 850,
           "kids": 113
         },
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 588,
           "kids": 54
         },
-        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+        "9:30 AM": {
           "adults": 1159,
           "kids": 166
         }
       },
       "2026-08": {
-        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+        "11:00 AM": {
           "adults": 1233,
           "kids": 228
         },
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 983,
           "kids": 80
         },
-        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+        "9:30 AM": {
           "adults": 1521,
           "kids": 289
         }
       },
       "2026-09": {
-        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+        "11:00 AM": {
           "adults": 470,
           "kids": 75
         },
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 392,
           "kids": 35
         },
-        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+        "9:30 AM": {
           "adults": 618,
           "kids": 100
         }
       },
       "2018-08": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 789,
           "kids": 0
         }
       },
       "2018-09": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 902,
           "kids": 0
         }
       },
       "2018-10": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 883,
           "kids": 0
         }
       },
       "2018-11": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 991,
           "kids": 0
         }
       },
       "2018-12": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 1381,
           "kids": 0
         }
       },
       "2019-01": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 1040,
           "kids": 0
         }
       },
       "2019-02": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
           "adults": 901,
           "kids": 0
         }
       },
       "2019-03": {
-        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+        "8:00 AM": {
+          "adults": 1014,
+          "kids": 0
+        }
+      }
+    }
+  },
+  "attendanceByServiceWeekly": {
+    "services": [
+      "8:00 AM",
+      "9:30 AM",
+      "11:00 AM"
+    ],
+    "weeks": [
+      "2018-08-01",
+      "2018-09-01",
+      "2018-10-01",
+      "2018-11-01",
+      "2018-12-01",
+      "2019-01-01",
+      "2019-02-01",
+      "2019-03-01",
+      "2026-07-01",
+      "2026-08-01",
+      "2026-09-01"
+    ],
+    "data": {
+      "2026-07-01": {
+        "11:00 AM": {
+          "adults": 850,
+          "kids": 113
+        },
+        "8:00 AM": {
+          "adults": 588,
+          "kids": 54
+        },
+        "9:30 AM": {
+          "adults": 1159,
+          "kids": 166
+        }
+      },
+      "2026-08-01": {
+        "11:00 AM": {
+          "adults": 1233,
+          "kids": 228
+        },
+        "8:00 AM": {
+          "adults": 983,
+          "kids": 80
+        },
+        "9:30 AM": {
+          "adults": 1521,
+          "kids": 289
+        }
+      },
+      "2026-09-01": {
+        "11:00 AM": {
+          "adults": 470,
+          "kids": 75
+        },
+        "8:00 AM": {
+          "adults": 392,
+          "kids": 35
+        },
+        "9:30 AM": {
+          "adults": 618,
+          "kids": 100
+        }
+      },
+      "2018-08-01": {
+        "8:00 AM": {
+          "adults": 789,
+          "kids": 0
+        }
+      },
+      "2018-09-01": {
+        "8:00 AM": {
+          "adults": 902,
+          "kids": 0
+        }
+      },
+      "2018-10-01": {
+        "8:00 AM": {
+          "adults": 883,
+          "kids": 0
+        }
+      },
+      "2018-11-01": {
+        "8:00 AM": {
+          "adults": 991,
+          "kids": 0
+        }
+      },
+      "2018-12-01": {
+        "8:00 AM": {
+          "adults": 1381,
+          "kids": 0
+        }
+      },
+      "2019-01-01": {
+        "8:00 AM": {
+          "adults": 1040,
+          "kids": 0
+        }
+      },
+      "2019-02-01": {
+        "8:00 AM": {
+          "adults": 901,
+          "kids": 0
+        }
+      },
+      "2019-03-01": {
+        "8:00 AM": {
           "adults": 1014,
           "kids": 0
         }
@@ -8095,7 +8207,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 15, 2026, 7:58 PM",
+    "refreshed": "Sep 15, 2026, 8:47 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8910,9 +9022,9 @@
       376,
       373,
       374,
-      363,
-      386,
-      402
+      371,
+      394,
+      414
     ]
   },
   "baptisms": {
@@ -8980,8 +9092,8 @@
     },
     "current": {
       "groups": 39,
-      "members": 402,
-      "groupSize": 10,
+      "members": 414,
+      "groupSize": 11,
       "fmInGroupsPct": 53,
       "asOfMonth": "Sep '26"
     },
@@ -9457,9 +9569,9 @@
         376,
         373,
         374,
-        363,
-        386,
-        402,
+        371,
+        394,
+        414,
         null,
         null,
         null
@@ -22403,14 +22515,14 @@
     "weeklyAvg": 10,
     "totalFetched": 7078,
     "since": "2026-08-17",
-    "asOf": "2026-09-16T02:44:33.052Z"
+    "asOf": "2026-09-16T03:45:01.167Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.26171875,
-    "avgOpenRate3": 0.4514119646970302,
+    "latestOpenRate": 0.265625,
+    "avgOpenRate3": 0.4527140480303635,
     "latestCampaign": "Don't miss Your Next Step!",
     "latestSentAt": "2026-09-12T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-16T02:44:34.243Z"
+    "asOf": "2026-09-16T03:45:02.975Z"
   }
 }
