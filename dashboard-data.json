@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T01:47:15.411Z",
+  "lastUpdated": "2026-09-16T02:45:54.492Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3271,6 +3271,9 @@
     "months": [
       "2018-08",
       "2018-09",
+      "2018-10",
+      "2018-11",
+      "2018-12",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3327,6 +3330,24 @@
       "2018-09": {
         "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
           "adults": 902,
+          "kids": 0
+        }
+      },
+      "2018-10": {
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 883,
+          "kids": 0
+        }
+      },
+      "2018-11": {
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 991,
+          "kids": 0
+        }
+      },
+      "2018-12": {
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 1381,
           "kids": 0
         }
       }
@@ -8053,7 +8074,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 15, 2026, 6:47 PM",
+    "refreshed": "Sep 15, 2026, 7:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8868,9 +8889,9 @@
       376,
       373,
       374,
-      371,
-      394,
-      410
+      363,
+      386,
+      402
     ]
   },
   "baptisms": {
@@ -8938,8 +8959,8 @@
     },
     "current": {
       "groups": 39,
-      "members": 410,
-      "groupSize": 11,
+      "members": 402,
+      "groupSize": 10,
       "fmInGroupsPct": 53,
       "asOfMonth": "Sep '26"
     },
@@ -9415,9 +9436,9 @@
         376,
         373,
         374,
-        371,
-        394,
-        410,
+        363,
+        386,
+        402,
         null,
         null,
         null
@@ -20120,13 +20141,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Karynn Sucaldito",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Carlos Perez",
               "team": "Stepping Stones",
               "pos": "Mustangs Lead Guide",
@@ -20296,8 +20310,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -22368,7 +22382,7 @@
     "weeklyAvg": 10,
     "totalFetched": 7078,
     "since": "2026-08-17",
-    "asOf": "2026-09-16T01:44:53.959Z"
+    "asOf": "2026-09-16T02:44:33.052Z"
   },
   "emailStats": {
     "latestOpenRate": 0.26171875,
@@ -22376,6 +22390,6 @@
     "latestCampaign": "Don't miss Your Next Step!",
     "latestSentAt": "2026-09-12T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-16T01:44:55.539Z"
+    "asOf": "2026-09-16T02:44:34.243Z"
   }
 }
