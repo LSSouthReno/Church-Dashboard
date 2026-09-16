@@ -5078,13 +5078,72 @@ function chartToRows_(chart){
   }
   return rows;
 }
+/* ---- section-specific, data-aware CSV builders (richer than what's charted) ---- */
+function dl_(slug, rows){ downloadCsv_('ls-'+slug+'-'+new Date().toISOString().slice(0,10)+'.csv', rows); }
+function gated_(slug, buildFn){
+  if (typeof mmIsUnlocked === 'function' && !mmIsUnlocked()){
+    alert('🔒 This export is members-only. Tap “Members” (top-right) to unlock, then try again.');
+    return;
+  }
+  dl_(slug, buildFn());
+}
+// Weekend Attendance: drop the empty early months, add a Total column + a totals row.
+function csvAttendance_(){
+  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
+  var months = a.months||[], adults = a.adults||[], kids = a.kids||[];
+  var start = 0; while (start < months.length && !((adults[start]||0) > 0 || (kids[start]||0) > 0)) start++;
+  var rows = [['Month','Adults','Kids','Total']], ta = 0, tk = 0;
+  for (var i = start; i < months.length; i++){ var ad = adults[i]||0, kd = kids[i]||0; ta += ad; tk += kd; rows.push([months[i], ad, kd, ad+kd]); }
+  rows.push(['TOTAL', ta, tk, ta+tk]);
+  return rows;
+}
+// Average Giving by Month (members-only): drop leading empty months, add a total.
+function csvGiving_(){
+  var g = (window.DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
+  var months = g.months||[], amt = g.amounts||[];
+  var start = 0; while (start < amt.length && !((amt[start]||0) > 0)) start++;
+  var rows = [['Month','Giving ($)']], t = 0;
+  for (var i = start; i < months.length; i++){ var v = amt[i]||0; t += v; rows.push([months[i], v]); }
+  rows.push(['TOTAL', t]);
+  return rows;
+}
+// Number of Donors per month (members-only) — counts only, no budget.
+function csvDonors_(){
+  var g = (window.DASHBOARD_DATA && DASHBOARD_DATA.giving) || {};
+  var months = g.months||[], don = g.donors||[];
+  var start = 0; while (start < don.length && !((don[start]||0) > 0)) start++;
+  var rows = [['Month','Donors']];
+  for (var i = start; i < months.length; i++) rows.push([months[i], don[i]||0]);
+  return rows;
+}
+// Serve Teams: volunteers by team, over time (one column per team + Total).
+function csvServeTeams_(){
+  var teams = ((window.DASHBOARD_DATA && DASHBOARD_DATA.serveTeams) || []).filter(function(t){ return (t.history||[]).length; });
+  var mset = {}; teams.forEach(function(t){ t.history.forEach(function(p){ mset[p.d] = 1; }); });
+  var months = Object.keys(mset).sort();
+  var maps = teams.map(function(t){ var m = {}; t.history.forEach(function(p){ m[p.d] = p.n; }); return m; });
+  var rows = [ ['Month'].concat(teams.map(function(t){ return t.name; })).concat(['Total']) ];
+  months.forEach(function(mo){
+    var row = [mo], tot = 0;
+    maps.forEach(function(m){ var v = m[mo]; row.push(v != null ? v : ''); if (typeof v === 'number') tot += v; });
+    row.push(tot); rows.push(row);
+  });
+  return rows;
+}
 function exportCardCsv_(card){
   var canvas = card.querySelector('canvas'); if (!canvas) return;
+  var id = canvas.id, cardId = card.id || '';
+  // route to a data-aware builder where one exists
+  if (id === 'attendanceChart')        return dl_('attendance', csvAttendance_());
+  if (id === 'givingChart')            return gated_('giving', csvGiving_);
+  if (cardId === 'budgetPieCard')      return gated_('donors', csvDonors_);   // this card's button = donors, members-only
+  if (id === 'serveTeamsTrendChart')   return dl_('serve-teams-by-team', csvServeTeams_());
+  // generic fallback: export exactly what's plotted
   var chart = (window.Chart && Chart.getChart) ? Chart.getChart(canvas) : null;
   if (!chart){ alert('This chart isn’t loaded yet (it may be locked behind Members access). Unlock and try again.'); return; }
   var h2 = card.querySelector('h2'); var title = (h2 ? h2.textContent : 'metrics').trim();
   var slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'metrics';
-  downloadCsv_('ls-'+slug+'-'+new Date().toISOString().slice(0,10)+'.csv', chartToRows_(chart));
+  dl_(slug, chartToRows_(chart));
 }
 function addCsvButtons_(){
   try{
