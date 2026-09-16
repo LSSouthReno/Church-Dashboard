@@ -2290,7 +2290,7 @@
       <h2>Weekend Attendance</h2>
       <div class="card-desc" data-sec="Weekend Attendance"></div>
       <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
-      <div class="chart-wrap" style="cursor:pointer;" title="Click a bar to see weekly breakdown"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
+      <div class="chart-wrap" style="cursor:pointer;" title="Click a month to see each week split by service time"><div class="chart-inner"><canvas id="attendanceChart"></canvas></div></div>
       <div class="avg-row">
         <div class="avg-box">
           <div class="avg-label">3-Month Average</div>
@@ -2325,14 +2325,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- Attendance by service time — full width -->
-  <div class="card" id="attnByServiceCard" style="margin-top:24px;">
-    <h2>Attendance by Service Time — Weekly</h2>
-    <div class="card-desc" data-sec="Attendance by Service Time"></div>
-    <div class="card-sub">Adults + kids for <strong>each service, every Sunday</strong> (8:00 / 9:30 / 11:00, and 1pm / 6pm when they ran) · recent Sundays shown · <strong>full week-by-week history in the CSV below</strong></div>
-    <div id="attnByServiceBody"></div>
   </div>
 
   <!-- Row 2: Serve Teams | Giving + Pledge -->
@@ -2549,6 +2541,13 @@
         <div class="modal-subtitle" id="attendanceModalSubtitle">Adults + Kids by week</div>
       </div>
       <button class="modal-close" id="attendanceModalClose" type="button" aria-label="Close weekly attendance popup">×</button>
+    </div>
+    <div id="attnModalControls" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 10px;">
+      <div id="attnModalToggle" style="display:none;border:1px solid var(--card-border);border-radius:8px;overflow:hidden;">
+        <button type="button" data-mode="service" class="attn-mode-btn" style="padding:6px 12px;border:none;background:transparent;color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;">By service</button>
+        <button type="button" data-mode="adultskids" class="attn-mode-btn" style="padding:6px 12px;border:none;background:transparent;color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;">Adults / Kids</button>
+      </div>
+      <button type="button" id="attnModalCsv" class="csv-btn" style="margin-left:auto;opacity:1;color:var(--yellow-2);border:1px solid var(--card-border);border-radius:8px;padding:6px 12px;font-weight:600;" title="Download the full week-by-week history, split by service">⤓ Weekly CSV (by service)</button>
     </div>
     <div class="modal-chart-wrap"><canvas id="weeklyAttendanceChart"></canvas></div>
   </div>
@@ -4412,75 +4411,108 @@ function attendanceWeeklyAvg(nMonths, pick) {
   if (!vals.length) return null;
   return Math.round(vals.reduce((s, v) => s + v, 0) / vals.length);
 }
+// "Sep '26" or "2026-09" → "2026-09"
+function monthIso_(label){
+  const s = String(label || '').replace(/[‘’]/g, "'");
+  let m = s.match(/^([A-Za-z]{3})\s+'?(\d{2})$/);
+  if (m){
+    const mons = {jan:'01',feb:'02',mar:'03',apr:'04',may:'05',jun:'06',jul:'07',aug:'08',sep:'09',oct:'10',nov:'11',dec:'12'};
+    const mon = mons[m[1].toLowerCase()];
+    if (mon) return '20' + m[2] + '-' + mon;
+  }
+  m = s.match(/^(\d{4})-(\d{2})/);
+  return m ? (m[1] + '-' + m[2]) : '';
+}
+let _attnModalState = null;
 function openAttendanceModal(monthLabel, weeklyRows) {
-  if (!weeklyRows || !weeklyRows.length) return;
-
   const modal = document.getElementById('attendanceModal');
   const title = document.getElementById('attendanceModalTitle');
-  const subtitle = document.getElementById('attendanceModalSubtitle');
-  const canvas = document.getElementById('weeklyAttendanceChart');
-
   title.textContent = monthLabel + ' Weekly Attendance';
-  subtitle.textContent = 'Adults + Kids by week';
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
 
-  const labels = weeklyRows.map(r => r.week || r.date || r.label || 'Week');
-  const adults = weeklyRows.map(r => Number(r.adults) || 0);
-  const kids = weeklyRows.map(r => Number(r.kids) || 0);
+  // Per-service weekly detail for this month, when the by-service feed has it.
+  const svcWk = attnByServiceWeekly_();
+  const iso = monthIso_(monthLabel);
+  const monthWeeks = (svcWk.weeks || []).filter(d => d.slice(0, 7) === iso);
+  const hasSvc = svcWk.services.length && monthWeeks.length;
 
+  _attnModalState = { weeklyRows: weeklyRows || [], svcWk, monthWeeks, hasSvc, mode: hasSvc ? 'service' : 'adultskids' };
+
+  const toggle = document.getElementById('attnModalToggle');
+  if (toggle) toggle.style.display = hasSvc ? 'inline-flex' : 'none';
+
+  renderWeeklyModalChart_();
+}
+function renderWeeklyModalChart_(){
+  const st = _attnModalState; if (!st) return;
+  const canvas = document.getElementById('weeklyAttendanceChart');
+  const subtitle = document.getElementById('attendanceModalSubtitle');
   if (weeklyAttendanceChart) weeklyAttendanceChart.destroy();
+
+  // reflect active mode on the toggle
+  document.querySelectorAll('#attnModalToggle .attn-mode-btn').forEach(function(b){
+    const on = b.getAttribute('data-mode') === st.mode;
+    b.style.background = on ? 'var(--yellow-2)' : 'transparent';
+    b.style.color = on ? '#1a1a1a' : 'var(--text-muted)';
+  });
+
+  let labels, datasets, footerFn;
+  if (st.mode === 'service' && st.hasSvc){
+    subtitle.textContent = 'Each Sunday, split by service time';
+    const data = st.svcWk.data || {};
+    const svcColors = ['#1e3a8a','#3b82f6','#60a5fa','#93c5fd','#bfdbfe'];
+    labels = st.monthWeeks.map(d => svcWeekLabel_(d).replace(/,\s*\d{4}$/, ''));  // "Sep 6"
+    datasets = st.svcWk.services.map(function(s, i){
+      const svc = st.monthWeeks.map(function(d){ const c = data[d] && data[d][s]; return c ? { a: Number(c.adults)||0, k: Number(c.kids)||0 } : { a:0, k:0 }; });
+      return {
+        label: s,
+        data: svc.map(function(o){ return o.a + o.k; }),
+        _svc: svc,
+        backgroundColor: svcColors[i % svcColors.length],
+        stack: 'wk', maxBarThickness: 60, borderSkipped: false
+      };
+    });
+    footerFn = function(items){ if (!items.length) return ''; const i = items[0].dataIndex; let t = 0; datasets.forEach(function(ds){ t += Number(ds.data[i]) || 0; }); return 'Total: ' + fmtNum(t); };
+  } else {
+    subtitle.textContent = 'Adults + Kids by week';
+    const rows = st.weeklyRows || [];
+    const adults = rows.map(function(r){ return Number(r.adults)||0; });
+    const kids = rows.map(function(r){ return Number(r.kids)||0; });
+    labels = rows.map(function(r){ return r.week || r.date || 'Week'; });
+    datasets = [
+      { label:'Adults', data:adults, backgroundColor:'#3b82f6', stack:'wk', borderRadius:{ topLeft:0, topRight:0, bottomLeft:6, bottomRight:6 }, borderSkipped:false },
+      { label:'Kids', data:kids, backgroundColor:'#93c5fd', stack:'wk', borderRadius:{ topLeft:6, topRight:6, bottomLeft:0, bottomRight:0 }, borderSkipped:false }
+    ];
+    footerFn = function(items){ if (!items.length) return ''; const i = items[0].dataIndex; return 'Total: ' + fmtNum((adults[i]||0)+(kids[i]||0)); };
+  }
 
   weeklyAttendanceChart = new Chart(canvas, {
     type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Adults',
-          data: adults,
-          backgroundColor: '#3b82f6',
-          stack: 'weeklyAttendance',
-          borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 6, bottomRight: 6 },
-          borderSkipped: false
-        },
-        {
-          label: 'Kids',
-          data: kids,
-          backgroundColor: '#93c5fd',
-          stack: 'weeklyAttendance',
-          borderRadius: { topLeft: 6, topRight: 6, bottomLeft: 0, bottomRight: 0 },
-          borderSkipped: false
-        }
-      ]
-    },
+    data: { labels, datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          position: 'top',
-          align: 'end',
-          labels: { color: '#cfcfcf', font: { size: 12, weight: '600' }, boxWidth: 12, boxHeight: 12, padding: 12 }
-        },
+        legend: { position:'top', align:'end', labels: { color:'#cfcfcf', font:{ size:12, weight:'600' }, boxWidth:12, boxHeight:12, padding:12 } },
         tooltip: {
           ...baseTooltip,
           callbacks: {
-            footer: (items) => {
-              if (!items.length) return '';
-              const i = items[0].dataIndex;
-              return 'Total: ' + fmtNum((Number(adults[i]) || 0) + (Number(kids[i]) || 0));
-            },
-            label: (ctx) => '  ' + ctx.dataset.label + ': ' + fmtNum(ctx.parsed.y)
+            footer: footerFn,
+            label: function(ctx){
+              const ds = ctx.dataset;
+              const sv = ds._svc && ds._svc[ctx.dataIndex];
+              return '  ' + ds.label + ': ' + fmtNum(ctx.parsed.y) + (sv ? '  (' + fmtNum(sv.a) + ' adults / ' + fmtNum(sv.k) + ' kids)' : '');
+            }
           },
-          footerFont: { family: 'Montserrat', weight: '700', size: 12 },
+          footerFont: { family:'Montserrat', weight:'700', size:12 },
           footerColor: '#ffffff',
           footerMarginTop: 6
         }
       },
       scales: {
-        x: { ...baseGridOpts, stacked: true, grid: { display: false }, ticks: { ...baseGridOpts.ticks, autoSkip: false, maxRotation: 0, minRotation: 0 } },
-        y: { ...baseGridOpts, stacked: true, beginAtZero: true, ticks: { ...baseGridOpts.ticks, callback: (v) => fmtNum(v) } }
+        x: { ...baseGridOpts, stacked:true, grid:{ display:false }, ticks:{ ...baseGridOpts.ticks, autoSkip:false, maxRotation:0, minRotation:0 } },
+        y: { ...baseGridOpts, stacked:true, beginAtZero:true, ticks:{ ...baseGridOpts.ticks, callback:(v)=>fmtNum(v) } }
       }
     }
   });
@@ -4497,6 +4529,15 @@ function initAttendanceModalEvents() {
   const modal = document.getElementById('attendanceModal');
   const closeBtn = document.getElementById('attendanceModalClose');
   if (closeBtn) closeBtn.addEventListener('click', closeAttendanceModal);
+  document.querySelectorAll('#attnModalToggle .attn-mode-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (!_attnModalState) return;
+      _attnModalState.mode = b.getAttribute('data-mode');
+      renderWeeklyModalChart_();
+    });
+  });
+  const csvBtn = document.getElementById('attnModalCsv');
+  if (csvBtn) csvBtn.addEventListener('click', function(){ dl_('attendance-by-service-weekly', csvAttendanceByServiceWeekly_()); });
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeAttendanceModal();
@@ -5347,7 +5388,6 @@ loadDashboardData()
     renderCGMembers();
     renderBaptisms();
     renderMembersGrowth();
-    renderAttendanceByService();
     addCsvButtons_();
     setTimeout(addCsvButtons_, 1200);   // catch any late-rendering charts
   })
