@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T13:46:00.106Z",
+  "lastUpdated": "2026-09-16T13:59:00.161Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3298,6 +3298,9 @@
       "2020-10",
       "2020-11",
       "2020-12",
+      "2021-01",
+      "2021-02",
+      "2021-03",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3534,6 +3537,36 @@
           "adults": 331,
           "kids": 0
         }
+      },
+      "2021-01": {
+        "8:00 AM": {
+          "adults": 292,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 306,
+          "kids": 0
+        }
+      },
+      "2021-02": {
+        "8:00 AM": {
+          "adults": 305,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 207,
+          "kids": 0
+        }
+      },
+      "2021-03": {
+        "8:00 AM": {
+          "adults": 327,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 240,
+          "kids": 0
+        }
       }
     }
   },
@@ -3665,6 +3698,19 @@
       "2020-12-13",
       "2020-12-20",
       "2020-12-27",
+      "2021-01-03",
+      "2021-01-10",
+      "2021-01-17",
+      "2021-01-24",
+      "2021-01-31",
+      "2021-02-07",
+      "2021-02-14",
+      "2021-02-21",
+      "2021-02-28",
+      "2021-03-07",
+      "2021-03-14",
+      "2021-03-21",
+      "2021-03-28",
       "2026-07-05",
       "2026-07-12",
       "2026-07-19",
@@ -4595,6 +4641,136 @@
         },
         "9:30 AM": {
           "adults": 224,
+          "kids": 0
+        }
+      },
+      "2021-01-03": {
+        "8:00 AM": {
+          "adults": 247,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 270,
+          "kids": 0
+        }
+      },
+      "2021-01-10": {
+        "8:00 AM": {
+          "adults": 259,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 415,
+          "kids": 0
+        }
+      },
+      "2021-01-17": {
+        "8:00 AM": {
+          "adults": 286,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 283,
+          "kids": 0
+        }
+      },
+      "2021-01-24": {
+        "8:00 AM": {
+          "adults": 347,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 239,
+          "kids": 0
+        }
+      },
+      "2021-01-31": {
+        "8:00 AM": {
+          "adults": 321,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 325,
+          "kids": 0
+        }
+      },
+      "2021-02-07": {
+        "8:00 AM": {
+          "adults": 272,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 246,
+          "kids": 0
+        }
+      },
+      "2021-02-14": {
+        "8:00 AM": {
+          "adults": 307,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 189,
+          "kids": 0
+        }
+      },
+      "2021-02-21": {
+        "8:00 AM": {
+          "adults": 296,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 224,
+          "kids": 0
+        }
+      },
+      "2021-02-28": {
+        "8:00 AM": {
+          "adults": 343,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 170,
+          "kids": 0
+        }
+      },
+      "2021-03-07": {
+        "8:00 AM": {
+          "adults": 319,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 222,
+          "kids": 0
+        }
+      },
+      "2021-03-14": {
+        "8:00 AM": {
+          "adults": 308,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 155,
+          "kids": 0
+        }
+      },
+      "2021-03-21": {
+        "8:00 AM": {
+          "adults": 293,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 225,
+          "kids": 0
+        }
+      },
+      "2021-03-28": {
+        "8:00 AM": {
+          "adults": 388,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 358,
           "kids": 0
         }
       }
@@ -9321,7 +9497,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 6:46 AM",
+    "refreshed": "Sep 16, 2026, 6:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -11130,6 +11306,14 @@
         "attPct": 75
       },
       {
+        "name": "Coan Community Group",
+        "members": 8,
+        "leaders": 1,
+        "schedule": "Meets weekly on Wednesdays from 6-7:30am",
+        "avgAttended": 5,
+        "attPct": 63
+      },
+      {
         "name": "Borowski Community Group",
         "members": 8,
         "leaders": 1,
@@ -11144,14 +11328,6 @@
         "schedule": "Meets weekly on Wednesdays from 5-7pm",
         "avgAttended": 4,
         "attPct": 57
-      },
-      {
-        "name": "Coan Community Group",
-        "members": 7,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-7:30am",
-        "avgAttended": 5,
-        "attPct": 71
       },
       {
         "name": "Turcich Community Group",
