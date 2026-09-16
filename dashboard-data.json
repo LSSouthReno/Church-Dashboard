@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T00:46:00.296Z",
+  "lastUpdated": "2026-09-16T00:58:48.231Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3263,9 +3263,74 @@
     ]
   },
   "attendanceByService": {
-    "services": [],
-    "months": [],
-    "data": {}
+    "services": [
+      "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)",
+      "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)",
+      "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)"
+    ],
+    "months": [
+      "2018-08",
+      "2018-09",
+      "2026-07",
+      "2026-08",
+      "2026-09"
+    ],
+    "data": {
+      "2026-07": {
+        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 850,
+          "kids": 113
+        },
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 588,
+          "kids": 54
+        },
+        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 1159,
+          "kids": 166
+        }
+      },
+      "2026-08": {
+        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 1233,
+          "kids": 228
+        },
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 983,
+          "kids": 80
+        },
+        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 1521,
+          "kids": 289
+        }
+      },
+      "2026-09": {
+        "Sat Dec 30 1899 11:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 470,
+          "kids": 75
+        },
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 392,
+          "kids": 35
+        },
+        "Sat Dec 30 1899 09:30:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 618,
+          "kids": 100
+        }
+      },
+      "2018-08": {
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 789,
+          "kids": 0
+        }
+      },
+      "2018-09": {
+        "Sat Dec 30 1899 08:00:00 GMT-0800 (Pacific Standard Time)": {
+          "adults": 902,
+          "kids": 0
+        }
+      }
+    }
   },
   "serveTeams": [
     {
@@ -7988,7 +8053,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 15, 2026, 5:46 PM",
+    "refreshed": "Sep 15, 2026, 5:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
