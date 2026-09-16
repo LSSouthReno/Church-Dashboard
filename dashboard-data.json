@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T12:46:25.697Z",
+  "lastUpdated": "2026-09-16T13:00:57.532Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3295,6 +3295,9 @@
       "2020-07",
       "2020-08",
       "2020-09",
+      "2020-10",
+      "2020-11",
+      "2020-12",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3501,6 +3504,36 @@
           "adults": 355,
           "kids": 0
         }
+      },
+      "2020-10": {
+        "9:30 AM": {
+          "adults": 323,
+          "kids": 0
+        },
+        "8:00 AM": {
+          "adults": 299,
+          "kids": 0
+        }
+      },
+      "2020-11": {
+        "8:00 AM": {
+          "adults": 253,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 308,
+          "kids": 0
+        }
+      },
+      "2020-12": {
+        "8:00 AM": {
+          "adults": 328,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 331,
+          "kids": 0
+        }
       }
     }
   },
@@ -3619,6 +3652,19 @@
       "2020-09-13",
       "2020-09-20",
       "2020-09-27",
+      "2020-10-04",
+      "2020-10-11",
+      "2020-10-18",
+      "2020-10-25",
+      "2020-11-01",
+      "2020-11-08",
+      "2020-11-15",
+      "2020-11-22",
+      "2020-11-29",
+      "2020-12-06",
+      "2020-12-13",
+      "2020-12-20",
+      "2020-12-27",
       "2026-07-05",
       "2026-07-12",
       "2026-07-19",
@@ -4427,6 +4473,128 @@
       "2020-09-27": {
         "9:30 AM": {
           "adults": 285,
+          "kids": 0
+        }
+      },
+      "2020-10-04": {
+        "9:30 AM": {
+          "adults": 279,
+          "kids": 0
+        }
+      },
+      "2020-10-11": {
+        "9:30 AM": {
+          "adults": 337,
+          "kids": 0
+        }
+      },
+      "2020-10-18": {
+        "8:00 AM": {
+          "adults": 286,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 317,
+          "kids": 0
+        }
+      },
+      "2020-10-25": {
+        "8:00 AM": {
+          "adults": 311,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 358,
+          "kids": 0
+        }
+      },
+      "2020-11-01": {
+        "8:00 AM": {
+          "adults": 263,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 291,
+          "kids": 0
+        }
+      },
+      "2020-11-08": {
+        "8:00 AM": {
+          "adults": 256,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 304,
+          "kids": 0
+        }
+      },
+      "2020-11-15": {
+        "8:00 AM": {
+          "adults": 269,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 314,
+          "kids": 0
+        }
+      },
+      "2020-11-22": {
+        "8:00 AM": {
+          "adults": 238,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 259,
+          "kids": 0
+        }
+      },
+      "2020-11-29": {
+        "8:00 AM": {
+          "adults": 239,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 370,
+          "kids": 0
+        }
+      },
+      "2020-12-06": {
+        "8:00 AM": {
+          "adults": 298,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 303,
+          "kids": 0
+        }
+      },
+      "2020-12-13": {
+        "8:00 AM": {
+          "adults": 300,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 304,
+          "kids": 0
+        }
+      },
+      "2020-12-20": {
+        "8:00 AM": {
+          "adults": 501,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 493,
+          "kids": 0
+        }
+      },
+      "2020-12-27": {
+        "8:00 AM": {
+          "adults": 211,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 224,
           "kids": 0
         }
       }
@@ -9153,7 +9321,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 5:46 AM",
+    "refreshed": "Sep 16, 2026, 6:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10605,7 +10773,7 @@
         23,
         26,
         25,
-        24,
+        25,
         null,
         null,
         null
@@ -10652,7 +10820,7 @@
         13,
         16,
         16,
-        21,
+        22,
         null,
         null,
         null
@@ -21265,7 +21433,7 @@
               "name": "Tina Watson",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
