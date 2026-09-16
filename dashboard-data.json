@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T15:46:38.882Z",
+  "lastUpdated": "2026-09-16T16:00:35.883Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3304,6 +3304,9 @@
       "2021-04",
       "2021-05",
       "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3596,6 +3599,24 @@
           "adults": 364,
           "kids": 0
         }
+      },
+      "2021-07": {
+        "9:30 AM": {
+          "adults": 329,
+          "kids": 0
+        }
+      },
+      "2021-08": {
+        "9:30 AM": {
+          "adults": 361,
+          "kids": 0
+        }
+      },
+      "2021-09": {
+        "9:30 AM": {
+          "adults": 302,
+          "kids": 0
+        }
       }
     }
   },
@@ -3753,6 +3774,19 @@
       "2021-06-13",
       "2021-06-20",
       "2021-06-27",
+      "2021-07-04",
+      "2021-07-11",
+      "2021-07-18",
+      "2021-07-25",
+      "2021-08-01",
+      "2021-08-08",
+      "2021-08-15",
+      "2021-08-22",
+      "2021-08-29",
+      "2021-09-05",
+      "2021-09-12",
+      "2021-09-19",
+      "2021-09-26",
       "2026-07-05",
       "2026-07-12",
       "2026-07-19",
@@ -4927,6 +4961,84 @@
       "2021-06-27": {
         "9:30 AM": {
           "adults": 372,
+          "kids": 0
+        }
+      },
+      "2021-07-04": {
+        "9:30 AM": {
+          "adults": 213,
+          "kids": 0
+        }
+      },
+      "2021-07-11": {
+        "9:30 AM": {
+          "adults": 400,
+          "kids": 0
+        }
+      },
+      "2021-07-18": {
+        "9:30 AM": {
+          "adults": 364,
+          "kids": 0
+        }
+      },
+      "2021-07-25": {
+        "9:30 AM": {
+          "adults": 339,
+          "kids": 0
+        }
+      },
+      "2021-08-01": {
+        "9:30 AM": {
+          "adults": 314,
+          "kids": 0
+        }
+      },
+      "2021-08-08": {
+        "9:30 AM": {
+          "adults": 397,
+          "kids": 0
+        }
+      },
+      "2021-08-15": {
+        "9:30 AM": {
+          "adults": 365,
+          "kids": 0
+        }
+      },
+      "2021-08-22": {
+        "9:30 AM": {
+          "adults": 407,
+          "kids": 0
+        }
+      },
+      "2021-08-29": {
+        "9:30 AM": {
+          "adults": 322,
+          "kids": 0
+        }
+      },
+      "2021-09-05": {
+        "9:30 AM": {
+          "adults": 258,
+          "kids": 0
+        }
+      },
+      "2021-09-12": {
+        "9:30 AM": {
+          "adults": 299,
+          "kids": 0
+        }
+      },
+      "2021-09-19": {
+        "9:30 AM": {
+          "adults": 352,
+          "kids": 0
+        }
+      },
+      "2021-09-26": {
+        "9:30 AM": {
+          "adults": 297,
           "kids": 0
         }
       }
@@ -9653,7 +9765,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 8:46 AM",
+    "refreshed": "Sep 16, 2026, 9:00 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -21748,13 +21860,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Cathy Cappini",
-              "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Mark Meich",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
@@ -21766,6 +21871,13 @@
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
               "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Bob Watson",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
               "serviceTime": "8 AM"
             }
           ],
@@ -22933,6 +23045,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -22942,8 +23068,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 27,
+            "totalVols": 27
           }
         }
       ]
@@ -23137,6 +23263,20 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -23146,8 +23286,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 27,
+            "totalVols": 27
           }
         }
       ]
@@ -23369,6 +23509,20 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -23378,8 +23532,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 29,
-            "totalVols": 29
+            "volsWithServiceTime": 31,
+            "totalVols": 31
           }
         }
       ]
@@ -23503,6 +23657,20 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -23512,8 +23680,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 15,
-            "totalVols": 15
+            "volsWithServiceTime": 17,
+            "totalVols": 17
           }
         }
       ]
@@ -23602,6 +23770,20 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -23611,8 +23793,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 10,
-            "totalVols": 10
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
@@ -23701,6 +23883,20 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Janet Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Colonna",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -23710,8 +23906,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 10,
-            "totalVols": 10
+            "volsWithServiceTime": 12,
+            "totalVols": 12
           }
         }
       ]
