@@ -5212,7 +5212,7 @@ function attnByServiceNorm_(){
   });
   return { services: services, months: months, data: data };
 }
-// Attendance by service time — wide CSV: Month | <svc> Adults | <svc> Kids | … | Total Adults | Total Kids
+// Attendance by service time — MONTHLY average wide CSV (kept for the monthly view).
 function csvAttendanceByService_(){
   var a = attnByServiceNorm_();
   var services = a.services||[], months = a.months||[], data = a.data||{};
@@ -5231,32 +5231,90 @@ function csvAttendanceByService_(){
   });
   return rows;
 }
-// On-page: compact table of the recent months + a CSV button for full history.
+// "2026-09-07" → "Sep 7, 2026"
+function svcWeekLabel_(dk){
+  var m = String(dk).match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!m) return String(dk);
+  var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(m[2],10)-1];
+  return mon + ' ' + parseInt(m[3],10) + ', ' + m[1];
+}
+// Per-Sunday detail: normalize labels + sort. Reads the weekly feed when present.
+function attnByServiceWeekly_(){
+  var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendanceByServiceWeekly) || {};
+  var rawServices = a.services || [], weeks = a.weeks || [], rawData = a.data || {};
+  var labelSet = {};
+  rawServices.forEach(function(s){ labelSet[svcClean_(s)] = 1; });
+  var services = Object.keys(labelSet).sort(function(x, y){ return svcMin_(x) - svcMin_(y); });
+  var data = {};
+  weeks.forEach(function(wk){
+    var src = rawData[wk] || {}, dst = {};
+    Object.keys(src).forEach(function(rawS){
+      var L = svcClean_(rawS), c = src[rawS] || {};
+      if (!dst[L]) dst[L] = { adults: 0, kids: 0 };
+      dst[L].adults += Number(c.adults) || 0;
+      dst[L].kids   += Number(c.kids)   || 0;
+    });
+    data[wk] = dst;
+  });
+  return { services: services, weeks: weeks, data: data };
+}
+// Attendance by service time — WEEKLY wide CSV: Date | Week | <svc> Adults/Kids | … | Total
+function csvAttendanceByServiceWeekly_(){
+  var a = attnByServiceWeekly_();
+  var services = a.services||[], weeks = a.weeks||[], data = a.data||{};
+  var header = ['Date','Week'];
+  services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
+  header.push('Total Adults','Total Kids');
+  var rows = [header];
+  weeks.forEach(function(wk){
+    var row = [wk, svcWeekLabel_(wk)], ta = 0, tk = 0;
+    services.forEach(function(s){
+      var c = (data[wk] && data[wk][s]) || null;
+      row.push(c ? c.adults : '', c ? c.kids : '');
+      if (c){ ta += c.adults; tk += c.kids; }
+    });
+    row.push(ta, tk); rows.push(row);
+  });
+  return rows;
+}
+// On-page: per-Sunday table of recent weeks + CSV of the full weekly history.
+// Falls back to the monthly-average view until the weekly feed has populated.
 function renderAttendanceByService(){
   var body = document.getElementById('attnByServiceBody'); if (!body) return;
-  var a = attnByServiceNorm_();
-  var services = a.services||[], months = a.months||[], data = a.data||{};
-  if (!services.length || !months.length){
+  var wk = attnByServiceWeekly_();
+  var weekly = (wk.services.length && wk.weeks.length);
+  var a = weekly ? wk : attnByServiceNorm_();
+  var services = a.services||[];
+  var rowKeys = weekly ? (a.weeks||[]) : (a.months||[]);
+  var data = a.data||{};
+  if (!services.length || !rowKeys.length){
     body.innerHTML = '<div class="card-sub" style="margin:10px 0 0;color:var(--text-muted);">Populating from Planning Center — this fills in automatically over the next few hours, then stays current.</div>';
     return;
   }
-  var recent = months.slice(-6);
-  var th = '<th style="text-align:left;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);">Month</th>';
-  services.forEach(function(s){ th += '<th style="text-align:right;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);white-space:nowrap;">'+s+'<div style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--text-muted);">adults / kids</div></th>'; });
-  th += '<th style="text-align:right;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);">Total</th>';
-  var trs = recent.map(function(mo){
-    var tds = '<td style="padding:8px 10px;font-weight:600;">'+mo+'</td>', ta=0, tk=0;
+  var recent = rowKeys.slice(weekly ? -8 : -6);
+  var firstColLabel = weekly ? 'Week' : 'Month';
+  var thStyle = 'padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);';
+  var th = '<th style="text-align:left;'+thStyle+'">'+firstColLabel+'</th>';
+  services.forEach(function(s){ th += '<th style="text-align:right;'+thStyle+'white-space:nowrap;">'+s+'<div style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--text-muted);">adults / kids</div></th>'; });
+  th += '<th style="text-align:right;'+thStyle+'">Total</th>';
+  var trs = recent.map(function(key){
+    var label = weekly ? svcWeekLabel_(key) : key;
+    var tds = '<td style="padding:8px 10px;font-weight:600;white-space:nowrap;">'+label+'</td>', ta=0, tk=0;
     services.forEach(function(s){
-      var c = (data[mo] && data[mo][s]) || null;
+      var c = (data[key] && data[key][s]) || null;
       tds += '<td style="padding:8px 10px;text-align:right;font-family:\'DM Mono\',monospace;white-space:nowrap;">'+(c ? (c.adults+' / '+c.kids) : '<span style="color:var(--text-muted);">—</span>')+'</td>';
       if (c){ ta+=c.adults; tk+=c.kids; }
     });
     tds += '<td style="padding:8px 10px;text-align:right;font-family:\'DM Mono\',monospace;font-weight:700;">'+(ta+tk)+'</td>';
     return '<tr>'+tds+'</tr>';
   }).join('');
+  var note = weekly ? 'Each row is one Sunday.' : 'Monthly average per service (weekly detail fills in shortly).';
+  var csvCall = weekly
+    ? 'dl_(\'attendance-by-service-weekly\', csvAttendanceByServiceWeekly_())'
+    : 'dl_(\'attendance-by-service\', csvAttendanceByService_())';
   body.innerHTML =
     '<div style="overflow-x:auto;margin-top:6px;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;"><thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>'
-    + '<div class="csv-row"><button type="button" class="csv-btn" onclick="dl_(\'attendance-by-service\', csvAttendanceByService_())" title="Export full history to CSV">⤓ CSV</button></div>';
+    + '<div class="card-sub" style="margin-top:8px;color:var(--text-muted);font-size:12px;">'+note+'</div>'
+    + '<div class="csv-row"><button type="button" class="csv-btn" onclick="'+csvCall+'" title="Export full weekly history to CSV">⤓ CSV</button></div>';
 }
 function exportCardCsv_(card){
   var canvas = card.querySelector('canvas'); if (!canvas) return;
