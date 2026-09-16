@@ -2329,9 +2329,9 @@
 
   <!-- Attendance by service time — full width -->
   <div class="card" id="attnByServiceCard" style="margin-top:24px;">
-    <h2>Attendance by Service Time</h2>
+    <h2>Attendance by Service Time — Weekly</h2>
     <div class="card-desc" data-sec="Attendance by Service Time"></div>
-    <div class="card-sub">Adults + kids per service (8:00 / 9:30 / 11:00, and 1pm / 6pm when they ran) · recent months shown · full history in the CSV</div>
+    <div class="card-sub">Adults + kids for <strong>each service, every Sunday</strong> (8:00 / 9:30 / 11:00, and 1pm / 6pm when they ran) · recent Sundays shown · <strong>full week-by-week history in the CSV below</strong></div>
     <div id="attnByServiceBody"></div>
   </div>
 
@@ -5099,25 +5099,10 @@ function gated_(slug, buildFn){
 function csvAttendance_(){
   var a = (DASHBOARD_DATA && DASHBOARD_DATA.attendance) || {};
   var months = a.months||[], adults = a.adults||[], kids = a.kids||[];
-  var bs = attnByServiceNorm_();                       // per-service breakdown, clean labels
-  var services = bs.services||[], bdata = bs.data||{};
   var start = 0; while (start < months.length && !((adults[start]||0) > 0 || (kids[start]||0) > 0)) start++;
-  var header = ['Month','Adults','Kids','Total'];
-  services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
-  var rows = [header], ta = 0, tk = 0;
-  for (var i = start; i < months.length; i++){
-    var ad = adults[i]||0, kd = kids[i]||0; ta += ad; tk += kd;
-    var row = [months[i], ad, kd, ad+kd], md = bdata[months[i]] || null;
-    services.forEach(function(s){ var c = md && md[s]; row.push(c ? c.adults : '', c ? c.kids : ''); });
-    rows.push(row);
-  }
-  var total = ['TOTAL', ta, tk, ta+tk];
-  services.forEach(function(s){
-    var sa = 0, sk = 0;
-    Object.keys(bdata).forEach(function(mo){ var c = bdata[mo][s]; if (c){ sa += c.adults||0; sk += c.kids||0; } });
-    total.push(sa, sk);
-  });
-  rows.push(total);
+  var rows = [['Month','Adults','Kids','Total']], ta = 0, tk = 0;
+  for (var i = start; i < months.length; i++){ var ad = adults[i]||0, kd = kids[i]||0; ta += ad; tk += kd; rows.push([months[i], ad, kd, ad+kd]); }
+  rows.push(['TOTAL', ta, tk, ta+tk]);
   return rows;
 }
 // Average Giving by Month (members-only): drop leading empty months, add a total.
@@ -5307,14 +5292,15 @@ function renderAttendanceByService(){
     tds += '<td style="padding:8px 10px;text-align:right;font-family:\'DM Mono\',monospace;font-weight:700;">'+(ta+tk)+'</td>';
     return '<tr>'+tds+'</tr>';
   }).join('');
-  var note = weekly ? 'Each row is one Sunday.' : 'Monthly average per service (weekly detail fills in shortly).';
+  var note = weekly ? 'Each row above is one Sunday.' : 'Monthly average per service (weekly detail fills in shortly).';
   var csvCall = weekly
     ? 'dl_(\'attendance-by-service-weekly\', csvAttendanceByServiceWeekly_())'
     : 'dl_(\'attendance-by-service\', csvAttendanceByService_())';
+  var btnLabel = weekly ? '⤓ Download weekly CSV (every Sunday, by service)' : '⤓ Download CSV';
   body.innerHTML =
     '<div style="overflow-x:auto;margin-top:6px;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;"><thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>'
     + '<div class="card-sub" style="margin-top:8px;color:var(--text-muted);font-size:12px;">'+note+'</div>'
-    + '<div class="csv-row"><button type="button" class="csv-btn" onclick="'+csvCall+'" title="Export full weekly history to CSV">⤓ CSV</button></div>';
+    + '<div class="csv-row" style="text-align:left;"><button type="button" class="csv-btn" style="opacity:1;color:var(--yellow-2);border:1px solid var(--card-border);border-radius:8px;padding:8px 12px;font-weight:600;" onclick="'+csvCall+'" title="Export the full week-by-week history to CSV">'+btnLabel+'</button></div>';
 }
 function exportCardCsv_(card){
   var canvas = card.querySelector('canvas'); if (!canvas) return;
