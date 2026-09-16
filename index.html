@@ -2327,6 +2327,14 @@
 
   </div>
 
+  <!-- Attendance by service time — full width -->
+  <div class="card" id="attnByServiceCard" style="margin-top:24px;">
+    <h2>Attendance by Service Time</h2>
+    <div class="card-desc" data-sec="Attendance by Service Time"></div>
+    <div class="card-sub">Adults + kids per service (8:00 / 9:30 / 11:00, and 1pm / 6pm when they ran) · recent months shown · full history in the CSV</div>
+    <div id="attnByServiceBody"></div>
+  </div>
+
   <!-- Row 2: Serve Teams | Giving + Pledge -->
   <div class="grid" style="margin-top:24px;">
 
@@ -5130,6 +5138,52 @@ function csvServeTeams_(){
   });
   return rows;
 }
+// Attendance by service time — wide CSV: Month | <svc> Adults | <svc> Kids | … | Total Adults | Total Kids
+function csvAttendanceByService_(){
+  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
+  var services = a.services||[], months = a.months||[], data = a.data||{};
+  var header = ['Month'];
+  services.forEach(function(s){ header.push(s+' Adults', s+' Kids'); });
+  header.push('Total Adults','Total Kids');
+  var rows = [header];
+  months.forEach(function(mo){
+    var row = [mo], ta = 0, tk = 0;
+    services.forEach(function(s){
+      var c = (data[mo] && data[mo][s]) || null;
+      row.push(c ? c.adults : '', c ? c.kids : '');
+      if (c){ ta += c.adults; tk += c.kids; }
+    });
+    row.push(ta, tk); rows.push(row);
+  });
+  return rows;
+}
+// On-page: compact table of the recent months + a CSV button for full history.
+function renderAttendanceByService(){
+  var body = document.getElementById('attnByServiceBody'); if (!body) return;
+  var a = (window.DASHBOARD_DATA && DASHBOARD_DATA.attendanceByService) || {};
+  var services = a.services||[], months = a.months||[], data = a.data||{};
+  if (!services.length || !months.length){
+    body.innerHTML = '<div class="card-sub" style="margin:10px 0 0;color:var(--text-muted);">Populating from Planning Center — this fills in automatically over the next few hours, then stays current.</div>';
+    return;
+  }
+  var recent = months.slice(-6);
+  var th = '<th style="text-align:left;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);">Month</th>';
+  services.forEach(function(s){ th += '<th style="text-align:right;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);white-space:nowrap;">'+s+'<div style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--text-muted);">adults / kids</div></th>'; });
+  th += '<th style="text-align:right;padding:8px 10px;color:var(--text-muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--card-border);">Total</th>';
+  var trs = recent.map(function(mo){
+    var tds = '<td style="padding:8px 10px;font-weight:600;">'+mo+'</td>', ta=0, tk=0;
+    services.forEach(function(s){
+      var c = (data[mo] && data[mo][s]) || null;
+      tds += '<td style="padding:8px 10px;text-align:right;font-family:\'DM Mono\',monospace;white-space:nowrap;">'+(c ? (c.adults+' / '+c.kids) : '<span style="color:var(--text-muted);">—</span>')+'</td>';
+      if (c){ ta+=c.adults; tk+=c.kids; }
+    });
+    tds += '<td style="padding:8px 10px;text-align:right;font-family:\'DM Mono\',monospace;font-weight:700;">'+(ta+tk)+'</td>';
+    return '<tr>'+tds+'</tr>';
+  }).join('');
+  body.innerHTML =
+    '<div style="overflow-x:auto;margin-top:6px;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;"><thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>'
+    + '<div class="csv-row"><button type="button" class="csv-btn" onclick="dl_(\'attendance-by-service\', csvAttendanceByService_())" title="Export full history to CSV">⤓ CSV</button></div>';
+}
 function exportCardCsv_(card){
   var canvas = card.querySelector('canvas'); if (!canvas) return;
   var id = canvas.id, cardId = card.id || '';
@@ -5175,6 +5229,7 @@ loadDashboardData()
     renderCGMembers();
     renderBaptisms();
     renderMembersGrowth();
+    renderAttendanceByService();
     addCsvButtons_();
     setTimeout(addCsvButtons_, 1200);   // catch any late-rendering charts
   })
