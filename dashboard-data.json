@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T14:46:47.284Z",
+  "lastUpdated": "2026-09-16T15:01:27.745Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3301,6 +3301,9 @@
       "2021-01",
       "2021-02",
       "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3567,6 +3570,32 @@
           "adults": 240,
           "kids": 0
         }
+      },
+      "2021-04": {
+        "8:00 AM": {
+          "adults": 441,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 249,
+          "kids": 0
+        }
+      },
+      "2021-05": {
+        "8:00 AM": {
+          "adults": 360,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 189,
+          "kids": 0
+        }
+      },
+      "2021-06": {
+        "9:30 AM": {
+          "adults": 364,
+          "kids": 0
+        }
       }
     }
   },
@@ -3711,6 +3740,19 @@
       "2021-03-14",
       "2021-03-21",
       "2021-03-28",
+      "2021-04-04",
+      "2021-04-11",
+      "2021-04-18",
+      "2021-04-25",
+      "2021-05-02",
+      "2021-05-09",
+      "2021-05-16",
+      "2021-05-23",
+      "2021-05-30",
+      "2021-06-06",
+      "2021-06-13",
+      "2021-06-20",
+      "2021-06-27",
       "2026-07-05",
       "2026-07-12",
       "2026-07-19",
@@ -4771,6 +4813,120 @@
         },
         "9:30 AM": {
           "adults": 358,
+          "kids": 0
+        }
+      },
+      "2021-04-04": {
+        "8:00 AM": {
+          "adults": 550,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 281,
+          "kids": 0
+        }
+      },
+      "2021-04-11": {
+        "8:00 AM": {
+          "adults": 432,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 276,
+          "kids": 0
+        }
+      },
+      "2021-04-18": {
+        "8:00 AM": {
+          "adults": 390,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 191,
+          "kids": 0
+        }
+      },
+      "2021-04-25": {
+        "8:00 AM": {
+          "adults": 393,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 247,
+          "kids": 0
+        }
+      },
+      "2021-05-02": {
+        "8:00 AM": {
+          "adults": 330,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 239,
+          "kids": 0
+        }
+      },
+      "2021-05-09": {
+        "8:00 AM": {
+          "adults": 412,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 122,
+          "kids": 0
+        }
+      },
+      "2021-05-16": {
+        "8:00 AM": {
+          "adults": 358,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 216,
+          "kids": 0
+        }
+      },
+      "2021-05-23": {
+        "8:00 AM": {
+          "adults": 409,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 180,
+          "kids": 0
+        }
+      },
+      "2021-05-30": {
+        "8:00 AM": {
+          "adults": 292,
+          "kids": 0
+        },
+        "9:30 AM": {
+          "adults": 186,
+          "kids": 0
+        }
+      },
+      "2021-06-06": {
+        "9:30 AM": {
+          "adults": 400,
+          "kids": 0
+        }
+      },
+      "2021-06-13": {
+        "9:30 AM": {
+          "adults": 379,
+          "kids": 0
+        }
+      },
+      "2021-06-20": {
+        "9:30 AM": {
+          "adults": 305,
+          "kids": 0
+        }
+      },
+      "2021-06-27": {
+        "9:30 AM": {
+          "adults": 372,
           "kids": 0
         }
       }
@@ -9497,7 +9653,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 7:46 AM",
+    "refreshed": "Sep 16, 2026, 8:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -10949,7 +11105,7 @@
         23,
         26,
         25,
-        25,
+        26,
         null,
         null,
         null
@@ -10996,7 +11152,7 @@
         13,
         16,
         16,
-        22,
+        23,
         null,
         null,
         null
@@ -11310,8 +11466,8 @@
         "members": 8,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-7:30am",
-        "avgAttended": 5,
-        "attPct": 63
+        "avgAttended": 4,
+        "attPct": 50
       },
       {
         "name": "Borowski Community Group",
@@ -11371,11 +11527,11 @@
       },
       {
         "name": "Mick/McKinley Community Group",
-        "members": 3,
+        "members": 4,
         "leaders": 2,
         "schedule": "Meets weekly on Mondays from 6-8pm",
         "avgAttended": 3,
-        "attPct": 100
+        "attPct": 75
       },
       {
         "name": "Moore Community Group",
@@ -23007,7 +23163,8 @@
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "",
           "captains": [
-            "Thomas Peregrin"
+            "Thomas Peregrin",
+            "Manuel Sanchez"
           ],
           "volunteers": [
             {
@@ -23205,6 +23362,13 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -23214,8 +23378,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 28,
-            "totalVols": 28
+            "volsWithServiceTime": 29,
+            "totalVols": 29
           }
         }
       ]
@@ -23232,7 +23396,7 @@
           "preacher": "",
           "captains": [
             "Matt Gardner",
-            "Manuel Sanchez"
+            "Sam Griffin"
           ],
           "volunteers": [
             {
@@ -23306,13 +23470,6 @@
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
-              "name": "Manuel Sanchez",
-              "team": "Service Captains",
-              "pos": "Service Captain",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Ashley Murad",
               "team": "Stepping Stones",
               "pos": "Lead Guide WP, Hawks, Mustangs",
@@ -23339,6 +23496,13 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sam Griffin",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
