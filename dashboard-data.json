@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T18:51:49.445Z",
+  "lastUpdated": "2026-09-16T19:46:02.831Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       239469,
-      174790
+      175315
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       364,
       402,
-      301
+      302
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5467463
+    "raised": 5467988
   },
   "attendance": {
     "months": [
@@ -3328,6 +3328,12 @@
       "2023-04",
       "2023-05",
       "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
       "2026-07",
       "2026-08",
       "2026-09"
@@ -3764,6 +3770,42 @@
           "adults": 609,
           "kids": 0
         }
+      },
+      "2023-07": {
+        "9:30 AM": {
+          "adults": 478,
+          "kids": 0
+        }
+      },
+      "2023-08": {
+        "9:30 AM": {
+          "adults": 541,
+          "kids": 0
+        }
+      },
+      "2023-09": {
+        "9:30 AM": {
+          "adults": 609,
+          "kids": 0
+        }
+      },
+      "2023-10": {
+        "9:30 AM": {
+          "adults": 555,
+          "kids": 0
+        }
+      },
+      "2023-11": {
+        "9:30 AM": {
+          "adults": 574,
+          "kids": 0
+        }
+      },
+      "2023-12": {
+        "9:30 AM": {
+          "adults": 763,
+          "kids": 0
+        }
       }
     }
   },
@@ -4024,6 +4066,32 @@
       "2023-06-11",
       "2023-06-18",
       "2023-06-25",
+      "2023-07-02",
+      "2023-07-09",
+      "2023-07-16",
+      "2023-07-23",
+      "2023-07-30",
+      "2023-08-06",
+      "2023-08-13",
+      "2023-08-20",
+      "2023-08-27",
+      "2023-09-03",
+      "2023-09-10",
+      "2023-09-17",
+      "2023-09-24",
+      "2023-10-01",
+      "2023-10-08",
+      "2023-10-15",
+      "2023-10-22",
+      "2023-10-29",
+      "2023-11-05",
+      "2023-11-12",
+      "2023-11-19",
+      "2023-11-26",
+      "2023-12-03",
+      "2023-12-10",
+      "2023-12-17",
+      "2023-12-24",
       "2026-07-05",
       "2026-07-12",
       "2026-07-19",
@@ -5816,6 +5884,162 @@
       "2023-06-25": {
         "9:30 AM": {
           "adults": 617,
+          "kids": 0
+        }
+      },
+      "2023-07-02": {
+        "9:30 AM": {
+          "adults": 202,
+          "kids": 0
+        }
+      },
+      "2023-07-09": {
+        "9:30 AM": {
+          "adults": 545,
+          "kids": 0
+        }
+      },
+      "2023-07-16": {
+        "9:30 AM": {
+          "adults": 549,
+          "kids": 0
+        }
+      },
+      "2023-07-23": {
+        "9:30 AM": {
+          "adults": 559,
+          "kids": 0
+        }
+      },
+      "2023-07-30": {
+        "9:30 AM": {
+          "adults": 534,
+          "kids": 0
+        }
+      },
+      "2023-08-06": {
+        "9:30 AM": {
+          "adults": 531,
+          "kids": 0
+        }
+      },
+      "2023-08-13": {
+        "9:30 AM": {
+          "adults": 520,
+          "kids": 0
+        }
+      },
+      "2023-08-20": {
+        "9:30 AM": {
+          "adults": 540,
+          "kids": 0
+        }
+      },
+      "2023-08-27": {
+        "9:30 AM": {
+          "adults": 573,
+          "kids": 0
+        }
+      },
+      "2023-09-03": {
+        "9:30 AM": {
+          "adults": 624,
+          "kids": 0
+        }
+      },
+      "2023-09-10": {
+        "9:30 AM": {
+          "adults": 568,
+          "kids": 0
+        }
+      },
+      "2023-09-17": {
+        "9:30 AM": {
+          "adults": 596,
+          "kids": 0
+        }
+      },
+      "2023-09-24": {
+        "9:30 AM": {
+          "adults": 649,
+          "kids": 0
+        }
+      },
+      "2023-10-01": {
+        "9:30 AM": {
+          "adults": 505,
+          "kids": 0
+        }
+      },
+      "2023-10-08": {
+        "9:30 AM": {
+          "adults": 500,
+          "kids": 0
+        }
+      },
+      "2023-10-15": {
+        "9:30 AM": {
+          "adults": 639,
+          "kids": 0
+        }
+      },
+      "2023-10-22": {
+        "9:30 AM": {
+          "adults": 530,
+          "kids": 0
+        }
+      },
+      "2023-10-29": {
+        "9:30 AM": {
+          "adults": 599,
+          "kids": 0
+        }
+      },
+      "2023-11-05": {
+        "9:30 AM": {
+          "adults": 490,
+          "kids": 0
+        }
+      },
+      "2023-11-12": {
+        "9:30 AM": {
+          "adults": 612,
+          "kids": 0
+        }
+      },
+      "2023-11-19": {
+        "9:30 AM": {
+          "adults": 631,
+          "kids": 0
+        }
+      },
+      "2023-11-26": {
+        "9:30 AM": {
+          "adults": 563,
+          "kids": 0
+        }
+      },
+      "2023-12-03": {
+        "9:30 AM": {
+          "adults": 631,
+          "kids": 0
+        }
+      },
+      "2023-12-10": {
+        "9:30 AM": {
+          "adults": 708,
+          "kids": 0
+        }
+      },
+      "2023-12-17": {
+        "9:30 AM": {
+          "adults": 650,
+          "kids": 0
+        }
+      },
+      "2023-12-24": {
+        "9:30 AM": {
+          "adults": 1064,
           "kids": 0
         }
       }
@@ -10542,7 +10766,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 11:51 AM",
+    "refreshed": "Sep 16, 2026, 12:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -22189,13 +22413,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Cody Wright",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Jorie Hetland",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -22792,8 +23009,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 100,
+            "totalVols": 100
           }
         }
       ]
@@ -24956,14 +25173,14 @@
     "weeklyAvg": 11,
     "totalFetched": 7079,
     "since": "2026-08-17",
-    "asOf": "2026-09-16T18:47:11.646Z"
+    "asOf": "2026-09-16T19:44:36.838Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.2734375,
-    "avgOpenRate3": 0.4553182146970302,
+    "latestOpenRate": 0.27734375,
+    "avgOpenRate3": 0.4566202980303635,
     "latestCampaign": "Don't miss Your Next Step!",
     "latestSentAt": "2026-09-12T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-16T18:47:13.080Z"
+    "asOf": "2026-09-16T19:44:38.115Z"
   }
 }
