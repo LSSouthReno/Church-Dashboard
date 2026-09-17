@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-16T23:46:06.643Z",
+  "lastUpdated": "2026-09-16T23:59:13.309Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13092,7 +13092,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 16, 2026, 4:46 PM",
+    "refreshed": "Sep 16, 2026, 4:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -24669,32 +24669,11 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Annalissa Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Anna Sawyer",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Brianna Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Isabella Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Jaimie Sullivan",
@@ -25155,15 +25134,8 @@
               "name": "David Castro",
               "team": "Stepping Stones",
               "pos": "Mustangs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Anita Irwin",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
             },
             {
               "name": "Thomas Adams",
@@ -25199,6 +25171,41 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Michael Marchese",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kylie Skolnick",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Christa Bowman",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -25342,8 +25349,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 102,
+            "totalVols": 102
           }
         }
       ]
