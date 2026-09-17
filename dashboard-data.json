@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-17T17:46:24.682Z",
+  "lastUpdated": "2026-09-17T17:59:39.219Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13092,7 +13092,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 17, 2026, 10:46 AM",
+    "refreshed": "Sep 17, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -24685,15 +24685,15 @@
             {
               "name": "Jackie Lewis",
               "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
+              "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Hunter Mannin",
               "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
+              "pos": "Bluebirds Guide",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -25110,16 +25110,9 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Carlos Perez",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Lead Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "David Castro",
               "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
+              "pos": "Hawks Guide",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -25185,6 +25178,20 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Carlos Perez",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shenoah Johnson",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -25328,8 +25335,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 99,
-            "totalVols": 99
+            "volsWithServiceTime": 100,
+            "totalVols": 100
           }
         }
       ]
