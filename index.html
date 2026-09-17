@@ -6632,9 +6632,37 @@ const SD_BLOCKED = new Set([
 ]);
 
 // ── Global top-nav tabs ─────────────────────────────────────────
+// ── Hash routing: every tab / full-screen view gets a shareable URL ──────────
+// #metrics · #sunday (or #sunday=YYYY-MM-DD) · #staff · #leaders · #calendar · #pastors
+// The router only calls the same open-functions the buttons call, so every
+// password gate (Staff OS, Pastors, Members inline reveal) still fires exactly
+// as before — routing never bypasses a lock.
+let _routingLock = false;
+function navSetHash(tab) {
+  const want = '#' + tab;
+  if ((location.hash || '') === want) return;
+  // replaceState updates the address bar WITHOUT firing hashchange, so clicking a
+  // tab never re-triggers the router (no reroute loop, no double-open).
+  try { history.replaceState(null, '', want); } catch (e) { location.hash = tab; }
+}
+function applyHashRoute() {
+  const raw = (location.hash || '').replace(/^#/, '');
+  const sun = raw.match(/^sunday(?:=(\d{4}-\d{2}-\d{2}))?$/);
+  _routingLock = true;
+  try {
+    if (raw === 'pastors') openPastorModal();
+    else if (sun) { if (sun[1]) _sundayPendingDate = sun[1]; navGo('sunday'); }
+    else if (raw === 'staff' || raw === 'leaders' || raw === 'calendar' || raw === 'metrics') navGo(raw);
+    // Unknown or empty hash: leave the default Metrics view as-is.
+  } finally { _routingLock = false; }
+}
+window.addEventListener('DOMContentLoaded', applyHashRoute);
+window.addEventListener('hashchange', applyHashRoute);
+
 function navSetActive(tab) {
   document.querySelectorAll('#topNav .nav-tab').forEach(b =>
     b.classList.toggle('active', b.dataset.tab === tab));
+  if (!_routingLock) navSetHash(tab);
 }
 
 function navGo(tab) {
@@ -6674,16 +6702,8 @@ function closeSundayModal() {
   navSetActive('metrics');
 }
 
-// Deep link from the volunteer checklist email: #sunday or #sunday=YYYY-MM-DD
-// opens the Sunday one-sheet (on that date if given).
-function shOpenSundayFromHash() {
-  const m = (location.hash || '').match(/^#sunday(?:=(\d{4}-\d{2}-\d{2}))?/);
-  if (!m) return;
-  if (m[1]) _sundayPendingDate = m[1];
-  if (typeof navGo === 'function') navGo('sunday'); else openSundayModal();
-}
-window.addEventListener('DOMContentLoaded', shOpenSundayFromHash);
-window.addEventListener('hashchange', shOpenSundayFromHash);
+// Deep link from the volunteer checklist email (#sunday or #sunday=YYYY-MM-DD)
+// is now handled by applyHashRoute() above, alongside every other tab/view.
 
 async function sundayLoadData() {
   document.getElementById('sd-content').innerHTML =
@@ -11071,6 +11091,7 @@ function openPastorModal() {
     document.getElementById('pastorModContent').style.display = 'none';
     setTimeout(() => { const el = document.getElementById('pastorPwInput'); if (el) el.focus(); }, 180);
   }
+  if (!_routingLock) navSetHash('pastors');  // shareable #pastors URL; lock above still gates entry
 }
 function closePastorModal() {
   const modal = document.getElementById('pastorModal');
@@ -11079,6 +11100,7 @@ function closePastorModal() {
   if (typeof shClearSelect === 'function') shClearSelect();
   modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  if (!_routingLock) navSetHash('metrics');  // back to the dashboard URL when the pastor view closes
 }
 async function pastorDoUnlock() {
   const pw = document.getElementById('pastorPwInput').value;
