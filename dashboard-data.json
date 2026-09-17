@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-17T18:46:48.235Z",
+  "lastUpdated": "2026-09-17T19:01:28.881Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13092,7 +13092,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 17, 2026, 11:46 AM",
+    "refreshed": "Sep 17, 2026, 12:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -24788,13 +24788,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Cheryl O'Gorman",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Jeff Bridges",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -25335,8 +25328,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 99,
+            "totalVols": 99
           }
         }
       ]
@@ -25356,20 +25349,6 @@
             "Matt Bowman"
           ],
           "volunteers": [
-            {
-              "name": "Ray Brown",
-              "team": "Presiders",
-              "pos": "Presider",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Charlene Carp",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
             {
               "name": "Matt Gardner",
               "team": "Presiders",
@@ -26013,6 +25992,20 @@
               "pos": "Wolf Pack Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Charlene Carp",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Brandon Thompson",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -26153,7 +26146,7 @@
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
-            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321924\"},{\"type\":\"PlanTime\",\"id\":\"223321925\"}]",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
             "volsWithServiceTime": 94,
@@ -26635,20 +26628,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Karynn Sucaldito",
-              "team": "Presiders",
-              "pos": "Presider",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Brandon Thompson",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
               "name": "John Munk",
               "team": "Safety Team",
               "pos": "Safety Monitor",
@@ -26836,6 +26815,20 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Ray Brown",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
