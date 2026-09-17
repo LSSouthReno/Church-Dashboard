@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Force HTTPS: the password gates use crypto.subtle (Web Crypto), which browsers
+  // disable on non-secure (http://) pages, so unlocking fails silently over HTTP.
+  // Bounce any plain-HTTP visit to HTTPS immediately (localhost is exempt for dev).
+  (function () {
+    var h = location.hostname;
+    if (location.protocol === 'http:' && h !== 'localhost' && h !== '127.0.0.1') {
+      location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+    }
+  })();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Church Dashboard</title>
