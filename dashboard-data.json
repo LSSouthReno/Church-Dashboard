@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-19T04:56:41.290Z",
+  "lastUpdated": "2026-09-19T05:46:25.539Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       239469,
-      178415
+      179615
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       364,
       402,
-      307
+      308
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5471088
+    "raised": 5472288
   },
   "attendance": {
     "months": [
@@ -13092,7 +13092,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 18, 2026, 9:56 PM",
+    "refreshed": "Sep 18, 2026, 10:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -25199,6 +25199,27 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Alexis Durham",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Melissa Peterson",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jennifer Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -25342,8 +25363,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 104,
+            "totalVols": 104
           }
         }
       ]
@@ -27583,7 +27604,18 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-10-07",
+      "end": "2026-10-11"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -27593,14 +27625,14 @@
     "weeklyAvg": 10,
     "totalFetched": 7079,
     "since": "2026-08-20",
-    "asOf": "2026-09-19T04:46:54.052Z"
+    "asOf": "2026-09-19T05:44:49.291Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.5370036101083032,
-    "avgOpenRate3": 0.45627346184528195,
+    "latestOpenRate": 0.5379061371841155,
+    "avgOpenRate3": 0.45657430420388606,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-16T23:35:38+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-19T04:46:56.461Z"
+    "asOf": "2026-09-19T05:44:50.763Z"
   }
 }
