@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-20T17:46:35.405Z",
+  "lastUpdated": "2026-09-20T17:59:05.933Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3262,8 +3262,8 @@
       },
       {
         "week": "Sep 20",
-        "adults": 198,
-        "kids": 77
+        "adults": 493,
+        "kids": 79
       }
     ]
   },
@@ -3409,14 +3409,14 @@
       "2026-09": {
         "11:00 AM": {
           "adults": 235,
-          "kids": 38
+          "kids": 26
         },
         "8:00 AM": {
           "adults": 197,
           "kids": 16
         },
         "9:30 AM": {
-          "adults": 309,
+          "adults": 304,
           "kids": 55
         }
       },
@@ -8381,8 +8381,12 @@
           "kids": 13
         },
         "9:30 AM": {
-          "adults": 0,
+          "adults": 295,
           "kids": 64
+        },
+        "11:00 AM": {
+          "adults": 0,
+          "kids": 2
         }
       }
     }
@@ -13100,7 +13104,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 20, 2026, 10:46 AM",
+    "refreshed": "Sep 20, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -13967,14 +13971,14 @@
     ],
     "counts": [
       2,
-      8,
-      76,
-      80,
-      46,
-      88,
-      71
+      4,
+      32,
+      43,
+      19,
+      39,
+      29
     ],
-    "current": 393
+    "current": 169
   },
   "communityGroupsDetailed": {
     "goals2026": {
@@ -26028,6 +26032,13 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jon Harrison",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -26171,8 +26182,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 94,
-            "totalVols": 94
+            "volsWithServiceTime": 95,
+            "totalVols": 95
           }
         }
       ]
