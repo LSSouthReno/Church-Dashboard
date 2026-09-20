@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-20T09:57:20.409Z",
+  "lastUpdated": "2026-09-20T10:45:46.429Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13084,7 +13084,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 20, 2026, 2:57 AM",
+    "refreshed": "Sep 20, 2026, 3:45 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -27683,7 +27683,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "error": "Bandwidth quota exceeded: https://api.planningcenteronline.com/people/v2/people?offset=4000&order=-created_at&per_page=100. Try reducing the rate of data transfer."
+    "count30d": 41,
+    "weeklyAvg": 10,
+    "totalFetched": 7079,
+    "since": "2026-08-21",
+    "asOf": "2026-09-20T10:44:30.665Z"
   },
   "emailStats": {
     "latestOpenRate": 0.2786885245901639,
@@ -27691,6 +27695,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-19T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-20T09:44:20.012Z"
+    "asOf": "2026-09-20T10:44:31.490Z"
   }
 }
