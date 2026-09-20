@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-20T14:46:11.372Z",
+  "lastUpdated": "2026-09-20T15:46:08.215Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       239469,
-      187189
+      190159
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       364,
       402,
-      312
+      313
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5479862
+    "raised": 5482832
   },
   "attendance": {
     "months": [
@@ -743,7 +743,7 @@
       691,
       649,
       747,
-      740
+      559
     ],
     "kids": [
       0,
@@ -946,7 +946,7 @@
       109,
       83,
       119,
-      71
+      74
     ]
   },
   "attendanceWeekly": {
@@ -3259,6 +3259,11 @@
         "week": "Sep 13",
         "adults": 707,
         "kids": 101
+      },
+      {
+        "week": "Sep 20",
+        "adults": 0,
+        "kids": 2
       }
     ]
   },
@@ -3408,7 +3413,7 @@
         },
         "8:00 AM": {
           "adults": 196,
-          "kids": 18
+          "kids": 12
         },
         "9:30 AM": {
           "adults": 309,
@@ -4708,7 +4713,8 @@
       "2026-08-23",
       "2026-08-30",
       "2026-09-06",
-      "2026-09-13"
+      "2026-09-13",
+      "2026-09-20"
     ],
     "data": {
       "2026-07-05": {
@@ -8367,6 +8373,12 @@
         "9:30 AM": {
           "adults": 294,
           "kids": 51
+        }
+      },
+      "2026-09-20": {
+        "8:00 AM": {
+          "adults": 0,
+          "kids": 2
         }
       }
     }
@@ -13084,7 +13096,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 20, 2026, 7:46 AM",
+    "refreshed": "Sep 20, 2026, 8:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -24705,7 +24717,7 @@
             {
               "name": "Halee Frink",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
+              "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             },
@@ -25069,7 +25081,7 @@
             {
               "name": "Emma Baskharoon",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Lead Guide",
+              "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             },
@@ -25191,13 +25203,6 @@
               "pos": "Back Left Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
-            },
-            {
-              "name": "Geoffrey Caliger",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "C",
-              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -25341,8 +25346,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"217676412\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 102,
-            "totalVols": 102
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ]
@@ -27680,14 +27685,14 @@
     "weeklyAvg": 10,
     "totalFetched": 7079,
     "since": "2026-08-21",
-    "asOf": "2026-09-20T14:44:39.945Z"
+    "asOf": "2026-09-20T15:44:37.758Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.28688524590163933,
-    "avgOpenRate3": 0.3739922089226884,
+    "latestOpenRate": 0.29098360655737704,
+    "avgOpenRate3": 0.37535832914126765,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-19T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-20T14:44:41.042Z"
+    "asOf": "2026-09-20T15:44:38.972Z"
   }
 }
