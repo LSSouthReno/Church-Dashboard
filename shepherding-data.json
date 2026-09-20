@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T04:50:01.124Z",
+  "generatedAt": "2026-09-20T05:50:10.903Z",
   "asOf": "2026-09-19",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,8 +21,8 @@
     "totalPeople": 396,
     "avgScore": 0,
     "inGroup": 226,
-    "serving": 235,
-    "leading": 83,
+    "serving": 230,
+    "leading": 82,
     "givingRegular": 0,
     "recurring": 0,
     "givingGrowing": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 396,
     "notInGroup": 170,
-    "notServing": 161,
+    "notServing": 166,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,8 +49,8 @@
     },
     "pct": {
       "inGroup": 0.5707070707070707,
-      "serving": 0.5934343434343434,
-      "leading": 0.20959595959595959,
+      "serving": 0.5808080808080808,
+      "leading": 0.20707070707070707,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -2061,11 +2061,6 @@
               "joinedAt": "2024-08-12T17:29:19Z"
             },
             {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-01-27T22:33:23Z"
-            },
-            {
               "name": "Chair Crew",
               "role": "leader",
               "joinedAt": "2026-08-03T23:01:10Z"
@@ -2611,6 +2606,57 @@
         },
         {
           "id": null,
+          "name": "Adam Carp",
+          "first": "Adam",
+          "last": "Carp",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "CG LEADERS",
+              "role": "leader",
+              "joinedAt": "2025-01-28T00:55:18Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2024-08-12T21:38:00Z"
+            },
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2024-08-12T18:10:44Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Ashley Murad",
           "first": "Ashley",
           "last": "Murad",
@@ -3149,11 +3195,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:48Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-01-28T02:51:17Z"
             }
           ],
           "flags": [],
@@ -3271,62 +3312,6 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-11-04T22:13:58Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Adam Carp",
-          "first": "Adam",
-          "last": "Carp",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "CG LEADERS",
-              "role": "leader",
-              "joinedAt": "2025-01-28T00:55:18Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2024-08-12T21:38:00Z"
-            },
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2024-08-12T18:10:44Z"
-            },
-            {
-              "name": "Preachers",
-              "role": "leader",
-              "joinedAt": "2024-08-26T20:13:54Z"
             }
           ],
           "flags": [],
@@ -5472,11 +5457,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:56Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "leader",
-              "joinedAt": "2025-01-29T03:26:23Z"
             }
           ],
           "flags": [],
@@ -5810,21 +5790,6 @@
               "joinedAt": "2024-08-10T14:19:13Z"
             },
             {
-              "name": "Preachers",
-              "role": "leader",
-              "joinedAt": "2026-06-30T22:20:11Z"
-            },
-            {
-              "name": "Parking Team",
-              "role": "leader",
-              "joinedAt": "2026-02-10T00:02:31Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "leader",
-              "joinedAt": "2025-01-27T19:04:11Z"
-            },
-            {
               "name": "Lead Guide's Stepping Stones",
               "role": "member",
               "joinedAt": "2026-05-26T23:23:56Z"
@@ -5879,11 +5844,6 @@
               "name": "Enrichment Team",
               "role": "leader",
               "joinedAt": "2024-08-06T22:54:02Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-05-14T18:57:39Z"
             },
             {
               "name": "8am Enrichment Team (Early Birds)",
@@ -7498,11 +7458,6 @@
               "name": "Coffee Team",
               "role": "leader",
               "joinedAt": "2024-09-29T23:13:26Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2026-04-20T21:45:47Z"
             }
           ],
           "flags": [],
@@ -8156,11 +8111,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:50Z"
-            },
-            {
-              "name": "Preachers",
-              "role": "member",
-              "joinedAt": "2024-08-26T20:14:26Z"
             }
           ],
           "flags": [],
@@ -8232,8 +8182,8 @@
         "totalPeople": 63,
         "avgScore": 0,
         "inGroup": 22,
-        "serving": 29,
-        "leading": 10,
+        "serving": 27,
+        "leading": 9,
         "givingRegular": 0,
         "recurring": 0,
         "givingGrowing": 0,
@@ -8242,7 +8192,7 @@
         "overdue": 0,
         "notBaptized": 63,
         "notInGroup": 41,
-        "notServing": 34,
+        "notServing": 36,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -8260,8 +8210,8 @@
         },
         "pct": {
           "inGroup": 0.3492063492063492,
-          "serving": 0.4603174603174603,
-          "leading": 0.15873015873015872,
+          "serving": 0.42857142857142855,
+          "leading": 0.14285714285714285,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -8906,6 +8856,48 @@
         },
         {
           "id": null,
+          "name": "Dena Wiggins",
+          "first": "Dena",
+          "last": "Wiggins",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2026-08-19T18:14:40Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Elyse Bozsik",
           "first": "Elyse",
           "last": "Bozsik",
@@ -9143,6 +9135,48 @@
         },
         {
           "id": null,
+          "name": "Tom McDonald",
+          "first": "Tom",
+          "last": "McDonald",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Tech Team",
+              "role": "member",
+              "joinedAt": "2026-01-15T20:14:09Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Allison Wallace",
           "first": "Allison",
           "last": "Wallace",
@@ -9180,6 +9214,43 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Bart Wallace",
+          "first": "Bart",
+          "last": "Wallace",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
           ],
           "pending": true
         },
@@ -9333,53 +9404,6 @@
         },
         {
           "id": null,
-          "name": "Tom McDonald",
-          "first": "Tom",
-          "last": "McDonald",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Tech Team",
-              "role": "member",
-              "joinedAt": "2026-01-15T20:14:09Z"
-            },
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2025-08-12T20:04:34Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Yolindia McCorquodale",
           "first": "Yolindia",
           "last": "McCorquodale",
@@ -9420,6 +9444,43 @@
           "name": "Alison Crook",
           "first": "Alison",
           "last": "Crook",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Bill Wallace",
+          "first": "Bill",
+          "last": "Wallace",
           "email": "",
           "phone": "",
           "member": false,
@@ -9533,53 +9594,6 @@
           "flags": [
             "Not in a group",
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Dena Wiggins",
-          "first": "Dena",
-          "last": "Wiggins",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2026-08-19T18:14:40Z"
-            },
-            {
-              "name": "Hands To Heart",
-              "role": "leader",
-              "joinedAt": "2024-09-18T16:18:59Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
@@ -9771,48 +9785,6 @@
               "name": "Content Team",
               "role": "member",
               "joinedAt": "2026-05-05T00:06:53Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bart Wallace",
-          "first": "Bart",
-          "last": "Wallace",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2025-09-17T16:09:23Z"
             }
           ],
           "flags": [
@@ -10149,48 +10121,6 @@
               "name": "Content Team",
               "role": "member",
               "joinedAt": "2026-05-08T05:14:36Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bill Wallace",
-          "first": "Bill",
-          "last": "Wallace",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2025-03-29T20:09:15Z"
             }
           ],
           "flags": [
@@ -10922,11 +10852,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:44Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-01-27T19:44:49Z"
             }
           ],
           "flags": [],
@@ -10988,11 +10913,6 @@
               "name": "Prayer Team",
               "role": "member",
               "joinedAt": "2026-08-21T05:37:36Z"
-            },
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2024-08-27T16:59:39Z"
             }
           ],
           "flags": [],
@@ -11008,7 +10928,7 @@
         "totalPeople": 64,
         "avgScore": 0,
         "inGroup": 33,
-        "serving": 30,
+        "serving": 28,
         "leading": 8,
         "givingRegular": 0,
         "recurring": 0,
@@ -11018,7 +10938,7 @@
         "overdue": 0,
         "notBaptized": 64,
         "notInGroup": 31,
-        "notServing": 34,
+        "notServing": 36,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -11036,7 +10956,7 @@
         },
         "pct": {
           "inGroup": 0.515625,
-          "serving": 0.46875,
+          "serving": 0.4375,
           "leading": 0.125,
           "givingRegular": 0,
           "recurring": 0,
@@ -11729,6 +11649,48 @@
         },
         {
           "id": null,
+          "name": "Kathy Rector",
+          "first": "Kathy",
+          "last": "Rector",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Peissner Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T22:20:03Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Kimberly Wilford",
           "first": "Kimberly",
           "last": "Wilford",
@@ -12316,6 +12278,52 @@
         },
         {
           "id": null,
+          "name": "Jeff Bridges",
+          "first": "Jeff",
+          "last": "Bridges",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Colonna/Mavros Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T21:43:54Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "First Impressions Team",
+              "role": "member",
+              "joinedAt": "2025-01-06T20:26:29Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Jeff Jewell",
           "first": "Jeff",
           "last": "Jewell",
@@ -12354,52 +12362,6 @@
           "flags": [
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kathy Rector",
-          "first": "Kathy",
-          "last": "Rector",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Peissner Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T22:20:03Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hands To Heart",
-              "role": "member",
-              "joinedAt": "2024-11-17T03:14:57Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -12654,57 +12616,6 @@
         },
         {
           "id": null,
-          "name": "Jeff Bridges",
-          "first": "Jeff",
-          "last": "Bridges",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Colonna/Mavros Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:43:54Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member",
-              "joinedAt": "2025-01-06T20:26:29Z"
-            },
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2024-09-08T22:30:13Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Kelly Farson",
           "first": "Kelly",
           "last": "Farson",
@@ -12788,6 +12699,48 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Ryan Baskharoon",
+          "first": "Ryan",
+          "last": "Baskharoon",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Colonna/Mavros Community Group",
+              "role": "member",
+              "joinedAt": "2024-12-13T05:05:29Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
           ],
           "pending": true
         },
@@ -13393,52 +13346,6 @@
         },
         {
           "id": null,
-          "name": "Ryan Baskharoon",
-          "first": "Ryan",
-          "last": "Baskharoon",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Colonna/Mavros Community Group",
-              "role": "member",
-              "joinedAt": "2024-12-13T05:05:29Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-02-24T21:57:07Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Bruce Rector",
           "first": "Bruce",
           "last": "Rector",
@@ -13748,11 +13655,6 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-08-12T17:08:18Z"
-            },
-            {
-              "name": "Preachers",
-              "role": "member",
-              "joinedAt": "2024-08-26T20:13:45Z"
             }
           ],
           "flags": [],
@@ -13819,7 +13721,7 @@
         "totalPeople": 48,
         "avgScore": 0,
         "inGroup": 28,
-        "serving": 26,
+        "serving": 25,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -13829,7 +13731,7 @@
         "overdue": 0,
         "notBaptized": 48,
         "notInGroup": 20,
-        "notServing": 22,
+        "notServing": 23,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -13847,7 +13749,7 @@
         },
         "pct": {
           "inGroup": 0.5833333333333334,
-          "serving": 0.5416666666666666,
+          "serving": 0.5208333333333334,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
           "recurring": 0,
@@ -14471,6 +14373,48 @@
         },
         {
           "id": null,
+          "name": "Richard Diebert",
+          "first": "Richard",
+          "last": "Diebert",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Turcich Community Group",
+              "role": "member",
+              "joinedAt": "2026-04-02T14:02:05Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Julie Serpa",
           "first": "Julie",
           "last": "Serpa",
@@ -14759,52 +14703,6 @@
             "Not in a group",
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Richard Diebert",
-          "first": "Richard",
-          "last": "Diebert",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Turcich Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-02T14:02:05Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2026-02-10T00:02:00Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -15856,11 +15754,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-08-12T18:10:52Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-02-24T21:57:29Z"
             }
           ],
           "flags": [],
@@ -17014,6 +16907,57 @@
         },
         {
           "id": null,
+          "name": "Ryan Griffin",
+          "first": "Ryan",
+          "last": "Griffin",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Ryan Griffin Community Group",
+              "role": "leader",
+              "joinedAt": "2025-04-17T16:50:05Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2025-04-18T08:58:31Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Presiders",
+              "role": "member",
+              "joinedAt": "2024-08-10T14:19:37Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Dr Richard Reich",
           "first": "Dr Richard",
           "last": "Reich",
@@ -17100,11 +17044,6 @@
               "name": "Tech Team",
               "role": "leader",
               "joinedAt": "2024-07-29T23:23:29Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-02-24T21:57:17Z"
             }
           ],
           "flags": [],
@@ -17550,62 +17489,6 @@
         },
         {
           "id": null,
-          "name": "Ryan Griffin",
-          "first": "Ryan",
-          "last": "Griffin",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Ryan Griffin Community Group",
-              "role": "leader",
-              "joinedAt": "2025-04-17T16:50:05Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-04-18T08:58:31Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Presiders",
-              "role": "member",
-              "joinedAt": "2024-08-10T14:19:37Z"
-            },
-            {
-              "name": "Preachers",
-              "role": "leader",
-              "joinedAt": "2024-08-26T20:13:36Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Stephanie Fava",
           "first": "Stephanie",
           "last": "Fava",
@@ -17854,11 +17737,6 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "leader",
               "joinedAt": "2024-08-12T17:17:41Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-10-15T20:17:00Z"
             }
           ],
           "flags": [],
@@ -18093,11 +17971,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2024-10-01T18:29:53Z"
-            },
-            {
-              "name": "Point Leaders",
-              "role": "member",
-              "joinedAt": "2025-02-12T03:32:15Z"
             }
           ],
           "flags": [],
