@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T14:50:13.793Z",
+  "generatedAt": "2026-09-20T15:50:37.247Z",
   "asOf": "2026-09-20",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 396,
     "avgScore": 0,
     "inGroup": 226,
-    "serving": 235,
+    "serving": 233,
     "leading": 83,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 396,
     "notInGroup": 170,
-    "notServing": 161,
+    "notServing": 163,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5707070707070707,
-      "serving": 0.5934343434343434,
+      "serving": 0.5883838383838383,
       "leading": 0.20959595959595959,
       "givingRegular": 0,
       "recurring": 0,
@@ -3342,7 +3342,7 @@
         "totalPeople": 57,
         "avgScore": 0,
         "inGroup": 32,
-        "serving": 33,
+        "serving": 32,
         "leading": 10,
         "givingRegular": 0,
         "recurring": 0,
@@ -3352,7 +3352,7 @@
         "overdue": 0,
         "notBaptized": 57,
         "notInGroup": 25,
-        "notServing": 24,
+        "notServing": 25,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3370,7 +3370,7 @@
         },
         "pct": {
           "inGroup": 0.5614035087719298,
-          "serving": 0.5789473684210527,
+          "serving": 0.5614035087719298,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
           "recurring": 0,
@@ -3718,6 +3718,43 @@
           "name": "Tracey Wright",
           "first": "Tracey",
           "last": "Wright",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Valerie Ridgers",
+          "first": "Valerie",
+          "last": "Ridgers",
           "email": "",
           "phone": "",
           "member": false,
@@ -4157,48 +4194,6 @@
           "serveTeams": [],
           "flags": [
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Valerie Ridgers",
-          "first": "Valerie",
-          "last": "Ridgers",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2026-04-22T02:41:04Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
@@ -5975,7 +5970,7 @@
         "totalPeople": 49,
         "avgScore": 0,
         "inGroup": 30,
-        "serving": 33,
+        "serving": 32,
         "leading": 8,
         "givingRegular": 0,
         "recurring": 0,
@@ -5985,7 +5980,7 @@
         "overdue": 0,
         "notBaptized": 49,
         "notInGroup": 19,
-        "notServing": 16,
+        "notServing": 17,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -6003,7 +5998,7 @@
         },
         "pct": {
           "inGroup": 0.6122448979591837,
-          "serving": 0.673469387755102,
+          "serving": 0.6530612244897959,
           "leading": 0.16326530612244897,
           "givingRegular": 0,
           "recurring": 0,
@@ -7230,6 +7225,48 @@
         },
         {
           "id": null,
+          "name": "Erich Brenner",
+          "first": "Erich",
+          "last": "Brenner",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Colonna/Mavros Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T21:43:09Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Gavin Au",
           "first": "Gavin",
           "last": "Au",
@@ -7564,52 +7601,6 @@
               "name": "Presiders",
               "role": "member",
               "joinedAt": "2025-03-18T21:59:18Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Erich Brenner",
-          "first": "Erich",
-          "last": "Brenner",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Colonna/Mavros Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:43:09Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Service Captains",
-              "role": "member",
-              "joinedAt": "2024-07-29T23:22:19Z"
             }
           ],
           "flags": [],
