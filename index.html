@@ -6537,7 +6537,7 @@ function cgFilterTable() {
 // ─────────────────────────────────────────────────────────────────────────────
 const STAFF_HASH = 'ac7f5a10683437edf6618ad90f38b43db60dd2b43a4e23fbae0dc9d58bda56f8';
 const STAFF_SESSION_KEY = 'staff_unlocked';
-const STAFF_DATA_URL = 'https://lssouthreno.github.io/Church-Dashboard/eos-data.json';
+const STAFF_DATA_URL = './eos-data.json';
 
 // ── Meeting minutes sync — fill in after deploying the Apps Script web app ──
 const MEETING_WEBAPP_URL  = 'https://script.google.com/macros/s/AKfycbyAvuf8TpNq7mfXJ3VSj_krVsJRBYvTndq2GGX_kTq0D1wrGw5CpQ3wnc308xTFJ9qD/exec';
@@ -6550,9 +6550,9 @@ const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
 // Code_ids_joy_webapp.gs is deployed as part of the same web app as EOS_WEBAPP_URL
 // (Code_eos_webapp.gs's doPost/doGet dispatch ids/joy_bomb/absence actions to it).
 const IDS_WEBAPP_URL      = EOS_WEBAPP_URL;
-const JOY_BOMBS_DATA_URL  = 'https://lssouthreno.github.io/Church-Dashboard/joy_bombs.json';
-const PATHWAY_DATA_URL    = 'https://lssouthreno.github.io/Church-Dashboard/pathway.json';
-const ABSENCES_DATA_URL   = 'https://lssouthreno.github.io/Church-Dashboard/absences.json';
+const JOY_BOMBS_DATA_URL  = './joy_bombs.json';
+const PATHWAY_DATA_URL    = './pathway.json';
+const ABSENCES_DATA_URL   = './absences.json';
 const IDS_LS_KEY          = 'lssr_ids_log';
 const JOY_BOMBS_LS_KEY    = 'lssr_joy_bombs';
 
@@ -6723,7 +6723,7 @@ async function sundayLoadData() {
     // Fetch dashboard-data (has sundayPlans) and eos-data (has calendar events)
     const [dashRes, eosRes] = await Promise.all([
       fetch(DATA_URL + '?v=' + Date.now(), { cache: 'no-store' }),
-      fetch('https://lssouthreno.github.io/Church-Dashboard/eos-data.json?v=' + Date.now(), { cache: 'no-store' })
+      fetch('./eos-data.json?v=' + Date.now(), { cache: 'no-store' })
     ]);
     if (dashRes.ok) {
       const dash = await dashRes.json();

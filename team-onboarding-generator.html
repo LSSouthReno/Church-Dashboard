@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Force HTTPS: the Admin gate hashes via crypto.subtle (Web Crypto), which
+  // browsers disable on non-secure (http://) pages — so the gate silently fails
+  // over HTTP. Bounce any plain-HTTP visit to HTTPS (localhost exempt for dev).
+  (function () {
+    var h = location.hostname;
+    if (location.protocol === 'http:' && h !== 'localhost' && h !== '127.0.0.1') {
+      location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+    }
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Team Onboarding Guide · Living Stones Church</title>
