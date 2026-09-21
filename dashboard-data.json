@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-21T19:46:11.003Z",
+  "lastUpdated": "2026-09-21T19:58:31.873Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 21, 2026, 12:46 PM",
+    "refreshed": "Sep 21, 2026, 12:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9451,7 +9451,7 @@
         null,
         null,
         5,
-        59,
+        58,
         8,
         11,
         null,
@@ -9798,14 +9798,6 @@
         "attPct": 45
       },
       {
-        "name": "Durham Community Group",
-        "members": 11,
-        "leaders": 3,
-        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
-        "avgAttended": 6,
-        "attPct": 55
-      },
-      {
         "name": "Maidens Community Group",
         "members": 11,
         "leaders": 1,
@@ -9836,6 +9828,14 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 6,
         "attPct": 55
+      },
+      {
+        "name": "Durham Community Group",
+        "members": 10,
+        "leaders": 3,
+        "schedule": "Meets weekly on Wednesdays from 10am-12pm",
+        "avgAttended": 6,
+        "attPct": 60
       },
       {
         "name": "Ryan Griffin Community Group",
@@ -9976,14 +9976,14 @@
     ],
     "venn": {
       "familyMembers": 365,
-      "cgMembers": 417,
-      "both": 194,
+      "cgMembers": 416,
+      "both": 193,
       "pctFmInCg": 53,
-      "pctCgAreFm": 47
+      "pctCgAreFm": 46
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 171,
+        "count": 172,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -10071,6 +10071,7 @@
           "John Cappini",
           "John Conelea",
           "Joseph Bozsik",
+          "Judy England",
           "Julie Orr",
           "Julie Serpa",
           "Karen Kuhn",
@@ -22241,7 +22242,7 @@
               "name": "Stephanie Fava",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
