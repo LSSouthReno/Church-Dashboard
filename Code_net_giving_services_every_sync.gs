@@ -1308,28 +1308,37 @@ function syncCGLeaderPipeline_() {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  // Pipeline candidates from the Shepherding sync: spiritually "adult" members
-  // (mature, not yet leading) primed to be IDENTIFIED for leadership. Written to
-  // the CGLeaderCandidates sheet by syncShepherdingHealth_.
+  // Leadership pipeline candidates: read the Shepherding private data directly
+  // (ShepherdingData sheet = chunked JSON, same spreadsheet) and pick spiritually
+  // "adult" members (mature, not yet leading) primed to be IDENTIFIED. Reading it
+  // here (rather than depending on the shepherding job to pre-write a sheet) keeps
+  // it self-contained in this sync. Names only — no scores leave this function.
   try {
-    const candSh = ss.getSheetByName('CGLeaderCandidates');
-    if (candSh && candSh.getLastRow() >= 2) {
-      const cands = candSh.getRange(2, 1, candSh.getLastRow() - 1, 4).getValues();
-      let added = 0;
-      cands.forEach(function(r) {
-        const name = String(r[0] || '').trim();
-        if (!name) return;
-        const inCG = String(r[2] || '') === 'Yes';
-        // In-CG adults are the readiest CG-leader/apprentice candidates; others are
-        // still worth identifying but flagged so the pastor knows to get them grouped.
-        allRows.push(['pipeline', '1', inCG ? 'Adult · Identify for Leadership' : 'Adult · Identify (not yet in a CG)', name, '']);
-        added++;
+    const shSh = ss.getSheetByName('ShepherdingData');
+    if (shSh && shSh.getLastRow() >= 1) {
+      const chunks = shSh.getRange(1, 1, shSh.getLastRow(), 1).getValues().map(function(r){ return String(r[0] || ''); });
+      const shData = JSON.parse(chunks.join(''));
+      const seen = {};
+      const cands = [];
+      (shData.elders || []).forEach(function(e) {
+        if (e.unassigned) return;
+        (e.people || []).forEach(function(p) {
+          if (!p || p.newFamilyMember) return;
+          if (p.paci === 'adult' && !p.leads && p.name && !seen[p.name]) {
+            seen[p.name] = 1;
+            cands.push({ name: p.name, score: p.score || 0, inCG: (p.groups || []).length > 0 });
+          }
+        });
       });
-      Logger.log('   Shepherding leadership candidates added: ' + added);
+      cands.sort(function(a, b){ return (b.score || 0) - (a.score || 0); });
+      cands.slice(0, 40).forEach(function(c) {
+        allRows.push(['pipeline', '1', c.inCG ? 'Adult · Identify for Leadership' : 'Adult · Identify (not yet in a CG)', c.name, '']);
+      });
+      Logger.log('   Leadership candidates from ShepherdingData: ' + Math.min(cands.length, 40) + ' of ' + cands.length);
     } else {
-      Logger.log('   No CGLeaderCandidates sheet yet (shepherding sync may not have run)');
+      Logger.log('   No ShepherdingData sheet found — skipping leadership candidates');
     }
-  } catch (e) { Logger.log('   ! candidate read failed: ' + e.message); }
+  } catch (e) { Logger.log('   ! candidate read (ShepherdingData) failed: ' + e.message); }
 
   const hdrs = ['Type', 'Phase', 'Label', 'Name', 'AddedThisYear'];
   const sh = ensureSheet_(ss, SHEETS.cgPipeline, hdrs);
