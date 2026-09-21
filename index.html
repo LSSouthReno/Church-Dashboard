@@ -6370,24 +6370,44 @@ function cgRenderKPIs(cg) {
     </div>`).join('');
 }
 
+// Linear year-end projection from this year's monthly trend (the sheet's "Pace")
+function cgPaceProject(vals) {
+  if (!Array.isArray(vals)) return null;
+  const pts = [];
+  vals.forEach((v, i) => { if (v != null) pts.push([i, v]); });
+  if (pts.length < 2) return null;
+  const first = pts[0], last = pts[pts.length - 1];
+  if (last[0] === first[0]) return null;
+  const slope = (last[1] - first[1]) / (last[0] - first[0]);
+  return Math.round(last[1] + slope * (11 - last[0]));
+}
+
 function cgRenderGoals(cg) {
   const cur = cg.current || {};
   const goals = cg.goals2026 || {};
   const el = document.getElementById('cgGoals');
   if (!el) return;
+  const yr = String(new Date().getFullYear());
   const items = [
-    { name: 'Active Groups',  cur: cur.groups,        goal: goals.groups,        pct: false },
-    { name: 'Total Members',  cur: cur.members,       goal: goals.members,       pct: false },
+    { name: 'Active Groups',  cur: cur.groups,        goal: goals.groups,        pct: false, series: (cg.groupCountsByYear || {})[yr] },
+    { name: 'Total Members',  cur: cur.members,       goal: goals.members,       pct: false, series: (cg.peopleInGroupsByYear || {})[yr] },
     { name: 'FM in Groups',   cur: cur.fmInGroupsPct, goal: goals.fmInGroupsPct, pct: true  }
   ];
   el.innerHTML = items.map(item => {
     const filled = (item.cur && item.goal) ? Math.min(100, Math.round((item.cur / item.goal) * 100)) : 0;
     const suffix = item.pct ? '%' : '';
+    const proj = cgPaceProject(item.series);
+    let pace = '';
+    if (proj != null && item.goal) {
+      const col = proj >= item.goal ? '#4ade80' : (proj >= item.goal * 0.85 ? '#fbbf24' : '#f87171');
+      const arrow = proj >= item.goal ? 'on pace' : 'off pace';
+      pace = ` <span style="color:${col};font-weight:600" title="Projected year-end at the current run rate">· ~${proj}${suffix} by Dec (${arrow})</span>`;
+    }
     return `
       <div class="cg-goal-row">
         <div class="cg-goal-name">${escapeHtml(item.name)}</div>
         <div class="cg-goal-track"><div class="cg-goal-fill${filled >= 100 ? ' at-goal' : ''}" style="width:${filled}%"></div></div>
-        <div class="cg-goal-val">${item.cur !== undefined ? item.cur : '?'}${suffix} / ${item.goal !== undefined ? item.goal : '?'}${suffix}</div>
+        <div class="cg-goal-val">${item.cur !== undefined ? item.cur : '?'}${suffix} / ${item.goal !== undefined ? item.goal : '?'}${suffix}${pace}</div>
       </div>`;
   }).join('');
 }
