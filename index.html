@@ -903,7 +903,7 @@
   .tmod-lockerr { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
   #cgPwInput { width: 100%; background: #1a1a1a; border: 1px solid #3a3a3a; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 15px; padding: 10px 12px; border-radius: 7px; outline: none; margin-bottom: 10px; box-sizing: border-box; }
-  #cgPwInput:focus { border-color: #a78bfa; }
+  #cgPwInput:focus { border-color: #2dd4bf; }
 
   /* CG modal inner layout */
   .cg-kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
@@ -911,7 +911,7 @@
   @media (max-width: 640px) { .cg-kpi-row { grid-template-columns: repeat(2, 1fr); } }
   .cg-kpi-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; text-align: center; }
   .cg-kpi-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .cg-kpi-value { font-size: 28px; font-weight: 700; color: #a78bfa; line-height: 1; }
+  .cg-kpi-value { font-size: 28px; font-weight: 700; color: #2dd4bf; line-height: 1; }
   .cg-kpi-goal { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
 
   .cg-section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 12px; }
@@ -919,7 +919,7 @@
   .cg-goal-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .cg-goal-name { font-size: 13px; font-weight: 500; width: 180px; flex-shrink: 0; }
   .cg-goal-track { flex: 1; height: 8px; background: #2a2a2a; border-radius: 4px; overflow: hidden; }
-  .cg-goal-fill { height: 100%; background: #a78bfa; border-radius: 4px; }
+  .cg-goal-fill { height: 100%; background: #2dd4bf; border-radius: 4px; }
   .cg-goal-fill.at-goal { background: #4ade80; }
   .cg-goal-val { font-size: 12px; color: var(--text-muted); white-space: nowrap; min-width: 80px; text-align: right; }
 
@@ -928,7 +928,7 @@
 
   .cg-table-ctrls { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
   .cg-table-ctrls input, .cg-table-ctrls select { background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 13px; padding: 7px 10px; border-radius: 7px; flex: 1; min-width: 120px; outline: none; }
-  .cg-table-ctrls input:focus, .cg-table-ctrls select:focus { border-color: #a78bfa; }
+  .cg-table-ctrls input:focus, .cg-table-ctrls select:focus { border-color: #2dd4bf; }
 
   .cg-rate-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
   .cg-rate-high  { background: rgba(74,222,128,0.15);  color: #4ade80; }  /* Healthy: 7-12 */
@@ -938,7 +938,7 @@
 
   .cg-pipeline-phase { margin-bottom: 18px; }
   .cg-pipeline-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-  .cg-phase-badge { background: rgba(167,139,250,0.15); color: #a78bfa; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+  .cg-phase-badge { background: rgba(45,212,191,0.15); color: #2dd4bf; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
   .cg-roster-badge { background: rgba(74,222,128,0.12); color: #4ade80; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
   .cg-phase-label { font-size: 13px; font-weight: 600; }
   .cg-phase-count { font-size: 12px; color: var(--text-muted); margin-left: auto; }
@@ -957,7 +957,7 @@
   .cg-venn-stat { background: #161616; border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 16px; }
   .cg-venn-stat-top { display: flex; align-items: baseline; gap: 10px; }
   .cg-venn-stat-pct { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
-  .cg-venn-stat-pct.purple { color: #a78bfa; }
+  .cg-venn-stat-pct.purple { color: #2dd4bf; }
   .cg-venn-stat-pct.blue { color: #60a5fa; }
   .cg-venn-stat-frac { font-size: 13px; color: var(--text-muted); font-weight: 600; }
   .cg-venn-stat-label { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
@@ -975,13 +975,14 @@
   .cg-action-hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
   .cg-action-title { font-size: 15px; font-weight: 700; color: var(--text); }
   .cg-action-count { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-  .cg-action-count.purple { color: #a78bfa; }
+  .cg-action-count.purple { color: #2dd4bf; }
   .cg-action-count.blue { color: #60a5fa; }
+  .cg-action-count.teal { color: #2dd4bf; }
   .cg-action-count.amber { color: #fbbf24; }
   .cg-action-count.green { color: #4ade80; }
   .cg-action-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45; }
   .cg-action-search { width: 100%; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 12.5px; padding: 7px 10px; border-radius: 7px; outline: none; margin-bottom: 10px; box-sizing: border-box; }
-  .cg-action-search:focus { border-color: #a78bfa; }
+  .cg-action-search:focus { border-color: #2dd4bf; }
   .cg-action-names { display: flex; flex-wrap: wrap; gap: 6px; max-height: 220px; overflow-y: auto; align-content: flex-start; }
   .cg-action-names::-webkit-scrollbar { width: 7px; }
   .cg-action-names::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
@@ -992,6 +993,23 @@
   .cg-flag-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #161616; border: 1px solid var(--card-border); border-radius: 8px; }
   .cg-flag-name { font-size: 13px; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cg-flag-meta { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+
+  /* ---- Interactive trend chart (consolidated, toggleable) ---- */
+  .cg-trend-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cg-seg { display: inline-flex; background: #161616; border: 1px solid var(--card-border); border-radius: 8px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+  .cg-seg-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+  .cg-seg-btn:hover { color: var(--text); }
+  .cg-seg-btn.active { background: #2dd4bf; color: #04211d; }
+  /* Leadership pipeline phase columns (Identify → Assess → Prepare → Plant) */
+  .cg-pipe-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-top: 6px; }
+  .cg-pipe-col { background: #161616; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 13px; }
+  .cg-pipe-col-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .cg-pipe-col-name { font-size: 12px; font-weight: 700; letter-spacing: .03em; }
+  .cg-pipe-col-count { font-size: 13px; font-weight: 800; color: #2dd4bf; }
+  .cg-pipe-names { display: flex; flex-direction: column; gap: 5px; max-height: 240px; overflow-y: auto; }
+  .cg-pipe-name { font-size: 12.5px; color: var(--text); padding: 5px 8px; background: #1c1c1c; border: 1px solid #2c2c2c; border-radius: 7px; }
+  .cg-pipe-name .cg-pipe-sub { font-size: 10.5px; color: var(--text-dim); display: block; margin-top: 1px; }
+  .cg-pipe-empty { font-size: 11.5px; color: var(--text-dim); font-style: italic; }
 
   .tmod-adminbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; padding: 10px 14px; background: var(--card-bg); border: 1px solid var(--yellow-2); border-radius: 8px; }
   .tmod-adminbar span { color: var(--yellow-2); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; }
@@ -2750,82 +2768,18 @@
     <!-- KPI cards -->
     <div class="cg-kpi-row" id="cgKPIs"></div>
 
-    <!-- 2026 Goals -->
-    <div class="cg-section-label">2026 Goals</div>
+    <!-- 2026 Goals + pace -->
+    <div class="cg-section-label">2026 Goals &amp; Pace</div>
     <div class="cg-goals" id="cgGoals"></div>
 
-    <!-- CG ∩ Family Member Venn -->
-    <div class="cg-section-label">Membership &amp; Community Group Overlap</div>
-    <div class="cg-venn-card" id="cgVennCard">
-      <div class="cg-venn-grid">
-        <div>
-          <div class="cg-venn-svg-wrap" id="cgVennSvg"></div>
-          <div class="cg-venn-legend">
-            <span><i class="cg-venn-dot" style="background:#a78bfa"></i> Community Group members</span>
-            <span><i class="cg-venn-dot" style="background:#60a5fa"></i> Family Members (membership)</span>
-          </div>
-        </div>
-        <div class="cg-venn-stats" id="cgVennStats"></div>
-      </div>
+    <!-- ===== ACTIONABLE: Leadership pipeline (who to identify / develop) ===== -->
+    <div class="cg-section-label">Leadership Pipeline &mdash; Who to Identify, Assess &amp; Develop</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="card-sub" id="cgPipelineSub">Active leaders &amp; development pipeline</div>
+      <div id="cgPipelineContent"></div>
     </div>
 
-    <!-- Multi-year trends -->
-    <div class="cg-charts-2col">
-      <div class="card">
-        <h2>Active Groups by Year</h2>
-        <div class="card-sub">Monthly group count &middot; multi-year comparison</div>
-        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgModCountChart"></canvas></div></div>
-      </div>
-      <div class="card">
-        <h2>People in Groups by Year</h2>
-        <div class="card-sub">Monthly member count &middot; multi-year comparison</div>
-        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgModMembersChart"></canvas></div></div>
-      </div>
-    </div>
-
-    <!-- Connection funnel + Outsiders -->
-    <div class="cg-charts-2col">
-      <div class="card">
-        <h2>Connection Funnel</h2>
-        <div class="card-sub" id="cgFunnelSub">New members joining groups each month</div>
-        <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgJoinChart"></canvas></div></div>
-      </div>
-      <div class="card">
-        <h2>Outsiders Becoming Insiders</h2>
-        <div class="card-sub">Non-members joining groups each month</div>
-        <div class="chart-wrap"><div class="chart-inner"><canvas id="cgOutsidersChart"></canvas></div></div>
-      </div>
-    </div>
-
-    <!-- Leader Pipeline + Attendance table -->
-    <div class="cg-charts-2col">
-      <div class="card">
-        <h2>CG Leadership</h2>
-        <div class="card-sub" id="cgPipelineSub">Active leaders &amp; development pipeline</div>
-        <div id="cgPipelineContent"></div>
-      </div>
-      <div class="card">
-        <h2>Group Size Health</h2>
-        <div class="card-sub">Member count per group &middot; goal: 10 per group</div>
-        <div class="cg-table-ctrls">
-          <input type="text" id="cgTableSearch" placeholder="Search group&hellip;" oninput="cgFilterTable()">
-          <select id="cgTableSort" onchange="cgFilterTable()">
-            <option value="members-d">Sort: members &#8595;</option>
-            <option value="members-a">Sort: members &#8593;</option>
-            <option value="att-d">Sort: avg attendance &#8595;</option>
-            <option value="az">Sort: name A&ndash;Z</option>
-          </select>
-        </div>
-        <div class="tmod-table-wrap">
-          <table class="tmod-table">
-            <thead><tr><th>Group</th><th>Members</th><th>Leaders</th><th>Avg Att.</th><th>Schedule</th><th>Size</th></tr></thead>
-            <tbody id="cgTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Actionable follow-up lists -->
+    <!-- ===== ACTIONABLE: Follow-up lists ===== -->
     <div class="cg-section-label">Action Lists &mdash; Who to Follow Up With</div>
     <div class="cg-action-grid">
       <div class="cg-action-card">
@@ -2841,7 +2795,7 @@
       <div class="cg-action-card">
         <div class="cg-action-hdr">
           <div class="cg-action-title">In a CG, not yet a Family Member</div>
-          <div class="cg-action-count purple" id="cgNotFmCount">&mdash;</div>
+          <div class="cg-action-count teal" id="cgNotFmCount">&mdash;</div>
         </div>
         <div class="cg-action-sub">Already connected &mdash; prime candidates for the Membership / Starting Point path.</div>
         <input type="text" class="cg-action-search" id="cgNotFmSearch" placeholder="Search name&hellip;" oninput="cgFilterActionList('cgNotFm')">
@@ -2850,7 +2804,7 @@
       </div>
     </div>
 
-    <!-- Group health flags -->
+    <!-- ===== ACTIONABLE: Group health flags ===== -->
     <div class="cg-section-label" style="margin-top:24px">Group Health Flags</div>
     <div class="cg-action-grid" style="grid-template-columns:1fr 1fr 1fr">
       <div class="cg-action-card">
@@ -2876,6 +2830,61 @@
         </div>
         <div class="cg-action-sub">No co-leader/apprentice &mdash; leadership risk.</div>
         <div class="cg-flag-list" id="cgSoloList"></div>
+      </div>
+    </div>
+
+    <!-- ===== Membership overlap Venn ===== -->
+    <div class="cg-section-label" style="margin-top:24px">Membership &amp; Community Group Overlap</div>
+    <div class="cg-venn-card" id="cgVennCard">
+      <div class="cg-venn-grid">
+        <div>
+          <div class="cg-venn-svg-wrap" id="cgVennSvg"></div>
+          <div class="cg-venn-legend">
+            <span><i class="cg-venn-dot" style="background:#2dd4bf"></i> Community Group members</span>
+            <span><i class="cg-venn-dot" style="background:#60a5fa"></i> Family Members (membership)</span>
+          </div>
+        </div>
+        <div class="cg-venn-stats" id="cgVennStats"></div>
+      </div>
+    </div>
+
+    <!-- ===== Interactive trends (one chart, toggle the metric) ===== -->
+    <div class="cg-section-label">Trends</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="cg-trend-hdr">
+        <div>
+          <h2 id="cgTrendTitle" style="margin:0">Active Groups by Year</h2>
+          <div class="card-sub" id="cgTrendSub">Monthly &middot; multi-year comparison</div>
+        </div>
+        <div class="cg-seg" id="cgTrendSeg">
+          <button class="cg-seg-btn active" data-metric="groups" onclick="cgSelectTrend('groups',this)">Groups</button>
+          <button class="cg-seg-btn" data-metric="members" onclick="cgSelectTrend('members',this)">Members</button>
+          <button class="cg-seg-btn" data-metric="size" onclick="cgSelectTrend('size',this)">Avg Size</button>
+          <button class="cg-seg-btn" data-metric="joined" onclick="cgSelectTrend('joined',this)">Joined</button>
+          <button class="cg-seg-btn" data-metric="outsiders" onclick="cgSelectTrend('outsiders',this)">Outsiders</button>
+        </div>
+      </div>
+      <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgTrendChart"></canvas></div></div>
+    </div>
+
+    <!-- ===== Group size health table (reference) ===== -->
+    <div class="cg-section-label">Group Size Health</div>
+    <div class="card">
+      <div class="card-sub">Member count per group &middot; goal: 10 per group</div>
+      <div class="cg-table-ctrls">
+        <input type="text" id="cgTableSearch" placeholder="Search group&hellip;" oninput="cgFilterTable()">
+        <select id="cgTableSort" onchange="cgFilterTable()">
+          <option value="members-d">Sort: members &#8595;</option>
+          <option value="members-a">Sort: members &#8593;</option>
+          <option value="att-d">Sort: avg attendance &#8595;</option>
+          <option value="az">Sort: name A&ndash;Z</option>
+        </select>
+      </div>
+      <div class="tmod-table-wrap">
+        <table class="tmod-table">
+          <thead><tr><th>Group</th><th>Members</th><th>Leaders</th><th>Avg Att.</th><th>Schedule</th><th>Size</th></tr></thead>
+          <tbody id="cgTableBody"></tbody>
+        </table>
       </div>
     </div>
 
@@ -6331,14 +6340,11 @@ function cgRenderAll() {
   _cgData = cg;
   cgRenderKPIs(cg);
   cgRenderGoals(cg);
-  cgRenderVenn(cg);
-  cgRenderGroupsByYear(cg);
-  cgRenderMembersByYear(cg);
-  cgRenderJoinFunnel(cg);
-  cgRenderOutsiders(cg);
   cgRenderPipeline(cg);
-  cgRenderAttendanceTable(cg);
   cgRenderActionLists(cg);
+  cgRenderVenn(cg);
+  cgRenderTrend('groups');
+  cgRenderAttendanceTable(cg);
 }
 
 // Average weekly attendance ÷ total members across all groups
@@ -6433,7 +6439,7 @@ function cgVennSvgMarkup(v) {
   const xMid   = Math.round((cxA + cxB) / 2);
   const xRight = Math.round(cxB + rB * 0.42);
   return `<svg class="cg-venn-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overlap of Community Group members and Family Members">
-    <circle cx="${cxA}" cy="${cy}" r="${rA}" fill="rgba(167,139,250,0.30)" stroke="#a78bfa" stroke-width="2"/>
+    <circle cx="${cxA}" cy="${cy}" r="${rA}" fill="rgba(45,212,191,0.30)" stroke="#2dd4bf" stroke-width="2"/>
     <circle cx="${cxB}" cy="${cy}" r="${rB}" fill="rgba(96,165,250,0.30)" stroke="#60a5fa" stroke-width="2"/>
     ${tspanNum(xLeft,  cgOnly, 'CG only')}
     ${tspanNum(xMid,   both,   'Both')}
@@ -6480,7 +6486,7 @@ function cgRenderVenn(cg) {
         <span class="cg-venn-stat-frac">${both.toLocaleString()} of ${v.cgMembers.toLocaleString()}</span>
       </div>
       <div class="cg-venn-stat-label"><b>of Community Group members are Family Members.</b> The rest are prime membership candidates.</div>
-      <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pctCgAreFm)}%;background:#a78bfa"></div></div>
+      <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pctCgAreFm)}%;background:#2dd4bf"></div></div>
     </div>`;
 }
 
@@ -6558,7 +6564,7 @@ const CG_YEAR_COLORS = {
   '2023': { border: 'rgba(107,114,128,0.8)',  bg: 'transparent' },
   '2024': { border: 'rgba(96,165,250,0.85)',  bg: 'transparent' },
   '2025': { border: 'rgba(251,146,60,0.9)',   bg: 'transparent' },
-  '2026': { border: 'rgba(167,139,250,1)',     bg: 'transparent' }
+  '2026': { border: 'rgba(45,212,191,1)',     bg: 'transparent' }
 };
 
 function cgBuildMultiYearDatasets(byYear) {
@@ -6585,6 +6591,54 @@ const cgMultiYearScales = {
   x: { ...baseGridOpts, grid: { display: false }, ticks: { ...baseGridOpts.ticks, autoSkip: false, maxRotation: 0 } },
   y: { ...baseGridOpts, beginAtZero: true, ticks: { ...baseGridOpts.ticks, precision: 0 } }
 };
+
+// ── Consolidated interactive trend chart (one canvas, toggle the metric) ──────
+let _cgTrendChart = null;
+function cgComputeSizeByYear(cg) {
+  const g = cg.groupCountsByYear || {}, m = cg.peopleInGroupsByYear || {}, out = {};
+  Object.keys(m).forEach(yr => {
+    out[yr] = (m[yr] || []).map((v, i) => {
+      const gc = (g[yr] || [])[i];
+      return (v != null && gc) ? Math.round(v / gc) : null;
+    });
+  });
+  return out;
+}
+const CG_TREND_META = {
+  groups:    { title: 'Active Groups by Year',      sub: 'Monthly group count · multi-year comparison',   unit: 'groups',    src: cg => cg.groupCountsByYear },
+  members:   { title: 'People in Groups by Year',   sub: 'Monthly member count · multi-year comparison',   unit: 'people',    src: cg => cg.peopleInGroupsByYear },
+  size:      { title: 'Average Group Size by Year',  sub: 'Members ÷ groups each month · goal: 10',         unit: '/group',    src: cg => cgComputeSizeByYear(cg) },
+  joined:    { title: 'Joined a Group',              sub: 'New group members each month · multi-year',      unit: 'joined',    src: cg => cg.joinedGroup },
+  outsiders: { title: 'Outsiders → Insiders',       sub: 'Non-members joining groups each month',          unit: 'people',    src: cg => cg.outsidersInsiders }
+};
+function cgSelectTrend(metric, btn) {
+  document.querySelectorAll('#cgTrendSeg .cg-seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+  cgRenderTrend(metric);
+}
+function cgRenderTrend(metric) {
+  const cg = _cgData || {};
+  const meta = CG_TREND_META[metric] || CG_TREND_META.groups;
+  const tEl = document.getElementById('cgTrendTitle'); if (tEl) tEl.textContent = meta.title;
+  const sEl = document.getElementById('cgTrendSub');   if (sEl) sEl.textContent = meta.sub;
+  const byYear = meta.src(cg) || {};
+  const ctx = document.getElementById('cgTrendChart'); if (!ctx) return;
+  if (_cgTrendChart) { _cgTrendChart.destroy(); _cgTrendChart = null; }
+  const datasets = cgBuildMultiYearDatasets(byYear);
+  prepScrollableChart('cgTrendChart', 12);
+  _cgTrendChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: CG_MONTHS, datasets },
+    options: {
+      responsive: false, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, labels: { color: '#aaa', font: { size: 11, family: 'Montserrat' }, boxWidth: 20 } },
+        tooltip: { ...baseTooltip, callbacks: { label: c => '  ' + c.dataset.label + ': ' + (c.parsed.y != null ? c.parsed.y : '—') + ' ' + meta.unit } }
+      },
+      scales: cgMultiYearScales
+    }
+  });
+  const wrap = ctx.closest('.chart-wrap'); if (wrap) requestAnimationFrame(() => { wrap.scrollLeft = 0; });
+}
 
 function cgRenderGroupsByYear(cg) {
   const byYear = cg.groupCountsByYear || {};
@@ -6674,7 +6728,7 @@ function cgRenderJoinFunnel(cg) {
     data: {
       labels,
       datasets: [
-        { label: 'Applied', data: appliedData, backgroundColor: 'rgba(167,139,250,0.55)', borderRadius: 4, maxBarThickness: 28, hidden: !hasApplied },
+        { label: 'Applied', data: appliedData, backgroundColor: 'rgba(45,212,191,0.55)', borderRadius: 4, maxBarThickness: 28, hidden: !hasApplied },
         { label: 'Joined',  data: joinedData,  backgroundColor: 'rgba(74,222,128,0.7)',   borderRadius: 4, maxBarThickness: 28 }
       ]
     },
@@ -6706,7 +6760,7 @@ function cgRenderOutsiders(cg) {
     type: 'bar',
     data: {
       labels,
-      datasets: [{ label: 'Outsiders joining', data, backgroundColor: data.map((_, i) => ['#a78bfa','#9333ea','#7c3aed','#c4b5fd'][i % 4]), borderRadius: 4, maxBarThickness: 28 }]
+      datasets: [{ label: 'Outsiders joining', data, backgroundColor: data.map((_, i) => ['#2dd4bf','#14b8a6','#0d9488','#5eead4'][i % 4]), borderRadius: 4, maxBarThickness: 28 }]
     },
     options: {
       responsive: false, maintainAspectRatio: false,
@@ -6741,42 +6795,37 @@ function cgRenderPipeline(cg) {
   const subEl = document.getElementById('cgPipelineSub');
   if (subEl) {
     let sub = rosterTotal + ' current leader' + (rosterTotal !== 1 ? 's' : '');
-    if (pipelineTotal > 0) sub += ' · ' + pipelineTotal + ' potential';
-    if (cg.leadersAdded && cg.leadersAdded.total2026) sub += ' · ' + cg.leadersAdded.total2026 + ' added in 2026';
+    if (pipelineTotal > 0) sub += ' · ' + pipelineTotal + ' primed to identify';
+    if (cg.leadersAdded && cg.leadersAdded.total2026) sub += ' · ' + cg.leadersAdded.total2026 + ' developed in 2026';
     subEl.textContent = sub;
   }
 
-  const renderNameList = (names) =>
-    '<div class="cg-pipeline-names">' +
-    names.map(n => '<span class="cg-name-tag">' + escapeHtml(n) + '</span>').join('') +
-    '</div>';
-
   let html = '';
 
-  // --- Current Leaders section ---
-  html += '<div class="cg-section-divider">Current Leaders (' + rosterTotal + ')</div>';
-  if (allCurrentNames.length) {
-    html += renderNameList(allCurrentNames.sort((a, b) => a.localeCompare(b)));
+  // --- Pipeline board: the actionable "who to identify / develop" columns ---
+  if (pipeline.length) {
+    html += '<div class="cg-pipe-board">';
+    pipeline.forEach(col => {
+      const names = col.names || [];
+      html += '<div class="cg-pipe-col"><div class="cg-pipe-col-hdr">' +
+              '<span class="cg-pipe-col-name">' + escapeHtml(col.label || 'Candidates') + '</span>' +
+              '<span class="cg-pipe-col-count">' + names.length + '</span></div>';
+      html += names.length
+        ? '<div class="cg-pipe-names">' + names.map(n => '<div class="cg-pipe-name">' + escapeHtml(n) + '</div>').join('') + '</div>'
+        : '<div class="cg-pipe-empty">None right now.</div>';
+      html += '</div>';
+    });
+    html += '</div>';
   } else {
-    html += '<div class="cg-no-pipeline">No current leaders found.</div>';
+    html += '<div class="cg-no-pipeline">No leadership candidates yet. These fill in automatically from the Shepherding sync — spiritually &ldquo;adult&rdquo; members (mature &amp; engaged, not yet leading) who are primed to be identified. To also track Assess → Prepare → Plant, create a Planning Center People workflow named &ldquo;Leader Development.&rdquo;</div>';
   }
 
-  // --- Potential Leaders section ---
-  html += '<div class="cg-section-divider" style="margin-top:22px">Potential Leaders (' + pipelineTotal + ')</div>';
-  if (pipeline.length) {
-    // If multiple workflow steps exist, show each step as a sub-group
-    pipeline.forEach(p => {
-      html += `<div class="cg-pipeline-phase">
-        <div class="cg-pipeline-hdr">
-          <span class="cg-phase-badge">${escapeHtml(p.label)}</span>
-          <span class="cg-phase-count">${p.count}</span>
-        </div>
-        ${renderNameList(p.names || [])}
-      </div>`;
-    });
-  } else {
-    html += '<div class="cg-no-pipeline">No potential leaders tracked yet. To add someone here, create a workflow in Planning Center People named "Leader Development" and add candidates to it.</div>';
-  }
+  // --- Current leaders (collapsible reference) ---
+  html += '<details style="margin-top:16px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">CURRENT LEADERS (' + rosterTotal + ')</summary>';
+  html += allCurrentNames.length
+    ? '<div class="cg-pipeline-names" style="margin-top:10px">' + allCurrentNames.sort((a, b) => a.localeCompare(b)).map(n => '<span class="cg-name-tag">' + escapeHtml(n) + '</span>').join('') + '</div>'
+    : '<div class="cg-no-pipeline">No current leaders found.</div>';
+  html += '</details>';
 
   el.innerHTML = html;
 }
