@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-21T03:07:32.201Z",
+  "lastUpdated": "2026-09-21T03:47:04.374Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -224,7 +224,7 @@
       363983,
       407656,
       239469,
-      196348
+      196458
     ],
     "donors": [
       0,
@@ -331,12 +331,12 @@
       362,
       364,
       402,
-      325
+      326
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5489021
+    "raised": 5489131
   },
   "attendance": {
     "months": [
@@ -7980,7 +7980,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 20, 2026, 8:07 PM",
+    "refreshed": "Sep 20, 2026, 8:47 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -23038,7 +23038,18 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-10-07",
+      "end": "2026-10-11"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -23048,7 +23059,7 @@
     "weeklyAvg": 11,
     "totalFetched": 7093,
     "since": "2026-08-22",
-    "asOf": "2026-09-21T02:44:53.023Z"
+    "asOf": "2026-09-21T03:44:42.301Z"
   },
   "emailStats": {
     "latestOpenRate": 0.3114754098360656,
@@ -23056,6 +23067,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-19T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-21T02:44:54.643Z"
+    "asOf": "2026-09-21T03:44:43.388Z"
   }
 }
