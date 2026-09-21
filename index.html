@@ -922,6 +922,11 @@
   .cg-goal-fill { height: 100%; background: #2dd4bf; border-radius: 4px; }
   .cg-goal-fill.at-goal { background: #4ade80; }
   .cg-goal-val { font-size: 12px; color: var(--text-muted); white-space: nowrap; min-width: 80px; text-align: right; }
+  @media (max-width: 640px) {
+    .cg-goal-row { flex-wrap: wrap; }
+    .cg-goal-name { width: 100%; }
+    .cg-goal-val { white-space: normal; min-width: 0; }
+  }
 
   .cg-charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
   @media (max-width: 768px) { .cg-charts-2col { grid-template-columns: 1fr; } }
