@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-21T22:46:41.344Z",
+  "lastUpdated": "2026-09-21T22:59:33.173Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 21, 2026, 3:46 PM",
+    "refreshed": "Sep 21, 2026, 3:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -19788,13 +19788,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Audrey Hawkins",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Jeff Bridges",
               "team": "Parking Team",
               "pos": "Parking Czar",
@@ -20423,6 +20416,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Matt Gardner",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -20500,7 +20500,7 @@
               "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 2,
               "description": ""
             },
             {
@@ -20540,9 +20540,9 @@
             },
             {
               "seq": 17,
-              "title": "PROCLAIM / BENEDICTION",
+              "title": "PROCLAMATION OF FAITH",
               "type": "item",
-              "lengthMin": 1,
+              "lengthMin": 0,
               "description": ""
             },
             {
@@ -20554,13 +20554,20 @@
             },
             {
               "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -22235,7 +22242,7 @@
               "name": "Anna Sawyer",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
