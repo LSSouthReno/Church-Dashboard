@@ -906,7 +906,8 @@
   #cgPwInput:focus { border-color: #a78bfa; }
 
   /* CG modal inner layout */
-  .cg-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .cg-kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 900px) { .cg-kpi-row { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 640px) { .cg-kpi-row { grid-template-columns: repeat(2, 1fr); } }
   .cg-kpi-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; text-align: center; }
   .cg-kpi-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
@@ -945,6 +946,52 @@
   .cg-name-tag { background: #1c1c1c; border: 1px solid #333; border-radius: 14px; padding: 4px 10px; font-size: 12px; }
   .cg-section-divider { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); font-weight: 600; margin: 16px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--card-border); }
   .cg-no-pipeline { font-size: 12px; color: var(--text-dim); font-style: italic; padding: 6px 0; }
+
+  /* ---- CG ∩ Family Member Venn ---- */
+  .cg-venn-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 22px; margin-bottom: 24px; }
+  .cg-venn-grid { display: grid; grid-template-columns: minmax(300px, 1.1fr) 1fr; gap: 24px; align-items: center; }
+  @media (max-width: 820px) { .cg-venn-grid { grid-template-columns: 1fr; } }
+  .cg-venn-svg-wrap { display: flex; justify-content: center; align-items: center; }
+  .cg-venn-svg { width: 100%; max-width: 440px; height: auto; }
+  .cg-venn-stats { display: flex; flex-direction: column; gap: 14px; }
+  .cg-venn-stat { background: #161616; border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 16px; }
+  .cg-venn-stat-top { display: flex; align-items: baseline; gap: 10px; }
+  .cg-venn-stat-pct { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+  .cg-venn-stat-pct.purple { color: #a78bfa; }
+  .cg-venn-stat-pct.blue { color: #60a5fa; }
+  .cg-venn-stat-frac { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+  .cg-venn-stat-label { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+  .cg-venn-stat-label b { color: var(--text); font-weight: 600; }
+  .cg-venn-track { height: 6px; background: #2a2a2a; border-radius: 3px; overflow: hidden; margin-top: 9px; }
+  .cg-venn-fill { height: 100%; border-radius: 3px; }
+  .cg-venn-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+  .cg-venn-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .cg-venn-dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+  /* ---- Actionable named lists ---- */
+  .cg-action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 820px) { .cg-action-grid { grid-template-columns: 1fr; } }
+  .cg-action-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; }
+  .cg-action-hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .cg-action-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .cg-action-count { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .cg-action-count.purple { color: #a78bfa; }
+  .cg-action-count.blue { color: #60a5fa; }
+  .cg-action-count.amber { color: #fbbf24; }
+  .cg-action-count.green { color: #4ade80; }
+  .cg-action-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45; }
+  .cg-action-search { width: 100%; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 12.5px; padding: 7px 10px; border-radius: 7px; outline: none; margin-bottom: 10px; box-sizing: border-box; }
+  .cg-action-search:focus { border-color: #a78bfa; }
+  .cg-action-names { display: flex; flex-wrap: wrap; gap: 6px; max-height: 220px; overflow-y: auto; align-content: flex-start; }
+  .cg-action-names::-webkit-scrollbar { width: 7px; }
+  .cg-action-names::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  .cg-action-name { background: #1c1c1c; border: 1px solid #333; border-radius: 13px; padding: 4px 10px; font-size: 12px; white-space: nowrap; }
+  .cg-action-empty { font-size: 12px; color: var(--text-dim); font-style: italic; padding: 10px 0; }
+  .cg-action-more { font-size: 11px; color: var(--text-dim); margin-top: 8px; font-style: italic; }
+  .cg-flag-list { display: flex; flex-direction: column; gap: 8px; }
+  .cg-flag-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #161616; border: 1px solid var(--card-border); border-radius: 8px; }
+  .cg-flag-name { font-size: 13px; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cg-flag-meta { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
 
   .tmod-adminbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; padding: 10px 14px; background: var(--card-bg); border: 1px solid var(--yellow-2); border-radius: 8px; }
   .tmod-adminbar span { color: var(--yellow-2); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; }
@@ -2707,6 +2754,21 @@
     <div class="cg-section-label">2026 Goals</div>
     <div class="cg-goals" id="cgGoals"></div>
 
+    <!-- CG ∩ Family Member Venn -->
+    <div class="cg-section-label">Membership &amp; Community Group Overlap</div>
+    <div class="cg-venn-card" id="cgVennCard">
+      <div class="cg-venn-grid">
+        <div>
+          <div class="cg-venn-svg-wrap" id="cgVennSvg"></div>
+          <div class="cg-venn-legend">
+            <span><i class="cg-venn-dot" style="background:#a78bfa"></i> Community Group members</span>
+            <span><i class="cg-venn-dot" style="background:#60a5fa"></i> Family Members (membership)</span>
+          </div>
+        </div>
+        <div class="cg-venn-stats" id="cgVennStats"></div>
+      </div>
+    </div>
+
     <!-- Multi-year trends -->
     <div class="cg-charts-2col">
       <div class="card">
@@ -2760,6 +2822,60 @@
             <tbody id="cgTableBody"></tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- Actionable follow-up lists -->
+    <div class="cg-section-label">Action Lists &mdash; Who to Follow Up With</div>
+    <div class="cg-action-grid">
+      <div class="cg-action-card">
+        <div class="cg-action-hdr">
+          <div class="cg-action-title">Family Members not in a CG</div>
+          <div class="cg-action-count blue" id="cgFmNotInCgCount">&mdash;</div>
+        </div>
+        <div class="cg-action-sub">Members to shepherd into a group &mdash; the fastest lever on the 75% goal.</div>
+        <input type="text" class="cg-action-search" id="cgFmNotInCgSearch" placeholder="Search name&hellip;" oninput="cgFilterActionList('fmNotInCg')">
+        <div class="cg-action-names" id="cgFmNotInCgNames"></div>
+        <div class="cg-action-more" id="cgFmNotInCgMore"></div>
+      </div>
+      <div class="cg-action-card">
+        <div class="cg-action-hdr">
+          <div class="cg-action-title">In a CG, not yet a Family Member</div>
+          <div class="cg-action-count purple" id="cgNotFmCount">&mdash;</div>
+        </div>
+        <div class="cg-action-sub">Already connected &mdash; prime candidates for the Membership / Starting Point path.</div>
+        <input type="text" class="cg-action-search" id="cgNotFmSearch" placeholder="Search name&hellip;" oninput="cgFilterActionList('cgNotFm')">
+        <div class="cg-action-names" id="cgNotFmNames"></div>
+        <div class="cg-action-more" id="cgNotFmMore"></div>
+      </div>
+    </div>
+
+    <!-- Group health flags -->
+    <div class="cg-section-label" style="margin-top:24px">Group Health Flags</div>
+    <div class="cg-action-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="cg-action-card">
+        <div class="cg-action-hdr">
+          <div class="cg-action-title">Ready to multiply</div>
+          <div class="cg-action-count amber" id="cgMultiplyCount">&mdash;</div>
+        </div>
+        <div class="cg-action-sub">Groups over 18 &mdash; candidates to plant from.</div>
+        <div class="cg-flag-list" id="cgMultiplyList"></div>
+      </div>
+      <div class="cg-action-card">
+        <div class="cg-action-hdr">
+          <div class="cg-action-title">Below healthy size</div>
+          <div class="cg-action-count green" id="cgSmallCount">&mdash;</div>
+        </div>
+        <div class="cg-action-sub">Groups under 7 &mdash; may need members or merging.</div>
+        <div class="cg-flag-list" id="cgSmallList"></div>
+      </div>
+      <div class="cg-action-card">
+        <div class="cg-action-hdr">
+          <div class="cg-action-title">Single-leader groups</div>
+          <div class="cg-action-count blue" id="cgSoloCount">&mdash;</div>
+        </div>
+        <div class="cg-action-sub">No co-leader/apprentice &mdash; leadership risk.</div>
+        <div class="cg-flag-list" id="cgSoloList"></div>
       </div>
     </div>
 
@@ -6209,16 +6325,28 @@ async function cgDoUnlock() {
   }
 }
 
+let _cgData = {};
 function cgRenderAll() {
   const cg = DASHBOARD_DATA.communityGroupsDetailed || {};
+  _cgData = cg;
   cgRenderKPIs(cg);
   cgRenderGoals(cg);
+  cgRenderVenn(cg);
   cgRenderGroupsByYear(cg);
   cgRenderMembersByYear(cg);
   cgRenderJoinFunnel(cg);
   cgRenderOutsiders(cg);
   cgRenderPipeline(cg);
   cgRenderAttendanceTable(cg);
+  cgRenderActionLists(cg);
+}
+
+// Average weekly attendance ÷ total members across all groups
+function cgAttendingVsMember(cg) {
+  const ga = cg.groupAttendance || [];
+  let att = 0, mem = 0;
+  ga.forEach(g => { att += (g.avgAttended || 0); mem += (g.members || 0); });
+  return mem > 0 && att > 0 ? Math.round(att / mem * 100) : null;
 }
 
 function cgRenderKPIs(cg) {
@@ -6226,11 +6354,13 @@ function cgRenderKPIs(cg) {
   const goals = cg.goals2026 || {};
   const el = document.getElementById('cgKPIs');
   if (!el) return;
+  const avm = cgAttendingVsMember(cg);
   const kpis = [
     { label: 'Active Groups',  value: cur.groups !== undefined ? cur.groups : '—',                 goal: goals.groups     ? 'Goal: ' + goals.groups      : '' },
     { label: 'Total Members',  value: cur.members !== undefined ? cur.members : '—',               goal: goals.members    ? 'Goal: ' + goals.members     : '' },
     { label: 'Avg Group Size', value: cur.groupSize !== undefined ? cur.groupSize : '—',           goal: goals.groupSize  ? 'Goal: ' + goals.groupSize   : '' },
-    { label: 'FM in Groups',   value: cur.fmInGroupsPct !== undefined ? cur.fmInGroupsPct + '%' : '—', goal: goals.fmInGroupsPct ? 'Goal: ' + goals.fmInGroupsPct + '%' : '' }
+    { label: 'FM in Groups',   value: cur.fmInGroupsPct !== undefined ? cur.fmInGroupsPct + '%' : '—', goal: goals.fmInGroupsPct ? 'Goal: ' + goals.fmInGroupsPct + '%' : '' },
+    { label: 'Attending / Member', value: avm !== null ? avm + '%' : '—',                          goal: 'Avg weekly turnout' }
   ];
   el.innerHTML = kpis.map(k => `
     <div class="cg-kpi-card">
@@ -6260,6 +6390,144 @@ function cgRenderGoals(cg) {
         <div class="cg-goal-val">${item.cur !== undefined ? item.cur : '?'}${suffix} / ${item.goal !== undefined ? item.goal : '?'}${suffix}</div>
       </div>`;
   }).join('');
+}
+
+// ── CG ∩ Family Member Venn ──────────────────────────────────────────────────
+function cgVennSvgMarkup(v) {
+  const cgM  = Math.max(0, v.cgMembers || 0);
+  const fm   = Math.max(0, v.familyMembers || 0);
+  const both = Math.max(0, Math.min(v.both || 0, cgM, fm));
+  const cgOnly = Math.max(0, cgM - both);
+  const fmOnly = Math.max(0, fm - both);
+  const W = 440, H = 250, cy = 125;
+  const maxR = 94, minR = 60, mx = Math.max(cgM, fm, 1);
+  const rA = Math.round(minR + (maxR - minR) * Math.sqrt(cgM / mx));
+  const rB = Math.round(minR + (maxR - minR) * Math.sqrt(fm / mx));
+  const d  = Math.round((rA + rB) * 0.60);
+  const cxA = Math.round(W/2 - d/2), cxB = Math.round(W/2 + d/2);
+  const num = (n) => n.toLocaleString();
+  const tspanNum = (x, val, sub) =>
+    `<text x="${x}" y="${cy-4}" text-anchor="middle" fill="#fff" font-size="24" font-weight="800" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.35);stroke-width:3px">${num(val)}</text>` +
+    `<text x="${x}" y="${cy+16}" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="10.5" font-weight="600" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.35);stroke-width:2.5px">${sub}</text>`;
+  const xLeft  = Math.round(cxA - rA * 0.42);
+  const xMid   = Math.round((cxA + cxB) / 2);
+  const xRight = Math.round(cxB + rB * 0.42);
+  return `<svg class="cg-venn-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overlap of Community Group members and Family Members">
+    <circle cx="${cxA}" cy="${cy}" r="${rA}" fill="rgba(167,139,250,0.30)" stroke="#a78bfa" stroke-width="2"/>
+    <circle cx="${cxB}" cy="${cy}" r="${rB}" fill="rgba(96,165,250,0.30)" stroke="#60a5fa" stroke-width="2"/>
+    ${tspanNum(xLeft,  cgOnly, 'CG only')}
+    ${tspanNum(xMid,   both,   'Both')}
+    ${tspanNum(xRight, fmOnly, 'FM only')}
+  </svg>`;
+}
+
+function cgRenderVenn(cg) {
+  const svgWrap = document.getElementById('cgVennSvg');
+  const statsEl = document.getElementById('cgVennStats');
+  if (!svgWrap || !statsEl) return;
+  const v = cg.venn;
+  if (!v || !v.cgMembers || !v.familyMembers) {
+    // Graceful pre-sync fallback: show the one overlap metric we already have.
+    const pct = (cg.current || {}).fmInGroupsPct;
+    svgWrap.innerHTML = '<div class="cg-action-empty" style="text-align:center">The full overlap diagram populates at the next hourly sync.</div>';
+    statsEl.innerHTML = (pct != null)
+      ? `<div class="cg-venn-stat"><div class="cg-venn-stat-top"><span class="cg-venn-stat-pct blue">${pct}%</span></div>
+          <div class="cg-venn-stat-label"><b>of Family Members are in a Community Group.</b> Goal: 75%.</div>
+          <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pct)}%;background:#60a5fa"></div></div></div>`
+      : '<div class="cg-action-empty">Overlap data pending.</div>';
+    return;
+  }
+  const both = Math.min(v.both || 0, v.cgMembers, v.familyMembers);
+  const pctFmInCg  = v.pctFmInCg  != null ? v.pctFmInCg  : Math.round(both / v.familyMembers * 100);
+  const pctCgAreFm = v.pctCgAreFm != null ? v.pctCgAreFm : Math.round(both / v.cgMembers    * 100);
+  svgWrap.innerHTML = cgVennSvgMarkup(v);
+  const goalPct = ((cg.goals2026 || {}).fmInGroupsPct) || 75;
+  statsEl.innerHTML = `
+    <div class="cg-venn-stat">
+      <div class="cg-venn-stat-top">
+        <span class="cg-venn-stat-pct blue">${pctFmInCg}%</span>
+        <span class="cg-venn-stat-frac">${both.toLocaleString()} of ${v.familyMembers.toLocaleString()}</span>
+      </div>
+      <div class="cg-venn-stat-label"><b>of Family Members are in a Community Group.</b> Goal: ${goalPct}% &mdash; ${pctFmInCg >= goalPct ? 'at goal 🎉' : (goalPct - pctFmInCg) + ' pts to go'}.</div>
+      <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pctFmInCg)}%;background:#60a5fa"></div></div>
+    </div>
+    <div class="cg-venn-stat">
+      <div class="cg-venn-stat-top">
+        <span class="cg-venn-stat-pct purple">${pctCgAreFm}%</span>
+        <span class="cg-venn-stat-frac">${both.toLocaleString()} of ${v.cgMembers.toLocaleString()}</span>
+      </div>
+      <div class="cg-venn-stat-label"><b>of Community Group members are Family Members.</b> The rest are prime membership candidates.</div>
+      <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pctCgAreFm)}%;background:#a78bfa"></div></div>
+    </div>`;
+}
+
+// ── Actionable named lists + group-health flags ──────────────────────────────
+const CG_NAME_CAP = 400;
+function cgRenderNameList(elId, moreId, listObj) {
+  const el = document.getElementById(elId);
+  const moreEl = document.getElementById(moreId);
+  if (!el) return;
+  const names = (listObj && listObj.names) || [];
+  if (!names.length) {
+    el.innerHTML = '<div class="cg-action-empty">' + (listObj && listObj.count === 0 ? 'None — everyone here is covered. 🎉' : 'Populates at the next hourly sync.') + '</div>';
+    if (moreEl) moreEl.textContent = '';
+    return;
+  }
+  const shown = names.slice(0, CG_NAME_CAP);
+  el.innerHTML = shown.map(n => '<span class="cg-action-name">' + escapeHtml(n) + '</span>').join('');
+  const total = (listObj.count != null) ? listObj.count : names.length;
+  if (moreEl) moreEl.textContent = total > shown.length ? ('+ ' + (total - shown.length) + ' more (refine with search)') : '';
+}
+
+function cgFilterActionList(which) {
+  const map = {
+    fmNotInCg: ['cgFmNotInCgSearch', 'cgFmNotInCgNames', 'cgFmNotInCgMore'],
+    cgNotFm:   ['cgNotFmSearch', 'cgNotFmNames', 'cgNotFmMore']
+  };
+  const ids = map[which]; if (!ids) return;
+  const q = (document.getElementById(ids[0]).value || '').toLowerCase();
+  const src = ((_cgData.actionLists || {})[which] || {});
+  const all = src.names || [];
+  const filtered = q ? all.filter(n => n.toLowerCase().includes(q)) : all;
+  cgRenderNameList(ids[1], ids[2], { names: filtered, count: q ? filtered.length : (src.count != null ? src.count : all.length) });
+}
+
+function cgRenderFlagList(elId, countId, rows, cls) {
+  const el = document.getElementById(elId), cEl = document.getElementById(countId);
+  if (cEl) cEl.textContent = rows.length;
+  if (!el) return;
+  if (!rows.length) { el.innerHTML = '<div class="cg-action-empty">None right now.</div>'; return; }
+  el.innerHTML = rows.map(r =>
+    '<div class="cg-flag-row"><span class="cg-flag-name">' + escapeHtml(r.name) + '</span><span class="cg-flag-meta">' + escapeHtml(r.meta) + '</span></div>'
+  ).join('');
+}
+
+function cgRenderActionLists(cg) {
+  const al = cg.actionLists || {};
+  // Named follow-up lists (from PCO via hourly sync)
+  const fmNotInCg = al.fmNotInCg || {};
+  const cgNotFm   = al.cgNotFm   || {};
+  const c1 = document.getElementById('cgFmNotInCgCount');
+  const c2 = document.getElementById('cgNotFmCount');
+  if (c1) c1.textContent = (fmNotInCg.count != null) ? fmNotInCg.count.toLocaleString() : '—';
+  if (c2) c2.textContent = (cgNotFm.count   != null) ? cgNotFm.count.toLocaleString()   : '—';
+  cgRenderNameList('cgFmNotInCgNames', 'cgFmNotInCgMore', fmNotInCg);
+  cgRenderNameList('cgNotFmNames', 'cgNotFmMore', cgNotFm);
+
+  // Group-health flags — derived from per-group attendance data
+  const ga = cg.groupAttendance || [];
+  const multiply = ga.filter(g => (g.members||0) > 18)
+    .sort((a,b)=>b.members-a.members)
+    .map(g => ({ name: g.name, meta: g.members + ' members' }));
+  const small = ga.filter(g => (g.members||0) > 0 && (g.members||0) < 7)
+    .sort((a,b)=>a.members-b.members)
+    .map(g => ({ name: g.name, meta: g.members + ' members' }));
+  const solo = ga.filter(g => g.leaders != null && g.leaders < 2)
+    .sort((a,b)=>(b.members||0)-(a.members||0))
+    .map(g => ({ name: g.name, meta: (g.leaders||0) + ' leader' + ((g.leaders===1)?'':'s') + ' · ' + (g.members||0) + ' mbrs' }));
+  cgRenderFlagList('cgMultiplyList', 'cgMultiplyCount', multiply, 'amber');
+  cgRenderFlagList('cgSmallList', 'cgSmallCount', small, 'green');
+  cgRenderFlagList('cgSoloList', 'cgSoloCount', solo, 'blue');
 }
 
 const CG_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
