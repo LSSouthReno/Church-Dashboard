@@ -1,5 +1,48 @@
 {
-  "pending": [],
+  "pending": [
+    {
+      "id": "jb_165421490_20260920_breakfastteam",
+      "name": "Anabel Dito",
+      "pcoPersonId": "165421490",
+      "team": "Breakfast Team",
+      "phone": "12102604401",
+      "firstServeDate": "2026-09-20",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Breakfast Provider"
+    },
+    {
+      "id": "jb_151513236_20260920_prayerteam",
+      "name": "Kelly Farson",
+      "pcoPersonId": "151513236",
+      "team": "Prayer Team",
+      "phone": "17754098761",
+      "firstServeDate": "2026-09-20",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Service Prayer"
+    },
+    {
+      "id": "jb_192847793_20260920_prayerteam",
+      "name": "Cheryl Devore",
+      "pcoPersonId": "192847793",
+      "team": "Prayer Team",
+      "phone": "17758424853",
+      "firstServeDate": "2026-09-20",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Service Prayer"
+    }
+  ],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -576,5 +619,5 @@
       "position": "Mustangs Guide"
     }
   ],
-  "lastUpdated": "2026-09-21T06:59:53.076Z"
+  "lastUpdated": "2026-09-21T08:01:41.388Z"
 }
