@@ -45,6 +45,7 @@ const SH_GIVING_WM_PROP   = 'SH_GIVING_WATERMARK';      // ISO created_at waterm
 const SH_MANUAL_SHEET     = 'ShepherdingManualMaturity'; // pid | by | date — manual maturity overrides
 const SH_CHANGELOG_SHEET  = 'ShepherdingChangeLog';      // ts | pastor | pid | field | value — audit trail
 const SH_OVERRIDES_SHEET  = 'ShepherdingPendingEdits';   // pid | field | value | by | ts — edits not yet in the hourly snapshot
+const SH_LEADER_CAND_SHEET = 'CGLeaderCandidates';       // Name | Elder | InCG | Serving — PACI-"adult" leadership pipeline candidates (read by the CG sync)
 const SH_CELL_CHUNK       = 40000;
 
 // ── Pending edits: dashboard changes appear instantly (and survive reloads) by
@@ -299,6 +300,21 @@ function syncShepherdingHealth_() {
   };
   out.congregation.totalPeople = uniq.length;
 
+  // Leadership pipeline candidates for the CG dashboard: spiritually "adult"
+  // members (mature enough to lead, not yet leading) — primed to be IDENTIFIED
+  // for leadership. Names only (no scores) since the CG data file is public;
+  // the private score is used solely to rank the most-ready first.
+  try {
+    var leaderCands = uniq
+      .filter(function(p){ return p.paci === 'adult' && p.member && !p.leads; })
+      .sort(function(a, b){ return (b.score || 0) - (a.score || 0); })
+      .slice(0, 40)
+      .map(function(p){ return { name: p.name, elder: p.assignedElder || '',
+        inCG: (p.groups || []).length > 0, serving: (p.serveTeams || []).length > 0 }; });
+    spStoreLeaderCandidates_(leaderCands);
+    Logger.log('   CG leader candidates (PACI "adult" members): ' + leaderCands.length);
+  } catch (e) { Logger.log('   ! leader candidates failed: ' + e.message); }
+
   spStorePrivate_(out);
   spPushToGitHub_(spBuildPublicSeed_(out));
   // This snapshot read PCO fresh, so pending edits made before the sync started
@@ -306,6 +322,20 @@ function syncShepherdingHealth_() {
   spClearOverridesBefore_(new Date(startMs).toISOString());
   Logger.log('✓ Shepherding Health — done in ' + Math.round(shElapsed_(startMs)/1000) + 's. people=' +
              uniq.length + ' avgScore=' + out.congregation.avgScore);
+}
+
+// Write CG leadership-pipeline candidates to a sheet the CG sync reads.
+function spStoreLeaderCandidates_(cands) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(SH_LEADER_CAND_SHEET) || ss.insertSheet(SH_LEADER_CAND_SHEET);
+  sh.clearContents();
+  var hdrs = ['Name', 'Elder', 'InCG', 'Serving'];
+  sh.getRange(1, 1, 1, hdrs.length).setValues([hdrs]);
+  if (cands && cands.length) {
+    var rows = cands.map(function(c){ return [c.name, c.elder, c.inCG ? 'Yes' : '', c.serving ? 'Yes' : '']; });
+    sh.getRange(2, 1, rows.length, hdrs.length).setValues(rows);
+  }
+  sh.setFrozenRows(1);
 }
 
 /* =========================================================

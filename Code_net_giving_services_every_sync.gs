@@ -1307,6 +1307,30 @@ function syncCGLeaderPipeline_() {
   Logger.log('   No pipeline data found in PCO — only roster rows will be written');
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // Pipeline candidates from the Shepherding sync: spiritually "adult" members
+  // (mature, not yet leading) primed to be IDENTIFIED for leadership. Written to
+  // the CGLeaderCandidates sheet by syncShepherdingHealth_.
+  try {
+    const candSh = ss.getSheetByName('CGLeaderCandidates');
+    if (candSh && candSh.getLastRow() >= 2) {
+      const cands = candSh.getRange(2, 1, candSh.getLastRow() - 1, 4).getValues();
+      let added = 0;
+      cands.forEach(function(r) {
+        const name = String(r[0] || '').trim();
+        if (!name) return;
+        const inCG = String(r[2] || '') === 'Yes';
+        // In-CG adults are the readiest CG-leader/apprentice candidates; others are
+        // still worth identifying but flagged so the pastor knows to get them grouped.
+        allRows.push(['pipeline', '1', inCG ? 'Adult · Identify for Leadership' : 'Adult · Identify (not yet in a CG)', name, '']);
+        added++;
+      });
+      Logger.log('   Shepherding leadership candidates added: ' + added);
+    } else {
+      Logger.log('   No CGLeaderCandidates sheet yet (shepherding sync may not have run)');
+    }
+  } catch (e) { Logger.log('   ! candidate read failed: ' + e.message); }
+
   const hdrs = ['Type', 'Phase', 'Label', 'Name', 'AddedThisYear'];
   const sh = ensureSheet_(ss, SHEETS.cgPipeline, hdrs);
   sh.clearContents();
