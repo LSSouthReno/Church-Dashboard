@@ -304,6 +304,7 @@ function syncShepherdingHealth_() {
   // members (mature enough to lead, not yet leading) — primed to be IDENTIFIED
   // for leadership. Names only (no scores) since the CG data file is public;
   // the private score is used solely to rank the most-ready first.
+  out.leaderCandidateCount = 0;
   try {
     // paci "adult" = mature engagement score, not currently leading. (uniq is
     // already the shepherded congregation, so no separate membership check — the
@@ -315,6 +316,7 @@ function syncShepherdingHealth_() {
       .map(function(p){ return { name: p.name, elder: p.assignedElder || '',
         inCG: (p.groups || []).length > 0, serving: (p.serveTeams || []).length > 0 }; });
     spStoreLeaderCandidates_(leaderCands);
+    out.leaderCandidateCount = leaderCands.length;
     Logger.log('   CG leader candidates (PACI "adult", not leading): ' + leaderCands.length);
   } catch (e) { Logger.log('   ! leader candidates failed: ' + e.message); }
 
@@ -1040,7 +1042,9 @@ function spBuildPublicSeed_(full) {
   elders.forEach(function(e){ e.people.forEach(function(p){ if(!seen[p.name]){seen[p.name]=1;uniq.push(p);} }); });
   var cong = spSummarize_(uniq); cong.totalPeople = uniq.length;
   return { generatedAt:full.generatedAt, asOf:full.asOf, givingMonths:full.givingMonths,
-           statusVocab:full.statusVocab, paciVocab:full.paciVocab, seed:true, congregation:cong, elders:elders };
+           statusVocab:full.statusVocab, paciVocab:full.paciVocab, seed:true, congregation:cong, elders:elders,
+           leaderCandidateCount: full.leaderCandidateCount || 0,
+           paciCounts: (full.congregation && full.congregation.paciCounts) || null };
 }
 
 /* =========================================================
