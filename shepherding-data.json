@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T18:50:07.407Z",
+  "generatedAt": "2026-09-21T19:50:08.076Z",
   "asOf": "2026-09-21",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 396,
     "avgScore": 0,
-    "inGroup": 226,
+    "inGroup": 225,
     "serving": 234,
     "leading": 83,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 396,
-    "notInGroup": 170,
+    "notInGroup": 171,
     "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 396
     },
     "pct": {
-      "inGroup": 0.5707070707070707,
+      "inGroup": 0.5681818181818182,
       "serving": 0.5909090909090909,
       "leading": 0.20959595959595959,
       "givingRegular": 0,
@@ -11003,7 +11003,7 @@
       "summary": {
         "totalPeople": 64,
         "avgScore": 0,
-        "inGroup": 33,
+        "inGroup": 32,
         "serving": 30,
         "leading": 8,
         "givingRegular": 0,
@@ -11013,7 +11013,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 64,
-        "notInGroup": 31,
+        "notInGroup": 32,
         "notServing": 34,
         "notGiving": 0,
         "paciCounts": {
@@ -11031,7 +11031,7 @@
           "unknown": 64
         },
         "pct": {
-          "inGroup": 0.515625,
+          "inGroup": 0.5,
           "serving": 0.46875,
           "leading": 0.125,
           "givingRegular": 0,
@@ -11311,6 +11311,43 @@
           "name": "John Cappini",
           "first": "John",
           "last": "Cappini",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Judy England",
+          "first": "Judy",
+          "last": "England",
           "email": "",
           "phone": "",
           "member": false,
@@ -11678,48 +11715,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Judy England",
-          "first": "Judy",
-          "last": "England",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Durham Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:57:38Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
           ],
           "pending": true
         },
