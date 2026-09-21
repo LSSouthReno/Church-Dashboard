@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T17:50:10.364Z",
+  "generatedAt": "2026-09-21T18:50:07.407Z",
   "asOf": "2026-09-21",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 396,
     "avgScore": 0,
     "inGroup": 226,
-    "serving": 233,
+    "serving": 234,
     "leading": 83,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 396,
     "notInGroup": 170,
-    "notServing": 163,
+    "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5707070707070707,
-      "serving": 0.5883838383838383,
+      "serving": 0.5909090909090909,
       "leading": 0.20959595959595959,
       "givingRegular": 0,
       "recurring": 0,
@@ -3342,7 +3342,7 @@
         "totalPeople": 57,
         "avgScore": 0,
         "inGroup": 32,
-        "serving": 32,
+        "serving": 33,
         "leading": 10,
         "givingRegular": 0,
         "recurring": 0,
@@ -3352,7 +3352,7 @@
         "overdue": 0,
         "notBaptized": 57,
         "notInGroup": 25,
-        "notServing": 25,
+        "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3370,7 +3370,7 @@
         },
         "pct": {
           "inGroup": 0.5614035087719298,
-          "serving": 0.5614035087719298,
+          "serving": 0.5789473684210527,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
           "recurring": 0,
@@ -3681,43 +3681,6 @@
           "name": "Tracey Allman",
           "first": "Tracey",
           "last": "Allman",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Tracey Wright",
-          "first": "Tracey",
-          "last": "Wright",
           "email": "",
           "phone": "",
           "member": false,
@@ -4073,6 +4036,48 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tracey Wright",
+          "first": "Tracey",
+          "last": "Wright",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Tech Team",
+              "role": "member",
+              "joinedAt": "2026-09-21T18:21:12Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
