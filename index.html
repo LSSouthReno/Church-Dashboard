@@ -12358,7 +12358,10 @@ async function aiAsk() {
       method: 'POST',
       // text/plain avoids a CORS preflight to the Apps Script endpoint
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ question: q, history: _aiHistory.slice(-6) })
+      // Only pass the members-unlock proof when the Members gate is open, so the
+      // backend includes giving/financial numbers only for unlocked users.
+      body: JSON.stringify({ question: q, history: _aiHistory.slice(-6),
+        mm: (typeof mmIsUnlocked === 'function' && mmIsUnlocked() && typeof MM_HASH !== 'undefined') ? MM_HASH : '' })
     });
     const j = await res.json();
     typing.remove();
