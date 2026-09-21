@@ -4155,6 +4155,9 @@ async function loadDashboardData() {
   if (!res.ok) throw new Error('Could not load dashboard-data.json');
   DASHBOARD_DATA = await res.json();
   normalizeDashboardData();
+  // Re-apply the URL hash now that data is ready: #groups/#teams open modals that
+  // need DASHBOARD_DATA, so the DOMContentLoaded pass (before data loaded) skipped them.
+  try { if (typeof applyHashRoute === 'function') applyHashRoute(); } catch (e) {}
 }
 
 function normalizeDashboardData() {
@@ -5688,6 +5691,7 @@ function openTeamsModal() {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  if (!_routingLock) navSetHash('teams');  // shareable #teams URL
 
   try { if (sessionStorage.getItem('tm_admin') === '1') tmAdminUnlocked = true; } catch(e) {}
   tmRenderAll();
@@ -5700,6 +5704,7 @@ function closeTeamsModal() {
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   tmAT = null;
+  if (!_routingLock) navSetHash('metrics');
 }
 
 /* ---- render everything ---- */
@@ -6299,6 +6304,7 @@ function openCGModal() {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  if (!_routingLock) navSetHash('groups');  // shareable #groups URL; password gate still applies
 
   const lu = DASHBOARD_DATA.lastUpdated
     ? new Date(DASHBOARD_DATA.lastUpdated).toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
@@ -6322,6 +6328,7 @@ function closeCGModal() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (!_routingLock) navSetHash('metrics');
 }
 
 async function cgDoUnlock() {
@@ -7006,7 +7013,15 @@ function applyHashRoute() {
   const sun = raw.match(/^sunday(?:=(\d{4}-\d{2}-\d{2}))?$/);
   _routingLock = true;
   try {
+    // Close the standalone full-screen modals that AREN'T the target, so
+    // hash-switching between them never stacks two overlays.
+    const _shut = { cg: closeCGModal, teams: closeTeamsModal, pastor: closePastorModal };
+    const _keep = raw === 'groups' ? 'cg' : raw === 'teams' ? 'teams' : raw === 'pastors' ? 'pastor' : null;
+    Object.keys(_shut).forEach(function(k){ if (k !== _keep && typeof _shut[k] === 'function') _shut[k](); });
+
     if (raw === 'pastors') openPastorModal();
+    else if (raw === 'groups') openCGModal();
+    else if (raw === 'teams') openTeamsModal();
     else if (sun) { if (sun[1]) _sundayPendingDate = sun[1]; navGo('sunday'); }
     else if (raw === 'staff' || raw === 'leaders' || raw === 'calendar' || raw === 'metrics') navGo(raw);
     // Unknown or empty hash: leave the default Metrics view as-is.
