@@ -71,6 +71,7 @@ const SHEETS = {
   cgPipeline:   'CGLeaderPipeline',
   cgFunnel:     'CGJoinFunnel',
   cgOutsiders:  'CGOutsiders',
+  cgVenn:       'CGVennLists',
   descriptions: 'SectionDescriptions'
 };
 
@@ -148,6 +149,7 @@ function syncDashboard() {
   safeRun_('CG Group Attendance', () => { syncCGGroupAttendance_(); });
   safeRun_('CG Join Funnel',      () => { syncCGJoinFunnel_(); });
   safeRun_('CG Outsiders',        () => { syncCGOutsiders_(); });
+  safeRun_('CG Venn (∩ Family Members)', () => { syncCGVenn_(); });
   safeRun_('CG Leader Pipeline',  () => { syncCGLeaderPipeline_(); });
 
   // Batch the three file pushes below into ONE commit so this hourly run
@@ -625,6 +627,7 @@ function setupCacheSheets_(ss) {
   ensureSheet_(ss, SHEETS.cgPipeline,    ['Type', 'Phase', 'Label', 'Name', 'AddedIn2026']);
   ensureSheet_(ss, SHEETS.cgFunnel,      ['MonthKey', 'Month', 'Applied', 'Joined']);
   ensureSheet_(ss, SHEETS.cgOutsiders,   ['MonthKey', 'Month', 'Count']);
+  ensureSheet_(ss, SHEETS.cgVenn,        ['List', 'Name']);
   ensureSheet_(ss, SHEETS.descriptions,  ['Section', 'Description (shown under the section title on the dashboard)']);
 }
 
@@ -1042,6 +1045,115 @@ function syncCGOutsiders_() {
   Logger.log('   CG Outsiders done: ' + rows.length + ' months');
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// CG ∩ Family Member Venn + actionable follow-up lists
+// Family Member = the authoritative "All Family Members" PCO list (membership
+// roster — Member, Elder, Deacon, Pastor, etc.); falls back to membership=Member.
+// CG member = anyone in an active Community Group. Produces raw set sizes (for the
+// Venn) plus named lists of the two follow-up gaps, written to the CGVennLists
+// sheet and Script Properties for buildCGDetailed_ to assemble.
+// ─────────────────────────────────────────────────────────────────────────────
+function syncCGVenn_() {
+  Logger.log('▶  CG Venn (CG ∩ Family Members) — starting');
+  const props = PropertiesService.getScriptProperties();
+
+  // 1. Family Members WITH names — authoritative "All Family Members" list
+  const fmNameById = {};
+  const readNames_ = function(arr) {
+    arr.forEach(function(p) {
+      const fn = (p.attributes && p.attributes.first_name) || '';
+      const ln = (p.attributes && p.attributes.last_name)  || '';
+      fmNameById[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
+    });
+  };
+  try {
+    const lists = pcoGetAll_('/people/v2/lists?per_page=100') || [];
+    const fmList = lists.find(function(l) {
+      const n = ((l.attributes && l.attributes.name) || '').toLowerCase();
+      return n.indexOf('all family') !== -1 || n.indexOf('family member') !== -1;
+    });
+    if (fmList) {
+      readNames_(pcoGetAll_('/people/v2/lists/' + fmList.id + '/people?fields[Person]=first_name,last_name&per_page=100') || []);
+      Logger.log('   Family Members ("' + fmList.attributes.name + '"): ' + Object.keys(fmNameById).length);
+    } else {
+      readNames_(pcoGetAll_('/people/v2/people?where[membership]=Member&fields[Person]=first_name,last_name&per_page=100') || []);
+      Logger.log('   Family Members (membership=Member fallback): ' + Object.keys(fmNameById).length);
+    }
+  } catch (e) { Logger.log('   ! FM fetch failed: ' + e.message); }
+
+  // 2. Active CG groups → unique member IDs (default archive_status = not archived)
+  const groups = pcoGetAll_(
+    '/groups/v2/group_types/' + DASHBOARD_CONFIG.COMMUNITY_GROUP_TYPE_ID + '/groups?per_page=100'
+  ) || [];
+  const cgMemberIds = new Set();
+  groups.forEach(function(g) {
+    try {
+      const ms = pcoGetAll_('/groups/v2/groups/' + g.id + '/memberships?per_page=100') || [];
+      ms.forEach(function(m) {
+        const pid = m.relationships && m.relationships.person &&
+                    m.relationships.person.data && m.relationships.person.data.id;
+        if (pid) cgMemberIds.add(pid);
+      });
+    } catch (e) { Logger.log('   ! Venn group ' + g.id + ': ' + e.message); }
+  });
+  Logger.log('   Unique CG members (active groups): ' + cgMemberIds.size);
+
+  // 3. Partition the sets
+  const fmIds = Object.keys(fmNameById);
+  let bothCount = 0;
+  const fmNotInCgIds = [];
+  fmIds.forEach(function(id) {
+    if (cgMemberIds.has(id)) bothCount++;
+    else fmNotInCgIds.push(id);
+  });
+  const fmSet = new Set(fmIds);
+  const cgNotFmIds = [];
+  cgMemberIds.forEach(function(id) { if (!fmSet.has(id)) cgNotFmIds.push(id); });
+
+  // 4. Resolve names for CG-only (non-FM) people, in id chunks
+  const cgNameById = {};
+  const BATCH = 50;
+  for (let i = 0; i < cgNotFmIds.length; i += BATCH) {
+    const chunk = cgNotFmIds.slice(i, i + BATCH);
+    try {
+      const people = pcoGetAll_('/people/v2/people?where[id]=' + chunk.join(',') +
+        '&fields[Person]=first_name,last_name&per_page=' + chunk.length) || [];
+      people.forEach(function(p) {
+        const fn = (p.attributes && p.attributes.first_name) || '';
+        const ln = (p.attributes && p.attributes.last_name)  || '';
+        cgNameById[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
+      });
+    } catch (e) { Logger.log('   ! Venn name chunk failed: ' + e.message); }
+    Utilities.sleep(200);
+  }
+
+  // 5. Persist raw counts (drives the Venn + keeps FM% consistent with this FM set)
+  const fmTotal = fmIds.length;
+  props.setProperty('FM_TOTAL', String(fmTotal));
+  props.setProperty('CG_MEMBERS_TOTAL', String(cgMemberIds.size));
+  props.setProperty('FM_IN_CG', String(bothCount));
+  props.setProperty('FM_NOT_IN_CG_COUNT', String(fmNotInCgIds.length));
+  props.setProperty('CG_NOT_FM_COUNT', String(cgNotFmIds.length));
+  if (fmTotal > 0) props.setProperty('FM_IN_GROUPS_PCT', String(Math.round(bothCount / fmTotal * 100)));
+  Logger.log('   Venn: FM=' + fmTotal + ' CG=' + cgMemberIds.size + ' both=' + bothCount);
+
+  // 6. Write named follow-up lists (capped to keep the JSON payload small)
+  const CAP = 500;
+  const fmNotInCgNames = fmNotInCgIds.map(function(id) { return fmNameById[id]; }).filter(Boolean).sort();
+  const cgNotFmNames   = cgNotFmIds.map(function(id) { return cgNameById[id] || ('Person ' + id); }).sort();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const hdrs = ['List', 'Name'];
+  const sh = ensureSheet_(ss, SHEETS.cgVenn, hdrs);
+  sh.clearContents();
+  sh.getRange(1, 1, 1, hdrs.length).setValues([hdrs]);
+  const rows = [];
+  fmNotInCgNames.slice(0, CAP).forEach(function(n) { rows.push(['fmNotInCg', n]); });
+  cgNotFmNames.slice(0, CAP).forEach(function(n) { rows.push(['cgNotFm', n]); });
+  if (rows.length) sh.getRange(2, 1, rows.length, hdrs.length).setValues(rows);
+  sh.setFrozenRows(1);
+  Logger.log('   Venn lists written: fmNotInCg=' + fmNotInCgIds.length + ' cgNotFm=' + cgNotFmIds.length);
+}
+
 function syncCGLeaderPipeline_() {
   Logger.log('▶  CG Leader Pipeline — starting');
 
@@ -1421,6 +1533,33 @@ function buildCGDetailed_(ss, groupRows) {
     });
   }
 
+  // Venn (CG ∩ Family Members) — raw counts persisted by syncCGVenn_
+  const props = PropertiesService.getScriptProperties();
+  const fmTotal = parseInt(props.getProperty('FM_TOTAL') || '0', 10);
+  const cgTotal = parseInt(props.getProperty('CG_MEMBERS_TOTAL') || '0', 10);
+  const bothCt  = parseInt(props.getProperty('FM_IN_CG') || '0', 10);
+  const venn = (fmTotal > 0 && cgTotal > 0) ? {
+    familyMembers: fmTotal,
+    cgMembers: cgTotal,
+    both: bothCt,
+    pctFmInCg:  Math.round(bothCt / fmTotal * 100),
+    pctCgAreFm: Math.round(bothCt / cgTotal * 100)
+  } : null;
+
+  // Actionable follow-up lists from CGVennLists sheet
+  const actionLists = { fmNotInCg: { count: 0, names: [] }, cgNotFm: { count: 0, names: [] } };
+  const cgVennSh = ss.getSheetByName(SHEETS.cgVenn);
+  if (cgVennSh && cgVennSh.getLastRow() >= 2) {
+    cgVennSh.getRange(2, 1, cgVennSh.getLastRow() - 1, 2).getValues().forEach(r => {
+      const list = String(r[0] || ''); const name = String(r[1] || '');
+      if (!name) return;
+      if (list === 'fmNotInCg')    actionLists.fmNotInCg.names.push(name);
+      else if (list === 'cgNotFm') actionLists.cgNotFm.names.push(name);
+    });
+  }
+  actionLists.fmNotInCg.count = parseInt(props.getProperty('FM_NOT_IN_CG_COUNT') || String(actionLists.fmNotInCg.names.length), 10);
+  actionLists.cgNotFm.count   = parseInt(props.getProperty('CG_NOT_FM_COUNT')   || String(actionLists.cgNotFm.names.length),   10);
+
   return {
     goals2026: { groups: 50, members: 500, groupSize: 10, fmInGroupsPct: 75 },
     current: {
@@ -1438,7 +1577,9 @@ function buildCGDetailed_(ss, groupRows) {
     outsidersInsiders,
     leaderRoster,
     leaderPipeline,
-    groupAttendance
+    groupAttendance,
+    venn,
+    actionLists
   };
 }
 
