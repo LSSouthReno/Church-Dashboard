@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151513236_20260920_prayerteam",
-      "name": "Kelly Farson",
-      "pcoPersonId": "151513236",
-      "team": "Prayer Team",
-      "phone": "17754098761",
-      "firstServeDate": "2026-09-20",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Service Prayer"
-    },
-    {
       "id": "jb_192847793_20260920_prayerteam",
       "name": "Cheryl Devore",
       "pcoPersonId": "192847793",
@@ -617,7 +603,21 @@
       "notes": "",
       "source": "auto",
       "position": "Breakfast Provider"
+    },
+    {
+      "id": "jb_151513236_20260920_prayerteam",
+      "name": "Kelly Farson",
+      "pcoPersonId": "151513236",
+      "team": "Prayer Team",
+      "phone": "17754098761",
+      "firstServeDate": "2026-09-20",
+      "status": "bombed",
+      "bombedDate": "2026-09-21",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Service Prayer"
     }
   ],
-  "lastUpdated": "2026-09-21T21:00:35.940Z"
+  "lastUpdated": "2026-09-21T21:00:57.477Z"
 }
