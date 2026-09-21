@@ -651,6 +651,7 @@
     <label>Team Name</label>
     <input type="text" id="team-name-other" placeholder="Enter your team name" />
   </div>
+  <div id="og-prefill-note" style="display:none;margin:-.4rem 0 .2rem;padding:.5rem .7rem;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.3);border-radius:7px;font-size:.76rem;color:#2dd4bf;"></div>
 
   <div class="field">
     <label>What does this team do and why does it matter?</label>
@@ -1097,9 +1098,66 @@ function renderFileList() {
   ).join('');
 }
 
+// ── Prefill from what the dashboard already knows about a team ────────────────
+// The dashboard reliably knows the team's Point Leader (from the Leader Forms /
+// Planning Center import) and current/needed volunteer counts. We prefill only
+// EMPTY fields so we never overwrite what a leader has typed.
+let _ogTeamData = null;
+function ogNormTeam(s) {
+  return String(s || '').toLowerCase()
+    .replace(/\(kids\)/g, '').replace(/team/g, '').replace(/[^a-z]/g, '').trim();
+}
+function ogLoadTeamData() {
+  fetch('./dashboard-data.json?v=' + Date.now(), { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ if (d) { _ogTeamData = d; const cur = val('team-name'); if (cur && cur !== 'Other') ogPrefillFromTeam(cur); } })
+    .catch(function(){});
+}
+function ogFindTeam(name) {
+  if (!_ogTeamData) return null;
+  const key = ogNormTeam(name);
+  const forms = _ogTeamData.teamsLeaderForms || [];
+  const serve = _ogTeamData.serveTeams || [];
+  const form = forms.filter(function(f){ return ogNormTeam(f.n) === key; })[0] || null;
+  const st   = serve.filter(function(s){ return ogNormTeam(s.name) === key; })[0] || null;
+  return (form || st) ? { form: form, serve: st } : null;
+}
+function ogSetIfEmpty(id, value) {
+  const el = document.getElementById(id);
+  if (el && !el.value && value) { el.value = value; return true; }
+  return false;
+}
+function ogPrefillFromTeam(name) {
+  const note = document.getElementById('og-prefill-note');
+  const match = ogFindTeam(name);
+  if (!match) { if (note) note.style.display = 'none'; return; }
+  const filled = [];
+  if (match.form && match.form.l) { if (ogSetIfEmpty('leader-name', match.form.l)) filled.push('leader name'); }
+  // Surface the roster context the dashboard is sure of (from PCO), even where
+  // there's no matching form field — helps the leader fill "how many we need".
+  let ctx = '';
+  if (match.serve && (match.serve.current != null || match.serve.needed != null)) {
+    ctx = ' Planning Center shows ~' + (match.serve.current || 0) + ' serving' +
+          (match.serve.needed != null ? ', ~' + match.serve.needed + ' more needed.' : '.');
+  } else if (match.form && match.form.mem != null) {
+    ctx = ' Planning Center shows ~' + match.form.mem + ' on this team' +
+          (match.form.need != null ? ', ~' + match.form.need + ' more needed.' : '.');
+  }
+  if (note) {
+    if (filled.length || ctx) {
+      note.innerHTML = '&#10003; Prefilled from Planning Center' +
+        (filled.length ? ': ' + filled.join(', ') + '.' : '.') + ctx +
+        ' <span style="color:var(--muted)">Edit anything below.</span>';
+      note.style.display = '';
+    } else { note.style.display = 'none'; }
+  }
+}
+
 function handleTeamSelect(v) {
   document.getElementById('team-name-other-wrap').style.display = v === 'Other' ? '' : 'none';
   if (v !== 'Other') document.getElementById('team-name-other').value = '';
+  if (v && v !== 'Other') ogPrefillFromTeam(v);
+  else { const note = document.getElementById('og-prefill-note'); if (note) note.style.display = 'none'; }
 }
 
 // drag-and-drop on upload zone
@@ -1663,6 +1721,7 @@ function clearDraft() {
 function initGenerator() {
   initDropZone();
   renderSavedList();
+  ogLoadTeamData();
   try {
     const draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
     if (hasContent(draft)) {
