@@ -1057,28 +1057,19 @@ function syncCGVenn_() {
   Logger.log('▶  CG Venn (CG ∩ Family Members) — starting');
   const props = PropertiesService.getScriptProperties();
 
-  // 1. Family Members WITH names — authoritative "All Family Members" list
+  // 1. Family Members WITH names — by PCO membership status (same source as
+  //    syncCGOutsiders_, whose person IDs are proven to match group-membership
+  //    person IDs in this org; the "All Family Members" list returned IDs that
+  //    did not correlate, yielding a false 0% overlap).
   const fmNameById = {};
-  const readNames_ = function(arr) {
-    arr.forEach(function(p) {
+  try {
+    const people = pcoGetAll_('/people/v2/people?where[membership]=Member&fields[Person]=first_name,last_name&per_page=100') || [];
+    people.forEach(function(p) {
       const fn = (p.attributes && p.attributes.first_name) || '';
       const ln = (p.attributes && p.attributes.last_name)  || '';
       fmNameById[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
     });
-  };
-  try {
-    const lists = pcoGetAll_('/people/v2/lists?per_page=100') || [];
-    const fmList = lists.find(function(l) {
-      const n = ((l.attributes && l.attributes.name) || '').toLowerCase();
-      return n.indexOf('all family') !== -1 || n.indexOf('family member') !== -1;
-    });
-    if (fmList) {
-      readNames_(pcoGetAll_('/people/v2/lists/' + fmList.id + '/people?fields[Person]=first_name,last_name&per_page=100') || []);
-      Logger.log('   Family Members ("' + fmList.attributes.name + '"): ' + Object.keys(fmNameById).length);
-    } else {
-      readNames_(pcoGetAll_('/people/v2/people?where[membership]=Member&fields[Person]=first_name,last_name&per_page=100') || []);
-      Logger.log('   Family Members (membership=Member fallback): ' + Object.keys(fmNameById).length);
-    }
+    Logger.log('   Family Members (membership=Member): ' + Object.keys(fmNameById).length);
   } catch (e) { Logger.log('   ! FM fetch failed: ' + e.message); }
 
   // 2. Active CG groups → unique member IDs (default archive_status = not archived)
@@ -1127,8 +1118,14 @@ function syncCGVenn_() {
     Utilities.sleep(200);
   }
 
-  // 5. Persist raw counts (drives the Venn + keeps FM% consistent with this FM set)
+  // 5. Persist raw counts (drives the Venn + keeps FM% consistent with this FM set).
+  //    Guard: a zero overlap with non-empty sets means the FM/CG IDs failed to
+  //    correlate — skip persisting so we never clobber the last-good numbers.
   const fmTotal = fmIds.length;
+  if (fmTotal > 0 && cgMemberIds.size > 0 && bothCount === 0) {
+    Logger.log('   ! Venn anomaly: 0 overlap for FM=' + fmTotal + ' CG=' + cgMemberIds.size + ' — keeping prior values, not persisting.');
+    return;
+  }
   props.setProperty('FM_TOTAL', String(fmTotal));
   props.setProperty('CG_MEMBERS_TOTAL', String(cgMemberIds.size));
   props.setProperty('FM_IN_CG', String(bothCount));
