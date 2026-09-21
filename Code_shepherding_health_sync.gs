@@ -305,14 +305,17 @@ function syncShepherdingHealth_() {
   // for leadership. Names only (no scores) since the CG data file is public;
   // the private score is used solely to rank the most-ready first.
   try {
+    // paci "adult" = mature engagement score, not currently leading. (uniq is
+    // already the shepherded congregation, so no separate membership check — the
+    // `member` flag is unreliable and would wrongly zero the list.)
     var leaderCands = uniq
-      .filter(function(p){ return p.paci === 'adult' && p.member && !p.leads; })
+      .filter(function(p){ return p.paci === 'adult' && !p.leads; })
       .sort(function(a, b){ return (b.score || 0) - (a.score || 0); })
       .slice(0, 40)
       .map(function(p){ return { name: p.name, elder: p.assignedElder || '',
         inCG: (p.groups || []).length > 0, serving: (p.serveTeams || []).length > 0 }; });
     spStoreLeaderCandidates_(leaderCands);
-    Logger.log('   CG leader candidates (PACI "adult" members): ' + leaderCands.length);
+    Logger.log('   CG leader candidates (PACI "adult", not leading): ' + leaderCands.length);
   } catch (e) { Logger.log('   ! leader candidates failed: ' + e.message); }
 
   spStorePrivate_(out);
