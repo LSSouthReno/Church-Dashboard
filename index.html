@@ -6446,11 +6446,14 @@ function cgRenderVenn(cg) {
   const statsEl = document.getElementById('cgVennStats');
   if (!svgWrap || !statsEl) return;
   const v = cg.venn;
-  if (!v || !v.cgMembers || !v.familyMembers) {
+  // Treat a zero overlap between non-empty sets as not-yet-ready (an ID-correlation
+  // anomaly), not a real 0% — fall back rather than draw an empty-overlap Venn.
+  const vennAnomalous = v && v.cgMembers && v.familyMembers && !v.both;
+  if (!v || !v.cgMembers || !v.familyMembers || vennAnomalous) {
     // Graceful pre-sync fallback: show the one overlap metric we already have.
     const pct = (cg.current || {}).fmInGroupsPct;
     svgWrap.innerHTML = '<div class="cg-action-empty" style="text-align:center">The full overlap diagram populates at the next hourly sync.</div>';
-    statsEl.innerHTML = (pct != null)
+    statsEl.innerHTML = (pct)
       ? `<div class="cg-venn-stat"><div class="cg-venn-stat-top"><span class="cg-venn-stat-pct blue">${pct}%</span></div>
           <div class="cg-venn-stat-label"><b>of Family Members are in a Community Group.</b> Goal: 75%.</div>
           <div class="cg-venn-track"><div class="cg-venn-fill" style="width:${Math.min(100,pct)}%;background:#60a5fa"></div></div></div>`
