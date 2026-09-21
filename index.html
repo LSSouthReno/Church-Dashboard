@@ -12225,5 +12225,156 @@ function shStoryHtml(p) {
 function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 </script>
 
+<!-- ============================ AI ASSISTANT WIDGET ============================ -->
+<style>
+  #aiFab { position: fixed; bottom: 22px; right: 22px; width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #2dd4bf, #0d9488); color: #04211d; border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45); z-index: 3000; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; transition: transform .15s ease, box-shadow .15s ease; }
+  #aiFab:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 26px rgba(45,212,191,0.35); }
+  #aiFab.open { transform: scale(0.9); opacity: .85; }
+  #aiPanel { position: fixed; bottom: 90px; right: 22px; width: 380px; max-width: calc(100vw - 32px);
+    height: 560px; max-height: calc(100vh - 130px); background: #141414; border: 1px solid #2c2c2c;
+    border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.6); z-index: 3000; display: none;
+    flex-direction: column; overflow: hidden; }
+  #aiPanel.open { display: flex; animation: aiPop .16s ease; }
+  @keyframes aiPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 480px) { #aiPanel { right: 16px; left: 16px; width: auto; bottom: 84px; } }
+  .ai-hd { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: linear-gradient(135deg, rgba(45,212,191,0.16), rgba(13,148,136,0.10)); border-bottom: 1px solid #2c2c2c; }
+  .ai-hd-icon { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg,#2dd4bf,#0d9488); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .ai-hd-t { font-weight: 700; font-size: 14px; color: var(--text); }
+  .ai-hd-s { font-size: 11px; color: var(--text-muted); }
+  .ai-hd-x { margin-left: auto; background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; padding: 4px; }
+  .ai-hd-x:hover { color: var(--text); }
+  .ai-msgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .ai-msgs::-webkit-scrollbar { width: 7px; } .ai-msgs::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  .ai-msg { font-size: 13.5px; line-height: 1.5; max-width: 88%; padding: 9px 12px; border-radius: 12px; white-space: pre-wrap; word-wrap: break-word; }
+  .ai-msg.user { align-self: flex-end; background: #0d9488; color: #eafffb; border-bottom-right-radius: 3px; }
+  .ai-msg.bot  { align-self: flex-start; background: #1e1e1e; border: 1px solid #2c2c2c; color: var(--text); border-bottom-left-radius: 3px; }
+  .ai-msg.bot b { color: #2dd4bf; }
+  .ai-msg.err { align-self: flex-start; background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3); color: #fca5a5; font-size: 12.5px; }
+  .ai-typing { align-self: flex-start; color: var(--text-dim); font-size: 12.5px; font-style: italic; padding: 4px 6px; }
+  .ai-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .ai-chip { background: #1c1c1c; border: 1px solid #333; color: var(--text-muted); font-size: 11.5px; padding: 6px 10px; border-radius: 13px; cursor: pointer; text-align: left; }
+  .ai-chip:hover { border-color: #2dd4bf; color: #2dd4bf; }
+  .ai-in { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #2c2c2c; align-items: flex-end; }
+  .ai-in textarea { flex: 1; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-size: 13px; padding: 9px 11px; border-radius: 10px; outline: none; resize: none; max-height: 90px; line-height: 1.4; }
+  .ai-in textarea:focus { border-color: #2dd4bf; }
+  .ai-send { background: #2dd4bf; color: #04211d; border: none; border-radius: 10px; width: 38px; height: 38px; font-size: 17px; cursor: pointer; flex-shrink: 0; }
+  .ai-send:disabled { opacity: .4; cursor: default; }
+  .ai-foot { font-size: 10px; color: var(--text-dim); text-align: center; padding: 0 12px 8px; }
+</style>
+
+<button id="aiFab" title="Ask AI about the data" onclick="aiToggle()" aria-label="Open AI assistant">&#10024;</button>
+<div id="aiPanel" role="dialog" aria-label="AI data assistant">
+  <div class="ai-hd">
+    <div class="ai-hd-icon">&#10024;</div>
+    <div>
+      <div class="ai-hd-t">Questions?</div>
+      <div class="ai-hd-s">AI-powered answers about the dashboard&rsquo;s data</div>
+    </div>
+    <button class="ai-hd-x" onclick="aiToggle()" aria-label="Close">&times;</button>
+  </div>
+  <div class="ai-msgs" id="aiMsgs"></div>
+  <div class="ai-in">
+    <textarea id="aiInput" rows="1" placeholder="Ask about giving, attendance, groups, teams&hellip;" onkeydown="aiKey(event)" oninput="aiGrow(this)"></textarea>
+    <button class="ai-send" id="aiSend" onclick="aiAsk()" aria-label="Send">&#10148;</button>
+  </div>
+  <div class="ai-foot">Answers are AI-generated from current dashboard data &mdash; double-check anything important.</div>
+</div>
+
+<script>
+// ── AI assistant: floating chat that answers analytical questions about the data ──
+const AI_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwFDvy1joePSCaV8LRX8G8A7izF2rWhP8KwXzy9zIJ7SLllm3e5NsjgWBneCZ6Frknyvg/exec';  // dedicated AI proxy (server builds the data digest)
+let _aiHistory = [];     // [{role, content}] short rolling history for follow-ups
+let _aiBusy = false;
+let _aiGreeted = false;
+
+function aiToggle() {
+  const p = document.getElementById('aiPanel'), f = document.getElementById('aiFab');
+  const open = p.classList.toggle('open');
+  f.classList.toggle('open', open);
+  if (open) {
+    if (!_aiGreeted) { aiGreet(); _aiGreeted = true; }
+    setTimeout(() => document.getElementById('aiInput').focus(), 100);
+  }
+}
+function aiGrow(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
+function aiKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiAsk(); } }
+
+function aiGreet() {
+  const wrap = document.getElementById('aiMsgs');
+  aiAddBot("Hi! Ask me anything analytical about the dashboard — giving, attendance, community groups, or serve teams. For example:");
+  const qs = [
+    'How are community groups trending toward the 2026 goals?',
+    'Which serve teams need the most volunteers?',
+    'What’s our giving trend over the last few months?',
+    'How many Family Members still aren’t in a community group?'
+  ];
+  const chips = document.createElement('div'); chips.className = 'ai-suggest';
+  qs.forEach(q => { const c = document.createElement('button'); c.className = 'ai-chip'; c.textContent = q;
+    c.onclick = () => { document.getElementById('aiInput').value = q; aiAsk(); }; chips.appendChild(c); });
+  wrap.appendChild(chips); wrap.scrollTop = wrap.scrollHeight;
+}
+function aiAddMsg(text, cls) {
+  const wrap = document.getElementById('aiMsgs');
+  const d = document.createElement('div'); d.className = 'ai-msg ' + cls;
+  if (cls === 'bot') d.innerHTML = aiFmt(text); else d.textContent = text;
+  wrap.appendChild(d); wrap.scrollTop = wrap.scrollHeight; return d;
+}
+function aiAddBot(t) { return aiAddMsg(t, 'bot'); }
+// light markdown: **bold**, bullet lines, and line breaks (input escaped first)
+function aiFmt(t) {
+  let s = (t == null ? '' : String(t)).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  return s;
+}
+
+// Note: the data digest is built server-side by the AI proxy (from the public
+// dashboard data, scoped to aggregate + group/team detail, no individual names),
+// so the widget only sends the question + short history.
+
+async function aiAsk() {
+  if (_aiBusy) return;
+  const inp = document.getElementById('aiInput');
+  const q = (inp.value || '').trim();
+  if (!q) return;
+  inp.value = ''; aiGrow(inp);
+  // remove the intro suggestion chips once a question is asked
+  const chips = document.querySelector('#aiMsgs .ai-suggest'); if (chips) chips.remove();
+  aiAddMsg(q, 'user');
+
+  if (!AI_ENDPOINT) {
+    aiAddMsg("The assistant isn’t connected yet — the AI backend still needs to be set up. Once it’s live, this will answer instantly.", 'err');
+    return;
+  }
+  _aiBusy = true;
+  const sendBtn = document.getElementById('aiSend'); sendBtn.disabled = true;
+  const typing = document.createElement('div'); typing.className = 'ai-typing'; typing.textContent = 'Thinking…';
+  const wrap = document.getElementById('aiMsgs'); wrap.appendChild(typing); wrap.scrollTop = wrap.scrollHeight;
+  try {
+    const res = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      // text/plain avoids a CORS preflight to the Apps Script endpoint
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ question: q, history: _aiHistory.slice(-6) })
+    });
+    const j = await res.json();
+    typing.remove();
+    if (j && j.answer) {
+      aiAddBot(j.answer);
+      _aiHistory.push({ role: 'user', content: q }, { role: 'assistant', content: j.answer });
+    } else {
+      aiAddMsg((j && j.error) ? j.error : 'Sorry, I couldn’t get an answer just now. Please try again.', 'err');
+    }
+  } catch (e) {
+    typing.remove();
+    aiAddMsg('Connection problem reaching the assistant. Please try again in a moment.', 'err');
+  } finally {
+    _aiBusy = false; sendBtn.disabled = false; document.getElementById('aiInput').focus();
+  }
+}
+</script>
 </body>
 </html>
