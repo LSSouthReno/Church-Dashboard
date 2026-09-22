@@ -17,7 +17,7 @@
 <title>Church Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
@@ -1157,7 +1157,7 @@
   .ogc-month { font-size: 15px; color: #d6b86a; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; line-height: 1; }
   .ogc-body { flex: 1 1 auto; padding: 6px 34px; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; }
   .ogc-ev { height: 156px; flex: 0 0 156px; display: flex; gap: 14px; align-items: stretch; }
-  .ogc-media { position: relative; flex: 0 0 186px; width: 186px; height: 124px; align-self: center; margin-left: 6px; }   /* 3:2 landscape — keeps most of a 16:9 event graphic */
+  .ogc-media { position: relative; flex: 0 0 186px; width: 186px; height: 124px; align-self: flex-start; margin: 12px 0 0 6px; }   /* top-aligned with the title */   /* 3:2 landscape — keeps most of a 16:9 event graphic */
   .ogc-img { width: 186px; height: 124px; object-fit: cover; display: block; border: 2px solid #1b1915; background: #1b1915; }
   .ogc-img.live { filter: grayscale(1) contrast(1.05); }       /* preview only, before the baked B&W copy arrives */
   .ogc-tile { width: 186px; height: 124px; background: #1b1915; border: 2px solid #1b1915; display: flex; align-items: center; justify-content: center; }
@@ -1165,7 +1165,7 @@
   .ogc-badge { position: absolute; left: -9px; top: -9px; width: 48px; height: 48px; border-radius: 50%; background: #1b1915; border: 2px solid #f2ecd8; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
   .ogc-badge .m { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #d6b86a; letter-spacing: .08em; }
   .ogc-badge .d { font-size: 19px; font-weight: 800; color: #fff; margin-top: 1px; }
-  .ogc-ev-body { flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; display: block; padding-top: 4px; }
+  .ogc-ev-body { flex: 1 1 auto; min-width: 0; height: 100%; box-sizing: border-box; overflow: hidden; display: block; padding-top: 10px; }   /* title cap-top lines up with the image top */
   .ogc-ev-qr { float: right; width: 78px; margin: 0 0 4px 10px; text-align: center; }
   .ogc-ev-qr img { width: 78px; height: 78px; display: block; background: #fff; border: 1px solid #1b1915; }
   .ogc-ev-qr .qc { font-size: 7px; color: #6e5d26; margin-top: 3px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
@@ -1176,6 +1176,8 @@
   /* 8-spot layout: 4 per side, everything a notch smaller */
   .ogc-card.cap4 .ogc-ev { height: 118px; flex-basis: 118px; gap: 12px; }
   .ogc-card.cap4 .ogc-media, .ogc-card.cap4 .ogc-img, .ogc-card.cap4 .ogc-tile { width: 150px; height: 100px; flex-basis: 150px; }
+  .ogc-card.cap4 .ogc-media { margin-top: 8px; }
+  .ogc-card.cap4 .ogc-ev-body { padding-top: 6px; }
   .ogc-card.cap4 .ogc-tile img { width: 44px; height: 44px; }
   .ogc-card.cap4 .ogc-badge { width: 40px; height: 40px; left: -8px; top: -8px; }
   .ogc-card.cap4 .ogc-badge .d { font-size: 16px; }
@@ -7248,7 +7250,7 @@ function ogaRenderList() {
     const shortened = window._ogcTrimmed && window._ogcTrimmed.has(key);
     const when = e.date + (e.time && !/12:00 AM/.test(e.time) ? ' · ' + e.time : '') + (e.endKey ? '–' + fmtEndKey(e.endKey) : '');
     const meta = [e.location ? e.location.split(' - ')[0] : '', e.owner || '', ogaIsBaptism(e) ? 'Baptism' : ''].filter(Boolean).join(' · ');
-    const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
+    const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '<span class="oga-badge" title="No image on the calendar yet — the card uses a generated graphic until one is added">✨ auto image</span>') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
     return '<div class="oga-item' + (st.on ? ' on' : '') + '" id="ogaItem-' + key + '">' +
       '<input type="checkbox" class="oga-cb" ' + (st.on ? 'checked' : '') + ' onchange="ogaToggle(\'' + key + '\',this.checked)">' +
       (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.imgLocal || e.img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'">' : '') +
@@ -7378,6 +7380,77 @@ function ogaQrDataUrl(text) {
     } catch (e) {}
   }
   return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(text);
+}
+// ── Auto event art ──────────────────────────────────────────────────────────
+// Events with no Planning Center image get a generated graphic in the style of our
+// event art (B&W, gritty, bold slanted title, big date stamp, LS mark). It's rebuilt
+// every time the card is made, so as soon as a real image lands on the calendar
+// (15-min sync) the card uses that instead — nothing is stored.
+const _ogcArtCache = {};
+let _ogcLogoImg = null;
+function ogcLoadImg(src) { return new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; }); }
+function ogcHash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+async function ogcMakeEventArt(e, timeText) {
+  const key = (e.name || '') + '|' + e.dateKey + '|' + (timeText || '');
+  if (_ogcArtCache[key]) return _ogcArtCache[key];
+  try { await document.fonts.load('400 80px "Bebas Neue"'); await document.fonts.load('800 20px Montserrat'); } catch (x) {}
+  if (!_ogcLogoImg) _ogcLogoImg = await ogcLoadImg('assets/ls-logo-white.png');
+  if (!_ogcTopoImg) { try { await ogcTexture(); } catch (x) {} }
+  const W = 600, H = 400, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  let seed = ogcHash(key); const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  // base + vignette
+  x.fillStyle = '#131313'; x.fillRect(0, 0, W, H);
+  const vg = x.createRadialGradient(W * (0.35 + rnd() * 0.3), H * 0.45, 40, W / 2, H / 2, W * 0.75);
+  vg.addColorStop(0, 'rgba(255,255,255,0.13)'); vg.addColorStop(1, 'rgba(0,0,0,0.55)');
+  x.fillStyle = vg; x.fillRect(0, 0, W, H);
+  // South Reno contours, offset per event so each graphic looks different
+  if (_ogcTopoImg) {
+    const t = ogcTopoLightDraw(_ogcTopoImg, 1008, 1392);
+    x.globalAlpha = 0.55; x.drawImage(t, -rnd() * 400, -rnd() * 900, 1008, 1392); x.globalAlpha = 1;
+  }
+  // brushy light streaks + grain
+  for (let i = 0; i < 5; i++) { x.save(); x.translate(rnd() * W, rnd() * H); x.rotate(-0.35 + rnd() * 0.2); x.fillStyle = 'rgba(255,255,255,' + (0.025 + rnd() * 0.04) + ')'; x.fillRect(-300, -8 - rnd() * 20, 600, 16 + rnd() * 40); x.restore(); }
+  for (let i = 0; i < 9000; i++) { const v = rnd() < 0.5 ? 0 : 255; x.fillStyle = 'rgba(' + v + ',' + v + ',' + v + ',' + (rnd() * 0.08).toFixed(3) + ')'; x.fillRect(rnd() * W, rnd() * H, 1.5, 1.5); }
+  // header lockup
+  // header lockup top-RIGHT (the card's date badge sits over the top-left corner)
+  if (_ogcLogoImg) x.drawImage(_ogcLogoImg, W - 26 - 38, 22, 38, 38);
+  x.fillStyle = 'rgba(255,255,255,0.85)'; x.font = '800 13px Montserrat'; x.textBaseline = 'middle'; x.textAlign = 'right';
+  if (x.letterSpacing !== undefined) x.letterSpacing = '3px';
+  x.fillText('LIVING STONES SOUTH RENO', W - 26 - 38 - 12, 42);
+  if (x.letterSpacing !== undefined) x.letterSpacing = '0px';
+  x.textAlign = 'left';
+  // title — condensed, slanted, auto-fit to ≤3 lines
+  const title = ogaExpand(e.name || 'Event').toUpperCase().replace(/\s+/g, ' ').trim();
+  const words = title.split(' '), maxW = W - 64;
+  let fs = 132, lines = [];   // title block spans y≈92–322
+  for (; fs >= 44; fs -= 4) {
+    x.font = '400 ' + fs + 'px "Bebas Neue", "Arial Narrow", Impact, sans-serif';
+    lines = []; let cur = '';
+    words.forEach(w => { const t = cur ? cur + ' ' + w : w; if (x.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
+    if (cur) lines.push(cur);
+    if (lines.length <= 3 && lines.every(l => x.measureText(l).width <= maxW) && lines.length * fs * 0.92 <= 230) break;
+  }
+  x.save(); x.transform(1, 0, -0.14, 1, 52, 0);   // italic slant like our brush-type titles (shifted right of the date badge)
+  x.textBaseline = 'alphabetic'; x.fillStyle = '#fff'; x.shadowColor = 'rgba(0,0,0,0.6)'; x.shadowBlur = 14;
+  const blockH = lines.length * fs * 0.92, top = 92 + (230 - blockH) / 2;
+  lines.forEach((l, i) => x.fillText(l, 32, top + (i + 1) * fs * 0.92 - fs * 0.12));
+  x.restore();
+  // rough white rule
+  x.fillStyle = 'rgba(255,255,255,0.9)'; x.beginPath(); x.moveTo(32, 336); x.lineTo(250, 331); x.lineTo(252, 337); x.lineTo(30, 341); x.fill();
+  // day/time (bottom-left) + big date stamp (bottom-right)
+  const d = new Date(e.dateKey + 'T12:00:00');
+  x.fillStyle = 'rgba(255,255,255,0.8)'; x.font = '800 14px Montserrat'; x.textBaseline = 'alphabetic';
+  if (x.letterSpacing !== undefined) x.letterSpacing = '2px';
+  const sub = (d.toLocaleDateString('en-US', { weekday: 'long' }) + (timeText ? ' · ' + timeText : '')).toUpperCase();
+  x.fillText(sub.length > 34 ? sub.slice(0, 33) + '…' : sub, 32, 370);
+  if (x.letterSpacing !== undefined) x.letterSpacing = '0px';
+  x.save(); x.transform(1, 0, -0.18, 1, 60, 0);
+  x.font = '400 78px "Bebas Neue", Impact, sans-serif'; x.textAlign = 'right';
+  const ds = (d.getMonth() + 1) + '/' + d.getDate();
+  x.lineWidth = 6; x.strokeStyle = '#111'; x.strokeText(ds, W - 34, H - 22); x.fillStyle = '#fff'; x.fillText(ds, W - 34, H - 22);
+  x.restore();
+  return (_ogcArtCache[key] = c.toDataURL('image/png'));
 }
 // Center-crop to a square and bake black & white (html2canvas ignores CSS filters).
 function ogcBakeImage(dataUrl) {
@@ -7523,6 +7596,8 @@ async function ogaBuildCard() {
   const faces = chosen.length <= 3 ? [chosen, []] : [chosen.slice(0, Math.ceil(chosen.length / 2)), chosen.slice(Math.ceil(chosen.length / 2))];
   await ogaEnsureQR();
   const tex = await ogcTexture();
+  const art = {};
+  await Promise.all(chosen.filter(it => !it.e.img).map(async it => { art[ogaKey(it.e)] = await ogcMakeEventArt(it.e, ogaCardTime(it.e, it.st)); }));
   const CAL_URL = 'https://lssr.churchcenter.com/calendar';
   const calQr = ogaQrDataUrl(CAL_URL);
 
@@ -7539,7 +7614,7 @@ async function ogaBuildCard() {
     const cached = e.img && _ogcImgCache[e.img];
     const media = e.img
       ? '<img class="ogc-img' + (cached ? '' : ' live') + '" data-orig="' + escapeHtml(e.img) + '"' + (e.imgLocal ? ' data-local="' + escapeHtml(e.imgLocal) + '"' : '') + ' referrerpolicy="no-referrer" src="' + escapeHtml(cached || e.imgLocal || e.img) + '" alt="">'
-      : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>';
+      : (art[ogaKey(e)] ? '<img class="ogc-img" data-gen="1" src="' + art[ogaKey(e)] + '" alt="">' : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>');
     return '<div class="ogc-ev" data-key="' + ogaKey(e) + '"><div class="ogc-media">' + media + badge + '</div>' +
       '<div class="ogc-ev-body">' +
         '<div class="ogc-ev-name">' + escapeHtml(ogaExpand(e.name) || 'Event') + '</div>' +
@@ -7734,6 +7809,10 @@ async function ogaExportLayers(btn) {
     zip.file('shared/calendar-qr-lssr.churchcenter.com-calendar.svg', ogcQrSvg('https://lssr.churchcenter.com/calendar'));
     for (const [n, u] of [['ls-lockup-white.png', 'assets/ls-card-logo-b.png'], ['ls-mark-white.png', 'assets/ls-logo-white.png']]) { const b = await fetchBin(u); if (b) zip.file('shared/logos/' + n, b); }
     const seen = {};
+    for (const im of document.querySelectorAll('#ogcPages img.ogc-img[data-gen]')) {
+      const name = ogcSlug((im.closest('.ogc-ev').querySelector('.ogc-ev-name') || {}).textContent) || 'event';
+      zip.file('shared/photos/' + name + '-generated.png', ogcDataUrlToBytes(im.src));
+    }
     for (const im of document.querySelectorAll('#ogcPages img.ogc-img[data-orig]')) {
       const orig = im.dataset.orig; if (seen[orig]) continue; seen[orig] = 1;
       const name = ogcSlug((im.closest('.ogc-ev').querySelector('.ogc-ev-name') || {}).textContent) || 'photo';
@@ -14427,7 +14506,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T230040Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T232324Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
