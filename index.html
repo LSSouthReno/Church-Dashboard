@@ -1232,6 +1232,11 @@
   .cg-seg-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
   .cg-seg-btn:hover { color: var(--text); }
   .cg-seg-btn.active { background: #2dd4bf; color: #04211d; }
+  .cgy-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .cgy-strip:empty { display: none; }
+  .cgy-chip { background: #161616; border: 1px solid var(--card-border); border-radius: 9px; padding: 8px 12px; font-size: 12px; color: var(--text-muted); }
+  .cgy-chip b { color: var(--text); font-size: 15px; margin-right: 4px; }
+  .cgy-chip .up { color: #4ade80; font-weight: 700; } .cgy-chip .down { color: #f87171; font-weight: 700; }
   /* Leadership pipeline phase columns (Identify → Assess → Prepare → Plant) */
   .cg-pipe-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-top: 6px; }
   .cg-pipe-col { background: #161616; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 13px; }
@@ -3172,6 +3177,11 @@
           <h2 id="cgTrendTitle" style="margin:0">Active Groups by Year</h2>
           <div class="card-sub" id="cgTrendSub">Monthly &middot; multi-year comparison</div>
         </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+        <div class="cg-seg" id="cgTrendView">
+          <button class="cg-seg-btn active" onclick="cgSetTrendView('month',this)">Monthly</button>
+          <button class="cg-seg-btn" onclick="cgSetTrendView('year',this)">By Year</button>
+        </div>
         <div class="cg-seg" id="cgTrendSeg">
           <button class="cg-seg-btn active" data-metric="groups" onclick="cgSelectTrend('groups',this)">Groups</button>
           <button class="cg-seg-btn" data-metric="members" onclick="cgSelectTrend('members',this)">Members</button>
@@ -3180,8 +3190,10 @@
           <button class="cg-seg-btn" data-metric="joined" onclick="cgSelectTrend('joined',this)">Joined</button>
           <button class="cg-seg-btn" data-metric="outsiders" onclick="cgSelectTrend('outsiders',this)">Outsiders</button>
         </div>
+        </div>
       </div>
       <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgTrendChart"></canvas></div></div>
+      <div class="cgy-strip" id="cgTrendYoY"></div>
     </div>
 
     <!-- ===== Group size health table (reference) ===== -->
@@ -8081,11 +8093,32 @@ const CG_TREND_META = {
   joined:    { title: 'Joined a Group',              sub: 'New group members each month · multi-year',      unit: 'joined',    src: cg => cg.joinedGroup },
   outsiders: { title: 'Outsiders → Insiders',       sub: 'Non-members joining groups each month',          unit: 'people',    src: cg => cg.outsidersInsiders }
 };
+const CG_TREND_FLOW = { applied: 1, joined: 1, outsiders: 1 };   // summed per year; others = latest reading
+let _cgTrendView = 'month', _cgTrendMetric = 'groups';
+function cgSetTrendView(v, btn) {
+  document.querySelectorAll('#cgTrendView .cg-seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+  _cgTrendView = v; cgRenderTrend(_cgTrendMetric);
+}
+// Year-by-year series: flows = sum of the year (current year = YTD), stocks = latest month reported.
+function cgYearSeries(byYear, flow) {
+  const cy = String(new Date().getFullYear());
+  return Object.keys(byYear || {}).sort().map(y => {
+    const arr = (byYear[y] || []).map(v => (v == null ? null : Number(v)));
+    let last = -1; arr.forEach((v, i) => { if (v != null) last = i; });
+    if (last < 0) return null;
+    const first = arr.findIndex(v => v != null);
+    const val = flow ? arr.reduce((t, v) => t + (v || 0), 0) : Math.round(arr[last] * 10) / 10;
+    return { y, val, last, first, partial: last < 11 || first > 0, current: y === cy };
+  }).filter(Boolean);
+}
 function cgSelectTrend(metric, btn) {
   document.querySelectorAll('#cgTrendSeg .cg-seg-btn').forEach(b => b.classList.toggle('active', b === btn));
   cgRenderTrend(metric);
 }
 function cgRenderTrend(metric) {
+  _cgTrendMetric = metric;
+  if (_cgTrendView === 'year') return cgRenderTrendByYear(metric);
+  const yEl = document.getElementById('cgTrendYoY'); if (yEl) yEl.innerHTML = '';
   const cg = _cgData || {};
   const meta = CG_TREND_META[metric] || CG_TREND_META.groups;
   const tEl = document.getElementById('cgTrendTitle'); if (tEl) tEl.textContent = meta.title;
@@ -8108,6 +8141,49 @@ function cgRenderTrend(metric) {
     }
   });
   const wrap = ctx.closest('.chart-wrap'); if (wrap) requestAnimationFrame(() => { wrap.scrollLeft = 0; });
+}
+
+function cgRenderTrendByYear(metric) {
+  const cg = _cgData || {};
+  const meta = CG_TREND_META[metric] || CG_TREND_META.groups;
+  const flow = !!CG_TREND_FLOW[metric];
+  const byYear = meta.src(cg) || {};
+  const ser = cgYearSeries(byYear, flow);
+  const tEl = document.getElementById('cgTrendTitle'); if (tEl) tEl.textContent = meta.title.replace(/ by Year$/, '') + ' — Year by Year';
+  const sEl = document.getElementById('cgTrendSub');
+  if (sEl) sEl.textContent = flow ? 'Total per year · current year is year-to-date' : 'Latest monthly reading each year (Dec, or most recent month)';
+  const ctx = document.getElementById('cgTrendChart'); if (!ctx) return;
+  if (_cgTrendChart) { _cgTrendChart.destroy(); _cgTrendChart = null; }
+  const M = CG_MONTHS;
+  const labels = ser.map(r => r.y + (r.partial ? (flow ? (r.current ? ' YTD' : ' (' + M[r.first] + '–' + M[r.last] + ')') : ' (' + M[r.last] + ')') : ''));
+  // YoY: current year compares the same months of the prior year for flows
+  const yoy = ser.map((r, i) => {
+    const p = ser[i - 1]; if (!p || p.y !== String(+r.y - 1)) return null;
+    let prev = p.val;
+    if (flow && r.current) prev = (byYear[p.y] || []).slice(0, r.last + 1).reduce((t, v) => t + (v || 0), 0);
+    if (!flow && r.current) { const pv = (byYear[p.y] || [])[r.last]; if (pv != null) prev = Number(pv); }
+    return prev > 0 ? { pct: Math.round((r.val - prev) / prev * 100), prev } : null;
+  });
+  prepScrollableChart('cgTrendChart', Math.max(ser.length, 3));
+  _cgTrendChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label: meta.title, data: ser.map(r => r.val), backgroundColor: ser.map(r => r.current ? '#2dd4bf' : 'rgba(45,212,191,0.45)'), borderRadius: 6, maxBarThickness: 90 }] },
+    options: {
+      responsive: false, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...baseTooltip, callbacks: { label: c => { const y = yoy[c.dataIndex]; return '  ' + c.parsed.y + ' ' + meta.unit + (y ? '  (' + (y.pct >= 0 ? '+' : '') + y.pct + '% vs ' + y.prev + ')' : ''); } } }
+      },
+      scales: {
+        x: { ...baseGridOpts, grid: { display: false } },
+        y: { ...baseGridOpts, beginAtZero: true, ticks: { ...baseGridOpts.ticks, precision: 0 } }
+      }
+    }
+  });
+  const yEl = document.getElementById('cgTrendYoY');
+  if (yEl) yEl.innerHTML = ser.map((r, i) => { const y = yoy[i];
+    return '<div class="cgy-chip"><b>' + r.val + '</b>' + escapeHtml(labels[i]) +
+      (y ? ' · <span class="' + (y.pct >= 0 ? 'up' : 'down') + '">' + (y.pct >= 0 ? '▲' : '▼') + ' ' + Math.abs(y.pct) + '%</span> vs ' + y.prev + (r.current ? ' same ' + (flow ? 'months' : 'month') + ' ' + (r.y - 1) : ' in ' + (r.y - 1)) : '') + '</div>'; }).join('');
 }
 
 function cgRenderGroupsByYear(cg) {
@@ -14132,7 +14208,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T221531Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T222555Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
