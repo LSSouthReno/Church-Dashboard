@@ -8754,8 +8754,16 @@ function staffRenderAll(data) {
 }
 
 function staffRenderMeta(data) {
-  const q = (data.meta && data.meta.quarter) || 'Q2 2026';
-  const d = (data.meta && data.meta.lastUpdated) || '';
+  // Quarter auto-advances with the calendar so it's never stale.
+  const now = new Date();
+  const q = 'Q' + (Math.floor(now.getMonth() / 3) + 1) + ' ' + now.getFullYear();
+  // "Updated" = the live dashboard sync time (this snapshot pulls live scorecard/
+  // rocks data hourly). The EOS planning content itself is authored per-quarter.
+  let d = '';
+  try {
+    const src = (window.DASHBOARD_DATA && DASHBOARD_DATA.lastUpdated) || (data.meta && data.meta.lastUpdated) || '';
+    if (src) { const dt = new Date(src); d = isNaN(dt) ? String(src) : dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+  } catch (e) {}
   const metaEl = document.getElementById('staffModMeta');
   if (metaEl) metaEl.textContent = q + (d ? ' · Updated ' + d : '');
 }
@@ -13308,7 +13316,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T145154Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T151424Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
