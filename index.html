@@ -1156,10 +1156,10 @@
   .ogc-month { font-size: 15px; color: #d6b86a; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; line-height: 1; }
   .ogc-body { flex: 1 1 auto; padding: 6px 34px; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; }
   .ogc-ev { height: 156px; flex: 0 0 156px; display: flex; gap: 14px; align-items: stretch; }
-  .ogc-media { position: relative; flex: 0 0 136px; width: 136px; height: 136px; align-self: center; margin-left: 6px; }
-  .ogc-img { width: 136px; height: 136px; object-fit: cover; display: block; border: 2px solid #1b1915; background: #1b1915; }
+  .ogc-media { position: relative; flex: 0 0 186px; width: 186px; height: 124px; align-self: center; margin-left: 6px; }   /* 3:2 landscape — keeps most of a 16:9 event graphic */
+  .ogc-img { width: 186px; height: 124px; object-fit: cover; display: block; border: 2px solid #1b1915; background: #1b1915; }
   .ogc-img.live { filter: grayscale(1) contrast(1.05); }       /* preview only, before the baked B&W copy arrives */
-  .ogc-tile { width: 136px; height: 136px; background: #1b1915; border: 2px solid #1b1915; display: flex; align-items: center; justify-content: center; }
+  .ogc-tile { width: 186px; height: 124px; background: #1b1915; border: 2px solid #1b1915; display: flex; align-items: center; justify-content: center; }
   .ogc-tile img { width: 58px; height: 58px; opacity: .35; }
   .ogc-badge { position: absolute; left: -9px; top: -9px; width: 48px; height: 48px; border-radius: 50%; background: #1b1915; border: 2px solid #f2ecd8; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
   .ogc-badge .m { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #d6b86a; letter-spacing: .08em; }
@@ -1174,7 +1174,7 @@
   .ogc-cta { display: inline-block; font-size: 8px; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 3px 8px; margin-top: 5px; text-transform: uppercase; letter-spacing: .05em; }
   /* 8-spot layout: 4 per side, everything a notch smaller */
   .ogc-card.cap4 .ogc-ev { height: 118px; flex-basis: 118px; gap: 12px; }
-  .ogc-card.cap4 .ogc-media, .ogc-card.cap4 .ogc-img, .ogc-card.cap4 .ogc-tile { width: 104px; height: 104px; flex-basis: 104px; }
+  .ogc-card.cap4 .ogc-media, .ogc-card.cap4 .ogc-img, .ogc-card.cap4 .ogc-tile { width: 150px; height: 100px; flex-basis: 150px; }
   .ogc-card.cap4 .ogc-tile img { width: 44px; height: 44px; }
   .ogc-card.cap4 .ogc-badge { width: 40px; height: 40px; left: -8px; top: -8px; }
   .ogc-card.cap4 .ogc-badge .d { font-size: 16px; }
@@ -7293,10 +7293,13 @@ function ogcBakeImage(dataUrl) {
   return new Promise(res => {
     const im = new Image();
     im.onload = () => {
-      const S = 480, c = document.createElement('canvas'); c.width = c.height = S;
-      const x = c.getContext('2d'); const side = Math.min(im.width, im.height);
-      x.drawImage(im, (im.width - side) / 2, (im.height - side) / 2, side, side, 0, 0, S, S);
-      const d = x.getImageData(0, 0, S, S), a = d.data;
+      // 3:2 landscape center-crop (matches .ogc-media) — a 16:9 graphic only loses ~16% of its width.
+      const W = 600, H = 400, c = document.createElement('canvas'); c.width = W; c.height = H;
+      const x = c.getContext('2d');
+      let sw = im.width, sh = im.width * H / W;
+      if (sh > im.height) { sh = im.height; sw = im.height * W / H; }
+      x.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, 0, 0, W, H);
+      const d = x.getImageData(0, 0, W, H), a = d.data;
       for (let i = 0; i < a.length; i += 4) {
         let g = 0.299 * a[i] + 0.587 * a[i + 1] + 0.114 * a[i + 2];
         g = Math.max(0, Math.min(255, (g - 128) * 1.08 + 128));
@@ -14208,7 +14211,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T222555Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T223633Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
