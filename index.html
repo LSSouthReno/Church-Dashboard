@@ -1117,6 +1117,11 @@
   .sos-mini-row { display: flex; align-items: center; gap: 9px; padding: 6px 0; }
   .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
   .sos-mini-title { flex: 1 1 auto; font-size: 14.5px; color: var(--sp-ink,#1a1510); }
+  .sos-team-tag { font-size: 10px; font-weight: 700; letter-spacing: .03em; text-transform: none; color: var(--sp-muted,#8a7e6e); background: rgba(201,150,58,.12); border-radius: 10px; padding: 2px 8px; margin-left: 6px; }
+  .sos-pri { font-size: 10.5px; font-weight: 800; text-transform: uppercase; border-radius: 8px; padding: 1px 6px; margin-left: 4px; background: #eee6d6; color: #7a6524; }
+  .sos-pri.hig { background: #f6d9cf; color: #9a3412; }
+  .sos-bq { font-size: 11.5px; color: var(--sp-muted,#8a7e6e); margin-left: 4px; }
+  .sos-mini-row .sp-rock-status { flex: 0 0 auto; }
   .sos-add-inline { display: flex; gap: 7px; margin-top: 10px; }
   .sos-add-inline .sos-input { margin-bottom: 0; }
   .sos-goal { background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
@@ -8168,6 +8173,55 @@ function sosAddStep(goalId, inputId) {
 }
 
 // ── Render ───────────────────────────────────────────────────────────────────
+// ── Team Rocks / Boulders for one person (shared with the rest of Staff OS) ──
+function sosOwnerMatch(ownerStr, fullName) {
+  const full = String(fullName || '').toLowerCase().trim(); if (!full) return false;
+  const first = full.split(/\s+/)[0];
+  return String(ownerStr || '').toLowerCase().split(/\s*(?:&|,|\/|\band\b|\+)\s*/).some(part => {
+    part = part.trim(); if (!part) return false;
+    return part === full || part === first || part.split(/\s+/)[0] === first && (part.split(/\s+/).length === 1 || full.indexOf(part) === 0);
+  });
+}
+function sosTeamRocks(name) {
+  const data = window._staffLastData || {}, edits = rocksEditsLoad_(), closed = edits.closed || {};
+  const open = [ ...(data.rocks || []).filter(i => (i.status === 'open' || !i.status) && !closed[i.rock]), ...((edits.added || []).filter(i => !closed[i.rock])) ];
+  const seen = {};
+  return open.filter(r => { if (seen[r.rock]) return false; seen[r.rock] = 1; return sosOwnerMatch(r.addedBy, name); });
+}
+function sosTeamBoulders(name) {
+  const order = { 'off-track': 0, 'tbd': 1, 'on-track': 2, 'complete': 3 };
+  return applyBoulderOverrides_((window._staffLastData || {}).boulders || []).filter(b => sosOwnerMatch(b.owner, name))
+    .sort((a, b) => (order[a.status || 'tbd'] - order[b.status || 'tbd']));
+}
+function sosRockResolve(cb) {
+  const rock = cb.dataset.rock;
+  if (!confirm('Resolve this rock? It closes it for the whole team.\n\n"' + rock + '"')) { cb.checked = false; return; }
+  rockResolve({ dataset: { rock: rock } });
+}
+function sosRockAdd() {
+  const el = document.getElementById('sosAddRock'), rock = (el && el.value || '').trim(); if (!rock) { el && el.focus(); return; }
+  const addedBy = _sos.viewing || _sos.me, priority = (document.getElementById('sosAddRockPri') || {}).value || 'med';
+  const edits = rocksEditsLoad_(); edits.added = edits.added || [];
+  edits.added.push({ rock, addedBy, priority, _local: true, ts: Date.now() });
+  rocksEditsSave_(edits);
+  eosPost_({ action: 'rock_add', rock, addedBy, priority });
+  try { staffRenderRocks(window._staffLastData || {}); } catch (e) {}
+  sosRender(); sosToast('Rock added for the team ✓');
+}
+function sosBoulderAdd() {
+  const el = document.getElementById('sosAddBoulder'), title = (el && el.value || '').trim(); if (!title) { el && el.focus(); return; }
+  const owner = _sos.viewing || _sos.me, d = new Date(), quarter = 'Q' + Math.ceil((d.getMonth() + 1) / 3) + ' ' + d.getFullYear();
+  const bEdits = bouldersEditsLoad_(); bEdits.added = bEdits.added || [];
+  if (!bEdits.added.find(b => b.title === title && b.owner === owner)) {
+    bEdits.added.push({ owner, title, quarter, status: 'tbd', type: 'individual', _local: true, ts: Date.now() });
+    bouldersEditsSave_(bEdits);
+    eosPost_({ action: 'boulder_add', owner, title, quarter });
+  }
+  try { staffRenderBoulders(window._staffLastData || {}); staffRenderSnapshot(window._staffLastData || {}); } catch (e) {}
+  sosRender(); sosToast('Boulder added ✓');
+}
+function sosRefreshIfOpen() { try { if (_sos && _sos.loaded && document.getElementById('sp-mine')) sosRender(); } catch (e) {} }
+
 function sosRender() {
   const host = document.getElementById('sp-mine'); if (!host) return;
   const g = sosTaskGroups();
@@ -8193,6 +8247,28 @@ function sosRender() {
         : '<div class="sos-empty sm">Nothing yet.</div>') +
       '<div class="sos-add-inline"><input id="sosAdd_' + type + '" class="sos-input sm" placeholder="' + addLabel + '" onkeydown="if(event.key===\'Enter\')sosAddSimple(\'' + type + '\',\'sosAdd_' + type + '\')"><button class="sos-btn sm" onclick="sosAddSimple(\'' + type + '\',\'sosAdd_' + type + '\')">Add</button></div></div>';
   };
+
+  // Rocks & Boulders are the TEAM ones (same data as the Rocks / Boulders tabs, L10 and
+  // profiles) filtered to this person — add / resolve / status changes sync everywhere.
+  const teamReady = !!window._staffLastData;
+  const myRocks = teamReady ? sosTeamRocks(viewing) : [], myBoulders = teamReady ? sosTeamBoulders(viewing) : [];
+  const bLabels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
+  const teamRocksHtml = '<div class="sos-mini"><div class="sos-mini-h">This Quarter’s Rocks <span class="sos-team-tag">synced with Staff OS</span></div>' +
+    (!teamReady ? '<div class="sos-empty sm">Loading team rocks…</div>' : myRocks.length ? myRocks.map(r =>
+      '<div class="sos-mini-row"><input type="checkbox" class="sos-cb" title="Resolve this rock (closes it everywhere)" onchange="sosRockResolve(this)" data-rock="' + escapeHtml(r.rock) + '">' +
+      '<span class="sos-mini-title">' + escapeHtml(r.rock) + (r.priority ? ' <span class="sos-pri ' + escapeHtml(String(r.priority).slice(0, 3)) + '">' + escapeHtml(String(r.priority)) + '</span>' : '') + '</span></div>').join('')
+      : '<div class="sos-empty sm">No open rocks.</div>') +
+    '<div class="sos-add-inline"><input id="sosAddRock" class="sos-input sm" placeholder="Add a rock (90-day priority)…" onkeydown="if(event.key===\'Enter\')sosRockAdd()">' +
+    '<select id="sosAddRockPri" class="sos-input sm" style="flex:0 0 auto;width:auto"><option value="high">High</option><option value="med" selected>Med</option><option value="low">Low</option></select>' +
+    '<button class="sos-btn sm" onclick="sosRockAdd()">Add</button></div></div>';
+  const teamBouldersHtml = '<div class="sos-mini"><div class="sos-mini-h">Boulders <span class="sos-team-tag">synced with Staff OS</span></div>' +
+    (!teamReady ? '<div class="sos-empty sm">Loading team boulders…</div>' : myBoulders.length ? myBoulders.map(b => {
+      const st = b.status || 'tbd';
+      return '<div class="sos-mini-row' + (st === 'complete' ? ' done' : '') + '"><span class="sos-mini-title">' + escapeHtml(b.title) +
+        ' <span class="sos-bq">' + escapeHtml(b.quarter || '') + (b.type === 'company' ? ' · company' : '') + '</span></span>' +
+        '<button class="sp-rock-status ' + st + ' sp-boulder-status-btn" data-key="' + escapeHtml(boulderKey_(b)) + '" onclick="boulderCycleStatus(this)" title="Click to cycle status">' + bLabels[st] + '</button></div>';
+    }).join('') : '<div class="sos-empty sm">No boulders yet.</div>') +
+    '<div class="sos-add-inline"><input id="sosAddBoulder" class="sos-input sm" placeholder="Add a boulder (this quarter)…" onkeydown="if(event.key===\'Enter\')sosBoulderAdd()"><button class="sos-btn sm" onclick="sosBoulderAdd()">Add</button></div></div>';
 
   const goals = sosPlansByType('goal');
   const goalsHtml = goals.length ? goals.map(goal => {
@@ -8238,8 +8314,8 @@ function sosRender() {
       '</div>' +
       '<div class="sos-col">' +
         '<div class="sos-card"><div class="sos-card-h">🎯 Rocks, Boulders &amp; Focus</div>' +
-          rockCard('rock','This Quarter’s Rocks','Add a rock (90-day priority)…') +
-          rockCard('boulder','Boulders (long-range)','Add a boulder…') +
+          teamRocksHtml +
+          teamBouldersHtml +
           rockCard('focus','Areas of Focus','Add an area of focus…') +
         '</div>' +
         '<div class="sos-card"><div class="sos-card-h">📈 Annual Plan &amp; Goals</div>' +
@@ -9986,6 +10062,7 @@ async function staffLoadData() {
 function staffRenderAll(data) {
   staffRendered = true;
   window._staffLastData = data;
+  setTimeout(sosRefreshIfOpen, 0);
   staffRenderMeta(data);
   staffRenderTabs(data);
   staffRenderVTO(data);
@@ -10302,6 +10379,7 @@ function boulderCycleStatus(btn) {
   // Re-render Boulders tab and Snapshot (not L10 — would wipe meeting notes)
   staffRenderBoulders(window._staffLastData || {});
   staffRenderSnapshot(window._staffLastData || {});
+  sosRefreshIfOpen();
 }
 function rockResolve(btn) {
   const rock = btn.dataset.rock;
@@ -10313,6 +10391,7 @@ function rockResolve(btn) {
   eosPost_({ action: 'rock_resolve', rock });
   staffRenderRocks(window._staffLastData || {});
   staffRenderSnapshot(window._staffLastData || {});
+  sosRefreshIfOpen();
 }
 function rockAdd() {
   const rockInput = document.getElementById('sp-add-rock-text');
@@ -10330,6 +10409,7 @@ function rockAdd() {
   // Sync to Google Sheet
   eosPost_({ action: 'rock_add', rock, addedBy, priority });
   staffRenderRocks(window._staffLastData || {});
+  sosRefreshIfOpen();
 }
 function rockUnresolve(btn) {
   const rock = btn.dataset.rock;
@@ -10339,6 +10419,7 @@ function rockUnresolve(btn) {
   edits.added = (edits.added || []).filter(r => r.rock !== rock || !r._local);
   rocksEditsSave_(edits);
   staffRenderRocks(window._staffLastData || {});
+  sosRefreshIfOpen();
 }
 // ── Escalate a rock to a Boulder ──────────────────────────────────────────
 // A recurring/systemic rock gets promoted: it leaves the open Rocks list and
@@ -10379,6 +10460,7 @@ function rockEscalateToBoulder(rockText, opts) {
   staffRenderSnapshot(window._staffLastData || {});
   if (opts.fromL10) staffRenderL10(window._staffLastData || {});
   if (opts.fromProfile && window._spCurrentPerson) openStaffProfile(window._spCurrentPerson.name);
+  sosRefreshIfOpen();
 }
 // ── Resolve/Add from L10 IDS section ──────────────────────────────────────
 function rockResolveFromL10(btn) {
@@ -14580,7 +14662,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T233143Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T235039Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
