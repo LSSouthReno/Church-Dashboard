@@ -1130,7 +1130,7 @@
   .ogc-bar { max-width: 1100px; margin: 0 auto 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
   .ogc-pages { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
   /* 5×7 portrait at 96dpi = 480×672 · brand amber #cf8636 */
-  .ogc-card { width: 480px; height: 672px; background: #16130e; color: #f4efe6; border-radius: 6px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
+  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #16130e; color: #f4efe6; border-radius: 6px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
   /* Hero with nested-chevron (mountain) motif */
   .ogc-hero { position: relative; padding: 26px 30px 20px; background:
@@ -7118,10 +7118,13 @@ function ogaBuildCard() {
     const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' })) + (time ? ' · ' + time : '');
     const loc = e.location ? e.location.split(' - ')[0] : '';
     const link = st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
-    const qrCap = /\/registrations?\//.test(link) ? 'Register' : 'Scan for info';
-    const qr = link
-      ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">' + qrCap + '</div></div>'
-      : (e.img ? '<img class="ogc-thumb" crossorigin="anonymous" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">' : '');
+    const isReg = /\/registrations?\//.test(link);
+    // Registrations get a scannable QR; everything else shows its graphic when it
+    // has one; an info-only Church Center link falls back to a small "scan" QR.
+    const qr = isReg
+      ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">Register</div></div>'
+      : (e.img ? '<img class="ogc-thumb" crossorigin="anonymous" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">'
+        : (link ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">Scan</div></div>' : ''));
     return '<div class="ogc-ev">' +
       '<div class="ogc-date"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div>' +
         '<div class="d">' + d.getDate() + '</div><div class="dow">' + d.toLocaleDateString('en-US', { weekday: 'short' }) + '</div></div>' +
