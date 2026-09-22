@@ -1055,6 +1055,75 @@
   .oga-badge.reg { background: rgba(207,134,54,0.18); color: #e0954a; }
   .oga-badge.cc { background: rgba(45,212,191,0.14); color: #2dd4bf; }
 
+  /* ---- Staff OS: My Snapshot workspace ---- */
+  .sos-loading, .sos-empty { color: var(--sp-muted,#9a917f); padding: 24px; text-align: center; font-size: 13px; }
+  .sos-empty.sm { padding: 10px; font-size: 12px; }
+  .sos-signin { display: flex; justify-content: center; padding: 40px 16px; }
+  .sos-signin-box { max-width: 440px; width: 100%; background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 14px; padding: 26px; }
+  .sos-signin-t { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .sos-signin-s { font-size: 13px; color: var(--sp-muted,#9a917f); margin-bottom: 18px; line-height: 1.5; }
+  .sos-input { width: 100%; background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 8px; color: #f4efe6; padding: 10px 12px; font-size: 13px; font-family: inherit; margin-bottom: 10px; box-sizing: border-box; }
+  .sos-input.sm { padding: 7px 9px; font-size: 12px; margin-bottom: 0; }
+  .sos-btn { background: #1c1c1c; border: 1px solid var(--sp-border,#2a2a2a); color: #f4efe6; border-radius: 8px; padding: 9px 14px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .sos-btn.hi { background: var(--sp-gold,#cf8636); color: #1a1206; border-color: var(--sp-gold,#cf8636); }
+  .sos-btn.sm { padding: 6px 10px; font-size: 12px; }
+  .sos-btn.ghost { background: transparent; color: var(--sp-muted,#9a917f); }
+  .sos-btn:hover { filter: brightness(1.12); }
+  .sos-err { color: #f87171; font-size: 12px; margin-top: 6px; min-height: 14px; }
+  .sos-topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .sos-who { font-size: 16px; color: #fff; } .sos-who b { font-weight: 800; }
+  .sos-role { font-size: 12px; color: var(--sp-muted,#9a917f); margin-left: 6px; }
+  .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 900px) { .sos-grid { grid-template-columns: 1fr; } }
+  .sos-col { display: flex; flex-direction: column; gap: 18px; }
+  .sos-card { background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 14px; padding: 18px; }
+  .sos-card-h { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sos-count { font-size: 11px; font-weight: 600; color: var(--sp-muted,#9a917f); background: #0f0f0f; padding: 2px 8px; border-radius: 10px; }
+  .sos-addtask { background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 10px; padding: 10px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .sos-addtask-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .sos-addtask-row .sos-input { margin-bottom: 0; flex: 1 1 auto; min-width: 90px; }
+  .sos-tgroup { margin-bottom: 12px; }
+  .sos-tgroup-h { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; margin-bottom: 6px; color: var(--sp-muted,#9a917f); }
+  .sos-tgroup-h.ov { color: #f87171; } .sos-tgroup-h.td { color: #cf8636; }
+  .sos-task { display: flex; gap: 10px; align-items: flex-start; padding: 9px 8px; border-radius: 8px; }
+  .sos-task:hover { background: #0f0f0f; }
+  .sos-task.done .sos-task-title { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
+  .sos-cb { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--sp-gold,#cf8636); cursor: pointer; flex: 0 0 auto; }
+  .sos-task-body { flex: 1 1 auto; min-width: 0; }
+  .sos-task-top { display: flex; gap: 7px; flex-wrap: wrap; align-items: baseline; }
+  .sos-task-title { font-size: 13.5px; color: #f4efe6; font-weight: 600; }
+  .sos-task-notes { font-size: 12px; color: var(--sp-muted,#9a917f); margin-top: 2px; }
+  .sos-tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: #0f0f0f; color: var(--sp-muted,#9a917f); }
+  .sos-tag.high { background: rgba(248,113,113,.16); color: #f87171; }
+  .sos-tag.due { background: rgba(207,134,54,.16); color: #e0954a; }
+  .sos-tag.from { background: rgba(96,165,250,.16); color: #93c5fd; }
+  .sos-task-actions { display: flex; gap: 3px; opacity: .5; }
+  .sos-task:hover .sos-task-actions { opacity: 1; }
+  .sos-task-actions button, .sos-x { background: none; border: none; color: var(--sp-muted,#9a917f); cursor: pointer; font-size: 12px; padding: 2px 4px; }
+  .sos-task-actions button:hover, .sos-x:hover { color: #fff; }
+  .sos-done-wrap { margin-top: 8px; } .sos-done-wrap summary { cursor: pointer; font-size: 12px; color: var(--sp-muted,#9a917f); padding: 4px 0; }
+  .sos-mini { margin-bottom: 16px; }
+  .sos-mini-h { font-size: 12px; font-weight: 700; color: #cf8636; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .sos-mini-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; }
+  .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
+  .sos-mini-title { flex: 1 1 auto; font-size: 13px; color: #f4efe6; }
+  .sos-add-inline { display: flex; gap: 6px; margin-top: 8px; }
+  .sos-add-inline .sos-input { margin-bottom: 0; }
+  .sos-goal { background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+  .sos-goal-top { display: flex; align-items: baseline; gap: 8px; }
+  .sos-goal-title { flex: 1 1 auto; font-size: 14px; font-weight: 700; color: #fff; }
+  .sos-goal-period { font-size: 11px; color: var(--sp-muted,#9a917f); }
+  .sos-goal-metric { font-size: 12px; color: var(--sp-muted,#9a917f); margin: 6px 0; }
+  .sos-cur { width: 60px; background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 5px; color: #f4efe6; padding: 2px 6px; font-size: 12px; }
+  .sos-prog { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+  .sos-prog input[type=range] { flex: 1 1 auto; accent-color: var(--sp-gold,#cf8636); }
+  .sos-prog-lbl { font-size: 12px; font-weight: 800; color: #cf8636; width: 40px; text-align: right; }
+  .sos-steps { margin: 6px 0; }
+  .sos-step { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 12.5px; color: #f4efe6; }
+  .sos-step.done span { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
+  .sos-step span { flex: 1 1 auto; }
+  .sos-goal-add { border-top: 1px solid var(--sp-border,#2a2a2a); padding-top: 12px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
+
   /* Print-preview overlay for the finished 5×7 card — LSSR branded (charcoal + amber) */
   .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4000; display: none; overflow: auto; padding: 24px; }
   .ogc-overlay.open { display: block; }
@@ -3063,7 +3132,8 @@
   <!-- Unlocked content -->
   <div id="staffModContent" class="staff-panel" style="display:none">
     <nav class="sp-nav-tabs">
-      <div class="sp-nav-tab sp-active" onclick="staffShowSection('sp-snapshot',this)">Snapshot</div>
+      <div class="sp-nav-tab sp-active" onclick="staffShowSection('sp-mine',this);sosInit()">My Snapshot</div>
+      <div class="sp-nav-tab" onclick="staffShowSection('sp-snapshot',this)">Team Snapshot</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-vto',this)">V/TO</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-vot',this)">Culture</div>
       <div class="sp-nav-tab" onclick="staffShowSection('sp-acc-chart',this)">Acc Chart</div>
@@ -3080,8 +3150,11 @@
     <div class="sp-main-wrap">
       <div class="sp-main">
 
-        <!-- SNAPSHOT (rendered by staffRenderSnapshot) -->
-        <div class="sp-section sp-active" id="sp-snapshot"></div>
+        <!-- MY SNAPSHOT (per-staff-member workspace, rendered by sosRender) -->
+        <div class="sp-section sp-active" id="sp-mine"></div>
+
+        <!-- TEAM SNAPSHOT (rendered by staffRenderSnapshot) -->
+        <div class="sp-section" id="sp-snapshot"></div>
 
         <!-- V/TO -->
         <div class="sp-section" id="sp-vto">
@@ -7104,6 +7177,224 @@ async function ogaDownloadPDF(btn) {
   } finally { btn.disabled = false; }
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// STAFF OS — per-member personal workspace (My Snapshot)
+// ════════════════════════════════════════════════════════════════════════════
+const SOS_ME_KEY = 'lssr_sos_me';
+let _sos = { me: '', role: '', roster: [], tasks: [], assigned: [], plans: [], loaded: false, busy: false };
+
+function sosApiGet(params) {
+  return fetch(STAFF_OS_URL + '?' + params + '&_=' + Date.now()).then(r => r.json());
+}
+function sosApiPost(body) {
+  return fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(body) }).then(r => r.json());
+}
+function sosInit() {
+  const host = document.getElementById('sp-mine'); if (!host) return;
+  if (!_sos.roster.length) {
+    host.innerHTML = '<div class="sos-loading">Loading your workspace…</div>';
+    sosApiGet('action=sos_roster').then(res => {
+      _sos.roster = (res && res.roster) || [];
+      _sos.me = localStorage.getItem(SOS_ME_KEY) || '';
+      if (_sos.me) sosLoadData(); else sosRenderSignin();
+    }).catch(() => { host.innerHTML = '<div class="sos-loading">Could not reach the staff workspace. Check your connection and reopen.</div>'; });
+  } else if (_sos.me) { sosRender(); } else { sosRenderSignin(); }
+}
+function sosRenderSignin() {
+  const host = document.getElementById('sp-mine'); if (!host) return;
+  host.innerHTML =
+    '<div class="sos-signin">' +
+      '<div class="sos-signin-box">' +
+        '<div class="sos-signin-t">Who’s signing in?</div>' +
+        '<div class="sos-signin-s">Pick your name to open your personal snapshot — tasks, rocks &amp; boulders, and your annual plan.</div>' +
+        '<select id="sosWhoSel" class="sos-input">' + '<option value="">Select your name…</option>' +
+          _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '">' + escapeHtml(p.name) + (p.role ? ' — ' + escapeHtml(p.role) : '') + '</option>').join('') +
+        '</select>' +
+        '<input type="password" id="sosPin" class="sos-input" placeholder="PIN (leave blank if you don’t have one)" autocomplete="off">' +
+        '<button class="sos-btn hi" onclick="sosSignIn()">Open my snapshot →</button>' +
+        '<div id="sosSigninErr" class="sos-err"></div>' +
+      '</div>' +
+    '</div>';
+}
+function sosSignIn() {
+  const who = (document.getElementById('sosWhoSel') || {}).value || '';
+  const pin = (document.getElementById('sosPin') || {}).value || '';
+  const err = document.getElementById('sosSigninErr');
+  if (!who) { if (err) err.textContent = 'Please pick your name.'; return; }
+  if (err) err.textContent = '';
+  sosApiPost({ action: 'sos_signin', who: who, pin: pin }).then(res => {
+    if (res && res.ok) { _sos.me = who; _sos.role = res.role || ''; localStorage.setItem(SOS_ME_KEY, who); sosLoadData(); }
+    else if (err) err.textContent = (res && res.error) || 'Could not sign in.';
+  }).catch(() => { if (err) err.textContent = 'Connection problem. Try again.'; });
+}
+function sosSignOut() { _sos.me = ''; _sos.role = ''; localStorage.removeItem(SOS_ME_KEY); sosRenderSignin(); }
+function sosLoadData() {
+  const host = document.getElementById('sp-mine');
+  if (host && !_sos.loaded) host.innerHTML = '<div class="sos-loading">Loading ' + escapeHtml(_sos.me) + '’s workspace…</div>';
+  return sosApiGet('action=sos_data&who=' + encodeURIComponent(_sos.me)).then(res => {
+    if (res && res.ok) {
+      _sos.tasks = res.tasks || []; _sos.assigned = res.assigned || []; _sos.plans = res.plans || [];
+      if (res.roster && res.roster.length) _sos.roster = res.roster;
+      const meRow = _sos.roster.find(p => p.name === _sos.me); if (meRow) _sos.role = meRow.role || _sos.role;
+      _sos.loaded = true; sosRender();
+    } else { sosRenderSignin(); }
+  }).catch(() => { const h = document.getElementById('sp-mine'); if (h) h.innerHTML = '<div class="sos-loading">Could not load your workspace. <a href="#" onclick="sosLoadData();return false" style="color:var(--sp-gold)">Retry</a></div>'; });
+}
+function sosRefresh() { sosLoadData(); }
+
+// ── Task helpers ─────────────────────────────────────────────────────────────
+function sosTaskGroups() {
+  const open = _sos.tasks.filter(t => t.status !== 'done');
+  const done = _sos.tasks.filter(t => t.status === 'done');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const key = t => { if (!t.due) return 3; const d = new Date(t.due + 'T12:00:00'); if (isNaN(d)) return 3; d.setHours(0,0,0,0); if (d < today) return 0; if (d.getTime() === today.getTime()) return 1; return 2; };
+  const buckets = [[],[],[],[]];
+  open.forEach(t => buckets[key(t)].push(t));
+  buckets.forEach(b => b.sort((a,c) => (a.due||'zzzz').localeCompare(c.due||'zzzz')));
+  return { buckets, done };
+}
+function sosTaskRow(t) {
+  const from = (t.assignedBy && t.assignedBy !== _sos.me) ? '<span class="sos-tag from">from ' + escapeHtml(t.assignedBy) + '</span>' : '';
+  const pri = t.priority === 'high' ? '<span class="sos-tag high">high</span>' : '';
+  const due = t.due ? '<span class="sos-tag due">' + escapeHtml(sosFmtDue(t.due)) + '</span>' : '';
+  const notes = t.notes ? '<div class="sos-task-notes">' + escapeHtml(t.notes) + '</div>' : '';
+  const done = t.status === 'done';
+  return '<div class="sos-task' + (done ? ' done' : '') + '">' +
+    '<input type="checkbox" class="sos-cb" ' + (done ? 'checked' : '') + ' onchange="sosToggleTask(\'' + t.id + '\',this.checked)">' +
+    '<div class="sos-task-body"><div class="sos-task-top"><span class="sos-task-title">' + escapeHtml(t.title || '') + '</span>' + due + pri + from + '</div>' + notes + '</div>' +
+    '<div class="sos-task-actions">' +
+      '<button title="Edit" onclick="sosEditTask(\'' + t.id + '\')">✎</button>' +
+      '<button title="Delete" onclick="sosDeleteTask(\'' + t.id + '\')">🗑</button>' +
+    '</div></div>';
+}
+function sosFmtDue(d) { try { const dt = new Date(d + 'T12:00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); } catch(e){ return d; } }
+
+function sosAddTask() {
+  const title = (document.getElementById('sosNewTitle')||{}).value.trim();
+  if (!title) { const el=document.getElementById('sosNewTitle'); if(el) el.focus(); return; }
+  const forWho = (document.getElementById('sosNewFor')||{}).value || _sos.me;
+  const due = (document.getElementById('sosNewDue')||{}).value || '';
+  const pri = (document.getElementById('sosNewPri')||{}).value || 'normal';
+  const notes = (document.getElementById('sosNewNotes')||{}).value || '';
+  const body = { action:'sos_task_add', owner: forWho, title: title, due: due, priority: pri, notes: notes, assignedBy: (forWho !== _sos.me ? _sos.me : '') };
+  ['sosNewTitle','sosNewDue','sosNewNotes'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
+  sosApiPost(body).then(()=>sosLoadData());
+}
+function sosToggleTask(id, done) { sosApiPost({ action:'sos_task_update', id:id, status: done?'done':'open' }).then(()=>sosLoadData()); }
+function sosDeleteTask(id) { if(!confirm('Delete this task?')) return; sosApiPost({ action:'sos_task_delete', id:id }).then(()=>sosLoadData()); }
+function sosEditTask(id) {
+  const t = _sos.tasks.find(x=>x.id===id) || _sos.assigned.find(x=>x.id===id); if(!t) return;
+  const title = prompt('Task', t.title); if (title===null) return;
+  const notes = prompt('Notes (optional)', t.notes||''); if (notes===null) return;
+  const due = prompt('Due date (YYYY-MM-DD, blank = none)', t.due||''); if (due===null) return;
+  sosApiPost({ action:'sos_task_update', id:id, title:title.trim(), notes:notes, due:due.trim() }).then(()=>sosLoadData());
+}
+
+// ── Plan / rocks / focus helpers ─────────────────────────────────────────────
+function sosPlansByType(type) { return _sos.plans.filter(p => p.type === type && !p.parentId); }
+function sosSteps(goalId) { return _sos.plans.filter(p => p.type === 'step' && p.parentId === goalId); }
+function sosAddSimple(type, inputId) {
+  const el = document.getElementById(inputId); const title = el ? el.value.trim() : '';
+  if (!title) { if(el) el.focus(); return; }
+  if (el) el.value = '';
+  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:type, title:title, status:'active' }).then(()=>sosLoadData());
+}
+function sosDeletePlan(id) { if(!confirm('Delete this item?')) return; sosApiPost({ action:'sos_plan_delete', id:id }).then(()=>sosLoadData()); }
+function sosTogglePlan(id, done) { sosApiPost({ action:'sos_plan_update', id:id, status: done?'done':'active' }).then(()=>sosLoadData()); }
+function sosAddGoal() {
+  const t = (document.getElementById('sosGoalTitle')||{}).value.trim(); if(!t){return;}
+  const metric = (document.getElementById('sosGoalMetric')||{}).value||'';
+  const target = (document.getElementById('sosGoalTarget')||{}).value||'';
+  const period = (document.getElementById('sosGoalPeriod')||{}).value||('' + new Date().getFullYear());
+  ['sosGoalTitle','sosGoalMetric','sosGoalTarget'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
+  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:'goal', title:t, metric:metric, target:target, current:'0', progress:0, period:period, status:'active' }).then(()=>sosLoadData());
+}
+function sosSetProgress(id, val) { sosApiPost({ action:'sos_plan_update', id:id, progress:Number(val) }).then(()=>{ const lbl=document.getElementById('sosProgLbl-'+id); if(lbl) lbl.textContent=val+'%'; }); }
+function sosSetCurrent(id, val) { sosApiPost({ action:'sos_plan_update', id:id, current:val }).then(()=>sosLoadData()); }
+function sosAddStep(goalId, inputId) {
+  const el=document.getElementById(inputId); const t = el?el.value.trim():''; if(!t){ if(el) el.focus(); return; }
+  if(el) el.value='';
+  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:'step', title:t, parentId:goalId, status:'active' }).then(()=>sosLoadData());
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function sosRender() {
+  const host = document.getElementById('sp-mine'); if (!host) return;
+  const g = sosTaskGroups();
+  const bucketLabels = ['Overdue','Today','Upcoming','No date'];
+  const openCount = _sos.tasks.filter(t=>t.status!=='done').length;
+  const staffOpts = _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '"' + (p.name===_sos.me?' selected':'') + '>' + escapeHtml(p.name==_sos.me?'Me ('+p.name+')':p.name) + '</option>').join('');
+
+  let tasksHtml = '';
+  g.buckets.forEach((b, i) => { if (!b.length) return;
+    tasksHtml += '<div class="sos-tgroup"><div class="sos-tgroup-h ' + ['ov','td','up','nd'][i] + '">' + bucketLabels[i] + ' · ' + b.length + '</div>' + b.map(sosTaskRow).join('') + '</div>';
+  });
+  if (!openCount) tasksHtml = '<div class="sos-empty">No open tasks. You’re clear. 🎉</div>';
+  if (g.done.length) tasksHtml += '<details class="sos-done-wrap"><summary>' + g.done.length + ' completed</summary>' + g.done.map(sosTaskRow).join('') + '</details>';
+
+  const rockCard = (type, title, addLabel) => {
+    const items = sosPlansByType(type);
+    return '<div class="sos-mini"><div class="sos-mini-h">' + title + '</div>' +
+      (items.length ? items.map(p => '<div class="sos-mini-row' + (p.status==='done'?' done':'') + '">' +
+        '<input type="checkbox" class="sos-cb" ' + (p.status==='done'?'checked':'') + ' onchange="sosTogglePlan(\'' + p.id + '\',this.checked)">' +
+        '<span class="sos-mini-title">' + escapeHtml(p.title) + '</span>' +
+        '<button class="sos-x" onclick="sosDeletePlan(\'' + p.id + '\')">🗑</button></div>').join('')
+        : '<div class="sos-empty sm">Nothing yet.</div>') +
+      '<div class="sos-add-inline"><input id="sosAdd_' + type + '" class="sos-input sm" placeholder="' + addLabel + '" onkeydown="if(event.key===\'Enter\')sosAddSimple(\'' + type + '\',\'sosAdd_' + type + '\')"><button class="sos-btn sm" onclick="sosAddSimple(\'' + type + '\',\'sosAdd_' + type + '\')">Add</button></div></div>';
+  };
+
+  const goals = sosPlansByType('goal');
+  const goalsHtml = goals.length ? goals.map(goal => {
+    const prog = Number(goal.progress || 0);
+    const steps = sosSteps(goal.id);
+    const stepsHtml = steps.map(s => '<div class="sos-step' + (s.status==='done'?' done':'') + '"><input type="checkbox" class="sos-cb" ' + (s.status==='done'?'checked':'') + ' onchange="sosTogglePlan(\'' + s.id + '\',this.checked)"><span>' + escapeHtml(s.title) + '</span><button class="sos-x" onclick="sosDeletePlan(\'' + s.id + '\')">🗑</button></div>').join('');
+    const metricLine = (goal.metric || goal.target) ? '<div class="sos-goal-metric">' + escapeHtml(goal.metric||'Progress') + ': <input class="sos-cur" value="' + escapeHtml(String(goal.current||'')) + '" onchange="sosSetCurrent(\'' + goal.id + '\',this.value)"> / <b>' + escapeHtml(String(goal.target||'')) + '</b></div>' : '';
+    return '<div class="sos-goal">' +
+      '<div class="sos-goal-top"><span class="sos-goal-title">' + escapeHtml(goal.title) + '</span>' +
+        '<span class="sos-goal-period">' + escapeHtml(goal.period||'') + '</span>' +
+        '<button class="sos-x" onclick="sosDeletePlan(\'' + goal.id + '\')">🗑</button></div>' +
+      metricLine +
+      '<div class="sos-prog"><input type="range" min="0" max="100" value="' + prog + '" oninput="document.getElementById(\'sosProgLbl-' + goal.id + '\').textContent=this.value+\'%\'" onchange="sosSetProgress(\'' + goal.id + '\',this.value)"><span class="sos-prog-lbl" id="sosProgLbl-' + goal.id + '">' + prog + '%</span></div>' +
+      (stepsHtml ? '<div class="sos-steps">' + stepsHtml + '</div>' : '') +
+      '<div class="sos-add-inline"><input id="sosStep_' + goal.id + '" class="sos-input sm" placeholder="Add action step…" onkeydown="if(event.key===\'Enter\')sosAddStep(\'' + goal.id + '\',\'sosStep_' + goal.id + '\')"><button class="sos-btn sm" onclick="sosAddStep(\'' + goal.id + '\',\'sosStep_' + goal.id + '\')">Add</button></div>' +
+    '</div>';
+  }).join('') : '<div class="sos-empty sm">No goals yet — add your first below.</div>';
+
+  host.innerHTML =
+    '<div class="sos-topbar"><div class="sos-who">👤 <b>' + escapeHtml(_sos.me) + '</b>' + (_sos.role?' <span class="sos-role">' + escapeHtml(_sos.role) + '</span>':'') + '</div>' +
+      '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Switch user</button></div></div>' +
+    '<div class="sos-grid">' +
+      '<div class="sos-col">' +
+        '<div class="sos-card"><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
+          '<div class="sos-addtask">' +
+            '<input id="sosNewTitle" class="sos-input" placeholder="Add a task…" onkeydown="if(event.key===\'Enter\')sosAddTask()">' +
+            '<div class="sos-addtask-row">' +
+              '<input id="sosNewDue" type="date" class="sos-input sm" title="Due date">' +
+              '<select id="sosNewPri" class="sos-input sm"><option value="normal">Normal</option><option value="high">High priority</option></select>' +
+              '<select id="sosNewFor" class="sos-input sm" title="Assign to">' + staffOpts + '</select>' +
+              '<button class="sos-btn hi" onclick="sosAddTask()">Add</button>' +
+            '</div>' +
+            '<input id="sosNewNotes" class="sos-input sm" placeholder="Notes (optional) — sent along if you assign it to someone">' +
+          '</div>' +
+          tasksHtml +
+        '</div>' +
+      '</div>' +
+      '<div class="sos-col">' +
+        '<div class="sos-card"><div class="sos-card-h">🎯 Rocks, Boulders &amp; Focus</div>' +
+          rockCard('rock','This Quarter’s Rocks','Add a rock (90-day priority)…') +
+          rockCard('boulder','Boulders (long-range)','Add a boulder…') +
+          rockCard('focus','Areas of Focus','Add an area of focus…') +
+        '</div>' +
+        '<div class="sos-card"><div class="sos-card-h">📈 Annual Plan &amp; Goals</div>' +
+          goalsHtml +
+          '<div class="sos-goal-add"><input id="sosGoalTitle" class="sos-input" placeholder="New goal…">' +
+            '<div class="sos-addtask-row"><input id="sosGoalMetric" class="sos-input sm" placeholder="Metric (e.g. Baptisms)"><input id="sosGoalTarget" class="sos-input sm" placeholder="Target"><input id="sosGoalPeriod" class="sos-input sm" placeholder="' + new Date().getFullYear() + '"><button class="sos-btn hi" onclick="sosAddGoal()">Add goal</button></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+}
+
 // ── Actionable named lists + group-health flags ──────────────────────────────
 const CG_NAME_CAP = 400;
 function cgRenderNameList(elId, moreId, listObj) {
@@ -7504,6 +7795,8 @@ const BOULDERS_LS_KEY     = 'lssr_boulders_edits';
 // Code_ids_joy_webapp.gs is deployed as part of the same web app as EOS_WEBAPP_URL
 // (Code_eos_webapp.gs's doPost/doGet dispatch ids/joy_bomb/absence actions to it).
 const IDS_WEBAPP_URL      = EOS_WEBAPP_URL;
+// Staff OS personal workspace (per-member tasks / plans) — dedicated HEAD deployment.
+const STAFF_OS_URL        = 'https://script.google.com/macros/s/AKfycbx-YDZg924fyFkG2U69o6Z0BBTLsh8ZAUvwK4fxSkW7LKGiXlxn5s2jyq9GCDxwA_sANA/exec';
 const JOY_BOMBS_DATA_URL  = './joy_bombs.json';
 const PATHWAY_DATA_URL    = './pathway.json';
 const ABSENCES_DATA_URL   = './absences.json';
@@ -8280,6 +8573,7 @@ function openStaffModal() {
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
+    sosInit();
   } else {
     document.getElementById('staffModLocked').style.display = 'flex';
     document.getElementById('staffModContent').style.display = 'none';
@@ -8307,6 +8601,7 @@ async function staffDoUnlock() {
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
+    sosInit();
     return;
   }
   errEl.style.display = 'block';
