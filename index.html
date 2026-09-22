@@ -7254,7 +7254,30 @@ function ogcFmtRange(items) {
 // Background = a real topographic map of South Reno (contours traced from USGS-derived
 // elevation tiles, 20 m interval, heavier index line every 100 m — assets/south-reno-topo.svg),
 // composited with a light paper grain into one same-origin PNG so the PDF export draws it.
-let _ogcTexture = null;
+let _ogcTexture = null, _ogcTopoLight = null, _ogcTopoImg = null;
+// Light-grey copy of the South Reno topo for the dark header/footer bands (contours continue across the card).
+function ogcTopoLightDraw(topoImg, W, H) {
+  const c = document.createElement('canvas'); c.width = W || 1008; c.height = H || 1392;
+  if (!topoImg) return c;
+  const x = c.getContext('2d');
+  x.drawImage(topoImg, 0, 0, c.width, c.height);
+  x.globalCompositeOperation = 'source-in';
+  x.fillStyle = 'rgb(214,210,200)'; x.fillRect(0, 0, c.width, c.height);
+  return c;
+}
+function ogcApplyBandTopo() {
+  if (!_ogcTopoLight) return;
+  document.querySelectorAll('#ogcPages .ogc-card').forEach(card => {
+    card.querySelectorAll('.ogc-hero, .ogc-foot').forEach(b => {
+      b.style.backgroundImage = 'url(' + _ogcTopoLight + ')';
+      // Card is a fixed 504×696 canvas; header sits at its top, footer at its bottom,
+      // so anchoring the card-sized topo top/bottom lines the contours up exactly.
+      b.style.backgroundSize = '504px 696px';
+      b.style.backgroundPosition = b.classList.contains('ogc-foot') ? '0 100%' : '0 0';
+      b.style.backgroundRepeat = 'no-repeat';
+    });
+  });
+}
 function ogcTextureDraw(topoImg) {
   const W = 1008, H = 1392, c = document.createElement('canvas'); c.width = W; c.height = H;
   const x = c.getContext('2d');
@@ -7267,7 +7290,7 @@ function ogcTexture() {
   if (_ogcTexture) return Promise.resolve(_ogcTexture);
   return new Promise(res => {
     const im = new Image();
-    im.onload = () => { _ogcTexture = ogcTextureDraw(im); res(_ogcTexture); };
+    im.onload = () => { _ogcTopoImg = im; _ogcTexture = ogcTextureDraw(im); _ogcTopoLight = ogcTopoLightDraw(im).toDataURL('image/png'); res(_ogcTexture); };
     im.onerror = () => { _ogcTexture = ogcTextureDraw(null); res(_ogcTexture); };
     im.src = 'assets/south-reno-topo.svg';
   });
@@ -7447,6 +7470,7 @@ async function ogaBuildCard() {
       '</div><div class="ogc-trim" data-html2canvas-ignore="true" title="Trim line (5×7). Everything outside is bleed."></div></div></div>';
   };
   document.getElementById('ogcPages').innerHTML = faces.map((f, i) => faceHtml(f, i)).join('');
+  ogcApplyBandTopo();
   const o = document.getElementById('ogcOverlay');
   o.classList.add('open'); o.setAttribute('aria-hidden', 'false');
   ogcSetStatus('');
@@ -7578,7 +7602,10 @@ async function ogaExportLayers(btn) {
         { name: 'Background – South Reno topo contours', canvas: await ogcImgLayer('assets/south-reno-topo.svg', W, H) },
         { name: 'Background – paper grain', canvas: ogcGrainLayer(W, H) }
       ].filter(l => l.canvas);
-      const groups = { Header: [{ name: 'Header band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-hero')), '#1b1915') }], Events: [], Footer: [{ name: 'Footer band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-foot')), '#1b1915') }] };
+      const bandTopo = el => { if (!_ogcTopoImg) return null; const r = rectOf(el), t = ogcTopoLightDraw(_ogcTopoImg, W, H), c = document.createElement('canvas'); c.width = W; c.height = H; c.getContext('2d').drawImage(t, r[0], r[1], r[2], r[3], r[0], r[1], r[2], r[3]); return c; };
+      const hT = bandTopo(card.querySelector('.ogc-hero')), fT = bandTopo(card.querySelector('.ogc-foot'));
+      const groups = { Header: [{ name: 'Header band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-hero')), '#1b1915') }].concat(hT ? [{ name: 'Header topo - light grey #D6D2C8', canvas: hT }] : []), Events: [],
+        Footer: [{ name: 'Footer band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-foot')), '#1b1915') }].concat(fT ? [{ name: 'Footer topo - light grey #D6D2C8', canvas: fT }] : []) };
       for (const t of targets) groups[t.group].push({ name: t.name, canvas: await renderLayer(t.k) });
       const flat = await html2canvas(card, { scale: S, useCORS: true, backgroundColor: '#f2ecd8', logging: false });
       card.querySelectorAll('[data-lyr]').forEach(x => x.removeAttribute('data-lyr')); card.removeAttribute('data-lyrcard');
@@ -14215,7 +14242,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T223744Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T224111Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
