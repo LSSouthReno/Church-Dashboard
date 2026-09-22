@@ -1044,6 +1044,7 @@
   .oga-item-top { display: flex; align-items: baseline; gap: 10px; justify-content: space-between; }
   .oga-item-name { font-size: 16px; font-weight: 700; color: var(--sp-ink,#1a1510); }
   .oga-item-when { font-size: 13px; color: var(--sp-gold,#c9963a); font-weight: 800; white-space: nowrap; }
+  .oga-warn { text-transform: none; letter-spacing: 0; color: #b0612a; font-weight: 700; margin-left: 4px; }
   .oga-item-meta { font-size: 13px; color: var(--sp-muted,#8a7e6e); margin-top: 3px; }
   .oga-item-fields { margin-top: 12px; display: none; flex-direction: column; gap: 8px; }
   .oga-item.on .oga-item-fields { display: flex; }
@@ -1186,13 +1187,13 @@
   .ogc-foot { position: relative; background: #1b1915; color: #cbbf9a; padding: 10px 34px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
   .ogc-more { position: absolute; left: 0; right: 0; top: -10px; text-align: center; line-height: 1; }
   .ogc-more span { display: inline-block; background: #d6b86a; color: #1b1915; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; }
-  .ogc-foot-txt { line-height: 1.2; }
+  .ogc-foot-txt { line-height: 1.2; min-width: 0; }
   .ogc-foot-k { font-size: 8.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #cbbf9a; }
-  .ogc-foot-url { font-size: 14px; font-weight: 800; color: #fff; margin: 2px 0 1px; letter-spacing: .01em; }
+  .ogc-foot-url { font-size: 12.5px; font-weight: 800; color: #fff; margin: 2px 0 1px; letter-spacing: .01em; }
   .ogc-foot-or { font-size: 8.5px; font-weight: 700; color: #d6b86a; letter-spacing: .06em; text-transform: uppercase; }
-  .ogc-foot-r { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .ogc-foot-scan { font-size: 9px; font-weight: 800; color: #d6b86a; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; text-align: right; max-width: 112px; }
-  .ogc-foot-qr { width: 62px; height: 62px; background: #fff; padding: 3px; display: block; flex: 0 0 auto; }
+  .ogc-foot-r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+  .ogc-foot-scan { font-size: 9px; font-weight: 800; color: #d6b86a; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; text-align: right; max-width: 92px; }
+  .ogc-foot-qr { width: 80px; height: 80px; background: #fff; padding: 3px; display: block; flex: 0 0 auto; }
   .ogc-foot b { color: #fff; }
   .ogc-connect { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
   .ogc-connect-h { font-size: 24px; font-weight: 800; color: #1b1915; text-transform: uppercase; }
@@ -3798,7 +3799,7 @@
           </div>
           <div class="oga-toolbar">
             <label>Card month:
-              <select id="ogaMonth" title="Sets the month printed on the card (events below always cover the next 90 days)"></select>
+              <select id="ogaMonth" onchange="ogaMonthChanged()" title="Sets the month printed on the card and pre-selects that month + the first week of the next (all events for the next 90 days stay listed)"></select>
             </label>
             <label>Card title: <input type="text" id="ogaTitle" value="Your Next Step"></label>
             <span class="oga-note">Worship gatherings, rehearsals, community-group &amp; recurring group events are filtered out automatically. Baptisms are kept.</span>
@@ -7144,7 +7145,46 @@ function ogaExcluded(e) {
   return false;
 }
 // Auto-recommended for the card: public (Church Center) + has a graphic or blurb.
-function ogaRecommended(e) { return (e.visibleCC || e.reg) && (e.img || e.desc || e.summary || ogaIsBaptism(e)); }
+// Spell out LS Students grade labels on the card ("HS" → High School, "MS" → Middle School).
+function ogaExpand(t) { return String(t || '').replace(/\bHS\b/g, 'High School').replace(/\bMS\b/g, 'Middle School'); }
+// "6:30–9:00 PM" / "11:00 AM–1:00 PM" from the calendar start + end ('' for all-day).
+function ogaTimeRange(e) {
+  const t = (e.time || '').trim(), te = (e.timeEnd || '').trim();
+  if (!t || (/^12:00 AM$/.test(t) && (!te || /^11:59 PM$/.test(te)))) return '';
+  if (!te || te === t || /^11:59 PM$/.test(te)) return t;
+  const a = t.split(' '), b = te.split(' ');
+  return (a[1] === b[1] ? a[0] : t) + '–' + te;
+}
+// Card-copy defaults for specific events (used until someone edits the field in the builder).
+const OGA_COPY_DEFAULTS = {
+  'connection sunday': {
+    time: 'All services: 8, 9:30, and 11',
+    blurb: 'Connection Sunday is THE day to find your people! We’re launching 5–7 new Community Groups, with connection tables on the patio after every service. We were made for community, and this is your easiest next step.'
+  },
+  'baptisms': {
+    blurb: 'Baptism is everyone’s first step of following Jesus: declaring your faith publicly. We baptize on the first Sunday of every month. Sign up, and a pastor will reach out to answer your questions and get you on the list.'
+  }
+};
+function ogaCopyDefault(e) { return OGA_COPY_DEFAULTS[ogaNorm(e.name).trim()] || OGA_COPY_DEFAULTS[String(e.name || '').trim().toLowerCase()] || null; }
+function ogaCardTime(e, st) { if (st && st.time != null) return st.time; const d = ogaCopyDefault(e); return d && d.time ? d.time : ogaTimeRange(e); }
+function ogaCardBlurb(e, st) {
+  const raw = e.summary || e.desc || '', d = ogaCopyDefault(e);
+  if (d && d.blurb && (!st || st.blurb == null || st.blurb === raw)) return d.blurb;
+  return st && st.blurb != null ? st.blurb : raw;
+}
+// Default selection window for the chosen card month: the month + the first week of the next.
+function ogaSelWindow() {
+  const m = ogaMonthSel() || ogaDefaultMonth();
+  return { start: new Date(m.getFullYear(), m.getMonth(), 1), end: new Date(m.getFullYear(), m.getMonth() + 1, 7, 23, 59) };
+}
+function ogaInWindow(e) { const w = ogaSelWindow(), d = new Date(e.dateKey + 'T12:00:00'); return d >= w.start && d <= w.end; }
+function ogaMonthChanged() {
+  // Re-default the picks for the new month (recommended + inside month & first week after).
+  _ogaEvents.forEach(e => { const k = ogaKey(e); (_ogaState[k] = _ogaState[k] || {}).on = !!(ogaRecommended(e) && ogaInWindow(e)); });
+  ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on));
+  ogaRenderList();
+}
+function ogaRecommended(e) { return !!ogaCopyDefault(e) || (e.visibleCC || e.reg) && (e.img || e.desc || e.summary || ogaIsBaptism(e)); }
 
 function ogaRenderList() {
   const listEl = document.getElementById('ogaList'); if (!listEl) return;
@@ -7168,7 +7208,7 @@ function ogaRenderList() {
   // First paint: auto-select the recommended events so the leader starts with a
   // sensible card and just trims. (Only once — respects later manual toggles.)
   if (!_ogaAutoSelected && !q) {
-    _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: ogaRecommended(e), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' }; });
+    _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: !!(ogaRecommended(e) && ogaInWindow(e)), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' }; });
     _ogaAutoSelected = true;
     if (typeof sosPrewarm === 'function') sosPrewarm();
     ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on));
@@ -7181,7 +7221,10 @@ function ogaRenderList() {
   if (!_ogaEvents.length) { listEl.innerHTML = '<div class="oga-empty">No events in this window. Widen the window or clear the search.</div>'; return; }
   listEl.innerHTML = _ogaEvents.map(e => {
     const key = ogaKey(e);
-    const st = _ogaState[key] || (_ogaState[key] = { on: ogaRecommended(e), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' });
+    const st = _ogaState[key] || (_ogaState[key] = { on: !!(ogaRecommended(e) && ogaInWindow(e)), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' });
+    const cDef = ogaCopyDefault(e), calTime = ogaTimeRange(e), cardTime = ogaCardTime(e, st);
+    const noEnd = !cDef && e.time && !/^12:00 AM$/.test(e.time) && (!e.timeEnd || e.timeEnd === e.time) && st.time == null;
+    const shortened = window._ogcTrimmed && window._ogcTrimmed.has(key);
     const when = e.date + (e.time && !/12:00 AM/.test(e.time) ? ' · ' + e.time : '') + (e.endKey ? '–' + fmtEndKey(e.endKey) : '');
     const meta = [e.location ? e.location.split(' - ')[0] : '', e.owner || '', ogaIsBaptism(e) ? 'Baptism' : ''].filter(Boolean).join(' · ');
     const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
@@ -7189,13 +7232,15 @@ function ogaRenderList() {
       '<input type="checkbox" class="oga-cb" ' + (st.on ? 'checked' : '') + ' onchange="ogaToggle(\'' + key + '\',this.checked)">' +
       (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.imgLocal || e.img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'">' : '') +
       '<div class="oga-item-body">' +
-        '<div class="oga-item-top"><span class="oga-item-name">' + escapeHtml(e.name || 'Event') + '</span>' +
+        '<div class="oga-item-top"><span class="oga-item-name">' + escapeHtml(ogaExpand(e.name) || 'Event') + '</span>' +
         '<span class="oga-item-when">' + escapeHtml(when) + '</span></div>' +
         (meta ? '<div class="oga-item-meta">' + escapeHtml(meta) + '</div>' : '') +
         (badges ? '<div class="oga-badges">' + badges + '</div>' : '') +
         '<div class="oga-item-fields">' +
-          '<label>Blurb (prints on the card)</label>' +
-          '<textarea rows="2" oninput="ogaField(\'' + key + '\',\'blurb\',this.value)">' + escapeHtml(st.blurb) + '</textarea>' +
+          '<label>Time on the card' + (calTime ? ' (calendar: ' + escapeHtml(calTime) + ')' : '') + (noEnd ? ' <span class="oga-warn">⚠ no end time on the calendar — add it here</span>' : '') + '</label>' +
+          '<input type="text" maxlength="40" placeholder="e.g. 6:30–9:00 PM" value="' + escapeHtml(cardTime) + '" oninput="ogaField(\'' + key + '\',\'time\',this.value)">' +
+          '<label>Blurb (prints on the card — max 5 lines)' + (cDef && cDef.blurb && ogaCardBlurb(e, st) === cDef.blurb ? ' <span class="oga-warn">✎ reworded for the card</span>' : '') + (shortened ? ' <span class="oga-warn">✂ shortened to 5 lines on the card — reword here to control it</span>' : '') + '</label>' +
+          '<textarea rows="3" oninput="ogaField(\'' + key + '\',\'blurb\',this.value)">' + escapeHtml(ogaCardBlurb(e, st)) + '</textarea>' +
           '<label>Registration / info link (sets the default call-to-action)</label>' +
           '<input type="text" placeholder="https://…" value="' + escapeHtml(st.reg) + '" oninput="ogaField(\'' + key + '\',\'reg\',this.value)">' +
           '<label>Call-to-action button (leave blank for “' + escapeHtml(ogaAutoCta(e, st)) + '”)</label>' +
@@ -7262,7 +7307,7 @@ function ogcTopoLightDraw(topoImg, W, H) {
   const x = c.getContext('2d');
   x.drawImage(topoImg, 0, 0, c.width, c.height);
   x.globalCompositeOperation = 'source-in';
-  x.fillStyle = 'rgb(214,210,200)'; x.fillRect(0, 0, c.width, c.height);
+  x.fillStyle = 'rgba(214,210,200,0.5)'; x.fillRect(0, 0, c.width, c.height);   // softer on the dark bands
   return c;
 }
 function ogcApplyBandTopo() {
@@ -7395,24 +7440,52 @@ const _ogcNotes = { cap: '', over: '', img: '', work: '' };
 function ogcSetStatus(t) { _ogcNotes.work = t || ''; ogcRenderStatus(); }
 function ogcRenderStatus() { const el = document.getElementById('ogcStatus'); if (el) el.textContent = [_ogcNotes.work, _ogcNotes.cap, _ogcNotes.img, _ogcNotes.over].filter(Boolean).join('  ·  '); }
 // Shrink each description (then the title) until the full text fits its slot.
+// Every description uses the SAME font size and is capped at 5 lines — the card drives
+// people to the calendar for full details. Long copy is shortened by dropping whole
+// trailing sentences (then words + "…" if one sentence is still too long), and the
+// builder flags which blurbs were shortened.
+function ogcClampText(desc, full, maxH) {
+  desc.textContent = full;
+  if (desc.scrollHeight <= maxH + 1) return false;
+  const sents = full.match(/[^.!?]+[.!?]+["'”’)\]]*\s*|[^.!?]+$/g) || [full];
+  for (let n = sents.length - 1; n >= 1; n--) {
+    desc.textContent = sents.slice(0, n).join('').trim();
+    if (desc.scrollHeight <= maxH + 1) return true;
+  }
+  const words = sents[0].trim().split(/\s+/);
+  let lo = 1, hi = words.length, best = 1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1; desc.textContent = words.slice(0, mid).join(' ').replace(/[,;:—–-]+$/, '') + '…';
+    if (desc.scrollHeight <= maxH + 1) { best = mid; lo = mid + 1; } else hi = mid - 1;
+  }
+  desc.textContent = words.slice(0, best).join(' ').replace(/[,;:—–-]+$/, '') + '…';
+  return true;
+}
 function ogcFitText() {
-  let over = 0;
+  let over = 0; const trimmed = new Set();
   document.querySelectorAll('#ogcPages .ogc-ev').forEach(ev => {
     const body = ev.querySelector('.ogc-ev-body'), desc = ev.querySelector('.ogc-ev-desc'), name = ev.querySelector('.ogc-ev-name');
     const four = !!ev.closest('.ogc-card.cap4');
-    let fs = four ? 8.75 : 9.5, nf = four ? 13 : 14.5, guard = 0;
-    if (desc) { desc.style.fontSize = fs + 'px'; desc.style.lineHeight = '1.34'; }
-    if (name) name.style.fontSize = nf + 'px';
-    while (body.scrollHeight > body.clientHeight + 1 && guard++ < 60) {
-      if (desc && fs > 6.5) { fs -= 0.25; desc.style.fontSize = fs + 'px'; desc.style.lineHeight = fs < 8 ? '1.24' : '1.3'; }
-      else if (name && nf > 10) { nf -= 0.5; name.style.fontSize = nf + 'px'; }
-      else break;
+    const fs = four ? 8.75 : 9.5, lh = 1.34;
+    if (name) name.style.fontSize = (four ? 13 : 14.5) + 'px';
+    if (desc) {
+      desc.style.fontSize = fs + 'px'; desc.style.lineHeight = String(lh);
+      const full = desc.dataset.full != null ? desc.dataset.full : desc.textContent; desc.dataset.full = full;
+      // 5 lines max; if a long (2-line) title leaves no room, give up a line rather than shrink the font.
+      for (let lines = 5; lines >= 2; lines--) {
+        const cut = ogcClampText(desc, full, fs * lh * lines);
+        if (body.scrollHeight <= body.clientHeight + 1) { if (cut) trimmed.add(ev.dataset.key); break; }
+        if (lines === 2 && cut) trimmed.add(ev.dataset.key);
+      }
     }
     const bad = body.scrollHeight > body.clientHeight + 1;
     ev.classList.toggle('overflow', bad); if (bad) over++;
   });
-  _ogcNotes.over = over ? over + ' description(s) too long to fit — shorten the blurb (red underline).' : '';
+  window._ogcTrimmed = trimmed;
+  _ogcNotes.over = (trimmed.size ? '✂ ' + trimmed.size + ' description(s) shortened to fit 5 lines — reword the blurb in the builder to control what’s kept. ' : '') +
+    (over ? over + ' event(s) still too long (red underline) — shorten the title or blurb.' : '');
   ogcRenderStatus();
+  if (trimmed.size) { try { ogaRenderList(); } catch (e) {} }
   return over;
 }
 
@@ -7435,21 +7508,21 @@ async function ogaBuildCard() {
   const evHtml = (item) => {
     const e = item.e, st = item.st;
     const d = new Date(e.dateKey + 'T12:00:00');
-    const time = (e.time && !/12:00 AM/.test(e.time)) ? e.time : '';
+    const time = ogaCardTime(e, st);
+    // No locations for now (not every event has one — keep the card consistent).
     const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' })) + (time ? ' · ' + time : '');
-    const loc = e.location ? e.location.split(' - ')[0] : '';
     // Paper can't click links — drop raw URLs from the printed text.
-    const desc = (st.blurb || e.summary || e.desc || '').replace(/\s*https?:\/\/\S+/g, '').replace(/\s{2,}/g, ' ').trim();
+    const desc = ogaExpand(ogaCardBlurb(e, st)).replace(/\s*https?:\/\/\S+/g, '').replace(/\s{2,}/g, ' ').trim();
     const cta = ((st.cta || '').trim()) || ogaAutoCta(e, st);
     const badge = '<div class="ogc-badge"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div><div class="d">' + d.getDate() + '</div></div>';
     const cached = e.img && _ogcImgCache[e.img];
     const media = e.img
       ? '<img class="ogc-img' + (cached ? '' : ' live') + '" data-orig="' + escapeHtml(e.img) + '"' + (e.imgLocal ? ' data-local="' + escapeHtml(e.imgLocal) + '"' : '') + ' referrerpolicy="no-referrer" src="' + escapeHtml(cached || e.imgLocal || e.img) + '" alt="">'
       : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>';
-    return '<div class="ogc-ev"><div class="ogc-media">' + media + badge + '</div>' +
+    return '<div class="ogc-ev" data-key="' + ogaKey(e) + '"><div class="ogc-media">' + media + badge + '</div>' +
       '<div class="ogc-ev-body">' +
-        '<div class="ogc-ev-name">' + escapeHtml(e.name || 'Event') + '</div>' +
-        '<div class="ogc-ev-when">' + escapeHtml(when + (loc ? ' · ' + loc : '')) + '</div>' +
+        '<div class="ogc-ev-name">' + escapeHtml(ogaExpand(e.name) || 'Event') + '</div>' +
+        '<div class="ogc-ev-when">' + escapeHtml(when) + '</div>' +
         (desc ? '<div class="ogc-ev-desc">' + escapeHtml(desc) + '</div>' : '') +
         '<span class="ogc-cta">→ ' + escapeHtml(cta) + '</span>' +
       '</div></div>';
@@ -14242,7 +14315,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T224111Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T225302Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
