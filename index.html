@@ -7189,34 +7189,43 @@ function ogcBakeImage(dataUrl) {
 }
 // Pull event photos through the Staff OS proxy (Planning Center's CDN sends no CORS
 // headers), bake them, and swap them into the preview so the export can draw them.
-let _ogcPrefetchQ = new Set(), _ogcPrefetchT = null, _ogcPrefetchBusy = Promise.resolve();
-function ogcPrefetch(urls) {
-  (urls || []).forEach(u => { if (u && !_ogcImgCache[u]) _ogcPrefetchQ.add(u); });
-  clearTimeout(_ogcPrefetchT);
-  _ogcPrefetchT = setTimeout(() => {
-    const batch = [..._ogcPrefetchQ].slice(0, 12); batch.forEach(u => _ogcPrefetchQ.delete(u));
-    if (!batch.length) return;
-    _ogcPrefetchBusy = _ogcPrefetchBusy.then(() => sosApiPost({ action: 'sos_img', urls: batch }).then(res => {
-      const raw = (res && res.images) || [];
-      return Promise.all(batch.map(async (u, i) => { if (raw[i] && !_ogcImgCache[u]) { const b = await ogcBakeImage(raw[i]); if (b) _ogcImgCache[u] = b; } }));
-    }).catch(() => {}));
-  }, 600);
-}
-async function ogcPrepareImages() {
-  await _ogcPrefetchBusy;
-  const imgs = [...document.querySelectorAll('#ogcPages img[data-orig]')];
-  const need = [...new Set(imgs.map(i => i.dataset.orig).filter(u => !_ogcImgCache[u]))];
-  if (need.length) {
-    ogcSetStatus('Preparing photos for print…');
-    try {
-      const res = await sosApiPost({ action: 'sos_img', urls: need });
-      const raw = (res && res.images) || [];
-      await Promise.all(need.map(async (u, i) => { if (raw[i]) { const b = await ogcBakeImage(raw[i]); if (b) _ogcImgCache[u] = b; } }));
-    } catch (e) {}
+// Photos come through the Staff OS proxy ONE per request (small responses), max 3 in
+// flight, each retried up to 3×. A single slow/oversized photo can't sink the rest.
+const _ogcInflight = {};
+let _ogcActive = 0; const _ogcWaiters = [];
+function ogcSlot() { return new Promise(res => { if (_ogcActive < 3) { _ogcActive++; res(); } else _ogcWaiters.push(res); }); }
+function ogcRelease() { const n = _ogcWaiters.shift(); if (n) n(); else _ogcActive--; }
+async function ogcFetchBaked(u) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await ogcSlot();
+    let res = null;
+    try { res = await sosApiPost({ action: 'sos_img', urls: [u] }); } catch (e) { res = null; }
+    ogcRelease();
+    const d = res && res.ok && res.images && res.images[0];
+    if (d) { const baked = await ogcBakeImage(d); if (baked) return baked; }
+    else if (res && res.ok) return null;                 // server declined (host/size) — don't retry
+    await new Promise(r => setTimeout(r, 900 * (attempt + 1)));
   }
+  return null;
+}
+function ogcGetBaked(u) {
+  if (_ogcImgCache[u]) return Promise.resolve(_ogcImgCache[u]);
+  if (!_ogcInflight[u]) _ogcInflight[u] = ogcFetchBaked(u).then(b => { if (b) _ogcImgCache[u] = b; delete _ogcInflight[u]; return b; });
+  return _ogcInflight[u];
+}
+function ogcPrefetch(urls) { [...new Set(urls || [])].forEach(u => { if (u) ogcGetBaked(u); }); }
+async function ogcPrepareImages() {
+  const imgs = [...document.querySelectorAll('#ogcPages img[data-orig]')];
+  const need = [...new Set(imgs.map(i => i.dataset.orig))];
+  if (need.some(u => !_ogcImgCache[u])) ogcSetStatus('Preparing photos for print…');
+  await Promise.all(need.map(ogcGetBaked));
   let missing = 0;
-  imgs.forEach(i => { const b = _ogcImgCache[i.dataset.orig]; if (b) { i.src = b; i.classList.remove('live'); } else missing++; });
-  _ogcNotes.img = missing ? missing + ' photo(s) couldn’t be prepared — they’ll export blank.' : '';
+  imgs.forEach(i => {
+    const b = _ogcImgCache[i.dataset.orig];
+    if (b) { i.src = b; i.classList.remove('live'); }
+    else { missing++; const t = document.createElement('div'); t.className = 'ogc-tile'; t.innerHTML = '<img src="assets/ls-logo-white.png" alt="">'; i.replaceWith(t); }
+  });
+  _ogcNotes.img = missing ? missing + ' photo(s) couldn’t be loaded — showing the LS tile instead.' : '';
   ogcSetStatus('');
   return missing;
 }
@@ -13619,7 +13628,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T190923Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T201244Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
