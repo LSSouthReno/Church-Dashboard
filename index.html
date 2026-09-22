@@ -1190,6 +1190,8 @@
   .ogc-foot-k { font-size: 8.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #cbbf9a; }
   .ogc-foot-url { font-size: 14px; font-weight: 800; color: #fff; margin: 2px 0 1px; letter-spacing: .01em; }
   .ogc-foot-or { font-size: 8.5px; font-weight: 700; color: #d6b86a; letter-spacing: .06em; text-transform: uppercase; }
+  .ogc-foot-r { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .ogc-foot-scan { font-size: 9px; font-weight: 800; color: #d6b86a; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; text-align: right; max-width: 112px; }
   .ogc-foot-qr { width: 62px; height: 62px; background: #fff; padding: 3px; display: block; flex: 0 0 auto; }
   .ogc-foot b { color: #fff; }
   .ogc-connect { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
@@ -7439,8 +7441,9 @@ async function ogaBuildCard() {
         '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
         '<div class="ogc-foot">' + (isFront && faces.length > 1 ? '<div class="ogc-more"><span>' + (faces[1].length ? 'More next steps on the back →' : 'Sunday times on the back →') + '</span></div>' : '') +
           '<div class="ogc-foot-txt"><div class="ogc-foot-k">See all announcements</div>' +
-          '<div class="ogc-foot-url">lssr.churchcenter.com/calendar</div><div class="ogc-foot-or">or scan this code →</div></div>' +
-          '<img class="ogc-foot-qr" src="' + calQr + '" alt="QR code to lssr.churchcenter.com/calendar"></div>' +
+          '<div class="ogc-foot-url">lssr.churchcenter.com/calendar</div></div>' +
+          '<div class="ogc-foot-r"><div class="ogc-foot-scan">Scan to take any of these next steps <span>→</span></div>' +
+          '<img class="ogc-foot-qr" src="' + calQr + '" alt="QR code to lssr.churchcenter.com/calendar"></div></div>' +
       '</div><div class="ogc-trim" data-html2canvas-ignore="true" title="Trim line (5×7). Everything outside is bleed."></div></div></div>';
   };
   document.getElementById('ogcPages').innerHTML = faces.map((f, i) => faceHtml(f, i)).join('');
@@ -7560,6 +7563,7 @@ async function ogaExportLayers(btn) {
       card.querySelectorAll('.ogc-ev').forEach((ev, i) => tag(ev, 'Event ' + (i + 1) + ' – ' + (ev.querySelector('.ogc-ev-name') || {}).textContent, 'Events'));
       tag(card.querySelector('.ogc-connect'), 'Connect panel', 'Events');
       tag(card.querySelector('.ogc-foot-txt'), 'Footer – see all announcements', 'Footer');
+      tag(card.querySelector('.ogc-foot-scan'), 'Footer – scan to take any of these next steps', 'Footer');
       tag(card.querySelector('.ogc-foot-qr'), 'Footer – calendar QR', 'Footer');
       tag(card.querySelector('.ogc-more'), 'Footer – more on the back tag', 'Footer');
       card.setAttribute('data-lyrcard', face);
@@ -7600,7 +7604,7 @@ async function ogaExportLayers(btn) {
         copy.push('', (i + 1) + '. ' + g('.ogc-ev-name'), '   Date: ' + g('.ogc-badge .m') + ' ' + g('.ogc-badge .d'), '   When: ' + g('.ogc-ev-when'), '   Description: ' + g('.ogc-ev-desc'), '   Call to action: ' + g('.ogc-cta').replace(/^→\s*/, ''));
       });
       if (card.querySelector('.ogc-more')) copy.push('', 'Tag: ' + card.querySelector('.ogc-more').textContent);
-      copy.push('', 'Footer: See all announcements · lssr.churchcenter.com/calendar · or scan this code →', '');
+      copy.push('', 'Footer: See all announcements · lssr.churchcenter.com/calendar · Scan to take any of these next steps → [QR]', '');
     }
     ogcSetStatus('Packing assets…');
     // shared vectors / assets
@@ -14211,7 +14215,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T223633Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T223744Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
