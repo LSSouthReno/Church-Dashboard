@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T07:52:58.450Z",
+  "generatedAt": "2026-09-22T08:50:00.964Z",
   "asOf": "2026-09-22",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 397,
     "avgScore": 0,
-    "inGroup": 223,
+    "inGroup": 220,
     "serving": 234,
     "leading": 80,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 397,
-    "notInGroup": 174,
+    "notInGroup": 177,
     "notServing": 163,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 397
     },
     "pct": {
-      "inGroup": 0.5617128463476071,
+      "inGroup": 0.5541561712846348,
       "serving": 0.5894206549118388,
       "leading": 0.20151133501259447,
       "givingRegular": 0,
@@ -66,7 +66,7 @@
       "summary": {
         "totalPeople": 66,
         "avgScore": 0,
-        "inGroup": 48,
+        "inGroup": 46,
         "serving": 53,
         "leading": 24,
         "givingRegular": 0,
@@ -76,7 +76,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 66,
-        "notInGroup": 18,
+        "notInGroup": 20,
         "notServing": 13,
         "notGiving": 0,
         "paciCounts": {
@@ -94,7 +94,7 @@
           "unknown": 66
         },
         "pct": {
-          "inGroup": 0.7272727272727273,
+          "inGroup": 0.696969696969697,
           "serving": 0.803030303030303,
           "leading": 0.36363636363636365,
           "givingRegular": 0,
@@ -372,6 +372,48 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2024-08-12T17:06:20Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Diane Sikora",
+          "first": "Diane",
+          "last": "Sikora",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2026-08-14T21:45:01Z"
             }
           ],
           "flags": [
@@ -951,52 +993,6 @@
           "flags": [
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Diane Sikora",
-          "first": "Diane",
-          "last": "Sikora",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2026-08-14T21:45:01Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -1749,6 +1745,53 @@
         },
         {
           "id": null,
+          "name": "Eric Sikora",
+          "first": "Eric",
+          "last": "Sikora",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2025-11-01T14:46:54Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2026-08-14T21:49:21Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Estefania (Steph) Febo",
           "first": "Estefania (Steph)",
           "last": "Febo",
@@ -2365,57 +2408,6 @@
               "name": "First Impressions Team",
               "role": "member",
               "joinedAt": "2025-05-19T17:28:04Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Eric Sikora",
-          "first": "Eric",
-          "last": "Sikora",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-14T10:06:13Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2025-11-01T14:46:54Z"
-            },
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2026-08-14T21:49:21Z"
             }
           ],
           "flags": [],
@@ -16001,7 +15993,7 @@
       "summary": {
         "totalPeople": 45,
         "avgScore": 0,
-        "inGroup": 29,
+        "inGroup": 28,
         "serving": 30,
         "leading": 13,
         "givingRegular": 0,
@@ -16011,7 +16003,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 45,
-        "notInGroup": 16,
+        "notInGroup": 17,
         "notServing": 15,
         "notGiving": 0,
         "paciCounts": {
@@ -16029,7 +16021,7 @@
           "unknown": 45
         },
         "pct": {
-          "inGroup": 0.6444444444444445,
+          "inGroup": 0.6222222222222222,
           "serving": 0.6666666666666666,
           "leading": 0.28888888888888886,
           "givingRegular": 0,
@@ -17111,6 +17103,48 @@
         },
         {
           "id": null,
+          "name": "Jed Ingalls",
+          "first": "Jed",
+          "last": "Ingalls",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "First Impressions Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T05:05:18Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Kara Schelin",
           "first": "Kara",
           "last": "Schelin",
@@ -17746,52 +17780,6 @@
               "name": "Enrichment Team",
               "role": "member",
               "joinedAt": "2025-06-30T21:42:18Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jed Ingalls",
-          "first": "Jed",
-          "last": "Ingalls",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-01-08T09:44:56Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member",
-              "joinedAt": "2025-02-03T05:05:18Z"
             }
           ],
           "flags": [],
