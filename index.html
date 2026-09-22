@@ -1183,7 +1183,9 @@
   .ogc-card.cap4 .ogc-ev-desc { margin-top: 3px; }
   .ogc-ev.overflow .ogc-ev-body { box-shadow: inset 0 -3px 0 #c83a3a; }   /* preview warning only */
   /* dark footer band (runs into the bleed) */
-  .ogc-foot { background: #1b1915; color: #cbbf9a; padding: 10px 34px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .ogc-foot { position: relative; background: #1b1915; color: #cbbf9a; padding: 10px 34px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .ogc-more { position: absolute; left: 0; right: 0; top: -10px; text-align: center; line-height: 1; }
+  .ogc-more span { display: inline-block; background: #d6b86a; color: #1b1915; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; }
   .ogc-foot-txt { line-height: 1.2; }
   .ogc-foot-k { font-size: 8.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #cbbf9a; }
   .ogc-foot-url { font-size: 14px; font-weight: 800; color: #fff; margin: 2px 0 1px; letter-spacing: .01em; }
@@ -3729,6 +3731,7 @@
 <div class="ogc-overlay" id="ogcOverlay" aria-hidden="true">
   <div class="ogc-bar">
     <button class="oga-btn hi" id="ogcExportBtn" onclick="ogaExportPDF(this)">⬇ Export PDF</button>
+    <button class="oga-btn" id="ogcLayersBtn" onclick="ogaExportLayers(this)" title="Layered PSD + PNG layers + vectors + copy, for a designer">⬇ Layered files (.zip)</button>
     <button class="oga-btn ghost" onclick="ogcClose()">Close</button>
     <span class="ogc-hint">5×7 in · 0.125 in bleed + crop marks · front &amp; back — ready to send to the printer.</span>
     <span class="ogc-status" id="ogcStatus"></span>
@@ -7117,7 +7120,7 @@ function ogaRenderList() {
 // Default call-to-action (used when the leader leaves the CTA field blank).
 function ogaAutoCta(e, st) {
   const link = st && st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
-  if (/\/registrations?\//.test(link)) return 'Register on Church Center';
+  if (/\/registrations?\//.test(link) || (e && e.reg)) return 'Sign up today';
   if (link) return 'Details on Church Center';
   return ogaIsBaptism(e) ? 'Sign up to be baptized' : 'Join us — all welcome';
 }
@@ -7346,7 +7349,8 @@ async function ogaBuildCard() {
         '<div class="ogc-hero"><img class="ogc-lockup" src="assets/ls-card-logo-b.png" alt="Living Stones South Reno">' +
           '<div class="ogc-hero-r"><div class="ogc-h1">' + escapeHtml(h1) + '</div><div class="ogc-month">' + escapeHtml(month) + '</div></div></div>' +
         '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
-        '<div class="ogc-foot"><div class="ogc-foot-txt"><div class="ogc-foot-k">See all announcements</div>' +
+        '<div class="ogc-foot">' + (isFront && faces.length > 1 ? '<div class="ogc-more"><span>' + (faces[1].length ? 'More next steps on the back →' : 'Sunday times on the back →') + '</span></div>' : '') +
+          '<div class="ogc-foot-txt"><div class="ogc-foot-k">See all announcements</div>' +
           '<div class="ogc-foot-url">lssr.churchcenter.com/calendar</div><div class="ogc-foot-or">or scan this code →</div></div>' +
           '<img class="ogc-foot-qr" src="' + calQr + '" alt="QR code to lssr.churchcenter.com/calendar"></div>' +
       '</div><div class="ogc-trim" data-html2canvas-ignore="true" title="Trim line (5×7). Everything outside is bleed."></div></div></div>';
@@ -7376,37 +7380,180 @@ function ogcConnectPanel() {
 function ogaLoadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
 // Export: one PDF, one page per side. Page = 5×7 trim + 0.125in bleed + 0.25in slug
 // with crop marks at the trim lines (outside the bleed) and a small slug label.
+// Shared: settle photos/fonts/fit before any export.
+async function ogcReadyForExport() {
+  await Promise.race([_ogcPrep, new Promise(r => setTimeout(r, 15000))]);
+  ogcApplyImages(true);
+  try { await document.fonts.ready; } catch (e) {}
+  ogcFitText();
+  if (!window.html2canvas) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  if (!(window.jspdf && window.jspdf.jsPDF)) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+}
+// Print PDF: one page per side = 5×7 trim + 0.125in bleed + 0.25in slug with crop marks.
+async function ogcBuildPdf(cards) {
+  const TRIM_W = 5, TRIM_H = 7, BLEED = 0.125, SLUG = 0.25;
+  const PW = TRIM_W + 2 * (BLEED + SLUG), PH = TRIM_H + 2 * (BLEED + SLUG);
+  const pdf = new window.jspdf.jsPDF({ unit: 'in', format: [PW, PH], orientation: 'portrait' });
+  const x0 = SLUG + BLEED, x1 = x0 + TRIM_W, y0 = SLUG + BLEED, y1 = y0 + TRIM_H, M = SLUG - 0.03;
+  for (let i = 0; i < cards.length; i++) {
+    const canvas = await html2canvas(cards[i], { scale: 4, useCORS: true, backgroundColor: '#f2ecd8', logging: false });
+    if (i > 0) pdf.addPage([PW, PH], 'portrait');
+    pdf.addImage(canvas.toDataURL('image/jpeg', 0.93), 'JPEG', SLUG, SLUG, TRIM_W + 2 * BLEED, TRIM_H + 2 * BLEED);
+    pdf.setDrawColor(0); pdf.setLineWidth(0.004);
+    [x0, x1].forEach(x => { pdf.line(x, 0, x, M); pdf.line(x, PH - M, x, PH); });
+    [y0, y1].forEach(y => { pdf.line(0, y, M, y); pdf.line(PW - M, y, PW, y); });
+    pdf.setFontSize(5.5); pdf.setTextColor(90);
+    pdf.text('LSSR Announcements — ' + (i === 0 ? 'FRONT' : 'BACK') + ' · Trim 5 × 7 in · Bleed 0.125 in', PW / 2, 0.16, { align: 'center' });
+  }
+  return pdf;
+}
+function ogcFileStamp() { const m = (ogaMonthLabel() || '').replace(/\s+/g, '-'); return m ? 'LSSR-Announcements-' + m : 'LSSR-Announcements-' + new Date().toISOString().slice(0, 10); }
 async function ogaExportPDF(btn) {
   const cards = [...document.querySelectorAll('#ogcPages .ogc-card')];
   if (!cards.length) return;
   const old = btn.textContent; btn.disabled = true; btn.textContent = 'Preparing…';
   try {
-    await Promise.race([_ogcPrep, new Promise(r => setTimeout(r, 15000))]);
-    ogcApplyImages(true);
-    try { await document.fonts.ready; } catch (e) {}
-    ogcFitText();
+    await ogcReadyForExport();
     ogcSetStatus('Rendering print file…');
-    if (!window.html2canvas) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
-    if (!(window.jspdf && window.jspdf.jsPDF)) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
-    const TRIM_W = 5, TRIM_H = 7, BLEED = 0.125, SLUG = 0.25;
-    const PW = TRIM_W + 2 * (BLEED + SLUG), PH = TRIM_H + 2 * (BLEED + SLUG);
-    const pdf = new window.jspdf.jsPDF({ unit: 'in', format: [PW, PH], orientation: 'portrait' });
-    const x0 = SLUG + BLEED, x1 = x0 + TRIM_W, y0 = SLUG + BLEED, y1 = y0 + TRIM_H, M = SLUG - 0.03;
-    for (let i = 0; i < cards.length; i++) {
-      const canvas = await html2canvas(cards[i], { scale: 4, useCORS: true, backgroundColor: '#f2ecd8', logging: false });
-      if (i > 0) pdf.addPage([PW, PH], 'portrait');
-      pdf.addImage(canvas.toDataURL('image/jpeg', 0.93), 'JPEG', SLUG, SLUG, TRIM_W + 2 * BLEED, TRIM_H + 2 * BLEED);
-      // crop marks (hairline, black), kept out of the bleed
-      pdf.setDrawColor(0); pdf.setLineWidth(0.004);
-      [x0, x1].forEach(x => { pdf.line(x, 0, x, M); pdf.line(x, PH - M, x, PH); });
-      [y0, y1].forEach(y => { pdf.line(0, y, M, y); pdf.line(PW - M, y, PW, y); });
-      pdf.setFontSize(5.5); pdf.setTextColor(90);
-      pdf.text('LSSR Announcements — ' + (i === 0 ? 'FRONT' : 'BACK') + ' · Trim 5 × 7 in · Bleed 0.125 in', PW / 2, 0.16, { align: 'center' });
-    }
-    pdf.save('LSSR-Announcements-' + new Date().toISOString().slice(0, 10) + '.pdf');
+    (await ogcBuildPdf(cards)).save(ogcFileStamp() + '.pdf');
     ogcSetStatus('Exported ✓');
   } catch (err) {
     ogcSetStatus('Export failed: ' + (err && err.message ? err.message : err));
+  } finally { btn.disabled = false; btn.textContent = old; }
+}
+
+// ── Layered files for a designer ─────────────────────────────────────────────
+// Zip: per side a layered PSD (named groups/layers, bottom→top) + the same layers as
+// full-canvas transparent PNGs (all 1512×2088 = 5.25×7.25in incl. bleed @ 288dpi, so they
+// stack aligned), plus vectors (topo SVG, QR SVG), logos, photos, all copy, the print PDF
+// and a spec README.
+function ogcSolid(W, H, color) { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); x.fillStyle = color; x.fillRect(0, 0, W, H); return c; }
+function ogcRectLayer(W, H, r, color) { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); x.fillStyle = color; x.fillRect(r[0], r[1], r[2], r[3]); return c; }
+function ogcGrainLayer(W, H) {
+  const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  let seed = 20260922; const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const k = W / 1008;
+  for (let i = 0; i < 26000; i++) { x.fillStyle = 'rgba(92,72,38,' + (rnd() * 0.07).toFixed(3) + ')'; x.fillRect(rnd() * W, rnd() * H, 1.3 * k, 1.3 * k); }
+  return c;
+}
+function ogcImgLayer(src, W, H) {
+  return new Promise(res => { const im = new Image(); im.onload = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; c.getContext('2d').drawImage(im, 0, 0, W, H); res(c); }; im.onerror = () => res(null); im.src = src; });
+}
+function ogcQrSvg(text) {
+  try {
+    const q = qrcode(0, 'M'); q.addData(text); q.make(); const n = q.getModuleCount(), m = 2, sz = n + m * 2; let d = '';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += 'M' + (c + m) + ' ' + (r + m) + 'h1v1h-1z';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + sz + ' ' + sz + '" shape-rendering="crispEdges"><rect width="' + sz + '" height="' + sz + '" fill="#fff"/><path d="' + d + '" fill="#1b1915"/></svg>';
+  } catch (e) { return ''; }
+}
+function ogcDataUrlToBytes(u) { const b = atob(u.split(',')[1]); const a = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+function ogcSlug(t) { return String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40); }
+async function ogaExportLayers(btn) {
+  const cards = [...document.querySelectorAll('#ogcPages .ogc-card')];
+  if (!cards.length) return;
+  const old = btn.textContent; btn.disabled = true; btn.textContent = 'Building layers…';
+  try {
+    await ogcReadyForExport();
+    if (!window.JSZip) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+    if (!window.agPsd) await ogaLoadScript('https://cdn.jsdelivr.net/npm/ag-psd@31.0.2/dist/bundle.js');
+    await ogaEnsureQR();
+    const S = 3, W = 504 * S, H = 696 * S, zip = new JSZip(), stamp = ogcFileStamp();
+    const toPng = c => new Promise(r => c.toBlob(b => r(b), 'image/png'));
+    const copy = [];
+    for (let ci = 0; ci < cards.length; ci++) {
+      const card = cards[ci], face = ci === 0 ? 'front' : 'back', cr = card.getBoundingClientRect();
+      ogcSetStatus('Layering ' + face + '…');
+      const rectOf = el => { const r = el.getBoundingClientRect(); return [(r.left - cr.left) * S, (r.top - cr.top) * S, r.width * S, r.height * S]; };
+      // tag every element layer so the html2canvas clone can isolate one at a time
+      const targets = [];
+      const tag = (el, name, group) => { if (!el) return; const k = 'L' + targets.length; el.setAttribute('data-lyr', k); targets.push({ k, name, group }); };
+      tag(card.querySelector('.ogc-lockup'), 'Logo – LS lockup', 'Header');
+      tag(card.querySelector('.ogc-hero-r'), 'Header – title + month', 'Header');
+      card.querySelectorAll('.ogc-ev').forEach((ev, i) => tag(ev, 'Event ' + (i + 1) + ' – ' + (ev.querySelector('.ogc-ev-name') || {}).textContent, 'Events'));
+      tag(card.querySelector('.ogc-connect'), 'Connect panel', 'Events');
+      tag(card.querySelector('.ogc-foot-txt'), 'Footer – see all announcements', 'Footer');
+      tag(card.querySelector('.ogc-foot-qr'), 'Footer – calendar QR', 'Footer');
+      tag(card.querySelector('.ogc-more'), 'Footer – more on the back tag', 'Footer');
+      card.setAttribute('data-lyrcard', face);
+      const renderLayer = async k => html2canvas(card, { scale: S, useCORS: true, backgroundColor: null, logging: false, onclone: doc => {
+        const c = doc.querySelector('[data-lyrcard="' + face + '"]');
+        c.style.backgroundImage = 'none'; c.style.backgroundColor = 'transparent'; c.style.boxShadow = 'none';
+        c.querySelectorAll('.ogc-hero, .ogc-foot').forEach(x => { x.style.background = 'transparent'; });
+        c.querySelectorAll('[data-lyr]').forEach(x => { x.style.visibility = x.getAttribute('data-lyr') === k ? 'visible' : 'hidden'; });
+      } });
+      const bg = [
+        { name: 'Background – cream #F2ECD8', canvas: ogcSolid(W, H, '#f2ecd8') },
+        { name: 'Background – South Reno topo contours', canvas: await ogcImgLayer('assets/south-reno-topo.svg', W, H) },
+        { name: 'Background – paper grain', canvas: ogcGrainLayer(W, H) }
+      ].filter(l => l.canvas);
+      const groups = { Header: [{ name: 'Header band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-hero')), '#1b1915') }], Events: [], Footer: [{ name: 'Footer band #1B1915', canvas: ogcRectLayer(W, H, rectOf(card.querySelector('.ogc-foot')), '#1b1915') }] };
+      for (const t of targets) groups[t.group].push({ name: t.name, canvas: await renderLayer(t.k) });
+      const flat = await html2canvas(card, { scale: S, useCORS: true, backgroundColor: '#f2ecd8', logging: false });
+      card.querySelectorAll('[data-lyr]').forEach(x => x.removeAttribute('data-lyr')); card.removeAttribute('data-lyrcard');
+      // PNG layers (numbered bottom → top)
+      const ordered = bg.concat(groups.Header, groups.Events, groups.Footer);
+      for (let i = 0; i < ordered.length; i++) zip.file(face + '/layers-png/' + String(i + 1).padStart(2, '0') + ' ' + ordered[i].name.replace(/[–—]/g, '-').normalize('NFKD').replace(/[^\x20-\x7e]/g, '').replace(/[\/\\:*?"<>|]/g, '-').slice(0, 80) + '.png', await toPng(ordered[i].canvas));
+      zip.file(face + '/' + stamp + '-' + face + '-flattened.png', await toPng(flat));
+      // Layered PSD (groups; ag-psd lists children bottom → top)
+      ogcSetStatus('Writing ' + face + ' PSD…');
+      const psd = { width: W, height: H, canvas: flat, children: [
+        { name: 'Background', children: bg },
+        { name: 'Header', children: groups.Header },
+        { name: 'Events', children: groups.Events },
+        { name: 'Footer', children: groups.Footer }
+      ] };
+      zip.file(face + '/' + stamp + '-' + face + '.psd', agPsd.writePsd(psd));
+      // copy
+      copy.push('=== ' + face.toUpperCase() + ' ===');
+      copy.push('Title: ' + ((card.querySelector('.ogc-h1') || {}).textContent || ''));
+      copy.push('Month: ' + ((card.querySelector('.ogc-month') || {}).textContent || ''));
+      card.querySelectorAll('.ogc-ev').forEach((ev, i) => {
+        const g = sel => ((ev.querySelector(sel) || {}).textContent || '').trim();
+        copy.push('', (i + 1) + '. ' + g('.ogc-ev-name'), '   Date: ' + g('.ogc-badge .m') + ' ' + g('.ogc-badge .d'), '   When: ' + g('.ogc-ev-when'), '   Description: ' + g('.ogc-ev-desc'), '   Call to action: ' + g('.ogc-cta').replace(/^→\s*/, ''));
+      });
+      if (card.querySelector('.ogc-more')) copy.push('', 'Tag: ' + card.querySelector('.ogc-more').textContent);
+      copy.push('', 'Footer: See all announcements · lssr.churchcenter.com/calendar · or scan this code →', '');
+    }
+    ogcSetStatus('Packing assets…');
+    // shared vectors / assets
+    const fetchBin = async u => { try { const r = await fetch(u); return r.ok ? await r.arrayBuffer() : null; } catch (e) { return null; } };
+    const topo = await fetchBin('assets/south-reno-topo.svg'); if (topo) zip.file('shared/south-reno-topo-contours.svg', topo);
+    zip.file('shared/calendar-qr-lssr.churchcenter.com-calendar.svg', ogcQrSvg('https://lssr.churchcenter.com/calendar'));
+    for (const [n, u] of [['ls-lockup-white.png', 'assets/ls-card-logo-b.png'], ['ls-mark-white.png', 'assets/ls-logo-white.png']]) { const b = await fetchBin(u); if (b) zip.file('shared/logos/' + n, b); }
+    const seen = {};
+    for (const im of document.querySelectorAll('#ogcPages img.ogc-img[data-orig]')) {
+      const orig = im.dataset.orig; if (seen[orig]) continue; seen[orig] = 1;
+      const name = ogcSlug((im.closest('.ogc-ev').querySelector('.ogc-ev-name') || {}).textContent) || 'photo';
+      if (_ogcImgCache[orig]) zip.file('shared/photos/' + name + '-bw.jpg', ogcDataUrlToBytes(_ogcImgCache[orig]));
+      if (im.dataset.local) { const b = await fetchBin(im.dataset.local); if (b) zip.file('shared/photos/' + name + '-original' + (im.dataset.local.match(/\.\w+$/) || ['.jpg'])[0], b); }
+    }
+    zip.file('copy.txt', copy.join('\n'));
+    zip.file('README.txt', [
+      'LSSR Announcement Card — layered files (' + stamp + ')',
+      '',
+      'Size: 5 × 7 in trim, 0.125 in bleed on all sides → artboard 5.25 × 7.25 in.',
+      'Raster layers: 1512 × 2088 px (288 dpi at the bleed size); every PNG layer is full-canvas and transparent, so they stack aligned.',
+      'Keep text ≥ 0.25 in inside the trim (the safe zone). The trim line is 0.125 in in from each edge.',
+      '',
+      'Per side: <side>/*.psd (groups Background / Header / Events / Footer), <side>/layers-png/ (same layers, numbered bottom → top), and a flattened PNG.',
+      'Also included: print-ready PDF with crop marks (print-ready.pdf).',
+      '',
+      'Colors: charcoal #1B1915 · cream #F2ECD8 · gold #D6B86A · body text #4A4332 · date/when text #7A6524',
+      'Font: Montserrat (800 for headings/names, 600–700 labels, 400–500 body).',
+      'Photos are baked black & white (shared/photos/*-bw.jpg); color originals included (*-original.*).',
+      'Topo: real South Reno contours (20 m interval, heavier index line every 100 m), vector at shared/south-reno-topo-contours.svg, drawn at 13% / 24% opacity in #6B5530.',
+      'QR: shared/calendar-qr-…svg (vector) → https://lssr.churchcenter.com/calendar',
+      'All card text: copy.txt'
+    ].join('\n'));
+    ogcSetStatus('Adding print PDF…');
+    const pdf = await ogcBuildPdf(cards); zip.file('print-ready.pdf', pdf.output('arraybuffer'));
+    ogcSetStatus('Compressing…');
+    const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
+    if (typeof window._ogcZipHook === 'function') await window._ogcZipHook(blob, stamp + '-layered.zip');
+    else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = stamp + '-layered.zip'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
+    ogcSetStatus('Layered files ready ✓ (' + Math.round(blob.size / 1048576) + ' MB)');
+  } catch (err) {
+    ogcSetStatus('Layered export failed: ' + (err && err.message ? err.message : err));
   } finally { btn.disabled = false; btn.textContent = old; }
 }
 
@@ -13677,7 +13824,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T213354Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T214410Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
