@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T21:50:04.239Z",
+  "generatedAt": "2026-09-22T22:50:22.815Z",
   "asOf": "2026-09-22",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 397,
     "avgScore": 0,
     "inGroup": 218,
-    "serving": 233,
+    "serving": 234,
     "leading": 78,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 397,
     "notInGroup": 179,
-    "notServing": 164,
+    "notServing": 163,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5491183879093199,
-      "serving": 0.5869017632241813,
+      "serving": 0.5894206549118388,
       "leading": 0.1964735516372796,
       "givingRegular": 0,
       "recurring": 0,
@@ -67,7 +67,7 @@
         "totalPeople": 66,
         "avgScore": 0,
         "inGroup": 44,
-        "serving": 53,
+        "serving": 54,
         "leading": 22,
         "givingRegular": 0,
         "recurring": 0,
@@ -77,7 +77,7 @@
         "overdue": 0,
         "notBaptized": 66,
         "notInGroup": 22,
-        "notServing": 13,
+        "notServing": 12,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -95,7 +95,7 @@
         },
         "pct": {
           "inGroup": 0.6666666666666666,
-          "serving": 0.803030303030303,
+          "serving": 0.8181818181818182,
           "leading": 0.3333333333333333,
           "givingRegular": 0,
           "recurring": 0,
@@ -221,43 +221,6 @@
           "name": "Christina Harris",
           "first": "Christina",
           "last": "Harris",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Christopher Degener",
-          "first": "Christopher",
-          "last": "Degener",
           "email": "",
           "phone": "",
           "member": false,
@@ -693,6 +656,48 @@
               "name": "First Impressions Team",
               "role": "member",
               "joinedAt": "2025-07-22T07:18:50Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Christopher Degener",
+          "first": "Christopher",
+          "last": "Degener",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "LS Students Leaders",
+              "role": "member",
+              "joinedAt": "2026-09-22T21:53:59Z"
             }
           ],
           "flags": [
