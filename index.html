@@ -984,6 +984,22 @@
   .cg-v4-region-h { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 700; margin: 0 0 6px; }
   .cg-v4-region-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 7px; }
   .cg-v4-region-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .cg-v4-region-row.clickable { cursor: pointer; }
+  .cg-v4-region-row.clickable:hover { background: rgba(45,212,191,0.12); }
+  .v4hit { cursor: pointer; }
+  .v4hit:hover text, .v4hit:focus text { fill: #fff; }
+  .v4hit:hover circle { fill: rgba(255,255,255,0.10); }
+  .v4hit:focus { outline: none; }
+  .cg-v4-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 4200; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .cg-v4-modal.open { display: flex; }
+  .cg-v4-modal-box { background: #181818; border: 1px solid var(--card-border); border-radius: 14px; width: 100%; max-width: 560px; max-height: 82vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .cg-v4-modal-hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 20px 10px; }
+  .cg-v4-modal-title { font-size: 17px; font-weight: 800; color: var(--text); }
+  .cg-v4-modal-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .cg-v4-modal-x { background: none; border: none; color: var(--text-muted); font-size: 26px; line-height: 1; cursor: pointer; padding: 0 4px; }
+  .cg-v4-modal-x:hover { color: var(--text); }
+  .cg-v4-modal-search { margin: 0 20px 12px; background: #0f0f0f; border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); padding: 9px 12px; font-size: 13px; font-family: inherit; }
+  .cg-v4-modal-names { display: flex; flex-wrap: wrap; gap: 6px; overflow-y: auto; padding: 0 20px 20px; align-content: flex-start; }
   .cg-v4-chips { display: inline-flex; gap: 3px; flex: 0 0 auto; width: 68px; }
   .cg-v4-chip { width: 11px; height: 11px; border-radius: 3px; opacity: 0.35; }
   .cg-v4-chip.on { opacity: 1; }
@@ -1032,42 +1048,58 @@
   .oga-item-fields label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); font-weight: 700; margin-bottom: -3px; }
   .oga-img-thumb { width: 46px; height: 46px; border-radius: 7px; object-fit: cover; flex: 0 0 auto; border: 1px solid var(--card-border); }
   .oga-empty { grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 40px; }
+  .oga-note { font-size: 11px; color: var(--text-dim); flex: 1 1 240px; line-height: 1.4; }
+  .oga-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+  .oga-badge { font-size: 9.5px; font-weight: 700; padding: 1px 6px; border-radius: 5px; letter-spacing: .02em; }
+  .oga-badge.img { background: rgba(96,165,250,0.16); color: #93c5fd; }
+  .oga-badge.reg { background: rgba(207,134,54,0.18); color: #e0954a; }
+  .oga-badge.cc { background: rgba(45,212,191,0.14); color: #2dd4bf; }
 
-  /* Print-preview overlay for the finished 5×7 card */
-  .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 4000; display: none; overflow: auto; padding: 24px; }
+  /* Print-preview overlay for the finished 5×7 card — LSSR branded (charcoal + amber) */
+  .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4000; display: none; overflow: auto; padding: 24px; }
   .ogc-overlay.open { display: block; }
-  .ogc-bar { max-width: 1100px; margin: 0 auto 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .ogc-pages { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
-  /* 5×7 portrait at 96dpi = 480×672 */
-  .ogc-card { width: 480px; height: 672px; background: #fff; color: #17150f; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 12px 40px rgba(0,0,0,0.5); font-family: 'Montserrat', system-ui, sans-serif; }
+  .ogc-bar { max-width: 1100px; margin: 0 auto 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .ogc-pages { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
+  /* 5×7 portrait at 96dpi = 480×672 · brand amber #cf8636 */
+  .ogc-card { width: 480px; height: 672px; background: #16130e; color: #f4efe6; border-radius: 6px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
-  .ogc-hero { background: linear-gradient(135deg, #0f766e, #115e59); color: #fff; padding: 30px 32px 24px; }
-  .ogc-hero .ogc-brand { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; opacity: .85; font-weight: 700; }
-  .ogc-hero .ogc-h1 { font-size: 30px; font-weight: 800; line-height: 1.05; margin: 10px 0 6px; letter-spacing: -.5px; }
-  .ogc-hero .ogc-h2 { font-size: 13px; opacity: .9; font-weight: 600; }
-  .ogc-body { padding: 20px 30px; flex: 1 1 auto; overflow: hidden; }
-  .ogc-ev { padding: 11px 0; border-bottom: 1px solid #e7e3da; display: flex; gap: 13px; }
+  /* Hero with nested-chevron (mountain) motif */
+  .ogc-hero { position: relative; padding: 26px 30px 20px; background:
+      radial-gradient(120% 90% at 80% -10%, rgba(207,134,54,0.28), transparent 60%),
+      linear-gradient(160deg, #23201a 0%, #16130e 70%); border-bottom: 2px solid #cf8636; overflow: hidden; }
+  .ogc-hero-chev { position: absolute; right: -30px; top: -20px; width: 210px; height: 210px; opacity: 0.16; }
+  .ogc-hero-top { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
+  .ogc-logo { width: 34px; height: 34px; flex: 0 0 auto; }
+  .ogc-brandtxt { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #d9c9ad; font-weight: 800; line-height: 1.3; }
+  .ogc-brandtxt b { color: #fff; display: block; font-size: 12px; letter-spacing: .16em; }
+  .ogc-h1 { font-size: 30px; font-weight: 800; line-height: 1.02; margin: 16px 0 4px; letter-spacing: -.5px; color: #fff; position: relative; z-index: 1; }
+  .ogc-h2 { font-size: 12px; color: #cf8636; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; position: relative; z-index: 1; }
+  .ogc-body { padding: 6px 26px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .ogc-ev { padding: 9px 0; border-bottom: 1px solid rgba(207,134,54,0.22); display: flex; gap: 12px; align-items: center; }
   .ogc-ev:last-child { border-bottom: none; }
-  .ogc-date { flex: 0 0 46px; text-align: center; }
-  .ogc-date .m { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #0f766e; letter-spacing: .05em; }
-  .ogc-date .d { font-size: 24px; font-weight: 800; line-height: 1; color: #17150f; }
-  .ogc-date .dow { font-size: 9px; color: #8a8578; font-weight: 700; text-transform: uppercase; }
+  .ogc-date { flex: 0 0 44px; text-align: center; }
+  .ogc-date .m { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #cf8636; letter-spacing: .06em; }
+  .ogc-date .d { font-size: 26px; font-weight: 800; line-height: 1; color: #fff; }
+  .ogc-date .dow { font-size: 8.5px; color: #9a917f; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .ogc-thumb { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(207,134,54,0.3); }
   .ogc-ev-body { flex: 1 1 auto; min-width: 0; }
-  .ogc-ev-name { font-size: 15px; font-weight: 800; line-height: 1.15; }
-  .ogc-ev-when { font-size: 11px; color: #0f766e; font-weight: 700; margin-top: 1px; }
-  .ogc-ev-desc { font-size: 11px; color: #55503f; margin-top: 3px; line-height: 1.35; }
-  .ogc-ev-qr { flex: 0 0 54px; text-align: center; }
-  .ogc-ev-qr img { width: 54px; height: 54px; }
-  .ogc-ev-qr .qc { font-size: 8px; color: #8a8578; margin-top: 2px; font-weight: 700; }
-  .ogc-foot { background: #f3f1ea; padding: 12px 30px; font-size: 10px; color: #6b6656; text-align: center; font-weight: 600; letter-spacing: .02em; }
-  .ogc-pagetag { position: absolute; top: 10px; right: 14px; font-size: 9px; color: rgba(255,255,255,.7); font-weight: 700; }
+  .ogc-ev-name { font-size: 15px; font-weight: 800; line-height: 1.12; color: #fff; }
+  .ogc-ev-when { font-size: 10.5px; color: #cf8636; font-weight: 700; margin-top: 2px; }
+  .ogc-ev-desc { font-size: 10.5px; color: #c3bcac; margin-top: 3px; line-height: 1.32; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ogc-ev-qr { flex: 0 0 50px; text-align: center; }
+  .ogc-ev-qr img { width: 50px; height: 50px; background: #fff; padding: 3px; border-radius: 5px; }
+  .ogc-ev-qr .qc { font-size: 7.5px; color: #9a917f; margin-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-foot { background: #0f0d09; padding: 11px 26px; font-size: 9.5px; color: #9a917f; text-align: center; font-weight: 600; letter-spacing: .04em; border-top: 1px solid rgba(207,134,54,0.25); }
+  .ogc-foot b { color: #cf8636; }
+  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(255,255,255,.45); font-weight: 800; letter-spacing: .1em; z-index: 2; }
+  .ogc-empty-face { color: #6b6656; text-align: center; padding: 60px 20px; font-size: 13px; }
   @media print {
     body * { visibility: hidden !important; }
     #ogcOverlay, #ogcOverlay * { visibility: visible !important; }
-    #ogcOverlay { position: absolute; inset: 0; background: #fff; padding: 0; overflow: visible; }
+    #ogcOverlay { position: absolute; inset: 0; background: #16130e; padding: 0; overflow: visible; }
     .ogc-bar { display: none !important; }
-    .ogc-pages { display: block; }
-    .ogc-card { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0 auto; }
+    .ogc-pages { display: block; gap: 0; }
+    .ogc-card { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0 auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     @page { size: 5in 7in; margin: 0; }
   }
 
@@ -3587,7 +3619,7 @@
               </select>
             </label>
             <label>Card title: <input type="text" id="ogaTitle" value="This Month at Living Stones"></label>
-            <label class="oga-chk"><input type="checkbox" id="ogaHideWorship" checked onchange="ogaRenderList()"> Hide worship gatherings &amp; rehearsals</label>
+            <span class="oga-note">Worship gatherings, rehearsals, community-group &amp; recurring group events are filtered out automatically. Baptisms are kept.</span>
             <span class="oga-count" id="ogaCount"></span>
           </div>
           <div id="ogaList" class="oga-list"></div>
@@ -3601,11 +3633,27 @@
 <!-- 📇 Announcement card print preview -->
 <div class="ogc-overlay" id="ogcOverlay" aria-hidden="true">
   <div class="ogc-bar">
-    <button class="oga-btn hi" onclick="window.print()">🖨 Print (5×7 double-sided)</button>
+    <button class="oga-btn hi" onclick="ogaDownloadPDF(this)">⬇ Download PDF (5×7)</button>
+    <button class="oga-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
     <button class="oga-btn ghost" onclick="ogcClose()">Close</button>
-    <span style="color:#bbb;font-size:12px;align-self:center">Tip: in the print dialog, enable "Two-sided" and set paper to 5×7 (or Letter, "Fit").</span>
+    <span style="color:#bbb;font-size:12px;align-self:center">Double-sided: enable "Two-sided" and set paper to 5×7 (or Letter, "Fit").</span>
   </div>
   <div class="ogc-pages" id="ogcPages"></div>
+</div>
+
+<!-- 🍀 4-way Venn region → names modal -->
+<div class="cg-v4-modal" id="cgV4Modal" aria-hidden="true" onclick="if(event.target===this)cgV4ModalClose()">
+  <div class="cg-v4-modal-box">
+    <div class="cg-v4-modal-hd">
+      <div>
+        <div class="cg-v4-modal-title" id="cgV4ModalTitle">Region</div>
+        <div class="cg-v4-modal-sub" id="cgV4ModalSub"></div>
+      </div>
+      <button class="cg-v4-modal-x" onclick="cgV4ModalClose()" aria-label="Close">&times;</button>
+    </div>
+    <input type="text" id="cgV4ModalSearch" class="cg-v4-modal-search" placeholder="Search names…" oninput="cgV4ModalRender(this.value)">
+    <div class="cg-v4-modal-names" id="cgV4ModalNames"></div>
+  </div>
 </div>
 
 <!-- ☀ Sunday One-sheet Modal -->
@@ -6680,42 +6728,51 @@ function cgV4Chips(mask) {
     '<i class="cg-v4-chip' + (mask & s.bit ? ' on' : '') + '" style="background:' + s.color + '"></i>').join('') + '</span>';
 }
 
-// Four-ellipse Venn silhouette (topologically complete). Labels the four outer
-// lobes + the fully-engaged center; the precise 15-region counts sit in the panel.
+// Four-leaf-clover diagram: four overlapping circles (Member top, CG right,
+// Serving bottom, Giving left). Every count is a clickable button → name modal.
 function cgVenn4SvgMarkup(v4) {
-  const sets = v4.sets || {};
   const reg = v4.regions || {};
   const R = m => Number(reg[m] || reg[String(m)] || 0);
   const num = n => Number(n).toLocaleString();
-  const W = 560, H = 430;
-  // Four congruent tilted ellipses forming the classic 4-set Venn.
-  const E = [
-    { color: '#60a5fa', cx: 220, cy: 250, rot: -40 }, // Family Member
-    { color: '#2dd4bf', cx: 275, cy: 205, rot: -40 }, // CG
-    { color: '#f59e0b', cx: 285, cy: 205, rot:  40 }, // Serving
-    { color: '#fb7185', cx: 340, cy: 250, rot:  40 }  // Giving
+  const setTotal = bit => { let t = 0; for (let m = 1; m <= 15; m++) if (m & bit) t += R(m); return t; };
+  const pairTotal = (a, b) => { let t = 0; for (let m = 1; m <= 15; m++) if ((m & a) && (m & b)) t += R(m); return t; };
+  // circle centres (offset 76 from centre 220,210), r=118.
+  // Member top · CG left · Serving bottom · Giving right (matches the labels).
+  const C = { M: [220,134], C: [144,210], S: [220,286], G: [296,210] };
+  const petals = [
+    { c: C.M, color: '#60a5fa' }, { c: C.C, color: '#2dd4bf' },
+    { c: C.S, color: '#f59e0b' }, { c: C.G, color: '#fb7185' }
   ];
-  const rx = 200, ry = 112;
-  const ell = E.map(e =>
-    `<ellipse cx="${e.cx}" cy="${e.cy}" rx="${rx}" ry="${ry}" transform="rotate(${e.rot} ${e.cx} ${e.cy})" fill="${e.color}" fill-opacity="0.28" stroke="${e.color}" stroke-width="2.5"/>`
-  ).join('');
-  const lbl = (x, y, val, cap, col) =>
-    `<text x="${x}" y="${y}" text-anchor="middle" fill="#fff" font-size="23" font-weight="800" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.55);stroke-width:3.5px">${num(val)}</text>` +
-    `<text x="${x}" y="${y+17}" text-anchor="middle" fill="${col||'rgba(255,255,255,0.9)'}" font-size="10.5" font-weight="700" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.55);stroke-width:3px">${cap}</text>`;
-  // Set-name tags near each ellipse's outer end.
-  const tag = (x, y, txt, col) =>
-    `<text x="${x}" y="${y}" text-anchor="middle" fill="${col}" font-size="13" font-weight="800" font-family="Montserrat" letter-spacing="0.03em" style="paint-order:stroke;stroke:rgba(0,0,0,0.5);stroke-width:3px">${txt}</text>`;
-  return `<svg class="cg-venn4-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four-way overlap of Family Members, Community Group members, servers and givers">
-    ${ell}
-    ${tag(70, 250, 'MEMBER', '#60a5fa')}
-    ${tag(210, 70, 'CG', '#2dd4bf')}
-    ${tag(360, 70, 'SERVING', '#f59e0b')}
-    ${tag(500, 250, 'GIVING', '#fb7185')}
-    ${lbl(110, 268, R(1), 'Member only')}
-    ${lbl(225, 120, R(2), 'CG only')}
-    ${lbl(345, 120, R(4), 'Serving only')}
-    ${lbl(452, 268, R(8), 'Giving only')}
-    ${lbl(280, 232, R(15), 'ALL FOUR', '#fde68a')}
+  const circ = petals.map(p =>
+    `<circle cx="${p.c[0]}" cy="${p.c[1]}" r="118" fill="${p.color}" fill-opacity="0.24" stroke="${p.color}" stroke-width="2.5"/>`).join('');
+  // clickable count: transparent hit circle + number (+optional caption)
+  const hit = (x, y, val, cap, attrs, size, col) => {
+    size = size || 22;
+    return `<g class="v4hit" ${attrs} tabindex="0" role="button">` +
+      `<circle cx="${x}" cy="${y}" r="${cap ? 26 : 19}" fill="#ffffff" fill-opacity="0.001"/>` +
+      `<text x="${x}" y="${y + (cap ? -1 : 6)}" text-anchor="middle" fill="#fff" font-size="${size}" font-weight="800" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.6);stroke-width:3.5px">${num(val)}</text>` +
+      (cap ? `<text x="${x}" y="${y + 14}" text-anchor="middle" fill="${col || 'rgba(255,255,255,0.9)'}" font-size="9.5" font-weight="700" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.6);stroke-width:3px">${cap}</text>` : '') +
+      `</g>`;
+  };
+  const tag = (x, y, txt, tot, col, attrs) =>
+    `<g class="v4hit v4tag" ${attrs} tabindex="0" role="button">` +
+    `<text x="${x}" y="${y}" text-anchor="middle" fill="${col}" font-size="12.5" font-weight="800" font-family="Montserrat" letter-spacing="0.05em" style="paint-order:stroke;stroke:rgba(0,0,0,0.55);stroke-width:3px">${txt}</text>` +
+    `<text x="${x}" y="${y + 15}" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="Montserrat" style="paint-order:stroke;stroke:rgba(0,0,0,0.55);stroke-width:3px">${num(tot)}</text></g>`;
+  return `<svg class="cg-venn4-svg" viewBox="0 0 440 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four-leaf-clover overlap of Member, CG, Serving and Giving">
+    ${circ}
+    ${tag(220, 44, 'MEMBER', setTotal(1), '#60a5fa', 'data-kind="set" data-bit="1"')}
+    ${tag(400, 214, 'GIVING', setTotal(8), '#fb7185', 'data-kind="set" data-bit="8"')}
+    ${tag(220, 452, 'SERVING', setTotal(4), '#f59e0b', 'data-kind="set" data-bit="4"')}
+    ${tag(40, 214, 'CG', setTotal(2), '#2dd4bf', 'data-kind="set" data-bit="2"')}
+    ${hit(220, 104, R(1), '', 'data-kind="mask" data-mask="1"')}
+    ${hit(110, 210, R(2), '', 'data-kind="mask" data-mask="2"')}
+    ${hit(220, 316, R(4), '', 'data-kind="mask" data-mask="4"')}
+    ${hit(330, 210, R(8), '', 'data-kind="mask" data-mask="8"')}
+    ${hit(168, 158, pairTotal(1,2), '', 'data-kind="pair" data-a="1" data-b="2"', 15)}
+    ${hit(272, 158, pairTotal(1,8), '', 'data-kind="pair" data-a="1" data-b="8"', 15)}
+    ${hit(168, 262, pairTotal(2,4), '', 'data-kind="pair" data-a="2" data-b="4"', 15)}
+    ${hit(272, 262, pairTotal(4,8), '', 'data-kind="pair" data-a="4" data-b="8"', 15)}
+    ${hit(220, 210, R(15), 'ALL FOUR', 'data-kind="mask" data-mask="15"', 22, '#fde68a')}
   </svg>`;
 }
 
@@ -6737,7 +6794,14 @@ function cgRenderVenn4(cg) {
   const sets = v4.sets || {};
   if (legEl) legEl.innerHTML = CG_V4_SETS.map(s =>
     '<span><i class="cg-venn-dot" style="background:' + s.color + '"></i>' + s.label +
-    ' <b style="color:var(--text)">' + Number(sets[s.key] || 0).toLocaleString() + '</b></span>').join('');
+    ' <b style="color:var(--text)">' + Number(sets[s.key] || 0).toLocaleString() + '</b></span>').join('') +
+    '<span style="color:var(--text-dim);width:100%;text-align:center;font-weight:500">Tap any number to see who’s in it.</span>';
+  // Wire the clickable clover regions.
+  svgWrap.querySelectorAll('.v4hit').forEach(function(g){
+    const open = function(){ cgV4OpenHit(g.getAttribute('data-kind'), g.dataset); };
+    g.addEventListener('click', open);
+    g.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
 
   // Region breakdown, grouped by how many marks.
   const uni = v4.universe || 1;
@@ -6755,7 +6819,7 @@ function cgRenderVenn4(cg) {
       groups.map(g => {
         const rows = g.masks.map(m => {
           const ct = R(m); const pct = Math.round(ct / uni * 100);
-          return '<div class="cg-v4-region-row">' + cgV4Chips(m) +
+          return '<div class="cg-v4-region-row' + (ct ? ' clickable' : '') + '"' + (ct ? ' onclick="cgV4OpenMask(' + m + ')" tabindex="0" role="button"' : '') + '>' + cgV4Chips(m) +
             '<span class="cg-v4-region-name">' + cgV4RegionName(m) + '</span>' +
             '<span class="cg-v4-region-ct">' + ct.toLocaleString() + '</span>' +
             '<span class="cg-v4-region-pct">' + pct + '%</span></div>';
@@ -6798,29 +6862,91 @@ function cgV4ToggleNames(id, btn) {
   btn.textContent = open ? 'Show fewer' : ('Show all ' + el.children.length);
 }
 
+// ── Click-through name modal for any Venn region ─────────────────────────────
+function cgV4RegNames(m) { return (_cgV4 && _cgV4.regionNames && (_cgV4.regionNames[m] || _cgV4.regionNames[String(m)])) || []; }
+function cgV4Reg(m) { return (_cgV4 && _cgV4.regions && Number(_cgV4.regions[m] || _cgV4.regions[String(m)] || 0)) || 0; }
+function cgV4UnionNames(pred) { const set = {}; for (let m = 1; m <= 15; m++) if (pred(m)) cgV4RegNames(m).forEach(n => set[n] = 1); return Object.keys(set).sort(); }
+function cgV4UnionTotal(pred) { let t = 0; for (let m = 1; m <= 15; m++) if (pred(m)) t += cgV4Reg(m); return t; }
+function cgV4OpenHit(kind, ds) {
+  if (kind === 'mask') { cgV4OpenMask(parseInt(ds.mask, 10)); return; }
+  if (kind === 'set') {
+    const bit = parseInt(ds.bit, 10); const s = CG_V4_SETS.find(x => x.bit === bit);
+    cgV4Open((s ? s.label : 'Set'), 'Everyone in this circle', cgV4UnionNames(m => m & bit), cgV4UnionTotal(m => m & bit));
+  } else if (kind === 'pair') {
+    const a = parseInt(ds.a, 10), b = parseInt(ds.b, 10);
+    const sa = CG_V4_SETS.find(x => x.bit === a), sb = CG_V4_SETS.find(x => x.bit === b);
+    cgV4Open((sa ? sa.short : '') + ' + ' + (sb ? sb.short : ''), 'In both circles', cgV4UnionNames(m => (m & a) && (m & b)), cgV4UnionTotal(m => (m & a) && (m & b)));
+  }
+}
+function cgV4OpenMask(m) { cgV4Open(cgV4RegionName(m).replace(/<[^>]*>/g, ''), 'People in exactly this region', cgV4RegNames(m).slice(), cgV4Reg(m)); }
+let _cgV4ModalNames = [];
+function cgV4Open(title, subtitle, names, trueTotal) {
+  _cgV4ModalNames = names || [];
+  const ov = document.getElementById('cgV4Modal'); if (!ov) return;
+  document.getElementById('cgV4ModalTitle').textContent = title;
+  const shown = _cgV4ModalNames.length;
+  const tot = (trueTotal != null) ? trueTotal : shown;
+  let sub = subtitle + ' · ' + tot.toLocaleString() + ' ' + (tot === 1 ? 'person' : 'people');
+  if (shown < tot) sub += ' (showing first ' + shown + ')';
+  document.getElementById('cgV4ModalSub').textContent = sub;
+  const s = document.getElementById('cgV4ModalSearch'); if (s) s.value = '';
+  cgV4ModalRender('');
+  ov.classList.add('open'); ov.setAttribute('aria-hidden', 'false');
+}
+function cgV4ModalRender(q) {
+  q = (q || '').toLowerCase();
+  const list = q ? _cgV4ModalNames.filter(n => n.toLowerCase().includes(q)) : _cgV4ModalNames;
+  const el = document.getElementById('cgV4ModalNames');
+  el.innerHTML = list.length ? list.map(n => '<span class="cg-v4-name">' + escapeHtml(n) + '</span>').join('') : '<div class="cg-action-empty">No matches.</div>';
+}
+function cgV4ModalClose() { const ov = document.getElementById('cgV4Modal'); if (ov) { ov.classList.remove('open'); ov.setAttribute('aria-hidden', 'true'); } }
+
 // ── Announcement card generator (staff area) ────────────────────────────────
-let _ogaEvents = [];      // candidate events in window
+let _ogaEvents = [];      // candidate events in current window (after filtering)
 let _ogaState = {};       // key → { on, blurb, reg }
+let _ogaAllEvents = [];   // every calendar event loaded
+let _ogaNameCounts = {};  // normalized name → occurrences across the whole calendar
 let _ogaLoaded = false;
+let _ogaAutoSelected = false;
+
 function ogaInit() {
   if (_ogaLoaded) { ogaRenderList(); return; }
   _ogaLoaded = true;
-  const use = (evs) => { _ogaAllEvents = evs || []; ogaRenderList(); };
+  const use = (evs) => {
+    _ogaAllEvents = evs || [];
+    _ogaNameCounts = {};
+    _ogaAllEvents.forEach(e => { const k = ogaNorm(e.name); _ogaNameCounts[k] = (_ogaNameCounts[k] || 0) + 1; });
+    ogaRenderList();
+  };
   if (_sundayEosCal && _sundayEosCal.length) { use(_sundayEosCal); return; }
   fetch('./eos-data.json?v=' + Date.now()).then(r => r.json())
     .then(d => { _sundayEosCal = (d.calendar && d.calendar.events) || []; use(_sundayEosCal); })
     .catch(() => use([]));
 }
-let _ogaAllEvents = [];
-function ogaIsWorshipish(name) {
-  const n = (name || '').toLowerCase();
-  return n.includes('worship gathering') || n.includes('rehearsal') || n.includes('sound check') ||
-         n.includes('run through') || n.includes('staff meeting') || n.startsWith('rbd') || n.includes('rbd-');
+function ogaNorm(name) { return (name || '').toLowerCase().replace(/[^a-z]/g, ''); }
+function ogaIsBaptism(e) { return /bapti/i.test(e.name || ''); }
+// What we NEVER put on an announcement card (Sunday worship + routine recurring +
+// RBD + community-group/team-specific recurring). Baptisms are always kept.
+function ogaExcluded(e) {
+  if (ogaIsBaptism(e)) return false;                    // always keep baptisms
+  if (e.rbd) return true;
+  const n = (e.name || '').toLowerCase();
+  if (n.includes('worship gathering')) return true;
+  if (n.includes('rehearsal') || n.includes('sound check') || n.includes('run through') ||
+      n.includes('staff meeting') || n.includes('prayer set') || n.includes('load in') ||
+      n.includes('tear down') || n.includes('setup') || n.includes('set up') || n.includes('teardown')) return true;
+  if (n.includes('community group') || n.startsWith('cg ') || n.includes('small group')) return true;
+  // Routine recurring: the same event name appears 3+ times across the calendar
+  // (weekly/monthly group rhythms) — a specific group's recurring event.
+  if ((_ogaNameCounts[ogaNorm(e.name)] || 0) >= 3) return true;
+  return false;
 }
+// Auto-recommended for the card: public (Church Center) + has a graphic or blurb.
+function ogaRecommended(e) { return (e.visibleCC || e.reg) && (e.img || e.desc || e.summary || ogaIsBaptism(e)); }
+
 function ogaRenderList() {
   const listEl = document.getElementById('ogaList'); if (!listEl) return;
   const days = parseInt((document.getElementById('ogaWindow') || {}).value || '60', 10);
-  const hideW = (document.getElementById('ogaHideWorship') || {}).checked;
   const q = ((document.getElementById('ogaSearch') || {}).value || '').toLowerCase();
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const end = new Date(today); end.setDate(end.getDate() + days);
@@ -6829,13 +6955,19 @@ function ogaRenderList() {
     if (!e.dateKey) return false;
     const d = new Date(e.dateKey + 'T12:00:00');
     if (d < today || d > end) return false;
-    if (e.rbd) return false;
-    if (hideW && ogaIsWorshipish(e.name)) return false;
-    if (q && !(e.name || '').toLowerCase().includes(q)) return false;
-    const k = (e.name || '') + '|' + e.dateKey;   // de-dupe repeats on same day
+    if (ogaExcluded(e)) return false;
+    const k = ogaNorm(e.name) + '|' + e.dateKey;         // de-dupe same-day repeats
     if (seen[k]) return false; seen[k] = 1;
+    if (q && !(e.name || '').toLowerCase().includes(q)) return false;
     return true;
   }).sort((a, b) => (a.dateKey < b.dateKey ? -1 : a.dateKey > b.dateKey ? 1 : 0));
+
+  // First paint: auto-select the recommended events so the leader starts with a
+  // sensible card and just trims. (Only once — respects later manual toggles.)
+  if (!_ogaAutoSelected && !q) {
+    _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: ogaRecommended(e), blurb: e.desc || e.summary || '', reg: e.reg || e.url || '' }; });
+    _ogaAutoSelected = true;
+  }
 
   const cntEl = document.getElementById('ogaCount');
   const selCount = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length;
@@ -6846,14 +6978,16 @@ function ogaRenderList() {
     const key = ogaKey(e);
     const st = _ogaState[key] || (_ogaState[key] = { on: false, blurb: e.desc || e.summary || '', reg: e.reg || e.url || '' });
     const when = e.date + (e.time && !/12:00 AM/.test(e.time) ? ' · ' + e.time : '') + (e.endKey ? '–' + fmtEndKey(e.endKey) : '');
-    const meta = [e.location ? e.location.split(' - ')[0] : '', e.owner || ''].filter(Boolean).join(' · ');
+    const meta = [e.location ? e.location.split(' - ')[0] : '', e.owner || '', ogaIsBaptism(e) ? 'Baptism' : ''].filter(Boolean).join(' · ');
+    const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
     return '<div class="oga-item' + (st.on ? ' on' : '') + '" id="ogaItem-' + key + '">' +
       '<input type="checkbox" class="oga-cb" ' + (st.on ? 'checked' : '') + ' onchange="ogaToggle(\'' + key + '\',this.checked)">' +
-      (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">' : '') +
+      (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'">' : '') +
       '<div class="oga-item-body">' +
         '<div class="oga-item-top"><span class="oga-item-name">' + escapeHtml(e.name || 'Event') + '</span>' +
         '<span class="oga-item-when">' + escapeHtml(when) + '</span></div>' +
         (meta ? '<div class="oga-item-meta">' + escapeHtml(meta) + '</div>' : '') +
+        (badges ? '<div class="oga-badges">' + badges + '</div>' : '') +
         '<div class="oga-item-fields">' +
           '<label>Blurb (prints on the card)</label>' +
           '<textarea rows="2" oninput="ogaField(\'' + key + '\',\'blurb\',this.value)">' + escapeHtml(st.blurb) + '</textarea>' +
@@ -6868,29 +7002,53 @@ function fmtEndKey(k) { try { const d = new Date(k + 'T12:00:00'); return d.toLo
 function ogaToggle(key, on) {
   (_ogaState[key] = _ogaState[key] || {}).on = on;
   const el = document.getElementById('ogaItem-' + key); if (el) el.classList.toggle('on', on);
-  ogaRenderList();
+  const cntEl = document.getElementById('ogaCount');
+  if (cntEl) { const s = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length; cntEl.textContent = _ogaEvents.length + ' events · ' + s + ' selected'; }
 }
 function ogaField(key, f, v) { (_ogaState[key] = _ogaState[key] || {})[f] = v; }
 function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); ogaRenderList(); }
 
+// LS nested-chevron (mountain) mark, from the culture-guide motif.
+function ogcLogoSvg(size, stroke) {
+  stroke = stroke || '#cf8636';
+  return '<svg class="ogc-logo" width="' + size + '" height="' + size + '" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M50 10 L86 78 H70 L50 38 L30 78 H14 Z" fill="' + stroke + '"/>' +
+    '<path d="M50 30 L70 70 H30 Z" fill="#fff"/>' +
+    '<text x="50" y="63" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="800" fill="#16130e">LS</text>' +
+    '</svg>';
+}
+function ogcChevronSvg() {
+  return '<svg class="ogc-hero-chev" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    [0,1,2,3].map(i => { const o = i*22; return '<path d="M' + (30+o) + ' 180 L100 ' + (40+o) + ' L' + (170-o) + ' 180" stroke="#cf8636" stroke-width="6" fill="none"/>'; }).join('') +
+    '</svg>';
+}
+
 function ogaBuildCard() {
-  const chosen = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on)
-    .map(e => ({ e: e, st: _ogaState[ogaKey(e)] }));
+  const chosen = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).map(e => ({ e: e, st: _ogaState[ogaKey(e)] }));
   if (!chosen.length) { alert('Select at least one announcement first.'); return; }
   const title = (document.getElementById('ogaTitle') || {}).value || 'This Month at Living Stones';
-  // Split across two faces (front / back), ~6 per face.
-  const per = Math.ceil(chosen.length / 2);
-  const faces = [chosen.slice(0, Math.min(per, 6)), chosen.slice(Math.min(per, 6))];
   const monthLabel = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  // Equal-sized events, max 5 per face, balanced so a double-sided card fills
+  // both sides (e.g. 5 events → 3 front / 2 back, not 5 / empty).
+  const PER = 5;
+  const total = chosen.length;
+  const pages = Math.max(2, Math.ceil(total / PER));
+  const per = Math.ceil(total / pages);
+  const faces = [];
+  for (let i = 0; i < total; i += per) faces.push(chosen.slice(i, i + per));
+  while (faces.length < 2) faces.push([]);   // always a double-sided pair
+
   const evHtml = (item) => {
     const e = item.e, st = item.st;
     const d = new Date(e.dateKey + 'T12:00:00');
     const time = (e.time && !/12:00 AM/.test(e.time)) ? e.time : '';
-    const when = (e.endKey ? 'through ' + fmtEndKey(e.endKey) : (e.dayOfWeek || d.toLocaleDateString('en-US', { weekday: 'short' }))) + (time ? ' · ' + time : '');
+    const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' })) + (time ? ' · ' + time : '');
     const loc = e.location ? e.location.split(' - ')[0] : '';
-    const qr = (st.reg && /^https?:\/\//.test(st.reg))
-      ? '<div class="ogc-ev-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=0&data=' + encodeURIComponent(st.reg) + '" alt="QR"><div class="qc">Scan to register</div></div>'
-      : '';
+    const link = st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
+    const qrCap = /\/registrations?\//.test(link) ? 'Register' : 'Scan for info';
+    const qr = link
+      ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">' + qrCap + '</div></div>'
+      : (e.img ? '<img class="ogc-thumb" crossorigin="anonymous" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">' : '');
     return '<div class="ogc-ev">' +
       '<div class="ogc-date"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div>' +
         '<div class="d">' + d.getDate() + '</div><div class="dow">' + d.toLocaleDateString('en-US', { weekday: 'short' }) + '</div></div>' +
@@ -6901,24 +7059,49 @@ function ogaBuildCard() {
   };
   const faceHtml = (evs, idx) => {
     const isFront = idx === 0;
-    const hero = isFront
-      ? '<div class="ogc-hero"><div class="ogc-brand">Living Stones Church · South Reno</div>' +
-        '<div class="ogc-h1">' + escapeHtml(title) + '</div><div class="ogc-h2">' + monthLabel + " · what's coming up</div></div>"
-      : '<div class="ogc-hero"><div class="ogc-brand">Living Stones Church · South Reno</div>' +
-        '<div class="ogc-h1">More to come</div><div class="ogc-h2">Mark your calendar</div></div>';
+    const h1 = isFront ? title : 'More This Month';
+    const h2 = isFront ? monthLabel : 'Mark your calendar';
     return '<div class="ogc-card"><div class="ogc-face">' +
-      '<span class="ogc-pagetag">' + (isFront ? 'FRONT' : 'BACK') + '</span>' + hero +
-      '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : '<div style="color:#8a8578;text-align:center;padding:40px">—</div>') + '</div>' +
-      '<div class="ogc-foot">lssouthreno.com · 95 Foothill Drive, Reno NV 89521</div>' +
+      '<span class="ogc-pagetag">' + (isFront ? 'FRONT' : (idx === 1 ? 'BACK' : 'PAGE ' + (idx + 1))) + '</span>' +
+      '<div class="ogc-hero">' + ogcChevronSvg() +
+        '<div class="ogc-hero-top">' + ogcLogoSvg(34) + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
+        '<div class="ogc-h1">' + escapeHtml(h1) + '</div><div class="ogc-h2">' + escapeHtml(h2) + '</div>' +
+      '</div>' +
+      '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : '<div class="ogc-empty-face">More announcements coming soon.</div>') + '</div>' +
+      '<div class="ogc-foot"><b>lssouthreno.com</b> · 95 Foothill Drive, Reno NV 89521</div>' +
       '</div></div>';
   };
   document.getElementById('ogcPages').innerHTML = faces.map((f, i) => faceHtml(f, i)).join('');
-  document.getElementById('ogcOverlay').classList.add('open');
-  document.getElementById('ogcOverlay').setAttribute('aria-hidden', 'false');
+  const o = document.getElementById('ogcOverlay');
+  o.classList.add('open'); o.setAttribute('aria-hidden', 'false');
 }
 function ogcClose() {
   const o = document.getElementById('ogcOverlay');
   o.classList.remove('open'); o.setAttribute('aria-hidden', 'true');
+}
+// Download a true 5×7 PDF (jsPDF + html2canvas, lazy-loaded from CDN).
+function ogaLoadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+async function ogaDownloadPDF(btn) {
+  const cards = [...document.querySelectorAll('#ogcPages .ogc-card')];
+  if (!cards.length) return;
+  const old = btn.textContent; btn.textContent = 'Building PDF…'; btn.disabled = true;
+  try {
+    if (!window.html2canvas) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    if (!(window.jspdf && window.jspdf.jsPDF)) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    const jsPDF = window.jspdf.jsPDF;
+    const pdf = new jsPDF({ unit: 'in', format: [5, 7], orientation: 'portrait' });
+    for (let i = 0; i < cards.length; i++) {
+      const canvas = await html2canvas(cards[i], { scale: 3, useCORS: true, backgroundColor: '#16130e', logging: false });
+      const img = canvas.toDataURL('image/jpeg', 0.95);
+      if (i > 0) pdf.addPage([5, 7], 'portrait');
+      pdf.addImage(img, 'JPEG', 0, 0, 5, 7);
+    }
+    pdf.save('LSSR-Announcements-' + new Date().toISOString().slice(0, 10) + '.pdf');
+    btn.textContent = old;
+  } catch (err) {
+    btn.textContent = old;
+    alert('Direct PDF hit a snag (usually a cross-origin image). Use "Print / Save as PDF" instead — it always works.\n\n(' + (err && err.message ? err.message : err) + ')');
+  } finally { btn.disabled = false; }
 }
 
 // ── Actionable named lists + group-health flags ──────────────────────────────
