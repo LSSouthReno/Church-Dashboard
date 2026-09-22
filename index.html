@@ -1124,55 +1124,56 @@
   .sos-step span { flex: 1 1 auto; }
   .sos-goal-add { border-top: 1px solid var(--sp-border,#2a2a2a); padding-top: 12px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
 
-  /* Print-preview overlay for the finished 5×7 card — LSSR branded (charcoal + amber) */
+  /* Print-preview overlay — 5×7 card, charcoal + cream torn-paper + B&W photos */
   .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4000; display: none; overflow: auto; padding: 24px; }
   .ogc-overlay.open { display: block; }
   .ogc-bar { max-width: 1100px; margin: 0 auto 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
   .ogc-pages { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
-  /* 5×7 portrait at 96dpi = 480×672 · brand amber #cf8636 */
-  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #16130e; color: #f4efe6; border-radius: 6px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
+  /* 5×7 portrait at 96dpi = 480×672 · cream #ece4be on charcoal #1b1915 */
+  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #1b1915; color: #f3efe6; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
-  /* Hero with nested-chevron (mountain) motif */
-  .ogc-hero { position: relative; padding: 26px 30px 20px; background:
-      radial-gradient(120% 90% at 80% -10%, rgba(207,134,54,0.28), transparent 60%),
-      linear-gradient(160deg, #23201a 0%, #16130e 70%); border-bottom: 2px solid #cf8636; overflow: hidden; }
-  .ogc-hero-chev { position: absolute; right: -30px; top: -20px; width: 210px; height: 210px; opacity: 0.16; }
-  .ogc-hero-top { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
-  .ogc-logo { width: 34px; height: 34px; flex: 0 0 auto; }
-  .ogc-brandtxt { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #d9c9ad; font-weight: 800; line-height: 1.3; }
-  .ogc-brandtxt b { color: #fff; display: block; font-size: 12px; letter-spacing: .16em; }
-  .ogc-h1 { font-size: 30px; font-weight: 800; line-height: 1.02; margin: 16px 0 4px; letter-spacing: -.5px; color: #fff; position: relative; z-index: 1; }
-  .ogc-h2 { font-size: 12px; color: #cf8636; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; position: relative; z-index: 1; }
-  .ogc-body { padding: 6px 26px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
-  .ogc-ev { padding: 9px 0; border-bottom: 1px solid rgba(207,134,54,0.22); display: flex; gap: 12px; align-items: center; }
+  /* Cream torn header band */
+  .ogc-hero { position: relative; background: #ece4be; color: #1b1915; padding: 22px 30px 30px;
+    clip-path: polygon(0 0,100% 0,100% 86%,94% 100%,87% 89%,79% 99%,71% 88%,63% 100%,55% 89%,47% 99%,39% 88%,31% 100%,23% 89%,15% 99%,8% 88%,3% 97%,0 87%); }
+  .ogc-hero-top { display: flex; align-items: center; gap: 9px; }
+  .ogc-logo { width: 30px; height: 30px; flex: 0 0 auto; }
+  .ogc-brandtxt { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #6a6045; font-weight: 800; line-height: 1.3; }
+  .ogc-brandtxt b { color: #1b1915; display: block; font-size: 12px; letter-spacing: .14em; }
+  .ogc-h1 { font-size: 31px; font-weight: 800; line-height: 0.98; margin: 13px 0 3px; letter-spacing: -.6px; color: #1b1915; text-transform: uppercase; }
+  .ogc-h2 { font-size: 12px; color: #8a7a45; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .ogc-body { padding: 4px 24px 6px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .ogc-ev { padding: 8px 0; display: flex; gap: 12px; align-items: center; border-bottom: 1px dashed rgba(236,228,190,0.28); }
   .ogc-ev:last-child { border-bottom: none; }
-  .ogc-date { flex: 0 0 44px; text-align: center; }
-  .ogc-date .m { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #cf8636; letter-spacing: .06em; }
-  .ogc-date .d { font-size: 26px; font-weight: 800; line-height: 1; color: #fff; }
-  .ogc-date .dow { font-size: 8.5px; color: #9a917f; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
-  .ogc-thumb { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(207,134,54,0.3); }
+  /* Black circle date badge with cream ring */
+  .ogc-badge { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; background: #100f0c; border: 2px solid #ece4be; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+  .ogc-badge .m { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #ece4be; letter-spacing: .08em; }
+  .ogc-badge .d { font-size: 21px; font-weight: 800; color: #fff; margin-top: 1px; }
+  .ogc-thumb { flex: 0 0 54px; width: 54px; height: 54px; object-fit: cover; filter: grayscale(1) contrast(1.05); border: 2px solid #ece4be; }
   .ogc-ev-body { flex: 1 1 auto; min-width: 0; }
-  .ogc-ev-name { font-size: 15px; font-weight: 800; line-height: 1.12; color: #fff; }
-  .ogc-ev-when { font-size: 10.5px; color: #cf8636; font-weight: 700; margin-top: 2px; }
-  .ogc-ev-desc { font-size: 10.5px; color: #c3bcac; margin-top: 3px; line-height: 1.32; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .ogc-ev-qr { flex: 0 0 50px; text-align: center; }
-  .ogc-ev-qr img { width: 50px; height: 50px; background: #fff; padding: 3px; border-radius: 5px; }
-  .ogc-ev-qr .qc { font-size: 7.5px; color: #9a917f; margin-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
-  .ogc-foot { background: #0f0d09; padding: 11px 26px; font-size: 9.5px; color: #9a917f; text-align: center; font-weight: 600; letter-spacing: .04em; border-top: 1px solid rgba(207,134,54,0.25); }
-  .ogc-foot b { color: #cf8636; }
-  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(255,255,255,.45); font-weight: 800; letter-spacing: .1em; z-index: 2; }
+  .ogc-ev-name { font-size: 15px; font-weight: 800; line-height: 1.1; color: #fff; text-transform: uppercase; letter-spacing: -0.2px; }
+  .ogc-ev-when { font-size: 10px; color: #cbb56a; font-weight: 800; margin-top: 2px; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-ev-desc { font-size: 10.5px; color: #cbc6b8; margin-top: 3px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ogc-cta { display: inline-block; font-size: 10px; font-weight: 800; color: #1b1915; background: #ece4be; padding: 2px 8px; border-radius: 3px; margin-top: 5px; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-ev-qr { flex: 0 0 48px; text-align: center; }
+  .ogc-ev-qr img { width: 48px; height: 48px; background: #fff; padding: 3px; }
+  .ogc-ev-qr .qc { font-size: 7px; color: #9a917f; margin-top: 2px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
+  /* Cream torn footer band */
+  .ogc-foot { background: #ece4be; color: #4a4230; padding: 16px 26px 12px; font-size: 9.5px; text-align: center; font-weight: 700; letter-spacing: .03em;
+    clip-path: polygon(0 14%,5% 1%,12% 12%,20% 1%,28% 12%,36% 1%,44% 12%,52% 1%,60% 12%,68% 1%,76% 12%,84% 1%,92% 12%,96% 2%,100% 13%,100% 100%,0 100%); }
+  .ogc-foot b { color: #1b1915; }
+  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(27,25,21,.4); font-weight: 800; letter-spacing: .1em; z-index: 2; }
   .ogc-empty-face { color: #6b6656; text-align: center; padding: 60px 20px; font-size: 13px; }
-  .ogc-connect { text-align: center; padding: 30px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-  .ogc-connect-h { font-size: 22px; font-weight: 800; color: #fff; }
-  .ogc-connect-times { font-size: 15px; font-weight: 700; color: #cf8636; margin: 8px 0 4px; letter-spacing: .02em; }
-  .ogc-connect-addr { font-size: 12px; color: #c3bcac; margin-bottom: 20px; }
-  .ogc-connect-qr { width: 132px; height: 132px; background: #fff; padding: 8px; border-radius: 10px; }
-  .ogc-connect-web { font-size: 14px; font-weight: 800; color: #fff; margin-top: 12px; }
+  .ogc-connect { text-align: center; padding: 26px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+  .ogc-connect-h { font-size: 23px; font-weight: 800; color: #fff; text-transform: uppercase; }
+  .ogc-connect-times { font-size: 15px; font-weight: 800; color: #cbb56a; margin: 8px 0 4px; letter-spacing: .02em; }
+  .ogc-connect-addr { font-size: 12px; color: #cbc6b8; margin-bottom: 18px; }
+  .ogc-connect-qr { width: 128px; height: 128px; background: #fff; padding: 8px; }
+  .ogc-connect-web { font-size: 14px; font-weight: 800; color: #ece4be; margin-top: 12px; }
   .ogc-connect-tag { font-size: 11px; color: #9a917f; margin-top: 14px; font-style: italic; }
   @media print {
     body * { visibility: hidden !important; }
     #ogcOverlay, #ogcOverlay * { visibility: visible !important; }
-    #ogcOverlay { position: absolute; inset: 0; background: #16130e; padding: 0; overflow: visible; }
+    #ogcOverlay { position: absolute; inset: 0; background: #1b1915; padding: 0; overflow: visible; }
     .ogc-bar { display: none !important; }
     .ogc-pages { display: block; gap: 0; }
     .ogc-card { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0 auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -3713,10 +3714,10 @@
 <!-- 📇 Announcement card print preview -->
 <div class="ogc-overlay" id="ogcOverlay" aria-hidden="true">
   <div class="ogc-bar">
-    <button class="oga-btn hi" onclick="ogaDownloadPDF(this)">⬇ Download PDF (5×7)</button>
-    <button class="oga-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
+    <button class="oga-btn hi" onclick="window.print()">🖨 Print / Save as PDF (5×7)</button>
+    <button class="oga-btn" onclick="ogaDownloadPDF(this)">⬇ Quick PDF</button>
     <button class="oga-btn ghost" onclick="ogcClose()">Close</button>
-    <span style="color:#bbb;font-size:12px;align-self:center">Double-sided: enable "Two-sided" and set paper to 5×7 (or Letter, "Fit").</span>
+    <span style="color:#bbb;font-size:12px;align-self:center">Double-sided: enable "Two-sided", set paper to 5×7 (or Letter, "Fit"). Print keeps every photo.</span>
   </div>
   <div class="ogc-pages" id="ogcPages"></div>
 </div>
@@ -7124,20 +7125,21 @@ function ogaBuildCard() {
     const time = (e.time && !/12:00 AM/.test(e.time)) ? e.time : '';
     const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' })) + (time ? ' · ' + time : '');
     const loc = e.location ? e.location.split(' - ')[0] : '';
+    const desc = st.blurb || e.desc || e.summary || '';
     const link = st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
     const isReg = /\/registrations?\//.test(link);
-    // Registrations get a scannable QR; everything else shows its graphic when it
-    // has one; an info-only Church Center link falls back to a small "scan" QR.
-    const qr = isReg
-      ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">Register</div></div>'
-      : (e.img ? '<img class="ogc-thumb" crossorigin="anonymous" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">'
-        : (link ? '<div class="ogc-ev-qr"><img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">Scan</div></div>' : ''));
-    return '<div class="ogc-ev">' +
-      '<div class="ogc-date"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div>' +
-        '<div class="d">' + d.getDate() + '</div><div class="dow">' + d.toLocaleDateString('en-US', { weekday: 'short' }) + '</div></div>' +
+    // Every item gets a clear call-to-action so people know what to do.
+    const cta = isReg ? 'Register today' : (link ? 'Scan for details' : (ogaIsBaptism(e) ? 'Sign up to be baptized' : 'Join us — all welcome'));
+    // Circular black date badge + B&W photo (no crossorigin so the image actually
+    // renders; PDF export falls back to Print, which prints images fine).
+    const badge = '<div class="ogc-badge"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div><div class="d">' + d.getDate() + '</div></div>';
+    const thumb = e.img ? '<img class="ogc-thumb" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">' : '';
+    const qr = link ? '<div class="ogc-ev-qr"><img referrerpolicy="no-referrer" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">' + (isReg ? 'Register' : 'Scan') + '</div></div>' : '';
+    return '<div class="ogc-ev">' + badge + thumb +
       '<div class="ogc-ev-body"><div class="ogc-ev-name">' + escapeHtml(e.name || 'Event') + '</div>' +
         '<div class="ogc-ev-when">' + escapeHtml(when + (loc ? ' · ' + loc : '')) + '</div>' +
-        (st.blurb ? '<div class="ogc-ev-desc">' + escapeHtml(st.blurb) + '</div>' : '') +
+        (desc ? '<div class="ogc-ev-desc">' + escapeHtml(desc) + '</div>' : '') +
+        '<span class="ogc-cta">' + cta + '</span>' +
       '</div>' + qr + '</div>';
   };
   const faceHtml = (evs, idx) => {
@@ -7147,8 +7149,8 @@ function ogaBuildCard() {
     const h2 = isFront ? monthLabel : (isConnect ? 'We’d love to see you Sunday' : 'Mark your calendar');
     return '<div class="ogc-card"><div class="ogc-face">' +
       '<span class="ogc-pagetag">' + (isFront ? 'FRONT' : (idx === 1 ? 'BACK' : 'PAGE ' + (idx + 1))) + '</span>' +
-      '<div class="ogc-hero">' + ogcChevronSvg() +
-        '<div class="ogc-hero-top">' + ogcLogoSvg(34) + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
+      '<div class="ogc-hero">' +
+        '<div class="ogc-hero-top">' + ogcLogoSvg(30, '#1b1915') + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
         '<div class="ogc-h1">' + escapeHtml(h1) + '</div><div class="ogc-h2">' + escapeHtml(h2) + '</div>' +
       '</div>' +
       '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
@@ -7170,7 +7172,7 @@ function ogcConnectPanel() {
     '<div class="ogc-connect-h">Join us this Sunday</div>' +
     '<div class="ogc-connect-times">8:00 · 9:30 · 11:00 AM</div>' +
     '<div class="ogc-connect-addr">95 Foothill Drive, Reno NV 89521</div>' +
-    '<img class="ogc-connect-qr" crossorigin="anonymous" src="' + qr + '" alt="lssouthreno.com">' +
+    '<img class="ogc-connect-qr" referrerpolicy="no-referrer" src="' + qr + '" alt="lssouthreno.com">' +
     '<div class="ogc-connect-web">lssouthreno.com</div>' +
     '<div class="ogc-connect-tag">Helping everyone find everything in Jesus.</div>' +
   '</div>';
@@ -13330,7 +13332,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T153111Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T153636Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
