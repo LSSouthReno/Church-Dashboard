@@ -1290,6 +1290,16 @@
   .cgp-dock-lbl { font-size: 10.5px; color: var(--text-dim); writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; letter-spacing: .06em; text-transform: uppercase; }
   .cgp-dock-t { min-width: 92px; padding: 14px 10px; border: 1.5px dashed #3a3a3a; border-radius: 10px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--text-muted); }
   .cgp-dock-t.drop-on { border-color: var(--cgp-c, #2dd4bf); color: #fff; background: #1a2624; }
+  .cgp-card .cgp-nm, .cg-dragname, .cgp-click { cursor: pointer; }
+  .cgp-card .cgp-nm:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .cgp-d-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cgp-d-steps button { border: 1px solid var(--sh-line); background: var(--sh-panel-2); color: var(--text-muted); border-radius: 7px; padding: 6px 10px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .cgp-d-steps button.cur { background: var(--cgp-c, #2dd4bf); border-color: var(--cgp-c, #2dd4bf); color: #111; cursor: default; }
+  .cgp-d-steps button:not(.cur):hover { color: #fff; border-color: var(--cgp-c, #2dd4bf); }
+  .cgp-d-kv { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; padding: 5px 0; border-bottom: 1px solid var(--sh-line); }
+  .cgp-d-kv .k { color: var(--text-dim); } .cgp-d-kv .v { color: var(--text); text-align: right; }
+  .cgp-d-kv a { color: #2dd4bf; text-decoration: none; }
+  .cgp-d-flag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; background: rgba(251,113,133,.12); color: #fda4af; margin: 0 5px 5px 0; }
   .cgp-toast { position: fixed; right: 18px; bottom: 18px; z-index: 4400; background: #1f1f1f; border: 1px solid #333; color: var(--text); border-radius: 10px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; transform: translateY(8px); transition: all .2s; pointer-events: none; max-width: 360px; }
   .cgp-toast.show { opacity: 1; transform: none; }
   .cgp-toast.err { border-color: #f87171; }
@@ -2895,6 +2905,16 @@
   </div>
   <div class="sh-drawer-body" id="shDrawerBody"></div>
 </div><!-- /sh-drawer -->
+
+<!-- Groups-dashboard person drawer (same look as the shepherding drawer; no giving amounts) -->
+<div class="sh-drawer-ov" id="cgpDrawerOv" style="z-index:4450" onclick="cgpCloseDrawer()"></div>
+<div class="sh-drawer" id="cgpDrawer" style="z-index:4460" aria-hidden="true">
+  <div class="sh-drawer-head">
+    <div class="sh-person-id" id="cgpDrawerHead"></div>
+    <button class="sh-drawer-close" onclick="cgpCloseDrawer()" title="Close">&times;</button>
+  </div>
+  <div class="sh-drawer-body" id="cgpDrawerBody"></div>
+</div>
 
 <!-- ======== MEMBERS PASSWORD PROMPT ======== -->
 <div id="mmPrompt" role="dialog" aria-modal="true">
@@ -7162,6 +7182,7 @@ const OGA_COPY_DEFAULTS = {
     blurb: 'Connection Sunday is THE day to find your people! We’re launching 5–7 new Community Groups, with connection tables on the patio after every service. We were made for community, and this is your easiest next step.'
   },
   'baptisms': {
+    time: 'All services: 8, 9:30, and 11',
     blurb: 'Baptism is everyone’s first step of following Jesus: declaring your faith publicly. We baptize on the first Sunday of every month. Sign up, and a pastor will reach out to answer your questions and get you on the list.'
   }
 };
@@ -8443,7 +8464,7 @@ let _cgpDrag = null, _cgpSeq = 0;
 
 function cgDragName(n, cls, pid) {
   return '<span class="' + cls + ' cg-dragname" draggable="true" data-name="' + escapeHtml(n) + '"' + (pid ? ' data-pid="' + escapeHtml(pid) + '"' : '') +
-    ' title="Drag onto a CG Leader Pipeline step to add">' + escapeHtml(n) + '</span>';
+    ' title="Click for their snapshot · drag onto a CG Leader Pipeline step to add">' + escapeHtml(n) + '</span>';
 }
 function cgpPw() { try { return sessionStorage.getItem('cg_pw') || ''; } catch (e) { return ''; } }
 async function cgpApi(body) {
@@ -8494,7 +8515,7 @@ function cgRenderPipeline(cg) {
     '<details style="margin-top:14px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em" id="cgpPlantedSum">PLANTED (COMPLETED)</summary><div class="cg-pipeline-names" id="cgpPlanted" style="margin-top:10px"></div></details>' +
     (suggested.length ? '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">SUGGESTED TO IDENTIFY (' + suggested.length + ') — mature &amp; engaged, not yet leading</summary><div class="cg-pipeline-names" id="cgpSuggested" style="margin-top:10px">' + suggested.map(n => cgDragName(n, 'cg-name-tag')).join('') + '</div></details>' : '') +
     '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">CURRENT LEADERS (' + leaders.length + ')</summary>' +
-      (leaders.length ? '<div class="cg-pipeline-names" style="margin-top:10px">' + leaders.map(n => '<span class="cg-name-tag">' + escapeHtml(n) + '</span>').join('') + '</div>' : '<div class="cg-no-pipeline">No current leaders found.</div>') + '</details>';
+      (leaders.length ? '<div class="cg-pipeline-names" style="margin-top:10px">' + leaders.map(n => '<span class="cg-name-tag cgp-click" data-name="' + escapeHtml(n) + '" title="Click for their snapshot">' + escapeHtml(n) + '</span>').join('') + '</div>' : '<div class="cg-no-pipeline">No current leaders found.</div>') + '</details>';
   cgpInstallDnD();
   try { const c = JSON.parse(sessionStorage.getItem('lssr_cgp_cache') || 'null'); if (c && c.steps) Object.assign(_cgp, c, { loaded: true }); } catch (e) {}
   cgpPaint();
@@ -8531,7 +8552,7 @@ function cgpPaint() {
       '<div class="cg-pipe-names">' + (cards.length ? cards.map(c =>
         '<div class="cgp-card' + (c.pending ? ' pending' : '') + '" draggable="true" data-card="' + c.cardId + '" title="' + escapeHtml(c.name) + ' — in ' + escapeHtml(st.name) + (c.movedAt ? ' since ' + new Date(c.movedAt).toLocaleDateString() : '') + '">' +
           '<button onclick="cgpNudge(\'' + c.cardId + '\',-1)" title="Back a step"' + (i === 0 ? ' disabled' : '') + '>◀</button>' +
-          '<span class="cgp-nm">' + escapeHtml(c.name) + '</span><span class="cgp-age">' + cgpAge(c.movedAt) + '</span>' +
+          '<span class="cgp-nm" title="Click for their snapshot">' + escapeHtml(c.name) + '</span><span class="cgp-age">' + cgpAge(c.movedAt) + '</span>' +
           '<button onclick="cgpNudge(\'' + c.cardId + '\',1)" title="Forward a step"' + (i === n - 1 ? ' disabled' : '') + '>▶</button>' +
           '<button class="x" onclick="cgpRemove(\'' + c.cardId + '\')" title="Remove from pipeline">×</button>' +
         '</div>').join('') : '<div class="cg-pipe-empty">Drop someone here.</div>') + '</div></div>';
@@ -8544,7 +8565,7 @@ function cgpPaint() {
     '<button onclick="cgpLoad()" title="Refresh from Planning Center">↻ Refresh</button><a href="' + CGP_WF_URL + '" target="_blank" rel="noopener">Open workflow ↗</a>';
   const pl = document.getElementById('cgpPlanted'), ps = document.getElementById('cgpPlantedSum');
   if (ps) ps.textContent = 'PLANTED — COMPLETED THE PIPELINE (' + _cgp.completed.length + ')';
-  if (pl) pl.innerHTML = _cgp.completed.length ? _cgp.completed.map(c => '<span class="cg-name-tag" title="Completed ' + (c.completedAt ? new Date(c.completedAt).toLocaleDateString() : '') + '">' + escapeHtml(c.name) + '</span>').join('') : '<div class="cg-no-pipeline">No one has completed the pipeline yet.</div>';
+  if (pl) pl.innerHTML = _cgp.completed.length ? _cgp.completed.map(c => cgDragName(c.name, 'cg-name-tag', c.pid)).join('') : '<div class="cg-no-pipeline">No one has completed the pipeline yet.</div>';
   cgpPaintDock();
 }
 
@@ -8642,6 +8663,15 @@ function cgpPick(pid, btn, stepId) {
 function cgpInstallDnD() {
   if (window._cgpDnD) return; window._cgpDnD = true;
   document.addEventListener('click', e => { const box = document.getElementById('cgpResults'); if (box && !e.target.closest('.cgp-add')) box.classList.remove('open'); });
+  document.addEventListener('click', e => {
+    if (!e.target.closest) return;
+    if (e.target.closest('button')) return;
+    const card = e.target.closest('.cgp-card');
+    if (card) { const c = _cgp.cards.find(x => x.cardId === card.dataset.card); if (c) cgpOpenDrawer(c.pid, c.name); return; }
+    const nm = e.target.closest('.cg-dragname, .cgp-click');
+    if (nm && !nm.closest('.cgp-results')) cgpOpenDrawer(nm.dataset.pid || '', nm.dataset.name || nm.textContent);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') cgpCloseDrawer(); });
   document.addEventListener('dragstart', e => {
     const card = e.target.closest && e.target.closest('.cgp-card');
     const nm = !card && e.target.closest && e.target.closest('.cg-dragname');
@@ -8671,6 +8701,88 @@ function cgpInstallDnD() {
     const stepId = t.dataset.cgpStep;
     if (d.kind === 'card') cgpMove(d.cardId, stepId); else cgpAdd(d.name, d.pid, stepId);
   });
+}
+
+// ── Person drawer (click any name) ──
+const _cgpPeople = {};   // cache: pid or lowercase name → response
+let _cgpDrawerKey = '';
+function cgpCloseDrawer() {
+  const d = document.getElementById('cgpDrawer'); if (!d) return;
+  d.classList.remove('open'); d.setAttribute('aria-hidden', 'true');
+  document.getElementById('cgpDrawerOv').classList.remove('open');
+}
+async function cgpOpenDrawer(pid, name) {
+  const key = pid ? 'p' + pid : 'n' + String(name || '').toLowerCase(); _cgpDrawerKey = key;
+  document.getElementById('cgpDrawerHead').innerHTML = '<div class="sh-person-name">' + escapeHtml(name || 'Loading…') + '</div>';
+  document.getElementById('cgpDrawerBody').innerHTML = '<div class="sh-d-loading">Loading their snapshot from Planning Center…</div>';
+  document.getElementById('cgpDrawer').classList.add('open'); document.getElementById('cgpDrawer').setAttribute('aria-hidden', 'false');
+  document.getElementById('cgpDrawerOv').classList.add('open');
+  let r = _cgpPeople[key];
+  if (!r) {
+    try { r = await cgpApi({ action: 'cgp_person', pid: pid || '', name: pid ? '' : name }); if (r && r.ok) _cgpPeople[key] = r; }
+    catch (e) { r = { ok: false, error: e.message }; }
+  }
+  if (_cgpDrawerKey !== key) return;
+  if (!r || !r.ok) { document.getElementById('cgpDrawerBody').innerHTML = '<div class="sh-d-sec"><div class="sh-d-loading">' + escapeHtml((r && r.error) || 'Couldn’t load this person.') + '</div></div>'; return; }
+  if (r.person && r.person.pid) _cgpPeople['p' + r.person.pid] = r;
+  cgpRenderDrawer(r.person, r.source);
+}
+function cgpRenderDrawer(p, source) {
+  const mon = iso => { try { return new Date(iso).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); } catch (e) { return ''; } };
+  const card = _cgp.cards.find(c => c.pid && c.pid === p.pid);
+  const planted = _cgp.completed.find(c => c.pid && c.pid === p.pid);
+  const stIdx = card ? cgpStepIdx(card.stepId) : -1;
+  const status = p.status && p.status !== 'unknown' && typeof SH_STATUS_LABEL !== 'undefined' ? '<span class="sh-badge st-' + p.status + '">' + SH_STATUS_LABEL[p.status] + '</span>' : '';
+  const paci = p.paci && typeof shPaciBadge === 'function' ? shPaciBadge(p) : '';
+  document.getElementById('cgpDrawerHead').innerHTML = '<div class="sh-person-name">' + escapeHtml(p.name) + '</div><div class="sh-badges">' + paci + status +
+    (p.membershipType ? '<span class="sh-badge" style="background:rgba(96,165,250,.15);color:#93c5fd">' + escapeHtml(p.membershipType) + '</span>' : '') +
+    (card ? '<span class="sh-badge" style="background:' + CGP_COLORS[stIdx % 4] + '33;color:' + CGP_COLORS[stIdx % 4] + '">Pipeline: ' + escapeHtml(cgpStepName(card.stepId)) + '</span>' : '') +
+    (planted ? '<span class="sh-badge" style="background:rgba(45,212,191,.15);color:#5eead4">Planted ✓</span>' : '') + '</div>';
+  // Snapshot — same story as the shepherding card, minus any giving amounts.
+  const rows = [], g = p.giving;
+  if (g) {
+    if (!g.gifts) rows.push(['&#128176;', 'No giving recorded in the last 12 months.' + (g.lastGiftDaysAgo != null ? ' Last gift ' + g.lastGiftDaysAgo + ' days ago.' : '')]);
+    else {
+      let t = 'Gave <b>' + g.gifts + '&times;</b> across ' + g.monthsGiven + ' month' + (g.monthsGiven === 1 ? '' : 's') + ' (last 12 months).';
+      if (g.recurring) t += ' Active recurring gift.';
+      if (g.giftsRecentHalf > 0 && !g.giftsEarlyHalf) t += ' All in the last 6 months.';
+      else if (g.giftsEarlyHalf > 0 && !g.giftsRecentHalf && g.giftsEarlyHalf + g.giftsRecentHalf > 0) t += ' Nothing in the last 6 months.';
+      if (g.lastGiftDaysAgo != null) t += ' Last gift ' + g.lastGiftDaysAgo + ' day' + (g.lastGiftDaysAgo === 1 ? '' : 's') + ' ago.';
+      rows.push(['&#128176;', t]);
+    }
+  }
+  rows.push(['&#128101;', (p.groups || []).length ? p.groups.map(x => escapeHtml(x.name) + ' (' + (/leader/i.test(x.role) ? '<b>leader</b>' : 'member') + ')' + (x.joinedAt ? ' since ' + mon(x.joinedAt) : '')).join('; ') : 'Not in a community group.']);
+  rows.push(['&#129309;', (p.serveTeams || []).length ? p.serveTeams.map(x => escapeHtml(x.name) + ' (' + (/leader/i.test(x.role) ? '<b>leader</b>' : 'member') + ')' + (x.joinedAt ? ' since ' + mon(x.joinedAt) : '')).join('; ') : 'Not on a serve team.']);
+  let h = '<div class="sh-d-sec"><h4>Snapshot</h4><div class="sh-facts">' + rows.map(r => '<div class="sh-fact"><span class="ic">' + r[0] + '</span><span>' + r[1] + '</span></div>').join('') + '</div>' +
+    ((p.flags || []).length ? '<div style="margin-top:10px">' + p.flags.map(f => '<span class="cgp-d-flag">' + escapeHtml(f) + '</span>').join('') + '</div>' : '') + '</div>';
+  // CG Leader Pipeline — move / add / remove right here
+  h += '<div class="sh-d-sec"><h4>CG Leader Pipeline</h4>';
+  if (_cgp.loaded && p.pid) {
+    h += '<div style="font-size:12px;color:var(--text-dim);margin:-2px 0 8px">' + (card ? 'Currently in <b style="color:var(--text)">' + escapeHtml(cgpStepName(card.stepId)) + '</b> — click a step to move them.' : planted ? 'Completed the pipeline (planted).' : 'Not in the pipeline — click a step to add them.') + '</div>' +
+      '<div class="cgp-d-steps">' + _cgp.steps.map((st, i) => '<button style="--cgp-c:' + CGP_COLORS[i % 4] + '" class="' + (card && card.stepId === st.id ? 'cur' : '') + '" onclick="cgpDrawerStep(\'' + p.pid + '\',\'' + st.id + '\',this)" data-name="' + escapeHtml(p.name) + '">' + (i + 1) + '. ' + escapeHtml(st.name) + '</button>').join('') +
+      (card ? '<button onclick="cgpCloseDrawer();cgpRemove(\'' + card.cardId + '\')" style="margin-left:auto">Remove</button>' : '') + '</div>';
+  } else h += '<div style="font-size:12px;color:var(--text-dim)">Pipeline not loaded yet.</div>';
+  h += '</div>';
+  // Details
+  const kv = (k, v) => v ? '<div class="cgp-d-kv"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>' : '';
+  const ns = p.nextStep && (p.nextStep.text || p.nextStep);
+  h += '<div class="sh-d-sec"><h4>Details</h4>' +
+    kv('Suggested next step', ns ? escapeHtml(ns) : '') +
+    kv('Shepherding pastor', escapeHtml(p.shepherd || '')) +
+    kv('Spiritual maturity', escapeHtml(p.maturity || '')) +
+    kv('Baptized', source === 'shepherding' ? (p.baptized ? 'Yes' : 'Not yet') : '') +
+    kv('Email', p.email ? '<a href="mailto:' + escapeHtml(p.email) + '">' + escapeHtml(p.email) + '</a>' : '') +
+    kv('Phone', p.phone ? '<a href="tel:' + escapeHtml(p.phone) + '">' + escapeHtml(p.phone) + '</a>' : '') +
+    kv('Planning Center', p.pid ? '<a href="https://people.planningcenteronline.com/people/AC' + escapeHtml(p.pid) + '" target="_blank" rel="noopener">Open profile ↗</a>' : '') +
+    '</div>' +
+    (source === 'live' ? '<div style="font-size:11px;color:var(--text-dim)">Not on a shepherding list — pulled live from Planning Center.</div>' : '');
+  document.getElementById('cgpDrawerBody').innerHTML = h;
+}
+async function cgpDrawerStep(pid, stepId, btn) {
+  if (btn.classList.contains('cur')) return;
+  const card = _cgp.cards.find(c => c.pid === pid);
+  if (card) await cgpMove(card.cardId, stepId); else await cgpAdd(btn.dataset.name, pid, stepId);
+  const r = _cgpPeople['p' + pid]; if (r && _cgpDrawerKey && document.getElementById('cgpDrawer').classList.contains('open')) cgpRenderDrawer(r.person, r.source);
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -14315,7 +14427,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T225302Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T225938Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
