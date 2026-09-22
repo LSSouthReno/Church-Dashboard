@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-22T22:47:14.435Z",
+  "lastUpdated": "2026-09-22T23:08:35.128Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 22, 2026, 3:47 PM",
+    "refreshed": "Sep 22, 2026, 4:08 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9467,13 +9467,13 @@
         5,
         4,
         1,
-        20,
+        19,
         19,
         15,
         10
       ],
       "2026": [
-        36,
+        35,
         25,
         18,
         17,
@@ -9514,13 +9514,13 @@
         1,
         null,
         null,
-        12,
+        11,
         10,
         8,
         2
       ],
       "2026": [
-        19,
+        18,
         15,
         4,
         6,
@@ -9727,14 +9727,6 @@
     ],
     "groupAttendance": [
       {
-        "name": "Men’s Tuesday Night: Better Call Paul",
-        "members": 23,
-        "leaders": 2,
-        "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 8,
-        "attPct": 35
-      },
-      {
         "name": "Poleselli / McAlpine Community Group",
         "members": 23,
         "leaders": 2,
@@ -9749,6 +9741,14 @@
         "schedule": "Meets every other week on Mondays from 6:30-8pm",
         "avgAttended": 11,
         "attPct": 52
+      },
+      {
+        "name": "Men’s Tuesday Night: Better Call Paul",
+        "members": 21,
+        "leaders": 2,
+        "schedule": "Meets weekly on Tuesdays from 6-8pm",
+        "avgAttended": 8,
+        "attPct": 38
       },
       {
         "name": "Bridges Community Group",
@@ -10017,7 +10017,7 @@
     ],
     "venn": {
       "familyMembers": 396,
-      "cgMembers": 392,
+      "cgMembers": 390,
       "both": 214,
       "pctFmInCg": 54,
       "pctCgAreFm": 55
@@ -10025,7 +10025,7 @@
     "venn4": {
       "sets": {
         "familyMembers": 396,
-        "cg": 392,
+        "cg": 390,
         "serving": 295,
         "giving": 836
       },
@@ -10034,17 +10034,17 @@
         "1": 57,
         "2": 90,
         "3": 23,
-        "4": 37,
+        "4": 38,
         "5": 22,
-        "6": 11,
+        "6": 10,
         "7": 36,
         "8": 480,
         "9": 62,
         "10": 61,
         "11": 44,
-        "12": 21,
+        "12": 22,
         "13": 41,
-        "14": 16,
+        "14": 15,
         "15": 111
       },
       "regionNames": {
@@ -10258,6 +10258,7 @@
           "Michael dykins",
           "Mikayla Sanchez",
           "Pat Peregrin",
+          "Ron Moschetti",
           "Sam Griffin",
           "Savannah Wilson",
           "Scarlett Fava",
@@ -10296,7 +10297,6 @@
           "Michael France",
           "Michelle LaGrange",
           "Rich Brown",
-          "Ron Moschetti",
           "Shiona Dykins",
           "Wende Schwake"
         ],
@@ -10720,6 +10720,7 @@
           "Brianne Sullivan",
           "Casey Shull",
           "Courtney Rumbaugh",
+          "Elmer Alegre",
           "Emory Breach",
           "Jeannette Rumsey",
           "Jessica Adrian",
@@ -10787,7 +10788,6 @@
           "Cory Hunt",
           "David Castro",
           "Debbie Rowland",
-          "Elmer Alegre",
           "Emily LeBlanc",
           "Karynn Sucaldito",
           "Liz Suto",
@@ -10914,7 +10914,7 @@
       "lists": {
         "engagedNotMember": {
           "label": "In CG + Serving + Giving — not yet a Member",
-          "count": 16,
+          "count": 15,
           "names": [
             "Aaron Marinucci",
             "Aliyah Ramirez",
@@ -10923,7 +10923,6 @@
             "Cory Hunt",
             "David Castro",
             "Debbie Rowland",
-            "Elmer Alegre",
             "Emily LeBlanc",
             "Karynn Sucaldito",
             "Liz Suto",
@@ -11700,7 +11699,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 178,
+        "count": 176,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -11758,7 +11757,6 @@
           "Donnell Green",
           "Ed Griggs",
           "Edda Gibson",
-          "Elmer Alegre",
           "Emilee Collins",
           "Emily LeBlanc",
           "Erik Wilson",
@@ -11854,7 +11852,6 @@
           "Rich Brown",
           "Rick Williams",
           "Rob Brandt",
-          "Ron Moschetti",
           "Russ Riggs",
           "Ryan Dubach",
           "Ryan Wilson",
@@ -22900,7 +22897,7 @@
               "name": "Melinda Harrison",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
