@@ -3823,7 +3823,9 @@
             <label>Card month:
               <select id="ogaMonth" onchange="ogaMonthChanged()" title="Sets the month printed on the card and pre-selects that month + the first week of the next (all events for the next 90 days stay listed)"></select>
             </label>
-            <label>Card title: <input type="text" id="ogaTitle" value="Your Next Step"></label>
+            <label>Card title: <input type="text" id="ogaTitle" value="Your Next Step" oninput="ogaQueueSave()"></label>
+            <span class="oga-note" id="ogaSaved" style="font-weight:700"></span>
+            <button class="oga-btn ghost" onclick="ogaResetShared()" title="Forget this month's saved picks and go back to the suggested events">Reset to suggestions</button>
             <span class="oga-note">Worship gatherings, rehearsals, community-group &amp; recurring group events are filtered out automatically. Baptisms are kept.</span>
             <span class="oga-count" id="ogaCount"></span>
           </div>
@@ -7142,6 +7144,7 @@ function ogaInit() {
     _ogaNameCounts = {};
     _ogaAllEvents.forEach(e => { const k = ogaNorm(e.name); _ogaNameCounts[k] = (_ogaNameCounts[k] || 0) + 1; });
     ogaRenderList();
+    ogaLoadShared(ogaMonthKey());
   };
   if (_sundayEosCal && _sundayEosCal.length) { use(_sundayEosCal); return; }
   fetch('./eos-data.json?v=' + Date.now()).then(r => r.json())
@@ -7202,10 +7205,80 @@ function ogaSelWindow() {
 }
 function ogaInWindow(e) { const w = ogaSelWindow(), d = new Date(e.dateKey + 'T12:00:00'); return d >= w.start && d <= w.end; }
 function ogaMonthChanged() {
-  // Re-default the picks for the new month (recommended + inside month & first week after).
+  // Show the defaults for the new month (recommended + inside month & first week after),
+  // then swap in that month's shared saved picks if anyone has saved some.
+  clearTimeout(_ogaSaveT); _ogaDirty = false;
   _ogaEvents.forEach(e => { const k = ogaKey(e); (_ogaState[k] = _ogaState[k] || {}).on = !!(ogaRecommended(e) && ogaInWindow(e)); });
   ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on));
   ogaRenderList();
+  ogaLoadShared(ogaMonthKey());
+}
+// ── Shared builder state (per card month, any person / any browser) ──
+let _ogaSaveT = null, _ogaDirty = false, _ogaLoadSeq = 0;
+function ogaMonthKey() { return (document.getElementById('ogaMonth') || {}).value || ''; }
+function ogaSaveStatus(t) { const el = document.getElementById('ogaSaved'); if (el) el.textContent = t; }
+function ogaWho() { try { return (_sos && _sos.me) || ''; } catch (e) { return ''; } }
+function ogaFmtWhen(iso) { try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
+async function ogaPost(body) {
+  const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+  return r.json();
+}
+function ogaSnapshot() {
+  const byKey = {}; (_ogaAllEvents || []).forEach(e => { byKey[ogaKey(e)] = e; });
+  const items = {};
+  Object.keys(_ogaState).forEach(k => {
+    const e = byKey[k], st = _ogaState[k]; if (!e || !st) return;
+    const raw = e.summary || e.desc || '', o = { on: !!st.on };
+    if (st.blurb != null && st.blurb !== raw) o.blurb = String(st.blurb).slice(0, 1500);
+    if (st.reg && st.reg !== (e.reg || e.url || '')) o.reg = st.reg;
+    if (st.cta) o.cta = st.cta;
+    if (st.time != null) o.time = st.time;
+    if (o.on || Object.keys(o).length > 1) items[k] = o;   // only what matters: picks + edits
+  });
+  return { title: (document.getElementById('ogaTitle') || {}).value || 'Your Next Step', items };
+}
+function ogaQueueSave() {
+  const m = ogaMonthKey(); if (!m) return;
+  _ogaDirty = true; ogaSaveStatus('Saving…');
+  clearTimeout(_ogaSaveT);
+  _ogaSaveT = setTimeout(async () => {
+    try {
+      const j = await ogaPost({ action: 'oga_state_save', month: m, state: ogaSnapshot(), by: ogaWho() });
+      if (!j.ok) throw new Error(j.error || 'save failed');
+      if (ogaMonthKey() === m) ogaSaveStatus('✓ Saved for everyone · ' + ogaFmtWhen(j.updatedAt));
+    } catch (e) { ogaSaveStatus('⚠ Couldn’t save (' + e.message + ') — your picks are still here; try again'); }
+  }, 1200);
+}
+async function ogaResetShared() {
+  const m = ogaMonthKey(); if (!m) return;
+  if (!confirm('Reset this month’s card to the suggested events? This clears the saved picks and edits for everyone.')) return;
+  clearTimeout(_ogaSaveT); _ogaDirty = false; ogaSaveStatus('Resetting…');
+  try { await ogaPost({ action: 'oga_state_save', month: m, clear: true }); } catch (e) {}
+  _ogaEvents.forEach(e => { const k = ogaKey(e); _ogaState[k] = { on: !!(ogaRecommended(e) && ogaInWindow(e)), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' }; });
+  const t = document.getElementById('ogaTitle'); if (t) t.value = 'Your Next Step';
+  ogaRenderList(); ogaSaveStatus('Reset to suggestions — changes you make now save for everyone.');
+}
+async function ogaLoadShared(m) {
+  if (!m) return;
+  const seq = ++_ogaLoadSeq; ogaSaveStatus('Loading saved picks…');
+  try {
+    const j = await ogaPost({ action: 'oga_state_get', month: m });
+    if (seq !== _ogaLoadSeq || ogaMonthKey() !== m) return;
+    if (!j.ok) throw new Error(j.error || 'load failed');
+    if (!j.state) { ogaSaveStatus('No saved picks for this month yet — showing suggestions. Changes save for everyone.'); return; }
+    if (_ogaDirty) { ogaSaveStatus('Saved picks exist for this month, but you’ve already made changes — yours will be saved.'); return; }
+    const saved = j.state.items || {};
+    (_ogaAllEvents || []).forEach(e => {
+      const k = ogaKey(e), s = saved[k];
+      const st = _ogaState[k] || (_ogaState[k] = { blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' });
+      st.on = !!(s && s.on);
+      if (s) { if (s.blurb != null) st.blurb = s.blurb; if (s.reg) st.reg = s.reg; st.cta = s.cta || ''; if (s.time != null) st.time = s.time; else delete st.time; }
+    });
+    const t = document.getElementById('ogaTitle'); if (t && j.state.title) t.value = j.state.title;
+    ogaRenderList();
+    ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on));
+    ogaSaveStatus('✓ Saved picks loaded' + (j.updatedBy ? ' · last edited by ' + j.updatedBy : '') + (j.updatedAt ? ', ' + ogaFmtWhen(j.updatedAt) : ''));
+  } catch (e) { if (seq === _ogaLoadSeq) ogaSaveStatus('⚠ Couldn’t load saved picks (' + e.message + ')'); }
 }
 function ogaRecommended(e) { return !!ogaCopyDefault(e) || (e.visibleCC || e.reg) && (e.img || e.desc || e.summary || ogaIsBaptism(e)); }
 
@@ -7287,9 +7360,10 @@ function ogaToggle(key, on) {
   const el = document.getElementById('ogaItem-' + key); if (el) el.classList.toggle('on', on);
   const cntEl = document.getElementById('ogaCount');
   if (cntEl) { const s = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length; cntEl.textContent = _ogaEvents.length + ' events · ' + s + ' selected (card fits ' + OGC_MAX + ')'; }
+  ogaQueueSave();
 }
-function ogaField(key, f, v) { (_ogaState[key] = _ogaState[key] || {})[f] = v; }
-function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); if (on) ogcPrefetch(_ogaEvents.filter(e => e.img).slice(0, 12)); ogaRenderList(); }
+function ogaField(key, f, v) { (_ogaState[key] = _ogaState[key] || {})[f] = v; ogaQueueSave(); }
+function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); if (on) ogcPrefetch(_ogaEvents.filter(e => e.img).slice(0, 12)); ogaRenderList(); ogaQueueSave(); }
 
 // LS nested-chevron (mountain) mark, from the culture-guide motif.
 function ogcLogoSvg(size, stroke) {
@@ -14506,7 +14580,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T232324Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T233143Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
