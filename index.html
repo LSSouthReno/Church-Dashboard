@@ -7052,7 +7052,7 @@ function ogaRenderList() {
     _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: ogaRecommended(e), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' }; });
     _ogaAutoSelected = true;
     if (typeof sosPrewarm === 'function') sosPrewarm();
-    ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on && e.img).map(e => e.img));
+    ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on));
   }
 
   const cntEl = document.getElementById('ogaCount');
@@ -7068,7 +7068,7 @@ function ogaRenderList() {
     const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
     return '<div class="oga-item' + (st.on ? ' on' : '') + '" id="ogaItem-' + key + '">' +
       '<input type="checkbox" class="oga-cb" ' + (st.on ? 'checked' : '') + ' onchange="ogaToggle(\'' + key + '\',this.checked)">' +
-      (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'">' : '') +
+      (e.img ? '<img class="oga-img-thumb" src="' + escapeHtml(e.imgLocal || e.img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'">' : '') +
       '<div class="oga-item-body">' +
         '<div class="oga-item-top"><span class="oga-item-name">' + escapeHtml(e.name || 'Event') + '</span>' +
         '<span class="oga-item-when">' + escapeHtml(when) + '</span></div>' +
@@ -7079,21 +7079,30 @@ function ogaRenderList() {
           '<textarea rows="2" oninput="ogaField(\'' + key + '\',\'blurb\',this.value)">' + escapeHtml(st.blurb) + '</textarea>' +
           '<label>Registration / info link (becomes a QR code)</label>' +
           '<input type="text" placeholder="https://…" value="' + escapeHtml(st.reg) + '" oninput="ogaField(\'' + key + '\',\'reg\',this.value)">' +
+          '<label>Call-to-action button (leave blank for “' + escapeHtml(ogaAutoCta(e, st)) + '”)</label>' +
+          '<input type="text" maxlength="32" placeholder="' + escapeHtml(ogaAutoCta(e, st)) + '" value="' + escapeHtml(st.cta || '') + '" oninput="ogaField(\'' + key + '\',\'cta\',this.value)">' +
         '</div>' +
       '</div></div>';
   }).join('');
+}
+// Default call-to-action (used when the leader leaves the CTA field blank).
+function ogaAutoCta(e, st) {
+  const link = st && st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
+  if (/\/registrations?\//.test(link)) return 'Register today';
+  if (link) return 'Scan for details';
+  return ogaIsBaptism(e) ? 'Sign up to be baptized' : 'Join us — all welcome';
 }
 function ogaKey(e) { return (e.name + '_' + e.dateKey).replace(/[^a-zA-Z0-9]/g, '').slice(0, 40); }
 function fmtEndKey(k) { try { const d = new Date(k + 'T12:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); } catch (e) { return k; } }
 function ogaToggle(key, on) {
   (_ogaState[key] = _ogaState[key] || {}).on = on;
-  if (on) { const ev = _ogaEvents.find(e => ogaKey(e) === key); if (ev && ev.img) ogcPrefetch([ev.img]); }
+  if (on) { const ev = _ogaEvents.find(e => ogaKey(e) === key); if (ev) ogcPrefetch([ev]); }
   const el = document.getElementById('ogaItem-' + key); if (el) el.classList.toggle('on', on);
   const cntEl = document.getElementById('ogaCount');
   if (cntEl) { const s = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length; cntEl.textContent = _ogaEvents.length + ' events · ' + s + ' selected (card fits ' + OGC_MAX + ')'; }
 }
 function ogaField(key, f, v) { (_ogaState[key] = _ogaState[key] || {})[f] = v; }
-function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); if (on) ogcPrefetch(_ogaEvents.filter(e => e.img).slice(0, 12).map(e => e.img)); ogaRenderList(); }
+function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); if (on) ogcPrefetch(_ogaEvents.filter(e => e.img).slice(0, 12)); ogaRenderList(); }
 
 // LS nested-chevron (mountain) mark, from the culture-guide motif.
 function ogcLogoSvg(size, stroke) {
@@ -7195,39 +7204,52 @@ const _ogcInflight = {};
 let _ogcActive = 0; const _ogcWaiters = [];
 function ogcSlot() { return new Promise(res => { if (_ogcActive < 3) { _ogcActive++; res(); } else _ogcWaiters.push(res); }); }
 function ogcRelease() { const n = _ogcWaiters.shift(); if (n) n(); else _ogcActive--; }
-async function ogcFetchBaked(u) {
-  for (let attempt = 0; attempt < 3; attempt++) {
+// Same-origin mirror first (cal-img/…, copied onto the site by the calendar sync —
+// loads + bakes instantly and always exports). Fallback: the Staff OS proxy, hard
+// 12 s limit per try so a stuck request can never hang the card.
+async function ogcProxyOne(u) {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 12000);
+  try { const r = await fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify({ action: 'sos_img', urls: [u] }), signal: ctl.signal }); return await r.json(); }
+  finally { clearTimeout(t); }
+}
+async function ogcFetchBaked(u, local) {
+  if (local) { const b = await ogcBakeImage(local); if (b) return b; }
+  for (let attempt = 0; attempt < 2; attempt++) {
     await ogcSlot();
     let res = null;
-    try { res = await sosApiPost({ action: 'sos_img', urls: [u] }); } catch (e) { res = null; }
+    try { res = await ogcProxyOne(u); } catch (e) { res = null; }
     ogcRelease();
     const d = res && res.ok && res.images && res.images[0];
     if (d) { const baked = await ogcBakeImage(d); if (baked) return baked; }
     else if (res && res.ok) return null;                 // server declined (host/size) — don't retry
-    await new Promise(r => setTimeout(r, 900 * (attempt + 1)));
+    await new Promise(r => setTimeout(r, 800));
   }
   return null;
 }
-function ogcGetBaked(u) {
+function ogcGetBaked(u, local) {
   if (_ogcImgCache[u]) return Promise.resolve(_ogcImgCache[u]);
-  if (!_ogcInflight[u]) _ogcInflight[u] = ogcFetchBaked(u).then(b => { if (b) _ogcImgCache[u] = b; delete _ogcInflight[u]; return b; });
+  if (!_ogcInflight[u]) _ogcInflight[u] = ogcFetchBaked(u, local).then(b => { if (b) _ogcImgCache[u] = b; delete _ogcInflight[u]; return b; });
   return _ogcInflight[u];
 }
-function ogcPrefetch(urls) { [...new Set(urls || [])].forEach(u => { if (u) ogcGetBaked(u); }); }
-async function ogcPrepareImages() {
-  const imgs = [...document.querySelectorAll('#ogcPages img[data-orig]')];
-  const need = [...new Set(imgs.map(i => i.dataset.orig))];
-  if (need.some(u => !_ogcImgCache[u])) ogcSetStatus('Preparing photos for print…');
-  await Promise.all(need.map(ogcGetBaked));
+function ogcPrefetch(events) { (events || []).forEach(e => { if (e && e.img) ogcGetBaked(e.img, e.imgLocal); }); }
+// Swap baked photos into the preview; when final, anything still missing becomes the LS tile.
+function ogcApplyImages(final) {
   let missing = 0;
-  imgs.forEach(i => {
+  document.querySelectorAll('#ogcPages img[data-orig]').forEach(i => {
     const b = _ogcImgCache[i.dataset.orig];
-    if (b) { i.src = b; i.classList.remove('live'); }
-    else { missing++; const t = document.createElement('div'); t.className = 'ogc-tile'; t.innerHTML = '<img src="assets/ls-logo-white.png" alt="">'; i.replaceWith(t); }
+    if (b) { if (i.src !== b) i.src = b; i.classList.remove('live'); }
+    else if (final) { missing++; const t = document.createElement('div'); t.className = 'ogc-tile'; t.innerHTML = '<img src="assets/ls-logo-white.png" alt="">'; i.replaceWith(t); }
   });
   _ogcNotes.img = missing ? missing + ' photo(s) couldn’t be loaded — showing the LS tile instead.' : '';
-  ogcSetStatus('');
   return missing;
+}
+async function ogcPrepareImages() {
+  const imgs = [...document.querySelectorAll('#ogcPages img[data-orig]')];
+  const pending = imgs.filter(i => !_ogcImgCache[i.dataset.orig]);
+  if (pending.length) ogcSetStatus('Preparing photos for print…');
+  await Promise.all(imgs.map(i => ogcGetBaked(i.dataset.orig, i.dataset.local)));
+  ogcApplyImages(true);
+  ogcSetStatus('');
 }
 const _ogcNotes = { cap: '', over: '', img: '', work: '' };
 function ogcSetStatus(t) { _ogcNotes.work = t || ''; ogcRenderStatus(); }
@@ -7274,11 +7296,11 @@ async function ogaBuildCard() {
     const desc = st.blurb || e.summary || e.desc || '';
     const link = st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
     const isReg = /\/registrations?\//.test(link);
-    const cta = isReg ? 'Register today' : (link ? 'Scan for details' : (ogaIsBaptism(e) ? 'Sign up to be baptized' : 'Join us — all welcome'));
+    const cta = ((st.cta || '').trim()) || ogaAutoCta(e, st);
     const badge = '<div class="ogc-badge"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div><div class="d">' + d.getDate() + '</div></div>';
     const cached = e.img && _ogcImgCache[e.img];
     const media = e.img
-      ? '<img class="ogc-img' + (cached ? '' : ' live') + '" data-orig="' + escapeHtml(e.img) + '" referrerpolicy="no-referrer" src="' + escapeHtml(cached || e.img) + '" alt="">'
+      ? '<img class="ogc-img' + (cached ? '' : ' live') + '" data-orig="' + escapeHtml(e.img) + '"' + (e.imgLocal ? ' data-local="' + escapeHtml(e.imgLocal) + '"' : '') + ' referrerpolicy="no-referrer" src="' + escapeHtml(cached || e.imgLocal || e.img) + '" alt="">'
       : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>';
     const qr = link ? '<div class="ogc-ev-qr"><img src="' + ogaQrDataUrl(link) + '" alt="QR"><div class="qc">' + (isReg ? 'Scan to register' : 'Scan for info') + '</div></div>' : '';
     return '<div class="ogc-ev"><div class="ogc-media">' + media + badge + '</div>' +
@@ -7333,7 +7355,8 @@ async function ogaExportPDF(btn) {
   if (!cards.length) return;
   const old = btn.textContent; btn.disabled = true; btn.textContent = 'Preparing…';
   try {
-    await _ogcPrep;
+    await Promise.race([_ogcPrep, new Promise(r => setTimeout(r, 15000))]);
+    ogcApplyImages(true);
     try { await document.fonts.ready; } catch (e) {}
     ogcFitText();
     ogcSetStatus('Rendering print file…');
@@ -13628,7 +13651,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T201244Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T205828Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
