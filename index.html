@@ -3784,7 +3784,7 @@
           </div>
           <div class="oga-toolbar">
             <label>Card month:
-              <select id="ogaMonth" onchange="ogaRenderList()"></select>
+              <select id="ogaMonth" title="Sets the month printed on the card (events below always cover the next 90 days)"></select>
             </label>
             <label>Card title: <input type="text" id="ogaTitle" value="Your Next Step"></label>
             <span class="oga-note">Worship gatherings, rehearsals, community-group &amp; recurring group events are filtered out automatically. Baptisms are kept.</span>
@@ -7136,9 +7136,9 @@ function ogaRenderList() {
   const listEl = document.getElementById('ogaList'); if (!listEl) return;
   const q = ((document.getElementById('ogaSearch') || {}).value || '').toLowerCase();
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const mSel = ogaMonthSel();
-  let start = today, end = new Date(today); end.setDate(end.getDate() + 60);
-  if (mSel) { start = mSel < today ? today : mSel; end = new Date(mSel.getFullYear(), mSel.getMonth() + 1, 0, 23, 59); }
+  // Always list the next 90 days — the card month only sets the card's title date,
+  // so later events can still go on an earlier month's card.
+  const start = today, end = new Date(today); end.setDate(end.getDate() + 90);
   const seen = {};
   _ogaEvents = (_ogaAllEvents || []).filter(e => {
     if (!e.dateKey) return false;
@@ -14132,7 +14132,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T215306Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T221531Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
