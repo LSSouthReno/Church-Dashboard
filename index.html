@@ -7229,11 +7229,11 @@ function sosRenderSignin() {
     '<div class="sos-signin">' +
       '<div class="sos-signin-box">' +
         '<div class="sos-signin-t">Who’s signing in?</div>' +
-        '<div class="sos-signin-s">Pick your name to open your personal snapshot — tasks, rocks &amp; boulders, and your annual plan.</div>' +
+        '<div class="sos-signin-s">Pick your name and enter your PIN — the <b>last 4 digits of your phone number</b> — to open your personal snapshot (tasks, rocks &amp; boulders, and your annual plan).</div>' +
         '<select id="sosWhoSel" class="sos-input">' + '<option value="">Select your name…</option>' +
           _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '">' + escapeHtml(p.name) + (p.role ? ' — ' + escapeHtml(p.role) : '') + '</option>').join('') +
         '</select>' +
-        '<input type="password" id="sosPin" class="sos-input" placeholder="PIN (leave blank if you don’t have one)" autocomplete="off">' +
+        '<input type="password" id="sosPin" class="sos-input" placeholder="PIN — last 4 digits of your phone" autocomplete="off" inputmode="numeric" onkeydown="if(event.key===\'Enter\')sosSignIn()">' +
         '<button class="sos-btn hi" onclick="sosSignIn()">Open my snapshot →</button>' +
         '<div id="sosSigninErr" class="sos-err"></div>' +
       '</div>' +
