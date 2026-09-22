@@ -13299,5 +13299,31 @@ async function aiAsk() {
   }
 }
 </script>
+
+<!-- Auto-update checker: detects a newer deploy and offers a cache-busting refresh. -->
+<div id="lssrUpdateBar" role="status" style="display:none;position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:99999;background:#16130e;border:1px solid #cf8636;border-radius:12px;padding:11px 14px 11px 16px;box-shadow:0 10px 34px rgba(0,0,0,.55);font-family:'Montserrat',system-ui,sans-serif;color:#f4efe6;font-size:13px;align-items:center;gap:12px;max-width:92vw">
+  <span style="font-weight:600">🔄 A newer version of the dashboard is ready.</span>
+  <button id="lssrUpdateBtn" style="background:#cf8636;color:#1a1206;border:none;border-radius:8px;padding:7px 14px;font-weight:800;cursor:pointer;font-family:inherit;font-size:13px">Refresh</button>
+  <button id="lssrUpdateX" aria-label="Dismiss" style="background:none;border:none;color:#9a917f;cursor:pointer;font-size:18px;line-height:1;padding:0 4px">×</button>
+</div>
+<script>
+(function(){
+  var APP_BUILD='20260922T145154Z';                 // replaced at deploy time; matches /build.txt
+  function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
+  function check(){
+    try {
+      fetch('./build.txt?cb='+Date.now(), {cache:'no-store'})
+        .then(function(r){ return r.ok ? r.text() : ''; })
+        .then(function(t){ t=(t||'').trim(); if(t && APP_BUILD.indexOf('__')!==0 && t!==APP_BUILD) showBar(); })
+        .catch(function(){});
+    } catch(e){}
+  }
+  var b=document.getElementById('lssrUpdateBtn'); if(b) b.onclick=function(){ location.href=location.pathname+'?u='+Date.now()+location.hash; };
+  var x=document.getElementById('lssrUpdateX'); if(x) x.onclick=function(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='none'; };
+  setTimeout(check, 6000);
+  setInterval(check, 300000);                // re-check every 5 min
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) check(); });
+})();
+</script>
 </body>
 </html>
