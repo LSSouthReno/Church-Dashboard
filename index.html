@@ -10225,17 +10225,31 @@ function staffRenderAllGroups_(data) {
 // If the JSON doesn't include these fields, the hardcoded HTML fallback stays.
 
 function staffRenderTabs(data) {
-  if (!data.tabs || !data.tabs.length) return;
   const nav = document.querySelector('#staffModContent .sp-nav-tabs');
   if (!nav) return;
-  const visible = data.tabs.filter(t => t.visible !== false);
-  if (!visible.length) return;
-  const currentId = (nav.querySelector('.sp-nav-tab.sp-active') || {}).dataset && nav.querySelector('.sp-nav-tab.sp-active').dataset.id;
-  nav.innerHTML = visible.map(t =>
-    `<div class="sp-nav-tab" data-id="${t.id}" onclick="staffShowSection('${t.id}',this)">${t.label}</div>`
+  // "My Snapshot" and "Announce Card" always bookend the sheet-driven middle tabs
+  // (the sheet's `tabs` list controls the labels/visibility of everything between).
+  const mid = (data.tabs && data.tabs.length)
+    ? data.tabs.filter(t => t.visible !== false)
+        .map(t => ({ id: t.id, label: t.id === 'sp-snapshot' ? 'Team Snapshot' : t.label, extra: '' }))
+    : [
+        { id: 'sp-snapshot', label: 'Team Snapshot' }, { id: 'sp-vto', label: 'V/TO' },
+        { id: 'sp-vot', label: 'Culture' }, { id: 'sp-acc-chart', label: 'Acc Chart' },
+        { id: 'sp-scorecard', label: 'Scorecard' }, { id: 'sp-ids', label: 'Rocks' },
+        { id: 'sp-boulders', label: 'Boulders' }, { id: 'sp-l10', label: 'Staff Sync' },
+        { id: 'sp-meetings', label: 'Meeting Pulse' }, { id: 'sp-funnel', label: 'Funnel' },
+        { id: 'sp-pathway', label: 'Pathway' }
+      ].map(t => ({ id: t.id, label: t.label, extra: '' }));
+  const all = [{ id: 'sp-mine', label: 'My Snapshot', extra: ';sosInit()' }]
+    .concat(mid)
+    .concat([{ id: 'sp-announce', label: 'Announce Card', extra: ';ogaInit()' }]);
+  const curEl = nav.querySelector('.sp-nav-tab.sp-active');
+  const currentId = (curEl && curEl.dataset && curEl.dataset.id) || 'sp-mine';
+  nav.innerHTML = all.map(t =>
+    `<div class="sp-nav-tab" data-id="${t.id}" onclick="staffShowSection('${t.id}',this)${t.extra || ''}">${t.label}</div>`
   ).join('');
   const toActivate = nav.querySelector(`[data-id="${currentId}"]`) || nav.querySelector('.sp-nav-tab');
-  if (toActivate) { toActivate.classList.add('sp-active'); staffShowSection(toActivate.dataset.id, toActivate); }
+  if (toActivate) { toActivate.classList.add('sp-active'); staffShowSection(toActivate.dataset.id, toActivate); if (toActivate.dataset.id === 'sp-mine') sosInit(); }
 }
 
 function staffRenderVTO(data) {
@@ -13316,7 +13330,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T151424Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T153111Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
