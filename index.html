@@ -1242,6 +1242,69 @@
   .cg-pipe-name { font-size: 12.5px; color: var(--text); padding: 5px 8px; background: #1c1c1c; border: 1px solid #2c2c2c; border-radius: 7px; }
   .cg-pipe-name .cg-pipe-sub { font-size: 10.5px; color: var(--text-dim); display: block; margin-top: 1px; }
   .cg-pipe-empty { font-size: 11.5px; color: var(--text-dim); font-style: italic; }
+  /* CG Leader Pipeline — live PCO board */
+  .cgp-top { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin: 6px 0 14px; }
+  .cgp-add { position: relative; flex: 1 1 260px; max-width: 400px; }
+  .cgp-add input { width: 100%; box-sizing: border-box; background: #0f0f0f; border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); padding: 9px 12px; font: inherit; font-size: 13px; }
+  .cgp-results { position: absolute; z-index: 40; top: calc(100% + 4px); left: 0; right: 0; background: #181818; border: 1px solid var(--card-border); border-radius: 10px; box-shadow: 0 12px 30px rgba(0,0,0,.55); max-height: 320px; overflow: auto; display: none; }
+  .cgp-results.open { display: block; }
+  .cgp-res { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid #222; font-size: 12.5px; }
+  .cgp-res:last-child { border-bottom: none; }
+  .cgp-res-name { flex: 1; min-width: 0; }
+  .cgp-res-mem { display: block; font-size: 10.5px; color: var(--text-dim); }
+  .cgp-res-empty { padding: 10px 12px; font-size: 12px; color: var(--text-dim); }
+  .cgp-stepbtn { border: 1px solid #333; background: #202020; color: var(--text-muted); border-radius: 6px; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; cursor: pointer; }
+  .cgp-stepbtn:hover { color: #fff; border-color: var(--cgp-c, #2dd4bf); background: #262626; }
+  .cgp-meta { font-size: 11px; color: var(--text-dim); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .cgp-meta a { color: #2dd4bf; text-decoration: none; }
+  .cgp-meta button { background: none; border: 1px solid #333; color: var(--text-muted); border-radius: 6px; padding: 3px 8px; font: inherit; font-size: 11px; cursor: pointer; }
+  .cgp-meta button:hover { color: #fff; }
+  .cgp-col { border-top: 3px solid var(--cgp-c, #2dd4bf); transition: background .12s, border-color .12s; min-height: 120px; }
+  .cgp-col .cg-pipe-col-count { color: var(--cgp-c, #2dd4bf); }
+  .cgp-col.drop-on { background: #13201e; border-color: var(--cgp-c, #2dd4bf); box-shadow: 0 0 0 1px var(--cgp-c, #2dd4bf) inset; }
+  .cgp-card { display: flex; align-items: center; gap: 4px; padding: 6px 6px 6px 9px; background: #1c1c1c; border: 1px solid #2c2c2c; border-radius: 8px; cursor: grab; font-size: 12.5px; user-select: none; }
+  .cgp-card:hover { border-color: #444; }
+  .cgp-card.pending { opacity: .5; }
+  .cgp-card .cgp-nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+  .cgp-card .cgp-age { font-size: 10px; color: var(--text-dim); flex: 0 0 auto; }
+  .cgp-card button { background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 0 3px; font-size: 13px; line-height: 1; }
+  .cgp-card button:hover { color: #fff; }
+  .cgp-card button.x:hover { color: #f87171; }
+  .cgp-card button:disabled { visibility: hidden; }
+  .cgp-trash { margin-top: 12px; border: 1.5px dashed #444; border-radius: 10px; padding: 12px; text-align: center; font-size: 12px; color: var(--text-dim); display: none; }
+  body.cgp-dragging .cgp-trash { display: block; }
+  .cgp-trash.drop-on { border-color: #f87171; color: #f87171; background: rgba(248,113,113,.08); }
+  .cgp-hint { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
+  .cg-dragname { cursor: grab; }
+  .cg-dragname:hover { border-color: #2dd4bf !important; color: var(--text) !important; }
+  .cgp-dock { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 4300; display: none; gap: 8px; align-items: stretch; background: #111; border: 1px solid #333; border-radius: 14px; padding: 10px; box-shadow: 0 10px 40px rgba(0,0,0,.65); }
+  body.cgp-dragging-ext .cgp-dock { display: flex; }
+  .cgp-dock-lbl { font-size: 10.5px; color: var(--text-dim); writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; letter-spacing: .06em; text-transform: uppercase; }
+  .cgp-dock-t { min-width: 92px; padding: 14px 10px; border: 1.5px dashed #3a3a3a; border-radius: 10px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--text-muted); }
+  .cgp-dock-t.drop-on { border-color: var(--cgp-c, #2dd4bf); color: #fff; background: #1a2624; }
+  .cgp-toast { position: fixed; right: 18px; bottom: 18px; z-index: 4400; background: #1f1f1f; border: 1px solid #333; color: var(--text); border-radius: 10px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; transform: translateY(8px); transition: all .2s; pointer-events: none; max-width: 360px; }
+  .cgp-toast.show { opacity: 1; transform: none; }
+  .cgp-toast.err { border-color: #f87171; }
+  .cgp-choice { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 18px; overflow-y: auto; }
+  .cgp-choice button { text-align: left; background: #1c1c1c; border: 1px solid #2c2c2c; border-radius: 8px; color: var(--text); padding: 9px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .cgp-choice button:hover { border-color: #2dd4bf; }
+  /* Applied & Joined — month by month, totals, YoY */
+  .cgaj-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .cgaj-kpi { background: #161616; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 14px; }
+  .cgaj-kpi-l { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim); }
+  .cgaj-kpi-v { font-size: 26px; font-weight: 800; color: var(--text); margin-top: 4px; line-height: 1.1; }
+  .cgaj-kpi-d { font-size: 11.5px; margin-top: 3px; color: var(--text-muted); }
+  .cgaj-up { color: #4ade80; } .cgaj-down { color: #f87171; }
+  .cgaj-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 760px; }
+  .cgaj-table th { font-size: 10.5px; color: var(--text-dim); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 6px 6px; text-align: right; border-bottom: 1px solid #2a2a2a; }
+  .cgaj-table th:first-child, .cgaj-table td:first-child { text-align: left; }
+  .cgaj-table td { padding: 7px 6px; text-align: right; border-bottom: 1px solid #1f1f1f; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .cgaj-table td.yr { color: var(--text); font-weight: 700; white-space: nowrap; }
+  .cgaj-table td.tot { color: var(--text); font-weight: 800; }
+  .cgaj-table tr.joined td.yr::after { content: ' · Joined'; color: #4ade80; font-weight: 600; }
+  .cgaj-table tr.applied td.yr::after { content: ' · Applied'; color: #2dd4bf; font-weight: 600; }
+  .cgaj-table tr.yrstart td { border-top: 1px solid #333; }
+  .cgaj-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
 
   .tmod-adminbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; padding: 10px 14px; background: var(--card-bg); border: 1px solid var(--yellow-2); border-radius: 8px; }
   .tmod-adminbar span { color: var(--yellow-2); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; }
@@ -3005,7 +3068,7 @@
     <div class="cg-goals" id="cgGoals"></div>
 
     <!-- ===== ACTIONABLE: Leadership pipeline (who to identify / develop) ===== -->
-    <div class="cg-section-label">Leadership Pipeline &mdash; Who to Identify, Assess &amp; Develop</div>
+    <div class="cg-section-label">CG Leader Pipeline &mdash; Identify &rarr; Assess &rarr; Prepare &rarr; Plant</div>
     <div class="card" style="margin-bottom:24px">
       <div class="card-sub" id="cgPipelineSub">Active leaders &amp; development pipeline</div>
       <div id="cgPipelineContent"></div>
@@ -3094,6 +3157,13 @@
       <div class="cg-venn4-lists" id="cgVenn4Lists"></div>
     </div>
 
+    <!-- ===== Applied & Joined a CG: month by month, year totals, YoY ===== -->
+    <div class="cg-section-label">Applied &amp; Joined a CG &mdash; Monthly, Year Totals &amp; YoY</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="card-sub">Applied = &ldquo;Request to join&rdquo; applications in Planning Center Groups &middot; Joined = new group members (joined date) &middot; Community Groups only</div>
+      <div id="cgAJ" style="margin-top:12px"></div>
+    </div>
+
     <!-- ===== Interactive trends (one chart, toggle the metric) ===== -->
     <div class="cg-section-label">Trends</div>
     <div class="card" style="margin-bottom:24px">
@@ -3106,6 +3176,7 @@
           <button class="cg-seg-btn active" data-metric="groups" onclick="cgSelectTrend('groups',this)">Groups</button>
           <button class="cg-seg-btn" data-metric="members" onclick="cgSelectTrend('members',this)">Members</button>
           <button class="cg-seg-btn" data-metric="size" onclick="cgSelectTrend('size',this)">Avg Size</button>
+          <button class="cg-seg-btn" data-metric="applied" onclick="cgSelectTrend('applied',this)">Applied</button>
           <button class="cg-seg-btn" data-metric="joined" onclick="cgSelectTrend('joined',this)">Joined</button>
           <button class="cg-seg-btn" data-metric="outsiders" onclick="cgSelectTrend('outsiders',this)">Outsiders</button>
         </div>
@@ -6635,6 +6706,7 @@ async function cgDoUnlock() {
   const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   if (hash === CG_HASH) {
     sessionStorage.setItem(CG_SESSION_KEY, '1');
+    try { sessionStorage.setItem('cg_pw', val); } catch (e) {}
     document.getElementById('cgModLocked').style.display = 'none';
     document.getElementById('cgModContent').style.display = 'block';
     if (!cgRendered) { cgRenderAll(); cgRendered = true; }
@@ -6652,6 +6724,7 @@ function cgRenderAll() {
   cgRenderGoals(cg);
   cgRenderPipeline(cg);
   cgRenderActionLists(cg);
+  cgRenderAppliedJoined(cg);
   cgRenderVenn(cg);
   cgRenderVenn4(cg);
   cgRenderTrend('groups');
@@ -6995,7 +7068,7 @@ function cgV4ModalRender(q) {
   q = (q || '').toLowerCase();
   const list = q ? _cgV4ModalNames.filter(n => n.toLowerCase().includes(q)) : _cgV4ModalNames;
   const el = document.getElementById('cgV4ModalNames');
-  el.innerHTML = list.length ? list.map(n => '<span class="cg-v4-name">' + escapeHtml(n) + '</span>').join('') : '<div class="cg-action-empty">No matches.</div>';
+  el.innerHTML = list.length ? list.map(n => cgDragName(n, 'cg-v4-name')).join('') : '<div class="cg-action-empty">No matches.</div>';
 }
 function cgV4ModalClose() { const ov = document.getElementById('cgV4Modal'); if (ov) { ov.classList.remove('open'); ov.setAttribute('aria-hidden', 'true'); } }
 
@@ -7013,13 +7086,13 @@ function ogaDefaultMonth() { const t = new Date(); return new Date(t.getFullYear
 function ogaFillMonths() {
   const sel = document.getElementById('ogaMonth'); if (!sel || sel.options.length) return;
   const t = new Date(), def = ogaDefaultMonth();
-  for (let i = 0; i < 3; i++) {
+  // One card per month: the chosen month IS the card's title date (no multi-month ranges).
+  for (let i = 0; i < 4; i++) {
     const d = new Date(t.getFullYear(), t.getMonth() + i, 1);
     const o = new Option(d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }), d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'));
     if (d.getTime() === def.getTime()) o.selected = true;
     sel.add(o);
   }
-  sel.add(new Option('All upcoming (next 60 days)', 'all'));
 }
 function ogaMonthSel() { const v = (document.getElementById('ogaMonth') || {}).value || ''; if (!v || v === 'all') return null; const [y, m] = v.split('-').map(Number); return new Date(y, m - 1, 1); }
 function ogaMonthLabel() { const d = ogaMonthSel(); return d ? d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase() : ''; }
@@ -7899,7 +7972,7 @@ function cgRenderNameList(elId, moreId, listObj) {
     return;
   }
   const shown = names.slice(0, CG_NAME_CAP);
-  el.innerHTML = shown.map(n => '<span class="cg-action-name">' + escapeHtml(n) + '</span>').join('');
+  el.innerHTML = shown.map(n => cgDragName(n, 'cg-action-name')).join('');
   const total = (listObj.count != null) ? listObj.count : names.length;
   if (moreEl) moreEl.textContent = total > shown.length ? ('+ ' + (total - shown.length) + ' more (refine with search)') : '';
 }
@@ -8004,6 +8077,7 @@ const CG_TREND_META = {
   groups:    { title: 'Active Groups by Year',      sub: 'Monthly group count · multi-year comparison',   unit: 'groups',    src: cg => cg.groupCountsByYear },
   members:   { title: 'People in Groups by Year',   sub: 'Monthly member count · multi-year comparison',   unit: 'people',    src: cg => cg.peopleInGroupsByYear },
   size:      { title: 'Average Group Size by Year',  sub: 'Members ÷ groups each month · goal: 10',         unit: '/group',    src: cg => cgComputeSizeByYear(cg) },
+  applied:   { title: 'Applied to Join a Group',     sub: 'Church Center "request to join" applications each month · multi-year', unit: 'applied', src: cg => cg.appliedToJoin },
   joined:    { title: 'Joined a Group',              sub: 'New group members each month · multi-year',      unit: 'joined',    src: cg => cg.joinedGroup },
   outsiders: { title: 'Outsiders → Insiders',       sub: 'Non-members joining groups each month',          unit: 'people',    src: cg => cg.outsidersInsiders }
 };
@@ -8172,57 +8246,291 @@ function cgRenderOutsiders(cg) {
   });
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// CG LEADER PIPELINE — live two-way board on the PCO People workflow
+// "CG Leader Pipeline" (Identify → Assess → Prepare → Plant). Drag cards between
+// steps (or use ◀ ▶), drop on Remove / × to take them out, search or drag any name
+// on this page onto a step to add them. Every change writes to Planning Center via
+// the Staff OS web app (cgp_* actions, password-checked server-side); UI is optimistic.
+// ════════════════════════════════════════════════════════════════════════════
+const CGP_WF_URL = 'https://people.planningcenteronline.com/workflows/535815';
+const CGP_COLORS = ['#60a5fa', '#f59e0b', '#a78bfa', '#2dd4bf'];
+let _cgp = { steps: [], cards: [], completed: [], loaded: false, fetchedAt: '', error: '' };
+let _cgpDrag = null, _cgpSeq = 0;
+
+function cgDragName(n, cls, pid) {
+  return '<span class="' + cls + ' cg-dragname" draggable="true" data-name="' + escapeHtml(n) + '"' + (pid ? ' data-pid="' + escapeHtml(pid) + '"' : '') +
+    ' title="Drag onto a CG Leader Pipeline step to add">' + escapeHtml(n) + '</span>';
+}
+function cgpPw() { try { return sessionStorage.getItem('cg_pw') || ''; } catch (e) { return ''; } }
+async function cgpApi(body) {
+  let pw = cgpPw();
+  if (!pw) {
+    pw = (prompt('Enter the Groups password to connect the live pipeline:') || '').trim();
+    if (!pw) throw new Error('Password needed to edit the pipeline');
+    try { sessionStorage.setItem('cg_pw', pw); } catch (e) {}
+  }
+  const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ pw: pw }, body)) });
+  const j = await r.json();
+  if (j && j.auth === false) { try { sessionStorage.removeItem('cg_pw'); } catch (e) {} throw new Error('Wrong password — try again'); }
+  return j;
+}
+function cgpToast(msg, err) {
+  let t = document.getElementById('cgpToast');
+  if (!t) { t = document.createElement('div'); t.id = 'cgpToast'; t.className = 'cgp-toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.toggle('err', !!err); t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), err ? 5000 : 2800);
+}
+function cgpStepIdx(id) { return _cgp.steps.findIndex(s => s.id === String(id)); }
+function cgpStepName(id) { const s = _cgp.steps[cgpStepIdx(id)]; return s ? s.name : 'step'; }
+function cgpAge(iso) {
+  if (!iso) return '';
+  const d = (Date.now() - new Date(iso).getTime()) / 86400000;
+  if (d < 1) return 'today'; if (d < 14) return Math.round(d) + 'd'; if (d < 120) return Math.round(d / 7) + 'w';
+  return Math.round(d / 30.4) + 'mo';
+}
+function cgpSaveCache() { try { sessionStorage.setItem('lssr_cgp_cache', JSON.stringify({ steps: _cgp.steps, cards: _cgp.cards, completed: _cgp.completed, fetchedAt: _cgp.fetchedAt })); } catch (e) {} }
+
 function cgRenderPipeline(cg) {
-  const roster   = cg.leaderRoster   || [];
-  const pipeline = cg.leaderPipeline || [];
   const el = document.getElementById('cgPipelineContent');
   if (!el) return;
+  const suggested = [];
+  (cg.leaderPipeline || []).forEach(p => (p.names || []).forEach(n => { if (suggested.indexOf(n) < 0) suggested.push(n); }));
+  const leaders = [];
+  (cg.leaderRoster || []).forEach(p => (p.names || []).forEach(n => { if (leaders.indexOf(n) < 0) leaders.push(n); }));
+  leaders.sort((a, b) => a.localeCompare(b));
+  el.innerHTML =
+    '<div class="cgp-top">' +
+      '<div class="cgp-add"><input id="cgpSearch" type="text" placeholder="＋ Add someone — search any name in Planning Center…" autocomplete="off" oninput="cgpSearchInput()" onfocus="cgpSearchInput()">' +
+        '<div class="cgp-results" id="cgpResults"></div></div>' +
+      '<div class="cgp-meta" id="cgpMeta">Connecting to Planning Center…</div>' +
+    '</div>' +
+    '<div class="cg-pipe-board" id="cgpBoard"></div>' +
+    '<div class="cgp-trash" data-cgp-trash="1">🗑 Drop here to remove from the pipeline</div>' +
+    '<div class="cgp-hint">Drag a name between steps (or use ◀ ▶) — it moves in Planning Center too. Drag any name on this page (action lists, Venn names, suggestions below) onto a step to add them.</div>' +
+    '<details style="margin-top:14px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em" id="cgpPlantedSum">PLANTED (COMPLETED)</summary><div class="cg-pipeline-names" id="cgpPlanted" style="margin-top:10px"></div></details>' +
+    (suggested.length ? '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">SUGGESTED TO IDENTIFY (' + suggested.length + ') — mature &amp; engaged, not yet leading</summary><div class="cg-pipeline-names" id="cgpSuggested" style="margin-top:10px">' + suggested.map(n => cgDragName(n, 'cg-name-tag')).join('') + '</div></details>' : '') +
+    '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">CURRENT LEADERS (' + leaders.length + ')</summary>' +
+      (leaders.length ? '<div class="cg-pipeline-names" style="margin-top:10px">' + leaders.map(n => '<span class="cg-name-tag">' + escapeHtml(n) + '</span>').join('') + '</div>' : '<div class="cg-no-pipeline">No current leaders found.</div>') + '</details>';
+  cgpInstallDnD();
+  try { const c = JSON.parse(sessionStorage.getItem('lssr_cgp_cache') || 'null'); if (c && c.steps) Object.assign(_cgp, c, { loaded: true }); } catch (e) {}
+  cgpPaint();
+  cgpLoad();
+}
 
-  // All roster entries collapse into a flat list (single "Current Leader" phase)
-  const allCurrentNames = [];
-  roster.forEach(p => (p.names || []).forEach(n => allCurrentNames.push(n)));
-  const rosterTotal = allCurrentNames.length;
-
-  // Pipeline entries (from PCO workflow, when it exists)
-  const allPipelineNames = [];
-  pipeline.forEach(p => (p.names || []).forEach(n => allPipelineNames.push(n)));
-  const pipelineTotal = allPipelineNames.length;
-
-  const subEl = document.getElementById('cgPipelineSub');
-  if (subEl) {
-    let sub = rosterTotal + ' current leader' + (rosterTotal !== 1 ? 's' : '');
-    if (pipelineTotal > 0) sub += ' · ' + pipelineTotal + ' primed to identify';
-    if (cg.leadersAdded && cg.leadersAdded.total2026) sub += ' · ' + cg.leadersAdded.total2026 + ' developed in 2026';
-    subEl.textContent = sub;
+async function cgpLoad() {
+  const seq = ++_cgpSeq;
+  try {
+    const j = await cgpApi({ action: 'cgp_list' });
+    if (seq !== _cgpSeq) return;           // a newer load or an edit superseded this one
+    if (!j.ok) throw new Error(j.error || 'Could not load the pipeline');
+    Object.assign(_cgp, { steps: j.steps, cards: j.cards, completed: j.completed, fetchedAt: j.fetchedAt, loaded: true, error: '' });
+    cgpSaveCache();
+  } catch (e) {
+    _cgp.error = e.message || String(e);
   }
+  cgpPaint();
+}
 
-  let html = '';
+function cgpPaint() {
+  const board = document.getElementById('cgpBoard'); if (!board) return;
+  const meta = document.getElementById('cgpMeta');
+  if (!_cgp.loaded) {
+    board.innerHTML = '<div class="cg-pipe-empty" style="padding:18px 4px">' + (_cgp.error ? '⚠ ' + escapeHtml(_cgp.error) + ' <button class="cgp-stepbtn" onclick="_cgp.error=\'\';cgpPaint();cgpLoad()">Retry</button>' : 'Loading the live pipeline from Planning Center…') + '</div>';
+    if (meta) meta.innerHTML = '<a href="' + CGP_WF_URL + '" target="_blank" rel="noopener">Open in Planning Center ↗</a>';
+    return;
+  }
+  const n = _cgp.steps.length;
+  board.innerHTML = _cgp.steps.map((st, i) => {
+    const cards = _cgp.cards.filter(c => c.stepId === st.id).sort((a, b) => a.name.localeCompare(b.name));
+    return '<div class="cg-pipe-col cgp-col" data-cgp-step="' + st.id + '" style="--cgp-c:' + CGP_COLORS[i % 4] + '">' +
+      '<div class="cg-pipe-col-hdr"><span class="cg-pipe-col-name">' + (i + 1) + '. ' + escapeHtml(st.name) + '</span><span class="cg-pipe-col-count">' + cards.length + '</span></div>' +
+      '<div class="cg-pipe-names">' + (cards.length ? cards.map(c =>
+        '<div class="cgp-card' + (c.pending ? ' pending' : '') + '" draggable="true" data-card="' + c.cardId + '" title="' + escapeHtml(c.name) + ' — in ' + escapeHtml(st.name) + (c.movedAt ? ' since ' + new Date(c.movedAt).toLocaleDateString() : '') + '">' +
+          '<button onclick="cgpNudge(\'' + c.cardId + '\',-1)" title="Back a step"' + (i === 0 ? ' disabled' : '') + '>◀</button>' +
+          '<span class="cgp-nm">' + escapeHtml(c.name) + '</span><span class="cgp-age">' + cgpAge(c.movedAt) + '</span>' +
+          '<button onclick="cgpNudge(\'' + c.cardId + '\',1)" title="Forward a step"' + (i === n - 1 ? ' disabled' : '') + '>▶</button>' +
+          '<button class="x" onclick="cgpRemove(\'' + c.cardId + '\')" title="Remove from pipeline">×</button>' +
+        '</div>').join('') : '<div class="cg-pipe-empty">Drop someone here.</div>') + '</div></div>';
+  }).join('');
+  const total = _cgp.cards.length;
+  const sub = document.getElementById('cgPipelineSub');
+  if (sub) sub.textContent = total + ' in the pipeline · ' + _cgp.steps.map(st => _cgp.cards.filter(c => c.stepId === st.id).length + ' ' + st.name).join(' · ') + ' · ' + _cgp.completed.length + ' planted' +
+    (((_cgData || {}).leadersAdded || {}).total2026 ? ' · ' + _cgData.leadersAdded.total2026 + ' new leaders in 2026' : '');
+  if (meta) meta.innerHTML = (_cgp.error ? '<span style="color:#f87171">⚠ ' + escapeHtml(_cgp.error) + '</span>' : '<span>Live from Planning Center' + (_cgp.fetchedAt ? ' · ' + new Date(_cgp.fetchedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : '') + '</span>') +
+    '<button onclick="cgpLoad()" title="Refresh from Planning Center">↻ Refresh</button><a href="' + CGP_WF_URL + '" target="_blank" rel="noopener">Open workflow ↗</a>';
+  const pl = document.getElementById('cgpPlanted'), ps = document.getElementById('cgpPlantedSum');
+  if (ps) ps.textContent = 'PLANTED — COMPLETED THE PIPELINE (' + _cgp.completed.length + ')';
+  if (pl) pl.innerHTML = _cgp.completed.length ? _cgp.completed.map(c => '<span class="cg-name-tag" title="Completed ' + (c.completedAt ? new Date(c.completedAt).toLocaleDateString() : '') + '">' + escapeHtml(c.name) + '</span>').join('') : '<div class="cg-no-pipeline">No one has completed the pipeline yet.</div>';
+  cgpPaintDock();
+}
 
-  // --- Pipeline board: the actionable "who to identify / develop" columns ---
-  if (pipeline.length) {
-    html += '<div class="cg-pipe-board">';
-    pipeline.forEach(col => {
-      const names = col.names || [];
-      html += '<div class="cg-pipe-col"><div class="cg-pipe-col-hdr">' +
-              '<span class="cg-pipe-col-name">' + escapeHtml(col.label || 'Candidates') + '</span>' +
-              '<span class="cg-pipe-col-count">' + names.length + '</span></div>';
-      html += names.length
-        ? '<div class="cg-pipe-names">' + names.map(n => '<div class="cg-pipe-name">' + escapeHtml(n) + '</div>').join('') + '</div>'
-        : '<div class="cg-pipe-empty">None right now.</div>';
-      html += '</div>';
+function cgpPaintDock() {
+  let dock = document.getElementById('cgpDock');
+  if (!dock) { dock = document.createElement('div'); dock.id = 'cgpDock'; dock.className = 'cgp-dock'; document.body.appendChild(dock); }
+  dock.innerHTML = '<div class="cgp-dock-lbl">Add to</div>' + _cgp.steps.map((st, i) => '<div class="cgp-dock-t" data-cgp-step="' + st.id + '" style="--cgp-c:' + CGP_COLORS[i % 4] + '">' + escapeHtml(st.name) + '</div>').join('');
+}
+
+// ── mutations (optimistic) ──
+async function cgpMove(cardId, stepId) {
+  const c = _cgp.cards.find(x => x.cardId === cardId); if (!c || c.stepId === stepId) return;
+  const prev = c.stepId; c.stepId = stepId; c.pending = true; c.movedAt = new Date().toISOString(); _cgpSeq++; cgpPaint();
+  try {
+    const j = await cgpApi({ action: 'cgp_move', cardId: cardId, stepId: stepId });
+    if (!j.ok) throw new Error(j.error || 'Move failed');
+    Object.assign(c, j.card || {}, { pending: false });
+    cgpToast(c.name + ' → ' + cgpStepName(stepId) + ' ✓');
+  } catch (e) { c.stepId = prev; c.pending = false; cgpToast('Couldn’t move ' + c.name + ': ' + e.message, true); }
+  cgpSaveCache(); cgpPaint();
+}
+function cgpNudge(cardId, dir) {
+  const c = _cgp.cards.find(x => x.cardId === cardId); if (!c) return;
+  const i = cgpStepIdx(c.stepId) + dir; if (i < 0 || i >= _cgp.steps.length) return;
+  cgpMove(cardId, _cgp.steps[i].id);
+}
+async function cgpRemove(cardId) {
+  const i = _cgp.cards.findIndex(x => x.cardId === cardId); if (i < 0) return;
+  const c = _cgp.cards[i];
+  if (!confirm('Remove ' + c.name + ' from the CG Leader Pipeline in Planning Center?')) return;
+  _cgp.cards.splice(i, 1); _cgpSeq++; cgpPaint();
+  try {
+    const j = await cgpApi({ action: 'cgp_remove', cardId: cardId });
+    if (!j.ok) throw new Error(j.error || 'Remove failed');
+    cgpToast(c.name + ' removed from the pipeline');
+  } catch (e) { _cgp.cards.splice(i, 0, c); cgpToast('Couldn’t remove ' + c.name + ': ' + e.message, true); }
+  cgpSaveCache(); cgpPaint();
+}
+async function cgpAdd(name, pid, stepId) {
+  name = String(name || '').trim(); if (!name && !pid) return;
+  const existing = _cgp.cards.find(x => (pid && x.pid === String(pid)) || (!pid && x.name.toLowerCase() === name.toLowerCase()));
+  if (existing) { if (existing.stepId === stepId) cgpToast(existing.name + ' is already in ' + cgpStepName(stepId)); else cgpMove(existing.cardId, stepId); return; }
+  const tmp = { cardId: 'tmp' + Date.now(), pid: pid || '', name: name, stepId: stepId, pending: true, movedAt: new Date().toISOString() };
+  _cgp.cards.push(tmp); _cgpSeq++; cgpPaint();
+  try {
+    const j = await cgpApi(pid ? { action: 'cgp_add', pid: pid, stepId: stepId } : { action: 'cgp_add', name: name, stepId: stepId });
+    _cgp.cards = _cgp.cards.filter(x => x !== tmp);
+    if (j.needsChoice) { cgpPaint(); cgpChoose(name, j.choices || [], stepId); return; }
+    if (!j.ok) throw new Error(j.error || 'Add failed');
+    _cgp.cards = _cgp.cards.filter(x => x.cardId !== j.card.cardId);
+    _cgp.cards.push(Object.assign(j.card, { pending: false }));
+    cgpToast((j.existed ? j.card.name + ' was already in the pipeline — moved to ' : j.card.name + ' added to ') + cgpStepName(stepId) + ' ✓');
+  } catch (e) { _cgp.cards = _cgp.cards.filter(x => x !== tmp); cgpToast('Couldn’t add ' + name + ': ' + e.message, true); }
+  cgpSaveCache(); cgpPaint();
+}
+function cgpChoose(name, choices, stepId) {
+  let m = document.getElementById('cgpChoiceModal');
+  if (!m) { m = document.createElement('div'); m.id = 'cgpChoiceModal'; m.className = 'cg-v4-modal'; m.onclick = e => { if (e.target === m) m.classList.remove('open'); }; document.body.appendChild(m); }
+  m.innerHTML = '<div class="cg-v4-modal-box"><div class="cg-v4-modal-hd"><div><div class="cg-v4-modal-title">Which ' + escapeHtml(name) + '?</div><div class="cg-v4-modal-sub">' +
+    (choices.length ? 'Pick the right person to add to ' + escapeHtml(cgpStepName(stepId)) + '.' : 'No match in Planning Center — try the search box with a different spelling.') + '</div></div>' +
+    '<button class="cg-v4-modal-x" onclick="document.getElementById(\'cgpChoiceModal\').classList.remove(\'open\')">×</button></div>' +
+    '<div class="cgp-choice">' + choices.map(p => '<button data-pid="' + escapeHtml(p.pid) + '" data-name="' + escapeHtml(p.name) + '">' + escapeHtml(p.name) + (p.membership ? ' <span style="color:var(--text-dim);font-size:11px">· ' + escapeHtml(p.membership) + '</span>' : '') + '</button>').join('') + '</div></div>';
+  m.querySelectorAll('.cgp-choice button').forEach(b => b.onclick = () => { m.classList.remove('open'); cgpAdd(b.dataset.name, b.dataset.pid, stepId); });
+  m.classList.add('open');
+}
+
+// ── search-to-add ──
+let _cgpSearchT = null, _cgpSearchQ = '';
+function cgpSearchInput() {
+  const q = (document.getElementById('cgpSearch').value || '').trim(), box = document.getElementById('cgpResults');
+  clearTimeout(_cgpSearchT);
+  if (q.length < 2) { box.classList.remove('open'); return; }
+  box.innerHTML = '<div class="cgp-res-empty">Searching Planning Center…</div>'; box.classList.add('open');
+  _cgpSearchT = setTimeout(async () => {
+    _cgpSearchQ = q;
+    try {
+      const j = await cgpApi({ action: 'cgp_search', q: q });
+      if (_cgpSearchQ !== q) return;
+      const people = (j && j.people) || [];
+      box.innerHTML = people.length ? people.map(p => {
+        const inPipe = _cgp.cards.find(c => c.pid === p.pid);
+        return '<div class="cgp-res"><span class="cgp-res-name">' + cgDragName(p.name, 'cgp-res-nm', p.pid) + '<span class="cgp-res-mem">' + escapeHtml(p.membership || '') + (inPipe ? ' · in ' + escapeHtml(cgpStepName(inPipe.stepId)) : '') + '</span></span>' +
+          _cgp.steps.map((st, i) => '<button class="cgp-stepbtn" style="--cgp-c:' + CGP_COLORS[i % 4] + '" title="Add to ' + escapeHtml(st.name) + '" onclick="cgpPick(\'' + p.pid + '\',this,\'' + st.id + '\')" data-name="' + escapeHtml(p.name) + '">' + escapeHtml(st.name) + '</button>').join('') + '</div>';
+      }).join('') : '<div class="cgp-res-empty">No one found for “' + escapeHtml(q) + '”.</div>';
+    } catch (e) { box.innerHTML = '<div class="cgp-res-empty">⚠ ' + escapeHtml(e.message) + '</div>'; }
+  }, 300);
+}
+function cgpPick(pid, btn, stepId) {
+  document.getElementById('cgpResults').classList.remove('open');
+  document.getElementById('cgpSearch').value = '';
+  cgpAdd(btn.dataset.name, pid, stepId);
+}
+
+// ── drag & drop (installed once; works across the whole page + the Venn modal) ──
+function cgpInstallDnD() {
+  if (window._cgpDnD) return; window._cgpDnD = true;
+  document.addEventListener('click', e => { const box = document.getElementById('cgpResults'); if (box && !e.target.closest('.cgp-add')) box.classList.remove('open'); });
+  document.addEventListener('dragstart', e => {
+    const card = e.target.closest && e.target.closest('.cgp-card');
+    const nm = !card && e.target.closest && e.target.closest('.cg-dragname');
+    if (!card && !nm) return;
+    if (!_cgp.loaded) { e.preventDefault(); cgpToast('The pipeline is still loading…', true); return; }
+    if (card) { if (card.dataset.card.indexOf('tmp') === 0) { e.preventDefault(); return; } _cgpDrag = { kind: 'card', cardId: card.dataset.card }; document.body.classList.add('cgp-dragging'); }
+    else { _cgpDrag = { kind: 'name', name: nm.dataset.name || nm.textContent, pid: nm.dataset.pid || '' }; document.body.classList.add('cgp-dragging-ext'); }
+    try { e.dataTransfer.setData('text/plain', card ? card.textContent : _cgpDrag.name); e.dataTransfer.effectAllowed = 'move'; } catch (x) {}
+  });
+  document.addEventListener('dragend', () => {
+    _cgpDrag = null; document.body.classList.remove('cgp-dragging', 'cgp-dragging-ext');
+    document.querySelectorAll('.drop-on').forEach(x => x.classList.remove('drop-on'));
+  });
+  const target = e => e.target.closest && e.target.closest('[data-cgp-step],[data-cgp-trash]');
+  document.addEventListener('dragover', e => {
+    if (!_cgpDrag) return; const t = target(e); if (!t) return;
+    if (t.dataset.cgpTrash && _cgpDrag.kind !== 'card') return;
+    e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (x) {}
+    document.querySelectorAll('.drop-on').forEach(x => { if (x !== t) x.classList.remove('drop-on'); });
+    t.classList.add('drop-on');
+  });
+  document.addEventListener('dragleave', e => { const t = target(e); if (t && !t.contains(e.relatedTarget)) t.classList.remove('drop-on'); });
+  document.addEventListener('drop', e => {
+    if (!_cgpDrag) return; const t = target(e); if (!t) return;
+    e.preventDefault(); const d = _cgpDrag; t.classList.remove('drop-on');
+    if (t.dataset.cgpTrash) { if (d.kind === 'card') cgpRemove(d.cardId); return; }
+    const stepId = t.dataset.cgpStep;
+    if (d.kind === 'card') cgpMove(d.cardId, stepId); else cgpAdd(d.name, d.pid, stepId);
+  });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// APPLIED & JOINED A CG — month by month, year totals, YoY (Discipleship ask)
+// ════════════════════════════════════════════════════════════════════════════
+function cgRenderAppliedJoined(cg) {
+  const el = document.getElementById('cgAJ'); if (!el) return;
+  const A = cg.appliedToJoin || {}, J = cg.joinedGroup || {};
+  const years = Object.keys(Object.assign({}, A, J)).sort().reverse();
+  if (!years.length) { el.innerHTML = '<div class="cg-action-empty">Populates at the next hourly sync.</div>'; return; }
+  const sum = (arr, upto) => (arr || []).slice(0, upto == null ? 12 : upto + 1).reduce((t, v) => t + (v || 0), 0);
+  const lastIdx = arr => { let k = -1; (arr || []).forEach((v, i) => { if (v != null) k = i; }); return k; };
+  const hasApplied = years.some(y => (A[y] || []).some(v => v > 0));
+  const now = new Date(), cy = String(now.getFullYear()), py = String(now.getFullYear() - 1);
+  const thru = Math.max(lastIdx(J[cy]), lastIdx(A[cy]));
+  const pct = (a, b) => b > 0 ? Math.round((a - b) / b * 100) : null;
+  const delta = (a, b) => { const p = pct(a, b); if (p == null) return '<span>no ' + py + ' data to compare</span>'; return '<span class="' + (p >= 0 ? 'cgaj-up' : 'cgaj-down') + '">' + (p >= 0 ? '▲ ' : '▼ ') + Math.abs(p) + '%</span> vs ' + (b) + ' same months ' + py; };
+  const thruLbl = thru >= 0 ? CG_MONTHS[0] + '–' + CG_MONTHS[thru] : '';
+  const monthInProgress = thru === now.getMonth();
+  const kp = (lbl, val, d) => '<div class="cgaj-kpi"><div class="cgaj-kpi-l">' + lbl + '</div><div class="cgaj-kpi-v">' + val + '</div><div class="cgaj-kpi-d">' + d + '</div></div>';
+  let html = '<div class="cgaj-kpis">' +
+    kp('Joined · ' + cy + ' YTD', sum(J[cy], thru), thruLbl ? delta(sum(J[cy], thru), sum(J[py], thru)) : '') +
+    (hasApplied ? kp('Applied · ' + cy + ' YTD', sum(A[cy], thru), thruLbl ? delta(sum(A[cy], thru), sum(A[py], thru)) : '') : kp('Applied · ' + cy + ' YTD', '—', 'Populates at the next hourly sync')) +
+    (J[py] ? kp('Joined · ' + py + ' total', sum(J[py]), J[String(+py - 1)] ? delta(sum(J[py]), sum(J[String(+py - 1)])).replace(/same months \d+/, 'in ' + (+py - 1)) : '') : '') +
+    (hasApplied && A[py] ? kp('Applied · ' + py + ' total', sum(A[py]), '') : '') +
+    '</div>';
+  html += '<div class="tmod-table-wrap" style="overflow-x:auto"><table class="cgaj-table"><thead><tr><th>Year</th>' + CG_MONTHS.map(m => '<th>' + m + '</th>').join('') + '<th>Total</th><th>YoY</th></tr></thead><tbody>';
+  years.forEach(y => {
+    const prev = String(+y - 1), isCur = y === cy;
+    const rows = hasApplied ? [['applied', A], ['joined', J]] : [['joined', J]];
+    rows.forEach(([cls, src], ri) => {
+      const arr = src[y] || [];
+      const tot = isCur ? sum(arr, thru) : sum(arr);
+      const cmp = src[prev] ? (isCur ? sum(src[prev], thru) : sum(src[prev])) : null;
+      const p = cmp != null ? pct(tot, cmp) : null;
+      html += '<tr class="' + cls + (ri === 0 ? ' yrstart' : '') + '"><td class="yr">' + y + '</td>' +
+        CG_MONTHS.map((m, i) => '<td>' + (arr[i] != null ? arr[i] : '·') + '</td>').join('') +
+        '<td class="tot">' + tot + (isCur && thru < 11 ? '<span style="font-weight:500;color:var(--text-dim);font-size:10px"> YTD</span>' : '') + '</td>' +
+        '<td>' + (p == null ? '—' : '<span class="' + (p >= 0 ? 'cgaj-up' : 'cgaj-down') + '">' + (p >= 0 ? '+' : '') + p + '%</span>') + '</td></tr>';
     });
-    html += '</div>';
-  } else {
-    html += '<div class="cg-no-pipeline">No leadership candidates yet. These fill in automatically from the Shepherding sync — spiritually &ldquo;adult&rdquo; members (mature &amp; engaged, not yet leading) who are primed to be identified. To also track Assess → Prepare → Plant, create a Planning Center People workflow named &ldquo;Leader Development.&rdquo;</div>';
-  }
-
-  // --- Current leaders (collapsible reference) ---
-  html += '<details style="margin-top:16px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em">CURRENT LEADERS (' + rosterTotal + ')</summary>';
-  html += allCurrentNames.length
-    ? '<div class="cg-pipeline-names" style="margin-top:10px">' + allCurrentNames.sort((a, b) => a.localeCompare(b)).map(n => '<span class="cg-name-tag">' + escapeHtml(n) + '</span>').join('') + '</div>'
-    : '<div class="cg-no-pipeline">No current leaders found.</div>';
-  html += '</details>';
-
+  });
+  html += '</tbody></table></div>';
+  html += '<div class="cgaj-note">YoY for ' + cy + ' compares the same months (' + thruLbl + ') of ' + py + (monthInProgress ? '; ' + CG_MONTHS[thru] + ' is still in progress' : '') + '. Earlier years compare full-year totals. · = no data that month.</div>';
   el.innerHTML = html;
 }
 
@@ -13824,7 +14132,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T214410Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T215306Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
