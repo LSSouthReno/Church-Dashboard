@@ -1133,61 +1133,55 @@
   .sos-step span { flex: 1 1 auto; }
   .sos-goal-add { border-top: 1px solid var(--sp-border,#d8cdb8); padding-top: 14px; margin-top: 8px; display: flex; flex-direction: column; gap: 10px; }
 
-  /* Print-preview overlay — 5×7 card, charcoal + cream torn-paper + B&W photos */
-  .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4000; display: none; overflow: auto; padding: 24px; }
+  /* Announcement card — print-ready 5×7 with 0.125in bleed. The card element IS the
+     bleed canvas (5.25×7.25in = 504×696px @96dpi); content stays inside a safe zone.
+     Straight bands (html2canvas can't render clip-path/filter, so nothing relies on them). */
+  .ogc-overlay { position: fixed; inset: 0; background: rgba(18,16,12,0.92); z-index: 4000; display: none; overflow: auto; padding: 24px; }
   .ogc-overlay.open { display: block; }
-  .ogc-bar { max-width: 1100px; margin: 0 auto 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
-  .ogc-pages { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
-  /* 5×7 portrait at 96dpi = 480×672 · LIGHT body, DARK torn header/footer */
-  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #f2ecd8; color: #26221a; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
+  .ogc-bar { max-width: 1100px; margin: 0 auto 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .ogc-hint { color: #cbc4b2; font-size: 13px; align-self: center; }
+  .ogc-status { color: #e8c97a; font-size: 13px; font-weight: 700; align-self: center; min-height: 18px; }
+  .ogc-pages { display: flex; gap: 34px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
+  .ogc-pagewrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .ogc-pagecap { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #bdb49c; text-transform: uppercase; }
+  .ogc-card { width: 504px; height: 696px; flex: 0 0 auto; background-color: #f2ecd8; background-size: 504px 696px; color: #26221a; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.55); font-family: 'Montserrat', system-ui, sans-serif; }
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
-  /* Dark charcoal torn header band */
-  .ogc-hero { position: relative; background: #1b1915; color: #f2ecd8; padding: 22px 30px 30px;
-    clip-path: polygon(0 0,100% 0,100% 86%,94% 100%,87% 89%,79% 99%,71% 88%,63% 100%,55% 89%,47% 99%,39% 88%,31% 100%,23% 89%,15% 99%,8% 88%,3% 97%,0 87%); }
-  .ogc-hero-top { display: flex; align-items: center; gap: 9px; }
-  .ogc-logo { width: 30px; height: 30px; flex: 0 0 auto; }
-  .ogc-brandtxt { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #cbbf9a; font-weight: 800; line-height: 1.3; }
-  .ogc-brandtxt b { color: #fff; display: block; font-size: 12px; letter-spacing: .14em; }
-  .ogc-h1 { font-size: 31px; font-weight: 800; line-height: 0.98; margin: 13px 0 3px; letter-spacing: -.6px; color: #fff; text-transform: uppercase; }
-  .ogc-h2 { font-size: 12px; color: #cbb56a; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-  .ogc-body { padding: 6px 24px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
-  .ogc-ev { padding: 9px 0; display: flex; gap: 12px; align-items: center; border-bottom: 1px dashed rgba(27,25,21,0.16); }
-  .ogc-ev:last-child { border-bottom: none; }
-  /* Dark circle date badge on the light body */
-  .ogc-badge { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; background: #1b1915; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
-  .ogc-badge .m { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #cbb56a; letter-spacing: .08em; }
-  .ogc-badge .d { font-size: 21px; font-weight: 800; color: #fff; margin-top: 1px; }
-  .ogc-thumb { flex: 0 0 54px; width: 54px; height: 54px; object-fit: cover; filter: grayscale(1) contrast(1.05); border: 2px solid #1b1915; }
-  .ogc-ev-body { flex: 1 1 auto; min-width: 0; }
-  .ogc-ev-name { font-size: 15.5px; font-weight: 800; line-height: 1.1; color: #1b1915; text-transform: uppercase; letter-spacing: -0.2px; }
-  .ogc-ev-when { font-size: 10px; color: #8a742e; font-weight: 800; margin-top: 2px; text-transform: uppercase; letter-spacing: .03em; }
-  .ogc-ev-desc { font-size: 10.5px; color: #57503c; margin-top: 3px; line-height: 1.32; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .ogc-cta { display: inline-block; font-size: 10px; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 3px 9px; border-radius: 3px; margin-top: 6px; text-transform: uppercase; letter-spacing: .04em; }
-  .ogc-ev-qr { flex: 0 0 48px; text-align: center; }
-  .ogc-ev-qr img { width: 48px; height: 48px; background: #fff; padding: 3px; border: 1px solid #1b1915; }
-  .ogc-ev-qr .qc { font-size: 7px; color: #8a742e; margin-top: 2px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
-  /* Dark torn footer band */
-  .ogc-foot { background: #1b1915; color: #cbbf9a; padding: 16px 26px 12px; font-size: 9.5px; text-align: center; font-weight: 700; letter-spacing: .03em;
-    clip-path: polygon(0 14%,5% 1%,12% 12%,20% 1%,28% 12%,36% 1%,44% 12%,52% 1%,60% 12%,68% 1%,76% 12%,84% 1%,92% 12%,96% 2%,100% 13%,100% 100%,0 100%); }
+  .ogc-trim { position: absolute; inset: 12px; border: 1px dashed rgba(200,40,40,.55); pointer-events: none; z-index: 5; }
+  /* slim dark header band (runs into the bleed) */
+  .ogc-hero { background: #1b1915; color: #f2ecd8; padding: 24px 34px 14px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .ogc-lockup { height: 30px; width: auto; display: block; }
+  .ogc-hero-r { text-align: right; }
+  .ogc-h1 { font-size: 16px; font-weight: 800; line-height: 1.05; color: #fff; text-transform: uppercase; letter-spacing: .02em; }
+  .ogc-h2 { font-size: 9.5px; color: #d6b86a; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; }
+  .ogc-body { flex: 1 1 auto; padding: 6px 34px; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; }
+  .ogc-ev { height: 168px; flex: 0 0 168px; display: flex; gap: 14px; align-items: stretch; }
+  .ogc-media { position: relative; flex: 0 0 136px; width: 136px; height: 136px; align-self: center; margin-left: 6px; }
+  .ogc-img { width: 136px; height: 136px; object-fit: cover; display: block; border: 2px solid #1b1915; background: #1b1915; }
+  .ogc-img.live { filter: grayscale(1) contrast(1.05); }       /* preview only, before the baked B&W copy arrives */
+  .ogc-tile { width: 136px; height: 136px; background: #1b1915; border: 2px solid #1b1915; display: flex; align-items: center; justify-content: center; }
+  .ogc-tile img { width: 58px; height: 58px; opacity: .35; }
+  .ogc-badge { position: absolute; left: -9px; top: -9px; width: 48px; height: 48px; border-radius: 50%; background: #1b1915; border: 2px solid #f2ecd8; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+  .ogc-badge .m { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #d6b86a; letter-spacing: .08em; }
+  .ogc-badge .d { font-size: 19px; font-weight: 800; color: #fff; margin-top: 1px; }
+  .ogc-ev-body { flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; display: block; padding-top: 4px; }
+  .ogc-ev-qr { float: right; width: 78px; margin: 0 0 4px 10px; text-align: center; }
+  .ogc-ev-qr img { width: 78px; height: 78px; display: block; background: #fff; border: 1px solid #1b1915; }
+  .ogc-ev-qr .qc { font-size: 7px; color: #6e5d26; margin-top: 3px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+  .ogc-ev-name { font-size: 14.5px; font-weight: 800; line-height: 1.1; color: #1b1915; text-transform: uppercase; letter-spacing: -0.1px; }
+  .ogc-ev-when { font-size: 9.5px; color: #7a6524; font-weight: 800; margin-top: 3px; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-ev-desc { font-size: 9.5px; color: #4a4332; margin-top: 4px; line-height: 1.34; }
+  .ogc-cta { display: inline-block; font-size: 8.5px; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 3px 9px; margin-top: 6px; text-transform: uppercase; letter-spacing: .05em; }
+  .ogc-ev.overflow .ogc-ev-body { box-shadow: inset 0 -3px 0 #c83a3a; }   /* preview warning only */
+  /* dark footer band (runs into the bleed) */
+  .ogc-foot { background: #1b1915; color: #cbbf9a; padding: 11px 34px 22px; font-size: 9px; text-align: center; font-weight: 700; letter-spacing: .04em; }
   .ogc-foot b { color: #fff; }
-  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(242,236,216,.5); font-weight: 800; letter-spacing: .1em; z-index: 2; }
-  .ogc-empty-face { color: #8a8266; text-align: center; padding: 60px 20px; font-size: 13px; }
-  .ogc-connect { text-align: center; padding: 26px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-  .ogc-connect-h { font-size: 23px; font-weight: 800; color: #1b1915; text-transform: uppercase; }
-  .ogc-connect-times { font-size: 15px; font-weight: 800; color: #8a742e; margin: 8px 0 4px; letter-spacing: .02em; }
-  .ogc-connect-addr { font-size: 12px; color: #57503c; margin-bottom: 18px; }
-  .ogc-connect-qr { width: 128px; height: 128px; background: #fff; padding: 8px; border: 1px solid #1b1915; }
+  .ogc-connect { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+  .ogc-connect-h { font-size: 24px; font-weight: 800; color: #1b1915; text-transform: uppercase; }
+  .ogc-connect-times { font-size: 15px; font-weight: 800; color: #7a6524; margin: 8px 0 4px; letter-spacing: .02em; }
+  .ogc-connect-addr { font-size: 12px; color: #4a4332; margin-bottom: 18px; }
+  .ogc-connect-qr { width: 132px; height: 132px; background: #fff; border: 1px solid #1b1915; }
   .ogc-connect-web { font-size: 14px; font-weight: 800; color: #1b1915; margin-top: 12px; }
-  .ogc-connect-tag { font-size: 11px; color: #8a8266; margin-top: 14px; font-style: italic; }
-  @media print {
-    body * { visibility: hidden !important; }
-    #ogcOverlay, #ogcOverlay * { visibility: visible !important; }
-    #ogcOverlay { position: absolute; inset: 0; background: #f2ecd8; padding: 0; overflow: visible; }
-    .ogc-bar { display: none !important; }
-    .ogc-pages { display: block; gap: 0; }
-    .ogc-card { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0 auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { size: 5in 7in; margin: 0; }
-  }
+  .ogc-connect-tag { font-size: 11px; color: #6e6450; margin-top: 12px; font-style: italic; }
 
   /* ---- Actionable named lists ---- */
   .cg-action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -3708,7 +3702,7 @@
                 <option value="90">Next 90 days</option>
               </select>
             </label>
-            <label>Card title: <input type="text" id="ogaTitle" value="This Month at Living Stones"></label>
+            <label>Card title: <input type="text" id="ogaTitle" value="What’s Coming Up"></label>
             <span class="oga-note">Worship gatherings, rehearsals, community-group &amp; recurring group events are filtered out automatically. Baptisms are kept.</span>
             <span class="oga-count" id="ogaCount"></span>
           </div>
@@ -3723,10 +3717,10 @@
 <!-- 📇 Announcement card print preview -->
 <div class="ogc-overlay" id="ogcOverlay" aria-hidden="true">
   <div class="ogc-bar">
-    <button class="oga-btn hi" onclick="window.print()">🖨 Print / Save as PDF (5×7)</button>
-    <button class="oga-btn" onclick="ogaDownloadPDF(this)">⬇ Quick PDF</button>
+    <button class="oga-btn hi" id="ogcExportBtn" onclick="ogaExportPDF(this)">⬇ Export PDF</button>
     <button class="oga-btn ghost" onclick="ogcClose()">Close</button>
-    <span style="color:#bbb;font-size:12px;align-self:center">Double-sided: enable "Two-sided", set paper to 5×7 (or Letter, "Fit"). Print keeps every photo.</span>
+    <span class="ogc-hint">5×7 in · 0.125 in bleed + crop marks · front &amp; back — ready to send to the printer.</span>
+    <span class="ogc-status" id="ogcStatus"></span>
   </div>
   <div class="ogc-pages" id="ogcPages"></div>
 </div>
@@ -7055,18 +7049,20 @@ function ogaRenderList() {
   // First paint: auto-select the recommended events so the leader starts with a
   // sensible card and just trims. (Only once — respects later manual toggles.)
   if (!_ogaAutoSelected && !q) {
-    _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: ogaRecommended(e), blurb: e.desc || e.summary || '', reg: e.reg || e.url || '' }; });
+    _ogaEvents.forEach(e => { const key = ogaKey(e); if (!(key in _ogaState)) _ogaState[key] = { on: ogaRecommended(e), blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' }; });
     _ogaAutoSelected = true;
+    if (typeof sosPrewarm === 'function') sosPrewarm();
+    ogcPrefetch(_ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on && e.img).map(e => e.img));
   }
 
   const cntEl = document.getElementById('ogaCount');
   const selCount = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length;
-  if (cntEl) cntEl.textContent = _ogaEvents.length + ' events · ' + selCount + ' selected';
+  if (cntEl) cntEl.textContent = _ogaEvents.length + ' events · ' + selCount + ' selected (card fits ' + OGC_MAX + ')';
 
   if (!_ogaEvents.length) { listEl.innerHTML = '<div class="oga-empty">No events in this window. Widen the window or clear the search.</div>'; return; }
   listEl.innerHTML = _ogaEvents.map(e => {
     const key = ogaKey(e);
-    const st = _ogaState[key] || (_ogaState[key] = { on: false, blurb: e.desc || e.summary || '', reg: e.reg || e.url || '' });
+    const st = _ogaState[key] || (_ogaState[key] = { on: false, blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' });
     const when = e.date + (e.time && !/12:00 AM/.test(e.time) ? ' · ' + e.time : '') + (e.endKey ? '–' + fmtEndKey(e.endKey) : '');
     const meta = [e.location ? e.location.split(' - ')[0] : '', e.owner || '', ogaIsBaptism(e) ? 'Baptism' : ''].filter(Boolean).join(' · ');
     const badges = (e.img ? '<span class="oga-badge img">🖼 image</span>' : '') + (e.reg ? '<span class="oga-badge reg">🔗 registration</span>' : '') + (e.visibleCC ? '<span class="oga-badge cc">Church Center</span>' : '');
@@ -7091,12 +7087,13 @@ function ogaKey(e) { return (e.name + '_' + e.dateKey).replace(/[^a-zA-Z0-9]/g, 
 function fmtEndKey(k) { try { const d = new Date(k + 'T12:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); } catch (e) { return k; } }
 function ogaToggle(key, on) {
   (_ogaState[key] = _ogaState[key] || {}).on = on;
+  if (on) { const ev = _ogaEvents.find(e => ogaKey(e) === key); if (ev && ev.img) ogcPrefetch([ev.img]); }
   const el = document.getElementById('ogaItem-' + key); if (el) el.classList.toggle('on', on);
   const cntEl = document.getElementById('ogaCount');
-  if (cntEl) { const s = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length; cntEl.textContent = _ogaEvents.length + ' events · ' + s + ' selected'; }
+  if (cntEl) { const s = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).length; cntEl.textContent = _ogaEvents.length + ' events · ' + s + ' selected (card fits ' + OGC_MAX + ')'; }
 }
 function ogaField(key, f, v) { (_ogaState[key] = _ogaState[key] || {})[f] = v; }
-function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); ogaRenderList(); }
+function ogaSetAll(on) { _ogaEvents.forEach(e => { (_ogaState[ogaKey(e)] = _ogaState[ogaKey(e)] || {}).on = on; }); if (on) ogcPrefetch(_ogaEvents.filter(e => e.img).slice(0, 12).map(e => e.img)); ogaRenderList(); }
 
 // LS nested-chevron (mountain) mark, from the culture-guide motif.
 function ogcLogoSvg(size, stroke) {
@@ -7113,20 +7110,151 @@ function ogcChevronSvg() {
     '</svg>';
 }
 
-function ogaBuildCard() {
-  const chosen = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).map(e => ({ e: e, st: _ogaState[ogaKey(e)] }));
+// Card fits 6 announcements: 3 per side, front + back.
+const OGC_MAX = 6;
+let _ogcPrep = Promise.resolve();          // resolves when photos are baked for export
+const _ogcImgCache = {};                    // original URL → baked B&W square data URL
+
+function ogcFmtRange(items) {
+  if (!items.length) return '';
+  const ds = items.map(x => new Date(x.e.dateKey + 'T12:00:00')).sort((a, b) => a - b);
+  const f = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return ds.length === 1 || ds[0].getTime() === ds[ds.length - 1].getTime() ? f(ds[0]) : f(ds[0]) + ' – ' + f(ds[ds.length - 1]);
+}
+// Deterministic topographic-contour + paper-grain texture (drawn once, same-origin data URL
+// so it exports cleanly). Echoes the mountain motif from the culture guide.
+let _ogcTexture = null;
+function ogcTexture() {
+  if (_ogcTexture) return _ogcTexture;
+  const W = 1008, H = 1392, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  let seed = 20260922; const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  for (let i = 0; i < 26000; i++) { x.fillStyle = 'rgba(92,72,38,' + (rnd() * 0.07).toFixed(3) + ')'; x.fillRect(rnd() * W, rnd() * H, 1.3, 1.3); }
+  x.lineWidth = 1.4;
+  [[W * 0.86, H * 0.18, 17], [W * 0.08, H * 0.62, 15], [W * 0.62, H * 0.97, 12]].forEach(([cx, cy, rings]) => {
+    const p1 = rnd() * 6, p2 = rnd() * 6, p3 = rnd() * 6;
+    for (let k = 1; k <= rings; k++) {
+      const r = k * 42;
+      x.strokeStyle = 'rgba(120,96,52,' + (k % 5 === 0 ? 0.13 : 0.075) + ')';
+      x.beginPath();
+      for (let t = 0; t <= Math.PI * 2 + 0.05; t += 0.04) {
+        const rr = r * (1 + 0.13 * Math.sin(3 * t + p1 + k * 0.15) + 0.07 * Math.sin(5 * t + p2) + 0.035 * Math.sin(9 * t + p3 + k * 0.3));
+        const px = cx + rr * Math.cos(t), py = cy + rr * 0.82 * Math.sin(t);
+        t === 0 ? x.moveTo(px, py) : x.lineTo(px, py);
+      }
+      x.stroke();
+    }
+  });
+  _ogcTexture = c.toDataURL('image/png');
+  return _ogcTexture;
+}
+// QR codes generated in the browser (crisp, no third-party request); qrserver fallback.
+async function ogaEnsureQR() {
+  if (window.qrcode) return true;
+  try { await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js'); } catch (e) {}
+  return !!window.qrcode;
+}
+function ogaQrDataUrl(text) {
+  if (window.qrcode) {
+    try {
+      const q = qrcode(0, 'M'); q.addData(text); q.make();
+      const n = q.getModuleCount(), cell = 10, m = 2, size = (n + m * 2) * cell;
+      const c = document.createElement('canvas'); c.width = c.height = size;
+      const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, size, size); x.fillStyle = '#1b1915';
+      for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (q.isDark(r, k)) x.fillRect((k + m) * cell, (r + m) * cell, cell, cell);
+      return c.toDataURL('image/png');
+    } catch (e) {}
+  }
+  return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(text);
+}
+// Center-crop to a square and bake black & white (html2canvas ignores CSS filters).
+function ogcBakeImage(dataUrl) {
+  return new Promise(res => {
+    const im = new Image();
+    im.onload = () => {
+      const S = 480, c = document.createElement('canvas'); c.width = c.height = S;
+      const x = c.getContext('2d'); const side = Math.min(im.width, im.height);
+      x.drawImage(im, (im.width - side) / 2, (im.height - side) / 2, side, side, 0, 0, S, S);
+      const d = x.getImageData(0, 0, S, S), a = d.data;
+      for (let i = 0; i < a.length; i += 4) {
+        let g = 0.299 * a[i] + 0.587 * a[i + 1] + 0.114 * a[i + 2];
+        g = Math.max(0, Math.min(255, (g - 128) * 1.08 + 128));
+        a[i] = a[i + 1] = a[i + 2] = g;
+      }
+      x.putImageData(d, 0, 0); res(c.toDataURL('image/jpeg', 0.9));
+    };
+    im.onerror = () => res(null);
+    im.src = dataUrl;
+  });
+}
+// Pull event photos through the Staff OS proxy (Planning Center's CDN sends no CORS
+// headers), bake them, and swap them into the preview so the export can draw them.
+let _ogcPrefetchQ = new Set(), _ogcPrefetchT = null, _ogcPrefetchBusy = Promise.resolve();
+function ogcPrefetch(urls) {
+  (urls || []).forEach(u => { if (u && !_ogcImgCache[u]) _ogcPrefetchQ.add(u); });
+  clearTimeout(_ogcPrefetchT);
+  _ogcPrefetchT = setTimeout(() => {
+    const batch = [..._ogcPrefetchQ].slice(0, 12); batch.forEach(u => _ogcPrefetchQ.delete(u));
+    if (!batch.length) return;
+    _ogcPrefetchBusy = _ogcPrefetchBusy.then(() => sosApiPost({ action: 'sos_img', urls: batch }).then(res => {
+      const raw = (res && res.images) || [];
+      return Promise.all(batch.map(async (u, i) => { if (raw[i] && !_ogcImgCache[u]) { const b = await ogcBakeImage(raw[i]); if (b) _ogcImgCache[u] = b; } }));
+    }).catch(() => {}));
+  }, 600);
+}
+async function ogcPrepareImages() {
+  await _ogcPrefetchBusy;
+  const imgs = [...document.querySelectorAll('#ogcPages img[data-orig]')];
+  const need = [...new Set(imgs.map(i => i.dataset.orig).filter(u => !_ogcImgCache[u]))];
+  if (need.length) {
+    ogcSetStatus('Preparing photos for print…');
+    try {
+      const res = await sosApiPost({ action: 'sos_img', urls: need });
+      const raw = (res && res.images) || [];
+      await Promise.all(need.map(async (u, i) => { if (raw[i]) { const b = await ogcBakeImage(raw[i]); if (b) _ogcImgCache[u] = b; } }));
+    } catch (e) {}
+  }
+  let missing = 0;
+  imgs.forEach(i => { const b = _ogcImgCache[i.dataset.orig]; if (b) { i.src = b; i.classList.remove('live'); } else missing++; });
+  _ogcNotes.img = missing ? missing + ' photo(s) couldn’t be prepared — they’ll export blank.' : '';
+  ogcSetStatus('');
+  return missing;
+}
+const _ogcNotes = { cap: '', over: '', img: '', work: '' };
+function ogcSetStatus(t) { _ogcNotes.work = t || ''; ogcRenderStatus(); }
+function ogcRenderStatus() { const el = document.getElementById('ogcStatus'); if (el) el.textContent = [_ogcNotes.work, _ogcNotes.cap, _ogcNotes.img, _ogcNotes.over].filter(Boolean).join('  ·  '); }
+// Shrink each description (then the title) until the full text fits its slot.
+function ogcFitText() {
+  let over = 0;
+  document.querySelectorAll('#ogcPages .ogc-ev').forEach(ev => {
+    const body = ev.querySelector('.ogc-ev-body'), desc = ev.querySelector('.ogc-ev-desc'), name = ev.querySelector('.ogc-ev-name');
+    let fs = 9.5, nf = 14.5, guard = 0;
+    if (desc) { desc.style.fontSize = fs + 'px'; desc.style.lineHeight = '1.34'; }
+    if (name) name.style.fontSize = nf + 'px';
+    while (body.scrollHeight > body.clientHeight + 1 && guard++ < 60) {
+      if (desc && fs > 6.5) { fs -= 0.25; desc.style.fontSize = fs + 'px'; desc.style.lineHeight = fs < 8 ? '1.24' : '1.3'; }
+      else if (name && nf > 11) { nf -= 0.5; name.style.fontSize = nf + 'px'; }
+      else break;
+    }
+    const bad = body.scrollHeight > body.clientHeight + 1;
+    ev.classList.toggle('overflow', bad); if (bad) over++;
+  });
+  _ogcNotes.over = over ? over + ' description(s) too long to fit — shorten the blurb (red underline).' : '';
+  ogcRenderStatus();
+  return over;
+}
+
+async function ogaBuildCard() {
+  let chosen = _ogaEvents.filter(e => (_ogaState[ogaKey(e)] || {}).on).map(e => ({ e: e, st: _ogaState[ogaKey(e)] }));
   if (!chosen.length) { alert('Select at least one announcement first.'); return; }
-  const title = (document.getElementById('ogaTitle') || {}).value || 'This Month at Living Stones';
-  const monthLabel = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  // Equal-sized events, max 5 per face, balanced so a double-sided card fills
-  // both sides (e.g. 5 events → 3 front / 2 back, not 5 / empty).
-  const PER = 5;
-  const total = chosen.length;
-  const pages = Math.max(2, Math.ceil(total / PER));
-  const per = Math.ceil(total / pages);
-  const faces = [];
-  for (let i = 0; i < total; i += per) faces.push(chosen.slice(i, i + per));
-  while (faces.length < 2) faces.push([]);   // always a double-sided pair
+  let capNote = '';
+  if (chosen.length > OGC_MAX) { capNote = 'Using the first ' + OGC_MAX + ' of ' + chosen.length + ' selected (3 per side).'; chosen = chosen.slice(0, OGC_MAX); }
+  _ogcNotes.cap = capNote; _ogcNotes.over = ''; _ogcNotes.img = '';
+  const title = (document.getElementById('ogaTitle') || {}).value || 'What’s Coming Up';
+  // ≤3 → all on the front, back = "Connect" panel; 4–6 → split evenly front/back.
+  const faces = chosen.length <= 3 ? [chosen, []] : [chosen.slice(0, Math.ceil(chosen.length / 2)), chosen.slice(Math.ceil(chosen.length / 2))];
+  await ogaEnsureQR();
+  const tex = ogcTexture();
 
   const evHtml = (item) => {
     const e = item.e, st = item.st;
@@ -7134,81 +7262,94 @@ function ogaBuildCard() {
     const time = (e.time && !/12:00 AM/.test(e.time)) ? e.time : '';
     const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' })) + (time ? ' · ' + time : '');
     const loc = e.location ? e.location.split(' - ')[0] : '';
-    const desc = st.blurb || e.desc || e.summary || '';
+    const desc = st.blurb || e.summary || e.desc || '';
     const link = st.reg && /^https?:\/\//.test(st.reg) ? st.reg : '';
     const isReg = /\/registrations?\//.test(link);
-    // Every item gets a clear call-to-action so people know what to do.
     const cta = isReg ? 'Register today' : (link ? 'Scan for details' : (ogaIsBaptism(e) ? 'Sign up to be baptized' : 'Join us — all welcome'));
-    // Circular black date badge + B&W photo (no crossorigin so the image actually
-    // renders; PDF export falls back to Print, which prints images fine).
     const badge = '<div class="ogc-badge"><div class="m">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</div><div class="d">' + d.getDate() + '</div></div>';
-    const thumb = e.img ? '<img class="ogc-thumb" referrerpolicy="no-referrer" src="' + escapeHtml(e.img) + '" alt="" onerror="this.style.display=\'none\'">' : '';
-    const qr = link ? '<div class="ogc-ev-qr"><img referrerpolicy="no-referrer" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=' + encodeURIComponent(link) + '" alt="QR"><div class="qc">' + (isReg ? 'Register' : 'Scan') + '</div></div>' : '';
-    return '<div class="ogc-ev">' + badge + thumb +
-      '<div class="ogc-ev-body"><div class="ogc-ev-name">' + escapeHtml(e.name || 'Event') + '</div>' +
+    const cached = e.img && _ogcImgCache[e.img];
+    const media = e.img
+      ? '<img class="ogc-img' + (cached ? '' : ' live') + '" data-orig="' + escapeHtml(e.img) + '" referrerpolicy="no-referrer" src="' + escapeHtml(cached || e.img) + '" alt="">'
+      : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>';
+    const qr = link ? '<div class="ogc-ev-qr"><img src="' + ogaQrDataUrl(link) + '" alt="QR"><div class="qc">' + (isReg ? 'Scan to register' : 'Scan for info') + '</div></div>' : '';
+    return '<div class="ogc-ev"><div class="ogc-media">' + media + badge + '</div>' +
+      '<div class="ogc-ev-body">' + qr +
+        '<div class="ogc-ev-name">' + escapeHtml(e.name || 'Event') + '</div>' +
         '<div class="ogc-ev-when">' + escapeHtml(when + (loc ? ' · ' + loc : '')) + '</div>' +
         (desc ? '<div class="ogc-ev-desc">' + escapeHtml(desc) + '</div>' : '') +
         '<span class="ogc-cta">' + cta + '</span>' +
-      '</div>' + qr + '</div>';
+      '</div></div>';
   };
   const faceHtml = (evs, idx) => {
-    const isFront = idx === 0;
-    const isConnect = !isFront && !evs.length;
-    const h1 = isFront ? title : (isConnect ? 'Connect With Us' : 'More This Month');
-    const h2 = isFront ? monthLabel : (isConnect ? 'We’d love to see you Sunday' : 'Mark your calendar');
-    return '<div class="ogc-card"><div class="ogc-face">' +
-      '<span class="ogc-pagetag">' + (isFront ? 'FRONT' : (idx === 1 ? 'BACK' : 'PAGE ' + (idx + 1))) + '</span>' +
-      '<div class="ogc-hero">' +
-        '<div class="ogc-hero-top">' + ogcLogoSvg(30, '#ece4be') + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
-        '<div class="ogc-h1">' + escapeHtml(h1) + '</div><div class="ogc-h2">' + escapeHtml(h2) + '</div>' +
-      '</div>' +
-      '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
-      '<div class="ogc-foot"><b>lssouthreno.com</b> · 95 Foothill Drive, Reno NV 89521</div>' +
-      '</div></div>';
+    const isFront = idx === 0, isConnect = !isFront && !evs.length;
+    const h1 = isFront ? title : (isConnect ? 'Connect With Us' : 'More Coming Up');
+    const h2 = isConnect ? 'Sundays at 95 Foothill Drive' : ogcFmtRange(evs);
+    return '<div class="ogc-pagewrap"><div class="ogc-pagecap">' + (isFront ? 'Front' : 'Back') + '</div>' +
+      '<div class="ogc-card" style="background-image:url(' + tex + ')"><div class="ogc-face">' +
+        '<div class="ogc-hero"><img class="ogc-lockup" src="assets/ls-card-logo-b.png" alt="Living Stones South Reno">' +
+          '<div class="ogc-hero-r"><div class="ogc-h1">' + escapeHtml(h1) + '</div>' + (h2 ? '<div class="ogc-h2">' + escapeHtml(h2) + '</div>' : '') + '</div></div>' +
+        '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
+        '<div class="ogc-foot"><b>lssouthreno.com</b> · Sundays 8:00 · 9:30 · 11:00 AM · 95 Foothill Drive, Reno NV</div>' +
+      '</div><div class="ogc-trim" data-html2canvas-ignore="true" title="Trim line (5×7). Everything outside is bleed."></div></div></div>';
   };
   document.getElementById('ogcPages').innerHTML = faces.map((f, i) => faceHtml(f, i)).join('');
   const o = document.getElementById('ogcOverlay');
   o.classList.add('open'); o.setAttribute('aria-hidden', 'false');
+  ogcSetStatus('');
+  try { await document.fonts.ready; } catch (e) {}
+  ogcFitText();
+  _ogcPrep = ogcPrepareImages().then(() => { ogcFitText(); });
 }
 function ogcClose() {
   const o = document.getElementById('ogcOverlay');
   o.classList.remove('open'); o.setAttribute('aria-hidden', 'true');
 }
-// Branded closer shown when a card face has no events (keeps the back looking finished).
+// Branded closer shown when the back has no events.
 function ogcConnectPanel() {
-  const qr = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=' + encodeURIComponent('https://lssouthreno.com');
+  const qr = ogaQrDataUrl('https://lssouthreno.com');
   return '<div class="ogc-connect">' +
     '<div class="ogc-connect-h">Join us this Sunday</div>' +
     '<div class="ogc-connect-times">8:00 · 9:30 · 11:00 AM</div>' +
     '<div class="ogc-connect-addr">95 Foothill Drive, Reno NV 89521</div>' +
-    '<img class="ogc-connect-qr" referrerpolicy="no-referrer" src="' + qr + '" alt="lssouthreno.com">' +
+    '<img class="ogc-connect-qr" src="' + qr + '" alt="lssouthreno.com">' +
     '<div class="ogc-connect-web">lssouthreno.com</div>' +
     '<div class="ogc-connect-tag">Helping everyone find everything in Jesus.</div>' +
   '</div>';
 }
-// Download a true 5×7 PDF (jsPDF + html2canvas, lazy-loaded from CDN).
 function ogaLoadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
-async function ogaDownloadPDF(btn) {
+// Export: one PDF, one page per side. Page = 5×7 trim + 0.125in bleed + 0.25in slug
+// with crop marks at the trim lines (outside the bleed) and a small slug label.
+async function ogaExportPDF(btn) {
   const cards = [...document.querySelectorAll('#ogcPages .ogc-card')];
   if (!cards.length) return;
-  const old = btn.textContent; btn.textContent = 'Building PDF…'; btn.disabled = true;
+  const old = btn.textContent; btn.disabled = true; btn.textContent = 'Preparing…';
   try {
+    await _ogcPrep;
+    try { await document.fonts.ready; } catch (e) {}
+    ogcFitText();
+    ogcSetStatus('Rendering print file…');
     if (!window.html2canvas) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
     if (!(window.jspdf && window.jspdf.jsPDF)) await ogaLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
-    const jsPDF = window.jspdf.jsPDF;
-    const pdf = new jsPDF({ unit: 'in', format: [5, 7], orientation: 'portrait' });
+    const TRIM_W = 5, TRIM_H = 7, BLEED = 0.125, SLUG = 0.25;
+    const PW = TRIM_W + 2 * (BLEED + SLUG), PH = TRIM_H + 2 * (BLEED + SLUG);
+    const pdf = new window.jspdf.jsPDF({ unit: 'in', format: [PW, PH], orientation: 'portrait' });
+    const x0 = SLUG + BLEED, x1 = x0 + TRIM_W, y0 = SLUG + BLEED, y1 = y0 + TRIM_H, M = SLUG - 0.03;
     for (let i = 0; i < cards.length; i++) {
-      const canvas = await html2canvas(cards[i], { scale: 3, useCORS: true, backgroundColor: '#16130e', logging: false });
-      const img = canvas.toDataURL('image/jpeg', 0.95);
-      if (i > 0) pdf.addPage([5, 7], 'portrait');
-      pdf.addImage(img, 'JPEG', 0, 0, 5, 7);
+      const canvas = await html2canvas(cards[i], { scale: 4, useCORS: true, backgroundColor: '#f2ecd8', logging: false });
+      if (i > 0) pdf.addPage([PW, PH], 'portrait');
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.93), 'JPEG', SLUG, SLUG, TRIM_W + 2 * BLEED, TRIM_H + 2 * BLEED);
+      // crop marks (hairline, black), kept out of the bleed
+      pdf.setDrawColor(0); pdf.setLineWidth(0.004);
+      [x0, x1].forEach(x => { pdf.line(x, 0, x, M); pdf.line(x, PH - M, x, PH); });
+      [y0, y1].forEach(y => { pdf.line(0, y, M, y); pdf.line(PW - M, y, PW, y); });
+      pdf.setFontSize(5.5); pdf.setTextColor(90);
+      pdf.text('LSSR Announcements — ' + (i === 0 ? 'FRONT' : 'BACK') + ' · Trim 5 × 7 in · Bleed 0.125 in', PW / 2, 0.16, { align: 'center' });
     }
     pdf.save('LSSR-Announcements-' + new Date().toISOString().slice(0, 10) + '.pdf');
-    btn.textContent = old;
+    ogcSetStatus('Exported ✓');
   } catch (err) {
-    btn.textContent = old;
-    alert('Direct PDF hit a snag (usually a cross-origin image). Use "Print / Save as PDF" instead — it always works.\n\n(' + (err && err.message ? err.message : err) + ')');
-  } finally { btn.disabled = false; }
+    ogcSetStatus('Export failed: ' + (err && err.message ? err.message : err));
+  } finally { btn.disabled = false; btn.textContent = old; }
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -8903,18 +9044,17 @@ function staffRenderAll(data) {
 }
 
 function staffRenderMeta(data) {
-  // Quarter auto-advances with the calendar so it's never stale.
-  const now = new Date();
-  const q = 'Q' + (Math.floor(now.getMonth() / 3) + 1) + ' ' + now.getFullYear();
-  // "Updated" = the live dashboard sync time (this snapshot pulls live scorecard/
-  // rocks data hourly). The EOS planning content itself is authored per-quarter.
-  let d = '';
-  try {
-    const src = (window.DASHBOARD_DATA && DASHBOARD_DATA.lastUpdated) || (data.meta && data.meta.lastUpdated) || '';
-    if (src) { const dt = new Date(src); d = isNaN(dt) ? String(src) : dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
-  } catch (e) {}
+  // Top-right stamp = when the Staff OS data last synced (same style as the dashboard's
+  // "Updated …"). Uses the newest of the calendar quick-sync and the hourly sync.
+  const stamps = [];
+  try { if (data && data.calendar && data.calendar.syncedAt) stamps.push(new Date(data.calendar.syncedAt)); } catch (e) {}
+  try { if (typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA && DASHBOARD_DATA.lastUpdated) stamps.push(new Date(DASHBOARD_DATA.lastUpdated)); } catch (e) {}
+  const valid = stamps.filter(d => !isNaN(d));
   const metaEl = document.getElementById('staffModMeta');
-  if (metaEl) metaEl.textContent = q + (d ? ' · Updated ' + d : '');
+  if (!metaEl) return;
+  if (!valid.length) { metaEl.textContent = ''; return; }
+  const d = new Date(Math.max.apply(null, valid.map(x => x.getTime())));
+  metaEl.textContent = 'Synced ' + d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
 function staffRenderScorecard(data) {
@@ -13479,7 +13619,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T174141Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T190923Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
