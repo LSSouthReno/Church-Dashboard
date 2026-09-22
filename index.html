@@ -1055,125 +1055,129 @@
   .oga-badge.reg { background: rgba(207,134,54,0.18); color: #e0954a; }
   .oga-badge.cc { background: rgba(45,212,191,0.14); color: #2dd4bf; }
 
-  /* ---- Staff OS: My Snapshot workspace ---- */
-  .sos-loading, .sos-empty { color: var(--sp-muted,#9a917f); padding: 24px; text-align: center; font-size: 13px; }
-  .sos-empty.sm { padding: 10px; font-size: 12px; }
-  .sos-signin { display: flex; justify-content: center; padding: 40px 16px; }
-  .sos-signin-box { max-width: 440px; width: 100%; background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 14px; padding: 26px; }
-  .sos-signin-t { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-  .sos-signin-s { font-size: 13px; color: var(--sp-muted,#9a917f); margin-bottom: 18px; line-height: 1.5; }
-  .sos-input { width: 100%; background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 8px; color: #f4efe6; padding: 10px 12px; font-size: 13px; font-family: inherit; margin-bottom: 10px; box-sizing: border-box; }
-  .sos-input.sm { padding: 7px 9px; font-size: 12px; margin-bottom: 0; }
-  .sos-btn { background: #1c1c1c; border: 1px solid var(--sp-border,#2a2a2a); color: #f4efe6; border-radius: 8px; padding: 9px 14px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; }
-  .sos-btn.hi { background: var(--sp-gold,#cf8636); color: #1a1206; border-color: var(--sp-gold,#cf8636); }
-  .sos-btn.sm { padding: 6px 10px; font-size: 12px; }
-  .sos-btn.ghost { background: transparent; color: var(--sp-muted,#9a917f); }
-  .sos-btn:hover { filter: brightness(1.12); }
-  .sos-err { color: #f87171; font-size: 12px; margin-top: 6px; min-height: 14px; }
-  .sos-topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-  .sos-who { font-size: 16px; color: #fff; } .sos-who b { font-weight: 800; }
-  .sos-role { font-size: 12px; color: var(--sp-muted,#9a917f); margin-left: 6px; }
-  .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  /* ---- Staff OS: My Snapshot workspace (light parchment, matches the panel) ---- */
+  .sos-loading, .sos-empty { color: var(--sp-muted,#8a7e6e); padding: 28px; text-align: center; font-size: 14px; }
+  .sos-empty.sm { padding: 12px; font-size: 13px; }
+  .sos-signin { display: flex; justify-content: center; padding: 48px 16px; }
+  .sos-signin-box { max-width: 400px; width: 100%; background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 16px; padding: 32px; box-shadow: 0 6px 24px rgba(26,21,16,0.07); text-align: center; }
+  .sos-signin-t { font-size: 22px; font-weight: 800; color: var(--sp-ink,#1a1510); margin-bottom: 8px; }
+  .sos-signin-s { font-size: 14px; color: var(--sp-muted,#8a7e6e); margin-bottom: 20px; line-height: 1.55; }
+  .sos-input { width: 100%; background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 9px; color: var(--sp-ink,#1a1510); padding: 12px 14px; font-size: 15px; font-family: inherit; margin-bottom: 12px; box-sizing: border-box; }
+  .sos-input:focus { outline: none; border-color: var(--sp-gold,#c9963a); }
+  .sos-input.sm { padding: 8px 10px; font-size: 13px; margin-bottom: 0; }
+  .sos-btn { background: #fff; border: 1px solid var(--sp-border,#d8cdb8); color: var(--sp-ink,#1a1510); border-radius: 9px; padding: 11px 18px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; }
+  .sos-btn.hi { background: var(--sp-gold,#c9963a); color: #fff; border-color: var(--sp-gold,#c9963a); }
+  .sos-btn.sm { padding: 7px 12px; font-size: 13px; }
+  .sos-btn.ghost { background: transparent; color: var(--sp-muted,#8a7e6e); }
+  .sos-btn:hover { filter: brightness(1.04); }
+  .sos-err { color: var(--sp-red,#a83030); font-size: 13px; margin-top: 8px; min-height: 16px; }
+  .sos-topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .sos-who { font-size: 19px; color: var(--sp-ink,#1a1510); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .sos-who b { font-weight: 800; }
+  .sos-viewing { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--sp-muted,#8a7e6e); }
+  .sos-viewing .sos-input.sm { margin-bottom: 0; }
+  .sos-viewing-tag { font-size: 11px; font-weight: 700; color: var(--sp-gold,#c9963a); background: rgba(201,150,58,.12); padding: 3px 9px; border-radius: 6px; }
+  .sos-role { font-size: 12px; color: var(--sp-muted,#8a7e6e); background: rgba(26,21,16,.05); padding: 2px 9px; border-radius: 20px; font-weight: 700; }
+  .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
   @media (max-width: 900px) { .sos-grid { grid-template-columns: 1fr; } }
-  .sos-col { display: flex; flex-direction: column; gap: 18px; }
-  .sos-card { background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 14px; padding: 18px; }
-  .sos-card-h { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .sos-count { font-size: 11px; font-weight: 600; color: var(--sp-muted,#9a917f); background: #0f0f0f; padding: 2px 8px; border-radius: 10px; }
-  .sos-addtask { background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 10px; padding: 10px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .sos-col { display: flex; flex-direction: column; gap: 22px; }
+  .sos-card { background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 16px; padding: 24px; box-shadow: 0 4px 18px rgba(26,21,16,0.05); }
+  .sos-card-h { font-size: 18px; font-weight: 800; color: var(--sp-ink,#1a1510); margin-bottom: 18px; display: flex; align-items: center; gap: 9px; }
+  .sos-count { font-size: 12px; font-weight: 700; color: var(--sp-muted,#8a7e6e); background: rgba(26,21,16,.05); padding: 3px 10px; border-radius: 12px; }
+  .sos-addtask { background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 12px; padding: 14px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 10px; }
   .sos-addtask-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .sos-addtask-row .sos-input { margin-bottom: 0; flex: 1 1 auto; min-width: 90px; }
-  .sos-tgroup { margin-bottom: 12px; }
-  .sos-tgroup-h { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; margin-bottom: 6px; color: var(--sp-muted,#9a917f); }
-  .sos-tgroup-h.ov { color: #f87171; } .sos-tgroup-h.td { color: #cf8636; }
-  .sos-task { display: flex; gap: 10px; align-items: flex-start; padding: 9px 8px; border-radius: 8px; }
-  .sos-task:hover { background: #0f0f0f; }
-  .sos-task.done .sos-task-title { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
-  .sos-cb { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--sp-gold,#cf8636); cursor: pointer; flex: 0 0 auto; }
+  .sos-addtask-row .sos-input { margin-bottom: 0; flex: 1 1 auto; min-width: 100px; }
+  .sos-tgroup { margin-bottom: 16px; }
+  .sos-tgroup-h { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; font-weight: 800; margin-bottom: 8px; color: var(--sp-muted,#8a7e6e); }
+  .sos-tgroup-h.ov { color: var(--sp-red,#a83030); } .sos-tgroup-h.td { color: var(--sp-gold,#c9963a); }
+  .sos-task { display: flex; gap: 12px; align-items: flex-start; padding: 11px 8px; border-radius: 10px; }
+  .sos-task:hover { background: #fbf9f4; }
+  .sos-task.done .sos-task-title { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
+  .sos-cb { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--sp-gold,#c9963a); cursor: pointer; flex: 0 0 auto; }
   .sos-task-body { flex: 1 1 auto; min-width: 0; }
-  .sos-task-top { display: flex; gap: 7px; flex-wrap: wrap; align-items: baseline; }
-  .sos-task-title { font-size: 13.5px; color: #f4efe6; font-weight: 600; }
-  .sos-task-notes { font-size: 12px; color: var(--sp-muted,#9a917f); margin-top: 2px; }
-  .sos-tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: #0f0f0f; color: var(--sp-muted,#9a917f); }
-  .sos-tag.high { background: rgba(248,113,113,.16); color: #f87171; }
-  .sos-tag.due { background: rgba(207,134,54,.16); color: #e0954a; }
-  .sos-tag.from { background: rgba(96,165,250,.16); color: #93c5fd; }
-  .sos-task-actions { display: flex; gap: 3px; opacity: .5; }
+  .sos-task-top { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .sos-task-title { font-size: 15px; color: var(--sp-ink,#1a1510); font-weight: 600; }
+  .sos-task-notes { font-size: 13px; color: var(--sp-muted,#8a7e6e); margin-top: 3px; }
+  .sos-tag { font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 6px; background: rgba(26,21,16,.05); color: var(--sp-muted,#8a7e6e); }
+  .sos-tag.high { background: rgba(168,48,48,.12); color: var(--sp-red,#a83030); }
+  .sos-tag.due { background: rgba(201,150,58,.14); color: var(--sp-gold,#c9963a); }
+  .sos-tag.from { background: rgba(90,122,92,.14); color: var(--sp-sage,#5a7a5c); }
+  .sos-task-actions { display: flex; gap: 3px; opacity: .45; }
   .sos-task:hover .sos-task-actions { opacity: 1; }
-  .sos-task-actions button, .sos-x { background: none; border: none; color: var(--sp-muted,#9a917f); cursor: pointer; font-size: 12px; padding: 2px 4px; }
-  .sos-task-actions button:hover, .sos-x:hover { color: #fff; }
-  .sos-done-wrap { margin-top: 8px; } .sos-done-wrap summary { cursor: pointer; font-size: 12px; color: var(--sp-muted,#9a917f); padding: 4px 0; }
-  .sos-mini { margin-bottom: 16px; }
-  .sos-mini-h { font-size: 12px; font-weight: 700; color: #cf8636; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
-  .sos-mini-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; }
-  .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
-  .sos-mini-title { flex: 1 1 auto; font-size: 13px; color: #f4efe6; }
-  .sos-add-inline { display: flex; gap: 6px; margin-top: 8px; }
+  .sos-task-actions button, .sos-x { background: none; border: none; color: var(--sp-muted,#8a7e6e); cursor: pointer; font-size: 13px; padding: 2px 4px; }
+  .sos-task-actions button:hover, .sos-x:hover { color: var(--sp-ink,#1a1510); }
+  .sos-done-wrap { margin-top: 10px; } .sos-done-wrap summary { cursor: pointer; font-size: 13px; color: var(--sp-muted,#8a7e6e); padding: 5px 0; }
+  .sos-mini { margin-bottom: 20px; }
+  .sos-mini-h { font-size: 12.5px; font-weight: 800; color: var(--sp-gold,#c9963a); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
+  .sos-mini-row { display: flex; align-items: center; gap: 9px; padding: 6px 0; }
+  .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
+  .sos-mini-title { flex: 1 1 auto; font-size: 14.5px; color: var(--sp-ink,#1a1510); }
+  .sos-add-inline { display: flex; gap: 7px; margin-top: 10px; }
   .sos-add-inline .sos-input { margin-bottom: 0; }
-  .sos-goal { background: #0f0f0f; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+  .sos-goal { background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
   .sos-goal-top { display: flex; align-items: baseline; gap: 8px; }
-  .sos-goal-title { flex: 1 1 auto; font-size: 14px; font-weight: 700; color: #fff; }
-  .sos-goal-period { font-size: 11px; color: var(--sp-muted,#9a917f); }
-  .sos-goal-metric { font-size: 12px; color: var(--sp-muted,#9a917f); margin: 6px 0; }
-  .sos-cur { width: 60px; background: #161616; border: 1px solid var(--sp-border,#2a2a2a); border-radius: 5px; color: #f4efe6; padding: 2px 6px; font-size: 12px; }
-  .sos-prog { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
-  .sos-prog input[type=range] { flex: 1 1 auto; accent-color: var(--sp-gold,#cf8636); }
-  .sos-prog-lbl { font-size: 12px; font-weight: 800; color: #cf8636; width: 40px; text-align: right; }
-  .sos-steps { margin: 6px 0; }
-  .sos-step { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 12.5px; color: #f4efe6; }
-  .sos-step.done span { text-decoration: line-through; color: var(--sp-muted,#9a917f); }
+  .sos-goal-title { flex: 1 1 auto; font-size: 16px; font-weight: 700; color: var(--sp-ink,#1a1510); }
+  .sos-goal-period { font-size: 12px; color: var(--sp-muted,#8a7e6e); }
+  .sos-goal-metric { font-size: 13px; color: var(--sp-muted,#8a7e6e); margin: 8px 0; }
+  .sos-cur { width: 64px; background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 6px; color: var(--sp-ink,#1a1510); padding: 3px 7px; font-size: 13px; }
+  .sos-prog { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+  .sos-prog input[type=range] { flex: 1 1 auto; accent-color: var(--sp-gold,#c9963a); }
+  .sos-prog-lbl { font-size: 14px; font-weight: 800; color: var(--sp-gold,#c9963a); width: 44px; text-align: right; }
+  .sos-steps { margin: 8px 0; }
+  .sos-step { display: flex; align-items: center; gap: 9px; padding: 4px 0; font-size: 14px; color: var(--sp-ink,#1a1510); }
+  .sos-step.done span { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
   .sos-step span { flex: 1 1 auto; }
-  .sos-goal-add { border-top: 1px solid var(--sp-border,#2a2a2a); padding-top: 12px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
+  .sos-goal-add { border-top: 1px solid var(--sp-border,#d8cdb8); padding-top: 14px; margin-top: 8px; display: flex; flex-direction: column; gap: 10px; }
 
   /* Print-preview overlay — 5×7 card, charcoal + cream torn-paper + B&W photos */
   .ogc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4000; display: none; overflow: auto; padding: 24px; }
   .ogc-overlay.open { display: block; }
   .ogc-bar { max-width: 1100px; margin: 0 auto 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: center; }
   .ogc-pages { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
-  /* 5×7 portrait at 96dpi = 480×672 · cream #ece4be on charcoal #1b1915 */
-  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #1b1915; color: #f3efe6; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
+  /* 5×7 portrait at 96dpi = 480×672 · LIGHT body, DARK torn header/footer */
+  .ogc-card { width: 480px; height: 672px; flex: 0 0 auto; background: #f2ecd8; color: #26221a; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.6); font-family: 'Montserrat', system-ui, sans-serif; }
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
-  /* Cream torn header band */
-  .ogc-hero { position: relative; background: #ece4be; color: #1b1915; padding: 22px 30px 30px;
+  /* Dark charcoal torn header band */
+  .ogc-hero { position: relative; background: #1b1915; color: #f2ecd8; padding: 22px 30px 30px;
     clip-path: polygon(0 0,100% 0,100% 86%,94% 100%,87% 89%,79% 99%,71% 88%,63% 100%,55% 89%,47% 99%,39% 88%,31% 100%,23% 89%,15% 99%,8% 88%,3% 97%,0 87%); }
   .ogc-hero-top { display: flex; align-items: center; gap: 9px; }
   .ogc-logo { width: 30px; height: 30px; flex: 0 0 auto; }
-  .ogc-brandtxt { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #6a6045; font-weight: 800; line-height: 1.3; }
-  .ogc-brandtxt b { color: #1b1915; display: block; font-size: 12px; letter-spacing: .14em; }
-  .ogc-h1 { font-size: 31px; font-weight: 800; line-height: 0.98; margin: 13px 0 3px; letter-spacing: -.6px; color: #1b1915; text-transform: uppercase; }
-  .ogc-h2 { font-size: 12px; color: #8a7a45; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-  .ogc-body { padding: 4px 24px 6px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
-  .ogc-ev { padding: 8px 0; display: flex; gap: 12px; align-items: center; border-bottom: 1px dashed rgba(236,228,190,0.28); }
+  .ogc-brandtxt { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #cbbf9a; font-weight: 800; line-height: 1.3; }
+  .ogc-brandtxt b { color: #fff; display: block; font-size: 12px; letter-spacing: .14em; }
+  .ogc-h1 { font-size: 31px; font-weight: 800; line-height: 0.98; margin: 13px 0 3px; letter-spacing: -.6px; color: #fff; text-transform: uppercase; }
+  .ogc-h2 { font-size: 12px; color: #cbb56a; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .ogc-body { padding: 6px 24px; flex: 1 1 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .ogc-ev { padding: 9px 0; display: flex; gap: 12px; align-items: center; border-bottom: 1px dashed rgba(27,25,21,0.16); }
   .ogc-ev:last-child { border-bottom: none; }
-  /* Black circle date badge with cream ring */
-  .ogc-badge { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; background: #100f0c; border: 2px solid #ece4be; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
-  .ogc-badge .m { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #ece4be; letter-spacing: .08em; }
+  /* Dark circle date badge on the light body */
+  .ogc-badge { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; background: #1b1915; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+  .ogc-badge .m { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #cbb56a; letter-spacing: .08em; }
   .ogc-badge .d { font-size: 21px; font-weight: 800; color: #fff; margin-top: 1px; }
-  .ogc-thumb { flex: 0 0 54px; width: 54px; height: 54px; object-fit: cover; filter: grayscale(1) contrast(1.05); border: 2px solid #ece4be; }
+  .ogc-thumb { flex: 0 0 54px; width: 54px; height: 54px; object-fit: cover; filter: grayscale(1) contrast(1.05); border: 2px solid #1b1915; }
   .ogc-ev-body { flex: 1 1 auto; min-width: 0; }
-  .ogc-ev-name { font-size: 15px; font-weight: 800; line-height: 1.1; color: #fff; text-transform: uppercase; letter-spacing: -0.2px; }
-  .ogc-ev-when { font-size: 10px; color: #cbb56a; font-weight: 800; margin-top: 2px; text-transform: uppercase; letter-spacing: .03em; }
-  .ogc-ev-desc { font-size: 10.5px; color: #cbc6b8; margin-top: 3px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .ogc-cta { display: inline-block; font-size: 10px; font-weight: 800; color: #1b1915; background: #ece4be; padding: 2px 8px; border-radius: 3px; margin-top: 5px; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-ev-name { font-size: 15.5px; font-weight: 800; line-height: 1.1; color: #1b1915; text-transform: uppercase; letter-spacing: -0.2px; }
+  .ogc-ev-when { font-size: 10px; color: #8a742e; font-weight: 800; margin-top: 2px; text-transform: uppercase; letter-spacing: .03em; }
+  .ogc-ev-desc { font-size: 10.5px; color: #57503c; margin-top: 3px; line-height: 1.32; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ogc-cta { display: inline-block; font-size: 10px; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 3px 9px; border-radius: 3px; margin-top: 6px; text-transform: uppercase; letter-spacing: .04em; }
   .ogc-ev-qr { flex: 0 0 48px; text-align: center; }
-  .ogc-ev-qr img { width: 48px; height: 48px; background: #fff; padding: 3px; }
-  .ogc-ev-qr .qc { font-size: 7px; color: #9a917f; margin-top: 2px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
-  /* Cream torn footer band */
-  .ogc-foot { background: #ece4be; color: #4a4230; padding: 16px 26px 12px; font-size: 9.5px; text-align: center; font-weight: 700; letter-spacing: .03em;
+  .ogc-ev-qr img { width: 48px; height: 48px; background: #fff; padding: 3px; border: 1px solid #1b1915; }
+  .ogc-ev-qr .qc { font-size: 7px; color: #8a742e; margin-top: 2px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
+  /* Dark torn footer band */
+  .ogc-foot { background: #1b1915; color: #cbbf9a; padding: 16px 26px 12px; font-size: 9.5px; text-align: center; font-weight: 700; letter-spacing: .03em;
     clip-path: polygon(0 14%,5% 1%,12% 12%,20% 1%,28% 12%,36% 1%,44% 12%,52% 1%,60% 12%,68% 1%,76% 12%,84% 1%,92% 12%,96% 2%,100% 13%,100% 100%,0 100%); }
-  .ogc-foot b { color: #1b1915; }
-  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(27,25,21,.4); font-weight: 800; letter-spacing: .1em; z-index: 2; }
-  .ogc-empty-face { color: #6b6656; text-align: center; padding: 60px 20px; font-size: 13px; }
+  .ogc-foot b { color: #fff; }
+  .ogc-pagetag { position: absolute; top: 12px; right: 14px; font-size: 8.5px; color: rgba(242,236,216,.5); font-weight: 800; letter-spacing: .1em; z-index: 2; }
+  .ogc-empty-face { color: #8a8266; text-align: center; padding: 60px 20px; font-size: 13px; }
   .ogc-connect { text-align: center; padding: 26px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-  .ogc-connect-h { font-size: 23px; font-weight: 800; color: #fff; text-transform: uppercase; }
-  .ogc-connect-times { font-size: 15px; font-weight: 800; color: #cbb56a; margin: 8px 0 4px; letter-spacing: .02em; }
-  .ogc-connect-addr { font-size: 12px; color: #cbc6b8; margin-bottom: 18px; }
-  .ogc-connect-qr { width: 128px; height: 128px; background: #fff; padding: 8px; }
-  .ogc-connect-web { font-size: 14px; font-weight: 800; color: #ece4be; margin-top: 12px; }
-  .ogc-connect-tag { font-size: 11px; color: #9a917f; margin-top: 14px; font-style: italic; }
+  .ogc-connect-h { font-size: 23px; font-weight: 800; color: #1b1915; text-transform: uppercase; }
+  .ogc-connect-times { font-size: 15px; font-weight: 800; color: #8a742e; margin: 8px 0 4px; letter-spacing: .02em; }
+  .ogc-connect-addr { font-size: 12px; color: #57503c; margin-bottom: 18px; }
+  .ogc-connect-qr { width: 128px; height: 128px; background: #fff; padding: 8px; border: 1px solid #1b1915; }
+  .ogc-connect-web { font-size: 14px; font-weight: 800; color: #1b1915; margin-top: 12px; }
+  .ogc-connect-tag { font-size: 11px; color: #8a8266; margin-top: 14px; font-style: italic; }
   @media print {
     body * { visibility: hidden !important; }
     #ogcOverlay, #ogcOverlay * { visibility: visible !important; }
-    #ogcOverlay { position: absolute; inset: 0; background: #1b1915; padding: 0; overflow: visible; }
+    #ogcOverlay { position: absolute; inset: 0; background: #f2ecd8; padding: 0; overflow: visible; }
     .ogc-bar { display: none !important; }
     .ogc-pages { display: block; gap: 0; }
     .ogc-card { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0 auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -3130,10 +3134,10 @@
   <div id="staffModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
     <div class="tmod-lockcard">
       <div class="tmod-lockicon">&#128274;</div>
-      <div class="tmod-lockttl">Staff Area</div>
-      <div class="tmod-lockmsg">Enter the staff password to access EOS tools, scorecard, boulders, and meeting data.</div>
-      <input type="password" id="staffPwInput" placeholder="Staff password" autocomplete="off" onkeydown="if(event.key==='Enter')staffDoUnlock()">
-      <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="staffDoUnlock()">Unlock</button>
+      <div class="tmod-lockttl">Staff Sign-In</div>
+      <div class="tmod-lockmsg">Enter your <b>PIN</b> &mdash; the last 4 digits of your phone number &mdash; to open your personal dashboard. (Staff password also works.)</div>
+      <input type="password" id="staffPwInput" placeholder="Your PIN" autocomplete="off" inputmode="numeric" onkeydown="if(event.key==='Enter')staffDoUnlock()">
+      <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="staffDoUnlock()">Sign in</button>
       <div id="staffLockErr" class="tmod-lockerr">Incorrect password.</div>
     </div>
   </div>
@@ -7150,7 +7154,7 @@ function ogaBuildCard() {
     return '<div class="ogc-card"><div class="ogc-face">' +
       '<span class="ogc-pagetag">' + (isFront ? 'FRONT' : (idx === 1 ? 'BACK' : 'PAGE ' + (idx + 1))) + '</span>' +
       '<div class="ogc-hero">' +
-        '<div class="ogc-hero-top">' + ogcLogoSvg(30, '#1b1915') + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
+        '<div class="ogc-hero-top">' + ogcLogoSvg(30, '#ece4be') + '<div class="ogc-brandtxt">Living Stones<b>SOUTH RENO</b></div></div>' +
         '<div class="ogc-h1">' + escapeHtml(h1) + '</div><div class="ogc-h2">' + escapeHtml(h2) + '</div>' +
       '</div>' +
       '<div class="ogc-body">' + (evs.length ? evs.map(evHtml).join('') : ogcConnectPanel()) + '</div>' +
@@ -7206,7 +7210,7 @@ async function ogaDownloadPDF(btn) {
 // STAFF OS — per-member personal workspace (My Snapshot)
 // ════════════════════════════════════════════════════════════════════════════
 const SOS_ME_KEY = 'lssr_sos_me';
-let _sos = { me: '', role: '', roster: [], tasks: [], assigned: [], plans: [], loaded: false, busy: false };
+let _sos = { me: '', role: '', isAdmin: false, viewing: '', roster: [], tasks: [], assigned: [], plans: [], loaded: false, busy: false };
 
 function sosApiGet(params) {
   return fetch(STAFF_OS_URL + '?' + params + '&_=' + Date.now()).then(r => r.json());
@@ -7214,56 +7218,86 @@ function sosApiGet(params) {
 function sosApiPost(body) {
   return fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(body) }).then(r => r.json());
 }
+function sosSetMe(name) {
+  _sos.me = name; _sos.viewing = name;
+  const row = _sos.roster.find(p => p.name === name);
+  _sos.role = (row && row.role) || _sos.role; _sos.isAdmin = !!(row && row.isAdmin);
+  try { localStorage.setItem(SOS_ME_KEY, name); } catch (e) {}
+}
 function sosInit() {
   const host = document.getElementById('sp-mine'); if (!host) return;
   if (!_sos.roster.length) {
     host.innerHTML = '<div class="sos-loading">Loading your workspace…</div>';
     sosApiGet('action=sos_roster').then(res => {
       _sos.roster = (res && res.roster) || [];
-      _sos.me = localStorage.getItem(SOS_ME_KEY) || '';
-      if (_sos.me) sosLoadData(); else sosRenderSignin();
+      const saved = (function(){ try { return localStorage.getItem(SOS_ME_KEY) || ''; } catch(e){ return ''; } })();
+      if (saved && _sos.roster.find(p => p.name === saved)) { sosSetMe(saved); sosLoadData(); } else sosRenderSignin();
     }).catch(() => { host.innerHTML = '<div class="sos-loading">Could not reach the staff workspace. Check your connection and reopen.</div>'; });
   } else if (_sos.me) { sosRender(); } else { sosRenderSignin(); }
 }
-function sosRenderSignin() {
+function sosRenderSignin(matches) {
   const host = document.getElementById('sp-mine'); if (!host) return;
+  // If a PIN matched more than one person, show a small chooser for just those.
+  const chooser = (matches && matches.length > 1)
+    ? '<select id="sosMatchSel" class="sos-input">' + matches.map(m => '<option value="' + escapeHtml(m.name) + '">' + escapeHtml(m.name) + (m.role ? ' — ' + escapeHtml(m.role) : '') + '</option>').join('') + '</select>' +
+      '<button class="sos-btn hi" onclick="sosPickMatch()">Continue →</button>'
+    : '<input type="password" id="sosPin" class="sos-input" placeholder="4-digit PIN" autocomplete="off" inputmode="numeric" maxlength="6" onkeydown="if(event.key===\'Enter\')sosLogin()">' +
+      '<button class="sos-btn hi" onclick="sosLogin()">Log in →</button>';
   host.innerHTML =
     '<div class="sos-signin">' +
       '<div class="sos-signin-box">' +
-        '<div class="sos-signin-t">Who’s signing in?</div>' +
-        '<div class="sos-signin-s">Pick your name and enter your PIN — the <b>last 4 digits of your phone number</b> — to open your personal snapshot (tasks, rocks &amp; boulders, and your annual plan).</div>' +
-        '<select id="sosWhoSel" class="sos-input">' + '<option value="">Select your name…</option>' +
-          _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '">' + escapeHtml(p.name) + (p.role ? ' — ' + escapeHtml(p.role) : '') + '</option>').join('') +
-        '</select>' +
-        '<input type="password" id="sosPin" class="sos-input" placeholder="PIN — last 4 digits of your phone" autocomplete="off" inputmode="numeric" onkeydown="if(event.key===\'Enter\')sosSignIn()">' +
-        '<button class="sos-btn hi" onclick="sosSignIn()">Open my snapshot →</button>' +
+        '<div class="sos-signin-t">Staff sign-in</div>' +
+        '<div class="sos-signin-s">' + (matches && matches.length > 1
+            ? 'A couple of people share that PIN — pick your name.'
+            : 'Enter your PIN — the <b>last 4 digits of your phone number</b> — to open your snapshot.') + '</div>' +
+        chooser +
         '<div id="sosSigninErr" class="sos-err"></div>' +
       '</div>' +
     '</div>';
+  setTimeout(() => { const el = document.getElementById('sosPin'); if (el) el.focus(); }, 100);
 }
-function sosSignIn() {
-  const who = (document.getElementById('sosWhoSel') || {}).value || '';
+let _sosMatches = [];
+// Apply a single-match sos_login response (which already includes the workspace)
+// without a second round-trip.
+function sosApplyLogin(res) {
+  if (res.roster && res.roster.length) _sos.roster = res.roster;
+  _sos.me = res.who; _sos.viewing = res.who; _sos.role = res.role || ''; _sos.isAdmin = !!res.isAdmin;
+  _sos.tasks = res.tasks || []; _sos.assigned = res.assigned || []; _sos.plans = res.plans || [];
+  _sos.loaded = true;
+  try { localStorage.setItem(SOS_ME_KEY, res.who); } catch (e) {}
+  sosRender();
+}
+function sosLogin() {
   const pin = (document.getElementById('sosPin') || {}).value || '';
   const err = document.getElementById('sosSigninErr');
-  if (!who) { if (err) err.textContent = 'Please pick your name.'; return; }
-  if (err) err.textContent = '';
-  sosApiPost({ action: 'sos_signin', who: who, pin: pin }).then(res => {
-    if (res && res.ok) { _sos.me = who; _sos.role = res.role || ''; localStorage.setItem(SOS_ME_KEY, who); sosLoadData(); }
-    else if (err) err.textContent = (res && res.error) || 'Could not sign in.';
+  if (!pin) { if (err) err.textContent = 'Enter your PIN.'; return; }
+  if (err) err.textContent = 'Checking…';
+  sosApiPost({ action: 'sos_login', pin: pin }).then(res => {
+    if (res && res.ok && res.matches && res.matches.length) {
+      _sosMatches = res.matches;
+      if (res.matches.length === 1) { sosApplyLogin(res); }
+      else sosRenderSignin(res.matches);
+    } else if (err) err.textContent = (res && res.error) || 'That PIN didn’t match.';
   }).catch(() => { if (err) err.textContent = 'Connection problem. Try again.'; });
 }
-function sosSignOut() { _sos.me = ''; _sos.role = ''; localStorage.removeItem(SOS_ME_KEY); sosRenderSignin(); }
+function sosPickMatch() {
+  const name = (document.getElementById('sosMatchSel') || {}).value || '';
+  if (name) { sosSetMe(name); sosLoadData(); }
+}
+function sosSignOut() { _sos.me = ''; _sos.role = ''; _sos.isAdmin = false; _sos.viewing = ''; _sos.loaded = false; try { localStorage.removeItem(SOS_ME_KEY); } catch (e) {} sosRenderSignin(); }
+// Admins (Brad/Ryan) can switch whose workspace they're viewing/editing.
+function sosSwitchViewing(name) { if (!name) return; _sos.viewing = name; _sos.loaded = false; sosLoadData(); }
 function sosLoadData() {
+  const who = _sos.viewing || _sos.me;
   const host = document.getElementById('sp-mine');
-  if (host && !_sos.loaded) host.innerHTML = '<div class="sos-loading">Loading ' + escapeHtml(_sos.me) + '’s workspace…</div>';
-  return sosApiGet('action=sos_data&who=' + encodeURIComponent(_sos.me)).then(res => {
+  if (host && !_sos.loaded) host.innerHTML = '<div class="sos-loading">Loading ' + escapeHtml(who) + '’s workspace…</div>';
+  return sosApiGet('action=sos_data&who=' + encodeURIComponent(who)).then(res => {
     if (res && res.ok) {
       _sos.tasks = res.tasks || []; _sos.assigned = res.assigned || []; _sos.plans = res.plans || [];
       if (res.roster && res.roster.length) _sos.roster = res.roster;
-      const meRow = _sos.roster.find(p => p.name === _sos.me); if (meRow) _sos.role = meRow.role || _sos.role;
       _sos.loaded = true; sosRender();
     } else { sosRenderSignin(); }
-  }).catch(() => { const h = document.getElementById('sp-mine'); if (h) h.innerHTML = '<div class="sos-loading">Could not load your workspace. <a href="#" onclick="sosLoadData();return false" style="color:var(--sp-gold)">Retry</a></div>'; });
+  }).catch(() => { const h = document.getElementById('sp-mine'); if (h) h.innerHTML = '<div class="sos-loading">Could not load the workspace. <a href="#" onclick="sosLoadData();return false" style="color:var(--sp-gold)">Retry</a></div>'; });
 }
 function sosRefresh() { sosLoadData(); }
 
@@ -7297,7 +7331,7 @@ function sosFmtDue(d) { try { const dt = new Date(d + 'T12:00:00'); return dt.to
 function sosAddTask() {
   const title = (document.getElementById('sosNewTitle')||{}).value.trim();
   if (!title) { const el=document.getElementById('sosNewTitle'); if(el) el.focus(); return; }
-  const forWho = (document.getElementById('sosNewFor')||{}).value || _sos.me;
+  const forWho = (document.getElementById('sosNewFor')||{}).value || _sos.viewing || _sos.me;
   const due = (document.getElementById('sosNewDue')||{}).value || '';
   const pri = (document.getElementById('sosNewPri')||{}).value || 'normal';
   const notes = (document.getElementById('sosNewNotes')||{}).value || '';
@@ -7322,7 +7356,7 @@ function sosAddSimple(type, inputId) {
   const el = document.getElementById(inputId); const title = el ? el.value.trim() : '';
   if (!title) { if(el) el.focus(); return; }
   if (el) el.value = '';
-  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:type, title:title, status:'active' }).then(()=>sosLoadData());
+  sosApiPost({ action:'sos_plan_add', owner:_sos.viewing, type:type, title:title, status:'active' }).then(()=>sosLoadData());
 }
 function sosDeletePlan(id) { if(!confirm('Delete this item?')) return; sosApiPost({ action:'sos_plan_delete', id:id }).then(()=>sosLoadData()); }
 function sosTogglePlan(id, done) { sosApiPost({ action:'sos_plan_update', id:id, status: done?'done':'active' }).then(()=>sosLoadData()); }
@@ -7332,14 +7366,14 @@ function sosAddGoal() {
   const target = (document.getElementById('sosGoalTarget')||{}).value||'';
   const period = (document.getElementById('sosGoalPeriod')||{}).value||('' + new Date().getFullYear());
   ['sosGoalTitle','sosGoalMetric','sosGoalTarget'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
-  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:'goal', title:t, metric:metric, target:target, current:'0', progress:0, period:period, status:'active' }).then(()=>sosLoadData());
+  sosApiPost({ action:'sos_plan_add', owner:_sos.viewing, type:'goal', title:t, metric:metric, target:target, current:'0', progress:0, period:period, status:'active' }).then(()=>sosLoadData());
 }
 function sosSetProgress(id, val) { sosApiPost({ action:'sos_plan_update', id:id, progress:Number(val) }).then(()=>{ const lbl=document.getElementById('sosProgLbl-'+id); if(lbl) lbl.textContent=val+'%'; }); }
 function sosSetCurrent(id, val) { sosApiPost({ action:'sos_plan_update', id:id, current:val }).then(()=>sosLoadData()); }
 function sosAddStep(goalId, inputId) {
   const el=document.getElementById(inputId); const t = el?el.value.trim():''; if(!t){ if(el) el.focus(); return; }
   if(el) el.value='';
-  sosApiPost({ action:'sos_plan_add', owner:_sos.me, type:'step', title:t, parentId:goalId, status:'active' }).then(()=>sosLoadData());
+  sosApiPost({ action:'sos_plan_add', owner:_sos.viewing, type:'step', title:t, parentId:goalId, status:'active' }).then(()=>sosLoadData());
 }
 
 // ── Render ───────────────────────────────────────────────────────────────────
@@ -7348,7 +7382,8 @@ function sosRender() {
   const g = sosTaskGroups();
   const bucketLabels = ['Overdue','Today','Upcoming','No date'];
   const openCount = _sos.tasks.filter(t=>t.status!=='done').length;
-  const staffOpts = _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '"' + (p.name===_sos.me?' selected':'') + '>' + escapeHtml(p.name==_sos.me?'Me ('+p.name+')':p.name) + '</option>').join('');
+  const viewing = _sos.viewing || _sos.me;
+  const staffOpts = _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '"' + (p.name===viewing?' selected':'') + '>' + escapeHtml(p.name===_sos.me?'Me ('+p.name+')':p.name) + '</option>').join('');
 
   let tasksHtml = '';
   g.buckets.forEach((b, i) => { if (!b.length) return;
@@ -7386,8 +7421,14 @@ function sosRender() {
   }).join('') : '<div class="sos-empty sm">No goals yet — add your first below.</div>';
 
   host.innerHTML =
-    '<div class="sos-topbar"><div class="sos-who">👤 <b>' + escapeHtml(_sos.me) + '</b>' + (_sos.role?' <span class="sos-role">' + escapeHtml(_sos.role) + '</span>':'') + '</div>' +
-      '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Switch user</button></div></div>' +
+    '<div class="sos-topbar"><div class="sos-who">👤 <b>' + escapeHtml(_sos.me) + '</b>' + (_sos.role?' <span class="sos-role">' + escapeHtml(_sos.role) + '</span>':'') +
+      (_sos.isAdmin
+        ? ' <span class="sos-role">Admin</span><div class="sos-viewing">Viewing <select class="sos-input sm" onchange="sosSwitchViewing(this.value)">' +
+            _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '"' + (p.name===viewing?' selected':'') + '>' + escapeHtml(p.name) + '</option>').join('') + '</select>' +
+            (viewing !== _sos.me ? '<span class="sos-viewing-tag">editing ' + escapeHtml(viewing) + '’s board</span>' : '') + '</div>'
+        : '') +
+      '</div>' +
+      '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Log out</button></div></div>' +
     '<div class="sos-grid">' +
       '<div class="sos-col">' +
         '<div class="sos-card"><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
@@ -8602,8 +8643,16 @@ function openStaffModal() {
   } else {
     document.getElementById('staffModLocked').style.display = 'flex';
     document.getElementById('staffModContent').style.display = 'none';
+    sosPrewarm();   // warm the Apps Script backend while they type their PIN
     setTimeout(() => { const el = document.getElementById('staffPwInput'); if (el) el.focus(); }, 200);
   }
+}
+// Warm the Staff OS Apps Script instance (and cache the roster) before login so
+// the sign-in call doesn't eat a cold start.
+let _sosPrewarmed = false;
+function sosPrewarm() {
+  if (_sosPrewarmed) return; _sosPrewarmed = true;
+  sosApiGet('action=sos_roster').then(res => { if (res && res.roster && res.roster.length) _sos.roster = res.roster; }).catch(() => { _sosPrewarmed = false; });
 }
 
 function closeStaffModal() {
@@ -8616,22 +8665,41 @@ function closeStaffModal() {
 }
 
 async function staffDoUnlock() {
-  const pw = document.getElementById('staffPwInput').value;
+  const inp = document.getElementById('staffPwInput');
+  const pw = (inp.value || '').trim();
   const errEl = document.getElementById('staffLockErr');
   errEl.style.display = 'none';
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-  if (hex === STAFF_HASH) {
+  const revealStaff = () => {
     sessionStorage.setItem(STAFF_SESSION_KEY, '1');
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
-    sosInit();
-    return;
+  };
+  const goMine = () => { const tab = [...document.querySelectorAll('.sp-nav-tab')].find(t => /my snapshot/i.test(t.textContent)); if (tab) staffShowSection('sp-mine', tab); };
+  // 1) Personal PIN (last 4 of phone) → sign the person straight in + load My Snapshot in one call.
+  if (/^\d{3,6}$/.test(pw)) {
+    errEl.style.display = 'block'; errEl.classList.remove('tmod-lockerr'); errEl.style.color = 'var(--sp-muted, #9a917f)'; errEl.textContent = 'Signing you in…';
+    try {
+      const res = await sosApiPost({ action: 'sos_login', pin: pw });
+      if (res && res.ok && res.matches && res.matches.length) {
+        revealStaff();
+        if (res.matches.length === 1) { sosApplyLogin(res); } else { _sosMatches = res.matches; sosRenderSignin(res.matches); }
+        goMine();
+        errEl.style.display = 'none'; errEl.classList.add('tmod-lockerr'); errEl.style.color = '';
+        return;
+      }
+    } catch (e) {}
+    errEl.classList.add('tmod-lockerr'); errEl.style.color = '';
   }
+  // 2) Shared staff password (fallback for anyone who uses it).
+  try {
+    const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+    const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    if (hex === STAFF_HASH) { revealStaff(); sosInit(); return; }
+  } catch (e) {}
+  errEl.textContent = 'That PIN or password didn’t match.';
   errEl.style.display = 'block';
-  document.getElementById('staffPwInput').value = '';
-  document.getElementById('staffPwInput').focus();
+  inp.value = ''; inp.focus();
 }
 
 async function staffLoadData() {
@@ -13332,7 +13400,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260922T153636Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260922T154849Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
