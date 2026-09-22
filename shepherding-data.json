@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T19:50:16.850Z",
+  "generatedAt": "2026-09-22T20:50:31.307Z",
   "asOf": "2026-09-22",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,9 +20,9 @@
   "congregation": {
     "totalPeople": 397,
     "avgScore": 0,
-    "inGroup": 220,
+    "inGroup": 218,
     "serving": 234,
-    "leading": 80,
+    "leading": 78,
     "givingRegular": 0,
     "recurring": 0,
     "givingGrowing": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 397,
-    "notInGroup": 177,
+    "notInGroup": 179,
     "notServing": 163,
     "notGiving": 0,
     "paciCounts": {
@@ -48,9 +48,9 @@
       "unknown": 397
     },
     "pct": {
-      "inGroup": 0.5541561712846348,
+      "inGroup": 0.5491183879093199,
       "serving": 0.5894206549118388,
-      "leading": 0.20151133501259447,
+      "leading": 0.1964735516372796,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -66,9 +66,9 @@
       "summary": {
         "totalPeople": 66,
         "avgScore": 0,
-        "inGroup": 46,
+        "inGroup": 44,
         "serving": 53,
-        "leading": 24,
+        "leading": 22,
         "givingRegular": 0,
         "recurring": 0,
         "givingGrowing": 0,
@@ -76,7 +76,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 66,
-        "notInGroup": 20,
+        "notInGroup": 22,
         "notServing": 13,
         "notGiving": 0,
         "paciCounts": {
@@ -94,9 +94,9 @@
           "unknown": 66
         },
         "pct": {
-          "inGroup": 0.696969696969697,
+          "inGroup": 0.6666666666666666,
           "serving": 0.803030303030303,
-          "leading": 0.36363636363636365,
+          "leading": 0.3333333333333333,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -134,6 +134,43 @@
           "giving": null,
           "newFamilyMember": true,
           "familyStep": "Pastoral Meeting being scheduled/in process",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Anthony Parrett",
+          "first": "Anthony",
+          "last": "Parrett",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
           "groups": [],
           "serveTeams": [],
           "flags": [
@@ -255,6 +292,43 @@
         },
         {
           "id": null,
+          "name": "Molly Bell",
+          "first": "Molly",
+          "last": "Bell",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Annalissa Sanchez",
           "first": "Annalissa",
           "last": "Sanchez",
@@ -292,48 +366,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Anthony Parrett",
-          "first": "Anthony",
-          "last": "Parrett",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:37:45Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
           ],
           "pending": true
         },
@@ -460,6 +492,48 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Justin Bell",
+          "first": "Justin",
+          "last": "Bell",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Lattin Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T22:42:03Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
           ],
           "pending": true
         },
@@ -759,105 +833,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Justin Bell",
-          "first": "Justin",
-          "last": "Bell",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Lattin Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T22:42:03Z"
-            },
-            {
-              "name": "Bell Community Group",
-              "role": "leader",
-              "joinedAt": "2024-06-11T18:13:17Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:19Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Molly Bell",
-          "first": "Molly",
-          "last": "Bell",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "leader",
-              "joinedAt": "2024-07-18T21:37:36Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-01-28T00:55:30Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
           ],
           "pending": true
         },
@@ -2295,11 +2270,6 @@
           "newFamilyMember": false,
           "familyStep": "",
           "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2025-11-09T23:17:16Z"
-            },
             {
               "name": "Isaac Griffin Community Group",
               "role": "member",
@@ -5567,11 +5537,6 @@
           "newFamilyMember": false,
           "familyStep": "",
           "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2025-08-26T20:03:07Z"
-            },
             {
               "name": "Howes/Peissner Community Group",
               "role": "member",
@@ -13356,11 +13321,6 @@
           "newFamilyMember": false,
           "familyStep": "",
           "groups": [
-            {
-              "name": "Bell Community Group",
-              "role": "member",
-              "joinedAt": "2024-08-05T05:25:46Z"
-            },
             {
               "name": "Isaac Griffin Community Group",
               "role": "member",
