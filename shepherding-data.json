@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T10:49:59.843Z",
+  "generatedAt": "2026-09-23T11:50:04.431Z",
   "asOf": "2026-09-23",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 218,
+    "inGroup": 217,
     "serving": 232,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 176,
+    "notInGroup": 177,
     "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.5532994923857868,
+      "inGroup": 0.550761421319797,
       "serving": 0.5888324873096447,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -5570,6 +5570,57 @@
         },
         {
           "id": null,
+          "name": "John Turcich",
+          "first": "John",
+          "last": "Turcich",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2025-04-03T08:52:16Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Safety Team",
+              "role": "leader",
+              "joinedAt": "2024-08-06T22:58:08Z"
+            },
+            {
+              "name": "Prayer Team",
+              "role": "member",
+              "joinedAt": "2024-08-12T20:23:01Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Lance Jauron",
           "first": "Lance",
           "last": "Jauron",
@@ -5832,62 +5883,6 @@
               "name": "Content Team",
               "role": "member",
               "joinedAt": "2026-05-08T05:14:42Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "John Turcich",
-          "first": "John",
-          "last": "Turcich",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Turcich Community Group",
-              "role": "leader",
-              "joinedAt": "2025-05-13T20:05:55Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2025-04-03T08:52:16Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Safety Team",
-              "role": "leader",
-              "joinedAt": "2024-08-06T22:58:08Z"
-            },
-            {
-              "name": "Prayer Team",
-              "role": "member",
-              "joinedAt": "2024-08-12T20:23:01Z"
             }
           ],
           "flags": [],
@@ -13645,7 +13640,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 27,
         "serving": 26,
         "leading": 7,
         "givingRegular": 0,
@@ -13655,7 +13650,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 20,
+        "notInGroup": 21,
         "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
@@ -13673,7 +13668,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.5833333333333334,
+          "inGroup": 0.5625,
           "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
@@ -14298,6 +14293,48 @@
         },
         {
           "id": null,
+          "name": "Richard Diebert",
+          "first": "Richard",
+          "last": "Diebert",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Parking Team",
+              "role": "member",
+              "joinedAt": "2026-02-10T00:02:00Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Julie Serpa",
           "first": "Julie",
           "last": "Serpa",
@@ -14586,52 +14623,6 @@
             "Not in a group",
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Richard Diebert",
-          "first": "Richard",
-          "last": "Diebert",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Turcich Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-02T14:02:05Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2026-02-10T00:02:00Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -15096,57 +15087,6 @@
         },
         {
           "id": null,
-          "name": "Anthony Azzam",
-          "first": "Anthony",
-          "last": "Azzam",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Men’s Tuesday Night: Better Call Paul",
-              "role": "leader",
-              "joinedAt": "2026-05-28T00:52:08Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-08-31T08:48:56Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2026-06-28T17:59:07Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Diane Dale",
           "first": "Diane",
           "last": "Dale",
@@ -15329,6 +15269,57 @@
           "flags": [
             "Not serving"
           ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Anthony Azzam",
+          "first": "Anthony",
+          "last": "Azzam",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Men’s Tuesday Night: Better Call Paul",
+              "role": "leader",
+              "joinedAt": "2026-05-28T00:52:08Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2026-08-31T08:48:56Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2026-06-28T17:59:07Z"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
