@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T16:50:28.054Z",
+  "generatedAt": "2026-09-23T17:50:35.616Z",
   "asOf": "2026-09-23",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 218,
+    "inGroup": 216,
     "serving": 232,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 176,
+    "notInGroup": 178,
     "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.5532994923857868,
+      "inGroup": 0.5482233502538071,
       "serving": 0.5888324873096447,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -15829,7 +15829,7 @@
       "summary": {
         "totalPeople": 45,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 26,
         "serving": 30,
         "leading": 13,
         "givingRegular": 0,
@@ -15839,7 +15839,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 45,
-        "notInGroup": 17,
+        "notInGroup": 19,
         "notServing": 15,
         "notGiving": 0,
         "paciCounts": {
@@ -15857,7 +15857,7 @@
           "unknown": 45
         },
         "pct": {
-          "inGroup": 0.6222222222222222,
+          "inGroup": 0.5777777777777777,
           "serving": 0.6666666666666666,
           "leading": 0.28888888888888886,
           "givingRegular": 0,
@@ -15906,6 +15906,43 @@
           ],
           "serveTeams": [],
           "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Allie Fava",
+          "first": "Allie",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
             "Not serving"
           ],
           "pending": true
@@ -16091,48 +16128,6 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Allie Fava",
-          "first": "Allie",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-07-06T22:15:22Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
             "Not serving"
           ],
           "pending": true
@@ -16335,6 +16330,58 @@
               "name": "First Impressions Team",
               "role": "member",
               "joinedAt": "2026-05-20T20:04:07Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Emery Fava",
+          "first": "Emery",
+          "last": "Fava",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2025-04-14T03:05:30Z"
+            },
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-06-11T09:10:59Z"
+            },
+            {
+              "name": "Tech Team",
+              "role": "member",
+              "joinedAt": "2025-06-11T08:28:54Z"
             }
           ],
           "flags": [
@@ -16688,62 +16735,6 @@
           "flags": [
             "Not in a group"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Emery Fava",
-          "first": "Emery",
-          "last": "Fava",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2025-06-29T23:20:41Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2025-04-14T03:05:30Z"
-            },
-            {
-              "name": "Worship Team",
-              "role": "member",
-              "joinedAt": "2025-06-11T09:10:59Z"
-            },
-            {
-              "name": "Tech Team",
-              "role": "member",
-              "joinedAt": "2025-06-11T08:28:54Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -17507,11 +17498,6 @@
               "name": "Thompson/Primus Community Group",
               "role": "member",
               "joinedAt": "2026-09-15T02:11:33Z"
-            },
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2024-09-26T02:33:44Z"
             }
           ],
           "serveTeams": [
