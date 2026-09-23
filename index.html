@@ -7286,8 +7286,16 @@ function ogaSaveStatus(t) { const el = document.getElementById('ogaSaved'); if (
 function ogaWho() { try { return (_sos && _sos.me) || ''; } catch (e) { return ''; } }
 function ogaFmtWhen(iso) { try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
 async function ogaPost(body) {
-  const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
-  return r.json();
+  // Apps Script occasionally answers with its generic doGet JSON instead of ours — retry those.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+      const j = await r.json();
+      if (j && (j.month || j.ok === false)) return j;
+    } catch (e) { if (attempt === 2) throw e; }
+    await new Promise(res => setTimeout(res, 700 * (attempt + 1)));
+  }
+  throw new Error('no response');
 }
 function ogaSnapshot() {
   const byKey = {}; (_ogaAllEvents || []).forEach(e => { byKey[ogaKey(e)] = e; });
@@ -7299,6 +7307,7 @@ function ogaSnapshot() {
     if (st.reg && st.reg !== (e.reg || e.url || '')) o.reg = st.reg;
     if (st.cta) o.cta = st.cta;
     if (st.time != null) o.time = st.time;
+    if (st.title) o.title = String(st.title).slice(0, 70);
     if (o.on || Object.keys(o).length > 1) items[k] = o;   // only what matters: picks + edits
   });
   return { title: (document.getElementById('ogaTitle') || {}).value || 'Your Next Step', items };
@@ -7338,7 +7347,7 @@ async function ogaLoadShared(m) {
       const k = ogaKey(e), s = saved[k];
       const st = _ogaState[k] || (_ogaState[k] = { blurb: e.summary || e.desc || '', reg: e.reg || e.url || '' });
       st.on = !!(s && s.on);
-      if (s) { if (s.blurb != null) st.blurb = s.blurb; if (s.reg) st.reg = s.reg; st.cta = s.cta || ''; if (s.time != null) st.time = s.time; else delete st.time; }
+      if (s) { if (s.blurb != null) st.blurb = s.blurb; if (s.reg) st.reg = s.reg; st.cta = s.cta || ''; if (s.time != null) st.time = s.time; else delete st.time; st.title = s.title || ''; }
     });
     const t = document.getElementById('ogaTitle'); if (t && j.state.title) t.value = j.state.title;
     ogaRenderList();
@@ -7400,6 +7409,8 @@ function ogaRenderList() {
         (meta ? '<div class="oga-item-meta">' + escapeHtml(meta) + '</div>' : '') +
         (badges ? '<div class="oga-badges">' + badges + '</div>' : '') +
         '<div class="oga-item-fields">' +
+          '<label>Title on the card' + (st.title ? ' <span class="oga-warn">✎ edited (calendar: ' + escapeHtml(e.name) + ')</span>' : '') + '</label>' +
+          '<input type="text" maxlength="70" placeholder="' + escapeHtml(ogaExpand(e.name)) + '" value="' + escapeHtml(st.title || '') + '" oninput="ogaField(\'' + key + '\',\'title\',this.value)">' +
           '<label>Time on the card' + (calTime ? ' (calendar: ' + escapeHtml(calTime) + ')' : '') + (noEnd ? ' <span class="oga-warn">⚠ no end time on the calendar — add it here</span>' : '') + '</label>' +
           '<input type="text" maxlength="40" placeholder="e.g. 6:30–9:00 PM" value="' + escapeHtml(cardTime) + '" oninput="ogaField(\'' + key + '\',\'time\',this.value)">' +
           '<label>Blurb (prints on the card — max 5 lines)' + (cDef && cDef.blurb && ogaCardBlurb(e, st) === cDef.blurb ? ' <span class="oga-warn">✎ reworded for the card</span>' : '') + (shortened ? ' <span class="oga-warn">✂ shortened to 5 lines on the card — reword here to control it</span>' : '') + '</label>' +
@@ -7738,7 +7749,7 @@ async function ogaBuildCard() {
   await ogaEnsureQR();
   const tex = await ogcTexture();
   const art = {};
-  await Promise.all(chosen.filter(it => !it.e.img).map(async it => { art[ogaKey(it.e)] = await ogcMakeEventArt(it.e, ogaCardTime(it.e, it.st)); }));
+  await Promise.all(chosen.filter(it => !it.e.img).map(async it => { art[ogaKey(it.e)] = await ogcMakeEventArt(Object.assign({}, it.e, { name: ((it.st.title || '').trim()) || it.e.name }), ogaCardTime(it.e, it.st)); }));
   const CAL_URL = 'https://lssr.churchcenter.com/calendar';
   const calQr = ogaQrDataUrl(CAL_URL);
 
@@ -7758,7 +7769,7 @@ async function ogaBuildCard() {
       : (art[ogaKey(e)] ? '<img class="ogc-img" data-gen="1" src="' + art[ogaKey(e)] + '" alt="">' : '<div class="ogc-tile"><img src="assets/ls-logo-white.png" alt=""></div>');
     return '<div class="ogc-ev" data-key="' + ogaKey(e) + '"><div class="ogc-media">' + media + badge + '</div>' +
       '<div class="ogc-ev-body">' +
-        '<div class="ogc-ev-name">' + escapeHtml(ogaExpand(e.name) || 'Event') + '</div>' +
+        '<div class="ogc-ev-name">' + escapeHtml(((st.title || '').trim()) || ogaExpand(e.name) || 'Event') + '</div>' +
         '<div class="ogc-ev-when">' + escapeHtml(when) + '</div>' +
         (desc ? '<div class="ogc-ev-desc">' + escapeHtml(desc) + '</div>' : '') +
         '<span class="ogc-cta">→ ' + escapeHtml(cta) + '</span>' +
@@ -14979,7 +14990,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T001522Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260923T002136Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
