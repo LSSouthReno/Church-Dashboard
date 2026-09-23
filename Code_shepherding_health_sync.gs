@@ -72,7 +72,7 @@ function spApplyOverrides_(data) {
     if (o.field==='health') { p.statusRaw=v; p.status=shNormStatus_(v); p.healthDate=today; p.healthDaysAgo=0; p.overdue = (v===''); }
     else if (o.field==='healthDate') { p.healthDate=v; p.healthDaysAgo=spHealthDaysAgo_(v); p.overdue=(p.healthDaysAgo==null)||(p.healthDaysAgo>SH_OVERDUE_DAYS); }
     else if (o.field==='maturity') { p.spiritualMat=v; p.maturityManual = v ? { by:o.by, date:(o.ts||'').slice(0,10) } : null; }
-    else if (o.field==='membership') { p.membershipType=v; p.member=/member|deacon|pastor/i.test(v); }
+    else if (o.field==='membership') { p.membershipType=v; p.member=/^\s*(member|deacon|pastor)\s*$/i.test(v); }
     else if (o.field==='elder') { p.assignedElder=v; }
     else if (o.field==='pref') { p.preferredComm=v; }
     else if (o.field==='known') { p.known=v; }
@@ -359,7 +359,7 @@ function spFetchShepherdingLists_() {
         var a = p.attributes || {};
         var full = ((a.first_name||'') + ' ' + (a.last_name||'')).trim();
         return { id:String(p.id), first:a.first_name||'', last:a.last_name||'', name:full||('Person '+p.id),
-                 member:/member|deacon|pastor/i.test(String(a.membership||'')) };
+                 member:/^\s*(member|deacon|pastor)\s*$/i.test(String(a.membership||'')) };
       }).filter(function(p){ return !!p.id; });
     } catch (e) { Logger.log('   ! list "' + name + '" people fetch failed: ' + e.message); }
     out.push({ elder: elder, list: name, people: people });
@@ -769,7 +769,7 @@ function spContactAndFields_(ids, startMs) {
       contact[pid] = {
         email: spPickPrimary_(rel.emails, emailById, 'address'),
         phone: spPickPrimary_(rel.phone_numbers, phoneById, 'number'),
-        member: /member|deacon|pastor/i.test(mt),
+        member: /^\s*(member|deacon|pastor)\s*$/i.test(mt),
         membershipType: mt
       };
       var byDef = fdByPerson[pid] || {};

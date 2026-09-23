@@ -286,7 +286,7 @@ function shCompletionReady_(pid) {
   }
   var missing = [];
   if (!fd[SH_FIELD.healthAssess]) missing.push('Health status');
-  if (!/member|deacon|pastor/i.test(mt)) missing.push('Membership = Member');
+  if (!/^\s*(member|deacon|pastor)\s*$/i.test(mt)) missing.push('Membership = Member');
   if (!fd[SH_FIELD.assignedElder]) missing.push('Shepherding pastor');
   if (String(fd[SH_FIELD.known]||'').toLowerCase() !== 'true') missing.push('Known? = Yes');
   return { ready: missing.length===0, missing: missing };

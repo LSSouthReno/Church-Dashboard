@@ -14050,7 +14050,11 @@ const SH_STATUS_ORDER = ['all','healthy','weak','wandering','lost','could-not-co
 const SH_PACI_ORDER = ['all','parent','adult','child','infant'];
 const SH_HEALTH_OPTS = ['Healthy','Weak','Wandering','Lost','Could Not Contact'];
 const SH_MATURITY_OPTS = ['N/A','Infant','Child','Adult','Parent'];
-const SH_MEMBERSHIP_OPTS = ['Attender','Member','Deacon','Pastor','Child','Guest','Inactive'];
+// Every PCO membership type, always offered in this order. The synced list only holds types
+// someone on the lists CURRENTLY has, so it can't be the source (e.g. "Former Member"
+// vanished whenever nobody was one); any extra PCO types found are appended after these.
+const SH_MEMBERSHIP_OPTS = ['Attender','Member','Deacon','Pastor','Former Member','Inactive','Child','Guest'];
+function shMembershipOpts(){ return SH_MEMBERSHIP_OPTS.concat((_shepData&&_shepData.membershipOptions)||[]).filter(function(v,i,a){return v&&a.indexOf(v)===i;}); }
 // Single "Show" filter — includes the negative filters the pastors asked for.
 const SH_FILTERS = [
   ['all','Everyone'], ['notgroup','Not in a group'], ['notserve','Not serving'], ['notgive','Not giving'],
@@ -14422,7 +14426,7 @@ function shBulkEditOpen(){
   const people = shSelectedPeople();
   if(!people.length){ return; }
   const elderOpts = (_shepData&&_shepData.elderOptions)||[];
-  const memOpts = (((_shepData&&_shepData.membershipOptions&&_shepData.membershipOptions.length)?_shepData.membershipOptions:[]).concat(SH_MEMBERSHIP_OPTS)).filter(function(v,i,a){return a.indexOf(v)===i;});
+  const memOpts = shMembershipOpts();
   const nc = '<option value="'+SH_BULK_NOCHANGE+'" selected>— no change —</option>';
   const sel = (id, opts) => '<select id="'+id+'">'+nc+opts.map(o=>'<option value="'+shEsc(o)+'">'+shEsc(o)+'</option>').join('')+'</select>';
   const boolSel = id => '<select id="'+id+'">'+nc+'<option value="true">Yes</option><option value="false">No</option></select>';
@@ -14557,7 +14561,8 @@ function shRow(label, control, field, extra) {
 }
 function shEditControlsHtml(p) {
   const elderOpts = (_shepData.elderOptions||[]);
-  const memOpts = ((_shepData.membershipOptions&&_shepData.membershipOptions.length)?_shepData.membershipOptions:[]).concat(SH_MEMBERSHIP_OPTS).filter(function(v,i,a){return a.indexOf(v)===i;});
+  // Same full list in EVERY drawer, plus this person's own type if it's an unusual one.
+  const memOpts = shMembershipOpts(); if (p.membershipType && !memOpts.some(o => o.toLowerCase() === String(p.membershipType).trim().toLowerCase())) memOpts.push(String(p.membershipType).trim());
   const manual = p.maturityManual ? '<span class="sh-manual-flag" title="Set from this dashboard">&#9998; set manually'+(p.maturityManual.by?(' by '+shEsc(p.maturityManual.by)):'')+(p.maturityManual.date?(' · '+shEsc(p.maturityManual.date)):'')+'</span>' : '';
   let h = '<div class="sh-d-sec"><h4>Update Shepherding</h4>';
   h += shRow('Health status', '<select id="shEdhealth">'+shOpts(SH_HEALTH_OPTS, p.statusRaw, '— none —')+'</select>', 'health');
@@ -14705,7 +14710,7 @@ function shDetailHtml(d) {
 function shFamilyReqs(p) {
   return [
     ['Health status set', !!(p.statusRaw)],
-    ['Membership set to Member', /member|deacon|pastor/i.test(p.membershipType||'')],
+    ['Membership set to Member', /^\s*(member|deacon|pastor)\s*$/i.test(p.membershipType||'')],
     ['Shepherding pastor assigned', !!(p.assignedElder)],
     ['Known? set to Yes', String(p.known).toLowerCase()==='true']
   ];
@@ -15003,7 +15008,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T195027Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260923T225448Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
