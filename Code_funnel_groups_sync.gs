@@ -360,6 +360,8 @@ function fgDonorIdsSince_(sinceDate) {
                 d.relationships.person.data && d.relationships.person.data.id;
     if (pid) ids.add(pid);
   });
+  // PCO joined donors: either spouse's gift counts for both (Code_joint_givers.gs).
+  try { jgExpandGiverSet_(ids); } catch (e) { Logger.log('   ! joint-giver expand failed: ' + e.message); }
   return ids;
 }
 

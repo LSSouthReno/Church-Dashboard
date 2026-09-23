@@ -602,10 +602,20 @@ function spRecurringDonorIds_() {
 // came back empty and those spouses were silently left un-pooled — the sweep
 // stays well under the limit and sees every household's full membership, so the
 // pairing is reliable for the WHOLE congregation.
+// 2026-09-23: Planning Center's own JOINED-DONOR link (Giving → joint donors) wins
+// when present — it's exactly who the church set up as one giving unit. The
+// household couple test below only fills in pairs that were never joined in PCO.
 function spHouseholdAdultsByPerson_(ids, startMs) {
-  var partner = spBuildCouplePartnerMap_(startMs);   // church-wide pid -> spouse pid
-  var out = {};
-  ids.forEach(function(id){ var p = partner[String(id)]; out[id] = p ? [String(id), p] : [String(id)]; });
+  var joint = {}; try { joint = pcoJointGiverMap_(); } catch (e) { Logger.log('   ! joint-giver map failed: ' + e.message); }
+  var partner = spBuildCouplePartnerMap_(startMs);   // church-wide pid -> spouse pid (heuristic)
+  var out = {}, viaJoint = 0;
+  ids.forEach(function(id){
+    id = String(id);
+    var p = joint[id] || partner[id];
+    if (joint[id]) viaJoint++;
+    out[id] = p ? [id, String(p)] : [id];
+  });
+  Logger.log('   Giving units: ' + viaJoint + ' via PCO joined donors');
   return out;
 }
 // pid -> spouse pid for every couple in the church. A couple = exactly two
