@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-23T18:46:25.672Z",
+  "lastUpdated": "2026-09-23T19:04:18.530Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 23, 2026, 11:46 AM",
+    "refreshed": "Sep 23, 2026, 12:04 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9438,7 +9438,7 @@
         26,
         25,
         43,
-        27,
+        28,
         null,
         null,
         null
@@ -9482,7 +9482,7 @@
         23,
         24,
         24,
-        29,
+        30,
         null,
         null,
         null
@@ -9904,20 +9904,20 @@
         "attPct": 70
       },
       {
+        "name": "Geoffrey Caliger Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 50
+      },
+      {
         "name": "Gardner Community Group",
         "members": 9,
         "leaders": 2,
         "schedule": "Meets weekly on Sundays from 3-5pm",
         "avgAttended": 6,
         "attPct": 67
-      },
-      {
-        "name": "Geoffrey Caliger Community Group",
-        "members": 9,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 56
       },
       {
         "name": "Watson Community Group",
@@ -10018,15 +10018,15 @@
     ],
     "venn": {
       "familyMembers": 393,
-      "cgMembers": 386,
-      "both": 212,
+      "cgMembers": 387,
+      "both": 213,
       "pctFmInCg": 54,
       "pctCgAreFm": 55
     },
     "venn4": {
       "sets": {
         "familyMembers": 393,
-        "cg": 386,
+        "cg": 387,
         "serving": 295,
         "giving": 836
       },
@@ -10044,9 +10044,9 @@
         "10": 61,
         "11": 44,
         "12": 22,
-        "13": 41,
+        "13": 40,
         "14": 15,
-        "15": 111
+        "15": 112
       },
       "regionNames": {
         "1": [
@@ -10749,7 +10749,6 @@
           "Caleb Frink",
           "Casey Madison",
           "Cathy Cappini",
-          "Cody Wright",
           "Daniel Akre",
           "Danny Rotter",
           "David Wandishin",
@@ -10820,6 +10819,7 @@
           "Cheryl O'Gorman",
           "Chuck Grimm",
           "Cindy Lefler",
+          "Cody Wright",
           "Damian Smith",
           "Darren Wilford",
           "David Peissner",
@@ -10931,7 +10931,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 181,
+          "count": 180,
           "names": [
             "Aaron Carl",
             "Adam Carp",
@@ -10975,7 +10975,6 @@
             "Christina Harter",
             "Christopher Degener",
             "Christopher Oliphant",
-            "Cody Wright",
             "Daniel Akre",
             "Danny Rotter",
             "Dave Morgan",
@@ -11118,7 +11117,7 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 111,
+          "count": 112,
           "names": [
             "Alan Charles",
             "Alexis Durham",
@@ -11146,6 +11145,7 @@
             "Cheryl O'Gorman",
             "Chuck Grimm",
             "Cindy Lefler",
+            "Cody Wright",
             "Damian Smith",
             "Darren Wilford",
             "David Peissner",
@@ -11506,7 +11506,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 181,
+        "count": 180,
         "names": [
           "Aaron Carl",
           "Adam Carp",
@@ -11550,7 +11550,6 @@
           "Christina Harter",
           "Christopher Degener",
           "Christopher Oliphant",
-          "Cody Wright",
           "Daniel Akre",
           "Danny Rotter",
           "Dave Morgan",
