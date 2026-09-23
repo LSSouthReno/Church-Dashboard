@@ -1211,13 +1211,13 @@
   .ogc-face { position: absolute; inset: 0; display: flex; flex-direction: column; }
   .ogc-trim { position: absolute; inset: 12px; border: 1px dashed rgba(200,40,40,.55); pointer-events: none; z-index: 5; }
   /* slim dark header band (runs into the bleed) */
-  .ogc-hero { background: #1b1915; color: #f2ecd8; padding: 24px 34px 14px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .ogc-lockup { height: 30px; width: auto; display: block; }
+  .ogc-hero { background: #1b1915; color: #f2ecd8; padding: 24px 34px 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .ogc-lockup { height: 35px; width: auto; display: block; }
   .ogc-hero-r { text-align: right; }
-  .ogc-h1 { font-size: 16px; font-weight: 800; line-height: 1.05; color: #fff; text-transform: uppercase; letter-spacing: .02em; }
+  .ogc-h1 { font-size: 16.7px; font-weight: 800; line-height: 1; color: #fff; text-transform: uppercase; letter-spacing: 0; }
   .ogc-h2 { font-size: 9.5px; color: #d6b86a; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; }
-  .ogc-month { font-size: 15px; color: #d6b86a; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; line-height: 1; }
-  .ogc-body { flex: 1 1 auto; padding: 6px 34px; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; }
+  .ogc-month { font-size: 16.7px; color: #d6b86a; font-weight: 800; letter-spacing: 0; text-transform: uppercase; margin-top: 4.5px; line-height: 1; }
+  .ogc-body { flex: 1 1 auto; padding: 6px 29px 6px 34px; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; }
   .ogc-ev { height: 156px; flex: 0 0 156px; display: flex; gap: 14px; align-items: stretch; }
   .ogc-media { position: relative; flex: 0 0 186px; width: 186px; height: 124px; align-self: flex-start; margin: 12px 0 0 6px; }   /* top-aligned with the title */   /* 3:2 landscape — keeps most of a 16:9 event graphic */
   .ogc-img { width: 186px; height: 124px; object-fit: cover; display: block; border: 2px solid #1b1915; background: #1b1915; }
@@ -1227,37 +1227,36 @@
   .ogc-badge { position: absolute; left: -9px; top: -9px; width: 48px; height: 48px; border-radius: 50%; background: #1b1915; border: 2px solid #f2ecd8; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
   .ogc-badge .m { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #d6b86a; letter-spacing: .08em; }
   .ogc-badge .d { font-size: 19px; font-weight: 800; color: #fff; margin-top: 1px; }
-  .ogc-ev-body { flex: 1 1 auto; min-width: 0; height: 100%; box-sizing: border-box; overflow: hidden; display: block; padding-top: 10px; }   /* title cap-top lines up with the image top */
+  .ogc-ev-body { flex: 1 1 auto; min-width: 0; height: 100%; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; padding: 10px 0 20px; }   /* title cap-top lines up with the image top; CTA bottom lines up with the image bottom */
   .ogc-ev-qr { float: right; width: 78px; margin: 0 0 4px 10px; text-align: center; }
   .ogc-ev-qr img { width: 78px; height: 78px; display: block; background: #fff; border: 1px solid #1b1915; }
   .ogc-ev-qr .qc { font-size: 7px; color: #6e5d26; margin-top: 3px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-  .ogc-ev-name { font-size: 14.5px; font-weight: 800; line-height: 1.1; color: #1b1915; text-transform: uppercase; letter-spacing: -0.1px; }
-  .ogc-ev-when { font-size: 9.5px; color: #7a6524; font-weight: 800; margin-top: 3px; text-transform: uppercase; letter-spacing: .03em; }
-  .ogc-ev-desc { font-size: 9.5px; color: #4a4332; margin-top: 4px; line-height: 1.34; }
-  .ogc-cta { display: inline-block; font-size: 8px; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 3px 8px; margin-top: 5px; text-transform: uppercase; letter-spacing: .05em; }
+  .ogc-ev-name { font-size: 15.3px; font-weight: 800; line-height: 13.7px; color: #1b1915; text-transform: uppercase; letter-spacing: 0; }
+  .ogc-ev-when { font-size: 15.3px; line-height: 13.7px; color: #7a6524; font-weight: 800; margin-top: 2.6px; text-transform: uppercase; letter-spacing: 0; }
+  .ogc-ev-desc { font-size: 13.3px; font-weight: 500; color: #4a4332; margin-top: 4.5px; line-height: 12px; }
+  .ogc-cta { display: inline-block; flex: 0 0 auto; font-size: 8.8px; line-height: 1; font-weight: 800; color: #f2ecd8; background: #1b1915; padding: 5.2px 14px; margin-top: auto; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; }
+  .ogc-ev-body > :nth-last-child(2) { margin-bottom: 7px; }   /* minimum gap above the pinned CTA */
   /* 8-spot layout: 4 per side, everything a notch smaller */
   .ogc-card.cap4 .ogc-ev { height: 118px; flex-basis: 118px; gap: 12px; }
   .ogc-card.cap4 .ogc-media, .ogc-card.cap4 .ogc-img, .ogc-card.cap4 .ogc-tile { width: 150px; height: 100px; flex-basis: 150px; }
   .ogc-card.cap4 .ogc-media { margin-top: 8px; }
-  .ogc-card.cap4 .ogc-ev-body { padding-top: 6px; }
+  .ogc-card.cap4 .ogc-ev-body { padding: 6px 0 10px; }
   .ogc-card.cap4 .ogc-tile img { width: 44px; height: 44px; }
   .ogc-card.cap4 .ogc-badge { width: 40px; height: 40px; left: -8px; top: -8px; }
   .ogc-card.cap4 .ogc-badge .d { font-size: 16px; }
   .ogc-card.cap4 .ogc-badge .m { font-size: 7px; }
-  .ogc-card.cap4 .ogc-ev-when { font-size: 8.5px; margin-top: 2px; }
-  .ogc-card.cap4 .ogc-ev-desc { margin-top: 3px; }
   .ogc-ev.overflow .ogc-ev-body { box-shadow: inset 0 -3px 0 #c83a3a; }   /* preview warning only */
   /* dark footer band (runs into the bleed) */
-  .ogc-foot { position: relative; background: #1b1915; color: #cbbf9a; padding: 10px 34px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .ogc-foot { position: relative; background: #1b1915; color: #cbbf9a; padding: 20px 29px 30px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
   .ogc-more { position: absolute; left: 0; right: 0; top: -10px; text-align: center; line-height: 1; }
-  .ogc-more span { display: inline-block; background: #d6b86a; color: #1b1915; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; }
-  .ogc-foot-txt { line-height: 1.2; min-width: 0; }
-  .ogc-foot-k { font-size: 8.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #cbbf9a; }
-  .ogc-foot-url { font-size: 12.5px; font-weight: 800; color: #fff; margin: 2px 0 1px; letter-spacing: .01em; }
+  .ogc-more span { display: inline-block; box-sizing: border-box; min-width: 361px; background: #d6b86a; color: #1b1915; font-size: 15.3px; line-height: 1; font-weight: 800; letter-spacing: 0; text-transform: uppercase; padding: 3.6px 16px; }
+  .ogc-foot-txt { line-height: 1.1; min-width: 0; }
+  .ogc-foot-k { font-size: 14px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; color: #cbbf9a; }
+  .ogc-foot-url { font-size: 14px; font-weight: 800; color: #fff; margin: 1px 0 0; letter-spacing: 0; }
   .ogc-foot-or { font-size: 8.5px; font-weight: 700; color: #d6b86a; letter-spacing: .06em; text-transform: uppercase; }
-  .ogc-foot-r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-  .ogc-foot-scan { font-size: 9px; font-weight: 800; color: #d6b86a; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; text-align: right; max-width: 92px; }
-  .ogc-foot-qr { width: 80px; height: 80px; background: #fff; padding: 3px; display: block; flex: 0 0 auto; }
+  .ogc-foot-r { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+  .ogc-foot-scan { font-size: 15.3px; font-weight: 800; color: #d6b86a; letter-spacing: 0; text-transform: uppercase; line-height: 13.7px; text-align: left; white-space: nowrap; }
+  .ogc-foot-qr { width: 62px; height: 62px; background: #fff; padding: 3px; display: block; flex: 0 0 auto; }
   .ogc-foot b { color: #fff; }
   .ogc-connect { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
   .ogc-connect-h { font-size: 24px; font-weight: 800; color: #1b1915; text-transform: uppercase; }
@@ -7218,8 +7217,9 @@ function ogaIsBaptism(e) { return /bapti/i.test(e.name || ''); }
 // What we NEVER put on an announcement card (Sunday worship + routine recurring +
 // RBD + community-group/team-specific recurring). Baptisms are always kept.
 // Recurring events that ARE open to anyone to join (show once, as "every week").
-const OGA_ALWAYS_RECURRING = ['mosesstudy'];
-function ogaIsOpenRecurring(e) { return OGA_ALWAYS_RECURRING.indexOf(ogaNorm(e.name)) !== -1; }
+// Matched by name PREFIX (ogaNorm), so a PCO rename like "Moses Study" → "Moses Women's Bible Study" still counts.
+const OGA_ALWAYS_RECURRING = ['moses'];
+function ogaIsOpenRecurring(e) { const n = ogaNorm(e.name); return OGA_ALWAYS_RECURRING.some(x => n.indexOf(x) === 0); }
 function ogaExcluded(e) {
   if (ogaIsBaptism(e)) return false;                    // always keep baptisms
   if (ogaIsOpenRecurring(e)) return false;              // special joinable recurring studies
@@ -7249,12 +7249,12 @@ function ogaTimeRange(e) {
 // Card-copy defaults for specific events (used until someone edits the field in the builder).
 const OGA_COPY_DEFAULTS = {
   'connection sunday': {
-    time: 'All services: 8, 9:30, and 11',
-    blurb: 'Connection Sunday is THE day to find your people! We’re launching 5–7 new Community Groups, with connection tables on the patio after every service. We were made for community, and this is your easiest next step.'
+    time: '8, 9:30, and 11',
+    blurb: 'We’re launching new community groups. Meet us out on the patio to join!'
   },
   'baptisms': {
-    time: 'All services: 8, 9:30, and 11',
-    blurb: 'Baptism is everyone’s first step of following Jesus: declaring your faith publicly. We baptize on the first Sunday of every month. Sign up, and a pastor will reach out to answer your questions and get you on the list.'
+    time: '8, 9:30, and 11',
+    blurb: 'Baptism is everyone’s first step to following Jesus. Declare your faith!'
   }
 };
 function ogaCopyDefault(e) { return OGA_COPY_DEFAULTS[ogaNorm(e.name).trim()] || OGA_COPY_DEFAULTS[String(e.name || '').trim().toLowerCase()] || null; }
@@ -7413,7 +7413,7 @@ function ogaRenderList() {
           '<input type="text" maxlength="70" placeholder="' + escapeHtml(ogaExpand(e.name)) + '" value="' + escapeHtml(st.title || '') + '" oninput="ogaField(\'' + key + '\',\'title\',this.value)">' +
           '<label>Time on the card' + (calTime ? ' (calendar: ' + escapeHtml(calTime) + ')' : '') + (noEnd ? ' <span class="oga-warn">⚠ no end time on the calendar — add it here</span>' : '') + '</label>' +
           '<input type="text" maxlength="40" placeholder="e.g. 6:30–9:00 PM" value="' + escapeHtml(cardTime) + '" oninput="ogaField(\'' + key + '\',\'time\',this.value)">' +
-          '<label>Blurb (prints on the card — max 5 lines)' + (cDef && cDef.blurb && ogaCardBlurb(e, st) === cDef.blurb ? ' <span class="oga-warn">✎ reworded for the card</span>' : '') + (shortened ? ' <span class="oga-warn">✂ shortened to 5 lines on the card — reword here to control it</span>' : '') + '</label>' +
+          '<label>Blurb (prints on the card — keep it to 1–2 short sentences)' + (cDef && cDef.blurb && ogaCardBlurb(e, st) === cDef.blurb ? ' <span class="oga-warn">✎ reworded for the card</span>' : '') + (shortened ? ' <span class="oga-warn">✂ simplified to fit the card — reword here to control it</span>' : '') + '</label>' +
           '<textarea rows="3" oninput="ogaField(\'' + key + '\',\'blurb\',this.value)">' + escapeHtml(ogaCardBlurb(e, st)) + '</textarea>' +
           '<label>Registration / info link (sets the default call-to-action)</label>' +
           '<input type="text" placeholder="https://…" value="' + escapeHtml(st.reg) + '" oninput="ogaField(\'' + key + '\',\'reg\',this.value)">' +
@@ -7685,50 +7685,57 @@ async function ogcPrepareImages() {
 const _ogcNotes = { cap: '', over: '', img: '', work: '' };
 function ogcSetStatus(t) { _ogcNotes.work = t || ''; ogcRenderStatus(); }
 function ogcRenderStatus() { const el = document.getElementById('ogcStatus'); if (el) el.textContent = [_ogcNotes.work, _ogcNotes.cap, _ogcNotes.img, _ogcNotes.over].filter(Boolean).join('  ·  '); }
-// Shrink each description (then the title) until the full text fits its slot.
-// Every description uses the SAME font size and is capped at 5 lines — the card drives
-// people to the calendar for full details. Long copy is shortened by dropping whole
-// trailing sentences (then words + "…" if one sentence is still too long), and the
-// builder flags which blurbs were shortened.
+// Fit each blurb to its slot at ONE fixed size (V2 print spec: 13.3px on 12px leading) —
+// the card is a teaser that drives people to the calendar, so copy is simplified, never shrunk.
+// If the full blurb doesn't fit: drop phrases the when-line already says ("on September 27",
+// "from 4:00–6:00 PM", "at Living Stones South Reno"), then keep, in order, only the sentences
+// that fit (skipping a long one lets a shorter one after it through). Last resort: words + "…".
+// The builder flags which blurbs were shortened.
+function ogcSimplify(t) {
+  const MON = '(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\\.?';
+  const DAY = '(?:(?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)days?,?\\s+)?';
+  const AP = '\\s*(?:[ap]m|[ap]\\.m\\.)(?![a-z])', TM = '\\d{1,2}(?::\\d{2})?(?:' + AP + ')?';
+  return String(t || '')
+    .replace(new RegExp('\\s+(?:on|this)\\s+' + DAY + MON + '\\s+\\d{1,2}(?:st|nd|rd|th)?(?:,?\\s*\\d{4})?', 'gi'), '')
+    .replace(new RegExp('\\s+(?:from\\s+)?' + TM + '\\s*(?:–|—|-|to)\\s*\\d{1,2}(?::\\d{2})?' + AP, 'gi'), '')
+    .replace(/\s+at\s+(?:Living Stones(?: South Reno)?|LS South Reno|LSSR)\b/gi, '')
+    .replace(/\s+([,.!?;:])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+}
 function ogcClampText(desc, full, maxH) {
-  desc.textContent = full;
-  if (desc.scrollHeight <= maxH + 1) return false;
-  const sents = full.match(/[^.!?]+[.!?]+["'”’)\]]*\s*|[^.!?]+$/g) || [full];
-  for (let n = sents.length - 1; n >= 1; n--) {
-    desc.textContent = sents.slice(0, n).join('').trim();
-    if (desc.scrollHeight <= maxH + 1) return true;
-  }
-  const words = sents[0].trim().split(/\s+/);
+  const fits = t => { desc.textContent = t; return desc.scrollHeight <= maxH + 1; };
+  if (fits(full)) return false;
+  const simple = ogcSimplify(full);
+  if (simple !== full && fits(simple)) return true;
+  const sents = (simple.match(/[^.!?]+[.!?]+["'”’)\]]*\s*|[^.!?]+$/g) || [simple]).map(x => x.trim()).filter(Boolean);
+  let kept = [];
+  sents.forEach(x => { if (fits(kept.concat(x).join(' '))) kept.push(x); });
+  if (kept.length) { fits(kept.join(' ')); return true; }
+  const words = sents[0].split(/\s+/);
   let lo = 1, hi = words.length, best = 1;
-  while (lo <= hi) {
-    const mid = (lo + hi) >> 1; desc.textContent = words.slice(0, mid).join(' ').replace(/[,;:—–-]+$/, '') + '…';
-    if (desc.scrollHeight <= maxH + 1) { best = mid; lo = mid + 1; } else hi = mid - 1;
-  }
-  desc.textContent = words.slice(0, best).join(' ').replace(/[,;:—–-]+$/, '') + '…';
+  const cut = n => words.slice(0, n).join(' ').replace(/[,;:—–-]+$/, '') + '…';
+  while (lo <= hi) { const mid = (lo + hi) >> 1; if (fits(cut(mid))) { best = mid; lo = mid + 1; } else hi = mid - 1; }
+  desc.textContent = cut(best);
   return true;
 }
 function ogcFitText() {
   let over = 0; const trimmed = new Set();
   document.querySelectorAll('#ogcPages .ogc-ev').forEach(ev => {
-    const body = ev.querySelector('.ogc-ev-body'), desc = ev.querySelector('.ogc-ev-desc'), name = ev.querySelector('.ogc-ev-name');
-    const four = !!ev.closest('.ogc-card.cap4');
-    const fs = four ? 8.75 : 9.5, lh = 1.34;
-    if (name) name.style.fontSize = (four ? 13 : 14.5) + 'px';
+    const body = ev.querySelector('.ogc-ev-body'), desc = ev.querySelector('.ogc-ev-desc');
+    const LH = 12;   // blurb leading (px) — matches .ogc-ev-desc
     if (desc) {
-      desc.style.fontSize = fs + 'px'; desc.style.lineHeight = String(lh);
       const full = desc.dataset.full != null ? desc.dataset.full : desc.textContent; desc.dataset.full = full;
-      // 5 lines max; if a long (2-line) title leaves no room, give up a line rather than shrink the font.
-      for (let lines = 5; lines >= 2; lines--) {
-        const cut = ogcClampText(desc, full, fs * lh * lines);
+      // As many lines as the slot allows (max 4); a long title/when-line just leaves fewer.
+      for (let lines = 4; lines >= 1; lines--) {
+        const cut = ogcClampText(desc, full, LH * lines);
         if (body.scrollHeight <= body.clientHeight + 1) { if (cut) trimmed.add(ev.dataset.key); break; }
-        if (lines === 2 && cut) trimmed.add(ev.dataset.key);
+        if (lines === 1 && cut) trimmed.add(ev.dataset.key);
       }
     }
     const bad = body.scrollHeight > body.clientHeight + 1;
     ev.classList.toggle('overflow', bad); if (bad) over++;
   });
   window._ogcTrimmed = trimmed;
-  _ogcNotes.over = (trimmed.size ? '✂ ' + trimmed.size + ' description(s) shortened to fit 5 lines — reword the blurb in the builder to control what’s kept. ' : '') +
+  _ogcNotes.over = (trimmed.size ? '✂ ' + trimmed.size + ' blurb(s) simplified to fit — reword them in the builder to control what’s kept. ' : '') +
     (over ? over + ' event(s) still too long (red underline) — shorten the title or blurb.' : '');
   ogcRenderStatus();
   if (trimmed.size) { try { ogaRenderList(); } catch (e) {} }
@@ -7758,7 +7765,9 @@ async function ogaBuildCard() {
     const d = new Date(e.dateKey + 'T12:00:00');
     const time = ogaCardTime(e, st);
     // No locations for now (not every event has one — keep the card consistent).
-    const when = (e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' }) + (ogaIsOpenRecurring(e) ? 's' : '')) + (time ? ' · ' + time : '');
+    const lead = e.endKey ? 'Through ' + fmtEndKey(e.endKey) : d.toLocaleDateString('en-US', { weekday: 'long' }) + (ogaIsOpenRecurring(e) ? 's' : '');
+    const t2 = e.endKey ? time : time.replace(new RegExp('^' + d.toLocaleDateString('en-US', { weekday: 'long' }) + 's?\\b[\\s,·•:-]*', 'i'), '');
+    const when = lead + (t2 ? ' • ' + t2 : '');
     // Paper can't click links — drop raw URLs from the printed text.
     const desc = ogaExpand(ogaCardBlurb(e, st)).replace(/\s*https?:\/\/\S+/g, '').replace(/\s{2,}/g, ' ').trim();
     const cta = ((st.cta || '').trim()) || ogaAutoCta(e, st);
@@ -7770,7 +7779,8 @@ async function ogaBuildCard() {
     return '<div class="ogc-ev" data-key="' + ogaKey(e) + '"><div class="ogc-media">' + media + badge + '</div>' +
       '<div class="ogc-ev-body">' +
         '<div class="ogc-ev-name">' + escapeHtml(((st.title || '').trim()) || ogaExpand(e.name) || 'Event') + '</div>' +
-        '<div class="ogc-ev-when">' + escapeHtml(when) + '</div>' +
+        // Only wrap between chunks ("Tuesdays •" / "Sep 22–Nov 17," / "5:30–6:30 PM") — never inside a time range.
+        '<div class="ogc-ev-when">' + when.split(/(?<=[,•])\s+/).map(x => '<span style="white-space:nowrap">' + escapeHtml(x) + '</span>').join(' ') + '</div>' +
         (desc ? '<div class="ogc-ev-desc">' + escapeHtml(desc) + '</div>' : '') +
         '<span class="ogc-cta">→ ' + escapeHtml(cta) + '</span>' +
       '</div></div>';
@@ -7786,7 +7796,7 @@ async function ogaBuildCard() {
         '<div class="ogc-foot">' + (isFront && faces.length > 1 ? '<div class="ogc-more"><span>' + (faces[1].length ? 'More next steps on the back →' : 'Sunday times on the back →') + '</span></div>' : '') +
           '<div class="ogc-foot-txt"><div class="ogc-foot-k">See all announcements</div>' +
           '<div class="ogc-foot-url">lssr.churchcenter.com/calendar</div></div>' +
-          '<div class="ogc-foot-r"><div class="ogc-foot-scan">Scan for all next steps <span>→</span></div>' +
+          '<div class="ogc-foot-r"><div class="ogc-foot-scan">Scan for all<br>next steps <span>→</span></div>' +
           '<img class="ogc-foot-qr" src="' + calQr + '" alt="QR code to lssr.churchcenter.com/calendar"></div></div>' +
       '</div><div class="ogc-trim" data-html2canvas-ignore="true" title="Trim line (5×7). Everything outside is bleed."></div></div></div>';
   };
@@ -14990,7 +15000,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T002136Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260923T182407Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
