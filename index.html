@@ -1158,6 +1158,7 @@
   .cp-gbar { height: 8px; border-radius: 6px; background: #eadfca; overflow: hidden; }
   .cp-gbar i { display: block; height: 100%; background: linear-gradient(90deg, #c9963a, #3f9b6b); border-radius: 6px; }
   .cp-gadd { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .cp-gadd .cp-need { border-color: #c83a3a !important; box-shadow: 0 0 0 3px rgba(200,58,58,.18); }
   .cp-obj { position: relative; z-index: 1; }
   .cp-obj-lbl { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--sp-gold,#c9963a); margin-bottom: 2px; }
   .cp-obj-line { display: flex; align-items: center; gap: 4px; border-bottom: 3px solid var(--sp-ink,#1a1510); padding-bottom: 3px; background: rgba(255,255,255,.85); }
@@ -8369,8 +8370,8 @@ function cpHtml(person) {
         '</div>' +
         '<div class="cp-gbar"><i style="width:' + (pct == null ? 0 : Math.round(pct * 100)) + '%"></i></div></div>';
     }).join('') : '<div class="sos-empty sm">Where do you want to be 12 months from now? Add your first goal.</div>') +
-    '<div class="cp-gadd"><input id="cpNewGoal" class="sos-input sm" placeholder="New 12-month goal (e.g. 50 active groups)…">' +
-      '<div class="cp-madd-row"><input id="cpNewGoalTarget" class="sos-input sm cp-narrow" placeholder="Target #"><select id="cpNewGoalMetric" class="sos-input sm">' + metricOpts('') + '</select><button class="sos-btn sm hi" onclick="cpAddGoal()">Add goal</button></div></div>' +
+    '<div class="cp-gadd"><input id="cpNewGoal" class="sos-input sm" placeholder="Goal name (e.g. 50 active groups)…" onkeydown="if(event.key===\'Enter\')cpAddGoal()">' +
+      '<div class="cp-madd-row"><input id="cpNewGoalTarget" class="sos-input sm cp-narrow" placeholder="Target #" onkeydown="if(event.key===\'Enter\')cpAddGoal()"><select id="cpNewGoalMetric" class="sos-input sm">' + metricOpts('') + '</select><button class="sos-btn sm hi" onclick="cpAddGoal()">Add goal</button></div></div>' +
     '</div>';
 
   const objs = cpPlans('objective').concat(cpPlans('goal').filter(p => !p.parentId)).slice(0, 3);
@@ -8493,8 +8494,10 @@ function cpAddCustomMetric() {
 }
 function cpAddGoal() {
   const t = document.getElementById('cpNewGoal'), tg = document.getElementById('cpNewGoalTarget'), mm = document.getElementById('cpNewGoalMetric');
-  const title = (t && t.value || '').trim(); if (!title) { t && t.focus(); return; }
   const metric = (mm && mm.value) || '', m = cpCatalog()[metric];
+  // No name typed but an auto metric picked → name the goal after the metric.
+  const title = (t && t.value || '').trim() || (m ? m.label : '');
+  if (!title) { sosToast('Type a name for the goal first (top box)'); if (t) { t.focus(); t.classList.add('cp-need'); setTimeout(() => t.classList.remove('cp-need'), 1600); } return; }
   sosAddPlanLocal({ type: 'goal12', title: title, target: (tg && tg.value || '').trim(), metric: metric, current: '', detail: m ? String(m.value) : '', period: String(new Date().getFullYear()), status: 'active' });
 }
 function cpLinkGoal(id, key) {
@@ -15000,7 +15003,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T193822Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260923T195027Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
