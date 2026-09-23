@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T20:50:13.089Z",
+  "generatedAt": "2026-09-23T21:50:06.625Z",
   "asOf": "2026-09-23",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 217,
+    "inGroup": 216,
     "serving": 232,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 177,
+    "notInGroup": 178,
     "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.550761421319797,
+      "inGroup": 0.5482233502538071,
       "serving": 0.5888324873096447,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -5906,7 +5906,7 @@
       "summary": {
         "totalPeople": 50,
         "avgScore": 0,
-        "inGroup": 30,
+        "inGroup": 29,
         "serving": 32,
         "leading": 8,
         "givingRegular": 0,
@@ -5916,7 +5916,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 50,
-        "notInGroup": 20,
+        "notInGroup": 21,
         "notServing": 18,
         "notGiving": 0,
         "paciCounts": {
@@ -5934,7 +5934,7 @@
           "unknown": 50
         },
         "pct": {
-          "inGroup": 0.6,
+          "inGroup": 0.58,
           "serving": 0.64,
           "leading": 0.16,
           "givingRegular": 0,
@@ -6342,6 +6342,48 @@
         },
         {
           "id": null,
+          "name": "Megan Wampler",
+          "first": "Megan",
+          "last": "Wampler",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Worship Team",
+              "role": "member",
+              "joinedAt": "2025-02-03T18:51:09Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Nicole Leach",
           "first": "Nicole",
           "last": "Leach",
@@ -6649,52 +6691,6 @@
             "Not in a group",
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Megan Wampler",
-          "first": "Megan",
-          "last": "Wampler",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member",
-              "joinedAt": "2024-06-11T18:20:37Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Worship Team",
-              "role": "member",
-              "joinedAt": "2025-02-03T18:51:09Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
