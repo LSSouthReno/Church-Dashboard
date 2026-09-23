@@ -1118,20 +1118,20 @@
   .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
   .sos-mini-title { flex: 1 1 auto; font-size: 14.5px; color: var(--sp-ink,#1a1510); }
   .cp-card { margin-top: 18px; }
-  .cp-wrap { position: relative; padding: 8px 4px 4px; }
-  .cp-band { position: relative; display: grid; grid-template-columns: minmax(290px, 1fr) minmax(200px, 1.15fr) minmax(290px, 1fr); grid-template-rows: auto 210px auto; }
-  .cp-anchors { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
-  .cp-anchor-lbl { position: absolute; font-size: 12.5px; font-weight: 800; color: var(--sp-ink,#1a1510); line-height: 1.25; text-align: right; }
-  .cp-anchor-lbl span { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; background: var(--sp-gold,#c9963a); color: #fff; font-size: 11px; align-items: center; justify-content: center; margin-right: 5px; }
-  .cp-objs-h { font-size: 12.5px; font-weight: 800; color: var(--sp-gold,#c9963a); text-transform: uppercase; letter-spacing: .06em; margin: 26px 0 10px; }
-  .cp-objs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start; }
-  .cp-svg { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 0; overflow: visible; }
+  .cp-wrap { position: relative; padding: 8px 4px 4px; display: flex; flex-direction: column; gap: 16px; }
+  .cp-wrap.cp-abs { display: block; padding: 0; }
+  .cp-wrap.cp-abs .cp-goal, .cp-wrap.cp-abs .cp-reality, .cp-wrap.cp-abs .cp-smart, .cp-wrap.cp-abs .cp-otitle, .cp-wrap.cp-abs .cp-osteps { position: absolute; z-index: 1; }
+  .cp-oblock { position: static; }
+  .cp-otitle { text-align: right; border-bottom: 3px solid var(--sp-ink,#1a1510); padding-bottom: 2px; }
+  .cp-otitle .cp-obj-lbl { text-align: right; }
+  .cp-otitle-row { display: flex; align-items: flex-end; gap: 4px; }
+  .cp-otitle .cp-obj-title { text-align: right; resize: none; overflow: hidden; line-height: 1.25; }
+  .cp-oblock-new .cp-otitle { border-bottom-style: dashed; border-color: #c9b99c; }
+  .cp-osteps { border-left: 2px solid var(--sp-ink,#1a1510); padding: 4px 0 2px; background: rgba(255,255,255,.9); }
   .cp-box { position: relative; z-index: 1; background: #fff; border: 2px solid var(--sp-ink,#1a1510); border-radius: 12px; padding: 14px 16px; }
   .cp-box-h { font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); margin-bottom: 10px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
   .cp-box-h span { font-weight: 600; font-size: 12px; color: var(--sp-muted,#8a7e6e); }
-  .cp-goal { grid-column: 3; grid-row: 1; align-self: start; }
-  .cp-reality { grid-column: 1; grid-row: 3; }
-  .cp-smart { grid-column: 1; grid-row: 1; align-self: start; max-width: 250px; border: 1.5px solid var(--sp-border,#e6dccb); border-radius: 10px; padding: 12px 14px; font-size: 12px; line-height: 1.6; color: var(--sp-muted,#8a7e6e); background: rgba(255,255,255,.7); }
+  .cp-smart { max-width: 250px; border: 1.5px solid var(--sp-border,#e6dccb); border-radius: 10px; padding: 12px 14px; font-size: 12px; line-height: 1.6; color: var(--sp-muted,#8a7e6e); background: rgba(255,255,255,.7); }
   .cp-smart b { display: block; color: var(--sp-ink,#1a1510); font-size: 12.5px; }
   .cp-smart span { display: block; font-size: 11px; }
   .cp-overall { margin-left: auto; font-size: 13px; color: #3f9b6b; }
@@ -1170,12 +1170,10 @@
   .cp-step-in { flex: 1 1 auto; border: none; background: transparent; font: inherit; font-size: 13px; line-height: 1.4; color: var(--sp-ink,#1a1510); resize: none; overflow: hidden; min-width: 0; padding: 1px 2px; field-sizing: content; }
   .cp-step.done .cp-step-in { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
   .cp-step-add .cp-step-in { color: var(--sp-muted,#8a7e6e); }
-  @media (max-width: 980px) {
-    .cp-band { display: flex; flex-direction: column-reverse; gap: 16px; }
-    .cp-svg, .cp-anchors { display: none; }
-    .cp-smart { max-width: none; }
-    .cp-objs { grid-template-columns: 1fr; }
-  }
+  .cp-wrap:not(.cp-abs) .cp-svg { display: none; }
+  .cp-wrap:not(.cp-abs) .cp-smart { max-width: none; order: 9; }
+  .cp-wrap:not(.cp-abs) .cp-reality { order: -1; }
+  .cp-wrap:not(.cp-abs) .cp-otitle { text-align: left; }
   .sos-team-tag { font-size: 10px; font-weight: 700; letter-spacing: .03em; text-transform: none; color: var(--sp-muted,#8a7e6e); background: rgba(201,150,58,.12); border-radius: 10px; padding: 2px 8px; margin-left: 6px; }
   .sos-pri { font-size: 10.5px; font-weight: 800; text-transform: uppercase; border-radius: 8px; padding: 1px 6px; margin-left: 4px; background: #eee6d6; color: #7a6524; }
   .sos-pri.hig { background: #f6d9cf; color: #9a3412; }
@@ -8272,8 +8270,8 @@ function cpCatalog() {
   const b = D.baptisms || {};
   if (b.months) add('baptisms_ytd', 'Baptisms ' + cy + ' YTD', b.months.reduce((t, m, i) => t + (String(m).endsWith("'" + yy) ? (b.counts[i] || 0) : 0), 0), '', 'Baptisms');
   const mb = D.members || {};
-  add('members_total', 'Church members', mb.current, '', 'Church Members');
-  if (mb.years) { const i = mb.years.indexOf(Number(cy)); if (i >= 0) add('new_members_ytd', 'New members ' + cy + ' YTD', mb.counts[i], '', 'Church Members'); }
+  add('members_total', 'Church members (Member · Deacon · Pastor)', mb.current, '', 'Planning Center membership');
+  if (mb.years) { const i = mb.years.indexOf(Number(cy)); if (i >= 0) add('new_members_ytd', 'New members ' + cy + ' YTD (by join date)', mb.counts[i], '', 'Church Members'); }
   add('volunteers', 'Active volunteers (last 90 days)', D.uniqueVolunteers, '', 'Serve Teams');
   if (D.uniqueVolunteers && cat.att_adults) add('vol_pct', 'Volunteers as % of adult attendance', D.uniqueVolunteers / cat.att_adults.value * 100, '%', 'Serve Teams');
   if (D.newAdults30d) add('new_adults_30d', 'New adults (last 30 days)', D.newAdults30d.count30d, '', 'Planning Center');
@@ -8355,19 +8353,22 @@ function cpHtml(person) {
     '</div>';
 
   const objs = cpPlans('objective').concat(cpPlans('goal').filter(p => !p.parentId)).slice(0, 3);
-  const objHtml = i => {
-    const o = objs[i];
-    if (!o) {
-      return i === objs.length ? '<div class="cp-obj cp-obj-new"><div class="cp-obj-lbl">Strategic objective ' + (i + 1) + '</div><div class="cp-obj-line"><input id="cpNewObj" class="cp-obj-title" placeholder="＋ Add a strategic objective…" onkeydown="if(event.key===\'Enter\')cpAddObjective()"></div></div>' : '';
-    }
-    const steps = sosSteps(o.id);
-    const done = steps.filter(s => s.status === 'done').length;
-    return '<div class="cp-obj">' +
-      '<div class="cp-obj-lbl">Strategic objective ' + (i + 1) + (steps.length ? ' · ' + done + '/' + steps.length + ' done' : '') + '</div>' +
-      '<div class="cp-obj-line"><input class="cp-obj-title" value="' + E(o.title) + '" onchange="cpSet(\'' + o.id + '\',\'title\',this.value)"><button class="cp-x" title="Delete objective and its steps" onclick="sosDeletePlan(\'' + o.id + '\')">×</button></div>' +
-      '<div class="cp-steps">' + steps.map(st => '<div class="cp-step' + (st.status === 'done' ? ' done' : '') + '">' +
+  // One diagram like the template: the objective nearest the goal sits highest; each
+  // objective's line meets the diagonal, with its action steps hanging off below.
+  const slots = objs.map((o, i) => ({ o, i }));
+  if (objs.length < 3) slots.push({ o: null, i: objs.length });
+  const grow = "this.style.height='auto';this.style.height=this.scrollHeight+'px';cpLayoutSoon()";
+  const blockHtml = ({ o, i }) => {
+    if (!o) return '<div class="cp-oblock cp-oblock-new" data-i="' + i + '"><div class="cp-otitle"><div class="cp-obj-lbl">Strategic objective ' + (i + 1) + '</div>' +
+      '<textarea id="cpNewObj" class="cp-obj-title" rows="1" placeholder="＋ Add a strategic objective…" oninput="' + grow + '" onkeydown="if(event.key===\'Enter\'){event.preventDefault();cpAddObjective()}"></textarea></div></div>';
+    const steps = sosSteps(o.id), done = steps.filter(x => x.status === 'done').length;
+    return '<div class="cp-oblock" data-i="' + i + '">' +
+      '<div class="cp-otitle"><div class="cp-obj-lbl">Strategic objective ' + (i + 1) + (steps.length ? ' · ' + done + '/' + steps.length + ' done' : '') + '</div>' +
+        '<div class="cp-otitle-row"><button class="cp-x" title="Delete objective and its steps" onclick="sosDeletePlan(\'' + o.id + '\')">×</button>' +
+        '<textarea class="cp-obj-title" rows="1" oninput="' + grow + '" onchange="cpSet(\'' + o.id + '\',\'title\',this.value)">' + E(o.title) + '</textarea></div></div>' +
+      '<div class="cp-osteps">' + steps.map(st => '<div class="cp-step' + (st.status === 'done' ? ' done' : '') + '">' +
         '<input type="checkbox" class="sos-cb" ' + (st.status === 'done' ? 'checked' : '') + ' onchange="sosTogglePlan(\'' + st.id + '\',this.checked)">' +
-        '<textarea class="cp-step-in" rows="1" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\'" onchange="cpSet(\'' + st.id + '\',\'title\',this.value)">' + E(st.title) + '</textarea>' +
+        '<textarea class="cp-step-in" rows="1" oninput="' + grow + '" onchange="cpSet(\'' + st.id + '\',\'title\',this.value)">' + E(st.title) + '</textarea>' +
         '<button class="cp-x" onclick="sosDeletePlan(\'' + st.id + '\')">×</button></div>').join('') +
         '<div class="cp-step cp-step-add"><input id="cpStep_' + o.id + '" class="cp-step-in" placeholder="＋ Add an action step…" onkeydown="if(event.key===\'Enter\')sosAddStep(\'' + o.id + '\',\'cpStep_' + o.id + '\')"></div>' +
       '</div></div>';
@@ -8375,37 +8376,89 @@ function cpHtml(person) {
   return '<div class="sos-card cp-card"><div class="sos-card-h">🧭 12-Month Critical Path <span class="sos-count">Current reality → strategic objectives → goal</span></div>' +
     '<div class="cp-wrap" id="cpWrap">' +
       '<svg class="cp-svg" id="cpSvg" aria-hidden="true"></svg>' +
-      '<div class="cp-band">' + '<div class="cp-smart"><b>Action steps should be SMART</b>Specific · Measurable · Attainable · Realistic · Timely<span>(i.e. who will do what, and when?)</span></div>' + goalHtml + realityHtml +
-        '<div class="cp-anchors" id="cpAnchors">' + objs.map((o, i) => '<div class="cp-anchor-lbl" data-i="' + i + '"><span>' + (i + 1) + '</span>' + E(o.title) + '</div>').join('') + '</div>' +
-      '</div>' +
-      '<div class="cp-objs-h">Strategic objectives &amp; action steps</div>' +
-      '<div class="cp-objs">' + [0, 1, 2].map(objHtml).join('') + '</div>' +
+      '<div class="cp-smart"><b>Action steps should be SMART</b>Specific · Measurable · Attainable · Realistic · Timely<span>(i.e. who will do what, and when?)</span></div>' +
+      goalHtml +
+      slots.slice().sort((a, b) => b.i - a.i).map(blockHtml).join('') +
+      realityHtml +
     '</div></div>';
+}
+// Lay the diagram out like the template (desktop): goal top-right, objectives stepping
+// down-left along the diagonal (each objective line ends ON the line, steps hang below it),
+// Current Reality at the bottom-left where the line starts. Positions depend on how tall
+// each objective's steps are, so we measure and place them in JS.
+let _cpGeo = null;
+function cpLayoutSoon() { clearTimeout(window._cpLay); window._cpLay = setTimeout(cpLayout, 60); }
+function cpLayout() {
+  const wrap = document.getElementById('cpWrap'); if (!wrap) return;
+  // Re-lay out whenever the diagram's width changes (e.g. it was drawn while its tab was hidden).
+  if (window.ResizeObserver && wrap._cpRO !== true) {
+    if (window._cpRO) window._cpRO.disconnect();
+    let lastW = -1;
+    window._cpRO = new ResizeObserver(() => { const w = wrap.clientWidth; if (w !== lastW) { lastW = w; cpLayoutSoon(); } });
+    window._cpRO.observe(wrap); wrap._cpRO = true;
+  }
+  if (!wrap.clientWidth) return;                         // hidden — the observer will call us back
+  wrap.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
+  const W = wrap.clientWidth, parts = wrap.querySelectorAll('.cp-goal, .cp-reality, .cp-smart, .cp-otitle, .cp-osteps');
+  if (W < 980) { wrap.classList.remove('cp-abs'); parts.forEach(el => el.removeAttribute('style')); wrap.style.height = ''; _cpGeo = null; cpDrawLine(); return; }
+  wrap.classList.add('cp-abs');
+  const G = wrap.querySelector('.cp-goal'), R = wrap.querySelector('.cp-reality'), S = wrap.querySelector('.cp-smart');
+  const goalW = Math.min(360, Math.round(W * 0.3)), realW = Math.min(360, Math.round(W * 0.3)), titleW = 250, gap = 34;
+  G.style.cssText = 'left:' + (W - goalW) + 'px;top:0;width:' + goalW + 'px';
+  S.style.cssText = 'left:0;top:0;width:240px';
+  R.style.width = realW + 'px';
+  const xg = W - goalW, yg = G.offsetHeight, xr = realW;
+  const blocks = [...wrap.querySelectorAll('.cp-oblock')];     // top (nearest goal) → bottom
+  // pass 1: estimate each anchor's x from even spacing, size steps, measure heights
+  const n = blocks.length;
+  const place = xs => {
+    let y = yg + 46; const ys = [];
+    blocks.forEach((b, k) => {
+      const T = b.querySelector('.cp-otitle'), P = b.querySelector('.cp-osteps');
+      const stepW = Math.max(230, Math.min(W - xs[k] - 10, 560));
+      T.style.cssText = 'width:' + titleW + 'px';
+      if (P) P.style.cssText = 'width:' + stepW + 'px';
+      b.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });   // re-fit text at this width
+      const th = T.offsetHeight, ph = P ? P.offsetHeight : 0;
+      ys.push(y + th);                                  // anchor = bottom of the objective line
+      y += th + ph + gap;
+    });
+    return { ys, yEnd: y };
+  };
+  let xs = blocks.map((b, k) => xg - (xg - xr) * (k + 1) / (n + 1)), lay = place(xs);
+  const yr = Math.max(lay.yEnd + 10, yg + 260);
+  const xOn = y => xg + (xr - xg) * (y - yg) / (yr - yg);   // point on the diagonal at height y
+  xs = lay.ys.map(xOn); lay = place(xs);                     // pass 2 with real x's
+  const yr2 = Math.max(lay.yEnd + 10, yg + 260), xOn2 = y => xg + (xr - xg) * (y - yg) / (yr2 - yg);
+  const anchors = [];
+  blocks.forEach((b, k) => {
+    const T = b.querySelector('.cp-otitle'), P = b.querySelector('.cp-osteps'), ay = lay.ys[k], ax = xOn2(ay);
+    T.style.cssText = 'width:' + titleW + 'px;left:' + (ax - titleW) + 'px;top:' + (ay - T.offsetHeight) + 'px';
+    if (P) P.style.cssText = 'width:' + Math.max(230, Math.min(W - ax - 10, 560)) + 'px;left:' + ax + 'px;top:' + ay + 'px';
+    anchors.push([ax, ay]);
+  });
+  R.style.cssText = 'left:0;top:' + yr2 + 'px;width:' + realW + 'px';
+  wrap.style.height = (yr2 + R.offsetHeight + 8) + 'px';
+  _cpGeo = { x1: xr, y1: yr2, x2: xg, y2: yg, anchors };
+  cpDrawLine();
 }
 // Diagonal line from Current Reality up to the 12-month goal, filled like a thermometer.
 function cpDrawLine() {
   const wrap = document.getElementById('cpWrap'), svg = document.getElementById('cpSvg'); if (!wrap || !svg) return;
-  const R = wrap.querySelector('.cp-reality'), G = wrap.querySelector('.cp-goal'); if (!R || !G) return;
-  const w = wrap.getBoundingClientRect(), r = R.getBoundingClientRect(), g = G.getBoundingClientRect();
-  if (getComputedStyle(svg).display === 'none') return;
-  const x1 = r.right - w.left - 18, y1 = r.top - w.top, x2 = g.left - w.left + 18, y2 = g.bottom - w.top;
+  if (!_cpGeo || getComputedStyle(svg).display === 'none') { svg.innerHTML = ''; return; }
+  const { x1, y1, x2, y2, anchors } = _cpGeo, W = wrap.clientWidth, H = wrap.clientHeight;
   const pct = cpOverallPct() || 0, xp = x1 + (x2 - x1) * pct, yp = y1 + (y2 - y1) * pct;
-  svg.setAttribute('width', w.width); svg.setAttribute('height', w.height); svg.setAttribute('viewBox', '0 0 ' + w.width + ' ' + w.height);
+  svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
   svg.innerHTML = '<defs><linearGradient id="cpGrad" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c9963a"/><stop offset="1" stop-color="#3f9b6b"/></linearGradient>' +
     '<marker id="cpArrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a1510"/></marker></defs>' +
     '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#eadfca" stroke-width="16" stroke-linecap="round"/>' +
     (pct > 0 ? '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + xp + '" y2="' + yp + '" stroke="url(#cpGrad)" stroke-width="16" stroke-linecap="round"/>' : '') +
     '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#1a1510" stroke-width="2" marker-end="url(#cpArrow)"/>' +
     '<circle cx="' + x1 + '" cy="' + y1 + '" r="13" fill="#c9963a" stroke="#fff" stroke-width="3"/>' +
-    [...wrap.querySelectorAll('.cp-anchor-lbl')].map((el, i, all) => {
-      const t = (i + 1) / (all.length + 1), ax = x1 + (x2 - x1) * t, ay = y1 + (y2 - y1) * t, len = Math.min(230, ax - 8);
-      const bo = wrap.querySelector('.cp-band').getBoundingClientRect(), dx = bo.left - w.left, dy = bo.top - w.top;   // labels live in .cp-band, the SVG in .cp-wrap
-      el.style.width = (len - 6) + 'px'; el.style.left = (ax - len - dx) + 'px'; el.style.top = (ay - el.offsetHeight - 6 - dy) + 'px';
-      return '<line x1="' + (ax - len) + '" y1="' + ay + '" x2="' + ax + '" y2="' + ay + '" stroke="#1a1510" stroke-width="2.5"/><circle cx="' + ax + '" cy="' + ay + '" r="5" fill="#1a1510"/>';
-    }).join('') +
-    '<g transform="translate(' + (xp + 14) + ',' + (yp + 4) + ')"><rect x="0" y="-13" rx="9" width="' + (pct >= 1 ? 58 : 50) + '" height="22" fill="#1a1510"/><text x="' + (pct >= 1 ? 29 : 25) + '" y="2" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="12" fill="#fff">' + Math.round(pct * 100) + '%</text></g>';
+    anchors.map(a => '<circle cx="' + a[0] + '" cy="' + a[1] + '" r="5.5" fill="#1a1510"/>').join('') +
+    '<g transform="translate(' + (xp - (pct >= 1 ? 72 : 64)) + ',' + (yp + 4) + ')"><rect x="0" y="-13" rx="9" width="' + (pct >= 1 ? 58 : 50) + '" height="22" fill="#1a1510"/><text x="' + (pct >= 1 ? 29 : 25) + '" y="2" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="12" fill="#fff">' + Math.round(pct * 100) + '%</text></g>';
 }
-window.addEventListener('resize', () => { clearTimeout(window._cpRz); window._cpRz = setTimeout(cpDrawLine, 120); });
+window.addEventListener('resize', () => { clearTimeout(window._cpRz); window._cpRz = setTimeout(cpLayout, 120); });
 function cpSet(id, field, value) {
   const body = { action: 'sos_plan_update', id: id }; body[field] = value;
   sosMutate(() => { const p = _sos.plans.find(x => x.id === id); if (p) p[field] = value; }, body);
@@ -8588,7 +8641,7 @@ function sosRender() {
       '</div>' +
     '</div>' +
     cpHtml(viewing);
-  requestAnimationFrame(cpDrawLine);
+  setTimeout(cpLayout, 0);
 }
 
 // ── Actionable named lists + group-health flags ──────────────────────────────
@@ -10878,6 +10931,7 @@ function staffShowSection(id, tabEl) {
   const el = document.getElementById(id);
   if (el) el.classList.add('sp-active');
   if (tabEl) tabEl.classList.add('sp-active');
+  if (id === 'sp-mine' && typeof cpLayout === 'function') setTimeout(cpLayout, 0);   // critical-path diagram needs a visible width
 }
 
 function staffCopyScript() {
@@ -14925,7 +14979,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T000018Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260923T001522Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
