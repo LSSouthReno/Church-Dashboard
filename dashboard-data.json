@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-23T16:46:37.405Z",
+  "lastUpdated": "2026-09-23T17:01:35.745Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 23, 2026, 9:46 AM",
+    "refreshed": "Sep 23, 2026, 10:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9932,8 +9932,8 @@
         "members": 8,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-7:30am",
-        "avgAttended": 6,
-        "attPct": 75
+        "avgAttended": 5,
+        "attPct": 63
       },
       {
         "name": "Coan Community Group",
@@ -21905,13 +21905,6 @@
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
-              "name": "Karynn Sucaldito",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Fredy Bridges",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
@@ -21924,6 +21917,27 @@
               "pos": "Hawks Lead Guide",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kadyn Skolnick",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Teylor Baskharoon (Hinzman)",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -21950,125 +21964,132 @@
             },
             {
               "seq": 4,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
               "title": "Battle Belongs",
               "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
-              "seq": 5,
+              "seq": 6,
               "title": "I Belong To Jesus",
               "type": "song",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 6,
+              "seq": 7,
               "title": "CONFESSION / ASSURANCE",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 7,
+              "seq": 8,
               "title": "Yes I Will",
               "type": "song",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 8,
+              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
-            },
-            {
-              "seq": 9,
-              "title": "NEW ELDER ANNOUCEMENT",
-              "type": "item",
-              "lengthMin": 3,
-              "description": ""
+              "description": "Underscore: GRATITUDE"
             },
             {
               "seq": 10,
+              "title": "NEW ELDER ANNOUCEMENT",
+              "type": "item",
+              "lengthMin": 3,
+              "description": "BRAD B"
+            },
+            {
+              "seq": 11,
               "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
-              "description": "End Underscore:"
+              "description": "End Underscore: \nSURRENDERING TO THE PRESENCE"
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING INST.",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "King Of Kings",
               "type": "song",
               "lengthMin": 5,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 22,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -22081,8 +22102,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 95,
-            "totalVols": 95
+            "volsWithServiceTime": 97,
+            "totalVols": 97
           }
         }
       ]
@@ -22885,7 +22906,7 @@
               "name": "Anita Bigger",
               "team": "Worship Team",
               "pos": "Piano",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -22899,6 +22920,27 @@
               "name": "Nathen Ross",
               "team": "Tech",
               "pos": "Slides",
+              "status": "U",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Caleb Frink",
+              "team": "Worship Team",
+              "pos": "Electric Guitar",
+              "status": "U",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Aaron Carl",
+              "team": "Tech",
+              "pos": "Sound",
+              "status": "C",
+              "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Tech",
+              "pos": "Lights",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
             }
@@ -22955,65 +22997,65 @@
             },
             {
               "seq": 8,
-              "title": "Graves Into Gardens",
-              "type": "song",
-              "lengthMin": 5,
-              "description": ""
-            },
-            {
-              "seq": 9,
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
               "description": "Underscore:"
             },
             {
-              "seq": 10,
+              "seq": 9,
               "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 10,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 11,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 12,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 14,
+              "seq": 13,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
-              "seq": 15,
+              "seq": 14,
               "title": "COMMUNION / OFFERING INST.",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 15,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "Graves Into Gardens",
+              "type": "song",
+              "lengthMin": 5,
               "description": ""
             },
             {
@@ -23044,8 +23086,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 45,
-            "totalVols": 45
+            "volsWithServiceTime": 48,
+            "totalVols": 48
           }
         }
       ]
@@ -23708,7 +23750,7 @@
               "name": "Anita Bigger",
               "team": "Worship Team",
               "pos": "Piano",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
