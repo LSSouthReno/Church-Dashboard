@@ -1113,6 +1113,14 @@
   .sos-task:hover .sos-task-actions { opacity: 1; }
   .sos-task-actions button, .sos-x { background: none; border: none; color: var(--sp-muted,#8a7e6e); cursor: pointer; font-size: 13px; padding: 2px 4px; }
   .sos-task-actions button:hover, .sos-x:hover { color: var(--sp-ink,#1a1510); }
+  .sos-move { flex: 0 0 auto; width: 30px; height: 24px; padding: 0 2px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--sp-muted,#8a7e6e); font: inherit; font-size: 13px; cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center; text-align-last: center; }
+  .sos-move:hover, .sos-move:focus { border-color: var(--sp-border,#d8cdb8); background: #fff; color: var(--sp-ink,#1a1510); outline: none; }
+  .sos-mini-row .sos-move { opacity: .5; } .sos-mini-row:hover .sos-move { opacity: 1; }
+  .sos-task[draggable], .sos-mini-row[draggable] { cursor: grab; }
+  .sos-dragged { opacity: .45; }
+  body.sos-dragging .sos-card[data-drop] { transition: box-shadow .15s, background .15s; }
+  body.sos-drag-task .sos-card[data-drop]:not([data-drop="task"]), body.sos-drag-rock .sos-card[data-drop]:not([data-drop="rock"]), body.sos-drag-boulder .sos-card[data-drop]:not([data-drop="boulder"]) { box-shadow: 0 0 0 2px rgba(201,150,58,.35); }
+  .sos-card.sos-drop-on { box-shadow: 0 0 0 3px var(--sp-gold,#c9963a) !important; background: #fffaf0; }
   .sos-done-wrap { margin-top: 10px; } .sos-done-wrap summary { cursor: pointer; font-size: 13px; color: var(--sp-muted,#8a7e6e); padding: 5px 0; }
   .sos-mini { margin-bottom: 20px; }
   .sos-mini-h { font-size: 12.5px; font-weight: 800; color: var(--sp-gold,#c9963a); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
@@ -8254,10 +8262,10 @@ function sosTaskRow(t) {
   const due = t.due ? '<span class="sos-tag due">' + escapeHtml(sosFmtDue(t.due)) + '</span>' : '';
   const notes = t.notes ? '<div class="sos-task-notes">' + escapeHtml(t.notes) + '</div>' : '';
   const done = t.status === 'done';
-  return '<div class="sos-task' + (done ? ' done' : '') + '">' +
+  return '<div class="sos-task' + (done ? ' done' : '') + '"' + sosDragAttrs('task', t.id) + '>' +
     '<input type="checkbox" class="sos-cb" ' + (done ? 'checked' : '') + ' onchange="sosToggleTask(\'' + t.id + '\',this.checked)">' +
     '<div class="sos-task-body"><div class="sos-task-top"><span class="sos-task-title">' + escapeHtml(t.title || '') + '</span>' + due + pri + from + '</div>' + notes + '</div>' +
-    '<div class="sos-task-actions">' +
+    '<div class="sos-task-actions">' + sosMoveSel('task', t.id) +
       '<button title="Edit" onclick="sosEditTask(\'' + t.id + '\')">✎</button>' +
       '<button title="Delete" onclick="sosDeleteTask(\'' + t.id + '\')">🗑</button>' +
     '</div></div>';
@@ -8548,6 +8556,7 @@ function cpOverallPct() {
 function cpFmt(v, unit) { return v == null || v === '' ? '—' : (typeof v === 'number' ? v.toLocaleString() : escapeHtml(String(v))) + (unit || ''); }
 function cpHtml(person) {
   cpEnsureOrgBaselines();
+  cpHealMetricRows();
   const cat = cpCatalog(), E = escapeHtml;
   const reality = cpRealityRows(person);
   const shownKeys = new Set(reality.filter(r => r.auto).map(r => r.key));
@@ -8564,7 +8573,7 @@ function cpHtml(person) {
       '<span class="cp-mlabel">' + E(r.label) + (r.auto ? ' <span class="cp-auto" title="Pulled automatically from ' + E(r.src) + '">auto</span>' : '') + '</span>' +
       (r.loading ? '<b class="cp-mval">' + (r.base == null ? '' : cpFmt(r.base, '')) + '</b><span class="cp-mnow">loading…</span>' : r.custom ? (r.base != null && r.base !== '' ? '<b class="cp-mval">' + cpFmt(r.base, '') + '</b>' : '') + '<input class="cp-mval-in" title="Today" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">'
         : '<b class="cp-mval" title="' + E(bl.label) + '">' + (r.base == null ? '—' : cpFmt(r.base, r.unit)) + '</b>' + delta(r)) +
-      '<button class="cp-x" title="Remove" onclick="' + (r.custom ? 'sosDeletePlan(\'' + r.id + '\')' : (r.linkId ? 'sosDeletePlan(\'' + r.linkId + '\')' : 'cpHideMetric(\'' + E(r.key) + '\')')) + '">×</button></div>').join('')
+      '<button class="cp-x" title="Remove" onclick="' + (r.custom ? 'sosDeletePlan(\'' + r.id + '\')' : 'cpRemoveMetric(\'' + E(r.key) + '\')') + '">×</button></div>').join('')
       : '<div class="sos-empty sm">No metrics yet.</div>') +
     '<details class="cp-more"><summary>＋ Add a metric</summary><div class="cp-madd">' +
       (addOpts ? '<select class="sos-input sm" onchange="if(this.value){cpAddLink(this.value);this.value=\'\'}"><option value="">Add a dashboard metric…</option>' + addOpts + '</select>' : '') +
@@ -8699,7 +8708,37 @@ function cpSet(id, field, value) {
   sosMutate(() => { const p = _sos.plans.find(x => x.id === id); if (p) p[field] = value; }, body);
 }
 function cpHideMetric(key) { sosAddPlanLocal({ type: 'metrichide', title: key, status: 'active' }); }
-function cpAddLink(key) { sosAddPlanLocal({ type: 'metriclink', title: key, status: 'active' }); }
+// Adding a metric back must undo an earlier "×" (metrichide) — otherwise the hide wins and the
+// metric never appears. Default metrics just need the hide removed; others get one link row.
+function cpDefaultKeys() { return CP_DEFAULT_METRICS[_sos.viewing || _sos.me] || ['att_adults']; }
+function cpDeletePlanQuiet(id) {
+  window._cpKilled = window._cpKilled || new Set(); if (window._cpKilled.has(id)) return; window._cpKilled.add(id);
+  sosMutate(() => { _sos.plans = _sos.plans.filter(p => p.id !== id); }, { action: 'sos_plan_delete', id: id });
+}
+function cpAddLink(key) {
+  const hides = cpPlans('metrichide').filter(p => p.title === key), links = cpPlans('metriclink').filter(p => p.title === key);
+  hides.forEach(p => cpDeletePlanQuiet(p.id));
+  if (!links.length && !cpDefaultKeys().includes(key)) sosAddPlanLocal({ type: 'metriclink', title: key, status: 'active' });
+  else if (!hides.length) sosRender();
+}
+function cpRemoveMetric(key) {
+  cpPlans('metriclink').filter(p => p.title === key).forEach(p => cpDeletePlanQuiet(p.id));
+  if (cpDefaultKeys().includes(key) && !cpPlans('metrichide').some(p => p.title === key)) cpHideMetric(key);
+}
+// Self-heal old data: a metric that was both hidden and re-added (latest action wins), and duplicate rows.
+function cpHealMetricRows() {
+  const byKey = {}, kill = [], by = (a, b) => (Number(a.createdAt) || 0) - (Number(b.createdAt) || 0);
+  cpPlans('metriclink').concat(cpPlans('metrichide')).forEach(p => { if (!/^tmp/.test(p.id)) (byKey[p.title] = byKey[p.title] || []).push(p); });
+  Object.values(byKey).forEach(rows => {
+    const links = rows.filter(p => p.type === 'metriclink').sort(by), hides = rows.filter(p => p.type === 'metrichide').sort(by);
+    if (links.length && hides.length) {
+      if ((Number(links[links.length - 1].createdAt) || 0) >= (Number(hides[hides.length - 1].createdAt) || 0)) { kill.push(...hides); hides.length = 0; }
+      else { kill.push(...links); links.length = 0; }
+    }
+    kill.push(...links.slice(1), ...hides.slice(1));
+  });
+  if (kill.length) setTimeout(() => kill.forEach(p => cpDeletePlanQuiet(p.id)), 0);
+}
 function cpAddCustomMetric() {
   const l = document.getElementById('cpNewMLabel'), v = document.getElementById('cpNewMVal');
   const label = (l && l.value || '').trim(); if (!label) { l && l.focus(); return; }
@@ -8777,6 +8816,91 @@ function sosBoulderAdd() {
   try { staffRenderBoulders(window._staffLastData || {}); staffRenderSnapshot(window._staffLastData || {}); } catch (e) {}
   sosRender(); sosToast('Boulder added ✓');
 }
+// ── Move an item between To-Do ⇄ Rocks ⇄ Boulders (⇄ menu on each row, or drag it to another column) ──
+// Uses the same paths as everywhere else: tasks = StaffTasks; rocks/boulders = the shared team
+// Staff OS lists. A rock that moves away is closed with resolution "Moved to …" (it shows under
+// resolved rocks and can be reopened); a boulder that moves away is hidden via bouldersEdits.removed.
+const SOS_KIND_LABEL = { task: 'To-Do', rock: 'Rocks', boulder: 'Boulders' };
+let _sosDrag = null;
+function sosMoveSel(kind, id) {
+  return '<select class="sos-move" title="Move to To-Do, Rocks or Boulders" data-kind="' + kind + '" data-id="' + escapeHtml(id) + '" onmousedown="event.stopPropagation()" onchange="if(this.value)sosMoveItem(this.dataset.kind,this.dataset.id,this.value)">' +
+    '<option value="">⇄</option>' + Object.keys(SOS_KIND_LABEL).filter(k => k !== kind).map(k => '<option value="' + k + '">Move to ' + SOS_KIND_LABEL[k] + '</option>').join('') + '</select>';
+}
+function sosDragAttrs(kind, id) { return ' draggable="true" data-kind="' + kind + '" data-id="' + escapeHtml(id) + '" ondragstart="sosDragStart(event,this)" ondragend="sosDragEnd()"'; }
+function sosDropAttrs(kind) { return ' data-drop="' + kind + '" ondragover="sosDragOver(event,this)" ondragleave="if(!this.contains(event.relatedTarget))this.classList.remove(\'sos-drop-on\')" ondrop="sosDrop(event,this)"'; }
+function sosDragStart(e, el) {
+  if (e.target !== el) return;
+  _sosDrag = { kind: el.dataset.kind, id: el.dataset.id };
+  try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', el.dataset.id); } catch (x) {}
+  el.classList.add('sos-dragged');
+  setTimeout(() => document.body.classList.add('sos-dragging', 'sos-drag-' + _sosDrag.kind), 0);
+}
+function sosDragEnd() {
+  _sosDrag = null;
+  document.body.classList.remove('sos-dragging', 'sos-drag-task', 'sos-drag-rock', 'sos-drag-boulder');
+  document.querySelectorAll('.sos-drop-on, .sos-dragged').forEach(x => x.classList.remove('sos-drop-on', 'sos-dragged'));
+}
+function sosDragOver(e, el) { if (!_sosDrag || _sosDrag.kind === el.dataset.drop) return; e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (x) {} el.classList.add('sos-drop-on'); }
+function sosDrop(e, el) { e.preventDefault(); const d = _sosDrag; sosDragEnd(); if (d && d.kind !== el.dataset.drop) sosMoveItem(d.kind, d.id, el.dataset.drop); }
+function sosRerenderTeamLists() {
+  const d = window._staffLastData || {};
+  try { staffRenderRocks(d); } catch (e) {}
+  try { staffRenderBoulders(d); } catch (e) {}
+  try { staffRenderSnapshot(d); } catch (e) {}
+}
+function sosAddRockFor(who, title, priority) {
+  const edits = rocksEditsLoad_(); edits.added = edits.added || []; edits.closed = edits.closed || {};
+  if (edits.closed[title]) { delete edits.closed[title]; eosPost_({ action: 'rock_unresolve', rock: title }); }   // it was a rock before → reopen it
+  const exists = ((window._staffLastData || {}).rocks || []).some(r => r.rock === title) || edits.added.some(r => r.rock === title);
+  if (!exists) { edits.added.push({ rock: title, addedBy: who, priority: priority || 'med', _local: true, ts: Date.now() }); eosPost_({ action: 'rock_add', rock: title, addedBy: who, priority: priority || 'med' }); }
+  rocksEditsSave_(edits);
+}
+function sosCloseRock(title, resolution) {
+  const edits = rocksEditsLoad_(); edits.closed = edits.closed || {};
+  edits.closed[title] = { ts: Date.now(), resolution: resolution };
+  rocksEditsSave_(edits);
+  eosPost_({ action: 'rock_resolve', rock: title, resolution: resolution });
+}
+function sosAddBoulderFor(who, title) {
+  const d = new Date(), quarter = 'Q' + Math.ceil((d.getMonth() + 1) / 3) + ' ' + d.getFullYear();
+  const bEdits = bouldersEditsLoad_(); bEdits.added = bEdits.added || []; bEdits.removed = bEdits.removed || {};
+  const key = boulderKey_({ owner: who, title: title });
+  if (bEdits.removed[key]) delete bEdits.removed[key];                                                     // it was a boulder before → bring it back
+  const exists = ((window._staffLastData || {}).boulders || []).some(b => boulderKey_(b) === key) || bEdits.added.some(b => boulderKey_(b) === key);
+  if (!exists) { bEdits.added.push({ owner: who, title: title, quarter: quarter, status: 'tbd', type: 'individual', _local: true, ts: Date.now() }); eosPost_({ action: 'boulder_add', owner: who, title: title, quarter: quarter }); }
+  bouldersEditsSave_(bEdits);
+}
+function sosRemoveBoulder(key, movedTo) {
+  const bEdits = bouldersEditsLoad_(); bEdits.added = bEdits.added || []; bEdits.removed = bEdits.removed || {};
+  const wasLocal = bEdits.added.some(b => boulderKey_(b) === key);
+  bEdits.added = bEdits.added.filter(b => boulderKey_(b) !== key);
+  if (!wasLocal || ((window._staffLastData || {}).boulders || []).some(b => boulderKey_(b) === key)) bEdits.removed[key] = { ts: Date.now(), movedTo: movedTo };
+  bouldersEditsSave_(bEdits);
+}
+function sosMoveItem(from, id, to) {
+  if (!from || !to || from === to) return;
+  const who = _sos.viewing || _sos.me;
+  let title = '', high = false;
+  if (from === 'task') { const t = sosFind(id); if (!t) return; title = t.title; high = t.priority === 'high'; }
+  else if (from === 'rock') { const r = sosTeamRocks(who).find(x => x.rock === id); if (!r) return; title = r.rock; high = /^h/i.test(String(r.priority || '')); }
+  else if (from === 'boulder') { const b = sosTeamBoulders(who).find(x => boulderKey_(x) === id); if (!b) return; title = b.title; }
+  title = String(title || '').trim(); if (!title) return;
+  const notesLost = from === 'task' && !!(sosFind(id) || {}).notes;
+  // 1) Put it in the new list
+  if (to === 'rock') sosAddRockFor(who, title, high ? 'high' : 'med');
+  else if (to === 'boulder') sosAddBoulderFor(who, title);
+  // 2) Take it out of the old one
+  if (from === 'rock') sosCloseRock(title, 'Moved to ' + SOS_KIND_LABEL[to]);
+  else if (from === 'boulder') sosRemoveBoulder(id, to);
+  if (from !== 'task') sosRerenderTeamLists();
+  // Task side goes through the optimistic path (one re-render for both halves).
+  if (to === 'task' || from === 'task') {
+    const tmp = to === 'task' ? { id: sosTmpId(), owner: who, title: title, notes: 'Moved from ' + SOS_KIND_LABEL[from], status: 'open', due: '', priority: high ? 'high' : 'normal', assignedBy: '' } : null;
+    if (from === 'task') sosMutate(() => { _sos.tasks = _sos.tasks.filter(x => x.id !== id); _sos.assigned = _sos.assigned.filter(x => x.id !== id); }, { action: 'sos_task_delete', id: id });
+    if (tmp) sosMutate(() => _sos.tasks.push(tmp), { action: 'sos_task_add', owner: who, title: title, due: '', priority: tmp.priority, notes: tmp.notes, assignedBy: '' }, res => { if (res.id) tmp.id = res.id; });
+  } else sosRender();
+  sosToast('Moved to ' + SOS_KIND_LABEL[to] + ' ✓' + (notesLost ? ' (task notes don’t carry over)' : ''));
+}
 function sosRefreshIfOpen() { try { if (_sos && _sos.loaded && document.getElementById('sp-mine')) sosRender(); } catch (e) {} }
 
 function sosRender() {
@@ -8817,8 +8941,8 @@ function sosRender() {
   const bLabels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
   const teamRocksHtml = '<div class="sos-mini"><div class="sos-mini-h">This quarter <span class="sos-team-tag">synced with Staff OS</span></div>' +
     (!teamReady ? '<div class="sos-empty sm">Loading team rocks…</div>' : myRocks.length ? myRocks.map(r =>
-      '<div class="sos-mini-row"><input type="checkbox" class="sos-cb" title="Resolve this rock (closes it everywhere)" onchange="sosRockResolve(this)" data-rock="' + escapeHtml(r.rock) + '">' +
-      '<span class="sos-mini-title">' + escapeHtml(r.rock) + (r.priority ? ' <span class="sos-pri ' + escapeHtml(String(r.priority).slice(0, 3)) + '">' + escapeHtml(String(r.priority)) + '</span>' : '') + '</span></div>').join('')
+      '<div class="sos-mini-row"' + sosDragAttrs('rock', r.rock) + '><input type="checkbox" class="sos-cb" title="Resolve this rock (closes it everywhere)" onchange="sosRockResolve(this)" data-rock="' + escapeHtml(r.rock) + '">' +
+      '<span class="sos-mini-title">' + escapeHtml(r.rock) + (r.priority ? ' <span class="sos-pri ' + escapeHtml(String(r.priority).slice(0, 3)) + '">' + escapeHtml(String(r.priority)) + '</span>' : '') + '</span>' + sosMoveSel('rock', r.rock) + '</div>').join('')
       : '<div class="sos-empty sm">No open rocks.</div>') +
     '<div class="sos-add-inline"><input id="sosAddRock" class="sos-input sm" placeholder="Add a rock (90-day priority)…" onkeydown="if(event.key===\'Enter\')sosRockAdd()">' +
     '<select id="sosAddRockPri" class="sos-input sm" style="flex:0 0 auto;width:auto"><option value="high">High</option><option value="med" selected>Med</option><option value="low">Low</option></select>' +
@@ -8826,9 +8950,9 @@ function sosRender() {
   const teamBouldersHtml = '<div class="sos-mini"><div class="sos-mini-h">Long-range <span class="sos-team-tag">synced with Staff OS</span></div>' +
     (!teamReady ? '<div class="sos-empty sm">Loading team boulders…</div>' : myBoulders.length ? myBoulders.map(b => {
       const st = b.status || 'tbd';
-      return '<div class="sos-mini-row' + (st === 'complete' ? ' done' : '') + '"><span class="sos-mini-title">' + escapeHtml(b.title) +
+      return '<div class="sos-mini-row' + (st === 'complete' ? ' done' : '') + '"' + sosDragAttrs('boulder', boulderKey_(b)) + '><span class="sos-mini-title">' + escapeHtml(b.title) +
         ' <span class="sos-bq">' + escapeHtml(b.quarter || '') + (b.type === 'company' ? ' · company' : '') + '</span></span>' +
-        '<button class="sp-rock-status ' + st + ' sp-boulder-status-btn" data-key="' + escapeHtml(boulderKey_(b)) + '" onclick="boulderCycleStatus(this)" title="Click to cycle status">' + bLabels[st] + '</button></div>';
+        '<button class="sp-rock-status ' + st + ' sp-boulder-status-btn" data-key="' + escapeHtml(boulderKey_(b)) + '" onclick="boulderCycleStatus(this)" title="Click to cycle status">' + bLabels[st] + '</button>' + sosMoveSel('boulder', boulderKey_(b)) + '</div>';
     }).join('') : '<div class="sos-empty sm">No boulders yet.</div>') +
     '<div class="sos-add-inline"><input id="sosAddBoulder" class="sos-input sm" placeholder="Add a boulder (this quarter)…" onkeydown="if(event.key===\'Enter\')sosBoulderAdd()"><button class="sos-btn sm" onclick="sosBoulderAdd()">Add</button></div></div>';
 
@@ -8860,7 +8984,7 @@ function sosRender() {
       '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Log out</button></div></div>' +
     '<div class="sos-grid sos-grid3">' +
       '<div class="sos-col">' +
-        '<div class="sos-card"><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
+        '<div class="sos-card"' + sosDropAttrs('task') + '><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
           '<div class="sos-addtask">' +
             '<input id="sosNewTitle" class="sos-input" placeholder="Add a task…" onkeydown="if(event.key===\'Enter\')sosAddTask()">' +
             '<div class="sos-addtask-row">' +
@@ -8875,10 +8999,10 @@ function sosRender() {
         '</div>' +
       '</div>' +
       '<div class="sos-col">' +
-        '<div class="sos-card"><div class="sos-card-h">🪨 Rocks <span class="sos-count">' + (teamReady ? myRocks.length + ' open' : '…') + '</span></div>' + teamRocksHtml + '</div>' +
+        '<div class="sos-card"' + sosDropAttrs('rock') + '><div class="sos-card-h">🪨 Rocks <span class="sos-count">' + (teamReady ? myRocks.length + ' open' : '…') + '</span></div>' + teamRocksHtml + '</div>' +
       '</div>' +
       '<div class="sos-col">' +
-        '<div class="sos-card"><div class="sos-card-h">⛰️ Boulders <span class="sos-count">' + (teamReady ? myBoulders.filter(b => b.status !== 'complete').length + ' active' : '…') + '</span></div>' + teamBouldersHtml + '</div>' +
+        '<div class="sos-card"' + sosDropAttrs('boulder') + '><div class="sos-card-h">⛰️ Boulders <span class="sos-count">' + (teamReady ? myBoulders.filter(b => b.status !== 'complete').length + ' active' : '…') + '</span></div>' + teamBouldersHtml + '</div>' +
       '</div>' +
     '</div>' +
     cpHtml(viewing) +
@@ -11552,7 +11676,8 @@ function applyBoulderOverrides_(boulders) {
   const edits = bouldersEditsLoad_();
   const statuses = edits.statuses || {};
   const localAdded = edits.added || [];
-  return [...boulders, ...localAdded].map(b => { const k = boulderKey_(b); return statuses[k] ? { ...b, status: statuses[k] } : b; });
+  const removed = edits.removed || {};   // boulders moved to a rock / task from My Snapshot
+  return [...boulders, ...localAdded].filter(b => !removed[boulderKey_(b)]).map(b => { const k = boulderKey_(b); return statuses[k] ? { ...b, status: statuses[k] } : b; });
 }
 const _rbEsc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
@@ -15935,7 +16060,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T211631Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T212243Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
