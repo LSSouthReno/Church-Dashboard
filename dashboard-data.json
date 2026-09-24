@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-24T00:46:28.182Z",
+  "lastUpdated": "2026-09-24T01:02:15.170Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3270,7 +3270,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 119,
+      "current": 120,
       "needed": 150,
       "history": [
         {
@@ -3404,7 +3404,7 @@
         },
         {
           "d": "2026-09",
-          "n": 119
+          "n": 120
         }
       ]
     },
@@ -5156,7 +5156,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 389,
+  "uniqueVolunteers": 390,
   "budget": [
     {
       "label": "Network & Missions",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 23, 2026, 5:46 PM",
+    "refreshed": "Sep 23, 2026, 6:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9680,14 +9680,14 @@
           "Ginger King",
           "Bruce Rector",
           "Jeff Bridges",
+          "Kathy Rector",
           "Nick Steuer",
           "Ashleigh Cummings",
           "Ashley Peregrin",
           "Jeremy Low",
           "Lindsey Low",
           "Peggy Hart",
-          "Chuck Grimm",
-          "Kayleen Hagstrand"
+          "Chuck Grimm"
         ],
         "count": 76
       },
@@ -21275,13 +21275,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Timothy Frederick",
-              "team": "Parking Team",
-              "pos": "Parking Czar",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Kathy Herndon",
               "team": "First Impressions",
               "pos": "Greeter",
@@ -21364,13 +21357,6 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Cheryl O'Gorman",
-              "team": "First Impressions",
-              "pos": "Greeter",
-              "status": "U",
-              "serviceTime": "11 AM"
             },
             {
               "name": "David Wandishin",
@@ -21908,7 +21894,7 @@
               "name": "Karynn Sucaldito",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -22102,8 +22088,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 97,
-            "totalVols": 97
+            "volsWithServiceTime": 95,
+            "totalVols": 95
           }
         }
       ]
@@ -22579,13 +22565,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Michael dykins",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Tim Martin",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
@@ -22603,7 +22582,7 @@
               "name": "Cheryl O'Gorman",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -22680,8 +22659,15 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Laura Dykins",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -23347,7 +23333,7 @@
               "name": "Cheryl O'Gorman",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -23993,7 +23979,7 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -24499,7 +24485,7 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -24921,7 +24907,7 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -25280,7 +25266,7 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
