@@ -1084,7 +1084,9 @@
   .sos-viewing-tag { font-size: 11px; font-weight: 700; color: var(--sp-gold,#c9963a); background: rgba(201,150,58,.12); padding: 3px 9px; border-radius: 6px; }
   .sos-role { font-size: 12px; color: var(--sp-muted,#8a7e6e); background: rgba(26,21,16,.05); padding: 2px 9px; border-radius: 20px; font-weight: 700; }
   .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
-  @media (max-width: 900px) { .sos-grid { grid-template-columns: 1fr; } }
+  .sos-grid.sos-grid3 { grid-template-columns: 1.15fr 1fr 1fr; }
+  @media (max-width: 1180px) { .sos-grid.sos-grid3 { grid-template-columns: 1fr 1fr; } .sos-grid.sos-grid3 > .sos-col:first-child { grid-column: 1 / -1; } }
+  @media (max-width: 900px) { .sos-grid, .sos-grid.sos-grid3 { grid-template-columns: 1fr; } }
   .sos-col { display: flex; flex-direction: column; gap: 22px; }
   .sos-card { background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 16px; padding: 24px; box-shadow: 0 4px 18px rgba(26,21,16,0.05); }
   .sos-card-h { font-size: 18px; font-weight: 800; color: var(--sp-ink,#1a1510); margin-bottom: 18px; display: flex; align-items: center; gap: 9px; }
@@ -1118,6 +1120,65 @@
   .sos-mini-row.done .sos-mini-title { text-decoration: line-through; color: var(--sp-muted,#8a7e6e); }
   .sos-mini-title { flex: 1 1 auto; font-size: 14.5px; color: var(--sp-ink,#1a1510); }
   .cp-card { margin-top: 18px; }
+
+  /* ---- Core Strategies (Brad & Ryan) ---- */
+  .cs-host { margin-top: 22px; box-sizing: border-box; }
+  .cs-card .sos-card-h { flex-wrap: wrap; }
+  .cs-hbtns { margin-left: auto; display: flex; gap: 6px; }
+  .cs-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .cs-tab { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid var(--sp-border,#d8cdb8); background: #fbf9f4; color: var(--sp-ink,#1a1510); border-radius: 999px; padding: 8px 15px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .cs-tab:hover { border-color: var(--sp-gold,#c9963a); }
+  .cs-tab.on { background: var(--sp-ink,#1a1510); color: #fff; border-color: var(--sp-ink,#1a1510); }
+  .cs-tab-p { font-size: 11px; font-weight: 800; color: #3f9b6b; background: rgba(63,155,107,.12); border-radius: 8px; padding: 1px 6px; }
+  .cs-tab.on .cs-tab-p { color: #bfe8cf; background: rgba(255,255,255,.12); }
+  .cs-tab-add { padding: 8px 13px; color: #8a5a12; }
+  .cs-main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 26px; align-items: start; }
+  @media (max-width: 1000px) { .cs-main { grid-template-columns: 1fr; } }
+  .cs-name { width: 100%; border: none; background: transparent; font: inherit; font-size: 24px; font-weight: 800; color: var(--sp-ink,#1a1510); padding: 2px 0 10px; }
+  .cs-name:focus, .cs-pc-t:focus { outline: none; background: #fffaf0; box-shadow: 0 0 0 2px rgba(201,150,58,.35); border-radius: 6px; }
+  .cs-diag { max-width: 1250px; margin: 0 auto; }
+  .cs-svg { display: block; width: 100%; height: auto; max-height: 640px; margin: 0 auto; }
+  .cs-p { cursor: pointer; } .cs-p:hover { filter: brightness(1.06) drop-shadow(0 2px 6px rgba(26,21,16,.18)); }
+  .cs-hint { font-size: 12.5px; color: var(--sp-muted,#8a7e6e); margin-top: 8px; line-height: 1.5; }
+  .cs-loose { margin-top: 10px; font-size: 13px; color: var(--sp-muted,#8a7e6e); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cs-chip { border: 1.5px solid; background: #fff; border-radius: 999px; padding: 4px 11px; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; color: var(--sp-ink,#1a1510); }
+  .cs-chip i { font-style: normal; color: var(--sp-muted,#8a7e6e); margin-left: 4px; }
+  .cs-mlist { display: none; }
+  @media (max-width: 640px) { .cs-draw { display: none; } .cs-mlist { display: block; } }
+  .cs-mrow { display: flex; align-items: center; gap: 9px; padding: 9px 2px; border-bottom: 1px dashed var(--sp-border,#e6dccb); font-size: 14px; cursor: pointer; }
+  .cs-mrow b { flex: 1 1 auto; } .cs-mrow span:last-child { font-weight: 800; }
+  .cs-dot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+  .cs-side { background: #fbf9f4; border: 1px solid var(--sp-border,#e6dccb); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .cs-side .sos-input { margin-bottom: 4px; }
+  .cs-lbl { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #8a5a12; margin-top: 8px; }
+  .cs-lbl span { text-transform: none; letter-spacing: 0; color: #3f9b6b; }
+  .cs-ta { resize: vertical; font-family: inherit; line-height: 1.45; }
+  .cs-ov { display: flex; align-items: center; gap: 10px; } .cs-ov .cp-gbar { flex: 1 1 auto; margin: 0; } .cs-ov b { font-size: 15px; color: #3f9b6b; }
+  .cs-kpi { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--sp-border,#e6dccb); font-size: 13px; }
+  .cs-kpi span { flex: 1 1 auto; color: var(--sp-ink,#1a1510); } .cs-kpi b { font-size: 15px; white-space: nowrap; }
+  .cs-kadd { margin-top: 6px; color: #8a5a12; font-weight: 700; }
+  .cs-edit { margin-top: 20px; border-top: 1px solid var(--sp-border,#e6dccb); padding-top: 14px; }
+  .cs-edit > summary { cursor: pointer; font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); list-style: none; display: flex; align-items: center; gap: 8px; }
+  .cs-edit > summary::-webkit-details-marker { display: none; }
+  .cs-pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 14px; }
+  .cs-pc { background: #fff; border: 1px solid var(--sp-border,#e6dccb); border-top: 4px solid; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow .3s; }
+  .cs-pc .sos-input { margin-bottom: 0; }
+  .cs-pc-new { border-top-color: #d8cdb8; border-style: dashed; justify-content: flex-start; }
+  .cs-pc.cs-flash { box-shadow: 0 0 0 3px rgba(201,150,58,.55); }
+  .cs-pc-h { display: flex; align-items: center; gap: 6px; }
+  .cs-pc-n { width: 22px; height: 22px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .cs-pc-t { flex: 1 1 auto; min-width: 0; border: none; background: transparent; font: inherit; font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); padding: 2px 0; }
+  .cs-pc-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .cs-pc-row .sos-input { flex: 1 1 70px; min-width: 0; width: auto; }
+  .cs-pc-row input[type=month] { flex: 1 1 120px; }
+  .cs-pc-live { font-size: 16px; font-weight: 800; color: var(--sp-ink,#1a1510); flex: 1 1 70px; }
+  .cs-done { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; color: var(--sp-muted,#8a7e6e); }
+  .cs-steps .cp-step { padding: 3px 0; }
+  .cs-manage { background: #fbf9f4; border: 1px dashed var(--sp-border,#d8cdb8); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; max-width: 560px; }
+  .cs-manage-h { font-weight: 800; font-size: 14px; margin-bottom: 8px; }
+  .cs-mg-row { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+  .cs-mg-row .sos-input { flex: 1 1 auto; }
+  .cs-mg-n { width: 18px; font-weight: 800; color: var(--sp-muted,#8a7e6e); }
   .cp-wrap { position: relative; padding: 8px 4px 4px; display: flex; flex-direction: column; gap: 16px; }
   .cp-wrap.cp-abs { display: block; padding: 0; }
   .cp-wrap.cp-abs .cp-goal, .cp-wrap.cp-abs .cp-reality, .cp-wrap.cp-abs .cp-smart, .cp-wrap.cp-abs .cp-oblock { position: absolute; z-index: 1; }
@@ -8281,6 +8342,7 @@ function sosAddStep(goalId, inputId) {
   const el=document.getElementById(inputId); const t = el?el.value.trim():''; if(!t){ if(el) el.focus(); return; }
   if(el) el.value='';
   sosAddPlanLocal({ type:'step', title:t, parentId:goalId, status:'active' });
+  const again = document.getElementById(inputId); if (again) { try { again.focus({ preventScroll: true }); } catch (e) {} }
 }
 
 // ── Render ───────────────────────────────────────────────────────────────────
@@ -8564,6 +8626,11 @@ function cpLayout() {
     const vw = document.documentElement.clientWidth, want = Math.min(vw - 40, 1880), hr = host.getBoundingClientRect();
     if (want > hr.width + 60) { card.style.width = want + 'px'; card.style.marginLeft = Math.round((vw - want) / 2 - hr.left) + 'px'; }
     else { card.style.width = ''; card.style.marginLeft = ''; }
+    // The top bar, the To-Do / Rocks / Boulders row and the Core Strategies board span the same width.
+    const mine = card.closest('#sp-mine');
+    [mine && mine.querySelector('.sos-topbar'), mine && mine.querySelector('.sos-grid3'), document.getElementById('csHost')].forEach(el => {
+      if (el) { el.style.width = card.style.width; el.style.marginLeft = card.style.marginLeft; el.style.boxSizing = 'border-box'; }
+    });
   }
   const fit = el => el.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
   const W = wrap.clientWidth, parts = wrap.querySelectorAll('.cp-goal, .cp-reality, .cp-smart, .cp-oblock');
@@ -8698,7 +8765,8 @@ function sosRender() {
   const host = document.getElementById('sp-mine'); if (!host) return;
   // Re-rendering replaces the whole section — remember where the page is scrolled (window +
   // any scrolling ancestors) and the plan's height, so checking a box doesn't jump the page.
-  const _scrolls = []; for (let el = host; el; el = el.parentElement) if (el.scrollTop) _scrolls.push([el, el.scrollTop]);
+  const _scrolls = []; for (let el = host; el; el = el.parentElement) if (el.scrollTop || el.scrollHeight > el.clientHeight + 1) _scrolls.push([el, el.scrollTop]);
+  if (document.activeElement && host.contains(document.activeElement)) { try { document.activeElement.blur(); } catch (e) {} }   // a removed focused field can make the browser jump
   const _winY = window.scrollY, _oldWrap = document.getElementById('cpWrap'), _oldH = _oldWrap ? _oldWrap.offsetHeight : 0, _oldAbs = _oldWrap && _oldWrap.classList.contains('cp-abs');
   const g = sosTaskGroups();
   const bucketLabels = ['Overdue','Today','Upcoming','No date'];
@@ -8729,7 +8797,7 @@ function sosRender() {
   const teamReady = !!window._staffLastData;
   const myRocks = teamReady ? sosTeamRocks(viewing) : [], myBoulders = teamReady ? sosTeamBoulders(viewing) : [];
   const bLabels = { 'on-track': 'On Track', 'off-track': 'Off Track', 'complete': 'Complete', 'tbd': 'Set Status' };
-  const teamRocksHtml = '<div class="sos-mini"><div class="sos-mini-h">This Quarter’s Rocks <span class="sos-team-tag">synced with Staff OS</span></div>' +
+  const teamRocksHtml = '<div class="sos-mini"><div class="sos-mini-h">This quarter <span class="sos-team-tag">synced with Staff OS</span></div>' +
     (!teamReady ? '<div class="sos-empty sm">Loading team rocks…</div>' : myRocks.length ? myRocks.map(r =>
       '<div class="sos-mini-row"><input type="checkbox" class="sos-cb" title="Resolve this rock (closes it everywhere)" onchange="sosRockResolve(this)" data-rock="' + escapeHtml(r.rock) + '">' +
       '<span class="sos-mini-title">' + escapeHtml(r.rock) + (r.priority ? ' <span class="sos-pri ' + escapeHtml(String(r.priority).slice(0, 3)) + '">' + escapeHtml(String(r.priority)) + '</span>' : '') + '</span></div>').join('')
@@ -8737,7 +8805,7 @@ function sosRender() {
     '<div class="sos-add-inline"><input id="sosAddRock" class="sos-input sm" placeholder="Add a rock (90-day priority)…" onkeydown="if(event.key===\'Enter\')sosRockAdd()">' +
     '<select id="sosAddRockPri" class="sos-input sm" style="flex:0 0 auto;width:auto"><option value="high">High</option><option value="med" selected>Med</option><option value="low">Low</option></select>' +
     '<button class="sos-btn sm" onclick="sosRockAdd()">Add</button></div></div>';
-  const teamBouldersHtml = '<div class="sos-mini"><div class="sos-mini-h">Boulders <span class="sos-team-tag">synced with Staff OS</span></div>' +
+  const teamBouldersHtml = '<div class="sos-mini"><div class="sos-mini-h">Long-range <span class="sos-team-tag">synced with Staff OS</span></div>' +
     (!teamReady ? '<div class="sos-empty sm">Loading team boulders…</div>' : myBoulders.length ? myBoulders.map(b => {
       const st = b.status || 'tbd';
       return '<div class="sos-mini-row' + (st === 'complete' ? ' done' : '') + '"><span class="sos-mini-title">' + escapeHtml(b.title) +
@@ -8772,7 +8840,7 @@ function sosRender() {
         : '') +
       '</div>' +
       '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Log out</button></div></div>' +
-    '<div class="sos-grid">' +
+    '<div class="sos-grid sos-grid3">' +
       '<div class="sos-col">' +
         '<div class="sos-card"><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
           '<div class="sos-addtask">' +
@@ -8789,20 +8857,603 @@ function sosRender() {
         '</div>' +
       '</div>' +
       '<div class="sos-col">' +
-        '<div class="sos-card"><div class="sos-card-h">🎯 Rocks, Boulders &amp; Focus</div>' +
-          teamRocksHtml +
-          teamBouldersHtml +
-          rockCard('focus','Areas of Focus','Add an area of focus…') +
-        '</div>' +
+        '<div class="sos-card"><div class="sos-card-h">🪨 Rocks <span class="sos-count">' + (teamReady ? myRocks.length + ' open' : '…') + '</span></div>' + teamRocksHtml + '</div>' +
+      '</div>' +
+      '<div class="sos-col">' +
+        '<div class="sos-card"><div class="sos-card-h">⛰️ Boulders <span class="sos-count">' + (teamReady ? myBoulders.filter(b => b.status !== 'complete').length + ' active' : '…') + '</span></div>' + teamBouldersHtml + '</div>' +
       '</div>' +
     '</div>' +
-    cpHtml(viewing);
+    cpHtml(viewing) +
+    csHtml();
   const _nw = document.getElementById('cpWrap');
   if (_nw && _oldH) { _nw.style.minHeight = _oldH + 'px'; if (_oldAbs) _nw.classList.add('cp-abs'); }
   if (host.offsetWidth) { try { cpLayout(); } catch (e) {} if (_nw) _nw.style.minHeight = ''; }
   _scrolls.forEach(([el, top]) => { el.scrollTop = top; });
   if (window.scrollY !== _winY) window.scrollTo(0, _winY);
+  sosHoldScroll(_scrolls, _winY);
   setTimeout(cpLayout, 0);
+}
+// After a re-render, pin the page where it was for a moment: any late layout/focus shift the
+// browser makes (e.g. Safari after the focused "add step" box is replaced) is undone. The hold
+// ends early the moment the person scrolls, clicks or types.
+function sosHoldScroll(scrolls, winY) {
+  if (window._sosHoldStop) window._sosHoldStop();
+  let done = false;
+  const evs = ['wheel', 'touchstart', 'mousedown', 'keydown'];
+  const fix = () => { if (done) return; scrolls.forEach(([el, top]) => { if (el.isConnected && Math.abs(el.scrollTop - top) > 1) el.scrollTop = top; }); if (Math.abs(window.scrollY - winY) > 1) window.scrollTo(0, winY); };
+  const stop = () => { if (done) return; done = true; evs.forEach(e => window.removeEventListener(e, stop, true)); scrolls.forEach(([el]) => el.removeEventListener('scroll', fix)); window.removeEventListener('scroll', fix); window._sosHoldStop = null; };
+  evs.forEach(e => window.addEventListener(e, stop, true));
+  scrolls.forEach(([el]) => el.addEventListener('scroll', fix)); window.addEventListener('scroll', fix);
+  requestAnimationFrame(fix); setTimeout(fix, 60); setTimeout(fix, 250); setTimeout(stop, 700);
+  window._sosHoldStop = stop;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// CORE STRATEGIES — Brad & Ryan only (under My Annual Plan on their snapshots).
+// A handful of church-wide strategies (default: the 5 core ones, fully customizable), each
+// drawn as its own diagram (flywheel, funnel, pathway, pyramid, circles, roadmap, critical
+// path, scorecard). Every "piece" of a diagram can pull any number on the dashboard.
+// Shared board: StaffPlans rows owned by '_strategy', type 'strategy' — title = name,
+// metric = diagram, period = sort order, detail = JSON
+// { purpose, goal, kpis:[sourceKey], pieces:[{ id, t, note, src, val, target, when, done, steps:[{id,t,done}] }] }.
+// ════════════════════════════════════════════════════════════════════════════
+const CS_USERS = ['Brad Borowski', 'Ryan Griffin'];
+const CS_OWNER = '_strategy';
+const CS_CACHE = 'lssr_cs_cache';
+const CS_COLORS = ['#c9963a', '#3f9b6b', '#4a7fb5', '#b5654a', '#7a5fa8', '#2f8f8a', '#c2703d', '#5a7a5c'];
+const CS_DIAGRAMS = {
+  flywheel:  { label: 'Flywheel',      icon: '🔄', hint: 'Each piece feeds the next — momentum builds as the wheel turns.' },
+  funnel:    { label: 'Funnel',        icon: '🔻', hint: 'How people move from the widest stage (first piece) to the deepest. % = how many make it to the next stage.' },
+  pathway:   { label: 'Pathway',       icon: '➡️', hint: 'The next steps, in order, and how many are on each one.' },
+  pyramid:   { label: 'Pyramid',       icon: '🔺', hint: 'A broad base that supports fewer people at each level up. First piece = the base.' },
+  circles:   { label: 'Circles',       icon: '🎯', hint: 'Concentric circles. First piece = the center, last piece = the outer ring.' },
+  roadmap:   { label: 'Roadmap',       icon: '🗓', hint: 'Milestones across the ministry year (Labor Day → Labor Day). Give a piece a month to put it on the line.' },
+  critical:  { label: 'Critical Path', icon: '📈', hint: 'Where we are → the 12-month win, with each piece along the way. The line fills as pieces hit their targets.' },
+  scorecard: { label: 'Scorecard',     icon: '🎛', hint: 'Every piece as a gauge: today vs. its target.' }
+};
+// Starting set (targets come from the Staff OS scorecard / CG goals). Rename, re-draw or replace freely.
+const CS_DEFAULTS = [
+  { name: 'Sunday Gatherings', diagram: 'flywheel', purpose: 'Gatherings people love to come back to — and bring a friend.', kpis: ['att_total', 'new_adults_30d', 'email_open'],
+    pieces: [['Invite & welcome', 'new_adults_30d'], ['Worship together', 'att_adults', '900'], ['Kids & students', 'att_kids', '200'], ['Serve on a team', 'volunteers', '400'], ['Celebrate life change', 'baptisms_ytd', '80']] },
+  { name: 'Community Groups', diagram: 'funnel', purpose: 'Everyone connected in a community group.', kpis: ['cg_groups', 'cg_size', 'cg_fm_pct'],
+    pieces: [['Weekend adults', 'att_adults'], ['In a community group', 'cg_members', '500'], ['Applied to a group this year', 'cg_applied_ytd'], ['Joined a group this year', 'cg_joined_ytd'], ['Leading a group', 'cg_leaders']] },
+  { name: 'Membership', diagram: 'pathway', purpose: 'A clear path from first visit to family member.', kpis: ['members_total', 'new_members_ytd'],
+    pieces: [['First visit (new adults, 30 days)', 'new_adults_30d'], ['Membership class', ''], ['New members this year', 'new_members_ytd'], ['Church members', 'members_total', '462']] },
+  { name: 'Leadership Development', diagram: 'pyramid', purpose: 'Raising up leaders at every level.', kpis: ['volunteers', 'cg_leaders', 'serve_gap_total'],
+    pieces: [['Serving on a team', 'volunteers', '400'], ['Team & point leaders', ''], ['Community group leaders', 'cg_leaders'], ['Deacons', ''], ['Elders', '']] },
+  { name: 'Missions', diagram: 'circles', purpose: 'Jerusalem, Judea & Samaria, and the ends of the earth (Acts 1:8).', kpis: ['missions_total', 'missions_partners', 'budget_network-missions_pct'],
+    pieces: [['Reno — our neighbors', ''], ['Nevada & the West — church planting', ''], ['The nations — global partners', 'missions_partners']] }
+];
+let _cs = { rows: [], loaded: false, loading: false, sel: '', manage: false, editOpen: false };
+let _csPending = 0, _csLastMut = 0;
+try { _cs.sel = localStorage.getItem('lssr_cs_sel') || ''; const c = JSON.parse(localStorage.getItem(CS_CACHE) || 'null'); if (c && c.rows) _cs.rows = c.rows; } catch (e) {}
+
+function csEnabled() { return CS_USERS.includes(_sos.me) && CS_USERS.includes(_sos.viewing || _sos.me); }
+function csE(s) { return escapeHtml(String(s == null ? '' : s)); }
+function csId() { return 'p' + Date.now().toString(36) + Math.floor(Math.random() * 1e5).toString(36); }
+function csSaveCache() { try { localStorage.setItem(CS_CACHE, JSON.stringify({ rows: _cs.rows.map(r => { const o = Object.assign({}, r); delete o._d; delete o._dsrc; return o; }), ts: Date.now() })); } catch (e) {} }
+function csRow(sid) { return _cs.rows.find(r => r.id === sid || r._tmp === sid); }
+function csData(row) {
+  if (row._d && row._dsrc === row.detail) return row._d;
+  let d = {}; try { d = JSON.parse(row.detail || '{}') || {}; } catch (e) {}
+  d.purpose = d.purpose || ''; d.goal = d.goal || ''; d.kpis = d.kpis || []; d.pieces = d.pieces || [];
+  d.pieces.forEach(p => { p.steps = p.steps || []; });
+  row._d = d; row._dsrc = row.detail; return d;
+}
+function csStrategies() {
+  return _cs.rows.filter(r => r.type === 'strategy').slice()
+    .sort((a, b) => (Number(a.period) || 0) - (Number(b.period) || 0) || (a.createdAt || 0) - (b.createdAt || 0))
+    .map(row => ({ row, id: row.id, name: row.title || 'Untitled strategy', diagram: CS_DIAGRAMS[row.metric] ? row.metric : 'flywheel', data: csData(row) }));
+}
+function csSelected(list) { list = list || csStrategies(); return list.find(s => s.id === _cs.sel || s.row._tmp === _cs.sel) || list[0] || null; }
+
+// ── Numbers from anywhere on the dashboard ─────────────────────────────────
+function csFmt(v, unit) {
+  if (v == null || v === '' || isNaN(v)) return '—';
+  if (unit === '$') { const a = Math.abs(v); return '$' + (a >= 1e6 ? (v / 1e6).toFixed(a >= 1e7 ? 1 : 2).replace(/\.?0+$/, '') + 'M' : a >= 1e4 ? Math.round(v / 1e3) + 'K' : Math.round(v).toLocaleString()); }
+  return (Math.round(v * 10) / 10).toLocaleString() + (unit || '');
+}
+function csSources() {
+  if (!cpCatalogReady()) return {};
+  const cat = cpCatalog(), staff = window._staffLastData || null;
+  if (window._csSrc && window._csSrcCat === cat && window._csSrcStaff === staff) return window._csSrc;
+  const D = DASHBOARD_DATA, out = {}, cy = String(new Date().getFullYear()), yy = cy.slice(2);
+  const add = (key, label, value, unit, group, hint) => { if (value == null || value === '' || isNaN(value)) return; out[key] = { key, label, value: Math.round(Number(value) * 10) / 10, unit: unit || '', group, hint: hint == null ? '' : hint }; };
+  const sum = a => a.reduce((t, v) => t + (Number(v) || 0), 0);
+  Object.values(cat).forEach(m => add(m.key, m.label, m.value, m.unit, /^serve_/.test(m.key) ? 'Serve teams' : /^cg_/.test(m.key) ? 'Community groups' : 'Dashboard metrics', m.hint));
+  add('baptisms_all', 'Baptisms — all time (since 2021)', (D.baptisms || {}).total, '', 'Dashboard metrics');
+  if (D.newAdults30d) add('new_adults_week', 'New adults — weekly average', D.newAdults30d.weeklyAvg, '', 'Dashboard metrics');
+  if (D.emailStats) add('email_open3', 'Email open rate (avg of last 3)', D.emailStats.avgOpenRate3 * 100, '%', 'Dashboard metrics');
+  const cgd = D.communityGroupsDetailed || {};
+  const cgNames = { groups: 'active groups', members: 'people in groups', groupSize: 'average group size', fmInGroupsPct: 'Family Members in a CG' };
+  Object.keys(cgd.goals2026 || {}).forEach(k => add('cg_goal_' + k, 'CG goal — ' + (cgNames[k] || k), cgd.goals2026[k], /pct/i.test(k) ? '%' : '', 'Community groups'));
+  const g = D.giving || {}, gm = g.months || [], ga = g.amounts || [], gd = g.donors || [];
+  if (ga.length > 1) {
+    add('give_last_month', 'Giving — last full month (' + gm[gm.length - 2] + ')', ga[ga.length - 2], '$', 'Giving & missions');
+    add('give_this_month', 'Giving — ' + gm[gm.length - 1] + ' so far', ga[ga.length - 1], '$', 'Giving & missions');
+    add('donors_last_month', 'Donors — last full month', gd[gd.length - 2], '', 'Giving & missions');
+    add('give_ytd', 'Giving ' + cy + ' YTD', sum(ga.filter((v, i) => String(gm[i]).endsWith("'" + yy))), '$', 'Giving & missions');
+    add('give_12mo', 'Giving — last 12 months', sum(ga.slice(-13, -1)), '$', 'Giving & missions');
+  }
+  if (D.pledge) { add('pledge_raised', 'ALL-IN raised', D.pledge.raised, '$', 'Giving & missions', D.pledge.target); add('pledge_target', 'ALL-IN goal', D.pledge.target, '$', 'Giving & missions'); }
+  const mi = D.missions || {};
+  if (mi.items) { add('missions_partners', 'Missions partners supported', mi.items.length, '', 'Giving & missions'); add('missions_total', 'Missions giving (annual budget)', mi.total, '$', 'Giving & missions'); }
+  (D.budget || []).forEach(b => { add('budget_' + cpSlug(b.label), 'Budget — ' + b.label, b.amount, '$', 'Budget'); add('budget_' + cpSlug(b.label) + '_pct', 'Budget — ' + b.label + ' (% of budget)', b.pct, '%', 'Budget'); });
+  let need = 0, have = 0;
+  (D.serveTeams || []).forEach(t => { if (t.needed != null && t.needed !== '') { add('serve_need_' + cpSlug(t.name), t.name + ' — volunteers needed', t.needed, '', 'Serve teams'); need += Number(t.needed) || 0; have += Number(t.current) || 0; } });
+  if (need) { add('serve_have_total', 'All teams — people on teams', have, '', 'Serve teams', need); add('serve_need_total', 'All teams — volunteers needed (target)', need, '', 'Serve teams'); add('serve_gap_total', 'All teams — open spots', Math.max(0, need - have), '', 'Serve teams', 0); }
+  ((staff || {}).scorecard || []).forEach(r => {
+    const n = parseFloat(String(r.current || '').replace(/[^0-9.\-]/g, '')), gl = parseFloat(String(r.goal || '').replace(/[^0-9.\-]/g, ''));
+    add('sc_' + cpSlug(r.metric), r.metric + ' (scorecard)', n, /%/.test(String(r.current) + String(r.goal)) ? '%' : '', 'Staff scorecard', isNaN(gl) ? '' : gl);
+  });
+  const fn = (staff || {}).funnel || {};
+  ['guest', 'attender', 'member', 'group', 'leader', 'missionary'].forEach(k => add('fun_' + k, 'Staff OS funnel — ' + k + 's', fn[k], '', 'Staff scorecard'));
+  // …and literally any other number in dashboard-data.json.
+  const skip = new Set(['attendanceWeekly', 'teamsVolunteers', 'sundayPlans', 'teamsPlans', 'teamsLeaderForms', 'staffTimeOff', 'sectionDescriptions', 'serveTeams', 'budget', 'giving', 'missions', 'lastUpdated']);
+  const walk = (o, path, depth) => {
+    if (o == null || depth > 4) return;
+    if (typeof o === 'number') { add('dd:' + path, path.replace(/\./g, ' › '), o, '', 'All dashboard data (raw)'); return; }
+    if (Array.isArray(o)) { if (o.length && o.every(v => v == null || typeof v === 'number')) { const last = o.slice().reverse().find(v => v != null); if (last != null) add('dd:' + path, path.replace(/\./g, ' › ') + ' (latest)', last, '', 'All dashboard data (raw)'); } return; }
+    if (typeof o === 'object') Object.keys(o).forEach(k => { if (depth === 0 && skip.has(k)) return; if (/^(19|20)\d\d$/.test(k) && Number(k) < Number(cy) - 1) return; walk(o[k], path ? path + '.' + k : k, depth + 1); });
+  };
+  walk(D, '', 0);
+  window._csSrc = out; window._csSrcCat = cat; window._csSrcStaff = staff;
+  return out;
+}
+function csSrcOptions(sel) {
+  const src = csSources(), groups = {};
+  Object.values(src).forEach(m => (groups[m.group] = groups[m.group] || []).push(m));
+  const order = ['Dashboard metrics', 'Community groups', 'Giving & missions', 'Budget', 'Serve teams', 'Staff scorecard', 'All dashboard data (raw)'];
+  let h = '<option value="">✍️ I’ll type the number</option>';
+  if (sel && !src[sel]) h += '<option value="' + csE(sel) + '" selected>' + (cpCatalogReady() ? '⚠ No longer on the dashboard: ' : 'Loading… ') + csE(sel) + '</option>';
+  Object.keys(groups).sort((a, b) => order.indexOf(a) - order.indexOf(b)).forEach(gname => {
+    h += '<optgroup label="' + csE(gname) + '">' + groups[gname].map(m => '<option value="' + csE(m.key) + '"' + (m.key === sel ? ' selected' : '') + '>' + csE(m.label) + ' — ' + csE(csFmt(m.value, m.unit)) + '</option>').join('') + '</optgroup>';
+  });
+  return h;
+}
+function csNum(s) { const n = parseFloat(String(s == null ? '' : s).replace(/[^0-9.\-]/g, '')); return isNaN(n) ? null : n; }
+// Value / target / progress for one piece.
+function csInfo(p) {
+  const ready = cpCatalogReady(), src = p.src ? csSources()[p.src] : null;
+  let v = null, unit = '';
+  if (src) { v = src.value; unit = src.unit; }
+  else if (!p.src) { v = csNum(p.val); unit = /%/.test(p.val || '') ? '%' : /\$/.test(p.val || '') ? '$' : ''; }
+  const t = csNum(p.target);
+  if (!unit && /%/.test(p.target || '')) unit = '%';
+  const pct = v != null && t != null && t > 0 ? Math.max(0, Math.min(1, v / t)) : (p.done ? 1 : null);
+  const st = p.steps || [], sd = st.filter(x => x.done).length;
+  return { v, unit, t, pct, src, loading: !!p.src && !ready, missing: !!p.src && ready && !src,
+    vs: p.src && !ready ? '…' : v == null ? (!p.src && p.val ? String(p.val) : '—') : csFmt(v, unit),
+    ts: t == null ? '' : csFmt(t, unit), steps: st.length ? sd + '/' + st.length + ' steps' : '' };
+}
+function csSub(i) { return [i.ts ? 'goal ' + i.ts + (i.pct != null ? ' · ' + Math.round(i.pct * 100) + '%' : '') : '', i.steps].filter(Boolean).join(' · '); }
+function csOverall(s) {
+  const ps = s.data.pieces.map(p => p.done ? 1 : csInfo(p).pct).filter(x => x != null);   // a piece marked done counts as hit
+  if (ps.length) return ps.reduce((a, b) => a + b, 0) / ps.length;
+  const st = [].concat(...s.data.pieces.map(p => p.steps || []));
+  return st.length ? st.filter(x => x.done).length / st.length : null;
+}
+
+// ── SVG helpers ───────────────────────────────────────────────────────────
+function csWrap(s, n, max) {
+  const words = String(s || '').split(/\s+/).filter(Boolean), lines = []; let cur = '';
+  words.forEach(w => { if (cur && (cur + ' ' + w).length > n) { lines.push(cur); cur = w; } else cur = (cur ? cur + ' ' : '') + w; });
+  if (cur) lines.push(cur);
+  max = max || 3;
+  if (lines.length > max) { lines.length = max; lines[max - 1] = lines[max - 1].replace(/.{0,2}$/, '') + '…'; }
+  return lines.length ? lines : [''];
+}
+// Multi-line text. o: { size, weight, fill, anchor, mid (vertically center the block), lh }
+function csT(x, y, lines, o) {
+  o = o || {}; const size = o.size || 14, lh = o.lh || Math.round(size * 1.22);
+  if (!Array.isArray(lines)) lines = [lines];
+  const y0 = o.mid ? y - (lines.length - 1) * lh / 2 + size * 0.35 : y;
+  return '<text x="' + x + '" y="' + y0 + '" text-anchor="' + (o.anchor || 'middle') + '" font-size="' + size + '" font-weight="' + (o.weight || 700) + '" fill="' + (o.fill || '#1a1510') + '"' + (o.op ? ' opacity="' + o.op + '"' : '') + '>' +
+    lines.map((l, i) => '<tspan x="' + x + '" dy="' + (i ? lh : 0) + '">' + csE(l) + '</tspan>').join('') + '</text>';
+}
+function csSvg(W, H, body) { return '<svg class="cs-svg" viewBox="0 0 ' + W + ' ' + H + '" font-family="Montserrat, sans-serif" role="img">' + body + '</svg>'; }
+function csG(p, inner) { return '<g class="cs-p" onclick="csFocusPiece(\'' + p.id + '\')"><title>' + csE(p.t) + ' — click to edit</title>' + inner + '</g>'; }
+function csCol(i) { return CS_COLORS[i % CS_COLORS.length]; }
+function csCheck(x, y) { return '<g transform="translate(' + x + ',' + y + ')"><circle r="11" fill="#3f9b6b" stroke="#fff" stroke-width="2"/><path d="M-5,0 L-1.5,4 L5.5,-4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>'; }
+
+// ── The diagrams (each one looks different) ─────────────────────────────────
+const CS_DRAW = {
+  flywheel(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, H = 670, cx = 500, cy = 342, R = 205, r = 64, rad = d => d * Math.PI / 180;
+    const ang = i => -90 + 360 * i / n, pt = (a, rr) => [cx + rr * Math.cos(rad(a)), cy + rr * Math.sin(rad(a))];
+    let o = '<defs><marker id="csFwA" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a7e6e"/></marker></defs>';
+    o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="none" stroke="#f3ecdf" stroke-width="40"/>';
+    if (n > 1) P.forEach((p, i) => {
+      const gap = (r + 14) / R * 180 / Math.PI, a1 = ang(i) + gap, a2 = ang(i + 1) - gap, p1 = pt(a1, R), p2 = pt(a2, R);
+      o += '<path d="M' + p1[0] + ',' + p1[1] + ' A' + R + ',' + R + ' 0 0 1 ' + p2[0] + ',' + p2[1] + '" fill="none" stroke="#8a7e6e" stroke-width="3" marker-end="url(#csFwA)"/>';
+    });
+    const ov = csOverall(s);
+    o += csT(cx, cy - 6, csWrap(s.name, 16, 3), { size: 24, weight: 800, mid: true }) + (ov != null ? csT(cx, cy + 58, Math.round(ov * 100) + '% of targets', { size: 15, fill: '#3f9b6b' }) : '');
+    P.forEach((p, i) => {
+      const I = csInfo(p), a = ang(i), c = pt(a, R), cs = Math.cos(rad(a)), sn = Math.sin(rad(a)), L = pt(a, R + r + 24);
+      const lines = csWrap(p.t, 20, 3), anchor = cs > 0.35 ? 'start' : cs < -0.35 ? 'end' : 'middle', lh = 20;
+      const ly = sn < -0.6 ? L[1] - (lines.length - 1) * lh - 22 : sn > 0.6 ? L[1] + 14 : L[1] - (lines.length - 1) * lh / 2 - 6;
+      o += csG(p, '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="' + r + '" fill="' + csCol(i) + '" stroke="#fff" stroke-width="4"/>' +
+        csT(c[0], c[1] - 2, I.vs, { size: I.vs.length > 6 ? 19 : 25, weight: 800, fill: '#fff', mid: true }) +
+        (I.ts ? csT(c[0], c[1] + 24, 'goal ' + I.ts, { size: 12, weight: 600, fill: '#fff', op: .9 }) : '') +
+        (p.done ? csCheck(c[0] + r * .72, c[1] - r * .72) : '') +
+        csT(L[0], ly, lines, { size: 16, weight: 800, anchor, lh }) +
+        (I.steps ? csT(L[0], ly + lines.length * lh, I.steps, { size: 12, weight: 600, fill: '#8a7e6e', anchor }) : ''));
+    });
+    return csSvg(W, H, o);
+  },
+  funnel(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, sh = 88, H = 30 + n * sh, top = 14, wMax = 900, wMin = 300;
+    const w = k => wMax - (wMax - wMin) * k / Math.max(n, 1);
+    let o = '';
+    P.forEach((p, i) => {
+      const I = csInfo(p), y1 = top + i * sh, y2 = y1 + sh - 6, a = w(i) / 2, b = w(i + 1) / 2;
+      o += csG(p, '<path d="M' + (500 - a) + ',' + y1 + ' L' + (500 + a) + ',' + y1 + ' L' + (500 + b) + ',' + y2 + ' L' + (500 - b) + ',' + y2 + ' Z" fill="' + csCol(i) + '"/>' +
+        csT(500, y1 + 32, csWrap(p.t, Math.round(b / 6.5), 1), { size: 16, weight: 800, fill: '#fff' }) +
+        csT(500, y1 + 62, I.vs + (csSub(I) ? '   ·   ' + csSub(I) : ''), { size: 15, weight: 700, fill: '#fff', op: .95 }) +
+        (p.done ? csCheck(500 + b - 22, y1 + 22) : ''));
+      const nx = P[i + 1];
+      if (nx) {
+        const J = csInfo(nx);
+        if (I.v && J.v != null && J.v <= I.v) { const x = Math.min(W - 100, 500 + w(i + 1) / 2 + 22); o += '<g><rect x="' + x + '" y="' + (y2 - 13) + '" width="96" height="26" rx="13" fill="#fbf4e6" stroke="#e6d3ad"/>' + csT(x + 48, y2 + 5, '↓ ' + Math.round(J.v / I.v * 100) + '%', { size: 13, weight: 800, fill: '#8a5a12' }) + '</g>'; }
+      }
+    });
+    return csSvg(W, H, o);
+  },
+  pathway(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, H = 290, x0 = 10, cw = (W - 20) / Math.max(n, 1), y = 20, h = 118, d = 30;
+    let o = '';
+    P.forEach((p, i) => {
+      const I = csInfo(p), a = x0 + i * cw, b = a + cw - 4, first = i === 0;
+      const pts = [[a, y], [b - d, y], [b, y + h / 2], [b - d, y + h], [a, y + h], first ? [a, y + h / 2] : [a + d, y + h / 2]];
+      const tx = (a + b) / 2 + (first ? -6 : 6);
+      o += csG(p, '<polygon points="' + pts.map(q => q.join(',')).join(' ') + '" fill="' + csCol(i) + '"/>' +
+        csT(tx, y + 30, 'STEP ' + (i + 1), { size: 11, weight: 800, fill: '#fff', op: .85 }) +
+        csT(tx, y + 58, csWrap(p.t, Math.max(8, Math.round((cw - d * 2) / 9)), 3), { size: 15, weight: 800, fill: '#fff', mid: true }) +
+        csT((a + b - d) / 2, y + h + 50, I.vs, { size: 30, weight: 800, fill: csCol(i) }) +
+        (csSub(I) ? csT((a + b - d) / 2, y + h + 74, csSub(I), { size: 12, weight: 600, fill: '#8a7e6e' }) : '') +
+        (I.pct != null ? '<rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + (cw - d - 48) + '" height="7" rx="3.5" fill="#efe6d6"/><rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + ((cw - d - 48) * I.pct) + '" height="7" rx="3.5" fill="' + csCol(i) + '"/>' : '') +
+        (p.done ? csCheck(b - d - 6, y + 16) : ''));
+      const nx = P[i + 1];
+      if (nx) { const J = csInfo(nx); if (I.v && J.v != null && J.v <= I.v) o += csT(b - d / 2 + 2, y + h + 50, Math.round(J.v / I.v * 100) + '% →', { size: 12, weight: 800, fill: '#8a5a12' }); }
+    });
+    return csSvg(W, H, o);
+  },
+  pyramid(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, lh = 86, top = 18, H = top + n * lh + 16, cx = 330, base = top + n * lh, half = 320;
+    const hw = yy => half * (yy - top) / (n * lh);
+    let o = '';
+    P.forEach((p, i) => {
+      const I = csInfo(p), yb = base - i * lh, yt = yb - lh + 5, mid = (yb + yt) / 2;
+      o += csG(p, '<path d="M' + (cx - hw(yb)) + ',' + yb + ' L' + (cx + hw(yb)) + ',' + yb + ' L' + (cx + hw(yt)) + ',' + yt + ' L' + (cx - hw(yt)) + ',' + yt + ' Z" fill="' + csCol(i) + '"/>' +
+        (hw(mid) > 46 ? csT(cx, mid, I.vs, { size: hw(mid) > 90 ? 24 : 17, weight: 800, fill: '#fff', mid: true }) : '') +
+        '<line x1="' + (cx + hw(mid) + 8) + '" y1="' + mid + '" x2="' + 690 + '" y2="' + mid + '" stroke="#cdbfa6" stroke-dasharray="3 4"/>' +
+        '<circle cx="' + 690 + '" cy="' + mid + '" r="4" fill="' + csCol(i) + '"/>' +
+        csT(704, mid - 4, csWrap(p.t, 30, 1), { size: 16, weight: 800, anchor: 'start' }) +
+        csT(704, mid + 17, [I.vs + (csSub(I) ? '  ·  ' + csSub(I) : '')], { size: 12.5, weight: 600, fill: '#8a7e6e', anchor: 'start' }) +
+        (p.done ? csCheck(cx + hw(yt) + 2, yt + 12) : ''));
+    });
+    return csSvg(W, H, o);
+  },
+  circles(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, H = 580, cx = 300, cy = 290, Rmax = 268, Rmin = n > 1 ? 70 : Rmax;
+    const rr = i => n > 1 ? Rmin + (Rmax - Rmin) * i / (n - 1) : Rmax;
+    let o = '';
+    for (let i = n - 1; i >= 0; i--) o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr(i) + '" fill="' + csCol(i) + '" fill-opacity="' + (0.55 + 0.4 * (1 - i / Math.max(n, 1))) + '" stroke="#fff" stroke-width="4"/>';
+    P.forEach((p, i) => {
+      const I = csInfo(p), rm = i ? (rr(i - 1) + rr(i)) / 2 : rr(0) * 0.45;
+      const ly = n > 1 ? 70 + (H - 140) * (n - 1 - i) / (n - 1) : cy;
+      const dy = Math.max(-0.9 * rm, Math.min(0.9 * rm, ly - cy)), dx = Math.sqrt(rm * rm - dy * dy);
+      const vy = i ? cy - rm : cy - rr(0) * 0.3;
+      o += csG(p, csT(cx, vy, I.vs, { size: i ? 17 : 22, weight: 800, fill: '#fff', mid: true }) +
+        '<circle cx="' + (cx + dx) + '" cy="' + (cy + dy) + '" r="5" fill="#1a1510"/>' +
+        '<polyline points="' + (cx + dx) + ',' + (cy + dy) + ' ' + 640 + ',' + ly + ' ' + 660 + ',' + ly + '" fill="none" stroke="#1a1510" stroke-width="1.4"/>' +
+        csT(672, ly - 4, csWrap(p.t, 32, 2), { size: 16, weight: 800, anchor: 'start', lh: 19 }) +
+        csT(672, ly + 17 + (csWrap(p.t, 32, 2).length - 1) * 19, [I.vs + (csSub(I) ? '  ·  ' + csSub(I) : '')], { size: 12.5, weight: 600, fill: '#8a7e6e', anchor: 'start' }) +
+        (p.done ? csCheck(660, ly - 22) : ''));
+    });
+    return csSvg(W, H, o);
+  },
+  roadmap(s) {
+    const P = s.data.pieces, Y = cpPlanYear(), W = 1000, x0 = 40, x1 = 960, mw = (x1 - x0) / 12;
+    const months = Array.from({ length: 12 }, (_, k) => { const d = new Date(Y, 8 + k, 1); return { key: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'), d }; });
+    const placed = [], loose = [];
+    P.forEach((p, i) => { const k = months.findIndex(m => m.key === String(p.when || '').slice(0, 7)); if (k < 0) loose.push([p, i]); else placed.push([p, i, k]); });
+    placed.sort((a, b) => a[2] - b[2]);
+    const cw = 158, ch = 62, gap = 12, lanes = { up: [], dn: [] };
+    const pos = placed.map(([p, i, k], j) => {
+      const mx = x0 + (k + 0.5) * mw, left = Math.max(4, Math.min(W - cw - 4, mx - cw / 2));
+      let best = null;
+      for (let lane = 0; lane < 8 && !best; lane++) for (const side of (j % 2 ? ['dn', 'up'] : ['up', 'dn'])) { if ((lanes[side][lane] == null || lanes[side][lane] < left - 8)) { best = { side, lane }; break; } }
+      best = best || { side: 'dn', lane: 8 };
+      lanes[best.side][best.lane] = left + cw;
+      return { p, i, k, mx, left, side: best.side, lane: best.lane };
+    });
+    const upN = Math.max(1, lanes.up.length), dnN = Math.max(1, lanes.dn.length), ay = 30 + upN * (ch + gap) + 26, H = ay + 44 + dnN * (ch + gap) + 10;
+    let o = '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (x1 - x0) + '" height="10" rx="5" fill="#efe6d6"/>';
+    months.forEach((m, k) => {
+      const x = x0 + k * mw;
+      o += (k ? '<line x1="' + x + '" y1="' + (ay - 9) + '" x2="' + x + '" y2="' + (ay + 9) + '" stroke="#cdbfa6"/>' : '') +
+        csT(x + mw / 2, ay + 28, m.d.toLocaleDateString('en-US', { month: 'short' }) + (k === 0 || m.d.getMonth() === 0 ? ' ’' + String(m.d.getFullYear()).slice(2) : ''), { size: 12, weight: 700, fill: '#8a7e6e' });
+    });
+    const now = new Date(), start = months[0].d, end = new Date(Y + 1, 8, 1);
+    if (now >= start && now < end) {
+      const frac = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth() + (now.getDate() - 1) / 31, xn = x0 + frac * mw;
+      o += '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (xn - x0) + '" height="10" rx="5" fill="#c9963a" opacity=".55"/>' +
+        '<g><title>Today</title><line x1="' + xn + '" y1="' + (ay - 14) + '" x2="' + xn + '" y2="' + (ay + 14) + '" stroke="#b42318" stroke-width="2.5"/><circle cx="' + xn + '" cy="' + (ay + 14) + '" r="3.5" fill="#b42318"/></g>';
+    }
+    pos.forEach(q => {
+      const I = csInfo(q.p), cy = q.side === 'up' ? ay - 26 - (q.lane + 1) * (ch + gap) + gap : ay + 42 + q.lane * (ch + gap), col = csCol(q.i);
+      const ey = q.side === 'up' ? cy + ch : cy;
+      o += csG(q.p, '<line x1="' + q.mx + '" y1="' + ey + '" x2="' + q.mx + '" y2="' + ay + '" stroke="' + col + '" stroke-width="1.5"/>' +
+        '<rect x="' + (q.mx - 7) + '" y="' + (ay - 7) + '" width="14" height="14" transform="rotate(45 ' + q.mx + ' ' + ay + ')" fill="' + (q.p.done ? '#3f9b6b' : col) + '" stroke="#fff" stroke-width="2"/>' +
+        '<rect x="' + q.left + '" y="' + cy + '" width="' + cw + '" height="' + ch + '" rx="9" fill="#fff" stroke="' + col + '" stroke-width="2"/>' +
+        '<rect x="' + q.left + '" y="' + cy + '" width="6" height="' + ch + '" rx="3" fill="' + col + '"/>' +
+        csT(q.left + 14, cy + 22, csWrap(q.p.t, 20, 2), { size: 13, weight: 800, anchor: 'start', lh: 15 }) +
+        csT(q.left + 14, cy + ch - 9, q.p.done ? '✓ done' : [I.vs !== '—' ? I.vs + (I.ts ? ' / ' + I.ts : '') : '', I.steps].filter(Boolean).join(' · ') || '—', { size: 11.5, weight: 700, fill: q.p.done ? '#3f9b6b' : '#8a7e6e', anchor: 'start' }));
+    });
+    return csSvg(W, H, o) + (loose.length ? '<div class="cs-loose"><b>No month yet:</b> ' + loose.map(([p, i]) => '<button class="cs-chip" style="border-color:' + csCol(i) + '" onclick="csFocusPiece(\'' + p.id + '\')">' + csE(p.t) + ' <i>' + csE(csInfo(p).vs) + '</i></button>').join('') + '</div>' : '');
+  },
+  critical(s) {
+    const P = s.data.pieces, n = P.length, W = 1000, H = 600, x1 = 90, y1 = 520, x2 = 740, y2 = 120, ov = csOverall(s) || 0;
+    const L = Math.hypot(x2 - x1, y2 - y1), nx = (y2 - y1) / L * -1, ny = (x2 - x1) / L;   // normal pointing up-left
+    const xp = x1 + (x2 - x1) * ov, yp = y1 + (y2 - y1) * ov;
+    let o = '<defs><linearGradient id="csCpG" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c9963a"/><stop offset="1" stop-color="#3f9b6b"/></linearGradient>' +
+      '<marker id="csCpA" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a1510"/></marker></defs>' +
+      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#efe6d6" stroke-width="18" stroke-linecap="round"/>' +
+      (ov > 0 ? '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + xp + '" y2="' + yp + '" stroke="url(#csCpG)" stroke-width="18" stroke-linecap="round"/>' : '') +
+      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#1a1510" stroke-width="2" marker-end="url(#csCpA)"/>' +
+      '<circle cx="' + x1 + '" cy="' + y1 + '" r="14" fill="#c9963a" stroke="#fff" stroke-width="3"/>' + csT(x1, y1 + 42, 'Where we are', { size: 14, weight: 800 }) +
+      '<rect x="760" y="40" width="228" height="170" rx="14" fill="#fff" stroke="#1a1510" stroke-width="2"/>' +
+      csT(778, 68, '12-MONTH WIN', { size: 11, weight: 800, fill: '#8a7e6e', anchor: 'start' }) +
+      csT(778, 94, csWrap(s.data.goal || 'Set the 12-month win (right panel)', 22, 4), { size: 15, weight: 800, anchor: 'start', lh: 19, fill: s.data.goal ? '#1a1510' : '#b8ab93' }) +
+      csT(778, 194, Math.round(ov * 100) + '% there', { size: 15, weight: 800, fill: '#3f9b6b', anchor: 'start' });
+    P.forEach((p, i) => {
+      const I = csInfo(p), t = (i + 1) / (n + 1), px = x1 + (x2 - x1) * t, py = y1 + (y2 - y1) * t, side = i % 2 ? -1 : 1;
+      const bx = px + nx * 105 * side, by = py + ny * 105 * side, bw = 200, bh = 64;
+      o += csG(p, '<line x1="' + px + '" y1="' + py + '" x2="' + bx + '" y2="' + by + '" stroke="' + csCol(i) + '" stroke-width="1.6"/>' +
+        '<circle cx="' + px + '" cy="' + py + '" r="8" fill="' + (p.done ? '#3f9b6b' : csCol(i)) + '" stroke="#fff" stroke-width="2.5"/>' +
+        '<rect x="' + (bx - bw / 2) + '" y="' + (by - bh / 2) + '" width="' + bw + '" height="' + bh + '" rx="10" fill="#fff" stroke="' + csCol(i) + '" stroke-width="2"/>' +
+        csT(bx, by - 8, csWrap(p.t, 24, 2), { size: 13, weight: 800, lh: 15, mid: true }) +
+        csT(bx, by + bh / 2 - 9, p.done ? '✓ done' : [I.vs + (I.ts ? ' / ' + I.ts : ''), I.steps].filter(Boolean).join(' · '), { size: 11.5, weight: 700, fill: p.done ? '#3f9b6b' : '#8a7e6e' }));
+    });
+    return csSvg(W, H, o);
+  },
+  scorecard(s) {
+    const P = s.data.pieces, n = P.length, cols = Math.min(4, Math.max(n, 1)), W = 1000, cw = W / cols, chh = 232, H = Math.ceil(n / cols) * chh + 8;
+    let o = '';
+    P.forEach((p, i) => {
+      const I = csInfo(p), cx = (i % cols + 0.5) * cw, top = Math.floor(i / cols) * chh, cy = top + 118, R = 80;
+      const arc = f => { const a = Math.PI * (1 - f); return (cx + R * Math.cos(a)) + ',' + (cy - R * Math.sin(a)); };
+      o += csG(p, '<rect x="' + (cx - cw / 2 + 8) + '" y="' + (top + 6) + '" width="' + (cw - 16) + '" height="' + (chh - 12) + '" rx="14" fill="#fffdf8" stroke="#eee4d3"/>' +
+        '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(1) + '" fill="none" stroke="#efe6d6" stroke-width="18" stroke-linecap="round"/>' +
+        (I.pct ? '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(Math.min(I.pct, 0.999)) + '" fill="none" stroke="' + (I.pct >= 1 ? '#3f9b6b' : csCol(i)) + '" stroke-width="18" stroke-linecap="round"/>' : '') +
+        csT(cx, cy - 12, I.vs, { size: I.vs.length > 7 ? 22 : 30, weight: 800 }) +
+        csT(cx, cy + 12, I.ts ? 'goal ' + I.ts + (I.pct != null ? ' · ' + Math.round(I.pct * 100) + '%' : '') : 'no target yet', { size: 12, weight: 600, fill: '#8a7e6e' }) +
+        csT(cx, cy + 46, csWrap(p.t, Math.round(cw / 10), 2), { size: 15, weight: 800, lh: 18 }) +
+        (p.done ? csCheck(cx + cw / 2 - 30, top + 30) : ''));
+    });
+    return csSvg(W, H, o);
+  }
+};
+function csDiagramHtml(s) {
+  if (!s.data.pieces.length) return '<div class="sos-empty">No pieces yet — add the first one below (e.g. a stage, a step, a level or a milestone).</div>';
+  let svg = '';
+  try { svg = CS_DRAW[s.diagram](s); } catch (e) { svg = '<div class="sos-empty">Couldn’t draw this diagram.</div>'; }
+  // Phones: a plain list instead of a tiny drawing.
+  const list = '<div class="cs-mlist">' + s.data.pieces.map((p, i) => { const I = csInfo(p); return '<div class="cs-mrow" onclick="csFocusPiece(\'' + p.id + '\')"><span class="cs-dot" style="background:' + csCol(i) + '"></span><b>' + csE(p.t) + '</b><span>' + csE(I.vs) + (I.ts ? ' / ' + csE(I.ts) : '') + (p.done ? ' ✓' : '') + '</span></div>'; }).join('') + '</div>';
+  return '<div class="cs-draw">' + svg + '</div>' + list;
+}
+
+// ── Render ──────────────────────────────────────────────────────────────────
+function csHtml() {
+  if (!csEnabled()) return '';
+  if (!_cs.loaded && !_cs.loading) setTimeout(() => csLoad(true), 0);
+  return '<div id="csHost" class="cs-host">' + csInner() + '</div>';
+}
+function csTabsHtml(list, sel) {
+  return list.map((s, i) => { const ov = csOverall(s);
+    return '<button class="cs-tab' + (sel && s.id === sel.id ? ' on' : '') + '" onclick="csSelect(\'' + s.id + '\')"><span class="cs-tab-i">' + CS_DIAGRAMS[s.diagram].icon + '</span>' + csE(s.name) + (ov != null ? '<span class="cs-tab-p">' + Math.round(ov * 100) + '%</span>' : '') + '</button>'; }).join('') +
+    '<button class="cs-tab cs-tab-add" title="Add or customize strategies" onclick="csToggleManage()">＋</button>';
+}
+function csInner() {
+  const list = csStrategies(), s = csSelected(list), E = csE;
+  let h = '<div class="sos-card cs-card"><div class="sos-card-h">⭐ Core Strategies <span class="sos-count">only Brad &amp; Ryan see this</span>' +
+    '<span class="cs-hbtns"><button class="sos-btn sm ghost" onclick="csToggleManage()">⚙ Customize</button><button class="sos-btn sm ghost" title="Reload" onclick="csLoad()">↻</button></span></div>';
+  if (_cs.manage || (_cs.loaded && !list.length)) {
+    h += '<div class="cs-manage"><div class="cs-manage-h">' + (list.length ? 'Your strategies — rename, reorder, add or remove' : 'No strategies yet') + '</div>' +
+      list.map((x, i) => '<div class="cs-mg-row"><span class="cs-mg-n">' + (i + 1) + '</span><input class="sos-input sm" value="' + E(x.name) + '" onchange="csRename(\'' + x.id + '\',this.value)">' +
+        '<button class="cp-x" title="Move up" onclick="csMove(\'' + x.id + '\',-1)">↑</button><button class="cp-x" title="Move down" onclick="csMove(\'' + x.id + '\',1)">↓</button>' +
+        '<button class="cp-x" title="Delete this strategy" onclick="csDelete(\'' + x.id + '\')">×</button></div>').join('') +
+      '<div class="cs-mg-row"><input id="csNewStrat" class="sos-input sm" placeholder="＋ New strategy name…" onkeydown="if(event.key===\'Enter\')csAddStrategy()"><button class="sos-btn sm hi" onclick="csAddStrategy()">Add</button></div>' +
+      (!list.length ? '<button class="sos-btn hi" style="margin-top:10px" onclick="csSeed()">Start with the 5 core strategies</button><div class="cs-hint">Sunday Gatherings · Community Groups · Membership · Leadership Development · Missions — each with its own diagram, already wired to live numbers. Rename or change any of it after.</div>' : '') +
+      (list.length ? '<button class="sos-btn sm" style="margin-top:8px" onclick="csToggleManage()">Done</button>' : '') + '</div>';
+  }
+  if (!list.length) return h + (!_cs.loaded ? '<div class="sos-loading">Loading core strategies…</div>' : '') + '</div>';
+  const d = s.data, ov = csOverall(s), used = new Set(d.kpis), src = csSources();
+  const kpis = d.kpis.map(k => { const m = src[k];
+    return '<div class="cs-kpi"><span>' + E(m ? m.label : (cpCatalogReady() ? k + ' (missing)' : 'Loading…')) + '</span><b>' + (m ? E(csFmt(m.value, m.unit)) : '…') + '</b><button class="cp-x" title="Remove" onclick="csDelKpi(\'' + s.id + '\',\'' + E(k) + '\')">×</button></div>'; }).join('');
+  h += '<div class="cs-tabs" id="csTabs">' + csTabsHtml(list, s) + '</div>' +
+    '<div class="cs-main">' +
+      '<div class="cs-stage">' +
+        '<input class="cs-name" value="' + E(s.name) + '" title="Rename this strategy" onchange="csRename(\'' + s.id + '\',this.value)">' +
+        '<div class="cs-diag" id="csDiag">' + csDiagramHtml(s) + '</div>' +
+        '<div class="cs-hint">' + CS_DIAGRAMS[s.diagram].icon + ' ' + E(CS_DIAGRAMS[s.diagram].hint) + ' Click any piece to edit it.</div>' +
+      '</div>' +
+      '<div class="cs-side">' +
+        '<label class="cs-lbl">Diagram</label><select class="sos-input sm" onchange="csSetDiagram(\'' + s.id + '\',this.value)">' +
+          Object.keys(CS_DIAGRAMS).map(k => '<option value="' + k + '"' + (k === s.diagram ? ' selected' : '') + '>' + CS_DIAGRAMS[k].icon + ' ' + CS_DIAGRAMS[k].label + '</option>').join('') + '</select>' +
+        '<label class="cs-lbl">Why it matters</label><textarea class="sos-input sm cs-ta" rows="2" placeholder="What winning looks like…" onchange="csSetData(\'' + s.id + '\',\'purpose\',this.value)">' + E(d.purpose) + '</textarea>' +
+        '<label class="cs-lbl">12-month win</label><input class="sos-input sm" value="' + E(d.goal) + '" placeholder="e.g. 900 adults on a Sunday" onchange="csSetData(\'' + s.id + '\',\'goal\',this.value)">' +
+        '<label class="cs-lbl">Progress to targets</label><div class="cs-ov" id="csOv">' + csOvHtml(ov) + '</div>' +
+        '<label class="cs-lbl">Key numbers <span>(live)</span></label>' + (kpis || '<div class="cs-hint">Pin any dashboard number here.</div>') +
+        '<select class="sos-input sm cs-kadd" onchange="if(this.value){csAddKpi(\'' + s.id + '\',this.value)}">' + csSrcOptions('').replace('✍️ I’ll type the number', '＋ Pin a number…') + '</select>' +
+      '</div>' +
+    '</div>' +
+    '<details class="cs-edit"' + (_cs.editOpen ? ' open' : '') + ' ontoggle="_cs.editOpen=this.open"><summary>✎ Edit pieces &amp; action steps <span class="sos-count">' + d.pieces.length + '</span></summary>' +
+      '<div class="cs-pgrid">' + d.pieces.map((p, i) => csPieceHtml(s, p, i)).join('') +
+        '<div class="cs-pc cs-pc-new"><div class="cs-lbl">Add a piece</div><input id="csNewPiece" class="sos-input sm" placeholder="Stage, step, level or milestone…" onkeydown="if(event.key===\'Enter\')csAddPiece(\'' + s.id + '\')">' +
+        '<button class="sos-btn sm hi" onclick="csAddPiece(\'' + s.id + '\')">Add piece</button></div>' +
+      '</div></details>';
+  return h + '</div>';
+}
+function csOvHtml(ov) { return ov == null ? '<span class="cs-hint">Give pieces a target to track progress.</span>' : '<div class="cp-gbar"><i style="width:' + Math.round(ov * 100) + '%"></i></div><b>' + Math.round(ov * 100) + '%</b>'; }
+function csPieceHtml(s, p, i) {
+  const E = csE, I = csInfo(p), a = '\'' + s.id + '\',\'' + p.id + '\'';
+  return '<div class="cs-pc" id="csPc_' + p.id + '" style="border-top-color:' + csCol(i) + '">' +
+    '<div class="cs-pc-h"><span class="cs-pc-n" style="background:' + csCol(i) + '">' + (i + 1) + '</span>' +
+      '<input class="cs-pc-t" value="' + E(p.t) + '" onchange="csSetPiece(' + a + ',\'t\',this.value)">' +
+      '<button class="cp-x" title="Move earlier" onclick="csMovePiece(' + a + ',-1)">↑</button><button class="cp-x" title="Move later" onclick="csMovePiece(' + a + ',1)">↓</button>' +
+      '<button class="cp-x" title="Delete piece" onclick="csDelPiece(' + a + ')">×</button></div>' +
+    '<label class="cs-lbl">Number</label><select class="sos-input sm" onchange="csSetPieceSrc(' + a + ',this.value)">' + csSrcOptions(p.src) + '</select>' +
+    '<div class="cs-pc-row">' +
+      (p.src ? '<span class="cs-pc-live" title="Pulled automatically">' + E(I.vs) + ' <span class="cp-auto">auto</span></span>'
+             : '<input class="sos-input sm" placeholder="Value" title="Today’s number (type it)" value="' + E(p.val || '') + '" onchange="csSetPiece(' + a + ',\'val\',this.value)">') +
+      '<input class="sos-input sm" placeholder="Target" title="Target" value="' + E(p.target || '') + '" onchange="csSetPiece(' + a + ',\'target\',this.value)">' +
+      '<input class="sos-input sm" type="month" title="When (puts it on the roadmap)" value="' + E(String(p.when || '').slice(0, 7)) + '" onchange="csSetPiece(' + a + ',\'when\',this.value)">' +
+      '<label class="cs-done"><input type="checkbox" class="sos-cb"' + (p.done ? ' checked' : '') + ' onchange="csSetPiece(' + a + ',\'done\',this.checked)"> Done</label>' +
+    '</div>' +
+    '<textarea class="sos-input sm cs-ta" rows="1" placeholder="Notes…" onchange="csSetPiece(' + a + ',\'note\',this.value)">' + E(p.note || '') + '</textarea>' +
+    '<div class="cs-steps">' + p.steps.map(st => '<div class="cp-step' + (st.done ? ' done' : '') + '"><input type="checkbox" class="sos-cb"' + (st.done ? ' checked' : '') + ' onchange="csSetStep(' + a + ',\'' + st.id + '\',\'done\',this.checked)">' +
+        '<input class="cp-step-in" value="' + E(st.t) + '" onchange="csSetStep(' + a + ',\'' + st.id + '\',\'t\',this.value)"><button class="cp-x" onclick="csDelStep(' + a + ',\'' + st.id + '\')">×</button></div>').join('') +
+      '<div class="cp-step cp-step-add"><input id="csStep_' + p.id + '" class="cp-step-in" placeholder="＋ Add an action step…" onkeydown="if(event.key===\'Enter\')csAddStep(' + a + ')"></div></div>' +
+  '</div>';
+}
+// Full redraw of the board only (not the whole snapshot), keeping the page where it is.
+function csRender(focusId) {
+  const host = document.getElementById('csHost'); if (!host) return;
+  const scrolls = []; for (let el = host; el; el = el.parentElement) if (el.scrollTop || el.scrollHeight > el.clientHeight + 1) scrolls.push([el, el.scrollTop]);
+  const winY = window.scrollY;
+  if (document.activeElement && host.contains(document.activeElement)) { try { document.activeElement.blur(); } catch (e) {} }
+  host.style.minHeight = host.offsetHeight + 'px';
+  host.innerHTML = csInner();
+  host.style.minHeight = '';
+  scrolls.forEach(([el, top]) => { el.scrollTop = top; });
+  if (window.scrollY !== winY) window.scrollTo(0, winY);
+  if (focusId) { const f = document.getElementById(focusId); if (f) try { f.focus({ preventScroll: true }); } catch (e) {} }
+  sosHoldScroll(scrolls, winY);
+}
+// Light redraw after a value edit: just the drawing, tabs and progress (inputs stay put).
+function csRenderLight() {
+  const list = csStrategies(), s = csSelected(list); if (!s) return;
+  const dg = document.getElementById('csDiag'), tb = document.getElementById('csTabs'), ov = document.getElementById('csOv');
+  if (dg) dg.innerHTML = csDiagramHtml(s);
+  if (tb) tb.innerHTML = csTabsHtml(list, s);
+  if (ov) ov.innerHTML = csOvHtml(csOverall(s));
+}
+
+// ── Load / save ─────────────────────────────────────────────────────────────
+function csLoad(background) {
+  _cs.loading = true; const started = Date.now();
+  if (!background) sosToast('Refreshing core strategies…');
+  return sosApiGet('action=sos_data&who=' + CS_OWNER).then(res => {
+    _cs.loading = false;
+    if (!res || !res.ok) return;
+    if (_csPending > 0 || _csLastMut >= started) return;          // newer local edits win
+    _cs.rows = (res.plans || []).filter(p => p.type === 'strategy'); _cs.loaded = true;
+    csSaveCache(); csRender();
+  }).catch(() => { _cs.loading = false; if (!_cs.loaded) { _cs.loaded = true; csRender(); } });
+}
+function csSave(row, fields) {
+  Object.assign(row, fields); csSaveCache();
+  _csLastMut = Date.now();
+  if (/^tmp/.test(row.id)) { row._dirty = Object.assign(row._dirty || {}, fields); return; }   // still being created
+  _csPending++;
+  sosApiPost(Object.assign({ action: 'sos_plan_update', id: row.id }, fields))
+    .then(res => { _csPending--; if (!res || res.ok === false) { sosToast('Couldn’t save — reloading'); csLoad(true); } })
+    .catch(() => { _csPending--; sosToast('Couldn’t save — check your connection'); });
+}
+function csAddRow(fields) {
+  const tmp = sosTmpId(), row = Object.assign({ id: tmp, _tmp: tmp, owner: CS_OWNER, type: 'strategy', status: 'active', createdAt: Date.now() }, fields);
+  _cs.rows.push(row); _csPending++; _csLastMut = Date.now(); csSaveCache();
+  return sosApiPost(Object.assign({ action: 'sos_plan_add', owner: CS_OWNER, type: 'strategy', status: 'active' }, fields)).then(res => {
+    _csPending--;
+    if (res && res.id) { row.id = res.id; if (_cs.sel === tmp) { _cs.sel = res.id; try { localStorage.setItem('lssr_cs_sel', res.id); } catch (e) {} } if (row._dirty) { const f = row._dirty; row._dirty = null; csSave(row, f); } csSaveCache(); }
+  }).catch(() => { _csPending--; sosToast('Couldn’t save the new strategy'); });
+}
+function csEdit(sid, fn, full, focusId) {
+  const row = csRow(sid); if (!row) return;
+  const d = JSON.parse(JSON.stringify(csData(row)));
+  if (fn(d) === false) return;
+  const detail = JSON.stringify(d);
+  row._d = d; row._dsrc = detail;
+  csSave(row, { detail: detail });
+  full ? csRender(focusId) : csRenderLight();
+}
+function csPiece(d, pid) { return d.pieces.find(p => p.id === pid); }
+
+// ── Actions ─────────────────────────────────────────────────────────────────
+function csSelect(sid) { _cs.sel = sid; try { localStorage.setItem('lssr_cs_sel', sid); } catch (e) {} csRender(); }
+function csToggleManage() { _cs.manage = !_cs.manage; csRender(); }
+function csRename(sid, v) { const row = csRow(sid); v = String(v || '').trim(); if (!row || !v) return; csSave(row, { title: v }); csRenderLight(); }
+function csSetDiagram(sid, v) { const row = csRow(sid); if (!row || !CS_DIAGRAMS[v]) return; csSave(row, { metric: v }); csRender(); }
+function csSetData(sid, field, v) { csEdit(sid, d => { d[field] = v; }, false); }
+function csMove(sid, dir) {
+  const list = csStrategies(), i = list.findIndex(s => s.id === sid), j = i + dir; if (i < 0 || j < 0 || j >= list.length) return;
+  [list[i], list[j]] = [list[j], list[i]];
+  list.forEach((s, k) => { if (String(s.row.period) !== String(k)) csSave(s.row, { period: String(k) }); });
+  csRender();
+}
+function csDelete(sid) {
+  const row = csRow(sid); if (!row) return;
+  if (!confirm('Delete the "' + row.title + '" strategy and everything in it? This removes it for Ryan too.')) return;
+  _cs.rows = _cs.rows.filter(r => r !== row); csSaveCache(); _csLastMut = Date.now(); _csPending++;
+  sosApiPost({ action: 'sos_plan_delete', id: row.id }).then(() => _csPending--).catch(() => { _csPending--; sosToast('Couldn’t delete — try again'); });
+  csRender();
+}
+function csAddStrategy() {
+  const el = document.getElementById('csNewStrat'), name = (el && el.value || '').trim(); if (!name) { el && el.focus(); return; }
+  const list = csStrategies(), usedD = new Set(list.map(s => s.diagram));
+  const diagram = Object.keys(CS_DIAGRAMS).find(k => !usedD.has(k)) || 'flywheel';
+  csAddRow({ title: name, metric: diagram, period: String(list.length), detail: JSON.stringify({ purpose: '', goal: '', kpis: [], pieces: [] }) });
+  _cs.sel = _cs.rows[_cs.rows.length - 1].id; _cs.editOpen = true;
+  csRender('csNewStrat');
+}
+function csSeed() {
+  if (csStrategies().length) return;
+  CS_DEFAULTS.forEach((st, k) => csAddRow({ title: st.name, metric: st.diagram, period: String(k), detail: JSON.stringify({
+    purpose: st.purpose, goal: '', kpis: st.kpis,
+    pieces: st.pieces.map(([t, src, target]) => ({ id: csId(), t, src: src || '', val: '', target: target || '', when: '', done: false, note: '', steps: [] })) }) }));
+  _cs.manage = false; _cs.sel = _cs.rows[0] && _cs.rows[0].id; csRender();
+}
+function csAddKpi(sid, key) { csEdit(sid, d => { if (d.kpis.includes(key)) return false; d.kpis.push(key); }, true); }
+function csDelKpi(sid, key) { csEdit(sid, d => { d.kpis = d.kpis.filter(k => k !== key); }, true); }
+function csAddPiece(sid) {
+  const el = document.getElementById('csNewPiece'), t = (el && el.value || '').trim(); if (!t) { el && el.focus(); return; }
+  _cs.editOpen = true;
+  csEdit(sid, d => { d.pieces.push({ id: csId(), t, src: '', val: '', target: '', when: '', done: false, note: '', steps: [] }); }, true, 'csNewPiece');
+}
+function csSetPiece(sid, pid, field, v) { csEdit(sid, d => { const p = csPiece(d, pid); if (!p) return false; p[field] = v; }, false); }
+function csSetPieceSrc(sid, pid, src) {
+  csEdit(sid, d => {
+    const p = csPiece(d, pid); if (!p) return false; p.src = src;
+    const m = src && csSources()[src];
+    if (m && !p.target && m.hint !== '' && m.hint != null) p.target = String(m.hint);   // e.g. a team's "needed" or a scorecard goal
+  }, true);
+}
+function csMovePiece(sid, pid, dir) {
+  csEdit(sid, d => { const i = d.pieces.findIndex(p => p.id === pid), j = i + dir; if (i < 0 || j < 0 || j >= d.pieces.length) return false; [d.pieces[i], d.pieces[j]] = [d.pieces[j], d.pieces[i]]; }, true);
+}
+function csDelPiece(sid, pid) {
+  const row = csRow(sid), p = row && csPiece(csData(row), pid); if (!p) return;
+  if (!confirm('Delete "' + p.t + '"' + (p.steps.length ? ' and its ' + p.steps.length + ' action step(s)' : '') + '?')) return;
+  csEdit(sid, d => { d.pieces = d.pieces.filter(x => x.id !== pid); }, true);
+}
+function csAddStep(sid, pid) {
+  const el = document.getElementById('csStep_' + pid), t = (el && el.value || '').trim(); if (!t) return;
+  csEdit(sid, d => { const p = csPiece(d, pid); if (!p) return false; p.steps.push({ id: csId(), t, done: false }); }, true, 'csStep_' + pid);
+}
+function csSetStep(sid, pid, stid, field, v) {
+  csEdit(sid, d => { const p = csPiece(d, pid), st = p && p.steps.find(x => x.id === stid); if (!st) return false; st[field] = v; }, false);
+  if (field === 'done') { const cb = document.querySelector('#csPc_' + pid + ' input[onchange*="' + stid + '"]'); if (cb) cb.closest('.cp-step').classList.toggle('done', !!v); }
+}
+function csDelStep(sid, pid, stid) { csEdit(sid, d => { const p = csPiece(d, pid); if (!p) return false; p.steps = p.steps.filter(x => x.id !== stid); }, true); }
+function csFocusPiece(pid) {
+  if (window._sosHoldStop) window._sosHoldStop();
+  const det = document.querySelector('.cs-edit'); if (det && !det.open) { det.open = true; _cs.editOpen = true; }
+  const el = document.getElementById('csPc_' + pid); if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.remove('cs-flash'); void el.offsetWidth; el.classList.add('cs-flash');
 }
 
 // ── Actionable named lists + group-health flags ──────────────────────────────
@@ -15177,7 +15828,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T185532Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T210114Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
