@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T15:50:22.958Z",
+  "generatedAt": "2026-09-24T16:50:41.049Z",
   "asOf": "2026-09-24",
   "givingMonths": 12,
   "statusVocab": [
@@ -17232,62 +17232,6 @@
         },
         {
           "id": null,
-          "name": "Jeremy Peterson",
-          "first": "Jeremy",
-          "last": "Peterson",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Ray Brown Community Group",
-              "role": "member",
-              "joinedAt": "2025-04-24T13:08:21Z"
-            },
-            {
-              "name": "Saddle Ridge Community Group",
-              "role": "leader",
-              "joinedAt": "2026-07-02T18:22:37Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-07-03T09:25:38Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member",
-              "joinedAt": "2026-04-28T02:32:03Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Kayleen Hagstrand",
           "first": "Kayleen",
           "last": "Hagstrand",
@@ -17561,6 +17505,67 @@
               "name": "Chair Crew",
               "role": "member",
               "joinedAt": "2026-08-07T13:28:31Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jeremy Peterson",
+          "first": "Jeremy",
+          "last": "Peterson",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Ray Brown Community Group",
+              "role": "member",
+              "joinedAt": "2025-04-24T13:08:21Z"
+            },
+            {
+              "name": "Saddle Ridge Community Group",
+              "role": "leader",
+              "joinedAt": "2026-07-02T18:22:37Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2026-07-03T09:25:38Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "First Impressions Team",
+              "role": "member",
+              "joinedAt": "2026-04-28T02:32:03Z"
+            },
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2026-09-24T16:07:25Z"
             }
           ],
           "flags": [],
