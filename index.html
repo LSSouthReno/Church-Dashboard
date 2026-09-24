@@ -4650,6 +4650,8 @@ async function loadDashboardData() {
   if (!res.ok) throw new Error('Could not load dashboard-data.json');
   DASHBOARD_DATA = await res.json();
   normalizeDashboardData();
+  window._cpCat = null;                                   // My Annual Plan metrics: rebuild now that the numbers are here
+  try { if (typeof sosRefreshIfOpen === 'function') sosRefreshIfOpen(); } catch (e) {}
   // Re-apply the URL hash now that data is ready: #groups/#teams open modals that
   // need DASHBOARD_DATA, so the DOMContentLoaded pass (before data loaded) skipped them.
   try { if (typeof applyHashRoute === 'function') applyHashRoute(); } catch (e) {}
@@ -8289,6 +8291,7 @@ function sosAddStep(goalId, inputId) {
 // objective + step (parentId), metric (custom {title,current}), metriclink {title=key},
 // metrichide {title=key}. Legacy 'goal' rows render as objectives.
 // ════════════════════════════════════════════════════════════════════════════
+const CP_METRIC_LABELS = { att_adults: 'Avg weekend attendance (adults, last 4 wks)', att_kids: 'Avg kids attendance (last 4 wks)', baptisms_ytd: 'Baptisms YTD', members_total: 'Church members (Member · Deacon · Pastor)', new_members_ytd: 'New members YTD', volunteers: 'Active volunteers (last 90 days)', vol_pct: 'Volunteers as % of adult attendance', new_adults_30d: 'New adults (last 30 days)', email_open: 'Email open rate (latest)', pledge_pct: 'ALL-IN pledge progress', cg_groups: 'Active community groups', cg_members: 'People in community groups', cg_size: 'Average group size', cg_fm_pct: 'Family Members in a CG', cg_joined_ytd: 'Joined a CG YTD', cg_applied_ytd: 'Applied to a CG YTD', cg_leaders: 'Community group leaders' };
 const CP_DEFAULT_METRICS = {
   'Brad Borowski': ['att_adults', 'volunteers', 'vol_pct', 'members_total', 'new_adults_30d', 'cg_fm_pct', 'pledge_pct'],
   'Ryan Griffin': ['att_adults', 'baptisms_ytd', 'members_total', 'new_members_ytd', 'cg_fm_pct', 'pledge_pct'],
@@ -8303,17 +8306,23 @@ const CP_DEFAULT_METRICS = {
   'Rachel Primus': ['att_adults', 'volunteers']
 };
 function cpSlug(t) { return String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function cpCatalogReady() { return typeof DASHBOARD_DATA !== 'undefined' && !!DASHBOARD_DATA && !!DASHBOARD_DATA.attendanceWeekly; }
 function cpCatalog() {
   if (window._cpCat && window._cpCatTs && Date.now() - window._cpCatTs < 60000) return window._cpCat;
-  const D = (typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA) || {};
+  // Dashboard numbers still loading → return nothing (and DON'T cache) so the plan never
+  // shows zeros or drops metrics; loadDashboardData() redraws the plan when they arrive.
+  if (!cpCatalogReady()) return {};
+  const D = DASHBOARD_DATA;
   const cy = String(new Date().getFullYear()), yy = cy.slice(2), cat = {};
   const add = (key, label, value, unit, src, hint) => { if (value == null || isNaN(value)) return; cat[key] = { key, label, value: Math.round(Number(value) * 10) / 10, unit: unit || '', src: src || '', hint: hint || '' }; };
   const avg = a => a.length ? a.reduce((t, v) => t + v, 0) / a.length : null;
   const aw = D.attendanceWeekly || {};
   const weeks = [].concat(...Object.keys(aw).sort().map(k => aw[k] || [])).filter(w => (w.adults || 0) > 0);
   const last4 = weeks.slice(-4);
-  add('att_adults', 'Avg weekend attendance (adults, last 4 wks)', Math.round(avg(last4.map(w => w.adults))), '', 'Weekend Attendance');
-  add('att_kids', 'Avg kids attendance (last 4 wks)', Math.round(avg(last4.map(w => w.kids || 0))), '', 'Weekend Attendance');
+  if (last4.length) {
+    add('att_adults', 'Avg weekend attendance (adults, last 4 wks)', Math.round(avg(last4.map(w => w.adults))), '', 'Weekend Attendance');
+    add('att_kids', 'Avg kids attendance (last 4 wks)', Math.round(avg(last4.map(w => w.kids || 0))), '', 'Weekend Attendance');
+  }
   const b = D.baptisms || {};
   if (b.months) add('baptisms_ytd', 'Baptisms ' + cy + ' YTD', b.months.reduce((t, m, i) => t + (String(m).endsWith("'" + yy) ? (b.counts[i] || 0) : 0), 0), '', 'Baptisms');
   const mb = D.members || {};
@@ -8418,7 +8427,8 @@ function cpRealityRows(person) {
   const hidden = new Set(cpPlans('metrichide').map(p => p.title));
   const keys = (CP_DEFAULT_METRICS[person] || ['att_adults']).concat(cpPlans('metriclink').map(p => p.title));
   const rows = [], seen = {};
-  const base = cpBaseline().values;
+  const base = cpBaseline().values, ready = cpCatalogReady();
+  if (!ready) { keys.forEach(k => { if (seen[k] || hidden.has(k)) return; seen[k] = 1; rows.push({ auto: true, loading: true, key: k, label: CP_METRIC_LABELS[k] || k.replace(/^serve_/, '').replace(/-/g, ' ') + ' volunteers', base: base[k], value: null, unit: '' }); }); return rows; }
   keys.forEach(k => { if (seen[k] || hidden.has(k) || !cat[k]) return; seen[k] = 1; const link = cpPlans('metriclink').find(p => p.title === k); rows.push(Object.assign({ auto: true, linkId: link ? link.id : '', base: base[k] }, cat[k])); });
   cpPlans('metric').forEach(p => rows.push({ custom: true, id: p.id, label: p.title, value: p.current, unit: '', base: base['custom_' + p.id] }));
   return rows;
@@ -8457,7 +8467,7 @@ function cpHtml(person) {
   const realityHtml = '<div class="cp-box cp-reality"><div class="cp-box-h">Current Reality <span>(where you started)</span>' + blSel + '</div>' +
     (reality.length ? reality.map(r => '<div class="cp-mrow">' +
       '<span class="cp-mlabel">' + E(r.label) + (r.auto ? ' <span class="cp-auto" title="Pulled automatically from ' + E(r.src) + '">auto</span>' : '') + '</span>' +
-      (r.custom ? (r.base != null && r.base !== '' ? '<b class="cp-mval">' + cpFmt(r.base, '') + '</b>' : '') + '<input class="cp-mval-in" title="Today" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">'
+      (r.loading ? '<b class="cp-mval">' + (r.base == null ? '' : cpFmt(r.base, '')) + '</b><span class="cp-mnow">loading…</span>' : r.custom ? (r.base != null && r.base !== '' ? '<b class="cp-mval">' + cpFmt(r.base, '') + '</b>' : '') + '<input class="cp-mval-in" title="Today" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">'
         : '<b class="cp-mval" title="' + E(bl.label) + '">' + (r.base == null ? '—' : cpFmt(r.base, r.unit)) + '</b>' + delta(r)) +
       '<button class="cp-x" title="Remove" onclick="' + (r.custom ? 'sosDeletePlan(\'' + r.id + '\')' : (r.linkId ? 'sosDeletePlan(\'' + r.linkId + '\')' : 'cpHideMetric(\'' + E(r.key) + '\')')) + '">×</button></div>').join('')
       : '<div class="sos-empty sm">No metrics yet.</div>') +
@@ -15142,7 +15152,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T183754Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T184841Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
