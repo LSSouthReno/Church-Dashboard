@@ -8434,12 +8434,26 @@ function cpRealityRows(person) {
   cpPlans('metric').forEach(p => rows.push({ custom: true, id: p.id, label: p.title, value: p.current, unit: '', base: base['custom_' + p.id] }));
   return rows;
 }
+// Percent goals: keep them as percents. Sheets used to store "60%" as 0.6 — for goals tied
+// to a % metric, read a small decimal back as a percent (and re-save it that way).
+function cpGoalUnit(g) { const m = g && g.metric && cpCatalog()[g.metric]; return m ? m.unit : ''; }
+function cpPctFix(v, unit) {
+  const s = String(v == null ? '' : v).trim();
+  if (unit !== '%' || !s || /%$/.test(s)) return s;
+  const n = parseFloat(s.replace(/[^0-9.\-]/g, ''));
+  if (isNaN(n)) return s;
+  return (Math.abs(n) <= 1.5 && /\./.test(s) ? String(Math.round(n * 1000) / 10) : String(n)) + '%';
+}
+function cpSetTarget(id, value) {
+  const g = _sos.plans.find(x => x.id === id);
+  cpSet(id, 'target', cpPctFix(value, cpGoalUnit(g)));
+}
 function cpGoalValue(g) {
   if (g.metric) { const m = cpCatalog()[g.metric]; if (m) return m.value; }
   const n = parseFloat(String(g.current || '').replace(/[^0-9.\-]/g, '')); return isNaN(n) ? null : n;
 }
 function cpGoalPct(g) {
-  const t = parseFloat(String(g.target || '').replace(/[^0-9.\-]/g, '')), c = cpGoalValue(g);
+  const t = parseFloat(cpPctFix(g.target, cpGoalUnit(g)).replace(/[^0-9.\-]/g, '')), c = cpGoalValue(g);
   if (isNaN(t) || c == null) return null;
   let base = NaN;
   if (g.metric) { const b = cpBaseline().values[g.metric]; if (b != null && b !== '') base = Number(b); }      // from the frozen starting point
@@ -8479,6 +8493,7 @@ function cpHtml(person) {
     '</div></details></div>';
 
   const goals = cpPlans('goal12');
+  goals.forEach(g => { const fixed = cpPctFix(g.target, cpGoalUnit(g)); if (cpCatalogReady() && g.metric && fixed !== String(g.target == null ? '' : g.target).trim() && !/^tmp/.test(g.id)) setTimeout(() => cpSet(g.id, 'target', fixed), 0); });
   const overall = cpOverallPct();
   const metricOpts = sel => '<option value="">Manual (I’ll update it)</option>' + Object.values(cat).map(m => '<option value="' + E(m.key) + '"' + (m.key === sel ? ' selected' : '') + '>Auto: ' + E(m.label) + '</option>').join('');
   const goalHtml = '<div class="cp-box cp-goal"><div class="cp-box-h">12-Month Goals <span>(Realistic)</span>' + (overall != null ? '<b class="cp-overall">' + Math.round(overall * 100) + '% there</b>' : '') + '</div>' +
@@ -8487,7 +8502,7 @@ function cpHtml(person) {
       return '<div class="cp-grow" id="cpG_' + g.id + '">' +
         '<div class="cp-grow-top"><input class="cp-gtitle" title="' + E(g.title) + '" value="' + E(g.title) + '" onchange="cpSet(\'' + g.id + '\',\'title\',this.value)">' +
           '<span class="cp-gnums">' + (m ? '<b title="Auto: ' + E(m.label) + '">' + cpFmt(v, m.unit) + '</b>' : '<input class="cp-num sm" title="Where you are now" value="' + E(String(g.current || '')) + '" onchange="cpSet(\'' + g.id + '\',\'current\',this.value)">') +
-          ' → <input class="cp-num sm" title="12-month goal" value="' + E(String(g.target || '')) + '" onchange="cpSet(\'' + g.id + '\',\'target\',this.value)"></span>' +
+          ' → <input class="cp-num sm" title="12-month goal" value="' + E(cpPctFix(g.target, m ? m.unit : '')) + '" onchange="cpSetTarget(\'' + g.id + '\',this.value)"></span>' +
           '<button class="cp-x" title="Link to an automatic metric" onclick="document.getElementById(\'cpG_' + g.id + '\').classList.toggle(\'cfg\');cpLayoutSoon()">⚙</button>' +
           '<button class="cp-x" title="Delete goal" onclick="sosDeletePlan(\'' + g.id + '\')">×</button></div>' +
         '<div class="cp-gbar"><i style="width:' + (pct == null ? 0 : Math.round(pct * 100)) + '%"></i></div>' +
@@ -8611,7 +8626,7 @@ function cpAddGoal() {
   // No name typed but an auto metric picked → name the goal after the metric.
   const title = (t && t.value || '').trim() || (m ? m.label : '');
   if (!title) { sosToast('Type a name for the goal first (top box)'); if (t) { t.focus(); t.classList.add('cp-need'); setTimeout(() => t.classList.remove('cp-need'), 1600); } return; }
-  sosAddPlanLocal({ type: 'goal12', title: title, target: (tg && tg.value || '').trim(), metric: metric, current: '', detail: m ? String(m.value) : '', period: String(new Date().getFullYear()), status: 'active' });
+  sosAddPlanLocal({ type: 'goal12', title: title, target: cpPctFix((tg && tg.value || '').trim(), m ? m.unit : ''), metric: metric, current: '', detail: m ? String(m.value) : '', period: String(new Date().getFullYear()), status: 'active' });
 }
 function cpLinkGoal(id, key) {
   const m = cpCatalog()[key], g = _sos.plans.find(x => x.id === id);
@@ -8681,6 +8696,10 @@ function sosRefreshIfOpen() { try { if (_sos && _sos.loaded && document.getEleme
 
 function sosRender() {
   const host = document.getElementById('sp-mine'); if (!host) return;
+  // Re-rendering replaces the whole section — remember where the page is scrolled (window +
+  // any scrolling ancestors) and the plan's height, so checking a box doesn't jump the page.
+  const _scrolls = []; for (let el = host; el; el = el.parentElement) if (el.scrollTop) _scrolls.push([el, el.scrollTop]);
+  const _winY = window.scrollY, _oldWrap = document.getElementById('cpWrap'), _oldH = _oldWrap ? _oldWrap.offsetHeight : 0, _oldAbs = _oldWrap && _oldWrap.classList.contains('cp-abs');
   const g = sosTaskGroups();
   const bucketLabels = ['Overdue','Today','Upcoming','No date'];
   const openCount = _sos.tasks.filter(t=>t.status!=='done').length;
@@ -8778,6 +8797,11 @@ function sosRender() {
       '</div>' +
     '</div>' +
     cpHtml(viewing);
+  const _nw = document.getElementById('cpWrap');
+  if (_nw && _oldH) { _nw.style.minHeight = _oldH + 'px'; if (_oldAbs) _nw.classList.add('cp-abs'); }
+  if (host.offsetWidth) { try { cpLayout(); } catch (e) {} if (_nw) _nw.style.minHeight = ''; }
+  _scrolls.forEach(([el, top]) => { el.scrollTop = top; });
+  if (window.scrollY !== _winY) window.scrollTo(0, _winY);
   setTimeout(cpLayout, 0);
 }
 
@@ -15153,7 +15177,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T185109Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T185532Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
