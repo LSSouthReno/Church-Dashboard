@@ -587,17 +587,17 @@
       "metric": "Weekend Attendance (Adults)",
       "owner": "Ryan Griffin",
       "goal": "900+",
-      "current": "814",
-      "status": "grey",
-      "notes": "Current: 800 (Jan 2026)"
+      "current": "714",
+      "status": "red",
+      "notes": ""
     },
     {
       "metric": "Stepping Stones (Kids)",
       "owner": "Geoffrey Caliger",
       "goal": "200+",
-      "current": "120",
-      "status": "grey",
-      "notes": "Current: 130 (Jan 2026)"
+      "current": "105",
+      "status": "red",
+      "notes": ""
     },
     {
       "metric": "All-In Giving YTD vs. Goal",
@@ -619,40 +619,40 @@
       "metric": "Active Church Members",
       "owner": "Brad Borowski",
       "goal": "462+",
-      "current": "",
-      "status": "grey",
-      "notes": "Current: 362 (Jan 2026); goal 75% active in serving/giving/group"
+      "current": "390",
+      "status": "yellow",
+      "notes": "goal 75% active in serving/giving/group"
     },
     {
       "metric": "People Serving (Total)",
       "owner": "Brad Borowski",
       "goal": "400+",
-      "current": "",
-      "status": "grey",
-      "notes": "Current: 298 people, 60% of members (Jan 2026)"
+      "current": "363",
+      "status": "yellow",
+      "notes": ""
     },
     {
       "metric": "Community Group Members (Active)",
       "owner": "Adam Carp",
       "goal": "500+",
-      "current": "374",
-      "status": "grey",
-      "notes": "Current: 387 members (Jan 2026)"
+      "current": "385",
+      "status": "red",
+      "notes": ""
     },
     {
       "metric": "CG Attendance Rate",
       "owner": "Adam Carp",
       "goal": "75%+",
-      "current": "",
-      "status": "grey",
-      "notes": "Current: 50% (Jan 2026)"
+      "current": "56%",
+      "status": "yellow",
+      "notes": ""
     },
     {
       "metric": "Active Community Groups",
       "owner": "Adam Carp",
       "goal": "50+",
       "current": "36",
-      "status": "grey",
+      "status": "red",
       "notes": "17 new CG leaders launched in 2025"
     },
     {
@@ -660,15 +660,15 @@
       "owner": "Geoffrey Caliger",
       "goal": "150",
       "current": "120",
-      "status": "grey",
+      "status": "yellow",
       "notes": ""
     },
     {
       "metric": "Stepping Stones Vol. Fill Rate",
       "owner": "Geoffrey Caliger",
       "goal": "95%+",
-      "current": "",
-      "status": "grey",
+      "current": "80%",
+      "status": "yellow",
       "notes": "Target: 32+ trained volunteers in rotation"
     },
     {
@@ -691,8 +691,8 @@
       "metric": "Weekly Email Open Rate",
       "owner": "Geoffrey Caliger",
       "goal": "≥ 50%",
-      "current": "",
-      "status": "grey",
+      "current": "48%",
+      "status": "yellow",
       "notes": "Industry avg ~22%; 30%+ is healthy for church email"
     },
     {
@@ -716,7 +716,7 @@
       "owner": "Ryan Griffin",
       "goal": "80+",
       "current": "53",
-      "status": "grey",
+      "status": "red",
       "notes": "Goal = 10% of avg attendance; 75 baptisms in 2025"
     },
     {
@@ -944,7 +944,7 @@
     "member": 0,
     "group": 0,
     "leader": 0,
-    "missionary": 0,
+    "missionary": 2,
     "asOf": "2026-09-24"
   },
   "calendar": {
@@ -7406,6 +7406,68 @@
       }
     ],
     "asOf": "2026-09-24",
-    "syncedAt": "2026-09-24T21:40:39.747Z"
-  }
+    "syncedAt": "2026-09-24T22:00:23.557Z"
+  },
+  "staff_profiles": [
+    {
+      "bambooId": "118",
+      "name": "Rachel Bartosz",
+      "photoUrl": null,
+      "jobTitle": "Administrative Director"
+    },
+    {
+      "bambooId": "121",
+      "name": "Bradley Borowski",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkwMjg2MzU5fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTI4NzgzNjl9fX1dfQ__&Signature=W4q4~w3lhSfDfSkAoSht0TLcw4n-hHfPfDu2IoTZK~RVb81aYdYTgpFf4l3B7r68DL283ZKDfmCeFpAjiXlP0HPO8RHRB5pGBctRoERHy8WSbI~HqWv~3oW3uvvsqRugPAkoc8FurdTJcKZ9GwIY~GkSFLvjJtVJMNfBOaXC8y7WUEhgraXE8nzX1Uq2GGK6eCBYep~WyO5jDX2X975ZFYtlaWEHnpTFVV1QqOE2To3b0MDWlpaoSWhut0qApUV89y7~z8hm9B9MYXAv8qTOyFIH248v5fhEV~fZvteUyXPe2bphQBgVkcjfqJSuMs5dFvEFLHRrdeRa823tclJZ~w__&Key-Pair-Id=K3R4N4FU6US991",
+      "jobTitle": "Executive Pastor"
+    },
+    {
+      "bambooId": "182",
+      "name": "Geoffrey Caliger",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkwMjg2MzU5fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTI4NzgzNjl9fX1dfQ__&Signature=VDdQ1hgl-Rn3NrWbgC94O9gVbXcDuCVmHqD-iHJo--FRo0RarK9wK6VEg-PGsJ4JEvQVE~2GHG~Ws075OvoPNsqvdALD8APgrl8kdtmaiatluRz9Fd9lWQGhr3TTx1tgqz17mQl4tLJplsPMwYuggFJ6QPsk6B1ZNLaJizwHeTdOHmIj0gKSk65VXUeEaygRyxbvlOIIsgLd5ii93rsNtunsrnGtVUsnoNTDEdzpmQghH~5dpRQYVFqZ9UspCAzBb9eKocvEjZ88wPd3odMOmNRLHexrM2dod7bfC5AEXmnLVQspcHO1DIhJrXQ7lslmfzUfJgULqPhep~HshKJimA__&Key-Pair-Id=K3R4N4FU6US991",
+      "jobTitle": "Stepping Stones Staffing Director"
+    },
+    {
+      "bambooId": "123",
+      "name": "Adam Carp",
+      "photoUrl": null,
+      "jobTitle": "Discipleship Pastor"
+    },
+    {
+      "bambooId": "179",
+      "name": "John Conelea",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkwMjg2MzU5fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTI4NzgzNjl9fX1dfQ__&Signature=SbMl023~M~vCv6bMUY3pLpSqqHtTgZRBpNRhR~A-MUbqoxzwPe9ej4hk2yCQ6enyVYgnZOeKlyTKzEI4OXg5ZyfYdknGs26hE~ExMKPZfF~0Bb-C~p~GL~CKLE-8d4vgXFIurQu3Neb7dhKbA5WauGimkNr8nGGMgf3qeJzrZ3ViNDJyVekW9sc5ikUTjV5pV7LOrYU9T6cAoTBFClTAqQ4V1RmPF~IIKSrwMKgke3gXLaBYh1qPXjr14prVEkP5z1KF65Fgww8uxRKS0I1BCGyrAGHHi8Fr6s0Ww761ownDuyp16hO6kg~wDitifkD4~fJw4vruOS5YmwREKES5Jw__&Key-Pair-Id=K3R4N4FU6US991",
+      "jobTitle": "Creative Director"
+    },
+    {
+      "bambooId": "165",
+      "name": "Gordon Fava",
+      "photoUrl": null,
+      "jobTitle": "Worship Director"
+    },
+    {
+      "bambooId": "173",
+      "name": "Deana Griffin",
+      "photoUrl": null,
+      "jobTitle": "Family Ministry Director"
+    },
+    {
+      "bambooId": "176",
+      "name": "Isaac Griffin",
+      "photoUrl": null,
+      "jobTitle": "Service & Students Coordinator"
+    },
+    {
+      "bambooId": "133",
+      "name": "Ryan Griffin",
+      "photoUrl": null,
+      "jobTitle": "Lead Pastor"
+    },
+    {
+      "bambooId": "177",
+      "name": "Katie Thompson",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkwMjg2MzU5fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTI4NzgzNjl9fX1dfQ__&Signature=e~aIWUiXxCNOkaMg2w2wY11cAEAxM1-aYBYT2mBRR~yT0bOdjcrLPDWTi~8CnNk8YRpmFZ0MicEgPNIt-4l63MVr2oKI2y-x9czEvcjPceKuLsB1ZCePR~ujJmN9GAAZEWWh~NyMhwH3B4rbzu7u12ZxruFkP4c3~EtqIl6ciaUxxvU6y1Ttqc6mvfx00GrtIpqLUp0uWkTMT46KKh3FAjJcqSFRV2FuCWLvU3bhErrd-UcEkrSrKX9saj8AsiHPupCThO63n2IRIi6Ipg5aHbHsqXU2QIq0SpIH11yOFwfxr4kuSaCx9BYzzVpaFHfaDXpS3RB-yAHZojzVrzDWxw__&Key-Pair-Id=K3R4N4FU6US991",
+      "jobTitle": "Student Ministry Director"
+    }
+  ]
 }
