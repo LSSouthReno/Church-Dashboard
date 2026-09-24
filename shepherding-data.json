@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T07:50:13.170Z",
+  "generatedAt": "2026-09-24T08:50:37.790Z",
   "asOf": "2026-09-24",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,8 +20,8 @@
   "congregation": {
     "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 216,
-    "serving": 232,
+    "inGroup": 215,
+    "serving": 231,
     "leading": 77,
     "givingRegular": 0,
     "recurring": 0,
@@ -30,8 +30,8 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 393,
-    "notInGroup": 177,
-    "notServing": 161,
+    "notInGroup": 178,
+    "notServing": 162,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -48,8 +48,8 @@
       "unknown": 393
     },
     "pct": {
-      "inGroup": 0.549618320610687,
-      "serving": 0.5903307888040712,
+      "inGroup": 0.5470737913486005,
+      "serving": 0.5877862595419847,
       "leading": 0.19592875318066158,
       "givingRegular": 0,
       "recurring": 0,
@@ -64,7 +64,7 @@
       "list": "Shepherding - Adam",
       "unassigned": false,
       "summary": {
-        "totalPeople": 65,
+        "totalPeople": 66,
         "avgScore": 0,
         "inGroup": 44,
         "serving": 54,
@@ -75,9 +75,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 65,
-        "notInGroup": 21,
-        "notServing": 11,
+        "notBaptized": 66,
+        "notInGroup": 22,
+        "notServing": 12,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -91,12 +91,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 65
+          "unknown": 66
         },
         "pct": {
-          "inGroup": 0.676923076923077,
-          "serving": 0.8307692307692308,
-          "leading": 0.3384615384615385,
+          "inGroup": 0.6666666666666666,
+          "serving": 0.8181818181818182,
+          "leading": 0.3333333333333333,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -221,6 +221,43 @@
           "name": "Molly Bell",
           "first": "Molly",
           "last": "Bell",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tyler Colton",
+          "first": "Tyler",
+          "last": "Colton",
           "email": "",
           "phone": "",
           "member": false,
@@ -8148,10 +8185,10 @@
       "list": "Shepherding - Keith",
       "unassigned": false,
       "summary": {
-        "totalPeople": 59,
+        "totalPeople": 58,
         "avgScore": 0,
-        "inGroup": 22,
-        "serving": 28,
+        "inGroup": 21,
+        "serving": 27,
         "leading": 9,
         "givingRegular": 0,
         "recurring": 0,
@@ -8159,7 +8196,7 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 59,
+        "notBaptized": 58,
         "notInGroup": 37,
         "notServing": 31,
         "notGiving": 0,
@@ -8175,12 +8212,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 59
+          "unknown": 58
         },
         "pct": {
-          "inGroup": 0.3728813559322034,
-          "serving": 0.4745762711864407,
-          "leading": 0.15254237288135594,
+          "inGroup": 0.3620689655172414,
+          "serving": 0.46551724137931033,
+          "leading": 0.15517241379310345,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -10003,57 +10040,6 @@
           "flags": [
             "Not in a group"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Bill Salcido",
-          "first": "Bill",
-          "last": "Salcido",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Flores Community Group",
-              "role": "member",
-              "joinedAt": "2026-07-15T01:01:28Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Coffee Team",
-              "role": "member",
-              "joinedAt": "2024-08-16T14:18:22Z"
-            },
-            {
-              "name": "8am Enrichment Team (Early Birds)",
-              "role": "member",
-              "joinedAt": "2025-07-07T23:36:46Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -18162,8 +18148,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 62,
-    "adult": 64,
+    "adult": 63,
     "child": 156,
-    "infant": 102
+    "infant": 103
   }
 }
