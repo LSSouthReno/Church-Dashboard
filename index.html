@@ -13057,8 +13057,10 @@ const ST_CACHE_KEY = 'lssr_stories_cache';
 const ST_STATUS = { new: 'New', reviewed: 'Reviewed', shared: 'Shared', archived: 'Archived' };
 let _st = { stories: null, lastSync: '', aiOn: false, err: '', loading: null, syncing: false, filter: 'new', kind: '', q: '', open: {}, edit: '', copied: '', photos: {} };
 
-function stGet(action) {
-  return fetch(STAFF_OS_URL + '?action=' + action + '&k=' + STAFF_HASH + '&_=' + Date.now()).then(r => r.json());
+// Apps Script occasionally answers a cold request with an HTML page instead of JSON — retry once.
+function stGet(action, retried) {
+  return fetch(STAFF_OS_URL + '?action=' + action + '&k=' + STAFF_HASH + '&_=' + Date.now()).then(r => r.json())
+    .catch(e => { if (retried) throw e; return new Promise(r => setTimeout(r, 1500)).then(() => stGet(action, true)); });
 }
 function stApply(list) { _st.stories = list.stories || []; _st.lastSync = list.lastSync || ''; _st.aiOn = !!list.aiOn; }
 function stLoad() {
@@ -16243,7 +16245,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T224023Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T225337Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
