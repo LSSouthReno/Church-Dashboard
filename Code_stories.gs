@@ -1,6 +1,6 @@
 /**
- * Stories — "Share a Community Group Story" PCO People form → Staff dashboard.
- * ==========================================================================
+ * Stories — "Share Your Story" PCO People form → Staff dashboard.
+ * ================================================================
  * Pulls submissions of PCO form 1324853 into a private "Stories" tab of the bound
  * spreadsheet (never into the public dashboard JSON), optionally tidies each one into
  * a story card with Claude (title, summary, lightly edited story, pull quote, tags,
@@ -8,6 +8,8 @@
  *   • Stories tab (sp-stories)            → GET  story_list
  *   • Staff Sync "New stories" block       → same data, filtered to since last Monday
  *   • status / notes / edits from staff    → POST story_update
+ *   • the submitted photo, on demand       → GET  story_photo (fresh from PCO each time,
+ *                                             since PCO file links expire)
  *
  * Reads/writes require k = the staff password hash (STAFF_HASH in index.html).
  * Sync runs on a 15-minute trigger (storySyncTick, self-installed on the first sync)
@@ -26,10 +28,11 @@ var STORY_ = {
   MODEL: 'claude-opus-5',
   MAX_PER_RUN: 10
 };
-var STORY_GET_ACTIONS_  = ['story_list', 'story_sync', 'story_inspect'];
+var STORY_GET_ACTIONS_  = ['story_list', 'story_sync', 'story_inspect', 'story_photo'];
 var STORY_POST_ACTIONS_ = ['story_update'];
 var STORY_HDRS_ = ['id', 'submittedAt', 'person', 'personId', 'email', 'cgLeader', 'doNotShare', 'title', 'summary',
-                   'story', 'pullQuote', 'tags', 'followUp', 'raw', 'status', 'notes', 'aiFormatted', 'updatedAt', 'updatedBy'];
+                   'story', 'pullQuote', 'tags', 'followUp', 'raw', 'status', 'notes', 'aiFormatted', 'updatedAt', 'updatedBy',
+                   'about', 'team', 'hasPhoto', 'permission'];
 var STORY_EDITABLE_ = ['status', 'title', 'summary', 'story', 'pullQuote', 'notes', 'followUp'];
 var STORY_STATUSES_ = ['new', 'reviewed', 'shared', 'archived'];
 
@@ -39,6 +42,7 @@ function storyDoGet_(e) {
   if (p.action === 'story_list') return eosWaJson_(storyList_());
   if (p.action === 'story_sync') { var r = syncStories_(); r.list = storyList_(); return eosWaJson_(r); }
   if (p.action === 'story_inspect') return eosWaJson_(storyInspect_());
+  if (p.action === 'story_photo') return eosWaJson_(storyPhoto_(String(p.id || '')));
   return eosWaJson_({ ok: false, error: 'Unknown story action' });
 }
 
@@ -68,6 +72,9 @@ function storySheet_() {
     sh.appendRow(STORY_HDRS_);
     sh.setFrozenRows(1);
     sh.getRange(1, 1, sh.getMaxRows(), STORY_HDRS_.length).setNumberFormat('@');
+  } else if (sh.getLastColumn() < STORY_HDRS_.length) {     // columns added after the tab was created
+    sh.getRange(1, 1, 1, STORY_HDRS_.length).setValues([STORY_HDRS_]);
+    sh.getRange(1, 1, sh.getMaxRows(), STORY_HDRS_.length).setNumberFormat('@');
   }
   return sh;
 }
@@ -79,7 +86,9 @@ function storyRows_() {
     STORY_HDRS_.forEach(function (h, i) { var v = data[r][i]; o[h] = v instanceof Date ? v.toISOString() : String(v); });
     if (!o.id) continue;
     try { o.tags = JSON.parse(o.tags || '[]'); } catch (x) { o.tags = []; }
+    try { o.about = JSON.parse(o.about || '[]'); } catch (x) { o.about = []; }
     o.doNotShare = o.doNotShare === 'yes';
+    o.hasPhoto = o.hasPhoto === 'yes';
     out.push(o);
   }
   return out;
@@ -120,15 +129,29 @@ function storyUpdate_(body) {
 function storyFormFields_() {
   var res = lfsGetAll_('/people/v2/forms/' + STORY_.FORM_ID + '/fields?per_page=100');
   if (!res.ok) throw new Error('form fields: ' + res.code + ' ' + res.error);
-  var map = { leader: '', story: '', noShare: '', all: [] };
+  var map = { story: '', leader: '', team: '', about: '', photo: '', permission: '', noShare: '', all: [] };
   (res.data || []).forEach(function (f) {
     var a = f.attributes || {}, label = String(a.label || ''), type = String(a.field_type || '');
     map.all.push({ id: f.id, label: label, type: type });
-    if (!map.noShare && /(not|n't)\s+want|do not share|don.t share|keep (it )?private/i.test(label)) map.noShare = f.id;
-    else if (!map.leader && /leader/i.test(label)) map.leader = f.id;
-    else if (!map.story && /story/i.test(label) && !/share/i.test(label)) map.story = f.id;
+    var take = function (k) { if (!map[k]) { map[k] = f.id; return true; } return false; };
+    if (/permission/i.test(label)) take('permission');
+    else if (/(not|n't)\s+want|do not share|don.t share/i.test(label)) take('noShare');
+    else if (type === 'file' || /photo|picture|image/i.test(label)) take('photo');
+    else if (/story about|kind of story|type of story/i.test(label)) take('about');
+    else if (/leader/i.test(label)) take('leader');
+    else if (/team/i.test(label)) take('team');
+    else if (/story/i.test(label) && !/share/i.test(label)) take('story');
   });
   return map;
+}
+
+// Checkbox answers come back as an array, a JSON string or a comma list depending on the field.
+function storyList_Of_(v) {
+  if (v == null || v === '') return [];
+  if (Array.isArray(v)) return v.map(String).filter(Boolean);
+  var s = String(v).trim();
+  if (/^\[/.test(s)) { try { return JSON.parse(s).map(String).filter(Boolean); } catch (x) {} }
+  return s.split(/\s*[,\n]\s*/).filter(Boolean);
 }
 
 function syncStories_() {
@@ -165,13 +188,20 @@ function syncStories_() {
         by[fid] = (a.display_value != null && a.display_value !== '') ? a.display_value : a.value;
       });
       var pid = ((((s.relationships || {}).person || {}).data) || {}).id || '';
+      var permission = String(by[fields.permission] || '').trim();
       var noShare = String(by[fields.noShare] || '').trim();
+      var privateOnly = permission ? /^no\b|no thank|just (be )?for staff|staff and elders to see|keep (it )?private/i.test(permission)
+                                   : (noShare && !/^(false|no|0)$/i.test(noShare));
       var row = {
         id: 'fs_' + s.id,
         submittedAt: (s.attributes || {}).created_at || '',
         person: people[pid] || '', personId: pid, email: storyEmailOf_(vals.body.data),
         cgLeader: String(by[fields.leader] || '').trim(),
-        doNotShare: (noShare && !/^(false|no|0)$/i.test(noShare)) ? 'yes' : 'no',
+        team: String(by[fields.team] || '').trim(),
+        about: JSON.stringify(storyList_Of_(by[fields.about])),
+        hasPhoto: (fields.photo && by[fields.photo]) ? 'yes' : 'no',
+        permission: permission,
+        doNotShare: privateOnly ? 'yes' : 'no',
         raw: String(by[fields.story] || '').trim(), status: 'new', notes: '',
         updatedAt: new Date().toISOString(), updatedBy: 'pco'
       };
@@ -199,6 +229,41 @@ function storyEmailOf_(values) {
   return hit;
 }
 
+/**
+ * The submitted photo for one story, as a data: URL. PCO file links are short-lived, so
+ * the link is re-read from the submission each time rather than stored.
+ */
+function storyPhoto_(id) {
+  var subId = String(id).replace(/^fs_/, '');
+  if (!/^\d+$/.test(subId)) return { ok: false, error: 'bad id' };
+  var fields = storyFormFields_();
+  if (!fields.photo) return { ok: false, error: 'no photo field' };
+  var vals = lfsFetchJson_('/people/v2/forms/' + STORY_.FORM_ID + '/form_submissions/' + subId + '/form_submission_values?per_page=100');
+  if (!vals.ok) return { ok: false, error: 'PCO ' + vals.code };
+  var url = '', name = '';
+  (vals.body.data || []).forEach(function (v) {
+    if (((((v.relationships || {}).form_field || {}).data) || {}).id !== fields.photo) return;
+    var a = v.attributes || {};
+    [a.value, a.display_value, a.file_url, a.url, JSON.stringify(a.attachments || a)].some(function (x) {
+      var m = String(x || '').match(/https?:\/\/[^\s"'<>]+/);
+      if (m) { url = m[0]; return true; }
+      return false;
+    });
+    name = String(a.display_value || a.value || '').replace(/^.*\//, '').substring(0, 120);
+  });
+  if (!url) return { ok: false, error: 'no photo', name: name };
+  var r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: true });
+  if (r.getResponseCode() === 401 || r.getResponseCode() === 403) {
+    if (/planningcenteronline\.com/i.test(url)) r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: true, headers: pcoHeaders_() });
+  }
+  if (r.getResponseCode() !== 200) return { ok: false, error: 'photo HTTP ' + r.getResponseCode(), name: name };
+  var blob = r.getBlob(), bytes = blob.getBytes();
+  var ct = String(r.getHeaders()['Content-Type'] || blob.getContentType() || '').split(';')[0];
+  if (!/^image\//.test(ct)) return { ok: false, error: 'not an image (' + ct + ')', name: name };
+  if (bytes.length > 8 * 1024 * 1024) return { ok: false, error: 'photo too large', name: name };
+  return { ok: true, name: name, dataUrl: 'data:' + ct + ';base64,' + Utilities.base64Encode(bytes) };
+}
+
 /** Read-only: resolved form fields + the latest submission's values, for checking the mapping. */
 function storyInspect_() {
   var fields = storyFormFields_();
@@ -209,7 +274,7 @@ function storyInspect_() {
     if (v.ok) sample = (v.body.data || []).map(function (x) {
       var a = x.attributes || {};
       return { field: ((((x.relationships || {}).form_field || {}).data) || {}).id,
-               value: String(a.display_value != null ? a.display_value : a.value).substring(0, 60) };
+               value: String(a.display_value != null ? a.display_value : a.value).substring(0, 60), attrKeys: Object.keys(a) };
     });
   }
   return { ok: true, fields: fields, submissions: listed.ok ? (listed.body.meta || {}).total_count : listed.error, sample: sample,
@@ -234,8 +299,9 @@ var STORY_SCHEMA_ = {
 };
 
 var STORY_SYSTEM_ =
-  'You help the staff of Living Stones Church South Reno (Reno, NV) collect stories of what God is doing through their ' +
-  'Community Groups (small groups that meet in homes). Members submit these through a "Share a Community Group Story" form. ' +
+  'You help the staff of Living Stones Church South Reno (Reno, NV) collect stories of what God is doing in their church — ' +
+  'through Community Groups (small groups that meet in homes), volunteering on a serve team, people\'s spiritual journeys, ' +
+  'and answered prayer. People submit these through a "Share Your Story" form. ' +
   'Turn each submission into a story card the staff can read in a few seconds and later share with the church.\n\n' +
   'Fields:\n' +
   '- title: a warm headline of 3–8 words, no quotation marks, no emoji.\n' +
@@ -260,7 +326,9 @@ function storyFormat_(row) {
 }
 
 function storyClaude_(key, row) {
-  var user = 'Submitted by: ' + (row.person || 'unknown') + '\nCommunity Group leader: ' + (row.cgLeader || 'unknown') +
+  var user = 'Submitted by: ' + (row.person || 'unknown') +
+             '\nThis is a story about: ' + (storyList_Of_(row.about).join(', ') || 'unspecified') +
+             (row.cgLeader ? '\nCommunity Group leader: ' + row.cgLeader : '') + (row.team ? '\nServe team: ' + row.team : '') +
              '\n\n<submission>\n' + String(row.raw).substring(0, 30000) + '\n</submission>';
   var resp = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,

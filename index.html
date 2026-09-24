@@ -1089,7 +1089,7 @@
   @media (max-width: 1180px) { .sos-grid.sos-grid3 { grid-template-columns: 1fr 1fr; } .sos-grid.sos-grid3 > .sos-col:first-child { grid-column: 1 / -1; } }
   @media (max-width: 900px) { .sos-grid, .sos-grid.sos-grid3 { grid-template-columns: 1fr; } }
   .sos-col { display: flex; flex-direction: column; gap: 22px; }
-  /* ── Stories (Share a Community Group Story form → Staff area) ── */
+  /* ── Stories (Share Your Story form → Staff area) ── */
   .st-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
   .st-chip { border: 1px solid var(--sp-border); background: #fff; color: var(--sp-ink); border-radius: 18px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
   .st-chip:hover { border-color: var(--sp-gold); }
@@ -1120,6 +1120,8 @@
   .st-story { font-size: 14.5px; line-height: 1.7; color: var(--sp-ink); }
   .st-story p { margin: 0 0 10px; }
   .st-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-muted); margin: 14px 0 5px; }
+  .st-photo { margin-bottom: 14px; font-size: 13px; color: var(--sp-muted); }
+  .st-photo img { display: block; max-width: 100%; max-height: 420px; border-radius: 8px; border: 1px solid var(--sp-border); }
   .st-follow { font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); border-radius: 6px; padding: 8px 12px; }
   .st-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .st-tag { font-size: 11px; color: var(--sp-muted); border: 1px solid var(--sp-border); border-radius: 10px; padding: 1px 8px; }
@@ -4061,7 +4063,7 @@
         <!-- Pathway Tracker (rendered by staffRenderPathway) -->
         <div class="sp-section" id="sp-pathway"></div>
 
-        <!-- Stories — Share a Community Group Story form (rendered by stRender) -->
+        <!-- Stories — Share Your Story form (rendered by stRender) -->
         <div class="sp-section" id="sp-stories"></div>
 
         <!-- Announcement Card generator (rendered by ogaInit) -->
@@ -13045,7 +13047,7 @@ function staffRenderAllGroups_(data) {
 // If the JSON doesn't include these fields, the hardcoded HTML fallback stays.
 
 // ════════════════════════════════════════════════════════════════════════════
-// STORIES — "Share a Community Group Story" PCO form → Staff "Stories" tab + the
+// STORIES — "Share Your Story" PCO form → Staff "Stories" tab + the
 // "New stories" block on Staff Sync. Backend: Code_stories.gs on the STAFF_OS
 // deployment (story_list / story_sync / story_update). Story text lives only in a
 // private sheet (never in the public JSON); requests carry the staff key.
@@ -13053,7 +13055,7 @@ function staffRenderAllGroups_(data) {
 const ST_FORM_URL  = 'https://lssr.churchcenter.com/people/forms/1324853';
 const ST_CACHE_KEY = 'lssr_stories_cache';
 const ST_STATUS = { new: 'New', reviewed: 'Reviewed', shared: 'Shared', archived: 'Archived' };
-let _st = { stories: null, lastSync: '', aiOn: false, err: '', loading: null, syncing: false, filter: 'new', q: '', open: {}, edit: '', copied: '' };
+let _st = { stories: null, lastSync: '', aiOn: false, err: '', loading: null, syncing: false, filter: 'new', kind: '', q: '', open: {}, edit: '', copied: '', photos: {} };
 
 function stGet(action) {
   return fetch(STAFF_OS_URL + '?action=' + action + '&k=' + STAFF_HASH + '&_=' + Date.now()).then(r => r.json());
@@ -13122,7 +13124,12 @@ function stParas(t) {
   return String(t || '').split(/\n{2,}/).filter(p => p.trim()).map(p => '<p>' + escapeHtml(p.trim()).replace(/\n/g, '<br>') + '</p>').join('');
 }
 function stWho(s) {
-  return [s.person || 'Unknown', s.cgLeader ? 'CG leader: ' + s.cgLeader : ''].filter(Boolean).join(' · ');
+  return [s.person || 'Unknown', s.cgLeader ? 'CG leader: ' + s.cgLeader : '', s.team ? 'Team: ' + s.team : ''].filter(Boolean).join(' · ');
+}
+// "This is a story about" answers → short labels for pills and the filter.
+function stKind(k) {
+  return String(k).replace(/^A Community Group$/i, 'Community Group').replace(/^Volunteering on a Team$/i, 'Serving')
+    .replace(/^My Spiritual Journey.*$/i, 'Spiritual Journey').replace(/^A Prayer God Has Answered$/i, 'Answered Prayer');
 }
 
 function stRender() {
@@ -13130,22 +13137,26 @@ function stRender() {
   const E = escapeHtml, all = _st.stories || [], q = _st.q.trim().toLowerCase();
   const counts = { all: all.length };
   all.forEach(s => counts[s.status] = (counts[s.status] || 0) + 1);
+  const kinds = [...new Set(all.flatMap(s => (s.about || []).map(stKind)))].sort();
   const list = all.filter(s => (_st.filter === 'all' || s.status === _st.filter) &&
-    (!q || [s.title, s.summary, s.story, s.person, s.cgLeader, (s.tags || []).join(' ')].join(' ').toLowerCase().includes(q)));
+    (!_st.kind || (s.about || []).map(stKind).includes(_st.kind)) &&
+    (!q || [s.title, s.summary, s.story, s.person, s.cgLeader, s.team, (s.about || []).join(' '), (s.tags || []).join(' ')].join(' ').toLowerCase().includes(q)));
   const chip = (k, label) => '<button class="st-chip' + (_st.filter === k ? ' on' : '') + '" onclick="stSetFilter(\'' + k + '\')">' + label + '<span class="n">' + (counts[k] || 0) + '</span></button>';
 
   let body;
   if (!_st.stories && (_st.loading || !_st.err)) body = '<div class="st-empty">Loading stories…</div>';
   else if (!_st.stories) body = '<div class="st-empty">Couldn’t load stories (' + E(_st.err) + '). <a href="#" onclick="stLoad();return false">Try again</a></div>';
-  else if (!all.length) body = '<div class="st-empty">No stories yet. When someone fills out the <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share a Community Group Story</a> form, it shows up here within about 15 minutes.</div>';
-  else if (!list.length) body = '<div class="st-empty">' + (q ? 'No stories match “' + E(_st.q) + '”.' : 'Nothing in ' + E(ST_STATUS[_st.filter] || _st.filter) + '.') + '</div>';
+  else if (!all.length) body = '<div class="st-empty">No stories yet. When someone fills out the <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share Your Story</a> form, it shows up here within about 15 minutes.</div>';
+  else if (!list.length) body = '<div class="st-empty">' + (q ? 'No stories match “' + E(_st.q) + '”.' : 'Nothing in ' + E(ST_STATUS[_st.filter] || _st.filter) + (_st.kind ? ' about ' + E(_st.kind) : '') + '.') + '</div>';
   else body = '<div class="st-list">' + list.map(stCardHtml).join('') + '</div>';
 
   el.innerHTML =
-    '<div class="sp-section-header"><div class="sp-eyebrow">Community Groups</div><h2>Stories</h2>' +
-    '<p>Stories from the <a class="st-link" href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share a Community Group Story</a> form show up here automatically. ' +
+    '<div class="sp-section-header"><div class="sp-eyebrow">Share Your Story</div><h2>Stories</h2>' +
+    '<p>Stories from the <a class="st-link" href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share Your Story</a> form show up here automatically. ' +
     'Read them, add notes, and mark the ones you’ve shared.</p></div>' +
     '<div class="st-bar">' + chip('new', 'New') + chip('reviewed', 'Reviewed') + chip('shared', 'Shared') + chip('archived', 'Archived') + chip('all', 'All') +
+      (kinds.length ? '<select class="st-btn" onchange="stSetKind(this.value)" aria-label="Kind of story"><option value="">All kinds</option>' +
+        kinds.map(k => '<option' + (k === _st.kind ? ' selected' : '') + '>' + E(k) + '</option>').join('') + '</select>' : '') +
       '<input class="st-search" id="stSearch" type="search" placeholder="Search stories, names, leaders…" value="' + E(_st.q) + '" oninput="stSearch(this.value)">' +
       '<button class="st-btn" onclick="stCopyLink(this)">Copy form link</button>' +
       '<button class="st-btn" onclick="stSync()"' + (_st.syncing ? ' disabled' : '') + '>' + (_st.syncing ? 'Checking…' : 'Check for new') + '</button></div>' +
@@ -13156,7 +13167,9 @@ function stRender() {
 function stCardHtml(s) {
   const E = escapeHtml, id = E(s.id), open = !!_st.open[s.id], editing = _st.edit === s.id;
   const pills = '<span class="st-pill ' + E(s.status) + '">' + E(ST_STATUS[s.status] || s.status) + '</span>' +
-    (s.doNotShare ? '<span class="st-pill private">Staff only — do not share</span>' : '');
+    (s.about || []).map(k => '<span class="st-pill">' + E(stKind(k)) + '</span>').join('') +
+    (s.doNotShare ? '<span class="st-pill private">Staff &amp; elders only — do not share</span>' : '') +
+    (s.hasPhoto ? '<span>Photo</span>' : '');
   let h = '<div class="st-card s-' + E(s.status) + '" id="st-' + id + '">' +
     '<div class="st-head" onclick="stToggle(\'' + id + '\')">' +
       '<div class="st-top">' + pills + '<span>' + E(stDate(s.submittedAt, true)) + '</span></div>' +
@@ -13174,6 +13187,12 @@ function stCardHtml(s) {
          '<div class="st-lbl">Story</div><textarea class="st-ta" id="stE_story" rows="12">' + E(s.story) + '</textarea>' +
          '<div class="st-actions"><button class="st-btn pri" onclick="stSaveEdit(\'' + id + '\')">Save</button><button class="st-btn" onclick="stEdit(\'\')">Cancel</button></div>';
     return h + '</div></div>';
+  }
+  if (s.hasPhoto) {
+    const ph = _st.photos[s.id];
+    h += '<div class="st-photo">' + (ph && ph.dataUrl ? '<a href="' + ph.dataUrl + '" download="' + E(ph.name || 'story-photo') + '" title="Download photo"><img src="' + ph.dataUrl + '" alt="Photo submitted with this story"></a>'
+      : ph && ph.error ? '<span>Couldn’t load the photo (' + E(ph.error) + ').</span>' : '<span>Loading photo…</span>') + '</div>';
+    if (!ph) stPhoto(s.id);
   }
   if (s.pullQuote) h += '<blockquote class="st-quote">“' + E(s.pullQuote) + '”</blockquote>';
   h += '<div class="st-story">' + stParas(s.story || s.raw) + '</div>';
@@ -13194,6 +13213,15 @@ function stCardHtml(s) {
 }
 
 function stSetFilter(k) { _st.filter = k; stRender(); }
+function stSetKind(k) { _st.kind = k; stRender(); }
+// Photos are fetched fresh from PCO per session (its file links expire), once per story.
+function stPhoto(id) {
+  _st.photos[id] = { loading: true };
+  stGet('story_photo&id=' + encodeURIComponent(id))
+    .then(res => { _st.photos[id] = res && res.ok ? res : { error: (res && res.error) || 'unavailable' }; })
+    .catch(e => { _st.photos[id] = { error: String(e.message || e) }; })
+    .finally(() => { if (_spCurSection === 'sp-stories') stRender(); });
+}
 function stSearch(v) {
   _st.q = v; stRender();
   const i = document.getElementById('stSearch'); if (i) { i.focus(); i.setSelectionRange(v.length, v.length); }
@@ -13241,10 +13269,10 @@ function stRenderSync() {
   const since = start.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
   let body;
   if (!_st.stories) body = '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">' + (_st.err ? 'Couldn’t load stories right now.' : 'Checking for new stories…') + '</div>';
-  else if (!items.length) body = '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No new Community Group stories since ' + E(since) + '. Groups can share at <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener" style="color:var(--sp-gold)">the story form</a>.</div>';
+  else if (!items.length) body = '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No new stories since ' + E(since) + '. Anyone can share at <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener" style="color:var(--sp-gold)">the Share Your Story form</a>.</div>';
   else body = items.map(s =>
     '<button class="st-sync-row" onclick="stOpenFromSync(\'' + E(s.id) + '\')">' +
-      '<div class="t">' + E(s.title || 'Untitled story') + (s.doNotShare ? ' <span class="st-pill private">Staff only</span>' : '') + '</div>' +
+      '<div class="t">' + E(s.title || 'Untitled story') + (s.about || []).map(k => ' <span class="st-pill">' + E(stKind(k)) + '</span>').join('') + (s.doNotShare ? ' <span class="st-pill private">Staff only</span>' : '') + '</div>' +
       '<div class="m">' + E(stWho(s)) + ' · ' + E(stDate(s.submittedAt)) + '</div>' +
       (s.summary ? '<div class="s">' + E(s.summary) + '</div>' : '') +
     '</button>').join('');
@@ -16215,7 +16243,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T223015Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T224023Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
