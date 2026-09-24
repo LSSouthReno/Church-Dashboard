@@ -1628,6 +1628,19 @@
   }
   .sp-nav-tab:hover { color: var(--sp-parchment); }
   .sp-nav-tab.sp-active { color: var(--sp-gold); border-bottom-color: var(--sp-gold); }
+  .sp-nav-group { display: inline-flex; align-items: center; gap: 7px; }
+  .sp-nav-group.sp-open { color: var(--sp-parchment); background: rgba(255,255,255,.05); }
+  .sp-nav-cur:not(:empty) { color: var(--sp-parchment); opacity: .75; }
+  .sp-nav-cur:not(:empty)::before { content: '·'; margin-right: 7px; color: var(--sp-muted); }
+  .sp-nav-caret { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+  .sp-nav-group.sp-open .sp-nav-caret { transform: translateY(1px) rotate(-135deg); }
+  .sp-nav-tab.sp-nav-tool { margin-left: auto; color: var(--sp-gold); background: rgba(201,150,58,.12); border-left: 1px solid rgba(201,150,58,.28); border-bottom-color: transparent; }
+  .sp-nav-tab.sp-nav-tool:hover { background: rgba(201,150,58,.2); color: #e8c888; }
+  .sp-nav-tab.sp-nav-tool.sp-active { background: var(--sp-gold); color: var(--sp-ink); border-bottom-color: var(--sp-gold); }
+  .sp-nav-menu { position: fixed; z-index: 100001; background: var(--sp-ink, #1a1510); border: 1px solid rgba(255,255,255,.1); border-top: 2px solid var(--sp-gold, #c9963a); border-radius: 0 0 10px 10px; box-shadow: 0 14px 34px rgba(0,0,0,.35); padding: 6px 0; }
+  .sp-nav-mi { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-muted, #8a7e6e); padding: 12px 20px; cursor: pointer; white-space: nowrap; border-left: 2px solid transparent; outline: none; }
+  .sp-nav-mi:hover, .sp-nav-mi:focus { color: var(--sp-parchment, #f2ecd8); background: rgba(255,255,255,.05); }
+  .sp-nav-mi.on { color: var(--sp-gold, #c9963a); border-left-color: var(--sp-gold, #c9963a); }
   .sp-main-wrap { flex: 1; overflow-y: auto; background: var(--sp-parchment); }
   .sp-main { padding: 40px 48px; max-width: 1200px; margin: 0 auto; }
   @media (max-width: 768px) { .sp-main { padding: 24px 16px; } .sp-nav-tabs { padding: 0 12px; } }
@@ -3446,22 +3459,7 @@
   </div>
   <!-- Unlocked content -->
   <div id="staffModContent" class="staff-panel" style="display:none">
-    <nav class="sp-nav-tabs">
-      <div class="sp-nav-tab sp-active" onclick="staffShowSection('sp-mine',this);sosInit()">My Snapshot</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-snapshot',this)">Team Snapshot</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-vto',this)">V/TO</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-vot',this)">Culture</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-acc-chart',this)">Acc Chart</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-scorecard',this)">Scorecard</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-vol-leads',this)">Vol Leads</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-funnel',this)">Funnel</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-boulders',this)">Boulders</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-meetings',this)">Meeting Pulse</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-l10',this)">L10 Feed</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-ids',this)">IDS</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-pathway',this)">Pathway</div>
-      <div class="sp-nav-tab" onclick="staffShowSection('sp-announce',this);ogaInit()">Announce Card</div>
-    </nav>
+    <nav class="sp-nav-tabs" aria-label="Staff sections"></nav>
     <div class="sp-main-wrap">
       <div class="sp-main">
 
@@ -11320,7 +11318,7 @@ async function staffDoUnlock() {
     document.getElementById('staffModContent').style.display = 'flex';
     if (!staffRendered) staffLoadData();
   };
-  const goMine = () => { const tab = [...document.querySelectorAll('.sp-nav-tab')].find(t => /my snapshot/i.test(t.textContent)); if (tab) staffShowSection('sp-mine', tab); };
+  const goMine = () => staffShowSection('sp-mine');
   // 1) Personal PIN (last 4 of phone) → sign the person straight in + load My Snapshot in one call.
   if (/^\d{3,6}$/.test(pw)) {
     errEl.style.display = 'block'; errEl.classList.remove('tmod-lockerr'); errEl.style.color = 'var(--sp-muted, #9a917f)'; errEl.textContent = 'Signing you in…';
@@ -12000,10 +11998,11 @@ function staffRenderTeam() {
 
 function staffShowSection(id, tabEl) {
   document.querySelectorAll('#staffModContent .sp-section').forEach(s => s.classList.remove('sp-active'));
-  document.querySelectorAll('#staffModContent .sp-nav-tab').forEach(t => t.classList.remove('sp-active'));
   const el = document.getElementById(id);
   if (el) el.classList.add('sp-active');
-  if (tabEl) tabEl.classList.add('sp-active');
+  _spCurSection = id;
+  if (typeof staffNavMark === 'function') staffNavMark(id);
+  else if (tabEl) tabEl.classList.add('sp-active');
   if (id === 'sp-mine' && typeof cpLayout === 'function') setTimeout(cpLayout, 0);   // critical-path diagram needs a visible width
 }
 
@@ -12212,7 +12211,7 @@ function staffRenderSnapshot(data) {
     <!-- ── Open Rocks ───────────────────────────────────────────────── -->
     <div class="sp-snap-label">
       <span>Open Rocks (${rocks.length})</span>
-      <button class="sp-snap-rocks-tab-btn" onclick="staffShowSection('sp-boulders', document.querySelector('.sp-nav-tab[onclick*=sp-boulders]'))">→ Boulders Tab</button>
+      <button class="sp-snap-rocks-tab-btn" onclick="staffShowSection('sp-boulders')">→ Boulders Tab</button>
     </div>
     ${rocks.length ? `<div class="sp-snap-rock-list">
       ${rocks.map(i => `<div class="sp-snap-rock-row">
@@ -12946,33 +12945,105 @@ function staffRenderAllGroups_(data) {
 // These read from the JSON pushed by the LS South Reno Staff OS Google Sheet.
 // If the JSON doesn't include these fields, the hardcoded HTML fallback stays.
 
-function staffRenderTabs(data) {
-  const nav = document.querySelector('#staffModContent .sp-nav-tabs');
-  if (!nav) return;
-  // "My Snapshot" and "Announce Card" always bookend the sheet-driven middle tabs
-  // (the sheet's `tabs` list controls the labels/visibility of everything between).
-  const mid = (data.tabs && data.tabs.length)
-    ? data.tabs.filter(t => t.visible !== false)
-        .map(t => ({ id: t.id, label: t.id === 'sp-snapshot' ? 'Team Snapshot' : t.label, extra: '' }))
-    : [
-        { id: 'sp-snapshot', label: 'Team Snapshot' }, { id: 'sp-vto', label: 'V/TO' },
-        { id: 'sp-vot', label: 'Culture' }, { id: 'sp-acc-chart', label: 'Acc Chart' },
-        { id: 'sp-scorecard', label: 'Scorecard' }, { id: 'sp-ids', label: 'Rocks' },
-        { id: 'sp-boulders', label: 'Boulders' }, { id: 'sp-l10', label: 'Staff Sync' },
-        { id: 'sp-meetings', label: 'Meeting Pulse' }, { id: 'sp-funnel', label: 'Funnel' },
-        { id: 'sp-pathway', label: 'Pathway' }
-      ].map(t => ({ id: t.id, label: t.label, extra: '' }));
-  const all = [{ id: 'sp-mine', label: 'My Snapshot', extra: ';sosInit()' }]
-    .concat(mid)
-    .concat([{ id: 'sp-announce', label: 'Announce Card', extra: ';ogaInit()' }]);
-  const curEl = nav.querySelector('.sp-nav-tab.sp-active');
-  const currentId = (curEl && curEl.dataset && curEl.dataset.id) || 'sp-mine';
-  nav.innerHTML = all.map(t =>
-    `<div class="sp-nav-tab" data-id="${t.id}" onclick="staffShowSection('${t.id}',this)${t.extra || ''}">${t.label}</div>`
-  ).join('');
-  const toActivate = nav.querySelector(`[data-id="${currentId}"]`) || nav.querySelector('.sp-nav-tab');
-  if (toActivate) { toActivate.classList.add('sp-active'); staffShowSection(toActivate.dataset.id, toActivate); if (toActivate.dataset.id === 'sp-mine') sosInit(); }
+// Staff nav: "My Snapshot" first, then the sheet-driven tabs (the "Nav Tabs" tab of the
+// LS South Reno Staff OS sheet controls labels / visibility / order), grouped into themed
+// dropdowns, then "Announcement Card" pinned on the far right as a distinct tool tab.
+const STAFF_NAV_GROUPS = [
+  { key: 'vision',     label: 'Vision & Culture',   ids: ['sp-vto', 'sp-vot', 'sp-acc-chart', 'sp-team'] },
+  { key: 'objectives', label: 'Current Objectives', ids: ['sp-scorecard', 'sp-ids', 'sp-boulders', 'sp-funnel', 'sp-pathway', 'sp-vol-leads'] },
+  { key: 'meetings',   label: 'Meetings',           ids: ['sp-l10', 'sp-meetings'] }
+];
+const STAFF_NAV_FALLBACK = [
+  { id: 'sp-vto', label: 'V/TO' }, { id: 'sp-vot', label: 'Culture' }, { id: 'sp-acc-chart', label: 'Acc Chart' },
+  { id: 'sp-scorecard', label: 'Scorecard' }, { id: 'sp-ids', label: 'Rocks' }, { id: 'sp-boulders', label: 'Boulders' },
+  { id: 'sp-l10', label: 'Staff Sync' }, { id: 'sp-meetings', label: 'Meeting Pulse' }, { id: 'sp-funnel', label: 'Funnel' }
+];
+const STAFF_NAV_EXTRA = { 'sp-mine': () => sosInit(), 'sp-announce': () => ogaInit() };
+let _spCurSection = 'sp-mine', _spNavItems = {};
+function staffNavTabs(tabs) {
+  if (tabs && tabs.length) {
+    try { localStorage.setItem('lssr_staff_tabs', JSON.stringify(tabs)); } catch (e) {}
+    return tabs.filter(t => t.visible !== false).map(t => ({ id: t.id, label: t.id === 'sp-snapshot' ? 'Team Snapshot' : t.label }));
+  }
+  try { const c = JSON.parse(localStorage.getItem('lssr_staff_tabs') || 'null'); if (c && c.length) return c.filter(t => t.visible !== false).map(t => ({ id: t.id, label: t.id === 'sp-snapshot' ? 'Team Snapshot' : t.label })); } catch (e) {}
+  return STAFF_NAV_FALLBACK.slice();
 }
+function staffBuildNav(tabs) {
+  const nav = document.querySelector('#staffModContent .sp-nav-tabs'); if (!nav) return null;
+  const mid = staffNavTabs(tabs), E = escapeHtml, groupOf = {}, placed = {};
+  STAFF_NAV_GROUPS.forEach(g => g.ids.forEach(id => groupOf[id] = g));
+  _spNavItems = {};
+  mid.forEach(t => _spNavItems[t.id] = t.label);
+  const tab = (id, label, cls) => '<div class="sp-nav-tab' + (cls ? ' ' + cls : '') + '" role="button" tabindex="0" data-id="' + id + '" onclick="staffNavGo(\'' + id + '\')" onkeydown="if(event.key===\'Enter\')staffNavGo(\'' + id + '\')">' + E(label) + '</div>';
+  let h = tab('sp-mine', 'My Snapshot');
+  mid.forEach(t => {
+    const g = groupOf[t.id];
+    if (!g) { h += tab(t.id, t.label); return; }
+    if (placed[g.key]) return; placed[g.key] = 1;
+    const kids = mid.filter(x => groupOf[x.id] === g);
+    h += '<div class="sp-nav-tab sp-nav-group" role="button" tabindex="0" aria-haspopup="true" data-group="' + g.key + '" data-ids="' + kids.map(k => k.id).join(' ') + '" onclick="staffNavMenu(this)" onkeydown="if(event.key===\'Enter\'||event.key===\'ArrowDown\'){event.preventDefault();staffNavMenu(this)}">' +
+      E(g.label) + '<span class="sp-nav-cur"></span><i class="sp-nav-caret"></i></div>';
+  });
+  h += tab('sp-announce', 'Announcement Card', 'sp-nav-tool');
+  nav.innerHTML = h;
+  staffNavMark(_spCurSection);
+  return nav;
+}
+// Highlight the tab (or the group that holds it) for the visible section.
+function staffNavMark(id) {
+  const nav = document.querySelector('#staffModContent .sp-nav-tabs'); if (!nav) return;
+  nav.querySelectorAll('.sp-nav-tab').forEach(t => t.classList.remove('sp-active'));
+  nav.querySelectorAll('.sp-nav-cur').forEach(c => c.textContent = '');
+  const direct = nav.querySelector('.sp-nav-tab[data-id="' + id + '"]');
+  if (direct) { direct.classList.add('sp-active'); return; }
+  const grp = [...nav.querySelectorAll('.sp-nav-group')].find(g => (g.dataset.ids || '').split(' ').includes(id));
+  if (grp) { grp.classList.add('sp-active'); const c = grp.querySelector('.sp-nav-cur'); if (c) c.textContent = _spNavItems[id] || ''; }
+}
+function staffNavGo(id) {
+  staffNavClose();
+  staffShowSection(id);
+  const extra = STAFF_NAV_EXTRA[id]; if (extra) { try { extra(); } catch (e) {} }
+}
+function staffNavMenu(btn) {
+  const open = document.getElementById('spNavMenu');
+  if (open && open.dataset.group === btn.dataset.group) { staffNavClose(); return; }
+  staffNavClose();
+  const ids = (btn.dataset.ids || '').split(' ').filter(Boolean);
+  const m = document.createElement('div');
+  m.id = 'spNavMenu'; m.className = 'sp-nav-menu'; m.dataset.group = btn.dataset.group; m.setAttribute('role', 'menu');
+  m.innerHTML = ids.map(id => '<div class="sp-nav-mi' + (id === _spCurSection ? ' on' : '') + '" role="menuitem" tabindex="0" onclick="staffNavGo(\'' + id + '\')" onkeydown="if(event.key===\'Enter\')staffNavGo(\'' + id + '\')">' + escapeHtml(_spNavItems[id] || id) + '</div>').join('');
+  document.body.appendChild(m);
+  const r = btn.getBoundingClientRect(), vw = document.documentElement.clientWidth;
+  m.style.top = Math.round(r.bottom) + 'px';
+  m.style.left = Math.round(Math.max(8, Math.min(vw - m.offsetWidth - 8, r.left))) + 'px';
+  m.style.minWidth = Math.round(r.width) + 'px';
+  btn.classList.add('sp-open'); btn.setAttribute('aria-expanded', 'true');
+  m.addEventListener('mousedown', e => e.stopPropagation());
+  m.addEventListener('keydown', e => {
+    const items = [...m.querySelectorAll('.sp-nav-mi')], k = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); (items[k + 1] || items[0]).focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); (items[k - 1] || items[items.length - 1]).focus(); }
+    else if (e.key === 'Escape') { staffNavClose(); btn.focus(); }
+  });
+  setTimeout(() => document.addEventListener('mousedown', staffNavClose, { once: true }), 0);
+  if (document.activeElement === btn) { const f = m.querySelector('.sp-nav-mi'); if (f) f.focus(); }
+}
+function staffNavClose() {
+  const m = document.getElementById('spNavMenu'); if (m) m.remove();
+  document.querySelectorAll('.sp-nav-group.sp-open').forEach(b => { b.classList.remove('sp-open'); b.setAttribute('aria-expanded', 'false'); });
+}
+window.addEventListener('resize', staffNavClose);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') staffNavClose(); });
+function staffRenderTabs(data) {
+  const nav = staffBuildNav(data && data.tabs); if (!nav) return;
+  // Stay on the section that's showing; fall back to My Snapshot if that tab was hidden in the sheet.
+  const visible = id => id === 'sp-mine' || id === 'sp-announce' || !!_spNavItems[id];
+  const cur = visible(_spCurSection) ? _spCurSection : 'sp-mine';
+  staffShowSection(cur);
+  if (cur === 'sp-mine') sosInit();
+}
+// Build the nav right away (from the last-known tabs) so the old placeholder tabs never flash.
+try { staffBuildNav(null); } catch (e) {}
 
 function staffRenderVTO(data) {
   if (!data.vto) return;
@@ -16089,7 +16160,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T212829Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T214141Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
