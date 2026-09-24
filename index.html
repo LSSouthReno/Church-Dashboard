@@ -13053,7 +13053,7 @@ function staffRenderAllGroups_(data) {
 // private sheet (never in the public JSON); requests carry the staff key.
 // ════════════════════════════════════════════════════════════════════════════
 const ST_FORM_URL  = 'https://lssr.churchcenter.com/people/forms/1324853';
-const ST_CACHE_KEY = 'lssr_stories_cache';
+const ST_CACHE_KEY = 'lssr_stories_cache';   // localStorage: instant paint on return visits
 const ST_STATUS = { new: 'New', reviewed: 'Reviewed', shared: 'Shared', archived: 'Archived' };
 let _st = { stories: null, lastSync: '', aiOn: false, err: '', loading: null, syncing: false, filter: 'new', kind: '', q: '', open: {}, edit: '', copied: '', photos: {} };
 
@@ -13065,10 +13065,11 @@ function stGet(action, retried) {
 function stApply(list) { _st.stories = list.stories || []; _st.lastSync = list.lastSync || ''; _st.aiOn = !!list.aiOn; }
 function stLoad() {
   if (_st.loading) return _st.loading;
+  _st.fetched = true;
   const p = stGet('story_list').then(res => {
     if (!res || !res.ok) throw new Error((res && res.error) || 'Could not load stories');
     stApply(res); _st.err = '';
-    try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify(res)); } catch (e) {}
+    try { localStorage.setItem(ST_CACHE_KEY, JSON.stringify(res)); } catch (e) {}
   }).catch(e => { _st.err = String(e.message || e); })
     .finally(() => { _st.loading = null; stRefreshViews(); });
   _st.loading = p;
@@ -13079,15 +13080,15 @@ function stSync() {
   if (_st.syncing) return;
   _st.syncing = true; stRefreshViews();
   stGet('story_sync').then(res => {
-    if (res && res.list && res.list.ok) { stApply(res.list); try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify(res.list)); } catch (e) {} }
+    if (res && res.list && res.list.ok) { stApply(res.list); try { localStorage.setItem(ST_CACHE_KEY, JSON.stringify(res.list)); } catch (e) {} }
     else if (res && !res.ok) _st.err = res.error || 'Sync failed';
   }).catch(e => { _st.err = String(e.message || e); })
     .finally(() => { _st.syncing = false; stRefreshViews(); });
 }
 function stInit() {
-  if (!_st.stories) { try { const c = JSON.parse(sessionStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {} }
+  if (!_st.stories) { try { const c = JSON.parse(localStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {} }
   stRender();
-  stLoad().then(() => {
+  (_st.loading || stLoad()).then(() => {
     if (!_st.lastSync || Date.now() - new Date(_st.lastSync) > 10 * 60 * 1000) stSync();
   });
 }
@@ -13202,7 +13203,9 @@ function stCardHtml(s) {
   if ((s.tags || []).length) h += '<div class="st-lbl">Themes</div><div class="st-tags">' + s.tags.map(t => '<span class="st-tag">' + E(t) + '</span>').join('') + '</div>';
   h += '<div class="st-lbl">Staff notes</div><textarea class="st-ta" rows="2" placeholder="Who followed up, where it was shared…" onchange="stSave(\'' + id + '\',{notes:this.value})">' + E(s.notes) + '</textarea>';
   if (s.raw && s.raw.trim() !== String(s.story || '').trim()) h += '<details class="st-raw"><summary>As submitted</summary><div>' + E(s.raw) + '</div></details>';
-  if (s.email) h += '<div class="st-meta" style="margin:10px 0 0">Contact: <a href="mailto:' + E(s.email) + '">' + E(s.email) + '</a></div>';
+  const contact = [s.personId && /^\d+$/.test(s.personId) ? '<a href="https://people.planningcenteronline.com/people/AC' + s.personId + '" target="_blank" rel="noopener">Open ' + E(s.person || 'person') + ' in Planning Center</a>' : '',
+                   s.email ? '<a href="mailto:' + E(s.email) + '">' + E(s.email) + '</a>' : ''].filter(Boolean).join(' · ');
+  if (contact) h += '<div class="st-meta" style="margin:10px 0 0">' + contact + '</div>';
   const btn = (label, fn, pri) => '<button class="st-btn' + (pri ? ' pri' : '') + '" onclick="' + fn + '">' + label + '</button>';
   h += '<div class="st-actions">' +
     (s.status === 'new' ? btn('Mark reviewed', 'stSetStatus(\'' + id + '\',\'reviewed\')', true) : '') +
@@ -13234,7 +13237,7 @@ function stFind(id) { return (_st.stories || []).find(s => s.id === id); }
 function stSave(id, patch) {
   const s = stFind(id); if (!s) return;
   Object.assign(s, patch);
-  try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify({ ok: true, stories: _st.stories, lastSync: _st.lastSync, aiOn: _st.aiOn })); } catch (e) {}
+  try { localStorage.setItem(ST_CACHE_KEY, JSON.stringify({ ok: true, stories: _st.stories, lastSync: _st.lastSync, aiOn: _st.aiOn })); } catch (e) {}
   stRefreshViews();
   fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action: 'story_update', k: STAFF_HASH, id: id, by: (_sos && _sos.me) || 'staff' }, patch)) })
     .then(r => r.json())
@@ -13262,10 +13265,9 @@ function stCopyLink(btn) {
 // Staff Sync: stories that came in since the last meeting (most recent Monday before today).
 function stRenderSync() {
   const el = document.getElementById('sp-l10-stories'); if (!el) return;
-  if (!_st.stories && !_st.loading && !_st.err) {
-    try { const c = JSON.parse(sessionStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {}
-    stLoad();
-  }
+  // Paint from the last copy on this device, then refresh once per page load (Apps Script can take 20s+ to wake).
+  if (!_st.stories) { try { const c = JSON.parse(localStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {} }
+  if (!_st.fetched && !_st.loading) stLoad();
   const E = escapeHtml, start = stWeekStart();
   const items = (_st.stories || []).filter(s => s.status !== 'archived' && new Date(s.submittedAt) >= start);
   const since = start.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
@@ -16245,7 +16247,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T225337Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T225933Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
