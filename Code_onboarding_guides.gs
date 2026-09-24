@@ -125,3 +125,89 @@ function ogGetGuide_(pw, team) {
   }
   return { ok: false, error: 'not found' };
 }
+
+/**
+ * og_team_contact — prefill a team's leader + secondary contact for the generator.
+ *   GET ?action=og_team_contact&team=<PCO team name>&leader=<point leader name>[&pw=<sha256>|&verify=<last4>]
+ * Only returns phone/email for (a) the team's Point Leader on the Leader Forms tab and
+ * (b) another PCO Services team leader of that same team — never an arbitrary person.
+ * Contact details come back only with the admin hash OR when `verify` matches the last
+ * 4 digits of the point leader's own phone (same light-identity idea as the staff PIN).
+ * Without either it returns { locked:true } plus the names.
+ */
+function ogTeamContact_(p) {
+  p = p || {};
+  var team = String(p.team || '').trim(), leader = String(p.leader || '').trim(), pcoTeam = String(p.pcoTeam || p.team || '').trim();
+  if (!team) return { ok: false, error: 'missing team' };
+  var norm = function(s) { return String(s || '').toLowerCase().replace(/\(kids\)/g, '').replace(/teams?/g, '').replace(/[^a-z]/g, '').replace(/^connection$/, 'connect'); };
+  var cache = CacheService.getScriptCache(), ck = 'OG_TC4_' + norm(team) + '_' + norm(pcoTeam) + '_' + norm(leader);
+  var info = null;
+  try { var hit = cache.get(ck); if (hit) info = JSON.parse(hit); } catch (x) {}
+  if (!info) {
+    info = { primary: null, secondary: null };
+    // (a) Point leader must be on the Leader Forms tab for this team.
+    var lf = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Leader Forms');
+    var rows = lf ? lf.getDataRange().getValues() : [];
+    var isPointLeader = rows.some(function(r) { return norm(r[2]) === norm(team) && String(r[1] || '').trim().toLowerCase() === leader.toLowerCase(); });
+    if (isPointLeader && leader) info.primary = ogPcoPersonByName_(leader);
+    // (b) Another PCO Services team leader of the same team → secondary contact.
+    try {
+      var teams = pcoGetAll_('/services/v2/teams?per_page=100');
+      var t = teams.filter(function(x) { return norm((x.attributes || {}).name) === norm(pcoTeam); })[0];
+      if (t) {
+        var tl = pcoGetAllWithIncluded_('/services/v2/teams/' + t.id + '/team_leaders?include=people&per_page=100');
+        var ids = [];
+        (tl.data || []).forEach(function(r) { var d = (((r.relationships || {}).people || {}).data) || (((r.relationships || {}).person || {}).data); if (d && d.id) ids.push(d.id); });
+        if (!info.primary && !leader && ids.length) info.primary = ogPcoPersonById_(ids[0]);   // no Leader Form (e.g. Presiders) → first PCO team leader
+        for (var i = 0; i < ids.length && !info.secondary; i++) {
+          if (info.primary && String(ids[i]) === String(info.primary.id)) continue;
+          var sp = ogPcoPersonById_(ids[i]);
+          if (sp && (!info.primary || sp.name.toLowerCase() !== info.primary.name.toLowerCase())) info.secondary = sp;
+        }
+      }
+    } catch (x) { info.teamLeaderError = String(x && x.message || x); }
+    try { cache.put(ck, JSON.stringify(info), 21600); } catch (x) {}
+  }
+  var digits = function(s) { return String(s || '').replace(/\D/g, ''); };
+  var verify = digits(p.verify);
+  var authed = ogAuth_(p.pw) || (!!verify && verify.length === 4 && !!info.primary && (info.primary.phones || []).some(function(ph) { return digits(ph).slice(-4) === verify; }));
+  var pub = function(c) { return c ? (authed ? { name: c.name, phone: c.phone || '', email: c.email || '' } : { name: c.name }) : null; };
+  return { ok: true, locked: !authed, verified: authed, primary: pub(info.primary), secondary: pub(info.secondary),
+           canVerify: !!(info.primary && (info.primary.phones || []).length) };
+}
+function ogPcoPerson_(json) {
+  var d = json && json.data; if (!d) return null;
+  if (Object.prototype.toString.call(d) === '[object Array]') d = d[0]; if (!d) return null;
+  var a = d.attributes || {}, inc = json.included || [];
+  var emails = inc.filter(function(x) { return x.type === 'Email'; }).map(function(x) { return x.attributes || {}; });
+  var phones = inc.filter(function(x) { return x.type === 'PhoneNumber'; }).map(function(x) { return x.attributes || {}; });
+  var pick = function(list, key) { var pr = list.filter(function(x) { return x.primary; })[0] || list[0]; return pr ? String(pr[key] || '') : ''; };
+  return { id: d.id, name: a.name || ((a.first_name || '') + ' ' + (a.last_name || '')).trim(),
+           email: pick(emails, 'address'), phone: pick(phones, 'number'),
+           phones: phones.map(function(x) { return String(x.number || ''); }) };
+}
+function ogPcoGetJson_(path) {
+  var res = UrlFetchApp.fetch('https://api.planningcenteronline.com' + path, { method: 'get', muteHttpExceptions: true, headers: pcoHeaders_() });
+  if (res.getResponseCode() < 200 || res.getResponseCode() >= 300) return null;
+  return JSON.parse(res.getContentText());
+}
+function ogPcoPersonById_(id) { return ogPcoPerson_(ogPcoGetJson_('/people/v2/people/' + encodeURIComponent(id) + '?include=emails,phone_numbers')); }
+function ogPcoPersonByName_(name) {
+  var fold = function(s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim(); };
+  var want = fold(name), parts = want.split(' ');
+  var match = function(d) { var a = d.attributes || {}; return fold(a.name) === want || fold((a.first_name || '') + ' ' + (a.last_name || '')) === want || fold((a.nickname || '') + ' ' + (a.last_name || '')) === want; };
+  var json = ogPcoGetJson_('/people/v2/people?where[search_name]=' + encodeURIComponent(name) + '&include=emails,phone_numbers&per_page=25');
+  var pick = json && json.data && json.data.filter(match)[0];
+  if (!pick && parts.length > 1) {
+    // Accents / nicknames: search by first name and compare accent-insensitively.
+    json = ogPcoGetJson_('/people/v2/people?where[first_name]=' + encodeURIComponent(parts[0]) + '&include=emails,phone_numbers&per_page=100');
+    pick = json && json.data && json.data.filter(match)[0];
+    if (!pick) { json = ogPcoGetJson_('/people/v2/people?where[search_name]=' + encodeURIComponent(parts[parts.length - 1]) + '&include=emails,phone_numbers&per_page=100'); pick = json && json.data && json.data.filter(function(d) { var a = d.attributes || {}; return fold(a.last_name) === parts[parts.length - 1] && fold(a.first_name || a.nickname).indexOf(parts[0].slice(0, 3)) === 0; })[0]; }
+  }
+  if (!pick) return null;
+  // Keep only this person's included rows.
+  var relIds = {};
+  ['emails', 'phone_numbers'].forEach(function(k) { (((pick.relationships || {})[k] || {}).data || []).forEach(function(r) { relIds[r.type + ':' + r.id] = 1; }); });
+  var inc = (json.included || []).filter(function(x) { return relIds[x.type + ':' + x.id]; });
+  return ogPcoPerson_({ data: pick, included: inc });
+}

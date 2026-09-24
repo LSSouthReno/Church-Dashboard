@@ -171,6 +171,10 @@ function doGet(e) {
       return eosWaJson_(ogGetGuide_((e && e.parameter && e.parameter.pw) || '',
                                     (e && e.parameter && e.parameter.team) || ''));
     }
+    if (action === 'og_team_contact') {
+      // Onboarding generator prefill — team leader / secondary contact (see Code_onboarding_guides.gs).
+      return eosWaJson_(ogTeamContact_((e && e.parameter) || {}));
+    }
     if (action === 'og_delete') {
       // Onboarding guides — remove a team's saved guide (admin hash required).
       return eosWaJson_(ogDeleteGuide_((e && e.parameter && e.parameter.pw) || '',

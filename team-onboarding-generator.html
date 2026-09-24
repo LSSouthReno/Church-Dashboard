@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="team-checklists.js"></script>
 <script>
   // Force HTTPS: the Admin gate hashes via crypto.subtle (Web Crypto), which
   // browsers disable on non-secure (http://) pages — so the gate silently fails
@@ -636,6 +637,7 @@
       <option>First Impressions</option>
       <option>Connection Team</option>
       <option>Hospitality Team</option>
+      <option>Coffee Team</option>
       <option>Presiders Team</option>
       <option>Stepping Stones (Kids)</option>
       <option>Enrichment</option>
@@ -644,6 +646,7 @@
       <option>Parking Team</option>
       <option>Safety Team</option>
       <option>Prayer Team</option>
+      <option>Service Captains</option>
       <option value="Other">Other</option>
     </select>
   </div>
@@ -1098,59 +1101,282 @@ function renderFileList() {
   ).join('');
 }
 
-// ── Prefill from what the dashboard already knows about a team ────────────────
-// The dashboard reliably knows the team's Point Leader (from the Leader Forms /
-// Planning Center import) and current/needed volunteer counts. We prefill only
-// EMPTY fields so we never overwrite what a leader has typed.
-let _ogTeamData = null;
+// ── Prefill a team's guide from what the church already knows ─────────────────
+// Sources: dashboard-data.json (Point Leader from the Leader Forms, Sunday plans →
+// which gatherings this team serves, team size), team-checklists.js (the team's Sunday
+// checklist → the "typical service day" walkthrough, arrival, huddle, what to wear), the
+// team profiles below (purpose / why it's great, written for LSSR), and — only for staff
+// (admin) or the leader themselves (last 4 of their phone) — leader + secondary contact
+// info from Planning Center via the onboarding web app.
+// Only EMPTY fields (or fields still holding an earlier prefill) are filled, so nothing a
+// leader typed is ever overwritten; "Refill" overwrites on purpose.
+const OG_VISION = 'Helping Everyone Find Everything in Jesus';
+const OG_TEAMS = {
+  'Worship Team': { ck: 'worship team', form: 'Worship & Tech', pco: 'Worship Team',
+    purpose: 'We lead our church family in worshiping Jesus together every Sunday. Before a word is preached, the songs we sing tell the story of who God is and what He has done — so we lead with authenticity, not performance, pointing every person in the room to Jesus. It is one of the clearest ways we live out ' + OG_VISION + '.',
+    great: 'You get to use the gifts God gave you to help people encounter Him — and do it alongside a humble, hungry, happy crew who pray together, grow together, and genuinely enjoy each other. Expect real friendships and a team that cares about your walk with Jesus as much as your playing.',
+    arrival: '90 minutes before the first gathering you serve — production meeting at 7:30 AM with Tech, Presiders, and the Preacher',
+    rehearsals: 'Mid-week Worship Team rehearsal plus a pre-service rehearsal on Sunday morning — both are on your plan in Planning Center.',
+    bring: 'Your instrument and gear, ready to go (in-ear packs/monitor needs covered with Tech)' },
+  'Tech Team': { ck: 'tech', form: 'Worship & Tech', pco: 'Tech',
+    purpose: 'We run sound, lights, slides, and livestream so nothing gets between people and the message of Jesus. When tech is done well it disappears — the words are on the screen right on time, the mix is clear, and people at home can join in. Quiet, behind-the-scenes excellence that serves ' + OG_VISION + '.',
+    great: 'You will learn real production skills from people who love teaching them, and you get a front-row seat to how God moves every Sunday. It is a tight-knit booth crew — lots of laughs, clear roles, and the satisfaction of a service that ran smoothly because of you.',
+    arrival: '90+ minutes before the first gathering you serve — production meeting at 7:30 AM with Worship, Presiders, and the Preacher',
+    rehearsals: 'Mid-week Tech rehearsal plus a pre-service rehearsal on Sunday morning — both are on your plan in Planning Center.' },
+  'First Impressions': { ck: 'first impressions', form: 'First Impressions', pco: 'First Impressions',
+    purpose: 'We are the first face of Living Stones. Before someone hears a song or a sermon, they meet us at the door — and a warm, genuine welcome tells them they belong here. Many guests decide in the first few minutes whether they will come back, so we get to open the door (literally) to people finding everything in Jesus.',
+    great: 'It is simple, joyful, and it matters: a smile, a handshake, and learning people\'s names. You will get to know the whole church family, spot new faces, and serve with a happy team — and you are dismissed to enjoy most of the service.',
+    arrival: 'By 7:30 AM, prepped and ready — with your lanyard/badge on',
+    dress: 'Wear your lanyard / name badge' },
+  'Connection Team': { ck: 'connect', form: 'Connection Team', pco: 'Connection Team',
+    purpose: 'We are the hub of information at Living Stones — the people a guest can walk up to with any question. We help people take their next step: a community group, a class, serving, an upcoming event. Every conversation at our desk is a chance to connect someone to finding everything in Jesus.',
+    great: 'You get to have real conversations with guests and help them feel known right away — and you will know everything that is going on at church before anyone else. It is relational, flexible, and you will see people you helped take a next step become family.',
+    arrival: '30 minutes before your gathering (7:30 AM for the 8:00) to set up the desk — wear your lanyard',
+    gather: 'The Connect desk in the lobby — desk items are in the cubbies behind the door in the Wolf Pack room',
+    dress: 'Wear your lanyard / name badge' },
+  'Hospitality Team': { ck: 'hospitality team', form: 'Hospitality', pco: 'Hospitality Team',
+    purpose: 'We make sure no one sits alone. Spread across the worship center, we welcome people, talk with them, and help them feel at home and cared about — especially anyone who looks new or by themselves. Authentic community starts with someone noticing you, and that is how we help people find everything in Jesus.',
+    great: 'It is the easiest team to join and one of the most meaningful: you just love people well for 15 minutes, then sit down and worship. You will make friends, meet new families, and be the reason someone comes back.',
+    arrival: '15 minutes before the start of your gathering' },
+  'Coffee Team': { ck: 'coffee team', form: 'Coffee Team', pco: 'Coffee Team',
+    purpose: 'We serve coffee, and with it, hospitality. A hot cup in someone\'s hand makes the lobby feel like a living room and gives people a reason to linger and talk. We create the space where authentic community happens before and after every gathering.',
+    great: 'It is hands-on, practical, and social — you will be in the middle of the lobby buzz every Sunday. Setup and teardown crews each have a clear job, and it is a great team for friends or families to serve on together.',
+    arrival: '60 minutes before your gathering to stock supplies and brew the first round' },
+  'Breakfast Team': { ck: 'breakfast team', form: 'Breakfast Team', pco: 'Breakfast Team',
+    purpose: 'We feed the volunteers who serve the church. A hot breakfast for the early crews says "we see you and we\'re grateful for you," and it fuels the people who make Sunday happen. It is faith that cares, one plate at a time.',
+    great: 'If you love to cook, this is your team. You serve behind the scenes, bless dozens of volunteers every week, and coordinate a menu with a fun, generous group.',
+    arrival: 'By 7:00 AM with breakfast fully cooked (hot breakfast for about 30 people)',
+    bring: 'Your fully cooked dish for the menu you coordinated with the team' },
+  'Parking Team': { ck: 'parking', form: 'Parking', pco: 'Parking Team',
+    purpose: 'We are the very first welcome anyone gets — before the doors, before the lobby, right as they turn into the lot. We keep traffic safe and moving and make arriving at church easy, especially for guests who have never been here. A great first minute helps people find everything in Jesus.',
+    great: 'Fresh air, high-fives, and a crew that loves being outside together. You make a huge difference in a short amount of time, and you are often the first smile a guest sees.',
+    arrival: '60 minutes before your gathering to grab your vest/flag and set cones',
+    checkin: 'Get your vest and flag, then confirm your post with the Parking lead',
+    dress: 'Weather-appropriate clothes — you will be outside; wear your team vest' },
+  'Safety Team': { ck: 'safety', form: 'Safety Team', pco: 'Safety Team',
+    purpose: 'We keep people safe so they can focus on Jesus. From the children\'s wing to the parking lot, we are a calm, unobtrusive presence that protects our kids, our guests, and our church family. Faith that cares means caring for people\'s safety too.',
+    great: 'You serve with a trained, trusted team, learn real skills (radios, first aid, awareness), and give parents peace of mind every Sunday. It is serving that quietly makes everything else possible.',
+    arrival: 'At least 15 minutes before your gathering — 7:00 AM if you can make pre-service prayer',
+    checkin: 'Pick up your radio from the kitchen cabinet and do a radio check with the team; know your assigned post',
+    dress: 'Your purple lanyard name badge; the safety shirt is encouraged but not required' },
+  'Prayer Team': { ck: 'prayer team', form: 'Prayer Team', pco: 'Prayer Team',
+    purpose: 'We cover every gathering in prayer. While the service happens, we intercede for the preacher, the people in the room, and the work God is doing — because nobody finds everything in Jesus without His Spirit at work. Our pursuit of God fuels everything else.',
+    great: 'You get to partner with God in the most important work of Sunday. It is quiet, focused, and deeply encouraging — and you will see prayers answered in the lives of people you prayed for.',
+    arrival: '10 minutes before your gathering, at the designated prayer location',
+    gather: 'The designated prayer room / location',
+    resources: 'The During-Service Prayer Prompts on the back of the Prayer Team sign — updated weekly with scripture.' },
+  'Enrichment': { ck: 'enrichment', form: 'Enrichment', pco: 'Enrichment Teams',
+    purpose: 'We serve communion and receive the offering — two moments where the whole church responds to Jesus together. We prepare the elements, serve every person with the words "His body broken and blood shed for you," and reset the room between gatherings so it is ready for the next group of people.',
+    great: 'Few things are as meaningful as looking someone in the eye and handing them communion. You serve as a team, take communion together afterward, and help every gathering run with reverence and care.',
+    arrival: '7:00 AM for the first gathering (communion prep); otherwise before your gathering starts' },
+  'Stepping Stones (Kids)': { ck: 'stepping stones', form: 'Stepping Stones', pco: 'Stepping Stones',
+    purpose: 'We help kids find everything in Jesus. Every Sunday we teach children the truth of the Bible that points to Jesus, in safe, fun, well-prepared classrooms — so parents can worship knowing their kids are loved and learning. We are planting seeds of faith that last a lifetime.',
+    great: 'Kids are hilarious, honest, and hungry to learn — and you get to be a trusted adult who shows them Jesus. You will have a clear curriculum, supportive team leads, and the joy of watching kids grow in their faith week after week.',
+    arrival: 'At least 15 minutes before your gathering (Team Leads arrive at 7:00 AM for prayer and setup)',
+    checkin: 'Check in with the Team Lead — attendance is taken in the Services app starting at 7:45 AM',
+    resources: 'The lesson curriculum is posted in Church Center — plan 30–60 minutes each Thursday to review it.',
+    bg: 'Yes — required for Kids/Students ministry specifically' },
+  'LS Students': { ck: 'ls students', form: 'LS Students', pco: 'LS Students',
+    purpose: 'We help students find everything in Jesus during the years they are deciding what they believe. Games, a talk, and small-group discussion create a place where students are known, challenged, and loved — and where their faith becomes their own.',
+    great: 'You get to be the adult a student remembers. Students are real, fun, and full of questions, and you will lead a small group, build genuine relationships, and see God work in the next generation.',
+    arrival: '30 minutes before the 9:30 gathering to connect with the Students director',
+    checkin: 'Connect with the Students director when you arrive',
+    bg: 'Yes — required for Kids/Students ministry specifically' },
+  'Service Captains': { ck: 'service captains', form: 'Service Captains', pco: 'Service Captains',
+    purpose: 'We make sure Sunday is ready before anyone arrives: signs out, doors open, rooms set, and every team supported through the morning. We carry the whole campus so every other team — and every guest — can focus on meeting Jesus.',
+    great: 'You see the whole Sunday come together and get to be the person everyone counts on. It is practical leadership with a great crew, and you will know every corner of the building (and every team) by name.',
+    arrival: '6:30 AM for setup (pre-service prayer at 7:00 AM)',
+    skipPhases: /team\s*&\s*access|notes\s*&\s*supplies/i },
+  'Presiders Team': { ck: 'presiders team', form: '', pco: 'Presiders',
+    purpose: 'We guide the church through each gathering — welcomes, scripture readings, transitions, communion, and next steps — so the service flows and people know how to respond to Jesus. We help every guest understand what is happening and where to go next.',
+    great: 'You get to shepherd the whole room for a morning, use your voice to point people to Jesus, and serve closely with the Worship, Tech, and preaching teams.',
+    arrival: '7:30 AM for the production meeting with Tech, Worship, and the Preacher' }
+};
+const OG_DEFAULT_ABSENCE = 'Decline the request in Planning Center (or block out the date in Church Center) as soon as you know, and text your team leader so we can find coverage. Life happens — an early heads-up is all we ask.';
+let _ogTeamData = null, _ogPrefilled = {}, _ogContactTeam = '';
 function ogNormTeam(s) {
-  return String(s || '').toLowerCase()
-    .replace(/\(kids\)/g, '').replace(/team/g, '').replace(/[^a-z]/g, '').trim();
+  return String(s || '').toLowerCase().replace(/\(kids\)/g, '').replace(/teams?/g, '').replace(/[^a-z]/g, '').replace(/^connection$/, 'connect');
 }
 function ogLoadTeamData() {
+  try { const h = sessionStorage.getItem('og_adm'); if (h === OG_ADMIN_HASH) _ogPw = h; } catch (e) {}
   fetch('./dashboard-data.json?v=' + Date.now(), { cache: 'no-store' })
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(d){ if (d) { _ogTeamData = d; const cur = val('team-name'); if (cur && cur !== 'Other') ogPrefillFromTeam(cur); } })
     .catch(function(){});
 }
+function ogProfile(name) { return OG_TEAMS[name] || null; }
 function ogFindTeam(name) {
   if (!_ogTeamData) return null;
-  const key = ogNormTeam(name);
-  const forms = _ogTeamData.teamsLeaderForms || [];
-  const serve = _ogTeamData.serveTeams || [];
-  const form = forms.filter(function(f){ return ogNormTeam(f.n) === key; })[0] || null;
-  const st   = serve.filter(function(s){ return ogNormTeam(s.name) === key; })[0] || null;
+  const prof = ogProfile(name), forms = _ogTeamData.teamsLeaderForms || [], serve = _ogTeamData.serveTeams || [];
+  const keys = [prof && prof.form, prof && prof.pco, name].filter(Boolean).map(ogNormTeam);
+  const form = forms.filter(function(f){ return keys.indexOf(ogNormTeam(f.n)) !== -1; })[0] || null;
+  const st   = serve.filter(function(s){ return keys.indexOf(ogNormTeam(s.name)) !== -1; })[0] || null;
   return (form || st) ? { form: form, serve: st } : null;
 }
-function ogSetIfEmpty(id, value) {
-  const el = document.getElementById(id);
-  if (el && !el.value && value) { el.value = value; return true; }
-  return false;
+// Which gatherings this team serves, from the Sunday plans in Planning Center.
+function ogServiceTimes(name) {
+  const prof = ogProfile(name); if (!_ogTeamData || !prof) return null;
+  const key = ogNormTeam(prof.pco), tm = {}, all = {}; let n = 0, allN = 0, rehearsal = false;
+  (_ogTeamData.sundayPlans || []).forEach(function(p) { (p.services || []).forEach(function(s) { (s.volunteers || []).forEach(function(v) {
+    ['8 AM', '9:30 AM', '11 AM'].forEach(function(t) { all[t] = 1; });
+    if (ogNormTeam(v.team) !== key) return;
+    const ts = (String(v.serviceTime || '').match(/\d{1,2}(?::\d{2})?\s*[ap]m/ig) || []).map(function(t){ return t.toUpperCase().replace(/\s+/g, ' '); });
+    if (/rehears/i.test(v.serviceTime || '')) rehearsal = true;
+    if (!ts.length) return;
+    n++; if (ts.length >= 3) allN++;
+    ts.forEach(function(t){ tm[t] = (tm[t] || 0) + 1; });
+  }); }); });
+  const order = function(t) { const m = t.match(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/); let h = +m[1] % 12 + (m[3] === 'PM' ? 12 : 0); return h * 60 + (+m[2] || 0); };
+  const times = Object.keys(tm).sort(function(a, b){ return order(a) - order(b); });
+  const gatherings = Object.keys(all).sort(function(a, b){ return order(a) - order(b); });
+  return { times: times, gatherings: gatherings, everyone: n > 0 && allN / n > 0.6, rehearsal: rehearsal };
 }
-function ogPrefillFromTeam(name) {
+function ogPretty(t) { return t.replace(/^(\d{1,2}) (AM|PM)$/, '$1:00 $2'); }
+function ogJoin(list) { return list.length <= 1 ? list.join('') : list.slice(0, -1).join(', ') + ' & ' + list[list.length - 1]; }
+function ogServiceDaysText(name) {
+  const st = ogServiceTimes(name), prof = ogProfile(name);
+  if (!st || !st.times.length) {
+    if (name === 'LS Students') return 'Sunday mornings during the 9:30 AM gathering.';
+    if (prof && /worship|tech/i.test(prof.pco)) return 'Sunday mornings — all three gatherings (8:00, 9:30 & 11:00 AM) — plus rehearsals that are on your Planning Center plan.';
+    return '';
+  }
+  const t = st.times.map(ogPretty);
+  let s = 'Sunday mornings — ';
+  if (st.everyone) s += 'our team serves all ' + (t.length === 3 ? 'three ' : '') + 'gatherings (' + ogJoin(t) + ').';
+  else s += 'we serve the ' + ogJoin(t) + ' gathering' + (t.length > 1 ? 's' : '') + '. Most people serve one gathering a Sunday — your exact time is on your schedule in Planning Center.';
+  if (st.rehearsal) s += ' Rehearsals are on your plan in Planning Center too.';
+  s += ' We also serve at special gatherings like Christmas and Easter.';
+  return s;
+}
+// The team's Sunday checklist, reformatted as a walkthrough (grouped by phase, time — task).
+function ogChecklist(name) {
+  const prof = ogProfile(name), all = window.LSSR_TEAM_CHECKLISTS || {};
+  return (prof && all[prof.ck]) || null;
+}
+function ogWalkthrough(name) {
+  const items = ogChecklist(name), prof = ogProfile(name); if (!items) return '';
+  const st = ogServiceTimes(name), out = [];
+  if (st && st.gatherings && st.gatherings.length) out.push('Our Sunday: gatherings at ' + ogJoin(st.gatherings.map(ogPretty)) + ' (about an hour each).');
+  let phase = '';
+  items.forEach(function(it) {
+    if (/^(mission)$/i.test(it.phase) || (prof.skipPhases && prof.skipPhases.test(it.phase))) return;
+    if (it.phase !== phase) { phase = it.phase; out.push(''); out.push(phase + ':'); }
+    const time = String(it.time || '').trim();
+    out.push((time && time !== '—' ? time + ' — ' : '') + it.text);
+  });
+  return out.join('\n').replace(/^\n+/, '').trim();
+}
+function ogFromChecklist(name, re, skip) {
+  const items = ogChecklist(name) || [], prof = ogProfile(name);
+  const hit = items.filter(function(it){ return re.test(it.text) && !(skip && skip.test(it.phase)) && !(prof.skipPhases && prof.skipPhases.test(it.phase)); })[0];
+  return hit ? ((hit.time && hit.time !== '—' && /\d/.test(hit.time) ? hit.time + ' — ' : '') + hit.text) : '';
+}
+// Everything we can fill for a team (contact info is added separately, when allowed).
+function ogPrefillValues(name) {
+  const prof = ogProfile(name), match = ogFindTeam(name), v = {};
+  if (!prof) { if (match && match.form && match.form.l) v['leader-name'] = match.form.l; return v; }
+  v['team-purpose'] = prof.purpose;
+  v['team-great'] = prof.great;
+  if (match && match.form && match.form.l) v['leader-name'] = match.form.l;
+  v['service-days'] = ogServiceDaysText(name);
+  v['arrival-time'] = prof.arrival || '';
+  if (prof.gather) v['gather-spot'] = prof.gather;
+  if (prof.checkin) v['check-in'] = prof.checkin;
+  if (prof.rehearsals) v['rehearsals'] = prof.rehearsals;
+  v['typical-day'] = ogWalkthrough(name);
+  v['dress-code'] = prof.dress || '';
+  // Pre-service prayer: the team's own checklist line when it has a clean one, else the all-volunteer 7:00 AM prayer.
+  const hud = prof.huddle || ogFromChecklist(name, /^(arrive for )?pre-service prayer|^gather with the team for pre-service prayer|pray together|team prayer/i, /during|after|week|emergency|before sunday/i);
+  v['huddle'] = hud || '7:00 AM pre-service prayer — every volunteer is welcome, and anyone serving the 8:00 gathering is especially encouraged to join';
+  if (prof.bring) v['bring-items'] = prof.bring;
+  if (prof.resources) v['sched-resources'] = prof.resources;
+  if (prof.bg) v['background-check'] = prof.bg;
+  v['absence-policy'] = OG_DEFAULT_ABSENCE;
+  return v;
+}
+function ogApply(id, value, force) {
+  const el = document.getElementById(id); if (!el || !value) return false;
+  const cur = el.value || '';
+  if (!force && cur && cur !== _ogPrefilled[id]) return false;   // the leader typed something — leave it
+  if (el.tagName === 'SELECT' && ![...el.options].some(function(o){ return (o.value || o.text) === value; })) return false;
+  el.value = value; _ogPrefilled[id] = value;
+  if (el.tagName === 'TEXTAREA') { el.style.height = 'auto'; el.style.height = Math.max(el.scrollHeight, 60) + 'px'; }
+  return true;
+}
+function ogPrefillFromTeam(name, force) {
   const note = document.getElementById('og-prefill-note');
+  if (!name || name === 'Other') { if (note) note.style.display = 'none'; return; }
+  // Clear an earlier team's untouched prefill before filling this one.
+  if (_ogPrefilled._team && _ogPrefilled._team !== name) Object.keys(_ogPrefilled).forEach(function(id) { const el = document.getElementById(id); if (id !== '_team' && el && el.value === _ogPrefilled[id]) el.value = ''; });
+  if (_ogPrefilled._team !== name) _ogPrefilled = { _team: name };
+  const vals = ogPrefillValues(name), filled = [];
+  Object.keys(vals).forEach(function(id) { if (ogApply(id, vals[id], force)) filled.push(id); });
   const match = ogFindTeam(name);
-  if (!match) { if (note) note.style.display = 'none'; return; }
-  const filled = [];
-  if (match.form && match.form.l) { if (ogSetIfEmpty('leader-name', match.form.l)) filled.push('leader name'); }
-  // Surface the roster context the dashboard is sure of (from PCO), even where
-  // there's no matching form field — helps the leader fill "how many we need".
   let ctx = '';
-  if (match.serve && (match.serve.current != null || match.serve.needed != null)) {
-    ctx = ' Planning Center shows ~' + (match.serve.current || 0) + ' serving' +
-          (match.serve.needed != null ? ', ~' + match.serve.needed + ' more needed.' : '.');
-  } else if (match.form && match.form.mem != null) {
-    ctx = ' Planning Center shows ~' + match.form.mem + ' on this team' +
-          (match.form.need != null ? ', ~' + match.form.need + ' more needed.' : '.');
-  }
+  if (match && match.serve && (match.serve.current != null || match.serve.needed != null)) ctx = 'Planning Center shows ~' + (match.serve.current || 0) + ' serving' + (match.serve.needed != null ? ' (goal ~' + match.serve.needed + ').' : '.');
   if (note) {
-    if (filled.length || ctx) {
-      note.innerHTML = '&#10003; Prefilled from Planning Center' +
-        (filled.length ? ': ' + filled.join(', ') + '.' : '.') + ctx +
-        ' <span style="color:var(--muted)">Edit anything below.</span>';
-      note.style.display = '';
-    } else { note.style.display = 'none'; }
+    note.innerHTML = (filled.length || Object.keys(vals).length
+      ? '&#10003; Prefilled ' + (filled.length ? filled.length + ' section' + (filled.length === 1 ? '' : 's') : 'this team') + ' from Planning Center, the team checklist, and our Sunday schedule. ' + ctx + ' <span style="color:var(--muted)">Edit anything below.</span>' +
+        ' <a href="#" onclick="ogRefill();return false" style="color:#2dd4bf;font-weight:700">Refill everything</a>'
+      : ctx) + '<div id="og-contact-box" style="margin-top:.45rem"></div>';
+    note.style.display = '';
   }
+  scheduleDraftSave();
+  ogLoadContacts(name);
+}
+function ogRefill() {
+  const name = currentTeamSelect(); if (!name) return;
+  if (!confirm('Replace every prefilled section with fresh info from Planning Center and the team checklist?\n\nAnything you typed in those sections will be replaced.')) return;
+  ogPrefillFromTeam(name, true);
+}
+function currentTeamSelect() { const v = val('team-name'); return v && v !== 'Other' ? v : ''; }
+// Leader + secondary contact from Planning Center — staff (admin) or the leader (last 4 of phone).
+function ogContactParams(name, extra) {
+  const prof = ogProfile(name) || {}, match = ogFindTeam(name);
+  const q = { action: 'og_team_contact', team: prof.form || (match && match.form && match.form.n) || prof.pco || name, pcoTeam: prof.pco || name, leader: (match && match.form && match.form.l) || '' };
+  return Object.keys(Object.assign(q, extra || {})).map(function(k){ return k + '=' + encodeURIComponent(q[k]); }).join('&');
+}
+function ogLoadContacts(name, verify) {
+  const box = document.getElementById('og-contact-box'); if (!box) return;
+  let saved = ''; try { saved = sessionStorage.getItem('og_v_' + ogNormTeam(name)) || ''; } catch (e) {}
+  verify = verify || saved;
+  const extra = _ogPw ? { pw: _ogPw } : (verify ? { verify: verify } : {});
+  _ogContactTeam = name;
+  box.innerHTML = '<span style="color:var(--muted)">Looking up contact info in Planning Center…</span>';
+  fetch(OG_WEBAPP_URL + '?' + ogContactParams(name, extra) + '&t=' + Date.now()).then(function(r){ return r.json(); }).then(function(res) {
+    if (_ogContactTeam !== name) return;
+    if (!res || !res.ok) { box.innerHTML = ''; return; }
+    const p = res.primary, s = res.secondary;
+    if (!res.locked) {
+      const got = [];
+      if (p) { if (!val('leader-name') || val('leader-name') === _ogPrefilled['leader-name']) ogApply('leader-name', p.name, true); if (ogApply('leader-phone', p.phone)) got.push('phone'); if (ogApply('leader-email', p.email)) got.push('email'); }
+      if (s) {
+        const cb = document.getElementById('has-secondary');
+        if (ogApply('secondary-contact', s.name)) got.push('secondary contact');
+        ogApply('secondary-phone', s.phone); ogApply('secondary-email', s.email);
+        if (cb && val('secondary-contact')) { cb.checked = true; document.getElementById('secondary-fields').style.display = ''; }
+      }
+      if (verify && !_ogPw) { try { sessionStorage.setItem('og_v_' + ogNormTeam(name), verify); } catch (e) {} }
+      box.innerHTML = got.length ? '&#10003; Contact info filled in (' + got.join(', ') + ').' : (p || s ? '&#10003; Contact info is up to date.' : '');
+      scheduleDraftSave();
+      return;
+    }
+    if (verify && !_ogPw) { try { sessionStorage.removeItem('og_v_' + ogNormTeam(name)); } catch (e) {} }
+    if (p && p.name && !val('leader-name')) ogApply('leader-name', p.name);
+    if (!p || !res.canVerify) {
+      box.innerHTML = s ? '<span style="color:var(--muted)">Secondary contact on file in Planning Center: ' + esc(s.name) + '. Staff can fill contact details from the Admin panel.</span>' : '';
+      return;
+    }
+    box.innerHTML = '<span>Are you ' + esc(p.name) + '? Enter the <b>last 4 digits of your phone</b> to fill in your contact info' + (s ? ' (and ' + esc(s.name) + ' as secondary contact)' : '') + ':</span> ' +
+      '<input id="og-verify" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" style="width:70px;padding:.25rem .45rem;margin:0 .3rem;border-radius:6px;border:1px solid rgba(45,212,191,.4);background:transparent;color:inherit" onkeydown="if(event.key===\'Enter\')ogVerify()">' +
+      '<button type="button" onclick="ogVerify()" style="padding:.25rem .7rem;border-radius:6px;border:1px solid #2dd4bf;background:rgba(45,212,191,.15);color:#2dd4bf;font-weight:700;cursor:pointer">Fill in</button>' +
+      (verify ? ' <span style="color:#f87171">That didn’t match — try again.</span>' : '');
+  }).catch(function() { if (_ogContactTeam === name) box.innerHTML = ''; });
+}
+function ogVerify() {
+  const v = (document.getElementById('og-verify') || {}).value || '', name = currentTeamSelect();
+  if (!/^\d{4}$/.test(v.trim()) || !name) return;
+  ogLoadContacts(name, v.trim());
 }
 
 function handleTeamSelect(v) {
@@ -1195,7 +1421,15 @@ function bulletLines(text) {
   const lines = text.split('\n').filter(l=>l.trim());
   // Strip only bullet markers ("• ", "- ", "* ", "1. ", "1) ") — never digits
   // that are part of the content, like the "9" in "9:10 - At Post".
-  return '<ul class="doc-list">'+lines.map(l=>'<li>'+esc(l.trim().replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/,''))+'</li>').join('')+'</ul>';
+  // A line ending in ":" (e.g. "Pre-Service Prep:") is a sub-heading for the lines under it.
+  let html = '', open = false;
+  lines.forEach(l => {
+    const t = l.trim();
+    if (/:$/.test(t) && !/ — /.test(t) && t.length < 70) { if (open) { html += '</ul>'; open = false; } html += '<p style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6b6560;margin:.55rem 0 .2rem">'+esc(t.replace(/:$/,''))+'</p>'; return; }
+    if (!open) { html += '<ul class="doc-list">'; open = true; }
+    html += '<li>'+esc(t.replace(/^(?:[•\-\*]+|\d+[\.\)])\s+/,''))+'</li>';
+  });
+  return html + (open ? '</ul>' : '');
 }
 function card(lbl,v) {
   if (!v) return '';
@@ -1489,6 +1723,8 @@ async function admUnlock() {
   const h = await sha256Hex(pw);
   if (h !== OG_ADMIN_HASH) { document.getElementById('admErr').style.display = ''; return; }
   _ogPw = h;
+  try { sessionStorage.setItem('og_adm', h); } catch (e) {}
+  if (typeof currentTeamSelect === 'function' && currentTeamSelect()) ogLoadContacts(currentTeamSelect());
   document.getElementById('admPw').value = '';
   document.getElementById('admErr').style.display = 'none';
   document.getElementById('admLocked').style.display = 'none';
@@ -1925,7 +2161,7 @@ async function downloadWord() {
   });
   if (val('typical-day')) {
     kids.push(subHead('A Typical Service Day'));
-    lines(val('typical-day')).forEach(l => kids.push(bullet(l)));
+    lines(val('typical-day')).forEach(l => { const t = l.trim(); kids.push(/:$/.test(t) && !/ — /.test(t) && t.length < 70 ? subHead(t.replace(/:$/, '')) : bullet(l)); });
   }
 
   // ── PLANNING CENTER ──
