@@ -135,7 +135,7 @@ window.LSSR_TEAM_CHECKLISTS = {
 
   'service captains': [
     { phase:'Team & Access', time:'—', text:'Team: Matt Bowman, Kelly Coan, Matt Gardner, Sam Griffin, Thomas Peregrin, Danny Rotter, Tim Milligan, Manuel Sanchez' },
-    { phase:'Team & Access', time:'—', text:'All pad locks and alarm code: 9591' },
+    { phase:'Team & Access', time:'—', text:'Padlock & alarm code: not posted here for security — if you forgot it, ask your team leader' },
     { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Trash bags 28x45' },
     { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Toilet paper / seat covers' },
     { phase:'Notes & Supplies', time:'Restock via inventory app', text:'Trifold paper towels' },
