@@ -1120,7 +1120,29 @@
   .cp-card { margin-top: 18px; }
   .cp-wrap { position: relative; padding: 8px 4px 4px; display: flex; flex-direction: column; gap: 16px; }
   .cp-wrap.cp-abs { display: block; padding: 0; }
-  .cp-wrap.cp-abs .cp-goal, .cp-wrap.cp-abs .cp-reality, .cp-wrap.cp-abs .cp-smart, .cp-wrap.cp-abs .cp-otitle, .cp-wrap.cp-abs .cp-osteps { position: absolute; z-index: 1; }
+  .cp-wrap.cp-abs .cp-goal, .cp-wrap.cp-abs .cp-reality, .cp-wrap.cp-abs .cp-smart, .cp-wrap.cp-abs .cp-oblock { position: absolute; z-index: 1; }
+  .cp-wrap.cp-abs .cp-goal, .cp-wrap.cp-abs .cp-reality { overflow-y: auto; }
+  /* Landscape diagram: each objective is a column hanging off the diagonal — its line (top border)
+     starts ON the diagonal, the bracket (left border) drops from there, steps hang below. */
+  .cp-wrap.cp-abs .cp-oblock { border-top: 3px solid var(--sp-ink,#1a1510); border-left: 2px solid var(--sp-ink,#1a1510); background: rgba(255,255,255,.92); padding: 4px 6px 2px 0; }
+  .cp-wrap.cp-abs .cp-oblock-new { border-top-style: dashed; border-left-style: dashed; border-color: #c9b99c; }
+  .cp-wrap.cp-abs .cp-otitle { border: none; text-align: left; padding: 0 0 2px 12px; }
+  .cp-wrap.cp-abs .cp-otitle .cp-obj-lbl, .cp-wrap.cp-abs .cp-otitle .cp-obj-title { text-align: left; }
+  .cp-wrap.cp-abs .cp-otitle-row { flex-direction: row-reverse; align-items: flex-start; }
+  .cp-wrap.cp-abs .cp-osteps { border-left: none; background: none; padding-top: 0; }
+  .cp-wrap.cp-abs .cp-step { padding: 3px 0; }
+  .cp-wrap.cp-abs .cp-step-in { font-size: 12.5px; line-height: 1.35; }
+  .cp-wrap.cp-abs .cp-box { padding: 12px 14px; }
+  .cp-wrap.cp-abs .cp-mrow { padding: 4px 0; font-size: 13px; }
+  .cp-wrap.cp-abs .cp-mval { font-size: 15px; }
+  .cp-more > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: #8a5a12; margin-top: 8px; list-style: none; }
+  .cp-more > summary::-webkit-details-marker { display: none; }
+  .cp-gnums { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--sp-muted,#8a7e6e); white-space: nowrap; flex: 0 0 auto; }
+  .cp-gnums b { color: var(--sp-ink,#1a1510); font-size: 14px; }
+  .cp-num.sm { width: 54px; padding: 2px 5px; font-size: 13px; }
+  .cp-gcfg { display: none; margin-top: 6px; }
+  .cp-grow.cfg .cp-gcfg { display: block; }
+  .cp-grow-top .cp-gtitle { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; }
   .cp-oblock { position: static; }
   .cp-otitle { text-align: right; border-bottom: 3px solid var(--sp-ink,#1a1510); padding-bottom: 2px; }
   .cp-otitle .cp-obj-lbl { text-align: right; }
@@ -1148,14 +1170,14 @@
   .cp-madd-row .sos-input { flex: 1 1 auto; min-width: 0; }
   .cp-narrow { flex: 0 0 76px !important; }
   .cp-link { background: none; border: none; color: #8a5a12; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; text-align: left; padding: 2px 0; }
-  .cp-grow { padding: 8px 0 10px; border-bottom: 1px dashed var(--sp-border,#e6dccb); }
+  .cp-grow { padding: 6px 0 7px; border-bottom: 1px dashed var(--sp-border,#e6dccb); }
   .cp-grow-top { display: flex; gap: 6px; align-items: center; }
   .cp-gtitle { flex: 1 1 auto; border: none; background: transparent; font: inherit; font-size: 14.5px; font-weight: 800; color: var(--sp-ink,#1a1510); padding: 2px 0; min-width: 0; }
   .cp-gtitle:focus, .cp-obj-title:focus, .cp-step-in:focus { outline: none; background: #fffaf0; box-shadow: 0 0 0 2px rgba(201,150,58,.35); border-radius: 5px; }
   .cp-grow-nums { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12.5px; color: var(--sp-muted,#8a7e6e); margin: 4px 0 6px; }
   .cp-now b { color: var(--sp-ink,#1a1510); font-size: 14px; }
   .cp-gmetric { font: inherit; font-size: 11.5px; border: 1px solid var(--sp-border,#e6dccb); border-radius: 6px; padding: 3px 4px; background: #fffdf8; color: var(--sp-muted,#8a7e6e); max-width: 100%; }
-  .cp-gbar { height: 8px; border-radius: 6px; background: #eadfca; overflow: hidden; }
+  .cp-gbar { height: 6px; margin-top: 5px; border-radius: 6px; background: #eadfca; overflow: hidden; }
   .cp-gbar i { display: block; height: 100%; background: linear-gradient(90deg, #c9963a, #3f9b6b); border-radius: 6px; }
   .cp-gadd { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
   .cp-gadd .cp-need { border-color: #c83a3a !important; box-shadow: 0 0 0 3px rgba(200,58,58,.18); }
@@ -8349,11 +8371,11 @@ function cpHtml(person) {
       (r.custom ? '<input class="cp-mval-in" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">' : '<b class="cp-mval">' + cpFmt(r.value, r.unit) + (r.hint ? '<small> / ' + cpFmt(r.hint, r.unit) + ' goal</small>' : '') + '</b>') +
       '<button class="cp-x" title="Remove" onclick="' + (r.custom ? 'sosDeletePlan(\'' + r.id + '\')' : (r.linkId ? 'sosDeletePlan(\'' + r.linkId + '\')' : 'cpHideMetric(\'' + E(r.key) + '\')')) + '">×</button></div>').join('')
       : '<div class="sos-empty sm">No metrics yet.</div>') +
-    '<div class="cp-madd">' +
-      (addOpts ? '<select class="sos-input sm" onchange="if(this.value){cpAddLink(this.value);this.value=\'\'}"><option value="">＋ Add a dashboard metric…</option>' + addOpts + '</select>' : '') +
+    '<details class="cp-more"><summary>＋ Add a metric</summary><div class="cp-madd">' +
+      (addOpts ? '<select class="sos-input sm" onchange="if(this.value){cpAddLink(this.value);this.value=\'\'}"><option value="">Add a dashboard metric…</option>' + addOpts + '</select>' : '') +
       '<div class="cp-madd-row"><input id="cpNewMLabel" class="sos-input sm" placeholder="Your own metric…"><input id="cpNewMVal" class="sos-input sm cp-narrow" placeholder="Value"><button class="sos-btn sm" onclick="cpAddCustomMetric()">Add</button></div>' +
       '<button class="cp-link" onclick="cpRequestMetric()">📨 Ask Brad to add an automatic metric</button>' +
-    '</div></div>';
+    '</div></details></div>';
 
   const goals = cpPlans('goal12');
   const overall = cpOverallPct();
@@ -8361,17 +8383,17 @@ function cpHtml(person) {
   const goalHtml = '<div class="cp-box cp-goal"><div class="cp-box-h">12-Month Goals <span>(Realistic)</span>' + (overall != null ? '<b class="cp-overall">' + Math.round(overall * 100) + '% there</b>' : '') + '</div>' +
     (goals.length ? goals.map(g => {
       const pct = cpGoalPct(g), v = cpGoalValue(g), m = g.metric && cat[g.metric];
-      return '<div class="cp-grow">' +
-        '<div class="cp-grow-top"><input class="cp-gtitle" value="' + E(g.title) + '" onchange="cpSet(\'' + g.id + '\',\'title\',this.value)"><button class="cp-x" onclick="sosDeletePlan(\'' + g.id + '\')">×</button></div>' +
-        '<div class="cp-grow-nums">' +
-          (m ? '<span class="cp-now">Now <b>' + cpFmt(v, m.unit) + '</b></span>' : 'Now <input class="cp-num" value="' + E(String(g.current || '')) + '" onchange="cpSet(\'' + g.id + '\',\'current\',this.value)">') +
-          ' → Goal <input class="cp-num" value="' + E(String(g.target || '')) + '" onchange="cpSet(\'' + g.id + '\',\'target\',this.value)">' +
-          '<select class="cp-gmetric" onchange="cpLinkGoal(\'' + g.id + '\',this.value)">' + metricOpts(g.metric) + '</select>' +
-        '</div>' +
-        '<div class="cp-gbar"><i style="width:' + (pct == null ? 0 : Math.round(pct * 100)) + '%"></i></div></div>';
+      return '<div class="cp-grow" id="cpG_' + g.id + '">' +
+        '<div class="cp-grow-top"><input class="cp-gtitle" title="' + E(g.title) + '" value="' + E(g.title) + '" onchange="cpSet(\'' + g.id + '\',\'title\',this.value)">' +
+          '<span class="cp-gnums">' + (m ? '<b title="Auto: ' + E(m.label) + '">' + cpFmt(v, m.unit) + '</b>' : '<input class="cp-num sm" title="Where you are now" value="' + E(String(g.current || '')) + '" onchange="cpSet(\'' + g.id + '\',\'current\',this.value)">') +
+          ' → <input class="cp-num sm" title="12-month goal" value="' + E(String(g.target || '')) + '" onchange="cpSet(\'' + g.id + '\',\'target\',this.value)"></span>' +
+          '<button class="cp-x" title="Link to an automatic metric" onclick="document.getElementById(\'cpG_' + g.id + '\').classList.toggle(\'cfg\');cpLayoutSoon()">⚙</button>' +
+          '<button class="cp-x" title="Delete goal" onclick="sosDeletePlan(\'' + g.id + '\')">×</button></div>' +
+        '<div class="cp-gbar"><i style="width:' + (pct == null ? 0 : Math.round(pct * 100)) + '%"></i></div>' +
+        '<div class="cp-gcfg"><select class="cp-gmetric" onchange="cpLinkGoal(\'' + g.id + '\',this.value)">' + metricOpts(g.metric) + '</select></div></div>';
     }).join('') : '<div class="sos-empty sm">Where do you want to be 12 months from now? Add your first goal.</div>') +
-    '<div class="cp-gadd"><input id="cpNewGoal" class="sos-input sm" placeholder="Goal name (e.g. 50 active groups)…" onkeydown="if(event.key===\'Enter\')cpAddGoal()">' +
-      '<div class="cp-madd-row"><input id="cpNewGoalTarget" class="sos-input sm cp-narrow" placeholder="Target #" onkeydown="if(event.key===\'Enter\')cpAddGoal()"><select id="cpNewGoalMetric" class="sos-input sm">' + metricOpts('') + '</select><button class="sos-btn sm hi" onclick="cpAddGoal()">Add goal</button></div></div>' +
+    '<details class="cp-more"' + (goals.length ? '' : ' open') + '><summary>＋ Add a goal</summary><div class="cp-gadd"><input id="cpNewGoal" class="sos-input sm" placeholder="Goal name (e.g. 50 active groups)…" onkeydown="if(event.key===\'Enter\')cpAddGoal()">' +
+      '<div class="cp-madd-row"><input id="cpNewGoalTarget" class="sos-input sm cp-narrow" placeholder="Target #" onkeydown="if(event.key===\'Enter\')cpAddGoal()"><select id="cpNewGoalMetric" class="sos-input sm">' + metricOpts('') + '</select><button class="sos-btn sm hi" onclick="cpAddGoal()">Add goal</button></div></div></details>' +
     '</div>';
 
   const objs = cpPlans('objective').concat(cpPlans('goal').filter(p => !p.parentId)).slice(0, 3);
@@ -8395,12 +8417,12 @@ function cpHtml(person) {
         '<div class="cp-step cp-step-add"><input id="cpStep_' + o.id + '" class="cp-step-in" placeholder="＋ Add an action step…" onkeydown="if(event.key===\'Enter\')sosAddStep(\'' + o.id + '\',\'cpStep_' + o.id + '\')"></div>' +
       '</div></div>';
   };
-  return '<div class="sos-card cp-card"><div class="sos-card-h">🧭 12-Month Critical Path <span class="sos-count">Current reality → strategic objectives → goal</span></div>' +
+  return '<div class="sos-card cp-card"><div class="sos-card-h">🧭 My Annual Plan <span class="sos-count">Current reality → strategic objectives → 12-month goals</span></div>' +
     '<div class="cp-wrap" id="cpWrap">' +
       '<svg class="cp-svg" id="cpSvg" aria-hidden="true"></svg>' +
       '<div class="cp-smart"><b>Action steps should be SMART</b>Specific · Measurable · Attainable · Realistic · Timely<span>(i.e. who will do what, and when?)</span></div>' +
       goalHtml +
-      slots.slice().sort((a, b) => b.i - a.i).map(blockHtml).join('') +
+      slots.map(blockHtml).join('') +
       realityHtml +
     '</div></div>';
 }
@@ -8420,48 +8442,38 @@ function cpLayout() {
     window._cpRO.observe(wrap); wrap._cpRO = true;
   }
   if (!wrap.clientWidth) return;                         // hidden — the observer will call us back
-  wrap.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
-  const W = wrap.clientWidth, parts = wrap.querySelectorAll('.cp-goal, .cp-reality, .cp-smart, .cp-otitle, .cp-osteps');
-  if (W < 980) { wrap.classList.remove('cp-abs'); parts.forEach(el => el.removeAttribute('style')); wrap.style.height = ''; _cpGeo = null; cpDrawLine(); return; }
+  // Break the card out of the page column so it spans (almost) the whole screen.
+  const card = wrap.closest('.cp-card'), host = card && card.parentElement;
+  if (card && host) {
+    const vw = document.documentElement.clientWidth, want = Math.min(vw - 40, 1880), hr = host.getBoundingClientRect();
+    if (want > hr.width + 60) { card.style.width = want + 'px'; card.style.marginLeft = Math.round((vw - want) / 2 - hr.left) + 'px'; }
+    else { card.style.width = ''; card.style.marginLeft = ''; }
+  }
+  const fit = el => el.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
+  const W = wrap.clientWidth, parts = wrap.querySelectorAll('.cp-goal, .cp-reality, .cp-smart, .cp-oblock');
+  if (W < 1100) { wrap.classList.remove('cp-abs'); parts.forEach(el => el.removeAttribute('style')); fit(wrap); wrap.style.height = ''; _cpGeo = null; cpDrawLine(); return; }
   wrap.classList.add('cp-abs');
   const G = wrap.querySelector('.cp-goal'), R = wrap.querySelector('.cp-reality'), S = wrap.querySelector('.cp-smart');
-  const goalW = Math.min(360, Math.round(W * 0.3)), realW = Math.min(360, Math.round(W * 0.3)), titleW = 250, gap = 34;
-  G.style.cssText = 'left:' + (W - goalW) + 'px;top:0;width:' + goalW + 'px';
-  S.style.cssText = 'left:0;top:0;width:240px';
-  R.style.width = realW + 'px';
-  const xg = W - goalW, yg = G.offsetHeight, xr = realW;
-  const blocks = [...wrap.querySelectorAll('.cp-oblock')];     // top (nearest goal) → bottom
-  // pass 1: estimate each anchor's x from even spacing, size steps, measure heights
-  const n = blocks.length;
-  const place = xs => {
-    let y = yg + 46; const ys = [];
-    blocks.forEach((b, k) => {
-      const T = b.querySelector('.cp-otitle'), P = b.querySelector('.cp-osteps');
-      const stepW = Math.max(230, Math.min(W - xs[k] - 10, 560));
-      T.style.cssText = 'width:' + titleW + 'px';
-      if (P) P.style.cssText = 'width:' + stepW + 'px';
-      b.querySelectorAll('textarea').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });   // re-fit text at this width
-      const th = T.offsetHeight, ph = P ? P.offsetHeight : 0;
-      ys.push(y + th);                                  // anchor = bottom of the objective line
-      y += th + ph + gap;
-    });
-    return { ys, yEnd: y };
-  };
-  let xs = blocks.map((b, k) => xg - (xg - xr) * (k + 1) / (n + 1)), lay = place(xs);
-  const yr = Math.max(lay.yEnd + 10, yg + 260);
-  const xOn = y => xg + (xr - xg) * (y - yg) / (yr - yg);   // point on the diagonal at height y
-  xs = lay.ys.map(xOn); lay = place(xs);                     // pass 2 with real x's
-  const yr2 = Math.max(lay.yEnd + 10, yg + 260), xOn2 = y => xg + (xr - xg) * (y - yg) / (yr2 - yg);
+  const H0 = 660, goalW = Math.min(360, Math.round(W * 0.21)), realW = Math.min(330, Math.round(W * 0.19)), gap = 18;
+  S.style.cssText = 'left:0;top:0;width:' + Math.min(270, realW) + 'px';
+  G.style.cssText = 'left:' + (W - goalW) + 'px;top:0;width:' + goalW + 'px;max-height:' + H0 + 'px';
+  R.style.cssText = 'left:0;width:' + realW + 'px;max-height:' + Math.max(260, H0 - S.offsetHeight - 30) + 'px';
+  const x1 = realW, y1 = Math.max(S.offsetHeight + 24, H0 - R.offsetHeight), x2 = W - goalW, y2 = 64;
+  R.style.top = y1 + 'px';
+  const yOn = x => y1 + (y2 - y1) * (x - x1) / (x2 - x1);
+  const blocks = [...wrap.querySelectorAll('.cp-oblock')];   // objective 1 (left, lowest) → 3 (right, highest)
+  const colW = (x2 - x1 - gap) / Math.max(blocks.length, 1);
+  let H = Math.max(H0, y1 + R.offsetHeight, G.offsetHeight);
   const anchors = [];
   blocks.forEach((b, k) => {
-    const T = b.querySelector('.cp-otitle'), P = b.querySelector('.cp-osteps'), ay = lay.ys[k], ax = xOn2(ay);
-    T.style.cssText = 'width:' + titleW + 'px;left:' + (ax - titleW) + 'px;top:' + (ay - T.offsetHeight) + 'px';
-    if (P) P.style.cssText = 'width:' + Math.max(230, Math.min(W - ax - 10, 560)) + 'px;left:' + ax + 'px;top:' + ay + 'px';
+    const ax = x1 + gap / 2 + k * colW + 6, ay = yOn(ax);
+    b.style.cssText = 'left:' + ax + 'px;top:' + ay + 'px;width:' + (colW - gap) + 'px';
+    fit(b);
+    H = Math.max(H, ay + b.offsetHeight + 8);
     anchors.push([ax, ay]);
   });
-  R.style.cssText = 'left:0;top:' + yr2 + 'px;width:' + realW + 'px';
-  wrap.style.height = (yr2 + R.offsetHeight + 8) + 'px';
-  _cpGeo = { x1: xr, y1: yr2, x2: xg, y2: yg, anchors };
+  wrap.style.height = Math.ceil(H) + 'px';
+  _cpGeo = { x1: x1, y1: y1, x2: x2, y2: y2, anchors };
   cpDrawLine();
 }
 // Diagonal line from Current Reality up to the 12-month goal, filled like a thermometer.
@@ -15040,7 +15052,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T181552Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T183255Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
