@@ -1089,6 +1089,54 @@
   @media (max-width: 1180px) { .sos-grid.sos-grid3 { grid-template-columns: 1fr 1fr; } .sos-grid.sos-grid3 > .sos-col:first-child { grid-column: 1 / -1; } }
   @media (max-width: 900px) { .sos-grid, .sos-grid.sos-grid3 { grid-template-columns: 1fr; } }
   .sos-col { display: flex; flex-direction: column; gap: 22px; }
+  /* ── Stories (Share a Community Group Story form → Staff area) ── */
+  .st-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .st-chip { border: 1px solid var(--sp-border); background: #fff; color: var(--sp-ink); border-radius: 18px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .st-chip:hover { border-color: var(--sp-gold); }
+  .st-chip.on { background: var(--sp-ink); color: var(--sp-parchment); border-color: var(--sp-ink); }
+  .st-chip .n { opacity: .65; font-weight: 500; margin-left: 4px; }
+  .st-search { flex: 1; min-width: 180px; border: 1px solid var(--sp-border); border-radius: 18px; padding: 7px 14px; font-size: 13px; font-family: inherit; background: #fff; color: var(--sp-ink); }
+  .st-btn { border: 1px solid var(--sp-border); background: #fff; color: var(--sp-ink); border-radius: 8px; padding: 7px 13px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; }
+  .st-btn:hover { border-color: var(--sp-gold); }
+  .st-btn.pri { background: var(--sp-ink); color: var(--sp-parchment); border-color: var(--sp-ink); }
+  .st-btn:disabled { opacity: .55; cursor: default; }
+  .st-meta { font-size: 12px; color: var(--sp-muted); margin-bottom: 18px; }
+  .st-list { display: flex; flex-direction: column; gap: 14px; }
+  .st-card { background: #fff; border: 1px solid var(--sp-border); border-left: 4px solid var(--sp-border); border-radius: 10px; padding: 16px 20px; }
+  .st-card.s-new { border-left-color: var(--sp-gold); }
+  .st-card.s-shared { border-left-color: var(--sp-green); }
+  .st-card.s-archived { opacity: .7; }
+  .st-head { cursor: pointer; }
+  .st-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: var(--sp-muted); margin-bottom: 6px; }
+  .st-pill { font-size: 11px; font-weight: 700; letter-spacing: .3px; padding: 2px 9px; border-radius: 10px; background: var(--sp-section-bg); color: var(--sp-ink); }
+  .st-pill.new { background: rgba(201,150,58,.16); color: #8a6320; }
+  .st-pill.shared { background: rgba(58,122,74,.13); color: var(--sp-green); }
+  .st-pill.private { background: rgba(168,48,48,.1); color: var(--sp-red); }
+  .st-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--sp-ink); line-height: 1.3; }
+  .st-who { font-size: 13px; color: var(--sp-muted); margin-top: 3px; }
+  .st-sum { font-size: 14px; color: var(--sp-ink); margin-top: 8px; line-height: 1.55; }
+  .st-body { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--sp-border); }
+  .st-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--sp-ink); border-left: 3px solid var(--sp-gold); padding: 4px 0 4px 14px; margin: 0 0 14px; }
+  .st-story { font-size: 14.5px; line-height: 1.7; color: var(--sp-ink); }
+  .st-story p { margin: 0 0 10px; }
+  .st-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-muted); margin: 14px 0 5px; }
+  .st-follow { font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); border-radius: 6px; padding: 8px 12px; }
+  .st-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .st-tag { font-size: 11px; color: var(--sp-muted); border: 1px solid var(--sp-border); border-radius: 10px; padding: 1px 8px; }
+  .st-ta { width: 100%; border: 1px solid var(--sp-border); border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 13.5px; line-height: 1.5; color: var(--sp-ink); background: #fbf9f4; resize: vertical; box-sizing: border-box; }
+  .st-in { width: 100%; border: 1px solid var(--sp-border); border-radius: 6px; padding: 7px 10px; font-family: inherit; font-size: 14px; color: var(--sp-ink); background: #fbf9f4; box-sizing: border-box; }
+  .st-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .st-raw { margin-top: 12px; font-size: 12.5px; color: var(--sp-muted); }
+  .st-raw summary { cursor: pointer; }
+  .st-raw div { white-space: pre-wrap; margin-top: 6px; padding: 10px 12px; background: var(--sp-section-bg); border-radius: 6px; color: var(--sp-ink); }
+  .st-empty { background: #fff; border: 1px dashed var(--sp-border); border-radius: 10px; padding: 28px; text-align: center; color: var(--sp-muted); font-size: 14px; line-height: 1.6; }
+  .st-empty a, .st-meta a, .sp-section-header a.st-link { color: var(--sp-gold); }
+  .st-navn { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 6px; border-radius: 9px; background: var(--sp-gold); color: var(--sp-ink); font-size: 11px; font-weight: 800; line-height: 18px; text-align: center; }
+  .st-sync-row { display: block; width: 100%; text-align: left; background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-left: 3px solid var(--sp-gold); border-radius: 0 4px 4px 0; padding: 10px 14px; margin-bottom: 8px; cursor: pointer; font-family: inherit; color: var(--sp-ink); }
+  .st-sync-row:hover { background: var(--sp-section-bg); }
+  .st-sync-row .t { font-size: 14px; font-weight: 700; }
+  .st-sync-row .m { font-size: 12px; color: var(--sp-muted); margin-top: 2px; }
+  .st-sync-row .s { font-size: 13px; margin-top: 5px; line-height: 1.5; }
   .sos-card { background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 16px; padding: 24px; box-shadow: 0 4px 18px rgba(26,21,16,0.05); }
   .sos-card-h { font-size: 18px; font-weight: 800; color: var(--sp-ink,#1a1510); margin-bottom: 18px; display: flex; align-items: center; gap: 9px; }
   .sos-count { font-size: 12px; font-weight: 700; color: var(--sp-muted,#8a7e6e); background: rgba(26,21,16,.05); padding: 3px 10px; border-radius: 12px; }
@@ -4012,6 +4060,9 @@
 
         <!-- Pathway Tracker (rendered by staffRenderPathway) -->
         <div class="sp-section" id="sp-pathway"></div>
+
+        <!-- Stories — Share a Community Group Story form (rendered by stRender) -->
+        <div class="sp-section" id="sp-stories"></div>
 
         <!-- Announcement Card generator (rendered by ogaInit) -->
         <div class="sp-section" id="sp-announce">
@@ -12672,6 +12723,19 @@ function staffRenderL10(data) {
 
     if (isJoyBombs) return joyBombRenderSection_();
 
+    // Segue (good news) → the normal notes box, then any Community Group stories since last Monday.
+    if (t.includes('segue')) return `
+      <div class="sp-l10-sec">
+        <div class="sp-l10-sec-hdr">
+          <h4>${a.item}</h4>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--sp-muted);">${a.time}</span>
+        </div>
+        <div class="sp-l10-input-row" style="margin-top:8px;">
+          <textarea data-sk="item_${ai}" class="sp-l10-inp" style="width:100%;" placeholder="Notes…"${dis}></textarea>
+        </div>
+      </div>
+      <div class="sp-l10-sec" id="sp-l10-stories"></div>`;
+
     if (isStaffDev) return `
       <div class="sp-l10-sec">
         <div class="sp-l10-sec-hdr">
@@ -12805,6 +12869,7 @@ function staffRenderL10(data) {
     </div>`;
 
   if (!locked) staffL10BindAndRestore();
+  stRenderSync();
   staffL10RenderHistory();
   const _idsLogEl = document.getElementById('sp-l10-ids-log');
   if (_idsLogEl) idsRefreshList_(_idsLogEl);
@@ -12979,6 +13044,220 @@ function staffRenderAllGroups_(data) {
 // These read from the JSON pushed by the LS South Reno Staff OS Google Sheet.
 // If the JSON doesn't include these fields, the hardcoded HTML fallback stays.
 
+// ════════════════════════════════════════════════════════════════════════════
+// STORIES — "Share a Community Group Story" PCO form → Staff "Stories" tab + the
+// "New stories" block on Staff Sync. Backend: Code_stories.gs on the STAFF_OS
+// deployment (story_list / story_sync / story_update). Story text lives only in a
+// private sheet (never in the public JSON); requests carry the staff key.
+// ════════════════════════════════════════════════════════════════════════════
+const ST_FORM_URL  = 'https://lssr.churchcenter.com/people/forms/1324853';
+const ST_CACHE_KEY = 'lssr_stories_cache';
+const ST_STATUS = { new: 'New', reviewed: 'Reviewed', shared: 'Shared', archived: 'Archived' };
+let _st = { stories: null, lastSync: '', aiOn: false, err: '', loading: null, syncing: false, filter: 'new', q: '', open: {}, edit: '', copied: '' };
+
+function stGet(action) {
+  return fetch(STAFF_OS_URL + '?action=' + action + '&k=' + STAFF_HASH + '&_=' + Date.now()).then(r => r.json());
+}
+function stApply(list) { _st.stories = list.stories || []; _st.lastSync = list.lastSync || ''; _st.aiOn = !!list.aiOn; }
+function stLoad() {
+  if (_st.loading) return _st.loading;
+  const p = stGet('story_list').then(res => {
+    if (!res || !res.ok) throw new Error((res && res.error) || 'Could not load stories');
+    stApply(res); _st.err = '';
+    try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify(res)); } catch (e) {}
+  }).catch(e => { _st.err = String(e.message || e); })
+    .finally(() => { _st.loading = null; stRefreshViews(); });
+  _st.loading = p;
+  return p;
+}
+// Pull new submissions straight from PCO (the 15-minute trigger does this too).
+function stSync() {
+  if (_st.syncing) return;
+  _st.syncing = true; stRefreshViews();
+  stGet('story_sync').then(res => {
+    if (res && res.list && res.list.ok) { stApply(res.list); try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify(res.list)); } catch (e) {} }
+    else if (res && !res.ok) _st.err = res.error || 'Sync failed';
+  }).catch(e => { _st.err = String(e.message || e); })
+    .finally(() => { _st.syncing = false; stRefreshViews(); });
+}
+function stInit() {
+  if (!_st.stories) { try { const c = JSON.parse(sessionStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {} }
+  stRender();
+  stLoad().then(() => {
+    if (!_st.lastSync || Date.now() - new Date(_st.lastSync) > 10 * 60 * 1000) stSync();
+  });
+}
+function stRefreshViews() {
+  if (_spCurSection === 'sp-stories') stRender();
+  stRenderSync();
+  stNavCount();
+}
+function stNavCount() {
+  const t = document.querySelector('#staffNav .sp-nav-tab[data-id="sp-stories"]'); if (!t) return;
+  const n = (_st.stories || []).filter(s => s.status === 'new').length;
+  t.innerHTML = 'Stories' + (n ? '<span class="st-navn" aria-label="' + n + ' new">' + n + '</span>' : '');
+}
+
+// Staff Sync covers "since the last meeting": the most recent Monday before today.
+function stWeekStart() {
+  const d = new Date(); d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - ((((d.getDay() + 6) % 7)) || 7));
+  return d;
+}
+function stDate(iso, withYear) {
+  const d = new Date(iso); if (isNaN(d)) return '';
+  const o = { month: 'short', day: 'numeric' };
+  if (withYear || d.getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+  return d.toLocaleDateString('en-US', o);
+}
+function stAgo(iso) {
+  const m = Math.round((Date.now() - new Date(iso)) / 60000);
+  if (!iso || isNaN(m)) return 'never';
+  if (m < 1) return 'just now';
+  if (m < 60) return m + ' min ago';
+  if (m < 1440) return Math.round(m / 60) + ' hr ago';
+  return stDate(iso);
+}
+function stParas(t) {
+  return String(t || '').split(/\n{2,}/).filter(p => p.trim()).map(p => '<p>' + escapeHtml(p.trim()).replace(/\n/g, '<br>') + '</p>').join('');
+}
+function stWho(s) {
+  return [s.person || 'Unknown', s.cgLeader ? 'CG leader: ' + s.cgLeader : ''].filter(Boolean).join(' · ');
+}
+
+function stRender() {
+  const el = document.getElementById('sp-stories'); if (!el) return;
+  const E = escapeHtml, all = _st.stories || [], q = _st.q.trim().toLowerCase();
+  const counts = { all: all.length };
+  all.forEach(s => counts[s.status] = (counts[s.status] || 0) + 1);
+  const list = all.filter(s => (_st.filter === 'all' || s.status === _st.filter) &&
+    (!q || [s.title, s.summary, s.story, s.person, s.cgLeader, (s.tags || []).join(' ')].join(' ').toLowerCase().includes(q)));
+  const chip = (k, label) => '<button class="st-chip' + (_st.filter === k ? ' on' : '') + '" onclick="stSetFilter(\'' + k + '\')">' + label + '<span class="n">' + (counts[k] || 0) + '</span></button>';
+
+  let body;
+  if (!_st.stories && (_st.loading || !_st.err)) body = '<div class="st-empty">Loading stories…</div>';
+  else if (!_st.stories) body = '<div class="st-empty">Couldn’t load stories (' + E(_st.err) + '). <a href="#" onclick="stLoad();return false">Try again</a></div>';
+  else if (!all.length) body = '<div class="st-empty">No stories yet. When someone fills out the <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share a Community Group Story</a> form, it shows up here within about 15 minutes.</div>';
+  else if (!list.length) body = '<div class="st-empty">' + (q ? 'No stories match “' + E(_st.q) + '”.' : 'Nothing in ' + E(ST_STATUS[_st.filter] || _st.filter) + '.') + '</div>';
+  else body = '<div class="st-list">' + list.map(stCardHtml).join('') + '</div>';
+
+  el.innerHTML =
+    '<div class="sp-section-header"><div class="sp-eyebrow">Community Groups</div><h2>Stories</h2>' +
+    '<p>Stories from the <a class="st-link" href="' + ST_FORM_URL + '" target="_blank" rel="noopener">Share a Community Group Story</a> form show up here automatically. ' +
+    'Read them, add notes, and mark the ones you’ve shared.</p></div>' +
+    '<div class="st-bar">' + chip('new', 'New') + chip('reviewed', 'Reviewed') + chip('shared', 'Shared') + chip('archived', 'Archived') + chip('all', 'All') +
+      '<input class="st-search" id="stSearch" type="search" placeholder="Search stories, names, leaders…" value="' + E(_st.q) + '" oninput="stSearch(this.value)">' +
+      '<button class="st-btn" onclick="stCopyLink(this)">Copy form link</button>' +
+      '<button class="st-btn" onclick="stSync()"' + (_st.syncing ? ' disabled' : '') + '>' + (_st.syncing ? 'Checking…' : 'Check for new') + '</button></div>' +
+    '<div class="st-meta">Last checked ' + E(stAgo(_st.lastSync)) + (_st.stories && !_st.aiOn ? ' · Shown as written' : '') + (_st.err && _st.stories ? ' · <span style="color:var(--sp-red)">' + E(_st.err) + '</span>' : '') + '</div>' +
+    body;
+}
+
+function stCardHtml(s) {
+  const E = escapeHtml, id = E(s.id), open = !!_st.open[s.id], editing = _st.edit === s.id;
+  const pills = '<span class="st-pill ' + E(s.status) + '">' + E(ST_STATUS[s.status] || s.status) + '</span>' +
+    (s.doNotShare ? '<span class="st-pill private">Staff only — do not share</span>' : '');
+  let h = '<div class="st-card s-' + E(s.status) + '" id="st-' + id + '">' +
+    '<div class="st-head" onclick="stToggle(\'' + id + '\')">' +
+      '<div class="st-top">' + pills + '<span>' + E(stDate(s.submittedAt, true)) + '</span></div>' +
+      '<div class="st-title">' + E(s.title || 'Untitled story') + '</div>' +
+      '<div class="st-who">' + E(stWho(s)) + '</div>' +
+      (s.summary ? '<div class="st-sum">' + E(s.summary) + '</div>' : '') +
+    '</div>';
+  if (!open) return h + '</div>';
+
+  h += '<div class="st-body">';
+  if (editing) {
+    h += '<div class="st-lbl">Title</div><input class="st-in" id="stE_title" value="' + E(s.title) + '">' +
+         '<div class="st-lbl">Summary</div><textarea class="st-ta" id="stE_summary" rows="2">' + E(s.summary) + '</textarea>' +
+         '<div class="st-lbl">Pull quote</div><input class="st-in" id="stE_pullQuote" value="' + E(s.pullQuote) + '">' +
+         '<div class="st-lbl">Story</div><textarea class="st-ta" id="stE_story" rows="12">' + E(s.story) + '</textarea>' +
+         '<div class="st-actions"><button class="st-btn pri" onclick="stSaveEdit(\'' + id + '\')">Save</button><button class="st-btn" onclick="stEdit(\'\')">Cancel</button></div>';
+    return h + '</div></div>';
+  }
+  if (s.pullQuote) h += '<blockquote class="st-quote">“' + E(s.pullQuote) + '”</blockquote>';
+  h += '<div class="st-story">' + stParas(s.story || s.raw) + '</div>';
+  if (s.followUp) h += '<div class="st-lbl">Suggested follow-up</div><div class="st-follow">' + E(s.followUp) + '</div>';
+  if ((s.tags || []).length) h += '<div class="st-lbl">Themes</div><div class="st-tags">' + s.tags.map(t => '<span class="st-tag">' + E(t) + '</span>').join('') + '</div>';
+  h += '<div class="st-lbl">Staff notes</div><textarea class="st-ta" rows="2" placeholder="Who followed up, where it was shared…" onchange="stSave(\'' + id + '\',{notes:this.value})">' + E(s.notes) + '</textarea>';
+  if (s.raw && s.raw.trim() !== String(s.story || '').trim()) h += '<details class="st-raw"><summary>As submitted</summary><div>' + E(s.raw) + '</div></details>';
+  if (s.email) h += '<div class="st-meta" style="margin:10px 0 0">Contact: <a href="mailto:' + E(s.email) + '">' + E(s.email) + '</a></div>';
+  const btn = (label, fn, pri) => '<button class="st-btn' + (pri ? ' pri' : '') + '" onclick="' + fn + '">' + label + '</button>';
+  h += '<div class="st-actions">' +
+    (s.status === 'new' ? btn('Mark reviewed', 'stSetStatus(\'' + id + '\',\'reviewed\')', true) : '') +
+    (s.status !== 'shared' && !s.doNotShare ? btn('Mark shared', 'stSetStatus(\'' + id + '\',\'shared\')') : '') +
+    (s.status === 'archived' ? btn('Restore', 'stSetStatus(\'' + id + '\',\'reviewed\')') : btn('Archive', 'stSetStatus(\'' + id + '\',\'archived\')')) +
+    btn(_st.copied === s.id ? 'Copied' : 'Copy story', 'stCopy(\'' + id + '\')') +
+    btn('Edit', 'stEdit(\'' + id + '\')') +
+  '</div>';
+  return h + '</div></div>';
+}
+
+function stSetFilter(k) { _st.filter = k; stRender(); }
+function stSearch(v) {
+  _st.q = v; stRender();
+  const i = document.getElementById('stSearch'); if (i) { i.focus(); i.setSelectionRange(v.length, v.length); }
+}
+function stToggle(id) { _st.open[id] = !_st.open[id]; if (!_st.open[id] && _st.edit === id) _st.edit = ''; stRender(); }
+function stEdit(id) { _st.edit = id; if (id) _st.open[id] = true; stRender(); }
+function stFind(id) { return (_st.stories || []).find(s => s.id === id); }
+function stSave(id, patch) {
+  const s = stFind(id); if (!s) return;
+  Object.assign(s, patch);
+  try { sessionStorage.setItem(ST_CACHE_KEY, JSON.stringify({ ok: true, stories: _st.stories, lastSync: _st.lastSync, aiOn: _st.aiOn })); } catch (e) {}
+  stRefreshViews();
+  fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action: 'story_update', k: STAFF_HASH, id: id, by: (_sos && _sos.me) || 'staff' }, patch)) })
+    .then(r => r.json())
+    .then(res => { if (!res || !res.ok) throw new Error((res && res.error) || 'save failed'); })
+    .catch(e => { alert('Couldn’t save that change (' + (e.message || e) + '). Reloading stories.'); stLoad(); });
+}
+function stSetStatus(id, status) { stSave(id, { status: status }); }
+function stSaveEdit(id) {
+  const v = k => (document.getElementById('stE_' + k) || {}).value;
+  _st.edit = '';
+  stSave(id, { title: v('title'), summary: v('summary'), pullQuote: v('pullQuote'), story: v('story') });
+}
+function stCopy(id) {
+  const s = stFind(id); if (!s) return;
+  const text = (s.title ? s.title + '\n\n' : '') + (s.story || s.raw || '') + (s.person ? '\n\n— ' + s.person : '');
+  navigator.clipboard.writeText(text).then(() => {
+    _st.copied = id; stRender();
+    setTimeout(() => { if (_st.copied === id) { _st.copied = ''; stRender(); } }, 1800);
+  });
+}
+function stCopyLink(btn) {
+  navigator.clipboard.writeText(ST_FORM_URL).then(() => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy form link', 1800); });
+}
+
+// Staff Sync: stories that came in since the last meeting (most recent Monday before today).
+function stRenderSync() {
+  const el = document.getElementById('sp-l10-stories'); if (!el) return;
+  if (!_st.stories && !_st.loading && !_st.err) {
+    try { const c = JSON.parse(sessionStorage.getItem(ST_CACHE_KEY) || 'null'); if (c) stApply(c); } catch (e) {}
+    stLoad();
+  }
+  const E = escapeHtml, start = stWeekStart();
+  const items = (_st.stories || []).filter(s => s.status !== 'archived' && new Date(s.submittedAt) >= start);
+  const since = start.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  let body;
+  if (!_st.stories) body = '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">' + (_st.err ? 'Couldn’t load stories right now.' : 'Checking for new stories…') + '</div>';
+  else if (!items.length) body = '<div style="color:var(--sp-muted);font-size:13px;padding:8px 0;">No new Community Group stories since ' + E(since) + '. Groups can share at <a href="' + ST_FORM_URL + '" target="_blank" rel="noopener" style="color:var(--sp-gold)">the story form</a>.</div>';
+  else body = items.map(s =>
+    '<button class="st-sync-row" onclick="stOpenFromSync(\'' + E(s.id) + '\')">' +
+      '<div class="t">' + E(s.title || 'Untitled story') + (s.doNotShare ? ' <span class="st-pill private">Staff only</span>' : '') + '</div>' +
+      '<div class="m">' + E(stWho(s)) + ' · ' + E(stDate(s.submittedAt)) + '</div>' +
+      (s.summary ? '<div class="s">' + E(s.summary) + '</div>' : '') +
+    '</button>').join('');
+  el.innerHTML =
+    '<div class="sp-l10-sec-hdr"><h4>New Stories</h4>' +
+      '<span class="st-pill' + (items.length ? ' new' : '') + '">' + items.length + ' since ' + E(since) + '</span></div>' + body;
+}
+function stOpenFromSync(id) {
+  _st.open[id] = true; _st.filter = 'all';
+  staffNavGo('sp-stories');
+  setTimeout(() => { const c = document.getElementById('st-' + id); if (c) c.scrollIntoView({ block: 'center' }); }, 60);
+}
+
 // Staff nav: "My Snapshot" first, then the sheet-driven tabs (the "Nav Tabs" tab of the
 // LS South Reno Staff OS sheet controls labels / visibility / order), grouped into themed
 // dropdowns, then "Announcement Card" pinned on the far right as a distinct tool tab.
@@ -12992,7 +13271,7 @@ const STAFF_NAV_FALLBACK = [
   { id: 'sp-scorecard', label: 'Scorecard' }, { id: 'sp-ids', label: 'Rocks' }, { id: 'sp-boulders', label: 'Boulders' },
   { id: 'sp-l10', label: 'Staff Sync' }, { id: 'sp-meetings', label: 'Meeting Pulse' }, { id: 'sp-funnel', label: 'Funnel' }
 ];
-const STAFF_NAV_EXTRA = { 'sp-mine': () => sosInit(), 'sp-announce': () => ogaInit() };
+const STAFF_NAV_EXTRA = { 'sp-mine': () => sosInit(), 'sp-stories': () => stInit(), 'sp-announce': () => ogaInit() };
 let _spCurSection = 'sp-mine', _spNavItems = {};
 function staffNavTabs(tabs) {
   if (tabs && tabs.length) {
@@ -13018,9 +13297,11 @@ function staffBuildNav(tabs) {
     h += '<div class="sp-nav-tab sp-nav-group" role="button" tabindex="0" aria-haspopup="true" data-group="' + g.key + '" data-ids="' + kids.map(k => k.id).join(' ') + '" onclick="staffNavMenu(this)" onkeydown="if(event.key===\'Enter\'||event.key===\'ArrowDown\'){event.preventDefault();staffNavMenu(this)}">' +
       E(g.label) + '<span class="sp-nav-cur"></span><i class="sp-nav-caret"></i></div>';
   });
+  h += tab('sp-stories', 'Stories');
   h += tab('sp-announce', 'Announcement Card', 'sp-nav-tool');
   nav.innerHTML = h;
   staffNavMark(_spCurSection);
+  stNavCount();
   return nav;
 }
 // Highlight the tab (or the group that holds it) for the visible section.
@@ -13071,7 +13352,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') staffNavClos
 function staffRenderTabs(data) {
   const nav = staffBuildNav(data && data.tabs); if (!nav) return;
   // Stay on the section that's showing; fall back to My Snapshot if that tab was hidden in the sheet.
-  const visible = id => id === 'sp-mine' || id === 'sp-announce' || !!_spNavItems[id];
+  const visible = id => id === 'sp-mine' || id === 'sp-stories' || id === 'sp-announce' || !!_spNavItems[id];
   const cur = visible(_spCurSection) ? _spCurSection : 'sp-mine';
   staffShowSection(cur);
   if (cur === 'sp-mine') sosInit();
@@ -15934,7 +16215,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T222149Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T223015Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
