@@ -8300,19 +8300,18 @@ function sosLogin() {
   const err = document.getElementById('sosSigninErr');
   if (!pin) { if (err) err.textContent = 'Enter your PIN.'; return; }
   if (err) err.textContent = 'Checking…';
-  sosApiPost({ action: 'sos_login', pin: pin }).then(res => {
-    if (res && res.ok && res.matches && res.matches.length) {
-      _sosMatches = res.matches;
-      if (res.matches.length === 1) { sosApplyLogin(res); }
-      else sosRenderSignin(res.matches);
-    } else if (err) err.textContent = (res && res.error) || 'That PIN didn’t match.';
-  }).catch(() => { if (err) err.textContent = 'Connection problem. Try again.'; });
+  sosLoginRequest(pin.trim(), attempt => { if (err) err.textContent = attempt ? 'Trying once more…' : 'Still working — the server is a little slow…'; }).then(r => {
+    if (r.status === 'ok') {
+      _sosMatches = r.res.matches; staffRemember();
+      if (r.res.matches.length === 1) sosApplyLiteLogin(r.res); else { if (r.res.roster) _sos.roster = r.res.roster; sosRenderSignin(r.res.matches); }
+    } else if (err) err.textContent = r.status === 'nomatch' ? 'That PIN didn’t match (last 4 digits of the phone on your Planning Center profile).' : 'Couldn’t reach the server — try again in a moment.';
+  });
 }
 function sosPickMatch() {
   const name = (document.getElementById('sosMatchSel') || {}).value || '';
   if (name) { sosSetMe(name); sosLoadData(); }
 }
-function sosSignOut() { _sos.me = ''; _sos.role = ''; _sos.isAdmin = false; _sos.viewing = ''; _sos.loaded = false; _sos.tasks = []; _sos.assigned = []; _sos.plans = []; try { localStorage.removeItem(SOS_ME_KEY); } catch (e) {} sosRenderSignin(); }
+function sosSignOut() { try { localStorage.removeItem('staff_unlocked_until'); } catch (e) {} _sos.me = ''; _sos.role = ''; _sos.isAdmin = false; _sos.viewing = ''; _sos.loaded = false; _sos.tasks = []; _sos.assigned = []; _sos.plans = []; try { localStorage.removeItem(SOS_ME_KEY); } catch (e) {} sosRenderSignin(); }
 // Admins (Brad/Ryan) can switch whose workspace they're viewing/editing.
 function sosSwitchViewing(name) { if (!name) return; _sos.viewing = name; if (sosApplyCache(name)) { sosRender(); sosLoadData(true); } else { _sos.loaded = false; _sos.tasks = []; _sos.assigned = []; _sos.plans = []; sosLoadData(); } }
 function sosLoadData(background) {
@@ -10664,7 +10663,9 @@ const STAFF_TEAM_DATA = [
 ];
 
 function staffIsUnlocked() {
-  return sessionStorage.getItem(STAFF_SESSION_KEY) === '1';
+  if (sessionStorage.getItem(STAFF_SESSION_KEY) === '1') return true;
+  try { if (Number(localStorage.getItem('staff_unlocked_until') || 0) > Date.now()) { sessionStorage.setItem(STAFF_SESSION_KEY, '1'); return true; } } catch (e) {}
+  return false;
 }
 
 /* =========================================================
@@ -11393,43 +11394,79 @@ function closeStaffModal() {
   navSetActive('metrics');
 }
 
+// Staff sign-in. The shared password is checked locally first (instant). A PIN goes to the
+// Staff OS web app in "lite" mode (identity only, from a server-side cache → ~1–3 s), the
+// area opens right away, and the person's workspace paints from this device's cache and
+// refreshes in the background. Slow / failed calls retry once and say so — they're never
+// reported as a wrong PIN. A successful sign-in is remembered on this device for 60 days.
+const STAFF_REMEMBER_KEY = 'staff_unlocked_until';
+function staffRemember() { try { localStorage.setItem(STAFF_REMEMBER_KEY, String(Date.now() + 60 * 864e5)); } catch (e) {} }
+function sosPostTimed(body, ms) {
+  const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const t = ctl ? setTimeout(() => ctl.abort(), ms) : null;
+  return fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(body), signal: ctl ? ctl.signal : undefined })
+    .then(r => r.json()).finally(() => { if (t) clearTimeout(t); });
+}
+// → { status: 'ok' | 'nomatch' | 'error', res }
+async function sosLoginRequest(pin, onSlow) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const slowT = setTimeout(() => { if (onSlow) onSlow(attempt); }, 5000);
+    try {
+      const res = await sosPostTimed({ action: 'sos_login', pin: pin, lite: true }, 25000);
+      clearTimeout(slowT);
+      if (res && res.ok && res.matches && res.matches.length) return { status: 'ok', res };
+      if (res && (res.nomatch || (res.ok === false && /PIN/i.test(res.error || '')))) return { status: 'nomatch', res };
+    } catch (e) { clearTimeout(slowT); }
+  }
+  return { status: 'error' };
+}
+// Identity-only login result → paint from this device's cache (instant) and refresh in the background.
+function sosApplyLiteLogin(res) {
+  if (res.roster && res.roster.length) _sos.roster = res.roster;
+  _sos.me = res.who; _sos.viewing = res.who; _sos.role = res.role || ''; _sos.isAdmin = !!res.isAdmin;
+  try { localStorage.setItem(SOS_ME_KEY, res.who); } catch (e) {}
+  if (res.tasks) { sosApplyLogin(res); return; }                  // full payload (older server)
+  if (sosApplyCache(res.who)) { sosRender(); sosLoadData(true); }
+  else { _sos.loaded = false; _sos.tasks = []; _sos.assigned = []; _sos.plans = []; sosLoadData(); }
+}
 async function staffDoUnlock() {
   const inp = document.getElementById('staffPwInput');
+  const btn = document.querySelector('#staffModLocked .tmod-dbtn');
   const pw = (inp.value || '').trim();
   const errEl = document.getElementById('staffLockErr');
+  if (!pw) { inp.focus(); return; }
+  if (staffDoUnlock._busy) return;
   errEl.style.display = 'none';
+  const say = (msg, isErr) => { errEl.style.display = 'block'; errEl.textContent = msg; if (isErr) { errEl.classList.add('tmod-lockerr'); errEl.style.color = ''; } else { errEl.classList.remove('tmod-lockerr'); errEl.style.color = 'var(--sp-muted, #9a917f)'; } };
   const revealStaff = () => {
-    sessionStorage.setItem(STAFF_SESSION_KEY, '1');
+    sessionStorage.setItem(STAFF_SESSION_KEY, '1'); staffRemember();
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
     document.getElementById('staffNav').hidden = false;
+    errEl.style.display = 'none';
     if (!staffRendered) staffLoadData();
   };
   const goMine = () => staffShowSection('sp-mine');
-  // 1) Personal PIN (last 4 of phone) → sign the person straight in + load My Snapshot in one call.
-  if (/^\d{3,6}$/.test(pw)) {
-    errEl.style.display = 'block'; errEl.classList.remove('tmod-lockerr'); errEl.style.color = 'var(--sp-muted, #9a917f)'; errEl.textContent = 'Signing you in…';
-    try {
-      const res = await sosApiPost({ action: 'sos_login', pin: pw });
-      if (res && res.ok && res.matches && res.matches.length) {
-        revealStaff();
-        if (res.matches.length === 1) { sosApplyLogin(res); } else { _sosMatches = res.matches; sosRenderSignin(res.matches); }
-        goMine();
-        errEl.style.display = 'none'; errEl.classList.add('tmod-lockerr'); errEl.style.color = '';
-        return;
-      }
-    } catch (e) {}
-    errEl.classList.add('tmod-lockerr'); errEl.style.color = '';
-  }
-  // 2) Shared staff password (fallback for anyone who uses it).
+  // 1) Shared staff password — checked locally, no server needed.
   try {
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
     const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
     if (hex === STAFF_HASH) { revealStaff(); sosInit(); return; }
   } catch (e) {}
-  errEl.textContent = 'That PIN or password didn’t match.';
-  errEl.style.display = 'block';
-  inp.value = ''; inp.focus();
+  // 2) Personal PIN (last 4 of phone).
+  if (!/^\d{3,6}$/.test(pw)) { say('That password didn’t match. Staff: enter your PIN — the last 4 digits of your phone.', true); inp.value = ''; inp.focus(); return; }
+  staffDoUnlock._busy = true; if (btn) { btn.disabled = true; btn.textContent = 'Signing in…'; }
+  say('Signing you in…');
+  const r = await sosLoginRequest(pw, attempt => say(attempt ? 'Trying once more…' : 'Still working — the staff server is a little slow right now…'));
+  staffDoUnlock._busy = false; if (btn) { btn.disabled = false; btn.textContent = 'Sign in'; }
+  if (r.status === 'ok') {
+    revealStaff();
+    if (r.res.matches.length === 1) sosApplyLiteLogin(r.res); else { _sosMatches = r.res.matches; if (r.res.roster) _sos.roster = r.res.roster; sosRenderSignin(r.res.matches); }
+    goMine();
+    return;
+  }
+  if (r.status === 'nomatch') { say('That PIN didn’t match. It’s the last 4 digits of the phone number on your Planning Center profile.', true); inp.value = ''; inp.focus(); return; }
+  say('Couldn’t reach the staff server — it’s being slow. Your PIN wasn’t the problem; tap Sign in to try again.', true);
 }
 
 async function staffLoadData() {
@@ -16247,7 +16284,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T225933Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T230224Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
