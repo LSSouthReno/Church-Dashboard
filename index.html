@@ -14075,7 +14075,7 @@ function openPastorModal() {
     shRestoreIdentity();
     document.getElementById('pastorModLocked').style.display = 'none';
     document.getElementById('pastorModContent').style.display = 'block';
-    if (!_shRendered) shepLoadData();
+    if (!_shRendered) shepLoadData(); else shRefreshIfStale(2 * 60 * 1000);   // reopening always pulls the latest hourly snapshot
   } else {
     document.getElementById('pastorModLocked').style.display = 'flex';
     document.getElementById('pastorModContent').style.display = 'none';
@@ -14135,36 +14135,68 @@ function shCacheKey() { return 'sh_cache_' + (_shPastorName||'x'); }
 function shReadCache() { try { const s = sessionStorage.getItem(shCacheKey()); if (!s) return null; const d = JSON.parse(s); return (d && Array.isArray(d.elders)) ? d : null; } catch (e) { return null; } }
 function shWriteCache(d) { try { sessionStorage.setItem(shCacheKey(), JSON.stringify(d)); } catch (e) {} }
 
-async function shepLoadData() {
-  const grid = document.getElementById('shPeopleGrid');
-  // 1. Instant paint from this session's cache (stale-while-revalidate).
-  const cached = shReadCache();
-  if (cached) shApplyData(cached, true);
-  else grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
-
-  // 2. Fetch fresh in the background; the gated web app first, then the public seed.
-  let data = null;
-  try {
-    const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + '&t=' + Date.now());
-    if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) data = j; }
-  } catch (e) {}
-  if (!data && !cached) {
-    try { const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache:'no-store' }); if (res.ok) data = await res.json(); } catch (e) {}
+// Freshness: the snapshot is rebuilt hourly on the server. The page used to fetch it only
+// once per browser-tab session, so a long-open tab (phones) kept showing an old "Last synced".
+// Now: refetch on every reopen, every 15 min while open, and when the tab comes back to the
+// foreground — with retries, because the first call after an idle period often gets Google's
+// HTML interstitial instead of JSON.
+let _shLastFetch = 0, _shLoading = false;
+function shRefreshIfStale(maxAgeMs) { if (Date.now() - _shLastFetch > (maxAgeMs || 0)) shepLoadData(); }
+async function shFetchShepData() {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + '&t=' + Date.now());
+      if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) return j; if (j && j.error === 'unauthorized') return null; }
+    } catch (e) {}
+    await new Promise(r => setTimeout(r, 1500 * (attempt + 1)));
   }
-  if (!data || !Array.isArray(data.elders)) {
-    if (!cached) grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">It publishes hourly from Planning Center once the sync is running.</span></div>';
-    return; // keep showing cached data if the refresh failed
-  }
-  if (!data.seed) shWriteCache(data);
-  shApplyData(data, false);
+  return null;
 }
+async function shepLoadData() {
+  if (_shLoading) return; _shLoading = true;
+  try {
+    const grid = document.getElementById('shPeopleGrid');
+    // 1. Instant paint from this session's cache (stale-while-revalidate) — only on first paint.
+    const cached = shReadCache();
+    if (!_shepData) {
+      if (cached) shApplyData(cached, true);
+      else grid.innerHTML = '<div class="sh-empty">Loading shepherding data…</div>';
+    } else shSetMeta(_shepData, true);
+
+    // 2. Fetch fresh; the gated web app first (with retries), then the public seed.
+    let data = await shFetchShepData();
+    if (!data && !cached && !_shepData) {
+      try { const res = await fetch(SHEP_DATA_URL + '?t=' + Date.now(), { cache:'no-store' }); if (res.ok) data = await res.json(); } catch (e) {}
+    }
+    if (!data || !Array.isArray(data.elders)) {
+      if (!cached && !_shepData) grid.innerHTML = '<div class="sh-empty">Shepherding data could not be loaded yet.<br><span style="font-size:12px;">It publishes hourly from Planning Center once the sync is running.</span></div>';
+      else shSetMeta(_shepData || cached, false, true);   // keep showing data, but say the refresh failed
+      return;
+    }
+    _shLastFetch = Date.now();
+    if (!data.seed) shWriteCache(data);
+    shApplyData(data, false);
+  } finally { _shLoading = false; }
+}
+function shSetMeta(data, refreshing, failed) {
+  const meta = document.getElementById('pastorModMeta'); if (!meta || !data) return;
+  const when = data.generatedAt || data.asOf;
+  meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—')
+    + (refreshing ? ' <span style="color:var(--text-dim)">· refreshing…</span>' : '')
+    + (failed ? ' <span style="color:#fca5a5;cursor:pointer" onclick="shepLoadData()" title="Try again">· couldn’t refresh — tap to retry</span>' : '');
+}
+setInterval(() => {
+  const m = document.getElementById('pastorModal');
+  if (m && m.classList.contains('open') && _shRendered && document.visibilityState === 'visible') shRefreshIfStale(14 * 60 * 1000);
+}, 60 * 1000);
+document.addEventListener('visibilitychange', () => {
+  const m = document.getElementById('pastorModal');
+  if (document.visibilityState === 'visible' && m && m.classList.contains('open') && _shRendered) shRefreshIfStale(5 * 60 * 1000);
+});
 
 function shApplyData(data, fromCache) {
   _shepData = data; _shRendered = true;
-  const meta = document.getElementById('pastorModMeta');
-  if (meta) { const when = data.generatedAt || data.asOf;
-    meta.innerHTML = '<b>Last synced</b>' + (when ? new Date(when).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '—')
-      + (fromCache ? ' <span style="color:var(--text-dim)">· refreshing…</span>' : ''); }
+  shSetMeta(data, fromCache);
   document.getElementById('pastorSeedNote').innerHTML = data.seed
     ? '<div class="sh-seed-note">&#9432; <b>Preview data.</b> Group &amp; serve involvement is live, but PACI scores, giving, contact and status fill in after the first Planning Center sync.</div>' : '';
 
@@ -15008,7 +15040,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260923T225448Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T181552Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
