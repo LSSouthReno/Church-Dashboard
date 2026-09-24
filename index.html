@@ -1156,7 +1156,25 @@
   .cs-ov { display: flex; align-items: center; gap: 10px; } .cs-ov .cp-gbar { flex: 1 1 auto; margin: 0; } .cs-ov b { font-size: 15px; color: #3f9b6b; }
   .cs-kpi { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--sp-border,#e6dccb); font-size: 13px; }
   .cs-kpi span { flex: 1 1 auto; color: var(--sp-ink,#1a1510); } .cs-kpi b { font-size: 15px; white-space: nowrap; }
-  .cs-kadd { margin-top: 6px; color: #8a5a12; font-weight: 700; }
+  .cs-pickbtn { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 9px; padding: 8px 10px; font: inherit; font-size: 13px; color: var(--sp-ink,#1a1510); cursor: pointer; }
+  .cs-pickbtn span { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cs-pickbtn i { font-style: normal; font-size: 12px; opacity: .7; }
+  .cs-pickbtn:hover { border-color: var(--sp-gold,#c9963a); }
+  .cs-pickbtn.kpi { margin-top: 6px; color: #8a5a12; font-weight: 700; }
+  .cs-pick { position: fixed; z-index: 100000; display: none; flex-direction: column; background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 14px; box-shadow: 0 14px 40px rgba(26,21,16,.22); overflow: hidden; }
+  .cs-pick.open { display: flex; }
+  .cs-pick-top { display: flex; align-items: center; gap: 6px; padding: 10px 10px 4px; }
+  .cs-pick-top .sos-input { margin: 0; font-size: 14px; padding: 10px 12px; }
+  .cs-pick-meta { font-size: 11.5px; color: var(--sp-muted,#8a7e6e); padding: 2px 14px 6px; }
+  .cs-pick-meta a { color: #8a5a12; font-weight: 700; }
+  .cs-pick-list { overflow-y: auto; flex: 1 1 auto; padding: 0 6px 8px; }
+  .cs-pick-g { position: sticky; top: 0; background: #fff; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #8a5a12; padding: 8px 8px 4px; }
+  .cs-pick-i { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--sp-ink,#1a1510); }
+  .cs-pick-i.hi { background: #f6eedf; }
+  .cs-pick-i.cur { box-shadow: inset 3px 0 0 var(--sp-gold,#c9963a); }
+  .cs-pick-l { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+  .cs-pick-l small { display: block; font-size: 10.5px; color: var(--sp-muted,#8a7e6e); }
+  .cs-pick-i b { font-size: 13.5px; white-space: nowrap; }
   .cs-edit { margin-top: 20px; border-top: 1px solid var(--sp-border,#e6dccb); padding-top: 14px; }
   .cs-edit > summary { cursor: pointer; font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); list-style: none; display: flex; align-items: center; gap: 8px; }
   .cs-edit > summary::-webkit-details-marker { display: none; }
@@ -8956,7 +8974,9 @@ function csFmt(v, unit) {
 function csSources() {
   if (!cpCatalogReady()) return {};
   const cat = cpCatalog(), staff = window._staffLastData || null;
-  if (window._csSrc && window._csSrcCat === cat && window._csSrcStaff === staff) return window._csSrc;
+  const pco = window._csPco || null;
+  if (!pco) csLoadPcoLists();
+  if (window._csSrc && window._csSrcCat === cat && window._csSrcStaff === staff && window._csSrcPco === pco) return window._csSrc;
   const D = DASHBOARD_DATA, out = {}, cy = String(new Date().getFullYear()), yy = cy.slice(2);
   const add = (key, label, value, unit, group, hint) => { if (value == null || value === '' || isNaN(value)) return; out[key] = { key, label, value: Math.round(Number(value) * 10) / 10, unit: unit || '', group, hint: hint == null ? '' : hint }; };
   const sum = a => a.reduce((t, v) => t + (Number(v) || 0), 0);
@@ -8997,20 +9017,107 @@ function csSources() {
     if (typeof o === 'object') Object.keys(o).forEach(k => { if (depth === 0 && skip.has(k)) return; if (/^(19|20)\d\d$/.test(k) && Number(k) < Number(cy) - 1) return; walk(o[k], path ? path + '.' + k : k, depth + 1); });
   };
   walk(D, '', 0);
-  window._csSrc = out; window._csSrcCat = cat; window._csSrcStaff = staff;
+  // Every Planning Center People list (head-count as of PCO's last refresh of that list).
+  ((pco || {}).lists || []).forEach(l => {
+    add('pco_list_' + l.id, l.name, l.count, '', 'PCO lists' + (l.category ? ' — ' + l.category : ''));
+    if (out['pco_list_' + l.id]) out['pco_list_' + l.id].asOf = l.refreshedAt || '';
+  });
+  window._csSrc = out; window._csSrcCat = cat; window._csSrcStaff = staff; window._csSrcPco = pco;
   return out;
 }
-function csSrcOptions(sel) {
-  const src = csSources(), groups = {};
-  Object.values(src).forEach(m => (groups[m.group] = groups[m.group] || []).push(m));
-  const order = ['Dashboard metrics', 'Community groups', 'Giving & missions', 'Budget', 'Serve teams', 'Staff scorecard', 'All dashboard data (raw)'];
-  let h = '<option value="">✍️ I’ll type the number</option>';
-  if (sel && !src[sel]) h += '<option value="' + csE(sel) + '" selected>' + (cpCatalogReady() ? '⚠ No longer on the dashboard: ' : 'Loading… ') + csE(sel) + '</option>';
-  Object.keys(groups).sort((a, b) => order.indexOf(a) - order.indexOf(b)).forEach(gname => {
-    h += '<optgroup label="' + csE(gname) + '">' + groups[gname].map(m => '<option value="' + csE(m.key) + '"' + (m.key === sel ? ' selected' : '') + '>' + csE(m.label) + ' — ' + csE(csFmt(m.value, m.unit)) + '</option>').join('') + '</optgroup>';
-  });
-  return h;
+// PCO lists come from the Staff OS web app (cached there 20 min, here per session + localStorage).
+function csLoadPcoLists(force) {
+  if (window._csPcoLoading) return; window._csPcoLoading = true;
+  if (!window._csPco) { try { const c = JSON.parse(localStorage.getItem('lssr_cs_pco') || 'null'); if (c && c.lists) window._csPco = c; } catch (e) {} }
+  sosApiGet('action=sos_pco_lists' + (force ? '&refresh=1' : '')).then(res => {
+    if (!res || !res.ok) return;
+    window._csPco = { lists: res.lists || [], asOf: res.asOf };
+    try { localStorage.setItem('lssr_cs_pco', JSON.stringify(window._csPco)); } catch (e) {}
+    if (document.getElementById('csHost')) csRenderLight();
+    if (_csPickState) csPickFilter();
+  }).catch(() => {}).finally(() => { window._csPcoLoading = false; });
 }
+const CS_GROUP_ORDER = ['Dashboard metrics', 'Community groups', 'Giving & missions', 'Budget', 'Serve teams', 'Staff scorecard', 'PCO lists', 'All dashboard data (raw)'];
+function csGroupRank(g) { const i = CS_GROUP_ORDER.findIndex(x => g === x || g.indexOf(x + ' — ') === 0); return i < 0 ? 99 : i; }
+function csSrcLabel(key) {
+  if (!key) return '✍️ I’ll type the number';
+  const m = csSources()[key]; if (m) return m.label;
+  return (cpCatalogReady() ? '⚠ Not found: ' : 'Loading… ') + key;
+}
+// Button that opens the searchable picker (replaces a 300-item dropdown).
+function csPickBtn(mode, sid, pid, key) {
+  const lbl = mode === 'kpi' ? '＋ Pin a number…' : csSrcLabel(key);
+  return '<button type="button" class="cs-pickbtn' + (mode === 'kpi' ? ' kpi' : '') + '" title="' + csE(lbl) + '" onclick="csOpenPicker(this,\'' + mode + '\',\'' + sid + '\',\'' + (pid || '') + '\')"><span>' + csE(lbl) + '</span><i>🔍</i></button>';
+}
+let _csPickState = null;
+function csOpenPicker(btn, mode, sid, pid) {
+  csClosePicker();
+  let el = document.getElementById('csPick');
+  if (!el) {
+    el = document.createElement('div'); el.id = 'csPick'; el.className = 'cs-pick';
+    el.innerHTML = '<div class="cs-pick-top"><input id="csPickQ" class="sos-input sm" placeholder="Search numbers & PCO lists…" autocomplete="off"><button class="cp-x" title="Close" onclick="csClosePicker()">×</button></div><div class="cs-pick-meta" id="csPickMeta"></div><div class="cs-pick-list" id="csPickList"></div>';
+    document.body.appendChild(el);
+    const q = el.querySelector('#csPickQ');
+    q.addEventListener('input', () => { _csPickState && (_csPickState.hi = 0); csPickFilter(); });
+    q.addEventListener('keydown', e => {
+      const st = _csPickState; if (!st) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); st.hi = Math.min(st.items.length - 1, st.hi + 1); csPickPaint(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); st.hi = Math.max(0, st.hi - 1); csPickPaint(); }
+      else if (e.key === 'Enter') { e.preventDefault(); const it = st.items[st.hi]; if (it) csPickChoose(it.key); }
+      else if (e.key === 'Escape') { e.preventDefault(); csClosePicker(); }
+    });
+    el.addEventListener('mousedown', e => e.stopPropagation());
+  }
+  _csPickState = { mode, sid, pid, hi: 0, items: [], cur: '' };
+  if (mode === 'piece') { const row = csRow(sid), p = row && csPiece(csData(row), pid); _csPickState.cur = p ? p.src : ''; }
+  el.querySelector('#csPickQ').value = '';
+  el.classList.add('open');
+  // Position under the button (above it if there's no room), inside the viewport.
+  const r = btn.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = window.innerHeight, w = Math.min(520, vw - 24), h = Math.min(460, vh - 40);
+  el.style.width = w + 'px'; el.style.left = Math.max(12, Math.min(vw - w - 12, r.left)) + 'px';
+  const below = vh - r.bottom - 12, top = below >= Math.min(h, 320) ? r.bottom + 6 : Math.max(12, r.top - 6 - h);
+  const mh = Math.max(220, below >= Math.min(h, 320) ? Math.min(h, below) : Math.min(h, r.top - 18));
+  el.style.maxHeight = mh + 'px'; el.style.top = Math.max(12, Math.min(vh - mh - 12, top)) + 'px';
+  csPickFilter();
+  try { el.querySelector('#csPickQ').focus({ preventScroll: true }); } catch (e) {}
+  setTimeout(() => document.addEventListener('mousedown', csClosePicker, { once: true }), 0);
+}
+function csClosePicker() { const el = document.getElementById('csPick'); if (el) el.classList.remove('open'); _csPickState = null; }
+function csPickFilter() {
+  const st = _csPickState, el = document.getElementById('csPick'); if (!st || !el) return;
+  const words = (el.querySelector('#csPickQ').value || '').toLowerCase().split(/\s+/).filter(Boolean);
+  const src = csSources();
+  let items = Object.values(src).filter(m => !(st.mode === 'kpi' && csRow(st.sid) && csData(csRow(st.sid)).kpis.includes(m.key)));
+  if (words.length) items = items.filter(m => { const hay = (m.label + ' ' + m.group + ' ' + m.key).toLowerCase(); return words.every(w => hay.indexOf(w) !== -1 || (w.length > 3 && /s$/.test(w) && hay.indexOf(w.replace(/e?s$/, '')) !== -1)); });   // "elders" finds "Elder…"
+  items.sort((a, b) => csGroupRank(a.group) - csGroupRank(b.group) || (a.group < b.group ? -1 : a.group > b.group ? 1 : 0));
+  if (st.mode === 'piece' && (!words.length || /type|manual|own/.test(words.join(' ')))) items.unshift({ key: '', label: '✍️ I’ll type the number myself', group: '', manual: true });
+  st.items = items;
+  const pcoN = ((window._csPco || {}).lists || []).length;
+  el.querySelector('#csPickMeta').innerHTML = (words.length ? items.filter(i => !i.manual).length + ' match' + (items.length === 1 ? '' : 'es') : Object.keys(src).length + ' numbers') +
+    ' · ' + (pcoN ? pcoN + ' PCO lists included' : 'loading PCO lists…') + ' · <a href="#" onclick="csLoadPcoLists(true);return false">refresh lists</a>';
+  csPickPaint();
+}
+function csPickPaint() {
+  const st = _csPickState, list = document.getElementById('csPickList'); if (!st || !list) return;
+  const fmtDay = v => { const d = new Date(v); return isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: d.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined }); };
+  let h = '', g = null;
+  st.items.slice(0, 600).forEach((m, i) => {
+    if (m.group !== g && !m.manual) { g = m.group; h += '<div class="cs-pick-g">' + csE(g) + '</div>'; }
+    h += '<div class="cs-pick-i' + (i === st.hi ? ' hi' : '') + (m.key === st.cur && st.mode === 'piece' ? ' cur' : '') + '" data-i="' + i + '" onmousemove="if(_csPickState&&_csPickState.hi!==' + i + '){_csPickState.hi=' + i + ';csPickPaint()}" onclick="csPickChoose(_csPickState.items[' + i + '].key)">' +
+      '<span class="cs-pick-l" title="' + csE(m.label) + '">' + csE(m.label) + (m.asOf ? '<small>PCO count as of ' + csE(fmtDay(m.asOf)) + '</small>' : '') + '</span>' +
+      (m.manual ? '' : '<b>' + csE(csFmt(m.value, m.unit)) + '</b>') + '</div>';
+  });
+  if (!st.items.length) h = '<div class="sos-empty sm">No numbers match. Try fewer words — or pick “I’ll type the number”.</div>';
+  list.innerHTML = h;
+  const hi = list.querySelector('.cs-pick-i.hi'); if (hi) { const lr = list.getBoundingClientRect(), r = hi.getBoundingClientRect(); if (r.top < lr.top + 24) list.scrollTop -= lr.top + 24 - r.top; else if (r.bottom > lr.bottom) list.scrollTop += r.bottom - lr.bottom; }
+}
+function csPickChoose(key) {
+  const st = _csPickState; if (!st) return;
+  csClosePicker();
+  if (st.mode === 'kpi') { if (key) csAddKpi(st.sid, key); }
+  else csSetPieceSrc(st.sid, st.pid, key);
+}
+window.addEventListener('resize', csClosePicker);
 function csNum(s) { const n = parseFloat(String(s == null ? '' : s).replace(/[^0-9.\-]/g, '')); return isNaN(n) ? null : n; }
 // Value / target / progress for one piece.
 function csInfo(p) {
@@ -9287,7 +9394,7 @@ function csInner() {
         '<label class="cs-lbl">12-month win</label><input class="sos-input sm" value="' + E(d.goal) + '" placeholder="e.g. 900 adults on a Sunday" onchange="csSetData(\'' + s.id + '\',\'goal\',this.value)">' +
         '<label class="cs-lbl">Progress to targets</label><div class="cs-ov" id="csOv">' + csOvHtml(ov) + '</div>' +
         '<label class="cs-lbl">Key numbers <span>(live)</span></label>' + (kpis || '<div class="cs-hint">Pin any dashboard number here.</div>') +
-        '<select class="sos-input sm cs-kadd" onchange="if(this.value){csAddKpi(\'' + s.id + '\',this.value)}">' + csSrcOptions('').replace('✍️ I’ll type the number', '＋ Pin a number…') + '</select>' +
+        csPickBtn('kpi', s.id, '', '') +
       '</div>' +
     '</div>' +
     '<details class="cs-edit"' + (_cs.editOpen ? ' open' : '') + ' ontoggle="_cs.editOpen=this.open"><summary>✎ Edit pieces &amp; action steps <span class="sos-count">' + d.pieces.length + '</span></summary>' +
@@ -9305,9 +9412,9 @@ function csPieceHtml(s, p, i) {
       '<input class="cs-pc-t" value="' + E(p.t) + '" onchange="csSetPiece(' + a + ',\'t\',this.value)">' +
       '<button class="cp-x" title="Move earlier" onclick="csMovePiece(' + a + ',-1)">↑</button><button class="cp-x" title="Move later" onclick="csMovePiece(' + a + ',1)">↓</button>' +
       '<button class="cp-x" title="Delete piece" onclick="csDelPiece(' + a + ')">×</button></div>' +
-    '<label class="cs-lbl">Number</label><select class="sos-input sm" onchange="csSetPieceSrc(' + a + ',this.value)">' + csSrcOptions(p.src) + '</select>' +
+    '<label class="cs-lbl">Number</label>' + csPickBtn('piece', s.id, p.id, p.src) +
     '<div class="cs-pc-row">' +
-      (p.src ? '<span class="cs-pc-live" title="Pulled automatically">' + E(I.vs) + ' <span class="cp-auto">auto</span></span>'
+      (p.src ? '<span class="cs-pc-live" title="Pulled automatically">' + E(I.vs) + ' <span class="cp-auto">' + (/^pco_list_/.test(p.src) ? 'PCO list' : 'auto') + '</span></span>'
              : '<input class="sos-input sm" placeholder="Value" title="Today’s number (type it)" value="' + E(p.val || '') + '" onchange="csSetPiece(' + a + ',\'val\',this.value)">') +
       '<input class="sos-input sm" placeholder="Target" title="Target" value="' + E(p.target || '') + '" onchange="csSetPiece(' + a + ',\'target\',this.value)">' +
       '<input class="sos-input sm" type="month" title="When (puts it on the roadmap)" value="' + E(String(p.when || '').slice(0, 7)) + '" onchange="csSetPiece(' + a + ',\'when\',this.value)">' +
@@ -15828,7 +15935,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T210114Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T211631Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
