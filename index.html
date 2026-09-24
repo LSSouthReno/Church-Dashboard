@@ -1630,22 +1630,34 @@
   .sp-nav-tab:hover { color: var(--sp-parchment); }
   .sp-nav-tab.sp-active { color: var(--sp-gold); border-bottom-color: var(--sp-gold); }
   /* Staff OS header: title on the left, section tabs inline to its right (one compact row) */
-  #staffModal .tmod-header.sp-head { padding: 0 24px 0 32px; gap: 28px; flex-wrap: nowrap; align-items: stretch; min-height: 60px; }
+  #staffModal .tmod-header.sp-head { position: relative; padding: 0 24px 0 32px; gap: 28px; flex-wrap: nowrap; align-items: stretch; min-height: 62px; }
   #staffModal .sp-head .tmod-titles { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; padding: 10px 0; }
   #staffModal .sp-head .tmod-title { font-size: 20px; line-height: 1.15; }
   #staffModal .sp-head .tmod-sub { font-size: 10.5px; margin-top: 2px; white-space: nowrap; }
-  #staffModal .sp-head-meta { color: var(--text-dim); letter-spacing: 0; text-transform: none; }
-  #staffModal .sp-head .sp-nav-tabs { flex: 1 1 auto; min-width: 0; background: transparent; border-top: none; padding: 0; align-items: stretch; }
+  /* "Synced …" tucked in the top-right corner, above the Announcement Card tab */
+  #staffModal .sp-head-meta { position: absolute; top: 5px; right: 26px; font-size: 10.5px; color: rgba(242,236,216,.55); white-space: nowrap; pointer-events: none; }
+  #staffModal .sp-head .sp-nav-tabs { flex: 1 1 auto; min-width: 0; background: rgba(255,255,255,.035); border-top: none; border-left: 1px solid rgba(255,255,255,.07); padding: 0; align-items: stretch; }
   #staffModal .sp-head .sp-nav-tabs[hidden] { display: none; }
-  #staffModal .sp-head .sp-nav-tab { display: flex; align-items: center; padding: 0 15px; }
+  /* Readable tabs: same face as the site header (Montserrat), normal case, brighter */
+  #staffModal .sp-head .sp-nav-tab { display: flex; align-items: center; padding: 0 18px; font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 600; letter-spacing: .01em; text-transform: none; color: rgba(242,236,216,.78); border-bottom-width: 3px; }
+  #staffModal .sp-head .sp-nav-tab:hover, #staffModal .sp-head .sp-nav-group.sp-open { color: #fff; background: rgba(255,255,255,.06); }
+  #staffModal .sp-head .sp-nav-tab.sp-active { color: var(--sp-gold, #c9963a); background: rgba(201,150,58,.09); border-bottom-color: var(--sp-gold, #c9963a); }
   #staffModal .sp-head .sp-nav-group { display: inline-flex; }
-  #staffModal .sp-head .sp-nav-tab.sp-nav-tool { border-left: 1px solid rgba(201,150,58,.28); }
+  #staffModal .sp-head .sp-nav-cur:not(:empty) { font-weight: 500; }
+  #staffModal .sp-head .sp-nav-tab.sp-nav-tool { align-self: flex-end; height: 36px; margin-bottom: 7px; border: 1px solid rgba(201,150,58,.45); border-radius: 8px; padding: 0 16px; color: var(--sp-gold, #c9963a); background: rgba(201,150,58,.12); }
+  #staffModal .sp-head .sp-nav-tab.sp-nav-tool:hover { background: rgba(201,150,58,.22); color: #e8c888; }
+  #staffModal .sp-head .sp-nav-tab.sp-nav-tool.sp-active { background: var(--sp-gold, #c9963a); color: var(--sp-ink, #1a1510); }
+  .sp-nav-mi { font-family: 'Montserrat', sans-serif !important; font-size: 13px !important; font-weight: 600; letter-spacing: .01em !important; text-transform: none !important; color: rgba(242,236,216,.78) !important; }
+  .sp-nav-mi.on { color: var(--sp-gold, #c9963a) !important; }
+  .sp-nav-mi:hover, .sp-nav-mi:focus { color: #fff !important; }
   @media (max-width: 900px) {
     #staffModal .tmod-header.sp-head { flex-wrap: wrap; padding: 0 12px; gap: 0; }
     #staffModal .sp-head .tmod-titles { padding: 10px 4px 6px; }
     #staffModal .sp-head .tmod-sub { white-space: normal; }
     #staffModal .sp-head .sp-nav-tabs { flex-basis: 100%; overflow-x: auto; }
     #staffModal .sp-head .sp-nav-tab { padding: 12px 13px; }
+    #staffModal .sp-head .sp-nav-tab.sp-nav-tool { align-self: center; margin: 0 6px; height: 32px; }
+    #staffModal .sp-head-meta { top: 8px; right: 14px; }
   }
   .sp-nav-group { display: inline-flex; align-items: center; gap: 7px; }
   .sp-nav-group.sp-open { color: var(--sp-parchment); background: rgba(255,255,255,.05); }
@@ -3461,9 +3473,10 @@
   <div class="tmod-header sp-head">
     <div class="tmod-titles">
       <div class="tmod-title">Staff OS</div>
-      <div class="tmod-sub">LIVING STONES CHURCH<span id="staffModMeta" class="sp-head-meta"></span></div>
+      <div class="tmod-sub">LIVING STONES CHURCH</div>
     </div>
     <nav class="sp-nav-tabs" id="staffNav" aria-label="Staff sections" hidden></nav>
+    <div id="staffModMeta" class="sp-head-meta"></div>
   </div>
   <!-- Lock screen -->
   <div id="staffModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
@@ -11499,7 +11512,7 @@ function staffRenderMeta(data) {
   if (!metaEl) return;
   if (!valid.length) { metaEl.textContent = ''; return; }
   const d = new Date(Math.max.apply(null, valid.map(x => x.getTime())));
-  metaEl.textContent = ' · Synced ' + d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  metaEl.textContent = 'Synced ' + d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
 function staffRenderScorecard(data) {
@@ -15921,7 +15934,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T220416Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T222149Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
