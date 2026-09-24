@@ -1135,15 +1135,18 @@
   .cs-hbtns { margin-left: auto; display: flex; gap: 6px; }
   .cs-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
   .cs-tab { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid var(--sp-border,#d8cdb8); background: #fbf9f4; color: var(--sp-ink,#1a1510); border-radius: 999px; padding: 8px 15px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
-  .cs-tab:hover { border-color: var(--sp-gold,#c9963a); }
-  .cs-tab.on { background: var(--sp-ink,#1a1510); color: #fff; border-color: var(--sp-ink,#1a1510); }
-  .cs-tab-p { font-size: 11px; font-weight: 800; color: #3f9b6b; background: rgba(63,155,107,.12); border-radius: 8px; padding: 1px 6px; }
-  .cs-tab.on .cs-tab-p { color: #bfe8cf; background: rgba(255,255,255,.12); }
-  .cs-tab-add { padding: 8px 13px; color: #8a5a12; }
+  .cs-tab { border-radius: 8px; border-width: 1px; background: #fff; color: #2a3a4d; }
+  .cs-tab:hover { border-color: #8795a3; }
+  .cs-tab.on { background: #1e2a38; color: #fff; border-color: #1e2a38; }
+  .cs-tab-i { display: inline-flex; color: #6b7785; } .cs-tab.on .cs-tab-i { color: #c9d3dc; }
+  .cs-ico { display: block; }
+  .cs-tab-p { font-size: 11px; font-weight: 700; color: #465c73; background: #eef1f4; border-radius: 6px; padding: 1px 6px; }
+  .cs-tab.on .cs-tab-p { color: #fff; background: rgba(255,255,255,.14); }
+  .cs-tab-add { padding: 8px 13px; color: #6b7785; }
   .cs-main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 26px; align-items: start; }
   @media (max-width: 1000px) { .cs-main { grid-template-columns: 1fr; } }
   .cs-name { width: 100%; border: none; background: transparent; font: inherit; font-size: 24px; font-weight: 800; color: var(--sp-ink,#1a1510); padding: 2px 0 10px; }
-  .cs-name:focus, .cs-pc-t:focus { outline: none; background: #fffaf0; box-shadow: 0 0 0 2px rgba(201,150,58,.35); border-radius: 6px; }
+  .cs-name:focus, .cs-pc-t:focus { outline: none; background: #f7f8fa; box-shadow: 0 0 0 2px rgba(42,58,77,.25); border-radius: 6px; }
   .cs-diag { max-width: 1250px; margin: 0 auto; }
   .cs-svg { display: block; width: 100%; height: auto; max-height: 640px; margin: 0 auto; }
   .cs-p { cursor: pointer; } .cs-p:hover { filter: brightness(1.06) drop-shadow(0 2px 6px rgba(26,21,16,.18)); }
@@ -1156,43 +1159,45 @@
   .cs-mrow { display: flex; align-items: center; gap: 9px; padding: 9px 2px; border-bottom: 1px dashed var(--sp-border,#e6dccb); font-size: 14px; cursor: pointer; }
   .cs-mrow b { flex: 1 1 auto; } .cs-mrow span:last-child { font-weight: 800; }
   .cs-dot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
-  .cs-side { background: #fbf9f4; border: 1px solid var(--sp-border,#e6dccb); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .cs-side { background: #fafaf8; border: 1px solid var(--sp-border,#e6dccb); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
   .cs-side .sos-input { margin-bottom: 4px; }
-  .cs-lbl { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #8a5a12; margin-top: 8px; }
-  .cs-lbl span { text-transform: none; letter-spacing: 0; color: #3f9b6b; }
+  .cs-lbl { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #6b7785; margin-top: 8px; }
+  .cs-lbl span { text-transform: none; letter-spacing: 0; color: #8795a3; font-weight: 600; }
   .cs-ta { resize: vertical; font-family: inherit; line-height: 1.45; }
-  .cs-ov { display: flex; align-items: center; gap: 10px; } .cs-ov .cp-gbar { flex: 1 1 auto; margin: 0; } .cs-ov b { font-size: 15px; color: #3f9b6b; }
+  .cs-ov { display: flex; align-items: center; gap: 10px; } .cs-ov .cp-gbar { flex: 1 1 auto; margin: 0; } .cs-ov b { font-size: 15px; color: #1e2a38; } .cs-ov .cp-gbar { background: #e6e9ed; } .cs-ov .cp-gbar i { background: #2a3a4d; }
   .cs-kpi { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--sp-border,#e6dccb); font-size: 13px; }
   .cs-kpi span { flex: 1 1 auto; color: var(--sp-ink,#1a1510); } .cs-kpi b { font-size: 15px; white-space: nowrap; }
   .cs-pickbtn { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 9px; padding: 8px 10px; font: inherit; font-size: 13px; color: var(--sp-ink,#1a1510); cursor: pointer; }
   .cs-pickbtn span { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cs-pickbtn i { font-style: normal; font-size: 12px; opacity: .7; }
+  .cs-pickbtn i { font-style: normal; color: #8795a3; display: inline-flex; }
   .cs-pickbtn:hover { border-color: var(--sp-gold,#c9963a); }
-  .cs-pickbtn.kpi { margin-top: 6px; color: #8a5a12; font-weight: 700; }
+  .cs-pickbtn.kpi { margin-top: 6px; color: #2a3a4d; font-weight: 600; }
   .cs-pick { position: fixed; z-index: 100000; display: none; flex-direction: column; background: #fff; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 14px; box-shadow: 0 14px 40px rgba(26,21,16,.22); overflow: hidden; }
   .cs-pick.open { display: flex; }
   .cs-pick-top { display: flex; align-items: center; gap: 6px; padding: 10px 10px 4px; }
   .cs-pick-top .sos-input { margin: 0; font-size: 14px; padding: 10px 12px; }
   .cs-pick-meta { font-size: 11.5px; color: var(--sp-muted,#8a7e6e); padding: 2px 14px 6px; }
-  .cs-pick-meta a { color: #8a5a12; font-weight: 700; }
+  .cs-pick-meta a { color: #374b61; font-weight: 700; }
   .cs-pick-list { overflow-y: auto; flex: 1 1 auto; padding: 0 6px 8px; }
-  .cs-pick-g { position: sticky; top: 0; background: #fff; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #8a5a12; padding: 8px 8px 4px; }
+  .cs-pick-g { position: sticky; top: 0; background: #fff; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #6b7785; padding: 8px 8px 4px; }
   .cs-pick-i { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--sp-ink,#1a1510); }
-  .cs-pick-i.hi { background: #f6eedf; }
-  .cs-pick-i.cur { box-shadow: inset 3px 0 0 var(--sp-gold,#c9963a); }
+  .cs-pick-i.hi { background: #eef1f4; }
+  .cs-pick-i.cur { box-shadow: inset 3px 0 0 #2a3a4d; }
   .cs-pick-l { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
   .cs-pick-l small { display: block; font-size: 10.5px; color: var(--sp-muted,#8a7e6e); }
   .cs-pick-i b { font-size: 13.5px; white-space: nowrap; }
   .cs-edit { margin-top: 20px; border-top: 1px solid var(--sp-border,#e6dccb); padding-top: 14px; }
-  .cs-edit > summary { cursor: pointer; font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); list-style: none; display: flex; align-items: center; gap: 8px; }
+  .cs-edit > summary { cursor: pointer; font-size: 15px; font-weight: 700; color: #1e2a38; list-style: none; display: flex; align-items: center; gap: 8px; }
+  .cs-edit > summary::before { content: ''; width: 7px; height: 7px; border-right: 2px solid #6b7785; border-bottom: 2px solid #6b7785; transform: rotate(-45deg); transition: transform .15s; margin: 0 4px 0 2px; }
+  .cs-edit[open] > summary::before { transform: rotate(45deg); }
   .cs-edit > summary::-webkit-details-marker { display: none; }
   .cs-pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 14px; }
-  .cs-pc { background: #fff; border: 1px solid var(--sp-border,#e6dccb); border-top: 4px solid; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow .3s; }
+  .cs-pc { background: #fff; border: 1px solid var(--sp-border,#e6dccb); border-top: 3px solid; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow .3s; }
   .cs-pc .sos-input { margin-bottom: 0; }
   .cs-pc-new { border-top-color: #d8cdb8; border-style: dashed; justify-content: flex-start; }
-  .cs-pc.cs-flash { box-shadow: 0 0 0 3px rgba(201,150,58,.55); }
+  .cs-pc.cs-flash { box-shadow: 0 0 0 3px rgba(42,58,77,.4); }
   .cs-pc-h { display: flex; align-items: center; gap: 6px; }
-  .cs-pc-n { width: 22px; height: 22px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .cs-pc-n { width: 22px; height: 22px; border-radius: 6px; color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
   .cs-pc-t { flex: 1 1 auto; min-width: 0; border: none; background: transparent; font: inherit; font-size: 15px; font-weight: 800; color: var(--sp-ink,#1a1510); padding: 2px 0; }
   .cs-pc-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
   .cs-pc-row .sos-input { flex: 1 1 70px; min-width: 0; width: auto; }
@@ -8566,7 +8571,7 @@ function cpHtml(person) {
     '<option value="ld"' + (bl.mode === 'ld' ? ' selected' : '') + '>As of Labor Day ' + Y + '</option>' +
     '<option value="prior"' + (bl.mode === 'prior' ? ' selected' : '') + '>As of Labor Day ' + (Y - 1) + '</option>' +
     (pref && pref.detail && pref.period ? '<option value="snap"' + (bl.mode === 'snap' ? ' selected' : '') + '>Snapshot ' + E(cpFmtDay(cpParseDay(pref.period))) + '</option>' : '') +
-    '<option value="new">📸 Snapshot today</option></select>';
+    '<option value="new">Snapshot today</option></select>';
   const delta = r => { const b = Number(r.base), v = Number(r.value); if (r.base == null || r.base === '' || isNaN(b) || isNaN(v)) return ''; const d = Math.round((v - b) * 10) / 10; return '<span class="cp-mnow' + (d > 0 ? ' up' : d < 0 ? ' down' : '') + '" title="Today: ' + E(String(v)) + (r.unit || '') + '">→ ' + cpFmt(v, r.unit) + (d ? ' (' + (d > 0 ? '+' : '') + d.toLocaleString() + ')' : '') + '</span>'; };
   const realityHtml = '<div class="cp-box cp-reality"><div class="cp-box-h">Current Reality <span>(where you started)</span>' + blSel + '</div>' +
     (reality.length ? reality.map(r => '<div class="cp-mrow">' +
@@ -8578,7 +8583,7 @@ function cpHtml(person) {
     '<details class="cp-more"><summary>＋ Add a metric</summary><div class="cp-madd">' +
       (addOpts ? '<select class="sos-input sm" onchange="if(this.value){cpAddLink(this.value);this.value=\'\'}"><option value="">Add a dashboard metric…</option>' + addOpts + '</select>' : '') +
       '<div class="cp-madd-row"><input id="cpNewMLabel" class="sos-input sm" placeholder="Your own metric…"><input id="cpNewMVal" class="sos-input sm cp-narrow" placeholder="Value"><button class="sos-btn sm" onclick="cpAddCustomMetric()">Add</button></div>' +
-      '<button class="cp-link" onclick="cpRequestMetric()">📨 Ask Brad to add an automatic metric</button>' +
+      '<button class="cp-link" onclick="cpRequestMetric()">Ask Brad to add an automatic metric →</button>' +
     '</div></details></div>';
 
   const goals = cpPlans('goal12');
@@ -8622,7 +8627,7 @@ function cpHtml(person) {
         '<div class="cp-step cp-step-add"><input id="cpStep_' + o.id + '" class="cp-step-in" placeholder="＋ Add an action step…" onkeydown="if(event.key===\'Enter\')sosAddStep(\'' + o.id + '\',\'cpStep_' + o.id + '\')"></div>' +
       '</div></div>';
   };
-  return '<div class="sos-card cp-card"><div class="sos-card-h">🧭 My Annual Plan <span class="sos-count">Current reality → strategic objectives → 12-month goals</span></div>' +
+  return '<div class="sos-card cp-card"><div class="sos-card-h">My Annual Plan <span class="sos-count">Current reality → strategic objectives → 12-month goals</span></div>' +
     '<div class="cp-wrap" id="cpWrap">' +
       '<svg class="cp-svg" id="cpSvg" aria-hidden="true"></svg>' +
       '<div class="cp-smart"><b>Action steps should be SMART</b>Specific · Measurable · Attainable · Realistic · Timely<span>(i.e. who will do what, and when?)</span></div>' +
@@ -8920,7 +8925,7 @@ function sosRender() {
   g.buckets.forEach((b, i) => { if (!b.length) return;
     tasksHtml += '<div class="sos-tgroup"><div class="sos-tgroup-h ' + ['ov','td','up','nd'][i] + '">' + bucketLabels[i] + ' · ' + b.length + '</div>' + b.map(sosTaskRow).join('') + '</div>';
   });
-  if (!openCount) tasksHtml = '<div class="sos-empty">No open tasks. You’re clear. 🎉</div>';
+  if (!openCount) tasksHtml = '<div class="sos-empty">No open tasks.</div>';
   if (g.done.length) tasksHtml += '<details class="sos-done-wrap"><summary>' + g.done.length + ' completed</summary>' + g.done.map(sosTaskRow).join('') + '</details>';
 
   const rockCard = (type, title, addLabel) => {
@@ -8974,7 +8979,7 @@ function sosRender() {
   }).join('') : '<div class="sos-empty sm">No goals yet — add your first below.</div>';
 
   host.innerHTML =
-    '<div class="sos-topbar"><div class="sos-who">👤 <b>' + escapeHtml(_sos.me) + '</b>' + (_sos.role?' <span class="sos-role">' + escapeHtml(_sos.role) + '</span>':'') +
+    '<div class="sos-topbar"><div class="sos-who"><b>' + escapeHtml(_sos.me) + '</b>' + (_sos.role?' <span class="sos-role">' + escapeHtml(_sos.role) + '</span>':'') +
       (_sos.isAdmin
         ? ' <span class="sos-role">Admin</span><div class="sos-viewing">Viewing <select class="sos-input sm" onchange="sosSwitchViewing(this.value)">' +
             _sos.roster.map(p => '<option value="' + escapeHtml(p.name) + '"' + (p.name===viewing?' selected':'') + '>' + escapeHtml(p.name) + '</option>').join('') + '</select>' +
@@ -8984,7 +8989,7 @@ function sosRender() {
       '<div><button class="sos-btn sm" onclick="sosRefresh()">↻ Refresh</button> <button class="sos-btn sm ghost" onclick="sosSignOut()">Log out</button></div></div>' +
     '<div class="sos-grid sos-grid3">' +
       '<div class="sos-col">' +
-        '<div class="sos-card"' + sosDropAttrs('task') + '><div class="sos-card-h">✅ To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
+        '<div class="sos-card"' + sosDropAttrs('task') + '><div class="sos-card-h">To-Do <span class="sos-count">' + openCount + ' open</span></div>' +
           '<div class="sos-addtask">' +
             '<input id="sosNewTitle" class="sos-input" placeholder="Add a task…" onkeydown="if(event.key===\'Enter\')sosAddTask()">' +
             '<div class="sos-addtask-row">' +
@@ -8999,10 +9004,10 @@ function sosRender() {
         '</div>' +
       '</div>' +
       '<div class="sos-col">' +
-        '<div class="sos-card"' + sosDropAttrs('rock') + '><div class="sos-card-h">🪨 Rocks <span class="sos-count">' + (teamReady ? myRocks.length + ' open' : '…') + '</span></div>' + teamRocksHtml + '</div>' +
+        '<div class="sos-card"' + sosDropAttrs('rock') + '><div class="sos-card-h">Rocks <span class="sos-count">' + (teamReady ? myRocks.length + ' open' : '…') + '</span></div>' + teamRocksHtml + '</div>' +
       '</div>' +
       '<div class="sos-col">' +
-        '<div class="sos-card"' + sosDropAttrs('boulder') + '><div class="sos-card-h">⛰️ Boulders <span class="sos-count">' + (teamReady ? myBoulders.filter(b => b.status !== 'complete').length + ' active' : '…') + '</span></div>' + teamBouldersHtml + '</div>' +
+        '<div class="sos-card"' + sosDropAttrs('boulder') + '><div class="sos-card-h">Boulders <span class="sos-count">' + (teamReady ? myBoulders.filter(b => b.status !== 'complete').length + ' active' : '…') + '</span></div>' + teamBouldersHtml + '</div>' +
       '</div>' +
     '</div>' +
     cpHtml(viewing) +
@@ -9042,16 +9047,32 @@ function sosHoldScroll(scrolls, winY) {
 const CS_USERS = ['Brad Borowski', 'Ryan Griffin'];
 const CS_OWNER = '_strategy';
 const CS_CACHE = 'lssr_cs_cache';
-const CS_COLORS = ['#c9963a', '#3f9b6b', '#4a7fb5', '#b5654a', '#7a5fa8', '#2f8f8a', '#c2703d', '#5a7a5c'];
+// Professional palette: one slate-navy ramp (dark → light, in piece order) + muted brass / forest accents.
+const CS_RAMP = ['#1e2a38', '#2a3a4d', '#374b61', '#465c73', '#566e86', '#6a8298'];
+const CS_OK = '#3d6b52', CS_BRASS = '#a07d3b', CS_MUTED = '#6b7785';
+let _csRampN = 6;
+// Line icons (currentColor) instead of emoji.
+const CS_ICON_PATHS = {
+  flywheel: '<path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/>',
+  funnel: '<path d="M3 5h18l-7 8v6l-4-2v-4z"/>',
+  pathway: '<path d="M3 12h15"/><path d="M13 6l6 6-6 6"/>',
+  pyramid: '<path d="M12 4l9 16H3z"/><path d="M7.4 12h9.2"/>',
+  circles: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/>',
+  roadmap: '<path d="M3 12h18"/><path d="M7 8v8"/><path d="M12 6v12"/><path d="M17 9v6"/>',
+  critical: '<path d="M4 19L19 5"/><path d="M12 5h7v7"/>',
+  scorecard: '<path d="M4 17a8 8 0 0 1 16 0"/><path d="M12 17l4.5-5"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'
+};
+function csIcon(k, sz) { return '<svg class="cs-ico" width="' + (sz || 15) + '" height="' + (sz || 15) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (CS_ICON_PATHS[k] || '') + '</svg>'; }
 const CS_DIAGRAMS = {
-  flywheel:  { label: 'Flywheel',      icon: '🔄', hint: 'Each piece feeds the next — momentum builds as the wheel turns.' },
-  funnel:    { label: 'Funnel',        icon: '🔻', hint: 'How people move from the widest stage (first piece) to the deepest. % = how many make it to the next stage.' },
-  pathway:   { label: 'Pathway',       icon: '➡️', hint: 'The next steps, in order, and how many are on each one.' },
-  pyramid:   { label: 'Pyramid',       icon: '🔺', hint: 'A broad base that supports fewer people at each level up. First piece = the base.' },
-  circles:   { label: 'Circles',       icon: '🎯', hint: 'Concentric circles. First piece = the center, last piece = the outer ring.' },
-  roadmap:   { label: 'Roadmap',       icon: '🗓', hint: 'Milestones across the ministry year (Labor Day → Labor Day). Give a piece a month to put it on the line.' },
-  critical:  { label: 'Critical Path', icon: '📈', hint: 'Where we are → the 12-month win, with each piece along the way. The line fills as pieces hit their targets.' },
-  scorecard: { label: 'Scorecard',     icon: '🎛', hint: 'Every piece as a gauge: today vs. its target.' }
+  flywheel:  { label: 'Flywheel',      hint: 'Each piece feeds the next — momentum builds as the wheel turns.' },
+  funnel:    { label: 'Funnel',        hint: 'How people move from the widest stage (first piece) to the deepest. % = how many make it to the next stage.' },
+  pathway:   { label: 'Pathway',       hint: 'The next steps, in order, and how many are on each one.' },
+  pyramid:   { label: 'Pyramid',       hint: 'A broad base that supports fewer people at each level up. First piece = the base.' },
+  circles:   { label: 'Circles',       hint: 'Concentric circles. First piece = the center, last piece = the outer ring.' },
+  roadmap:   { label: 'Roadmap',       hint: 'Milestones across the ministry year (Labor Day → Labor Day). Give a piece a month to put it on the line.' },
+  critical:  { label: 'Critical Path', hint: 'Where we are → the 12-month win, with each piece along the way. The line fills as pieces hit their targets.' },
+  scorecard: { label: 'Scorecard',     hint: 'Every piece as a gauge: today vs. its target.' }
 };
 // Starting set (targets come from the Staff OS scorecard / CG goals). Rename, re-draw or replace freely.
 const CS_DEFAULTS = [
@@ -9164,14 +9185,14 @@ function csLoadPcoLists(force) {
 const CS_GROUP_ORDER = ['Dashboard metrics', 'Community groups', 'Giving & missions', 'Budget', 'Serve teams', 'Staff scorecard', 'PCO lists', 'All dashboard data (raw)'];
 function csGroupRank(g) { const i = CS_GROUP_ORDER.findIndex(x => g === x || g.indexOf(x + ' — ') === 0); return i < 0 ? 99 : i; }
 function csSrcLabel(key) {
-  if (!key) return '✍️ I’ll type the number';
+  if (!key) return 'Entered manually';
   const m = csSources()[key]; if (m) return m.label;
-  return (cpCatalogReady() ? '⚠ Not found: ' : 'Loading… ') + key;
+  return (cpCatalogReady() ? 'Not found: ' : 'Loading… ') + key;
 }
 // Button that opens the searchable picker (replaces a 300-item dropdown).
 function csPickBtn(mode, sid, pid, key) {
   const lbl = mode === 'kpi' ? '＋ Pin a number…' : csSrcLabel(key);
-  return '<button type="button" class="cs-pickbtn' + (mode === 'kpi' ? ' kpi' : '') + '" title="' + csE(lbl) + '" onclick="csOpenPicker(this,\'' + mode + '\',\'' + sid + '\',\'' + (pid || '') + '\')"><span>' + csE(lbl) + '</span><i>🔍</i></button>';
+  return '<button type="button" class="cs-pickbtn' + (mode === 'kpi' ? ' kpi' : '') + '" title="' + csE(lbl) + '" onclick="csOpenPicker(this,\'' + mode + '\',\'' + sid + '\',\'' + (pid || '') + '\')"><span>' + csE(lbl) + '</span><i>' + csIcon('search', 14) + '</i></button>';
 }
 let _csPickState = null;
 function csOpenPicker(btn, mode, sid, pid) {
@@ -9214,7 +9235,7 @@ function csPickFilter() {
   let items = Object.values(src).filter(m => !(st.mode === 'kpi' && csRow(st.sid) && csData(csRow(st.sid)).kpis.includes(m.key)));
   if (words.length) items = items.filter(m => { const hay = (m.label + ' ' + m.group + ' ' + m.key).toLowerCase(); return words.every(w => hay.indexOf(w) !== -1 || (w.length > 3 && /s$/.test(w) && hay.indexOf(w.replace(/e?s$/, '')) !== -1)); });   // "elders" finds "Elder…"
   items.sort((a, b) => csGroupRank(a.group) - csGroupRank(b.group) || (a.group < b.group ? -1 : a.group > b.group ? 1 : 0));
-  if (st.mode === 'piece' && (!words.length || /type|manual|own/.test(words.join(' ')))) items.unshift({ key: '', label: '✍️ I’ll type the number myself', group: '', manual: true });
+  if (st.mode === 'piece' && (!words.length || /type|manual|own|enter/.test(words.join(' ')))) items.unshift({ key: '', label: 'Enter the number manually', group: '', manual: true });
   st.items = items;
   const pcoN = ((window._csPco || {}).lists || []).length;
   el.querySelector('#csPickMeta').innerHTML = (words.length ? items.filter(i => !i.manual).length + ' match' + (items.length === 1 ? '' : 'es') : Object.keys(src).length + ' numbers') +
@@ -9284,22 +9305,22 @@ function csT(x, y, lines, o) {
 }
 function csSvg(W, H, body) { return '<svg class="cs-svg" viewBox="0 0 ' + W + ' ' + H + '" font-family="Montserrat, sans-serif" role="img">' + body + '</svg>'; }
 function csG(p, inner) { return '<g class="cs-p" onclick="csFocusPiece(\'' + p.id + '\')"><title>' + csE(p.t) + ' — click to edit</title>' + inner + '</g>'; }
-function csCol(i) { return CS_COLORS[i % CS_COLORS.length]; }
-function csCheck(x, y) { return '<g transform="translate(' + x + ',' + y + ')"><circle r="11" fill="#3f9b6b" stroke="#fff" stroke-width="2"/><path d="M-5,0 L-1.5,4 L5.5,-4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>'; }
+function csCol(i) { const n = Math.max(1, _csRampN); return CS_RAMP[n <= 1 ? 0 : Math.round(Math.min(i, n - 1) * (CS_RAMP.length - 1) / (n - 1))]; }
+function csCheck(x, y) { return '<g transform="translate(' + x + ',' + y + ')"><circle r="11" fill="' + CS_OK + '" stroke="#fff" stroke-width="2"/><path d="M-5,0 L-1.5,4 L5.5,-4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>'; }
 
 // ── The diagrams (each one looks different) ─────────────────────────────────
 const CS_DRAW = {
   flywheel(s) {
     const P = s.data.pieces, n = P.length, W = 1000, H = 670, cx = 500, cy = 342, R = 205, r = 64, rad = d => d * Math.PI / 180;
     const ang = i => -90 + 360 * i / n, pt = (a, rr) => [cx + rr * Math.cos(rad(a)), cy + rr * Math.sin(rad(a))];
-    let o = '<defs><marker id="csFwA" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a7e6e"/></marker></defs>';
-    o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="none" stroke="#f3ecdf" stroke-width="40"/>';
+    let o = '<defs><marker id="csFwA" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8795a3"/></marker></defs>';
+    o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="none" stroke="#eceef1" stroke-width="40"/>';
     if (n > 1) P.forEach((p, i) => {
       const gap = (r + 14) / R * 180 / Math.PI, a1 = ang(i) + gap, a2 = ang(i + 1) - gap, p1 = pt(a1, R), p2 = pt(a2, R);
-      o += '<path d="M' + p1[0] + ',' + p1[1] + ' A' + R + ',' + R + ' 0 0 1 ' + p2[0] + ',' + p2[1] + '" fill="none" stroke="#8a7e6e" stroke-width="3" marker-end="url(#csFwA)"/>';
+      o += '<path d="M' + p1[0] + ',' + p1[1] + ' A' + R + ',' + R + ' 0 0 1 ' + p2[0] + ',' + p2[1] + '" fill="none" stroke="#8795a3" stroke-width="2.5" marker-end="url(#csFwA)"/>';
     });
     const ov = csOverall(s);
-    o += csT(cx, cy - 6, csWrap(s.name, 16, 3), { size: 24, weight: 800, mid: true }) + (ov != null ? csT(cx, cy + 58, Math.round(ov * 100) + '% of targets', { size: 15, fill: '#3f9b6b' }) : '');
+    o += csT(cx, cy - 6, csWrap(s.name, 16, 3), { size: 24, weight: 800, mid: true }) + (ov != null ? csT(cx, cy + 58, Math.round(ov * 100) + '% of targets', { size: 15, fill: CS_OK }) : '');
     P.forEach((p, i) => {
       const I = csInfo(p), a = ang(i), c = pt(a, R), cs = Math.cos(rad(a)), sn = Math.sin(rad(a)), L = pt(a, R + r + 24);
       const lines = csWrap(p.t, 20, 3), anchor = cs > 0.35 ? 'start' : cs < -0.35 ? 'end' : 'middle', lh = 20;
@@ -9326,7 +9347,7 @@ const CS_DRAW = {
       const nx = P[i + 1];
       if (nx) {
         const J = csInfo(nx);
-        if (I.v && J.v != null && J.v <= I.v) { const x = Math.min(W - 100, 500 + w(i + 1) / 2 + 22); o += '<g><rect x="' + x + '" y="' + (y2 - 13) + '" width="96" height="26" rx="13" fill="#fbf4e6" stroke="#e6d3ad"/>' + csT(x + 48, y2 + 5, '↓ ' + Math.round(J.v / I.v * 100) + '%', { size: 13, weight: 800, fill: '#8a5a12' }) + '</g>'; }
+        if (I.v && J.v != null && J.v <= I.v) { const x = Math.min(W - 100, 500 + w(i + 1) / 2 + 22); o += '<g><rect x="' + x + '" y="' + (y2 - 13) + '" width="96" height="26" rx="13" fill="#f3f5f7" stroke="#d5dbe1"/>' + csT(x + 48, y2 + 5, '↓ ' + Math.round(J.v / I.v * 100) + '%', { size: 13, weight: 800, fill: '#374b61' }) + '</g>'; }
       }
     });
     return csSvg(W, H, o);
@@ -9343,10 +9364,10 @@ const CS_DRAW = {
         csT(tx, y + 58, csWrap(p.t, Math.max(8, Math.round((cw - d * 2) / 9)), 3), { size: 15, weight: 800, fill: '#fff', mid: true }) +
         csT((a + b - d) / 2, y + h + 50, I.vs, { size: 30, weight: 800, fill: csCol(i) }) +
         (csSub(I) ? csT((a + b - d) / 2, y + h + 74, csSub(I), { size: 12, weight: 600, fill: '#8a7e6e' }) : '') +
-        (I.pct != null ? '<rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + (cw - d - 48) + '" height="7" rx="3.5" fill="#efe6d6"/><rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + ((cw - d - 48) * I.pct) + '" height="7" rx="3.5" fill="' + csCol(i) + '"/>' : '') +
+        (I.pct != null ? '<rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + (cw - d - 48) + '" height="7" rx="3.5" fill="#e6e9ed"/><rect x="' + (a + 24) + '" y="' + (y + h + 88) + '" width="' + ((cw - d - 48) * I.pct) + '" height="7" rx="3.5" fill="' + csCol(i) + '"/>' : '') +
         (p.done ? csCheck(b - d - 6, y + 16) : ''));
       const nx = P[i + 1];
-      if (nx) { const J = csInfo(nx); if (I.v && J.v != null && J.v <= I.v) o += csT(b - d / 2 + 2, y + h + 50, Math.round(J.v / I.v * 100) + '% →', { size: 12, weight: 800, fill: '#8a5a12' }); }
+      if (nx) { const J = csInfo(nx); if (I.v && J.v != null && J.v <= I.v) o += csT(b - d / 2 + 2, y + h + 50, Math.round(J.v / I.v * 100) + '% →', { size: 12, weight: 800, fill: CS_MUTED }); }
     });
     return csSvg(W, H, o);
   },
@@ -9358,7 +9379,7 @@ const CS_DRAW = {
       const I = csInfo(p), yb = base - i * lh, yt = yb - lh + 5, mid = (yb + yt) / 2;
       o += csG(p, '<path d="M' + (cx - hw(yb)) + ',' + yb + ' L' + (cx + hw(yb)) + ',' + yb + ' L' + (cx + hw(yt)) + ',' + yt + ' L' + (cx - hw(yt)) + ',' + yt + ' Z" fill="' + csCol(i) + '"/>' +
         (hw(mid) > 46 ? csT(cx, mid, I.vs, { size: hw(mid) > 90 ? 24 : 17, weight: 800, fill: '#fff', mid: true }) : '') +
-        '<line x1="' + (cx + hw(mid) + 8) + '" y1="' + mid + '" x2="' + 690 + '" y2="' + mid + '" stroke="#cdbfa6" stroke-dasharray="3 4"/>' +
+        '<line x1="' + (cx + hw(mid) + 8) + '" y1="' + mid + '" x2="' + 690 + '" y2="' + mid + '" stroke="#c3cad2" stroke-dasharray="3 4"/>' +
         '<circle cx="' + 690 + '" cy="' + mid + '" r="4" fill="' + csCol(i) + '"/>' +
         csT(704, mid - 4, csWrap(p.t, 30, 1), { size: 16, weight: 800, anchor: 'start' }) +
         csT(704, mid + 17, [I.vs + (csSub(I) ? '  ·  ' + csSub(I) : '')], { size: 12.5, weight: 600, fill: '#8a7e6e', anchor: 'start' }) +
@@ -9370,15 +9391,15 @@ const CS_DRAW = {
     const P = s.data.pieces, n = P.length, W = 1000, H = 580, cx = 300, cy = 290, Rmax = 268, Rmin = n > 1 ? 70 : Rmax;
     const rr = i => n > 1 ? Rmin + (Rmax - Rmin) * i / (n - 1) : Rmax;
     let o = '';
-    for (let i = n - 1; i >= 0; i--) o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr(i) + '" fill="' + csCol(i) + '" fill-opacity="' + (0.55 + 0.4 * (1 - i / Math.max(n, 1))) + '" stroke="#fff" stroke-width="4"/>';
+    for (let i = n - 1; i >= 0; i--) o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr(i) + '" fill="' + csCol(i) + '" stroke="#fff" stroke-width="4"/>';
     P.forEach((p, i) => {
       const I = csInfo(p), rm = i ? (rr(i - 1) + rr(i)) / 2 : rr(0) * 0.45;
       const ly = n > 1 ? 70 + (H - 140) * (n - 1 - i) / (n - 1) : cy;
       const dy = Math.max(-0.9 * rm, Math.min(0.9 * rm, ly - cy)), dx = Math.sqrt(rm * rm - dy * dy);
       const vy = i ? cy - rm : cy - rr(0) * 0.3;
       o += csG(p, csT(cx, vy, I.vs, { size: i ? 17 : 22, weight: 800, fill: '#fff', mid: true }) +
-        '<circle cx="' + (cx + dx) + '" cy="' + (cy + dy) + '" r="5" fill="#1a1510"/>' +
-        '<polyline points="' + (cx + dx) + ',' + (cy + dy) + ' ' + 640 + ',' + ly + ' ' + 660 + ',' + ly + '" fill="none" stroke="#1a1510" stroke-width="1.4"/>' +
+        '<circle cx="' + (cx + dx) + '" cy="' + (cy + dy) + '" r="5" fill="#1e2a38"/>' +
+        '<polyline points="' + (cx + dx) + ',' + (cy + dy) + ' ' + 640 + ',' + ly + ' ' + 660 + ',' + ly + '" fill="none" stroke="#1e2a38" stroke-width="1.2"/>' +
         csT(672, ly - 4, csWrap(p.t, 32, 2), { size: 16, weight: 800, anchor: 'start', lh: 19 }) +
         csT(672, ly + 17 + (csWrap(p.t, 32, 2).length - 1) * 19, [I.vs + (csSub(I) ? '  ·  ' + csSub(I) : '')], { size: 12.5, weight: 600, fill: '#8a7e6e', anchor: 'start' }) +
         (p.done ? csCheck(660, ly - 22) : ''));
@@ -9401,27 +9422,27 @@ const CS_DRAW = {
       return { p, i, k, mx, left, side: best.side, lane: best.lane };
     });
     const upN = Math.max(1, lanes.up.length), dnN = Math.max(1, lanes.dn.length), ay = 30 + upN * (ch + gap) + 26, H = ay + 44 + dnN * (ch + gap) + 10;
-    let o = '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (x1 - x0) + '" height="10" rx="5" fill="#efe6d6"/>';
+    let o = '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (x1 - x0) + '" height="10" rx="5" fill="#e6e9ed"/>';
     months.forEach((m, k) => {
       const x = x0 + k * mw;
-      o += (k ? '<line x1="' + x + '" y1="' + (ay - 9) + '" x2="' + x + '" y2="' + (ay + 9) + '" stroke="#cdbfa6"/>' : '') +
+      o += (k ? '<line x1="' + x + '" y1="' + (ay - 9) + '" x2="' + x + '" y2="' + (ay + 9) + '" stroke="#c3cad2"/>' : '') +
         csT(x + mw / 2, ay + 28, m.d.toLocaleDateString('en-US', { month: 'short' }) + (k === 0 || m.d.getMonth() === 0 ? ' ’' + String(m.d.getFullYear()).slice(2) : ''), { size: 12, weight: 700, fill: '#8a7e6e' });
     });
     const now = new Date(), start = months[0].d, end = new Date(Y + 1, 8, 1);
     if (now >= start && now < end) {
       const frac = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth() + (now.getDate() - 1) / 31, xn = x0 + frac * mw;
-      o += '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (xn - x0) + '" height="10" rx="5" fill="#c9963a" opacity=".55"/>' +
-        '<g><title>Today</title><line x1="' + xn + '" y1="' + (ay - 14) + '" x2="' + xn + '" y2="' + (ay + 14) + '" stroke="#b42318" stroke-width="2.5"/><circle cx="' + xn + '" cy="' + (ay + 14) + '" r="3.5" fill="#b42318"/></g>';
+      o += '<rect x="' + x0 + '" y="' + (ay - 5) + '" width="' + (xn - x0) + '" height="10" rx="5" fill="' + CS_BRASS + '" opacity=".55"/>' +
+        '<g><title>Today</title><line x1="' + xn + '" y1="' + (ay - 14) + '" x2="' + xn + '" y2="' + (ay + 14) + '" stroke="#8f2d2d" stroke-width="2.5"/><circle cx="' + xn + '" cy="' + (ay + 14) + '" r="3.5" fill="#8f2d2d"/></g>';
     }
     pos.forEach(q => {
       const I = csInfo(q.p), cy = q.side === 'up' ? ay - 26 - (q.lane + 1) * (ch + gap) + gap : ay + 42 + q.lane * (ch + gap), col = csCol(q.i);
       const ey = q.side === 'up' ? cy + ch : cy;
       o += csG(q.p, '<line x1="' + q.mx + '" y1="' + ey + '" x2="' + q.mx + '" y2="' + ay + '" stroke="' + col + '" stroke-width="1.5"/>' +
-        '<rect x="' + (q.mx - 7) + '" y="' + (ay - 7) + '" width="14" height="14" transform="rotate(45 ' + q.mx + ' ' + ay + ')" fill="' + (q.p.done ? '#3f9b6b' : col) + '" stroke="#fff" stroke-width="2"/>' +
+        '<rect x="' + (q.mx - 7) + '" y="' + (ay - 7) + '" width="14" height="14" transform="rotate(45 ' + q.mx + ' ' + ay + ')" fill="' + (q.p.done ? CS_OK : col) + '" stroke="#fff" stroke-width="2"/>' +
         '<rect x="' + q.left + '" y="' + cy + '" width="' + cw + '" height="' + ch + '" rx="9" fill="#fff" stroke="' + col + '" stroke-width="2"/>' +
         '<rect x="' + q.left + '" y="' + cy + '" width="6" height="' + ch + '" rx="3" fill="' + col + '"/>' +
         csT(q.left + 14, cy + 22, csWrap(q.p.t, 20, 2), { size: 13, weight: 800, anchor: 'start', lh: 15 }) +
-        csT(q.left + 14, cy + ch - 9, q.p.done ? '✓ done' : [I.vs !== '—' ? I.vs + (I.ts ? ' / ' + I.ts : '') : '', I.steps].filter(Boolean).join(' · ') || '—', { size: 11.5, weight: 700, fill: q.p.done ? '#3f9b6b' : '#8a7e6e', anchor: 'start' }));
+        csT(q.left + 14, cy + ch - 9, q.p.done ? '✓ done' : [I.vs !== '—' ? I.vs + (I.ts ? ' / ' + I.ts : '') : '', I.steps].filter(Boolean).join(' · ') || '—', { size: 11.5, weight: 700, fill: q.p.done ? CS_OK : CS_MUTED, anchor: 'start' }));
     });
     return csSvg(W, H, o) + (loose.length ? '<div class="cs-loose"><b>No month yet:</b> ' + loose.map(([p, i]) => '<button class="cs-chip" style="border-color:' + csCol(i) + '" onclick="csFocusPiece(\'' + p.id + '\')">' + csE(p.t) + ' <i>' + csE(csInfo(p).vs) + '</i></button>').join('') + '</div>' : '');
   },
@@ -9429,24 +9450,24 @@ const CS_DRAW = {
     const P = s.data.pieces, n = P.length, W = 1000, H = 600, x1 = 90, y1 = 520, x2 = 740, y2 = 120, ov = csOverall(s) || 0;
     const L = Math.hypot(x2 - x1, y2 - y1), nx = (y2 - y1) / L * -1, ny = (x2 - x1) / L;   // normal pointing up-left
     const xp = x1 + (x2 - x1) * ov, yp = y1 + (y2 - y1) * ov;
-    let o = '<defs><linearGradient id="csCpG" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c9963a"/><stop offset="1" stop-color="#3f9b6b"/></linearGradient>' +
+    let o = '<defs><linearGradient id="csCpG" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8795a3"/><stop offset="1" stop-color="#1e2a38"/></linearGradient>' +
       '<marker id="csCpA" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a1510"/></marker></defs>' +
-      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#efe6d6" stroke-width="18" stroke-linecap="round"/>' +
+      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#e6e9ed" stroke-width="18" stroke-linecap="round"/>' +
       (ov > 0 ? '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + xp + '" y2="' + yp + '" stroke="url(#csCpG)" stroke-width="18" stroke-linecap="round"/>' : '') +
-      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#1a1510" stroke-width="2" marker-end="url(#csCpA)"/>' +
-      '<circle cx="' + x1 + '" cy="' + y1 + '" r="14" fill="#c9963a" stroke="#fff" stroke-width="3"/>' + csT(x1, y1 + 42, 'Where we are', { size: 14, weight: 800 }) +
-      '<rect x="760" y="40" width="228" height="170" rx="14" fill="#fff" stroke="#1a1510" stroke-width="2"/>' +
+      '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#1e2a38" stroke-width="2" marker-end="url(#csCpA)"/>' +
+      '<circle cx="' + x1 + '" cy="' + y1 + '" r="14" fill="' + CS_BRASS + '" stroke="#fff" stroke-width="3"/>' + csT(x1, y1 + 42, 'Where we are', { size: 14, weight: 800 }) +
+      '<rect x="760" y="40" width="228" height="170" rx="14" fill="#fff" stroke="#1e2a38" stroke-width="2"/>' +
       csT(778, 68, '12-MONTH WIN', { size: 11, weight: 800, fill: '#8a7e6e', anchor: 'start' }) +
       csT(778, 94, csWrap(s.data.goal || 'Set the 12-month win (right panel)', 22, 4), { size: 15, weight: 800, anchor: 'start', lh: 19, fill: s.data.goal ? '#1a1510' : '#b8ab93' }) +
-      csT(778, 194, Math.round(ov * 100) + '% there', { size: 15, weight: 800, fill: '#3f9b6b', anchor: 'start' });
+      csT(778, 194, Math.round(ov * 100) + '% there', { size: 15, weight: 800, fill: CS_OK, anchor: 'start' });
     P.forEach((p, i) => {
       const I = csInfo(p), t = (i + 1) / (n + 1), px = x1 + (x2 - x1) * t, py = y1 + (y2 - y1) * t, side = i % 2 ? -1 : 1;
       const bx = px + nx * 105 * side, by = py + ny * 105 * side, bw = 200, bh = 64;
       o += csG(p, '<line x1="' + px + '" y1="' + py + '" x2="' + bx + '" y2="' + by + '" stroke="' + csCol(i) + '" stroke-width="1.6"/>' +
-        '<circle cx="' + px + '" cy="' + py + '" r="8" fill="' + (p.done ? '#3f9b6b' : csCol(i)) + '" stroke="#fff" stroke-width="2.5"/>' +
+        '<circle cx="' + px + '" cy="' + py + '" r="8" fill="' + (p.done ? CS_OK : csCol(i)) + '" stroke="#fff" stroke-width="2.5"/>' +
         '<rect x="' + (bx - bw / 2) + '" y="' + (by - bh / 2) + '" width="' + bw + '" height="' + bh + '" rx="10" fill="#fff" stroke="' + csCol(i) + '" stroke-width="2"/>' +
         csT(bx, by - 8, csWrap(p.t, 24, 2), { size: 13, weight: 800, lh: 15, mid: true }) +
-        csT(bx, by + bh / 2 - 9, p.done ? '✓ done' : [I.vs + (I.ts ? ' / ' + I.ts : ''), I.steps].filter(Boolean).join(' · '), { size: 11.5, weight: 700, fill: p.done ? '#3f9b6b' : '#8a7e6e' }));
+        csT(bx, by + bh / 2 - 9, p.done ? '✓ done' : [I.vs + (I.ts ? ' / ' + I.ts : ''), I.steps].filter(Boolean).join(' · '), { size: 11.5, weight: 700, fill: p.done ? CS_OK : CS_MUTED }));
     });
     return csSvg(W, H, o);
   },
@@ -9456,9 +9477,9 @@ const CS_DRAW = {
     P.forEach((p, i) => {
       const I = csInfo(p), cx = (i % cols + 0.5) * cw, top = Math.floor(i / cols) * chh, cy = top + 118, R = 80;
       const arc = f => { const a = Math.PI * (1 - f); return (cx + R * Math.cos(a)) + ',' + (cy - R * Math.sin(a)); };
-      o += csG(p, '<rect x="' + (cx - cw / 2 + 8) + '" y="' + (top + 6) + '" width="' + (cw - 16) + '" height="' + (chh - 12) + '" rx="14" fill="#fffdf8" stroke="#eee4d3"/>' +
-        '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(1) + '" fill="none" stroke="#efe6d6" stroke-width="18" stroke-linecap="round"/>' +
-        (I.pct ? '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(Math.min(I.pct, 0.999)) + '" fill="none" stroke="' + (I.pct >= 1 ? '#3f9b6b' : csCol(i)) + '" stroke-width="18" stroke-linecap="round"/>' : '') +
+      o += csG(p, '<rect x="' + (cx - cw / 2 + 8) + '" y="' + (top + 6) + '" width="' + (cw - 16) + '" height="' + (chh - 12) + '" rx="14" fill="#fbfbfc" stroke="#e3e7eb"/>' +
+        '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(1) + '" fill="none" stroke="#e6e9ed" stroke-width="18" stroke-linecap="round"/>' +
+        (I.pct ? '<path d="M' + arc(0) + ' A' + R + ',' + R + ' 0 0 1 ' + arc(Math.min(I.pct, 0.999)) + '" fill="none" stroke="' + (I.pct >= 1 ? CS_OK : csCol(i)) + '" stroke-width="18" stroke-linecap="round"/>' : '') +
         csT(cx, cy - 12, I.vs, { size: I.vs.length > 7 ? 22 : 30, weight: 800 }) +
         csT(cx, cy + 12, I.ts ? 'goal ' + I.ts + (I.pct != null ? ' · ' + Math.round(I.pct * 100) + '%' : '') : 'no target yet', { size: 12, weight: 600, fill: '#8a7e6e' }) +
         csT(cx, cy + 46, csWrap(p.t, Math.round(cw / 10), 2), { size: 15, weight: 800, lh: 18 }) +
@@ -9468,6 +9489,7 @@ const CS_DRAW = {
   }
 };
 function csDiagramHtml(s) {
+  _csRampN = s.data.pieces.length || 1;
   if (!s.data.pieces.length) return '<div class="sos-empty">No pieces yet — add the first one below (e.g. a stage, a step, a level or a milestone).</div>';
   let svg = '';
   try { svg = CS_DRAW[s.diagram](s); } catch (e) { svg = '<div class="sos-empty">Couldn’t draw this diagram.</div>'; }
@@ -9484,13 +9506,13 @@ function csHtml() {
 }
 function csTabsHtml(list, sel) {
   return list.map((s, i) => { const ov = csOverall(s);
-    return '<button class="cs-tab' + (sel && s.id === sel.id ? ' on' : '') + '" onclick="csSelect(\'' + s.id + '\')"><span class="cs-tab-i">' + CS_DIAGRAMS[s.diagram].icon + '</span>' + csE(s.name) + (ov != null ? '<span class="cs-tab-p">' + Math.round(ov * 100) + '%</span>' : '') + '</button>'; }).join('') +
+    return '<button class="cs-tab' + (sel && s.id === sel.id ? ' on' : '') + '" onclick="csSelect(\'' + s.id + '\')"><span class="cs-tab-i">' + csIcon(s.diagram) + '</span>' + csE(s.name) + (ov != null ? '<span class="cs-tab-p">' + Math.round(ov * 100) + '%</span>' : '') + '</button>'; }).join('') +
     '<button class="cs-tab cs-tab-add" title="Add or customize strategies" onclick="csToggleManage()">＋</button>';
 }
 function csInner() {
   const list = csStrategies(), s = csSelected(list), E = csE;
-  let h = '<div class="sos-card cs-card"><div class="sos-card-h">⭐ Core Strategies <span class="sos-count">only Brad &amp; Ryan see this</span>' +
-    '<span class="cs-hbtns"><button class="sos-btn sm ghost" onclick="csToggleManage()">⚙ Customize</button><button class="sos-btn sm ghost" title="Reload" onclick="csLoad()">↻</button></span></div>';
+  let h = '<div class="sos-card cs-card"><div class="sos-card-h">Core Strategies <span class="sos-count">Brad &amp; Ryan only</span>' +
+    '<span class="cs-hbtns"><button class="sos-btn sm ghost" onclick="csToggleManage()">Customize</button><button class="sos-btn sm ghost" title="Reload" onclick="csLoad()">↻</button></span></div>';
   if (_cs.manage || (_cs.loaded && !list.length)) {
     h += '<div class="cs-manage"><div class="cs-manage-h">' + (list.length ? 'Your strategies — rename, reorder, add or remove' : 'No strategies yet') + '</div>' +
       list.map((x, i) => '<div class="cs-mg-row"><span class="cs-mg-n">' + (i + 1) + '</span><input class="sos-input sm" value="' + E(x.name) + '" onchange="csRename(\'' + x.id + '\',this.value)">' +
@@ -9500,7 +9522,7 @@ function csInner() {
       (!list.length ? '<button class="sos-btn hi" style="margin-top:10px" onclick="csSeed()">Start with the 5 core strategies</button><div class="cs-hint">Sunday Gatherings · Community Groups · Membership · Leadership Development · Missions — each with its own diagram, already wired to live numbers. Rename or change any of it after.</div>' : '') +
       (list.length ? '<button class="sos-btn sm" style="margin-top:8px" onclick="csToggleManage()">Done</button>' : '') + '</div>';
   }
-  if (!list.length) return h + (!_cs.loaded ? '<div class="sos-loading">Loading core strategies…</div>' : '') + '</div>';
+  if (!list.length) return h + (!_cs.loaded ? (_cs.err ? '<div class="sos-loading">Couldn’t reach the strategy board — retrying… <a href="#" onclick="_cs.tries=0;csLoad();return false">Retry now</a></div>' : '<div class="sos-loading">Loading core strategies…</div>') : '') + '</div>';
   const d = s.data, ov = csOverall(s), used = new Set(d.kpis), src = csSources();
   const kpis = d.kpis.map(k => { const m = src[k];
     return '<div class="cs-kpi"><span>' + E(m ? m.label : (cpCatalogReady() ? k + ' (missing)' : 'Loading…')) + '</span><b>' + (m ? E(csFmt(m.value, m.unit)) : '…') + '</b><button class="cp-x" title="Remove" onclick="csDelKpi(\'' + s.id + '\',\'' + E(k) + '\')">×</button></div>'; }).join('');
@@ -9509,11 +9531,11 @@ function csInner() {
       '<div class="cs-stage">' +
         '<input class="cs-name" value="' + E(s.name) + '" title="Rename this strategy" onchange="csRename(\'' + s.id + '\',this.value)">' +
         '<div class="cs-diag" id="csDiag">' + csDiagramHtml(s) + '</div>' +
-        '<div class="cs-hint">' + CS_DIAGRAMS[s.diagram].icon + ' ' + E(CS_DIAGRAMS[s.diagram].hint) + ' Click any piece to edit it.</div>' +
+        '<div class="cs-hint">' + E(CS_DIAGRAMS[s.diagram].hint) + ' Click any piece to edit it.</div>' +
       '</div>' +
       '<div class="cs-side">' +
         '<label class="cs-lbl">Diagram</label><select class="sos-input sm" onchange="csSetDiagram(\'' + s.id + '\',this.value)">' +
-          Object.keys(CS_DIAGRAMS).map(k => '<option value="' + k + '"' + (k === s.diagram ? ' selected' : '') + '>' + CS_DIAGRAMS[k].icon + ' ' + CS_DIAGRAMS[k].label + '</option>').join('') + '</select>' +
+          Object.keys(CS_DIAGRAMS).map(k => '<option value="' + k + '"' + (k === s.diagram ? ' selected' : '') + '>' + CS_DIAGRAMS[k].label + '</option>').join('') + '</select>' +
         '<label class="cs-lbl">Why it matters</label><textarea class="sos-input sm cs-ta" rows="2" placeholder="What winning looks like…" onchange="csSetData(\'' + s.id + '\',\'purpose\',this.value)">' + E(d.purpose) + '</textarea>' +
         '<label class="cs-lbl">12-month win</label><input class="sos-input sm" value="' + E(d.goal) + '" placeholder="e.g. 900 adults on a Sunday" onchange="csSetData(\'' + s.id + '\',\'goal\',this.value)">' +
         '<label class="cs-lbl">Progress to targets</label><div class="cs-ov" id="csOv">' + csOvHtml(ov) + '</div>' +
@@ -9521,7 +9543,7 @@ function csInner() {
         csPickBtn('kpi', s.id, '', '') +
       '</div>' +
     '</div>' +
-    '<details class="cs-edit"' + (_cs.editOpen ? ' open' : '') + ' ontoggle="_cs.editOpen=this.open"><summary>✎ Edit pieces &amp; action steps <span class="sos-count">' + d.pieces.length + '</span></summary>' +
+    '<details class="cs-edit"' + (_cs.editOpen ? ' open' : '') + ' ontoggle="_cs.editOpen=this.open"><summary>Edit pieces &amp; action steps <span class="sos-count">' + d.pieces.length + '</span></summary>' +
       '<div class="cs-pgrid">' + d.pieces.map((p, i) => csPieceHtml(s, p, i)).join('') +
         '<div class="cs-pc cs-pc-new"><div class="cs-lbl">Add a piece</div><input id="csNewPiece" class="sos-input sm" placeholder="Stage, step, level or milestone…" onkeydown="if(event.key===\'Enter\')csAddPiece(\'' + s.id + '\')">' +
         '<button class="sos-btn sm hi" onclick="csAddPiece(\'' + s.id + '\')">Add piece</button></div>' +
@@ -9530,6 +9552,7 @@ function csInner() {
 }
 function csOvHtml(ov) { return ov == null ? '<span class="cs-hint">Give pieces a target to track progress.</span>' : '<div class="cp-gbar"><i style="width:' + Math.round(ov * 100) + '%"></i></div><b>' + Math.round(ov * 100) + '%</b>'; }
 function csPieceHtml(s, p, i) {
+  _csRampN = s.data.pieces.length || 1;
   const E = csE, I = csInfo(p), a = '\'' + s.id + '\',\'' + p.id + '\'';
   return '<div class="cs-pc" id="csPc_' + p.id + '" style="border-top-color:' + csCol(i) + '">' +
     '<div class="cs-pc-h"><span class="cs-pc-n" style="background:' + csCol(i) + '">' + (i + 1) + '</span>' +
@@ -9579,11 +9602,17 @@ function csLoad(background) {
   if (!background) sosToast('Refreshing core strategies…');
   return sosApiGet('action=sos_data&who=' + CS_OWNER).then(res => {
     _cs.loading = false;
-    if (!res || !res.ok) return;
+    if (!res || !res.ok) throw new Error((res && res.error) || 'load failed');
+    _cs.err = false; _cs.tries = 0;
     if (_csPending > 0 || _csLastMut >= started) return;          // newer local edits win
     _cs.rows = (res.plans || []).filter(p => p.type === 'strategy'); _cs.loaded = true;
     csSaveCache(); csRender();
-  }).catch(() => { _cs.loading = false; if (!_cs.loaded) { _cs.loaded = true; csRender(); } });
+  }).catch(() => {
+    // Never treat a failed load as "no strategies" (that would offer to re-seed) — show an error and retry.
+    _cs.loading = false; _cs.err = true; _cs.tries = (_cs.tries || 0) + 1;
+    if (_cs.tries < 5) setTimeout(() => { if (!_cs.loaded) csLoad(true); }, 2000 * _cs.tries);
+    csRender();
+  });
 }
 function csSave(row, fields) {
   Object.assign(row, fields); csSaveCache();
@@ -16060,7 +16089,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T212243Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T212829Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
