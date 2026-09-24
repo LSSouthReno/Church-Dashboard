@@ -1629,6 +1629,24 @@
   }
   .sp-nav-tab:hover { color: var(--sp-parchment); }
   .sp-nav-tab.sp-active { color: var(--sp-gold); border-bottom-color: var(--sp-gold); }
+  /* Staff OS header: title on the left, section tabs inline to its right (one compact row) */
+  #staffModal .tmod-header.sp-head { padding: 0 24px 0 32px; gap: 28px; flex-wrap: nowrap; align-items: stretch; min-height: 60px; }
+  #staffModal .sp-head .tmod-titles { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; padding: 10px 0; }
+  #staffModal .sp-head .tmod-title { font-size: 20px; line-height: 1.15; }
+  #staffModal .sp-head .tmod-sub { font-size: 10.5px; margin-top: 2px; white-space: nowrap; }
+  #staffModal .sp-head-meta { color: var(--text-dim); letter-spacing: 0; text-transform: none; }
+  #staffModal .sp-head .sp-nav-tabs { flex: 1 1 auto; min-width: 0; background: transparent; border-top: none; padding: 0; align-items: stretch; }
+  #staffModal .sp-head .sp-nav-tabs[hidden] { display: none; }
+  #staffModal .sp-head .sp-nav-tab { display: flex; align-items: center; padding: 0 15px; }
+  #staffModal .sp-head .sp-nav-group { display: inline-flex; }
+  #staffModal .sp-head .sp-nav-tab.sp-nav-tool { border-left: 1px solid rgba(201,150,58,.28); }
+  @media (max-width: 900px) {
+    #staffModal .tmod-header.sp-head { flex-wrap: wrap; padding: 0 12px; gap: 0; }
+    #staffModal .sp-head .tmod-titles { padding: 10px 4px 6px; }
+    #staffModal .sp-head .tmod-sub { white-space: normal; }
+    #staffModal .sp-head .sp-nav-tabs { flex-basis: 100%; overflow-x: auto; }
+    #staffModal .sp-head .sp-nav-tab { padding: 12px 13px; }
+  }
   .sp-nav-group { display: inline-flex; align-items: center; gap: 7px; }
   .sp-nav-group.sp-open { color: var(--sp-parchment); background: rgba(255,255,255,.05); }
   .sp-nav-cur:not(:empty) { color: var(--sp-parchment); opacity: .75; }
@@ -3440,12 +3458,12 @@
 
 <!-- Staff OS Full-Screen Modal -->
 <div class="tmod-overlay" id="staffModal" aria-hidden="true">
-  <div class="tmod-header">
+  <div class="tmod-header sp-head">
     <div class="tmod-titles">
       <div class="tmod-title">Staff OS</div>
-      <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; RUNNING ON TRACTION</div>
+      <div class="tmod-sub">LIVING STONES CHURCH<span id="staffModMeta" class="sp-head-meta"></span></div>
     </div>
-    <div class="tmod-meta" id="staffModMeta"></div>
+    <nav class="sp-nav-tabs" id="staffNav" aria-label="Staff sections" hidden></nav>
   </div>
   <!-- Lock screen -->
   <div id="staffModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
@@ -3460,7 +3478,6 @@
   </div>
   <!-- Unlocked content -->
   <div id="staffModContent" class="staff-panel" style="display:none">
-    <nav class="sp-nav-tabs" aria-label="Staff sections"></nav>
     <div class="sp-main-wrap">
       <div class="sp-main">
 
@@ -11282,11 +11299,13 @@ function openStaffModal() {
   if (staffIsUnlocked()) {
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
+    document.getElementById('staffNav').hidden = false;
     if (!staffRendered) staffLoadData();
     sosInit();
   } else {
     document.getElementById('staffModLocked').style.display = 'flex';
     document.getElementById('staffModContent').style.display = 'none';
+    document.getElementById('staffNav').hidden = true;   // tabs only after sign-in
     sosPrewarm();   // warm the Apps Script backend while they type their PIN
     setTimeout(() => { const el = document.getElementById('staffPwInput'); if (el) el.focus(); }, 200);
   }
@@ -11317,6 +11336,7 @@ async function staffDoUnlock() {
     sessionStorage.setItem(STAFF_SESSION_KEY, '1');
     document.getElementById('staffModLocked').style.display = 'none';
     document.getElementById('staffModContent').style.display = 'flex';
+    document.getElementById('staffNav').hidden = false;
     if (!staffRendered) staffLoadData();
   };
   const goMine = () => staffShowSection('sp-mine');
@@ -11479,7 +11499,7 @@ function staffRenderMeta(data) {
   if (!metaEl) return;
   if (!valid.length) { metaEl.textContent = ''; return; }
   const d = new Date(Math.max.apply(null, valid.map(x => x.getTime())));
-  metaEl.textContent = 'Synced ' + d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  metaEl.textContent = ' · Synced ' + d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
 function staffRenderScorecard(data) {
@@ -12970,7 +12990,7 @@ function staffNavTabs(tabs) {
   return STAFF_NAV_FALLBACK.slice();
 }
 function staffBuildNav(tabs) {
-  const nav = document.querySelector('#staffModContent .sp-nav-tabs'); if (!nav) return null;
+  const nav = document.getElementById('staffNav'); if (!nav) return null;
   const mid = staffNavTabs(tabs), E = escapeHtml, groupOf = {}, placed = {};
   STAFF_NAV_GROUPS.forEach(g => g.ids.forEach(id => groupOf[id] = g));
   _spNavItems = {};
@@ -12992,7 +13012,7 @@ function staffBuildNav(tabs) {
 }
 // Highlight the tab (or the group that holds it) for the visible section.
 function staffNavMark(id) {
-  const nav = document.querySelector('#staffModContent .sp-nav-tabs'); if (!nav) return;
+  const nav = document.getElementById('staffNav'); if (!nav) return;
   nav.querySelectorAll('.sp-nav-tab').forEach(t => t.classList.remove('sp-active'));
   nav.querySelectorAll('.sp-nav-cur').forEach(c => c.textContent = '');
   const direct = nav.querySelector('.sp-nav-tab[data-id="' + id + '"]');
@@ -15901,7 +15921,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T220106Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T220416Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
