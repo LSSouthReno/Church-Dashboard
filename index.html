@@ -1135,6 +1135,9 @@
   .cp-wrap.cp-abs .cp-box { padding: 12px 14px; }
   .cp-wrap.cp-abs .cp-mrow { padding: 4px 0; font-size: 13px; }
   .cp-wrap.cp-abs .cp-mval { font-size: 15px; }
+  .cp-blsel { margin-left: auto; font: inherit; font-size: 11.5px; font-weight: 700; border: 1px solid var(--sp-border,#e6dccb); border-radius: 6px; padding: 2px 4px; background: #fffdf8; color: #8a5a12; max-width: 170px; }
+  .cp-mnow { font-size: 11.5px; color: var(--sp-muted,#8a7e6e); white-space: nowrap; }
+  .cp-mnow.up { color: #2f7d52; } .cp-mnow.down { color: #b42318; }
   .cp-more > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: #8a5a12; margin-top: 8px; list-style: none; }
   .cp-more > summary::-webkit-details-marker { display: none; }
   .cp-gnums { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--sp-muted,#8a7e6e); white-space: nowrap; flex: 0 0 auto; }
@@ -8335,13 +8338,89 @@ function cpCatalog() {
   return cat;
 }
 function cpPlans(type) { return _sos.plans.filter(p => p.type === type); }
+// ── Baselines: Current Reality is FROZEN on Labor Day (start of the ministry year) ──
+// Org-wide Labor Day snapshots are StaffPlans rows owned by '_org' (type 'baseline',
+// title 'LD2026', detail = JSON {metricKey: value}). The first staff load after Labor Day
+// writes that year's snapshot (history-reconstructed where possible, else the value that
+// day). Each person can switch THEIR plan to last year's Labor Day or a snapshot of today
+// (row type 'baselinepref': title 'ld' | 'prior' | 'snap', detail = snap values, period = date).
+function cpLaborDay(y) { const d = new Date(y, 8, 1); d.setDate(1 + ((8 - d.getDay()) % 7)); return d; }   // first Monday of September
+function cpPlanYear() { const now = new Date(), ld = cpLaborDay(now.getFullYear()); return now >= ld ? now.getFullYear() : now.getFullYear() - 1; }
+function cpParseDay(v) { v = String(v || ''); return new Date(/T/.test(v) ? v : v + 'T12:00:00'); }   // Sheets returns stored dates as ISO timestamps
+function cpFmtDay(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+// Metric values as of a past date, rebuilt from the dashboard's history (only the metrics that have history).
+function cpValuesAt(date) {
+  const D = (typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA) || {}, out = {}, r1 = v => Math.round(v * 10) / 10;
+  const aw = D.attendanceWeekly || {}, wk = [];
+  Object.keys(aw).forEach(k => (aw[k] || []).forEach(w => { const dt = new Date(w.week + ' ' + k.slice(0, 4)); if (!isNaN(dt) && dt <= date && (w.adults || 0) > 0) wk.push({ dt, a: w.adults, k: w.kids || 0 }); }));
+  wk.sort((a, b) => a.dt - b.dt); const l4 = wk.slice(-4);
+  if (l4.length) { out.att_adults = Math.round(l4.reduce((t, w) => t + w.a, 0) / l4.length); out.att_kids = Math.round(l4.reduce((t, w) => t + w.k, 0) / l4.length); }
+  const yr = String(date.getFullYear()), mo = date.getMonth(), prev = mo === 0 ? [String(+yr - 1), 11] : [yr, mo - 1];
+  const cg = D.communityGroupsDetailed || {};
+  const g = ((cg.groupCountsByYear || {})[prev[0]] || [])[prev[1]], m = ((cg.peopleInGroupsByYear || {})[prev[0]] || [])[prev[1]];
+  if (g != null) out.cg_groups = g; if (m != null) out.cg_members = m; if (g && m) out.cg_size = Math.round(m / g);
+  const ytd = o => { const a = (o || {})[yr]; return a ? a.slice(0, mo).reduce((t, v) => t + (v || 0), 0) : undefined; };
+  if (cg.joinedGroup) { const v = ytd(cg.joinedGroup); if (v != null) out.cg_joined_ytd = v; }
+  if (cg.appliedToJoin) { const v = ytd(cg.appliedToJoin); if (v != null) out.cg_applied_ytd = v; }
+  const b = D.baptisms || {};
+  if (b.months && yr === String(new Date().getFullYear())) out.baptisms_ytd = b.months.reduce((t, lbl, i) => { const d = new Date(String(lbl).replace("'", ' 20')); return t + (!isNaN(d) && String(d.getFullYear()) === yr && d.getMonth() < mo ? (b.counts[i] || 0) : 0); }, 0);
+  const mk = yr + '-' + String(mo + 1).padStart(2, '0');
+  (D.serveTeams || []).forEach(t => { const h = (t.history || []).filter(x => x.d < mk).sort((a, c) => a.d < c.d ? -1 : 1).pop(); if (h) out['serve_' + cpSlug(t.name)] = h.n; });
+  Object.keys(out).forEach(k => out[k] = r1(out[k]));
+  return out;
+}
+function cpOrgBaselines() { return window._cpOrg || {}; }
+function cpEnsureOrgBaselines() {
+  if (window._cpOrgLoading || window._cpOrgLoaded) return; window._cpOrgLoading = true;
+  try { const c = JSON.parse(localStorage.getItem('lssr_cp_org') || 'null'); if (c) window._cpOrg = c; } catch (e) {}
+  fetch(STAFF_OS_URL + '?action=sos_data&who=_org').then(r => r.json()).then(j => {
+    const org = {};
+    ((j && j.plans) || []).filter(p => p.type === 'baseline').sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0)).forEach(p => {
+      if (org[p.title]) return;                       // earliest write wins
+      try { org[p.title] = { values: JSON.parse(p.detail || '{}'), date: p.period }; } catch (e) {}
+    });
+    const Y = cpPlanYear(), key = 'LD' + Y;
+    if (!org[key] && typeof DASHBOARD_DATA !== 'undefined' && DASHBOARD_DATA) {
+      // First load of the new ministry year: freeze Labor Day. History where we have it, today's value otherwise.
+      const cat = cpCatalog(), vals = {};
+      Object.keys(cat).forEach(k => vals[k] = cat[k].value);
+      Object.assign(vals, cpValuesAt(cpLaborDay(Y)));
+      org[key] = { values: vals, date: cpLaborDay(Y).toISOString().slice(0, 10) };
+      sosApiPost({ action: 'sos_plan_add', owner: '_org', type: 'baseline', title: key, detail: JSON.stringify(vals), period: org[key].date, status: 'active' }).catch(() => {});
+    }
+    window._cpOrg = org; window._cpOrgLoaded = true;
+    try { localStorage.setItem('lssr_cp_org', JSON.stringify(org)); } catch (e) {}
+    if (_sos && _sos.loaded) sosRender();
+  }).catch(() => {}).finally(() => { window._cpOrgLoading = false; });
+}
+function cpBaselinePref() { return cpPlans('baselinepref')[0] || null; }
+// The baseline this person's plan measures from: { mode, label, values }.
+function cpBaseline() {
+  const pref = cpBaselinePref(), mode = pref ? pref.title : 'ld', Y = cpPlanYear(), org = cpOrgBaselines();
+  if (mode === 'snap' && pref) { let v = {}; try { v = JSON.parse(pref.detail || '{}'); } catch (e) {} return { mode, label: 'Snapshot · ' + cpFmtDay(cpParseDay(pref.period)), values: v }; }
+  if (mode === 'prior') { const k = 'LD' + (Y - 1); return { mode, label: 'Labor Day ' + (Y - 1) + ' (' + cpFmtDay(cpLaborDay(Y - 1)).replace(/, \d{4}$/, '') + ')', values: (org[k] && org[k].values) || cpValuesAt(cpLaborDay(Y - 1)) }; }
+  const k = 'LD' + Y;
+  return { mode: 'ld', label: 'Labor Day ' + Y + ' (' + cpFmtDay(cpLaborDay(Y)).replace(/, \d{4}$/, '') + ')', values: (org[k] && org[k].values) || Object.assign(Object.fromEntries(Object.values(cpCatalog()).map(m => [m.key, m.value])), cpValuesAt(cpLaborDay(Y))) };
+}
+function cpSetBaseline(v) {
+  const pref = cpBaselinePref(), today = new Date().toISOString().slice(0, 10);
+  let fields = { title: v };
+  if (v === 'new') {
+    const vals = {}; Object.values(cpCatalog()).forEach(m => vals[m.key] = m.value);
+    cpPlans('metric').forEach(p => vals['custom_' + p.id] = p.current);
+    fields = { title: 'snap', detail: JSON.stringify(vals), period: today };
+  }
+  if (pref) sosMutate(() => Object.assign(pref, fields), Object.assign({ action: 'sos_plan_update', id: pref.id }, fields));
+  else sosAddPlanLocal(Object.assign({ type: 'baselinepref', status: 'active' }, fields));
+}
 function cpRealityRows(person) {
   const cat = cpCatalog();
   const hidden = new Set(cpPlans('metrichide').map(p => p.title));
   const keys = (CP_DEFAULT_METRICS[person] || ['att_adults']).concat(cpPlans('metriclink').map(p => p.title));
   const rows = [], seen = {};
-  keys.forEach(k => { if (seen[k] || hidden.has(k) || !cat[k]) return; seen[k] = 1; const link = cpPlans('metriclink').find(p => p.title === k); rows.push(Object.assign({ auto: true, linkId: link ? link.id : '' }, cat[k])); });
-  cpPlans('metric').forEach(p => rows.push({ custom: true, id: p.id, label: p.title, value: p.current, unit: '' }));
+  const base = cpBaseline().values;
+  keys.forEach(k => { if (seen[k] || hidden.has(k) || !cat[k]) return; seen[k] = 1; const link = cpPlans('metriclink').find(p => p.title === k); rows.push(Object.assign({ auto: true, linkId: link ? link.id : '', base: base[k] }, cat[k])); });
+  cpPlans('metric').forEach(p => rows.push({ custom: true, id: p.id, label: p.title, value: p.current, unit: '', base: base['custom_' + p.id] }));
   return rows;
 }
 function cpGoalValue(g) {
@@ -8351,7 +8430,9 @@ function cpGoalValue(g) {
 function cpGoalPct(g) {
   const t = parseFloat(String(g.target || '').replace(/[^0-9.\-]/g, '')), c = cpGoalValue(g);
   if (isNaN(t) || c == null) return null;
-  const base = parseFloat(String(g.detail || '').replace(/[^0-9.\-]/g, ''));
+  let base = NaN;
+  if (g.metric) { const b = cpBaseline().values[g.metric]; if (b != null && b !== '') base = Number(b); }      // from the frozen starting point
+  if (isNaN(base)) base = parseFloat(String(g.detail || '').replace(/[^0-9.\-]/g, ''));
   let pct = (!isNaN(base) && t !== base) ? (c - base) / (t - base) : (t ? c / t : 0);
   return Math.max(0, Math.min(1, pct));
 }
@@ -8361,14 +8442,23 @@ function cpOverallPct() {
 }
 function cpFmt(v, unit) { return v == null || v === '' ? '—' : (typeof v === 'number' ? v.toLocaleString() : escapeHtml(String(v))) + (unit || ''); }
 function cpHtml(person) {
+  cpEnsureOrgBaselines();
   const cat = cpCatalog(), E = escapeHtml;
   const reality = cpRealityRows(person);
   const shownKeys = new Set(reality.filter(r => r.auto).map(r => r.key));
   const addOpts = Object.values(cat).filter(m => !shownKeys.has(m.key)).map(m => '<option value="' + E(m.key) + '">' + E(m.label) + '</option>').join('');
-  const realityHtml = '<div class="cp-box cp-reality"><div class="cp-box-h">Current Reality <span>(Where are you right now?)</span></div>' +
+  const bl = cpBaseline(), pref = cpBaselinePref(), Y = cpPlanYear();
+  const blSel = '<select class="cp-blsel" title="Which starting point this plan measures from" onchange="cpSetBaseline(this.value)">' +
+    '<option value="ld"' + (bl.mode === 'ld' ? ' selected' : '') + '>As of Labor Day ' + Y + '</option>' +
+    '<option value="prior"' + (bl.mode === 'prior' ? ' selected' : '') + '>As of Labor Day ' + (Y - 1) + '</option>' +
+    (pref && pref.detail && pref.period ? '<option value="snap"' + (bl.mode === 'snap' ? ' selected' : '') + '>Snapshot ' + E(cpFmtDay(cpParseDay(pref.period))) + '</option>' : '') +
+    '<option value="new">📸 Snapshot today</option></select>';
+  const delta = r => { const b = Number(r.base), v = Number(r.value); if (r.base == null || r.base === '' || isNaN(b) || isNaN(v)) return ''; const d = Math.round((v - b) * 10) / 10; return '<span class="cp-mnow' + (d > 0 ? ' up' : d < 0 ? ' down' : '') + '" title="Today: ' + E(String(v)) + (r.unit || '') + '">→ ' + cpFmt(v, r.unit) + (d ? ' (' + (d > 0 ? '+' : '') + d.toLocaleString() + ')' : '') + '</span>'; };
+  const realityHtml = '<div class="cp-box cp-reality"><div class="cp-box-h">Current Reality <span>(where you started)</span>' + blSel + '</div>' +
     (reality.length ? reality.map(r => '<div class="cp-mrow">' +
       '<span class="cp-mlabel">' + E(r.label) + (r.auto ? ' <span class="cp-auto" title="Pulled automatically from ' + E(r.src) + '">auto</span>' : '') + '</span>' +
-      (r.custom ? '<input class="cp-mval-in" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">' : '<b class="cp-mval">' + cpFmt(r.value, r.unit) + (r.hint ? '<small> / ' + cpFmt(r.hint, r.unit) + ' goal</small>' : '') + '</b>') +
+      (r.custom ? (r.base != null && r.base !== '' ? '<b class="cp-mval">' + cpFmt(r.base, '') + '</b>' : '') + '<input class="cp-mval-in" title="Today" value="' + E(String(r.value || '')) + '" onchange="cpSet(\'' + r.id + '\',\'current\',this.value)">'
+        : '<b class="cp-mval" title="' + E(bl.label) + '">' + (r.base == null ? '—' : cpFmt(r.base, r.unit)) + '</b>' + delta(r)) +
       '<button class="cp-x" title="Remove" onclick="' + (r.custom ? 'sosDeletePlan(\'' + r.id + '\')' : (r.linkId ? 'sosDeletePlan(\'' + r.linkId + '\')' : 'cpHideMetric(\'' + E(r.key) + '\')')) + '">×</button></div>').join('')
       : '<div class="sos-empty sm">No metrics yet.</div>') +
     '<details class="cp-more"><summary>＋ Add a metric</summary><div class="cp-madd">' +
@@ -15052,7 +15142,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T183255Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T183754Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
