@@ -1122,6 +1122,9 @@
   .st-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-muted); margin: 14px 0 5px; }
   .st-photo { margin-bottom: 14px; font-size: 13px; color: var(--sp-muted); }
   .st-photo img { display: block; max-width: 100%; max-height: 420px; border-radius: 8px; border: 1px solid var(--sp-border); }
+  .st-note { font-size: 11.5px; margin: -8px 0 14px 17px; }
+  .st-note.ok { color: var(--sp-green); }
+  .st-note.warn { color: var(--sp-red); font-weight: 600; }
   .st-follow { font-size: 13px; color: var(--sp-ink); background: var(--sp-section-bg); border-radius: 6px; padding: 8px 12px; }
   .st-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .st-tag { font-size: 11px; color: var(--sp-muted); border: 1px solid var(--sp-border); border-radius: 10px; padding: 1px 8px; }
@@ -1129,7 +1132,7 @@
   .st-in { width: 100%; border: 1px solid var(--sp-border); border-radius: 6px; padding: 7px 10px; font-family: inherit; font-size: 14px; color: var(--sp-ink); background: #fbf9f4; box-sizing: border-box; }
   .st-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .st-raw { margin-top: 12px; font-size: 12.5px; color: var(--sp-muted); }
-  .st-raw summary { cursor: pointer; }
+  .st-raw summary { cursor: pointer; color: var(--sp-ink); font-weight: 600; }
   .st-raw div { white-space: pre-wrap; margin-top: 6px; padding: 10px 12px; background: var(--sp-section-bg); border-radius: 6px; color: var(--sp-ink); }
   .st-empty { background: #fff; border: 1px dashed var(--sp-border); border-radius: 10px; padding: 28px; text-align: center; color: var(--sp-muted); font-size: 14px; line-height: 1.6; }
   .st-empty a, .st-meta a, .sp-section-header a.st-link { color: var(--sp-gold); }
@@ -13234,12 +13237,16 @@ function stCardHtml(s) {
       : ph && ph.error ? '<span>Couldn’t load the photo (' + E(ph.error) + ').</span>' : '<span>Loading photo…</span>') + '</div>';
     if (!ph) stPhoto(s.id);
   }
-  if (s.pullQuote) h += '<blockquote class="st-quote">“' + E(s.pullQuote) + '”</blockquote>';
+  const edited = !!s.raw && stNorm(s.raw) !== stNorm(s.story);
+  if (s.pullQuote) h += '<blockquote class="st-quote">“' + E(s.pullQuote) + '”</blockquote>' +
+    (stVerbatim(s.pullQuote, s.raw) ? '<div class="st-note ok">Pull quote is word for word from their submission</div>'
+                                    : '<div class="st-note warn">Pull quote isn’t word for word — quote from the original below instead</div>');
+  if (edited) h += '<div class="st-lbl">Lightly edited for readability — don’t quote this version</div>';
   h += '<div class="st-story">' + stParas(s.story || s.raw) + '</div>';
   if (s.followUp) h += '<div class="st-lbl">Suggested follow-up</div><div class="st-follow">' + E(s.followUp) + '</div>';
   if ((s.tags || []).length) h += '<div class="st-lbl">Themes</div><div class="st-tags">' + s.tags.map(t => '<span class="st-tag">' + E(t) + '</span>').join('') + '</div>';
   h += '<div class="st-lbl">Staff notes</div><textarea class="st-ta" rows="2" placeholder="Who followed up, where it was shared…" onchange="stSave(\'' + id + '\',{notes:this.value})">' + E(s.notes) + '</textarea>';
-  if (s.raw && s.raw.trim() !== String(s.story || '').trim()) h += '<details class="st-raw"><summary>As submitted</summary><div>' + E(s.raw) + '</div></details>';
+  if (edited) h += '<details class="st-raw"><summary>Original submission — word for word (use this for direct quotes)</summary><div>' + E(s.raw) + '</div></details>';
   const contact = [s.personId && /^\d+$/.test(s.personId) ? '<a href="https://people.planningcenteronline.com/people/AC' + s.personId + '" target="_blank" rel="noopener">Open ' + E(s.person || 'person') + ' in Planning Center</a>' : '',
                    s.email ? '<a href="mailto:' + E(s.email) + '">' + E(s.email) + '</a>' : ''].filter(Boolean).join(' · ');
   if (contact) h += '<div class="st-meta" style="margin:10px 0 0">' + contact + '</div>';
@@ -13248,7 +13255,9 @@ function stCardHtml(s) {
     (s.status === 'new' ? btn('Mark reviewed', 'stSetStatus(\'' + id + '\',\'reviewed\')', true) : '') +
     (s.status !== 'shared' && !s.doNotShare ? btn('Mark shared', 'stSetStatus(\'' + id + '\',\'shared\')') : '') +
     (s.status === 'archived' ? btn('Restore', 'stSetStatus(\'' + id + '\',\'reviewed\')') : btn('Archive', 'stSetStatus(\'' + id + '\',\'archived\')')) +
-    btn(_st.copied === s.id ? 'Copied' : 'Copy story', 'stCopy(\'' + id + '\')') +
+    (edited ? btn(_st.copied === s.id + ':raw' ? 'Copied' : 'Copy original words', 'stCopy(\'' + id + '\',true)') +
+              btn(_st.copied === s.id ? 'Copied' : 'Copy edited version', 'stCopy(\'' + id + '\')')
+            : btn(_st.copied === s.id ? 'Copied' : 'Copy story', 'stCopy(\'' + id + '\')')) +
     btn('Edit', 'stEdit(\'' + id + '\')') +
   '</div>';
   return h + '</div></div>';
@@ -13287,13 +13296,22 @@ function stSaveEdit(id) {
   _st.edit = '';
   stSave(id, { title: v('title'), summary: v('summary'), pullQuote: v('pullQuote'), story: v('story') });
 }
-function stCopy(id) {
+// original=true copies their exact submitted words (no title), for direct quotes.
+function stCopy(id, original) {
   const s = stFind(id); if (!s) return;
-  const text = (s.title ? s.title + '\n\n' : '') + (s.story || s.raw || '') + (s.person ? '\n\n— ' + s.person : '');
+  const text = original ? String(s.raw || '') + (s.person ? '\n\n— ' + s.person : '')
+                        : (s.title ? s.title + '\n\n' : '') + (s.story || s.raw || '') + (s.person ? '\n\n— ' + s.person : '');
+  const key = original ? id + ':raw' : id;
   navigator.clipboard.writeText(text).then(() => {
-    _st.copied = id; stRender();
-    setTimeout(() => { if (_st.copied === id) { _st.copied = ''; stRender(); } }, 1800);
+    _st.copied = key; stRender();
+    setTimeout(() => { if (_st.copied === key) { _st.copied = ''; stRender(); } }, 1800);
   });
+}
+// Compare ignoring spacing and curly-vs-straight quotes, so formatting alone doesn't count as an edit.
+function stNorm(t) { return String(t || '').replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim(); }
+function stVerbatim(quote, raw) {
+  const q = stNorm(quote).replace(/^["']+|["']+$/g, '').replace(/[.,!?;:]+$/, '');
+  return !!q && stNorm(raw).includes(q);
 }
 function stCopyLink(btn) {
   navigator.clipboard.writeText(ST_FORM_URL).then(() => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy form link', 1800); });
@@ -16284,7 +16302,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T230224Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260924T232939Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
