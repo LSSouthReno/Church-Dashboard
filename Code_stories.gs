@@ -26,9 +26,14 @@ var STORY_ = {
   SS_ID: '1kueJyrRjDQHZ6vAuipltf1AYKsn_hjOlPtjwNmG9psA',   // bound "Church Dashboard auto" sheet
   KEY: 'ac7f5a10683437edf6618ad90f38b43db60dd2b43a4e23fbae0dc9d58bda56f8',
   MODEL: 'claude-opus-5',
-  MAX_PER_RUN: 10
+  MAX_PER_RUN: 10,
+  VERSION: 'v3',
+  // The Staff OS web app. The timer calls this over HTTP so each run uses the currently
+  // deployed code: a time trigger installed from a web-app request keeps running the code
+  // version that installed it, not HEAD (verified 2026-09-25 with a probe trigger).
+  WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbx-YDZg924fyFkG2U69o6Z0BBTLsh8ZAUvwK4fxSkW7LKGiXlxn5s2jyq9GCDxwA_sANA/exec'
 };
-var STORY_GET_ACTIONS_  = ['story_list', 'story_sync', 'story_inspect', 'story_photo'];
+var STORY_GET_ACTIONS_  = ['story_list', 'story_sync', 'story_inspect', 'story_photo', 'story_repair', 'story_retrigger'];
 var STORY_POST_ACTIONS_ = ['story_update'];
 var STORY_HDRS_ = ['id', 'submittedAt', 'person', 'personId', 'email', 'cgLeader', 'doNotShare', 'title', 'summary',
                    'story', 'pullQuote', 'tags', 'followUp', 'raw', 'status', 'notes', 'aiFormatted', 'updatedAt', 'updatedBy',
@@ -43,6 +48,8 @@ function storyDoGet_(e) {
   if (p.action === 'story_sync') { var r = syncStories_(); r.list = storyList_(); return eosWaJson_(r); }
   if (p.action === 'story_inspect') return eosWaJson_(storyInspect_());
   if (p.action === 'story_photo') return eosWaJson_(storyPhoto_(String(p.id || '')));
+  if (p.action === 'story_repair') return eosWaJson_(storyRepair_());
+  if (p.action === 'story_retrigger') return eosWaJson_(storyRetrigger_());
   return eosWaJson_({ ok: false, error: 'Unknown story action' });
 }
 
@@ -53,7 +60,21 @@ function storyDoPost_(body) {
 }
 
 /** Trigger handler (public name so the time trigger can call it). */
-function storySyncTick() { syncStories_(); }
+function storySyncTick() {
+  try {
+    var r = UrlFetchApp.fetch(STORY_.WEBAPP_URL + '?action=story_sync&k=' + STORY_.KEY, { muteHttpExceptions: true, followRedirects: true });
+    if (r.getResponseCode() === 200 && /"ok"\s*:\s*true/.test(r.getContentText())) return;
+  } catch (e) {}
+  syncStories_();   // web app unreachable → sync with whatever code this trigger has
+}
+
+/** Replace the timer (so it's installed by the current code, which calls the web app). */
+function storyRetrigger_() {
+  var n = 0;
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'storySyncTick') { ScriptApp.deleteTrigger(t); n++; } });
+  ScriptApp.newTrigger('storySyncTick').timeBased().everyMinutes(15).create();
+  return { ok: true, removed: n, installedFrom: STORY_.VERSION };
+}
 
 function storyEnsureTrigger_() {
   var has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'storySyncTick'; });
@@ -98,7 +119,8 @@ function storyList_() {
   var rows = storyRows_();
   rows.sort(function (a, b) { return a.submittedAt < b.submittedAt ? 1 : -1; });
   var props = PropertiesService.getScriptProperties();
-  return { ok: true, stories: rows, lastSync: props.getProperty('STORY_LAST_SYNC') || '',
+  return { ok: true, stories: rows, lastSync: props.getProperty('STORY_LAST_SYNC') || '', ver: STORY_.VERSION,
+           lastSyncVer: props.getProperty('STORY_LAST_SYNC_VER') || '',
            aiOn: !!props.getProperty('ANTHROPIC_API_KEY'),
            formUrl: 'https://lssr.churchcenter.com/people/forms/' + STORY_.FORM_ID };
 }
@@ -181,29 +203,16 @@ function syncStories_() {
       var s = subs[i];
       var vals = lfsFetchJson_('/people/v2/forms/' + STORY_.FORM_ID + '/form_submissions/' + s.id + '/form_submission_values?per_page=100');
       if (!vals.ok) continue;
-      var by = {};
-      (vals.body.data || []).forEach(function (v) {
-        var fid = ((((v.relationships || {}).form_field || {}).data) || {}).id;
-        var a = v.attributes || {};
-        by[fid] = (a.display_value != null && a.display_value !== '') ? a.display_value : a.value;
-      });
       var pid = ((((s.relationships || {}).person || {}).data) || {}).id || '';
-      var permission = String(by[fields.permission] || '').trim();
-      var noShare = String(by[fields.noShare] || '').trim();
-      var privateOnly = permission ? /^no\b|no thank|just (be )?for staff|staff and elders to see|keep (it )?private/i.test(permission)
-                                   : (noShare && !/^(false|no|0)$/i.test(noShare));
+      var ans = storyAnswers_(vals.body.data, fields);
       var row = {
         id: 'fs_' + s.id,
         submittedAt: (s.attributes || {}).created_at || '',
         person: people[pid] || '', personId: pid, email: storyEmailOf_(vals.body.data),
-        cgLeader: String(by[fields.leader] || '').trim(),
-        team: String(by[fields.team] || '').trim(),
-        about: JSON.stringify(storyList_Of_(by[fields.about])),
-        hasPhoto: (fields.photo && by[fields.photo]) ? 'yes' : 'no',
-        permission: permission,
-        doNotShare: privateOnly ? 'yes' : 'no',
-        raw: String(by[fields.story] || '').trim(), status: 'new', notes: '',
-        updatedAt: new Date().toISOString(), updatedBy: 'pco'
+        cgLeader: ans.cgLeader, team: ans.team, about: JSON.stringify(ans.about),
+        hasPhoto: ans.hasPhoto ? 'yes' : 'no', permission: ans.permission, doNotShare: ans.doNotShare ? 'yes' : 'no',
+        raw: ans.story, status: 'new', notes: '',
+        updatedAt: new Date().toISOString(), updatedBy: 'pco ' + STORY_.VERSION
       };
       var f = storyFormat_(row);
       row.title = f.title; row.summary = f.summary; row.story = f.story; row.pullQuote = f.pullQuote;
@@ -211,8 +220,11 @@ function syncStories_() {
       sh.appendRow(STORY_HDRS_.map(function (h) { return row[h] == null ? '' : String(row[h]); }));
       have[row.id] = 1; added++;
     }
-    PropertiesService.getScriptProperties().setProperty('STORY_LAST_SYNC', new Date().toISOString());
-    return { ok: true, added: added, pending: pending, total: (listed.data || []).length, triggerInstalled: installed };
+    var props = PropertiesService.getScriptProperties();
+    props.setProperty('STORY_LAST_SYNC', new Date().toISOString());
+    props.setProperty('STORY_LAST_SYNC_VER', STORY_.VERSION + (added ? ' added ' + added : ''));
+    var repaired = storyRepair_().repaired.length;
+    return { ok: true, added: added, pending: pending, repaired: repaired, total: (listed.data || []).length, triggerInstalled: installed };
   } finally {
     lock.releaseLock();
   }
@@ -244,7 +256,7 @@ function storyPhoto_(id) {
   (vals.body.data || []).forEach(function (v) {
     if (((((v.relationships || {}).form_field || {}).data) || {}).id !== fields.photo) return;
     var a = v.attributes || {};
-    [a.value, a.display_value, a.file_url, a.url, JSON.stringify(a.attachments || a)].some(function (x) {
+    [JSON.stringify(a.attachments || ''), a.value, a.file_url, a.url, a.display_value].some(function (x) {
       var m = String(x || '').match(/https?:\/\/[^\s"'<>]+/);
       if (m) { url = m[0]; return true; }
       return false;
@@ -262,6 +274,53 @@ function storyPhoto_(id) {
   if (!/^image\//.test(ct)) return { ok: false, error: 'not an image (' + ct + ')', name: name };
   if (bytes.length > 8 * 1024 * 1024) return { ok: false, error: 'photo too large', name: name };
   return { ok: true, name: name, dataUrl: 'data:' + ct + ';base64,' + Utilities.base64Encode(bytes) };
+}
+
+/**
+ * Re-reads the form answers (type, team, photo, permission, CG leader) for any story whose
+ * permission cell is blank — e.g. imported before those questions existed — and fills them in.
+ * Never touches the original text, the edited story, status or notes.
+ */
+function storyRepair_() {
+  var sh = storySheet_(), data = sh.getDataRange().getValues(), fields = storyFormFields_(), out = [];
+  var col = function (h) { return STORY_HDRS_.indexOf(h); };
+  for (var r = 1; r < data.length; r++) {
+    var id = String(data[r][col('id')] || '');
+    if (!/^fs_\d+$/.test(id) || String(data[r][col('permission')] || '')) continue;
+    var vals = lfsFetchJson_('/people/v2/forms/' + STORY_.FORM_ID + '/form_submissions/' + id.slice(3) + '/form_submission_values?per_page=100');
+    if (!vals.ok) continue;
+    var a = storyAnswers_(vals.body.data, fields);
+    if (!a.permission && !a.about.length) continue;
+    var set = function (h, v) { sh.getRange(r + 1, col(h) + 1).setValue(v); };
+    set('about', JSON.stringify(a.about)); set('team', a.team); set('hasPhoto', a.hasPhoto ? 'yes' : 'no');
+    set('permission', a.permission); set('doNotShare', a.doNotShare ? 'yes' : 'no');
+    if (!String(data[r][col('cgLeader')] || '')) set('cgLeader', a.cgLeader);
+    out.push({ id: id, about: a.about, hasPhoto: a.hasPhoto, permission: a.permission });
+  }
+  return { ok: true, repaired: out };
+}
+
+// One place that turns a submission's values into our fields.
+function storyAnswers_(values, fields) {
+  var by = {};
+  (values || []).forEach(function (v) {
+    var fid = ((((v.relationships || {}).form_field || {}).data) || {}).id;
+    var a = v.attributes || {};
+    by[fid] = (a.display_value != null && a.display_value !== '') ? a.display_value : a.value;
+  });
+  var permission = String(by[fields.permission] || '').trim();
+  var noShare = String(by[fields.noShare] || '').trim();
+  return {
+    by: by,
+    story: String(by[fields.story] || '').trim(),
+    cgLeader: String(by[fields.leader] || '').trim(),
+    team: String(by[fields.team] || '').trim(),
+    about: storyList_Of_(by[fields.about]),
+    hasPhoto: !!(fields.photo && by[fields.photo]),
+    permission: permission,
+    doNotShare: permission ? /^no\b|no thank|just (be )?for staff|staff and elders to see|keep (it )?private/i.test(permission)
+                           : !!(noShare && !/^(false|no|0)$/i.test(noShare))
+  };
 }
 
 /** Read-only: resolved form fields + the latest submission's values, for checking the mapping. */
