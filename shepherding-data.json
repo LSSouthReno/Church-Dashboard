@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T18:18:50.135Z",
+  "generatedAt": "2026-09-25T19:18:54.341Z",
   "asOf": "2026-09-25",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 390,
     "avgScore": 0,
-    "inGroup": 216,
+    "inGroup": 215,
     "serving": 231,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 390,
-    "notInGroup": 174,
+    "notInGroup": 175,
     "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 390
     },
     "pct": {
-      "inGroup": 0.5538461538461539,
+      "inGroup": 0.5512820512820513,
       "serving": 0.5923076923076923,
       "leading": 0.19743589743589743,
       "givingRegular": 0,
@@ -3288,7 +3288,7 @@
       "summary": {
         "totalPeople": 57,
         "avgScore": 0,
-        "inGroup": 30,
+        "inGroup": 29,
         "serving": 33,
         "leading": 10,
         "givingRegular": 0,
@@ -3298,7 +3298,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 57,
-        "notInGroup": 27,
+        "notInGroup": 28,
         "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
@@ -3316,7 +3316,7 @@
           "unknown": 57
         },
         "pct": {
-          "inGroup": 0.5263157894736842,
+          "inGroup": 0.5087719298245614,
           "serving": 0.5789473684210527,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
@@ -3634,6 +3634,43 @@
           ],
           "serveTeams": [],
           "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jere England",
+          "first": "Jere",
+          "last": "England",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
             "Not serving"
           ],
           "pending": true
@@ -4056,48 +4093,6 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Jere England",
-          "first": "Jere",
-          "last": "England",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Frederick/Coggiola/Schelin Community Group",
-              "role": "member",
-              "joinedAt": "2025-04-08T20:40:21Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
             "Not serving"
           ],
           "pending": true
@@ -18057,7 +18052,7 @@
   "paciCounts": {
     "parent": 62,
     "adult": 64,
-    "child": 155,
-    "infant": 100
+    "child": 154,
+    "infant": 101
   }
 }
