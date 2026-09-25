@@ -1079,18 +1079,55 @@ function spPushToGitHub_(data) {
 /* =========================================================
    Triggers
 ========================================================= */
+// A time trigger installed from a web-app request keeps running the code version of the
+// deployment that installed it, not HEAD (verified 2026-09-25 with a probe trigger). So the
+// recurring timers are thin ticks: each one asks the Staff OS web app (redeployed in place
+// with every change) to schedule a one-shot job, and that job is installed by the current
+// deployment, so it runs current code. Same pattern as storySyncTick in Code_stories.gs.
+var SP_TICK_WEBAPP_URL_ = 'https://script.google.com/macros/s/AKfycbx-YDZg924fyFkG2U69o6Z0BBTLsh8ZAUvwK4fxSkW7LKGiXlxn5s2jyq9GCDxwA_sANA/exec';
+var SP_TICKS_ = [
+  { handler: 'shepherdingHealthTick', legacy: 'syncShepherdingHealth_', every: 'hour' },
+  { handler: 'shepherdingGivingTick', legacy: 'syncShepherdingGiving_', every: 'day4am' }
+];
+
+/** Hourly timer. Public name so the time trigger can call it. */
+function shepherdingHealthTick() { spTick_('run_shepherding_health_sync', syncShepherdingHealth_); }
+/** Daily 4am timer. */
+function shepherdingGivingTick() { spTick_('run_shepherding_giving', syncShepherdingGiving_); }
+
+function spTick_(action, localFn) {
+  try {
+    var r = UrlFetchApp.fetch(SP_TICK_WEBAPP_URL_ + '?action=' + action + '&via=trigger', { muteHttpExceptions: true, followRedirects: true });
+    if (r.getResponseCode() === 200 && /"ok"\s*:\s*true/.test(r.getContentText())) return;
+  } catch (e) {}
+  localFn();   // web app unreachable → run with whatever code this trigger has
+}
+
+function spNewTick_(tk) {
+  var b = ScriptApp.newTrigger(tk.handler).timeBased();
+  if (tk.every === 'hour') b.everyHours(1).create();
+  else b.everyDays(1).atHour(4).create();
+}
+
+/** Replace both timers (legacy direct handlers included) so they're installed by the current code. */
+function spRetrigger_() {
+  var before = ScriptApp.getProjectTriggers().map(function(t){ return t.getHandlerFunction(); }), removed = 0;
+  ScriptApp.getProjectTriggers().forEach(function(t){ var h = t.getHandlerFunction();
+    if (SP_TICKS_.some(function(tk){ return h === tk.handler || h === tk.legacy; })) { ScriptApp.deleteTrigger(t); removed++; } });
+  SP_TICKS_.forEach(spNewTick_);
+  return { ok: true, removed: removed, before: before,
+           after: ScriptApp.getProjectTriggers().map(function(t){ return t.getHandlerFunction(); }) };
+}
+
 function installShepherdingHealthTrigger() {
-  ScriptApp.getProjectTriggers().forEach(function(t){ var h=t.getHandlerFunction();
-    if (h==='syncShepherdingHealth_' || h==='syncShepherdingGiving_') ScriptApp.deleteTrigger(t); });
-  ScriptApp.newTrigger('syncShepherdingHealth_').timeBased().everyHours(1).create();
-  ScriptApp.newTrigger('syncShepherdingGiving_').timeBased().everyDays(1).atHour(4).create();
-  Logger.log('Triggers installed: hourly health + daily giving (4am).');
+  var r = spRetrigger_();
+  Logger.log('Triggers installed: hourly health + daily giving (4am) ticks. Removed ' + r.removed + '.');
 }
 function runShepherdingHealthNow() { syncShepherdingHealth_(); }
 function runShepherdingGivingNow() { syncShepherdingGiving_(); }
 // On-demand giving refresh via an installable trigger (~30-min limit), for when
 // the web-app path would time out. Records status + removes its own trigger.
-function shepGivingJob_() {
+function shepGivingJob_(ev) {
   var props = PropertiesService.getScriptProperties();
   props.setProperty('SHEP_GIVING_STATUS', 'running:' + new Date().toISOString());
   try {
@@ -1099,14 +1136,36 @@ function shepGivingJob_() {
   } catch (e) {
     props.setProperty('SHEP_GIVING_STATUS', 'error:' + (e && e.message) + ':' + new Date().toISOString());
   } finally {
-    try { ScriptApp.getProjectTriggers().forEach(function(t){
-      if (t.getHandlerFunction() === 'shepGivingJob_') ScriptApp.deleteTrigger(t); }); } catch (e2) {}
+    spDeleteOwnTrigger_(ev);
   }
 }
+// Hourly health refresh as a one-shot job (scheduled by shepherdingHealthTick via the web app).
+function shepHealthJob_(ev) {
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty('SHEP_HEALTH_STATUS', 'running:' + new Date().toISOString());
+  try {
+    syncShepherdingHealth_();
+    props.setProperty('SHEP_HEALTH_STATUS', 'done:' + new Date().toISOString());
+  } catch (e) {
+    props.setProperty('SHEP_HEALTH_STATUS', 'error:' + (e && e.message) + ':' + new Date().toISOString());
+  } finally {
+    spDeleteOwnTrigger_(ev);
+  }
+}
+// Removes only the one-shot trigger that fired this run, so a job scheduled while this
+// one was running isn't deleted before it gets to fire.
+function spDeleteOwnTrigger_(ev) {
+  var uid = ev && ev.triggerUid;
+  if (!uid) return;
+  try { ScriptApp.getProjectTriggers().forEach(function(t){
+    if (t.getUniqueId() === uid) ScriptApp.deleteTrigger(t); }); } catch (e2) {}
+}
+// Installs any missing tick and swaps out a legacy direct-handler timer (which may be
+// pinned to old code) for its tick.
 function spEnsureShepherdingTrigger_() {
   var ts = ScriptApp.getProjectTriggers();
-  if (!ts.some(function(t){ return t.getHandlerFunction()==='syncShepherdingHealth_'; }))
-    ScriptApp.newTrigger('syncShepherdingHealth_').timeBased().everyHours(1).create();
-  if (!ts.some(function(t){ return t.getHandlerFunction()==='syncShepherdingGiving_'; }))
-    ScriptApp.newTrigger('syncShepherdingGiving_').timeBased().everyDays(1).atHour(4).create();
+  SP_TICKS_.forEach(function(tk){
+    ts.forEach(function(t){ if (t.getHandlerFunction() === tk.legacy) ScriptApp.deleteTrigger(t); });
+    if (!ts.some(function(t){ return t.getHandlerFunction() === tk.handler; })) spNewTick_(tk);
+  });
 }

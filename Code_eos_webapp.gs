@@ -31,6 +31,8 @@ function doGet(e) {
   try {
     var action = (e && e.parameter && e.parameter.action) || '';
     if (EOS_IDSJOY_GET_ACTIONS_.indexOf(action) !== -1) return idsJoyDoGet_(e);
+    if (typeof SOS_GET_ACTIONS_ !== 'undefined' && SOS_GET_ACTIONS_.indexOf(action) !== -1) return sosDoGet_(e);
+    if (typeof STORY_GET_ACTIONS_ !== 'undefined' && STORY_GET_ACTIONS_.indexOf(action) !== -1) return storyDoGet_(e);
     if (action === 'rocks') {
       var ss = SpreadsheetApp.openById(EOS_WA_SS_ID_);
       return eosWaJson_({ rocks: eosWaReadRocks_(ss), boulders: eosWaReadBoulders_(ss) });
@@ -44,6 +46,16 @@ function doGet(e) {
       pushJsonToGitHub_(dataJr);
       return eosWaJson_({ ok: true, ran: 'json_rebuild' });
     }
+    if (action === 'run_cg_venn') {
+      // Rebuild the Groups dashboard Venn / 4-way (FM ∩ CG ∩ Serving ∩ Giving) + action
+      // lists, then republish dashboard-data.json — same as the hourly step, on demand.
+      syncCGVenn_();
+      var ssCv = SpreadsheetApp.getActiveSpreadsheet();
+      var dataCv = buildDashboardDataFromSheet_(ssCv);
+      writeDashboardJsonToSheet_(ssCv, dataCv);
+      pushJsonToGitHub_(dataCv);
+      return eosWaJson_({ ok: true, ran: 'syncCGVenn_+json_rebuild' });
+    }
     if (action === 'run_shepherding_sync') {
       // Re-pulls the elder "Shepherding - [Name]" lists from PCO People and
       // merge-pushes them into eos-data.json.
@@ -54,9 +66,27 @@ function doGet(e) {
       // Full pastor-shepherding rebuild: ensures the hourly trigger exists, then
       // pulls each shepherded person's PCO activity, computes maturity scores +
       // congregation health, and stores the data. See Code_shepherding_health_sync.gs.
+      // via=trigger (the hourly shepherdingHealthTick) schedules it as a one-shot job
+      // instead, so the job is installed by, and runs, this deployment's current code.
+      var hVia = (e && e.parameter && e.parameter.via) || '';
+      if (hVia === 'trigger') {
+        ScriptApp.getProjectTriggers().forEach(function(t){
+          if (t.getHandlerFunction() === 'shepHealthJob_') ScriptApp.deleteTrigger(t); });
+        ScriptApp.newTrigger('shepHealthJob_').timeBased().after(10000).create();
+        PropertiesService.getScriptProperties().setProperty('SHEP_HEALTH_STATUS', 'scheduled:' + new Date().toISOString());
+        return eosWaJson_({ ok:true, ran:'shep_health_trigger_scheduled' });
+      }
+      if (hVia === 'status') {
+        return eosWaJson_({ ok:true, status: PropertiesService.getScriptProperties().getProperty('SHEP_HEALTH_STATUS') || 'none' });
+      }
       spEnsureShepherdingTrigger_();
       syncShepherdingHealth_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingHealth_' });
+    }
+    if (action === 'run_shepherding_retrigger') {
+      // Re-installs the shepherding timers as thin ticks (see spRetrigger_), replacing
+      // legacy direct-handler timers that may be pinned to an old code version.
+      return eosWaJson_(spRetrigger_());
     }
     if (action === 'run_shepherding_giving') {
       // Heavy daily giving refresh (24-mo pull + household join → cache). Over the
@@ -75,6 +105,11 @@ function doGet(e) {
       }
       syncShepherdingGiving_();
       return eosWaJson_({ ok: true, ran: 'syncShepherdingGiving_' });
+    }
+    if (action === 'joint_giver_probe') {
+      // Read-only, pastor-gated: checks PCO's joined-donor link (counts + sample, no amounts).
+      if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(jgProbe_());
     }
     if (action === 'shepherding_data') {
       // Gated read of the FULL sensitive shepherding data. Any valid pastor login
@@ -198,6 +233,10 @@ function doPost(e) {
     var action = body.action || '';
 
     if (EOS_IDSJOY_POST_ACTIONS_.indexOf(action) !== -1) return idsJoyDoPost_(e);
+    if (typeof SOS_POST_ACTIONS_ !== 'undefined' && SOS_POST_ACTIONS_.indexOf(action) !== -1) return sosDoPost_(e);
+    if (typeof STORY_POST_ACTIONS_ !== 'undefined' && STORY_POST_ACTIONS_.indexOf(action) !== -1) return storyDoPost_(body);
+    if (typeof CGP_POST_ACTIONS_ !== 'undefined' && CGP_POST_ACTIONS_.indexOf(action) !== -1) return cgpDoPost_(body);
+    if (typeof OGA_POST_ACTIONS_ !== 'undefined' && OGA_POST_ACTIONS_.indexOf(action) !== -1) return ogaDoPost_(body);
 
     // Onboarding generator saves each generated guide here (one row per team).
     if (action === 'og_save') return eosWaJson_(ogSaveGuide_(body));
