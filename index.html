@@ -2625,7 +2625,7 @@
   .tlh-stat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 5px; }
 
   /* ======== PASTOR SHEPHERDING PAGE (teal/slate on charcoal) ======== */
-  #pastorModal, .sh-drawer {
+  #pastorModal, .sh-drawer, #bapBoard {
     --sh-accent:#5cbccb; --sh-accent-dim:#356f79; --sh-accent-bg:rgba(92,188,203,.10);
     --sh-sand:#d8c59a; --sh-bg:#20262a; --sh-panel:#272e32; --sh-panel-2:#222a2e; --sh-line:#333c40;
     --paci-parent:#43d9a4; --paci-adult:#5aa877; --paci-child:#e0b23c; --paci-infant:#e06b6e;
@@ -2855,6 +2855,83 @@
 
   .sh-empty { text-align:center; color:var(--text-dim); padding:48px 20px; font-size:14px; }
   .sh-seed-note { background:var(--sh-accent-bg); border:1px solid var(--sh-accent-dim); border-radius:9px; padding:12px 15px; margin-bottom:18px; font-size:12.5px; color:var(--sh-accent); line-height:1.6; }
+
+  /* ── Baptism board ── */
+  .bap-open-btn { border-color:var(--sh-accent-dim) !important; color:var(--sh-accent) !important; background:#1b2124 !important; }
+  .bap-open-btn:hover { background:var(--sh-accent-bg) !important; }
+  .bap-count:empty { display:none; }
+  .bap-count { display:inline-block; min-width:18px; padding:1px 6px; margin-left:4px; border-radius:9px; background:var(--sh-accent); color:#04222a; font-size:11px; font-weight:800; text-align:center; }
+  #bapBoard { position:fixed; inset:0; top:var(--nav-h); z-index:2500; background:var(--sh-bg); display:none; flex-direction:column; }
+  #bapBoard.open { display:flex; }
+  #bapBoard .tmod-header { background:#1b2124; border-bottom-color:var(--sh-line); }
+  #bapBoard .tmod-title { color:var(--sh-accent); font-weight:800; }
+  #bapBoard .tmod-body { background:var(--sh-bg); }
+  .bap-tiles { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-bottom:20px; }
+  .bap-tile { background:var(--sh-panel); border:1px solid var(--sh-line); border-left:3px solid var(--bt,var(--sh-accent)); border-radius:10px; padding:14px 16px; }
+  .bap-tile b { display:block; font-size:28px; font-weight:800; color:#f0f0f0; line-height:1; }
+  .bap-tile span { display:block; font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); margin-top:6px; }
+  .bap-tile i { display:block; font-style:normal; font-size:11.5px; color:var(--text-dim); margin-top:3px; }
+  .bap-chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .bap-chip { appearance:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted); font:600 12.5px 'Montserrat',sans-serif; padding:6px 13px; border-radius:18px; cursor:pointer; }
+  .bap-chip.on { border-color:var(--sh-accent-dim); color:var(--sh-accent); background:var(--sh-accent-bg); }
+  .bap-sec { margin:26px 0 12px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .bap-sec h3 { margin:0; font-size:12px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--sh-accent); }
+  .bap-sec small { font-size:12px; color:var(--text-dim); }
+  .bap-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr)); gap:14px; }
+  .bap-card { background:var(--sh-panel); border:1px solid var(--sh-line); border-radius:12px; padding:15px 16px; display:flex; flex-direction:column; gap:10px; min-width:0; }
+  .bap-card.overdue { border-left:3px solid #e06b6e; }
+  .bap-card.busy { opacity:.55; pointer-events:none; }
+  .bap-top { display:flex; gap:10px; align-items:flex-start; }
+  .bap-av { width:38px; height:38px; border-radius:50%; object-fit:cover; flex-shrink:0; background:var(--sh-panel-2); }
+  .bap-name { appearance:none; background:none; border:0; padding:0; font:700 16px 'Montserrat',sans-serif; color:#f0f0f0; cursor:pointer; text-align:left; text-decoration:none; }
+  .bap-name:hover { color:var(--sh-accent); }
+  .bap-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
+  .bap-pco { font-size:11px; color:var(--text-dim); text-decoration:none; margin-left:6px; }
+  .bap-pco:hover { color:var(--sh-accent); }
+  .bap-tag { display:inline-block; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:2px 7px; border-radius:5px; margin:4px 4px 0 0; background:var(--sh-panel-2); color:var(--text-muted); border:1px solid var(--sh-line); }
+  .bap-tag.red { color:#fca5a5; border-color:#7f3b3d; background:rgba(224,107,110,.12); }
+  .bap-tag.gold { color:var(--sh-sand); border-color:#6b5f44; background:rgba(216,197,154,.10); }
+  .bap-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12px; color:var(--text-muted); }
+  .bap-row > label { font-weight:600; width:58px; flex-shrink:0; }
+  .bap-sel, .bap-in { flex:1; min-width:110px; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text); font:13px 'Montserrat',sans-serif; padding:7px 9px; border-radius:7px; }
+  .bap-sel:focus, .bap-in:focus { outline:none; border-color:var(--sh-accent-dim); }
+  .bap-contact { display:flex; gap:6px; flex-wrap:wrap; }
+  .bap-contact a { font-size:12px; color:var(--text-muted); text-decoration:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); padding:5px 10px; border-radius:7px; }
+  .bap-contact a:hover { color:var(--sh-accent); border-color:var(--sh-accent-dim); }
+  .bap-card details { background:var(--sh-panel-2); border:1px solid var(--sh-line); border-radius:8px; padding:8px 10px; font-size:12.5px; }
+  .bap-card summary { cursor:pointer; color:var(--text-muted); font-weight:600; font-size:12px; }
+  .bap-qa { margin-top:8px; } .bap-qa b { display:block; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--sh-accent); margin-bottom:2px; }
+  .bap-qa div { color:var(--text); line-height:1.5; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .bap-note { border-left:2px solid var(--sh-line); padding:2px 0 2px 8px; margin-top:7px; color:var(--text); white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.45; }
+  .bap-note em { display:block; font-style:normal; font-size:10.5px; color:var(--text-dim); }
+  .bap-acts { display:flex; gap:8px; flex-wrap:wrap; }
+  .bap-btn { appearance:none; background:var(--sh-panel-2); border:1px solid var(--sh-line); color:var(--text-muted); font:700 12px 'Montserrat',sans-serif; padding:7px 12px; border-radius:7px; cursor:pointer; }
+  .bap-btn:hover { color:#fff; border-color:#4a5457; }
+  .bap-btn.go { background:var(--sh-accent-dim); border-color:var(--sh-accent); color:#eafcff; }
+  .bap-btn.go:hover { background:var(--sh-accent); color:#04222a; }
+  .bap-btn.warn:hover { color:#fca5a5; border-color:#7f3b3d; }
+  .bap-sun { background:var(--sh-panel); border:1px solid var(--sh-line); border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+  .bap-sun.past { border-color:#6b5f44; }
+  .bap-sun h4 { margin:0 0 12px; font-size:15px; color:#f0f0f0; display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .bap-sun h4 small { font-size:12px; color:var(--text-dim); font-weight:500; }
+  .bap-svcs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+  .bap-svc { background:var(--sh-panel-2); border:1px solid var(--sh-line); border-radius:9px; padding:10px; min-height:60px; }
+  .bap-svc > b { display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--sh-accent); margin-bottom:8px; }
+  .bap-person { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:7px 0; border-top:1px solid var(--sh-line); flex-wrap:wrap; }
+  .bap-person:first-of-type { border-top:0; }
+  .bap-person .bap-name { font-size:13.5px; }
+  .bap-person .bap-btn { padding:4px 9px; font-size:11px; }
+  .bap-empty { color:var(--text-dim); font-size:13px; padding:14px 2px; }
+  .bap-met { font-size:13px; color:var(--text-muted); background:var(--sh-panel); border:1px dashed var(--sh-line); border-radius:10px; padding:10px 14px; }
+  .bap-done td { padding:6px 10px 6px 0; font-size:13px; color:var(--text-muted); border-top:1px solid var(--sh-line); }
+  .bap-toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px); background:#15191a; border:1px solid var(--sh-accent-dim); color:var(--text); padding:10px 16px; border-radius:9px; font-size:13px; opacity:0; pointer-events:none; transition:.2s; z-index:2600; max-width:calc(100% - 32px); }
+  .bap-toast.show { opacity:1; transform:translateX(-50%); }
+  .bap-toast.err { border-color:#7f3b3d; color:#fca5a5; }
+  @media (max-width: 760px) {
+    .bap-svcs { grid-template-columns:1fr; }
+    #bapBoard .tmod-body { padding:16px 16px 40px; }
+    #bapBoard .tmod-sub { display:none; }
+  }
 
   /* ── Detail drawer ── */
   .sh-drawer-ov { position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:3000; opacity:0; pointer-events:none; transition:opacity .2s; }
@@ -3136,6 +3213,7 @@
       <div class="tmod-title">Shepherding</div>
       <div class="tmod-sub">LIVING STONES CHURCH &nbsp;&middot;&nbsp; PASTOR &amp; ELDER CARE</div>
     </div>
+    <button class="tmod-back bap-open-btn" id="bapOpenBtn" style="display:none" onclick="bapOpen()" title="Baptism Requested → Ready → Scheduled">&#128167; Baptisms <span class="bap-count" id="bapOpenCount"></span></button>
     <div class="tmod-meta" id="pastorModMeta"></div>
     <div id="shWhoami" class="sh-whoami" style="margin-left:12px"></div>
     <button class="tmod-back" style="margin-left:8px" onclick="shLogout()" title="Sign out">Sign out</button>
@@ -3173,6 +3251,21 @@
     <div class="sh-people-grid" id="shPeopleGrid"></div>
   </div>
 </div><!-- /pastorModal overlay -->
+
+<!-- Baptism board (opened from the Shepherding header; live PCO workflows) -->
+<div id="bapBoard" aria-hidden="true">
+  <div class="tmod-header">
+    <button class="tmod-back" onclick="bapClose()">&larr; Shepherding</button>
+    <div class="tmod-titles">
+      <div class="tmod-title">Baptisms</div>
+      <div class="tmod-sub">REQUESTED &rarr; MET &rarr; READY &rarr; SCHEDULED &rarr; BAPTIZED &nbsp;&middot;&nbsp; LIVE FROM PLANNING CENTER</div>
+    </div>
+    <div class="tmod-meta" id="bapMeta"></div>
+    <button class="tmod-back" onclick="bapLoad()" title="Reload from Planning Center">&#8635; Refresh</button>
+  </div>
+  <div class="tmod-body" id="bapBody"></div>
+  <div class="bap-toast" id="bapToast"></div>
+</div>
 
 <!-- Person detail drawer (lazy-loaded from PCO) -->
 <div class="sh-drawer-ov" id="shDrawerOv" onclick="shCloseDrawer()"></div>
@@ -15349,6 +15442,7 @@ function closePastorModal() {
   const modal = document.getElementById('pastorModal');
   if (!modal || !modal.classList.contains('open')) return;
   shCloseDrawer();
+  bapClose();
   if (typeof shClearSelect === 'function') shClearSelect();
   modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
@@ -15381,6 +15475,9 @@ function shLoadPrefs() {
 function shLogout() {
   try { sessionStorage.removeItem(PASTOR_SESSION_KEY); sessionStorage.removeItem(shCacheKey()); } catch (e) {}
   _shPastorHash=''; _shPastorName=''; _shPastorElder=''; _shRendered=false; _shDefaultedTab=false; _shepData=null;
+  try { sessionStorage.removeItem(BAP_CACHE_KEY); } catch (e) {}
+  _bap = null; bapClose(); bapBadge();
+  const bapBtn = document.getElementById('bapOpenBtn'); if (bapBtn) bapBtn.style.display = 'none';
   document.getElementById('pastorModContent').style.display='none';
   document.getElementById('pastorModLocked').style.display='flex';
   const el=document.getElementById('pastorPwInput'); if(el){ el.value=''; setTimeout(()=>el.focus(),150); }
@@ -15389,6 +15486,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   const d = document.getElementById('shDrawer');
   if (d && d.classList.contains('open')) { shCloseDrawer(); return; }
+  if (bapIsOpen()) { bapClose(); return; }
   const m = document.getElementById('pastorModal');
   if (m && m.classList.contains('open')) closePastorModal();
 });
@@ -15477,6 +15575,9 @@ function shApplyData(data, fromCache) {
   }
   const who = document.getElementById('shWhoami');
   if (who) who.textContent = _shPastorName ? ('Signed in: ' + _shPastorName) : '';
+  const bapBtn = document.getElementById('bapOpenBtn');
+  if (bapBtn) bapBtn.style.display = _shPastorHash ? '' : 'none';
+  if (_shPastorHash && !_bap && !_bapLoading) bapLoad(true);   // fills the button's count badge
   shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople();
 }
 
@@ -16135,6 +16236,278 @@ function shStoryHtml(p) {
     + rows.map(r=>'<div class="sh-fact"><span class="ic">'+r[0]+'</span><span>'+r[1]+'</span></div>').join('')
     + '</div></div>';
 }
+
+// ======== BAPTISM BOARD (Shepherding → 💧 Baptisms) ========
+// Live, two-way view of PCO's "Baptism Requested" (564704) and "Baptism Ready" (528797)
+// workflows. Backend: Code_baptism.gs — bap_list / bap_act on STAFF_OS_URL, gated by the
+// pastor login hash. The Sunday + service picked here is saved server-side (BaptismPlan tab)
+// and noted on the PCO card; names on the staff Schedule sheet fill in dates too.
+let _bap = null, _bapLoading = false, _bapMine = false;
+const BAP_CACHE_KEY = 'bap_cache';
+const BAP_STEP_SCHEDULED = '1416113';
+
+function bapOpen() {
+  if (!_shPastorHash) return;
+  if (!_bap) { try { const c = JSON.parse(sessionStorage.getItem(BAP_CACHE_KEY) || 'null'); if (c && c.ok) _bap = c; } catch (e) {} }
+  const b = document.getElementById('bapBoard'); b.classList.add('open'); b.setAttribute('aria-hidden', 'false');
+  bapRender();
+  bapLoad();
+}
+function bapClose() { const b = document.getElementById('bapBoard'); b.classList.remove('open'); b.setAttribute('aria-hidden', 'true'); }
+function bapIsOpen() { const b = document.getElementById('bapBoard'); return !!(b && b.classList.contains('open')); }
+
+async function bapLoad(quiet) {
+  if (_bapLoading || !_shPastorHash) return;
+  _bapLoading = true; bapMeta();
+  let j = null;
+  try {
+    // The first call after a redeploy can return Google's HTML page — retry once.
+    for (let i = 0; i < 2 && !(j && j.ok); i++) {
+      try { const r = await fetch(STAFF_OS_URL + '?action=bap_list&pw=' + _shPastorHash + '&t=' + Date.now()); j = await r.json(); } catch (e) { j = null; }
+    }
+    if (j && j.ok) { _bap = j; try { sessionStorage.setItem(BAP_CACHE_KEY, JSON.stringify(j)); } catch (e) {} }
+    else if (!quiet) bapToast('Couldn’t load from Planning Center' + (j && j.error ? ': ' + j.error : '') + ' — try Refresh', true);
+  } finally { _bapLoading = false; bapRender(); }
+}
+function bapMeta() {
+  const m = document.getElementById('bapMeta'); if (!m) return;
+  const when = _bap && _bap.asOf ? new Date(_bap.asOf).toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' }) : '—';
+  m.innerHTML = '<b>Loaded</b>' + when + (_bapLoading ? ' <span style="color:var(--text-dim)">· refreshing…</span>' : '');
+}
+function bapBadge() {
+  const el = document.getElementById('bapOpenCount'); if (!el) return;
+  const n = _bap ? _bap.requested.length + _bap.ready.filter(c => !c.date).length : 0;
+  el.textContent = n ? String(n) : '';
+}
+function bapToast(msg, err) {
+  const t = document.getElementById('bapToast'); if (!t) return;
+  t.textContent = msg; t.className = 'bap-toast show' + (err ? ' err' : '');
+  clearTimeout(bapToast._t); bapToast._t = setTimeout(() => { t.className = 'bap-toast' + (err ? ' err' : ''); }, err ? 6000 : 2800);
+}
+
+function bapMyId() { const p = (_bap && _bap.pastors || []).find(x => x.short === _shPastorElder); return p ? p.id : ''; }
+function bapDay(key) { if (!key) return ''; const d = new Date(key + 'T12:00:00'); return d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
+function bapWhen(iso) { if (!iso) return ''; return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric' }); }
+function bapAgo(iso) { if (!iso) return ''; const d = Math.floor((Date.now() - Date.parse(iso)) / 864e5); return d <= 0 ? 'today' : d === 1 ? '1 day ago' : d + ' days ago'; }
+function bapToday() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function bapAttr(s) { return shEsc(s); }
+
+function bapWho(c) {
+  const onList = !!shFindPerson(c.pid);
+  const pco = 'https://people.planningcenteronline.com/people/AC' + encodeURIComponent(c.pid);
+  const nm = onList
+    ? '<button class="bap-name" data-drawer="' + bapAttr(c.pid) + '" title="Open shepherding detail">' + shEsc(c.name) + '</button>'
+    : '<a class="bap-name" href="' + pco + '" target="_blank" rel="noopener" title="Open in Planning Center">' + shEsc(c.name) + '</a>';
+  const av = c.avatar ? '<img class="bap-av" src="' + bapAttr(c.avatar) + '" alt="" loading="lazy">' : '<div class="bap-av"></div>';
+  return '<div class="bap-top">' + av + '<div style="min-width:0;flex:1">' + nm
+    + (onList ? '<a class="bap-pco" href="' + pco + '" target="_blank" rel="noopener">PCO ↗</a>' : '') + '<div class="bap-sub">%SUB%</div>%TAGS%</div></div>';
+}
+function bapPastorSel(c) {
+  const ps = (_bap && _bap.pastors) || [];
+  const known = ps.some(p => p.id === c.assigneeId);
+  return '<div class="bap-row"><label>Pastor</label><select class="bap-sel" data-act="assign" data-wf="' + c.wf + '" data-card="' + bapAttr(c.cardId) + '">'
+    + (known ? '' : '<option value="" selected disabled>' + shEsc(c.assignee || 'Unassigned') + '</option>')
+    + ps.map(p => '<option value="' + bapAttr(p.id) + '"' + (p.id === c.assigneeId ? ' selected' : '') + '>' + shEsc(p.name) + '</option>').join('')
+    + '</select></div>';
+}
+function bapContact(c) {
+  const k = c.contact || {}; const out = [];
+  const tel = String(k.phone || '').replace(/[^\d+]/g, '');
+  if (tel) { out.push('<a href="sms:' + tel + '">💬 Text</a>'); out.push('<a href="tel:' + tel + '">📞 Call</a>'); }
+  if (k.email) out.push('<a href="mailto:' + bapAttr(k.email) + '">✉️ Email</a>');
+  return out.length ? '<div class="bap-contact">' + out.join('') + '</div>' : '';
+}
+function bapFormHtml(c) {
+  if (!c.form || !c.form.answers || !c.form.answers.length) return '';
+  return '<details><summary>Their baptism form (' + bapWhen(c.form.at) + ')</summary>'
+    + c.form.answers.map(a => '<div class="bap-qa"><b>' + shEsc(a.q) + '</b><div>' + shEsc(a.a) + '</div></div>').join('') + '</details>';
+}
+function bapNotesHtml(c) {
+  const notes = c.notes || [];
+  const list = notes.map(n => '<div class="bap-note"><em>' + bapWhen(n.at) + '</em>' + shEsc(n.text) + '</div>').join('');
+  return '<details' + (notes.length ? ' open' : '') + '><summary>Card notes (' + notes.length + ')</summary>' + list
+    + '<div class="bap-row" style="margin-top:8px"><input class="bap-in" data-note-for="' + bapAttr(c.cardId) + '" placeholder="Add a note to their PCO card…">'
+    + '<button class="bap-btn" data-op="note" data-wf="' + c.wf + '" data-card="' + bapAttr(c.cardId) + '">Add</button></div></details>';
+}
+function bapFill(html, sub, tags) { return html.replace('%SUB%', sub).replace('%TAGS%', tags ? '<div>' + tags + '</div>' : ''); }
+
+function bapReqCard(c) {
+  const snoozed = c.snoozeUntil && Date.parse(c.snoozeUntil) > Date.now();
+  let tags = '';
+  if (c.overdue && !snoozed) tags += '<span class="bap-tag red">Overdue</span>';
+  if (snoozed) tags += '<span class="bap-tag gold">Snoozed until ' + bapWhen(c.snoozeUntil) + '</span>';
+  if (c.child) tags += '<span class="bap-tag">Child</span>';
+  const sub = 'Requested ' + bapWhen(c.created) + ' · ' + bapAgo(c.created);
+  const k = 'data-wf="req" data-card="' + bapAttr(c.cardId) + '"';
+  return '<div class="bap-card' + (c.overdue && !snoozed ? ' overdue' : '') + '" data-cardwrap="' + bapAttr(c.cardId) + '">'
+    + bapFill(bapWho(c), sub, tags) + bapPastorSel(c) + bapContact(c) + bapFormHtml(c) + bapNotesHtml(c)
+    + '<div class="bap-acts">'
+    + '<button class="bap-btn go" data-op="met" ' + k + ' title="Completes the Pastoral Meeting step; PCO adds them to Baptism Ready the next day">✓ Met — ready to be baptized</button>'
+    + (snoozed ? '<button class="bap-btn" data-op="unsnooze" ' + k + '>Wake up</button>'
+               : '<select class="bap-sel" style="flex:0 1 140px" data-act="snooze" ' + k + '><option value="">💤 Snooze…</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="60">2 months</option><option value="90">3 months</option></select>')
+    + '<button class="bap-btn warn" data-op="remove" ' + k + ' title="Remove from Baptism Requested (they can fill the form out again later)">✕ Not now</button>'
+    + '</div></div>';
+}
+function bapDateSel(c) {
+  const sundays = ((_bap && _bap.sundays) || []).slice();
+  if (c.date && sundays.indexOf(c.date) < 0) sundays.unshift(c.date);
+  return '<div class="bap-row"><label>Sunday</label><select class="bap-sel" data-date-for="' + bapAttr(c.cardId) + '">'
+    + '<option value="">Pick a first Sunday…</option>'
+    + sundays.map(s => '<option value="' + s + '"' + (s === c.date ? ' selected' : '') + '>' + bapDay(s) + '</option>').join('')
+    + '</select></div><div class="bap-row"><label>Service</label><select class="bap-sel" data-svc-for="' + bapAttr(c.cardId) + '">'
+    + '<option value="">Pick a service…</option>'
+    + ((_bap && _bap.services) || []).map(s => '<option' + (s === c.service ? ' selected' : '') + '>' + s + '</option>').join('')
+    + '</select></div>';
+}
+function bapReadyCard(c) {
+  let tags = '';
+  if (c.stepId === BAP_STEP_SCHEDULED) tags += '<span class="bap-tag gold">Marked scheduled in PCO — no date yet</span>';
+  if (c.child) tags += '<span class="bap-tag">Child</span>';
+  const sub = 'Ready since ' + bapWhen(c.created) + ' · ' + bapAgo(c.created);
+  return '<div class="bap-card" data-cardwrap="' + bapAttr(c.cardId) + '">'
+    + bapFill(bapWho(c), sub, tags) + bapPastorSel(c) + bapDateSel(c) + bapContact(c) + bapNotesHtml(c)
+    + '<div class="bap-acts"><button class="bap-btn go" data-op="schedule" data-wf="ready" data-card="' + bapAttr(c.cardId) + '">📅 Schedule baptism</button></div></div>';
+}
+function bapScheduleHtml(list) {
+  const today = bapToday();
+  const days = {};
+  list.forEach(c => { (days[c.date] = days[c.date] || []).push(c); });
+  const upcoming = ((_bap && _bap.sundays) || []).filter(s => s >= today).slice(0, 1);
+  upcoming.forEach(s => { days[s] = days[s] || []; });
+  const keys = Object.keys(days).sort();
+  if (!keys.length) return '<div class="bap-empty">Nobody scheduled yet.</div>';
+  const svcs = (_bap && _bap.services) || [];
+  return keys.map(k => {
+    const ppl = days[k], past = k < today;
+    const bySvc = {}; svcs.forEach(s => { bySvc[s] = []; });
+    ppl.forEach(c => { (bySvc[c.service] = bySvc[c.service] || []).push(c); });
+    const cols = Object.keys(bySvc).map(s => '<div class="bap-svc"><b>' + shEsc(s || 'No service yet') + '</b>'
+      + (bySvc[s].length ? bySvc[s].map(c => {
+          const onList = !!shFindPerson(c.pid);
+          const nm = onList ? '<button class="bap-name" data-drawer="' + bapAttr(c.pid) + '">' + shEsc(c.name) + '</button>'
+                            : '<a class="bap-name" href="https://people.planningcenteronline.com/people/AC' + encodeURIComponent(c.pid) + '" target="_blank" rel="noopener">' + shEsc(c.name) + '</a>';
+          const pastor = (c.assignee || '').split(' ')[0];
+          return '<div class="bap-person" data-cardwrap="' + bapAttr(c.cardId) + '"><div>' + nm
+            + '<div class="bap-sub">' + shEsc(pastor ? 'Pastor: ' + pastor : 'No pastor') + (c.baptizer ? ' · Baptizer: ' + shEsc(c.baptizer) : '')
+            + (c.dateSource === 'sheet' ? ' · <span title="From the Baptisms sheet">sheet</span>' : '') + '</div></div>'
+            + '<div class="bap-acts"><button class="bap-btn go" data-op="baptized" data-wf="ready" data-card="' + bapAttr(c.cardId) + '">✓ Baptized</button>'
+            + '<button class="bap-btn" data-op="unschedule" data-wf="ready" data-card="' + bapAttr(c.cardId) + '" title="Clear the date and send back to Needs a Sunday">↺ Change</button></div></div>';
+        }).join('') : '<div class="bap-sub">—</div>') + '</div>').join('');
+    return '<div class="bap-sun' + (past ? ' past' : '') + '"><h4>' + bapDay(k) + '<small>' + ppl.length + ' ' + (ppl.length === 1 ? 'person' : 'people')
+      + (past ? ' · past — mark who was baptized' : '') + '</small></h4><div class="bap-svcs">' + cols + '</div></div>';
+  }).join('');
+}
+
+function bapRender() {
+  bapBadge(); bapMeta();
+  const body = document.getElementById('bapBody');
+  if (!body || !bapIsOpen()) return;
+  if (!_bap) { body.innerHTML = '<div class="sh-empty">Loading the baptism workflows from Planning Center…</div>'; return; }
+  const me = bapMyId();
+  const mine = c => !_bapMine || c.assigneeId === me;
+  const req = _bap.requested.filter(mine).sort((a, b) => (b.overdue - a.overdue) || (a.created < b.created ? -1 : 1));
+  const met = _bap.met.filter(mine);
+  const needDay = _bap.ready.filter(c => !c.date).filter(mine).sort((a, b) => a.created < b.created ? -1 : 1);
+  const sched = _bap.ready.filter(c => c.date).filter(mine);
+  const done = _bap.baptized.filter(mine);
+  const od = req.filter(c => c.overdue).length;
+  const next = sched.map(c => c.date).filter(d => d >= bapToday()).sort()[0];
+  const tile = (n, lbl, sub, col) => '<div class="bap-tile" style="--bt:' + col + '"><b>' + n + '</b><span>' + lbl + '</span>' + (sub ? '<i>' + sub + '</i>' : '') + '</div>';
+  body.innerHTML =
+    '<div class="bap-tiles">'
+    + tile(req.length, 'Need a meeting', od ? od + ' overdue' : 'Baptism Requested', od ? '#e06b6e' : 'var(--sh-accent)')
+    + tile(met.length, 'Met — moving', 'PCO adds to Ready next day', 'var(--sh-sand)')
+    + tile(needDay.length, 'Need a Sunday', 'Baptism Ready', '#e0b23c')
+    + tile(sched.length, 'Scheduled', next ? 'next: ' + bapDay(next) : '', '#43d9a4')
+    + tile(done.length, 'Baptized', 'last 4 months', '#5aa877')
+    + '</div>'
+    + '<div class="bap-chips"><button class="bap-chip' + (_bapMine ? '' : ' on') + '" data-mine="0">Everyone</button>'
+    + (me ? '<button class="bap-chip' + (_bapMine ? ' on' : '') + '" data-mine="1">Assigned to me</button>' : '') + '</div>'
+
+    + '<div class="bap-sec"><h3>1 · Needs a pastoral meeting</h3><small>Baptism Requested — reach out, meet, then mark them ready</small></div>'
+    + (req.length ? '<div class="bap-grid">' + req.map(bapReqCard).join('') + '</div>' : '<div class="bap-empty">No one waiting for a meeting. 🎉</div>')
+    + (met.length ? '<div class="bap-met" style="margin-top:12px">✓ Met and ready — Planning Center moves them to Baptism Ready the next day: '
+        + met.map(c => '<b>' + shEsc(c.name) + '</b> (' + shEsc((c.assignee || '').split(' ')[0] || '—') + ', ' + bapWhen(c.completedAt) + ')').join(', ') + '</div>' : '')
+
+    + '<div class="bap-sec"><h3>2 · Ready — pick a Sunday</h3><small>Baptism Ready — first Sunday of the month, 8:00 / 9:30 / 11:00</small></div>'
+    + (needDay.length ? '<div class="bap-grid">' + needDay.map(bapReadyCard).join('') + '</div>' : '<div class="bap-empty">Everyone who is ready has a Sunday.</div>')
+
+    + '<div class="bap-sec"><h3>3 · Baptism schedule</h3><small>Mark each person baptized on the day — it completes their PCO card and records the date</small></div>'
+    + bapScheduleHtml(sched)
+
+    + '<div class="bap-sec"><h3>Recently baptized</h3></div>'
+    + (done.length ? '<details class="bap-card" style="display:block"><summary>' + done.length + ' in the last 4 months</summary><table class="bap-done" style="width:100%;border-collapse:collapse;margin-top:8px">'
+        + done.map(c => '<tr><td>' + shEsc(c.name) + '</td><td>' + bapWhen(c.completedAt) + '</td><td>' + shEsc((c.assignee || '').split(' ')[0]) + '</td></tr>').join('') + '</table></details>'
+      : '<div class="bap-empty">None in the last 4 months.</div>');
+}
+
+function bapFind(cardId) {
+  if (!_bap) return null;
+  for (const k of ['requested', 'met', 'ready', 'baptized']) { const c = _bap[k].find(x => String(x.cardId) === String(cardId)); if (c) return { list: k, c }; }
+  return null;
+}
+const BAP_CONFIRM = {
+  met: c => 'Mark the pastoral meeting with ' + c.name + ' as done?\n\nThis completes their Baptism Requested card. Planning Center adds them to Baptism Ready the next day.',
+  remove: c => 'Remove ' + c.name + ' from Baptism Requested?\n\nUse this if they shouldn’t be baptized right now. They can fill the form out again when they’re ready.',
+  baptized: c => 'Mark ' + c.name + ' as baptized?\n\nThis completes their Baptism Ready card and records the baptism date on their PCO profile.',
+  unschedule: c => 'Clear ' + c.name + '’s baptism date and move them back to “Need a Sunday”?'
+};
+const BAP_DONE = { assign:'Pastor updated in PCO', note:'Note added to their PCO card', met:'Marked ready — moves to Baptism Ready tomorrow',
+  snooze:'Snoozed in PCO', unsnooze:'Back in the list', remove:'Removed from Baptism Requested', schedule:'Scheduled 📅',
+  unschedule:'Date cleared', baptized:'Baptized! 🎉 Card completed in PCO' };
+
+async function bapAct(op, wf, cardId, extra) {
+  const f = bapFind(cardId); if (!f) return;
+  if (BAP_CONFIRM[op] && !confirm(BAP_CONFIRM[op](f.c))) { bapRender(); return; }
+  const wrap = document.querySelector('[data-cardwrap="' + CSS.escape(String(cardId)) + '"]'); if (wrap) wrap.classList.add('busy');
+  const q = new URLSearchParams(Object.assign({ action:'bap_act', pw:_shPastorHash, op, wf, cardId, t:Date.now() }, extra || {}));
+  let j = null;
+  try { const r = await fetch(STAFF_OS_URL + '?' + q.toString()); j = await r.json(); } catch (e) {}
+  if (wrap) wrap.classList.remove('busy');
+  if (!j || !j.ok) { bapToast('Couldn’t save to Planning Center' + (j && (j.error || j.detail) ? ': ' + (j.error || j.detail) : ''), true); bapRender(); return; }
+  const c = f.c, move = (to) => { _bap[f.list] = _bap[f.list].filter(x => x !== c); _bap[to].unshift(c); };
+  if (op === 'assign') { c.assigneeId = extra.assignee; const p = _bap.pastors.find(x => x.id === extra.assignee); c.assignee = p ? p.name : c.assignee; }
+  else if (op === 'note') { (c.notes = c.notes || []).unshift(j.note || { at:new Date().toISOString(), text:extra.note }); }
+  else if (op === 'met') { c.stage = 'completed'; c.completedAt = new Date().toISOString(); move('met'); }
+  else if (op === 'snooze') { c.snoozeUntil = new Date(Date.now() + (+extra.days) * 864e5).toISOString(); }
+  else if (op === 'unsnooze') { c.snoozeUntil = null; }
+  else if (op === 'remove') { _bap[f.list] = _bap[f.list].filter(x => x !== c); }
+  else if (op === 'schedule') { c.date = extra.date; c.service = extra.service; c.dateSource = 'dashboard'; c.stepId = BAP_STEP_SCHEDULED; }
+  else if (op === 'unschedule') { c.date = ''; c.service = ''; c.stepId = ''; }
+  else if (op === 'baptized') { c.stage = 'completed'; c.completedAt = new Date().toISOString(); move('baptized'); }
+  try { sessionStorage.setItem(BAP_CACHE_KEY, JSON.stringify(_bap)); } catch (e) {}
+  bapRender(); bapToast(BAP_DONE[op] || 'Saved');
+  setTimeout(() => bapLoad(true), 2500);   // pick up PCO's own changes (automations, step names)
+}
+
+document.addEventListener('click', (e) => {
+  if (!bapIsOpen()) return;
+  const t = e.target.closest('[data-drawer],[data-op],[data-mine]'); if (!t || !document.getElementById('bapBoard').contains(t)) return;
+  if (t.dataset.drawer) { e.preventDefault(); shOpenDrawer(t.dataset.drawer); return; }
+  if (t.dataset.mine != null) { _bapMine = t.dataset.mine === '1'; bapRender(); return; }
+  const op = t.dataset.op, wf = t.dataset.wf, card = t.dataset.card;
+  if (op === 'note') {
+    const inp = document.querySelector('[data-note-for="' + CSS.escape(card) + '"]'); const txt = inp ? inp.value.trim() : '';
+    if (!txt) { if (inp) inp.focus(); return; }
+    bapAct('note', wf, card, { note: txt }); return;
+  }
+  if (op === 'schedule') {
+    const d = document.querySelector('[data-date-for="' + CSS.escape(card) + '"]'), s = document.querySelector('[data-svc-for="' + CSS.escape(card) + '"]');
+    if (!d || !d.value || !s || !s.value) { bapToast('Pick a Sunday and a service first', true); return; }
+    bapAct('schedule', wf, card, { date: d.value, service: s.value }); return;
+  }
+  bapAct(op, wf, card);
+});
+document.addEventListener('change', (e) => {
+  const t = e.target; if (!bapIsOpen() || !t.dataset || !t.dataset.act) return;
+  if (t.dataset.act === 'assign' && t.value) bapAct('assign', t.dataset.wf, t.dataset.card, { assignee: t.value });
+  if (t.dataset.act === 'snooze' && t.value) bapAct('snooze', t.dataset.wf, t.dataset.card, { days: t.value });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.target && e.target.dataset && e.target.dataset.noteFor && bapIsOpen()) {
+    const card = e.target.dataset.noteFor, f = bapFind(card); if (f && e.target.value.trim()) bapAct('note', f.c.wf, card, { note: e.target.value.trim() });
+  }
+});
 
 function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 </script>
