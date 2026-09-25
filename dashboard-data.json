@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-24T23:45:53.530Z",
+  "lastUpdated": "2026-09-24T23:59:03.204Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 24, 2026, 4:45 PM",
+    "refreshed": "Sep 24, 2026, 4:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9482,14 +9482,14 @@
         23,
         24,
         24,
-        31,
+        35,
         null,
         null,
         null
       ]
     },
     "leadersAdded": {
-      "total2026": 51
+      "total2026": 54
     },
     "outsidersInsiders": {
       "2024": [
@@ -9529,7 +9529,7 @@
         12,
         13,
         15,
-        26,
+        30,
         null,
         null,
         null
@@ -9612,6 +9612,7 @@
         "phase": "1",
         "label": "Identify",
         "names": [
+          "Brandon Thompson",
           "Chelsey Shauer",
           "Charlene O'Connor",
           "Tristan Martinez Valcher",
@@ -9648,13 +9649,15 @@
           "Sarah Perez",
           "Alison Crook",
           "Ronald Crook",
-          "Charlene Carp",
+          "Adam Carp",
+          "Brandon Thompson",
           "Deborah Vydra",
           "Manuel Sanchez",
           "Anna Sawyer",
           "Keith Primus",
           "Alan Charles",
           "Brenda Milligan",
+          "Charlene Carp",
           "David Yost",
           "Jenny Roccuzzo",
           "Shain Smith",
@@ -9689,7 +9692,7 @@
           "Peggy Hart",
           "Chuck Grimm"
         ],
-        "count": 76
+        "count": 79
       },
       {
         "phase": "2",
@@ -9736,6 +9739,14 @@
         "attPct": 57
       },
       {
+        "name": "Howes/Peissner Community Group",
+        "members": 22,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 7,
+        "attPct": 32
+      },
+      {
         "name": "McCarthy Community Group",
         "members": 21,
         "leaders": 2,
@@ -9758,14 +9769,6 @@
         "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
         "avgAttended": 9,
         "attPct": 50
-      },
-      {
-        "name": "Howes/Peissner Community Group",
-        "members": 18,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
-        "avgAttended": 7,
-        "attPct": 39
       },
       {
         "name": "Isaac Griffin Community Group",
@@ -10018,34 +10021,34 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 385,
+      "cgMembers": 389,
       "both": 211,
       "pctFmInCg": 54,
-      "pctCgAreFm": 55
+      "pctCgAreFm": 54
     },
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 385,
+        "cg": 389,
         "serving": 295,
         "giving": 952
       },
-      "universe": 1154,
+      "universe": 1156,
       "regions": {
         "1": 39,
-        "2": 84,
+        "2": 86,
         "3": 12,
         "4": 34,
         "5": 8,
         "6": 9,
         "7": 16,
-        "8": 529,
+        "8": 528,
         "9": 76,
-        "10": 65,
+        "10": 66,
         "11": 54,
-        "12": 27,
+        "12": 26,
         "13": 56,
-        "14": 16,
+        "14": 17,
         "15": 129
       },
       "regionNames": {
@@ -10138,6 +10141,7 @@
           "Jolie Mortensen",
           "Jonnie Buchanan",
           "Kailey Tierney",
+          "Kambree Bowen",
           "Kathleen Holland",
           "Kathrine Pierre",
           "Keith Baugh",
@@ -10171,6 +10175,7 @@
           "Sheri Bell",
           "Shile Eguen",
           "Sommer Merritt",
+          "Sophia L",
           "Tori Meyer",
           "Tracy Brown",
           "Tyler Harte",
@@ -10345,6 +10350,7 @@
           "Dorothy Bell",
           "Dru Bahnsen",
           "Duane Sanchez",
+          "Duke Renslow",
           "Dustin Garcia",
           "Dustin Holland",
           "Eduardo Cardenas",
@@ -10359,7 +10365,6 @@
           "Frank Luchetti",
           "FrontStream No Tax Deductions",
           "Gene Lumsden",
-          "Genesis He",
           "Gloria Obeso-Levy",
           "Grace Coan",
           "Greg Bodden",
@@ -10568,6 +10573,7 @@
           "Edda Gibson",
           "Erin Wilson",
           "Garrett Banks",
+          "Genesis He",
           "Heather Green",
           "Helen Koehm",
           "James A McLennan",
@@ -10684,7 +10690,6 @@
           "Jessica Adrian",
           "Kellan Coan",
           "Latisha Hill",
-          "Lorie Roberts",
           "Lydia Perlich",
           "Matt Sweitzer",
           "McKayla Leggett",
@@ -10767,6 +10772,7 @@
           "Erich Brenner",
           "Karynn Sucaldito",
           "Liz Suto",
+          "Lorie Roberts",
           "Michael Rehberger",
           "Nathen Ross",
           "Shawn Stoddard",
@@ -10908,7 +10914,7 @@
       "lists": {
         "engagedNotMember": {
           "label": "In CG + Serving + Giving — not yet a Member",
-          "count": 16,
+          "count": 17,
           "names": [
             "Aaron Marinucci",
             "Aliyah Ramirez",
@@ -10921,6 +10927,7 @@
             "Erich Brenner",
             "Karynn Sucaldito",
             "Liz Suto",
+            "Lorie Roberts",
             "Michael Rehberger",
             "Nathen Ross",
             "Shawn Stoddard",
@@ -11295,7 +11302,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 605,
+          "count": 604,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -11395,6 +11402,7 @@
             "Dorothy Bell",
             "Dru Bahnsen",
             "Duane Sanchez",
+            "Duke Renslow",
             "Dustin Garcia",
             "Dustin Holland",
             "Eduardo Cardenas",
@@ -11412,7 +11420,6 @@
             "Frank Luchetti",
             "FrontStream No Tax Deductions",
             "Gene Lumsden",
-            "Genesis He",
             "Ginny Bartoldo",
             "Gloria Obeso-Levy",
             "Grace Coan",
@@ -11688,7 +11695,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 174,
+        "count": 178,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -11752,6 +11759,7 @@
           "Fiona Delforge",
           "Gaelen Lamb",
           "Garrett Banks",
+          "Genesis He",
           "Heather Green",
           "Heather Winchester",
           "Helen Koehm",
@@ -11785,6 +11793,7 @@
           "Julio Vargas",
           "Justice JB",
           "Kailey Tierney",
+          "Kambree Bowen",
           "Karen Warner",
           "Karynn Sucaldito",
           "Kathleen Holland",
@@ -11804,6 +11813,7 @@
           "Lindsay Johnson",
           "Liz Suto",
           "Lori Traitel",
+          "Lorie Roberts",
           "Lorna Elias",
           "Lucas Piotto",
           "Lyndsey Mott",
@@ -11853,6 +11863,7 @@
           "Shile Eguen",
           "Shiona Dykins",
           "Sommer Merritt",
+          "Sophia L",
           "Steven Pradere",
           "Sue Henderson",
           "Suvidha Srestta Garnepudi",
@@ -22207,20 +22218,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Doretta Brown",
-              "team": "Enrichment Teams",
-              "pos": "Back Right Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
-              "name": "Melissa Peterson",
-              "team": "Enrichment Teams",
-              "pos": "Front Left Communion Server",
-              "status": "C",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Shannon Coan",
               "team": "Hospitality Team",
               "pos": "Host",
@@ -22604,6 +22601,41 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lucas Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jack Jauron",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Doretta Brown",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Melissa Peterson",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jeremy Peterson",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -22740,8 +22772,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 74,
-            "totalVols": 74
+            "volsWithServiceTime": 77,
+            "totalVols": 77
           }
         }
       ]
