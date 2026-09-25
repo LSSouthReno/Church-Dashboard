@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-25T18:46:05.667Z",
+  "lastUpdated": "2026-09-25T18:59:03.819Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 25, 2026, 11:46 AM",
+    "refreshed": "Sep 25, 2026, 11:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9463,7 +9463,7 @@
         3,
         6,
         4,
-        19,
+        18,
         9,
         4,
         4,
@@ -9819,14 +9819,6 @@
         "attPct": 79
       },
       {
-        "name": "Frederick/Coggiola/Schelin Community Group",
-        "members": 14,
-        "leaders": 4,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
-        "avgAttended": 6,
-        "attPct": 43
-      },
-      {
         "name": "Brown/Frank Community Group",
         "members": 14,
         "leaders": 2,
@@ -9841,6 +9833,14 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 8,
         "attPct": 62
+      },
+      {
+        "name": "Frederick/Coggiola/Schelin Community Group",
+        "members": 13,
+        "leaders": 4,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
+        "avgAttended": 6,
+        "attPct": 46
       },
       {
         "name": "Caliger/Rankin Community Group",
@@ -10021,15 +10021,15 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 392,
-      "both": 212,
+      "cgMembers": 391,
+      "both": 211,
       "pctFmInCg": 54,
       "pctCgAreFm": 54
     },
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 392,
+        "cg": 391,
         "serving": 295,
         "giving": 952
       },
@@ -10043,9 +10043,9 @@
         "6": 9,
         "7": 16,
         "8": 528,
-        "9": 75,
+        "9": 76,
         "10": 66,
-        "11": 55,
+        "11": 54,
         "12": 26,
         "13": 56,
         "14": 17,
@@ -10502,6 +10502,7 @@
           "James Burns",
           "Jason Welch",
           "Jeffrey Luckey",
+          "Jere England",
           "Jim Forbus",
           "Jim Pescatore",
           "Jo Belmont",
@@ -10648,7 +10649,6 @@
           "Jaime Sanchez",
           "Jan Colburn",
           "Jeff Jewell",
-          "Jere England",
           "Jerry Dorn",
           "Jessica Morgan",
           "Joshua Wampler",
@@ -10939,7 +10939,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 178,
+          "count": 179,
           "names": [
             "Aaron Carl",
             "Adam Carp",
@@ -11024,6 +11024,7 @@
             "Jeffrey Luckey",
             "Jenni Pereza",
             "Jennifer Janakus",
+            "Jere England",
             "Jim Forbus",
             "Jim Pescatore",
             "Jo Belmont",
@@ -11303,7 +11304,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 603,
+          "count": 604,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -11449,6 +11450,7 @@
             "Jenna Plunkett",
             "Jennifer King",
             "Jennifer Sadler",
+            "Jere England",
             "Jessica Carver",
             "Jessica Hampton",
             "Jim Forbus",
@@ -11503,8 +11505,7 @@
             "Lindsey Wolf",
             "Lisa Duffey",
             "Lisa Norman",
-            "Loose Cash South Reno",
-            "Loren Wooldridge"
+            "Loose Cash South Reno"
           ]
         }
       },
@@ -11512,7 +11513,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 178,
+        "count": 179,
         "names": [
           "Aaron Carl",
           "Adam Carp",
@@ -11597,6 +11598,7 @@
           "Jeffrey Luckey",
           "Jenni Pereza",
           "Jennifer Janakus",
+          "Jere England",
           "Jim Forbus",
           "Jim Pescatore",
           "Jo Belmont",
@@ -21929,6 +21931,27 @@
               "pos": "Back Right Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ed Griggs",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jenn Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -22093,8 +22116,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 94,
-            "totalVols": 94
+            "volsWithServiceTime": 97,
+            "totalVols": 97
           }
         }
       ]
