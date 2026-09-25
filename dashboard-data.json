@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-25T04:45:55.409Z",
+  "lastUpdated": "2026-09-25T04:58:57.105Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8029,7 +8029,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 24, 2026, 9:45 PM",
+    "refreshed": "Sep 24, 2026, 9:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9438,7 +9438,7 @@
         26,
         25,
         43,
-        30,
+        31,
         null,
         null,
         null
@@ -9482,7 +9482,7 @@
         23,
         24,
         24,
-        35,
+        37,
         null,
         null,
         null
@@ -9529,7 +9529,7 @@
         12,
         13,
         15,
-        30,
+        31,
         null,
         null,
         null
@@ -10004,11 +10004,11 @@
       },
       {
         "name": "Moore Community Group",
-        "members": 2,
+        "members": 4,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 5-6:30pm",
         "avgAttended": 2,
-        "attPct": 100
+        "attPct": 50
       },
       {
         "name": "Faker Community Group",
@@ -10021,31 +10021,31 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 389,
-      "both": 211,
+      "cgMembers": 391,
+      "both": 212,
       "pctFmInCg": 54,
       "pctCgAreFm": 54
     },
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 389,
+        "cg": 391,
         "serving": 295,
         "giving": 952
       },
-      "universe": 1156,
+      "universe": 1157,
       "regions": {
         "1": 39,
-        "2": 86,
+        "2": 87,
         "3": 12,
         "4": 34,
         "5": 8,
         "6": 9,
         "7": 16,
         "8": 528,
-        "9": 76,
+        "9": 75,
         "10": 66,
-        "11": 54,
+        "11": 55,
         "12": 26,
         "13": 56,
         "14": 17,
@@ -10176,6 +10176,7 @@
           "Shile Eguen",
           "Sommer Merritt",
           "Sophia L",
+          "Terri Mehlhaff",
           "Tori Meyer",
           "Tracy Brown",
           "Tyler Harte",
@@ -10493,7 +10494,6 @@
           "Debbie Berge",
           "Diane Sikora",
           "Elizabeth Wolfgang",
-          "Emily Smith",
           "Erica Edwards",
           "Ginny Bartoldo",
           "Heather Luckey",
@@ -10638,6 +10638,7 @@
           "Donna Sarazen",
           "Doug Neddenriep",
           "Dr Richard Reich",
+          "Emily Smith",
           "Estefania (Steph) Febo",
           "Gary Berge",
           "Gary Foote",
@@ -10937,7 +10938,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 179,
+          "count": 178,
           "names": [
             "Aaron Carl",
             "Adam Carp",
@@ -11000,7 +11001,6 @@
             "Elizabeth Wolfgang",
             "Elyse Bozsik",
             "Emery Fava",
-            "Emily Smith",
             "Eric Sikora",
             "Erica Edwards",
             "Erika Maxwell",
@@ -11302,7 +11302,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 604,
+          "count": 603,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -11408,7 +11408,6 @@
             "Eduardo Cardenas",
             "Elizabeth Wolfgang",
             "Ellie Wampler",
-            "Emily Smith",
             "Enrique Ibarra",
             "Erica Edwards",
             "Erick Walczak",
@@ -11503,7 +11502,8 @@
             "Lindsey Wolf",
             "Lisa Duffey",
             "Lisa Norman",
-            "Loose Cash South Reno"
+            "Loose Cash South Reno",
+            "Loren Wooldridge"
           ]
         }
       },
@@ -11511,7 +11511,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 179,
+        "count": 178,
         "names": [
           "Aaron Carl",
           "Adam Carp",
@@ -11574,7 +11574,6 @@
           "Elizabeth Wolfgang",
           "Elyse Bozsik",
           "Emery Fava",
-          "Emily Smith",
           "Eric Sikora",
           "Erica Edwards",
           "Erika Maxwell",
@@ -11695,7 +11694,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 178,
+        "count": 179,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -11867,6 +11866,7 @@
           "Steven Pradere",
           "Sue Henderson",
           "Suvidha Srestta Garnepudi",
+          "Terri Mehlhaff",
           "Thomas Adams",
           "Tiffany Jackson",
           "Tori Meyer",
