@@ -945,7 +945,7 @@
     "group": 0,
     "leader": 0,
     "missionary": 2,
-    "asOf": "2026-09-24"
+    "asOf": "2026-09-25"
   },
   "calendar": {
     "events": [
@@ -7403,10 +7403,22 @@
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus",
         "visibleCC": false
+      },
+      {
+        "name": "Good Friday decor set-up",
+        "dateKey": "2027-03-25",
+        "endKey": null,
+        "dayOfWeek": "Thu",
+        "date": "Mar 25",
+        "time": "12:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "11:59 PM",
+        "owner": "Katie Thompson",
+        "visibleCC": false
       }
     ],
-    "asOf": "2026-09-24",
-    "syncedAt": "2026-09-25T05:59:22.365Z"
+    "asOf": "2026-09-25",
+    "syncedAt": "2026-09-25T07:07:41.620Z"
   },
   "staff_profiles": [
     {
