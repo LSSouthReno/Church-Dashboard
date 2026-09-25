@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T03:19:22.256Z",
+  "generatedAt": "2026-09-25T04:19:17.860Z",
   "asOf": "2026-09-24",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 390,
     "avgScore": 0,
-    "inGroup": 215,
+    "inGroup": 216,
     "serving": 231,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 390,
-    "notInGroup": 175,
+    "notInGroup": 174,
     "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 390
     },
     "pct": {
-      "inGroup": 0.5512820512820513,
+      "inGroup": 0.5538461538461539,
       "serving": 0.5923076923076923,
       "leading": 0.19743589743589743,
       "givingRegular": 0,
@@ -13524,7 +13524,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 29,
         "serving": 26,
         "leading": 7,
         "givingRegular": 0,
@@ -13534,7 +13534,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 20,
+        "notInGroup": 19,
         "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
@@ -13552,7 +13552,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.5833333333333334,
+          "inGroup": 0.6041666666666666,
           "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
@@ -13985,43 +13985,6 @@
           "name": "Norman Horsley",
           "first": "Norman",
           "last": "Horsley",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Emily Smith",
-          "first": "Emily",
-          "last": "Smith",
           "email": "",
           "phone": "",
           "member": false,
@@ -14603,6 +14566,48 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Emily Smith",
+          "first": "Emily",
+          "last": "Smith",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Moore Community Group",
+              "role": "member",
+              "joinedAt": "2026-09-25T04:04:31Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
           ],
           "pending": true
         },
@@ -18057,7 +18062,7 @@
   "paciCounts": {
     "parent": 62,
     "adult": 64,
-    "child": 154,
-    "infant": 101
+    "child": 155,
+    "infant": 100
   }
 }
