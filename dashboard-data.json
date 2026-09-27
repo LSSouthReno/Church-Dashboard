@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-27T17:46:15.973Z",
+  "lastUpdated": "2026-09-27T18:02:28.911Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3267,8 +3267,8 @@
       },
       {
         "week": "Sep 27",
-        "adults": 187,
-        "kids": 90
+        "adults": 520,
+        "kids": 94
       }
     ]
   },
@@ -8009,7 +8009,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 27, 2026, 10:46 AM",
+    "refreshed": "Sep 27, 2026, 11:02 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9418,7 +9418,7 @@
         26,
         25,
         43,
-        33,
+        34,
         null,
         null,
         null
@@ -9719,7 +9719,7 @@
         "attPct": 57
       },
       {
-        "name": "Howes/Peissner Community Group",
+        "name": "Martinson/Degener Community Group",
         "members": 22,
         "leaders": 2,
         "schedule": "Meets every other week on Tuesdays from 6-8pm",
@@ -23799,7 +23799,7 @@
               "team": "Safety Team",
               "pos": "Safety Monitor",
               "status": "C",
-              "serviceTime": "8 AM"
+              "serviceTime": "8 AM, 11 AM"
             },
             {
               "name": "Sandy Norton",
@@ -24896,6 +24896,13 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Lloyd",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -24905,8 +24912,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 33,
-            "totalVols": 33
+            "volsWithServiceTime": 34,
+            "totalVols": 34
           }
         }
       ]
