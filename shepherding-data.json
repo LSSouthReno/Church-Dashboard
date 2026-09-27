@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T20:18:41.966Z",
+  "generatedAt": "2026-09-27T21:18:43.646Z",
   "asOf": "2026-09-27",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 390,
     "avgScore": 0,
     "inGroup": 215,
-    "serving": 231,
+    "serving": 232,
     "leading": 77,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 390,
     "notInGroup": 175,
-    "notServing": 159,
+    "notServing": 158,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5512820512820513,
-      "serving": 0.5923076923076923,
+      "serving": 0.5948717948717949,
       "leading": 0.19743589743589743,
       "givingRegular": 0,
       "recurring": 0,
@@ -13520,7 +13520,7 @@
         "totalPeople": 48,
         "avgScore": 0,
         "inGroup": 29,
-        "serving": 26,
+        "serving": 27,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -13530,7 +13530,7 @@
         "overdue": 0,
         "notBaptized": 48,
         "notInGroup": 19,
-        "notServing": 22,
+        "notServing": 21,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -13548,7 +13548,7 @@
         },
         "pct": {
           "inGroup": 0.6041666666666666,
-          "serving": 0.5416666666666666,
+          "serving": 0.5625,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
           "recurring": 0,
@@ -15017,48 +15017,6 @@
         },
         {
           "id": null,
-          "name": "Nancy Prahm",
-          "first": "Nancy",
-          "last": "Prahm",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Griffin/Watson Community Group",
-              "role": "member",
-              "joinedAt": "2025-12-18T15:05:28Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Anthony Azzam",
           "first": "Anthony",
           "last": "Azzam",
@@ -15404,6 +15362,52 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2026-04-18T16:00:57Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Nancy Prahm",
+          "first": "Nancy",
+          "last": "Prahm",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Griffin/Watson Community Group",
+              "role": "member",
+              "joinedAt": "2025-12-18T15:05:28Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Chair Crew",
+              "role": "member",
+              "joinedAt": "2026-09-27T21:00:59Z"
             }
           ],
           "flags": [],
@@ -18051,8 +18055,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 62,
-    "adult": 64,
-    "child": 154,
+    "adult": 65,
+    "child": 153,
     "infant": 101
   }
 }
