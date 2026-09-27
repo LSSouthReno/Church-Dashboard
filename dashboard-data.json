@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-27T14:46:09.524Z",
+  "lastUpdated": "2026-09-27T15:00:06.778Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3264,6 +3264,11 @@
         "week": "Sep 20",
         "adults": 753,
         "kids": 119
+      },
+      {
+        "week": "Sep 27",
+        "adults": 0,
+        "kids": 3
       }
     ]
   },
@@ -8004,7 +8009,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 27, 2026, 7:46 AM",
+    "refreshed": "Sep 27, 2026, 8:00 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9413,7 +9418,7 @@
         26,
         25,
         43,
-        32,
+        33,
         null,
         null,
         null
@@ -9457,7 +9462,7 @@
         23,
         24,
         24,
-        38,
+        39,
         null,
         null,
         null
@@ -9504,7 +9509,7 @@
         12,
         13,
         15,
-        32,
+        33,
         null,
         null,
         null
@@ -9996,7 +10001,7 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 391,
+      "cgMembers": 392,
       "both": 211,
       "pctFmInCg": 54,
       "pctCgAreFm": 54
@@ -10004,14 +10009,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 391,
+        "cg": 392,
         "serving": 291,
         "giving": 953
       },
-      "universe": 1156,
+      "universe": 1157,
       "regions": {
         "1": 39,
-        "2": 88,
+        "2": 89,
         "3": 12,
         "4": 32,
         "5": 8,
@@ -10092,6 +10097,7 @@
           "Claire Pierce",
           "Coco Candler",
           "Collet Alano",
+          "Crystal Flaherty",
           "Danielle Bunow",
           "Darlene Holtzer",
           "Dennis McGilvery",
@@ -11670,7 +11676,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 180,
+        "count": 181,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -11713,6 +11719,7 @@
           "Coco Candler",
           "Collet Alano",
           "Cory Hunt",
+          "Crystal Flaherty",
           "Danielle Bunow",
           "Darlene Holtzer",
           "Dave Timko",
@@ -21960,6 +21967,13 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Iain Dykins",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -22124,8 +22138,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 102,
-            "totalVols": 102
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
