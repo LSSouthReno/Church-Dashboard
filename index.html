@@ -1163,6 +1163,19 @@
   .sos-tag.high { background: rgba(168,48,48,.12); color: var(--sp-red,#a83030); }
   .sos-tag.due { background: rgba(201,150,58,.14); color: var(--sp-gold,#c9963a); }
   .sos-tag.from { background: rgba(90,122,92,.14); color: var(--sp-sage,#5a7a5c); }
+  .sos-tag.plan { background: rgba(26,21,16,.06); color: var(--sp-ink,#1a1510); }
+  .sos-task-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+  .sos-due-edit { position: relative; display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: rgba(201,150,58,.14); color: var(--sp-gold,#c9963a); cursor: pointer; }
+  .sos-due-edit.empty { background: none; border: 1px dashed rgba(26,21,16,.2); color: var(--sp-muted,#8a7e6e); font-weight: 600; }
+  .sos-due-edit.over { background: rgba(180,35,24,.10); color: #b42318; }
+  .sos-due-edit:hover { box-shadow: 0 0 0 1px var(--sp-gold,#c9963a); }
+  .sos-due-edit input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; border: 0; padding: 0; }
+  .sos-due-edit input::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+  .sos-added { font-size: 11px; color: var(--sp-muted,#8a7e6e); }
+  .sos-due-lbl { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--sp-muted,#8a7e6e); }
+  .cp-todo { flex: 0 0 auto; align-self: flex-start; margin-top: 2px; background: none; border: 1px solid rgba(26,21,16,.18); color: var(--sp-muted,#8a7e6e); font: 600 10.5px 'Montserrat',sans-serif; padding: 2px 7px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
+  .cp-todo:hover { border-color: var(--sp-gold,#c9963a); color: var(--sp-gold,#c9963a); }
+  .cp-todo.on { cursor: default; border-color: transparent; background: rgba(201,150,58,.14); color: var(--sp-gold,#c9963a); }
   .sos-task-actions { display: flex; gap: 3px; opacity: .45; }
   .sos-task:hover .sos-task-actions { opacity: 1; }
   .sos-task-actions button, .sos-x { background: none; border: none; color: var(--sp-muted,#8a7e6e); cursor: pointer; font-size: 13px; padding: 2px 4px; }
@@ -8432,26 +8445,47 @@ function sosTaskGroups() {
   const open = _sos.tasks.filter(t => t.status !== 'done');
   const done = _sos.tasks.filter(t => t.status === 'done');
   const today = new Date(); today.setHours(0,0,0,0);
-  const key = t => { if (!t.due) return 3; const d = new Date(t.due + 'T12:00:00'); if (isNaN(d)) return 3; d.setHours(0,0,0,0); if (d < today) return 0; if (d.getTime() === today.getTime()) return 1; return 2; };
+  const key = t => { const due = sosDue(t); if (!due) return 3; const d = new Date(due + 'T12:00:00'); d.setHours(0,0,0,0); if (d < today) return 0; if (d.getTime() === today.getTime()) return 1; return 2; };
   const buckets = [[],[],[],[]];
   open.forEach(t => buckets[key(t)].push(t));
-  buckets.forEach(b => b.sort((a,c) => (a.due||'zzzz').localeCompare(c.due||'zzzz')));
+  // Ordered by due date (soonest first); ties and undated tasks by when they were added.
+  const byDue = (a,c) => (sosDue(a)||'9999').localeCompare(sosDue(c)||'9999') || (sosAddedMs(a) - sosAddedMs(c));
+  buckets.forEach(b => b.sort(byDue));
+  done.sort((a,c) => (Number(c.updatedAt)||0) - (Number(a.updatedAt)||0));
   return { buckets, done };
 }
+// A task's due day as YYYY-MM-DD. Older rows came back from Sheets as a timestamp
+// ("2026-09-23T07:00:00.000Z" = local midnight), so read those as the local day.
+function sosDue(t) {
+  const v = t && t.due; if (!v) return '';
+  const s = String(v);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(v); if (isNaN(d)) return '';
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function sosAddedMs(t) { const v = t && t.createdAt; if (!v) return 0; const n = Number(v); return isNaN(n) ? (Date.parse(v) || 0) : n; }
 function sosTaskRow(t) {
   const from = (t.assignedBy && t.assignedBy !== _sos.me) ? '<span class="sos-tag from">from ' + escapeHtml(t.assignedBy) + '</span>' : '';
   const pri = t.priority === 'high' ? '<span class="sos-tag high">high</span>' : '';
-  const due = t.due ? '<span class="sos-tag due">' + escapeHtml(sosFmtDue(t.due)) + '</span>' : '';
   const notes = t.notes ? '<div class="sos-task-notes">' + escapeHtml(t.notes) + '</div>' : '';
   const done = t.status === 'done';
+  const dueDay = sosDue(t), overdue = !done && dueDay && dueDay < sosTodayKey();
+  // Due date is edited right on the task (anyone, any time). The added date is automatic.
+  const due = '<label class="sos-due-edit' + (dueDay ? '' : ' empty') + (overdue ? ' over' : '') + '" title="Due date — click to change" onclick="if(event.target.tagName!==\'INPUT\'){try{this.querySelector(\'input\').showPicker()}catch(e){}}">' +
+      '<span>' + (dueDay ? 'Due ' + escapeHtml(sosFmtDue(dueDay)) : '+ Due date') + '</span>' +
+      '<input type="date" value="' + dueDay + '" onchange="sosSetDue(\'' + t.id + '\',this.value)"></label>';
+  const added = sosAddedMs(t) ? '<span class="sos-added">added ' + escapeHtml(new Date(sosAddedMs(t)).toLocaleDateString('en-US',{month:'short',day:'numeric'})) + '</span>' : '';
+  const plan = t.planId ? '<span class="sos-tag plan" title="From your Annual Plan — checking it off here checks off the action step">Annual plan</span>' : '';
   return '<div class="sos-task' + (done ? ' done' : '') + '"' + sosDragAttrs('task', t.id) + '>' +
     '<input type="checkbox" class="sos-cb" ' + (done ? 'checked' : '') + ' onchange="sosToggleTask(\'' + t.id + '\',this.checked)">' +
-    '<div class="sos-task-body"><div class="sos-task-top"><span class="sos-task-title">' + escapeHtml(t.title || '') + '</span>' + due + pri + from + '</div>' + notes + '</div>' +
+    '<div class="sos-task-body"><div class="sos-task-top"><span class="sos-task-title">' + escapeHtml(t.title || '') + '</span>' + pri + from + plan + '</div>' + notes +
+      '<div class="sos-task-meta">' + due + added + '</div></div>' +
     '<div class="sos-task-actions">' + sosMoveSel('task', t.id) +
       '<button title="Edit" onclick="sosEditTask(\'' + t.id + '\')">✎</button>' +
       '<button title="Delete" onclick="sosDeleteTask(\'' + t.id + '\')">🗑</button>' +
     '</div></div>';
 }
+function sosTodayKey() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
 function sosFmtDue(d) { try { const dt = new Date(d + 'T12:00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); } catch(e){ return d; } }
 
 // ── Optimistic mutations: update the screen instantly, sync to the server in the
@@ -8491,12 +8525,35 @@ function sosAddTask() {
     sosApiPost(body).then(() => sosToast('Sent to ' + forWho)).catch(() => sosToast('Couldn’t send — try again'));
     return;
   }
-  const tmp = { id: sosTmpId(), owner: forWho, title: title, notes: notes, status: 'open', due: due, priority: pri, assignedBy: assignedBy };
+  const tmp = { id: sosTmpId(), owner: forWho, title: title, notes: notes, status: 'open', due: due, priority: pri, assignedBy: assignedBy, createdAt: Date.now() };
   sosMutate(() => _sos.tasks.push(tmp), body, res => { if (res.id) tmp.id = res.id; });
 }
 function sosToggleTask(id, done) {
-  sosMutate(() => { const t = sosFind(id); if (t) t.status = done ? 'done' : 'open'; }, { action:'sos_task_update', id:id, status: done?'done':'open' });
+  const t = sosFind(id);
+  sosMutate(() => { if (t) t.status = done ? 'done' : 'open'; }, { action:'sos_task_update', id:id, status: done?'done':'open' });
+  // A task sent from an Annual Plan action step checks that step off too (and back on).
+  const step = t && t.planId ? _sos.plans.find(p => p.id === t.planId) : null;
+  const want = done ? 'done' : 'active';
+  if (step && step.status !== want) sosMutate(() => { step.status = want; }, { action:'sos_plan_update', id:step.id, status:want });
 }
+function sosSetDue(id, v) {
+  const t = sosFind(id); if (!t) return;
+  sosMutate(() => { t.due = v || ''; }, { action:'sos_task_update', id:id, due: v || '' });
+}
+// Annual Plan action step → To-Do. The task keeps a link (planId) so finishing either one
+// finishes both.
+function sosStepToTask(stepId) {
+  const st = _sos.plans.find(p => p.id === stepId); if (!st) return;
+  if (sosStepTask(stepId)) { sosToast('Already on your To-Do list'); return; }
+  const obj = _sos.plans.find(p => p.id === st.parentId);
+  const who = _sos.viewing || _sos.me, assignedBy = (who !== _sos.me ? _sos.me : '');
+  const notes = obj ? 'Annual Plan: ' + obj.title : 'Annual Plan action step';
+  const tmp = { id: sosTmpId(), owner: who, title: st.title, notes: notes, status: 'open', due: '', priority: 'normal', assignedBy: assignedBy, createdAt: Date.now(), planId: st.id };
+  sosMutate(() => _sos.tasks.push(tmp), { action:'sos_task_add', owner: who, title: st.title, notes: notes, due: '', priority: 'normal', assignedBy: assignedBy, planId: st.id },
+    res => { if (res.id) tmp.id = res.id; });
+  sosToast('Added to To-Do — set a due date on it');
+}
+function sosStepTask(stepId) { return _sos.tasks.find(t => t.planId === stepId && t.status !== 'done'); }
 function sosDeleteTask(id) {
   if (!confirm('Delete this task?')) return;
   sosMutate(() => { _sos.tasks = _sos.tasks.filter(x => x.id !== id); _sos.assigned = _sos.assigned.filter(x => x.id !== id); }, { action:'sos_task_delete', id:id });
@@ -8505,8 +8562,7 @@ function sosEditTask(id) {
   const t = sosFind(id); if (!t) return;
   const title = prompt('Task', t.title); if (title===null) return;
   const notes = prompt('Notes (optional)', t.notes||''); if (notes===null) return;
-  const due = prompt('Due date (YYYY-MM-DD, blank = none)', t.due||''); if (due===null) return;
-  sosMutate(() => { t.title = title.trim(); t.notes = notes; t.due = due.trim(); }, { action:'sos_task_update', id:id, title:title.trim(), notes:notes, due:due.trim() });
+  sosMutate(() => { t.title = title.trim(); t.notes = notes; }, { action:'sos_task_update', id:id, title:title.trim(), notes:notes });
 }
 
 // ── Plan / rocks / focus helpers ─────────────────────────────────────────────
@@ -8528,6 +8584,10 @@ function sosDeletePlan(id) {
 }
 function sosTogglePlan(id, done) {
   sosMutate(() => { const p = _sos.plans.find(x => x.id === id); if (p) p.status = done ? 'done' : 'active'; }, { action:'sos_plan_update', id:id, status: done?'done':'active' });
+  // Keep a To-Do task made from this action step in step with it.
+  const want = done ? 'done' : 'open';
+  _sos.tasks.filter(t => t.planId === id && t.status !== want && (done || t.status === 'done')).slice(0, done ? 99 : 1)
+    .forEach(t => sosMutate(() => { t.status = want; }, { action:'sos_task_update', id:t.id, status:want }));
 }
 function sosAddGoal() {
   const t = (document.getElementById('sosGoalTitle')||{}).value.trim(); if(!t){return;}
@@ -8800,6 +8860,9 @@ function cpHtml(person) {
       '<div class="cp-osteps">' + steps.map(st => '<div class="cp-step' + (st.status === 'done' ? ' done' : '') + '">' +
         '<input type="checkbox" class="sos-cb" ' + (st.status === 'done' ? 'checked' : '') + ' onchange="sosTogglePlan(\'' + st.id + '\',this.checked)">' +
         '<textarea class="cp-step-in" rows="1" oninput="' + grow + '" onchange="cpSet(\'' + st.id + '\',\'title\',this.value)">' + E(st.title) + '</textarea>' +
+        (st.status === 'done' ? '' : sosStepTask(st.id)
+          ? '<span class="cp-todo on" title="On your To-Do list — checking it off there checks off this step">In To-Do</span>'
+          : '<button class="cp-todo" title="Add this action step to your To-Do list" onclick="sosStepToTask(\'' + st.id + '\')">+ To-Do</button>') +
         '<button class="cp-x" onclick="sosDeletePlan(\'' + st.id + '\')">×</button></div>').join('') +
         '<div class="cp-step cp-step-add"><input id="cpStep_' + o.id + '" class="cp-step-in" placeholder="＋ Add an action step…" onkeydown="if(event.key===\'Enter\')sosAddStep(\'' + o.id + '\',\'cpStep_' + o.id + '\')"></div>' +
       '</div></div>';
@@ -9170,7 +9233,7 @@ function sosRender() {
           '<div class="sos-addtask">' +
             '<input id="sosNewTitle" class="sos-input" placeholder="Add a task…" onkeydown="if(event.key===\'Enter\')sosAddTask()">' +
             '<div class="sos-addtask-row">' +
-              '<input id="sosNewDue" type="date" class="sos-input sm" title="Due date">' +
+              '<label class="sos-due-lbl" title="When it’s due (the date you add it is recorded automatically)">Due <input id="sosNewDue" type="date" class="sos-input sm"></label>' +
               '<select id="sosNewPri" class="sos-input sm"><option value="normal">Normal</option><option value="high">High priority</option></select>' +
               '<select id="sosNewFor" class="sos-input sm" title="Assign to">' + staffOpts + '</select>' +
               '<button class="sos-btn hi" onclick="sosAddTask()">Add</button>' +
@@ -16675,7 +16738,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260924T232939Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260928T185800Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
