@@ -942,7 +942,7 @@
     "guest": 0,
     "attender": 67,
     "member": 0,
-    "group": 391,
+    "group": 392,
     "leader": 83,
     "missionary": 2,
     "asOf": "2026-09-28"
@@ -7793,6 +7793,10 @@
           "role": "member"
         },
         {
+          "name": "Crystal Flaherty",
+          "role": "member"
+        },
+        {
           "name": "Dena Steuer",
           "role": "leader"
         },
@@ -8402,100 +8406,6 @@
     },
     {
       "type": "Community Group",
-      "name": "Howes/Peissner Community Group",
-      "members": [
-        {
-          "name": "Aliyah Ramirez",
-          "role": "member"
-        },
-        {
-          "name": "Alyssa Pichardo",
-          "role": "member"
-        },
-        {
-          "name": "Anna Sawyer",
-          "role": "member"
-        },
-        {
-          "name": "Ava Palmer",
-          "role": "member"
-        },
-        {
-          "name": "Brianna Sanchez",
-          "role": "member"
-        },
-        {
-          "name": "Casey Stoddard",
-          "role": "member"
-        },
-        {
-          "name": "Cielo Coudriet",
-          "role": "member"
-        },
-        {
-          "name": "Coco Candler",
-          "role": "member"
-        },
-        {
-          "name": "Emma Baskharoon",
-          "role": "member"
-        },
-        {
-          "name": "Faith Howes",
-          "role": "leader"
-        },
-        {
-          "name": "Genesis He",
-          "role": "member"
-        },
-        {
-          "name": "Isabella Peissner",
-          "role": "leader"
-        },
-        {
-          "name": "Jada Baehr",
-          "role": "member"
-        },
-        {
-          "name": "Jamison Leonis",
-          "role": "member"
-        },
-        {
-          "name": "Josie Nerska",
-          "role": "member"
-        },
-        {
-          "name": "Kailey Tierney",
-          "role": "member"
-        },
-        {
-          "name": "Kambree Bowen",
-          "role": "member"
-        },
-        {
-          "name": "Lauren Johnson",
-          "role": "member"
-        },
-        {
-          "name": "Lindsay Johnson",
-          "role": "member"
-        },
-        {
-          "name": "Lorie Roberts",
-          "role": "member"
-        },
-        {
-          "name": "Sophia L",
-          "role": "member"
-        },
-        {
-          "name": "Suvidha Srestta Garnepudi",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
       "name": "Isaac Griffin Community Group",
       "members": [
         {
@@ -8657,6 +8567,100 @@
         {
           "name": "Whitney Maidens",
           "role": "leader"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
+      "name": "Martinson/Degener Community Group",
+      "members": [
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Alyssa Pichardo",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Ava Palmer",
+          "role": "member"
+        },
+        {
+          "name": "Brianna Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Casey Stoddard",
+          "role": "member"
+        },
+        {
+          "name": "Cielo Coudriet",
+          "role": "member"
+        },
+        {
+          "name": "Coco Candler",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Faith Howes",
+          "role": "leader"
+        },
+        {
+          "name": "Genesis He",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Peissner",
+          "role": "leader"
+        },
+        {
+          "name": "Jada Baehr",
+          "role": "member"
+        },
+        {
+          "name": "Jamison Leonis",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Kailey Tierney",
+          "role": "member"
+        },
+        {
+          "name": "Kambree Bowen",
+          "role": "member"
+        },
+        {
+          "name": "Lauren Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Lindsay Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Lorie Roberts",
+          "role": "member"
+        },
+        {
+          "name": "Sophia L",
+          "role": "member"
+        },
+        {
+          "name": "Suvidha Srestta Garnepudi",
+          "role": "member"
         }
       ]
     },
@@ -12961,6 +12965,10 @@
         {
           "name": "Katie Thompson",
           "role": "leader"
+        },
+        {
+          "name": "Nancy Prahm",
+          "role": "member"
         },
         {
           "name": "Thomas Adams",
