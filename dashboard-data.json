@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-28T19:47:21.109Z",
+  "lastUpdated": "2026-09-28T20:54:31.165Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8042,7 +8042,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 28, 2026, 12:47 PM",
+    "refreshed": "Sep 28, 2026, 1:54 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9451,7 +9451,7 @@
         26,
         25,
         43,
-        35,
+        36,
         null,
         null,
         null
@@ -9495,7 +9495,7 @@
         23,
         24,
         23,
-        40,
+        41,
         null,
         null,
         null
@@ -9542,7 +9542,7 @@
         12,
         13,
         15,
-        34,
+        35,
         null,
         null,
         null
@@ -9986,6 +9986,14 @@
         "attPct": 50
       },
       {
+        "name": "Mick/McKinley Community Group",
+        "members": 5,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 6-8pm",
+        "avgAttended": 3,
+        "attPct": 60
+      },
+      {
         "name": "Flores Community Group",
         "members": 5,
         "leaders": 1,
@@ -10010,14 +10018,6 @@
         "attPct": 0
       },
       {
-        "name": "Mick/McKinley Community Group",
-        "members": 4,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 6-8pm",
-        "avgAttended": 3,
-        "attPct": 75
-      },
-      {
         "name": "Moore Community Group",
         "members": 4,
         "leaders": 2,
@@ -10036,15 +10036,15 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 392,
+      "cgMembers": 393,
       "both": 210,
       "pctFmInCg": 54,
-      "pctCgAreFm": 54
+      "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 392,
+        "cg": 393,
         "serving": 296,
         "giving": 957
       },
@@ -10053,9 +10053,9 @@
         "1": 39,
         "2": 89,
         "3": 12,
-        "4": 33,
+        "4": 32,
         "5": 7,
-        "6": 8,
+        "6": 9,
         "7": 16,
         "8": 530,
         "9": 78,
@@ -10244,7 +10244,6 @@
           "Niah Morris",
           "Rich Brown",
           "Sam Griffin",
-          "Savannah Wilson",
           "Scarlett Fava",
           "Simon Lefler"
         ],
@@ -10264,6 +10263,7 @@
           "Justice JB",
           "Michael France",
           "Michelle LaGrange",
+          "Savannah Wilson",
           "Shiona Dykins",
           "Wende Schwake"
         ],
@@ -11719,7 +11719,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 182,
+        "count": 183,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -11882,6 +11882,7 @@
           "Ryann Mclennan",
           "Samantha Gomez",
           "Sarah King",
+          "Savannah Wilson",
           "Sean Kovac",
           "Shanna Anderson",
           "Sharmann Reister",
@@ -18510,7 +18511,42 @@
             "totalVols": 111
           }
         }
-      ]
+      ],
+      "baptisms": {
+        "label": "September 6, 2026",
+        "byService": [
+          {
+            "service": "8:00 AM",
+            "people": [
+              {
+                "name": "Tammy Farr",
+                "baptizer": "Keith",
+                "adultChild": ""
+              }
+            ]
+          },
+          {
+            "service": "9:30 AM",
+            "people": [
+              {
+                "name": "Angie Bryan",
+                "baptizer": "Ray",
+                "adultChild": "Adult"
+              }
+            ]
+          },
+          {
+            "service": "11:00 AM",
+            "people": [
+              {
+                "name": "Erin Wilson",
+                "baptizer": "Nick",
+                "adultChild": "Adult"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "date": "2026-09-13",
@@ -21505,7 +21541,7 @@
               "name": "Adelyn Gibson",
               "team": "Worship Team",
               "pos": "Piano",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -21801,6 +21837,13 @@
               "pos": "Electric Guitar",
               "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Matt Sweitzer",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -21951,8 +21994,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 82,
-            "totalVols": 82
+            "volsWithServiceTime": 83,
+            "totalVols": 83
           }
         }
       ]
@@ -22524,6 +22567,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Matt Sweitzer",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -22667,8 +22717,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 79,
-            "totalVols": 79
+            "volsWithServiceTime": 80,
+            "totalVols": 80
           }
         }
       ]
@@ -24809,11 +24859,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 56,
+    "count30d": 57,
     "weeklyAvg": 13,
-    "totalFetched": 7121,
+    "totalFetched": 7122,
     "since": "2026-08-29",
-    "asOf": "2026-09-28T19:45:00.933Z"
+    "asOf": "2026-09-28T20:46:54.675Z"
   },
   "emailStats": {
     "latestOpenRate": 0.28991596638655465,
@@ -24821,6 +24871,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-26T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-28T19:45:02.936Z"
+    "asOf": "2026-09-28T20:47:01.600Z"
   }
 }
