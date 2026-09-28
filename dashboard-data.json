@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-28T18:46:13.827Z",
+  "lastUpdated": "2026-09-28T19:00:52.606Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8042,7 +8042,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 28, 2026, 11:46 AM",
+    "refreshed": "Sep 28, 2026, 12:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9451,7 +9451,7 @@
         26,
         25,
         43,
-        34,
+        35,
         null,
         null,
         null
@@ -9495,7 +9495,7 @@
         23,
         24,
         23,
-        39,
+        40,
         null,
         null,
         null
@@ -9542,7 +9542,7 @@
         12,
         13,
         15,
-        33,
+        34,
         null,
         null,
         null
@@ -9898,6 +9898,14 @@
         "attPct": 55
       },
       {
+        "name": "Geoffrey Caliger Community Group",
+        "members": 11,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6-8pm",
+        "avgAttended": 5,
+        "attPct": 45
+      },
+      {
         "name": "Coan/Sellman Community Group",
         "members": 10,
         "leaders": 2,
@@ -9920,14 +9928,6 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 6,
         "attPct": 60
-      },
-      {
-        "name": "Geoffrey Caliger Community Group",
-        "members": 10,
-        "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 5,
-        "attPct": 50
       },
       {
         "name": "Gardner Community Group",
@@ -10036,7 +10036,7 @@
     ],
     "venn": {
       "familyMembers": 390,
-      "cgMembers": 391,
+      "cgMembers": 392,
       "both": 210,
       "pctFmInCg": 54,
       "pctCgAreFm": 54
@@ -10044,14 +10044,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 390,
-        "cg": 391,
+        "cg": 392,
         "serving": 296,
         "giving": 957
       },
-      "universe": 1160,
+      "universe": 1161,
       "regions": {
         "1": 39,
-        "2": 88,
+        "2": 89,
         "3": 12,
         "4": 33,
         "5": 7,
@@ -10111,6 +10111,7 @@
         "2": [
           "Aaron Shaw",
           "Abigail Harte",
+          "Adam Laub",
           "Alyssa Pichardo",
           "Amanda Klinger",
           "Andrea Whittemore-Goad",
@@ -11718,11 +11719,12 @@
         ]
       },
       "cgNotFm": {
-        "count": 181,
+        "count": 182,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
           "Abigail Harte",
+          "Adam Laub",
           "Alexander Franklin",
           "Aliyah Ramirez",
           "Alyssa Pichardo",
@@ -21482,14 +21484,14 @@
               "name": "Alan Charles",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Alan Charles",
               "team": "Worship Team",
               "pos": "Acoustic Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -21792,6 +21794,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Gordon Fava",
+              "team": "Worship Team",
+              "pos": "Electric Guitar",
+              "status": "C",
+              "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -21827,7 +21836,7 @@
               "seq": 5,
               "title": "Raise A Hallelujah",
               "type": "song",
-              "lengthMin": 8,
+              "lengthMin": 6,
               "description": ""
             },
             {
@@ -21849,7 +21858,7 @@
               "title": "GREETING",
               "type": "item",
               "lengthMin": 1,
-              "description": "Underscore:"
+              "description": "Underscore: GRATITUDE"
             },
             {
               "seq": 9,
@@ -21884,7 +21893,7 @@
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
-              "description": "End Underscore:"
+              "description": "End Underscore: KING OF KINGS"
             },
             {
               "seq": 14,
@@ -21942,8 +21951,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 81,
-            "totalVols": 81
+            "volsWithServiceTime": 82,
+            "totalVols": 82
           }
         }
       ]
