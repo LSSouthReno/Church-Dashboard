@@ -1,5 +1,34 @@
 {
-  "pending": [],
+  "pending": [
+    {
+      "id": "jb_151512948_20260927_connectionteam",
+      "name": "Heather Green",
+      "pcoPersonId": "151512948",
+      "team": "Connection Team",
+      "phone": "17026968399",
+      "firstServeDate": "2026-09-27",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Connect Desk Host (B Team)"
+    },
+    {
+      "id": "jb_192841479_20260927_steppingstone",
+      "name": "Karynn Sucaldito",
+      "pcoPersonId": "192841479",
+      "team": "Stepping Stones",
+      "phone": "17758467506",
+      "firstServeDate": "2026-09-27",
+      "status": "pending",
+      "bombedDate": "",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Lead Guide"
+    }
+  ],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -618,5 +647,5 @@
       "position": "Service Prayer"
     }
   ],
-  "lastUpdated": "2026-09-28T07:00:13.426Z"
+  "lastUpdated": "2026-09-28T08:59:54.934Z"
 }
