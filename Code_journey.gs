@@ -34,14 +34,14 @@ var JR_ = {
   // Where each next step's button goes. Adjust freely.
   LINKS: {
     groups:     'https://lssr.churchcenter.com/groups',
-    serve:      'https://lssr.churchcenter.com/me',
+    serve:      'https://lssr.churchcenter.com/groups/serve-teams?enrollment=open_signup%2Crequest_to_join&filter=enrollment',
     giving:     'https://lssr.churchcenter.com/giving',
     baptism:    'https://lssr.churchcenter.com/people/forms/764941',
-    membership: 'https://lssr.churchcenter.com/',
+    membership: 'https://livingstoneschurches.com/lssr-membership',
     churchCenter: 'https://lssr.churchcenter.com/me'
   }
 };
-var JR_POST_ACTIONS_ = ['jr_config', 'jr_phone_start', 'jr_phone_verify', 'jr_pick', 'jr_magic', 'jr_oauth_start',
+var JR_POST_ACTIONS_ = ['jr_config', 'jr_phone_start', 'jr_phone_verify', 'jr_pick', 'jr_magic', 'jr_diag', 'jr_oauth_start',
                         'jr_oauth_finish', 'jr_me', 'jr_note', 'jr_logout'];
 
 function jrDoPost_(body) {
@@ -52,6 +52,7 @@ function jrDoPost_(body) {
     if (a === 'jr_phone_verify') return eosWaJson_(jrPhoneVerify_(body));
     if (a === 'jr_pick')         return eosWaJson_(jrPick_(body));
     if (a === 'jr_magic')        return eosWaJson_(jrMagic_(body));
+    if (a === 'jr_diag')         return eosWaJson_(jrDiag_(body));
     if (a === 'jr_oauth_start')  return eosWaJson_(jrOauthStart_());
     if (a === 'jr_oauth_finish') return eosWaJson_(jrOauthFinish_(body));
     if (a === 'jr_me')           return eosWaJson_(jrMe_(body));
@@ -152,6 +153,7 @@ function jrPhoneStart_(body) {
   // Only contact numbers that belong to someone at Living Stones — and give the SAME reply
   // either way, so nobody can use this to learn whether a number is in our records.
   var ppl = jrPeopleByPhone_(e164).filter(function(p) { return !p.child; });
+  jrLog_({ step: 'start', phone: '…' + e164.slice(-4), matches: ppl.length });
   if (!ppl.length) return { ok: true, sent: true, channel: jrConfig_().channel };
   if (jrSmsOn_()) { jrTwilio_('/Verifications', { To: e164, Channel: 'sms' }); return { ok: true, sent: true, channel: 'sms' }; }
   jrEmailCodes_(e164, ppl);
@@ -179,8 +181,12 @@ function jrEmailCodes_(e164, ppl) {
       '<p style="font-size:12.5px;line-height:1.6;color:#888;margin:26px 0 0">This link and code work once and expire in 15 minutes. Your page is private — only you and the pastors who care for you can see it. If you didn’t ask to sign in, you can ignore this email.</p></div>';
     var msg = { to: email, subject: 'Your Living Stones sign-in: ' + code, name: 'Living Stones South Reno', htmlBody: html,
       body: 'Hi ' + p.first + ',\n\nOpen your private My Journey page: ' + link + '\n\nOr enter this code: ' + code + '\n\nThis link and code work once and expire in 15 minutes. If you didn’t ask to sign in, ignore this email.' };
-    try { MailApp.sendEmail(Object.assign({ noReply: true }, msg)); } catch (e) { try { MailApp.sendEmail(msg); } catch (e2) {} }
+    var how = 'noReply';
+    try { MailApp.sendEmail(Object.assign({ noReply: true }, msg)); }
+    catch (e) { how = 'noReply failed (' + e.message + ')'; try { MailApp.sendEmail(msg); how += ' → sent from account'; } catch (e2) { how += ' → FAILED: ' + e2.message; } }
+    jrLog_({ step: 'email', pid: p.pid, to: jrMask_(email), how: how });
   });
+  if (!pending.length) jrLog_({ step: 'email', note: 'no email on file for ' + ppl.length + ' match(es)' });
   if (pending.length) c.put('jr_ec_' + jrHash_(e164), JSON.stringify({ list: pending, tries: 0 }), 900);
 }
 function jrPrimaryEmail_(pid) {
@@ -188,6 +194,34 @@ function jrPrimaryEmail_(pid) {
   var list = (r && r.data) || [];
   var em = list.filter(function(e) { return (e.attributes || {}).primary; })[0] || list[0];
   return em ? String((em.attributes || {}).address || '').trim() : '';
+}
+function jrMask_(e) { var m = String(e || '').split('@'); return m.length === 2 ? m[0].charAt(0) + '•••@' + m[1] : '(none)'; }
+// Last 20 sign-in attempts (no codes, masked emails) — read by jr_diag.
+function jrLog_(o) {
+  try {
+    var p = PropertiesService.getScriptProperties(), list = JSON.parse(p.getProperty('JR_SIGNIN_LOG') || '[]');
+    o.at = new Date().toISOString(); list.unshift(o); p.setProperty('JR_SIGNIN_LOG', JSON.stringify(list.slice(0, 20)));
+  } catch (e) {}
+}
+/** Run ONCE from the Apps Script editor (Run ▸ authorizeJourneyEmail) and click Allow, so the
+ *  web app may send sign-in emails. Sends nothing; just checks the mail permission. */
+function authorizeJourneyEmail() { Logger.log('Email permission OK — daily quota left: ' + MailApp.getRemainingDailyQuota()); }
+// Pastor-only: run the phone lookup for a person's own numbers and show what sign-in would do.
+function jrDiag_(body) {
+  if (!spPastorForHash_(body.pw)) return { ok: false, error: 'unauthorized' };
+  var pid = String(body.pid || '').replace(/\D/g, ''), out = { ok: true, log: JSON.parse(PropertiesService.getScriptProperties().getProperty('JR_SIGNIN_LOG') || '[]') };
+  try { out.mailQuota = MailApp.getRemainingDailyQuota(); out.mailAllowed = true; } catch (e) { out.mailAllowed = false; out.mailError = e.message.split('.')[0]; }
+  if (pid) {
+    var ph = jrGet_('/people/v2/people/' + pid + '/phone_numbers');
+    out.phones = ((ph && ph.data) || []).map(function(n) {
+      var raw = (n.attributes || {}).number || '', e = jrE164_(raw), found = e ? jrPeopleByPhone_(e) : [];
+      return { stored: '…' + String(raw).replace(/\D/g, '').slice(-4), location: (n.attributes || {}).location, e164ok: !!e,
+               lookupFindsThisPerson: found.some(function(f) { return String(f.pid) === pid; }), lookupMatches: found.length };
+    });
+    out.email = jrMask_(jrPrimaryEmail_(pid));
+    var P = jrGet_('/people/v2/people/' + pid); out.status = P && P.data && P.data.attributes && P.data.attributes.status; out.child = P && P.data && P.data.attributes && P.data.attributes.child;
+  }
+  return out;
 }
 function jrEsc_(s) { return String(s || '').replace(/[&<>"]/g, function(ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
 function jrMagic_(body) {
