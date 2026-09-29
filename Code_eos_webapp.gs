@@ -33,6 +33,7 @@ function doGet(e) {
     if (EOS_IDSJOY_GET_ACTIONS_.indexOf(action) !== -1) return idsJoyDoGet_(e);
     if (typeof SOS_GET_ACTIONS_ !== 'undefined' && SOS_GET_ACTIONS_.indexOf(action) !== -1) return sosDoGet_(e);
     if (typeof STORY_GET_ACTIONS_ !== 'undefined' && STORY_GET_ACTIONS_.indexOf(action) !== -1) return storyDoGet_(e);
+    if (action === 'jr' && typeof jrDoGet_ === 'function') return jrDoGet_(e);   // My Journey (GET transport)
     if (typeof BAP_GET_ACTIONS_ !== 'undefined' && BAP_GET_ACTIONS_.indexOf(action) !== -1) return bapDoGet_(e);
     if (action === 'rocks') {
       var ss = SpreadsheetApp.openById(EOS_WA_SS_ID_);

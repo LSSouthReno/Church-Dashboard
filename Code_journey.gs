@@ -44,22 +44,33 @@ var JR_ = {
 var JR_POST_ACTIONS_ = ['jr_config', 'jr_phone_start', 'jr_phone_verify', 'jr_pick', 'jr_magic', 'jr_diag', 'jr_oauth_start',
                         'jr_oauth_finish', 'jr_me', 'jr_note', 'jr_logout'];
 
+// Every reply names the action it answers (`for`), so the page can reject a stray reply —
+// e.g. when Google's redirect drops a POST body and doGet/doPost's generic {ok:true} comes back.
 function jrDoPost_(body) {
-  var a = String(body.action || '');
-  try {
-    if (a === 'jr_config')       return eosWaJson_(jrConfig_());
-    if (a === 'jr_phone_start')  return eosWaJson_(jrPhoneStart_(body));
-    if (a === 'jr_phone_verify') return eosWaJson_(jrPhoneVerify_(body));
-    if (a === 'jr_pick')         return eosWaJson_(jrPick_(body));
-    if (a === 'jr_magic')        return eosWaJson_(jrMagic_(body));
-    if (a === 'jr_diag')         return eosWaJson_(jrDiag_(body));
-    if (a === 'jr_oauth_start')  return eosWaJson_(jrOauthStart_());
-    if (a === 'jr_oauth_finish') return eosWaJson_(jrOauthFinish_(body));
-    if (a === 'jr_me')           return eosWaJson_(jrMe_(body));
-    if (a === 'jr_note')         return eosWaJson_(jrNote_(body));
-    if (a === 'jr_logout')       return eosWaJson_(jrLogout_(body));
-  } catch (e) { return eosWaJson_({ ok: false, error: 'Something went wrong — please try again.', detail: e.message }); }
-  return eosWaJson_({ ok: false, error: 'Unknown action' });
+  var a = String(body.action || ''), out;
+  try { out = jrRoute_(a, body); }
+  catch (e) { out = { ok: false, error: 'Something went wrong — please try again.', detail: e.message }; }
+  out.for = a;
+  return eosWaJson_(out);
+}
+// GET transport (…/exec?action=jr&p=<json>) — survives Google's redirects intact.
+function jrDoGet_(e) {
+  var body = {}; try { body = JSON.parse((e && e.parameter && e.parameter.p) || '{}'); } catch (x) {}
+  return jrDoPost_(body);
+}
+function jrRoute_(a, body) {
+  if (a === 'jr_config')       return jrConfig_();
+  if (a === 'jr_phone_start')  return jrPhoneStart_(body);
+  if (a === 'jr_phone_verify') return jrPhoneVerify_(body);
+  if (a === 'jr_pick')         return jrPick_(body);
+  if (a === 'jr_magic')        return jrMagic_(body);
+  if (a === 'jr_diag')         return jrDiag_(body);
+  if (a === 'jr_oauth_start')  return jrOauthStart_();
+  if (a === 'jr_oauth_finish') return jrOauthFinish_(body);
+  if (a === 'jr_me')           return jrMe_(body);
+  if (a === 'jr_note')         return jrNote_(body);
+  if (a === 'jr_logout')       return jrLogout_(body);
+  return { ok: false, error: 'Unknown action' };
 }
 
 function jrProp_(k) { return PropertiesService.getScriptProperties().getProperty(k) || ''; }

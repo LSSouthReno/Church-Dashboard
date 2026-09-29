@@ -128,12 +128,28 @@ const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&':'&am
 function tokenGet() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
 function tokenSet(t) { try { t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY); } catch (e) {} }
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._h); toast._h = setTimeout(() => t.classList.remove('show'), 2800); }
+// Requests go as GET (…/exec?action=jr&p=<json>): Google answers every call with a redirect,
+// and when a browser is signed into Google a POST body can be dropped on the way — the server
+// then sees an empty request and returns a generic {ok:true}. Every reply names the action it
+// answers (`for`); anything else is treated as a failed try. Long notes still go by POST.
 async function api(body, tries) {
-  for (let i = 0; i < (tries || 2); i++) {
-    try { const r = await fetch(API, { method: 'POST', body: JSON.stringify(body) }); const j = await r.json(); return j; }
-    catch (e) { if (i + 1 >= (tries || 2)) return { ok: false, error: 'We couldn’t reach the server — please check your connection and try again.' }; await new Promise(r => setTimeout(r, 1200)); }
+  const n = tries || 3, q = JSON.stringify(body);
+  for (let i = 0; i < n; i++) {
+    try {
+      const usePost = body.action === 'jr_note' && q.length > 1500 && i === 0;
+      const r = usePost ? await fetch(API, { method: 'POST', body: q })
+                        : await fetch(API + '?action=jr&p=' + encodeURIComponent(q) + '&t=' + Date.now());
+      const j = await r.json();
+      if (j && j.for === body.action) return j;
+      throw new Error('stray reply');
+    } catch (e) {
+      if (i + 1 >= n) return { ok: false, error: 'We couldn’t reach the server — please check your connection and try again.' };
+      await new Promise(r => setTimeout(r, 1000 + i * 1500));
+    }
   }
 }
+// First call after a quiet spell can take a while (the server is waking up) — say so.
+function slowNote(el, msg) { return setTimeout(() => { const a = document.querySelector(el); if (a && /Loading|Gathering/.test(a.innerText)) a.innerHTML = '<div class="loading">' + msg + '</div>'; }, 6000); }
 function fmtDate(iso, opts) { if (!iso) return ''; const d = new Date(String(iso).length === 10 ? iso + 'T12:00:00' : iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US', opts || { month: 'short', year: 'numeric' }); }
 function fmtPhone(v) { const d = v.replace(/\D/g, '').slice(0, 10); if (d.length < 4) return d; if (d.length < 7) return '(' + d.slice(0, 3) + ') ' + d.slice(3); return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6); }
 
@@ -202,9 +218,11 @@ async function pcoSignin() {
 // ── the journey ──────────────────────────────────────────────────────────────
 async function loadMe() {
   $('app').innerHTML = '<div class="loading">Gathering your journey…</div>';
+  const slow = slowNote('#app', 'Gathering your journey… this first load can take a few extra seconds.');
   const body = S.preview ? { action: 'jr_me', preview: S.preview, pw: S.pw } : { action: 'jr_me', token: tokenGet() };
   const r = await api(body, 3);
-  if (r.ok) { S.data = r; return viewJourney(); }
+  clearTimeout(slow);
+  if (r.ok && r.person) { S.data = r; return viewJourney(); }   // only ever draw a real person's page
   if (r.signin) { tokenSet(''); return viewSignin(); }
   $('app').innerHTML = '<div class="loading">' + esc(r.error || 'We couldn’t load your page.') + '<br><br><button class="btn" onclick="loadMe()">Try again</button></div>';
 }
@@ -336,7 +354,10 @@ async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 
     S.cfg = (await api({ action: 'jr_config' })) || {}; return viewSignin(r.error);
   }
   if (tokenGet()) return loadMe();
-  S.cfg = (await api({ action: 'jr_config' })) || {};
+  const slow = slowNote('#app', 'Loading… one moment.');
+  const cfg = await api({ action: 'jr_config' });
+  clearTimeout(slow);
+  S.cfg = cfg && cfg.ok ? cfg : { channel: 'email' };
   viewSignin();
 })();
 </script>
