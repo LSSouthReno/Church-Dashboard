@@ -783,6 +783,12 @@
     overflow: hidden;
   }
   .tmod-overlay.open { display: flex; }
+  /* While a full-screen section is open, Metrics steps out of the page entirely, so each
+     tab is its own page: nothing shows or scrolls behind it. Clipped (not display:none)
+     so Metrics keeps its layout and charts come back exactly as they were. */
+  body.sec-open > .dashboard { visibility: hidden; height: 0; overflow: hidden; }
+  @media screen { html:has(body.sec-open) { overflow: hidden; } }
+  .tmod-body { overscroll-behavior: contain; }
 
   .tmod-header {
     display: flex;
@@ -11257,6 +11263,23 @@ function navSetActive(tab) {
   if (!_routingLock) navSetHash(tab);
 }
 
+// Any open .tmod-overlay (Today, Sunday, Staff, Leaders, Calendar, Shepherding, Teams, Groups)
+// marks <body> sec-open, which takes Metrics out of the page (CSS above). Metrics' scroll spot
+// is remembered and restored on the way back.
+let _secScrollY = 0;
+function secSync() {
+  const open = !!document.querySelector('.tmod-overlay.open');
+  if (open === document.body.classList.contains('sec-open')) return;
+  if (open) { _secScrollY = window.scrollY; document.body.classList.add('sec-open'); }
+  else { document.body.classList.remove('sec-open'); window.scrollTo(0, _secScrollY); }
+}
+function secWatch() {
+  const mo = new MutationObserver(secSync);
+  document.querySelectorAll('.tmod-overlay').forEach(el => mo.observe(el, { attributes: true, attributeFilter: ['class'] }));
+  secSync();
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', secWatch); else secWatch();
+
 function navGo(tab) {
   // Close whichever full-screen sections are open (each close syncs the tab back to Metrics)
   if (typeof closePastorModal === 'function') closePastorModal();
@@ -17381,7 +17404,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260929T224053Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260929T233251Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
