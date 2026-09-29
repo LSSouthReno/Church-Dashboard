@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T17:19:10.514Z",
+  "generatedAt": "2026-09-29T18:18:54.781Z",
   "asOf": "2026-09-29",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 390,
     "avgScore": 0,
     "inGroup": 214,
-    "serving": 232,
+    "serving": 233,
     "leading": 77,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 390,
     "notInGroup": 176,
-    "notServing": 158,
+    "notServing": 157,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.5487179487179488,
-      "serving": 0.5948717948717949,
+      "serving": 0.5974358974358974,
       "leading": 0.19743589743589743,
       "givingRegular": 0,
       "recurring": 0,
@@ -3289,7 +3289,7 @@
         "totalPeople": 57,
         "avgScore": 0,
         "inGroup": 29,
-        "serving": 33,
+        "serving": 34,
         "leading": 10,
         "givingRegular": 0,
         "recurring": 0,
@@ -3299,7 +3299,7 @@
         "overdue": 0,
         "notBaptized": 57,
         "notInGroup": 28,
-        "notServing": 24,
+        "notServing": 23,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3317,7 +3317,7 @@
         },
         "pct": {
           "inGroup": 0.5087719298245614,
-          "serving": 0.5789473684210527,
+          "serving": 0.5964912280701754,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
           "recurring": 0,
@@ -3442,43 +3442,6 @@
           "id": null,
           "name": "John Andreano",
           "first": "John",
-          "last": "Andreano",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Kate Andreano",
-          "first": "Kate",
           "last": "Andreano",
           "email": "",
           "phone": "",
@@ -3857,6 +3820,48 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kate Andreano",
+          "first": "Kate",
+          "last": "Andreano",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2026-08-17T14:43:50Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
