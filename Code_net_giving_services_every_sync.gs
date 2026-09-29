@@ -165,6 +165,7 @@ function syncDashboard() {
 
     // 7. Push funnel + calendar data to Staff OS eos-data.json (buffered)
     safeRun_('Staff OS Funnel+Calendar', () => { syncStaffOSFunnelAndCalendar_(); });
+    safeRun_('Calendar quick-sync trigger', () => { ensureCalendarQuickTrigger_(); });
 
     // 8. Detect first-time servers and push joy_bombs.json (buffered)
     safeRun_('Joy Bombs', () => { syncJoyBombs(ss); });
@@ -938,17 +939,25 @@ function syncCGJoinFunnel_() {
         const role = a.role || 'member';
         if (role !== 'member' && role !== 'leader') return;
 
-        // "Applied" = created_at (first request / auto-add)
-        const createdAt = a.created_at;
-        if (createdAt && createdAt >= START_DATE) {
-          const mk = createdAt.substring(0, 7);
-          appliedByMonth[mk] = (appliedByMonth[mk] || 0) + 1;
-        }
         // "Joined" = joined_at (approved / became active member)
         const joinedAt = a.joined_at;
         if (joinedAt && joinedAt >= START_DATE) {
           const mk = joinedAt.substring(0, 7);
           joinedByMonth[mk] = (joinedByMonth[mk] || 0) + 1;
+        }
+      });
+      // "Applied" = a PCO Groups application ("Request to join" on Church Center),
+      // bucketed by applied_at. (Memberships carry no created_at, so the old
+      // membership-based count was always 0.)
+      // Uses the finance PAT (pcoGet_ in Code_finance_giving_sync.gs): the dashboard
+      // app credentials aren't allowed to read group applications (came back 0).
+      let apps = [], url = PCO_API + '/groups/v2/groups/' + g.id + '/applications?per_page=100';
+      while (url) { const r = pcoGet_(url); apps = apps.concat(r.data || []); url = r.links && r.links.next; }
+      apps.forEach(function(ap) {
+        const at = (ap.attributes || {}).applied_at;
+        if (at && at >= START_DATE) {
+          const mk = at.substring(0, 7);
+          appliedByMonth[mk] = (appliedByMonth[mk] || 0) + 1;
         }
       });
     } catch (e) {
@@ -982,11 +991,8 @@ function syncCGOutsiders_() {
   Logger.log('   Fetching church members from PCO People...');
   const memberSet = new Set();
   try {
-    const members = pcoGetAll_(
-      '/people/v2/people?where[membership]=Member&fields[Person]=id&per_page=100'
-    ) || [];
-    members.forEach(function(p) { memberSet.add(p.id); });
-    Logger.log('   Church Members in PCO: ' + memberSet.size);
+    Object.keys(cgFamilyMemberNames_()).forEach(function(id) { memberSet.add(id); });
+    Logger.log('   Church Members in PCO (Member/Deacon/Pastor): ' + memberSet.size);
   } catch (e) {
     Logger.log('   ! Could not fetch church members: ' + e.message);
   }
@@ -1046,13 +1052,79 @@ function syncCGOutsiders_() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CG ∩ Family Member Venn + actionable follow-up lists
-// Family Member = the authoritative "All Family Members" PCO list (membership
-// roster — Member, Elder, Deacon, Pastor, etc.); falls back to membership=Member.
+// CG ∩ Family Member Venn + actionable follow-up lists + the 4-way discipleship
+// Venn (Family Member ∩ CG ∩ Serving ∩ Giving).
+// Family Member = membership Member/Deacon/Pastor (see cgFamilyMemberNames_).
 // CG member = anyone in an active Community Group. Produces raw set sizes (for the
-// Venn) plus named lists of the two follow-up gaps, written to the CGVennLists
-// sheet and Script Properties for buildCGDetailed_ to assemble.
+// 2-way Venn) plus named follow-up lists, and the full 4-way region breakdown
+// (persisted as chunked JSON) for buildCGDetailed_ to assemble.
 // ─────────────────────────────────────────────────────────────────────────────
+var CG_FAMILY_MEMBER_STATUSES = ['Member', 'Deacon', 'Pastor'];
+
+/** Family Member = anyone whose PCO membership status marks them as part of the
+ *  church body: "Member" and its leadership subtypes "Deacon" and "Pastor" (all
+ *  three are Members — Deacon/Pastor are just roles on top of membership).
+ *  Returns { personId: "First Last" } merged across the three statuses. */
+function cgFamilyMemberNames_() {
+  const byId = {};
+  CG_FAMILY_MEMBER_STATUSES.forEach(function(st) {
+    try {
+      const ppl = pcoGetAll_('/people/v2/people?where[membership]=' + encodeURIComponent(st) +
+        '&fields[Person]=first_name,last_name&per_page=100') || [];
+      ppl.forEach(function(p) {
+        const fn = (p.attributes && p.attributes.first_name) || '';
+        const ln = (p.attributes && p.attributes.last_name)  || '';
+        byId[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
+      });
+      Logger.log('   Family Members (' + st + '): running total ' + Object.keys(byId).length);
+    } catch (e) { Logger.log('   ! FM status ' + st + ' fetch failed: ' + e.message); }
+  });
+  return byId;
+}
+
+/** Person IDs who have given ≥1 donation (any fund) in the last 365 days.
+ *  Uses the Giving-scoped PCO PAT (pcoGet_/PCO_API from the finance sync).
+ *  NEVER stores or exposes amounts — donor is a yes/no engagement flag only. */
+function cgGiverIds_() {
+  const ids = new Set();
+  try {
+    const since = new Date(); since.setDate(since.getDate() - 365);
+    const start = Utilities.formatDate(since, 'UTC', 'yyyy-MM-dd');
+    let url = PCO_API + '/giving/v2/donations?where[received_at][gte]=' + start + '&per_page=100';
+    let pages = 0;
+    while (url && pages < 300) {
+      let data;
+      try { data = pcoGet_(url); } catch (e) { Logger.log('   ! giver page failed: ' + e.message); break; }
+      (data.data || []).forEach(function(dn) {
+        const p = dn.relationships && dn.relationships.person && dn.relationships.person.data;
+        if (p && p.id) ids.add(p.id);
+      });
+      url = (data.links && data.links.next) || null;
+      pages++;
+    }
+  } catch (e) { Logger.log('   ! cgGiverIds_ failed: ' + e.message); }
+  Logger.log('   Givers (last 365d): ' + ids.size);
+  // PCO joined donors: either spouse's gift counts for both (Code_joint_givers.gs).
+  try { jgExpandGiverSet_(ids); } catch (e) { Logger.log('   ! joint-giver expand failed: ' + e.message); }
+  return ids;
+}
+
+/** Store/read a long JSON string across 9KB Script-Property chunks. */
+function cgSetChunkedProp_(props, base, str) {
+  str = str || '';
+  const n = Math.ceil(str.length / 9000) || 0;
+  for (let i = 0; i < n; i++) props.setProperty(base + '_' + i, str.substr(i * 9000, 9000));
+  props.setProperty(base + '_N', String(n));
+  for (let j = n; j < n + 30; j++) { if (props.getProperty(base + '_' + j) !== null) props.deleteProperty(base + '_' + j); }
+}
+function cgGetChunkedProp_(props, base) {
+  const n = parseInt(props.getProperty(base + '_N') || '0', 10);
+  if (!n) return '';
+  let out = '';
+  for (let i = 0; i < n; i++) out += (props.getProperty(base + '_' + i) || '');
+  return out;
+}
+
 function syncCGVenn_() {
   Logger.log('▶  CG Venn (CG ∩ Family Members) — starting');
   const props = PropertiesService.getScriptProperties();
@@ -1061,16 +1133,8 @@ function syncCGVenn_() {
   //    syncCGOutsiders_, whose person IDs are proven to match group-membership
   //    person IDs in this org; the "All Family Members" list returned IDs that
   //    did not correlate, yielding a false 0% overlap).
-  const fmNameById = {};
-  try {
-    const people = pcoGetAll_('/people/v2/people?where[membership]=Member&fields[Person]=first_name,last_name&per_page=100') || [];
-    people.forEach(function(p) {
-      const fn = (p.attributes && p.attributes.first_name) || '';
-      const ln = (p.attributes && p.attributes.last_name)  || '';
-      fmNameById[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
-    });
-    Logger.log('   Family Members (membership=Member): ' + Object.keys(fmNameById).length);
-  } catch (e) { Logger.log('   ! FM fetch failed: ' + e.message); }
+  const fmNameById = cgFamilyMemberNames_();
+  Logger.log('   Family Members (Member/Deacon/Pastor): ' + Object.keys(fmNameById).length);
 
   // 2. Active CG groups → unique member IDs (default archive_status = not archived)
   const groups = pcoGetAll_(
@@ -1149,6 +1213,91 @@ function syncCGVenn_() {
   if (rows.length) sh.getRange(2, 1, rows.length, hdrs.length).setValues(rows);
   sh.setFrozenRows(1);
   Logger.log('   Venn lists written: fmNotInCg=' + fmNotInCgIds.length + ' cgNotFm=' + cgNotFmIds.length);
+
+  // ─── 7. 4-way discipleship Venn: Family Member ∩ CG ∩ Serving ∩ Giving ───
+  //     Bits: F=1 (Family Member), C=2 (CG), S=4 (Serving), G=8 (Giving).
+  //     The whole CG dashboard is password-gated, so names are allowed here, but
+  //     NO giving amounts are ever fetched or stored — donor is a yes/no flag.
+  try {
+    const svIds = (typeof pwGetServerIds_ === 'function') ? pwGetServerIds_() : new Set();
+    Logger.log('   Servers (last 90d): ' + svIds.size);
+    const gvIds = cgGiverIds_();
+
+    const universe = new Set();
+    fmIds.forEach(function(id){ universe.add(id); });
+    cgMemberIds.forEach(function(id){ universe.add(id); });
+    svIds.forEach(function(id){ universe.add(id); });
+    gvIds.forEach(function(id){ universe.add(id); });
+
+    const fmS = new Set(fmIds);
+    const regionCounts = {};   // mask(1..15) -> count
+    const regionIds = {};      // mask -> [personId,...] (bounded, for action lists)
+    for (let m = 1; m <= 15; m++) { regionCounts[m] = 0; regionIds[m] = []; }
+    universe.forEach(function(id){
+      let mask = 0;
+      if (fmS.has(id))         mask |= 1;
+      if (cgMemberIds.has(id)) mask |= 2;
+      if (svIds.has(id))       mask |= 4;
+      if (gvIds.has(id))       mask |= 8;
+      if (!mask) return;
+      regionCounts[mask]++;
+      if (regionIds[mask].length < 250) regionIds[mask].push(id);
+    });
+
+    // Curated named action lists (most useful gaps for a discipleship pastor).
+    const NAMED = [
+      { key: 'engagedNotMember',   label: 'In CG + Serving + Giving — not yet a Member', masks: [2|4|8] },
+      { key: 'memberNotInCg',      label: 'Family Members not in a Community Group',       masks: [1, 1|4, 1|8, 1|4|8] },
+      { key: 'coreAllFour',        label: 'Engaged in all four (Member · CG · Serving · Giving)', masks: [1|2|4|8] },
+      { key: 'memberOnly',         label: 'Family Members only — no CG, serving, or giving', masks: [1] },
+      { key: 'givingNotConnected', label: 'Giving but not in a CG and not serving',        masks: [8, 1|8] }
+    ];
+    // Resolve names for EVERYONE in the diagram (so any region is click-to-list).
+    const needName = {};
+    for (let mk = 1; mk <= 15; mk++) (regionIds[mk] || []).forEach(function(id){ if (!fmNameById[id]) needName[id] = true; });
+    const extraName = {};
+    const needIds = Object.keys(needName);
+    for (let i = 0; i < needIds.length; i += 50) {
+      const chunk = needIds.slice(i, i + 50);
+      try {
+        const ppl = pcoGetAll_('/people/v2/people?where[id]=' + chunk.join(',') +
+          '&fields[Person]=first_name,last_name&per_page=' + chunk.length) || [];
+        ppl.forEach(function(p){
+          const fn = (p.attributes && p.attributes.first_name) || '';
+          const ln = (p.attributes && p.attributes.last_name)  || '';
+          extraName[p.id] = (fn + ' ' + ln).trim() || ('Person ' + p.id);
+        });
+      } catch (e) { Logger.log('   ! venn4 name chunk failed: ' + e.message); }
+      Utilities.sleep(150);
+    }
+    const nameOf = function(id){ return fmNameById[id] || extraName[id] || ('Person ' + id); };
+
+    // Per-region names (mask -> sorted names, capped) drive click-through modals.
+    const regionNames = {};
+    for (let mk = 1; mk <= 15; mk++) regionNames[mk] = (regionIds[mk] || []).map(nameOf).sort().slice(0, 200);
+
+    // Curated named action lists (most useful gaps for a discipleship pastor).
+    const lists = {};
+    NAMED.forEach(function(spec){
+      const idset = {};
+      spec.masks.forEach(function(mk){ (regionIds[mk]||[]).forEach(function(id){ idset[id] = true; }); });
+      let total = 0; spec.masks.forEach(function(mk){ total += (regionCounts[mk]||0); });
+      const names = Object.keys(idset).map(nameOf).sort();
+      lists[spec.key] = { label: spec.label, count: total, names: names.slice(0, 200) };
+    });
+
+    const venn4 = {
+      sets: { familyMembers: fmIds.length, cg: cgMemberIds.size, serving: svIds.size, giving: gvIds.size },
+      universe: universe.size,
+      regions: regionCounts,
+      regionNames: regionNames,
+      lists: lists,
+      asOf: Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd')
+    };
+    cgSetChunkedProp_(props, 'CG_VENN4', JSON.stringify(venn4));
+    Logger.log('   4-way Venn: FM=' + fmIds.length + ' CG=' + cgMemberIds.size +
+               ' SV=' + svIds.size + ' GV=' + gvIds.size + ' universe=' + universe.size);
+  } catch (e) { Logger.log('   ! 4-way Venn failed: ' + e.message); }
 }
 
 function syncCGLeaderPipeline_() {
@@ -1424,7 +1573,14 @@ function buildDashboardDataFromSheet_(ss) {
     members: {
       years:   memberRows.map(r => r[0]),
       counts:  memberRows.map(r => Number(r[1]) || 0),
-      current: memberRows.length ? (Number(memberRows[memberRows.length - 1][2]) || 0) : 0
+      // Current = everyone in PCO with membership Member/Deacon/Pastor (FM_TOTAL, set by
+      // syncCGVenn_). The sheet's running total only counts people with a recorded
+      // membership date (~173), which badly undercounts. Falls back to the sheet.
+      current: (function() {
+        var fm = parseInt(PropertiesService.getScriptProperties().getProperty('FM_TOTAL') || '0', 10);
+        return fm > 0 ? fm : (memberRows.length ? (Number(memberRows[memberRows.length - 1][2]) || 0) : 0);
+      })(),
+      withJoinDate: memberRows.length ? (Number(memberRows[memberRows.length - 1][2]) || 0) : 0
     },
     communityGroupsDetailed: buildCGDetailed_(ss, groupRows),
     sundayPlans: attachBaptisms_(getSundayPlans_()),
@@ -1590,6 +1746,11 @@ function buildCGDetailed_(ss, groupRows) {
   actionLists.fmNotInCg.count = parseInt(props.getProperty('FM_NOT_IN_CG_COUNT') || String(actionLists.fmNotInCg.names.length), 10);
   actionLists.cgNotFm.count   = parseInt(props.getProperty('CG_NOT_FM_COUNT')   || String(actionLists.cgNotFm.names.length),   10);
 
+  // 4-way discipleship Venn (chunked JSON persisted by syncCGVenn_)
+  let venn4 = null;
+  try { const s4 = cgGetChunkedProp_(props, 'CG_VENN4'); if (s4) venn4 = JSON.parse(s4); }
+  catch (e) { venn4 = null; }
+
   return {
     goals2026: { groups: 50, members: 500, groupSize: 10, fmInGroupsPct: 75 },
     current: {
@@ -1609,6 +1770,7 @@ function buildCGDetailed_(ss, groupRows) {
     leaderPipeline,
     groupAttendance,
     venn,
+    venn4,
     actionLists
   };
 }
@@ -3167,6 +3329,7 @@ function refreshTeamsDetail() {
 
 function syncSundayPlansData_() {
   const MAX_FUTURE_PLANS = 25; // ~5 months of Sundays per service type
+  const MAX_PAST_PLANS   = 10; // ~2-3 months of recent Sundays, selectable in the dashboard
 
   // ── Find all service types. Treat ANY service type as a candidate so we
   //    don't hard-code naming. We'll group plans by Sunday date and label
@@ -3203,6 +3366,20 @@ function syncSundayPlansData_() {
       '/services/v2/service_types/' + typeId +
       '/plans?filter=future&per_page=' + MAX_FUTURE_PLANS + '&order=sort_date'
     ) || [];
+    // Also pull recent PAST Sundays so they can be selected in the dashboard too.
+    // NOTE: pcoTryGetAll_ auto-paginates ALL pages (per_page is only page size), so
+    // filter=past would return years of Sundays. Fetch newest-first, keep only the
+    // MAX_PAST_PLANS most-recent past SUNDAYS, and cap BEFORE the roster loop so we
+    // don't fetch a roster for every historical plan.
+    var pastPlansAll = pcoTryGetAll_(
+      '/services/v2/service_types/' + typeId +
+      '/plans?filter=past&per_page=100&order=-sort_date'
+    ) || [];
+    var pastSundays = pastPlansAll.filter(function(pl){
+      var sd = String((pl.attributes && pl.attributes.sort_date) || '').substring(0, 10);
+      return sd && new Date(sd + 'T12:00:00').getDay() === 0;
+    }).slice(0, MAX_PAST_PLANS);
+    plans = plans.concat(pastSundays);
 
     plans.forEach(function(plan) {
       var sortDate = String((plan.attributes && plan.attributes.sort_date) || '');
@@ -3568,7 +3745,47 @@ function getBaptismSchedule_() {
     .sort(function(a, b) { return baptismTimeMin_(a) - baptismTimeMin_(b); })
     .map(function(s) { return { service: s, people: groups[s] }; });
 
-  return { date: dateKey, label: label, byService: byService };
+  return baptismRollForward_({ date: dateKey, label: label, byService: byService }, tz);
+}
+
+// The team sometimes fills in next month's names but leaves last month's date in C1:D1.
+// If that date has passed, keep only the people who still have an OPEN "Baptism Ready"
+// card in PCO (anyone already baptized drops off) and move them to the next baptism
+// Sunday (first Sunday of the month). If PCO can't be checked, the old rule stands
+// (a past date shows nothing), so leftover names can never appear on a new Sunday.
+function baptismRollForward_(bap, tz) {
+  var today = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd');
+  if (!bap || !bap.date || bap.date >= today) return bap;
+  var waiting = [];
+  try {
+    var res = pcoGetAllWithIncluded_('/people/v2/workflows/528797/cards?include=person&per_page=100');
+    var ppl = {};
+    (res.included || []).forEach(function(x) { if (x.type === 'Person') ppl[x.id] = x.attributes || {}; });
+    (res.data || []).forEach(function(c) {
+      var st = String((c.attributes || {}).stage || '');
+      if (st === 'completed' || st === 'removed') return;
+      var a = ppl[(((c.relationships || {}).person || {}).data || {}).id];
+      if (a) waiting.push(baptismNameParts_(a.first_name && a.last_name ? a.first_name + ' ' + a.last_name : a.name));
+    });
+  } catch (e) { Logger.log('baptismRollForward_: PCO check failed — ' + e.message); return bap; }
+  var isWaiting = function(name) {
+    var n = baptismNameParts_(name);
+    return waiting.some(function(w) {
+      return w.last && w.last === n.last && (w.first === n.first || w.first.indexOf(n.first) === 0 || n.first.indexOf(w.first) === 0);
+    });
+  };
+  var byService = (bap.byService || []).map(function(g) {
+    return { service: g.service, people: g.people.filter(function(p) { return isWaiting(p.name); }) };
+  }).filter(function(g) { return g.people.length; });
+  if (!byService.length) return bap;
+  var next = bapFirstSundays_(1)[0];
+  var label = Utilities.formatDate(new Date(next + 'T12:00:00'), tz, 'MMMM d, yyyy');
+  Logger.log('Baptism sheet date ' + bap.date + ' has passed; showing ' + byService.length + ' service group(s) for ' + next);
+  return { date: next, label: label, byService: byService, rolledFrom: bap.date };
+}
+function baptismNameParts_(name) {
+  var t = String(name || '').toLowerCase().replace(/[^a-z\s'-]/g, ' ').trim().split(/\s+/).filter(Boolean);
+  return { first: t[0] || '', last: t.length > 1 ? t[t.length - 1] : '' };
 }
 
 // Attach baptism names to the Sunday plan whose date matches the sheet's C1:D1 date.
@@ -4065,135 +4282,14 @@ function syncStaffOSFunnelAndCalendar_() {
   };
   Logger.log('   Funnel: missionary=' + missionaryCount);
 
-  // ── Calendar events (3 months back … 6 months ahead) ──────────────────
-  // The Calendar tab opens on the current month and lets you page back into
-  // recent months as well as forward through the next 6.
   const tz   = Session.getScriptTimeZone();
   const now  = new Date();
-  const CAL_PAST_MONTHS = 3;
-  const start = new Date(now.getFullYear(), now.getMonth() - CAL_PAST_MONTHS, 1);
-  const end   = new Date(now); end.setMonth(now.getMonth() + 6);
-  const calEvents = [];
-
-  try {
-    const result = pcoGetAllWithIncluded_(
-      '/calendar/v2/event_instances?order=starts_at&per_page=100' +
-      '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
-      '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString()) +
-      '&include=event'
-    );
-    const instances = result.data || [];
-    const included  = result.included || [];
-
-    const eventById = {};
-    included.forEach(function(inc) {
-      if (inc.type === 'Event') eventById[inc.id] = inc.attributes || {};
-    });
-
-    // Event owners (owner is a relationship on Event, not an attribute) →
-    // eventId → owner person name, via one pass over future events.
-    const ownerByEventId = {};
-    try {
-      const evRes = pcoGetAllWithIncluded_('/calendar/v2/events?filter=future&per_page=100&include=owner');
-      const personById = {};
-      (evRes.included || []).forEach(function(inc) {
-        if (inc.type === 'Person') {
-          personById[inc.id] = ((inc.attributes && inc.attributes.name) ||
-            (((inc.attributes && inc.attributes.first_name) || '') + ' ' +
-             ((inc.attributes && inc.attributes.last_name)  || '')).trim());
-        }
-      });
-      (evRes.data || []).forEach(function(evd) {
-        const ow = evd.relationships && evd.relationships.owner && evd.relationships.owner.data;
-        if (ow && personById[ow.id]) ownerByEventId[evd.id] = personById[ow.id];
-      });
-      Logger.log('   Event owners: ' + Object.keys(ownerByEventId).length);
-    } catch(e) { Logger.log('   Event owners fetch failed: ' + e.message); }
-
-    // Resource bookings for the same window → instanceId → [resource names]
-    // (used by the Calendar tab's detailed 1-month view)
-    const resByInstance = {};
-    try {
-      const rbRes = pcoGetAllWithIncluded_(
-        '/calendar/v2/resource_bookings?per_page=100&include=resource' +
-        '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
-        '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString())
-      );
-      const resNameById = {};
-      (rbRes.included || []).forEach(function(inc) {
-        if (inc.type === 'Resource') resNameById[inc.id] = (inc.attributes && inc.attributes.name) || '';
-      });
-      (rbRes.data || []).forEach(function(b) {
-        const ei = b.relationships && b.relationships.event_instance && b.relationships.event_instance.data;
-        const rr = b.relationships && b.relationships.resource && b.relationships.resource.data;
-        if (!ei || !rr) return;
-        const rn = resNameById[rr.id];
-        if (!rn) return;
-        if (!resByInstance[ei.id]) resByInstance[ei.id] = [];
-        if (resByInstance[ei.id].indexOf(rn) === -1) resByInstance[ei.id].push(rn);
-      });
-      Logger.log('   Resource bookings: ' + Object.keys(resByInstance).length + ' instances with resources');
-    } catch(e) { Logger.log('   Resource bookings fetch failed: ' + e.message); }
-
-    instances.forEach(function(inst) {
-      const evRel  = inst.relationships && inst.relationships.event && inst.relationships.event.data;
-      const evAttr = evRel ? (eventById[evRel.id] || {}) : {};
-      const name   = evAttr.name || '';
-      if (!name) return;
-      const nl = name.toLowerCase();
-      if (nl.includes('community group') || nl.startsWith('cg ') || nl.includes('small group')) return;
-      // RBD events are kept for the Calendar tab but flagged so the Staff OS
-      // "Coming Up" grid and Sunday one-sheet can keep hiding them.
-      const isRbd = name.toUpperCase().includes('RBD');
-      const startsAt = (inst.attributes && inst.attributes.starts_at) || '';
-      const endsAt   = (inst.attributes && inst.attributes.ends_at)   || '';
-      if (!startsAt) return;
-      const d = new Date(startsAt);
-      // For multi-day events PCO sets ends_at to midnight of the exclusive end day;
-      // back off one day so endKey is the actual last day of the event.
-      var endKey = null;
-      if (endsAt) {
-        var endD = new Date(endsAt);
-        if (endsAt.indexOf('T00:00:00') !== -1) endD.setDate(endD.getDate() - 1);
-        var endStr = Utilities.formatDate(endD, tz, 'yyyy-MM-dd');
-        var startStr = Utilities.formatDate(d, tz, 'yyyy-MM-dd');
-        if (endStr !== startStr) endKey = endStr;
-      }
-      const evt = {
-        name:      name,
-        dateKey:   Utilities.formatDate(d, tz, 'yyyy-MM-dd'),
-        endKey:    endKey,
-        dayOfWeek: Utilities.formatDate(d, tz, 'EEE'),
-        date:      Utilities.formatDate(d, tz, 'MMM d'),
-        time:      Utilities.formatDate(d, tz, 'h:mm a'),
-        location:  (inst.attributes && inst.attributes.location) || ''
-      };
-      if (isRbd) evt.rbd = true;
-      // Detail fields for the Calendar tab's 1-month view
-      if (endsAt && !endKey) evt.timeEnd = Utilities.formatDate(new Date(endsAt), tz, 'h:mm a');
-      const ownerName = evRel ? ownerByEventId[evRel.id] : '';
-      if (ownerName) evt.owner = ownerName;
-      if (evAttr.summary)    evt.summary = String(evAttr.summary).replace(/<[^>]*>/g, '').substring(0, 200);
-      const rbList = resByInstance[inst.id];
-      if (rbList && rbList.length) evt.resources = rbList;
-      // Links + rich detail for the Calendar tab's click-through popup
-      const ccUrl = (inst.attributes && inst.attributes.church_center_url) || '';
-      if (ccUrl && evAttr.visible_in_church_center !== false) evt.url = ccUrl;
-      if (evAttr.registration_url) evt.reg = evAttr.registration_url;
-      if (evAttr.image_url)        evt.img = evAttr.image_url;
-      if (evAttr.description) {
-        evt.desc = String(evAttr.description).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 600);
-      }
-      calEvents.push(evt);
-    });
-    Logger.log('   Calendar: ' + calEvents.length + ' events (filtered from ' + instances.length + ')');
-  } catch(e) {
-    Logger.log('   Calendar sync failed: ' + e.message);
-  }
+  const calEvents = buildStaffCalendarEvents_();
 
   const calendar = {
     events: calEvents,
-    asOf: Utilities.formatDate(now, tz, 'yyyy-MM-dd')
+    asOf: Utilities.formatDate(now, tz, 'yyyy-MM-dd'),
+    syncedAt: now.toISOString()
   };
 
   // ── Merge-push to eos-data.json ────────────────────────────────────────
@@ -5069,4 +5165,287 @@ function computeMailchimpStats_() {
     Logger.log('computeMailchimpStats_ error: ' + err.message);
     return { error: err.message };
   }
+}
+
+
+/* =========================================================
+   One-off Sunday resync job (run via installable trigger so it gets the
+   ~30-min limit instead of the 6-min web-app limit). Re-pulls Sunday plans
+   incl. recent past, rebuilds + pushes dashboard-data.json, records status
+   in Script Properties, then removes its own trigger.
+========================================================= */
+function sundayResyncJob_() {
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty('SUNDAY_RESYNC_STATUS', 'running:' + new Date().toISOString());
+  try {
+    syncSundayPlansData_();
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var data = buildDashboardDataFromSheet_(ss);
+    writeDashboardJsonToSheet_(ss, data);
+    pushJsonToGitHub_(data);
+    props.setProperty('SUNDAY_RESYNC_STATUS',
+      'done:' + ((data.sundayPlans||[]).length) + ':' + new Date().toISOString());
+  } catch (e) {
+    props.setProperty('SUNDAY_RESYNC_STATUS', 'error:' + (e && e.message) + ':' + new Date().toISOString());
+  } finally {
+    try {
+      ScriptApp.getProjectTriggers().forEach(function(t){
+        if (t.getHandlerFunction() === 'sundayResyncJob_') ScriptApp.deleteTrigger(t);
+      });
+    } catch (e2) {}
+  }
+}
+
+
+// Builds the Staff OS calendar event list (3 months back … 6 months ahead) from
+// PCO Calendar. Shared by the hourly Staff OS sync and the 15-min quick sync.
+function buildStaffCalendarEvents_() {
+  const calImgMap = calImgMapLoad_();   // image key → mirrored same-origin path (cal-img/…)
+  // ── Calendar events (3 months back … 6 months ahead) ──────────────────
+  // The Calendar tab opens on the current month and lets you page back into
+  // recent months as well as forward through the next 6.
+  const tz   = Session.getScriptTimeZone();
+  const now  = new Date();
+  const CAL_PAST_MONTHS = 3;
+  const start = new Date(now.getFullYear(), now.getMonth() - CAL_PAST_MONTHS, 1);
+  const end   = new Date(now); end.setMonth(now.getMonth() + 6);
+  const calEvents = [];
+
+  try {
+    const result = pcoGetAllWithIncluded_(
+      '/calendar/v2/event_instances?order=starts_at&per_page=100' +
+      '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
+      '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString()) +
+      '&include=event'
+    );
+    const instances = result.data || [];
+    const included  = result.included || [];
+
+    const eventById = {};
+    included.forEach(function(inc) {
+      if (inc.type === 'Event') eventById[inc.id] = inc.attributes || {};
+    });
+
+    // Event owners (owner is a relationship on Event, not an attribute) →
+    // eventId → owner person name, via one pass over future events.
+    const ownerByEventId = {};
+    try {
+      const evRes = pcoGetAllWithIncluded_('/calendar/v2/events?filter=future&per_page=100&include=owner');
+      const personById = {};
+      (evRes.included || []).forEach(function(inc) {
+        if (inc.type === 'Person') {
+          personById[inc.id] = ((inc.attributes && inc.attributes.name) ||
+            (((inc.attributes && inc.attributes.first_name) || '') + ' ' +
+             ((inc.attributes && inc.attributes.last_name)  || '')).trim());
+        }
+      });
+      (evRes.data || []).forEach(function(evd) {
+        const ow = evd.relationships && evd.relationships.owner && evd.relationships.owner.data;
+        if (ow && personById[ow.id]) ownerByEventId[evd.id] = personById[ow.id];
+      });
+      Logger.log('   Event owners: ' + Object.keys(ownerByEventId).length);
+    } catch(e) { Logger.log('   Event owners fetch failed: ' + e.message); }
+
+    // Resource bookings for the same window → instanceId → [resource names]
+    // (used by the Calendar tab's detailed 1-month view)
+    const resByInstance = {};
+    try {
+      const rbRes = pcoGetAllWithIncluded_(
+        '/calendar/v2/resource_bookings?per_page=100&include=resource' +
+        '&where[starts_at][gte]=' + encodeURIComponent(start.toISOString()) +
+        '&where[starts_at][lte]=' + encodeURIComponent(end.toISOString())
+      );
+      const resNameById = {};
+      (rbRes.included || []).forEach(function(inc) {
+        if (inc.type === 'Resource') resNameById[inc.id] = (inc.attributes && inc.attributes.name) || '';
+      });
+      (rbRes.data || []).forEach(function(b) {
+        const ei = b.relationships && b.relationships.event_instance && b.relationships.event_instance.data;
+        const rr = b.relationships && b.relationships.resource && b.relationships.resource.data;
+        if (!ei || !rr) return;
+        const rn = resNameById[rr.id];
+        if (!rn) return;
+        if (!resByInstance[ei.id]) resByInstance[ei.id] = [];
+        if (resByInstance[ei.id].indexOf(rn) === -1) resByInstance[ei.id].push(rn);
+      });
+      Logger.log('   Resource bookings: ' + Object.keys(resByInstance).length + ' instances with resources');
+    } catch(e) { Logger.log('   Resource bookings fetch failed: ' + e.message); }
+
+    instances.forEach(function(inst) {
+      const evRel  = inst.relationships && inst.relationships.event && inst.relationships.event.data;
+      const evAttr = evRel ? (eventById[evRel.id] || {}) : {};
+      const name   = evAttr.name || '';
+      if (!name) return;
+      const nl = name.toLowerCase();
+      if (nl.includes('community group') || nl.startsWith('cg ') || nl.includes('small group')) return;
+      // RBD events are kept for the Calendar tab but flagged so the Staff OS
+      // "Coming Up" grid and Sunday one-sheet can keep hiding them.
+      const isRbd = name.toUpperCase().includes('RBD');
+      const startsAt = (inst.attributes && inst.attributes.starts_at) || '';
+      const endsAt   = (inst.attributes && inst.attributes.ends_at)   || '';
+      if (!startsAt) return;
+      const d = new Date(startsAt);
+      // For multi-day events PCO sets ends_at to midnight of the exclusive end day;
+      // back off one day so endKey is the actual last day of the event.
+      var endKey = null;
+      if (endsAt) {
+        var endD = new Date(endsAt);
+        if (endsAt.indexOf('T00:00:00') !== -1) endD.setDate(endD.getDate() - 1);
+        var endStr = Utilities.formatDate(endD, tz, 'yyyy-MM-dd');
+        var startStr = Utilities.formatDate(d, tz, 'yyyy-MM-dd');
+        if (endStr !== startStr) endKey = endStr;
+      }
+      const evt = {
+        name:      name,
+        dateKey:   Utilities.formatDate(d, tz, 'yyyy-MM-dd'),
+        endKey:    endKey,
+        dayOfWeek: Utilities.formatDate(d, tz, 'EEE'),
+        date:      Utilities.formatDate(d, tz, 'MMM d'),
+        time:      Utilities.formatDate(d, tz, 'h:mm a'),
+        location:  (inst.attributes && inst.attributes.location) || ''
+      };
+      if (isRbd) evt.rbd = true;
+      // Detail fields for the Calendar tab's 1-month view
+      if (endsAt && !endKey) evt.timeEnd = Utilities.formatDate(new Date(endsAt), tz, 'h:mm a');
+      const ownerName = evRel ? ownerByEventId[evRel.id] : '';
+      if (ownerName) evt.owner = ownerName;
+      if (evAttr.summary)    evt.summary = String(evAttr.summary).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 2000);
+      const rbList = resByInstance[inst.id];
+      if (rbList && rbList.length) evt.resources = rbList;
+      // Links + rich detail for the Calendar tab's click-through popup
+      const ccUrl = (inst.attributes && inst.attributes.church_center_url) || '';
+      if (ccUrl && evAttr.visible_in_church_center !== false) evt.url = ccUrl;
+      if (evAttr.registration_url) evt.reg = evAttr.registration_url;
+      if (evAttr.image_url)        evt.img = evAttr.image_url;
+      if (evt.img) { const lk = calImgKey_(evt.img); if (calImgMap[lk]) evt.imgLocal = calImgMap[lk]; }
+      if (evAttr.description) {
+        evt.desc = String(evAttr.description).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 2000);
+      }
+      // Announcement-card signals: public (Church Center) visibility, featured, recurrence.
+      evt.visibleCC = (evAttr.visible_in_church_center === true);
+      if (evAttr.featured) evt.featured = true;
+      if (evAttr.recurrence) evt.recur = String(evAttr.recurrence);
+      if (evAttr.recurrence_description) evt.recurDesc = String(evAttr.recurrence_description).substring(0,120);
+      calEvents.push(evt);
+    });
+    Logger.log('   Calendar: ' + calEvents.length + ' events (filtered from ' + instances.length + ')');
+  } catch(e) {
+    Logger.log('   Calendar sync failed: ' + e.message);
+  }
+
+  return calEvents;
+}
+
+/**
+ * Lightweight calendar-only refresh, run every 15 min by its own trigger so PCO
+ * calendar edits (summaries, images, registrations) reach the dashboard fast.
+ * Commits ONLY when the events changed, and uses a sha-conditional PUT so it can
+ * never overwrite a concurrent write to eos-data.json (GitHub returns 409 → the
+ * next run retries). The hourly syncStaffOSFunnelAndCalendar_ still runs too.
+ */
+function syncCalendarQuick_() {
+  let events = buildStaffCalendarEvents_();
+  if (!events.length) { Logger.log('Calendar quick: no events built — skipping'); return 'skip-empty'; }
+  // Copy any new upcoming event photos onto the site (same origin → the card can
+  // draw/export them instantly), then rebuild so imgLocal paths are attached.
+  try { const m = mirrorCalendarImages_(events); if (m.added) events = buildStaffCalendarEvents_(); Logger.log('Calendar images mirrored: ' + m.added); }
+  catch (e) { Logger.log('Calendar image mirror failed: ' + e.message); }
+  const owner = getProp_('GITHUB_OWNER'), token = getProp_('GITHUB_TOKEN'), repo = getProp_('GITHUB_REPO');
+  const url = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/eos-data.json';
+  const hdrs = githubHeaders_(token);
+  const r = UrlFetchApp.fetch(url + '?ref=main', { muteHttpExceptions: true, headers: hdrs });
+  if (r.getResponseCode() !== 200) return 'read-' + r.getResponseCode();
+  const file = JSON.parse(r.getContentText());
+  let cur;
+  try { cur = JSON.parse(Utilities.newBlob(Utilities.base64Decode(String(file.content || '').replace(/\n/g, '')), 'text/plain', 'UTF-8').getDataAsString()); }
+  catch (e) { return 'parse-fail'; }
+  const prev = (cur.calendar && cur.calendar.events) || [];
+  if (JSON.stringify(prev) === JSON.stringify(events)) { Logger.log('Calendar quick: unchanged'); return 'unchanged'; }
+  const tz = Session.getScriptTimeZone(), now = new Date();
+  cur.calendar = { events: events, asOf: Utilities.formatDate(now, tz, 'yyyy-MM-dd'), syncedAt: now.toISOString() };
+  const payload = { message: 'Update calendar (quick sync)', branch: 'main', sha: file.sha,
+    content: Utilities.base64Encode(JSON.stringify(cur, null, 2), Utilities.Charset.UTF_8) };
+  const res = UrlFetchApp.fetch(url, { method: 'put', contentType: 'application/json', muteHttpExceptions: true, headers: hdrs, payload: JSON.stringify(payload) });
+  Logger.log('Calendar quick: PUT ' + res.getResponseCode());
+  return 'put-' + res.getResponseCode();
+}
+
+/** Idempotently installs the 15-min calendar trigger (called from syncDashboard). */
+function ensureCalendarQuickTrigger_() {
+  const has = ScriptApp.getProjectTriggers().some(function(t){ return t.getHandlerFunction() === 'syncCalendarQuick_'; });
+  if (!has) ScriptApp.newTrigger('syncCalendarQuick_').timeBased().everyMinutes(15).create();
+  return has ? 'exists' : 'created';
+}
+
+
+// ── Calendar image mirror ────────────────────────────────────────────────────
+// Planning Center's image CDN sends no CORS headers, so the announcement card
+// can't draw those photos into its PDF export. We copy upcoming events' photos into
+// the site repo (cal-img/<hash>.<ext>) — same origin as the dashboard — and record
+// key→path in a Script Property so every calendar build attaches evt.imgLocal.
+// The key is the image's storage key (NOT the signed URL, which rotates).
+function calImgKey_(url) {
+  let k = String(url || '');
+  const m = k.match(/[?&]key=([^&]+)/);
+  k = m ? decodeURIComponent(m[1]) : k.split('?')[0];
+  const d = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, k);
+  return d.map(function(b){ return ('0' + (b & 255).toString(16)).slice(-2); }).join('').slice(0, 16);
+}
+function calImgMapLoad_() {
+  try { return JSON.parse(PropertiesService.getScriptProperties().getProperty('CAL_IMG_MAP') || '{}'); } catch (e) { return {}; }
+}
+function calImgMapSave_(map) {
+  PropertiesService.getScriptProperties().setProperty('CAL_IMG_MAP', JSON.stringify(map));
+}
+function mirrorCalendarImages_(events) {
+  const map = calImgMapLoad_();
+  const now = new Date(), lo = new Date(now), hi = new Date(now);
+  lo.setDate(lo.getDate() - 7); hi.setDate(hi.getDate() + 150);
+  const want = {};
+  events.forEach(function(e) {
+    if (!e.img) return;
+    const d = new Date(e.dateKey + 'T12:00:00'); if (d < lo || d > hi) return;
+    const k = calImgKey_(e.img); if (!map[k]) want[k] = e.img;
+  });
+  const keys = Object.keys(want).slice(0, 25);           // bounded per run; the rest next run
+  if (!keys.length) return { added: 0 };
+  const resps = UrlFetchApp.fetchAll(keys.map(function(k){ return { url: want[k], muteHttpExceptions: true, followRedirects: true }; }));
+  const files = [], added = {};
+  resps.forEach(function(r, i) {
+    try {
+      if (r.getResponseCode() !== 200) return;
+      const ct = String(r.getHeaders()['Content-Type'] || 'image/jpeg').split(';')[0];
+      if (!/^image\//.test(ct)) return;
+      const bytes = r.getBlob().getBytes();
+      if (bytes.length > 2.5 * 1024 * 1024) return;          // skip huge originals
+      const ext = /png/.test(ct) ? 'png' : (/webp/.test(ct) ? 'webp' : 'jpg');
+      const path = 'cal-img/' + keys[i] + '.' + ext;
+      files.push({ path: path, b64: Utilities.base64Encode(bytes) }); added[keys[i]] = path;
+    } catch (e) {}
+  });
+  if (!files.length) return { added: 0 };
+  ghCommitBinaryFiles_(files, 'Mirror ' + files.length + ' calendar image(s) for the announcement card');
+  Object.keys(added).forEach(function(k){ map[k] = added[k]; });
+  calImgMapSave_(map);
+  return { added: files.length };
+}
+// Commit binary files in ONE commit via the Git Data API (blobs → tree → commit → ref).
+function ghCommitBinaryFiles_(files, message) {
+  const owner = getProp_('GITHUB_OWNER'), repo = getProp_('GITHUB_REPO'), token = getProp_('GITHUB_TOKEN');
+  const branch = propOptional_('GITHUB_BRANCH') || 'main';
+  const api = 'https://api.github.com/repos/' + owner + '/' + repo, h = githubHeaders_(token);
+  const call = function(method, path, payload) {
+    const opt = { method: method, muteHttpExceptions: true, headers: h };
+    if (payload) { opt.contentType = 'application/json'; opt.payload = JSON.stringify(payload); }
+    const r = UrlFetchApp.fetch(api + path, opt), c = r.getResponseCode();
+    if (c < 200 || c >= 300) throw new Error(method + ' ' + path + ' → ' + c + ' ' + r.getContentText().slice(0, 200));
+    return JSON.parse(r.getContentText());
+  };
+  const baseSha = call('get', '/git/ref/heads/' + branch).object.sha;
+  const baseTree = call('get', '/git/commits/' + baseSha).tree.sha;
+  const tree = files.map(function(f){ return { path: f.path, mode: '100644', type: 'blob', sha: call('post', '/git/blobs', { content: f.b64, encoding: 'base64' }).sha }; });
+  const newTree = call('post', '/git/trees', { base_tree: baseTree, tree: tree });
+  const commit = call('post', '/git/commits', { message: message, tree: newTree.sha, parents: [baseSha] });
+  call('patch', '/git/refs/heads/' + branch, { sha: commit.sha, force: false });   // non-force: fails safely on a race
+  return commit.sha;
 }
