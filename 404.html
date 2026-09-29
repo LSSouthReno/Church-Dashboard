@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Church Dashboard</title>
+<script>
+  // Clean URLs on GitHub Pages: every section address (lssouthreno.com/sunday, /staff …)
+  // lands here; hand it to the dashboard, which restores the address and opens that page.
+  // This page is also padded past 512 bytes so every browser shows it instead of its own
+  // "not found" screen. ------------------------------------------------------------------
+  location.replace('/?r=' + encodeURIComponent(location.pathname + location.search) + location.hash);
+</script>
+<meta name="robots" content="noindex">
+</head>
+<body style="background:#141414;color:#a39e94;font-family:sans-serif;padding:40px">Loading the dashboard…</body>
+</html>

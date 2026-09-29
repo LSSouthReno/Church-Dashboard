@@ -13,6 +13,18 @@
     }
   })();
 </script>
+<script>
+  // Clean URLs: 404.html sends lssouthreno.com/sunday → /?r=%2Fsunday. Put the real path
+  // back (no reload) before anything else runs, so the router and relative fetches see it.
+  (function () {
+    var q = new URLSearchParams(location.search), r = q.get('r');
+    if (!r || r.charAt(0) !== '/') return;
+    var u = new URL(r, location.origin);
+    q.delete('r'); q.forEach(function (v, k) { if (!u.searchParams.has(k)) u.searchParams.set(k, v); });
+    var path = u.pathname.replace(/\/+$/, '') || '/';
+    try { history.replaceState(null, '', path + u.search + location.hash); } catch (e) {}
+  })();
+</script>
 <meta charset="UTF-8" />
 <script>try { if (localStorage.getItem('lssr_staff_theme') === 'light') document.documentElement.classList.add('sp-light'); } catch (e) {}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -11164,26 +11176,44 @@ const SD_BLOCKED = new Set([
 ]);
 
 // ── Global top-nav tabs ─────────────────────────────────────────
-// ── Hash routing: every tab / full-screen view gets a shareable URL ──────────
-// #metrics · #sunday (or #sunday=YYYY-MM-DD) · #staff · #leaders · #calendar · #pastors
-// The router only calls the same open-functions the buttons call, so every
-// password gate (Staff OS, Pastors, Members inline reveal) still fires exactly
-// as before — routing never bypasses a lock.
+// ── Clean URLs: every tab / full-screen view gets a shareable address ─────────
+// lssouthreno.com/ (Today) · /metrics · /sunday (or /sunday?date=YYYY-MM-DD) · /staff ·
+// /leaders · /calendar · /pastors · /teams · /groups
+// GitHub Pages serves 404.html for these paths; it bounces to /?r=<path>, and the tiny
+// script at the top of <head> puts the path back before anything loads. Old #links
+// (#sunday=2026-10-04, #staff …, e.g. in past checklist emails) are converted here.
+// The router only calls the same open-functions the buttons call, so every password
+// gate (Staff OS, Pastors, Members inline reveal) still fires exactly as before.
 let _routingLock = false;
-function navSetHash(tab) {
-  const want = '#' + tab;
-  if ((location.hash || '') === want) return;
-  // replaceState updates the address bar WITHOUT firing hashchange, so clicking a
-  // tab never re-triggers the router (no reroute loop, no double-open).
-  try { history.replaceState(null, '', want); } catch (e) { location.hash = tab; }
+const NAV_ROUTES = ['today', 'metrics', 'sunday', 'staff', 'leaders', 'calendar', 'pastors', 'teams', 'groups'];
+function navPathFor(tab) { return tab === 'today' ? '/' : '/' + tab; }
+function navSetHash(tab) {   // (name kept: every open/close calls it) — sets the PATH now
+  const want = navPathFor(tab);
+  if (location.pathname === want && !location.hash) return;
+  // replaceState changes the address bar without reloading or re-running the router.
+  try { history.replaceState(null, '', want + (tab === 'sunday' ? location.search : '')); } catch (e) {}
+}
+function navCurrentRoute() {
+  // Legacy #links first: convert #sunday=DATE / #staff … to the clean path.
+  const h = (location.hash || '').replace(/^#/, '');
+  const hm = h.match(/^(today|metrics|sunday|staff|leaders|calendar|pastors|teams|groups)(?:=(\d{4}-\d{2}-\d{2}))?$/);
+  if (hm) {
+    try { history.replaceState(null, '', navPathFor(hm[1]) + (hm[2] ? '?date=' + hm[2] : '')); } catch (e) {}
+    return { tab: hm[1], date: hm[2] || '' };
+  }
+  const seg = location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0].toLowerCase();
+  const date = new URLSearchParams(location.search).get('date') || '';
+  if (!seg || seg === 'index.html') return { tab: 'today', date: '' };
+  if (NAV_ROUTES.indexOf(seg) >= 0) return { tab: seg, date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '' };
+  try { history.replaceState(null, '', '/'); } catch (e) {}   // unknown path → Today
+  return { tab: 'today', date: '' };
 }
 function applyHashRoute() {
-  const raw = (location.hash || '').replace(/^#/, '');
-  const sun = raw.match(/^sunday(?:=(\d{4}-\d{2}-\d{2}))?$/);
+  const r = navCurrentRoute(), raw = r.tab;
   _routingLock = true;
   try {
-    // Close the standalone full-screen modals that AREN'T the target, so
-    // hash-switching between them never stacks two overlays.
+    // Close the standalone full-screen modals that AREN'T the target, so switching
+    // between them never stacks two overlays.
     const _shut = { cg: closeCGModal, teams: closeTeamsModal, pastor: closePastorModal };
     const _keep = raw === 'groups' ? 'cg' : raw === 'teams' ? 'teams' : raw === 'pastors' ? 'pastor' : null;
     Object.keys(_shut).forEach(function(k){ if (k !== _keep && typeof _shut[k] === 'function') _shut[k](); });
@@ -11191,14 +11221,13 @@ function applyHashRoute() {
     if (raw === 'pastors') openPastorModal();
     else if (raw === 'groups') openCGModal();
     else if (raw === 'teams') openTeamsModal();
-    else if (sun) { if (sun[1]) _sundayPendingDate = sun[1]; navGo('sunday'); }
-    else if (raw === 'staff' || raw === 'leaders' || raw === 'calendar' || raw === 'metrics' || raw === 'today') navGo(raw);
-    else if (!raw) navGo('today');   // no link to a specific page → open on Today
-    // Unknown hash: leave the default Metrics view as-is.
+    else if (raw === 'sunday') { if (r.date) _sundayPendingDate = r.date; navGo('sunday'); }
+    else navGo(raw);
   } finally { _routingLock = false; }
 }
 window.addEventListener('DOMContentLoaded', applyHashRoute);
-window.addEventListener('hashchange', applyHashRoute);
+window.addEventListener('popstate', applyHashRoute);
+window.addEventListener('hashchange', applyHashRoute);   // an old #link clicked while the page is open
 
 function navSetActive(tab) {
   document.querySelectorAll('#topNav .nav-tab').forEach(b =>
@@ -17334,7 +17363,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260929T180845Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260929T182119Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
