@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-29T17:46:34.971Z",
+  "lastUpdated": "2026-09-29T18:01:24.063Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3275,7 +3275,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 120,
+      "current": 119,
       "needed": 150,
       "history": [
         {
@@ -3409,7 +3409,7 @@
         },
         {
           "d": "2026-09",
-          "n": 120
+          "n": 119
         }
       ]
     },
@@ -5161,7 +5161,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 364,
+  "uniqueVolunteers": 363,
   "budget": [
     {
       "label": "Network & Missions",
@@ -7541,7 +7541,7 @@
       "t": "SERVICES",
       "c": 3,
       "d": 0,
-      "p": 1,
+      "p": 2,
       "r": 100
     },
     {
@@ -7918,10 +7918,10 @@
       "date": "2026-09-27",
       "ds": "Sep 27, 2026",
       "ty": "SERVICES",
-      "s": 132,
+      "s": 133,
       "c": 93,
       "d": 30,
-      "p": 9
+      "p": 10
     },
     {
       "date": "2026-09-20",
@@ -8042,7 +8042,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 29, 2026, 10:46 AM",
+    "refreshed": "Sep 29, 2026, 11:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -8916,7 +8916,7 @@
       42,
       29
     ],
-    "current": 390,
+    "current": 391,
     "withJoinDate": 176
   },
   "communityGroupsDetailed": {
@@ -10035,7 +10035,7 @@
       }
     ],
     "venn": {
-      "familyMembers": 390,
+      "familyMembers": 391,
       "cgMembers": 392,
       "both": 210,
       "pctFmInCg": 54,
@@ -10043,7 +10043,7 @@
     },
     "venn4": {
       "sets": {
-        "familyMembers": 390,
+        "familyMembers": 391,
         "cg": 392,
         "serving": 296,
         "giving": 952
@@ -10057,8 +10057,8 @@
         "5": 7,
         "6": 9,
         "7": 16,
-        "8": 525,
-        "9": 78,
+        "8": 524,
+        "9": 79,
         "10": 66,
         "11": 51,
         "12": 26,
@@ -10560,6 +10560,7 @@
           "Tamara Price",
           "Terry Ackeret",
           "Tim Jackson",
+          "Tom Bartoldo",
           "Tracey Allman",
           "Tracey Wright",
           "Warren W Smith",
@@ -10956,7 +10957,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 180,
+          "count": 181,
           "names": [
             "Aaron Carl",
             "Adam Carp",
@@ -11128,6 +11129,7 @@
             "Thomas Alvarez",
             "Thomas Lloyd",
             "Tim Jackson",
+            "Tom Bartoldo",
             "Tom McDonald",
             "Tonya Lowry",
             "Tracey Allman",
@@ -11533,7 +11535,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 180,
+        "count": 181,
         "names": [
           "Aaron Carl",
           "Adam Carp",
@@ -11705,6 +11707,7 @@
           "Thomas Alvarez",
           "Thomas Lloyd",
           "Tim Jackson",
+          "Tom Bartoldo",
           "Tom McDonald",
           "Tonya Lowry",
           "Tracey Allman",
@@ -20363,7 +20366,7 @@
           "planId": "90255115",
           "title": "Sealed with the Spirit (Ephesians 1:11–14)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Matt Gardner",
             "Matt Bowman"
@@ -21082,6 +21085,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -21246,8 +21256,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"223321923\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 102,
-            "totalVols": 102
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
@@ -21261,7 +21271,7 @@
           "planId": "90727665",
           "title": "Dead: Now Made Alive (Ephesians 2:1–5)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Bradley Borowski",
           "captains": [
             "Timothy Milligan",
             "Kelly Coan"
@@ -21896,6 +21906,13 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Bradley Borowski",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -22046,8 +22063,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -22061,7 +22078,7 @@
           "planId": "90727691",
           "title": "Dead: Now Raised & Seated (Ephesians 2:6-7)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Danny Rotter",
             "Kelly Coan"
@@ -22696,6 +22713,13 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -22839,8 +22863,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -22854,7 +22878,7 @@
           "planId": "90727709",
           "title": "Saved By Grace Alone (Ephesians 2:8-10)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Thomas Peregrin",
             "Manuel Sanchez"
@@ -23363,6 +23387,13 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -23499,8 +23530,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 72
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -23514,7 +23545,7 @@
           "planId": "90727711",
           "title": "Living Stones (Ephesians 2:19-22)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Adam Carp",
           "captains": [
             "Matt Gardner",
             "Sam Griffin"
@@ -23946,6 +23977,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Adam Carp",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -24103,8 +24141,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 61,
-            "totalVols": 61
+            "volsWithServiceTime": 62,
+            "totalVols": 62
           }
         }
       ]
@@ -24118,7 +24156,7 @@
           "planId": "90727717",
           "title": "Partakers of the Promise (Ephesians 3:1–6)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Timothy Milligan",
             "Garrett Kooyers"
@@ -24354,6 +24392,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -24363,8 +24408,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 33,
-            "totalVols": 33
+            "volsWithServiceTime": 34,
+            "totalVols": 34
           }
         }
       ]
@@ -24378,7 +24423,7 @@
           "planId": "91262243",
           "title": "Cosmic Witnesses (Ephesians 3:7-13)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Danny Rotter",
             "Kelly Coan"
@@ -24558,6 +24603,13 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -24567,8 +24619,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"},{\"type\":\"PlanTime\",\"id\":\"225983887\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 25,
-            "totalVols": 25
+            "volsWithServiceTime": 26,
+            "totalVols": 26
           }
         }
       ]
@@ -24582,7 +24634,7 @@
           "planId": "91262244",
           "title": "Filled with The Fullness of God (Ephesians 3:14-19)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Sam Griffin",
             "Matt Bowman"
@@ -24769,6 +24821,13 @@
               "pos": "First Impressions Lead",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -24778,8 +24837,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"},{\"type\":\"PlanTime\",\"id\":\"225983894\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 26,
-            "totalVols": 26
+            "volsWithServiceTime": 27,
+            "totalVols": 27
           }
         }
       ]
@@ -24793,7 +24852,7 @@
           "planId": "91262245",
           "title": "Doxology (Ephesians 3:20-21)",
           "series": "Who Do You Think You Are (Ephesians)",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [
             "Matt Gardner",
             "Manuel Sanchez"
@@ -24966,6 +25025,13 @@
               "pos": "Breakfast Provider",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -24975,8 +25041,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 24,
-            "totalVols": 24
+            "volsWithServiceTime": 25,
+            "totalVols": 25
           }
         }
       ]
@@ -24990,7 +25056,7 @@
           "planId": "91743870",
           "title": "More Than the Tree ( )",
           "series": "",
-          "preacher": "",
+          "preacher": "Ryan Griffin",
           "captains": [],
           "volunteers": [
             {
@@ -25104,6 +25170,13 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Ryan Griffin",
+              "team": "Preachers",
+              "pos": "Preacher",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -25113,8 +25186,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"227200162\"},{\"type\":\"PlanTime\",\"id\":\"227200163\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 16,
-            "totalVols": 16
+            "volsWithServiceTime": 17,
+            "totalVols": 17
           }
         }
       ]
