@@ -142,16 +142,15 @@ function viewSignin(msg) {
   $('topR').innerHTML = ''; $('banner').innerHTML = '';
   if (!S.cfg) { $('app').innerHTML = '<div class="loading">Loading…</div>'; api({ action: 'jr_config' }).then(c => { S.cfg = c || {}; viewSignin(msg); }); return; }
   const c = S.cfg || {};
-  const none = !c.phone && !c.pco;
+  // No passwords: they type their phone number; the code comes by text (if texting is set up)
+  // or to the email on their Living Stones profile (a one-tap link + a code).
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
     '<h1>My Journey</h1><p>A private look at your life at Living Stones, and a next step or two for the season you’re in.</p>' +
-    (c.phone ? '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
-      '<button class="btn p" id="sendBtn" onclick="sendCode()">Text me a code</button>' : '') +
-    (c.phone && c.pco ? '<div class="or">or</div>' : '') +
-    (c.pco ? '<button class="btn" onclick="pcoSignin()"><img src="/assets/app/icon-192.png" alt="" style="width:20px;height:20px;border-radius:5px">Sign in with Planning Center</button>' : '') +
-    (none ? '<p class="fine" style="margin-top:0">Sign-in is almost ready. We’re putting the finishing touches on this page — check back soon.</p>' : '') +
+    '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
+    '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link') + '</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
-    '<div class="fine">Use the number you’ve given Living Stones (the one Church Center texts you on). Only you will see your page.</div></div>';
+    '<div class="fine">Use the number you’ve given Living Stones. ' + (c.channel === 'sms' ? 'We’ll text you a code.' : 'We’ll email a one-tap sign-in link to the address we have for you.') +
+    '<br><br><b style="color:var(--muted)">Your page is private.</b> Only you — and the pastors who care for you — can see it. No password needed.</div></div>';
   const ph = $('ph'); if (ph) setTimeout(() => ph.focus(), 50);
 }
 async function sendCode() {
@@ -159,17 +158,20 @@ async function sendCode() {
   if (d.length !== 10) { $('err').textContent = 'Please enter your 10-digit mobile number.'; return; }
   const b = $('sendBtn'); b.disabled = true; b.textContent = 'Sending…';
   const r = await api({ action: 'jr_phone_start', phone: d });
-  if (!r.ok) { b.disabled = false; b.textContent = 'Text me a code'; $('err').textContent = r.error || 'Please try again.'; return; }
-  S.phone = d; viewCode();
+  if (!r.ok) { b.disabled = false; b.textContent = (S.cfg || {}).channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link'; $('err').textContent = r.error || 'Please try again.'; return; }
+  S.phone = d; S.channel = r.channel || (S.cfg || {}).channel; viewCode();
 }
 function viewCode(msg) {
   const d = S.phone;
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
-    '<h1 style="font-size:26px">Check your texts</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, a 6-digit code is on its way.</p>' +
+    (S.channel === 'sms'
+      ? '<h1 style="font-size:26px">Check your texts</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, a 6-digit code is on its way.</p>'
+      : '<h1 style="font-size:26px">Check your email</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, we just emailed you a sign-in link. <b style="color:var(--text)">Tap “Open my journey”</b> in that email — or type the 6-digit code here.</p>') +
     '<input class="field code" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" oninput="this.value=this.value.replace(/\\D/g,\'\');if(this.value.length===6)checkCode()">' +
     '<button class="btn p" id="codeBtn" onclick="checkCode()">Open my journey</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
-    '<div class="fine"><a href="#" onclick="sendAgain();return false">Send it again</a> · <a href="#" onclick="viewSignin();return false">Use a different number</a><br>You’ll stay signed in on this device for 90 days.</div></div>';
+    '<div class="fine"><a href="#" onclick="sendAgain();return false">Send it again</a> · <a href="#" onclick="viewSignin();return false">Use a different number</a><br>' +
+    (S.channel === 'sms' ? '' : 'Don’t see it? Check your spam or promotions folder. ') + 'You’ll stay signed in on this device for 90 days.</div></div>';
   setTimeout(() => { const c = $('code'); if (c) c.focus(); }, 50);
 }
 async function sendAgain() { await api({ action: 'jr_phone_start', phone: S.phone }); toast('Sent again'); }
@@ -283,7 +285,7 @@ function viewJourney() {
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="openSheet(\'note\')">Send a note</button><button class="btn sm" onclick="openSheet(\'prayer\')">Share a prayer request</button></div></div>' +
       '<div class="card"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
     '</div>' +
-    '<div class="quiet">Only you can see this page. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.</div>' +
+    '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.</div>' +
   '</div>';
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
 }
@@ -318,6 +320,13 @@ async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 
     S.preview = q.get('preview').replace(/\D/g, ''); S.pw = h.get('k');
     history.replaceState(null, '', location.pathname + '?preview=' + S.preview);   // drop the key from the address bar
     return loadMe();
+  }
+  if (q.get('m')) {                                         // one-tap link from the sign-in email
+    $('app').innerHTML = '<div class="loading">Signing you in…</div>';
+    const r = await api({ action: 'jr_magic', m: q.get('m') }, 1);
+    history.replaceState(null, '', location.pathname);
+    if (r.ok && r.token) { tokenSet(r.token); return loadMe(); }
+    S.cfg = (await api({ action: 'jr_config' })) || {}; return viewSignin(r.error);
   }
   if (q.get('code') && q.get('state')) {                    // back from "Sign in with Planning Center"
     $('app').innerHTML = '<div class="loading">Finishing sign-in…</div>';

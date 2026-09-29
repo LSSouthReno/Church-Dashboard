@@ -41,7 +41,7 @@ var JR_ = {
     churchCenter: 'https://lssr.churchcenter.com/me'
   }
 };
-var JR_POST_ACTIONS_ = ['jr_config', 'jr_phone_start', 'jr_phone_verify', 'jr_pick', 'jr_oauth_start',
+var JR_POST_ACTIONS_ = ['jr_config', 'jr_phone_start', 'jr_phone_verify', 'jr_pick', 'jr_magic', 'jr_oauth_start',
                         'jr_oauth_finish', 'jr_me', 'jr_note', 'jr_logout'];
 
 function jrDoPost_(body) {
@@ -51,6 +51,7 @@ function jrDoPost_(body) {
     if (a === 'jr_phone_start')  return eosWaJson_(jrPhoneStart_(body));
     if (a === 'jr_phone_verify') return eosWaJson_(jrPhoneVerify_(body));
     if (a === 'jr_pick')         return eosWaJson_(jrPick_(body));
+    if (a === 'jr_magic')        return eosWaJson_(jrMagic_(body));
     if (a === 'jr_oauth_start')  return eosWaJson_(jrOauthStart_());
     if (a === 'jr_oauth_finish') return eosWaJson_(jrOauthFinish_(body));
     if (a === 'jr_me')           return eosWaJson_(jrMe_(body));
@@ -61,9 +62,12 @@ function jrDoPost_(body) {
 }
 
 function jrProp_(k) { return PropertiesService.getScriptProperties().getProperty(k) || ''; }
+// Phone sign-in is always on: they type their phone number; the code goes by TEXT when
+// Twilio is set up, otherwise to the EMAIL on their PCO profile (one-tap link + code).
+// No passwords anywhere (Brad: "seamless and simple but secure").
+function jrSmsOn_() { return !!(jrProp_('TWILIO_SID') && jrProp_('TWILIO_TOKEN') && jrProp_('TWILIO_VERIFY_SID')); }
 function jrConfig_() {
-  return { ok: true,
-    phone: !!(jrProp_('TWILIO_SID') && jrProp_('TWILIO_TOKEN') && jrProp_('TWILIO_VERIFY_SID')),
+  return { ok: true, phone: true, channel: jrSmsOn_() ? 'sms' : 'email',
     pco: !!(jrProp_('PCO_OAUTH_CLIENT_ID') && jrProp_('PCO_OAUTH_SECRET')) };
 }
 function jrHash_(s) {
@@ -140,19 +144,77 @@ function jrTwilio_(path, payload) {
   return { code: res.getResponseCode(), json: j };
 }
 function jrPhoneStart_(body) {
-  if (!jrConfig_().phone) return { ok: false, error: 'Phone sign-in isn’t turned on yet.' };
   var e164 = jrE164_(body.phone);
   if (!e164) return { ok: false, error: 'Please enter a 10-digit phone number.' };
   var c = CacheService.getScriptCache(), k = 'jr_rate_' + jrHash_(e164), n = Number(c.get(k) || 0);
   if (n >= 4) return { ok: false, error: 'Too many tries — please wait 15 minutes and try again.' };
   c.put(k, String(n + 1), 900);
-  // Only text numbers that belong to someone at Living Stones (never say which — same reply either way).
-  if (jrPeopleByPhone_(e164).length) jrTwilio_('/Verifications', { To: e164, Channel: 'sms' });
-  return { ok: true, sent: true };
+  // Only contact numbers that belong to someone at Living Stones — and give the SAME reply
+  // either way, so nobody can use this to learn whether a number is in our records.
+  var ppl = jrPeopleByPhone_(e164).filter(function(p) { return !p.child; });
+  if (!ppl.length) return { ok: true, sent: true, channel: jrConfig_().channel };
+  if (jrSmsOn_()) { jrTwilio_('/Verifications', { To: e164, Channel: 'sms' }); return { ok: true, sent: true, channel: 'sms' }; }
+  jrEmailCodes_(e164, ppl);
+  return { ok: true, sent: true, channel: 'email' };
 }
+
+// Email channel: every adult with that phone gets THEIR OWN one-tap link + 6-digit code, sent
+// only to the email on their own PCO profile. Codes/links are single-use and last 15 minutes.
+function jrEmailCodes_(e164, ppl) {
+  var c = CacheService.getScriptCache(), pending = [];
+  ppl.forEach(function(p) {
+    var email = jrPrimaryEmail_(p.pid); if (!email) return;
+    var code = ('000000' + (parseInt(jrRandom_().slice(0, 10), 16) % 1000000)).slice(-6);
+    var magic = jrRandom_();
+    pending.push({ pid: p.pid, code: jrHash_(code + ':' + e164) });
+    c.put('jr_ml_' + jrHash_(magic), String(p.pid), 900);
+    var link = JR_.REDIRECT + '?m=' + magic;
+    var html = '<div style="font-family:Montserrat,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;padding:28px 22px;color:#1a1a1a">' +
+      '<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#a07d20;font-weight:700">Living Stones South Reno</div>' +
+      '<h1 style="font-size:24px;margin:10px 0 8px">Hi ' + jrEsc_(p.first) + ', here’s your sign-in</h1>' +
+      '<p style="font-size:15px;line-height:1.6;color:#444;margin:0 0 22px">Tap the button to open your private My Journey page on this phone.</p>' +
+      '<a href="' + link + '" style="display:inline-block;background:#d4af37;color:#1a1407;text-decoration:none;font-weight:800;font-size:16px;padding:14px 26px;border-radius:10px">Open my journey</a>' +
+      '<p style="font-size:14px;line-height:1.6;color:#444;margin:24px 0 6px">Signing in on a different device? Enter this code:</p>' +
+      '<div style="font-size:30px;font-weight:800;letter-spacing:.3em;color:#1a1a1a">' + code + '</div>' +
+      '<p style="font-size:12.5px;line-height:1.6;color:#888;margin:26px 0 0">This link and code work once and expire in 15 minutes. Your page is private — only you and the pastors who care for you can see it. If you didn’t ask to sign in, you can ignore this email.</p></div>';
+    var msg = { to: email, subject: 'Your Living Stones sign-in: ' + code, name: 'Living Stones South Reno', htmlBody: html,
+      body: 'Hi ' + p.first + ',\n\nOpen your private My Journey page: ' + link + '\n\nOr enter this code: ' + code + '\n\nThis link and code work once and expire in 15 minutes. If you didn’t ask to sign in, ignore this email.' };
+    try { MailApp.sendEmail(Object.assign({ noReply: true }, msg)); } catch (e) { try { MailApp.sendEmail(msg); } catch (e2) {} }
+  });
+  if (pending.length) c.put('jr_ec_' + jrHash_(e164), JSON.stringify({ list: pending, tries: 0 }), 900);
+}
+function jrPrimaryEmail_(pid) {
+  var r = jrGet_('/people/v2/people/' + pid + '/emails');
+  var list = (r && r.data) || [];
+  var em = list.filter(function(e) { return (e.attributes || {}).primary; })[0] || list[0];
+  return em ? String((em.attributes || {}).address || '').trim() : '';
+}
+function jrEsc_(s) { return String(s || '').replace(/[&<>"]/g, function(ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
+function jrMagic_(body) {
+  var c = CacheService.getScriptCache(), k = 'jr_ml_' + jrHash_(String(body.m || '')), pid = c.get(k);
+  if (!pid) return { ok: false, error: 'That sign-in link has expired or was already used — please ask for a new one.' };
+  c.remove(k);
+  return jrNewSession_(pid, 'email-link');
+}
+
 function jrPhoneVerify_(body) {
   var e164 = jrE164_(body.phone), code = String(body.code || '').replace(/\D/g, '');
-  if (!e164 || code.length < 4) return { ok: false, error: 'Enter the code from the text.' };
+  if (!e164 || code.length < 4) return { ok: false, error: 'Enter the 6-digit code.' };
+  if (!jrSmsOn_()) {                                   // email channel
+    var c = CacheService.getScriptCache(), k = 'jr_ec_' + jrHash_(e164), hit = c.get(k);
+    if (!hit) return { ok: false, error: 'That code has expired — please ask for a new one.' };
+    var st = JSON.parse(hit), h = jrHash_(code + ':' + e164);
+    var m = st.list.filter(function(x) { return x.code === h; })[0];
+    if (!m) {
+      st.tries++;
+      if (st.tries >= 5) { c.remove(k); return { ok: false, error: 'Too many tries — please ask for a new code.' }; }
+      c.put(k, JSON.stringify(st), 900);
+      return { ok: false, error: 'That code didn’t match — check the email and try again.' };
+    }
+    st.list = st.list.filter(function(x) { return x.code !== h; });
+    if (st.list.length) c.put(k, JSON.stringify(st), 900); else c.remove(k);
+    return jrNewSession_(m.pid, 'email-code');
+  }
   var r = jrTwilio_('/VerificationCheck', { To: e164, Code: code });
   if (!(r.json && r.json.status === 'approved')) return { ok: false, error: 'That code didn’t match — check the text and try again.' };
   var ppl = jrPeopleByPhone_(e164).filter(function(p) { return !p.child; });
