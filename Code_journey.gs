@@ -30,6 +30,11 @@ var JR_ = {
   CACHE_MIN: 10,
   WF: { requested: '564704', ready: '528797', family: '528798', cgLeader: '535815' },
   CG_TYPE: '441907',
+  // "Leading" = leading PEOPLE (Brad, 2026-09-29): community-group leaders, these leadership
+  // groups, or serve roles that lead volunteers. Kids-classroom roles ("Lead Guide") don't count.
+  LEADER_GROUPS: ['elders', 'deacons', 'point leaders', 'serve team leaders', 'cg leaders'],
+  LEADER_ROLE: /\b(team lead(er)?|point lead(er)?|captain|coordinator|director)\b/i,
+  NOT_LEADER_ROLE: /\b(guide|teacher|helper|assistant)\b/i,
   NOTE_CAT: { note: '239853', prayer: '234652' },          // Pastoral Care · Prayer Requests
   // Where each next step's button goes. Adjust freely.
   LINKS: {
@@ -222,6 +227,10 @@ function jrDiag_(body) {
   if (!spPastorForHash_(body.pw)) return { ok: false, error: 'unauthorized' };
   var pid = String(body.pid || '').replace(/\D/g, ''), out = { ok: true, log: JSON.parse(PropertiesService.getScriptProperties().getProperty('JR_SIGNIN_LOG') || '[]') };
   try { out.mailQuota = MailApp.getRemainingDailyQuota(); out.mailAllowed = true; } catch (e) { out.mailAllowed = false; out.mailError = e.message.split('.')[0]; }
+  if (body.name) {
+    var sr = jrGet_('/people/v2/people?where[search_name]=' + encodeURIComponent(body.name) + '&per_page=25');
+    out.people = ((sr && sr.data) || []).map(function(x) { return { pid: x.id, name: (x.attributes || {}).name, child: (x.attributes || {}).child }; });
+  }
   if (pid) {
     var ph = jrGet_('/people/v2/people/' + pid + '/phone_numbers');
     out.phones = ((ph && ph.data) || []).map(function(n) {
@@ -320,11 +329,11 @@ function jrMe_(body) {
     pid = jrSessionPid_(String(body.token || ''));
     if (!pid) return { ok: false, signin: true };
   }
-  var c = CacheService.getScriptCache(), key = 'jr_me_' + pid;
-  if (!body.fresh) { var hit = c.get(key); if (hit) { var o = JSON.parse(hit); o.preview = preview; return o; } }
-  var out = jrBuild_(pid);
-  try { c.put(key, JSON.stringify(out), JR_.CACHE_MIN * 60); } catch (x) {}
+  var c = CacheService.getScriptCache(), key = 'jr_me2_' + pid, out = null;
+  if (!body.fresh) { var hit = c.get(key); if (hit) out = JSON.parse(hit); }
+  if (!out) { out = jrBuild_(pid); try { c.put(key, JSON.stringify(out), JR_.CACHE_MIN * 60); } catch (x) {} }
   out.preview = preview;
+  if (!preview) delete out.seasonWhy;   // the "why this season" reasons are for pastors only
   return out;
 }
 
@@ -365,7 +374,7 @@ function jrBuild_(pid) {
   });
 
   // Serving: teams (from Services position assignments) + schedule (served this year, upcoming)
-  var teams = {}, served = 0, upcoming = [], leadsTeam = false;
+  var teams = {}, served = 0, upcoming = [], leadRoles = [];
   var tm = jrGet_('/services/v2/people/' + pid + '/person_team_position_assignments?include=team_position&per_page=100');
   var posName = {}, posTeam = {};
   ((tm && tm.included) || []).forEach(function(i) {
@@ -375,7 +384,8 @@ function jrBuild_(pid) {
   });
   ((tm && tm.data) || []).forEach(function(x) {
     var tp = (((x.relationships || {}).team_position || {}).data || {}).id;
-    if (/lead|captain|coordinator|director/i.test(posName[tp] || '')) leadsTeam = true;
+    var pn_ = posName[tp] || '';
+    if (JR_.LEADER_ROLE.test(pn_) && !JR_.NOT_LEADER_ROLE.test(pn_)) leadRoles.push(pn_);
     teams[posTeam[tp] || tp] = teams[posTeam[tp] || tp] || { position: posName[tp] || '', since: (x.attributes || {}).created_at || '' };
   });
   var sch = jrGet_('/services/v2/people/' + pid + '/schedules?filter=past&per_page=100&order=-sort_date');
@@ -443,19 +453,28 @@ function jrBuild_(pid) {
   var pastor = elderFull ? { name: elderFull } : null;
 
   var member = /^(member|deacon|pastor)$/i.test(String(me.membership).trim());
-  var inCG = groups.some(function(g) { return g.cg; }), inGroup = groups.length > 0;
-  var leads = groups.some(function(g) { return g.leader; }) || leadsTeam;
+  var inCG = groups.some(function(g) { return g.cg; }), inGroup = inCG;
+  // Season reasons — shown to pastors in preview so the rules can be tuned (never to members).
+  var why = [], norm = function(n) { return String(n || '').toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim(); };
+  var cgLead = groups.filter(function(g) { return g.cg && g.leader; });
+  var leaderGroups = groups.filter(function(g) { return JR_.LEADER_GROUPS.indexOf(norm(g.name)) >= 0; });
+  cgLead.forEach(function(g) { why.push('Leads ' + g.name); });
+  leaderGroups.forEach(function(g) { why.push('In the ' + g.name + ' group'); });
+  leadRoles.forEach(function(r) { why.push('Serve role: ' + r); });
+  var leads = why.length > 0;
   var serving = teamList.length > 0;
 
   // Season (a place on the path — never a grade)
-  var season = 'exploring';
+  var season = 'exploring', seasonWhy = [];
+  if (baptized) seasonWhy.push('Baptized'); if (member) seasonWhy.push('Family Member (' + me.membership + ')');
+  if (inCG) seasonWhy.push('In a community group'); if (serving) seasonWhy.push('Serving: ' + teamList.map(function(t) { return t.name; }).join(', '));
   if (baptized || member) season = 'belonging';
   if ((baptized || member) && (inGroup || serving)) season = 'growing';
-  if (leads) season = 'leading';
+  if (leads) { season = 'leading'; seasonWhy = seasonWhy.concat(why); }
 
   // Milestones (only what we actually know)
   var ms = [];
-  var add = function(label, d) { if (d) ms.push({ label: label, date: String(d).substring(0, 10) }); };
+  var add = function(label, d) { var k = jrDay_(d); if (k) ms.push({ label: label, date: k }); };
   add('First connected with Living Stones', fd[SH_FIELD.firstVisit] || me.since);
   add('Said yes to Jesus', fd[SH_FIELD.salvationDate]);
   add('Baptized', fd[SH_FIELD.baptismDate]);
@@ -479,9 +498,17 @@ function jrBuild_(pid) {
     otherGroups: groups.filter(function(g) { return !g.cg; }).length,
     serving: { teams: teamList, servedThisYear: served }, giving: giving,
     baptized: baptized, member: member, baptism: { requested: wfs.requested === 'active', ready: wfs.ready === 'active', plan: baptismPlan },
-    milestones: ms, upcoming: upcoming.slice(0, 5), pastor: pastor, steps: jrSteps_(ctx), links: JR_.LINKS, asOf: new Date().toISOString() };
+    milestones: ms, upcoming: upcoming.slice(0, 5), pastor: pastor, steps: jrSteps_(ctx), links: JR_.LINKS, asOf: new Date().toISOString(),
+    seasonWhy: seasonWhy };
 }
 
+// Any date PCO hands us ("2026-07-06", "07/06/2026", ISO timestamp) → "YYYY-MM-DD" (or '').
+function jrDay_(v) {
+  var s = String(v || '').trim(); if (!s) return '';
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})/); if (m) return m[1] + '-' + m[2] + '-' + m[3];
+  m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); if (m) return m[3] + '-' + ('0' + m[1]).slice(-2) + '-' + ('0' + m[2]).slice(-2);
+  var d = new Date(s); return isNaN(d) ? '' : Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+}
 function jrTeamName_(teamId) {
   if (!teamId) return '';
   var c = CacheService.getScriptCache(), k = 'jr_team_' + teamId, hit = c.get(k);

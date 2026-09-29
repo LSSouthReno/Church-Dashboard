@@ -33,6 +33,7 @@
   .btn.g { background:none; color:var(--muted); }
   .btn.sm { padding:7px 12px; font-size:13px; }
   .btn:disabled { opacity:.55; cursor:default; }
+  .banner .why { margin-top:5px; color:var(--muted); font-weight:500; font-size:13px; } .banner .why b { color:var(--gold); }
   .banner { background:var(--gold-bg); border-bottom:1px solid var(--gold-line); color:var(--gold); font-size:13.5px; font-weight:600; padding:10px 24px; text-align:center; }
   /* sign-in */
   .signin { max-width:420px; margin:0 auto; padding:56px 22px 60px; text-align:center; }
@@ -251,7 +252,9 @@ function dismiss(id) { const d = dismissed(); d[id] = Date.now() + 60 * 864e5; t
 function viewJourney() {
   const d = S.data, p = d.person || {};
   $('topR').innerHTML = S.preview ? '' : '<button class="btn g sm" onclick="logout()">Sign out</button>';
-  $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s page · buttons that send or save are turned off</div>' : '';
+  const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
+  $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s page · buttons that send or save are turned off' +
+    (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
   const first = (p.first || '').split(' ')[0];
   const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' });
   const who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
