@@ -16346,7 +16346,9 @@ function shOpenDrawer(pid) {
   document.getElementById('shDrawerHead').innerHTML =
     '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
     + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')
-    + '</div>';
+    + '</div>'
+    // My Journey is link-only for now; pastors can see exactly what this person would see.
+    + '<button class="sh-save-btn" style="margin-top:8px" onclick="window.open(\'/journey/?preview='+encodeURIComponent(pid)+'#k='+_shPastorHash+'\',\'_blank\',\'noopener\')" title="See this person’s private My Journey page (preview — nothing is sent)">Preview My Journey ↗</button>';
   document.getElementById('shDrawerBody').innerHTML = shStoryHtml(p) + shEditControlsHtml(p) + '<div class="sh-d-loading" id="shDetailLoading">Loading Planning Center details…</div>';
   document.getElementById('shDrawer').classList.add('open');
   document.getElementById('shDrawerOv').classList.add('open');
@@ -17363,7 +17365,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260929T182119Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260929T183719Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

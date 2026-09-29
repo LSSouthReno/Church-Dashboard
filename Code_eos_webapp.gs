@@ -238,6 +238,7 @@ function doPost(e) {
     if (typeof STORY_POST_ACTIONS_ !== 'undefined' && STORY_POST_ACTIONS_.indexOf(action) !== -1) return storyDoPost_(body);
     if (typeof CGP_POST_ACTIONS_ !== 'undefined' && CGP_POST_ACTIONS_.indexOf(action) !== -1) return cgpDoPost_(body);
     if (typeof OGA_POST_ACTIONS_ !== 'undefined' && OGA_POST_ACTIONS_.indexOf(action) !== -1) return ogaDoPost_(body);
+    if (typeof JR_POST_ACTIONS_ !== 'undefined' && JR_POST_ACTIONS_.indexOf(action) !== -1) return jrDoPost_(body);
 
     // Onboarding generator saves each generated guide here (one row per team).
     if (action === 'og_save') return eosWaJson_(ogSaveGuide_(body));
