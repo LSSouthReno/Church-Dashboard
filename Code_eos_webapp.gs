@@ -30,6 +30,12 @@ var EOS_IDSJOY_POST_ACTIONS_ = ['ids_add', 'ids_update', 'joy_bomb_add', 'joy_bo
 function doGet(e) {
   try {
     var action = (e && e.parameter && e.parameter.action) || '';
+    // POST-by-GET (…/exec?action=<name>&p=<json>): a GET survives Google's /exec redirect
+    // intact, while a POST body can be dropped for browsers signed into Google.
+    if (action !== 'jr' && e.parameter.p != null) {
+      var pb = null; try { pb = JSON.parse(e.parameter.p); } catch (x) {}
+      if (pb && pb.action === action) return doPost({ postData: { contents: e.parameter.p }, parameter: {} });
+    }
     if (EOS_IDSJOY_GET_ACTIONS_.indexOf(action) !== -1) return idsJoyDoGet_(e);
     if (typeof SOS_GET_ACTIONS_ !== 'undefined' && SOS_GET_ACTIONS_.indexOf(action) !== -1) return sosDoGet_(e);
     if (typeof STORY_GET_ACTIONS_ !== 'undefined' && STORY_GET_ACTIONS_.indexOf(action) !== -1) return storyDoGet_(e);
@@ -229,10 +235,30 @@ function doGet(e) {
   }
 }
 
+// Every POST reply echoes `for: <action>`. Google can drop a POST body on the /exec
+// redirect; the request then lands in doGet's generic {ok:true}, so clients must only
+// trust a reply whose `for` matches what they sent. `rid` (a client request id) makes
+// retries safe: a repeat within 10 min gets the first reply instead of running again.
 function doPost(e) {
+  var body = null, action = '';
+  try { body = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (x) {}
+  if (body && typeof body === 'object') action = String(body.action || '');
+  var rid = (body && body.rid) ? 'gasrid_' + String(body.rid).slice(0, 80) : '';
+  var cache = rid ? CacheService.getScriptCache() : null;
+  if (cache) {
+    var hit = cache.get(rid);
+    if (hit) return ContentService.createTextOutput(hit).setMimeType(ContentService.MimeType.JSON);
+  }
+  var out = body ? eosWaDoPost_(e, body, action) : eosWaJson_({ ok: false, error: 'Bad request body' });
+  var txt = out.getContent(), obj = null;
+  try { obj = JSON.parse(txt); } catch (x) {}
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) { obj.for = action; txt = JSON.stringify(obj); }
+  if (cache && obj && obj.ok !== false && txt.length < 90000) { try { cache.put(rid, txt, 600); } catch (x) {} }
+  return ContentService.createTextOutput(txt).setMimeType(ContentService.MimeType.JSON);
+}
+
+function eosWaDoPost_(e, body, action) {
   try {
-    var body   = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    var action = body.action || '';
 
     if (EOS_IDSJOY_POST_ACTIONS_.indexOf(action) !== -1) return idsJoyDoPost_(e);
     if (typeof SOS_POST_ACTIONS_ !== 'undefined' && SOS_POST_ACTIONS_.indexOf(action) !== -1) return sosDoPost_(e);

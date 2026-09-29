@@ -7912,16 +7912,8 @@ function ogaSaveStatus(t) { const el = document.getElementById('ogaSaved'); if (
 function ogaWho() { try { return (_sos && _sos.me) || ''; } catch (e) { return ''; } }
 function ogaFmtWhen(iso) { try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
 async function ogaPost(body) {
-  // Apps Script occasionally answers with its generic doGet JSON instead of ours — retry those.
-  for (let attempt = 0; attempt < 3; attempt++) {
-    try {
-      const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
-      const j = await r.json();
-      if (j && (j.month || j.ok === false)) return j;
-    } catch (e) { if (attempt === 2) throw e; }
-    await new Promise(res => setTimeout(res, 700 * (attempt + 1)));
-  }
-  throw new Error('no response');
+  // gasCall retries Apps Script's generic doGet JSON (a dropped POST body) instead of accepting it.
+  return gasCall(STAFF_OS_URL, body);
 }
 function ogaSnapshot() {
   const byKey = {}; (_ogaAllEvents || []).forEach(e => { byKey[ogaKey(e)] = e; });
@@ -8265,9 +8257,7 @@ function ogcRelease() { const n = _ogcWaiters.shift(); if (n) n(); else _ogcActi
 // loads + bakes instantly and always exports). Fallback: the Staff OS proxy, hard
 // 12 s limit per try so a stuck request can never hang the card.
 async function ogcProxyOne(u) {
-  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 12000);
-  try { const r = await fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify({ action: 'sos_img', urls: [u] }), signal: ctl.signal }); return await r.json(); }
-  finally { clearTimeout(t); }
+  return gasCall(STAFF_OS_URL, { action: 'sos_img', urls: [u] }, { tries: 1, timeout: 12000 });
 }
 async function ogcFetchBaked(u, local) {
   if (local) { const b = await ogcBakeImage(local); if (b) return b; }
@@ -8665,7 +8655,7 @@ function sosApiGet(params) {
   return fetch(STAFF_OS_URL + '?' + params + '&_=' + Date.now()).then(r => r.json());
 }
 function sosApiPost(body) {
-  return fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(body) }).then(r => r.json());
+  return gasCall(STAFF_OS_URL, body);
 }
 function sosSetMe(name) {
   _sos.me = name; _sos.viewing = name;
@@ -10664,8 +10654,7 @@ async function cgpApi(body) {
     if (!pw) throw new Error('Password needed to edit the pipeline');
     try { sessionStorage.setItem('cg_pw', pw); } catch (e) {}
   }
-  const r = await fetch(STAFF_OS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ pw: pw }, body)) });
-  const j = await r.json();
+  const j = await gasCall(STAFF_OS_URL, Object.assign({ pw: pw }, body));
   if (j && j.auth === false) { try { sessionStorage.removeItem('cg_pw'); } catch (e) {} throw new Error('Wrong password — try again'); }
   return j;
 }
@@ -11084,6 +11073,37 @@ const STAFF_OS_URL        = 'https://script.google.com/macros/s/AKfycbx-YDZg924f
 const JOY_BOMBS_DATA_URL  = './joy_bombs.json';
 const PATHWAY_DATA_URL    = './pathway.json';
 const ABSENCES_DATA_URL   = './absences.json';
+
+// ── Apps Script calls that must not silently fail ──
+// Google can drop a POST body on the /exec redirect (browsers signed into Google). The
+// server then answers with its generic {ok:true} and nothing is saved. Every server reply
+// now echoes `for: <action>`, so any other reply counts as a failed try and is retried.
+// Small payloads go by GET (?action=<name>&p=<json>), which survives the redirect. Each
+// call carries a request id (rid) so a retry never runs the same write twice.
+const GAS_GET_MAX = 8000;   // Apps Script GETs 400 somewhere past ~10 KB (measured 2026-09-29)
+async function gasCall(url, body, opts) {
+  opts = opts || {};
+  const tries = opts.tries || 3;
+  const b = Object.assign({}, body, { rid: body.rid || (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)) });
+  const q = JSON.stringify(b);
+  const getUrl = url + '?action=' + encodeURIComponent(b.action) + '&p=' + encodeURIComponent(q);
+  let viaGet = getUrl.length <= GAS_GET_MAX, lastErr = null;
+  for (let i = 0; i < tries; i++) {
+    const ctl = opts.timeout && typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const t = ctl ? setTimeout(() => ctl.abort(), opts.timeout) : null;
+    try {
+      const r = viaGet ? await fetch(getUrl + '&_=' + Date.now(), { signal: ctl ? ctl.signal : undefined })
+                       : await fetch(url, { method: 'POST', body: q, signal: ctl ? ctl.signal : undefined });
+      if (viaGet && (r.status === 414 || r.status === 400)) viaGet = false;   // URL too long → POST next try
+      const j = await r.json();
+      if (j && j.for === b.action) return j;
+      lastErr = new Error('No reply from the server');
+    } catch (e) { lastErr = e; }
+    finally { if (t) clearTimeout(t); }
+    if (i + 1 < tries) await new Promise(res => setTimeout(res, 700 * (i + 1)));
+  }
+  throw lastErr || new Error('No reply from the server');
+}
 const IDS_LS_KEY          = 'lssr_ids_log';
 const JOY_BOMBS_LS_KEY    = 'lssr_joy_bombs';
 
@@ -11916,10 +11936,7 @@ function closeStaffModal() {
 const STAFF_REMEMBER_KEY = 'staff_unlocked_until';
 function staffRemember() { try { localStorage.setItem(STAFF_REMEMBER_KEY, String(Date.now() + 60 * 864e5)); } catch (e) {} }
 function sosPostTimed(body, ms) {
-  const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-  const t = ctl ? setTimeout(() => ctl.abort(), ms) : null;
-  return fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(body), signal: ctl ? ctl.signal : undefined })
-    .then(r => r.json()).finally(() => { if (t) clearTimeout(t); });
+  return gasCall(STAFF_OS_URL, body, { timeout: ms, tries: 1 });   // sosLoginRequest does its own retry
 }
 // → { status: 'ok' | 'nomatch' | 'error', res }
 async function sosLoginRequest(pin, onSlow) {
@@ -12376,7 +12393,7 @@ async function rbRemoteLoad_() {
 // ── EOS webapp POST helper ─────────────────────────────────────────────────
 function eosPost_(payload) {
   if (!EOS_WEBAPP_URL) return;
-  fetch(EOS_WEBAPP_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' }).catch(() => {});
+  gasCall(EOS_WEBAPP_URL, payload).catch(() => {});
 }
 
 // ── UI action handlers ─────────────────────────────────────────────────────
@@ -13796,8 +13813,7 @@ function stSave(id, patch) {
   Object.assign(s, patch);
   try { localStorage.setItem(ST_CACHE_KEY, JSON.stringify({ ok: true, stories: _st.stories, lastSync: _st.lastSync, aiOn: _st.aiOn })); } catch (e) {}
   stRefreshViews();
-  fetch(STAFF_OS_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action: 'story_update', k: STAFF_HASH, id: id, by: (_sos && _sos.me) || 'staff' }, patch)) })
-    .then(r => r.json())
+  gasCall(STAFF_OS_URL, Object.assign({ action: 'story_update', k: STAFF_HASH, id: id, by: (_sos && _sos.me) || 'staff' }, patch))
     .then(res => { if (!res || !res.ok) throw new Error((res && res.error) || 'save failed'); })
     .catch(e => { alert('Couldn’t save that change (' + (e.message || e) + '). Reloading stories.'); stLoad(); });
 }
@@ -14515,7 +14531,7 @@ function idsSave_(data) {
 function idsNextId_() { return 'ids_' + Date.now() + '_' + Math.random().toString(36).slice(2,6); }
 function idsPost_(payload) {
   if (!IDS_WEBAPP_URL) return;
-  fetch(IDS_WEBAPP_URL, { method:'POST', body:JSON.stringify(payload), mode:'no-cors' }).catch(()=>{});
+  gasCall(IDS_WEBAPP_URL, payload).catch(()=>{});
 }
 function idsAddIssue_(title, desc, by, owner, due) {
   if (!title.trim()) return false;
@@ -14705,7 +14721,7 @@ function joyBombMarkBombed_(id) {
   const local = joyBombsLsLoad_();
   local.bombed[id] = { date };
   joyBombsLsSave_(local);
-  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_mark',id,by:'',date}),mode:'no-cors'}).catch(()=>{});
+  if (IDS_WEBAPP_URL) gasCall(IDS_WEBAPP_URL,{action:'joy_bomb_mark',id,by:'',date}).catch(()=>{});
   joyBombAnimateOut_(id);
 }
 // Remove / hold off on a joy bomb (person was on the list incorrectly, or not ready
@@ -14719,7 +14735,7 @@ function joyBombDismiss_(id) {
   local.dismissed[id] = { date: new Date().toISOString().split('T')[0] };
   local.added = (local.added||[]).filter(e => e.id !== id);   // drop if it was a local manual add
   joyBombsLsSave_(local);
-  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_dismiss',id}),mode:'no-cors'}).catch(()=>{});
+  if (IDS_WEBAPP_URL) gasCall(IDS_WEBAPP_URL,{action:'joy_bomb_dismiss',id}).catch(()=>{});
   joyBombAnimateOut_(id);
 }
 function joyBombAnimateOut_(id) {
@@ -14784,7 +14800,7 @@ function joyBombFormSubmit_() {
   const entry = { id:'jb_'+Date.now(), name:name.trim(), team:team.trim(), position:position.trim(), phone:'', firstServeDate:date, notes:notes.trim(), status:'pending', source:'manual' };
   (local.added = local.added||[]).push(entry);
   joyBombsLsSave_(local);
-  if (IDS_WEBAPP_URL) fetch(IDS_WEBAPP_URL,{method:'POST',body:JSON.stringify({action:'joy_bomb_add',...entry}),mode:'no-cors'}).catch(()=>{});
+  if (IDS_WEBAPP_URL) gasCall(IDS_WEBAPP_URL,{action:'joy_bomb_add',...entry}).catch(()=>{});
   const modal = document.getElementById('sp-jb-add-modal');
   if (modal) modal.remove();
   staffRenderL10(window._staffLastData||{});
@@ -14995,7 +15011,7 @@ function absencesSaveLocal_(list) {
 
 function absencesPost_(payload) {
   if (!IDS_WEBAPP_URL) return;
-  fetch(IDS_WEBAPP_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' }).catch(() => {});
+  gasCall(IDS_WEBAPP_URL, payload).catch(() => {});
 }
 
 function absenceAdd_(containerId) {
@@ -15416,7 +15432,7 @@ let TLH_REMOTE = null; // { checklist, checklistTs, templates, templatesTs }
 
 function tlhPost_(payload) {
   if (!EOS_WEBAPP_URL) return;
-  try { fetch(EOS_WEBAPP_URL, { method:'POST', body:JSON.stringify(payload), mode:'no-cors' }).catch(()=>{}); } catch(e) {}
+  try { gasCall(EOS_WEBAPP_URL, payload).catch(()=>{}); } catch(e) {}
 }
 
 async function tlhLoadRemote_() {
@@ -17365,7 +17381,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260929T183719Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260929T224053Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

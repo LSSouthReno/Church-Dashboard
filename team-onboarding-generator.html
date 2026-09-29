@@ -1698,6 +1698,27 @@ async function sha256Hex(s) {
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+// Google can drop a POST body on the /exec redirect (browsers signed into Google), and the
+// server then answers with its generic {ok:true}. The server echoes `for: <action>` on every
+// reply, so anything else is retried. Small payloads go by GET, which survives the redirect;
+// the request id (rid) keeps a retry from saving twice.
+async function ogPost(body) {
+  const b = Object.assign({ rid: Date.now().toString(36) + Math.random().toString(36).slice(2, 10) }, body);
+  const q = JSON.stringify(b);
+  const getUrl = OG_WEBAPP_URL + '?action=' + encodeURIComponent(b.action) + '&p=' + encodeURIComponent(q);
+  let viaGet = getUrl.length <= 8000;   // Apps Script GETs 400 somewhere past ~10 KB
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = viaGet ? await fetch(getUrl + '&_=' + Date.now()) : await fetch(OG_WEBAPP_URL, { method: 'POST', body: q });
+      if (viaGet && (r.status === 414 || r.status === 400)) viaGet = false;
+      const j = await r.json();
+      if (j && j.for === b.action) return j;
+    } catch (e) {}
+    await new Promise(res => setTimeout(res, 700 * (i + 1)));
+  }
+  throw new Error('No reply from the server');
+}
+
 // Fire-and-forget save. Image data is stripped so the payload stays small;
 // the author's own copy (browser save / export file) keeps the images.
 function ogSaveToServer() {
@@ -1706,11 +1727,7 @@ function ogSaveToServer() {
     if (!team || team === 'Team') return;
     const data = collectFormData();
     data.files = (data.files || []).map(f => ({ name: f.name, type: f.type, dataUrl: null }));
-    fetch(OG_WEBAPP_URL, {
-      method: 'POST',
-      body: JSON.stringify({ action: 'og_save', team: team, leader: val('leader-name'), data: data }),
-      mode: 'no-cors'
-    }).catch(function() {});
+    ogPost({ action: 'og_save', team: team, leader: val('leader-name'), data: data }).catch(function() {});
   } catch (e) { /* never block the preview on a save failure */ }
 }
 
