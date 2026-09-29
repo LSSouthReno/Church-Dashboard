@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-29T19:48:31.684Z",
+  "lastUpdated": "2026-09-29T20:07:31.948Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -8042,7 +8042,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 29, 2026, 12:48 PM",
+    "refreshed": "Sep 29, 2026, 1:07 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -9451,7 +9451,7 @@
         26,
         25,
         43,
-        38,
+        40,
         null,
         null,
         null
@@ -9488,21 +9488,21 @@
       ],
       "2026": [
         34,
-        25,
+        24,
         17,
         16,
         16,
         23,
         24,
         23,
-        40,
+        42,
         null,
         null,
         null
       ]
     },
     "leadersAdded": {
-      "total2026": 56
+      "total2026": 57
     },
     "outsidersInsiders": {
       "2024": [
@@ -9615,9 +9615,10 @@
           "Carlos Flores",
           "Anna Moore",
           "Julia Perlingos-Jackson",
-          "Tina Faker"
+          "Tina Faker",
+          "Adam Carp"
         ],
-        "count": 63
+        "count": 64
       }
     ],
     "leaderPipeline": [
@@ -9802,14 +9803,6 @@
         "attPct": 50
       },
       {
-        "name": "Castaneda Community Group",
-        "members": 15,
-        "leaders": 3,
-        "schedule": "Meets weekly on Mondays from 3-5pm",
-        "avgAttended": 11,
-        "attPct": 73
-      },
-      {
         "name": "Peissner Community Group",
         "members": 14,
         "leaders": 2,
@@ -9832,6 +9825,14 @@
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 5,
         "attPct": 36
+      },
+      {
+        "name": "Castaneda Community Group",
+        "members": 14,
+        "leaders": 3,
+        "schedule": "Meets weekly on Mondays from 3-5pm",
+        "avgAttended": 11,
+        "attPct": 79
       },
       {
         "name": "Brown/Frank Community Group",
@@ -10032,23 +10033,31 @@
         "schedule": "Meets weekly on Mondays from 4:30-6:30pm",
         "avgAttended": 0,
         "attPct": 0
+      },
+      {
+        "name": "Carp/Thompson Community Group",
+        "members": 2,
+        "leaders": 1,
+        "schedule": "Meets weekly on Tuesdays from 6:15-8am",
+        "avgAttended": 0,
+        "attPct": 0
       }
     ],
     "venn": {
       "familyMembers": 391,
-      "cgMembers": 392,
-      "both": 210,
+      "cgMembers": 394,
+      "both": 212,
       "pctFmInCg": 54,
       "pctCgAreFm": 54
     },
     "venn4": {
       "sets": {
         "familyMembers": 391,
-        "cg": 392,
+        "cg": 394,
         "serving": 296,
-        "giving": 952
+        "giving": 955
       },
-      "universe": 1155,
+      "universe": 1158,
       "regions": {
         "1": 39,
         "2": 88,
@@ -10057,14 +10066,14 @@
         "5": 7,
         "6": 9,
         "7": 16,
-        "8": 524,
+        "8": 527,
         "9": 79,
         "10": 66,
         "11": 51,
         "12": 26,
-        "13": 56,
+        "13": 54,
         "14": 19,
-        "15": 131
+        "15": 133
       },
       "regionNames": {
         "1": [
@@ -10718,7 +10727,6 @@
         ],
         "13": [
           "Aaron Carl",
-          "Adam Carp",
           "Alex Buckwalter",
           "Alla Schock",
           "Allison Wallace",
@@ -10729,7 +10737,6 @@
           "Ariel Buckwalter",
           "Bart Wallace",
           "Bill Wallace",
-          "Brandon Thompson",
           "Caleb Frink",
           "Casey Madison",
           "Cathy Cappini",
@@ -10796,6 +10803,7 @@
           "Tiffany Jackson"
         ],
         "15": [
+          "Adam Carp",
           "Alan Charles",
           "Alexis Durham",
           "Amber Brown",
@@ -10814,6 +10822,7 @@
           "Bradford Skinner",
           "Bradley Borowski",
           "Brandon Perlich",
+          "Brandon Thompson",
           "Brenda Milligan",
           "Bruce Rector",
           "Byron Corletto",
@@ -10957,10 +10966,9 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 181,
+          "count": 179,
           "names": [
             "Aaron Carl",
-            "Adam Carp",
             "Alex Buckwalter",
             "Alison Crook",
             "Alla Schock",
@@ -10982,7 +10990,6 @@
             "Bill Wallace",
             "Brad Scobey",
             "Brady Simmons",
-            "Brandon Thompson",
             "Bret Tompkins",
             "Bryan Harter",
             "Cadence Laird",
@@ -11144,8 +11151,9 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 131,
+          "count": 133,
           "names": [
+            "Adam Carp",
             "Alan Charles",
             "Alexis Durham",
             "Amber Brown",
@@ -11164,6 +11172,7 @@
             "Bradford Skinner",
             "Bradley Borowski",
             "Brandon Perlich",
+            "Brandon Thompson",
             "Brenda Milligan",
             "Bruce Rector",
             "Byron Corletto",
@@ -11326,7 +11335,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 603,
+          "count": 606,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -11535,10 +11544,9 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 181,
+        "count": 179,
         "names": [
           "Aaron Carl",
-          "Adam Carp",
           "Alex Buckwalter",
           "Alison Crook",
           "Alla Schock",
@@ -11560,7 +11568,6 @@
           "Bill Wallace",
           "Brad Scobey",
           "Brady Simmons",
-          "Brandon Thompson",
           "Bret Tompkins",
           "Bryan Harter",
           "Cadence Laird",
@@ -21605,7 +21612,7 @@
               "name": "Deana Griffin",
               "team": "Stepping Stones",
               "pos": "Mustangs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -21889,13 +21896,6 @@
               "serviceTime": "8 AM"
             },
             {
-              "name": "Jaimie Sullivan",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
-            },
-            {
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
@@ -22051,8 +22051,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 95,
-            "totalVols": 95
+            "volsWithServiceTime": 94,
+            "totalVols": 94
           }
         }
       ],
@@ -23413,7 +23413,7 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Team Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -23499,6 +23499,41 @@
               "pos": "Hawks Lead Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Aliyah Ramirez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jennifer Torres",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -23635,8 +23670,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 85,
-            "totalVols": 85
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
@@ -23750,7 +23785,7 @@
             {
               "name": "Lydia Perlich",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
+              "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
             },
@@ -24089,6 +24124,188 @@
               "pos": "Preacher",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Brian Merritt",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Garrett Kooyers",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jennie Kooyers",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Natalie Kooyers",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Ruth Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bradford Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Isla Skinner",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 11 AM"
+            },
+            {
+              "name": "Evven Gardner",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Aliyah Ramirez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Annalissa Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Isabella Sanchez",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "David Castro",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Carlos Flores",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jeremy Low",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Savannah Caliger",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Clare Lattin",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Emma Baskharoon",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Tonya Lowry",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Fredy Bridges",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kathy McAlpine",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Tiffany Jackson",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Whitney Maidens",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Niah Morris",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -24246,8 +24463,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 62,
-            "totalVols": 62
+            "volsWithServiceTime": 88,
+            "totalVols": 88
           }
         }
       ]
@@ -24504,6 +24721,195 @@
               "pos": "Preacher",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Eric Sikora",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Team Lead",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Carlos Perez",
+              "team": "Stepping Stones",
+              "pos": "Lead Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Allison Wallace",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Patricia Thomas",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Cheryl Devore",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Abby Wampler",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lauren Bruno",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Lindsey Low",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Maggie Thetford",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anna Sawyer",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jackie Lewis",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jaimie Sullivan",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Hannah Christopher",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Natalie Christopher",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Cody Wright",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Anna Faker",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Autumn Blattman",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Geoffrey Caliger",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Holly O Connor",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Valerie Seno",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Jessica Adrian",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Clayton Sheldon",
+              "team": "Stepping Stones",
+              "pos": "Hawks Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lauren Rotter",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Blake Dito",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Anabel Dito",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -24513,8 +24919,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 34,
-            "totalVols": 34
+            "volsWithServiceTime": 61,
+            "totalVols": 61
           }
         }
       ]
