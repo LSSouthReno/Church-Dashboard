@@ -5706,7 +5706,9 @@ function renderWeeklyModalChart_(){
     const data = st.svcWk.data || {};
     const svcColors = ['#1e3a8a','#3b82f6','#60a5fa','#93c5fd','#bfdbfe'];
     labels = st.monthWeeks.map(d => svcWeekLabel_(d).replace(/,\s*\d{4}$/, ''));  // "Sep 6"
-    datasets = st.svcWk.services.map(function(s, i){
+    // Only the service times that actually met this month (the feed lists every time ever used).
+    const monthSvcs = st.svcWk.services.filter(function(s){ return st.monthWeeks.some(function(d){ const c = data[d] && data[d][s]; return c && ((Number(c.adults)||0) + (Number(c.kids)||0)) > 0; }); });
+    datasets = monthSvcs.map(function(s, i){
       const svc = st.monthWeeks.map(function(d){ const c = data[d] && data[d][s]; return c ? { a: Number(c.adults)||0, k: Number(c.kids)||0 } : { a:0, k:0 }; });
       return {
         label: s,
@@ -17408,7 +17410,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260929T234231Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260930T172014Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
