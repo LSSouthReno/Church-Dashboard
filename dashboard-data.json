@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-30T17:46:09.038Z",
+  "lastUpdated": "2026-09-30T17:59:09.657Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -9355,7 +9355,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 22,
+      "current": 15,
       "needed": 23,
       "history": [
         {
@@ -9484,7 +9484,7 @@
         },
         {
           "d": "2026-09",
-          "n": 22
+          "n": 15
         }
       ]
     },
@@ -10300,7 +10300,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 361,
+  "uniqueVolunteers": 358,
   "budget": [
     {
       "label": "Network & Missions",
@@ -13181,7 +13181,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 30, 2026, 10:46 AM",
+    "refreshed": "Sep 30, 2026, 10:59 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14629,12 +14629,12 @@
         34,
         24,
         17,
-        16,
+        15,
         16,
         23,
         24,
         23,
-        46,
+        47,
         null,
         null,
         null
@@ -15143,14 +15143,6 @@
         "attPct": 60
       },
       {
-        "name": "Turcich Community Group",
-        "members": 4,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 4,
-        "attPct": 100
-      },
-      {
         "name": "Saddle Ridge Community Group",
         "members": 4,
         "leaders": 1,
@@ -15167,18 +15159,26 @@
         "attPct": 50
       },
       {
-        "name": "Faker Community Group",
-        "members": 2,
+        "name": "Turcich Community Group",
+        "members": 3,
         "leaders": 1,
-        "schedule": "Meets weekly on Mondays from 4:30-6:30pm",
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 4,
+        "attPct": 133
+      },
+      {
+        "name": "Carp/Thompson Community Group",
+        "members": 3,
+        "leaders": 2,
+        "schedule": "Meets weekly on Tuesdays from 6:15-8am",
         "avgAttended": 0,
         "attPct": 0
       },
       {
-        "name": "Carp/Thompson Community Group",
+        "name": "Faker Community Group",
         "members": 2,
-        "leaders": 2,
-        "schedule": "Meets weekly on Tuesdays from 6:15-8am",
+        "leaders": 1,
+        "schedule": "Meets weekly on Mondays from 4:30-6:30pm",
         "avgAttended": 0,
         "attPct": 0
       }
@@ -15199,9 +15199,9 @@
       },
       "universe": 1158,
       "regions": {
-        "1": 39,
+        "1": 40,
         "2": 89,
-        "3": 12,
+        "3": 11,
         "4": 32,
         "5": 8,
         "6": 9,
@@ -15211,9 +15211,9 @@
         "10": 67,
         "11": 51,
         "12": 26,
-        "13": 53,
+        "13": 52,
         "14": 19,
-        "15": 134
+        "15": 135
       },
       "regionNames": {
         "1": [
@@ -15247,6 +15247,7 @@
           "Lyssa Sutton",
           "Paula J. Perialas",
           "RG Haddad",
+          "Richard Diebert",
           "Rita Misanik",
           "Rosa Catu",
           "Sherri Escobar",
@@ -15357,7 +15358,6 @@
           "Malena Kosher",
           "Melissa Soule",
           "Nita Taylor",
-          "Richard Diebert",
           "Rob Griffin",
           "Sarah Perez",
           "Tony Sanchez"
@@ -15879,7 +15879,6 @@
           "Ariel Buckwalter",
           "Bart Wallace",
           "Bill Wallace",
-          "Caleb Frink",
           "Casey Madison",
           "Cathy Cappini",
           "Chelsea Borowski",
@@ -15967,6 +15966,7 @@
           "Brenda Milligan",
           "Bruce Rector",
           "Byron Corletto",
+          "Caleb Frink",
           "Candy Bennett",
           "Carlos Flores",
           "Charlene Carp",
@@ -16135,7 +16135,6 @@
             "Bret Tompkins",
             "Bryan Harter",
             "Cadence Laird",
-            "Caleb Frink",
             "Cameron Niel",
             "Campbell Cummings",
             "Casey Madison",
@@ -16254,6 +16253,7 @@
             "Peggy Jo Ewald",
             "RG Haddad",
             "Rafik George Haddad",
+            "Richard Diebert",
             "Rita Misanik",
             "Rita Pescatore",
             "Robert Clark",
@@ -16293,7 +16293,7 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 134,
+          "count": 135,
           "names": [
             "Adam Carp",
             "Alan Charles",
@@ -16318,6 +16318,7 @@
             "Brenda Milligan",
             "Bruce Rector",
             "Byron Corletto",
+            "Caleb Frink",
             "Candy Bennett",
             "Carlos Flores",
             "Charlene Carp",
@@ -16433,7 +16434,7 @@
         },
         "memberOnly": {
           "label": "Family Members only — no CG, serving, or giving",
-          "count": 39,
+          "count": 40,
           "names": [
             "Allie Fava",
             "Andy Jones",
@@ -16465,6 +16466,7 @@
             "Lyssa Sutton",
             "Paula J. Perialas",
             "RG Haddad",
+            "Richard Diebert",
             "Rita Misanik",
             "Rosa Catu",
             "Sherri Escobar",
@@ -16714,7 +16716,6 @@
           "Bret Tompkins",
           "Bryan Harter",
           "Cadence Laird",
-          "Caleb Frink",
           "Cameron Niel",
           "Campbell Cummings",
           "Casey Madison",
@@ -16833,6 +16834,7 @@
           "Peggy Jo Ewald",
           "RG Haddad",
           "Rafik George Haddad",
+          "Richard Diebert",
           "Rita Misanik",
           "Rita Pescatore",
           "Robert Clark",
@@ -26698,13 +26700,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Brianna Sanchez",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Anna Sawyer",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
@@ -27086,7 +27081,7 @@
               "name": "Dante Sellman",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27245,8 +27240,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 101,
-            "totalVols": 101
+            "volsWithServiceTime": 100,
+            "totalVols": 100
           }
         }
       ],
@@ -27949,6 +27944,13 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Lauren Bruno",
+              "team": "Stepping Stones",
+              "pos": "Guide WP, Hawks, Mustangs",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -28092,8 +28094,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 92,
-            "totalVols": 92
+            "volsWithServiceTime": 93,
+            "totalVols": 93
           }
         }
       ]
@@ -30167,6 +30169,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lauren Bruno",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -30176,8 +30185,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 65,
-            "totalVols": 65
+            "volsWithServiceTime": 66,
+            "totalVols": 66
           }
         }
       ]
@@ -30937,15 +30946,15 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Team Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 11 AM"
             },
             {
               "name": "Laura Dykins",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
-              "serviceTime": "8 AM"
+              "status": "C",
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Anna Sawyer",
@@ -30957,7 +30966,7 @@
             {
               "name": "Halee Frink",
               "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
+              "pos": "Hawks Guide",
               "status": "U",
               "serviceTime": "9:30 AM"
             },
@@ -31056,13 +31065,13 @@
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
               "name": "Jennifer Torres",
               "team": "Stepping Stones",
-              "pos": "Hawks Guide",
+              "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "11 AM"
             },
@@ -31170,6 +31179,27 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Lauren Bruno",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anabel Dito",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Jorie Hetland",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31179,8 +31209,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"},{\"type\":\"PlanTime\",\"id\":\"225983894\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 68
+            "volsWithServiceTime": 71,
+            "totalVols": 71
           }
         }
       ]
