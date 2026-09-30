@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T11:19:11.333Z",
+  "generatedAt": "2026-09-30T12:18:35.884Z",
   "asOf": "2026-09-30",
   "givingMonths": 12,
   "statusVocab": [
@@ -18,10 +18,10 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 391,
+    "totalPeople": 392,
     "avgScore": 0,
-    "inGroup": 215,
-    "serving": 233,
+    "inGroup": 216,
+    "serving": 234,
     "leading": 77,
     "givingRegular": 0,
     "recurring": 0,
@@ -29,7 +29,7 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 391,
+    "notBaptized": 392,
     "notInGroup": 176,
     "notServing": 158,
     "notGiving": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 391
+      "unknown": 392
     },
     "pct": {
-      "inGroup": 0.5498721227621484,
-      "serving": 0.5959079283887468,
-      "leading": 0.1969309462915601,
+      "inGroup": 0.5510204081632653,
+      "serving": 0.5969387755102041,
+      "leading": 0.19642857142857142,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -3760,6 +3760,48 @@
         },
         {
           "id": null,
+          "name": "Sarah Perlich",
+          "first": "Sarah",
+          "last": "Perlich",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2025-05-30T22:36:49Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Bryan Harter",
           "first": "Bryan",
           "last": "Harter",
@@ -4629,48 +4671,6 @@
               "name": "Breakfast Team",
               "role": "member",
               "joinedAt": "2026-08-24T14:22:18Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Sarah Perlich",
-          "first": "Sarah",
-          "last": "Perlich",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Enrichment Team",
-              "role": "member",
-              "joinedAt": "2025-05-30T22:36:49Z"
             }
           ],
           "flags": [
@@ -8542,43 +8542,6 @@
         },
         {
           "id": null,
-          "name": "Tom Bartoldo",
-          "first": "Tom",
-          "last": "Bartoldo",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Brady Simmons",
           "first": "Brady",
           "last": "Simmons",
@@ -9436,6 +9399,43 @@
           "name": "Tamara Price",
           "first": "Tamara",
           "last": "Price",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tom Bartoldo",
+          "first": "Tom",
+          "last": "Bartoldo",
           "email": "",
           "phone": "",
           "member": false,
@@ -14692,57 +14692,6 @@
         },
         {
           "id": null,
-          "name": "Kathy Frank",
-          "first": "Kathy",
-          "last": "Frank",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": true,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Brown/Frank Community Group",
-              "role": "leader",
-              "joinedAt": "2026-03-25T18:29:17Z"
-            },
-            {
-              "name": "CG LEADERS",
-              "role": "member",
-              "joinedAt": "2026-05-05T08:31:56Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2026-02-27T02:28:44Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Kristen Dorn",
           "first": "Kristen",
           "last": "Dorn",
@@ -15153,6 +15102,57 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2025-01-27T17:29:46Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kathy Frank",
+          "first": "Kathy",
+          "last": "Frank",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": true,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Brown/Frank Community Group",
+              "role": "leader",
+              "joinedAt": "2026-03-25T18:29:17Z"
+            },
+            {
+              "name": "CG LEADERS",
+              "role": "member",
+              "joinedAt": "2026-05-05T08:31:56Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2026-02-27T02:28:44Z"
             }
           ],
           "flags": [],
@@ -17872,10 +17872,10 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 4,
+        "totalPeople": 5,
         "avgScore": 0,
-        "inGroup": 4,
-        "serving": 1,
+        "inGroup": 5,
+        "serving": 2,
         "leading": 0,
         "givingRegular": 0,
         "recurring": 0,
@@ -17883,7 +17883,7 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 4,
+        "notBaptized": 5,
         "notInGroup": 0,
         "notServing": 3,
         "notGiving": 0,
@@ -17899,11 +17899,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 4
+          "unknown": 5
         },
         "pct": {
           "inGroup": 1,
-          "serving": 0.25,
+          "serving": 0.4,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -17913,6 +17913,52 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Clayton Sheldon",
+          "first": "Clayton",
+          "last": "Sheldon",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [
+            {
+              "name": "Isaac Griffin Community Group",
+              "role": "member",
+              "joinedAt": "2026-01-28T07:26:06Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2026-02-23T22:07:04Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Bridget Evans",
@@ -18100,9 +18146,9 @@
   ],
   "leaderCandidateCount": 40,
   "paciCounts": {
-    "parent": 63,
+    "parent": 64,
     "adult": 65,
-    "child": 150,
+    "child": 149,
     "infant": 104
   }
 }
