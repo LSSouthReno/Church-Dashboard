@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T08:18:38.016Z",
+  "generatedAt": "2026-09-30T09:17:51.203Z",
   "asOf": "2026-09-30",
   "givingMonths": 12,
   "statusVocab": [
@@ -18,7 +18,7 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 390,
+    "totalPeople": 391,
     "avgScore": 0,
     "inGroup": 215,
     "serving": 233,
@@ -29,9 +29,9 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 390,
-    "notInGroup": 175,
-    "notServing": 157,
+    "notBaptized": 391,
+    "notInGroup": 176,
+    "notServing": 158,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 390
+      "unknown": 391
     },
     "pct": {
-      "inGroup": 0.5512820512820513,
-      "serving": 0.5974358974358974,
-      "leading": 0.19743589743589743,
+      "inGroup": 0.5498721227621484,
+      "serving": 0.5959079283887468,
+      "leading": 0.1969309462915601,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -8129,7 +8129,7 @@
       "list": "Shepherding - Keith",
       "unassigned": false,
       "summary": {
-        "totalPeople": 58,
+        "totalPeople": 59,
         "avgScore": 0,
         "inGroup": 21,
         "serving": 27,
@@ -8140,9 +8140,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 58,
-        "notInGroup": 37,
-        "notServing": 31,
+        "notBaptized": 59,
+        "notInGroup": 38,
+        "notServing": 32,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -8156,12 +8156,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 58
+          "unknown": 59
         },
         "pct": {
-          "inGroup": 0.3620689655172414,
-          "serving": 0.46551724137931033,
-          "leading": 0.15517241379310345,
+          "inGroup": 0.3559322033898305,
+          "serving": 0.4576271186440678,
+          "leading": 0.15254237288135594,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -8508,6 +8508,43 @@
           "name": "Thomas Alvarez",
           "first": "Thomas",
           "last": "Alvarez",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tom Bartoldo",
+          "first": "Tom",
+          "last": "Bartoldo",
           "email": "",
           "phone": "",
           "member": false,
@@ -18066,6 +18103,6 @@
     "parent": 63,
     "adult": 65,
     "child": 150,
-    "infant": 103
+    "infant": 104
   }
 }
