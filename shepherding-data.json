@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T17:17:58.161Z",
+  "generatedAt": "2026-09-30T18:19:05.889Z",
   "asOf": "2026-09-30",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 392,
     "avgScore": 0,
-    "inGroup": 217,
+    "inGroup": 216,
     "serving": 233,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 392,
-    "notInGroup": 175,
+    "notInGroup": 176,
     "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 392
     },
     "pct": {
-      "inGroup": 0.5535714285714286,
+      "inGroup": 0.5510204081632653,
       "serving": 0.5943877551020408,
       "leading": 0.19642857142857142,
       "givingRegular": 0,
@@ -13610,7 +13610,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 29,
+        "inGroup": 28,
         "serving": 26,
         "leading": 7,
         "givingRegular": 0,
@@ -13620,7 +13620,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 19,
+        "notInGroup": 20,
         "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
@@ -13638,7 +13638,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.6041666666666666,
+          "inGroup": 0.5833333333333334,
           "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
@@ -14105,6 +14105,48 @@
         },
         {
           "id": null,
+          "name": "Richard Diebert",
+          "first": "Richard",
+          "last": "Diebert",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Parking Team",
+              "role": "member",
+              "joinedAt": "2026-02-10T00:02:00Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Julie Serpa",
           "first": "Julie",
           "last": "Serpa",
@@ -14417,52 +14459,6 @@
             "Not in a group",
             "Not serving"
           ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Richard Diebert",
-          "first": "Richard",
-          "last": "Diebert",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Turcich Community Group",
-              "role": "member",
-              "joinedAt": "2026-04-02T14:02:05Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2026-02-10T00:02:00Z"
-            }
-          ],
-          "flags": [],
           "pending": true
         },
         {
@@ -18132,7 +18128,7 @@
   "paciCounts": {
     "parent": 64,
     "adult": 66,
-    "child": 146,
-    "infant": 106
+    "child": 145,
+    "infant": 107
   }
 }
