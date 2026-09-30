@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T14:18:58.915Z",
+  "generatedAt": "2026-09-30T15:18:54.714Z",
   "asOf": "2026-09-30",
   "givingMonths": 12,
   "statusVocab": [
@@ -3298,7 +3298,7 @@
         "totalPeople": 57,
         "avgScore": 0,
         "inGroup": 29,
-        "serving": 34,
+        "serving": 35,
         "leading": 10,
         "givingRegular": 0,
         "recurring": 0,
@@ -3308,7 +3308,7 @@
         "overdue": 0,
         "notBaptized": 57,
         "notInGroup": 28,
-        "notServing": 23,
+        "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3326,7 +3326,7 @@
         },
         "pct": {
           "inGroup": 0.5087719298245614,
-          "serving": 0.5964912280701754,
+          "serving": 0.6140350877192983,
           "leading": 0.17543859649122806,
           "givingRegular": 0,
           "recurring": 0,
@@ -3415,43 +3415,6 @@
           "name": "Heather Niel",
           "first": "Heather",
           "last": "Niel",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "John Andreano",
-          "first": "John",
-          "last": "Andreano",
           "email": "",
           "phone": "",
           "member": false,
@@ -3871,6 +3834,48 @@
           "flags": [
             "Not in a group",
             "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "John Andreano",
+          "first": "John",
+          "last": "Andreano",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2026-08-17T18:14:36Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
           ],
           "pending": true
         },
@@ -13571,7 +13576,7 @@
         "totalPeople": 48,
         "avgScore": 0,
         "inGroup": 29,
-        "serving": 27,
+        "serving": 26,
         "leading": 7,
         "givingRegular": 0,
         "recurring": 0,
@@ -13581,7 +13586,7 @@
         "overdue": 0,
         "notBaptized": 48,
         "notInGroup": 19,
-        "notServing": 21,
+        "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -13599,7 +13604,7 @@
         },
         "pct": {
           "inGroup": 0.6041666666666666,
-          "serving": 0.5625,
+          "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
           "recurring": 0,
@@ -14110,6 +14115,43 @@
           "name": "Kathy Pavlich",
           "first": "Kathy",
           "last": "Pavlich",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Tonya Lowry",
+          "first": "Tonya",
+          "last": "Lowry",
           "email": "",
           "phone": "",
           "member": false,
@@ -14729,48 +14771,6 @@
           "serveTeams": [],
           "flags": [
             "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Tonya Lowry",
-          "first": "Tonya",
-          "last": "Lowry",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2026-06-01T21:25:14Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
           ],
           "pending": true
         },
@@ -18148,7 +18148,7 @@
   "paciCounts": {
     "parent": 64,
     "adult": 65,
-    "child": 149,
-    "infant": 104
+    "child": 148,
+    "infant": 105
   }
 }
