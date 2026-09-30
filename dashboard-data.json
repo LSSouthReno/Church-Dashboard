@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-30T16:46:28.347Z",
+  "lastUpdated": "2026-09-30T17:04:31.200Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -4275,16 +4275,16 @@
       },
       "2026-09": {
         "8:00 AM": {
-          "adults": 197,
-          "kids": 16
+          "adults": 194,
+          "kids": 19
         },
         "9:30 AM": {
-          "adults": 304,
-          "kids": 55
+          "adults": 312,
+          "kids": 58
         },
         "11:00 AM": {
-          "adults": 243,
-          "kids": 39
+          "adults": 241,
+          "kids": 38
         }
       }
     }
@@ -4719,7 +4719,8 @@
       "2026-08-30",
       "2026-09-06",
       "2026-09-13",
-      "2026-09-20"
+      "2026-09-20",
+      "2026-09-27"
     ],
     "data": {
       "2018-08-19": {
@@ -8392,6 +8393,20 @@
         "11:00 AM": {
           "adults": 260,
           "kids": 42
+        }
+      },
+      "2026-09-27": {
+        "8:00 AM": {
+          "adults": 187,
+          "kids": 26
+        },
+        "9:30 AM": {
+          "adults": 333,
+          "kids": 66
+        },
+        "11:00 AM": {
+          "adults": 233,
+          "kids": 36
         }
       }
     }
@@ -13166,7 +13181,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 30, 2026, 9:46 AM",
+    "refreshed": "Sep 30, 2026, 10:04 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14626,7 +14641,7 @@
       ]
     },
     "leadersAdded": {
-      "total2026": 57
+      "total2026": 58
     },
     "outsidersInsiders": {
       "2024": [
@@ -14740,9 +14755,10 @@
           "Anna Moore",
           "Julia Perlingos-Jackson",
           "Tina Faker",
-          "Adam Carp"
+          "Adam Carp",
+          "Brandon Thompson"
         ],
-        "count": 64
+        "count": 65
       }
     ],
     "leaderPipeline": [
@@ -15161,7 +15177,7 @@
       {
         "name": "Carp/Thompson Community Group",
         "members": 2,
-        "leaders": 1,
+        "leaders": 2,
         "schedule": "Meets weekly on Tuesdays from 6:15-8am",
         "avgAttended": 0,
         "attPct": 0
@@ -15181,18 +15197,18 @@
         "serving": 296,
         "giving": 954
       },
-      "universe": 1159,
+      "universe": 1158,
       "regions": {
         "1": 39,
-        "2": 90,
+        "2": 89,
         "3": 12,
         "4": 32,
         "5": 8,
         "6": 9,
         "7": 15,
-        "8": 526,
+        "8": 525,
         "9": 79,
-        "10": 66,
+        "10": 67,
         "11": 51,
         "12": 26,
         "13": 53,
@@ -15329,7 +15345,6 @@
           "Sophia L",
           "Terri Mehlhaff",
           "Tori Meyer",
-          "Tracy Brown",
           "Tyler Harte",
           "Will Griffin"
         ],
@@ -15768,6 +15783,7 @@
           "Steven Pradere",
           "Sue Henderson",
           "Suvidha Srestta Garnepudi",
+          "Tracy Brown",
           "Vickie Luchetti"
         ],
         "11": [
@@ -16462,7 +16478,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 605,
+          "count": 604,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -26812,7 +26828,7 @@
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Richard Price",
@@ -27058,6 +27074,27 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Emory Breach",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Dante Sellman",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Thomas Adams",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -27208,8 +27245,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 98,
-            "totalVols": 98
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ],
@@ -27750,7 +27787,7 @@
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Richard Price",
@@ -27898,6 +27935,20 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Pat Peregrin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Renee Peregrin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -28041,8 +28092,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 92,
+            "totalVols": 92
           }
         }
       ]
@@ -28416,8 +28467,8 @@
               "name": "Douglas Drake",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "C",
-              "serviceTime": "9:30 AM"
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Kathy Herndon",
@@ -28691,6 +28742,27 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Gina Rankin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kelly Farson",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -28827,8 +28899,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 93,
+            "totalVols": 93
           }
         }
       ]
@@ -29119,14 +29191,14 @@
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Douglas Drake",
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Kathy Herndon",
@@ -29159,7 +29231,7 @@
             {
               "name": "Timothy Frederick",
               "team": "First Impressions",
-              "pos": "Greeter",
+              "pos": "First Impressions Lead",
               "status": "C",
               "serviceTime": "8 AM"
             },
@@ -29442,6 +29514,27 @@
               "pos": "Mustangs Lead Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Gina Rankin",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kay Tietz",
+              "team": "Prayer Team",
+              "pos": "Service Prayer",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Natalie Aiazzi",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -29599,8 +29692,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 85,
-            "totalVols": 85
+            "volsWithServiceTime": 88,
+            "totalVols": 88
           }
         }
       ]
@@ -29786,14 +29879,14 @@
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Kathy Herndon",
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Richard Price",
@@ -30043,7 +30136,7 @@
             {
               "name": "David Yost",
               "team": "First Impressions",
-              "pos": "Greeter",
+              "pos": "First Impressions Lead",
               "status": "U",
               "serviceTime": "8 AM"
             },
@@ -30249,7 +30342,7 @@
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Douglas Drake",
@@ -30558,6 +30651,20 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Timothy Frederick",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Pat Peregrin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -30567,8 +30674,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"},{\"type\":\"PlanTime\",\"id\":\"225983887\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 65,
-            "totalVols": 65
+            "volsWithServiceTime": 67,
+            "totalVols": 67
           }
         }
       ]
@@ -31056,6 +31163,13 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Natalie Aiazzi",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -31065,8 +31179,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"},{\"type\":\"PlanTime\",\"id\":\"225983894\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 67,
-            "totalVols": 67
+            "volsWithServiceTime": 68,
+            "totalVols": 68
           }
         }
       ]
@@ -31210,7 +31324,7 @@
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Douglas Drake",
@@ -31342,7 +31456,7 @@
               "name": "Tonshai Hatcher",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -31526,6 +31640,20 @@
               "pos": "Host",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "David Yost",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Pat Peregrin",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -31535,8 +31663,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 63,
-            "totalVols": 63
+            "volsWithServiceTime": 65,
+            "totalVols": 65
           }
         }
       ]
@@ -31642,14 +31770,14 @@
               "team": "First Impressions",
               "pos": "First Impressions Lead",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Douglas Drake",
               "team": "First Impressions",
               "pos": "Greeter",
               "status": "U",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM, 9:30 AM"
             },
             {
               "name": "Richard Price",
@@ -31704,7 +31832,7 @@
               "name": "Tonshai Hatcher",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -31902,6 +32030,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sarah Rawlins",
+              "team": "First Impressions",
+              "pos": "First Impressions Lead",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -31911,8 +32046,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"227200162\"},{\"type\":\"PlanTime\",\"id\":\"227200163\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 50,
-            "totalVols": 50
+            "volsWithServiceTime": 51,
+            "totalVols": 51
           }
         }
       ]
