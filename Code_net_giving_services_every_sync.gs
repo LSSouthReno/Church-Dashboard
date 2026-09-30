@@ -1524,6 +1524,8 @@ function buildDashboardDataFromSheet_(ss) {
     });
   });
 
+  const attnSvc = attnSvcFeedsFromSheet_(ss);   // per-service attendance (Code_attendance_by_service.gs)
+
   return {
     lastUpdated: new Date().toISOString(),
     sectionDescriptions: readSectionDescriptions_(ss),
@@ -1542,6 +1544,8 @@ function buildDashboardDataFromSheet_(ss) {
       kids: attendanceRows.map(r => Number(r[3]) || 0)
     },
     attendanceWeekly: attendanceWeekly,
+    attendanceByService: attnSvc.monthly,
+    attendanceByServiceWeekly: attnSvc.weekly,
     serveTeams: getServeTeams_(),
     uniqueVolunteers: (function() {
       var v = PropertiesService.getScriptProperties().getProperty('UNIQUE_VOLUNTEERS');
@@ -2416,6 +2420,10 @@ function getAttendanceWeeklyRowsForMonths_(months) {
   });
   Logger.log('   Kids check-ins fetched across all event_times: ' + totalKidCheckins);
 
+  // Same counts, split by service time → AttendanceByService tab (Code_attendance_by_service.gs).
+  try { attnSvcCollect_(eventTimes, adultHcByEtId, kidsHcByEtId, kidCheckinsByEtId); }
+  catch (err) { Logger.log('   ! attendance by service collect failed: ' + err.message); }
+
   // Aggregate by date — sum all event_times on the same Sunday
   const byDate = {};
 
@@ -2452,6 +2460,7 @@ function getAttendanceWeeklyRowsForMonths_(months) {
 }
 
 function upsertWeeklyAttendanceRows_(sh, rows) {
+  attnSvcFlush_(sh.getParent());   // per-service split of the same pull (Code_attendance_by_service.gs)
   if (!rows || !rows.length) return;
 
   const existing = sh.getDataRange().getValues();
