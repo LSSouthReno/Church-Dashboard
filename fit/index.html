@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141414">
+<title>Where Should I Serve? · Living Stones</title>
+<link rel="icon" type="image/png" href="/assets/app/icon-192.png">
+<link rel="apple-touch-icon" href="/assets/app/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<!--
+  Serving-fit survey — TEST VERSION, link-only (not linked from the site; noindex). Nothing is saved.
+  Built from the prototype Brad approved 2026-09-30. Team blurbs come from team-checklists.js; live
+  team gaps from /dashboard-data.json. Planned: move into My Journey + the Shepherding drawer.
+-->
+<style>
+  /* Layout: the My Journey look (dark + gold). One narrow survey column on top, reviewer notes below. */
+  :root {
+    color-scheme: dark;
+    --bg:#141414; --card:#1f1f1f; --card-2:#262626; --line:#2e2e2e; --line-2:#3a3a3a;
+    --text:#f2efe9; --muted:#a39e94; --dim:#78726a;
+    --gold:#d4af37; --gold-hi:#e3c35a; --gold-bg:rgba(212,175,55,.12); --gold-line:rgba(212,175,55,.38); --on-gold:#1a1407;
+    --ok:#8fd1a8; --warn:#f0c27a;
+    --display:'Playfair Display', Georgia, serif;
+    --body:'Montserrat', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:var(--body); -webkit-font-smoothing:antialiased; }
+  .page { max-width:1040px; margin:0 auto; padding-inline:16px; padding-block:18px 64px; }
+  .proto { background:var(--gold-bg); border:1px solid var(--gold-line); color:var(--gold); border-radius:10px; font-size:13px; font-weight:600; padding:9px 14px; line-height:1.5; }
+  .proto b { color:var(--gold-hi); }
+
+  /* survey card */
+  .survey { max-width:620px; margin:26px auto 0; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px 22px; }
+  .kicker { font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+  h1 { font-family:var(--display); font-size:30px; line-height:1.15; margin:8px 0 8px; text-wrap:balance; }
+  .lede { color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 18px; max-width:60ch; }
+  .prog { display:flex; gap:5px; margin:4px 0 18px; }
+  .prog i { flex:1; height:4px; border-radius:2px; background:var(--line-2); }
+  .prog i.on { background:var(--gold); }
+  .q h2 { font-size:19px; line-height:1.35; margin:0 0 6px; text-wrap:balance; }
+  .q .hint { color:var(--dim); font-size:13px; margin:0 0 14px; }
+  .opts { display:grid; gap:9px; }
+  .opt { appearance:none; text-align:left; width:100%; background:var(--card-2); border:1px solid var(--line-2); color:var(--text); border-radius:11px; padding:13px 15px; font:600 15px var(--body); cursor:pointer; display:flex; gap:12px; align-items:center; line-height:1.35; }
+  .opt:hover { border-color:#55524c; }
+  .opt:focus-visible, .btn:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  .opt .box { width:20px; height:20px; border-radius:50%; border:2px solid #55524c; flex-shrink:0; display:grid; place-items:center; }
+  .opt.multi .box { border-radius:6px; }
+  .opt.on { border-color:var(--gold); background:var(--gold-bg); }
+  .opt.on .box { border-color:var(--gold); background:var(--gold); }
+  .opt.on .box::after { content:''; width:7px; height:7px; border-radius:50%; background:var(--on-gold); }
+  .opt.multi.on .box::after { width:9px; height:5px; border-radius:0; background:none; border-left:2px solid var(--on-gold); border-bottom:2px solid var(--on-gold); transform:rotate(-45deg) translate(1px,-1px); }
+  .nav { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:18px; }
+  .btn { appearance:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font:700 14px var(--body); padding:11px 17px; border-radius:10px; border:1px solid var(--line-2); background:var(--card-2); color:var(--text); cursor:pointer; text-decoration:none; }
+  .btn.p { background:var(--gold); border-color:var(--gold); color:var(--on-gold); }
+  .btn.p:hover { background:var(--gold-hi); }
+  .btn.g { background:none; color:var(--muted); }
+  .btn:disabled { opacity:.45; cursor:default; }
+  .count { color:var(--dim); font-size:13px; font-variant-numeric:tabular-nums; }
+
+  /* results */
+  .res-h { font-family:var(--display); font-size:27px; margin:6px 0 6px; line-height:1.2; }
+  .fits { display:grid; gap:12px; margin-top:16px; }
+  .fit { border:1px solid var(--line-2); border-radius:13px; padding:16px 16px 14px; background:var(--card-2); display:grid; gap:8px; }
+  .fit.top { border-color:var(--gold-line); background:linear-gradient(180deg, var(--gold-bg), transparent 70%), var(--card-2); }
+  .fit-h { display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .fit-h b { font-size:17.5px; }
+  .tag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:6px; white-space:nowrap; }
+  .tag.best { background:var(--gold); color:var(--on-gold); }
+  .tag.good { background:var(--line-2); color:var(--text); }
+  .fit p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+  .fit .why { color:var(--text); }
+  .fit .sun { font-size:13px; } .fit .sun b { color:var(--text); font-weight:600; }
+  .fit .need { color:var(--warn); font-size:13px; font-weight:600; }
+  .fit .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:4px; }
+  .fit .acts .btn { padding:8px 13px; font-size:13px; }
+  .fine { color:var(--dim); font-size:12.5px; line-height:1.6; margin-top:14px; }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:#221d10; border:1px solid var(--gold-line); color:var(--text); padding:10px 16px; border-radius:10px; font-size:13.5px; max-width:calc(100% - 32px); opacity:0; transition:opacity .2s; pointer-events:none; }
+  .toast.show { opacity:1; }
+  @media (prefers-reduced-motion: reduce) { .toast { transition:none; } }
+
+  /* reviewer notes */
+  .notes { margin-top:44px; border-top:1px solid var(--line); padding-top:26px; display:grid; gap:18px; }
+  .notes h3 { font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin:0 0 8px; }
+  .cols { display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:16px; }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:13px; padding:17px 18px; min-width:0; }
+  .panel p, .panel li { color:var(--muted); font-size:14px; line-height:1.6; }
+  .panel p { margin:0 0 8px; }
+  .panel ul, .panel ol { margin:0; padding-left:18px; display:grid; gap:6px; }
+  .panel li b { color:var(--text); }
+  .tbl-wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13px; font-variant-numeric:tabular-nums; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { color:var(--dim); font-size:11px; letter-spacing:.06em; text-transform:uppercase; font-weight:700; }
+  td.n { text-align:right; }
+  td.gap { color:var(--warn); font-weight:700; text-align:right; }
+  td.full { color:var(--ok); text-align:right; }
+  td.x { color:var(--dim); }
+  .guide { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:4px 22px; margin-top:6px; }
+  .g-row { padding:10px 0; border-bottom:1px solid var(--line); min-width:0; }
+  .g-row b { font-size:14.5px; }
+  .g-row p { margin:3px 0 0; font-size:13.5px; }
+  .g-row .g-sun { color:var(--dim); font-size:12.5px; }
+  /* pastor drawer mock */
+  .drawer { background:var(--bg); border:1px solid var(--line); border-radius:11px; padding:13px 14px; }
+  .drawer h4 { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin:0 0 9px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .dr-row { display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:4px 0; color:var(--muted); }
+  .dr-row b { color:var(--text); font-weight:600; }
+  .dr-acts { display:flex; gap:7px; flex-wrap:wrap; margin-top:10px; }
+  .dr-acts span { font-size:12px; font-weight:700; border:1px solid var(--line-2); border-radius:7px; padding:6px 10px; color:var(--text); background:var(--card-2); }
+  .dr-acts span.hi { background:#8a7226; border-color:var(--gold); color:#fff7de; }
+  @media (max-width:520px) { .survey { padding:20px 16px 18px; } h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="proto"><b>Test version.</b> Take it as yourself (or as someone you shepherd) and tell Brad what felt off. Nothing you answer is saved.</div>
+  <section class="survey" id="survey" aria-live="polite"></section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+// Serve-team numbers from the dashboard (current / needed), Sep 30 2026. "what" and "sunday" are
+// written from each team's volunteer checklist (team-checklists.js, the Serve Teams dashboard).
+const SERVE_URL = 'https://lssr.churchcenter.com/groups/serve-teams?enrollment=open_signup%2Crequest_to_join&filter=enrollment';
+const TEAMS = {
+  ss:      { name:'Stepping Stones',   cur:116, need:150, bg:true,
+             what:'Kids ministry. Teach the week’s lesson in a classroom, help with check-in, and keep rooms clean, safe and fun.',
+             sunday:'Look over the curriculum on Thursday. Arrive 15 minutes before your service; tidy and sanitize after.' },
+  stu:     { name:'LS Students',       cur:12,  need:12, bg:true,
+             what:'Middle and high school ministry. Run the opening game, back up the speaker and lead a small-group discussion.',
+             sunday:'Arrive 30 minutes before the 9:30 service and stay for connection time after.' },
+  fi:      { name:'First Impressions', cur:30,  need:40,
+             what:'Greeters and door holders. Eye contact, a smile and a warm welcome for every person who walks in.',
+             sunday:'Arrive by 7:30. You’re released to enjoy the service 15 minutes in, then back at the doors between services.' },
+  connect: { name:'Connect',           cur:13,  need:15,
+             what:'The info desk. Welcome people, answer questions, point them to Church Center and upcoming events, and look after lost and found.',
+             sunday:'Arrive 30 minutes before your service to set up the desk.' },
+  hosp:    { name:'Hospitality',       cur:32,  need:29,
+             what:'Spread out through the room before service and make people feel at home, especially anyone sitting alone.',
+             sunday:'Just the 15 minutes before service. When worship starts, you sit down and enjoy it.' },
+  enrich:  { name:'Enrichment',        cur:65,  need:72,
+             what:'Communion and offering. Prepare and serve communion, pass the offering baskets, help people find seats and reset the rows between services.',
+             sunday:'Arrive at 7:00 to prep the trays. You enjoy the service until communion near the end.' },
+  coffee:  { name:'Coffee Team',       cur:16,  need:14,
+             what:'Brew and serve the lobby coffee. Keep the urns full, restock cups and cream, and clean up at the end.',
+             sunday:'Arrive an hour before; coffee is ready before the doors open.' },
+  bfast:   { name:'Breakfast Team',    cur:15,  need:23,
+             what:'Cook a hot breakfast at home with your team (for about 30 people), then set it out in the warmers and keep it stocked.',
+             sunday:'Plan the menu with your team, arrive with food by 7:00, tear down after 11:30.' },
+  parking: { name:'Parking',           cur:12,  need:14,
+             what:'In a vest and flag, set out cones and direct cars to open spaces, open overflow parking, and help traffic out safely.',
+             sunday:'Arrive an hour before service; outside the whole time.' },
+  safety:  { name:'Safety',            cur:37,  need:50, bg:true,
+             what:'Security and medical coverage. Guard the kids’ area doors, roam the campus by radio and respond to emergencies.',
+             sunday:'Arrive 15 minutes before your service (7:00 prayer preferred); you’re on post through the service.' },
+  prayer:  { name:'Prayer Team',       cur:22,  need:20,
+             what:'Intercessors. Cover the whole service in prayer from the prayer room, following the week’s prompts, and pray for the church during the week.',
+             sunday:'Arrive 10 minutes early and pray through to the end of the service. Everything shared stays confidential.' },
+  tech:    { name:'Tech',              cur:16,  need:20,
+             what:'Sound, slides, cameras and the livestream. Soundcheck the band, run the service, and power it all down after.',
+             sunday:'Arrive 90 minutes early for setup and the 7:30 production meeting. We train you.' },
+  worship: { name:'Worship Team',      cur:28,  need:38,
+             what:'Vocals and instruments. Soundcheck, pray and lead the church in worship; stay for prayer after the service.',
+             sunday:'Arrive 90 minutes early with your gear. Starts with a short audition.' }
+};
+const EXCLUDED = [
+  ['Service Captains', 10, 10, 'building crew with keys and alarm codes',
+   'The building crew. From 6:30 AM: unlock, put out signs, flags, cones and heaters, check bathrooms, take the headcount each service, then take out trash and lock up.'],
+  ['Presiders', null, null, 'service hosts, not in team counts',
+   'The service hosts. Run the transitions and announcements, lead communion, and close with next steps for guests.']
+];
+
+// 8 questions that shape the match, plus 1 for leaders (frequency). They ask about the person —
+// gifts, temperament, what they enjoy — never about teams; each option quietly adds points to
+// teams, and its phrase feeds the "Because…" line.
+const QS = [
+  { q:'People who know you well would say you’re the one who…', opts:[
+    ['Makes everyone feel noticed', { fi:4, hosp:2, connect:1, parking:1 }, 'you make people feel noticed'],
+    ['Quietly makes sure everything is ready', { enrich:4, coffee:2, bfast:1, tech:1 }, 'you quietly make sure things are ready'],
+    ['Gets down on the floor and plays with the kids', { ss:4, stu:1 }, 'kids love being around you'],
+    ['Teenagers actually open up to', { stu:4 }, 'teenagers open up to you'],
+    ['Prays when everyone else is worrying', { prayer:4 }, 'you’re the one who prays'],
+    ['Always has music playing or a gadget in hand', { worship:2, tech:2 }, 'music and gadgets are your thing']]},
+  { q:'At a party, where are you usually?', opts:[
+    ['Meeting everyone. The more new faces the better.', { connect:3, hosp:3, fi:2, parking:1 }, 'new people energize you'],
+    ['Catching up with a few people I know', { coffee:1, bfast:1, enrich:1, ss:1 }, ''],
+    ['In the kitchen, or wherever there’s a job to do', { tech:2, bfast:2, prayer:2, enrich:1, safety:1 }, 'you’re happiest with a job to do']]},
+  { q:'Which of these would make your day?', hint:'Pick up to two.', multi:2, opts:[
+    ['Spotting someone on their own and pulling them into the conversation', { hosp:3 }, 'you love pulling people in'],
+    ['Being the one who knows where everything is and what’s going on', { connect:3 }, 'you like being the one with answers'],
+    ['A quiet, meaningful moment of serving someone', { enrich:3 }, 'quiet, meaningful moments matter to you'],
+    ['A great cup of coffee, and making one for someone else', { coffee:3 }, 'you love a good cup of coffee'],
+    ['Cooking a big meal for people you love', { bfast:3 }, 'you love feeding people'],
+    ['Being outside with a clear job to do', { parking:3 }, 'you like being outside with a clear job'],
+    ['Being the calm one when something goes wrong', { safety:3 }, 'you stay calm when things go wrong'],
+    ['Explaining something until it finally clicks', { ss:2, stu:1 }, 'you love helping things click'],
+    ['Figuring out how something works', { tech:3 }, 'you love figuring out how things work']]},
+  { q:'Which age group do you have the most patience for?', opts:[
+    ['Toddlers and preschoolers', { ss:3 }, 'you have patience for little ones'],
+    ['Grade-schoolers', { ss:3 }, 'you have patience for grade-schoolers'],
+    ['Teenagers', { stu:3 }, 'you have patience for teenagers'],
+    ['Honestly? Grown-ups', { ss:-2, stu:-2 }, '']]},
+  { q:'Is music part of your life?', opts:[
+    ['Yes. I sing or play, and I’ve done it with others.', { worship:4 }, 'music is part of who you are'],
+    ['I sing in the car and play a little', { worship:1 }, ''],
+    ['I’m more of a listener', { worship:-6 }, '']]},
+  { q:'A new gadget shows up. You…', opts:[
+    ['Can’t wait to figure it out', { tech:3 }, 'you dive into new gadgets'],
+    ['Figure it out when you need to', { tech:1 }, ''],
+    ['Hand it to someone else', { tech:-3 }, '']]},
+  { q:'Have you been trained to handle emergencies? Medical, first aid, security, law enforcement or military all count.', opts:[
+    ['Yes', { safety:4 }, 'you’re trained for emergencies'],
+    ['No', {}, '']]},
+  { q:'Rain or shine, where would you rather be?', opts:[
+    ['Outside. The fresher the air the better.', { parking:3, safety:1 }, 'you’d rather be outside'],
+    ['Either is fine', { parking:1 }, ''],
+    ['Inside with the heat on', { parking:-3 }, '']]},
+  { q:'How often could you serve?', hint:'This doesn’t change your match. It helps the team leader plan.', leaders:true, opts:[
+    ['Every week', {}, ''], ['Twice a month', {}, ''], ['Once a month', {}, ''], ['Not sure yet', {}, '']]}
+];
+
+// Sample answers so the page opens on a real result (a welcoming, coffee-loving adult).
+let ans = [];
+let step = 0;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+
+function score() {
+  const pts = {}, why = {};
+  Object.keys(TEAMS).forEach(k => { pts[k] = 0; why[k] = []; });
+  QS.forEach((Q, qi) => (ans[qi] || []).forEach(oi => {
+    const [, w, phrase] = Q.opts[oi];
+    Object.keys(w).forEach(k => { pts[k] += w[k]; if (w[k] >= 2 && phrase) why[k].push(phrase); });
+  }));
+  return Object.keys(TEAMS).map(k => {
+    const t = TEAMS[k], gap = Math.max(0, t.need - t.cur);
+    const boost = Math.min(1.5, (gap / t.need) * 4);
+    return { k, t, gap, raw: pts[k], total: pts[k] + (pts[k] > 0 ? boost : 0), why: why[k] };
+  }).filter(r => r.raw >= 3).sort((a, b) => b.total - a.total).slice(0, 3);
+}
+function sentence(list) { return list.length < 2 ? (list[0] || '') : list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1]; }
+
+function render() {
+  const el = $('survey');
+  if (step < QS.length) {
+    const Q = QS[step], picked = ans[step] || [];
+    el.innerHTML =
+      (step === 0 ? '<div class="kicker">My Journey · Serving</div><h1>Where should I serve?</h1><p class="lede">Nine quick questions about you: how you’re wired and what you enjoy. We’ll suggest where you’d likely fit best to start serving. You can always try something else.</p>' : '') +
+      '<div class="prog" aria-hidden="true">' + QS.map((_, i) => '<i class="' + (i <= step ? 'on' : '') + '"></i>').join('') + '</div>' +
+      '<div class="q"><h2>' + esc(Q.q) + '</h2>' + (Q.hint ? '<p class="hint">' + esc(Q.hint) + '</p>' : '') +
+      '<div class="opts" role="' + (Q.multi ? 'group' : 'radiogroup') + '">' + Q.opts.map((o, i) =>
+        '<button class="opt' + (Q.multi ? ' multi' : '') + (picked.includes(i) ? ' on' : '') + '" id="opt-' + step + '-' + i + '" role="' + (Q.multi ? 'checkbox' : 'radio') + '" aria-checked="' + picked.includes(i) + '" onclick="pick(' + i + ')"><span class="box"></span>' + esc(o[0]) + '</button>').join('') + '</div></div>' +
+      '<div class="nav"><button class="btn g" onclick="back()"' + (step === 0 ? ' disabled' : '') + '>Back</button><span class="count">' + (step + 1) + ' of ' + QS.length + '</span>' +
+      '<button class="btn p" id="nextBtn" onclick="next()"' + (picked.length ? '' : ' disabled') + '>' + (step === QS.length - 1 ? 'See my fit' : 'Next') + '</button></div>';
+    return;
+  }
+  const top = score();
+  el.innerHTML = '<div class="kicker">Your serving fit</div><div class="res-h">Here’s where we’d start you</div>' +
+    '<p class="lede">Based on your answers. Try one for a Sunday or two. If it isn’t you, try the next.</p><div class="fits">' +
+    (top.length ? top.map((r, i) =>
+      '<div class="fit' + (i === 0 ? ' top' : '') + '"><div class="fit-h"><b>' + esc(r.t.name) + '</b><span class="tag ' + (i === 0 ? 'best' : 'good') + '">' + (i === 0 ? 'Best fit' : 'Good fit') + '</span></div>' +
+      (r.why.length ? '<p class="why">Because ' + esc(sentence(r.why.slice(0, 3))) + '.</p>' : '') +
+      '<p>' + esc(r.t.what) + '</p><p class="sun"><b>A Sunday:</b> ' + esc(r.t.sunday) + (r.t.bg ? ' Includes a quick background check.' : '') + '</p>' +
+      (r.gap ? '<p class="need">We need ' + r.gap + ' more people here right now.</p>' : '') +
+      '<div class="acts"><a class="btn p" href="' + SERVE_URL + '" target="_blank" rel="noopener">See serve teams</a>' +
+      '<button class="btn" onclick="toast(\'In the live version this sends your pastor a note.\')">Talk to my pastor</button></div></div>').join('')
+      : '<div class="fit"><p>Your answers didn’t point to one team. That’s okay! Your pastor would love to help you find a spot.</p></div>') +
+    '</div><div class="nav"><button class="btn g" onclick="restart()">Retake</button><button class="btn" onclick="step=0;render()">Change answers</button></div>' +
+    '<p class="fine">Test version: your answers aren’t saved or sent anywhere yet. In the live version they’ll go to your pastor so they can help, and nothing is signed up until you choose to.</p>';
+}
+function pick(i) {
+  const Q = QS[step]; let p = ans[step] || [];
+  if (Q.multi) { p = p.includes(i) ? p.filter(x => x !== i) : (p.length < Q.multi ? p.concat(i) : p.slice(1).concat(i)); }
+  else p = [i];
+  ans[step] = p;
+  if (!Q.multi) { render(); setTimeout(next, 180); } else render();
+}
+function next() { if (!(ans[step] || []).length) return; step++; render(); }
+function back() { if (step > 0) { step--; render(); } }
+function restart() { ans = []; step = 0; render(); }
+let tT; function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tT); tT = setTimeout(() => t.classList.remove('show'), 3200); }
+
+// Live current/needed counts from the dashboard's hourly feed (falls back to the numbers above).
+fetch('/dashboard-data.json', { cache:'no-store' }).then(r => r.json()).then(d => {
+  const norm = x => String(x || '').toLowerCase().replace(/ team$/, '').trim();
+  (d.serveTeams || []).forEach(t => { const T = Object.values(TEAMS).find(v => norm(v.name) === norm(t.name));
+    if (T && t.current != null && t.needed != null) { T.cur = Number(t.current) || T.cur; T.need = Number(t.needed) || T.need; } });
+  if (step >= QS.length) render();
+}).catch(() => {});
+render();
+</script>
+</body>
+</html>
