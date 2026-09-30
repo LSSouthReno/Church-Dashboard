@@ -71,6 +71,10 @@
   .tag.best { background:var(--gold); color:var(--on-gold); }
   .tag.good { background:var(--line-2); color:var(--text); }
   .fit p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+  .verse { font-family:var(--display); font-weight:700; font-style:normal; color:var(--text); font-size:16px; line-height:1.5; margin:4px 0 18px; padding-left:14px; border-left:2px solid var(--gold); max-width:60ch; }
+  .verse span { display:block; font-family:var(--body); font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-top:6px; }
+  .verse.sm { font-size:14px; margin:2px 0; color:var(--muted); }
+  .verse.sm span { font-size:10.5px; margin-top:3px; }
   .fit .why { color:var(--text); }
   .fit .sun { font-size:13px; } .fit .sun b { color:var(--text); font-weight:600; }
   .fit .need { color:var(--warn); font-size:13px; font-weight:600; }
@@ -122,48 +126,62 @@
 <div class="toast" id="toast" role="status"></div>
 <script>
 // Serve-team numbers from the dashboard (current / needed), Sep 30 2026. "what" and "sunday" are
-// written from each team's volunteer checklist (team-checklists.js, the Serve Teams dashboard).
+// written from each team's volunteer checklist (team-checklists.js, the Serve Teams dashboard);
+// "v" is a Scripture line (ESV) tying the team's work to God's word, shown on its result card.
 const SERVE_URL = 'https://lssr.churchcenter.com/groups/serve-teams?enrollment=open_signup%2Crequest_to_join&filter=enrollment';
 const TEAMS = {
   ss:      { name:'Stepping Stones',   cur:116, need:150, bg:true,
              what:'Kids ministry. Teach the week’s lesson in a classroom, help with check-in, and keep rooms clean, safe and fun.',
-             sunday:'Look over the curriculum on Thursday. Arrive 15 minutes before your service; tidy and sanitize after.' },
+             sunday:'Look over the curriculum on Thursday. Arrive 15 minutes before your service; tidy and sanitize after.',
+             v:['We will not hide them from their children, but tell to the coming generation the glorious deeds of the LORD.', 'Psalm 78:4'] },
   stu:     { name:'LS Students',       cur:12,  need:12, bg:true,
              what:'Middle and high school ministry. Run the opening game, back up the speaker and lead a small-group discussion.',
-             sunday:'Arrive 30 minutes before the 9:30 service and stay for connection time after.' },
+             sunday:'Arrive 30 minutes before the 9:30 service and stay for connection time after.',
+             v:['Let no one despise you for your youth, but set the believers an example in speech, in conduct, in love, in faith, in purity.', '1 Timothy 4:12'] },
   fi:      { name:'First Impressions', cur:30,  need:40,
              what:'Greeters and door holders. Eye contact, a smile and a warm welcome for every person who walks in.',
-             sunday:'Arrive by 7:30. You’re released to enjoy the service 15 minutes in, then back at the doors between services.' },
+             sunday:'Arrive by 7:30. You’re released to enjoy the service 15 minutes in, then back at the doors between services.',
+             v:['Welcome one another as Christ has welcomed you, for the glory of God.', 'Romans 15:7'] },
   connect: { name:'Connect',           cur:13,  need:15,
              what:'The info desk. Welcome people, answer questions, point them to Church Center and upcoming events, and look after lost and found.',
-             sunday:'Arrive 30 minutes before your service to set up the desk.' },
+             sunday:'Arrive 30 minutes before your service to set up the desk.',
+             v:['Now you are the body of Christ and individually members of it.', '1 Corinthians 12:27'] },
   hosp:    { name:'Hospitality',       cur:32,  need:29,
              what:'Spread out through the room before service and make people feel at home, especially anyone sitting alone.',
-             sunday:'Just the 15 minutes before service. When worship starts, you sit down and enjoy it.' },
+             sunday:'Just the 15 minutes before service. When worship starts, you sit down and enjoy it.',
+             v:['Do not neglect to show hospitality to strangers, for thereby some have entertained angels unawares.', 'Hebrews 13:2'] },
   enrich:  { name:'Enrichment',        cur:65,  need:72,
              what:'Communion and offering. Prepare and serve communion, pass the offering baskets, help people find seats and reset the rows between services.',
-             sunday:'Arrive at 7:00 to prep the trays. You enjoy the service until communion near the end.' },
+             sunday:'Arrive at 7:00 to prep the trays. You enjoy the service until communion near the end.',
+             v:['For as often as you eat this bread and drink the cup, you proclaim the Lord’s death until he comes.', '1 Corinthians 11:26'] },
   coffee:  { name:'Coffee Team',       cur:16,  need:14,
              what:'Brew and serve the lobby coffee. Keep the urns full, restock cups and cream, and clean up at the end.',
-             sunday:'Arrive an hour before; coffee is ready before the doors open.' },
+             sunday:'Arrive an hour before; coffee is ready before the doors open.',
+             v:['They received their food with glad and generous hearts.', 'Acts 2:46'] },
   bfast:   { name:'Breakfast Team',    cur:15,  need:23,
              what:'Cook a hot breakfast at home with your team (for about 30 people), then set it out in the warmers and keep it stocked.',
-             sunday:'Plan the menu with your team, arrive with food by 7:00, tear down after 11:30.' },
+             sunday:'Plan the menu with your team, arrive with food by 7:00, tear down after 11:30.',
+             v:['Show hospitality to one another without grumbling.', '1 Peter 4:9'] },
   parking: { name:'Parking',           cur:12,  need:14,
              what:'In a vest and flag, set out cones and direct cars to open spaces, open overflow parking, and help traffic out safely.',
-             sunday:'Arrive an hour before service; outside the whole time.' },
+             sunday:'Arrive an hour before service; outside the whole time.',
+             v:['Whatever you do, work heartily, as for the Lord and not for men.', 'Colossians 3:23'] },
   safety:  { name:'Safety',            cur:37,  need:50, bg:true,
              what:'Security and medical coverage. Guard the kids’ area doors, roam the campus by radio and respond to emergencies.',
-             sunday:'Arrive 15 minutes before your service (7:00 prayer preferred); you’re on post through the service.' },
+             sunday:'Arrive 15 minutes before your service (7:00 prayer preferred); you’re on post through the service.',
+             v:['And we prayed to our God and set a guard as a protection against them day and night.', 'Nehemiah 4:9'] },
   prayer:  { name:'Prayer Team',       cur:22,  need:20,
              what:'Intercessors. Cover the whole service in prayer from the prayer room, following the week’s prompts, and pray for the church during the week.',
-             sunday:'Arrive 10 minutes early and pray through to the end of the service. Everything shared stays confidential.' },
+             sunday:'Arrive 10 minutes early and pray through to the end of the service. Everything shared stays confidential.',
+             v:['The prayer of a righteous person has great power as it is working.', 'James 5:16'] },
   tech:    { name:'Tech',              cur:16,  need:20,
              what:'Sound, slides, cameras and the livestream. Soundcheck the band, run the service, and power it all down after.',
-             sunday:'Arrive 90 minutes early for setup and the 7:30 production meeting. We train you.' },
+             sunday:'Arrive 90 minutes early for setup and the 7:30 production meeting. We train you.',
+             v:['But all things should be done decently and in order.', '1 Corinthians 14:40'] },
   worship: { name:'Worship Team',      cur:28,  need:38,
              what:'Vocals and instruments. Soundcheck, pray and lead the church in worship; stay for prayer after the service.',
-             sunday:'Arrive 90 minutes early with your gear. Starts with a short audition.' }
+             sunday:'Arrive 90 minutes early with your gear. Starts with a short audition.',
+             v:['Sing to him a new song; play skillfully on the strings, with loud shouts.', 'Psalm 33:3'] }
 };
 const EXCLUDED = [
   ['Service Captains', 10, 10, 'building crew with keys and alarm codes',
@@ -177,33 +195,33 @@ const EXCLUDED = [
 // teams, and its phrase feeds the "Because…" line. multi = how many can be picked; an option with
 // a 4th element true ("I’m more of a listener") is exclusive and clears the others.
 const QS = [
-  { q:'People who know you well would say you’re the one who…', hint:'Pick up to three.', multi:3, opts:[
-    ['Makes everyone feel noticed', { fi:4, hosp:2, connect:1, parking:1 }, 'you make people feel noticed'],
-    ['Quietly makes sure everything is ready', { enrich:4, coffee:2, bfast:1, tech:1 }, 'you quietly make sure things are ready'],
-    ['Gets down on the floor and plays with the kids', { ss:4, stu:1 }, 'kids love being around you'],
-    ['Teenagers actually open up to', { stu:4 }, 'teenagers open up to you'],
-    ['Prays when everyone else is worrying', { prayer:4 }, 'you’re the one who prays'],
-    ['Always has music playing or a gadget in hand', { worship:2, tech:2 }, 'music and gadgets are your thing']]},
-  { q:'At a party, where are you usually?', hint:'Pick any that fit.', multi:3, opts:[
+  { q:'When God uses you to bless someone, it usually looks like…', hint:'Pick up to three.', multi:3, opts:[
+    ['Making them feel seen and welcome', { fi:4, hosp:2, connect:1, parking:1 }, 'you help people feel seen'],
+    ['Quietly making sure everything is ready for them', { enrich:4, coffee:2, bfast:1, tech:1 }, 'you serve quietly behind the scenes'],
+    ['Getting down on the floor with their kids', { ss:4, stu:1 }, 'God uses you with kids'],
+    ['Being someone their teenager can open up to', { stu:4 }, 'teenagers open up to you'],
+    ['Praying for them, often before they even ask', { prayer:4 }, 'you carry people in prayer'],
+    ['Through music, or the gear behind it', { worship:2, tech:2 }, 'God uses your love of music and gear']]},
+  { q:'At a church potluck, where are you usually?', hint:'Pick any that fit.', multi:3, opts:[
     ['Meeting everyone. The more new faces the better.', { connect:3, hosp:3, fi:2, parking:1 }, 'new people energize you'],
     ['Catching up with a few people I know', { coffee:1, bfast:1, enrich:1, ss:1 }, ''],
     ['In the kitchen, or wherever there’s a job to do', { tech:2, bfast:2, prayer:2, enrich:1, safety:1 }, 'you’re happiest with a job to do']]},
-  { q:'Which of these would make your day?', hint:'Pick up to three.', multi:3, opts:[
+  { q:'Which of these makes you feel most alive, like you’re doing what God made you for?', hint:'Pick up to three.', multi:3, opts:[
     ['Spotting someone on their own and pulling them into the conversation', { hosp:3 }, 'you love pulling people in'],
     ['Being the one who knows where everything is and what’s going on', { connect:3 }, 'you like being the one with answers'],
-    ['A quiet, meaningful moment of serving someone', { enrich:3 }, 'quiet, meaningful moments matter to you'],
+    ['A quiet, reverent moment of serving someone', { enrich:3 }, 'reverent moments of service matter to you'],
     ['A great cup of coffee, and making one for someone else', { coffee:3 }, 'you love a good cup of coffee'],
     ['Cooking a big meal for people you love', { bfast:3 }, 'you love feeding people'],
     ['Being outside with a clear job to do', { parking:3 }, 'you like being outside with a clear job'],
     ['Being the calm one when something goes wrong', { safety:3 }, 'you stay calm when things go wrong'],
     ['Explaining something until it finally clicks', { ss:2, stu:1 }, 'you love helping things click'],
     ['Figuring out how something works', { tech:3 }, 'you love figuring out how things work']]},
-  { q:'Which age groups do you have the most patience for?', hint:'Pick any that fit.', multi:3, opts:[
+  { q:'Which age groups has God given you the most patience for?', hint:'“Let the children come to me.” (Mark 10:14) Pick any that fit.', multi:3, opts:[
     ['Toddlers and preschoolers', { ss:3 }, 'you have patience for little ones'],
     ['Grade-schoolers', { ss:3 }, 'you have patience for grade-schoolers'],
     ['Teenagers', { stu:3 }, 'you have patience for teenagers'],
     ['Honestly? Grown-ups', { ss:-2, stu:-2 }, '', true]]},
-  { q:'Where does music fit in your life?', hint:'Pick any that fit.', multi:3, opts:[
+  { q:'Where does music fit in your life?', hint:'“Make a joyful noise to the LORD.” (Psalm 100:1) Pick any that fit.', multi:3, opts:[
     ['I sing', { worship:2 }, 'you sing'],
     ['I play an instrument', { worship:2 }, 'you play an instrument'],
     ['I’ve sung or played with a band, choir or worship team', { worship:2 }, 'you’ve made music with others'],
@@ -212,7 +230,7 @@ const QS = [
     ['Can’t wait to figure it out', { tech:3 }, 'you dive into new gadgets'],
     ['Figure it out when you need to', { tech:1 }, ''],
     ['Hand it to someone else', { tech:-3 }, '']]},
-  { q:'Have you had any training in handling emergencies?', hint:'Pick any that fit.', multi:2, opts:[
+  { q:'Has God given you training that could help in an emergency?', hint:'Pick any that fit.', multi:2, opts:[
     ['Medical, nursing or first aid', { safety:3 }, 'you’re trained to help in an emergency'],
     ['Security, law enforcement or the military', { safety:4 }, 'you’re trained to keep people safe'],
     ['Not really', {}, '', true]]},
@@ -250,7 +268,7 @@ function render() {
   if (step < QS.length) {
     const Q = QS[step], picked = ans[step] || [];
     el.innerHTML =
-      (step === 0 ? '<div class="kicker">My Journey · Serving</div><h1>Where should I serve?</h1><p class="lede">Nine quick questions about you: how you’re wired and what you enjoy. We’ll suggest where you’d likely fit best to start serving. You can always try something else.</p>' : '') +
+      (step === 0 ? '<div class="kicker">My Journey · Serving</div><h1>Where should I serve?</h1><p class="lede">God shaped you on purpose: your personality, your story, what makes you come alive. The church needs what he put in you. Nine quick questions, then we’ll suggest where to start serving. You can always try something else.</p><p class="verse">“As each has received a gift, use it to serve one another, as good stewards of God’s varied grace.”<span>1 Peter 4:10</span></p>' : '') +
       '<div class="prog" aria-hidden="true">' + QS.map((_, i) => '<i class="' + (i <= step ? 'on' : '') + '"></i>').join('') + '</div>' +
       '<div class="q"><h2>' + esc(Q.q) + '</h2>' + (Q.hint ? '<p class="hint">' + esc(Q.hint) + '</p>' : '') +
       '<div class="opts" role="' + (Q.multi ? 'group' : 'radiogroup') + '">' + Q.opts.map((o, i) =>
@@ -260,18 +278,20 @@ function render() {
     return;
   }
   const top = score();
-  el.innerHTML = '<div class="kicker">Your serving fit</div><div class="res-h">Here’s where we’d start you</div>' +
-    '<p class="lede">Based on your answers. Try one for a Sunday or two. If it isn’t you, try the next.</p><div class="fits">' +
+  el.innerHTML = '<div class="kicker">Your serving fit</div><div class="res-h">Where you might fit in the body</div>' +
+    '<p class="lede">Based on how God has shaped you. Try one for a Sunday or two. If it isn’t you, try the next. Every part matters.</p><div class="fits">' +
     (top.length ? top.map((r, i) =>
       '<div class="fit' + (i === 0 ? ' top' : '') + '"><div class="fit-h"><b>' + esc(r.t.name) + '</b><span class="tag ' + (i === 0 ? 'best' : 'good') + '">' + (i === 0 ? 'Best fit' : 'Good fit') + '</span></div>' +
       (r.why.length ? '<p class="why">Because ' + esc(sentence(r.why.slice(0, 3))) + '.</p>' : '') +
       '<p>' + esc(r.t.what) + '</p><p class="sun"><b>A Sunday:</b> ' + esc(r.t.sunday) + (r.t.bg ? ' Includes a quick background check.' : '') + '</p>' +
+      (r.t.v ? '<p class="verse sm">“' + esc(r.t.v[0]) + '”<span>' + esc(r.t.v[1]) + '</span></p>' : '') +
       (r.gap ? '<p class="need">We need ' + r.gap + ' more people here right now.</p>' : '') +
       '<div class="acts"><a class="btn p" href="' + SERVE_URL + '" target="_blank" rel="noopener">See serve teams</a>' +
       '<button class="btn" onclick="toast(\'In the live version this sends your pastor a note.\')">Talk to my pastor</button></div></div>').join('')
       : '<div class="fit"><p>Your answers didn’t point to one team. That’s okay! Your pastor would love to help you find a spot.</p></div>') +
-    '</div><div class="nav"><button class="btn g" onclick="restart()">Retake</button><button class="btn" onclick="step=0;render()">Change answers</button></div>' +
-    '<p class="fine">Test version: your answers aren’t saved or sent anywhere yet. In the live version they’ll go to your pastor so they can help, and nothing is signed up until you choose to.</p>';
+    '</div><p class="verse">“For we are his workmanship, created in Christ Jesus for good works, which God prepared beforehand, that we should walk in them.”<span>Ephesians 2:10</span></p>' +
+    '<div class="nav"><button class="btn g" onclick="restart()">Retake</button><button class="btn" onclick="step=0;render()">Change answers</button></div>' +
+    '<p class="fine">Test version: your answers aren’t saved or sent anywhere yet. In the live version they’ll go to your pastor so they can help, and nothing is signed up until you choose to. Scripture quotations are from the ESV.</p>';
 }
 function pick(i) {
   const Q = QS[step]; let p = ans[step] || [];
