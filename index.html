@@ -5677,10 +5677,13 @@ function openAttendanceModal(monthLabel, weeklyRows) {
   // Per-service weekly detail for this month, when the by-service feed has it.
   const svcWk = attnByServiceWeekly_();
   const iso = monthIso_(monthLabel);
-  const monthWeeks = (svcWk.weeks || []).filter(d => d.slice(0, 7) === iso);
+  // One column per weekend: Saturday / Christmas Eve services join that Sunday; Good Friday stays separate.
+  const colDates = {};
+  (svcWk.weeks || []).forEach(d => { const k = attnWeekendKey_(d); if (k.slice(0, 7) === iso) (colDates[k] = colDates[k] || []).push(d); });
+  const monthWeeks = Object.keys(colDates).sort();
   const hasSvc = svcWk.services.length && monthWeeks.length;
 
-  _attnModalState = { weeklyRows: weeklyRows || [], svcWk, monthWeeks, hasSvc, mode: hasSvc ? 'service' : 'adultskids' };
+  _attnModalState = { weeklyRows: weeklyRows || [], svcWk, monthWeeks, colDates, iso, hasSvc, mode: hasSvc ? 'service' : 'adultskids' };
 
   const toggle = document.getElementById('attnModalToggle');
   if (toggle) toggle.style.display = hasSvc ? 'inline-flex' : 'none';
@@ -5705,13 +5708,30 @@ function renderWeeklyModalChart_(){
     subtitle.textContent = 'Each Sunday, split by service time';
     const data = st.svcWk.data || {};
     const svcColors = ['#1e3a8a','#3b82f6','#60a5fa','#93c5fd','#bfdbfe'];
-    labels = st.monthWeeks.map(d => svcWeekLabel_(d).replace(/,\s*\d{4}$/, ''));  // "Sep 6"
+    labels = st.monthWeeks.map(function(k){
+      const l = svcWeekLabel_(k).replace(/,\s*\d{4}$/, '');   // "Sep 6"
+      return attnIsGoodFriday_(k) ? ['Good Friday', l] : l;
+    });
+    // One weekend column = the Sunday plus any other day folded into it (tagged, e.g. "Sat 12/20").
+    const cell = function(k, s){
+      const o = { a:0, k:0, days:[] };
+      (st.colDates[k] || [k]).forEach(function(d){
+        const c = data[d] && data[d][s]; if (!c) return;
+        const a = Number(c.adults)||0, kd = Number(c.kids)||0; if (!(a + kd)) return;
+        o.a += a; o.k += kd; if (d !== k) o.days.push(svcDayTag_(d));
+      });
+      return o;
+    };
     // Only the service times that actually met this month (the feed lists every time ever used).
-    const monthSvcs = st.svcWk.services.filter(function(s){ return st.monthWeeks.some(function(d){ const c = data[d] && data[d][s]; return c && ((Number(c.adults)||0) + (Number(c.kids)||0)) > 0; }); });
+    const monthSvcs = st.svcWk.services.filter(function(s){ return st.monthWeeks.some(function(k){ const c = cell(k, s); return c.a + c.k > 0; }); });
     datasets = monthSvcs.map(function(s, i){
-      const svc = st.monthWeeks.map(function(d){ const c = data[d] && data[d][s]; return c ? { a: Number(c.adults)||0, k: Number(c.kids)||0 } : { a:0, k:0 }; });
+      const svc = st.monthWeeks.map(function(k){ return cell(k, s); });
+      // A time that met only on a folded-in day this month says so in the legend, e.g. "4:30 PM (Sat)".
+      const used = svc.filter(function(o){ return o.a + o.k > 0; });
+      const wd = {}; used.forEach(function(o){ o.days.forEach(function(t){ wd[t.split(' ')[0]] = 1; }); });
+      const onlyOther = used.length && used.every(function(o){ return o.days.length; }) && Object.keys(wd).length === 1;
       return {
-        label: s,
+        label: s + (onlyOther ? ' (' + Object.keys(wd)[0] + ')' : ''),
         data: svc.map(function(o){ return o.a + o.k; }),
         _svc: svc,
         backgroundColor: svcColors[i % svcColors.length],
@@ -5721,7 +5741,17 @@ function renderWeeklyModalChart_(){
     footerFn = function(items){ if (!items.length) return ''; const i = items[0].dataIndex; let t = 0; datasets.forEach(function(ds){ t += Number(ds.data[i]) || 0; }); return 'Total: ' + fmtNum(t); };
   } else {
     subtitle.textContent = 'Adults + Kids by week';
-    const rows = st.weeklyRows || [];
+    // Fold a Saturday / Christmas Eve row into its weekend's Sunday, when that Sunday is in this month.
+    const dateOf = function(r){ const m = String(r.week || '').match(/(\d{1,2})\s*$/); return (m && st.iso) ? st.iso + '-' + String(m[1]).padStart(2, '0') : ''; };
+    const src = st.weeklyRows || [], have = {}, rows = [], byKey = {};
+    src.forEach(function(r){ const d = dateOf(r); if (d) have[d] = 1; });
+    src.forEach(function(r){
+      const dk = dateOf(r), sun = dk ? attnWeekendKey_(dk) : '';
+      const k = (sun && have[sun]) ? sun : 'row' + rows.length;
+      if (!byKey[k]) { byKey[k] = { week: have[sun] ? svcWeekLabel_(sun).replace(/,\s*\d{4}$/, '') : r.week, adults: 0, kids: 0, days: [] }; rows.push(byKey[k]); }
+      byKey[k].adults += Number(r.adults) || 0; byKey[k].kids += Number(r.kids) || 0;
+      if (k === sun && dk !== sun) byKey[k].days.push(svcDayTag_(dk));
+    });
     const adults = rows.map(function(r){ return Number(r.adults)||0; });
     const kids = rows.map(function(r){ return Number(r.kids)||0; });
     labels = rows.map(function(r){ return r.week || r.date || 'Week'; });
@@ -5729,7 +5759,7 @@ function renderWeeklyModalChart_(){
       { label:'Adults', data:adults, backgroundColor:'#3b82f6', stack:'wk', borderRadius:{ topLeft:0, topRight:0, bottomLeft:6, bottomRight:6 }, borderSkipped:false },
       { label:'Kids', data:kids, backgroundColor:'#93c5fd', stack:'wk', borderRadius:{ topLeft:6, topRight:6, bottomLeft:0, bottomRight:0 }, borderSkipped:false }
     ];
-    footerFn = function(items){ if (!items.length) return ''; const i = items[0].dataIndex; return 'Total: ' + fmtNum((adults[i]||0)+(kids[i]||0)); };
+    footerFn = function(items){ if (!items.length) return ''; const i = items[0].dataIndex; const d = rows[i] && rows[i].days; return 'Total: ' + fmtNum((adults[i]||0)+(kids[i]||0)) + (d && d.length ? '\nincludes ' + d.join(', ') : ''); };
   }
 
   weeklyAttendanceChart = new Chart(canvas, {
@@ -5747,7 +5777,7 @@ function renderWeeklyModalChart_(){
             label: function(ctx){
               const ds = ctx.dataset;
               const sv = ds._svc && ds._svc[ctx.dataIndex];
-              return '  ' + ds.label + ': ' + fmtNum(ctx.parsed.y) + (sv ? '  (' + fmtNum(sv.a) + ' adults / ' + fmtNum(sv.k) + ' kids)' : '');
+              return '  ' + ds.label + (sv && sv.days && sv.days.length ? ' (' + sv.days.join(', ') + ')' : '') + ': ' + fmtNum(ctx.parsed.y) + (sv ? '  (' + fmtNum(sv.a) + ' adults / ' + fmtNum(sv.k) + ' kids)' : '');
             }
           },
           footerFont: { family:'Montserrat', weight:'700', size:12 },
@@ -5756,7 +5786,8 @@ function renderWeeklyModalChart_(){
         }
       },
       scales: {
-        x: { ...baseGridOpts, stacked:true, grid:{ display:false }, ticks:{ ...baseGridOpts.ticks, autoSkip:false, maxRotation:0, minRotation:0 } },
+        x: { ...baseGridOpts, stacked:true, grid:{ display:false }, ticks:{ ...baseGridOpts.ticks, autoSkip:false, maxRotation:0, minRotation:0,
+             color: function(c){ return Array.isArray(labels[c.index]) ? '#e3c35a' : (baseGridOpts.ticks && baseGridOpts.ticks.color) || '#9a9a9a'; } } },
         y: { ...baseGridOpts, stacked:true, beginAtZero:true, ticks:{ ...baseGridOpts.ticks, callback:(v)=>fmtNum(v) } }
       }
     }
@@ -6570,6 +6601,18 @@ function csvAttendanceByService_(){
   return rows;
 }
 // "2026-09-07" → "Sep 7, 2026"
+// Good Friday (yyyy-mm-dd) for a year: Easter by the anonymous Gregorian algorithm, minus 2 days.
+// Keep in sync with attnSvcGoodFriday_ in Code_attendance_by_service.gs.
+function attnGoodFriday_(year){
+  var a=year%19, b=Math.floor(year/100), c=year%100, d=Math.floor(b/4), e=b%4, f=Math.floor((b+8)/25), g=Math.floor((b-f+1)/3);
+  var h=(19*a+b-d-g+15)%30, i=Math.floor(c/4), k=c%4, l=(32+2*e+2*i-h-k)%7, m=Math.floor((a+11*h+22*l)/451);
+  var mo=Math.floor((h+l-7*m+114)/31), dy=((h+l-7*m+114)%31)+1;
+  return new Date(Date.UTC(year, mo-1, dy-2)).toISOString().slice(0,10);
+}
+function attnIsGoodFriday_(dk){ return /^\d{4}-\d{2}-\d{2}$/.test(String(dk)) && attnGoodFriday_(+String(dk).slice(0,4)) === dk; }
+// The column a service date belongs to: its weekend's Sunday, so Saturday / Christmas Eve
+// services join that Sunday. Good Friday stays its own column.
+function attnWeekendKey_(dk){ return attnIsGoodFriday_(dk) ? dk : svcWeekSunday_(dk); }
 function svcWeekLabel_(dk){
   var m = String(dk).match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!m) return String(dk);
   var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(m[2],10)-1];
@@ -6614,7 +6657,7 @@ function csvAttendanceByServiceWeekly_(){
   var weeks = a.weeks||[], data = a.data||{};
   var agg = {}, order = [];
   weeks.forEach(function(wk){
-    var sun = svcWeekSunday_(wk);
+    var sun = attnWeekendKey_(wk);   // weekend's Sunday; Good Friday keeps its own row
     if (!agg[sun]){ agg[sun] = {a8:0,k8:0,h8:false, a93:0,k93:0,h93:false, a11:0,k11:0,h11:false, aX:0,kX:0, notes:[]}; order.push(sun); }
     var W = agg[sun], src = data[wk]||{}, tag = (wk===sun) ? '' : ' ('+svcDayTag_(wk)+')';
     Object.keys(src).forEach(function(s){
@@ -6630,7 +6673,7 @@ function csvAttendanceByServiceWeekly_(){
   order.forEach(function(sun){
     var W = agg[sun];
     var ta = W.a8+W.a93+W.a11+W.aX, tk = W.k8+W.k93+W.k11+W.kX;
-    rows.push([ svcWeekLabel_(sun),
+    rows.push([ (attnIsGoodFriday_(sun) ? 'Good Friday, ' : '') + svcWeekLabel_(sun),
       W.h8?W.a8:'', W.h93?W.a93:'', W.h11?W.a11:'', ta,
       W.h8?W.k8:'', W.h93?W.k93:'', W.h11?W.k11:'', tk,
       ta+tk, W.notes.join('; ') ]);
@@ -17410,7 +17453,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260930T172014Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20260930T175857Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

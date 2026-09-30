@@ -27,6 +27,8 @@ var ATTN_SVC_HDRS_ = ['DateKey', 'Service', 'Adults', 'Kids'];
 var ATTN_SVC_SEED_REF_ = '97fe1c4734fbddee4a99147e2db9ed001279c26f';  // last commit with the feed (2026-09-20)
 var ATTN_SVC_SEED_PROP_ = 'ATTN_SVC_SEEDED';
 var ATTN_SVC_LAST_ = [];   // rows from the most recent weekly pull, waiting to be written
+var ATTN_SVC_GF_PROP_ = 'ATTN_SVC_GOOD_FRIDAY';   // {done:{year:1}, seen:{date:[event names]}}
+var ATTN_SVC_GF_FIRST_YEAR_ = 2019;
 
 // ── pure helpers (no Apps Script services) ──────────────────────────────────
 
@@ -110,6 +112,17 @@ function attnSvcFeeds_(rows) {
   };
 }
 
+// Good Friday (yyyy-MM-dd) for a year — Easter Sunday by the anonymous Gregorian algorithm, minus 2 days.
+// Keep in sync with attnGoodFriday_ in index.html.
+function attnSvcGoodFriday_(year) {
+  var a = year % 19, b = Math.floor(year / 100), c = year % 100, d = Math.floor(b / 4), e = b % 4;
+  var f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+  var i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+  var month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+  var dt = new Date(Date.UTC(year, month - 1, day - 2));
+  return dt.toISOString().slice(0, 10);
+}
+
 // ── Apps Script glue ─────────────────────────────────────────────────────────
 
 // Called from getAttendanceWeeklyRowsForMonths_ with its per-event_time counts.
@@ -172,10 +185,66 @@ function attnSvcSeedIfNeeded_(ss) {
   Logger.log('AttendanceByService seed: +' + seed.length + ' historical rows');
 }
 
+// Good Friday isn't part of the Sunday Service check-in event the weekly sync reads, so it's
+// pulled on its own: every event_time on Good Friday from the Sunday event or any check-in
+// event named "Good Friday", counted the same way (non-kids headcounts = adults; kids
+// headcounts + check-ins = kids). History is pulled once per year; the latest one is
+// re-pulled for 3 weeks after it. Event names seen that day are kept for troubleshooting.
+function attnSvcGoodFridayRows_(gf) {
+  var tz = Session.getScriptTimeZone();
+  var until = new Date(Date.parse(gf + 'T00:00:00Z') + 2 * 864e5).toISOString().slice(0, 10);
+  var res = pcoGetAllWithIncluded_('/check-ins/v2/event_times?where[starts_at][gte]=' + gf +
+    '&where[starts_at][lte]=' + until + '&include=headcounts,event&per_page=100');
+  var names = {}, adults = {}, kidsHc = {};
+  (res.included || []).forEach(function(inc) {
+    if (inc.type === 'Event') { names[inc.id] = (inc.attributes || {}).name || ''; return; }
+    if (inc.type !== 'Headcount') return;
+    var etId = relId_(inc, 'event_time'), total = Number((inc.attributes || {}).total) || 0;
+    if (!etId || !total) return;
+    if (isKidsHeadcount_(inc)) kidsHc[etId] = (kidsHc[etId] || 0) + total;
+    else adults[etId] = (adults[etId] || 0) + total;
+  });
+  var seen = {}, items = [];
+  (res.data || []).forEach(function(et) {
+    var when = et.attributes.starts_at; if (!when) return;
+    var d = new Date(when);
+    if (Utilities.formatDate(d, tz, 'yyyy-MM-dd') !== gf) return;
+    var evId = relId_(et, 'event'), name = names[evId] || ('event ' + evId);
+    seen[name] = (seen[name] || 0) + 1;
+    if (evId !== String(DASHBOARD_CONFIG.CHECKINS_EVENT_ID) && !/good\s*friday/i.test(name)) return;
+    var kids = kidsHc[et.id] || 0;
+    try { kids += pcoGetAll_('/check-ins/v2/event_times/' + et.id + '/check_ins?per_page=100').length; } catch (x) {}
+    var hm = Utilities.formatDate(d, tz, 'H:mm').split(':');
+    items.push({ dateKey: gf, service: attnSvcLabelFromMin_(Number(hm[0]) * 60 + Number(hm[1])),
+                 adults: adults[et.id] || 0, kids: kids });
+  });
+  return { rows: attnSvcRowsFromItems_(items),
+           seen: Object.keys(seen).map(function(n) { return n + (seen[n] > 1 ? ' ×' + seen[n] : ''); }) };
+}
+function attnSvcPullGoodFridays_(ss) {
+  var props = PropertiesService.getScriptProperties();
+  var st = {}; try { st = JSON.parse(props.getProperty(ATTN_SVC_GF_PROP_) || '{}'); } catch (x) {}
+  st.done = st.done || {}; st.seen = st.seen || {};
+  var today = isoDate_(new Date()), rows = [], ran = false;
+  for (var y = ATTN_SVC_GF_FIRST_YEAR_; y <= new Date().getFullYear(); y++) {
+    var gf = attnSvcGoodFriday_(y);
+    if (gf > today) continue;
+    var recent = (Date.parse(today) - Date.parse(gf)) / 864e5 <= 21;
+    if (st.done[y] && !recent) continue;
+    var r = attnSvcGoodFridayRows_(gf);
+    rows = rows.concat(r.rows); st.seen[gf] = r.seen; st.done[y] = 1; ran = true;
+  }
+  if (!ran) return;
+  if (rows.length) { var sh = attnSvcSheet_(ss); attnSvcWrite_(sh, attnSvcMergeRows_(attnSvcRead_(sh), rows)); }
+  props.setProperty(ATTN_SVC_GF_PROP_, JSON.stringify(st));
+  Logger.log('AttendanceByService Good Friday: ' + rows.length + ' row(s); seen ' + JSON.stringify(st.seen));
+}
+
 // Called from upsertWeeklyAttendanceRows_ — writes the rows the last weekly pull collected.
 function attnSvcFlush_(ss) {
   try {
     attnSvcSeedIfNeeded_(ss);
+    try { attnSvcPullGoodFridays_(ss); } catch (e) { Logger.log('Good Friday pull failed: ' + e.message); }
     var fresh = ATTN_SVC_LAST_ || [];
     ATTN_SVC_LAST_ = [];
     if (!fresh.length) return;
@@ -191,7 +260,9 @@ function attnSvcFeedsFromSheet_(ss) {
   try {
     attnSvcSeedIfNeeded_(ss);
     var sh = ss.getSheetByName(ATTN_SVC_SHEET_);
-    return attnSvcFeeds_(sh ? attnSvcRead_(sh) : []);
+    var feeds = attnSvcFeeds_(sh ? attnSvcRead_(sh) : []);
+    try { feeds.weekly.goodFridayEvents = (JSON.parse(PropertiesService.getScriptProperties().getProperty(ATTN_SVC_GF_PROP_) || '{}').seen) || {}; } catch (x) {}
+    return feeds;
   } catch (err) {
     Logger.log('AttendanceByService feed failed: ' + err.message);
     return attnSvcFeeds_([]);
