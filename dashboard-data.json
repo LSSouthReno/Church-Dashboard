@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-30T18:47:22.700Z",
+  "lastUpdated": "2026-09-30T19:46:17.178Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3280,6 +3280,7 @@
       "11:00 AM",
       "1:00 PM",
       "4:30 PM",
+      "5:00 PM",
       "6:00 PM"
     ],
     "months": [
@@ -4200,6 +4201,10 @@
         }
       },
       "2026-04": {
+        "5:00 PM": {
+          "adults": 545,
+          "kids": 57
+        },
         "8:00 AM": {
           "adults": 228,
           "kids": 24
@@ -4297,6 +4302,7 @@
       "11:00 AM",
       "1:00 PM",
       "4:30 PM",
+      "5:00 PM",
       "6:00 PM"
     ],
     "weeks": [
@@ -4695,6 +4701,7 @@
       "2026-03-15",
       "2026-03-22",
       "2026-03-29",
+      "2026-04-03",
       "2026-04-05",
       "2026-04-12",
       "2026-04-19",
@@ -8041,6 +8048,12 @@
           "kids": 38
         }
       },
+      "2026-04-03": {
+        "5:00 PM": {
+          "adults": 545,
+          "kids": 57
+        }
+      },
       "2026-04-05": {
         "8:00 AM": {
           "adults": 360,
@@ -8410,7 +8423,21 @@
         }
       }
     },
-    "goodFridayEvents": {}
+    "goodFridayEvents": {
+      "2019-04-19": [],
+      "2020-04-10": [],
+      "2021-04-02": [],
+      "2022-04-15": [],
+      "2023-04-07": [],
+      "2024-03-29": [],
+      "2025-04-18": [
+        "Test"
+      ],
+      "2026-04-03": [
+        "Good Friday",
+        "Test"
+      ]
+    }
   },
   "serveTeams": [
     {
@@ -13182,7 +13209,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 30, 2026, 11:47 AM",
+    "refreshed": "Sep 30, 2026, 12:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -15160,20 +15187,20 @@
         "attPct": 50
       },
       {
+        "name": "Carp/Thompson Community Group",
+        "members": 4,
+        "leaders": 2,
+        "schedule": "Meets weekly on Tuesdays from 6:15-8am",
+        "avgAttended": 0,
+        "attPct": 0
+      },
+      {
         "name": "Turcich Community Group",
         "members": 3,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 4,
         "attPct": 133
-      },
-      {
-        "name": "Carp/Thompson Community Group",
-        "members": 3,
-        "leaders": 2,
-        "schedule": "Meets weekly on Tuesdays from 6:15-8am",
-        "avgAttended": 0,
-        "attPct": 0
       },
       {
         "name": "Faker Community Group",
@@ -27060,7 +27087,7 @@
             {
               "name": "Cathy Cappini",
               "team": "Enrichment Teams",
-              "pos": "Back Left Communion Server",
+              "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
             },
@@ -27091,6 +27118,20 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Nick Steuer",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Dena Steuer",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -27241,8 +27282,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 102,
+            "totalVols": 102
           }
         }
       ],
@@ -27950,7 +27991,7 @@
               "name": "Lauren Bruno",
               "team": "Stepping Stones",
               "pos": "Guide WP, Hawks, Mustangs",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
@@ -28757,7 +28798,7 @@
               "name": "Gina Rankin",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -29522,7 +29563,7 @@
               "name": "Gina Rankin",
               "team": "Prayer Team",
               "pos": "Service Prayer",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -30175,7 +30216,7 @@
               "name": "Lauren Bruno",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
@@ -31038,7 +31079,7 @@
               "name": "Elmer Alegre",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -31185,7 +31226,7 @@
               "name": "Lauren Bruno",
               "team": "Stepping Stones",
               "pos": "Check In",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -32110,14 +32151,14 @@
     "weeklyAvg": 12,
     "totalFetched": 7120,
     "since": "2026-08-31",
-    "asOf": "2026-09-30T18:45:06.055Z"
+    "asOf": "2026-09-30T19:44:39.049Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.11670663469224621,
-    "avgOpenRate3": 0.32386234946539644,
+    "latestOpenRate": 0.14068745003996802,
+    "avgOpenRate3": 0.33185595458130374,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-30T18:01:36+00:00",
     "campaignCount": 5,
-    "asOf": "2026-09-30T18:45:07.322Z"
+    "asOf": "2026-09-30T19:44:40.318Z"
   }
 }
