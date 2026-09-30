@@ -940,9 +940,9 @@
   ],
   "funnel": {
     "guest": 0,
-    "attender": 66,
+    "attender": 64,
     "member": 0,
-    "group": 392,
+    "group": 396,
     "leader": 83,
     "missionary": 2,
     "asOf": "2026-09-30"
@@ -7718,6 +7718,10 @@
           "role": "member"
         },
         {
+          "name": "Elizabeth Kova",
+          "role": "member"
+        },
+        {
           "name": "Fredy Bridges",
           "role": "leader"
         },
@@ -7897,6 +7901,20 @@
     },
     {
       "type": "Community Group",
+      "name": "Carp/Thompson Community Group",
+      "members": [
+        {
+          "name": "Adam Carp",
+          "role": "leader"
+        },
+        {
+          "name": "Brandon Thompson",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
       "name": "Castaneda Community Group",
       "members": [
         {
@@ -7926,10 +7944,6 @@
         {
           "name": "Dena Steuer",
           "role": "leader"
-        },
-        {
-          "name": "Emma Baskharoon",
-          "role": "member"
         },
         {
           "name": "Ginger King",
@@ -8365,6 +8379,10 @@
         },
         {
           "name": "Kati (Catherine) Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Sandra Pazen",
           "role": "member"
         },
         {
@@ -8911,6 +8929,10 @@
         },
         {
           "name": "Ed Griggs",
+          "role": "member"
+        },
+        {
+          "name": "Frank Aguilar",
           "role": "member"
         },
         {
@@ -14700,6 +14722,10 @@
           "role": "member"
         },
         {
+          "name": "Kate Andreano",
+          "role": "member"
+        },
+        {
           "name": "Kathy McAlpine",
           "role": "member"
         },
@@ -14813,10 +14839,6 @@
         },
         {
           "name": "Savannah Caliger",
-          "role": "member"
-        },
-        {
-          "name": "Scarlett Fava",
           "role": "member"
         },
         {
@@ -16685,6 +16707,7 @@
         "Teylor Baskharoon (Hinzman)",
         "Thomas Alvarez",
         "Timothy Frederick",
+        "Tom Bartoldo",
         "Tom McDonald",
         "Yolindia McCorquodale"
       ]
