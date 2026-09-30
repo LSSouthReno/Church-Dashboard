@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <!--
   Serving-fit survey — TEST VERSION, link-only (not linked from the site; noindex). Nothing is saved.
-  Built from the prototype Brad approved 2026-09-30. Team blurbs come from team-checklists.js; live
-  team gaps from /dashboard-data.json. Planned: move into My Journey + the Shepherding drawer.
+  Generated from the review prototype. Team blurbs come from team-checklists.js; live team gaps
+  from /dashboard-data.json. Planned: move into My Journey + the Shepherding drawer.
 -->
 <style>
   /* Layout: the My Journey look (dark + gold). One narrow survey column on top, reviewer notes below. */
@@ -174,20 +174,21 @@ const EXCLUDED = [
 
 // 8 questions that shape the match, plus 1 for leaders (frequency). They ask about the person —
 // gifts, temperament, what they enjoy — never about teams; each option quietly adds points to
-// teams, and its phrase feeds the "Because…" line.
+// teams, and its phrase feeds the "Because…" line. multi = how many can be picked; an option with
+// a 4th element true ("I’m more of a listener") is exclusive and clears the others.
 const QS = [
-  { q:'People who know you well would say you’re the one who…', opts:[
+  { q:'People who know you well would say you’re the one who…', hint:'Pick up to three.', multi:3, opts:[
     ['Makes everyone feel noticed', { fi:4, hosp:2, connect:1, parking:1 }, 'you make people feel noticed'],
     ['Quietly makes sure everything is ready', { enrich:4, coffee:2, bfast:1, tech:1 }, 'you quietly make sure things are ready'],
     ['Gets down on the floor and plays with the kids', { ss:4, stu:1 }, 'kids love being around you'],
     ['Teenagers actually open up to', { stu:4 }, 'teenagers open up to you'],
     ['Prays when everyone else is worrying', { prayer:4 }, 'you’re the one who prays'],
     ['Always has music playing or a gadget in hand', { worship:2, tech:2 }, 'music and gadgets are your thing']]},
-  { q:'At a party, where are you usually?', opts:[
+  { q:'At a party, where are you usually?', hint:'Pick any that fit.', multi:3, opts:[
     ['Meeting everyone. The more new faces the better.', { connect:3, hosp:3, fi:2, parking:1 }, 'new people energize you'],
     ['Catching up with a few people I know', { coffee:1, bfast:1, enrich:1, ss:1 }, ''],
     ['In the kitchen, or wherever there’s a job to do', { tech:2, bfast:2, prayer:2, enrich:1, safety:1 }, 'you’re happiest with a job to do']]},
-  { q:'Which of these would make your day?', hint:'Pick up to two.', multi:2, opts:[
+  { q:'Which of these would make your day?', hint:'Pick up to three.', multi:3, opts:[
     ['Spotting someone on their own and pulling them into the conversation', { hosp:3 }, 'you love pulling people in'],
     ['Being the one who knows where everything is and what’s going on', { connect:3 }, 'you like being the one with answers'],
     ['A quiet, meaningful moment of serving someone', { enrich:3 }, 'quiet, meaningful moments matter to you'],
@@ -197,22 +198,24 @@ const QS = [
     ['Being the calm one when something goes wrong', { safety:3 }, 'you stay calm when things go wrong'],
     ['Explaining something until it finally clicks', { ss:2, stu:1 }, 'you love helping things click'],
     ['Figuring out how something works', { tech:3 }, 'you love figuring out how things work']]},
-  { q:'Which age group do you have the most patience for?', opts:[
+  { q:'Which age groups do you have the most patience for?', hint:'Pick any that fit.', multi:3, opts:[
     ['Toddlers and preschoolers', { ss:3 }, 'you have patience for little ones'],
     ['Grade-schoolers', { ss:3 }, 'you have patience for grade-schoolers'],
     ['Teenagers', { stu:3 }, 'you have patience for teenagers'],
-    ['Honestly? Grown-ups', { ss:-2, stu:-2 }, '']]},
-  { q:'Is music part of your life?', opts:[
-    ['Yes. I sing or play, and I’ve done it with others.', { worship:4 }, 'music is part of who you are'],
-    ['I sing in the car and play a little', { worship:1 }, ''],
-    ['I’m more of a listener', { worship:-6 }, '']]},
+    ['Honestly? Grown-ups', { ss:-2, stu:-2 }, '', true]]},
+  { q:'Where does music fit in your life?', hint:'Pick any that fit.', multi:3, opts:[
+    ['I sing', { worship:2 }, 'you sing'],
+    ['I play an instrument', { worship:2 }, 'you play an instrument'],
+    ['I’ve sung or played with a band, choir or worship team', { worship:2 }, 'you’ve made music with others'],
+    ['I’m more of a listener', { worship:-6 }, '', true]]},
   { q:'A new gadget shows up. You…', opts:[
     ['Can’t wait to figure it out', { tech:3 }, 'you dive into new gadgets'],
     ['Figure it out when you need to', { tech:1 }, ''],
     ['Hand it to someone else', { tech:-3 }, '']]},
-  { q:'Have you been trained to handle emergencies? Medical, first aid, security, law enforcement or military all count.', opts:[
-    ['Yes', { safety:4 }, 'you’re trained for emergencies'],
-    ['No', {}, '']]},
+  { q:'Have you had any training in handling emergencies?', hint:'Pick any that fit.', multi:2, opts:[
+    ['Medical, nursing or first aid', { safety:3 }, 'you’re trained to help in an emergency'],
+    ['Security, law enforcement or the military', { safety:4 }, 'you’re trained to keep people safe'],
+    ['Not really', {}, '', true]]},
   { q:'Rain or shine, where would you rather be?', opts:[
     ['Outside. The fresher the air the better.', { parking:3, safety:1 }, 'you’d rather be outside'],
     ['Either is fine', { parking:1 }, ''],
@@ -272,7 +275,12 @@ function render() {
 }
 function pick(i) {
   const Q = QS[step]; let p = ans[step] || [];
-  if (Q.multi) { p = p.includes(i) ? p.filter(x => x !== i) : (p.length < Q.multi ? p.concat(i) : p.slice(1).concat(i)); }
+  if (Q.multi) {
+    const excl = j => !!Q.opts[j][3];
+    if (p.includes(i)) p = p.filter(x => x !== i);
+    else if (excl(i)) p = [i];                                  // "none of these" clears the rest
+    else { p = p.filter(x => !excl(x)); p = p.length < Q.multi ? p.concat(i) : p.slice(1).concat(i); }
+  }
   else p = [i];
   ans[step] = p;
   if (!Q.multi) { render(); setTimeout(next, 180); } else render();
