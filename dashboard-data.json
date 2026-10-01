@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-01T06:52:42.090Z",
+  "lastUpdated": "2026-10-01T07:46:02.596Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -117,7 +117,8 @@
       "Jun '26",
       "Jul '26",
       "Aug '26",
-      "Sep '26"
+      "Sep '26",
+      "Oct '26"
     ],
     "amounts": [
       0,
@@ -224,7 +225,8 @@
       363983,
       407656,
       239469,
-      296467
+      296467,
+      2767
     ],
     "donors": [
       0,
@@ -331,12 +333,13 @@
       362,
       364,
       402,
-      383
+      383,
+      1
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5589140
+    "raised": 5591907
   },
   "attendance": {
     "months": [
@@ -540,7 +543,8 @@
       "2026-06",
       "2026-07",
       "2026-08",
-      "2026-09"
+      "2026-09",
+      "2026-10"
     ],
     "adults": [
       0,
@@ -743,7 +747,8 @@
       691,
       649,
       747,
-      747
+      747,
+      0
     ],
     "kids": [
       0,
@@ -946,7 +951,8 @@
       109,
       83,
       119,
-      114
+      114,
+      0
     ]
   },
   "attendanceWeekly": {
@@ -13209,7 +13215,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Sep 30, 2026, 11:52 PM",
+    "refreshed": "Oct 1, 2026, 12:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -13415,7 +13421,8 @@
       "Jun '26",
       "Jul '26",
       "Aug '26",
-      "Sep '26"
+      "Sep '26",
+      "Oct '26"
     ],
     "counts": [
       0,
@@ -13618,6 +13625,7 @@
       36,
       35,
       36,
+      37,
       37
     ]
   },
@@ -13823,7 +13831,8 @@
       "Jun '26",
       "Jul '26",
       "Aug '26",
-      "Sep '26"
+      "Sep '26",
+      "Oct '26"
     ],
     "counts": [
       0,
@@ -14026,7 +14035,8 @@
       374,
       333,
       354,
-      393
+      393,
+      397
     ]
   },
   "baptisms": {
@@ -14095,10 +14105,10 @@
     },
     "current": {
       "groups": 37,
-      "members": 393,
+      "members": 397,
       "groupSize": 11,
       "fmInGroupsPct": 54,
-      "asOfMonth": "Sep '26"
+      "asOfMonth": "Oct '26"
     },
     "groupCountsByYear": {
       "2010": [
@@ -14335,7 +14345,7 @@
         35,
         36,
         37,
-        null,
+        37,
         null,
         null
       ]
@@ -14575,7 +14585,7 @@
         333,
         354,
         393,
-        null,
+        397,
         null,
         null
       ]
@@ -32139,14 +32149,14 @@
     "weeklyAvg": 12,
     "totalFetched": 7120,
     "since": "2026-09-01",
-    "asOf": "2026-10-01T06:46:30.577Z"
+    "asOf": "2026-10-01T07:44:37.656Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.3764988009592326,
-    "avgOpenRate3": 0.4104597382210586,
+    "latestOpenRate": 0.390087929656275,
+    "avgOpenRate3": 0.41498944778673935,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-09-30T18:01:36+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-01T06:46:32.677Z"
+    "asOf": "2026-10-01T07:44:38.495Z"
   }
 }
