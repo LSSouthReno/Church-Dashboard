@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T17:18:59.152Z",
+  "generatedAt": "2026-10-02T18:19:00.704Z",
   "asOf": "2026-10-02",
   "givingMonths": 12,
   "statusVocab": [
@@ -18,9 +18,9 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 392,
+    "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 216,
+    "inGroup": 217,
     "serving": 233,
     "leading": 77,
     "givingRegular": 0,
@@ -29,9 +29,9 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 392,
+    "notBaptized": 393,
     "notInGroup": 176,
-    "notServing": 159,
+    "notServing": 160,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 392
+      "unknown": 393
     },
     "pct": {
-      "inGroup": 0.5510204081632653,
-      "serving": 0.5943877551020408,
-      "leading": 0.19642857142857142,
+      "inGroup": 0.5521628498727735,
+      "serving": 0.5928753180661578,
+      "leading": 0.19592875318066158,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -17903,9 +17903,9 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 4,
+        "totalPeople": 5,
         "avgScore": 0,
-        "inGroup": 4,
+        "inGroup": 5,
         "serving": 1,
         "leading": 0,
         "givingRegular": 0,
@@ -17914,9 +17914,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 4,
+        "notBaptized": 5,
         "notInGroup": 0,
-        "notServing": 3,
+        "notServing": 4,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -17930,11 +17930,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 4
+          "unknown": 5
         },
         "pct": {
           "inGroup": 1,
-          "serving": 0.25,
+          "serving": 0.2,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -17944,6 +17944,48 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Mary Timko",
+          "first": "Mary",
+          "last": "Timko",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2025-01-27T22:45:10Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Bridget Evans",
