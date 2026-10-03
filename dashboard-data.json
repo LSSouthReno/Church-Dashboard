@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-03T17:01:43.863Z",
+  "lastUpdated": "2026-10-03T17:46:21.513Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      27636
+      27979
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      55
+      56
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5616775
+    "raised": 5617118
   },
   "attendance": {
     "months": [
@@ -13226,7 +13226,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 3, 2026, 10:01 AM",
+    "refreshed": "Oct 3, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -32302,18 +32302,14 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 49,
-    "weeklyAvg": 11,
-    "totalFetched": 7120,
-    "since": "2026-09-03",
-    "asOf": "2026-10-03T16:44:34.931Z"
+    "error": "Address unavailable: https://api.planningcenteronline.com/people/v2/people?offset=5300&order=-created_at&per_page=100"
   },
   "emailStats": {
-    "latestOpenRate": 0.07038123167155426,
-    "avgOpenRate3": 0.27537988338228603,
+    "latestOpenRate": 0.07624633431085044,
+    "avgOpenRate3": 0.27733491759538476,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-03T16:44:35.957Z"
+    "asOf": "2026-10-03T17:45:07.249Z"
   }
 }
