@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-03T19:45:49.368Z",
+  "lastUpdated": "2026-10-03T20:00:39.101Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13226,7 +13226,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 3, 2026, 12:45 PM",
+    "refreshed": "Oct 3, 2026, 1:00 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14682,7 +14682,7 @@
         16,
         23,
         24,
-        23,
+        22,
         48,
         1,
         null,
@@ -14729,7 +14729,7 @@
         11,
         12,
         13,
-        15,
+        14,
         38,
         1,
         null,
@@ -15016,14 +15016,6 @@
         "attPct": 36
       },
       {
-        "name": "Castaneda Community Group",
-        "members": 14,
-        "leaders": 3,
-        "schedule": "Meets weekly on Mondays from 3-5pm",
-        "avgAttended": 11,
-        "attPct": 79
-      },
-      {
         "name": "Brown/Frank Community Group",
         "members": 14,
         "leaders": 2,
@@ -15038,6 +15030,14 @@
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
         "avgAttended": 8,
         "attPct": 62
+      },
+      {
+        "name": "Castaneda Community Group",
+        "members": 13,
+        "leaders": 3,
+        "schedule": "Meets weekly on Mondays from 3-5pm",
+        "avgAttended": 11,
+        "attPct": 85
       },
       {
         "name": "Frederick/Coggiola/Schelin Community Group",
@@ -15234,22 +15234,22 @@
     ],
     "venn": {
       "familyMembers": 391,
-      "cgMembers": 397,
+      "cgMembers": 396,
       "both": 212,
       "pctFmInCg": 54,
-      "pctCgAreFm": 53
+      "pctCgAreFm": 54
     },
     "venn4": {
       "sets": {
         "familyMembers": 391,
-        "cg": 397,
+        "cg": 396,
         "serving": 296,
         "giving": 953
       },
-      "universe": 1159,
+      "universe": 1158,
       "regions": {
         "1": 40,
-        "2": 89,
+        "2": 88,
         "3": 12,
         "4": 32,
         "5": 8,
@@ -15358,7 +15358,6 @@
           "John Helmer",
           "John Weaver",
           "Jolie Mortensen",
-          "Jonnie Buchanan",
           "Kailey Tierney",
           "Kambree Bowen",
           "Kathleen Holland",
@@ -16922,7 +16921,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 185,
+        "count": 184,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17019,7 +17018,6 @@
           "John Weaver",
           "Jolie Mortensen",
           "Jonathan Smith",
-          "Jonnie Buchanan",
           "Josie Nerska",
           "Julie Baker",
           "Julie Delucchi",
@@ -27124,7 +27122,7 @@
               "name": "Nathan Meredith",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27182,6 +27180,20 @@
               "pos": "Bear Cubs Guide",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Cindy Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Reuben Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -27332,8 +27344,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 106,
-            "totalVols": 106
+            "volsWithServiceTime": 108,
+            "totalVols": 108
           }
         }
       ],
@@ -28113,6 +28125,34 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Richard Price",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Anthony Azzam",
+              "team": "Enrichment Teams",
+              "pos": "Back Left Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Reuben Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Sean Lefler",
+              "team": "Enrichment Teams",
+              "pos": "Back Right Communion Server",
+              "status": "U",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -28256,8 +28296,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 103,
-            "totalVols": 103
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ]
@@ -28880,13 +28920,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Tina Faker",
-              "team": "Stepping Stones",
-              "pos": "Hawks Lead Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Geoffrey Caliger",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Lead Guide",
@@ -28941,6 +28974,13 @@
               "pos": "Connect Desk Host (A Team)",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -30238,14 +30278,14 @@
               "name": "Tina Faker",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Anna Faker",
               "team": "Stepping Stones",
               "pos": "Hawks Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -31154,20 +31194,6 @@
               "serviceTime": "9:30 AM"
             },
             {
-              "name": "Tina Faker",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
-              "name": "Anna Faker",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Jackie Lewis",
               "team": "Stepping Stones",
               "pos": "Hawks Lead Guide",
@@ -31399,8 +31425,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 71
+            "volsWithServiceTime": 69,
+            "totalVols": 69
           }
         }
       ]
@@ -31881,6 +31907,13 @@
               "pos": "Offering Counter",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Tina Faker",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Lead Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -31890,8 +31923,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 66,
-            "totalVols": 66
+            "volsWithServiceTime": 67,
+            "totalVols": 67
           }
         }
       ]
