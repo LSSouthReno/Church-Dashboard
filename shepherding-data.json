@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T19:19:45.372Z",
+  "generatedAt": "2026-10-03T20:18:58.601Z",
   "asOf": "2026-10-03",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 217,
+    "inGroup": 216,
     "serving": 233,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 393,
-    "notInGroup": 176,
+    "notInGroup": 177,
     "notServing": 160,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 393
     },
     "pct": {
-      "inGroup": 0.5521628498727735,
+      "inGroup": 0.549618320610687,
       "serving": 0.5928753180661578,
       "leading": 0.19592875318066158,
       "givingRegular": 0,
@@ -10790,7 +10790,7 @@
       "summary": {
         "totalPeople": 65,
         "avgScore": 0,
-        "inGroup": 32,
+        "inGroup": 31,
         "serving": 28,
         "leading": 8,
         "givingRegular": 0,
@@ -10800,7 +10800,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 65,
-        "notInGroup": 33,
+        "notInGroup": 34,
         "notServing": 37,
         "notGiving": 0,
         "paciCounts": {
@@ -10818,7 +10818,7 @@
           "unknown": 65
         },
         "pct": {
-          "inGroup": 0.49230769230769234,
+          "inGroup": 0.47692307692307695,
           "serving": 0.4307692307692308,
           "leading": 0.12307692307692308,
           "givingRegular": 0,
@@ -10895,15 +10895,10 @@
           "giving": null,
           "newFamilyMember": true,
           "familyStep": "Ready to Meet",
-          "groups": [
-            {
-              "name": "Castaneda Community Group",
-              "role": "member",
-              "joinedAt": "2026-08-03T19:46:01Z"
-            }
-          ],
+          "groups": [],
           "serveTeams": [],
           "flags": [
+            "Not in a group",
             "Not serving"
           ],
           "pending": true
