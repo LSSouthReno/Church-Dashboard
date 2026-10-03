@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T11:18:36.396Z",
+  "generatedAt": "2026-10-03T12:17:44.096Z",
   "asOf": "2026-10-03",
   "givingMonths": 12,
   "statusVocab": [
@@ -15978,6 +15978,48 @@
         },
         {
           "id": null,
+          "name": "Chris Padgett",
+          "first": "Chris",
+          "last": "Padgett",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Ryan Griffin Community Group",
+              "role": "member",
+              "joinedAt": "2025-04-17T16:51:30Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "James Burns",
           "first": "James",
           "last": "Burns",
@@ -16611,48 +16653,6 @@
           ],
           "flags": [
             "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Chris Padgett",
-          "first": "Chris",
-          "last": "Padgett",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Ryan Griffin Community Group",
-              "role": "member",
-              "joinedAt": "2025-04-17T16:51:30Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
           ],
           "pending": true
         },
@@ -18175,7 +18175,7 @@
   "paciCounts": {
     "parent": 64,
     "adult": 65,
-    "child": 147,
-    "infant": 106
+    "child": 146,
+    "infant": 107
   }
 }
