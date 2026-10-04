@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-04T20:59:54.612Z",
+  "lastUpdated": "2026-10-04T21:55:30.262Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13263,7 +13263,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 4, 2026, 1:59 PM",
+    "refreshed": "Oct 4, 2026, 2:55 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -23753,7 +23753,47 @@
             "totalVols": 111
           }
         }
-      ]
+      ],
+      "baptisms": {
+        "label": "September 6, 2026",
+        "byService": [
+          {
+            "service": "8:00 AM",
+            "people": [
+              {
+                "name": "Tammy Farr",
+                "baptizer": "Keith",
+                "adultChild": ""
+              }
+            ]
+          },
+          {
+            "service": "9:30 AM",
+            "people": [
+              {
+                "name": "Angie Bryan",
+                "baptizer": "Ray",
+                "adultChild": "Adult"
+              }
+            ]
+          },
+          {
+            "service": "11:00 AM",
+            "people": [
+              {
+                "name": "Erin Wilson",
+                "baptizer": "Adam",
+                "adultChild": "Adult"
+              },
+              {
+                "name": "Steve Rester",
+                "baptizer": "Adam",
+                "adultChild": "Adult"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "date": "2026-09-13",
@@ -27380,47 +27420,7 @@
             "totalVols": 107
           }
         }
-      ],
-      "baptisms": {
-        "label": "October 4, 2026",
-        "byService": [
-          {
-            "service": "8:00 AM",
-            "people": [
-              {
-                "name": "Tammy Farr",
-                "baptizer": "Keith",
-                "adultChild": ""
-              }
-            ]
-          },
-          {
-            "service": "9:30 AM",
-            "people": [
-              {
-                "name": "Angie Bryan",
-                "baptizer": "Ray",
-                "adultChild": "Adult"
-              }
-            ]
-          },
-          {
-            "service": "11:00 AM",
-            "people": [
-              {
-                "name": "Erin Wilson",
-                "baptizer": "Adam",
-                "adultChild": "Adult"
-              },
-              {
-                "name": "Steve Rester",
-                "baptizer": "Adam",
-                "adultChild": "Adult"
-              }
-            ]
-          }
-        ]
-      }
+      ]
     },
     {
       "date": "2026-10-11",
@@ -32378,14 +32378,14 @@
     "weeklyAvg": 13,
     "totalFetched": 7128,
     "since": "2026-09-04",
-    "asOf": "2026-10-04T20:44:33.524Z"
+    "asOf": "2026-10-04T21:47:45.458Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.14076246334310852,
-    "avgOpenRate3": 0.3013066681790147,
+    "latestOpenRate": 0.1436950146627566,
+    "avgOpenRate3": 0.30228418528556406,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-04T20:44:34.399Z"
+    "asOf": "2026-10-04T21:47:50.058Z"
   }
 }
