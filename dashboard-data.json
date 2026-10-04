@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-04T14:48:06.689Z",
+  "lastUpdated": "2026-10-04T15:08:49.562Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3276,6 +3276,13 @@
         "adults": 753,
         "kids": 128
       }
+    ],
+    "2026-10": [
+      {
+        "week": "Oct 4",
+        "adults": 0,
+        "kids": 4
+      }
     ]
   },
   "attendanceByService": {
@@ -3387,7 +3394,8 @@
       "2026-06",
       "2026-07",
       "2026-08",
-      "2026-09"
+      "2026-09",
+      "2026-10"
     ],
     "data": {
       "2018-08": {
@@ -4297,6 +4305,12 @@
           "adults": 241,
           "kids": 38
         }
+      },
+      "2026-10": {
+        "8:00 AM": {
+          "adults": 0,
+          "kids": 4
+        }
       }
     }
   },
@@ -4733,7 +4747,8 @@
       "2026-09-06",
       "2026-09-13",
       "2026-09-20",
-      "2026-09-27"
+      "2026-09-27",
+      "2026-10-04"
     ],
     "data": {
       "2018-08-19": {
@@ -8426,6 +8441,12 @@
         "11:00 AM": {
           "adults": 233,
           "kids": 36
+        }
+      },
+      "2026-10-04": {
+        "8:00 AM": {
+          "adults": 0,
+          "kids": 4
         }
       }
     },
@@ -13226,7 +13247,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 4, 2026, 7:48 AM",
+    "refreshed": "Oct 4, 2026, 8:08 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -26826,7 +26847,7 @@
               "name": "Jeff Bridges",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -27045,13 +27066,6 @@
               "pos": "Wolf Pack Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Jeff Bridges",
-              "team": "First Impressions",
-              "pos": "First Impressions Lead",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Cathy Cappini",
@@ -27342,8 +27356,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592648\"},{\"type\":\"PlanTime\",\"id\":\"224592649\"},{\"type\":\"PlanTime\",\"id\":\"224592650\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 108,
-            "totalVols": 108
+            "volsWithServiceTime": 107,
+            "totalVols": 107
           }
         }
       ],
@@ -28079,7 +28093,7 @@
               "name": "Vonda Fineman",
               "team": "Counting Team",
               "pos": "Offering Counter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -30402,7 +30416,7 @@
               "name": "Vonda Fineman",
               "team": "Counting Team",
               "pos": "Offering Counter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
@@ -31917,7 +31931,7 @@
               "name": "Vonda Fineman",
               "team": "Counting Team",
               "pos": "Offering Counter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
