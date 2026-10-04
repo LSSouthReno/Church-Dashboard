@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-04T17:47:33.818Z",
+  "lastUpdated": "2026-10-04T18:45:58.900Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      42554
+      42573
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      138
+      139
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5631693
+    "raised": 5631712
   },
   "attendance": {
     "months": [
@@ -748,7 +748,7 @@
       649,
       747,
       747,
-      509
+      775
     ],
     "kids": [
       0,
@@ -952,7 +952,7 @@
       83,
       119,
       114,
-      61
+      110
     ]
   },
   "attendanceWeekly": {
@@ -3280,8 +3280,8 @@
     "2026-10": [
       {
         "week": "Oct 4",
-        "adults": 206,
-        "kids": 59
+        "adults": 509,
+        "kids": 61
       }
     ]
   },
@@ -4312,8 +4312,12 @@
           "kids": 18
         },
         "9:30 AM": {
-          "adults": 0,
+          "adults": 303,
           "kids": 41
+        },
+        "11:00 AM": {
+          "adults": 0,
+          "kids": 2
         }
       }
     }
@@ -8453,8 +8457,12 @@
           "kids": 18
         },
         "9:30 AM": {
-          "adults": 0,
+          "adults": 303,
           "kids": 41
+        },
+        "11:00 AM": {
+          "adults": 0,
+          "kids": 2
         }
       }
     },
@@ -13255,7 +13263,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 4, 2026, 10:47 AM",
+    "refreshed": "Oct 4, 2026, 11:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14669,7 +14677,7 @@
         25,
         43,
         45,
-        1,
+        2,
         null,
         null
       ]
@@ -15053,7 +15061,7 @@
         "attPct": 43
       },
       {
-        "name": "Ray Brown Community Group",
+        "name": "Brown/Peregrin Community Group",
         "members": 13,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-7:30am",
@@ -32363,11 +32371,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 52,
+    "count30d": 53,
     "weeklyAvg": 12,
-    "totalFetched": 7126,
+    "totalFetched": 7127,
     "since": "2026-09-04",
-    "asOf": "2026-10-04T17:45:25.636Z"
+    "asOf": "2026-10-04T18:44:37.063Z"
   },
   "emailStats": {
     "latestOpenRate": 0.14076246334310852,
@@ -32375,6 +32383,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-04T17:45:27.340Z"
+    "asOf": "2026-10-04T18:44:38.006Z"
   }
 }
