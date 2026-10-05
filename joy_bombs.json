@@ -15,20 +15,6 @@
       "position": "Connect Desk Host (B Team)"
     },
     {
-      "id": "jb_151512774_20261004_enrichmentteam",
-      "name": "Jeremy Peterson",
-      "pcoPersonId": "151512774",
-      "team": "Enrichment Teams",
-      "phone": "17752292858",
-      "firstServeDate": "2026-10-04",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Back Right Communion Server"
-    },
-    {
       "id": "jb_179629215_20261004_steppingstone",
       "name": "Jennifer Torres",
       "pcoPersonId": "179629215",
@@ -687,7 +673,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bear Cubs Lead Guide"
+    },
+    {
+      "id": "jb_151512774_20261004_enrichmentteam",
+      "name": "Jeremy Peterson",
+      "pcoPersonId": "151512774",
+      "team": "Enrichment Teams",
+      "phone": "17752292858",
+      "firstServeDate": "2026-10-04",
+      "status": "bombed",
+      "bombedDate": "2026-10-05",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Back Right Communion Server"
     }
   ],
-  "lastUpdated": "2026-10-05T20:11:26.076Z"
+  "lastUpdated": "2026-10-05T20:17:37.052Z"
 }
