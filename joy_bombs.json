@@ -15,20 +15,6 @@
       "position": "Connect Desk Host (B Team)"
     },
     {
-      "id": "jb_179629215_20261004_steppingstone",
-      "name": "Jennifer Torres",
-      "pcoPersonId": "179629215",
-      "team": "Stepping Stones",
-      "phone": "17752252206",
-      "firstServeDate": "2026-10-04",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Guide WP, Hawks, Mustangs"
-    },
-    {
       "id": "jb_151512874_20261004_steppingstone",
       "name": "Sean Lefler",
       "pcoPersonId": "151512874",
@@ -687,7 +673,21 @@
       "notes": "",
       "source": "auto",
       "position": "Back Right Communion Server"
+    },
+    {
+      "id": "jb_179629215_20261004_steppingstone",
+      "name": "Jennifer Torres",
+      "pcoPersonId": "179629215",
+      "team": "Stepping Stones",
+      "phone": "17752252206",
+      "firstServeDate": "2026-10-04",
+      "status": "bombed",
+      "bombedDate": "2026-10-05",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Guide WP, Hawks, Mustangs"
     }
   ],
-  "lastUpdated": "2026-10-05T20:17:37.052Z"
+  "lastUpdated": "2026-10-05T20:17:39.149Z"
 }
