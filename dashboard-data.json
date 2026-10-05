@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-05T22:45:56.150Z",
+  "lastUpdated": "2026-10-05T22:59:51.308Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 5, 2026, 3:45 PM",
+    "refreshed": "Oct 5, 2026, 3:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -15051,7 +15051,7 @@
         "name": "Isaac Griffin Community Group",
         "members": 17,
         "leaders": 1,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8:30pm",
+        "schedule": "Meets weekly on Fridays from 7-8:30pm",
         "avgAttended": 8,
         "attPct": 47
       },
@@ -27303,7 +27303,7 @@
               "seq": 7,
               "title": "CONFESSION / ASSURANCE",
               "type": "item",
-              "lengthMin": 2,
+              "lengthMin": 3,
               "description": ""
             },
             {
@@ -27331,7 +27331,7 @@
               "seq": 11,
               "title": "SERMON TEXT READING",
               "type": "item",
-              "lengthMin": 4,
+              "lengthMin": 2,
               "description": ""
             },
             {
@@ -27634,20 +27634,6 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
-            },
-            {
-              "name": "Karynn Sucaldito",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
-              "name": "Ray Brown",
-              "team": "Presiders",
-              "pos": "Presider",
-              "status": "U",
-              "serviceTime": "9:30 AM, 11 AM"
             },
             {
               "name": "Thomas Lloyd",
@@ -28103,6 +28089,20 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Karynn Sucaldito",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Damian Smith",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "9:30 AM, 11 AM"
             }
           ],
           "orderItems": [
@@ -29521,6 +29521,20 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Presider",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Anita Bigger",
+              "team": "Presiders",
+              "pos": "Sermon Text Reader",
+              "status": "U",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -29530,8 +29544,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 66,
-            "totalVols": 66
+            "volsWithServiceTime": 68,
+            "totalVols": 68
           }
         }
       ]
@@ -29606,13 +29620,6 @@
               "pos": "Sermon Text Reader",
               "status": "U",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Damian Smith",
-              "team": "Presiders",
-              "pos": "Sermon Text Reader",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
             },
             {
               "name": "Janet Colonna",
@@ -30042,8 +30049,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 68,
+            "totalVols": 68
           }
         }
       ]
