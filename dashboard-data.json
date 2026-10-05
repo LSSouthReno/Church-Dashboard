@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-05T21:05:25.574Z",
+  "lastUpdated": "2026-10-05T21:46:04.602Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      61833
+      62322
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      186
+      187
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5650972
+    "raised": 5651461
   },
   "attendance": {
     "months": [
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 5, 2026, 2:05 PM",
+    "refreshed": "Oct 5, 2026, 2:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -22862,47 +22862,7 @@
             "totalVols": 111
           }
         }
-      ],
-      "baptisms": {
-        "label": "September 6, 2026",
-        "byService": [
-          {
-            "service": "8:00 AM",
-            "people": [
-              {
-                "name": "Tammy Farr",
-                "baptizer": "Keith",
-                "adultChild": ""
-              }
-            ]
-          },
-          {
-            "service": "9:30 AM",
-            "people": [
-              {
-                "name": "Angie Bryan",
-                "baptizer": "Ray",
-                "adultChild": "Adult"
-              }
-            ]
-          },
-          {
-            "service": "11:00 AM",
-            "people": [
-              {
-                "name": "Erin Wilson",
-                "baptizer": "Adam",
-                "adultChild": "Adult"
-              },
-              {
-                "name": "Steve Rester",
-                "baptizer": "Adam",
-                "adultChild": "Adult"
-              }
-            ]
-          }
-        ]
-      }
+      ]
     },
     {
       "date": "2026-09-13",
@@ -31476,11 +31436,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 56,
+    "count30d": 55,
     "weeklyAvg": 13,
     "totalFetched": 7130,
     "since": "2026-09-05",
-    "asOf": "2026-10-05T20:44:51.556Z"
+    "asOf": "2026-10-05T21:44:37.510Z"
   },
   "emailStats": {
     "latestOpenRate": 0.16715542521994134,
@@ -31488,6 +31448,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-05T20:44:52.702Z"
+    "asOf": "2026-10-05T21:44:38.517Z"
   }
 }
