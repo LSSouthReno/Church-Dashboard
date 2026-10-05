@@ -942,7 +942,7 @@
     "guest": 0,
     "attender": 65,
     "member": 0,
-    "group": 396,
+    "group": 397,
     "leader": 83,
     "missionary": 2,
     "asOf": "2026-10-05"
@@ -6570,6 +6570,64 @@
     },
     {
       "type": "Community Group",
+      "name": "Brown/Peregrin Community Group",
+      "members": [
+        {
+          "name": "Aaron Ware",
+          "role": "member"
+        },
+        {
+          "name": "Austin Aranda",
+          "role": "member"
+        },
+        {
+          "name": "Byron Corletto",
+          "role": "member"
+        },
+        {
+          "name": "Cory Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Damian Smith",
+          "role": "member"
+        },
+        {
+          "name": "Erik Wilson",
+          "role": "member"
+        },
+        {
+          "name": "Garrett Banks",
+          "role": "member"
+        },
+        {
+          "name": "Iain Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Peterson",
+          "role": "member"
+        },
+        {
+          "name": "Peter Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "leader"
+        },
+        {
+          "name": "Thomas Adams",
+          "role": "member"
+        },
+        {
+          "name": "Thomas Peregrin",
+          "role": "leader"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
       "name": "Caliger/Rankin Community Group",
       "members": [
         {
@@ -7767,6 +7825,10 @@
           "role": "member"
         },
         {
+          "name": "Jonnie Buchanan",
+          "role": "member"
+        },
+        {
           "name": "Julia Perlingos-Jackson",
           "role": "leader"
         },
@@ -7987,64 +8049,6 @@
         {
           "name": "Wende Schwake",
           "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
-      "name": "Ray Brown Community Group",
-      "members": [
-        {
-          "name": "Aaron Ware",
-          "role": "member"
-        },
-        {
-          "name": "Austin Aranda",
-          "role": "member"
-        },
-        {
-          "name": "Byron Corletto",
-          "role": "member"
-        },
-        {
-          "name": "Cory Hunt",
-          "role": "member"
-        },
-        {
-          "name": "Damian Smith",
-          "role": "member"
-        },
-        {
-          "name": "Erik Wilson",
-          "role": "member"
-        },
-        {
-          "name": "Garrett Banks",
-          "role": "member"
-        },
-        {
-          "name": "Iain Dykins",
-          "role": "member"
-        },
-        {
-          "name": "Jeremy Peterson",
-          "role": "member"
-        },
-        {
-          "name": "Peter Sellman",
-          "role": "member"
-        },
-        {
-          "name": "Ray Brown",
-          "role": "leader"
-        },
-        {
-          "name": "Thomas Adams",
-          "role": "member"
-        },
-        {
-          "name": "Thomas Peregrin",
-          "role": "leader"
         }
       ]
     },
@@ -14862,6 +14866,10 @@
         },
         {
           "name": "Julia Donovan",
+          "role": "member"
+        },
+        {
+          "name": "Kate Stewart",
           "role": "member"
         },
         {
