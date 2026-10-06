@@ -678,6 +678,39 @@
     font-size: 12px;
   }
 
+  /* ---- Church: sub-nav + overview tiles + one grid over the existing cards ---- */
+  .ch-subnav { display: flex; gap: 6px; flex-wrap: wrap; margin: -6px 0 20px; }
+  .ch-subnav button { appearance: none; background: none; border: 1px solid transparent; border-radius: 999px; padding: 7px 13px; font: 600 12.5px 'Montserrat', sans-serif; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .ch-subnav button:hover { color: var(--text); }
+  .ch-subnav button.on { background: var(--gold-soft); color: var(--gold); border-color: rgba(212,175,55,.35); }
+  body.members-in .ch-subnav .lk { display: none; }
+  .ch-tiles { display: none; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .ch-tiles.on { display: grid; }
+  .ch-tile { appearance: none; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px 18px; min-height: 120px; display: flex; flex-direction: column; cursor: pointer; text-align: left; font-family: inherit; color: var(--text); transition: border-color .15s; }
+  .ch-tile:hover { border-color: #3f3f3f; }
+  .ch-tile .k { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  .ch-tile .v { font-size: 32px; font-weight: 800; letter-spacing: -.02em; margin: 8px 0 2px; line-height: 1; }
+  .ch-tile .d { font-size: 12px; color: var(--text-muted); }
+  .ch-tile .t { font-size: 12px; font-weight: 700; margin-top: auto; padding-top: 10px; min-height: 1em; }
+  .ch-tile .t.up { color: var(--green); } .ch-tile .t.dn { color: var(--red); } .ch-tile .t.wn { color: #e0a63c; } .ch-tile .t.gold { color: var(--gold); }
+  .ch-tile.lock { border-style: dashed; border-color: #3a3a3a; }
+  .ch-tile.lock .v { font-size: 18px; color: var(--text-dim); font-weight: 700; margin-top: 12px; }
+  .ch-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+  .ch-body > .grid, .ch-body .stack { display: contents; }
+  .ch-body .ch-c { display: none; }
+  .ch-body .ch-c.on { display: block; }
+  .ch-body .ch-c.on.fill-row { display: flex; }
+  .ch-body .ch-c.fill-row .chart-wrap { height: 300px; min-height: 0; flex: none; }
+  .ch-body:not([data-tab="overview"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ch-body[data-tab="attendance"] .ch-c, .ch-body[data-tab="baptisms"] .ch-c, .ch-body[data-tab="members"] .ch-c, .ch-body[data-tab="serve"] .ch-c, .ch-body #budgetPieCard { grid-column: 1 / -1; }
+  .ch-body .ch-c .chart-wrap.tall { height: 300px; }
+  .ch-note { grid-column: 1 / -1; color: var(--text-muted); font-size: 13px; padding: 4px 2px 0; }
+  @media (max-width: 1200px) {
+    .ch-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ch-body, .ch-body:not([data-tab="overview"]) { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 650px) { .ch-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .ch-tile { padding: 13px 14px; min-height: 100px; } .ch-tile .v { font-size: 26px; } }
+
   @media (max-width: 1200px) {
     .dashboard { padding: 24px 20px 50px; }
     .grid { grid-template-columns: 1fr; }
@@ -3378,10 +3411,13 @@
     </div>
   </div>
 
+  <div class="ch-subnav" id="chSubnav"></div>
+  <div class="ch-tiles on" id="chTiles"></div>
+  <div class="ch-body" id="chGrid" data-tab="overview">
   <!-- Row 1: Weekend Attendance | Baptisms + Members Growth -->
   <div class="grid">
 
-    <div class="card fill-row">
+    <div class="card fill-row ch-c on" data-ch="overview attendance" id="attCard">
       <h2>Weekend Attendance</h2>
       <div class="card-desc" data-sec="Weekend Attendance"></div>
       <div class="card-sub">Adults + Kids · full history · scroll horizontally · <span style="color:#93c5fd;cursor:pointer;">click a bar for weekly breakdown</span></div>
@@ -3399,7 +3435,7 @@
     </div>
 
     <div class="stack">
-      <div class="card" id="baptismsCard">
+      <div class="card ch-c" data-ch="baptisms" id="baptismsCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Baptisms</h2>
           <span id="baptismsTotalBadge" style="font-size:13px;color:#818cf8;font-weight:700;padding-top:2px;"></span>
@@ -3409,7 +3445,7 @@
         <div class="chart-wrap"><div class="chart-inner"><canvas id="baptismsChart"></canvas></div></div>
       </div>
 
-      <div class="card" id="membersGrowthCard">
+      <div class="card ch-c" data-ch="members" id="membersGrowthCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Church Members</h2>
           <span id="membersTotalBadge" style="font-size:13px;color:#34d399;font-weight:700;padding-top:2px;"></span>
@@ -3425,7 +3461,7 @@
   <!-- Row 2: Serve Teams | Giving + Pledge -->
   <div class="grid" style="margin-top:24px;">
 
-    <div class="card teams-card" id="teamsCard" onclick="openTeamsModal()" style="cursor:pointer;" title="Click for full team detail">
+    <div class="card teams-card ch-c on" data-ch="overview serve" id="teamsCard" onclick="navGo('serve')" style="cursor:pointer;" title="Open Serve">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
         <h2 style="margin:0;">Serve Teams · Volunteer Gaps</h2>
         <span id="teamsCardLockBadge" style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">Click for detail →</span>
@@ -3455,14 +3491,14 @@
     </div>
 
     <div class="stack">
-      <div class="card">
+      <div class="card ch-c" data-ch="giving">
         <h2>Average Giving by Month</h2>
         <div class="card-desc" data-sec="Average Giving by Month"></div>
         <div class="card-sub">Full history · scroll horizontally for older months</div>
         <div class="chart-wrap"><div class="chart-inner"><canvas id="givingChart"></canvas></div></div>
       </div>
 
-      <div class="card progress-card">
+      <div class="card progress-card ch-c" data-ch="giving">
         <h2>ALL-IN Pledge Progress</h2>
         <div class="card-desc" data-sec="ALL-IN Pledge Progress"></div>
         <div class="card-sub">General Giving + Building fund donations</div>
@@ -3498,7 +3534,7 @@
   </div>
 
   <!-- Budget Allocation — full-width, members-only -->
-  <div class="card" id="budgetPieCard" style="display:none;margin-top:24px;">
+  <div class="card ch-c" data-ch="giving" id="budgetPieCard" style="display:none;margin-top:24px;">
     <h2>Budget Allocation</h2>
     <div class="card-desc" data-sec="Budget Allocation"></div>
     <div class="card-sub">% of income by category</div>
@@ -3527,20 +3563,20 @@
   <!-- Row 3: Community Groups Count | Community Group Members -->
   <div class="grid" style="margin-top:24px;">
 
-    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+    <div class="card ch-c on" data-ch="overview groups" style="cursor:pointer;" onclick="navGo('groups')" title="Open the full Community Groups view">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
         <h2 style="margin:0;">Community Groups</h2>
-        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">Full detail <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></span>
       </div>
       <div class="card-desc" data-sec="Community Groups"></div>
       <div class="card-sub">Total groups · click for full CG detail</div>
       <div class="chart-wrap tall"><div class="chart-inner"><canvas id="cgCountChart"></canvas></div></div>
     </div>
 
-    <div class="card" style="cursor:pointer;" onclick="openCGModal()" title="Click for full community group detail">
+    <div class="card ch-c" data-ch="groups" style="cursor:pointer;" onclick="navGo('groups')" title="Open the full Community Groups view">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
         <h2 style="margin:0;">Community Group Members</h2>
-        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">🔐 Discipleship →</span>
+        <span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;padding-top:2px;">Full detail <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></span>
       </div>
       <div class="card-desc" data-sec="Community Group Members"></div>
       <div class="card-sub">Total members · click for full CG detail</div>
@@ -3549,9 +3585,7 @@
 
   </div>
 
-  <div class="sh-enter-wrap">
-    <button class="sh-enter-btn" onclick="openPastorModal()" title="For pastors &amp; elders">&#128737;&#65039; Pastors</button>
-  </div>
+  </div><!-- /chGrid -->
 
   <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno</div>
 </div>
@@ -5282,6 +5316,61 @@ async function loadDashboardData() {
   try { if (typeof applyHashRoute === 'function') applyHashRoute(); } catch (e) {}
 }
 
+/* ================================================================
+   CHURCH — overview tiles + sub-nav. The cards below are the same cards
+   as before; each carries data-ch="…" naming the tabs it belongs to.
+   ================================================================ */
+const CH_TABS = [['overview', 'Overview'], ['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Groups'], ['serve', 'Serve'], ['giving', 'Giving', 1]];
+const CH_LK = '<svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg>';
+function chBuildSubnav() {
+  const el = document.getElementById('chSubnav'); if (!el) return;
+  el.innerHTML = CH_TABS.map(t => '<button data-ch-tab="' + t[0] + '" onclick="chTab(\'' + t[0] + '\')">' + t[1] + (t[2] ? CH_LK : '') + '</button>').join('');
+}
+function chCurrentTab() { try { return sessionStorage.getItem('ch_tab') || 'overview'; } catch (e) { return 'overview'; } }
+function chTab(tab, silent) {
+  tab = CH_TABS.some(t => t[0] === tab) ? tab : 'overview';
+  try { sessionStorage.setItem('ch_tab', tab); } catch (e) {}
+  const g = document.getElementById('chGrid'); if (!g) return;
+  g.dataset.tab = tab;
+  g.querySelectorAll('.ch-c').forEach(c => c.classList.toggle('on', (c.dataset.ch || '').split(/\s+/).indexOf(tab) >= 0));
+  document.querySelectorAll('#chSubnav button').forEach(b => b.classList.toggle('on', b.dataset.chTab === tab));
+  const tiles = document.getElementById('chTiles'); if (tiles) tiles.classList.toggle('on', tab === 'overview');
+  if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(chResizeCharts, 30);
+}
+function chResizeCharts() {
+  document.querySelectorAll('#chGrid .ch-c.on canvas').forEach(c => { try { const ch = Chart.getChart(c); if (ch) ch.resize(); } catch (e) {} });
+}
+function chRenderTiles() {
+  const D = DASHBOARD_DATA, el = document.getElementById('chTiles'); if (!D || !el) return;
+  const wk = []; Object.keys(D.attendanceWeekly || {}).sort().forEach(k => (D.attendanceWeekly[k] || []).forEach(w => wk.push((+w.adults || 0) + (+w.kids || 0))));
+  const nz = wk.filter(n => n > 0), last = nz.slice(-4), prev = nz.slice(-8, -4);
+  const mean = a => a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length) : null;
+  const avg = mean(last), pavg = mean(prev), delta = (avg && pavg) ? Math.round((avg - pavg) / pavg * 100) : null;
+  const yr = new Date().getFullYear(), yy = "'" + String(yr).slice(2), B = D.baptisms || {};
+  const bapYtd = (B.months || []).reduce((a, m, i) => a + (String(m).endsWith(yy) ? (+(B.counts || [])[i] || 0) : 0), 0);
+  const M = D.members || {}, mi = (M.years || []).indexOf(yr), mNew = mi >= 0 ? (+(M.counts || [])[mi] || 0) : 0;
+  const CG = D.communityGroupMembers || {}, CGc = D.communityGroups || {};
+  const cgm = (CG.counts || []).slice(-1)[0], cgm2 = (CG.counts || []).slice(-3)[0], cgMon = (CG.months || []).slice(-3)[0], grp = (CGc.counts || []).slice(-1)[0];
+  const T = D.serveTeams || [];
+  const need = T.reduce((a, t) => a + (+t.needed || 0), 0), have = T.reduce((a, t) => a + Math.min(+t.current || 0, +t.needed || 0), 0), gap = T.reduce((a, t) => a + Math.max(0, (+t.needed || 0) - (+t.current || 0)), 0);
+  const fill = need ? Math.round(have / need * 100) : null;
+  const giveOpen = mmIsUnlocked(), G = D.giving || {}, gi = (G.amounts || []).length - 2;   // last COMPLETE month
+  const gAmt = gi >= 0 ? +G.amounts[gi] : null, gMon = gi >= 0 ? G.months[gi] : '';
+  const E = escapeHtml;
+  const tile = (tab, k, v, d, t, cls) => '<button class="ch-tile' + (cls ? ' ' + cls : '') + '" onclick="' + (tab === 'giving' && !giveOpen ? "mmShowPrompt(function(){chTab('giving')})" : "chTab('" + tab + "')") + '"><span class="k">' + k + '</span><span class="v">' + v + '</span><span class="d">' + d + '</span><span class="t ' + (t.cls || '') + '">' + (t.txt || '') + '</span></button>';
+  el.innerHTML =
+    tile('attendance', 'Weekend avg', avg != null ? avg.toLocaleString() : '—', 'adults + kids · last 4 weeks', delta == null ? {} : { txt: (delta >= 0 ? '▲ ' : '▼ ') + Math.abs(delta) + '% vs prior 4 weeks', cls: delta >= 0 ? 'up' : 'dn' }) +
+    tile('members', 'Members', M.current || '—', 'member · deacon · pastor', { txt: mNew ? '+' + mNew + ' this year' : '', cls: 'up' }) +
+    tile('baptisms', 'Baptisms ' + yr, bapYtd, (B.total || 0).toLocaleString() + ' all-time', { txt: '', cls: 'up' }) +
+    tile('groups', 'In a group', cgm != null ? cgm : '—', grp != null ? grp + ' community groups' : '', (cgm != null && cgm2 != null) ? { txt: (cgm - cgm2 >= 0 ? '+' : '') + (cgm - cgm2) + ' since ' + E(cgMon), cls: cgm - cgm2 >= 0 ? 'up' : 'dn' } : {}) +
+    tile('serve', 'Serving', D.uniqueVolunteers || '—', need ? need + ' positions · ' + gap + ' open' : '', fill != null ? { txt: fill + '% filled', cls: fill >= 90 ? 'up' : fill >= 75 ? 'wn' : 'dn' } : {}) +
+    (giveOpen
+      ? tile('giving', 'Giving · ' + E(gMon), gAmt != null ? '$' + Math.round(gAmt).toLocaleString() : '—', 'last full month', { txt: 'Pledge · budget · missions →', cls: 'gold' })
+      : tile('giving', 'Giving', 'Members only', 'Monthly giving, ALL-IN pledge, budget', { txt: 'Unlock →', cls: 'gold' }, 'lock'));
+}
+window.addEventListener('DOMContentLoaded', () => { chBuildSubnav(); chTab(chCurrentTab(), true); });
+
 function normalizeDashboardData() {
   DASHBOARD_DATA.lastUpdated = DASHBOARD_DATA.lastUpdated || new Date().toISOString();
   DASHBOARD_DATA.giving = DASHBOARD_DATA.giving || { months: [], amounts: [] };
@@ -6791,6 +6880,7 @@ loadDashboardData()
     renderMembersGrowth();
     addCsvButtons_();
     setTimeout(addCsvButtons_, 1200);   // catch any late-rendering charts
+    try { chRenderTiles(); chTab(chCurrentTab(), true); } catch (e) { console.error(e); }
   })
   .catch(showDashboardError);
 
@@ -7554,6 +7644,7 @@ function mmApplyState() {
   renderDonors();
   mmUpdatePledgeDetails();
   addCsvButtons_();   // giving/donor charts just became available — ensure their export buttons exist
+  try { chRenderTiles(); } catch (e) {}
 
   // Re-render missions amounts (blur/unblur on lock state change)
   const missionsList = document.getElementById('missionsList');
@@ -17092,7 +17183,7 @@ function tdNumbersCard() {
   const yy = "'" + String(new Date().getFullYear()).slice(2), B = D.baptisms || {};
   const bapYtd = (B.months || []).reduce((a, m, i) => a + (String(m).endsWith(yy) ? (+(B.counts || [])[i] || 0) : 0), 0);
   const st = (v, l, sub) => '<div class="td-stat"><b>' + v + '</b><span>' + l + '</span><i>' + sub + '</i></div>';
-  return '<div class="td-card"><div class="td-card-h"><h3>Key numbers</h3><button onclick="navGo(\'metrics\')">Metrics →</button></div><div class="td-stats">' +
+  return '<div class="td-card"><div class="td-card-h"><h3>Key numbers</h3><button onclick="navGo(\'church\')">Church →</button></div><div class="td-stats">' +
     (avg != null ? st(avg.toLocaleString(), 'Weekend avg', 'adults + kids, last 4 weeks') : '') +
     st(bapYtd, 'Baptisms ' + new Date().getFullYear(), 'so far this year') +
     (D.members && D.members.current ? st(D.members.current, 'Members', 'member · deacon · pastor') : '') +
