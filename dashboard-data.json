@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-06T18:52:21.875Z",
+  "lastUpdated": "2026-10-06T22:03:16.400Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 6, 2026, 11:52 AM",
+    "refreshed": "Oct 6, 2026, 3:03 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14117,7 +14117,7 @@
       333,
       352,
       391,
-      396
+      397
     ]
   },
   "baptisms": {
@@ -14188,7 +14188,7 @@
     },
     "current": {
       "groups": 37,
-      "members": 396,
+      "members": 397,
       "groupSize": 11,
       "fmInGroupsPct": 54,
       "asOfMonth": "Oct '26"
@@ -14668,7 +14668,7 @@
         333,
         352,
         391,
-        396,
+        397,
         null,
         null
       ]
@@ -14712,7 +14712,7 @@
         25,
         43,
         45,
-        3,
+        4,
         null,
         null
       ]
@@ -14756,7 +14756,7 @@
         24,
         22,
         48,
-        2,
+        3,
         null,
         null
       ]
@@ -14803,7 +14803,7 @@
         13,
         14,
         38,
-        2,
+        3,
         null,
         null
       ]
@@ -15016,20 +15016,20 @@
         "attPct": 57
       },
       {
+        "name": "Martinson/Degener Community Group",
+        "members": 23,
+        "leaders": 2,
+        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "avgAttended": 7,
+        "attPct": 30
+      },
+      {
         "name": "Men’s Tuesday Night: Better Call Paul",
         "members": 22,
         "leaders": 2,
         "schedule": "Meets weekly on Tuesdays from 6-8pm",
         "avgAttended": 9,
         "attPct": 41
-      },
-      {
-        "name": "Martinson/Degener Community Group",
-        "members": 22,
-        "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
-        "avgAttended": 7,
-        "attPct": 32
       },
       {
         "name": "McCarthy Community Group",
@@ -15306,7 +15306,7 @@
     ],
     "venn": {
       "familyMembers": 391,
-      "cgMembers": 396,
+      "cgMembers": 397,
       "both": 211,
       "pctFmInCg": 54,
       "pctCgAreFm": 53
@@ -15314,14 +15314,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 391,
-        "cg": 396,
+        "cg": 397,
         "serving": 297,
         "giving": 960
       },
-      "universe": 1164,
+      "universe": 1165,
       "regions": {
         "1": 40,
-        "2": 89,
+        "2": 90,
         "3": 11,
         "4": 34,
         "5": 8,
@@ -15389,6 +15389,7 @@
           "Annette Whittemore",
           "Anthony Lorenzi",
           "Ava Palmer",
+          "Bella Palmer",
           "Ben L",
           "Brandon Mickey",
           "Brett Caron",
@@ -17002,7 +17003,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 185,
+        "count": 186,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17023,6 +17024,7 @@
           "Austin Aranda",
           "Ava Palmer",
           "Avryl Benard",
+          "Bella Palmer",
           "Ben L",
           "Beth Watts",
           "Bill Winchester",
@@ -27120,7 +27122,7 @@
               "name": "Timothy Frederick",
               "team": "First Impressions",
               "pos": "Greeter",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -29583,7 +29585,7 @@
               "name": "Anita Bigger",
               "team": "Presiders",
               "pos": "Presider",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -31521,18 +31523,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 53,
-    "weeklyAvg": 12,
-    "totalFetched": 7131,
+    "count30d": 54,
+    "weeklyAvg": 13,
+    "totalFetched": 7132,
     "since": "2026-09-06",
-    "asOf": "2026-10-06T18:45:47.816Z"
+    "asOf": "2026-10-06T21:44:40.879Z"
   },
   "emailStats": {
     "latestOpenRate": 0.17008797653958943,
-    "avgOpenRate3": 0.314347573995643,
+    "avgOpenRate3": 0.31461402749950657,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-06T18:45:50.862Z"
+    "asOf": "2026-10-06T21:44:42.002Z"
   }
 }
