@@ -119,6 +119,19 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(jgProbe_());
     }
+    if (action === 'probe_members') {
+      // Read-only aggregate probe (no names): how PCO membership + the membership workflow look.
+      var out = {};
+      try {
+        ['Member','Deacon','Pastor'].forEach(function(m){ out['membership_' + m] = (pcoGetAll_('/people/v2/people?where[membership]=' + m + '&fields[Person]=id&per_page=100') || []).length; });
+        var lists = pcoGetAll_('/people/v2/lists?per_page=100') || [];
+        out.lists = lists.filter(function(l){ var n=((l.attributes||{}).name||'').toLowerCase(); return n.indexOf('family')>=0 || n.indexOf('member')>=0; }).map(function(l){ return { id:l.id, name:(l.attributes||{}).name, total:(l.attributes||{}).total_people }; });
+        var cards = pcoGetAll_('/people/v2/workflows/528798/cards?per_page=100') || [];
+        out.cards = cards.length; out.byStage = {}; out.completedByYear = {}; out.sampleAttrs = cards[0] ? Object.keys(cards[0].attributes||{}) : [];
+        cards.forEach(function(c){ var a=c.attributes||{}; out.byStage[a.stage]=(out.byStage[a.stage]||0)+1; if (a.completed_at) { var y=String(a.completed_at).slice(0,4)+'/'+a.stage; out.completedByYear[y]=(out.completedByYear[y]||0)+1; } });
+      } catch (x) { out.error = String(x && x.message || x); }
+      return eosWaJson_(out);
+    }
     if (action === 'run_members_sync') {
       // Rebuild the Members-by-year sheet from PCO now (Member Since + membership-workflow completion).
       // Read-only against PCO; the hourly publish picks the sheet up. Returns the rows for checking.
