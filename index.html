@@ -480,7 +480,7 @@
   }
   /* ── Phone app (installed / standalone) ── */
   #appTabs, #appMoreMenu, #appInstall { display:none; }
-  @media (display-mode: standalone) {
+  @media (display-mode: standalone), (max-width: 560px) {
     #topNav .nav-tabs { display:none; }
     #appTabs { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:2600; height:calc(64px + env(safe-area-inset-bottom)); padding:8px 4px env(safe-area-inset-bottom);
       background:rgba(20,20,20,.97); border-top:1px solid #2e2e2e; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); justify-content:space-around; }
@@ -2483,10 +2483,13 @@
   .sd-sheet { max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
   .sd-section { background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:20px 22px; }
   .sd-section-title { font-family:'Montserrat', sans-serif; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--yellow-2); margin-bottom:14px; }
-  .sd-special-list { display:flex; flex-wrap:wrap; gap:8px; }
-  .sd-special-item { display:flex; align-items:center; gap:8px; background:rgba(212,175,55,.08); border:1px solid rgba(212,175,55,.25); border-radius:20px; padding:6px 14px; }
-  .sd-special-name { font-size:13px; font-weight:600; color:var(--text); }
-  .sd-special-time,.sd-special-loc { font-size:11px; color:var(--text-muted); }
+  .sd-special-list { display:flex; flex-direction:column; }
+  .sd-special-item { display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--card-border); }
+  .sd-special-item:last-child { border-bottom:none; }
+  .sd-special-time { font-size:11px; color:var(--text-dim); font-weight:700; letter-spacing:.06em; text-transform:uppercase; width:66px; flex-shrink:0; }
+  .sd-special-name { font-size:13px; font-weight:600; color:var(--text); flex:1; min-width:0; }
+  .sd-special-loc { font-size:11px; color:var(--text-muted); margin-left:auto; white-space:nowrap; max-width:45%; overflow:hidden; text-overflow:ellipsis; }
+  @media (max-width: 560px) { .sd-special-loc { display:none; } }
   .sd-baptism-groups { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
   .sd-baptism-svc { background:rgba(76,154,255,.07); border:1px solid rgba(76,154,255,.28); border-radius:12px; padding:12px 14px; }
   .sd-baptism-svc-hdr { font-family:'Montserrat', sans-serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:#4c9aff; margin-bottom:8px; }
@@ -4783,6 +4786,13 @@
   .cal6-fbtn i { width: clamp(8px, 0.5vw, 16px); height: clamp(8px, 0.5vw, 16px); border-radius: 50%; }
   .cal6-fbtn:hover { color: var(--text); }
   .cal6-fbtn.on { background: var(--gold-soft); color: var(--gold); border-color: rgba(212,175,55,.35); }
+  @media (max-width: 760px) {
+    .cal6-toolbar { flex-wrap: wrap; row-gap: 8px; }
+    .cal6-filters { margin-left: 0; flex-basis: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+    .cal6-filters::-webkit-scrollbar { display: none; }
+    .cal6-fbtn { white-space: nowrap; flex-shrink: 0; }
+    .cal6-asof { flex-basis: 100%; margin-left: 0; text-align: left; }
+  }
 
   .cal6-toolbar {
     display: flex; align-items: center; gap: clamp(6px, 0.4vw, 14px);
@@ -12042,9 +12052,9 @@ function sundayBuildContent(plan, calEvents) {
         <div class="sd-special-list">
           ${calEvents.map(ev => `
             <div class="sd-special-item">
+              <span class="sd-special-time">${ev.time && ev.time !== '12:00 AM' ? ev.time.replace(/\s*(AM|PM)$/i, (m, ap) => ' ' + ap.toLowerCase()) : 'All day'}</span>
               <span class="sd-special-name">${ev.name}</span>
-              ${ev.time && ev.time !== '12:00 AM' ? `<span class="sd-special-time">&middot; ${ev.time}</span>` : ''}
-              ${ev.location ? `<span class="sd-special-loc">&middot; ${ev.location.split(',')[0]}</span>` : ''}
+              ${ev.location ? `<span class="sd-special-loc">${ev.location.split(',')[0].replace(/\s*-\s*95 Foothill Drive$/i, '')}</span>` : ''}
             </div>`).join('')}
         </div>
       </div>` : ''}
@@ -17871,7 +17881,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20260930T175857Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261006T222350Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

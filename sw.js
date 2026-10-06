@@ -2,7 +2,7 @@
 // NETWORK FIRST for everything on this site: every visit still gets the newest page and
 // data; the saved copy is used only when the network fails (offline / dropped Wi-Fi).
 // Other origins (Apps Script web apps, CDNs, fonts) are never touched.
-const CACHE = 'lssr-app-v2';
+const CACHE = 'lssr-app-v3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './team-checklists.js',
   './assets/ls-logo-white.png', './assets/ls-lockup-white.png', './assets/app/icon-192.png'];
 
