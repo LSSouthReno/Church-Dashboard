@@ -131,6 +131,10 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(shepPersonDetail_((e.parameter||{}).pid || ''));
     }
+    if (action === 'shep_field_options') {
+      if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
+      return eosWaJson_(shepFieldOptions_((e.parameter||{}).defId || ''));
+    }
     if (action === 'shep_update') {
       var byU = spPastorForHash_((e.parameter||{}).pw); if (!byU) return eosWaJson_({ error: 'unauthorized' });
       var pU = e.parameter||{}; pU.by = byU;

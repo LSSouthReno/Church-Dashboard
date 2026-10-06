@@ -54,8 +54,11 @@ function shepPersonDetail_(pid) {
   ((t1.json&&t1.json.data)||[]).forEach(function(t){ tabName[t.id]=(t.attributes||{}).name; });
   var fdef = shGet_('/people/v2/field_definitions?per_page=100');
   ((fdef.json&&fdef.json.data)||[]).forEach(function(d){
-    var a=d.attributes||{}; defs[d.id]={ name:a.name, tab: tabName[(((d.relationships||{}).tab||{}).data||{}).id]||'' };
+    var a=d.attributes||{}; defs[d.id]={ name:a.name, tab: tabName[(((d.relationships||{}).tab||{}).data||{}).id]||'', type:a.data_type||'string', seq:a.sequence||0 };
   });
+  // Every definition (so empty fields can be filled in from the drawer) — the UI hides
+  // the ones the shepherding controls already manage.
+  out.fieldDefs = Object.keys(defs).map(function(id){ var d=defs[id]; return { id:String(id), name:d.name, tab:d.tab||'Other', type:d.type, seq:d.seq }; });
 
   // Custom fields grouped by tab (1 call)
   out.fields = {};
@@ -63,9 +66,21 @@ function shepPersonDetail_(pid) {
   ((fdres.json&&fdres.json.data)||[]).forEach(function(r){
     var defId=(((r.relationships||{}).field_definition||{}).data||{}).id;
     var v=(r.attributes||{}).value; if (v==null || String(v).trim()==='') return;
-    var d=defs[defId]||{name:(r.attributes||{}).label||'Field',tab:'Other'};
-    (out.fields[d.tab||'Other']=out.fields[d.tab||'Other']||[]).push({ name:d.name, value:String(v) });
+    var d=defs[defId]||{name:(r.attributes||{}).label||'Field',tab:'Other',type:'string'};
+    (out.fields[d.tab||'Other']=out.fields[d.tab||'Other']||[]).push({ name:d.name, value:String(v), defId:String(defId||''), type:d.type });
   });
+
+  // Core person attributes + contacts (editable from the drawer; 3 calls)
+  var pr = shGet_('/people/v2/people/'+pid);
+  var pa = ((pr.json&&pr.json.data)||{}).attributes||{};
+  out.person = { first_name:pa.first_name||'', last_name:pa.last_name||'', nickname:pa.nickname||'', birthdate:pa.birthdate||'', anniversary:pa.anniversary||'',
+                 gender:pa.gender||'', marital_status:pa.marital_status||'', membership:pa.membership||'', status:pa.status||'' };
+  var ph = shGet_('/people/v2/people/'+pid+'/phone_numbers?per_page=25');
+  var em = shGet_('/people/v2/people/'+pid+'/emails?per_page=25');
+  out.contacts = {
+    phones: ((ph.json&&ph.json.data)||[]).map(function(x){ var a=x.attributes||{}; return { id:String(x.id), number:a.number||'', location:a.location||'', primary:!!a.primary }; }),
+    emails: ((em.json&&em.json.data)||[]).map(function(x){ var a=x.attributes||{}; return { id:String(x.id), address:a.address||'', location:a.location||'', primary:!!a.primary }; })
+  };
 
   // Notes — most recent 100 in ONE page, drop auto text-activity, cap 50 (1-2 calls)
   var cats = {};
@@ -131,6 +146,45 @@ function shepUpdate_(params) {
   var by = String(params.by||'');
   if (!pid || !field) return { error: 'missing pid/field' };
 
+  // ── Any core Person attribute (birthday, anniversary, gender, marital status, nickname) ──
+  if (field === 'attr') {
+    var attr = String(params.attr||'');
+    var ALLOWED = { birthdate:1, anniversary:1, gender:1, marital_status:1, nickname:1, first_name:1, last_name:1 };
+    if (!ALLOWED[attr]) return { error: 'attribute not editable: ' + attr };
+    var attrs = {}; attrs[attr] = value === '' ? null : value;
+    var wa = shWrite_('patch', '/people/v2/people/'+pid, { data:{ type:'Person', id:pid, attributes:attrs } });
+    var oka = wa.code>=200 && wa.code<300;
+    if (oka) spLogChange_(by, pid, 'attr:'+attr, value);
+    return { field:field, attr:attr, ok:oka, code:wa.code, detail: oka?null:(wa.raw||'').substring(0,300) };
+  }
+  // ── Any custom field, by definition id (the drawer lists every definition) ──
+  if (field === 'custom') {
+    var defIdC = String(params.defId||'').replace(/\D/g,'');
+    if (!defIdC) return { error: 'missing defId' };
+    var rc = shSetFieldDatum_(pid, defIdC, value);
+    if (rc.ok) {
+      spLogChange_(by, pid, 'custom:' + String(params.name||defIdC), value);
+      // Keep the snapshot overlay in step when the field is one the lists already show.
+      var known = { }; known[SH_FIELD.assignedElder]='elder'; known[SH_FIELD.spiritualMat]='maturity'; known[SH_FIELD.healthAssess]='health';
+      known[SH_FIELD.healthDate]='healthDate'; known[SH_FIELD.preferredComm]='pref'; known[SH_FIELD.known]='known'; known[SH_FIELD.deaconSupport]='deaconSupport'; known[SH_FIELD.deaconNotes]='deaconNotes';
+      if (known[defIdC]) spUpsertOverride_(pid, known[defIdC], value, by);
+    }
+    return { field:field, defId:defIdC, ok:rc.ok, code:rc.code, detail:rc.detail };
+  }
+  // ── Phone numbers / emails: edit (contactId), add (no contactId), or clear (blank value) ──
+  if (field === 'phone' || field === 'email') {
+    var cid = String(params.contactId||'').replace(/\D/g,''), loc = String(params.location||'') || (field==='phone'?'Mobile':'Home');
+    var type = field==='phone' ? 'PhoneNumber' : 'Email', coll = field==='phone' ? 'phone_numbers' : 'emails';
+    var at = {}; at[field==='phone'?'number':'address'] = value; at.location = loc;
+    var wc;
+    if (!value) { if (!cid) return { field:field, ok:true, code:204 }; wc = shWrite_('delete', '/people/v2/'+coll+'/'+cid, {}); }
+    else if (cid) wc = shWrite_('patch', '/people/v2/'+coll+'/'+cid, { data:{ type:type, id:cid, attributes:at } });
+    else wc = shWrite_('post', '/people/v2/people/'+pid+'/'+coll, { data:{ type:type, attributes:at } });
+    var okc = wc.code>=200 && wc.code<300;
+    if (okc) spLogChange_(by, pid, field, value);
+    var newId = okc && wc.json && wc.json.data ? String(wc.json.data.id||cid) : cid;
+    return { field:field, ok:okc, code:wc.code, contactId:newId, detail: okc?null:(wc.raw||'').substring(0,300) };
+  }
   // Membership status is a core Person attribute, not a custom field.
   if (field === 'membership') {
     var wm = shWrite_('patch', '/people/v2/people/'+pid, { data:{ type:'Person', id:pid, attributes:{ membership: value } } });
@@ -164,6 +218,13 @@ function shepUpdate_(params) {
     }
   } else result.detail = r.detail;
   return result;
+}
+
+// Options for a select-type custom field (loaded by the drawer on focus).
+function shepFieldOptions_(defId) {
+  defId = String(defId||'').replace(/\D/g,''); if (!defId) return { error:'missing defId' };
+  var r = shGet_('/people/v2/field_definitions/'+defId+'/field_options?per_page=100');
+  return { defId:defId, options: ((r.json&&r.json.data)||[]).map(function(o){ return String((o.attributes||{}).value||''); }).filter(Boolean) };
 }
 
 /* ── Pending-edit overlay: one row per (pid, field), newest value wins ── */

@@ -3339,6 +3339,10 @@
   .sh-save-btn { appearance:none; background:var(--sh-accent-dim); border:1px solid var(--sh-accent); color:#fff7de; font-weight:700; font-size:12px; padding:7px 14px; border-radius:7px; cursor:pointer; font-family:'Montserrat',sans-serif; }
   .sh-save-btn:hover { background:var(--sh-accent); color:#1a1400; }
   .sh-save-btn:disabled { opacity:.5; cursor:default; }
+  .sh-more-fields { margin-top:6px; }
+  .sh-more-fields summary { cursor:pointer; font-size:12px; color:var(--text-muted); font-weight:600; padding:6px 0; }
+  .sh-more-fields[open] summary { margin-bottom:8px; }
+  .sh-edit-row input[type=date] { color-scheme: dark; }
   .sh-save-note { font-size:11px; margin-left:4px; }
   .sh-save-note.ok { color:#6ee7b7; } .sh-save-note.err { color:#fca5a5; }
   .sh-wf-steps { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
@@ -16904,25 +16908,18 @@ function shDetailHtml(d) {
     });
     h += '</div>';
   }
-  // Custom fields
-  if (d.fields && Object.keys(d.fields).length) {
-    h += '<div class="sh-d-sec"><h4>Profile Fields</h4>';
-    Object.keys(d.fields).sort().forEach(tab => {
-      h += '<div class="sh-tabgrp"><div class="tt">'+shEsc(tab)+'</div>';
-      d.fields[tab].forEach(kv => { h += '<div class="sh-kv"><span class="k">'+shEsc(kv.name)+'</span><span class="v">'+shEsc(kv.value)+'</span></div>'; });
-      h += '</div>';
-    });
-    h += '</div>';
-  }
+  // Profile, contacts and every custom field — all editable, all written straight to PCO
+  h += shProfileEditHtml(d);
   // Recent dashboard activity (who changed what)
   if (Array.isArray(d.activity) && d.activity.length) {
     const flab = {health:'Health status', healthDate:'Status date', maturity:'Spiritual maturity', elder:'Shepherding pastor',
       membership:'Membership', pref:'Preferred contact', known:'Known?', deaconSupport:'Deacon support', deaconNotes:'Deacon notes',
-      'note-added':'Added a note', 'baptism-workflow':'Baptism Ready', 'family-workflow':'Membership process'};
+      'note-added':'Added a note', 'baptism-workflow':'Baptism Ready', 'family-workflow':'Membership process', phone:'Phone', email:'Email',
+      'attr:birthdate':'Birthday', 'attr:anniversary':'Anniversary', 'attr:gender':'Gender', 'attr:marital_status':'Marital status', 'attr:nickname':'Nickname'};
     h += '<div class="sh-d-sec"><h4>Recent Activity</h4>';
     d.activity.forEach(a => {
       const when = a.ts ? new Date(a.ts).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '';
-      const label = flab[a.field] || a.field;
+      const label = flab[a.field] || String(a.field||'').replace(/^custom:/, '').replace(/^attr:/, '');
       const val = /note/.test(a.field) ? '' : (a.value ? (' &rarr; <b>'+shEsc(a.value)+'</b>') : ' cleared');
       h += '<div class="sh-activity"><span class="who">'+shEsc(a.by||'—')+'</span> '+shEsc(label)+val+'<span class="when">'+when+'</span></div>';
     });
@@ -16930,6 +16927,111 @@ function shDetailHtml(d) {
   }
   return h || '<div class="sh-d-sec"><div class="sh-d-loading">No additional detail on file.</div></div>';
 }
+/* ── Editable profile: core attributes, phones/emails, and every PCO custom field.
+   Each row saves on its own and writes straight back to Planning Center. ── */
+const SH_MANAGED_DEFS = ['789184','789187','789188','789189','789190','846717','1082241','1082244'];   // already on the shepherding controls
+let _shFieldOpts = {};
+function shDateVal(v) {   // "2026-04-05" | "4/5/2026" | ISO → yyyy-mm-dd for <input type=date>
+  const s = String(v||'').trim(); if (!s) return '';
+  if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0,10);
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/); if (m) return m[3]+'-'+m[1].padStart(2,'0')+'-'+m[2].padStart(2,'0');
+  const d = new Date(s); return isNaN(d) ? '' : d.toISOString().slice(0,10);
+}
+function shXRow(label, control, onSave, noteId, hint) {
+  return '<div class="sh-edit-row"><label>'+label+'</label>'+control
+    + '<button class="sh-save-btn" onclick="'+onSave+'">Save</button><span class="sh-save-note" id="'+noteId+'"></span></div>'
+    + (hint ? '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 8px 0">'+hint+'</div>' : '');
+}
+function shFieldControl(id, type, value, defId) {
+  const v = shEsc(value||'');
+  if (type === 'date') return '<input id="'+id+'" type="date" value="'+shEsc(shDateVal(value))+'">';
+  if (type === 'boolean') return '<select id="'+id+'">'+shBoolOpts(value)+'</select>';
+  if (type === 'number') return '<input id="'+id+'" type="number" value="'+v+'">';
+  if (type === 'select' || type === 'checkboxes') return '<select id="'+id+'" data-def="'+shEsc(defId)+'" onfocus="shLoadFieldOpts(this)"><option value="">— none —</option>'+(value?'<option value="'+v+'" selected>'+v+'</option>':'')+'</select>';
+  if (type === 'text') return '<input id="'+id+'" type="text" value="'+v+'" style="min-width:220px">';
+  return '<input id="'+id+'" type="text" value="'+v+'">';
+}
+async function shLoadFieldOpts(sel) {
+  const defId = sel.dataset.def; if (!defId || sel.dataset.loaded) return;
+  sel.dataset.loaded = '1';
+  try {
+    let opts = _shFieldOpts[defId];
+    if (!opts) { const r = await fetch(EOS_WEBAPP_URL + '?action=shep_field_options&pw='+_shPastorHash+'&defId='+encodeURIComponent(defId)+'&t='+Date.now()); const j = await r.json(); opts = _shFieldOpts[defId] = (j && j.options) || []; }
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— none —</option>' + opts.map(o => '<option value="'+shEsc(o)+'"'+(o===cur?' selected':'')+'>'+shEsc(o)+'</option>').join('') + (cur && opts.indexOf(cur) < 0 ? '<option value="'+shEsc(cur)+'" selected>'+shEsc(cur)+'</option>' : '');
+  } catch (e) { sel.dataset.loaded = ''; }
+}
+function shProfileEditHtml(d) {
+  if (!d.person) {   // backend without the editable-profile endpoints yet → the old read-only list
+    if (!(d.fields && Object.keys(d.fields).length)) return '';
+    let r = '<div class="sh-d-sec"><h4>Profile Fields</h4>';
+    Object.keys(d.fields).sort().forEach(tab => { r += '<div class="sh-tabgrp"><div class="tt">'+shEsc(tab)+'</div>'; d.fields[tab].forEach(kv => { r += '<div class="sh-kv"><span class="k">'+shEsc(kv.name)+'</span><span class="v">'+shEsc(kv.value)+'</span></div>'; }); r += '</div>'; });
+    return r + '</div>';
+  }
+  const P = d.person || {}, C = d.contacts || {}, E = shEsc;
+  let h = '<div class="sh-d-sec"><h4>Profile <span style="font-weight:500;letter-spacing:0;text-transform:none;color:var(--text-dim)">· edits write straight to Planning Center</span></h4>';
+  const attr = (label, key, ctrl) => shXRow(label, ctrl, "shSaveX('attr','"+key+"','shAt"+key+"',this)", 'shNoteAt'+key);
+  h += attr('Nickname', 'nickname', '<input id="shAtnickname" type="text" value="'+E(P.nickname||'')+'">');
+  h += attr('Birthday', 'birthdate', '<input id="shAtbirthdate" type="date" value="'+E(shDateVal(P.birthdate))+'">');
+  h += attr('Anniversary', 'anniversary', '<input id="shAtanniversary" type="date" value="'+E(shDateVal(P.anniversary))+'">');
+  h += attr('Gender', 'gender', '<select id="shAtgender">'+shOpts(['Male','Female'], P.gender, '— none —')+'</select>');
+  h += attr('Marital status', 'marital_status', '<input id="shAtmarital_status" type="text" list="shMarital" value="'+E(P.marital_status||'')+'"><datalist id="shMarital"><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option><option>Engaged</option></datalist>');
+  h += '</div>';
+  // Contacts
+  h += '<div class="sh-d-sec"><h4>Contact</h4>';
+  (C.phones||[]).forEach((x,i) => { h += shXRow('Phone' + (x.primary ? ' ★' : '') + (x.location ? ' <em style="font-weight:400">'+E(x.location)+'</em>' : ''),
+    '<input id="shPh'+i+'" type="tel" value="'+E(x.number)+'">', "shSaveX('phone','"+E(x.id)+"','shPh"+i+"',this,'"+E(x.location||'')+"')", 'shNotePh'+i); });
+  h += shXRow('Add phone', '<input id="shPhNew" type="tel" placeholder="(775) 555-0100"><select id="shPhNewLoc" style="flex:0 1 auto"><option>Mobile</option><option>Home</option><option>Work</option></select>',
+    "shSaveX('phone','','shPhNew',this,document.getElementById('shPhNewLoc').value)", 'shNotePhNew');
+  (C.emails||[]).forEach((x,i) => { h += shXRow('Email' + (x.primary ? ' ★' : '') + (x.location ? ' <em style="font-weight:400">'+E(x.location)+'</em>' : ''),
+    '<input id="shEm'+i+'" type="email" value="'+E(x.address)+'">', "shSaveX('email','"+E(x.id)+"','shEm"+i+"',this,'"+E(x.location||'')+"')", 'shNoteEm'+i); });
+  h += shXRow('Add email', '<input id="shEmNew" type="email" placeholder="name@example.com"><select id="shEmNewLoc" style="flex:0 1 auto"><option>Home</option><option>Work</option><option>Other</option></select>',
+    "shSaveX('email','','shEmNew',this,document.getElementById('shEmNewLoc').value)", 'shNoteEmNew');
+  h += '<div style="font-size:11px;color:var(--text-dim);margin:-4px 0 0">Clear a number or address and save to remove it. ★ = primary.</div></div>';
+  // Custom fields: filled ones first, empty ones under "More fields"
+  const defs = (d.fieldDefs||[]).filter(f => SH_MANAGED_DEFS.indexOf(String(f.id)) < 0);
+  if (defs.length || (d.fields && Object.keys(d.fields).length)) {
+    const valByDef = {}; Object.keys(d.fields||{}).forEach(tab => (d.fields[tab]||[]).forEach(kv => { if (kv.defId) valByDef[String(kv.defId)] = kv.value; }));
+    const byTab = {}; defs.forEach(f => (byTab[f.tab||'Other'] = byTab[f.tab||'Other'] || []).push(f));
+    const row = f => shXRow(E(f.name), shFieldControl('shCf'+f.id, f.type, valByDef[String(f.id)], f.id), "shSaveX('custom','"+E(f.id)+"','shCf"+f.id+"',this,'"+E(f.name)+"')", 'shNoteCf'+f.id);
+    h += '<div class="sh-d-sec"><h4>Profile fields</h4>';
+    let empties = '';
+    Object.keys(byTab).sort().forEach(tab => {
+      const list = byTab[tab].sort((a,b) => (a.seq||0)-(b.seq||0) || String(a.name).localeCompare(b.name));
+      const filled = list.filter(f => valByDef[String(f.id)] != null), empty = list.filter(f => valByDef[String(f.id)] == null);
+      if (filled.length) h += '<div class="sh-tabgrp"><div class="tt">'+E(tab)+'</div>' + filled.map(row).join('') + '</div>';
+      if (empty.length) empties += '<div class="sh-tabgrp"><div class="tt">'+E(tab)+'</div>' + empty.map(row).join('') + '</div>';
+    });
+    if (empties) h += '<details class="sh-more-fields"><summary>More fields (empty for this person)</summary>' + empties + '</details>';
+    h += '</div>';
+  }
+  return h;
+}
+// kind: attr | custom | phone | email. key: attr name | defId | contactId. extra: field name | location.
+async function shSaveX(kind, key, inputId, btn, extra) {
+  const pid = _shCurrentPid; if (!pid) return;
+  const inp = document.getElementById(inputId), note = btn.nextElementSibling;
+  const val = inp ? String(inp.value || '').trim() : '';
+  btn.disabled = true; if (note) { note.className = 'sh-save-note'; note.textContent = 'Saving…'; }
+  try {
+    let q = EOS_WEBAPP_URL + '?action=shep_update&pw=' + _shPastorHash + '&pid=' + encodeURIComponent(pid) + '&field=' + kind + '&value=' + encodeURIComponent(val) + '&t=' + Date.now();
+    if (kind === 'attr') q += '&attr=' + encodeURIComponent(key);
+    else if (kind === 'custom') q += '&defId=' + encodeURIComponent(key) + '&name=' + encodeURIComponent(extra || '');
+    else q += '&contactId=' + encodeURIComponent(key || '') + '&location=' + encodeURIComponent(extra || '');
+    const j = await (await fetch(q)).json();
+    if (j && j.ok) {
+      if (note) { note.className = 'sh-save-note ok'; note.textContent = 'Saved to PCO ✓'; }
+      const p = shFindPerson(pid);
+      if (p && kind === 'phone' && !key && val) { p.phone = p.phone || val; }
+      if (p && kind === 'email' && !key && val) { p.email = p.email || val; }
+      if (p && kind === 'custom' && String(key) === '789176' && val) { p.importantDates = p.importantDates || {}; p.importantDates.baptism = val; }
+      if ((kind === 'phone' || kind === 'email') && !key && val) { setTimeout(() => shLoadDetail(pid), 600); }   // new contact → reload so it gets an id
+      if ((kind === 'phone' || kind === 'email') && key && !val) { const row = btn.closest('.sh-edit-row'); if (row) row.remove(); }
+    } else { if (note) { note.className = 'sh-save-note err'; note.textContent = 'Failed' + (j && j.code ? ' (' + j.code + ')' : '') + (j && j.error ? ' · ' + j.error : ''); } }
+  } catch (e) { if (note) { note.className = 'sh-save-note err'; note.textContent = 'Error'; } }
+  btn.disabled = false;
+}
+
 // The New Family Member "Membership Process" section — reused so it can refresh
 // live as the required fields get filled in.
 function shFamilyReqs(p) {
