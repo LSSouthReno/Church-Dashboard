@@ -929,6 +929,11 @@
 
   .tmod-tp { display: none; }
   .tmod-tp.on { display: block; }
+  .tlh-toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .tlh-toolbar-txt { flex: 1; color: var(--text-muted); font-size: 13px; }
+  #tlh-admin-btn { background: none; border: 1px solid #444; color: #777; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+  #tmod-tab-toolkit .tlh-body { padding: 0; }
+  #tmod-tab-toolkit .tlh-admin-wrap { padding: 16px 20px; margin-bottom: 18px; border: 1px solid var(--card-border); border-radius: 10px; }
 
   .tmod-ctrls { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
   .tmod-ctrls input, .tmod-ctrls select {
@@ -3719,9 +3724,10 @@
   <div class="tmod-body">
     <div class="tmod-metrics" id="tmodMetrics"></div>
     <div class="tmod-tabs">
-      <button class="tmod-tab on" onclick="tmTab('teams',this)">Teams</button>
-      <button class="tmod-tab" onclick="tmTab('svcs',this)">Services</button>
-      <button class="tmod-tab" id="tmAdminBtn" onclick="tmTab('admin',this)">Admin <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></button>
+      <button class="tmod-tab on" data-tm="teams" onclick="tmTab('teams',this)">Teams</button>
+      <button class="tmod-tab" data-tm="svcs" onclick="tmTab('svcs',this)">Service history</button>
+      <button class="tmod-tab" data-tm="toolkit" onclick="tmTab('toolkit',this)">Leader toolkit</button>
+      <button class="tmod-tab" id="tmAdminBtn" data-tm="admin" onclick="tmTab('admin',this)">Admin <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></button>
     </div>
 
     <!-- Teams tab -->
@@ -3756,6 +3762,104 @@
     </div>
 
     <!-- Admin tab -->
+
+    <!-- Leader toolkit (the former Team Leader Hub) -->
+    <div class="tmod-tp" id="tmod-tab-toolkit">
+      <div class="tlh-toolbar">
+        <div class="tlh-toolbar-txt">Checklist, message templates, the onboarding guide generator and quick links for every team leader.</div>
+        <div class="tmod-meta" id="tlh-updated"></div>
+        <button id="tlh-admin-btn" onclick="tlhAdminToggle()">⚙ Admin</button>
+      </div>
+      <!-- ── ADMIN PANEL ── -->
+  <div id="tlh-admin-panel" style="display:none;background:#1a1614;border-bottom:1px solid #3a3a3a;padding:20px 40px;gap:20px;flex-wrap:wrap;" class="tlh-admin-wrap">
+    <div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap;">
+      <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#d4af37;">Admin Mode Active</span>
+      <button onclick="tlhAdminAddCheck()" class="tlh-adm-btn">+ Add Checklist Item</button>
+      <button onclick="tlhAdminAddTemplate()" class="tlh-adm-btn">+ Add Message Template</button>
+      <button onclick="tlhAdminLock()" class="tlh-adm-btn tlh-adm-btn-red">Lock Admin</button>
+    </div>
+  </div>
+
+  <div class="tlh-body" id="tlh-body">
+
+    <!-- ── ONBOARDING GUIDE HERO ── -->
+    <div class="tlh-onboard-hero">
+      <div class="tlh-onboard-icon">📋</div>
+      <div class="tlh-onboard-text">
+        <h3>Volunteer Onboarding Guide Generator</h3>
+        <p>Fill out a short form and generate a custom PDF to hand your new volunteers — covers communication, PCO scheduling, day-of details, the Four H's, and more.</p>
+      </div>
+      <a href="team-onboarding-generator.html" target="_blank" class="tlh-onboard-btn">Open Generator →</a>
+    </div>
+
+    <!-- ── TEAM HEALTH ── -->
+    <div class="tlh-card accent-top">
+      <div class="tlh-card-title">Team Health — Volunteer Fill Rate</div>
+      <div class="tlh-card-sub" id="tlh-health-sub">Based on current PCO schedule data</div>
+      <div id="tlh-health-rows">
+        <div style="color:var(--text-dim);font-size:12px;">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ── WEEKLY CHECKLIST ── -->
+    <div class="tlh-card accent-top">
+      <div class="tlh-card-title">
+        Team Leader Checklist
+        <button class="tlh-reset-btn" onclick="tlhResetChecklist()">Reset</button>
+      </div>
+      <ul class="tlh-check-list" id="tlh-checklist"></ul>
+    </div>
+
+    <!-- ── MESSAGE TEMPLATES ── -->
+    <div class="tlh-card full accent-top">
+      <div class="tlh-card-title">Message Templates — Copy &amp; Send</div>
+      <div class="tlh-card-sub">Ready-to-send messages for common team leader situations</div>
+      <div class="tlh-tmpl-list" id="tlh-templates"></div>
+    </div>
+
+    <!-- ── QUICK LINKS ── -->
+    <div class="tlh-card">
+      <div class="tlh-card-title">Quick Links</div>
+      <div class="tlh-links">
+        <a href="https://services.planningcenteronline.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📅</span> Planning Center Services
+        </a>
+        <a href="https://lssr.churchcenter.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">⛪</span> Church Center
+        </a>
+        <a href="https://groups.planningcenteronline.com" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">💬</span> PCO Groups / Chat
+        </a>
+        <a href="team-onboarding-generator.html" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📋</span> Onboarding Generator
+        </a>
+        <a href="https://lschurches.com/southreno" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">🌐</span> Church Website
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/892107" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📝</span> Point Leader Update Form
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/869271" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">💛</span> Joy Bomb Form
+        </a>
+        <a href="https://lssr.churchcenter.com/people/forms/808945" target="_blank" class="tlh-link-btn">
+          <span class="tlh-link-icon">📦</span> Inventory Request Form
+        </a>
+      </div>
+    </div>
+
+    <!-- ── VOLUNTEER SNAPSHOT ── -->
+    <div class="tlh-card">
+      <div class="tlh-card-title">Volunteer Snapshot</div>
+      <div class="tlh-stat-row" id="tlh-stats">
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-total">—</div><div class="tlh-stat-lbl">Total Volunteers</div></div>
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-filled">—</div><div class="tlh-stat-lbl">Positions Filled</div></div>
+        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-gap" style="color:#ef4444">—</div><div class="tlh-stat-lbl">Total Gap</div></div>
+      </div>
+    </div>
+
+  </div><!-- /tlh-body -->
+    </div>
     <div class="tmod-tp" id="tmod-tab-admin">
       <div id="tmAdminLocked">
         <div class="tmod-lockcard">
@@ -7397,10 +7501,12 @@ function tmRenderAdminContent() {
 
 /* ---- tab switching ---- */
 function tmTab(name, btn) {
-  document.querySelectorAll('.tmod-tp').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.tmod-tab').forEach(b => b.classList.remove('on'));
-  document.getElementById('tmod-tab-' + name).classList.add('on');
-  btn.classList.add('on');
+  document.querySelectorAll('#teamsModal .tmod-tp').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('#teamsModal .tmod-tab').forEach(b => b.classList.remove('on'));
+  const p = document.getElementById('tmod-tab-' + name); if (p) p.classList.add('on');
+  const bt = btn || document.querySelector('#teamsModal .tmod-tab[data-tm="' + name + '"]'); if (bt) bt.classList.add('on');
+  const body = document.querySelector('#teamsModal .tmod-body'); if (body) body.scrollTop = 0;
+  if (name === 'toolkit') { try { tlhBuild(); tlhLoadRemote_(); } catch (e) { console.error(e); } }
   if (name === 'admin' && !tmAdminUnlocked) {
     setTimeout(() => { const i = document.getElementById('tmodPwInput'); if (i) i.focus(); }, 50);
   }
@@ -11561,7 +11667,7 @@ const NAV_SECTIONS = {
   today:    { open: () => openTodayModal(),  close: () => closeTodayModal() },
   sunday:   { open: () => openSundayModal(), close: () => closeSundayModal() },
   serve:    { open: () => openTeamsModal(),  close: () => closeTeamsModal() },
-  leaders:  { open: () => openTLHub(),       close: () => closeTLHub() },
+  leaders:  { open: () => openTLHub(),       close: () => {} },
   staff:    { open: () => openStaffModal(),  close: () => closeStaffModal() },
   calendar: { open: () => openCalTab(),      close: () => closeCalTab() },
   care:     { open: () => openPastorModal(), close: () => closePastorModal() },
@@ -15430,114 +15536,7 @@ function absencesRenderSection_(containerId) {
 <!-- ════════════════════════════════════════
      TEAM LEADER HUB MODAL
 ════════════════════════════════════════ -->
-<div class="tmod-overlay" id="tlHub" aria-hidden="true">
 
-  <div class="tmod-header">
-    <div class="tmod-titles">
-      <div class="tmod-title">Team Leader Hub</div>
-      <div class="tmod-sub">LIVING STONES CHURCH &nbsp;·&nbsp; SOUTH RENO</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="tmod-meta" style="font-size:11px;color:#9a9a9a;" id="tlh-updated"></div>
-      <button id="tlh-admin-btn" onclick="tlhAdminToggle()" style="
-        background:none;border:1px solid #444;color:#666;
-        font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
-        letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;
-        border-radius:20px;cursor:pointer;transition:all .15s;white-space:nowrap;
-      ">⚙ Admin</button>
-    </div>
-  </div>
-
-  <!-- ── ADMIN PANEL ── -->
-  <div id="tlh-admin-panel" style="display:none;background:#1a1614;border-bottom:1px solid #3a3a3a;padding:20px 40px;gap:20px;flex-wrap:wrap;" class="tlh-admin-wrap">
-    <div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap;">
-      <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#d4af37;">Admin Mode Active</span>
-      <button onclick="tlhAdminAddCheck()" class="tlh-adm-btn">+ Add Checklist Item</button>
-      <button onclick="tlhAdminAddTemplate()" class="tlh-adm-btn">+ Add Message Template</button>
-      <button onclick="tlhAdminLock()" class="tlh-adm-btn tlh-adm-btn-red">Lock Admin</button>
-    </div>
-  </div>
-
-  <div class="tlh-body" id="tlh-body">
-
-    <!-- ── ONBOARDING GUIDE HERO ── -->
-    <div class="tlh-onboard-hero">
-      <div class="tlh-onboard-icon">📋</div>
-      <div class="tlh-onboard-text">
-        <h3>Volunteer Onboarding Guide Generator</h3>
-        <p>Fill out a short form and generate a custom PDF to hand your new volunteers — covers communication, PCO scheduling, day-of details, the Four H's, and more.</p>
-      </div>
-      <a href="team-onboarding-generator.html" target="_blank" class="tlh-onboard-btn">Open Generator →</a>
-    </div>
-
-    <!-- ── TEAM HEALTH ── -->
-    <div class="tlh-card accent-top">
-      <div class="tlh-card-title">Team Health — Volunteer Fill Rate</div>
-      <div class="tlh-card-sub" id="tlh-health-sub">Based on current PCO schedule data</div>
-      <div id="tlh-health-rows">
-        <div style="color:var(--text-dim);font-size:12px;">Loading…</div>
-      </div>
-    </div>
-
-    <!-- ── WEEKLY CHECKLIST ── -->
-    <div class="tlh-card accent-top">
-      <div class="tlh-card-title">
-        Team Leader Checklist
-        <button class="tlh-reset-btn" onclick="tlhResetChecklist()">Reset</button>
-      </div>
-      <ul class="tlh-check-list" id="tlh-checklist"></ul>
-    </div>
-
-    <!-- ── MESSAGE TEMPLATES ── -->
-    <div class="tlh-card full accent-top">
-      <div class="tlh-card-title">Message Templates — Copy &amp; Send</div>
-      <div class="tlh-card-sub">Ready-to-send messages for common team leader situations</div>
-      <div class="tlh-tmpl-list" id="tlh-templates"></div>
-    </div>
-
-    <!-- ── QUICK LINKS ── -->
-    <div class="tlh-card">
-      <div class="tlh-card-title">Quick Links</div>
-      <div class="tlh-links">
-        <a href="https://services.planningcenteronline.com" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">📅</span> Planning Center Services
-        </a>
-        <a href="https://lssr.churchcenter.com" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">⛪</span> Church Center
-        </a>
-        <a href="https://groups.planningcenteronline.com" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">💬</span> PCO Groups / Chat
-        </a>
-        <a href="team-onboarding-generator.html" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">📋</span> Onboarding Generator
-        </a>
-        <a href="https://lschurches.com/southreno" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">🌐</span> Church Website
-        </a>
-        <a href="https://lssr.churchcenter.com/people/forms/892107" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">📝</span> Point Leader Update Form
-        </a>
-        <a href="https://lssr.churchcenter.com/people/forms/869271" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">💛</span> Joy Bomb Form
-        </a>
-        <a href="https://lssr.churchcenter.com/people/forms/808945" target="_blank" class="tlh-link-btn">
-          <span class="tlh-link-icon">📦</span> Inventory Request Form
-        </a>
-      </div>
-    </div>
-
-    <!-- ── VOLUNTEER SNAPSHOT ── -->
-    <div class="tlh-card">
-      <div class="tlh-card-title">Volunteer Snapshot</div>
-      <div class="tlh-stat-row" id="tlh-stats">
-        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-total">—</div><div class="tlh-stat-lbl">Total Volunteers</div></div>
-        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-filled">—</div><div class="tlh-stat-lbl">Positions Filled</div></div>
-        <div class="tlh-stat"><div class="tlh-stat-val" id="tlh-s-gap" style="color:#ef4444">—</div><div class="tlh-stat-lbl">Total Gap</div></div>
-      </div>
-    </div>
-
-  </div><!-- /tlh-body -->
-</div><!-- /tlHub -->
 
 <script>
 // ════════════════════════════════════════
@@ -15696,20 +15695,13 @@ function vclReset() {
 // TEAM LEADER HUB
 // ════════════════════════════════════════
 
+// The Team Leader Hub now lives inside Serve as the "Leader toolkit" tab.
 function openTLHub() {
-  document.getElementById('tlHub').classList.add('open');
-  document.getElementById('tlHub').setAttribute('aria-hidden','false');
+  openTeamsModal();
+  tmTab('toolkit');
   navSetActive('leaders');
-  tlhBuild();
-  tlhLoadRemote_(); // pull shared checklist/templates from eos-data.json, then re-render
 }
-function closeTLHub() {
-  const hub = document.getElementById('tlHub');
-  if (!hub || !hub.classList.contains('open')) return;
-  hub.classList.remove('open');
-  hub.setAttribute('aria-hidden','true');
-  navSetActive('church');
-}
+function closeTLHub() { /* closed with Serve */ }
 
 // ── Shared checklist/templates sync (durable across devices via eos-data.json) ──
 // The EOS web app's tlh_save action commits these as overlay fields; the merge-safe
@@ -15732,7 +15724,7 @@ async function tlhLoadRemote_() {
       templates:    Array.isArray(d.tlhTemplates) ? d.tlhTemplates : null,
       templatesTs:  Number(d.tlhTemplatesTs) || 0,
     };
-    if (document.getElementById('tlHub').classList.contains('open')) {
+    if (document.getElementById('tmod-tab-toolkit').classList.contains('on')) {
       tlhBuildChecklist();
       tlhBuildTemplates();
     }
