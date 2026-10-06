@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T21:19:39.580Z",
+  "generatedAt": "2026-10-06T22:19:01.505Z",
   "asOf": "2026-10-06",
   "givingMonths": 12,
   "statusVocab": [
@@ -21,7 +21,7 @@
     "totalPeople": 393,
     "avgScore": 0,
     "inGroup": 216,
-    "serving": 233,
+    "serving": 234,
     "leading": 77,
     "givingRegular": 0,
     "recurring": 0,
@@ -31,7 +31,7 @@
     "overdue": 0,
     "notBaptized": 393,
     "notInGroup": 177,
-    "notServing": 160,
+    "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -49,7 +49,7 @@
     },
     "pct": {
       "inGroup": 0.549618320610687,
-      "serving": 0.5928753180661578,
+      "serving": 0.5954198473282443,
       "leading": 0.19592875318066158,
       "givingRegular": 0,
       "recurring": 0,
@@ -17902,7 +17902,7 @@
         "totalPeople": 5,
         "avgScore": 0,
         "inGroup": 5,
-        "serving": 1,
+        "serving": 2,
         "leading": 0,
         "givingRegular": 0,
         "recurring": 0,
@@ -17912,7 +17912,7 @@
         "overdue": 0,
         "notBaptized": 5,
         "notInGroup": 0,
-        "notServing": 4,
+        "notServing": 3,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -17930,7 +17930,7 @@
         },
         "pct": {
           "inGroup": 1,
-          "serving": 0.2,
+          "serving": 0.4,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18026,48 +18026,6 @@
         },
         {
           "id": null,
-          "name": "Cindy Fladager",
-          "first": "Cindy",
-          "last": "Fladager",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Durham Community Group",
-              "role": "member",
-              "joinedAt": "2026-08-26T20:53:25Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Letty Guzman Garcia",
           "first": "Letty",
           "last": "Guzman Garcia",
@@ -18106,6 +18064,52 @@
           "flags": [
             "Not serving"
           ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Cindy Fladager",
+          "first": "Cindy",
+          "last": "Fladager",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Durham Community Group",
+              "role": "member",
+              "joinedAt": "2026-08-26T20:53:25Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Enrichment Team",
+              "role": "member",
+              "joinedAt": "2026-10-06T22:17:46Z"
+            }
+          ],
+          "flags": [],
           "pending": true
         },
         {
