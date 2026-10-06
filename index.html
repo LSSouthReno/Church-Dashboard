@@ -4745,12 +4745,17 @@
     padding: clamp(10px, 0.7vw, 24px) clamp(16px, 1.2vw, 40px);
     border-bottom: 1px solid var(--card-border); flex-shrink: 0;
   }
-  .cal6-title { font-size: clamp(18px, 1.15vw, 40px); font-weight: 700; letter-spacing: -0.3px; }
+  .cal6-title { font-size: clamp(18px, 1.15vw, 40px); font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
   .cal6-range { font-size: clamp(11px, 0.6vw, 20px); color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
   .cal6-legend { display: flex; gap: clamp(10px, 0.7vw, 26px); flex-wrap: wrap; margin-left: auto; }
   .cal6-leg { display: flex; align-items: center; gap: clamp(5px, 0.35vw, 12px); font-size: clamp(10px, 0.55vw, 19px); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
   .cal6-leg i { width: clamp(10px, 0.6vw, 20px); height: clamp(10px, 0.6vw, 20px); border-radius: 3px; flex-shrink: 0; }
-  .cal6-asof { flex-basis: 100%; text-align: right; font-size: clamp(9px, 0.5vw, 16px); color: var(--text-dim); margin-top: -4px; }
+  .cal6-asof { margin-left: auto; text-align: right; font-size: clamp(9px, 0.5vw, 16px); color: var(--text-dim); }
+  .cal6-filters { display: flex; gap: clamp(4px, 0.3vw, 10px); flex-wrap: wrap; margin-left: auto; }
+  .cal6-fbtn { appearance: none; background: none; border: 1px solid transparent; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(11px, 0.6vw, 20px); padding: clamp(5px, 0.35vw, 12px) clamp(10px, 0.7vw, 24px); border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: clamp(5px, 0.35vw, 12px); }
+  .cal6-fbtn i { width: clamp(8px, 0.5vw, 16px); height: clamp(8px, 0.5vw, 16px); border-radius: 50%; }
+  .cal6-fbtn:hover { color: var(--text); }
+  .cal6-fbtn.on { background: var(--gold-soft); color: var(--gold); border-color: rgba(212,175,55,.35); }
 
   .cal6-toolbar {
     display: flex; align-items: center; gap: clamp(6px, 0.4vw, 14px);
@@ -4769,8 +4774,8 @@
     border-radius: 999px; cursor: pointer; transition: background 0.15s, color 0.15s;
   }
   .cal6-vbtn:hover { color: var(--text); background: #2a2a2a; }
-  .cal6-vbtn.on { background: #e5484d; border-color: #e5484d; color: #fff; }
-  .cal6-mnav { display: flex; gap: 6px; margin-left: clamp(8px, 0.6vw, 22px); }
+  .cal6-vbtn.on { background: #2a2a2a; border-color: #3a3a3a; color: #fff; }
+  .cal6-mnav { display: flex; gap: 6px; margin-right: clamp(8px, 0.6vw, 22px); }
   .cal6-nbtn {
     appearance: none; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text-muted);
     font-size: clamp(15px, 0.85vw, 28px); line-height: 1;
@@ -4950,18 +4955,16 @@
       <div class="cal6-title">Calendar</div>
       <div class="cal6-range" id="cal6Range"></div>
     </div>
-    <div class="cal6-legend" id="cal6Legend"></div>
     <div class="cal6-asof" id="cal6AsOf"></div>
   </div>
   <div class="cal6-toolbar">
-    <span class="cal6-toolbar-label">View</span>
-    <button class="cal6-vbtn on" data-vmode="6" onclick="cal6SetMode(6)">6 Months</button>
-    <button class="cal6-vbtn" data-vmode="3" onclick="cal6SetMode(3)">3 Months</button>
-    <button class="cal6-vbtn" data-vmode="1" onclick="cal6SetMode(1)">1 Month</button>
     <div class="cal6-mnav" id="cal6MNav" style="display:none;">
       <button class="cal6-nbtn" id="cal6NavBack" onclick="cal6Nav(-1)" title="Earlier month">&#8249;</button>
       <button class="cal6-nbtn" id="cal6NavFwd" onclick="cal6Nav(1)" title="Later month">&#8250;</button>
     </div>
+    <button class="cal6-vbtn on" data-vmode="1" onclick="cal6SetMode(1)">Month</button>
+    <button class="cal6-vbtn" data-vmode="3" onclick="cal6SetMode(3)">3 months</button>
+    <div class="cal6-filters" id="cal6Legend"></div>
   </div>
   <div class="cal6-body mode-6" id="cal6Body">
     <div class="cal6-empty">Loading calendar from Planning Center…</div>
@@ -4979,17 +4982,25 @@
 ========================================================= */
 
 // Category rules — first match wins. RBD is flagged by the sync (ev.rbd).
+// Five filters (per Brad, Oct 2026): All · Ministry events · Students · Staff & leadership ·
+// Outside events (RBD). Sunday services and Baptism Sundays are shown under "All" (and
+// baptisms under Ministry) but don't get a chip of their own. Ministry events = anything at
+// the building that isn't a Sunday service or a meeting (e.g. the Scarlet Hope gala).
 const CAL6_CATS = [
-  { key:'rbd',      label:'RBD',                color:'#e5484d', match:(n,ev)=> !!ev.rbd || /\brbd\b/i.test(n) },
-  { key:'baptism',  label:'Baptisms',           color:'#4c9aff', match:n=>/baptism/i.test(n) },
-  { key:'students', label:'Students',           color:'#a06ee1', match:n=>/student|youth/i.test(n) },
-  { key:'kids',     label:'Kids',               color:'#e558a4', match:n=>/\bkids?\b|\bvbs\b|child|stepping stones/i.test(n) },
-  { key:'worship',  label:'Worship Gatherings', color:'#f5822a', match:n=>/worship gathering|worship night|christmas eve|christmas ser|good friday|easter/i.test(n) },
-  { key:'missions', label:'Missions',           color:'#2bb8a3', match:n=>/mission/i.test(n) },
-  { key:'care',     label:'Care & Classes',     color:'#57b85f', match:n=>/grief ?share|golden stones|regroup|celebration of life|premarital|pathfinders|class\b/i.test(n) },
-  { key:'staff',    label:'Staff & Leadership', color:'#9aa4b2', match:n=>/staff|elders|leader|rehearsal|planning|business meeting|financial update/i.test(n) },
-  { key:'event',    label:'Church Events',      color:'#d8b64a', match:()=>true },
+  { key:'rbd',      label:'Outside events (RBD)', color:'#e5484d', chip:true,  match:(n,ev)=> !!ev.rbd || /\brbd\b/i.test(n) },
+  { key:'students', label:'Students',             color:'#4c9aff', chip:true,  match:n=>/student|youth/i.test(n) },
+  { key:'staff',    label:'Staff & leadership',   color:'#9aa4b2', chip:true,  match:n=>/staff|\belders?\b|leader|rehearsal|planning|business meeting|financial update|pastor appt|\bmeeting\b/i.test(n) },
+  { key:'sunday',   label:'Sunday services',      color:'#7a756c', chip:false, match:n=>/worship gathering|sunday gathering|connection sunday/i.test(n) },
+  { key:'baptism',  label:'Baptism Sunday',       color:'#d4af37', chip:false, match:n=>/baptism/i.test(n) },
+  { key:'ministry', label:'Ministry events',      color:'#8fbf98', chip:true,  match:()=>true },
 ];
+let _cal6Filter = 'all';
+function cal6Visible(ev) {
+  if (_cal6Filter === 'all') return true;
+  const k = cal6Cat(ev).key;
+  return _cal6Filter === 'ministry' ? (k === 'ministry' || k === 'baptism') : k === _cal6Filter;
+}
+function cal6SetFilter(f) { _cal6Filter = f; cal6Render(); }
 
 function cal6Cat(ev) {
   const n = ev.name || '';
@@ -5031,7 +5042,7 @@ function closeCalTab() {
 
 let _cal6Events = null;   // raw events from eos-data.json
 let _cal6AsOf   = '';
-let _cal6Mode   = 6;      // 6 | 3 | 1 months visible
+let _cal6Mode   = 1;      // 3 | 1 months visible (one month fills the screen, TV-friendly)
 let _cal6Off    = 0;      // start-month offset from current month (negative = past)
 
 // How far the month nav can page relative to the current month. We always allow
@@ -5169,7 +5180,7 @@ function cal6Render() {
       const dayNum = slot - lead + 1;
       if (dayNum < 1 || dayNum > daysIn) { dayCells.push('<div class="cal6-day out"></div>'); continue; }
       const dk = first.getFullYear() + '-' + String(first.getMonth()+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
-      const evs = byDate[dk] || [];
+      const evs = (byDate[dk] || []).filter(cal6Visible);
       const chips = evs.map(ev => {
         const cat = cal6Cat(ev);
         usedCats.add(cat.key);
@@ -5212,10 +5223,9 @@ function cal6Render() {
     ? rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' })
     : rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + ' — ' +
       rangeEnd.toLocaleDateString('en-US', { month:'long', year:'numeric' });
-  document.getElementById('cal6Legend').innerHTML = CAL6_CATS
-    .filter(c => usedCats.has(c.key))
-    .map(c => '<div class="cal6-leg"><i style="background:' + c.color + '"></i>' + c.label + '</div>')
-    .join('');
+  document.getElementById('cal6Legend').innerHTML =
+    '<button class="cal6-fbtn' + (_cal6Filter === 'all' ? ' on' : '') + '" onclick="cal6SetFilter(\'all\')">All</button>' +
+    CAL6_CATS.filter(c => c.chip).map(c => '<button class="cal6-fbtn' + (_cal6Filter === c.key ? ' on' : '') + '" onclick="cal6SetFilter(\'' + c.key + '\')"><i style="background:' + c.color + '"></i>' + c.label + '</button>').join('');
   document.getElementById('cal6AsOf').textContent = _cal6AsOf
     ? 'Synced from PCO Calendar · ' + _cal6AsOf + ' · Community Groups not shown'
     : 'Synced from PCO Calendar · Community Groups not shown';
