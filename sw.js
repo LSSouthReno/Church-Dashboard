@@ -24,9 +24,9 @@ self.addEventListener('fetch', e => {
   if (url.origin !== self.location.origin) return;
   if (url.pathname.endsWith('/build.txt') || url.pathname.endsWith('/sw.js')) return;   // update check always live
   // One cache entry per path (the page adds ?v=<time> to data fetches; don't store each one).
-  // Section paths (/sunday …) are the dashboard page; real folders (e.g. /journey/) are their own page.
-  const nav = req.mode === 'navigate', own = /^\/journey(\/|$)/.test(url.pathname);
-  const key = url.origin + (nav ? (own ? '/journey/' : '/') : url.pathname);
+  // Section paths (/sunday …) are the dashboard page; real folders (/journey/, /tv/) are their own page.
+  const nav = req.mode === 'navigate', own = /^\/(journey|tv)(\/|$)/.exec(url.pathname);
+  const key = url.origin + (nav ? (own ? '/' + own[1] + '/' : '/') : url.pathname);
   e.respondWith(
     fetch(req).then(res => {
       if (res && res.ok && res.type === 'basic') {

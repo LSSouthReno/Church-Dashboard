@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Church Calendar · TV</title>
+<link rel="icon" type="image/png" href="/assets/app/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  TV / signage view of the dashboard's Church Calendar (lssouthreno.com/tv/).
+  Built for the office display (Samsung QM65C running Yodeck), which shows web pages inside a
+  frame. The main dashboard can't run there: it touches browser storage and registers a
+  service worker, both blocked in a frame, so its scripts stop and the screen stays blank.
+  This page deliberately uses NO localStorage / sessionStorage / cookies / service worker and
+  loads nothing but /eos-data.json. Calendar code is copied from index.html (cal6 section);
+  keep the two in step if the calendar's categories or layout change.
+  URL options:  ?view=6 (default) | ?view=3 | ?view=1   — months shown
+-->
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #1a1a1a; --card-border: #333;
+    --text: #f0f0f0; --text-muted: #9a9a9a; --text-dim: #6a6a6a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    background: var(--bg); color: var(--text);
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #calModal { display: flex; flex-direction: column; height: 100vh; }
+  .tv-clock { font-size: clamp(14px, 0.9vw, 30px); font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+  .cal6-header {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    padding: clamp(10px, 0.7vw, 24px) clamp(16px, 1.2vw, 40px);
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-title { font-size: clamp(18px, 1.15vw, 40px); font-weight: 700; letter-spacing: -0.3px; }
+  .cal6-range { font-size: clamp(11px, 0.6vw, 20px); color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .cal6-legend { display: flex; gap: clamp(10px, 0.7vw, 26px); flex-wrap: wrap; margin-left: auto; }
+  .cal6-leg { display: flex; align-items: center; gap: clamp(5px, 0.35vw, 12px); font-size: clamp(10px, 0.55vw, 19px); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .cal6-leg i { width: clamp(10px, 0.6vw, 20px); height: clamp(10px, 0.6vw, 20px); border-radius: 3px; flex-shrink: 0; }
+  .cal6-asof { flex-basis: 100%; text-align: right; font-size: clamp(9px, 0.5vw, 16px); color: var(--text-dim); margin-top: -4px; }
+
+  .cal6-toolbar {
+    display: flex; align-items: center; gap: clamp(6px, 0.4vw, 14px);
+    padding: clamp(8px, 0.5vw, 18px) clamp(16px, 1.2vw, 40px);
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-toolbar-label {
+    font-family: 'DM Mono', monospace; font-size: clamp(9px, 0.5vw, 16px);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+    margin-right: clamp(4px, 0.3vw, 10px);
+  }
+  .cal6-vbtn {
+    appearance: none; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(11px, 0.6vw, 20px);
+    padding: clamp(5px, 0.35vw, 12px) clamp(12px, 0.8vw, 28px);
+    border-radius: 999px; cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .cal6-vbtn:hover { color: var(--text); background: #2a2a2a; }
+  .cal6-vbtn.on { background: #e5484d; border-color: #e5484d; color: #fff; }
+  .cal6-mnav { display: flex; gap: 6px; margin-left: clamp(8px, 0.6vw, 22px); }
+  .cal6-nbtn {
+    appearance: none; background: #1c1c1c; border: 1px solid #3a3a3a; color: var(--text-muted);
+    font-size: clamp(15px, 0.85vw, 28px); line-height: 1;
+    padding: clamp(3px, 0.25vw, 9px) clamp(11px, 0.7vw, 24px);
+    border-radius: 7px; cursor: pointer;
+  }
+  .cal6-nbtn:hover:not(:disabled) { color: var(--text); background: #2a2a2a; }
+  .cal6-nbtn:disabled { opacity: 0.3; cursor: default; }
+
+  .cal6-body {
+    flex: 1; min-height: 0; overflow: auto;
+    padding: clamp(10px, 0.8vw, 28px);
+    display: grid;
+    gap: clamp(10px, 0.8vw, 26px);
+  }
+  .cal6-body.mode-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+  .cal6-body.mode-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .cal6-body.mode-1 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .cal6-month {
+    display: flex; flex-direction: column; min-height: 0; min-width: 0;
+    background: #161616; border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
+  }
+  .cal6-mname {
+    text-align: center; padding: clamp(5px, 0.32vw, 12px);
+    font-weight: 700; font-size: clamp(13px, 0.75vw, 26px);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border-bottom: 1px solid var(--card-border); flex-shrink: 0;
+  }
+  .cal6-dow { display: grid; grid-template-columns: repeat(7, 1fr); flex-shrink: 0; border-bottom: 1px solid #242424; }
+  .cal6-dow span { text-align: center; padding: clamp(2px, 0.15vw, 6px) 0; font-size: clamp(9px, 0.45vw, 16px); font-weight: 700; color: var(--text-dim); letter-spacing: 0.1em; }
+  /* Week rows size to their content in every view: busy weeks grow, empty
+     weeks shrink, so no event is ever clipped or hidden. If a whole month
+     outgrows its card, the weeks column scrolls. */
+  .cal6-weeks { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: thin; }
+  .cal6-weeks::-webkit-scrollbar { width: 6px; }
+  .cal6-weeks::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 3px; }
+  .cal6-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); flex: 1 0 auto; border-top: 1px solid #202020; }
+  .cal6-week:first-child { border-top: none; }
+  .cal6-day {
+    border-left: 1px solid #202020; min-width: 0; min-height: 0;
+    padding: clamp(1px, 0.1vw, 4px) clamp(2px, 0.2vw, 7px);
+    display: flex; flex-direction: column; gap: clamp(1px, 0.07vw, 3px);
+  }
+  .cal6-day:first-child { border-left: none; }
+  .cal6-day.out { background: #101010; }
+  .cal6-dnum { font-size: clamp(10px, 0.55vw, 20px); color: var(--text-dim); font-weight: 600; line-height: 1.1; flex-shrink: 0; }
+  .cal6-day.today { box-shadow: inset 0 0 0 2px #e5484d; border-radius: 4px; }
+  .cal6-day.today .cal6-dnum { color: #fff; }
+  .cal6-ev {
+    font-size: clamp(9px, 0.55vw, 20px); line-height: 1.2; font-weight: 600; color: #f0ede8;
+    padding: clamp(0px, 0.05vw, 2px) clamp(3px, 0.28vw, 10px);
+    border-left: clamp(2px, 0.2vw, 7px) solid;
+    border-radius: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .cal6-ev:hover { filter: brightness(1.4); }
+
+  /* 3-month view: bigger type, time prefix, wrap up to 2 lines */
+  .mode-3 .cal6-ev {
+    font-size: clamp(10px, 0.75vw, 26px);
+    white-space: normal;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  /* Sparse days (1–2 events) get roomy chips: full name, and for solo days a
+     time + location line, instead of a 2-line clamp that truncates the text. */
+  .mode-3 .cal6-ev.cal6-ev-roomy {
+    display: block; overflow: hidden;
+    padding-top: clamp(1px, 0.12vw, 4px); padding-bottom: clamp(1px, 0.12vw, 4px);
+  }
+  .mode-3 .cal6-ev-roomy .cal6-ev-name {
+    display: -webkit-box; -webkit-line-clamp: var(--cal6-clamp, 4); -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mode-3 .cal6-ev-roomy .cal6-ev-meta {
+    margin-top: 0.15em; font-size: 0.82em; line-height: 1.3; font-weight: 600;
+    color: var(--text-muted);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .mode-3 .cal6-dnum { font-size: clamp(11px, 0.7vw, 24px); }
+  .cal6-evtime { opacity: 0.7; font-weight: 700; font-size: 0.82em; }
+
+  /* 1-month view: full-detail event cards */
+  .mode-1 .cal6-dnum { font-size: clamp(12px, 0.8vw, 28px); }
+  .cal6-card {
+    border-left: clamp(3px, 0.25vw, 8px) solid;
+    border-radius: 5px;
+    padding: clamp(2px, 0.22vw, 8px) clamp(4px, 0.35vw, 12px);
+    overflow: hidden; flex-shrink: 0;
+    cursor: pointer;
+  }
+  .cal6-card:hover { filter: brightness(1.4); }
+  .cal6-card-name { font-weight: 700; font-size: clamp(10px, 0.75vw, 26px); line-height: 1.25; color: #f5f2ec; }
+  .cal6-card-meta {
+    font-size: clamp(9px, 0.6vw, 20px); line-height: 1.4; color: var(--text-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cal6-empty { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-dim); font-size: 15px; padding: 60px 20px; }
+
+  /* ── Event detail popup ─────────────────────────────────────── */
+  .cal6-dm-bg {
+    position: fixed; inset: 0; z-index: 2600;
+    background: rgba(0, 0, 0, 0.68);
+    display: none; align-items: center; justify-content: center;
+    padding: clamp(16px, 2vw, 60px);
+  }
+  .cal6-dm-bg.open { display: flex; }
+  .cal6-dm {
+    position: relative;
+    background: #191919; border: 1px solid #333; border-radius: 14px;
+    width: min(94vw, clamp(360px, 36vw, 1100px));
+    max-height: 88vh; overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+  }
+  .cal6-dm-x {
+    position: absolute; top: clamp(10px, 0.7vw, 22px); right: clamp(10px, 0.7vw, 22px);
+    appearance: none; background: rgba(20,20,20,0.85); border: 1px solid #444; color: #ddd;
+    width: clamp(30px, 1.8vw, 56px); height: clamp(30px, 1.8vw, 56px); border-radius: 50%;
+    font-size: clamp(16px, 1vw, 30px); line-height: 1; cursor: pointer;
+  }
+  .cal6-dm-x:hover { background: #333; color: #fff; }
+  .cal6-dm-img { width: 100%; max-height: clamp(150px, 15vw, 400px); object-fit: cover; display: block; border-radius: 13px 13px 0 0; }
+  .cal6-dm-pad { padding: clamp(18px, 1.5vw, 48px); }
+  .cal6-dm-cat {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-family: 'DM Mono', monospace; font-size: clamp(10px, 0.6vw, 19px);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: clamp(6px, 0.5vw, 16px);
+  }
+  .cal6-dm-cat i { width: 1em; height: 1em; border-radius: 3px; flex-shrink: 0; }
+  .cal6-dm-name { font-size: clamp(20px, 1.4vw, 46px); font-weight: 700; line-height: 1.2; margin-bottom: clamp(10px, 0.8vw, 24px); padding-right: clamp(34px, 2vw, 64px); }
+  .cal6-dm-row { font-size: clamp(13px, 0.75vw, 25px); color: var(--text-muted); line-height: 1.5; margin: clamp(3px, 0.28vw, 9px) 0; }
+  .cal6-dm-row b { color: var(--text); font-weight: 600; margin-right: 0.4em; }
+  .cal6-dm-desc { font-size: clamp(12px, 0.68vw, 22px); color: var(--text-muted); line-height: 1.55; margin-top: clamp(10px, 0.8vw, 24px); }
+  .cal6-dm-svc {
+    display: flex; align-items: center; gap: 0.7em; flex-wrap: wrap;
+    font-size: clamp(13px, 0.75vw, 25px); color: var(--text);
+    padding: clamp(6px, 0.45vw, 14px) 0; border-top: 1px solid #262626;
+  }
+  .cal6-dm-svc:first-of-type { border-top: none; }
+  .cal6-dm-svc a { color: #7db3ff; text-decoration: none; font-size: 0.85em; }
+  .cal6-dm-svc a:hover { text-decoration: underline; }
+  .cal6-dm-links { display: flex; gap: clamp(8px, 0.6vw, 18px); flex-wrap: wrap; margin-top: clamp(16px, 1.1vw, 34px); }
+  .cal6-dm-btn {
+    display: inline-block; text-decoration: none; font-weight: 700;
+    font-size: clamp(13px, 0.72vw, 24px);
+    padding: clamp(9px, 0.6vw, 20px) clamp(18px, 1.1vw, 38px);
+    border-radius: 9px;
+  }
+  .cal6-dm-btn.primary { background: #e5484d; color: #fff; }
+  .cal6-dm-btn.primary:hover { background: #f05a5f; }
+  .cal6-dm-btn.secondary { background: #262626; color: var(--text); border: 1px solid #3a3a3a; }
+  .cal6-dm-btn.secondary:hover { background: #333; }
+  /* TV overrides (after the shared calendar styles so they win) */
+  .cal6-toolbar { display: none; }          /* no remote on a wall screen */
+  .cal6-ev, .cal6-card { cursor: default; }
+</style>
+</head>
+<body>
+<div id="calModal">
+  <div class="cal6-header">
+    <div>
+      <div class="cal6-title">🗓 Church Calendar</div>
+      <div class="cal6-range" id="cal6Range"></div>
+    </div>
+    <div class="cal6-legend" id="cal6Legend"></div>
+    <div class="tv-clock" id="tvClock"></div>
+    <div class="cal6-asof" id="cal6AsOf"></div>
+  </div>
+  <div class="cal6-toolbar">
+    <button class="cal6-vbtn" data-vmode="6"></button>
+    <button class="cal6-vbtn" data-vmode="3"></button>
+    <button class="cal6-vbtn" data-vmode="1"></button>
+    <div class="cal6-mnav" id="cal6MNav" style="display:none;">
+      <button class="cal6-nbtn" id="cal6NavBack"></button>
+      <button class="cal6-nbtn" id="cal6NavFwd"></button>
+    </div>
+  </div>
+  <div class="cal6-body mode-6" id="cal6Body">
+    <div class="cal6-empty">Loading calendar from Planning Center…</div>
+  </div>
+  <div class="cal6-dm-bg" id="cal6DmBg"><div class="cal6-dm" id="cal6Dm"></div></div>
+</div>
+
+<script>
+/* =========================================================
+   CALENDAR TAB — 6-month color-coded wall calendar
+   Reads calendar.events from eos-data.json (PCO Calendar,
+   next 6 months, community groups excluded at sync time).
+========================================================= */
+
+// Category rules — first match wins. RBD is flagged by the sync (ev.rbd).
+const CAL6_CATS = [
+  { key:'rbd',      label:'RBD',                color:'#e5484d', match:(n,ev)=> !!ev.rbd || /\brbd\b/i.test(n) },
+  { key:'baptism',  label:'Baptisms',           color:'#4c9aff', match:n=>/baptism/i.test(n) },
+  { key:'students', label:'Students',           color:'#a06ee1', match:n=>/student|youth/i.test(n) },
+  { key:'kids',     label:'Kids',               color:'#e558a4', match:n=>/\bkids?\b|\bvbs\b|child|stepping stones/i.test(n) },
+  { key:'worship',  label:'Worship Gatherings', color:'#f5822a', match:n=>/worship gathering|worship night|christmas eve|christmas ser|good friday|easter/i.test(n) },
+  { key:'missions', label:'Missions',           color:'#2bb8a3', match:n=>/mission/i.test(n) },
+  { key:'care',     label:'Care & Classes',     color:'#57b85f', match:n=>/grief ?share|golden stones|regroup|celebration of life|premarital|pathfinders|class\b/i.test(n) },
+  { key:'staff',    label:'Staff & Leadership', color:'#9aa4b2', match:n=>/staff|elders|leader|rehearsal|planning|business meeting|financial update/i.test(n) },
+  { key:'event',    label:'Church Events',      color:'#d8b64a', match:()=>true },
+];
+
+function cal6Cat(ev) {
+  const n = ev.name || '';
+  for (const c of CAL6_CATS) { if (c.match(n, ev)) return c; }
+  return CAL6_CATS[CAL6_CATS.length - 1];
+}
+
+function cal6Esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Parse "6:00 PM" → minutes for intra-day sort
+function cal6Mins(t) {
+  const m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec((t || '').trim());
+  if (!m) return 0;
+  let h = parseInt(m[1], 10) % 12;
+  if (/pm/i.test(m[3])) h += 12;
+  return h * 60 + parseInt(m[2], 10);
+}
+
+let _cal6Events = null;   // raw events from eos-data.json
+let _cal6AsOf   = '';
+let _cal6Mode   = 6;      // 6 | 3 | 1 months visible
+let _cal6Off    = 0;      // start-month offset from current month (negative = past)
+
+// How far the month nav can page relative to the current month. We always allow
+// at least this range (so past nav is usable the moment the wider PCO sync lands),
+// and expand to whatever the loaded events actually span.
+const CAL6_PAST_MONTHS   = 3;   // matches the sync's CAL_PAST_MONTHS window
+const CAL6_FUTURE_MONTHS = 6;
+
+// Min/max start-month offset present in the data (relative to the current month),
+// widened to the guaranteed window above. maxOff is the offset of the latest month
+// that has any event; the start offset is later clamped so the last shown month
+// never runs past it.
+function cal6Bounds() {
+  const now = new Date();
+  const baseY = now.getFullYear(), baseM = now.getMonth();
+  const offOf = dk => (+dk.slice(0,4) - baseY) * 12 + (+dk.slice(5,7) - 1 - baseM);
+  let minOff = 0, maxOff = 0;
+  (_cal6Events || []).forEach(ev => {
+    if (!ev.dateKey) return;
+    const o = offOf(ev.dateKey);
+    if (o < minOff) minOff = o;
+    if (o > maxOff) maxOff = o;
+    if (ev.endKey) { const e = offOf(ev.endKey); if (e > maxOff) maxOff = e; }
+  });
+  return {
+    minOff: Math.min(minOff, -CAL6_PAST_MONTHS),
+    maxOff: Math.max(maxOff, CAL6_FUTURE_MONTHS - 1)
+  };
+}
+
+// Allowed range for the start-month offset given the current view width.
+function cal6OffRange() {
+  const b  = cal6Bounds();
+  const lo = b.minOff;
+  const hi = Math.max(lo, b.maxOff - (_cal6Mode - 1));
+  return { lo, hi, span: b.maxOff - b.minOff + 1 };
+}
+
+async function cal6Load() {
+  try {
+    const res = await fetch('/eos-data.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('eos-data fetch ' + res.status);
+    const d = await res.json();
+    const cal = d.calendar || {};
+    _cal6Events = cal.events || [];
+    _cal6AsOf   = cal.asOf || '';
+    cal6Render();
+  } catch (e) {
+    console.error('Calendar load error:', e);
+    if (_cal6Events) return;
+    document.getElementById('cal6Body').innerHTML =
+      '<div class="cal6-empty">Could not load calendar data. Check your connection and try again.</div>';
+  }
+}
+
+function cal6SetMode(m) {
+  _cal6Mode = m;
+  const { lo, hi } = cal6OffRange();
+  _cal6Off = Math.max(lo, Math.min(hi, _cal6Off));
+  cal6Render();
+}
+
+function cal6Nav(dir) {
+  const { lo, hi } = cal6OffRange();
+  const next = Math.max(lo, Math.min(hi, _cal6Off + dir));
+  if (next === _cal6Off) return;
+  _cal6Off = next;
+  cal6Render();
+}
+
+// Short time for dense views: "9:30 AM" → "9:30a", "6:00 PM" → "6p"
+function cal6TimeShort(t) {
+  return (t || '').replace(':00', '').replace(/\s*AM/i, 'a').replace(/\s*PM/i, 'p');
+}
+
+function cal6FmtDay(dk) {
+  return new Date(dk + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function cal6Render() {
+  if (!_cal6Events) return;
+  _cal6ChipReg = [];
+
+  // Safety net: exclude community groups even if one slips past the sync filter
+  const usable = _cal6Events.filter(ev => {
+    const n = (ev.name || '').toLowerCase();
+    return !(n.includes('community group') || n.startsWith('cg ') || n.includes('small group'));
+  });
+
+  // dateKey → [events], expanding multi-day events across each of their days
+  const byDate = {};
+  usable.forEach(ev => {
+    const startD = new Date(ev.dateKey + 'T12:00:00');
+    const endD   = new Date((ev.endKey || ev.dateKey) + 'T12:00:00');
+    for (let d = new Date(startD); d <= endD; d.setDate(d.getDate() + 1)) {
+      const dk = d.toISOString().slice(0, 10);
+      if (!byDate[dk]) byDate[dk] = [];
+      if (!byDate[dk].find(x => x.name === ev.name)) byDate[dk].push(ev);
+    }
+  });
+  Object.values(byDate).forEach(list => list.sort((a, b) => cal6Mins(a.time) - cal6Mins(b.time)));
+
+  // Collapse the recurring same-day service times ("8am/9:30am/11am Worship
+  // Gathering") into one chip so Sundays don't overflow their day cell — the
+  // detail popup still lists every service. Also keeps the 1-month fit-to-
+  // screen scale larger on busy months.
+  {
+    Object.keys(byDate).forEach(dk => {
+      const list = byDate[dk];
+      const svc  = list.filter(ev => /worship gathering/i.test(ev.name || ''));
+      if (svc.length < 2) return;
+      const times = svc.map(ev => (ev.name.match(/^([\d:]+(?:am|pm)?)/i) || [,''])[1].replace(/am|pm/i,'')).filter(Boolean);
+      byDate[dk] = [{
+        name: 'Worship Gatherings' + (times.length ? ' · ' + times.join(' · ') : ' ×' + svc.length),
+        time: svc[0].time, dateKey: dk, location: svc[0].location || '',
+        _group: svc
+      }].concat(list.filter(ev => !/worship gathering/i.test(ev.name || '')));
+    });
+  }
+
+  const now      = new Date();
+  const todayKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+  const dows     = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const usedCats = new Set();
+  let monthsHtml = '';
+
+  for (let k = 0; k < _cal6Mode; k++) {
+    const i      = _cal6Off + k;
+    const first  = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    const mLabel = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+    const lead   = first.getDay();  // Sunday-first offset
+
+    const dayCells = [];
+    for (let slot = 0; slot < 42; slot++) {
+      const dayNum = slot - lead + 1;
+      if (dayNum < 1 || dayNum > daysIn) { dayCells.push('<div class="cal6-day out"></div>'); continue; }
+      const dk = first.getFullYear() + '-' + String(first.getMonth()+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      const evs = byDate[dk] || [];
+      const chips = evs.map(ev => {
+        const cat = cal6Cat(ev);
+        usedCats.add(cat.key);
+        return cal6Chip(ev, cat, dk, evs.length);
+      }).join('');
+      dayCells.push('<div class="cal6-day' + (dk === todayKey ? ' today' : '') + '"><div class="cal6-dnum">' + dayNum + '</div>' + chips + '</div>');
+    }
+
+    let weeks = '';
+    for (let w = 0; w < 6; w++) {
+      weeks += '<div class="cal6-week">' + dayCells.slice(w*7, w*7+7).join('') + '</div>';
+    }
+
+    monthsHtml +=
+      '<div class="cal6-month">' +
+        '<div class="cal6-mname">' + mLabel + '</div>' +
+        '<div class="cal6-dow">' + dows.map(d => '<span>' + d + '</span>').join('') + '</div>' +
+        '<div class="cal6-weeks">' + weeks + '</div>' +
+      '</div>';
+  }
+
+  const body = document.getElementById('cal6Body');
+  body.className = 'cal6-body mode-' + _cal6Mode;
+  body.innerHTML = monthsHtml || '<div class="cal6-empty">No upcoming events found.</div>';
+
+  // Toolbar state: active view button + month nav (shown whenever the data
+  // spans more months than the current view — including past months)
+  document.querySelectorAll('.cal6-vbtn').forEach(b =>
+    b.classList.toggle('on', Number(b.dataset.vmode) === _cal6Mode));
+  const { lo, hi, span } = cal6OffRange();
+  const nav = document.getElementById('cal6MNav');
+  nav.style.display = span > _cal6Mode ? 'flex' : 'none';
+  document.getElementById('cal6NavBack').disabled = _cal6Off <= lo;
+  document.getElementById('cal6NavFwd').disabled  = _cal6Off >= hi;
+
+  // Header: range, legend (only categories in use), as-of
+  const rangeStart = new Date(now.getFullYear(), now.getMonth() + _cal6Off, 1);
+  const rangeEnd   = new Date(now.getFullYear(), now.getMonth() + _cal6Off + _cal6Mode - 1, 1);
+  document.getElementById('cal6Range').textContent = _cal6Mode === 1
+    ? rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' })
+    : rangeStart.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + ' — ' +
+      rangeEnd.toLocaleDateString('en-US', { month:'long', year:'numeric' });
+  document.getElementById('cal6Legend').innerHTML = CAL6_CATS
+    .filter(c => usedCats.has(c.key))
+    .map(c => '<div class="cal6-leg"><i style="background:' + c.color + '"></i>' + c.label + '</div>')
+    .join('');
+  document.getElementById('cal6AsOf').textContent = _cal6AsOf
+    ? 'Synced from PCO Calendar · ' + _cal6AsOf + ' · Community Groups not shown'
+    : 'Synced from PCO Calendar · Community Groups not shown';
+
+  // 1-month view: fit the whole month on screen with no scrolling
+  requestAnimationFrame(cal6FitMonth);
+  setTimeout(cal6FitMonth, 350);  // re-check once fonts/layout settle
+}
+
+// Fit-to-screen for the 1-month view (wall-calendar behavior for TVs):
+// if the month's content is taller than its card, scale the weeks grid
+// down proportionally so every event is visible without scrolling.
+// Below 0.45× we keep the scroll fallback instead of making text unreadable;
+// phones (≤980px) keep their natural size + page scroll.
+function cal6FitMonth() {
+  const weeks = document.querySelector('#cal6Body.mode-1 .cal6-weeks');
+  if (!weeks) return;
+  // Reset to the flex-sized, un-transformed state before measuring.
+  weeks.style.transform = '';
+  weeks.style.width = '';
+  weeks.style.height = '';
+  weeks.style.flex = '';
+  weeks.style.overflowY = '';
+  weeks.style.transformOrigin = '0 0';
+  // Capture the space the weeks grid is allowed to occupy (its flex height)
+  // BEFORE we override its height below.
+  const avail = weeks.clientHeight;
+  if (!avail) return;
+  weeks.style.overflowY = 'hidden';
+  // Displayed height grows monotonically with scale (bigger scale → narrower
+  // layout → more wrapping → taller), so binary-search the largest scale
+  // that still fits. ~8 relayouts of one element, only on render/resize.
+  //
+  // CRITICAL: overflow:hidden clips content at the element's OWN box height
+  // (its pre-transform layout height), and a CSS transform does not change that
+  // layout height. So we must let the box grow to its full content height
+  // (height:auto) while scaling — otherwise the last week(s) get clipped away
+  // even though the scaled result would have fit. The visual height is then
+  // scrollHeight * scale, which is what we fit against `avail`.
+  const displayedAt = s => {
+    weeks.style.width = s === 1 ? '' : (100 / s) + '%';
+    weeks.style.transform = s === 1 ? '' : 'scale(' + s + ')';
+    // flex:0 0 auto + height:auto let the box hold its FULL content height
+    // (flex:1's 0% basis would otherwise pin it to the flex track height and
+    // overflow:hidden would lop off the last week before the transform scales it).
+    weeks.style.flex = '0 0 auto';
+    weeks.style.height = 'auto';
+    return weeks.scrollHeight * s;
+  };
+  const MIN_SCALE = 0.45;
+  if (displayedAt(1) <= avail + 1) {  // fits natively — leave it flex-sized
+    weeks.style.flex = '';
+    weeks.style.height = '';
+    weeks.style.overflowY = '';
+    return;
+  }
+  let lo = MIN_SCALE, hi = 1, best = 0;
+  for (let i = 0; i < 7; i++) {
+    const mid = (lo + hi) / 2;
+    if (displayedAt(mid) <= avail + 1) { best = mid; lo = mid; } else { hi = mid; }
+  }
+  if (best) {
+    displayedAt(best);
+  } else {  // doesn't fit even at MIN_SCALE — keep it legible, allow scroll
+    weeks.style.width = (100 / MIN_SCALE) + '%';
+    weeks.style.transform = 'scale(' + MIN_SCALE + ')';
+    weeks.style.flex = '';         // flex-bounded again so it can scroll
+    weeks.style.height = '';
+    weeks.style.overflowY = 'auto';
+  }
+}
+
+window.addEventListener('resize', () => { if (_cal6Mode === 1) cal6FitMonth(); });
+
+// Registry mapping rendered chips back to their event, for the detail popup.
+let _cal6ChipReg = [];
+
+// One event chip/card, sized to the current view mode. Every chip is
+// clickable and opens the full-detail popup.
+function cal6Chip(ev, cat, dk, dayCount) {
+  const name = cal6Esc((ev.name || '').trim());
+  const tint = 'border-left-color:' + cat.color + ';background:' + cat.color + '2b;';
+  const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
+  const locShort  = (ev.location || '').split('\n')[0].split(' - ')[0].trim();
+  const multiDay  = ev.endKey ? cal6FmtDay(ev.dateKey) + ' – ' + cal6FmtDay(ev.endKey) : '';
+  const click = ' onclick="cal6ShowDetail(' + (_cal6ChipReg.push({ ev: ev, cat: cat }) - 1) + ')"';
+
+  if (_cal6Mode === 6) {
+    const tip = cal6Esc((ev.name||'').trim() + (ev.time ? ' · ' + ev.time : '') + (locShort ? ' · ' + locShort : ''));
+    return '<div class="cal6-ev" style="' + tint + '"' + click + ' title="' + tip + '">' + name + '</div>';
+  }
+
+  if (_cal6Mode === 3) {
+    const tip = cal6Esc((ev.name||'').trim() + ' · ' + timeRange + (locShort ? ' · ' + locShort : '') + (ev.owner ? ' · ' + ev.owner : ''));
+    // The fewer events share a day, the more room each chip has — so show the
+    // full name (and, for near-solo days, the time + location) instead of
+    // clamping everything to two lines and cutting the text off. Busy days stay
+    // compact so they still fit the cell.
+    const n = dayCount || 1;
+    if (n <= 2) {
+      const clamp = n <= 1 ? 6 : 4;
+      let meta = '';
+      if (n <= 1) {
+        const bits = [cal6Esc(timeRange)];
+        if (locShort) bits.push('📍 ' + cal6Esc(locShort));
+        meta = '<div class="cal6-ev-meta">' + bits.join(' · ') + '</div>';
+      }
+      return '<div class="cal6-ev cal6-ev-roomy" style="' + tint + '--cal6-clamp:' + clamp + ';"' + click + ' title="' + tip + '">' +
+        '<div class="cal6-ev-name">' +
+          (ev.time ? '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' : '') + name +
+        '</div>' + meta + '</div>';
+    }
+    return '<div class="cal6-ev" style="' + tint + '"' + click + ' title="' + tip + '">' +
+      '<span class="cal6-evtime">' + cal6Esc(cal6TimeShort(ev.time)) + '</span> ' + name + '</div>';
+  }
+
+  // 1-month view: full detail card (two compact meta lines)
+  let meta = '';
+  const when = multiDay ? multiDay + ' · ' + ev.time : timeRange;
+  meta += '<div class="cal6-card-meta">' + cal6Esc(when) + (locShort ? ' · 📍 ' + cal6Esc(locShort) : '') + '</div>';
+  const who = [];
+  if (ev.owner) who.push('👤 ' + cal6Esc(ev.owner));
+  if (ev.resources && ev.resources.length) who.push('🏷 ' + cal6Esc(ev.resources.join(', ')));
+  if (who.length) meta += '<div class="cal6-card-meta">' + who.join(' · ') + '</div>';
+  return '<div class="cal6-card" style="' + tint + '"' + click + '>' +
+    '<div class="cal6-card-name">' + name + '</div>' + meta + '</div>';
+}
+
+// ── Event detail popup ─────────────────────────────────────────
+function cal6ShowDetail(idx) {
+  const entry = _cal6ChipReg[idx];
+  if (!entry) return;
+  const ev  = entry.ev, cat = entry.cat;
+  const timeRange = ev.time + (ev.timeEnd && ev.timeEnd !== ev.time ? ' – ' + ev.timeEnd : '');
+  const dateLong = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  const dateLine = ev.endKey ? dateLong(ev.dateKey) + '  –  ' + dateLong(ev.endKey) : dateLong(ev.dateKey);
+
+  let h = '<button class="cal6-dm-x" onclick="cal6HideDetail()" aria-label="Close">✕</button>';
+  if (ev.img) h += '<img class="cal6-dm-img" src="' + cal6Esc(ev.img) + '" alt="" onerror="this.style.display=\'none\'">';
+  h += '<div class="cal6-dm-pad">';
+  h += '<div class="cal6-dm-cat"><i style="background:' + cat.color + '"></i>' + cal6Esc(cat.label) + '</div>';
+  h += '<div class="cal6-dm-name">' + cal6Esc((ev.name || '').trim()) + '</div>';
+  h += '<div class="cal6-dm-row"><b>📅 When</b>' + cal6Esc(dateLine) + '</div>';
+  h += '<div class="cal6-dm-row"><b>🕐 Time</b>' + cal6Esc(timeRange) + '</div>';
+  if (ev.location)  h += '<div class="cal6-dm-row"><b>📍 Where</b>' + cal6Esc(ev.location.split('\n').join(', ')) + '</div>';
+  if (ev.owner)     h += '<div class="cal6-dm-row"><b>👤 Owner</b>' + cal6Esc(ev.owner) + '</div>';
+  if (ev.resources && ev.resources.length)
+                    h += '<div class="cal6-dm-row"><b>🏷 Resources</b>' + cal6Esc(ev.resources.join(', ')) + '</div>';
+
+  // Collapsed "Worship Gatherings" chip → list each service with its link
+  if (ev._group && ev._group.length) {
+    h += '<div style="margin-top:clamp(10px,0.8vw,24px)">';
+    ev._group.forEach(svc => {
+      h += '<div class="cal6-dm-svc"><b>' + cal6Esc(svc.time) + '</b> ' + cal6Esc((svc.name || '').trim()) +
+        (svc.url ? ' <a href="' + cal6Esc(svc.url) + '" target="_blank" rel="noopener">Church Center ↗</a>' : '') +
+        '</div>';
+    });
+    h += '</div>';
+  }
+
+  const blurb = ev.desc || ev.summary || '';
+  if (blurb) h += '<div class="cal6-dm-desc">' + cal6Esc(blurb) + '</div>';
+
+  const links = [];
+  if (ev.reg) links.push('<a class="cal6-dm-btn primary" href="' + cal6Esc(ev.reg) + '" target="_blank" rel="noopener">Register / Sign Up ↗</a>');
+  if (ev.url) links.push('<a class="cal6-dm-btn ' + (ev.reg ? 'secondary' : 'primary') + '" href="' + cal6Esc(ev.url) + '" target="_blank" rel="noopener">View on Church Center ↗</a>');
+  if (links.length) h += '<div class="cal6-dm-links">' + links.join('') + '</div>';
+  h += '</div>';
+
+  document.getElementById('cal6Dm').innerHTML = h;
+  document.getElementById('cal6DmBg').classList.add('open');
+}
+
+function cal6HideDetail() {
+  const bg = document.getElementById('cal6DmBg');
+  if (bg) bg.classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cal6HideDetail();
+});
+
+/* ── TV driver ─────────────────────────────────────────────── */
+(function () {
+  var v = Number((/[?&]view=(\d)/.exec(location.search) || [])[1]);
+  if (v === 1 || v === 3 || v === 6) _cal6Mode = v;
+
+  function clock() {
+    var el = document.getElementById('tvClock');
+    if (el) el.textContent = new Date().toLocaleString('en-US',
+      { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+  clock();
+  setInterval(clock, 30 * 1000);
+
+  // New PCO data every 10 minutes; re-render also moves the "today" ring at midnight.
+  cal6Load();
+  setInterval(cal6Load, 10 * 60 * 1000);
+  // Full reload every 6 hours so the screen never runs a stale copy of this page for days.
+  setTimeout(function () { location.reload(); }, 6 * 60 * 60 * 1000);
+})();
+</script>
+</body>
+</html>
