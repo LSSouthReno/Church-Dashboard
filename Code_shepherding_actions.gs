@@ -227,8 +227,76 @@ function shepFieldOptions_(defId) {
   return { defId:defId, options: ((r.json&&r.json.data)||[]).map(function(o){ return String((o.attributes||{}).value||''); }).filter(Boolean) };
 }
 
+/* =========================================================
+   PASTOR SIGN-IN — identity hash (firstname+last4, shipped in the page) proves WHO;
+   a 6-digit code emailed to that pastor's PCO address proves it's really them; the
+   server then issues a 60-day session token, which is the only thing the data
+   endpoints accept. Knowing a pastor's phone number is no longer enough.
+   pastor_start  &pw=<identity hash>            → emails the code
+   pastor_verify &pw=<identity hash>&code=123456 → { token, name, elder }
+   pastor_signout&pw=<token>                     → revokes it
+========================================================= */
+function spPastorEmail_(hash) {
+  var p = SHEPHERDING_PASTORS[hash]; if (!p) return '';
+  var pid = null;
+  if (p.elder) Object.keys(SH_ELDER_BY_PERSON).forEach(function(id) { if (SH_ELDER_BY_PERSON[id] === p.elder) pid = id; });
+  if (!pid) pid = '136687145';   // "Admin" login → Brad
+  var cache = CacheService.getScriptCache(), k = 'SH_PEMAIL_' + pid, hit = cache.get(k); if (hit) return hit;
+  var r = shGet_('/people/v2/people/' + pid + '/emails');
+  var list = (r.json && r.json.data) || [];
+  var em = list.filter(function(e) { return (e.attributes || {}).primary; })[0] || list[0];
+  var addr = em ? String((em.attributes || {}).address || '').trim() : '';
+  if (addr) cache.put(k, addr, 21600);
+  return addr;
+}
+function spMaskEmail_(e) { var m = String(e || '').split('@'); return m.length === 2 ? m[0].charAt(0) + '•••@' + m[1] : ''; }
+function shepPastorStart_(p) {
+  var hash = String((p || {}).pw || ''), who = SHEPHERDING_PASTORS[hash];
+  if (!who) return { ok: false, error: 'unknown' };
+  var cache = CacheService.getScriptCache(), k = 'SH_CODE_' + hash, cur = null;
+  try { cur = JSON.parse(cache.get(k) || 'null'); } catch (x) {}
+  if (cur && cur.sentAt && Date.now() - cur.sentAt < 45000 && !(p || {}).force) return { ok: true, to: cur.to, wait: true };
+  var email = spPastorEmail_(hash); if (!email) return { ok: false, error: 'no email on file' };
+  var code = ('000000' + Math.floor(Math.random() * 1000000)).slice(-6);
+  cache.put(k, JSON.stringify({ code: code, tries: 0, sentAt: Date.now(), to: spMaskEmail_(email) }), 600);
+  var first = String(who.name).split(' ')[0];
+  var html = '<div style="font-family:Montserrat,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;padding:28px 22px;color:#1a1a1a">' +
+    '<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#a07d20;font-weight:700">Living Stones South Reno · Dashboard</div>' +
+    '<h1 style="font-size:22px;margin:10px 0 8px">Hi ' + first + ', here’s your Care sign-in code</h1>' +
+    '<div style="font-size:34px;font-weight:800;letter-spacing:.3em;color:#1a1a1a;margin:14px 0">' + code + '</div>' +
+    '<p style="font-size:14px;line-height:1.6;color:#444;margin:0 0 18px">Enter it in the dashboard sign-in box. It expires in 10 minutes. After that this device stays signed in for 60 days.</p>' +
+    '<p style="font-size:12.5px;line-height:1.6;color:#888;margin:0">If you didn’t just try to sign in, ignore this email — nothing opens without the code.</p></div>';
+  var msg = { to: email, subject: 'Your Care sign-in code: ' + code, name: 'Living Stones South Reno', htmlBody: html,
+    body: 'Hi ' + first + ',\n\nYour Care sign-in code is ' + code + '. It expires in 10 minutes.\n\nIf you didn’t just try to sign in, ignore this email.' };
+  try { MailApp.sendEmail(Object.assign({ noReply: true }, msg)); }
+  catch (e) { try { MailApp.sendEmail(msg); } catch (e2) { return { ok: false, error: 'email failed: ' + e2.message }; } }
+  return { ok: true, to: spMaskEmail_(email) };
+}
+function shepPastorVerify_(p) {
+  var hash = String((p || {}).pw || ''), code = String((p || {}).code || '').replace(/\D/g, ''), who = SHEPHERDING_PASTORS[hash];
+  if (!who) return { ok: false, error: 'unknown' };
+  var cache = CacheService.getScriptCache(), k = 'SH_CODE_' + hash, cur = null;
+  try { cur = JSON.parse(cache.get(k) || 'null'); } catch (x) {}
+  if (!cur) return { ok: false, error: 'expired' };
+  if (cur.tries >= 5) { cache.remove(k); return { ok: false, error: 'too many tries' }; }
+  if (!code || code !== cur.code) { cur.tries++; cache.put(k, JSON.stringify(cur), 600); return { ok: false, error: 'wrong code', left: 5 - cur.tries }; }
+  cache.remove(k);
+  var token = Utilities.getUuid().replace(/-/g, '');
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty('SH_TOK_' + token, JSON.stringify({ h: hash, name: who.name, exp: Date.now() + 60 * 864e5 }));
+  try { var all = props.getProperties(), now = Date.now(); Object.keys(all).forEach(function(kk) { if (kk.indexOf('SH_TOK_') !== 0) return; var v = null; try { v = JSON.parse(all[kk]); } catch (x) {} if (!v || !v.exp || v.exp < now) props.deleteProperty(kk); }); } catch (x) {}
+  spLogChange_(who.name, '', 'sign-in', 'Care · ' + (cur.to || ''));
+  return { ok: true, token: token, name: who.name, elder: who.elder };
+}
+function shepPastorSignout_(p) {
+  var t = String((p || {}).pw || '');
+  if (/^[0-9a-f]{32}$/.test(t)) { try { PropertiesService.getScriptProperties().deleteProperty('SH_TOK_' + t); } catch (x) {} }
+  return { ok: true };
+}
+
 /* ── Pending-edit overlay: one row per (pid, field), newest value wins ── */
 function spUpsertOverride_(pid, field, value, by) {
+  spCacheDelBig_(CacheService.getScriptCache(), 'SHD_GZ');   // gated payload must reflect this edit
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sh = ss.getSheetByName(SH_OVERRIDES_SHEET) || ss.insertSheet(SH_OVERRIDES_SHEET);

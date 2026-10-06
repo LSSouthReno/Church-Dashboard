@@ -119,13 +119,30 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(jgProbe_());
     }
+    if (action === 'run_members_sync') {
+      // Rebuild the Members-by-year sheet from PCO now (Member Since + membership-workflow completion).
+      // Read-only against PCO; the hourly publish picks the sheet up. Returns the rows for checking.
+      syncMembersOverTime_();
+      var msh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEETS.members);
+      return eosWaJson_({ ok: true, rows: msh ? msh.getDataRange().getValues() : [] });
+    }
+    if (action === 'pastor_start')   return eosWaJson_(shepPastorStart_(e.parameter || {}));
+    if (action === 'pastor_verify')  return eosWaJson_(shepPastorVerify_(e.parameter || {}));
+    if (action === 'pastor_signout') return eosWaJson_(shepPastorSignout_(e.parameter || {}));
     if (action === 'shepherding_data') {
-      // Gated read of the FULL sensitive shepherding data. Any valid pastor login
-      // (or the master password) is accepted.
+      // Gated read of the FULL sensitive shepherding data (server-issued pastor token only).
+      // &gz=1 returns it gzipped+base64 (~10x smaller — Apps Script is slow to deliver big
+      // bodies) and served from a short cache that edits and syncs invalidate.
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
+      var wantGz = (e.parameter||{}).gz === '1', shCache = CacheService.getScriptCache();
+      if (wantGz) { var hitGz = spCacheGetBig_(shCache, 'SHD_GZ'); if (hitGz) return eosWaJson_({ gz: hitGz, cached: true }); }
       var shd = spReadPrivate_();
       if (shd) spApplyOverrides_(shd);   // overlay pending edits not yet in the hourly snapshot
-      return eosWaJson_(shd || { error: 'no_data' });
+      if (!shd) return eosWaJson_({ error: 'no_data' });
+      if (!wantGz) return eosWaJson_(shd);
+      var b64 = Utilities.base64Encode(Utilities.gzip(Utilities.newBlob(JSON.stringify(shd), 'application/json')).getBytes());
+      spCachePutBig_(shCache, 'SHD_GZ', b64, 1800);
+      return eosWaJson_({ gz: b64 });
     }
     if (action === 'shep_person_detail') {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });

@@ -3744,14 +3744,24 @@
 <!-- ======== MEMBERS PASSWORD PROMPT ======== -->
 <div id="mmPrompt" role="dialog" aria-modal="true">
   <div class="mm-card">
+    <div id="mmCode" style="display:none">
+      <div class="mm-ttl">Check your email</div>
+      <div class="mm-msg" id="mmCodeMsg"></div>
+      <input id="mmCodeIn" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" maxlength="6" onkeydown="if(event.key==='Enter')mmVerifyCode()" />
+      <button class="mm-btn" id="mmCodeGo" onclick="mmVerifyCode()">Open Care</button>
+      <div class="mm-err" id="mmCodeErr"></div>
+      <div style="margin-top:10px;display:flex;gap:14px;justify-content:center"><button class="mm-cancel" onclick="mmResendCode()">Send a new code</button><button class="mm-cancel" onclick="mmCodeCancel()">Cancel</button></div>
+    </div>
+    <div id="mmMain">
     <div class="mm-ttl">Sign in</div>
     <div class="mm-msg" id="mmMsg">Only needed for giving detail, Staff, Care and your team page. Church, Sunday, Serve and Calendar are open to everyone.</div>
     <input id="mmPwInput" type="password" placeholder="Last 4 of your phone, or passcode" autocomplete="off" inputmode="text"
            onkeydown="if(event.key==='Enter')mmDoUnlock()" />
     <button class="mm-btn" id="mmGo" onclick="mmDoUnlock()">Continue</button>
     <div class="mm-err" id="mmErr">That didn’t match. Staff, pastors and team leaders: the last 4 digits of your phone. Members: the giving passcode.</div>
-    <div class="mm-msg" style="margin-top:10px;font-size:11px;color:var(--text-dim)">Stays signed in on this device for 60 days.</div>
+    <div class="mm-msg" style="margin-top:10px;font-size:11px;color:var(--text-dim)">Stays signed in on this device for 60 days. Pastors also get a one-time code by email.</div>
     <div><button class="mm-cancel" onclick="mmClosePrompt()">Cancel</button></div>
+    </div>
   </div>
 </div>
 
@@ -5529,6 +5539,8 @@ function chTab(tab, silent) {
 }
 function chResizeCharts() {
   document.querySelectorAll('#chGrid .ch-c.on canvas').forEach(c => { try { const ch = Chart.getChart(c); if (ch) ch.resize(); } catch (e) {} });
+  // Horizontal-history charts (giving, donors, attendance) open on the latest months.
+  setTimeout(() => document.querySelectorAll('#chGrid .ch-c.on .chart-wrap').forEach(w => { if (w.scrollWidth > w.clientWidth + 2) w.scrollLeft = w.scrollWidth; }), 60);
 }
 function chRenderTiles() {
   const D = DASHBOARD_DATA, el = document.getElementById('chTiles'); if (!D || !el) return;
@@ -7669,6 +7681,13 @@ async function mmDoUnlock() {
   mmDoUnlock._busy = true; btn.disabled = true; btn.textContent = 'Signing in…'; err.style.display = 'none';
   const r = await authTry(val, { onSlow: a => { msg.textContent = a ? 'Trying once more…' : 'Still working — the staff server is a little slow right now…'; } });
   mmDoUnlock._busy = false; btn.disabled = false; btn.textContent = 'Continue';
+  if (r.pending) {   // pastor: a code is on its way to their email; keep the box open for it
+    inp.value = '';
+    if (r.roles.length) lsToast('Signed in' + (r.who ? ' as ' + r.who : '') + ' · check your email for the Care code');
+    mmShowCode(r.pending);
+    if (r.roles.indexOf('staff') >= 0 && navCurrentRoute().tab === 'church') navGo('today');
+    return;
+  }
   if (r.roles.length) {
     inp.value = ''; mmClosePrompt();
     lsToast('Signed in' + (r.who ? ' as ' + r.who : '') + (r.roles.indexOf('members') >= 0 && r.roles.length === 1 ? ' · giving unlocked' : ''));
@@ -7706,9 +7725,9 @@ function authGrantStaff() {
   if (l && c && document.getElementById('staffModal').classList.contains('open')) { l.style.display = 'none'; c.style.display = 'flex'; if (n) n.hidden = false; if (!staffRendered) staffLoadData(); }
   if (DASHBOARD_DATA) mmApplyState();
 }
-function authGrantPastor(hex) {
-  _shPastorHash = hex; _shPastorName = SH_PASTORS[hex].name; _shPastorElder = SH_PASTORS[hex].elder;
-  try { sessionStorage.setItem(PASTOR_SESSION_KEY, hex); localStorage.setItem('pastor_hash', hex); } catch (e) {} remember60('pastor_until');
+function authGrantPastor(id, token) {
+  _shPastorHash = token; _shPastorName = SH_PASTORS[id].name; _shPastorElder = SH_PASTORS[id].elder;
+  try { localStorage.setItem('pastor_id', id); localStorage.setItem('pastor_token', token); sessionStorage.setItem(PASTOR_SESSION_KEY, token); } catch (e) {} remember60('pastor_until');
   const l = document.getElementById('pastorModLocked'), c = document.getElementById('pastorModContent');
   if (l && c && document.getElementById('pastorModal').classList.contains('open')) { l.style.display = 'none'; c.style.display = 'block'; if (!_shRendered) shepLoadData(); }
   if (DASHBOARD_DATA) mmApplyState();
@@ -7741,7 +7760,8 @@ async function authTry(raw, opts) {
   if (hex === CG_HASH) { authGrantGroups(val); roles.push('groups'); }
   if (hex === TM_ADMIN_HASH) { authGrantTeamsAdmin(); roles.push('teamsadmin'); }
   if (hex === TLH_ADMIN_HASH) { authGrantLeadersAdmin(); roles.push('leadersadmin'); }
-  if (SH_PASTORS[hexL]) { authGrantPastor(hexL); roles.push('pastor'); who = SH_PASTORS[hexL].name; }
+  let pastorPending = null;
+  if (SH_PASTORS[hexL] && !pastorIsUnlocked()) { pastorPending = await pastorStart(hexL); who = who || SH_PASTORS[hexL].name; }
   if (!roles.length && /^\d{3,6}$/.test(val)) {
     // Team leaders: the same last-4 is checked against the serve-team Point Leaders (in parallel).
     const leaderP = val.length === 4 ? fetch(EOS_WEBAPP_URL + '?action=leader_login&pin=' + val + '&_=' + Date.now()).then(x => x.json()).catch(() => null) : Promise.resolve(null);
@@ -7753,13 +7773,51 @@ async function authTry(raw, opts) {
       if (r.res.matches.length === 1) { sosApplyLiteLogin(r.res); who = r.res.who || ''; }
       else { _sosMatches = r.res.matches; if (r.res.roster) _sos.roster = r.res.roster; sosRenderSignin(r.res.matches); }
       if (document.getElementById('staffModal').classList.contains('open')) { try { staffShowSection('sp-mine'); } catch (e) {} }
-      // Pastors who are staff: the same PIN also opens Care (pastor key = first name + last 4).
+      // Pastors who are staff: the same PIN identifies them for Care too — a code goes to their email.
       const first = String(who).split(/\s+/)[0].toLowerCase();
-      if (first) { const ph = await sha256Hex(first + val); if (SH_PASTORS[ph]) { authGrantPastor(ph); roles.push('pastor'); } }
+      if (first) { const ph = await sha256Hex(first + val); if (SH_PASTORS[ph] && !pastorIsUnlocked()) pastorPending = await pastorStart(ph); }
     } else if (r.status === 'error' && !roles.length) return { roles: [], error: 'network' };
   }
   if (roles.length) navRefreshAuth();
-  return { roles, who };
+  return { roles, who, pending: pastorPending };
+}
+// Ask the server to email this pastor their code. Returns { id, to } or { id, error }.
+let _mmPastorPending = null;
+async function pastorStart(id, force) {
+  try {
+    const j = await (await fetch(EOS_WEBAPP_URL + '?action=pastor_start&pw=' + id + (force ? '&force=1' : '') + '&_=' + Date.now())).json();
+    if (j && j.ok) { _mmPastorPending = { id, to: j.to || '' }; return _mmPastorPending; }
+    return { id, error: (j && j.error) || 'could not send the code' };
+  } catch (e) { return { id, error: 'network' }; }
+}
+function mmShowCode(p) {
+  const box = document.getElementById('mmPrompt'); if (!box.classList.contains('on')) box.classList.add('on');
+  document.getElementById('mmMain').style.display = 'none';
+  const c = document.getElementById('mmCode'); c.style.display = 'block';
+  document.getElementById('mmCodeMsg').innerHTML = p && p.error ? 'Couldn’t email your code (' + escapeHtml(p.error) + '). ' : 'Care is for pastors only, so we emailed a 6-digit code to <b>' + escapeHtml((p && p.to) || 'your email on file') + '</b>. Enter it here.';
+  document.getElementById('mmCodeErr').style.display = 'none';
+  const i = document.getElementById('mmCodeIn'); i.value = ''; setTimeout(() => i.focus(), 60);
+}
+function mmCodeCancel() { _mmPastorPending = null; document.getElementById('mmCode').style.display = 'none'; document.getElementById('mmMain').style.display = ''; mmClosePrompt(); }
+async function mmResendCode() { if (!_mmPastorPending) return; const p = await pastorStart(_mmPastorPending.id, true); mmShowCode(p); lsToast(p.error ? 'Couldn’t resend' : 'Code sent again'); }
+async function mmVerifyCode() {
+  const p = _mmPastorPending; if (!p) return;
+  const i = document.getElementById('mmCodeIn'), btn = document.getElementById('mmCodeGo'), err = document.getElementById('mmCodeErr');
+  const code = (i.value || '').replace(/\D/g, ''); if (code.length !== 6) { err.textContent = 'Enter the 6-digit code from the email.'; err.style.display = 'block'; return; }
+  btn.disabled = true; err.style.display = 'none';
+  try {
+    const j = await (await fetch(EOS_WEBAPP_URL + '?action=pastor_verify&pw=' + p.id + '&code=' + code + '&_=' + Date.now())).json();
+    if (j && j.ok && j.token) {
+      authGrantPastor(p.id, j.token); navRefreshAuth();
+      _mmPastorPending = null; document.getElementById('mmCode').style.display = 'none'; document.getElementById('mmMain').style.display = '';
+      mmClosePrompt(); lsToast('Signed in to Care as ' + j.name);
+      const pend = _mmPendingAction; _mmPendingAction = null;
+      if (pend) pend(); else if (!document.getElementById('pastorModal').classList.contains('open') && !staffIsUnlocked()) navGo('care');
+      return;
+    }
+    err.textContent = j && j.error === 'expired' ? 'That code expired — tap “Send a new code”.' : j && j.error === 'too many tries' ? 'Too many tries — tap “Send a new code”.' : 'That code didn’t match' + (j && j.left ? ' (' + j.left + ' tries left)' : '') + '.';
+  } catch (e) { err.textContent = 'Couldn’t reach the server. Try again.'; }
+  err.style.display = 'block'; btn.disabled = false; i.focus();
 }
 // Serve-team leader identity (name + teams), remembered on this device for 60 days.
 function leaderMe() {
@@ -7780,7 +7838,7 @@ function navRefreshAuth() {
   const el = document.getElementById('navAuth'), mo = document.getElementById('appMoreAuth');
   let name = '';
   const lm = leaderMe();
-  try { if (a.staff) name = localStorage.getItem(SOS_ME_KEY) || ''; if (!name && a.pastor) name = (SH_PASTORS[sessionStorage.getItem(PASTOR_SESSION_KEY)] || {}).name || ''; if (!name && lm) name = lm.name; } catch (e) {}
+  try { if (a.staff) name = localStorage.getItem(SOS_ME_KEY) || ''; if (!name && a.pastor) name = (pastorIdentity() || {}).name || ''; if (!name && lm) name = lm.name; } catch (e) {}
   const first = (name || '').split(' ')[0];
   if (el) {
     if (a.staff || a.pastor || a.leader) {
@@ -7810,9 +7868,9 @@ document.addEventListener('click', e => { const m = document.getElementById('nav
 function signOut() {
   try {
     ['staff_unlocked', MM_SESSION_KEY, CG_SESSION_KEY, 'cg_pw', 'tm_admin', PASTOR_SESSION_KEY].forEach(k => sessionStorage.removeItem(k));
-    ['staff_unlocked_until', 'mm_until', 'pastor_until', 'pastor_hash', 'leader_me', SOS_ME_KEY].forEach(k => localStorage.removeItem(k));
+    ['staff_unlocked_until', 'mm_until', 'pastor_until', 'pastor_hash', 'pastor_id', 'pastor_token', 'leader_me', SOS_ME_KEY].forEach(k => localStorage.removeItem(k));
   } catch (e) {}
-  try { if (_shPastorHash) shLogout(); } catch (e) {}
+  try { if (_shPastorHash) { fetch(EOS_WEBAPP_URL + '?action=pastor_signout&pw=' + _shPastorHash + '&_=' + Date.now()).catch(() => {}); shLogout(); } } catch (e) {}
   tmAdminUnlocked = false; try { tlhAdminLock(); } catch (e) {}
   try { if (DASHBOARD_DATA) mmApplyState(); } catch (e) {}
   navRefreshAuth();
@@ -16391,18 +16449,20 @@ const SH_FILTERS = [
   ['ingroup','In a group'], ['serving','Serving'], ['leading','Leaders'], ['giving','Giving regularly']
 ];
 
-function pastorIsUnlocked() {
+// A pastor session = identity (SH_PASTORS key) + a SERVER-ISSUED token (from the emailed
+// code). The token is what every Care request sends as pw; the identity hash alone opens nothing.
+function pastorIdentity() {
   try {
-    let hx = sessionStorage.getItem(PASTOR_SESSION_KEY);
-    if (!hx || !SH_PASTORS[hx]) {   // remembered on this device (60 days)
-      const sv = localStorage.getItem('pastor_hash') || '';
-      if (Number(localStorage.getItem('pastor_until') || 0) > Date.now() && SH_PASTORS[sv]) { sessionStorage.setItem(PASTOR_SESSION_KEY, sv); hx = sv; }
-    }
-    return !!SH_PASTORS[hx];
-  } catch (e) { return false; }
+    const id = localStorage.getItem('pastor_id') || '', token = localStorage.getItem('pastor_token') || '';
+    if (SH_PASTORS[id] && /^[0-9a-f]{32}$/.test(token) && Number(localStorage.getItem('pastor_until') || 0) > Date.now())
+      return { id, token, name: SH_PASTORS[id].name, elder: SH_PASTORS[id].elder };
+  } catch (e) {}
+  return null;
 }
+function pastorIsUnlocked() { return !!pastorIdentity(); }
 function shRestoreIdentity() {
-  try { const h = sessionStorage.getItem(PASTOR_SESSION_KEY); if (h && SH_PASTORS[h]) { _shPastorHash=h; _shPastorName=SH_PASTORS[h].name; _shPastorElder=SH_PASTORS[h].elder; } } catch (e) {}
+  const p = pastorIdentity();
+  if (p) { _shPastorHash = p.token; _shPastorName = p.name; _shPastorElder = p.elder; }
 }
 
 function openPastorModal() {
@@ -16435,6 +16495,7 @@ async function pastorDoUnlock() {
   const pw = document.getElementById('pastorPwInput').value;
   const errEl = document.getElementById('pastorLockErr'); errEl.style.display = 'none';
   const r = await authTry(pw);
+  if (r.pending) { document.getElementById('pastorPwInput').value = ''; mmShowCode(r.pending); return; }
   if (r.roles.indexOf('pastor') >= 0) { lsToast('Signed in as ' + _shPastorName); return; }
   if (r.roles.length) { lsToast('Signed in — but that key doesn’t open Care.'); }
   errEl.style.display = 'block';
@@ -16449,7 +16510,7 @@ function shLoadPrefs() {
   try { const p = JSON.parse(localStorage.getItem(shPrefsKey())||'null'); return p||null; } catch (e) { return null; }
 }
 function shLogout() {
-  try { sessionStorage.removeItem(PASTOR_SESSION_KEY); sessionStorage.removeItem(shCacheKey()); localStorage.removeItem('pastor_until'); localStorage.removeItem('pastor_hash'); } catch (e) {}
+  try { sessionStorage.removeItem(PASTOR_SESSION_KEY); sessionStorage.removeItem(shCacheKey()); ['pastor_until', 'pastor_hash', 'pastor_id', 'pastor_token'].forEach(k => localStorage.removeItem(k)); } catch (e) {}
   _shPastorHash=''; _shPastorName=''; _shPastorElder=''; _shRendered=false; _shDefaultedTab=false; _shepData=null;
   try { sessionStorage.removeItem(BAP_CACHE_KEY); } catch (e) {}
   _bap = null; bapClose(); bapBadge();
@@ -16481,8 +16542,16 @@ function shRefreshIfStale(maxAgeMs) { if (Date.now() - _shLastFetch > (maxAgeMs 
 async function shFetchShepData() {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + '&t=' + Date.now());
-      if (res.ok) { const j = await res.json(); if (j && !j.error && Array.isArray(j.elders)) return j; if (j && j.error === 'unauthorized') return null; }
+      const gzOK = typeof DecompressionStream === 'function';
+      const res = await fetch(EOS_WEBAPP_URL + '?action=shepherding_data&pw=' + _shPastorHash + (gzOK ? '&gz=1' : '') + '&t=' + Date.now());
+      if (res.ok) {
+        let j = await res.json();
+        if (j && j.gz) {   // gzipped + base64 (about 10x smaller than the raw JSON)
+          const bin = Uint8Array.from(atob(j.gz), c => c.charCodeAt(0));
+          j = JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+        }
+        if (j && !j.error && Array.isArray(j.elders)) return j; if (j && j.error === 'unauthorized') { shLogout(); return null; }
+      }
     } catch (e) {}
     await new Promise(r => setTimeout(r, 1500 * (attempt + 1)));
   }
@@ -17383,7 +17452,7 @@ function todayStaffMe() {
   try { if (!staffIsUnlocked()) return ''; return localStorage.getItem(SOS_ME_KEY) || ''; } catch (e) { return ''; }
 }
 function todayPastor() {
-  try { const h = sessionStorage.getItem(PASTOR_SESSION_KEY); return (h && SH_PASTORS[h]) ? Object.assign({ hash: h }, SH_PASTORS[h]) : null; } catch (e) { return null; }
+  const p = pastorIdentity(); return p ? { hash: p.token, name: p.name, elder: p.elder } : null;
 }
 function todayTasks(me) {
   if (_sos.me === me && _sos.loaded) return _sos.tasks;
@@ -18017,7 +18086,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261006T222350Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261006T234858Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

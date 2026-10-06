@@ -143,11 +143,28 @@ var SHEPHERDING_PASTORS = {
   '258a074a71811b4c9184e49c95fee3fcbd3700932de36df2bbac9619798ec483': { name:'Ryan Griffin',  elder:'Ryan' },
   '19714e8203cc3d5e9f7c4a4499981a5d37448d56e193336b3ed32913abbc3b3d': { name:'Admin',         elder:'' }
 };
-// hash → pastor name (or null if not a valid login). Used to gate + attribute.
-function spPastorForHash_(hash) {
-  var p = SHEPHERDING_PASTORS[String(hash||'')];
+// Credential → pastor name (or null). Only SERVER-ISSUED session tokens are accepted
+// (32 hex, from pastor_verify after an emailed code). The identity hashes above are
+// shipped in the page and are NOT a credential on their own.
+function spPastorForHash_(pw) {
+  pw = String(pw || '');
+  if (!/^[0-9a-f]{32}$/.test(pw)) return null;
+  var rec = spTokenGet_(pw); if (!rec) return null;
+  var p = SHEPHERDING_PASTORS[rec.h];
   return p ? p.name : null;
 }
+function spTokenGet_(token) {
+  try { var v = JSON.parse(PropertiesService.getScriptProperties().getProperty('SH_TOK_' + token) || 'null'); if (v && v.exp > Date.now()) return v; } catch (x) {}
+  return null;
+}
+// Big values in CacheService (100 KB per key): chunked under <key>_0.._n with a count key.
+function spCachePutBig_(cache, key, str, ttl) {
+  try { var n = Math.ceil(str.length / 90000); for (var i = 0; i < n; i++) cache.put(key + '_' + i, str.substr(i * 90000, 90000), ttl); cache.put(key + '_n', String(n), ttl); } catch (x) {}
+}
+function spCacheGetBig_(cache, key) {
+  try { var n = parseInt(cache.get(key + '_n') || '0', 10); if (!n) return null; var out = ''; for (var i = 0; i < n; i++) { var c = cache.get(key + '_' + i); if (c == null) return null; out += c; } return out; } catch (x) { return null; }
+}
+function spCacheDelBig_(cache, key) { try { var n = parseInt(cache.get(key + '_n') || '0', 10); var ks = [key + '_n']; for (var i = 0; i < n; i++) ks.push(key + '_' + i); cache.removeAll(ks); } catch (x) {} }
 
 // PCO field-definition ids (discovered) — precise, no fuzzy matching.
 // var so Code_shepherding_actions.gs (write-back) reliably sees it cross-file.
@@ -1020,6 +1037,7 @@ function spStorePrivate_(data) {
   for (var i=0;i<json.length;i+=SH_CELL_CHUNK) chunks.push([json.substr(i, SH_CELL_CHUNK)]);
   sh.clearContents();
   if (chunks.length) sh.getRange(1,1,chunks.length,1).setValues(chunks);
+  spCacheDelBig_(CacheService.getScriptCache(), 'SHD_GZ');   // the gated payload cache is now stale
   Logger.log('   Stored private data: ' + json.length + ' chars / ' + chunks.length + ' cells');
 }
 function spReadPrivate_() {
