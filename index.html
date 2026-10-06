@@ -129,6 +129,23 @@
   #navMenu button { appearance: none; background: none; border: 0; text-align: left; padding: 10px 14px; border-radius: 8px; color: #f2efe9; font: 600 13px 'Montserrat', sans-serif; cursor: pointer; }
   #navMenu button:hover { background: #2a2a2a; }
   #navMenu .nm-sub { padding: 6px 14px 8px; font-size: 11px; color: var(--text-dim); }
+  .nav-search { appearance: none; display: flex; align-items: center; gap: 8px; background: #1a1a1a; border: 1px solid var(--line2, #383838); border-radius: 6px; padding: 6px 10px 6px 10px; color: var(--text-dim); font-family: 'Montserrat', sans-serif; font-size: 13px; cursor: pointer; }
+  .nav-search:hover { color: var(--text-muted); border-color: #4a4a4a; }
+  .nav-search svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .nav-search kbd { font-size: 10px; color: var(--text-dim); border: 1px solid #383838; border-radius: 4px; padding: 1px 5px; font-family: inherit; margin-left: 4px; }
+  @media (max-width: 760px) { .nav-search span, .nav-search kbd { display: none; } .nav-search { padding: 7px 9px; } }
+  #kpBg { display: none; position: fixed; inset: 0; z-index: 2700; background: rgba(0,0,0,.6); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 10vh 16px 0; }
+  #kpBg.open { display: block; }
+  #kp { max-width: 620px; margin: 0 auto; background: #1f1f1f; border: 1px solid #3a3a3a; border-radius: 14px; box-shadow: 0 24px 64px rgba(0,0,0,.6); overflow: hidden; }
+  #kpIn { width: 100%; box-sizing: border-box; background: none; border: 0; border-bottom: 1px solid #2c2c2c; color: var(--text); font: 500 16px 'Montserrat', sans-serif; padding: 15px 18px; outline: none; }
+  #kpList { max-height: 56vh; overflow-y: auto; padding: 6px 0 8px; }
+  .kp-sec { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; padding: 10px 18px 4px; }
+  .kp-it { display: flex; align-items: center; gap: 12px; padding: 9px 18px; font-size: 13.5px; color: var(--text); cursor: pointer; }
+  .kp-it.on, .kp-it:hover { background: var(--gold-soft); }
+  .kp-it .ic { width: 26px; height: 26px; border-radius: 7px; background: #2a2a2a; display: grid; place-items: center; font-size: 12px; flex-shrink: 0; color: var(--text-muted); }
+  .kp-it .ic.ai { background: var(--gold-soft); color: var(--gold); }
+  .kp-it .k { margin-left: auto; font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+  .kp-empty { padding: 18px; color: var(--text-dim); font-size: 13px; }
   #lsToast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px); z-index: 99999; background: #1f1f1f; border: 1px solid #3a3a3a; color: #f2efe9; padding: 10px 16px; border-radius: 10px; font: 600 13px 'Montserrat', sans-serif; box-shadow: 0 10px 34px rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s; }
   #lsToast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
   #appTabs button[data-tab="today"] { display: none; }
@@ -3374,8 +3391,14 @@
     <button class="nav-tab" data-tab="calendar" onclick="navGo('calendar')">Calendar</button>
     <button class="nav-tab" data-tab="care" onclick="navGo('care')">Care <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></button>
   </div>
-  <div class="nav-right"><div id="navAuth"></div></div>
+  <div class="nav-right"><button class="nav-search" onclick="kpOpen()" title="Search (⌘K)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Search</span><kbd>⌘K</kbd></button><div id="navAuth"></div></div>
 </nav>
+<div id="kpBg" onclick="if(event.target===this)kpClose()">
+  <div id="kp" role="dialog" aria-label="Search">
+    <input id="kpIn" type="text" placeholder="Search pages, teams, tools, events…" autocomplete="off" oninput="kpRender()" onkeydown="kpKey(event)">
+    <div id="kpList"></div>
+  </div>
+</div>
 <div id="navMenu" role="menu"></div>
 <div id="lsToast" role="status"></div>
 <!-- Installed phone app only: bottom tab bar (replaces the top tabs) -->
@@ -7727,6 +7750,94 @@ function signOut() {
   lsToast('Signed out');
 }
 window.addEventListener('DOMContentLoaded', () => { try { navRefreshAuth(); } catch (e) {} });
+
+/* ================================================================
+   SEARCH (⌘K) — jump to any section, team, tool or upcoming event.
+   People search stays inside Care (signed-in pastors only).
+   ================================================================ */
+let _kpItems = null, _kpSel = 0, _kpEvents = null;
+function kpStaticItems() {
+  const staffIn = staffIsUnlocked(), pastorIn = pastorIsUnlocked();
+  const it = [];
+  const add = (sec, label, hint, go, ic) => it.push({ sec, label, hint, go, ic: ic || '›' });
+  add('Pages', 'Church · Overview', 'attendance, members, baptisms, groups, serving', () => { navGo('church'); chTab('overview'); });
+  [['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
+    add('Pages', 'Church · ' + t[1], '', () => { navGo('church'); chTab(t[0]); }));
+  add('Pages', 'Sunday one-sheet', 'this Sunday: order of service, captains, teams', () => navGo('sunday'));
+  add('Pages', 'Serve · Teams', 'every team, every gap', () => { navGo('serve'); tmTab('teams'); });
+  add('Pages', 'Serve · Service history', '', () => { navGo('serve'); tmTab('svcs'); });
+  add('Pages', 'Serve · Leader toolkit', 'checklist, templates, onboarding guide', () => { navGo('serve'); tmTab('toolkit'); });
+  add('Pages', 'Calendar', '', () => navGo('calendar'));
+  add('Pages', 'Care · Shepherding', pastorIn ? '' : 'pastors sign in', () => navGo('care'));
+  add('Pages', 'Community Groups · full detail', 'pipeline, action lists, trends', () => navGo('groups'));
+  if (staffIn) {
+    add('Staff', 'Today', 'my tasks, this Sunday, this week', () => navGo('today'));
+    add('Staff', 'My Snapshot', 'to-dos, rocks, boulders, annual plan', () => { navGo('staff'); staffNavGo('sp-mine'); });
+    [['sp-snapshot', 'Team Snapshot'], ['sp-scorecard', 'Scorecard'], ['sp-ids', 'Rocks / IDS'], ['sp-boulders', 'Boulders'], ['sp-funnel', 'Funnel'], ['sp-pathway', 'Pathway'], ['sp-l10', 'Staff Sync'], ['sp-meetings', 'Meeting Pulse'], ['sp-vto', 'V/TO'], ['sp-vot', 'Culture'], ['sp-acc-chart', 'Accountability chart'], ['sp-stories', 'Stories'], ['sp-announce', 'Announcement card']].forEach(s =>
+      add('Staff', s[1], 'Staff OS', () => { navGo('staff'); staffNavGo(s[0]); }));
+  } else add('Staff', 'Staff OS', 'sign in with your PIN', () => navGo('staff'));
+  add('Tools', 'Volunteer onboarding guide generator', 'opens in a new tab', () => window.open('team-onboarding-generator.html', '_blank'), '⇗');
+  (DASHBOARD_DATA && DASHBOARD_DATA.serveTeams || []).forEach(t => add('Teams', t.name, (t.current || 0) + ' / ' + (t.needed || 0) + (t.needed > t.current ? ' · need ' + (t.needed - t.current) : ' · full'),
+    () => { navGo('serve'); tmTab('teams'); const i = document.getElementById('tmts'); if (i) { i.value = t.name; try { tmRT(); } catch (e) {} } }, '◈'));
+  return it;
+}
+async function kpLoadEvents() {
+  if (_kpEvents) return _kpEvents;
+  try {
+    let evs = _cal6Events;
+    if (!evs) { const r = await fetch('./eos-data.json?v=' + Date.now(), { cache: 'no-store' }); const j = await r.json(); evs = (j.calendar && j.calendar.events) || []; }
+    const today = new Date().toISOString().slice(0, 10), end = new Date(Date.now() + 90 * 864e5).toISOString().slice(0, 10), seen = {};
+    _kpEvents = evs.filter(e => e.dateKey >= today && e.dateKey <= end && !/community group|worship gathering/i.test(e.name || ''))
+      .filter(e => { const k = e.dateKey + '|' + String(e.name).trim().toLowerCase(); if (seen[k]) return false; seen[k] = 1; return true; })
+      .sort((a, b) => a.dateKey.localeCompare(b.dateKey)).slice(0, 400);
+  } catch (e) { _kpEvents = []; }
+  if (document.getElementById('kpBg').classList.contains('open')) kpRender();
+  return _kpEvents;
+}
+function kpOpen() {
+  const bg = document.getElementById('kpBg'), inp = document.getElementById('kpIn'); if (!bg) return;
+  _kpItems = kpStaticItems(); _kpSel = 0;
+  bg.classList.add('open'); inp.value = ''; kpRender(); setTimeout(() => inp.focus(), 30);
+  kpLoadEvents();
+}
+function kpClose() { const bg = document.getElementById('kpBg'); if (bg) bg.classList.remove('open'); }
+function kpMatches() {
+  const q = (document.getElementById('kpIn').value || '').trim().toLowerCase();
+  const words = q.split(/\s+/).filter(Boolean);
+  const hit = s => !words.length || words.every(w => s.toLowerCase().indexOf(w) >= 0);
+  let out = (_kpItems || []).filter(i => hit(i.label + ' ' + (i.hint || '') + ' ' + i.sec));
+  if (words.length) {
+    (_kpEvents || []).filter(e => hit(e.name)).slice(0, 8).forEach(e => out.push({ sec: 'Events', label: String(e.name).trim(), ic: '▣',
+      hint: new Date(e.dateKey + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + (e.time ? ' · ' + e.time : ''),
+      go: () => { navGo('calendar'); } }));
+    if (typeof aiToggle === 'function') out.push({ sec: 'Ask', label: 'Ask the assistant: “' + q + '”', hint: 'AI', ic: '✦', ai: true,
+      go: () => { const p = document.getElementById('aiPanel'); if (p && !p.classList.contains('open')) aiToggle(); const i = document.getElementById('aiInput'); if (i) { i.value = q; } setTimeout(() => { try { aiAsk(); } catch (e) {} }, 80); } });
+  } else out = out.slice(0, 14);
+  return out.slice(0, 40);
+}
+function kpRender() {
+  const list = document.getElementById('kpList'); if (!list) return;
+  const m = kpMatches(); if (_kpSel >= m.length) _kpSel = 0;
+  if (!m.length) { list.innerHTML = '<div class="kp-empty">Nothing matches. Try a team name, a page, or an event.</div>'; return; }
+  let sec = '', html = '';
+  m.forEach((i, k) => {
+    if (i.sec !== sec) { sec = i.sec; html += '<div class="kp-sec">' + sec + '</div>'; }
+    html += '<div class="kp-it' + (k === _kpSel ? ' on' : '') + '" data-k="' + k + '" onmousemove="_kpSel=' + k + ';kpMark()" onclick="kpGo(' + k + ')"><span class="ic' + (i.ai ? ' ai' : '') + '">' + i.ic + '</span><span>' + escapeHtml(i.label) + '</span><span class="k">' + escapeHtml(i.hint || '') + '</span></div>';
+  });
+  list.innerHTML = html;
+}
+function kpMark() { document.querySelectorAll('#kpList .kp-it').forEach(el => el.classList.toggle('on', +el.dataset.k === _kpSel)); }
+function kpGo(k) { const m = kpMatches(); const i = m[k]; if (!i) return; kpClose(); try { i.go(); } catch (e) { console.error(e); } }
+function kpKey(e) {
+  const m = kpMatches();
+  if (e.key === 'ArrowDown') { e.preventDefault(); _kpSel = Math.min(m.length - 1, _kpSel + 1); kpMark(); const el = document.querySelector('#kpList .kp-it.on'); if (el) el.scrollIntoView({ block: 'nearest' }); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); _kpSel = Math.max(0, _kpSel - 1); kpMark(); const el = document.querySelector('#kpList .kp-it.on'); if (el) el.scrollIntoView({ block: 'nearest' }); }
+  else if (e.key === 'Enter') { e.preventDefault(); kpGo(_kpSel); }
+  else if (e.key === 'Escape') { kpClose(); }
+}
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && String(e.key).toLowerCase() === 'k') { e.preventDefault(); const bg = document.getElementById('kpBg'); if (bg && bg.classList.contains('open')) kpClose(); else kpOpen(); }
+});
 
 /* Apply/remove the unlocked state to the main page */
 function mmApplyState() {
@@ -14068,8 +14179,9 @@ function stRefreshViews() {
   stNavCount();
 }
 function stNavCount() {
-  const t = document.querySelector('#staffNav .sp-nav-tab[data-id="sp-stories"]'); if (!t) return;
   const n = (_st.stories || []).filter(s => s.status === 'new').length;
+  _spNavItems['sp-stories'] = 'Stories' + (n ? ' (' + n + ' new)' : '');
+  const t = document.querySelector('#staffNav .sp-nav-tab[data-id="sp-stories"]'); if (!t) return;
   t.innerHTML = 'Stories' + (n ? '<span class="st-navn" aria-label="' + n + ' new">' + n + '</span>' : '');
 }
 
@@ -14277,10 +14389,12 @@ function stOpenFromSync(id) {
 // Staff nav: "My Snapshot" first, then the sheet-driven tabs (the "Nav Tabs" tab of the
 // LS South Reno Staff OS sheet controls labels / visibility / order), grouped into themed
 // dropdowns, then "Announcement Card" pinned on the far right as a distinct tool tab.
+// Five areas (Oct 2026 redesign): My Snapshot · Team · Meetings · Vision & Culture · Tools.
 const STAFF_NAV_GROUPS = [
-  { key: 'vision',     label: 'Vision & Culture',   ids: ['sp-vto', 'sp-vot', 'sp-acc-chart', 'sp-team'] },
-  { key: 'objectives', label: 'Current Objectives', ids: ['sp-scorecard', 'sp-ids', 'sp-boulders', 'sp-funnel', 'sp-pathway', 'sp-vol-leads'] },
-  { key: 'meetings',   label: 'Meetings',           ids: ['sp-l10', 'sp-meetings'] }
+  { key: 'team',     label: 'Team',             ids: ['sp-snapshot', 'sp-scorecard', 'sp-ids', 'sp-boulders', 'sp-funnel', 'sp-pathway', 'sp-vol-leads'] },
+  { key: 'meetings', label: 'Meetings',         ids: ['sp-l10', 'sp-meetings'] },
+  { key: 'vision',   label: 'Vision & Culture', ids: ['sp-vto', 'sp-vot', 'sp-acc-chart', 'sp-team'] },
+  { key: 'tools',    label: 'Tools',            ids: ['sp-stories', 'sp-announce'] }
 ];
 const STAFF_NAV_FALLBACK = [
   { id: 'sp-vto', label: 'V/TO' }, { id: 'sp-vot', label: 'Culture' }, { id: 'sp-acc-chart', label: 'Acc Chart' },
@@ -14304,17 +14418,16 @@ function staffBuildNav(tabs) {
   _spNavItems = {};
   mid.forEach(t => _spNavItems[t.id] = t.label);
   const tab = (id, label, cls) => '<div class="sp-nav-tab' + (cls ? ' ' + cls : '') + '" role="button" tabindex="0" data-id="' + id + '" onclick="staffNavGo(\'' + id + '\')" onkeydown="if(event.key===\'Enter\')staffNavGo(\'' + id + '\')">' + E(label) + '</div>';
+  _spNavItems['sp-stories'] = 'Stories'; _spNavItems['sp-announce'] = 'Announcement Card';
+  const all = mid.concat([{ id: 'sp-stories', label: 'Stories' }, { id: 'sp-announce', label: 'Announcement Card' }]);
   let h = tab('sp-mine', 'My Snapshot');
-  mid.forEach(t => {
-    const g = groupOf[t.id];
-    if (!g) { h += tab(t.id, t.label); return; }
-    if (placed[g.key]) return; placed[g.key] = 1;
-    const kids = mid.filter(x => groupOf[x.id] === g);
-    h += '<div class="sp-nav-tab sp-nav-group" role="button" tabindex="0" aria-haspopup="true" data-group="' + g.key + '" data-ids="' + kids.map(k => k.id).join(' ') + '" onclick="staffNavMenu(this)" onkeydown="if(event.key===\'Enter\'||event.key===\'ArrowDown\'){event.preventDefault();staffNavMenu(this)}">' +
+  STAFF_NAV_GROUPS.forEach(g => {
+    const kids = g.ids.filter(id => all.some(x => x.id === id));
+    if (!kids.length) return; placed[g.key] = 1;
+    h += '<div class="sp-nav-tab sp-nav-group" role="button" tabindex="0" aria-haspopup="true" data-group="' + g.key + '" data-ids="' + kids.join(' ') + '" onclick="staffNavMenu(this)" onkeydown="if(event.key===\'Enter\'||event.key===\'ArrowDown\'){event.preventDefault();staffNavMenu(this)}">' +
       E(g.label) + '<span class="sp-nav-cur"></span><i class="sp-nav-caret"></i></div>';
   });
-  h += tab('sp-stories', 'Stories');
-  h += tab('sp-announce', 'Announcement Card', 'sp-nav-tool');
+  all.forEach(t => { if (!groupOf[t.id]) h += tab(t.id, t.label); });   // anything the sheet adds that no area claims
   nav.innerHTML = h;
   staffNavMark(_spCurSection);
   stNavCount();
