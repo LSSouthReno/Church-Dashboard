@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T22:19:01.505Z",
+  "generatedAt": "2026-10-06T23:18:52.807Z",
   "asOf": "2026-10-06",
   "givingMonths": 12,
   "statusVocab": [
@@ -10784,9 +10784,9 @@
       "list": "Shepherding - Nick",
       "unassigned": false,
       "summary": {
-        "totalPeople": 65,
+        "totalPeople": 66,
         "avgScore": 0,
-        "inGroup": 32,
+        "inGroup": 33,
         "serving": 28,
         "leading": 8,
         "givingRegular": 0,
@@ -10795,9 +10795,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 65,
+        "notBaptized": 66,
         "notInGroup": 33,
-        "notServing": 37,
+        "notServing": 38,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -10811,12 +10811,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 65
+          "unknown": 66
         },
         "pct": {
-          "inGroup": 0.49230769230769234,
-          "serving": 0.4307692307692308,
-          "leading": 0.12307692307692308,
+          "inGroup": 0.5,
+          "serving": 0.42424242424242425,
+          "leading": 0.12121212121212122,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -10896,6 +10896,48 @@
               "name": "Moore Community Group",
               "role": "member",
               "joinedAt": "2026-10-04T19:56:12Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Mary Timko",
+          "first": "Mary",
+          "last": "Timko",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2025-01-27T22:45:10Z"
             }
           ],
           "serveTeams": [],
@@ -17899,9 +17941,9 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 5,
+        "totalPeople": 4,
         "avgScore": 0,
-        "inGroup": 5,
+        "inGroup": 4,
         "serving": 2,
         "leading": 0,
         "givingRegular": 0,
@@ -17910,9 +17952,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 5,
+        "notBaptized": 4,
         "notInGroup": 0,
-        "notServing": 3,
+        "notServing": 2,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -17926,11 +17968,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 5
+          "unknown": 4
         },
         "pct": {
           "inGroup": 1,
-          "serving": 0.4,
+          "serving": 0.5,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -17940,48 +17982,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Mary Timko",
-          "first": "Mary",
-          "last": "Timko",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Ready to Meet",
-          "groups": [
-            {
-              "name": "Poleselli / McAlpine Community Group",
-              "role": "member",
-              "joinedAt": "2025-01-27T22:45:10Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Bridget Evans",
