@@ -11753,7 +11753,10 @@ function navCurrentRoute() {
   const date = new URLSearchParams(location.search).get('date') || '';
   // The front door: Church for everyone, Today for staff who are signed in on this device.
   if (!seg || seg === 'index.html') return { tab: staffIsUnlocked() ? 'today' : 'church', date: '' };
-  if (NAV_ROUTES.indexOf(seg) >= 0) return { tab: navAlias(seg), date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '' };
+  if (NAV_ROUTES.indexOf(seg) >= 0) {
+    if (NAV_ALIAS[seg]) { try { history.replaceState(null, '', navPathFor(seg) + location.search); } catch (e) {} }   // /metrics → /church etc.
+    return { tab: navAlias(seg), date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '' };
+  }
   try { history.replaceState(null, '', '/'); } catch (e) {}   // unknown path → front door
   return { tab: staffIsUnlocked() ? 'today' : 'church', date: '' };
 }
