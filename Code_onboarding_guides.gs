@@ -191,6 +191,39 @@ function ogPcoGetJson_(path) {
   if (res.getResponseCode() < 200 || res.getResponseCode() >= 300) return null;
   return JSON.parse(res.getContentText());
 }
+/* leader_login — a serve-team Point Leader signs in to the dashboard with the last 4 digits of
+ * their phone (same light identity as the staff PIN). Matches against the Point Leaders on the
+ * Leader Forms tab, phones looked up in PCO once and cached 6 h. Returns only the leader's
+ * name and team(s) — never contact details.  GET ?action=leader_login&pin=1234 */
+function ogLeaderLogin_(p) {
+  var pin = String((p || {}).pin || '').replace(/\D/g, '');
+  if (pin.length !== 4) return { ok: false, error: 'pin must be 4 digits' };
+  var cache = CacheService.getScriptCache(), ck = 'OG_LEADERS_V1', leaders = null;
+  try { var hit = cache.get(ck); if (hit) leaders = JSON.parse(hit); } catch (x) {}
+  if (!leaders) {
+    leaders = {};
+    var lf = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Leader Forms');
+    var rows = lf ? lf.getDataRange().getValues() : [];
+    rows.forEach(function(r, i) {
+      var name = String(r[1] || '').trim(), team = String(r[2] || '').trim();
+      if (!name || !team || name.indexOf(' ') < 0) return;
+      if (i === 0 && /leader|name/i.test(name) && /team/i.test(team)) return;   // header row
+      var k = name.toLowerCase();
+      leaders[k] = leaders[k] || { name: name, teams: [], last4: null };
+      if (leaders[k].teams.indexOf(team) < 0) leaders[k].teams.push(team);
+    });
+    Object.keys(leaders).forEach(function(k) {
+      try { var person = ogPcoPersonByName_(leaders[k].name);
+        leaders[k].last4 = person ? (person.phones || []).map(function(ph) { return String(ph || '').replace(/\D/g, '').slice(-4); }).filter(Boolean) : [];
+      } catch (x) { leaders[k].last4 = []; }
+    });
+    try { cache.put(ck, JSON.stringify(leaders), 21600); } catch (x) {}
+  }
+  var hits = Object.keys(leaders).filter(function(k) { return (leaders[k].last4 || []).indexOf(pin) >= 0; }).map(function(k) { return leaders[k]; });
+  if (!hits.length) return { ok: true, nomatch: true };
+  var teams = []; hits.forEach(function(h) { h.teams.forEach(function(t) { if (teams.indexOf(t) < 0) teams.push(t); }); });
+  return { ok: true, name: hits[0].name, first: hits[0].name.split(' ')[0], teams: teams };
+}
 function ogPcoPersonById_(id) { return ogPcoPerson_(ogPcoGetJson_('/people/v2/people/' + encodeURIComponent(id) + '?include=emails,phone_numbers')); }
 function ogPcoPersonByName_(name) {
   var fold = function(s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim(); };

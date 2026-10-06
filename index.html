@@ -946,6 +946,41 @@
 
   .tmod-tp { display: none; }
   .tmod-tp.on { display: block; }
+  #tmMyTeamBtn { display: none; } body.leader-in #tmMyTeamBtn { display: inline-block; }
+  .mt-hello { font-size: 15px; font-weight: 600; margin: 2px 0 16px; }
+  .mt-team { margin-bottom: 26px; }
+  .mt-team-h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .mt-team-h h3 { margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
+  .mt-sub { color: var(--text-muted); font-size: 12.5px; }
+  .mt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 900px) { .mt-grid { grid-template-columns: 1fr; } }
+  .mt-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; }
+  .mt-eyebrow { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+  .mt-empty, .mt-hint { color: var(--text-muted); font-size: 12.5px; }
+  .mt-counts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .mt-chip { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 6px; background: #2a2a2a; }
+  .mt-chip.g { background: rgba(63,182,122,.18); color: #6fdba1; } .mt-chip.a { background: rgba(224,166,60,.18); color: #f3c766; } .mt-chip.r { background: rgba(229,72,77,.18); color: #ff8a8e; }
+  .mt-list-h { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; margin: 12px 0 4px; }
+  .mt-person { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--card-border); font-size: 13px; }
+  .mt-person:last-child { border-bottom: none; }
+  .mt-person small { display: block; color: var(--text-dim); font-size: 11px; }
+  .mt-av { width: 28px; height: 28px; border-radius: 50%; background: #2e2e2e; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: var(--text-muted); flex-shrink: 0; }
+  .mt-more summary { cursor: pointer; font-size: 12px; color: var(--text-muted); font-weight: 600; padding: 8px 0 4px; }
+  .mt-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .mt-actions a.tmod-dbtn { text-decoration: none; }
+  .mt-bar-l { font-size: 13px; display: flex; justify-content: space-between; } .mt-bar-l span { color: var(--text-muted); }
+  .mt-bar { height: 7px; background: #2a2a2a; border-radius: 4px; overflow: hidden; margin: 6px 0 12px; }
+  .mt-bar i { display: block; height: 100%; border-radius: 4px; background: var(--gold); } .mt-bar i.g { background: var(--green); } .mt-bar i.a { background: #e0a63c; } .mt-bar i.r { background: var(--red); }
+  .mt-spark { width: 100%; height: 46px; display: block; }
+  .mt-check { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; font-size: 13px; cursor: pointer; border-bottom: 1px solid var(--card-border); }
+  .mt-check:last-of-type { border-bottom: none; }
+  .mt-check input { margin-top: 3px; accent-color: #d4af37; }
+  .mt-check.done span { color: var(--text-dim); text-decoration: line-through; }
+  .mt-check b { color: var(--text-muted); font-weight: 600; font-size: 11px; margin-right: 4px; }
+  .mt-tpl { border-top: 1px solid var(--card-border); padding: 10px 0; }
+  .mt-tpl:first-of-type { border-top: none; }
+  .mt-tpl-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .mt-tpl-t { font-size: 12.5px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.45; }
   .tlh-toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
   .tlh-toolbar-txt { flex: 1; color: var(--text-muted); font-size: 13px; }
   #tlh-admin-btn { background: none; border: 1px solid #444; color: #777; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
@@ -3710,11 +3745,11 @@
 <div id="mmPrompt" role="dialog" aria-modal="true">
   <div class="mm-card">
     <div class="mm-ttl">Sign in</div>
-    <div class="mm-msg" id="mmMsg">Only needed for giving detail, Staff and Care. Church, Sunday, Serve and Calendar are open to everyone.</div>
+    <div class="mm-msg" id="mmMsg">Only needed for giving detail, Staff, Care and your team page. Church, Sunday, Serve and Calendar are open to everyone.</div>
     <input id="mmPwInput" type="password" placeholder="Last 4 of your phone, or passcode" autocomplete="off" inputmode="text"
            onkeydown="if(event.key==='Enter')mmDoUnlock()" />
     <button class="mm-btn" id="mmGo" onclick="mmDoUnlock()">Continue</button>
-    <div class="mm-err" id="mmErr">That didn’t match. Staff and pastors: the last 4 digits of your phone. Members: the giving passcode.</div>
+    <div class="mm-err" id="mmErr">That didn’t match. Staff, pastors and team leaders: the last 4 digits of your phone. Members: the giving passcode.</div>
     <div class="mm-msg" style="margin-top:10px;font-size:11px;color:var(--text-dim)">Stays signed in on this device for 60 days.</div>
     <div><button class="mm-cancel" onclick="mmClosePrompt()">Cancel</button></div>
   </div>
@@ -3754,6 +3789,7 @@
   <div class="tmod-body">
     <div class="tmod-metrics" id="tmodMetrics"></div>
     <div class="tmod-tabs">
+      <button class="tmod-tab" data-tm="myteam" id="tmMyTeamBtn" onclick="tmTab('myteam',this)">My team</button>
       <button class="tmod-tab on" data-tm="teams" onclick="tmTab('teams',this)">Teams</button>
       <button class="tmod-tab" data-tm="svcs" onclick="tmTab('svcs',this)">Service history</button>
       <button class="tmod-tab" data-tm="toolkit" onclick="tmTab('toolkit',this)">Leader toolkit</button>
@@ -3793,6 +3829,8 @@
 
     <!-- Admin tab -->
 
+    <!-- My team (signed-in Point Leaders) -->
+    <div class="tmod-tp" id="tmod-tab-myteam"></div>
     <!-- Leader toolkit (the former Team Leader Hub) -->
     <div class="tmod-tp" id="tmod-tab-toolkit">
       <div class="tlh-toolbar">
@@ -7554,6 +7592,7 @@ function tmTab(name, btn) {
   const bt = btn || document.querySelector('#teamsModal .tmod-tab[data-tm="' + name + '"]'); if (bt) bt.classList.add('on');
   const body = document.querySelector('#teamsModal .tmod-body'); if (body) body.scrollTop = 0;
   if (name === 'toolkit') { try { tlhBuild(); tlhLoadRemote_(); } catch (e) { console.error(e); } }
+  if (name === 'myteam') { try { tmRenderMyTeam(); } catch (e) { console.error(e); } }
   if (name === 'admin' && !tmAdminUnlocked) {
     setTimeout(() => { const i = document.getElementById('tmodPwInput'); if (i) i.focus(); }, 50);
   }
@@ -7636,6 +7675,7 @@ async function mmDoUnlock() {
     const pend = _mmPendingAction; _mmPendingAction = null;
     if (pend) pend();
     else if (r.roles.indexOf('staff') >= 0 && navCurrentRoute().tab === 'church') navGo('today');
+    else if (r.roles.indexOf('leader') >= 0 && r.roles.indexOf('staff') < 0) { navGo('serve'); tmTab('myteam'); }
     return;
   }
   err.textContent = r.error === 'network' ? 'Couldn’t reach the staff server — it’s being slow. Your PIN wasn’t the problem; try again.' : 'That didn’t match. Staff and pastors: the last 4 digits of your phone. Members: the giving passcode.';
@@ -7703,7 +7743,11 @@ async function authTry(raw, opts) {
   if (hex === TLH_ADMIN_HASH) { authGrantLeadersAdmin(); roles.push('leadersadmin'); }
   if (SH_PASTORS[hexL]) { authGrantPastor(hexL); roles.push('pastor'); who = SH_PASTORS[hexL].name; }
   if (!roles.length && /^\d{3,6}$/.test(val)) {
+    // Team leaders: the same last-4 is checked against the serve-team Point Leaders (in parallel).
+    const leaderP = val.length === 4 ? fetch(EOS_WEBAPP_URL + '?action=leader_login&pin=' + val + '&_=' + Date.now()).then(x => x.json()).catch(() => null) : Promise.resolve(null);
     const r = await sosLoginRequest(val, opts.onSlow);
+    const lr = await leaderP;
+    if (lr && lr.ok && !lr.nomatch && lr.teams && lr.teams.length) { authGrantLeader(lr); roles.push('leader'); who = who || lr.name; }
     if (r.status === 'ok') {
       authGrantStaff(); roles.push('staff');
       if (r.res.matches.length === 1) { sosApplyLiteLogin(r.res); who = r.res.who || ''; }
@@ -7712,40 +7756,52 @@ async function authTry(raw, opts) {
       // Pastors who are staff: the same PIN also opens Care (pastor key = first name + last 4).
       const first = String(who).split(/\s+/)[0].toLowerCase();
       if (first) { const ph = await sha256Hex(first + val); if (SH_PASTORS[ph]) { authGrantPastor(ph); roles.push('pastor'); } }
-    } else if (r.status === 'error') return { roles: [], error: 'network' };
+    } else if (r.status === 'error' && !roles.length) return { roles: [], error: 'network' };
   }
   if (roles.length) navRefreshAuth();
   return { roles, who };
 }
+// Serve-team leader identity (name + teams), remembered on this device for 60 days.
+function leaderMe() {
+  try { const m = JSON.parse(localStorage.getItem('leader_me') || 'null'); if (m && m.until > Date.now() && m.teams && m.teams.length) return m; } catch (e) {}
+  return null;
+}
+function authGrantLeader(lr) {
+  try { localStorage.setItem('leader_me', JSON.stringify({ name: lr.name, first: lr.first || String(lr.name).split(' ')[0], teams: lr.teams, until: Date.now() + 60 * 864e5 })); } catch (e) {}
+  const b = document.getElementById('tmMyTeamBtn'); if (b && document.getElementById('teamsModal').classList.contains('open')) { try { tmRenderMyTeam(); } catch (e) {} }
+}
 function authState() {
-  return { staff: staffIsUnlocked(), pastor: pastorIsUnlocked(), members: mmIsUnlocked(), groups: cgIsUnlocked() };
+  return { staff: staffIsUnlocked(), pastor: pastorIsUnlocked(), members: mmIsUnlocked(), groups: cgIsUnlocked(), leader: !!leaderMe() };
 }
 function navRefreshAuth() {
   const a = authState(), b = document.body;
   b.classList.toggle('staff-in', a.staff); b.classList.toggle('pastor-in', a.pastor);
-  b.classList.toggle('members-in', a.members); b.classList.toggle('signed-in', a.staff || a.pastor || a.members || a.groups);
+  b.classList.toggle('members-in', a.members); b.classList.toggle('leader-in', a.leader); b.classList.toggle('signed-in', a.staff || a.pastor || a.members || a.groups || a.leader);
   const el = document.getElementById('navAuth'), mo = document.getElementById('appMoreAuth');
   let name = '';
-  try { if (a.staff) name = localStorage.getItem(SOS_ME_KEY) || ''; if (!name && a.pastor) name = (SH_PASTORS[sessionStorage.getItem(PASTOR_SESSION_KEY)] || {}).name || ''; } catch (e) {}
+  const lm = leaderMe();
+  try { if (a.staff) name = localStorage.getItem(SOS_ME_KEY) || ''; if (!name && a.pastor) name = (SH_PASTORS[sessionStorage.getItem(PASTOR_SESSION_KEY)] || {}).name || ''; if (!name && lm) name = lm.name; } catch (e) {}
   const first = (name || '').split(' ')[0];
   if (el) {
-    if (a.staff || a.pastor) {
-      const role = a.pastor && a.staff ? 'Staff · Pastor' : a.pastor ? 'Pastor' : 'Staff';
+    if (a.staff || a.pastor || a.leader) {
+      const role = a.pastor && a.staff ? 'Staff · Pastor' : a.pastor ? 'Pastor' : a.staff ? 'Staff' : (lm ? lm.teams[0] + ' leader' : 'Team leader');
       el.innerHTML = '<button class="nav-me" onclick="navMenuToggle(event)" title="Account"><span class="av">' + escapeHtml((first || role)[0]) + '</span><span><b>' + escapeHtml(first || 'Signed in') + '</b><small>' + role + '</small></span></button>';
     } else if (a.members || a.groups) {
       el.innerHTML = '<button class="nav-me" onclick="navMenuToggle(event)" title="Account"><span class="av">M</span><span><b>' + (a.members ? 'Members' : 'Groups') + '</b><small>signed in</small></span></button>';
     } else el.innerHTML = '<button class="nav-signin" onclick="signInOpen()">Sign in</button>';
   }
-  if (mo) { mo.textContent = (a.staff || a.pastor || a.members || a.groups) ? 'Sign out' : 'Sign in'; mo.onclick = (a.staff || a.pastor || a.members || a.groups) ? signOut : signInOpen; }
+  const anyIn = a.staff || a.pastor || a.members || a.groups || a.leader;
+  if (mo) { mo.textContent = anyIn ? 'Sign out' : 'Sign in'; mo.onclick = anyIn ? signOut : signInOpen; }
 }
 function navMenuToggle(e) {
   if (e) e.stopPropagation();
   const m = document.getElementById('navMenu'); if (!m) return;
   if (m.classList.contains('open')) { m.classList.remove('open'); return; }
   const a = authState(); const bits = [];
-  if (a.staff) bits.push('Staff OS'); if (a.pastor) bits.push('Care'); if (a.members || a.staff || a.pastor) bits.push('Giving detail'); if (a.groups) bits.push('Groups');
+  if (a.staff) bits.push('Staff OS'); if (a.pastor) bits.push('Care'); if (a.members || a.staff || a.pastor) bits.push('Giving detail'); if (a.groups) bits.push('Groups'); if (a.leader) bits.push('My team');
   m.innerHTML = '<div class="nm-sub">Unlocked: ' + bits.join(' · ') + '</div>' +
     (a.staff ? '<button onclick="navMenuClose();navGo(\'today\')">Today</button><button onclick="navMenuClose();navGo(\'staff\')">My Snapshot</button>' : '') +
+    (a.leader ? '<button onclick="navMenuClose();navGo(\'serve\');tmTab(\'myteam\')">My team</button>' : '') +
     '<button onclick="navMenuClose();signOut()">Sign out</button>';
   m.classList.add('open');
 }
@@ -7754,7 +7810,7 @@ document.addEventListener('click', e => { const m = document.getElementById('nav
 function signOut() {
   try {
     ['staff_unlocked', MM_SESSION_KEY, CG_SESSION_KEY, 'cg_pw', 'tm_admin', PASTOR_SESSION_KEY].forEach(k => sessionStorage.removeItem(k));
-    ['staff_unlocked_until', 'mm_until', 'pastor_until', 'pastor_hash', SOS_ME_KEY].forEach(k => localStorage.removeItem(k));
+    ['staff_unlocked_until', 'mm_until', 'pastor_until', 'pastor_hash', 'leader_me', SOS_ME_KEY].forEach(k => localStorage.removeItem(k));
   } catch (e) {}
   try { if (_shPastorHash) shLogout(); } catch (e) {}
   tmAdminUnlocked = false; try { tlhAdminLock(); } catch (e) {}
@@ -7781,6 +7837,7 @@ function kpStaticItems() {
   add('Pages', 'Serve · Teams', 'every team, every gap', () => { navGo('serve'); tmTab('teams'); });
   add('Pages', 'Serve · Service history', '', () => { navGo('serve'); tmTab('svcs'); });
   add('Pages', 'Serve · Leader toolkit', 'checklist, templates, onboarding guide', () => { navGo('serve'); tmTab('toolkit'); });
+  if (leaderMe()) add('Pages', 'Serve · My team', leaderMe().teams.join(', '), () => { navGo('serve'); tmTab('myteam'); });
   add('Pages', 'Calendar', '', () => navGo('calendar'));
   add('Pages', 'Care · Shepherding', pastorIn ? '' : 'pastors sign in', () => navGo('care'));
   add('Pages', 'Community Groups · full detail', 'pipeline, action lists, trends', () => navGo('groups'));
@@ -15834,6 +15891,82 @@ function vclReset() {
 // ════════════════════════════════════════
 // TEAM LEADER HUB
 // ════════════════════════════════════════
+
+/* ================================================================
+   MY TEAM — what a signed-in Point Leader sees: this Sunday's roster for
+   their team, team health, their Sunday checklist and prefilled messages.
+   ================================================================ */
+function tmNormTeam(s) { return String(s || '').toLowerCase().replace(/\(kids\)/g, '').replace(/teams?/g, '').replace(/[^a-z]/g, '').replace(/^connection$/, 'connect'); }
+function tmRenderMyTeam() {
+  const el = document.getElementById('tmod-tab-myteam'); if (!el) return;
+  const me = leaderMe(), E = escapeHtml;
+  if (!me) { el.innerHTML = '<div class="tmod-lockcard" style="margin:30px auto"><div class="tmod-lockttl">Your team page</div><div class="tmod-lockmsg">Team leaders: sign in with the last 4 digits of your phone to see your roster for this Sunday, your checklist and ready-to-send messages.</div><button class="tmod-dbtn hi" style="width:100%;padding:11px" onclick="signInOpen()">Sign in</button></div>'; return; }
+  const D = DASHBOARD_DATA || {};
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const plan = (D.sundayPlans || []).filter(p => p.date >= todayKey).sort((a, b) => String(a.date).localeCompare(String(b.date)))[0];
+  const planDate = plan ? new Date(plan.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) : '';
+  const checklists = window.LSSR_TEAM_CHECKLISTS || (typeof TEAM_CHECKLISTS !== 'undefined' ? TEAM_CHECKLISTS : {});
+  const tpls = (typeof tlhGetTemplates === 'function') ? tlhGetTemplates() : [];
+  const wk = plan ? plan.date : todayKey;
+  let h = '<div class="mt-hello">Hi ' + E(me.first) + '. Here’s your week' + (planDate ? ' · this Sunday is ' + E(planDate) : '') + '.</div>';
+  me.teams.forEach((team, ti) => {
+    const key = tmNormTeam(team);
+    const st = (D.serveTeams || []).find(t => tmNormTeam(t.name) === key) || {};
+    const lf = (D.teamsLeaderForms || []).find(f => tmNormTeam(f.n) === key) || {};
+    const vols = []; ((plan && plan.services) || []).forEach(s => (s.volunteers || []).forEach(v => { if (tmNormTeam(v.team) === key) vols.push(v); }));
+    const conf = vols.filter(v => v.status === 'C'), dec = vols.filter(v => v.status === 'D'), unc = vols.filter(v => v.status !== 'C' && v.status !== 'D');
+    const need = +st.needed || 0, cur = +st.current || 0, pct = need ? Math.min(100, Math.round(cur / need * 100)) : 0;
+    const hist = (st.history || []).slice(-12), mx = Math.max(1, ...hist.map(x => +x.n || 0)), mn = Math.min(...hist.map(x => +x.n || 0), mx);
+    const pts = hist.map((x, i) => (hist.length > 1 ? i / (hist.length - 1) * 300 : 0).toFixed(1) + ',' + (44 - ((+x.n || 0) - mn) / Math.max(1, mx - mn) * 40).toFixed(1)).join(' ');
+    const ckKey = Object.keys(checklists).find(k => tmNormTeam(k) === key);
+    const items = ckKey ? checklists[ckKey] : [];
+    const doneKey = 'mt_done_' + key + '_' + wk; let done = {}; try { done = JSON.parse(localStorage.getItem(doneKey) || '{}'); } catch (e) {}
+    const person = v => '<div class="mt-person"><span class="mt-av">' + E(String(v.name || '?').split(' ').map(w => w[0] || '').join('').slice(0, 2).toUpperCase()) + '</span><span><b>' + E(v.name) + '</b><small>' + E([v.pos, v.serviceTime].filter(Boolean).join(' · ')) + '</small></span></div>';
+    h += '<div class="mt-team"><div class="mt-team-h"><h3>' + E(team) + '</h3><span class="mt-sub">' + E(cur + ' on the team · ' + need + ' needed') + (lf.subStr ? ' · point leader form ' + E(lf.subStr) : '') + '</span></div>';
+    h += '<div class="mt-grid">';
+    // This Sunday
+    h += '<div class="mt-card"><div class="mt-eyebrow">This Sunday' + (planDate ? ' · ' + E(planDate) : '') + '</div>';
+    if (!plan) h += '<div class="mt-empty">No Sunday plan loaded yet.</div>';
+    else if (!vols.length) h += '<div class="mt-empty">Nobody from this team is scheduled yet in Planning Center.</div>';
+    else {
+      h += '<div class="mt-counts"><span class="mt-chip g">' + conf.length + ' confirmed</span>' + (unc.length ? '<span class="mt-chip a">' + unc.length + ' unconfirmed</span>' : '') + (dec.length ? '<span class="mt-chip r">' + dec.length + ' declined</span>' : '') + '</div>';
+      if (unc.length) h += '<div class="mt-list-h">Still unconfirmed</div>' + unc.map(person).join('');
+      if (dec.length) h += '<div class="mt-list-h">Declined</div>' + dec.map(person).join('');
+      h += '<details class="mt-more"><summary>Confirmed (' + conf.length + ')</summary>' + conf.map(person).join('') + '</details>';
+    }
+    h += '<div class="mt-actions"><a class="tmod-dbtn" href="https://services.planningcenteronline.com/" target="_blank" rel="noopener">Open in Planning Center ↗</a><button class="tmod-dbtn" onclick="navGo(\'sunday\')">Sunday one-sheet →</button></div></div>';
+    // Team health
+    h += '<div class="mt-card"><div class="mt-eyebrow">Team health</div>';
+    h += '<div class="mt-bar-l">Staffing <span>' + cur + ' / ' + need + '</span></div><div class="mt-bar"><i class="' + (pct >= 90 ? 'g' : pct >= 75 ? 'a' : 'r') + '" style="width:' + pct + '%"></i></div>';
+    if (hist.length > 1) h += '<svg class="mt-spark" viewBox="0 0 300 46" preserveAspectRatio="none"><polyline fill="none" stroke="#d4af37" stroke-width="2" points="' + pts + '"/></svg><div class="mt-hint">People on the team · last ' + hist.length + ' months</div>';
+    if (need > cur) h += '<div class="mt-hint" style="margin-top:8px">Need <b>' + (need - cur) + ' more</b> to be fully staffed. The “Recruiting a new volunteer” message below is a good start.</div>';
+    h += '<div class="mt-actions"><button class="tmod-dbtn" onclick="tmTab(\'teams\');var i=document.getElementById(\'tmts\');if(i){i.value=' + JSON.stringify(team).replace(/"/g, '&quot;') + ';try{tmRT()}catch(e){}}">Full team detail →</button><button class="tmod-dbtn" onclick="tmTab(\'toolkit\')">Leader toolkit →</button></div></div>';
+    // Checklist
+    h += '<div class="mt-card"><div class="mt-eyebrow">Your Sunday checklist</div>';
+    if (!items.length) h += '<div class="mt-empty">No checklist on file for this team yet — the Leader toolkit has the general one.</div>';
+    else {
+      let phase = '';
+      items.forEach((it, i) => {
+        if (it.phase !== phase) { phase = it.phase; h += '<div class="mt-list-h">' + E(phase) + '</div>'; }
+        h += '<label class="mt-check' + (done[i] ? ' done' : '') + '"><input type="checkbox"' + (done[i] ? ' checked' : '') + ' onchange="mtToggle(\'' + doneKey + '\',' + i + ',this)"><span><b>' + E(it.time || '') + '</b> ' + E(it.text) + '</span></label>';
+      });
+      h += '<div class="mt-hint" style="margin-top:8px">Ticks are saved on this device for this Sunday only.</div>';
+    }
+    h += '</div>';
+    // Messages
+    h += '<div class="mt-card"><div class="mt-eyebrow">Messages · prefilled for ' + E(team) + '</div>';
+    if (!tpls.length) h += '<div class="mt-empty">No templates yet.</div>';
+    tpls.forEach((t, i) => {
+      const txt = String(t.text || '').replace(/\[Team Name\]/gi, team).replace(/\[Your Name\]/gi, me.first).replace(/\[Leader Name\]/gi, me.first);
+      const id = 'mtT' + ti + '_' + i;
+      h += '<div class="mt-tpl"><div class="mt-tpl-h"><span>' + E(t.label) + '</span><button class="tmod-dbtn" onclick="mtCopy(\'' + id + '\',this)">Copy</button></div><div class="mt-tpl-t" id="' + id + '">' + E(txt) + '</div></div>';
+    });
+    h += '</div></div></div>';
+  });
+  el.innerHTML = h;
+}
+function mtToggle(key, i, cb) { let d = {}; try { d = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {} if (cb.checked) d[i] = 1; else delete d[i]; try { localStorage.setItem(key, JSON.stringify(d)); } catch (e) {} cb.closest('label').classList.toggle('done', cb.checked); }
+function mtCopy(id, btn) { const el = document.getElementById(id); if (!el) return; const t = el.textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { lsToast('Copied — paste it into a text or email.'); btn.textContent = 'Copied ✓'; setTimeout(() => btn.textContent = 'Copy', 1800); }).catch(() => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); lsToast('Select and copy the text above.'); }); }
 
 // The Team Leader Hub now lives inside Serve as the "Leader toolkit" tab.
 function openTLHub() {
