@@ -5001,6 +5001,23 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .cal6-empty { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-dim); font-size: 15px; padding: 60px 20px; }
+  /* Desktop readability (Oct 2026): the month fills the screen height, type is bigger, chips are
+     name + one meta line, today is gold. Busy months scroll instead of shrinking the type. */
+  @media (min-width: 981px) {
+    .cal6-body.mode-1 { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+    .cal6-body.mode-1 .cal6-month { min-height: 0; }
+    .cal6-week { flex: 1 0 auto; }
+    .cal6-day { padding: clamp(4px, 0.3vw, 10px) clamp(5px, 0.35vw, 12px); gap: clamp(3px, 0.2vw, 6px); }
+    .mode-1 .cal6-dnum { font-size: clamp(13px, 0.85vw, 30px); font-weight: 700; color: var(--text-muted); margin-bottom: 2px; }
+    .cal6-card { padding: clamp(4px, 0.32vw, 11px) clamp(7px, 0.5vw, 16px); border-left-width: clamp(3px, 0.28vw, 9px); border-radius: 6px; }
+    .cal6-card-name { font-size: clamp(12.5px, 0.82vw, 28px); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cal6-card-meta { font-size: clamp(10.5px, 0.64vw, 21px); margin-top: 1px; }
+    .cal6-span { font-size: clamp(11px, 0.66vw, 22px); padding: clamp(2px, 0.18vw, 6px) clamp(7px, 0.5vw, 16px); }
+    .cal6-dow span { font-size: clamp(10px, 0.55vw, 18px); padding: clamp(4px, 0.25vw, 8px) 0; }
+    .cal6-mname { font-size: clamp(14px, 0.85vw, 28px); padding: clamp(7px, 0.4vw, 14px); }
+  }
+  .cal6-day.today { box-shadow: inset 0 0 0 2px var(--gold); }
+  .cal6-day.today .cal6-dnum { color: var(--gold); }
 
   /* ── Event detail popup ─────────────────────────────────────── */
   .cal6-dm-bg {
@@ -5371,7 +5388,7 @@ function cal6FitMonth() {
   weeks.style.height = '';
   weeks.style.flex = '';
   weeks.style.overflowY = '';
-  if (window.innerWidth <= 980) return;
+  if (window.innerWidth < 2400) return;   // laptops and monitors: readable type, a busy month scrolls. 4K TVs (≥2400) still fit-to-screen.
   weeks.style.transformOrigin = '0 0';
   // Capture the space the weeks grid is allowed to occupy (its flex height)
   // BEFORE we override its height below.
@@ -5398,7 +5415,7 @@ function cal6FitMonth() {
     weeks.style.height = 'auto';
     return weeks.scrollHeight * s;
   };
-  const MIN_SCALE = 0.45;
+  const MIN_SCALE = 0.7;
   if (displayedAt(1) <= avail + 1) {  // fits natively — leave it flex-sized
     weeks.style.flex = '';
     weeks.style.height = '';
@@ -5469,13 +5486,11 @@ function cal6Chip(ev, cat, dk, dayCount) {
   }
 
   // 1-month view: full detail card (two compact meta lines)
-  let meta = '';
+  // One quiet meta line: time, plus the place only when it's somewhere other than our building.
+  // Owner and resources live in the popup.
   const when = multiDay ? multiDay + ' · ' + ev.time : timeRange;
-  meta += '<div class="cal6-card-meta">' + cal6Esc(when) + (locShort ? ' · 📍 ' + cal6Esc(locShort) : '') + '</div>';
-  const who = [];
-  if (ev.owner) who.push('👤 ' + cal6Esc(ev.owner));
-  if (ev.resources && ev.resources.length) who.push('🏷 ' + cal6Esc(ev.resources.join(', ')));
-  if (who.length) meta += '<div class="cal6-card-meta">' + who.join(' · ') + '</div>';
+  const away = locShort && !/living stones|95 foothill/i.test(locShort) ? ' · ' + cal6Esc(locShort) : '';
+  const meta = '<div class="cal6-card-meta">' + cal6Esc(when) + away + '</div>';
   return '<div class="cal6-card" style="' + tint + '"' + click + '>' +
     '<div class="cal6-card-name">' + name + '</div>' + meta + '</div>';
 }
@@ -17988,12 +18003,16 @@ function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&
 
 <!-- ============================ AI ASSISTANT WIDGET ============================ -->
 <style>
-  #aiFab { position: fixed; bottom: 22px; right: 22px; width: 56px; height: 56px; border-radius: 50%;
-    background: linear-gradient(135deg, #2dd4bf, #0d9488); color: #04211d; border: none; cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.45); z-index: 3000; display: flex; align-items: center; justify-content: center;
-    font-size: 24px; transition: transform .15s ease, box-shadow .15s ease; }
-  #aiFab:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 26px rgba(45,212,191,0.35); }
-  #aiFab.open { transform: scale(0.9); opacity: .85; }
+  /* AI launcher: a transparent sphere of ~1,200 glowing blue dots (canvas), no circle, no label. */
+  #aiFab { all: unset; position: fixed; right: 22px; bottom: 22px; z-index: 3000; width: 68px; height: 68px; border-radius: 50%;
+    display: block; cursor: pointer; background: transparent; border: none; box-shadow: none; overflow: visible; transition: transform .18s; }
+  #aiFab:hover { transform: scale(1.08); }
+  #aiFab.hidden { display: none; }
+  #aiFab:focus-visible { outline: 2px solid rgba(90,160,255,.8); outline-offset: 4px; }
+  #aiFab canvas { filter: drop-shadow(0 0 6px rgba(90,160,255,.45)); }
+  canvas.ai-sphere { display: block; width: 100%; height: 100%; }
+  .ai-hello-orb { width: 150px !important; height: 150px !important; margin: 4px auto 10px; }
+  @media (max-width: 640px) { #aiFab { right: 14px; width: 58px; height: 58px; } }
   #aiPanel { position: fixed; bottom: 90px; right: 22px; width: 380px; max-width: calc(100vw - 32px);
     height: 560px; max-height: calc(100vh - 130px); background: #141414; border: 1px solid #2c2c2c;
     border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.6); z-index: 3000; display: none;
@@ -18002,7 +18021,7 @@ function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&
   @keyframes aiPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @media (max-width: 480px) { #aiPanel { right: 16px; left: 16px; width: auto; bottom: 84px; } }
   .ai-hd { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: linear-gradient(135deg, rgba(45,212,191,0.16), rgba(13,148,136,0.10)); border-bottom: 1px solid #2c2c2c; }
-  .ai-hd-icon { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg,#2dd4bf,#0d9488); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .ai-hd-icon { width: 34px; height: 34px; flex-shrink: 0; }
   .ai-hd-t { font-weight: 700; font-size: 14px; color: var(--text); }
   .ai-hd-s { font-size: 11px; color: var(--text-muted); }
   .ai-hd-x { margin-left: auto; background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; padding: 4px; }
@@ -18027,10 +18046,10 @@ function shEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&
   .ai-foot { font-size: 10px; color: var(--text-dim); text-align: center; padding: 0 12px 8px; }
 </style>
 
-<button id="aiFab" title="Ask AI about the data" onclick="aiToggle()" aria-label="Open AI assistant">&#10024;</button>
+<button id="aiFab" title="Ask AI about the data" onclick="aiToggle()" aria-label="Open AI assistant"><canvas class="ai-sphere"></canvas></button>
 <div id="aiPanel" role="dialog" aria-label="AI data assistant">
   <div class="ai-hd">
-    <div class="ai-hd-icon">&#10024;</div>
+    <div class="ai-hd-icon"><canvas class="ai-sphere"></canvas></div>
     <div>
       <div class="ai-hd-t">Questions?</div>
       <div class="ai-hd-s">AI-powered answers about the dashboard&rsquo;s data</div>
@@ -18055,17 +18074,53 @@ let _aiGreeted = false;
 function aiToggle() {
   const p = document.getElementById('aiPanel'), f = document.getElementById('aiFab');
   const open = p.classList.toggle('open');
-  f.classList.toggle('open', open);
+  f.classList.toggle('hidden', open);   // the orb steps aside while the chat is open
   if (open) {
     if (!_aiGreeted) { aiGreet(); _aiGreeted = true; }
     setTimeout(() => document.getElementById('aiInput').focus(), 100);
   }
+  if (window.aiHiveWake) aiHiveWake();
 }
+/* ---------- AI orb: Apple-style particle sphere (hundreds of tiny flowing blue dots, rotating in 3D) ---------- */
+(function(){
+  var N=1200, pts=[], t0=performance.now(), raf=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gold=Math.PI*(3-Math.sqrt(5));
+  for(var i=0;i<N;i++){ var y=1-(i/(N-1))*2, rad=Math.sqrt(1-y*y), th=gold*i;
+    pts.push({x:Math.cos(th)*rad, y:y, z:Math.sin(th)*rad, ph:Math.random()*6.283, sp:0.6+Math.random()*0.9, s:0.35+Math.random()*0.75, depth:0.55+Math.random()*0.45}); }
+  function draw(cv, t){
+    var dpr=Math.min(2, window.devicePixelRatio||1), W=cv.clientWidth, H=cv.clientHeight; if(!W||!H) return;
+    if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){ cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); }
+    var ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    var R=Math.min(W,H)*0.36, cx=W/2, cy=H/2, ay=t*0.35, ax=Math.sin(t*0.23)*0.45+0.35;
+    var cay=Math.cos(ay), say=Math.sin(ay), cax=Math.cos(ax), sax=Math.sin(ax);
+    if(W>100){ var halo=ctx.createRadialGradient(cx,cy,R*0.1,cx,cy,R*1.35); halo.addColorStop(0,'rgba(90,150,255,.20)'); halo.addColorStop(1,'rgba(90,150,255,0)'); ctx.fillStyle=halo; ctx.beginPath(); ctx.arc(cx,cy,Math.min(W,H)/2,0,6.283); ctx.fill(); }
+    ctx.globalCompositeOperation='lighter';
+    for(var i=0;i<N;i++){ var p=pts[i];
+      var flow=1+0.07*Math.sin(t*p.sp+p.ph)+0.05*Math.sin(t*0.9+p.y*5+p.ph*0.3), r=R*flow*p.depth;
+      var x=p.x*r, y=p.y*r, z=p.z*r;
+      var x1=x*cay+z*say, z1=-x*say+z*cay; var y1=y*cax-z1*sax, z2=y*sax+z1*cax;
+      var persp=1/(1-z2/(R*3.2)), px=cx+x1*persp, py=cy+y1*persp, front=(z2/R+1)/2;
+      var a=(0.28+0.72*front)*(0.6+0.4*Math.sin(t*1.7+p.ph)), size=Math.max(0.6,R/32)*p.s*persp*(0.7+0.5*front);
+      var hue=208+18*Math.sin(p.ph+t*0.2), light=62+18*front;
+      ctx.fillStyle='hsla('+hue.toFixed(0)+',95%,'+light.toFixed(0)+'%,'+a.toFixed(3)+')';
+      ctx.fillRect(px-size/2, py-size/2, size, size);
+    }
+    ctx.globalCompositeOperation='source-over';
+  }
+  function frame(now){ var t=(now-t0)/1000, any=false;
+    document.querySelectorAll('canvas.ai-sphere').forEach(function(cv){ if(cv.offsetParent===null) return; any=true; draw(cv,t); });
+    raf=(any&&!document.hidden&&!reduce)?requestAnimationFrame(frame):null; }
+  function wake(){ if(!raf) raf=requestAnimationFrame(frame); }
+  window.aiHiveWake=wake;
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) wake(); });
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', wake); else wake();
+})();
 function aiGrow(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
 function aiKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiAsk(); } }
 
 function aiGreet() {
   const wrap = document.getElementById('aiMsgs');
+  const orb = document.createElement('canvas'); orb.className = 'ai-sphere ai-hello-orb'; wrap.appendChild(orb);
   aiAddBot("Hi! Ask me anything analytical about the dashboard — giving, attendance, community groups, or serve teams. For example:");
   const qs = [
     'How are community groups trending toward the 2026 goals?',
@@ -18149,7 +18204,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T022655Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T174244Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
