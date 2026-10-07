@@ -26,6 +26,11 @@
   .top img { height:28px; }
   .top .t { border-left:1px solid var(--line-2); padding-left:12px; font-weight:700; color:var(--muted); font-size:14px; }
   .top .r { margin-left:auto; display:flex; gap:8px; align-items:center; }
+  /* Embedded inside the dashboard's My Journey tab (?embed=1): no top bar, tighter page padding. */
+  body.embed .top { display:none; }
+  body.embed .wrap { padding:10px 0 30px; max-width:none; }
+  body.embed .signin { padding-top:10px; }
+  body.embed .quiet { margin-bottom:0; }
   .roster { width:100%; border-collapse:collapse; font-size:13.5px; }
   .roster th { text-align:left; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); font-weight:700; padding:0 6px 8px; }
   .roster td { padding:9px 6px; border-top:1px solid var(--line); vertical-align:top; line-height:1.35; }
@@ -174,7 +179,7 @@ function fmtPhone(v) { const d = v.replace(/\D/g, '').slice(0, 10); if (d.length
 
 // ── sign-in screens ──────────────────────────────────────────────────────────
 function viewSignin(msg) {
-  $('topR').innerHTML = '<a class="btn g sm" href="/">Dashboard</a>'; $('banner').innerHTML = '';
+  $('topR').innerHTML = EMBED ? '' : '<a class="btn g sm" href="/">Dashboard</a>'; $('banner').innerHTML = '';
   if (!S.cfg) { $('app').innerHTML = '<div class="loading">Loading…</div>'; api({ action: 'jr_config' }).then(c => { S.cfg = c || {}; viewSignin(msg); }); return; }
   const c = S.cfg || {};
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
@@ -268,8 +273,8 @@ function dismissed() { try { return JSON.parse(localStorage.getItem(DISMISS_KEY)
 function dismiss(id) { const d = dismissed(); d[id] = Date.now() + 60 * 864e5; try { localStorage.setItem(DISMISS_KEY, JSON.stringify(d)); } catch (e) {} viewJourney(); toast('Okay — we’ll keep that for another season.'); }
 
 function viewJourney() {
-  const d = S.data, p = d.person || {};
-  $('topR').innerHTML = '<a class="btn g sm" href="/">Dashboard</a>' + (S.preview ? '' : '<button class="btn g sm" onclick="logout()">Sign out</button>');
+  const d = S.data, p = d.person || {}; tellParent();
+  $('topR').innerHTML = (EMBED ? '' : '<a class="btn g sm" href="/">Dashboard</a>') + (S.preview ? '' : '<button class="btn g sm" onclick="logout()">Sign out</button>');
   const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
   $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s page · buttons that send or save are turned off' +
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
@@ -325,7 +330,7 @@ function viewJourney() {
       '<div class="card"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
     '</div>' +
     leadHtml(d.leading) +
-    '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.</div>' +
+    '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.' + (EMBED && !S.preview ? ' · <a href="#" onclick="logout();return false">Sign out of My Journey</a>' : '') + '</div>' +
   '</div>';
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
 }
@@ -355,7 +360,7 @@ function leadHtml(L) {
 function openSheet(kind, prefill) {
   const pn = S.data && S.data.pastor && S.data.pastor.name ? S.data.pastor.name.split(' ')[0] : 'your pastor';
   $('sheet').innerHTML = '<h3>' + (kind === 'prayer' ? 'Share a prayer request' : 'Send ' + esc(pn) + ' a note') + '</h3>' +
-    '<div class="dim">' + (kind === 'prayer' ? 'Your pastors will pray for you. It’s kept private.' : 'It goes straight to ' + esc(pn) + '.') + '</div>' +
+    '<div class="dim">' + (kind === 'prayer' ? 'This goes to our prayer team, and ' + esc(pn) + ' is told too. It’s kept private.' : 'It goes straight to ' + esc(pn) + '.') + '</div>' +
     '<textarea id="noteTxt" placeholder="' + (kind === 'prayer' ? 'How can we pray for you?' : 'Write a few words…') + '">' + esc(prefill || '') + '</textarea>' +
     '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="btn g" onclick="closeSheet()">Cancel</button>' +
     '<button class="btn p" id="noteBtn" onclick="sendNote(\'' + kind + '\')"' + (S.preview ? ' disabled title="Turned off in preview"' : '') + '>Send</button></div>';
@@ -373,8 +378,17 @@ async function sendNote(kind) {
   else { b.disabled = false; b.textContent = 'Send'; toast(r.error || 'That didn’t send — please try again.'); }
 }
 async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); viewSignin(); }
+// Signed-in state for the dashboard (so it can label the tab).
+function tellParent() { if (EMBED) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && S.data.person.first) || '' }, location.origin); } catch (e) {} } }
 
 // ── start ────────────────────────────────────────────────────────────────────
+const EMBED = new URLSearchParams(location.search).get('embed') === '1';
+if (EMBED) {
+  document.body.classList.add('embed');
+  // Tell the dashboard how tall we are so its iframe never scrolls on its own.
+  const post = () => { try { parent.postMessage({ jrHeight: document.documentElement.scrollHeight }, location.origin); } catch (e) {} };
+  new ResizeObserver(post).observe(document.body); setInterval(post, 1500); window.addEventListener('load', post);
+}
 (async function start() {
   const q = new URLSearchParams(location.search), h = new URLSearchParams(location.hash.replace(/^#/, ''));
   if (q.get('preview') && h.get('k')) {                     // pastor preview (from the Shepherding drawer)
