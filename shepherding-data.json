@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T03:19:00.392Z",
+  "generatedAt": "2026-10-07T04:18:18.289Z",
   "asOf": "2026-10-06",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 216,
+    "inGroup": 217,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 393,
-    "notInGroup": 177,
+    "notInGroup": 176,
     "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 393
     },
     "pct": {
-      "inGroup": 0.549618320610687,
+      "inGroup": 0.5521628498727735,
       "serving": 0.5954198473282443,
       "leading": 0.19592875318066158,
       "givingRegular": 0,
@@ -5965,7 +5965,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 29,
+        "inGroup": 30,
         "serving": 32,
         "leading": 8,
         "givingRegular": 0,
@@ -5975,7 +5975,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 19,
+        "notInGroup": 18,
         "notServing": 16,
         "notGiving": 0,
         "paciCounts": {
@@ -5993,7 +5993,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.6041666666666666,
+          "inGroup": 0.625,
           "serving": 0.6666666666666666,
           "leading": 0.16666666666666666,
           "givingRegular": 0,
@@ -6856,48 +6856,6 @@
         },
         {
           "id": null,
-          "name": "Alla Schock",
-          "first": "Alla",
-          "last": "Schock",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2026-02-27T02:28:48Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Garrett Kooyers",
           "first": "Garrett",
           "last": "Kooyers",
@@ -7448,6 +7406,52 @@
               "name": "LS Students Leaders",
               "role": "member",
               "joinedAt": "2024-08-13T23:12:18Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Alla Schock",
+          "first": "Alla",
+          "last": "Schock",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Castaneda Community Group",
+              "role": "member",
+              "joinedAt": "2026-10-07T03:49:36Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2026-02-27T02:28:48Z"
             }
           ],
           "flags": [],
@@ -18179,8 +18183,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 64,
-    "adult": 63,
-    "child": 152,
+    "adult": 64,
+    "child": 151,
     "infant": 103
   }
 }
