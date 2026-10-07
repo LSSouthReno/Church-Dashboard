@@ -120,8 +120,9 @@ function doGet(e) {
       return eosWaJson_(jgProbe_());
     }
     if (action === 'probe_wf_card') {
-      // Read-only, admin-hash gated: one person's cards in the New Family Member workflow + the step list.
-      if (!ogAuth_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
+      // Read-only; only a signed-in lschurches.com Google user (the HEAD /dev link) may call it.
+      var who = ''; try { who = String(Session.getActiveUser().getEmail() || ''); } catch (x) {}
+      if (!/@lschurches\.com$/i.test(who)) return eosWaJson_({ error: 'unauthorized', who: who });
       var q = String((e.parameter||{}).name || ''), outw = { steps: [], people: [] };
       try {
         var stp = pcoGetAll_('/people/v2/workflows/528798/steps?per_page=100') || [];
