@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T23:18:52.807Z",
+  "generatedAt": "2026-10-07T00:19:32.497Z",
   "asOf": "2026-10-06",
   "givingMonths": 12,
   "statusVocab": [
@@ -17203,52 +17203,6 @@
         },
         {
           "id": null,
-          "name": "Stephanie Tompkins",
-          "first": "Stephanie",
-          "last": "Tompkins",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "groups": [
-            {
-              "name": "Coan/Sellman Community Group",
-              "role": "member",
-              "joinedAt": "2025-09-24T16:45:03Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2024-10-07T17:26:57Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Chuck Grimm",
           "first": "Chuck",
           "last": "Grimm",
@@ -17502,6 +17456,57 @@
               "name": "Stepping Stones Children's Ministry",
               "role": "member",
               "joinedAt": "2025-10-25T19:39:36Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Stephanie Tompkins",
+          "first": "Stephanie",
+          "last": "Tompkins",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "groups": [
+            {
+              "name": "Coan/Sellman Community Group",
+              "role": "member",
+              "joinedAt": "2025-09-24T16:45:03Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Breakfast Team",
+              "role": "member",
+              "joinedAt": "2026-10-06T23:24:31Z"
+            },
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2024-10-07T17:26:57Z"
             }
           ],
           "flags": [],
