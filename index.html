@@ -11887,8 +11887,10 @@ let _sundayPendingDate = null;  // deep-link target (#sunday=YYYY-MM-DD), honore
 
 const SD_BLOCKED = new Set([
   '8am worship gathering', '9:30am worship gathering', '11am worship gathering',
-  'grief share', 'worship rehearsal'
+  'grief share', 'worship rehearsal', 'mavros rehearsal', 'ryan griffin'
 ]);
+// Also hidden from "Special today": the standing Sunday Gatherings entry on every Sunday.
+const SD_BLOCKED_RE = /sunday gatherings?/i;
 
 // ── Global top-nav tabs ─────────────────────────────────────────
 // ── Clean URLs: every tab / full-screen view gets a shareable address ─────────
@@ -12085,7 +12087,7 @@ function sundaySelectWeek(dateKey) {
     return;
   }
   const calEventsToday = (_sundayEosCal || []).filter(ev =>
-    ev.dateKey === dateKey && !ev.rbd && !SD_BLOCKED.has((ev.name||'').toLowerCase().trim())
+    ev.dateKey === dateKey && !ev.rbd && !SD_BLOCKED.has((ev.name||'').toLowerCase().trim()) && !SD_BLOCKED_RE.test(ev.name||'')
   );
   container.innerHTML = sundayBuildContent(plan, calEventsToday);
 }
