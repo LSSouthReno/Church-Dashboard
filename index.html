@@ -5024,18 +5024,20 @@
   body.cal-tv #topNav, body.cal-tv #aiFab, body.cal-tv #aiPanel, body.cal-tv #lssrUpdateBar, body.cal-tv .cal6-toolbar, body.cal-tv .cal6-mname, body.cal-tv .cal6-title { display: none !important; }
   body.cal-tv .cal6-header { padding: 0.7vw 1.4vw; gap: 1.2vw; align-items: center; }
   body.cal-tv .cal6-header::before { content: ""; width: 12vw; height: 2.2vw; background: url('assets/ls-lockup-white.png') left center / contain no-repeat; flex-shrink: 0; }
-  body.cal-tv .cal6-range { font-size: 1.5vw; font-weight: 800; color: var(--text); letter-spacing: .06em; }
+  body.cal-tv .cal6-range { font-size: 1.35vw; font-weight: 600; color: var(--text); letter-spacing: .12em; }
   body.cal-tv .cal6-asof { font-size: 0.75vw; margin-left: auto; }
   body.cal-tv .cal6-body { padding: 0.6vw 1vw 0.8vw; }
   body.cal-tv .cal6-month { border-radius: 0.6vw; }
-  body.cal-tv .cal6-dow span { font-size: 0.85vw; padding: 0.35vw 0; letter-spacing: .12em; }
+  body.cal-tv .cal6-dow span { font-size: 0.72vw; padding: 0.4vw 0; letter-spacing: .18em; font-weight: 600; color: var(--text-dim); }
   body.cal-tv .cal6-day { padding: 0.3vw 0.45vw; gap: 0.22vw; }
-  body.cal-tv .cal6-dnum, body.cal-tv .mode-1 .cal6-dnum { font-size: 1.05vw; margin-bottom: 0.1vw; }
-  body.cal-tv .cal6-card.tv { padding: 0.28vw 0.55vw; border-left-width: 0.3vw; border-radius: 0.3vw; }
-  body.cal-tv .cal6-card.tv .cal6-card-name { font-size: 1.05vw; font-weight: 700; line-height: 1.25; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: clip; }
+  body.cal-tv .cal6-dnum, body.cal-tv .mode-1 .cal6-dnum { font-size: 0.9vw; font-weight: 500; margin-bottom: 0.15vw; color: var(--text-dim); }
+  body.cal-tv .cal6-day.today { box-shadow: inset 0 0 0 1px var(--gold); }
+  body.cal-tv .cal6-day.today .cal6-dnum { color: var(--gold); font-weight: 600; }
+  body.cal-tv .cal6-card.tv { padding: 0.24vw 0.5vw; border-left-width: 0.18vw; border-radius: 0.2vw; }
+  body.cal-tv .cal6-card.tv .cal6-card-name { font-size: 0.95vw; font-weight: 500; letter-spacing: .005em; line-height: 1.3; color: #ece9e2; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: clip; }
   body.cal-tv .cal6-span { white-space: normal; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
-  body.cal-tv .cal6-card.tv .cal6-evtime { font-size: 0.85em; opacity: .75; font-weight: 700; }
-  body.cal-tv .cal6-span { font-size: 0.95vw; padding: 0.22vw 0.55vw; border-left-width: 0.3vw; }
+  body.cal-tv .cal6-card.tv .cal6-evtime { font-size: 0.86em; opacity: .62; font-weight: 500; font-variant-numeric: tabular-nums; margin-right: .1em; }
+  body.cal-tv .cal6-span { font-size: 0.86vw; font-weight: 500; padding: 0.2vw 0.5vw; border-left-width: 0.18vw; border-radius: 0.2vw; }
   body.cal-tv .cal6-spans { padding: 0.25vw 0.45vw 0; gap: 0.2vw 0.45vw; }
   body.cal-tv .cal6-more { font-size: 0.9vw; }
 
@@ -18235,7 +18237,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T195850Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T222045Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
