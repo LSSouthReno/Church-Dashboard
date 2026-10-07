@@ -5320,7 +5320,7 @@ function cal6Render() {
     const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
     const lead   = first.getDay();  // Sunday-first offset
 
-    const phone = window.innerWidth <= 560, maxChips = phone ? 3 : (_cal6Mode === 1 && cal6IsTV() ? 4 : 99);
+    const phone = window.innerWidth <= 560, maxChips = phone ? 3 : 99;   // TV: every event, nothing to click
     const dayCells = [], slotKeys = [];
     for (let slot = 0; slot < 42; slot++) {
       const dayNum = slot - lead + 1;
@@ -5441,7 +5441,7 @@ function cal6FitMonth() {
     weeks.style.height = 'auto';
     return weeks.scrollHeight * s;
   };
-  const MIN_SCALE = 0.5;
+  const MIN_SCALE = 0.4;
   if (displayedAt(1) <= avail + 1) {  // fits natively — leave it flex-sized
     weeks.style.flex = '';
     weeks.style.height = '';
@@ -18235,7 +18235,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T184551Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T195850Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
