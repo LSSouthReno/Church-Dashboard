@@ -5300,7 +5300,7 @@ function cal6Render() {
     const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
     const lead   = first.getDay();  // Sunday-first offset
 
-    const phone = window.innerWidth <= 560, maxChips = phone ? 3 : 99;
+    const phone = window.innerWidth <= 560, maxChips = phone ? 3 : (_cal6Mode === 1 && cal6IsTV() ? 4 : 99);
     const dayCells = [], slotKeys = [];
     for (let slot = 0; slot < 42; slot++) {
       const dayNum = slot - lead + 1;
@@ -5379,6 +5379,15 @@ function cal6Render() {
 // down proportionally so every event is visible without scrolling.
 // Below 0.45× we keep the scroll fallback instead of making text unreadable;
 // phones (≤980px) keep their natural size + page scroll.
+// TV / signage: the office display loads /calendar?tv=1 (remembered for the session, since the
+// router cleans the address). A 16:9 screen 1600px or wider counts too, as does any 4K panel.
+let _cal6TV = false;
+try { if (new URLSearchParams(location.search).get('tv') === '1') { _cal6TV = true; sessionStorage.setItem('cal6_tv', '1'); } else if (sessionStorage.getItem('cal6_tv') === '1') _cal6TV = true; } catch (e) {}
+function cal6IsTV() {
+  if (_cal6TV) return true;
+  const w = window.innerWidth, hh = window.innerHeight;
+  return w >= 2400 || (w >= 1600 && Math.abs(w / Math.max(1, hh) - 16 / 9) < 0.06);
+}
 function cal6FitMonth() {
   const weeks = document.querySelector('#cal6Body.mode-1 .cal6-weeks');
   if (!weeks) return;
@@ -5388,7 +5397,7 @@ function cal6FitMonth() {
   weeks.style.height = '';
   weeks.style.flex = '';
   weeks.style.overflowY = '';
-  if (window.innerWidth < 2400) return;   // laptops and monitors: readable type, a busy month scrolls. 4K TVs (≥2400) still fit-to-screen.
+  if (!cal6IsTV()) return;   // laptops and monitors: readable type, a busy month scrolls. TVs: the whole month always fits.
   weeks.style.transformOrigin = '0 0';
   // Capture the space the weeks grid is allowed to occupy (its flex height)
   // BEFORE we override its height below.
@@ -5415,7 +5424,7 @@ function cal6FitMonth() {
     weeks.style.height = 'auto';
     return weeks.scrollHeight * s;
   };
-  const MIN_SCALE = 0.7;
+  const MIN_SCALE = 0.5;
   if (displayedAt(1) <= avail + 1) {  // fits natively — leave it flex-sized
     weeks.style.flex = '';
     weeks.style.height = '';
@@ -18204,7 +18213,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T174244Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T182043Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
