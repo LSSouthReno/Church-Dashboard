@@ -3675,12 +3675,12 @@
   <!-- Lock screen -->
   <div id="pastorModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
     <div class="tmod-lockcard">
-      <div class="tmod-lockicon">&#128737;&#65039;</div>
-      <div class="tmod-lockttl">Pastor &amp; Elder Care</div>
-      <div class="tmod-lockmsg">This area holds sensitive shepherding detail on individual people &mdash; spiritual-health scores, giving, and pastoral notes. Enter your password to continue.</div>
-      <input type="password" id="pastorPwInput" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
-      <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="pastorDoUnlock()">Unlock</button>
-      <div id="pastorLockErr" class="tmod-lockerr">Incorrect password.</div>
+      <div class="tmod-lockicon"><svg class="lk" viewBox="0 0 12 14" aria-hidden="true" style="width:22px;height:26px;opacity:.7;margin:0"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></div>
+      <div class="tmod-lockttl">Pastors &amp; elders</div>
+      <div class="tmod-lockmsg">Care holds sensitive detail on individual people. Enter the last 4 digits of your phone; the first time on a device we email you a one-time code.</div>
+      <input type="password" id="pastorPwInput" placeholder="Last 4 of your phone" autocomplete="off" inputmode="numeric" onkeydown="if(event.key==='Enter')pastorDoUnlock()">
+      <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="pastorDoUnlock()">Continue</button>
+      <div id="pastorLockErr" class="tmod-lockerr">That didn’t match a pastor or elder.</div>
     </div>
   </div>
   <!-- Unlocked content -->
@@ -4011,9 +4011,9 @@
   <!-- Locked state -->
   <div id="cgModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
     <div class="tmod-lockcard">
-      <div class="tmod-lockicon">&#128274;</div>
-      <div class="tmod-lockttl">Discipleship Area</div>
-      <div class="tmod-lockmsg">This area contains detailed community group metrics, leader pipeline, and attendance health. Enter the password to view.</div>
+      <div class="tmod-lockicon"><svg class="lk" viewBox="0 0 12 14" aria-hidden="true" style="width:22px;height:26px;opacity:.7;margin:0"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></div>
+      <div class="tmod-lockttl">Community groups detail</div>
+      <div class="tmod-lockmsg">Group-by-group health, the leader pipeline and action lists. Enter the groups password to view.</div>
       <input type="password" id="cgPwInput" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')cgDoUnlock()">
       <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="cgDoUnlock()">Unlock</button>
       <div id="cgLockErr" class="tmod-lockerr">Incorrect password.</div>
@@ -4192,9 +4192,9 @@
   <!-- Lock screen -->
   <div id="staffModLocked" class="tmod-body" style="display:flex;align-items:center;justify-content:center;">
     <div class="tmod-lockcard">
-      <div class="tmod-lockicon">&#128274;</div>
-      <div class="tmod-lockttl">Staff Sign-In</div>
-      <div class="tmod-lockmsg">Enter your <b>PIN</b> &mdash; the last 4 digits of your phone number &mdash; to open your personal dashboard. (Staff password also works.)</div>
+      <div class="tmod-lockicon"><svg class="lk" viewBox="0 0 12 14" aria-hidden="true" style="width:22px;height:26px;opacity:.7;margin:0"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></div>
+      <div class="tmod-lockttl">Staff sign-in</div>
+      <div class="tmod-lockmsg">Enter the last 4 digits of your phone number to open your personal dashboard.</div>
       <input type="password" id="staffPwInput" placeholder="Your PIN" autocomplete="off" inputmode="numeric" onkeydown="if(event.key==='Enter')staffDoUnlock()">
       <button class="tmod-dbtn hi" style="width:100%;padding:11px;margin-top:4px" onclick="staffDoUnlock()">Sign in</button>
       <div id="staffLockErr" class="tmod-lockerr">Incorrect password.</div>
@@ -12172,7 +12172,7 @@ function sundayBuildContent(plan, calEvents) {
             <div class="sd-special-item">
               <span class="sd-special-time">${ev.time && ev.time !== '12:00 AM' ? ev.time.replace(/\s*(AM|PM)$/i, (m, ap) => ' ' + ap.toLowerCase()) : 'All day'}</span>
               <span class="sd-special-name">${ev.name}</span>
-              ${ev.location ? `<span class="sd-special-loc">${ev.location.split(',')[0].replace(/\s*-\s*95 Foothill Drive$/i, '')}</span>` : ''}
+              ${ev.location && !/living stones|95 foothill/i.test(ev.location) ? `<span class="sd-special-loc">${ev.location.split(',')[0]}</span>` : ''}
             </div>`).join('')}
         </div>
       </div>` : ''}
