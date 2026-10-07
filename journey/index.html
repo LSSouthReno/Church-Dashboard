@@ -11,9 +11,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <!--
-  My Journey — link-only page (not linked from the dashboard yet). Backend: Code_journey.gs
-  (jr_* POST actions on the Staff OS web app). Pastors can preview anyone from the
-  Shepherding drawer: /journey/?preview=<pid>#k=<pastor hash>.
+  My Journey — every person's private page (linked from the dashboard nav). Backend: Code_journey.gs
+  (jr_* actions on the Staff OS web app). Sign-in: phone number → texted code (Twilio Verify) or an
+  emailed one-tap link + code. Pastors can preview anyone from the Care drawer.
+  Leaders (community-group leaders, serve-team leaders) also see their group's / team's roster.
 -->
 <style>
   :root { --bg:#141414; --card:#1f1f1f; --card-2:#262626; --line:#2e2e2e; --line-2:#3a3a3a; --text:#f2efe9; --muted:#a39e94; --dim:#78726a;
@@ -25,6 +26,23 @@
   .top img { height:28px; }
   .top .t { border-left:1px solid var(--line-2); padding-left:12px; font-weight:700; color:var(--muted); font-size:14px; }
   .top .r { margin-left:auto; display:flex; gap:8px; align-items:center; }
+  .roster { width:100%; border-collapse:collapse; font-size:13.5px; }
+  .roster th { text-align:left; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); font-weight:700; padding:0 6px 8px; }
+  .roster td { padding:9px 6px; border-top:1px solid var(--line); vertical-align:top; line-height:1.35; }
+  .roster td.n { font-weight:600; white-space:nowrap; }
+  .roster td.n small { display:block; color:var(--dim); font-weight:500; font-size:11.5px; }
+  .roster .y { color:var(--ok); font-weight:700; } .roster .nn { color:var(--dim); } .roster .q { color:var(--dim); }
+  .roster td.s { color:var(--muted); font-size:12.5px; }
+  .lead-sum { display:flex; gap:14px; flex-wrap:wrap; margin:0 0 12px; color:var(--muted); font-size:13px; }
+  .lead-sum b { color:var(--text); }
+  @media (max-width:640px) {
+    .roster thead { display:none; }
+    .roster tr { display:block; padding:10px 0; border-top:1px solid var(--line); }
+    .roster td { display:block; border:0; padding:2px 0; }
+    .roster td.f::before, .roster td.o::before { content:attr(data-l) ': '; color:var(--dim); font-size:12px; }
+    .roster td.f, .roster td.o { display:inline-block; margin-right:14px; }
+    .roster td.s { padding-top:4px; }
+  }
   .wrap { max-width:1180px; margin:0 auto; padding:30px 24px 60px; }
   .btn { appearance:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font:700 14px 'Montserrat',sans-serif; padding:10px 16px; border-radius:9px; border:1px solid var(--line-2); background:var(--card-2); color:var(--text); cursor:pointer; text-decoration:none; white-space:nowrap; }
   .btn:hover { border-color:#4a4a4a; }
@@ -156,7 +174,7 @@ function fmtPhone(v) { const d = v.replace(/\D/g, '').slice(0, 10); if (d.length
 
 // ── sign-in screens ──────────────────────────────────────────────────────────
 function viewSignin(msg) {
-  $('topR').innerHTML = ''; $('banner').innerHTML = '';
+  $('topR').innerHTML = '<a class="btn g sm" href="/">Dashboard</a>'; $('banner').innerHTML = '';
   if (!S.cfg) { $('app').innerHTML = '<div class="loading">Loading…</div>'; api({ action: 'jr_config' }).then(c => { S.cfg = c || {}; viewSignin(msg); }); return; }
   const c = S.cfg || {};
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
@@ -251,7 +269,7 @@ function dismiss(id) { const d = dismissed(); d[id] = Date.now() + 60 * 864e5; t
 
 function viewJourney() {
   const d = S.data, p = d.person || {};
-  $('topR').innerHTML = S.preview ? '' : '<button class="btn g sm" onclick="logout()">Sign out</button>';
+  $('topR').innerHTML = '<a class="btn g sm" href="/">Dashboard</a>' + (S.preview ? '' : '<button class="btn g sm" onclick="logout()">Sign out</button>');
   const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
   $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s page · buttons that send or save are turned off' +
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
@@ -306,9 +324,31 @@ function viewJourney() {
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="openSheet(\'note\')">Send a note</button><button class="btn sm" onclick="openSheet(\'prayer\')">Share a prayer request</button></div></div>' +
       '<div class="card"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
     '</div>' +
+    leadHtml(d.leading) +
     '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.</div>' +
   '</div>';
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
+}
+
+// ── leaders: your group / your team ──────────────────────────────────────────
+function leadHtml(L) {
+  if (!L || (!(L.groups || []).length && !(L.teams || []).length)) return '';
+  const yn = v => v === true ? '<span class="y">Yes</span>' : v === false ? '<span class="nn">Not yet</span>' : '<span class="q">—</span>';
+  const block = (t, kind) => {
+    const other = kind === 'group' ? 'Serving' : 'In a group';
+    const m = t.members || [];
+    const fam = m.filter(x => x.familyMember).length, oth = m.filter(x => kind === 'group' ? x.serving : x.inGroup).length;
+    const rows = m.map(x => '<tr><td class="n">' + esc(x.name) + (x.leader ? '<small>Co-leader</small>' : '') + '</td>' +
+      '<td class="f" data-l="Family Member">' + (x.inProcess ? '<span class="q">In process</span>' : yn(x.familyMember)) + '</td>' +
+      '<td class="o" data-l="' + other + '">' + yn(kind === 'group' ? x.serving : x.inGroup) + '</td>' +
+      '<td class="s">' + esc(x.step) + '</td></tr>').join('');
+    return '<div class="card" style="margin-top:16px"><div class="card-h"><h3>' + (kind === 'group' ? 'Your group' : 'Your team') + ' · ' + esc(t.name) + '</h3><span class="c">' + m.length + (m.length === 1 ? ' person' : ' people') + '</span></div>' +
+      '<div class="lead-sum"><span><b>' + fam + '</b> of ' + m.length + ' are Family Members</span><span><b>' + oth + '</b> of ' + m.length + ' ' + (kind === 'group' ? 'are serving' : 'are in a group') + '</span></div>' +
+      (m.length ? '<table class="roster"><thead><tr><th>Name</th><th>Family Member</th><th>' + other + '</th><th>A next step you could encourage</th></tr></thead><tbody>' + rows + '</tbody></table>'
+                : '<div class="dim">Nobody on the roster yet.</div>') +
+      '<div class="quiet" style="margin:12px 0 0;font-size:12px">Shown to you because you lead this ' + kind + '. Names and simple yes/no only — never giving or pastoral notes. Suggestions are a starting point, not a grade.</div></div>';
+  };
+  return (L.groups || []).map(g => block(g, 'group')).join('') + (L.teams || []).map(t => block(t, 'team')).join('');
 }
 
 // ── note / prayer ────────────────────────────────────────────────────────────

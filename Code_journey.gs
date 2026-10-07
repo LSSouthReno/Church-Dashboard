@@ -370,7 +370,7 @@ function jrBuild_(pid) {
   var gl = jrGet_('/groups/v2/people/' + pid + '/groups?per_page=100');
   ((gl && gl.data) || []).forEach(function(g) {
     var r = roles[g.id] || {}, gt = ((((g.relationships || {}).group_type || {}).data) || {}).id;
-    groups.push({ name: (g.attributes || {}).name || 'Group', leader: String(r.role || '') === 'leader', joined: r.joined_at || '', cg: String(gt) === JR_.CG_TYPE });
+    groups.push({ id: String(g.id), name: (g.attributes || {}).name || 'Group', leader: String(r.role || '') === 'leader', joined: r.joined_at || '', cg: String(gt) === JR_.CG_TYPE });
   });
 
   // Serving: teams (from Services position assignments) + schedule (served this year, upcoming)
@@ -499,7 +499,104 @@ function jrBuild_(pid) {
     serving: { teams: teamList, servedThisYear: served }, giving: giving,
     baptized: baptized, member: member, baptism: { requested: wfs.requested === 'active', ready: wfs.ready === 'active', plan: baptismPlan },
     milestones: ms, upcoming: upcoming.slice(0, 5), pastor: pastor, steps: jrSteps_(ctx), links: JR_.LINKS, asOf: new Date().toISOString(),
+    leading: jrLeading_(pid, groups, Object.keys(teams)),
     seasonWhy: seasonWhy };
+}
+
+/* =========================================================
+   LEADERS: "Your group" / "Your team" — the people a leader shepherds.
+   A community-group leader sees their group's roster; a serve-team leader (PCO
+   team_leaders) sees their team's. Per person: Family Member?, serving? / in a group?,
+   baptized (when we know), and one suggested next step. Never giving, never health.
+   Cached 6 h per leader (jr_lead_<pid>); jr_me's 10-min cache sits on top.
+========================================================= */
+function jrLeading_(pid, groups, teamIds) {
+  var c = CacheService.getScriptCache(), key = 'jr_lead_' + pid;
+  try { var hit = c.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
+  var out = { groups: [], teams: [] }, budget = Date.now() + 150000;   // stay well inside the web-app limit
+  try {
+    // Shepherding data gives richer flags for the people on it (members + candidates).
+    var sh = {}; try { var shd = spReadPrivate_(); ((shd && shd.elders) || []).forEach(function(e) { (e.people || []).forEach(function(p) { if (p.id) sh[String(p.id)] = p; }); }); } catch (e) {}
+
+    // ── Community groups this person LEADS ──
+    (groups || []).filter(function(g) { return g.cg && g.leader; }).forEach(function(g) {
+      if (Date.now() > budget) return;
+      var ms = jrGet_('/groups/v2/groups/' + g.id + '/memberships?include=person&per_page=100'), ppl = {}, rows = [];
+      ((ms && ms.included) || []).forEach(function(x) { if (x.type === 'Person') ppl[String(x.id)] = x.attributes || {}; });
+      ((ms && ms.data) || []).forEach(function(m) {
+        var mid = String((((m.relationships || {}).person || {}).data || {}).id || ''); if (!mid || mid === String(pid)) return;
+        var pa = ppl[mid] || {};
+        rows.push({ pid: mid, name: ((pa.first_name || '') + ' ' + (pa.last_name || '')).trim(), avatar: pa.avatar_url || '', leader: String((m.attributes || {}).role || '') === 'leader' });
+      });
+      out.groups.push({ id: g.id, name: g.name, members: jrRosterFlags_(rows, 'group', sh, budget) });
+    });
+
+    // ── Serve teams this person LEADS (PCO Services team leaders) ──
+    var led = jrTeamsLed_(pid, teamIds);
+    led.forEach(function(t) {
+      if (Date.now() > budget) return;
+      var tp = jrGet_('/services/v2/teams/' + t.id + '/people?per_page=100'), rows = [];
+      ((tp && tp.data) || []).forEach(function(p) {
+        var pa = p.attributes || {}; if (String(p.id) === String(pid)) return;
+        rows.push({ pid: String(p.id), name: ((pa.first_name || '') + ' ' + (pa.last_name || '')).trim() || pa.full_name || '', avatar: pa.photo_thumbnail_url || pa.photo_url || '', leader: false });
+      });
+      out.teams.push({ id: t.id, name: t.name, members: jrRosterFlags_(rows, 'team', sh, budget) });
+    });
+  } catch (e) { out.error = String(e && e.message || e); }
+  try { c.put(key, JSON.stringify(out), 21600); } catch (e) {}
+  return out;
+}
+// Teams where this person is a PCO team leader. Direct lookup first; otherwise a scan of all
+// teams' leaders, cached 6 h for everyone.
+function jrTeamsLed_(pid, teamIds) {
+  var found = [];
+  var tl = jrGet_('/services/v2/people/' + pid + '/team_leaders?include=team&per_page=100');
+  if (tl && tl.data && tl.data.length) {
+    var names = {}; (tl.included || []).forEach(function(x) { if (x.type === 'Team') names[x.id] = (x.attributes || {}).name || ''; });
+    tl.data.forEach(function(x) { var tid = String((((x.relationships || {}).team || {}).data || {}).id || ''); if (tid && !found.some(function(f) { return f.id === tid; })) found.push({ id: tid, name: names[tid] || jrTeamName_(tid) || 'Serve team' }); });
+    return found;
+  }
+  var c = CacheService.getScriptCache(), map = null;
+  try { var hit = c.get('JR_TEAM_LEADERS'); if (hit) map = JSON.parse(hit); } catch (e) {}
+  if (!map) {
+    map = {};
+    var teams = jrGet_('/services/v2/teams?per_page=100');
+    ((teams && teams.data) || []).forEach(function(t) {
+      var ld = jrGet_('/services/v2/teams/' + t.id + '/team_leaders?per_page=50');
+      ((ld && ld.data) || []).forEach(function(l) { var lp = String((((l.relationships || {}).person || {}).data || {}).id || ''); if (lp) (map[lp] = map[lp] || []).push({ id: String(t.id), name: (t.attributes || {}).name || '' }); });
+    });
+    try { c.put('JR_TEAM_LEADERS', JSON.stringify(map), 21600); } catch (e) {}
+  }
+  return map[String(pid)] || [];
+}
+// Flags + one suggested step per roster member. kind = 'group' (show serving) or 'team' (show in-a-group).
+function jrRosterFlags_(rows, kind, sh, budget) {
+  // Membership for everyone in one People call (where[id]=a,b,c); falls back to singles.
+  var ids = rows.map(function(r) { return r.pid; }), memb = {};
+  for (var i = 0; i < ids.length; i += 25) {
+    var chunk = ids.slice(i, i + 25), ok = false;
+    var pr = jrGet_('/people/v2/people?where[id]=' + chunk.join(',') + '&per_page=100');
+    if (pr && pr.data && pr.data.length) { ok = true; pr.data.forEach(function(p) { memb[String(p.id)] = (p.attributes || {}).membership || ''; }); }
+    if (!ok) chunk.forEach(function(id) { var one = jrGet_('/people/v2/people/' + id); if (one && one.data) memb[id] = ((one.data.attributes || {}).membership) || ''; });
+  }
+  return rows.map(function(r) {
+    var s = sh[r.pid] || null, m = memb[r.pid] || (s ? s.membershipType : '') || '';
+    var fam = /^(member|deacon|pastor)$/i.test(String(m).trim());
+    var serving = null, inGroup = null, baptized = s ? !!s.baptized : null, inProcess = !!(s && s.newFamilyMember);
+    if (s) { serving = (s.serveTeams || []).length > 0; inGroup = (s.groups || []).length > 0; }
+    if (kind === 'group' && serving === null && Date.now() < budget) { var ta = jrGet_('/services/v2/people/' + r.pid + '/person_team_position_assignments?per_page=1'); serving = !!(ta && ta.data && ta.data.length); }
+    if (kind === 'team' && inGroup === null && Date.now() < budget) { var gl = jrGet_('/groups/v2/people/' + r.pid + '/groups?per_page=50'); inGroup = ((gl && gl.data) || []).some(function(g) { return String(((((g.relationships || {}).group_type || {}).data) || {}).id) === JR_.CG_TYPE; }); }
+    var step = '';
+    var shStep = s && s.nextStep && s.nextStep.text ? String(s.nextStep.text) : '';
+    if (inProcess) step = 'In the Family Member process — cheer them on to finish';
+    else if (!fam) step = 'Invite them to become a Family Member';
+    else if (kind === 'group' && serving === false) step = 'Invite them to serve on a team';
+    else if (kind === 'team' && inGroup === false) step = 'Invite them to a community group';
+    else if (baptized === false) step = 'Ask whether they’ve thought about baptism';
+    else if (shStep && !/giv|generos|tith/i.test(shStep)) step = shStep;
+    else step = r.leader ? 'Leading alongside you — thank them' : 'Connected and serving — ask who they could invite';
+    return { pid: r.pid, name: r.name, avatar: r.avatar, leader: r.leader, familyMember: fam, inProcess: inProcess, serving: serving, inGroup: inGroup, baptized: baptized, step: step };
+  }).sort(function(a, b) { return (b.leader ? 1 : 0) - (a.leader ? 1 : 0) || a.name.localeCompare(b.name); });
 }
 
 // Any date PCO hands us ("2026-07-06", "07/06/2026", ISO timestamp) → "YYYY-MM-DD" (or '').
