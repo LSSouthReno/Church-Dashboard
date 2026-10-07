@@ -119,6 +119,27 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(jgProbe_());
     }
+    if (action === 'probe_wf_card') {
+      // Read-only, admin-hash gated: one person's cards in the New Family Member workflow + the step list.
+      if (!ogAuth_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
+      var q = String((e.parameter||{}).name || ''), outw = { steps: [], people: [] };
+      try {
+        var stp = pcoGetAll_('/people/v2/workflows/528798/steps?per_page=100') || [];
+        outw.steps = stp.map(function(s) { return { id: s.id, seq: (s.attributes||{}).sequence, name: (s.attributes||{}).name }; }).sort(function(x, y) { return (x.seq||0) - (y.seq||0); });
+        var ppl = pcoGetAll_('/people/v2/people?where[search_name]=' + encodeURIComponent(q) + '&per_page=10') || [];
+        ppl.forEach(function(p) {
+          var pa = p.attributes || {}, rec = { pid: p.id, name: pa.name, membership: pa.membership, cards: [] };
+          var cards = pcoGetAll_('/people/v2/people/' + p.id + '/workflow_cards?per_page=50') || [];
+          cards.forEach(function(c) {
+            var wid = String((((c.relationships||{}).workflow||{}).data||{}).id || ''); if (wid !== '528798') return;
+            var ca = c.attributes || {};
+            rec.cards.push({ id: c.id, stage: ca.stage, completed_at: ca.completed_at, removed_at: ca.removed_at, moved_to_step_at: ca.moved_to_step_at, step: String((((c.relationships||{}).current_step||{}).data||{}).id || '') });
+          });
+          outw.people.push(rec);
+        });
+      } catch (x) { outw.error = String(x && x.message || x); }
+      return eosWaJson_(outw);
+    }
     if (action === 'probe_members') {
       // Read-only aggregate probe (no names): how PCO membership + the membership workflow look.
       var out = {};
