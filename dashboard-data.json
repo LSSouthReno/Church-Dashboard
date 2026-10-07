@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-06T23:46:07.347Z",
+  "lastUpdated": "2026-10-07T01:59:34.709Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -9454,7 +9454,7 @@
     },
     {
       "name": "Breakfast Team",
-      "current": 15,
+      "current": 16,
       "needed": 23,
       "history": [
         {
@@ -9587,7 +9587,7 @@
         },
         {
           "d": "2026-10",
-          "n": 15
+          "n": 16
         }
       ]
     },
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 6, 2026, 4:46 PM",
+    "refreshed": "Oct 6, 2026, 6:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14117,7 +14117,7 @@
       333,
       352,
       391,
-      397
+      399
     ]
   },
   "baptisms": {
@@ -14168,16 +14168,16 @@
       2026
     ],
     "counts": [
-      1,
-      4,
-      33,
-      44,
-      18,
-      42,
-      30
+      2,
+      8,
+      74,
+      79,
+      43,
+      88,
+      71
     ],
     "current": 391,
-    "withJoinDate": 176
+    "withJoinDate": 391
   },
   "communityGroupsDetailed": {
     "goals2026": {
@@ -14188,7 +14188,7 @@
     },
     "current": {
       "groups": 37,
-      "members": 397,
+      "members": 399,
       "groupSize": 11,
       "fmInGroupsPct": 54,
       "asOfMonth": "Oct '26"
@@ -14668,7 +14668,7 @@
         333,
         352,
         391,
-        397,
+        399,
         null,
         null
       ]
@@ -14712,7 +14712,7 @@
         25,
         43,
         45,
-        4,
+        6,
         null,
         null
       ]
@@ -14756,7 +14756,7 @@
         24,
         22,
         48,
-        3,
+        5,
         null,
         null
       ]
@@ -14803,7 +14803,7 @@
         13,
         14,
         38,
-        3,
+        5,
         null,
         null
       ]
@@ -15008,6 +15008,14 @@
     ],
     "groupAttendance": [
       {
+        "name": "Men’s Tuesday Night: Better Call Paul",
+        "members": 24,
+        "leaders": 2,
+        "schedule": "Meets weekly on Tuesdays from 6-8pm",
+        "avgAttended": 9,
+        "attPct": 38
+      },
+      {
         "name": "Poleselli / McAlpine Community Group",
         "members": 23,
         "leaders": 2,
@@ -15022,14 +15030,6 @@
         "schedule": "Meets every other week on Tuesdays from 6-8pm",
         "avgAttended": 7,
         "attPct": 30
-      },
-      {
-        "name": "Men’s Tuesday Night: Better Call Paul",
-        "members": 22,
-        "leaders": 2,
-        "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 9,
-        "attPct": 41
       },
       {
         "name": "McCarthy Community Group",
@@ -15076,8 +15076,8 @@
         "members": 14,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-7:30pm",
-        "avgAttended": 7,
-        "attPct": 50
+        "avgAttended": 8,
+        "attPct": 57
       },
       {
         "name": "Colonna/Mavros Community Group",
@@ -15124,8 +15124,8 @@
         "members": 12,
         "leaders": 3,
         "schedule": "Meets weekly on Mondays from 3-5pm",
-        "avgAttended": 10,
-        "attPct": 83
+        "avgAttended": 11,
+        "attPct": 92
       },
       {
         "name": "Maidens Community Group",
@@ -15306,7 +15306,7 @@
     ],
     "venn": {
       "familyMembers": 391,
-      "cgMembers": 397,
+      "cgMembers": 399,
       "both": 211,
       "pctFmInCg": 54,
       "pctCgAreFm": 53
@@ -15314,14 +15314,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 391,
-        "cg": 397,
+        "cg": 399,
         "serving": 297,
         "giving": 960
       },
-      "universe": 1165,
+      "universe": 1167,
       "regions": {
         "1": 40,
-        "2": 90,
+        "2": 92,
         "3": 11,
         "4": 34,
         "5": 8,
@@ -15396,6 +15396,7 @@
           "Carly Albright",
           "Carolee Faanes",
           "Casey Stoddard",
+          "Charles Ko",
           "Chase Pagán",
           "Chris Wilson",
           "Christerson Ramlow",
@@ -15450,6 +15451,7 @@
           "Mary Jo (MJ) Mayer",
           "Melia Shively",
           "Melissa Negrillo",
+          "Mike McBride",
           "Mike Whiteford",
           "Molly DeBord",
           "Nicole Sfiroudis",
@@ -17003,7 +17005,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 186,
+        "count": 188,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17033,6 +17035,7 @@
           "Carly Albright",
           "Carolee Faanes",
           "Casey Stoddard",
+          "Charles Ko",
           "Chase Pagán",
           "Cheri Adams",
           "Chris Field",
@@ -17150,6 +17153,7 @@
           "Michelle Escobedo",
           "Michelle LaGrange",
           "Mikayla McEntire",
+          "Mike McBride",
           "Mike Munoz",
           "Mike Whiteford",
           "Molly DeBord",
@@ -29592,7 +29596,7 @@
               "name": "Anita Bigger",
               "team": "Presiders",
               "pos": "Sermon Text Reader",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             }
           ],
@@ -29678,7 +29682,7 @@
               "team": "Presiders",
               "pos": "Sermon Text Reader",
               "status": "U",
-              "serviceTime": "8 AM"
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Janet Colonna",
@@ -31523,11 +31527,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 53,
-    "weeklyAvg": 12,
-    "totalFetched": 7132,
-    "since": "2026-09-06",
-    "asOf": "2026-10-06T23:44:42.236Z"
+    "count30d": 55,
+    "weeklyAvg": 13,
+    "totalFetched": 7134,
+    "since": "2026-09-07",
+    "asOf": "2026-10-07T01:44:35.787Z"
   },
   "emailStats": {
     "latestOpenRate": 0.17302052785923755,
@@ -31535,6 +31539,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-03T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-06T23:44:43.410Z"
+    "asOf": "2026-10-07T01:44:36.838Z"
   }
 }
