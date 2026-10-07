@@ -267,8 +267,8 @@ function syncShepherdingHealth_() {
         target = unList;
       }
       var existing = target.people.filter(function(p){ return String(p.id)===String(nf.id); })[0];
-      if (existing) { existing._nf=true; existing._step=nf.step; existing._cardId=nf.cardId; existing._elder=shortElder||''; }
-      else target.people.push({ id:nf.id, first:nf.first, last:nf.last, name:nf.name, member:false, _nf:true, _step:nf.step, _cardId:nf.cardId, _elder:shortElder||'' });
+      if (existing) { existing._nf=true; existing._step=nf.step; existing._cardId=nf.cardId; existing._elder=shortElder||''; existing._assignee=nf.assignee||''; }
+      else target.people.push({ id:nf.id, first:nf.first, last:nf.last, name:nf.name, member:false, _nf:true, _step:nf.step, _cardId:nf.cardId, _elder:shortElder||'', _assignee:nf.assignee||'' });
     });
   }
 
@@ -288,6 +288,8 @@ function syncShepherdingHealth_() {
       var rec = spBuildPerson_(p, giving, groups[p.id], cf.contact[p.id], cf.fields[p.id], manual[p.id]);
       if (p._nf) {
         rec.newFamilyMember = true; rec.familyStep = p._step || ''; rec.familyCardId = p._cardId || '';
+        // Who the PCO workflow card is assigned to (the person responsible for reaching out).
+        rec.familyAssignee = p._assignee || (p._elder ? shFullElder_(p._elder) : '');
         // Default the drawer's Shepherding Pastor to the card assignee's pastor.
         if (!rec.assignedElder && p._elder) rec.assignedElder = shFullElder_(p._elder);
       }
@@ -855,7 +857,8 @@ function spNewFamilyMembers_(startMs) {
       out.push({ id:String(pid), first:pa.first_name||'', last:pa.last_name||'',
                  name:((pa.first_name||'')+' '+(pa.last_name||'')).trim()||('Person '+pid),
                  membership:String(pa.membership||''), step:stepName[relId_(c,'current_step')]||'',
-                 cardId:c.id, assigneeId:relId_(c,'assignee') });
+                 cardId:c.id, assigneeId:relId_(c,'assignee'),
+                 assignee:(function(){ var ap = persons[relId_(c,'assignee')] || {}; return ((ap.first_name||'')+' '+(ap.last_name||'')).trim(); })() });
     });
   } catch (e) { Logger.log('   ! new family fetch failed: ' + e.message); }
   return out;
@@ -1060,7 +1063,7 @@ function spBuildPublicSeed_(full) {
     assignedElder:'', spiritualMat:'', maturityManual:null, preferredComm:'',
     baptized:false, importantDates:{}, nextStep:null,
     score:null, paci:null, leads:!!p.leads, trajectory:'steady', pillars:null, giving:null,
-    newFamilyMember:!!p.newFamilyMember, familyStep:p.familyStep||'',
+    newFamilyMember:!!p.newFamilyMember, familyStep:p.familyStep||'', familyAssignee:p.familyAssignee||'',
     groups:p.groups||[], serveTeams:p.serveTeams||[], flags:(p.flags||[]).filter(function(f){return safe[f];}), pending:true }; }
   var elders = (full.elders||[]).map(function(e){
     var people = e.people.map(san);

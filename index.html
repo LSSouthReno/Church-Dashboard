@@ -3221,6 +3221,9 @@
   .sh-paci-badge.p-new    { background:rgba(234,179,8,.2); color:#fde047; box-shadow:inset 0 0 0 1px rgba(234,179,8,.5); }
   .sh-person.sh-newfam { border:2px solid var(--paci-child); border-left-width:6px; background:rgba(234,179,8,.10); box-shadow:0 0 0 1px rgba(234,179,8,.3), 0 4px 18px rgba(234,179,8,.15); }
   .sh-person.sh-newfam:hover { border-color:#fde047; }
+  .sh-nf-who { margin-top: 3px; font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
+  .sh-nf-who b { color: var(--gold); font-weight: 700; }
+  .sh-nf-who.none { color: #ff8a8e; }
   .sh-newfam-banner { font-size:12.5px; font-weight:800; color:#111; background:var(--paci-child); border-radius:7px; padding:7px 11px; margin-bottom:2px; letter-spacing:.01em; }
   /* Big, simple "advance" button for the membership process */
   .sh-adv-big { display:block; width:100%; box-sizing:border-box; text-align:center; font-size:14px !important; font-weight:800 !important;
@@ -16864,7 +16867,8 @@ function shPersonCard(p) {
   if (p.overdue && !p.newFamilyMember) badges += '<span class="sh-badge st-overdue">Overdue</span>';
   if (!p.baptized && !p.pending && !p.newFamilyMember) badges += '<span class="sh-badge st-nobap">Not baptized</span>';
   const nfBanner = p.newFamilyMember
-    ? '<div class="sh-newfam-banner">&#127881; New family member — contact to finalize'+(p.familyStep?(' · <b>'+shEsc(p.familyStep)+'</b>'):'')+'</div>'
+    ? '<div class="sh-newfam-banner">&#127881; New family member — contact to finalize'+(p.familyStep?(' · <b>'+shEsc(p.familyStep)+'</b>'):'')
+      + (p.familyAssignee ? '<div class="sh-nf-who">Reach out: <b>'+shEsc(p.familyAssignee)+'</b></div>' : '<div class="sh-nf-who none">No one assigned on the PCO card yet</div>') + '</div>'
     : '';
   let pillars = '';
   if (p.pillars && !p.newFamilyMember) {
@@ -18237,7 +18241,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T222045Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T222717Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
