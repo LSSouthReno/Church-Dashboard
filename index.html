@@ -155,9 +155,10 @@
   }
   @media (max-width: 560px) {
     #topNav { padding: 0 12px; }
-    .nav-lockup { display: none; }
-    .nav-mark { display: block; }
+    .nav-lockup { display: block; height: 24px; }
+    .nav-mark { display: none; }
     .nav-tabs { margin-left: 4px; }
+    .nav-brand { gap: 8px; }
     .nav-tab { padding: 0 9px; font-size: 12px; }
     .nav-me span:not(.av), .nav-signin { display: none; }
     .nav-me .av { width: 30px; height: 30px; }
@@ -2508,7 +2509,11 @@
   #sundayModal .tmod-body { padding:0; }
   .sd-week-bar { display:flex; align-items:center; gap:12px; padding:14px 28px; border-bottom:1px solid var(--card-border); background:var(--bg); flex-shrink:0; flex-wrap:wrap; }
   .sd-week-label { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; color:var(--text-muted); letter-spacing:.05em; white-space:nowrap; }
-  .sd-week-select { padding:7px 12px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; color:var(--text); font-family:'Montserrat',sans-serif; font-size:13px; cursor:pointer; min-width:220px; }
+  .sd-week-select { padding:7px 12px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; color:var(--text); font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700; cursor:pointer; min-width:220px; }
+  .sd-week-nav { appearance:none; background:var(--card-bg); border:1px solid var(--card-border); color:var(--text-muted); font-size:18px; line-height:1; padding:5px 12px; border-radius:6px; cursor:pointer; }
+  .sd-week-nav:hover:not(:disabled) { color:var(--text); border-color:#444; }
+  .sd-week-nav:disabled { opacity:.3; cursor:default; }
+  @media (max-width: 560px) { .sd-week-bar { flex-wrap:nowrap; gap:8px; padding:12px 14px; } .sd-week-select { min-width:0; flex:1; } .sd-print-btn { display:none; } }
   .sd-print-btn { margin-left:auto; padding:6px 14px; background:transparent; border:1px solid #3a3a3a; border-radius:6px; color:var(--text-muted); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; letter-spacing:.04em; white-space:nowrap; }
   .sd-print-btn:hover { border-color:var(--yellow-2); color:var(--yellow-2); }
   .sd-scroll { flex:1; overflow-y:auto; padding:28px 32px 60px; }
@@ -3420,9 +3425,7 @@
   <div class="nav-brand">
     <img class="nav-lockup" src="assets/ls-lockup-white.png" alt="Living Stones South Reno" />
     <img class="nav-mark" src="assets/ls-logo-white.png" alt="Living Stones South Reno" />
-    <div class="nav-brand-txt">
-      <div class="nav-title">Church Dashboard</div>
-    </div>
+
   </div>
   <div class="nav-tabs" role="tablist">
     <button class="nav-tab nav-today" data-tab="today" onclick="navGo('today')">Today</button>
@@ -4802,10 +4805,11 @@
   </div>
   <!-- Week selector bar -->
   <div class="sd-week-bar">
-    <span class="sd-week-label">WEEK</span>
+    <button class="sd-week-nav" onclick="sundayStep(-1)" title="Previous Sunday">&#8249;</button>
     <select class="sd-week-select" id="sd-week-select" onchange="sundaySelectWeek(this.value)">
       <option value="">Loading Sunday plans…</option>
     </select>
+    <button class="sd-week-nav" onclick="sundayStep(1)" title="Next Sunday">&#8250;</button>
     <button class="sd-print-btn" onclick="window.print()">Print / Save PDF</button>
   </div>
   <!-- Scrollable content -->
@@ -4914,14 +4918,34 @@
   .cal6-weeks { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: thin; }
   .cal6-weeks::-webkit-scrollbar { width: 6px; }
   .cal6-weeks::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 3px; }
-  .cal6-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); flex: 1 0 auto; border-top: 1px solid #202020; }
+  .cal6-week { display: flex; flex-direction: column; flex: 1 0 auto; border-top: 1px solid #202020; }
   .cal6-week:first-child { border-top: none; }
+  .cal6-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); flex: 1 0 auto; }
+  .cal6-spans { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px clamp(2px, 0.2vw, 7px); padding: clamp(2px, 0.15vw, 5px) clamp(2px, 0.2vw, 7px) 0; }
+  .cal6-span { font-size: clamp(9px, 0.6vw, 20px); font-weight: 700; color: #f0ede8; padding: clamp(1px, 0.1vw, 3px) clamp(4px, 0.3vw, 10px); border-left: clamp(2px, 0.2vw, 7px) solid; border-radius: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+  .cal6-span:hover { filter: brightness(1.4); }
+  .cal6-more { font-size: clamp(9px, 0.55vw, 18px); font-weight: 700; color: var(--gold); cursor: pointer; padding: 1px 3px; }
+  .cal6-daylist { margin-top: 10px; }
+  .cal6-dayrow { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #2a2a2a; font-size: 14px; cursor: pointer; }
+  .cal6-dayrow i { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .cal6-dayrow b { color: var(--text-muted); font-weight: 600; font-size: 12px; margin-right: 2px; }
+  /* Phones and tablets: name-only chips (one line each), no owner/time lines */
+  @media (max-width: 980px) {
+    .mode-1 .cal6-card-meta { display: none; }
+    .mode-1 .cal6-card { padding: 2px 4px; border-left-width: 3px; border-radius: 3px; }
+    .mode-1 .cal6-card-name { font-size: 10.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+    .cal6-day { padding: 2px 2px; gap: 2px; min-height: 64px; }
+    .cal6-dnum { font-size: 11px; }
+    .mode-1 .cal6-dnum { font-size: 11px; }
+    .cal6-span { font-size: 10px; }
+    .cal6-spans { padding: 2px 2px 0; gap: 2px; }
+  }
   .cal6-day {
     border-left: 1px solid #202020; min-width: 0; min-height: 0;
     padding: clamp(1px, 0.1vw, 4px) clamp(2px, 0.2vw, 7px);
     display: flex; flex-direction: column; gap: clamp(1px, 0.07vw, 3px);
   }
-  .cal6-day:first-child { border-left: none; }
+  .cal6-days .cal6-day:first-child { border-left: none; }
   .cal6-day.out { background: #101010; }
   .cal6-dnum { font-size: clamp(10px, 0.55vw, 20px); color: var(--text-dim); font-weight: 600; line-height: 1.1; flex-shrink: 0; }
   .cal6-day.today { box-shadow: inset 0 0 0 2px #e5484d; border-radius: 4px; }
@@ -5216,16 +5240,15 @@ function cal6Render() {
     return !(n.includes('community group') || n.startsWith('cg ') || n.includes('small group'));
   });
 
-  // dateKey → [events], expanding multi-day events across each of their days
-  const byDate = {};
+  // dateKey → [events]. Single-day events go in their day cell; multi-day events are
+  // drawn once per week as a bar spanning their days (instead of a chip in every cell).
+  const byDate = {}, spans = [];
   usable.forEach(ev => {
-    const startD = new Date(ev.dateKey + 'T12:00:00');
-    const endD   = new Date((ev.endKey || ev.dateKey) + 'T12:00:00');
-    for (let d = new Date(startD); d <= endD; d.setDate(d.getDate() + 1)) {
-      const dk = d.toISOString().slice(0, 10);
-      if (!byDate[dk]) byDate[dk] = [];
-      if (!byDate[dk].find(x => x.name === ev.name)) byDate[dk].push(ev);
-    }
+    const multi = !!(ev.endKey && ev.endKey > ev.dateKey);
+    if (multi) { if (cal6Visible(ev)) spans.push(ev); return; }
+    const dk = ev.dateKey;
+    if (!byDate[dk]) byDate[dk] = [];
+    if (!byDate[dk].find(x => x.name === ev.name)) byDate[dk].push(ev);
   });
   Object.values(byDate).forEach(list => list.sort((a, b) => cal6Mins(a.time) - cal6Mins(b.time)));
 
@@ -5260,23 +5283,37 @@ function cal6Render() {
     const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
     const lead   = first.getDay();  // Sunday-first offset
 
-    const dayCells = [];
+    const phone = window.innerWidth <= 560, maxChips = phone ? 3 : 99;
+    const dayCells = [], slotKeys = [];
     for (let slot = 0; slot < 42; slot++) {
       const dayNum = slot - lead + 1;
-      if (dayNum < 1 || dayNum > daysIn) { dayCells.push('<div class="cal6-day out"></div>'); continue; }
+      if (dayNum < 1 || dayNum > daysIn) { dayCells.push('<div class="cal6-day out"></div>'); slotKeys.push(''); continue; }
       const dk = first.getFullYear() + '-' + String(first.getMonth()+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      slotKeys.push(dk);
       const evs = (byDate[dk] || []).filter(cal6Visible);
-      const chips = evs.map(ev => {
+      let chips = evs.slice(0, maxChips).map(ev => {
         const cat = cal6Cat(ev);
         usedCats.add(cat.key);
         return cal6Chip(ev, cat, dk, evs.length);
       }).join('');
+      if (evs.length > maxChips) { _cal6DayReg[dk] = evs; chips += '<div class="cal6-more" onclick="cal6ShowDay(\'' + dk + '\')">+' + (evs.length - maxChips) + ' more</div>'; }
       dayCells.push('<div class="cal6-day' + (dk === todayKey ? ' today' : '') + '"><div class="cal6-dnum">' + dayNum + '</div>' + chips + '</div>');
     }
 
     let weeks = '';
     for (let w = 0; w < 6; w++) {
-      weeks += '<div class="cal6-week">' + dayCells.slice(w*7, w*7+7).join('') + '</div>';
+      const keys = slotKeys.slice(w*7, w*7+7), wkStart = keys.find(Boolean), wkEnd = keys.slice().reverse().find(Boolean);
+      let bars = '';
+      if (wkStart) {
+        spans.filter(ev => ev.dateKey <= wkEnd && ev.endKey >= wkStart).forEach(ev => {
+          const cat = cal6Cat(ev); usedCats.add(cat.key);
+          let c0 = keys.findIndex(k => k && k >= ev.dateKey), c1 = 6; for (let c = 6; c >= 0; c--) { if (keys[c] && keys[c] <= ev.endKey) { c1 = c; break; } }
+          if (c0 < 0) c0 = 0;
+          const cont = ev.dateKey < wkStart, more = ev.endKey > wkEnd;
+          bars += '<div class="cal6-span" style="grid-column:' + (c0 + 1) + ' / ' + (c1 + 2) + ';border-left-color:' + cat.color + ';background:' + cat.color + '2b;" onclick="cal6ShowDetail(' + (_cal6ChipReg.push({ ev: ev, cat: cat }) - 1) + ')" title="' + cal6Esc(ev.name + ' · ' + cal6FmtDay(ev.dateKey) + ' – ' + cal6FmtDay(ev.endKey)) + '">' + (cont ? '‹ ' : '') + cal6Esc(ev.name) + (more ? ' ›' : '') + '</div>';
+        });
+      }
+      weeks += '<div class="cal6-week">' + (bars ? '<div class="cal6-spans">' + bars + '</div>' : '') + '<div class="cal6-days">' + dayCells.slice(w*7, w*7+7).join('') + '</div></div>';
     }
 
     monthsHtml +=
@@ -5444,6 +5481,17 @@ function cal6Chip(ev, cat, dk, dayCount) {
 }
 
 // ── Event detail popup ─────────────────────────────────────────
+// A day's full event list (phones cap each cell at 3 chips + "+N more").
+let _cal6DayReg = {};
+function cal6ShowDay(dk) {
+  const evs = _cal6DayReg[dk] || []; if (!evs.length) return;
+  const d = new Date(dk + 'T12:00:00');
+  const rows = evs.map(ev => { const cat = cal6Cat(ev); const i = _cal6ChipReg.push({ ev: ev, cat: cat }) - 1;
+    return '<div class="cal6-dayrow" onclick="cal6ShowDetail(' + i + ')"><i style="background:' + cat.color + '"></i><span>' + (ev.time ? '<b>' + cal6Esc(cal6TimeShort(ev.time)) + '</b> ' : '') + cal6Esc(ev.name) + '</span></div>'; }).join('');
+  const dm = document.getElementById('cal6Dm'), bg = document.getElementById('cal6DmBg');
+  dm.innerHTML = '<button class="cal6-dm-x" onclick="cal6HideDetail()" aria-label="Close">&times;</button><div class="cal6-dm-cat">' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + '</div><div class="cal6-dm-title">' + evs.length + ' events</div><div class="cal6-daylist">' + rows + '</div>';
+  bg.classList.add('open');
+}
 function cal6ShowDetail(idx) {
   const entry = _cal6ChipReg[idx];
   if (!entry) return;
@@ -5565,7 +5613,7 @@ function chRenderTiles() {
     tile('members', 'Members', M.current || '—', 'member · deacon · pastor', { txt: mNew ? '+' + mNew + ' this year' : '', cls: 'up' }) +
     tile('baptisms', 'Baptisms ' + yr, bapYtd, (B.total || 0).toLocaleString() + ' all-time', { txt: '', cls: 'up' }) +
     tile('groups', 'In a group', cgm != null ? cgm : '—', grp != null ? grp + ' community groups' : '', (cgm != null && cgm2 != null) ? { txt: (cgm - cgm2 >= 0 ? '+' : '') + (cgm - cgm2) + ' since ' + E(cgMon), cls: cgm - cgm2 >= 0 ? 'up' : 'dn' } : {}) +
-    tile('serve', 'Serving', D.uniqueVolunteers || '—', need ? need + ' positions · ' + gap + ' open' : '', fill != null ? { txt: fill + '% filled', cls: fill >= 90 ? 'up' : fill >= 75 ? 'wn' : 'dn' } : {}) +
+    tile('serve', 'Serving', D.uniqueVolunteers || '—', need ? need + ' positions · ' + gap + ' open' : '', fill != null ? { txt: fill + '% staffed', cls: fill >= 90 ? 'up' : fill >= 75 ? 'wn' : 'dn' } : {}) +
     (giveOpen
       ? tile('giving', 'Giving · ' + E(gMon), gAmt != null ? '$' + Math.round(gAmt).toLocaleString() : '—', 'last full month', { txt: 'Pledge · budget · missions →', cls: 'gold' })
       : tile('giving', 'Giving', 'Members only', 'Monthly giving, ALL-IN pledge, budget', { txt: 'Unlock →', cls: 'gold' }, 'lock'));
@@ -7258,7 +7306,7 @@ function tmMetrics() {
     tm_metric(VOLS.length,       'Total volunteers',      'unique people in PCO') +
     tm_metric(totalPositions,    'Total positions filled','across all teams (PCO)', '') +
     tm_metric(gap,               'Staffing gap',          'positions still needed', gap > 0 ? 'tmod-vr' : 'tmod-vg') +
-    tm_metric(fill + '%',        'Recent fill rate',      'last 6 services',        fill >= 75 ? 'tmod-vg' : fill >= 60 ? 'tmod-va' : 'tmod-vr') +
+    tm_metric(fill + '%',        'Showed up',             'of scheduled · last 6 services', fill >= 75 ? 'tmod-vg' : fill >= 60 ? 'tmod-va' : 'tmod-vr') +
     tm_metric(rel  + '%',        'Avg reliability',       'all volunteers',          rel  >= 75 ? 'tmod-vg' : rel  >= 50 ? 'tmod-va' : 'tmod-vr');
 }
 function tm_metric(val, label, sub, cls) {
@@ -7472,7 +7520,7 @@ function tmRSP() {
   const ts = recent.reduce((a, p) => a + p.s, 0);
 
   document.getElementById('tmPS').innerHTML =
-    tm_metric(af + '%', 'Recent fill rate', 'last 6 services', af >= 75 ? 'tmod-vg' : af >= 60 ? 'tmod-va' : 'tmod-vr') +
+    tm_metric(af + '%', 'Showed up', 'of scheduled · last 6 services', af >= 75 ? 'tmod-vg' : af >= 60 ? 'tmod-va' : 'tmod-vr') +
     tm_metric(ad,       'Avg declines',     'per recent service', 'tmod-va') +
     tm_metric(ts,       'Scheduled',        'last 6 services') +
     tm_metric(PLANS.length, 'Services tracked', 'full history');
@@ -7916,9 +7964,14 @@ async function kpLoadEvents() {
     let evs = _cal6Events;
     if (!evs) { const r = await fetch('./eos-data.json?v=' + Date.now(), { cache: 'no-store' }); const j = await r.json(); evs = (j.calendar && j.calendar.events) || []; }
     const today = new Date().toISOString().slice(0, 10), end = new Date(Date.now() + 90 * 864e5).toISOString().slice(0, 10), seen = {};
-    _kpEvents = evs.filter(e => e.dateKey >= today && e.dateKey <= end && !/community group|worship gathering/i.test(e.name || ''))
+    const list = evs.filter(e => e.dateKey >= today && e.dateKey <= end && !/community group|worship gathering/i.test(e.name || ''))
       .filter(e => { const k = e.dateKey + '|' + String(e.name).trim().toLowerCase(); if (seen[k]) return false; seen[k] = 1; return true; })
-      .sort((a, b) => a.dateKey.localeCompare(b.dateKey)).slice(0, 400);
+      .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+    // Weekly repeats (rehearsals, staff meeting…) collapse to their next occurrence.
+    const byName = {}; list.forEach(e => { const k = String(e.name).trim().toLowerCase(); (byName[k] = byName[k] || []).push(e); });
+    _kpEvents = [];
+    Object.keys(byName).forEach(k => { const g = byName[k]; const first = Object.assign({}, g[0]); if (g.length >= 3) first.repeats = g.length; _kpEvents.push(first); });
+    _kpEvents.sort((a, b) => a.dateKey.localeCompare(b.dateKey)); _kpEvents = _kpEvents.slice(0, 400);
   } catch (e) { _kpEvents = []; }
   if (document.getElementById('kpBg').classList.contains('open')) kpRender();
   return _kpEvents;
@@ -7937,7 +7990,7 @@ function kpMatches() {
   let out = (_kpItems || []).filter(i => hit(i.label + ' ' + (i.hint || '') + ' ' + i.sec));
   if (words.length) {
     (_kpEvents || []).filter(e => hit(e.name)).slice(0, 8).forEach(e => out.push({ sec: 'Events', label: String(e.name).trim(), ic: '▣',
-      hint: new Date(e.dateKey + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + (e.time ? ' · ' + e.time : ''),
+      hint: (e.repeats ? 'next ' : '') + new Date(e.dateKey + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + (e.time ? ' · ' + e.time : '') + (e.repeats ? ' · repeats' : ''),
       go: () => { navGo('calendar'); } }));
     if (typeof aiToggle === 'function') out.push({ sec: 'Ask', label: 'Ask the assistant: “' + q + '”', hint: 'AI', ic: '✦', ai: true,
       go: () => { const p = document.getElementById('aiPanel'); if (p && !p.classList.contains('open')) aiToggle(); const i = document.getElementById('aiInput'); if (i) { i.value = q; } setTimeout(() => { try { aiAsk(); } catch (e) {} }, 80); } });
@@ -8037,7 +8090,10 @@ const CG_HASH = 'ea8ef92da17727c9d74fbcd9f81cd423d1841112a0497f8d2b7ad8a0248531c
 const CG_SESSION_KEY = 'cg_unlocked';
 let cgRendered = false;
 
-function cgIsUnlocked() { return sessionStorage.getItem(CG_SESSION_KEY) === '1'; }
+function cgIsUnlocked() {
+  try { if (sessionStorage.getItem(CG_SESSION_KEY) === '1') return true; } catch (e) {}
+  return (typeof staffIsUnlocked === 'function' && staffIsUnlocked()) || (typeof pastorIsUnlocked === 'function' && pastorIsUnlocked());
+}
 
 function openCGModal() {
   if (!DASHBOARD_DATA) return;
@@ -11286,13 +11342,12 @@ function cgDragName(n, cls, pid) {
   return '<span class="' + cls + ' cg-dragname" draggable="true" data-name="' + escapeHtml(n) + '"' + (pid ? ' data-pid="' + escapeHtml(pid) + '"' : '') +
     ' title="Click for their snapshot · drag onto a CG Leader Pipeline step to add">' + escapeHtml(n) + '</span>';
 }
-function cgpPw() { try { return sessionStorage.getItem('cg_pw') || ''; } catch (e) { return ''; } }
+function cgpPw() { try { return sessionStorage.getItem('cg_pw') || (pastorIdentity() || {}).token || ''; } catch (e) { return ''; } }
 async function cgpApi(body) {
   let pw = cgpPw();
   if (!pw) {
-    pw = (prompt('Enter the Groups password to connect the live pipeline:') || '').trim();
-    if (!pw) throw new Error('Password needed to edit the pipeline');
-    try { sessionStorage.setItem('cg_pw', pw); } catch (e) {}
+    mmShowPrompt(() => { if (cgpPw()) { cgpToast('Pipeline connected'); try { cgpLoad(); } catch (e) {} } });
+    throw new Error('The live pipeline needs the groups password (pastors are signed in already)');
   }
   const j = await gasCall(STAFF_OS_URL, Object.assign({ pw: pw }, body));
   if (j && j.auth === false) { try { sessionStorage.removeItem('cg_pw'); } catch (e) {} throw new Error('Wrong password — try again'); }
@@ -12012,6 +12067,12 @@ function sundayBuildSelector() {
   sundaySelectWeek(best);
 }
 
+function sundayStep(dir) {
+  const sel = document.getElementById('sd-week-select'); if (!sel || !_sundayPlans || !_sundayPlans.length) return;
+  const i = _sundayPlans.findIndex(p => p.date === sel.value), j = i + dir;
+  if (j < 0 || j >= _sundayPlans.length) return;
+  sel.value = _sundayPlans[j].date; sundaySelectWeek(sel.value);
+}
 function sundaySelectWeek(dateKey) {
   const container = document.getElementById('sd-content');
   if (!dateKey || !_sundayPlans) {
@@ -18086,7 +18147,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261006T234858Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261007T022655Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
