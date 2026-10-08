@@ -119,6 +119,16 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(jgProbe_());
     }
+    if (action === 'probe_jr_log') {
+      // Signed-in lschurches.com user only: last sign-in attempts (no codes, masked emails) + channel.
+      var who3 = ''; try { who3 = String(Session.getActiveUser().getEmail() || ''); } catch (x) {}
+      if (!/@lschurches\.com$/i.test(who3)) return eosWaJson_({ error: 'unauthorized' });
+      var rp = String((e.parameter||{}).resetPhone || '').replace(/\D/g, ''), reset = '';
+      if (rp.length === 10) { try { CacheService.getScriptCache().remove('jr_rate_' + jrHash_(jrE164_(rp))); reset = 'rate limit cleared for …' + rp.slice(-4); } catch (x) { reset = String(x); } }
+      var lg = []; try { lg = JSON.parse(PropertiesService.getScriptProperties().getProperty('JR_SIGNIN_LOG') || '[]'); } catch (x) {}
+      var sidOk = /^AC[0-9a-f]{32}$/i.test(jrProp_('TWILIO_SID')), vsidOk = /^VA[0-9a-f]{32}$/i.test(jrProp_('TWILIO_VERIFY_SID')), tokLen = jrProp_('TWILIO_TOKEN').length;
+      return eosWaJson_({ smsOn: jrSmsOn_(), sidFormatOk: sidOk, verifySidFormatOk: vsidOk, tokenLength: tokLen, reset: reset, log: lg.slice(0, 12) });
+    }
     if (action === 'probe_wf_card') {
       // Read-only; only a signed-in lschurches.com Google user (the HEAD /dev link) may call it.
       var who = ''; try { who = String(Session.getActiveUser().getEmail() || ''); } catch (x) {}

@@ -171,7 +171,13 @@ function jrPhoneStart_(body) {
   var ppl = jrPeopleByPhone_(e164).filter(function(p) { return !p.child; });
   jrLog_({ step: 'start', phone: '…' + e164.slice(-4), matches: ppl.length });
   if (!ppl.length) return { ok: true, sent: true, channel: jrConfig_().channel };
-  if (jrSmsOn_()) { jrTwilio_('/Verifications', { To: e164, Channel: 'sms' }); return { ok: true, sent: true, channel: 'sms' }; }
+  if (jrSmsOn_()) {
+    var tw = jrTwilio_('/Verifications', { To: e164, Channel: 'sms' });
+    jrLog_({ step: 'sms', http: tw.code, status: tw.json && tw.json.status, twilioCode: tw.json && tw.json.code, msg: tw.json && tw.json.message ? String(tw.json.message).slice(0, 160) : '' });
+    if (tw.code >= 200 && tw.code < 300) { c.remove('jr_chan_' + jrHash_(e164)); return { ok: true, sent: true, channel: 'sms' }; }
+    // Twilio refused (e.g. 21608 compliance profile pending, 429, outage) → fall back to email for this attempt.
+  }
+  c.put('jr_chan_' + jrHash_(e164), 'email', 900);   // the code for this phone went by EMAIL; verify that way
   jrEmailCodes_(e164, ppl);
   return { ok: true, sent: true, channel: 'email' };
 }
@@ -254,8 +260,9 @@ function jrMagic_(body) {
 function jrPhoneVerify_(body) {
   var e164 = jrE164_(body.phone), code = String(body.code || '').replace(/\D/g, '');
   if (!e164 || code.length < 4) return { ok: false, error: 'Enter the 6-digit code.' };
-  if (!jrSmsOn_()) {                                   // email channel
-    var c = CacheService.getScriptCache(), k = 'jr_ec_' + jrHash_(e164), hit = c.get(k);
+  var c0 = CacheService.getScriptCache();
+  if (!jrSmsOn_() || c0.get('jr_chan_' + jrHash_(e164)) === 'email') {   // email channel (configured, or Twilio fallback)
+    var c = c0, k = 'jr_ec_' + jrHash_(e164), hit = c.get(k);
     if (!hit) return { ok: false, error: 'That code has expired — please ask for a new one.' };
     var st = JSON.parse(hit), h = jrHash_(code + ':' + e164);
     var m = st.list.filter(function(x) { return x.code === h; })[0];
