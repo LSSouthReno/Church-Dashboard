@@ -377,12 +377,14 @@ async function sendNote(kind) {
   if (r.ok) { closeSheet(); toast(kind === 'prayer' ? 'Thank you — we’re praying with you.' : 'Sent. Thank you!'); }
   else { b.disabled = false; b.textContent = 'Send'; toast(r.error || 'That didn’t send — please try again.'); }
 }
-async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); viewSignin(); }
+async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; viewSignin(); tellParent(); }
 // Signed-in state for the dashboard (so it can label the tab).
-function tellParent() { if (EMBED) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && S.data.person.first) || '' }, location.origin); } catch (e) {} } }
+function tellParent() { if (EMBED) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && String(S.data.person.first).split(' ')[0]) || '' }, location.origin); } catch (e) {} } }
 
 // ── start ────────────────────────────────────────────────────────────────────
 const EMBED = new URLSearchParams(location.search).get('embed') === '1';
+// The dashboard's Sign out ends this session too.
+window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { tokenSet(''); S.data = null; viewSignin(); tellParent(); } });
 if (EMBED) {
   document.body.classList.add('embed');
   // Tell the dashboard how tall we are so its iframe never scrolls on its own.

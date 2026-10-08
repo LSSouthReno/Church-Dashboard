@@ -7948,9 +7948,11 @@ function navRefreshAuth() {
       el.innerHTML = '<button class="nav-me" onclick="navMenuToggle(event)" title="Account"><span class="av">' + escapeHtml((first || role)[0]) + '</span><span><b>' + escapeHtml(first || 'Signed in') + '</b><small>' + role + '</small></span></button>';
     } else if (a.members || a.groups) {
       el.innerHTML = '<button class="nav-me" onclick="navMenuToggle(event)" title="Account"><span class="av">M</span><span><b>' + (a.members ? 'Members' : 'Groups') + '</b><small>signed in</small></span></button>';
+    } else if (_jrSignedIn) {
+      el.innerHTML = '<button class="nav-me" onclick="navMenuToggle(event)" title="Account"><span class="av">' + escapeHtml((_jrFirst || 'M')[0].toUpperCase()) + '</span><span><b>' + escapeHtml(_jrFirst || 'Signed in') + '</b><small>My Journey</small></span></button>';
     } else el.innerHTML = '<button class="nav-signin" onclick="signInOpen()">Sign in</button>';
   }
-  const anyIn = a.staff || a.pastor || a.members || a.groups || a.leader;
+  const anyIn = a.staff || a.pastor || a.members || a.groups || a.leader || _jrSignedIn;
   if (mo) { mo.textContent = anyIn ? 'Sign out' : 'Sign in'; mo.onclick = anyIn ? signOut : signInOpen; }
 }
 function navMenuToggle(e) {
@@ -7974,6 +7976,7 @@ function signOut() {
     ['staff_unlocked_until', 'mm_until', 'pastor_until', 'pastor_hash', 'pastor_id', 'pastor_token', 'leader_me', SOS_ME_KEY].forEach(k => localStorage.removeItem(k));
   } catch (e) {}
   try { if (_shPastorHash) { fetch(EOS_WEBAPP_URL + '?action=pastor_signout&pw=' + _shPastorHash + '&_=' + Date.now()).catch(() => {}); shLogout(); } } catch (e) {}
+  jrSignOut();   // My Journey has its own 90-day session — Sign out ends it too
   tmAdminUnlocked = false; try { tlhAdminLock(); } catch (e) {}
   try { if (DASHBOARD_DATA) mmApplyState(); } catch (e) {}
   navRefreshAuth();
@@ -17564,6 +17567,15 @@ function openTodayModal() {
   if (staff) { todayRender(); todayLoad(); } else document.getElementById('tdInner').innerHTML = '';
   jrEmbedMount();
 }
+// My Journey session (set by the embedded page): shown in the account chip; ended by Sign out.
+let _jrSignedIn = false, _jrFirst = '';
+const JR_API_URL = 'https://script.google.com/macros/s/AKfycbx-YDZg924fyFkG2U69o6Z0BBTLsh8ZAUvwK4fxSkW7LKGiXlxn5s2jyq9GCDxwA_sANA/exec';
+function jrSignOut() {
+  let tok = ''; try { tok = localStorage.getItem('lssr_journey_token') || ''; localStorage.removeItem('lssr_journey_token'); } catch (e) {}
+  if (tok) fetch(JR_API_URL + '?action=jr&p=' + encodeURIComponent(JSON.stringify({ action: 'jr_logout', token: tok })) + '&t=' + Date.now()).catch(() => {});
+  _jrSignedIn = false; _jrFirst = '';
+  const f = document.getElementById('jrEmbed'); if (f && f.contentWindow) { try { f.contentWindow.postMessage({ jrLogout: true }, location.origin); } catch (e) {} }
+}
 // My Journey lives at /journey/ (its own page, so the email one-tap link works); the tab embeds it.
 function jrEmbedMount() {
   const f = document.getElementById('jrEmbed'); if (!f) return;
@@ -17573,7 +17585,7 @@ window.addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data) return;
   const f = document.getElementById('jrEmbed');
   if (f && e.data.jrHeight) f.style.height = Math.max(420, e.data.jrHeight + 8) + 'px';
-  if (typeof e.data.jrSignedIn === 'boolean') { const hd = document.getElementById('jrEmbedH'); if (hd) hd.textContent = e.data.jrFirst ? 'My Journey · ' + e.data.jrFirst : 'My Journey'; }
+  if (typeof e.data.jrSignedIn === 'boolean') { _jrSignedIn = e.data.jrSignedIn; _jrFirst = e.data.jrFirst || ''; const hd = document.getElementById('jrEmbedH'); if (hd) hd.textContent = _jrFirst ? 'My Journey · ' + _jrFirst : 'My Journey'; try { navRefreshAuth(); } catch (x) {} }
 });
 function closeTodayModal() {
   const m = document.getElementById('todayModal'); if (!m || !m.classList.contains('open')) return;
@@ -18260,7 +18272,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261007T234702Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261008T194258Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
