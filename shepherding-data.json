@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T19:19:39.640Z",
+  "generatedAt": "2026-10-08T20:18:24.774Z",
   "asOf": "2026-10-08",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 217,
+    "inGroup": 215,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 393,
-    "notInGroup": 176,
+    "notInGroup": 178,
     "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 393
     },
     "pct": {
-      "inGroup": 0.5521628498727735,
+      "inGroup": 0.5470737913486005,
       "serving": 0.5954198473282443,
       "leading": 0.19592875318066158,
       "givingRegular": 0,
@@ -1455,9 +1455,9 @@
           "familyAssignee": "",
           "groups": [
             {
-              "name": "Taylor Community Group",
+              "name": "Colburn/Turcich Community Group",
               "role": "leader",
-              "joinedAt": "2024-07-18T22:38:55Z"
+              "joinedAt": "2026-10-08T19:34:21Z"
             },
             {
               "name": "CG LEADERS",
@@ -8400,7 +8400,7 @@
       "summary": {
         "totalPeople": 59,
         "avgScore": 0,
-        "inGroup": 20,
+        "inGroup": 19,
         "serving": 27,
         "leading": 9,
         "givingRegular": 0,
@@ -8410,7 +8410,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 59,
-        "notInGroup": 39,
+        "notInGroup": 40,
         "notServing": 32,
         "notGiving": 0,
         "paciCounts": {
@@ -8428,7 +8428,7 @@
           "unknown": 59
         },
         "pct": {
-          "inGroup": 0.3389830508474576,
+          "inGroup": 0.3220338983050847,
           "serving": 0.4576271186440678,
           "leading": 0.15254237288135594,
           "givingRegular": 0,
@@ -9016,6 +9016,44 @@
         },
         {
           "id": null,
+          "name": "Nita Taylor",
+          "first": "Nita",
+          "last": "Taylor",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Allison Wallace",
           "first": "Allison",
           "last": "Wallace",
@@ -9449,11 +9487,6 @@
               "name": "Lattin Community Group",
               "role": "member",
               "joinedAt": "2024-07-18T22:41:45Z"
-            },
-            {
-              "name": "Taylor Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:33:13Z"
             }
           ],
           "serveTeams": [],
@@ -9648,49 +9681,6 @@
           "serveTeams": [],
           "flags": [
             "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Nita Taylor",
-          "first": "Nita",
-          "last": "Taylor",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [
-            {
-              "name": "Taylor Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:33:25Z"
-            }
-          ],
-          "serveTeams": [],
-          "flags": [
             "Not serving"
           ],
           "pending": true
@@ -13086,9 +13076,9 @@
           "familyAssignee": "",
           "groups": [
             {
-              "name": "Taylor Community Group",
+              "name": "Colburn/Turcich Community Group",
               "role": "leader",
-              "joinedAt": "2024-07-18T22:38:46Z"
+              "joinedAt": "2026-10-08T19:34:52Z"
             },
             {
               "name": "CG LEADERS",
@@ -13954,7 +13944,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 28,
+        "inGroup": 27,
         "serving": 26,
         "leading": 7,
         "givingRegular": 0,
@@ -13964,7 +13954,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 20,
+        "notInGroup": 21,
         "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
@@ -13982,7 +13972,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.5833333333333334,
+          "inGroup": 0.5625,
           "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
@@ -14666,6 +14656,49 @@
         },
         {
           "id": null,
+          "name": "Diane Dale",
+          "first": "Diane",
+          "last": "Dale",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2025-01-20T05:03:51Z"
+            }
+          ],
+          "flags": [
+            "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
           "name": "Marla Stemper",
           "first": "Marla",
           "last": "Stemper",
@@ -15225,53 +15258,6 @@
               "name": "Hospitality Team",
               "role": "member",
               "joinedAt": "2026-03-15T18:22:24Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
-          "name": "Diane Dale",
-          "first": "Diane",
-          "last": "Dale",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [
-            {
-              "name": "Taylor Community Group",
-              "role": "member",
-              "joinedAt": "2025-02-06T04:55:26Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2025-01-20T05:03:51Z"
             }
           ],
           "flags": [],
@@ -18577,7 +18563,7 @@
   "paciCounts": {
     "parent": 64,
     "adult": 64,
-    "child": 152,
-    "infant": 103
+    "child": 151,
+    "infant": 104
   }
 }
