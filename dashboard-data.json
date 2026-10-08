@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-08T00:46:41.637Z",
+  "lastUpdated": "2026-10-08T19:02:24.295Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      71368
+      72818
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      198
+      200
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5660507
+    "raised": 5661957
   },
   "attendance": {
     "months": [
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 7, 2026, 5:46 PM",
+    "refreshed": "Oct 8, 2026, 12:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -15020,8 +15020,8 @@
         "members": 23,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 13,
-        "attPct": 57
+        "avgAttended": 12,
+        "attPct": 52
       },
       {
         "name": "Martinson/Degener Community Group",
@@ -15288,7 +15288,7 @@
         "attPct": 0
       },
       {
-        "name": "Turcich Community Group",
+        "name": "Colburn/Turcich Community Group",
         "members": 3,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
@@ -15316,9 +15316,9 @@
         "familyMembers": 392,
         "cg": 402,
         "serving": 297,
-        "giving": 950
+        "giving": 951
       },
-      "universe": 1164,
+      "universe": 1165,
       "regions": {
         "1": 42,
         "2": 93,
@@ -15327,7 +15327,7 @@
         "5": 11,
         "6": 7,
         "7": 16,
-        "8": 523,
+        "8": 524,
         "9": 80,
         "10": 67,
         "11": 51,
@@ -16614,7 +16614,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 603,
+          "count": 604,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -16819,7 +16819,7 @@
           ]
         }
       },
-      "asOf": "2026-10-07"
+      "asOf": "2026-10-08"
     },
     "actionLists": {
       "fmNotInCg": {
@@ -27234,7 +27234,7 @@
               "name": "Alexis Durham",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -27276,7 +27276,7 @@
               "name": "Jeana Rehberger",
               "team": "Enrichment Teams",
               "pos": "Front Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27490,7 +27490,7 @@
         {
           "serviceType": "SERVICES",
           "planId": "90727709",
-          "title": "Saved By Grace Alone (Ephesians 2:8-10)",
+          "title": "You Are a Masterpiece (Ephesians 2:8-10)",
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "Ryan Griffin",
           "captains": [
@@ -28367,7 +28367,7 @@
         {
           "serviceType": "SERVICES",
           "planId": "90727711",
-          "title": "Living Stones (Ephesians 2:19-22)",
+          "title": "You Are a Living Stone (Ephesians 2:19-22)",
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "Adam Carp",
           "captains": [
@@ -28876,7 +28876,7 @@
               "name": "Shiona Dykins",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -29856,13 +29856,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Sarah Jones",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Lead Guide",
-              "status": "U",
-              "serviceTime": "8 AM"
-            },
-            {
               "name": "Cindy Lefler",
               "team": "Stepping Stones",
               "pos": "Bluebirds Lead Guide",
@@ -30143,8 +30136,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 68
+            "volsWithServiceTime": 67,
+            "totalVols": 67
           }
         }
       ]
@@ -30646,6 +30639,13 @@
               "pos": "Presider",
               "status": "C",
               "serviceTime": "9:30 AM, 11 AM"
+            },
+            {
+              "name": "Sarah Jones",
+              "team": "Stepping Stones",
+              "pos": "Bluebirds Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -30655,8 +30655,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ]
@@ -31558,18 +31558,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 55,
-    "weeklyAvg": 13,
+    "count30d": 53,
+    "weeklyAvg": 12,
     "totalFetched": 7134,
     "since": "2026-09-08",
-    "asOf": "2026-10-08T00:44:43.452Z"
+    "asOf": "2026-10-08T18:44:40.515Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.28082736674622116,
-    "avgOpenRate3": 0.30751424448526204,
+    "latestOpenRate": 0.3937947494033413,
+    "avgOpenRate3": 0.34517003870430213,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-07T15:44:53+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-08T00:44:44.799Z"
+    "asOf": "2026-10-08T18:44:41.320Z"
   }
 }

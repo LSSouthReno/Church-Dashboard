@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-08T00:19:42.921Z",
-  "asOf": "2026-10-07",
+  "generatedAt": "2026-10-08T19:19:39.640Z",
+  "asOf": "2026-10-08",
   "givingMonths": 12,
   "statusVocab": [
     "healthy",
@@ -18,9 +18,9 @@
   ],
   "seed": true,
   "congregation": {
-    "totalPeople": 392,
+    "totalPeople": 393,
     "avgScore": 0,
-    "inGroup": 216,
+    "inGroup": 217,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -29,9 +29,9 @@
     "noRecentGiving": 0,
     "needsAttention": 0,
     "overdue": 0,
-    "notBaptized": 392,
+    "notBaptized": 393,
     "notInGroup": 176,
-    "notServing": 158,
+    "notServing": 159,
     "notGiving": 0,
     "paciCounts": {
       "parent": 0,
@@ -45,12 +45,12 @@
       "wandering": 0,
       "lost": 0,
       "could-not-contact": 0,
-      "unknown": 392
+      "unknown": 393
     },
     "pct": {
-      "inGroup": 0.5510204081632653,
-      "serving": 0.5969387755102041,
-      "leading": 0.19642857142857142,
+      "inGroup": 0.5521628498727735,
+      "serving": 0.5954198473282443,
+      "leading": 0.19592875318066158,
       "givingRegular": 0,
       "recurring": 0,
       "givingGrowing": 0,
@@ -3407,9 +3407,9 @@
       "list": "Shepherding - Brad",
       "unassigned": false,
       "summary": {
-        "totalPeople": 57,
+        "totalPeople": 58,
         "avgScore": 0,
-        "inGroup": 29,
+        "inGroup": 30,
         "serving": 35,
         "leading": 10,
         "givingRegular": 0,
@@ -3418,9 +3418,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 57,
+        "notBaptized": 58,
         "notInGroup": 28,
-        "notServing": 22,
+        "notServing": 23,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -3434,12 +3434,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 57
+          "unknown": 58
         },
         "pct": {
-          "inGroup": 0.5087719298245614,
-          "serving": 0.6140350877192983,
-          "leading": 0.17543859649122806,
+          "inGroup": 0.5172413793103449,
+          "serving": 0.603448275862069,
+          "leading": 0.1724137931034483,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -4650,6 +4650,49 @@
           ],
           "flags": [
             "Not in a group"
+          ],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Steven Pradere",
+          "first": "Steven",
+          "last": "Pradere",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [
+            {
+              "name": "Borowski Community Group",
+              "role": "member",
+              "joinedAt": "2026-01-25T17:45:43Z"
+            }
+          ],
+          "serveTeams": [],
+          "flags": [
+            "Not serving"
           ],
           "pending": true
         },
@@ -5993,7 +6036,7 @@
           "familyAssignee": "",
           "groups": [
             {
-              "name": "Turcich Community Group",
+              "name": "Colburn/Turcich Community Group",
               "role": "leader",
               "joinedAt": "2025-05-13T20:05:55Z"
             },
@@ -18534,7 +18577,7 @@
   "paciCounts": {
     "parent": 64,
     "adult": 64,
-    "child": 151,
+    "child": 152,
     "infant": 103
   }
 }

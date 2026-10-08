@@ -643,7 +643,7 @@
       "metric": "CG Attendance Rate",
       "owner": "Adam Carp",
       "goal": "75%+",
-      "current": "57%",
+      "current": "56%",
       "status": "yellow",
       "notes": ""
     },
@@ -691,8 +691,8 @@
       "metric": "Weekly Email Open Rate",
       "owner": "Geoffrey Caliger",
       "goal": "≥ 50%",
-      "current": "30%",
-      "status": "red",
+      "current": "35%",
+      "status": "yellow",
       "notes": "Industry avg ~22%; 30%+ is healthy for church email"
     },
     {
@@ -942,10 +942,10 @@
     "guest": 0,
     "attender": 59,
     "member": 0,
-    "group": 400,
+    "group": 402,
     "leader": 83,
     "missionary": 2,
-    "asOf": "2026-10-07"
+    "asOf": "2026-10-08"
   },
   "calendar": {
     "events": [
@@ -6311,10 +6311,27 @@
         "timeEnd": "2:00 PM",
         "owner": "Rachel Primus",
         "visibleCC": false
+      },
+      {
+        "name": "Worship Rehearsal",
+        "dateKey": "2027-04-08",
+        "endKey": null,
+        "dayOfWeek": "Thu",
+        "date": "Apr 8",
+        "time": "12:00 PM",
+        "location": "South Reno Church - 95 Foothill Rd, Reno, NV 89511, USA",
+        "timeEnd": "8:00 PM",
+        "owner": "Bradley Borowski",
+        "summary": "Group: South Reno | Worship Team Campus: South Reno Church",
+        "resources": [
+          "Main Auditorium"
+        ],
+        "desc": "Group: South Reno | Worship Team Campus: South Reno Church",
+        "visibleCC": false
       }
     ],
-    "asOf": "2026-10-07",
-    "syncedAt": "2026-10-08T00:00:35.390Z"
+    "asOf": "2026-10-08",
+    "syncedAt": "2026-10-08T19:02:36.000Z"
   },
   "staff_profiles": [
     {
@@ -6326,13 +6343,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE0MDU3fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwMDYwNjd9fX1dfQ__&Signature=JR6-ExRy3PW55tdhP5orQr4yLX5lf0kjuEUMyQclsaq49bvWoMNzkQgHXxmwu-AU20PAFaqLtRKjEqDjVJ9vuhqALLQdBR6EFFZf6qxjowOjpNgEUAaQi~HGV3jk0A1tMOuTgdVcUw4pjjULX0xw3Oynp6uCDwOqSDhWf1WhBCnnJJFm5jsxbMtNzrUV3-JIHINjvrJSSaVClqHznBqYdsj~iNbLAp8euoNhfRZwsQZy69rBF7WYigzpVPu6qlQioyo6F0AHooWkIOv9f45wUe-rem9tdNra7u611NWAyf~LNVmeCWFSm1u0T8lqmmasraTeIJnIELNj1gSp~mXn~A__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=DjIa5zafbLvnwkhowjh0SDAgRYNQ-BErOuyU-uHkEQVzWiy1OaVo5au2Rv9g720XH6HjGQLsU2sL0sllFOg5DZXauWNzrDRjnYF5KhXjizwT04S1dsjT~-KVPQDQw4F0ZBAcZM1iwY6XeIQSDYqRbHUBydoFdk2alWe5py8h9cTQuB4aXF4ZqpmnMyB2qKXKrtxtMYWHgHMKsxruJUJFfKB-zhHuoYMGttGBvPtzrbjFH0jJWJ-iY6gak8HwD-Tr4hPsGuEbUQomedpq3fEIATgK5beifWcnr8AQ3XHXvqQA3Yc2vVPJI8WDsW30JP7gQrRa9HaWC4WIMGpjeO1m7g__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE0MDU3fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwMDYwNjd9fX1dfQ__&Signature=eJEtnotVSt2BhnSYfg3k7kty8kzCeB8DYGstZ7vn57eJJd2uGEROHfZauI7RyicpdZOwQFydMVdttQ1GtpeORbAg5ExNxrWxxc1Wrl0RNgzCJ8h18MM8AQsDJdoqMryTm1U7BJTS9tqXTs8wqDbJEbsnAp33lBQEwNbwUqA1Z4WFb~M60mQ65LUZx1hT8U19Mav111eM3AM-ITSccu~LvL1darAmTnUOpws1cJjB6h0IPZpKTbi9jOjabV3dSEXV1yhy4LgEFG4sR9wrq3QIIAJzkXaIoCO2pLlFSCUd7Jew09mzpZkXiVfvXmOJh5jqt3wijmc78Tt8zJ8qN18yzg__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=Nq6sFLYQ5GBIwfvJfUZn9xLvLsaEcWl7DZWjFz8o00a4IcvPeSplIMVjA1DkW-8uzmQI93EL9HK9ZfXDf5~F9vRmZ3Ddzns-~4vX22CdLP6cquZRzqoj1O~OBj0FiIIz8UgOhccgYN8sTvQ~0ArSnNRLMZ5JMPKN5d57wvPePa34qyQ1YoY8Ne1wt6ZQSTtdJgGXNPvzdQjzc8oH~l-Vpzg5Oz62ZlXp4m7NeKPNnNArxzTC-cH6-8ewgmJF~hvCQmHjQeEAKzh2SNla2VbFvPE8lkub6JEeSfrUOyTJxZ7dKdlgobG0ONoJ3R0txsaKdJGj1aPQNJG0dOGqi6AQAA__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -6344,7 +6361,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE0MDU3fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwMDYwNjd9fX1dfQ__&Signature=b3gZVACkS95tpXpd9rPbywnhLoG-GKg~NPamsQqgBJHAjmW8qFKkPRMfeeQwWvaEM7vsmPO23fjjBZuSRSrhJhGWIqx7D31JlVQlc7D0PAhWDb9DrfKgkvo7-YpqgveHaVtzjwpt8jOAfU2j3OAY24Fx8cPwULzk0fSK22tt41YCnCvI7x7zY~aaT3fSE1CSjj8omtA-E09IPnCEjutV7w-NgQDYRpuUy6VqjFSQ5R0qYAJUZFrJ0rwb2xiUL3QctGUDqa1U6DTVV7B7YLe3jFLcDAyoFeeJkuqOktKzTEMx9PN~L1N4uz8PsrH77z72dqIQv1T37WJty~LyzeP77w__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=iApANhWxun9lQYgGkk6U-Xcytj-JnJNiP~JoLbrcyHduftYrbn9iOA2gp1oxj2F2dlxlOPrV2NLXwQ0-MqU7XggqszMELRA5~Mxe-hkrA5FpPgtL1WFGM-vVYI9OA5PLLPXq9Lmelw4g3O3S4GXYVi4VE9KS8eMMGHfriQ8OLPw9hFITDDo5jL1O46ogIm2oAWQSR7V6OEzb2qf~EFscl2kYEY0nC5du-QX6uXRuhL5bDSFBbnW~6TNGsiT-p~eL2dF3hbG-9o~ODYHmQx-tK0s1gcYM2Ji6zeEKGaP3GQdlRG-vtXSG53IoILonYowp~FmeQd7DwS-AVSY7V7M5sw__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -6374,7 +6391,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE0MDU3fSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwMDYwNjd9fX1dfQ__&Signature=LXc2Xm6zRSDtDuye89Y~r-dMTkCtief8lWi8QKBuvWxCbSSSd91VuNzX8OUQHpwCY~dAWiipIS5tVGPcJCXANYDOK99ffTrod31W-JQ1ni6u4yHrt5B9vcpw~zt8HPq~PqBG5TRiqdzOPc0JufP1ZC7F-n7lWIsNDMuJBkIxKtpnTXZu8jEP3XnPdxxidorP94zRtddMth9Awg~JncSO88NUbR7UwGw8sq2X426QHz2muTLQypld2pnWrKeGLZasjEgU~vnSOXimzN1uugXsc9GW6ElRpjVPdOEd3M883MTm4tHmrFbO9aTaXNaP3Sax6DORRvM1Ga--vi3ofyqa0Q__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=Jqvq87MyyAqbmiSfde8sdVAbYmWYn5Zsd-WfisiVwnLdFnLSB9eSfzS7tj9fgfPSjls0U9dmGM2BZuKIvi11ygc0avJ7hdDUb4z1GFg-znOmAYn6N7qM5pt4sJspJOTi-MfUJpklFbyEZaM1eI0yTcRgQ7fOU6LFkh7AXn-Y4sn8NoXnOBY31M5MhdFx5hXAT1RgBKng4AUlQCDy4tX9ZL3Z7H6jTU-06FIzZ1N3ym8PEeJ2JNxsbq1F0wmaLYYof1qUmhtNgmDKv4r3Sk6LBDsd0-pH63WwVAcme8-hLxbe9I3dGne2E-Ty2fFHDG5dszUZOkNhtsjFrWhjEXLmWQ__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
@@ -6413,6 +6430,10 @@
         },
         {
           "name": "Steven Pradere",
+          "role": "member"
+        },
+        {
+          "name": "Wilfredo Torres",
           "role": "member"
         }
       ]
@@ -7776,6 +7797,10 @@
         {
           "name": "Richard Price",
           "role": "leader"
+        },
+        {
+          "name": "Steve Rester",
+          "role": "member"
         },
         {
           "name": "Tony Sanchez",
@@ -9442,32 +9467,2078 @@
     {
       "type": "LS Kids Class Groups",
       "name": "Bear Cubs Team",
-      "members": []
+      "members": [
+        {
+          "name": "Abby Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Addi Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Alexander Franklin",
+          "role": "member"
+        },
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Allison Wallace",
+          "role": "member"
+        },
+        {
+          "name": "Alyssa Key",
+          "role": "member"
+        },
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Ana Loftin",
+          "role": "member"
+        },
+        {
+          "name": "Anita Irwin",
+          "role": "member"
+        },
+        {
+          "name": "Anna Faker",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Annalissa Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Ashley Murad",
+          "role": "member"
+        },
+        {
+          "name": "Autumn Blattman",
+          "role": "member"
+        },
+        {
+          "name": "Becky Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Bradford Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Brianna Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Flores",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Perez",
+          "role": "member"
+        },
+        {
+          "name": "Chelsea Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Christa Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Cindy Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Clayton Sheldon",
+          "role": "member"
+        },
+        {
+          "name": "Courtney Rumbaugh",
+          "role": "member"
+        },
+        {
+          "name": "Craig Soule",
+          "role": "member"
+        },
+        {
+          "name": "David Castro",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Walker",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Elmer Alegre",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Fiona Delforge",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Halee Frink",
+          "role": "member"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
+        },
+        {
+          "name": "Holly O Connor",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Isla Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Lewis",
+          "role": "member"
+        },
+        {
+          "name": "Jaeley-Grace Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jaylee Langum",
+          "role": "member"
+        },
+        {
+          "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Low",
+          "role": "member"
+        },
+        {
+          "name": "Jo Belmont",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Kadyn Skolnick",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Katelynn Radmacher",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Katie Thompson",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        },
+        {
+          "name": "Keely Smith",
+          "role": "member"
+        },
+        {
+          "name": "Keith Primus",
+          "role": "member"
+        },
+        {
+          "name": "Lily Perry",
+          "role": "member"
+        },
+        {
+          "name": "Linda Poleselli",
+          "role": "member"
+        },
+        {
+          "name": "Lindsey Low",
+          "role": "member"
+        },
+        {
+          "name": "Lisa Morris",
+          "role": "member"
+        },
+        {
+          "name": "Lizl Solis",
+          "role": "member"
+        },
+        {
+          "name": "Loren Wooldridge",
+          "role": "member"
+        },
+        {
+          "name": "Lydia Perlich",
+          "role": "member"
+        },
+        {
+          "name": "Maggie Hysell",
+          "role": "member"
+        },
+        {
+          "name": "Maggie Thetford",
+          "role": "member"
+        },
+        {
+          "name": "Marshall Culpepper",
+          "role": "member"
+        },
+        {
+          "name": "Matt Bowman",
+          "role": "member"
+        },
+        {
+          "name": "McKayla Leggett",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Ayrault",
+          "role": "member"
+        },
+        {
+          "name": "Michelle DePaoli",
+          "role": "member"
+        },
+        {
+          "name": "Mikayla Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Molly Bell",
+          "role": "member"
+        },
+        {
+          "name": "Naomi Derby",
+          "role": "member"
+        },
+        {
+          "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Niah Morris",
+          "role": "member"
+        },
+        {
+          "name": "Nick Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Patricia Thomas",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "member"
+        },
+        {
+          "name": "Ruth Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Ryann Mclennan",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Perez",
+          "role": "member"
+        },
+        {
+          "name": "Savannah Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Scarlett Fava",
+          "role": "member"
+        },
+        {
+          "name": "Shenoah Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Shiona Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Simon Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Stefanie Martinez",
+          "role": "member"
+        },
+        {
+          "name": "Teylor Baskharoon (Hinzman)",
+          "role": "member"
+        },
+        {
+          "name": "Tiffany Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Tina Faker",
+          "role": "member"
+        },
+        {
+          "name": "Tonshai Hatcher",
+          "role": "member"
+        },
+        {
+          "name": "Tonya Lowry",
+          "role": "member"
+        },
+        {
+          "name": "Valerie Seno",
+          "role": "member"
+        },
+        {
+          "name": "Whitney Maidens",
+          "role": "member"
+        },
+        {
+          "name": "Ximena Bastidas",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "LS Kids Class Groups",
       "name": "Bluebirds Team",
-      "members": []
+      "members": [
+        {
+          "name": "Abby Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Addi Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Alexander Franklin",
+          "role": "member"
+        },
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Allison Wallace",
+          "role": "member"
+        },
+        {
+          "name": "Alyssa Key",
+          "role": "member"
+        },
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Ana Loftin",
+          "role": "member"
+        },
+        {
+          "name": "Anita Irwin",
+          "role": "member"
+        },
+        {
+          "name": "Anna Faker",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Annalissa Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Ashley Murad",
+          "role": "member"
+        },
+        {
+          "name": "Autumn Blattman",
+          "role": "member"
+        },
+        {
+          "name": "Becky Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Bradford Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Brianna Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Flores",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Perez",
+          "role": "member"
+        },
+        {
+          "name": "Chelsea Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Christa Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Cindy Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Clayton Sheldon",
+          "role": "member"
+        },
+        {
+          "name": "Cody Wright",
+          "role": "member"
+        },
+        {
+          "name": "Courtney Rumbaugh",
+          "role": "member"
+        },
+        {
+          "name": "David Castro",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Edward Jones",
+          "role": "member"
+        },
+        {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Walker",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Elmer Alegre",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Fiona Delforge",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Halee Frink",
+          "role": "member"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
+        },
+        {
+          "name": "Holly O Connor",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Peissner",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Lewis",
+          "role": "member"
+        },
+        {
+          "name": "Jaeley-Grace Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jaimie Sullivan",
+          "role": "member"
+        },
+        {
+          "name": "Jane Brinson",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jaylee Langum",
+          "role": "member"
+        },
+        {
+          "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Low",
+          "role": "member"
+        },
+        {
+          "name": "Jorie Hetland",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Katelynn Radmacher",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Katie Thompson",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        },
+        {
+          "name": "Keely Smith",
+          "role": "member"
+        },
+        {
+          "name": "Keith Primus",
+          "role": "member"
+        },
+        {
+          "name": "Lily Perry",
+          "role": "member"
+        },
+        {
+          "name": "Linda Poleselli",
+          "role": "member"
+        },
+        {
+          "name": "Lindsey Low",
+          "role": "member"
+        },
+        {
+          "name": "Lisa Morris",
+          "role": "member"
+        },
+        {
+          "name": "Lizl Solis",
+          "role": "member"
+        },
+        {
+          "name": "Lo Hysell",
+          "role": "member"
+        },
+        {
+          "name": "Loren Wooldridge",
+          "role": "member"
+        },
+        {
+          "name": "Lydia Perlich",
+          "role": "member"
+        },
+        {
+          "name": "Maggie Hysell",
+          "role": "member"
+        },
+        {
+          "name": "Marshall Culpepper",
+          "role": "member"
+        },
+        {
+          "name": "Matt Bowman",
+          "role": "member"
+        },
+        {
+          "name": "McKayla Leggett",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Ayrault",
+          "role": "member"
+        },
+        {
+          "name": "Michelle DePaoli",
+          "role": "member"
+        },
+        {
+          "name": "Molly Bell",
+          "role": "member"
+        },
+        {
+          "name": "Naomi Derby",
+          "role": "member"
+        },
+        {
+          "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Niah Morris",
+          "role": "member"
+        },
+        {
+          "name": "Nick Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "member"
+        },
+        {
+          "name": "Ruth Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Ryann Mclennan",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Perez",
+          "role": "member"
+        },
+        {
+          "name": "Savannah Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Shannon Coan",
+          "role": "member"
+        },
+        {
+          "name": "Shenoah Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Shiona Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Simon Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Stefanie Martinez",
+          "role": "member"
+        },
+        {
+          "name": "Teylor Baskharoon (Hinzman)",
+          "role": "member"
+        },
+        {
+          "name": "Tiffany Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Tina Faker",
+          "role": "member"
+        },
+        {
+          "name": "Tonshai Hatcher",
+          "role": "member"
+        },
+        {
+          "name": "Tonya Lowry",
+          "role": "member"
+        },
+        {
+          "name": "Valerie Seno",
+          "role": "member"
+        },
+        {
+          "name": "Whitney Maidens",
+          "role": "member"
+        },
+        {
+          "name": "Ximena Bastidas",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "LS Kids Class Groups",
       "name": "Check-in Team",
-      "members": []
+      "members": [
+        {
+          "name": "Abby Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Addi Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Alexander Franklin",
+          "role": "member"
+        },
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Allison Wallace",
+          "role": "member"
+        },
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Ana Loftin",
+          "role": "member"
+        },
+        {
+          "name": "Anita Irwin",
+          "role": "member"
+        },
+        {
+          "name": "Anna Faker",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Annalissa Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Ashley Murad",
+          "role": "member"
+        },
+        {
+          "name": "Autumn Blattman",
+          "role": "member"
+        },
+        {
+          "name": "Becky Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Bradford Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Brianna Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Flores",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Perez",
+          "role": "member"
+        },
+        {
+          "name": "Chelsea Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Christa Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Cindy Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Clayton Sheldon",
+          "role": "member"
+        },
+        {
+          "name": "Cody Wright",
+          "role": "member"
+        },
+        {
+          "name": "Courtney Rumbaugh",
+          "role": "member"
+        },
+        {
+          "name": "David Castro",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Elmer Alegre",
+          "role": "member"
+        },
+        {
+          "name": "Elyse Bozsik",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Fiona Delforge",
+          "role": "member"
+        },
+        {
+          "name": "Garrett Kooyers",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Halee Frink",
+          "role": "member"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
+        },
+        {
+          "name": "Holly O Connor",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Lewis",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Smith",
+          "role": "member"
+        },
+        {
+          "name": "Jaeley-Grace Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jaimie Sullivan",
+          "role": "member"
+        },
+        {
+          "name": "Jane Brinson",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jaylee Langum",
+          "role": "member"
+        },
+        {
+          "name": "Jed Ingalls",
+          "role": "member"
+        },
+        {
+          "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jennie Kooyers",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Low",
+          "role": "member"
+        },
+        {
+          "name": "John Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Jorie Hetland",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Julie Serpa",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Karynn Sucaldito",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        },
+        {
+          "name": "Kenzie Tompkins",
+          "role": "member"
+        },
+        {
+          "name": "Kristie Marchese",
+          "role": "member"
+        },
+        {
+          "name": "Kylie Skolnick",
+          "role": "member"
+        },
+        {
+          "name": "Laura Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Lauren Rotter",
+          "role": "member"
+        },
+        {
+          "name": "Lauren Smith",
+          "role": "member"
+        },
+        {
+          "name": "Lily Perry",
+          "role": "member"
+        },
+        {
+          "name": "Linda Poleselli",
+          "role": "member"
+        },
+        {
+          "name": "Lindsey Low",
+          "role": "member"
+        },
+        {
+          "name": "Lisa Morris",
+          "role": "member"
+        },
+        {
+          "name": "Lizl Solis",
+          "role": "member"
+        },
+        {
+          "name": "Lydia Perlich",
+          "role": "member"
+        },
+        {
+          "name": "Matt Bowman",
+          "role": "member"
+        },
+        {
+          "name": "McKayla Leggett",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Soule",
+          "role": "member"
+        },
+        {
+          "name": "Michael Marchese",
+          "role": "member"
+        },
+        {
+          "name": "Michelle DePaoli",
+          "role": "member"
+        },
+        {
+          "name": "Molly Bell",
+          "role": "member"
+        },
+        {
+          "name": "Naomi Derby",
+          "role": "member"
+        },
+        {
+          "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Niah Morris",
+          "role": "member"
+        },
+        {
+          "name": "Nick Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "member"
+        },
+        {
+          "name": "Richard Price",
+          "role": "member"
+        },
+        {
+          "name": "Ruth Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Savannah Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Shenoah Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Shiona Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Stephanie Tompkins",
+          "role": "member"
+        },
+        {
+          "name": "Teylor Baskharoon (Hinzman)",
+          "role": "member"
+        },
+        {
+          "name": "Tiffany Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Tina Faker",
+          "role": "member"
+        },
+        {
+          "name": "Tonshai Hatcher",
+          "role": "member"
+        },
+        {
+          "name": "Tonya Lowry",
+          "role": "member"
+        },
+        {
+          "name": "Valerie Seno",
+          "role": "member"
+        },
+        {
+          "name": "Whitney Maidens",
+          "role": "member"
+        },
+        {
+          "name": "Ximena Bastidas",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "LS Kids Class Groups",
       "name": "Mustangs Team",
-      "members": []
+      "members": [
+        {
+          "name": "Abby Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Addi Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Alexander Franklin",
+          "role": "member"
+        },
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Allison Wallace",
+          "role": "member"
+        },
+        {
+          "name": "Alyssa Key",
+          "role": "member"
+        },
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Ana Loftin",
+          "role": "member"
+        },
+        {
+          "name": "Anita Irwin",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Annalissa Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Ashley Murad",
+          "role": "member"
+        },
+        {
+          "name": "Autumn Blattman",
+          "role": "member"
+        },
+        {
+          "name": "Becky Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Bill Salcido",
+          "role": "member"
+        },
+        {
+          "name": "Brian Merritt",
+          "role": "member"
+        },
+        {
+          "name": "Campbell Cummings",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Flores",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Perez",
+          "role": "member"
+        },
+        {
+          "name": "Chelsea Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Christa Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Clayton Sheldon",
+          "role": "member"
+        },
+        {
+          "name": "Cody Wright",
+          "role": "member"
+        },
+        {
+          "name": "Courtney Rumbaugh",
+          "role": "member"
+        },
+        {
+          "name": "Craig Soule",
+          "role": "member"
+        },
+        {
+          "name": "David Castro",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Walker",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Elmer Alegre",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Fiona Delforge",
+          "role": "member"
+        },
+        {
+          "name": "Fredy Bridges",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Hannah Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
+        },
+        {
+          "name": "Hunter Mannin",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Peissner",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Lewis",
+          "role": "member"
+        },
+        {
+          "name": "Jaeley-Grace Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "James Benthin",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jed Ingalls",
+          "role": "member"
+        },
+        {
+          "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Low",
+          "role": "member"
+        },
+        {
+          "name": "Jessica Adrian",
+          "role": "member"
+        },
+        {
+          "name": "John Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Karynn Sucaldito",
+          "role": "member"
+        },
+        {
+          "name": "Kate Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Katelynn Radmacher",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Katie Thompson",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        },
+        {
+          "name": "Keely Smith",
+          "role": "member"
+        },
+        {
+          "name": "Keith Primus",
+          "role": "member"
+        },
+        {
+          "name": "Kellan Coan",
+          "role": "member"
+        },
+        {
+          "name": "Kylie Skolnick",
+          "role": "member"
+        },
+        {
+          "name": "Linda Poleselli",
+          "role": "member"
+        },
+        {
+          "name": "Lindsey Low",
+          "role": "member"
+        },
+        {
+          "name": "Lisa Morris",
+          "role": "member"
+        },
+        {
+          "name": "Loren Wooldridge",
+          "role": "member"
+        },
+        {
+          "name": "Matt Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Ayrault",
+          "role": "member"
+        },
+        {
+          "name": "Michael dykins",
+          "role": "member"
+        },
+        {
+          "name": "Naomi Derby",
+          "role": "member"
+        },
+        {
+          "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Niah Morris",
+          "role": "member"
+        },
+        {
+          "name": "Nick Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Nicole Leach",
+          "role": "member"
+        },
+        {
+          "name": "Rachel Radmacher",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "member"
+        },
+        {
+          "name": "Richard Price",
+          "role": "member"
+        },
+        {
+          "name": "Ruth Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Ryann Mclennan",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Perez",
+          "role": "member"
+        },
+        {
+          "name": "Savannah Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Shannon Coan",
+          "role": "member"
+        },
+        {
+          "name": "Shenoah Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Shiona Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Skylar Codman",
+          "role": "member"
+        },
+        {
+          "name": "Stefanie Martinez",
+          "role": "member"
+        },
+        {
+          "name": "Teylor Baskharoon (Hinzman)",
+          "role": "member"
+        },
+        {
+          "name": "Thomas Adams",
+          "role": "member"
+        },
+        {
+          "name": "Tiffany Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Tina Faker",
+          "role": "member"
+        },
+        {
+          "name": "Tonshai Hatcher",
+          "role": "member"
+        },
+        {
+          "name": "Tonya Lowry",
+          "role": "member"
+        },
+        {
+          "name": "Valerie Seno",
+          "role": "member"
+        },
+        {
+          "name": "Whitney Maidens",
+          "role": "member"
+        },
+        {
+          "name": "Ximena Bastidas",
+          "role": "member"
+        },
+        {
+          "name": "Zachary Codman",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "LS Kids Class Groups",
       "name": "Team Leads",
-      "members": []
+      "members": [
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Bill Salcido",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Katie Thompson",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "LS Kids Class Groups",
       "name": "Wolfpack Team",
-      "members": []
+      "members": [
+        {
+          "name": "Abby Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Addi Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Alexander Franklin",
+          "role": "member"
+        },
+        {
+          "name": "Aliyah Ramirez",
+          "role": "member"
+        },
+        {
+          "name": "Allison Wallace",
+          "role": "member"
+        },
+        {
+          "name": "Alyssa Key",
+          "role": "member"
+        },
+        {
+          "name": "Amanda Hess",
+          "role": "member"
+        },
+        {
+          "name": "Ana Loftin",
+          "role": "member"
+        },
+        {
+          "name": "Anita Irwin",
+          "role": "member"
+        },
+        {
+          "name": "Anna Faker",
+          "role": "member"
+        },
+        {
+          "name": "Anna Sawyer",
+          "role": "member"
+        },
+        {
+          "name": "Annalissa Sanchez",
+          "role": "member"
+        },
+        {
+          "name": "Ashley Murad",
+          "role": "member"
+        },
+        {
+          "name": "Autumn Blattman",
+          "role": "member"
+        },
+        {
+          "name": "Becky Hunt",
+          "role": "member"
+        },
+        {
+          "name": "Bradford Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Brian Merritt",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Flores",
+          "role": "member"
+        },
+        {
+          "name": "Carlos Perez",
+          "role": "member"
+        },
+        {
+          "name": "Chelsea Borowski",
+          "role": "member"
+        },
+        {
+          "name": "Christa Bowman",
+          "role": "member"
+        },
+        {
+          "name": "Cindy Lefler",
+          "role": "member"
+        },
+        {
+          "name": "Clare Lattin",
+          "role": "member"
+        },
+        {
+          "name": "Clayton Sheldon",
+          "role": "member"
+        },
+        {
+          "name": "Cody Wright",
+          "role": "member"
+        },
+        {
+          "name": "Courtney Rumbaugh",
+          "role": "member"
+        },
+        {
+          "name": "Craig Soule",
+          "role": "member"
+        },
+        {
+          "name": "David Castro",
+          "role": "member"
+        },
+        {
+          "name": "Deana Griffin",
+          "role": "leader"
+        },
+        {
+          "name": "Deborah Vydra",
+          "role": "member"
+        },
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Elizabeth Wolfgang",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Walker",
+          "role": "member"
+        },
+        {
+          "name": "Ellie Wampler",
+          "role": "member"
+        },
+        {
+          "name": "Elmer Alegre",
+          "role": "member"
+        },
+        {
+          "name": "Emma Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Evven Gardner",
+          "role": "member"
+        },
+        {
+          "name": "Fiona Delforge",
+          "role": "member"
+        },
+        {
+          "name": "Fredy Bridges",
+          "role": "member"
+        },
+        {
+          "name": "Geoffrey Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Hannah Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Holly Graham",
+          "role": "member"
+        },
+        {
+          "name": "Hunter Mannin",
+          "role": "member"
+        },
+        {
+          "name": "Isabella Peissner",
+          "role": "member"
+        },
+        {
+          "name": "Jackie Lewis",
+          "role": "member"
+        },
+        {
+          "name": "Jaeley-Grace Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "James Benthin",
+          "role": "member"
+        },
+        {
+          "name": "Janet Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Jaylee Langum",
+          "role": "member"
+        },
+        {
+          "name": "Jenn Ferguson",
+          "role": "member"
+        },
+        {
+          "name": "Jeremy Low",
+          "role": "member"
+        },
+        {
+          "name": "Jessica Adrian",
+          "role": "member"
+        },
+        {
+          "name": "John Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Josie Nerska",
+          "role": "member"
+        },
+        {
+          "name": "Karis Sellman",
+          "role": "member"
+        },
+        {
+          "name": "Karynn Sucaldito",
+          "role": "member"
+        },
+        {
+          "name": "Kate Andreano",
+          "role": "member"
+        },
+        {
+          "name": "Katelynn Radmacher",
+          "role": "member"
+        },
+        {
+          "name": "Kathy McAlpine",
+          "role": "member"
+        },
+        {
+          "name": "Katie Thompson",
+          "role": "member"
+        },
+        {
+          "name": "Kayleen Hagstrand",
+          "role": "member"
+        },
+        {
+          "name": "Keely Smith",
+          "role": "member"
+        },
+        {
+          "name": "Keith Primus",
+          "role": "member"
+        },
+        {
+          "name": "Kellan Coan",
+          "role": "member"
+        },
+        {
+          "name": "Kylie Skolnick",
+          "role": "member"
+        },
+        {
+          "name": "Linda Poleselli",
+          "role": "member"
+        },
+        {
+          "name": "Lindsey Low",
+          "role": "member"
+        },
+        {
+          "name": "Lisa Morris",
+          "role": "member"
+        },
+        {
+          "name": "Lizl Solis",
+          "role": "member"
+        },
+        {
+          "name": "Loren Wooldridge",
+          "role": "member"
+        },
+        {
+          "name": "Matt Bowman",
+          "role": "member"
+        },
+        {
+          "name": "McKayla Leggett",
+          "role": "member"
+        },
+        {
+          "name": "Melissa Ayrault",
+          "role": "member"
+        },
+        {
+          "name": "Michael dykins",
+          "role": "member"
+        },
+        {
+          "name": "Naomi Derby",
+          "role": "member"
+        },
+        {
+          "name": "Natalie Christopher",
+          "role": "member"
+        },
+        {
+          "name": "Niah Morris",
+          "role": "member"
+        },
+        {
+          "name": "Nick Colonna",
+          "role": "member"
+        },
+        {
+          "name": "Nicole Leach",
+          "role": "member"
+        },
+        {
+          "name": "Ray Brown",
+          "role": "member"
+        },
+        {
+          "name": "Richard Price",
+          "role": "member"
+        },
+        {
+          "name": "Ruth Skinner",
+          "role": "member"
+        },
+        {
+          "name": "Ryan Baskharoon",
+          "role": "member"
+        },
+        {
+          "name": "Ryann Mclennan",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Jones",
+          "role": "member"
+        },
+        {
+          "name": "Sarah Perez",
+          "role": "member"
+        },
+        {
+          "name": "Savannah Caliger",
+          "role": "member"
+        },
+        {
+          "name": "Shannon Coan",
+          "role": "member"
+        },
+        {
+          "name": "Shenoah Johnson",
+          "role": "member"
+        },
+        {
+          "name": "Shiona Dykins",
+          "role": "member"
+        },
+        {
+          "name": "Stefanie Martinez",
+          "role": "member"
+        },
+        {
+          "name": "Teylor Baskharoon (Hinzman)",
+          "role": "member"
+        },
+        {
+          "name": "Thomas Adams",
+          "role": "member"
+        },
+        {
+          "name": "Tiffany Jackson",
+          "role": "member"
+        },
+        {
+          "name": "Tina Faker",
+          "role": "member"
+        },
+        {
+          "name": "Tonshai Hatcher",
+          "role": "member"
+        },
+        {
+          "name": "Valerie Seno",
+          "role": "member"
+        },
+        {
+          "name": "Whitney Maidens",
+          "role": "member"
+        },
+        {
+          "name": "Ximena Bastidas",
+          "role": "member"
+        },
+        {
+          "name": "Zachary Codman",
+          "role": "member"
+        }
+      ]
     },
     {
       "type": "Missions",
@@ -13271,6 +15342,7 @@
         "Sarah Perlich",
         "Sheila Hlubucek",
         "Steve Orr",
+        "Steven Pradere",
         "Tina Faker",
         "Tina Watson",
         "Tracey Allman",
