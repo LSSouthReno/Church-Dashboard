@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-09T18:48:57.247Z",
+  "lastUpdated": "2026-10-09T19:46:57.206Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 9, 2026, 11:49 AM",
+    "refreshed": "Oct 9, 2026, 12:47 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14712,7 +14712,7 @@
         25,
         43,
         45,
-        12,
+        14,
         null,
         null
       ]
@@ -14756,7 +14756,7 @@
         24,
         22,
         48,
-        12,
+        14,
         null,
         null
       ]
@@ -14803,7 +14803,7 @@
         13,
         14,
         38,
-        9,
+        10,
         null,
         null
       ]
@@ -15218,6 +15218,14 @@
         "attPct": 56
       },
       {
+        "name": "Colburn/Turcich Community Group",
+        "members": 8,
+        "leaders": 3,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 4,
+        "attPct": 50
+      },
+      {
         "name": "Lattin Community Group",
         "members": 8,
         "leaders": 2,
@@ -15232,14 +15240,6 @@
         "schedule": "Meets weekly on Wednesdays from 6-7:30am",
         "avgAttended": 5,
         "attPct": 63
-      },
-      {
-        "name": "Colburn/Turcich Community Group",
-        "members": 6,
-        "leaders": 3,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 4,
-        "attPct": 67
       },
       {
         "name": "Febo/Sanchez Community Group (Spanish Speaking)",
@@ -15300,15 +15300,15 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 396,
-      "both": 211,
+      "cgMembers": 398,
+      "both": 212,
       "pctFmInCg": 54,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 396,
+        "cg": 398,
         "serving": 297,
         "giving": 951
       },
@@ -15321,14 +15321,14 @@
         "5": 11,
         "6": 7,
         "7": 16,
-        "8": 525,
+        "8": 524,
         "9": 80,
-        "10": 66,
+        "10": 67,
         "11": 51,
         "12": 26,
-        "13": 47,
+        "13": 46,
         "14": 22,
-        "15": 134
+        "15": 135
       },
       "regionNames": {
         "1": [
@@ -15639,6 +15639,7 @@
           "Dominic Smith",
           "Donna Buckwalter",
           "Dorothy Bell",
+          "Douglas Devries",
           "Dru Bahnsen",
           "Duke Renslow",
           "Dustin Garcia",
@@ -15718,7 +15719,6 @@
           "Loose Cash South Reno",
           "Loren Wooldridge",
           "Lori Traitel",
-          "Lorna Elias",
           "Luke Hawkins",
           "Luke Swann",
           "Macy England",
@@ -15883,6 +15883,7 @@
           "Leah field",
           "Levi Lunde",
           "Lindsay Johnson",
+          "Lorna Elias",
           "Lyndsey Mott",
           "Marcia Morcom",
           "Marissa Keene",
@@ -16006,7 +16007,6 @@
           "Danny Rotter",
           "David Wandishin",
           "Dennis Brinson",
-          "Diane Dale",
           "Douglas Drake",
           "Edward Jones",
           "Eric Sikora",
@@ -16106,6 +16106,7 @@
           "Deana Griffin",
           "Deborah Vydra",
           "Dena Steuer",
+          "Diane Dale",
           "Don Lattin",
           "Doretta Brown",
           "Emma Baskharoon",
@@ -16230,7 +16231,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 181,
+          "count": 180,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16281,7 +16282,6 @@
             "Deanna Toffolla",
             "Debbie Berge",
             "Dennis Brinson",
-            "Diane Dale",
             "Diane Sikora",
             "Donald Hug",
             "Donna Sarazen",
@@ -16417,7 +16417,7 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 134,
+          "count": 135,
           "names": [
             "Adam Carp",
             "Alan Charles",
@@ -16462,6 +16462,7 @@
             "Deana Griffin",
             "Deborah Vydra",
             "Dena Steuer",
+            "Diane Dale",
             "Don Lattin",
             "Doretta Brown",
             "Emma Baskharoon",
@@ -16606,7 +16607,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 605,
+          "count": 604,
           "names": [
             "Adam Anderson",
             "Addie Guyer",
@@ -16712,6 +16713,7 @@
             "Donna Buckwalter",
             "Donna Sarazen",
             "Dorothy Bell",
+            "Douglas Devries",
             "Dru Bahnsen",
             "Duke Renslow",
             "Dustin Garcia",
@@ -16806,8 +16808,7 @@
             "Lee Ables",
             "Leigha Monaghan",
             "Leona Lorenzen",
-            "Linda Cornell",
-            "Linda Kucia"
+            "Linda Cornell"
           ]
         }
       },
@@ -16815,7 +16816,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 181,
+        "count": 180,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -16866,7 +16867,6 @@
           "Deanna Toffolla",
           "Debbie Berge",
           "Dennis Brinson",
-          "Diane Dale",
           "Diane Sikora",
           "Donald Hug",
           "Donna Sarazen",
@@ -17001,7 +17001,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 185,
+        "count": 186,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17127,6 +17127,7 @@
           "Liz Suto",
           "Lori Traitel",
           "Lorie Roberts",
+          "Lorna Elias",
           "Lucas Piotto",
           "Lyndsey Mott",
           "Lynn Henderson",
@@ -29645,7 +29646,7 @@
               "name": "Breanne Read",
               "team": "Coffee Team",
               "pos": "Coffee Setup",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -30164,7 +30165,7 @@
               "name": "Brianne Sullivan",
               "team": "Coffee Team",
               "pos": "Coffee Setup",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM"
             },
             {
@@ -31231,14 +31232,14 @@
               "team": "Coffee Team",
               "pos": "Coffee Setup",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "8 AM"
             },
             {
               "name": "Jeannette Rumsey",
               "team": "Coffee Team",
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31622,6 +31623,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Breanne Read",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Harlow Shull",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31631,8 +31646,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"227200162\"},{\"type\":\"PlanTime\",\"id\":\"227200163\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 51,
-            "totalVols": 51
+            "volsWithServiceTime": 53,
+            "totalVols": 53
           }
         }
       ]
@@ -31660,11 +31675,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 53,
+    "count30d": 52,
     "weeklyAvg": 12,
     "totalFetched": 7136,
     "since": "2026-09-09",
-    "asOf": "2026-10-09T18:45:28.630Z"
+    "asOf": "2026-10-09T19:44:48.051Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4105011933174224,
@@ -31672,6 +31687,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-07T15:44:53+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-09T18:45:30.034Z"
+    "asOf": "2026-10-09T19:44:49.125Z"
   }
 }
