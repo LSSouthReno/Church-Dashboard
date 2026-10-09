@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T03:19:06.210Z",
+  "generatedAt": "2026-10-09T04:18:52.422Z",
   "asOf": "2026-10-08",
   "givingMonths": 12,
   "statusVocab": [
@@ -64,7 +64,7 @@
       "list": "Shepherding - Adam",
       "unassigned": false,
       "summary": {
-        "totalPeople": 67,
+        "totalPeople": 68,
         "avgScore": 0,
         "inGroup": 47,
         "serving": 54,
@@ -75,9 +75,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 67,
-        "notInGroup": 20,
-        "notServing": 13,
+        "notBaptized": 68,
+        "notInGroup": 21,
+        "notServing": 14,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -91,12 +91,12 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 67
+          "unknown": 68
         },
         "pct": {
-          "inGroup": 0.7014925373134329,
-          "serving": 0.8059701492537313,
-          "leading": 0.3283582089552239,
+          "inGroup": 0.6911764705882353,
+          "serving": 0.7941176470588235,
+          "leading": 0.3235294117647059,
           "givingRegular": 0,
           "recurring": 0,
           "givingGrowing": 0,
@@ -105,6 +105,44 @@
         }
       },
       "people": [
+        {
+          "id": null,
+          "name": "Justin Cabanilla",
+          "first": "Justin",
+          "last": "Cabanilla",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": true,
+          "familyStep": "Ready to Meet",
+          "familyAssignee": "Adam Carp",
+          "groups": [],
+          "serveTeams": [],
+          "flags": [
+            "Not in a group",
+            "Not serving"
+          ],
+          "pending": true
+        },
         {
           "id": null,
           "name": "Clayton Sheldon",
@@ -18325,7 +18363,7 @@
       "list": "Unassigned",
       "unassigned": true,
       "summary": {
-        "totalPeople": 5,
+        "totalPeople": 4,
         "avgScore": 0,
         "inGroup": 4,
         "serving": 2,
@@ -18336,9 +18374,9 @@
         "noRecentGiving": 0,
         "needsAttention": 0,
         "overdue": 0,
-        "notBaptized": 5,
-        "notInGroup": 1,
-        "notServing": 3,
+        "notBaptized": 4,
+        "notInGroup": 0,
+        "notServing": 2,
         "notGiving": 0,
         "paciCounts": {
           "parent": 0,
@@ -18352,11 +18390,11 @@
           "wandering": 0,
           "lost": 0,
           "could-not-contact": 0,
-          "unknown": 5
+          "unknown": 4
         },
         "pct": {
-          "inGroup": 0.8,
-          "serving": 0.4,
+          "inGroup": 1,
+          "serving": 0.5,
           "leading": 0,
           "givingRegular": 0,
           "recurring": 0,
@@ -18366,44 +18404,6 @@
         }
       },
       "people": [
-        {
-          "id": null,
-          "name": "Justin Cabanilla",
-          "first": "Justin",
-          "last": "Cabanilla",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": true,
-          "familyStep": "Ready to Meet",
-          "familyAssignee": "Katie Thompson",
-          "groups": [],
-          "serveTeams": [],
-          "flags": [
-            "Not in a group",
-            "Not serving"
-          ],
-          "pending": true
-        },
         {
           "id": null,
           "name": "Bridget Evans",
