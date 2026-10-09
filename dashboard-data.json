@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-09T17:50:36.953Z",
+  "lastUpdated": "2026-10-09T18:48:57.247Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      74108
+      74647
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      204
+      205
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5663247
+    "raised": 5663786
   },
   "attendance": {
     "months": [
@@ -13296,7 +13296,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 9, 2026, 10:50 AM",
+    "refreshed": "Oct 9, 2026, 11:49 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14117,7 +14117,7 @@
       333,
       343,
       382,
-      397
+      398
     ]
   },
   "baptisms": {
@@ -14188,7 +14188,7 @@
     },
     "current": {
       "groups": 36,
-      "members": 397,
+      "members": 398,
       "groupSize": 11,
       "fmInGroupsPct": 54,
       "asOfMonth": "Oct '26"
@@ -14668,7 +14668,7 @@
         333,
         343,
         382,
-        397,
+        398,
         null,
         null
       ]
@@ -28551,7 +28551,7 @@
               "name": "Caleb Frink",
               "team": "Worship Team",
               "pos": "Electric Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -29640,6 +29640,20 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Breanne Read",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jennifer Van Gelder",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -29649,8 +29663,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 70
+            "volsWithServiceTime": 72,
+            "totalVols": 72
           }
         }
       ]
@@ -29986,13 +30000,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "John Andreano",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Kate Andreano",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -30152,6 +30159,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Brianne Sullivan",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kevin Moore",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -30161,8 +30182,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 70,
+            "totalVols": 70
           }
         }
       ]
@@ -30678,6 +30699,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Bill Salcido",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Casey Shull",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -30687,8 +30722,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 71
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -31190,6 +31225,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Jeannette Rumsey",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -31199,8 +31248,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 69,
-            "totalVols": 69
+            "volsWithServiceTime": 71,
+            "totalVols": 71
           }
         }
       ]
@@ -31417,7 +31466,7 @@
               "name": "John Andreano",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -31615,7 +31664,7 @@
     "weeklyAvg": 12,
     "totalFetched": 7136,
     "since": "2026-09-09",
-    "asOf": "2026-10-09T17:45:50.399Z"
+    "asOf": "2026-10-09T18:45:28.630Z"
   },
   "emailStats": {
     "latestOpenRate": 0.4105011933174224,
@@ -31623,6 +31672,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-07T15:44:53+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-09T17:45:52.415Z"
+    "asOf": "2026-10-09T18:45:30.034Z"
   }
 }
