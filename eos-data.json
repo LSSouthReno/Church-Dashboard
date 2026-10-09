@@ -940,9 +940,9 @@
   ],
   "funnel": {
     "guest": 0,
-    "attender": 59,
+    "attender": 60,
     "member": 0,
-    "group": 402,
+    "group": 397,
     "leader": 83,
     "missionary": 2,
     "asOf": "2026-10-09"
@@ -6865,6 +6865,32 @@
     },
     {
       "type": "Community Group",
+      "name": "Colburn/Turcich Community Group",
+      "members": [
+        {
+          "name": "Diane Lane",
+          "role": "leader"
+        },
+        {
+          "name": "Jan Colburn",
+          "role": "leader"
+        },
+        {
+          "name": "John Turcich",
+          "role": "leader"
+        },
+        {
+          "name": "Mike Munoz",
+          "role": "member"
+        },
+        {
+          "name": "Nathen Ross",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
       "name": "Colonna/Mavros Community Group",
       "members": [
         {
@@ -7113,10 +7139,6 @@
         },
         {
           "name": "Lillian Wong",
-          "role": "member"
-        },
-        {
-          "name": "Mary Davis",
           "role": "member"
         },
         {
@@ -7906,6 +7928,10 @@
           "role": "member"
         },
         {
+          "name": "Lauren Bruno",
+          "role": "member"
+        },
+        {
           "name": "Lyndsey Mott",
           "role": "member"
         },
@@ -8153,40 +8179,6 @@
     },
     {
       "type": "Community Group",
-      "name": "Taylor Community Group",
-      "members": [
-        {
-          "name": "Chris Taylor",
-          "role": "member"
-        },
-        {
-          "name": "Diane Dale",
-          "role": "member"
-        },
-        {
-          "name": "Diane Lane",
-          "role": "leader"
-        },
-        {
-          "name": "Jan Colburn",
-          "role": "leader"
-        },
-        {
-          "name": "Janelle Yost",
-          "role": "member"
-        },
-        {
-          "name": "Lorna Elias",
-          "role": "member"
-        },
-        {
-          "name": "Nita Taylor",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
       "name": "Thompson/Primus Community Group",
       "members": [
         {
@@ -8251,24 +8243,6 @@
         },
         {
           "name": "Stephanie Fava",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
-      "name": "Turcich Community Group",
-      "members": [
-        {
-          "name": "John Turcich",
-          "role": "leader"
-        },
-        {
-          "name": "Mike Munoz",
-          "role": "member"
-        },
-        {
-          "name": "Nathen Ross",
           "role": "member"
         }
       ]
