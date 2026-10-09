@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T17:18:35.045Z",
+  "generatedAt": "2026-10-09T18:19:27.379Z",
   "asOf": "2026-10-09",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 215,
+    "inGroup": 216,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 179,
+    "notInGroup": 178,
     "notServing": 160,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.5456852791878173,
+      "inGroup": 0.5482233502538071,
       "serving": 0.5939086294416244,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -13982,7 +13982,7 @@
       "summary": {
         "totalPeople": 48,
         "avgScore": 0,
-        "inGroup": 27,
+        "inGroup": 28,
         "serving": 26,
         "leading": 7,
         "givingRegular": 0,
@@ -13992,7 +13992,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 48,
-        "notInGroup": 21,
+        "notInGroup": 20,
         "notServing": 22,
         "notGiving": 0,
         "paciCounts": {
@@ -14010,7 +14010,7 @@
           "unknown": 48
         },
         "pct": {
-          "inGroup": 0.5625,
+          "inGroup": 0.5833333333333334,
           "serving": 0.5416666666666666,
           "leading": 0.14583333333333334,
           "givingRegular": 0,
@@ -14694,49 +14694,6 @@
         },
         {
           "id": null,
-          "name": "Diane Dale",
-          "first": "Diane",
-          "last": "Dale",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Stepping Stones Children's Ministry",
-              "role": "member",
-              "joinedAt": "2025-01-20T05:03:51Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Marla Stemper",
           "first": "Marla",
           "last": "Stemper",
@@ -15296,6 +15253,53 @@
               "name": "Hospitality Team",
               "role": "member",
               "joinedAt": "2026-03-15T18:22:24Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Diane Dale",
+          "first": "Diane",
+          "last": "Dale",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [
+            {
+              "name": "Colburn/Turcich Community Group",
+              "role": "member",
+              "joinedAt": "2026-10-09T17:24:03Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Stepping Stones Children's Ministry",
+              "role": "member",
+              "joinedAt": "2025-01-20T05:03:51Z"
             }
           ],
           "flags": [],
