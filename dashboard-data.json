@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-10T21:45:51.270Z",
+  "lastUpdated": "2026-10-10T21:58:28.182Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13263,7 +13263,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 10, 2026, 2:45 PM",
+    "refreshed": "Oct 10, 2026, 2:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -31636,7 +31636,23 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-10-07",
+      "end": "2026-10-11"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-10-18",
+      "end": "2026-10-18"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
