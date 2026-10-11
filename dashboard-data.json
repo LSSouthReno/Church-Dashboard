@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T14:46:36.918Z",
+  "lastUpdated": "2026-10-11T15:01:43.905Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3282,6 +3282,11 @@
         "week": "Oct 4",
         "adults": 775,
         "kids": 110
+      },
+      {
+        "week": "Oct 11",
+        "adults": 0,
+        "kids": 3
       }
     ]
   },
@@ -4309,7 +4314,7 @@
       "2026-10": {
         "8:00 AM": {
           "adults": 206,
-          "kids": 18
+          "kids": 11
         },
         "9:30 AM": {
           "adults": 303,
@@ -4756,7 +4761,8 @@
       "2026-09-13",
       "2026-09-20",
       "2026-09-27",
-      "2026-10-04"
+      "2026-10-04",
+      "2026-10-11"
     ],
     "data": {
       "2018-08-19": {
@@ -8463,6 +8469,12 @@
         "11:00 AM": {
           "adults": 266,
           "kids": 51
+        }
+      },
+      "2026-10-11": {
+        "8:00 AM": {
+          "adults": 0,
+          "kids": 3
         }
       }
     },
@@ -13263,7 +13275,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 7:46 AM",
+    "refreshed": "Oct 11, 2026, 8:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
