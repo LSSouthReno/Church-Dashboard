@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T16:46:03.757Z",
+  "lastUpdated": "2026-10-11T17:00:11.909Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3286,7 +3286,7 @@
       {
         "week": "Oct 11",
         "adults": 179,
-        "kids": 13
+        "kids": 63
       }
     ]
   },
@@ -4318,11 +4318,11 @@
         },
         "9:30 AM": {
           "adults": 303,
-          "kids": 41
+          "kids": 45
         },
         "11:00 AM": {
           "adults": 266,
-          "kids": 51
+          "kids": 26
         }
       }
     }
@@ -8475,6 +8475,14 @@
         "8:00 AM": {
           "adults": 179,
           "kids": 13
+        },
+        "9:30 AM": {
+          "adults": 0,
+          "kids": 49
+        },
+        "11:00 AM": {
+          "adults": 0,
+          "kids": 1
         }
       }
     },
@@ -13275,7 +13283,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 9:46 AM",
+    "refreshed": "Oct 11, 2026, 10:00 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14691,7 +14699,7 @@
         25,
         43,
         45,
-        15,
+        18,
         null,
         null
       ]
@@ -14735,7 +14743,7 @@
         24,
         22,
         48,
-        15,
+        17,
         null,
         null
       ]
@@ -14782,7 +14790,7 @@
         13,
         14,
         38,
-        11,
+        13,
         null,
         null
       ]
@@ -15045,6 +15053,14 @@
         "attPct": 44
       },
       {
+        "name": "Brown/Frank Community Group",
+        "members": 15,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 40
+      },
+      {
         "name": "Peissner Community Group",
         "members": 14,
         "leaders": 2,
@@ -15075,14 +15091,6 @@
         "schedule": "Meets weekly on Mondays from 5-7pm",
         "avgAttended": 5,
         "attPct": 36
-      },
-      {
-        "name": "Brown/Frank Community Group",
-        "members": 14,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 43
       },
       {
         "name": "Brown/Peregrin Community Group",
@@ -15279,7 +15287,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 399,
+      "cgMembers": 401,
       "both": 212,
       "pctFmInCg": 54,
       "pctCgAreFm": 53
@@ -15287,22 +15295,22 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 399,
+        "cg": 401,
         "serving": 291,
         "giving": 952
       },
-      "universe": 1159,
+      "universe": 1160,
       "regions": {
         "1": 43,
-        "2": 90,
+        "2": 91,
         "3": 11,
         "4": 31,
         "5": 10,
         "6": 7,
         "7": 15,
-        "8": 523,
+        "8": 522,
         "9": 81,
-        "10": 68,
+        "10": 69,
         "11": 52,
         "12": 26,
         "13": 46,
@@ -15367,6 +15375,7 @@
           "Ava Palmer",
           "Bella Palmer",
           "Ben L",
+          "Brandon Howe",
           "Brandon Mickey",
           "Brett Caron",
           "Carly Albright",
@@ -15532,6 +15541,7 @@
           "Teodoro Kijah Banda"
         ],
         "8": [
+          "Aaron Prince",
           "Adam Anderson",
           "Addie Guyer",
           "Alana Hysell",
@@ -15672,7 +15682,6 @@
           "Kathleen Lumsden",
           "Kathleen Sturgis",
           "Kathy Mandell",
-          "Kelly Anderson",
           "Kenneth Meyer",
           "Kevin Cebrero",
           "Kim Sandoval",
@@ -15853,6 +15862,7 @@
           "Julio Vargas",
           "Karen Warner",
           "Kati (Catherine) Andreano",
+          "Kelly Anderson",
           "Kim Yaeger",
           "Lauren Bruno",
           "Laurie Gretsinger",
@@ -16583,8 +16593,9 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 604,
+          "count": 603,
           "names": [
+            "Aaron Prince",
             "Adam Anderson",
             "Addie Guyer",
             "Alana Hysell",
@@ -16764,7 +16775,6 @@
             "Kathy Mandell",
             "Kathy Pavlich",
             "Keenan Kelly",
-            "Kelly Anderson",
             "Kenneth Meyer",
             "Kevin Cebrero",
             "Kim Sandoval",
@@ -16977,7 +16987,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 187,
+        "count": 189,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17002,6 +17012,7 @@
           "Ben L",
           "Beth Watts",
           "Bill Winchester",
+          "Brandon Howe",
           "Brandon Mickey",
           "Brett Caron",
           "Carly Albright",
@@ -17090,6 +17101,7 @@
           "Kati (Catherine) Andreano",
           "Keith Baugh",
           "Keith Reister",
+          "Kelly Anderson",
           "Ken Croker",
           "Keyvan Hernández",
           "Kim Yaeger",
