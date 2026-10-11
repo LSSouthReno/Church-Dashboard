@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T18:46:05.930Z",
+  "lastUpdated": "2026-10-11T18:58:55.156Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -3285,8 +3285,8 @@
       },
       {
         "week": "Oct 11",
-        "adults": 527,
-        "kids": 72
+        "adults": 774,
+        "kids": 110
       }
     ]
   },
@@ -4321,8 +4321,8 @@
           "kids": 49
         },
         "11:00 AM": {
-          "adults": 266,
-          "kids": 27
+          "adults": 257,
+          "kids": 46
         }
       }
     }
@@ -8481,8 +8481,8 @@
           "kids": 56
         },
         "11:00 AM": {
-          "adults": 0,
-          "kids": 3
+          "adults": 247,
+          "kids": 41
         }
       }
     },
@@ -13283,7 +13283,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 11:46 AM",
+    "refreshed": "Oct 11, 2026, 11:58 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14699,7 +14699,7 @@
         25,
         43,
         45,
-        21,
+        23,
         null,
         null
       ]
@@ -14743,7 +14743,7 @@
         24,
         22,
         48,
-        17,
+        18,
         null,
         null
       ]
@@ -15006,11 +15006,11 @@
       },
       {
         "name": "Poleselli / McAlpine Community Group",
-        "members": 23,
+        "members": 24,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 13,
-        "attPct": 57
+        "attPct": 54
       },
       {
         "name": "Martinson/Degener Community Group",
@@ -15287,19 +15287,19 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 401,
-      "both": 212,
+      "cgMembers": 402,
+      "both": 213,
       "pctFmInCg": 54,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 401,
+        "cg": 402,
         "serving": 291,
-        "giving": 952
+        "giving": 953
       },
-      "universe": 1160,
+      "universe": 1161,
       "regions": {
         "1": 43,
         "2": 91,
@@ -15308,14 +15308,14 @@
         "5": 10,
         "6": 7,
         "7": 15,
-        "8": 522,
+        "8": 523,
         "9": 81,
         "10": 69,
         "11": 52,
         "12": 26,
-        "13": 46,
+        "13": 45,
         "14": 22,
-        "15": 134
+        "15": 135
       },
       "regionNames": {
         "1": [
@@ -16008,7 +16008,6 @@
           "Julie Serpa",
           "Kate Andreano",
           "Kevin Moore",
-          "Kim Conrad",
           "Kristie Marchese",
           "Lauren Rotter",
           "Layne Christopher",
@@ -16140,6 +16139,7 @@
           "Keith Primus",
           "Kelly Coan",
           "Kelly Farson",
+          "Kim Conrad",
           "Lance Jauron",
           "Laura Dykins",
           "Lauren Johnson",
@@ -16218,7 +16218,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 180,
+          "count": 179,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16318,7 +16318,6 @@
             "Keenan Kelly",
             "Kerry Munk",
             "Kevin Moore",
-            "Kim Conrad",
             "Krista Van Allen",
             "Kristie Marchese",
             "Kristina Godsell",
@@ -16404,7 +16403,7 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 134,
+          "count": 135,
           "names": [
             "Adam Carp",
             "Alan Charles",
@@ -16495,6 +16494,7 @@
             "Keith Primus",
             "Kelly Coan",
             "Kelly Farson",
+            "Kim Conrad",
             "Lance Jauron",
             "Laura Dykins",
             "Lauren Johnson",
@@ -16593,7 +16593,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 603,
+          "count": 604,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -16802,7 +16802,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 180,
+        "count": 179,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -16902,7 +16902,6 @@
           "Keenan Kelly",
           "Kerry Munk",
           "Kevin Moore",
-          "Kim Conrad",
           "Krista Van Allen",
           "Kristie Marchese",
           "Kristina Godsell",
@@ -30168,7 +30167,7 @@
               "name": "Kevin Moore",
               "team": "Coffee Team",
               "pos": "Coffee Tear Down/Put Away",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
