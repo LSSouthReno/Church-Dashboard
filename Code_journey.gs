@@ -518,7 +518,7 @@ function jrBuild_(pid) {
    Cached 6 h per leader (jr_lead_<pid>); jr_me's 10-min cache sits on top.
 ========================================================= */
 function jrLeading_(pid, groups, teamIds) {
-  var c = CacheService.getScriptCache(), key = 'jr_lead_' + pid;
+  var c = CacheService.getScriptCache(), key = 'jr_lead2_' + pid;   // v2: baptism from PCO for everyone
   try { var hit = c.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
   var out = { groups: [], teams: [] }, budget = Date.now() + 150000;   // stay well inside the web-app limit
   try {
@@ -579,17 +579,28 @@ function jrTeamsLed_(pid, teamIds) {
 // Flags + one suggested step per roster member. kind = 'group' (show serving) or 'team' (show in-a-group).
 function jrRosterFlags_(rows, kind, sh, budget) {
   // Membership for everyone in one People call (where[id]=a,b,c); falls back to singles.
-  var ids = rows.map(function(r) { return r.pid; }), memb = {};
+  var ids = rows.map(function(r) { return r.pid; }), memb = {}, bap = {};
+  // Baptized = the Baptized checkbox or a Baptism Date on their PCO profile (same rule as the shepherding sync).
+  var readFd = function(list) {
+    (list || []).forEach(function(x) {
+      if (x.type !== 'FieldDatum') return;
+      var def = String((((x.relationships || {}).field_definition || {}).data || {}).id || ''), who = String((((x.relationships || {}).customizable || {}).data || {}).id || '');
+      var v = String((x.attributes || {}).value || '');
+      if (!who) return;
+      if (def === String(SH_FIELD.baptized) && /^true$/i.test(v)) bap[who] = true;
+      if (def === String(SH_FIELD.baptismDate) && v) bap[who] = true;
+    });
+  };
   for (var i = 0; i < ids.length; i += 25) {
     var chunk = ids.slice(i, i + 25), ok = false;
-    var pr = jrGet_('/people/v2/people?where[id]=' + chunk.join(',') + '&per_page=100');
-    if (pr && pr.data && pr.data.length) { ok = true; pr.data.forEach(function(p) { memb[String(p.id)] = (p.attributes || {}).membership || ''; }); }
-    if (!ok) chunk.forEach(function(id) { var one = jrGet_('/people/v2/people/' + id); if (one && one.data) memb[id] = ((one.data.attributes || {}).membership) || ''; });
+    var pr = jrGet_('/people/v2/people?where[id]=' + chunk.join(',') + '&include=field_data&per_page=100');
+    if (pr && pr.data && pr.data.length) { ok = true; pr.data.forEach(function(p) { memb[String(p.id)] = (p.attributes || {}).membership || ''; }); readFd(pr.included); }
+    if (!ok) chunk.forEach(function(id) { var one = jrGet_('/people/v2/people/' + id + '?include=field_data'); if (one && one.data) { memb[id] = ((one.data.attributes || {}).membership) || ''; readFd(one.included); } });
   }
   return rows.map(function(r) {
     var s = sh[r.pid] || null, m = memb[r.pid] || (s ? s.membershipType : '') || '';
     var fam = /^(member|deacon|pastor)$/i.test(String(m).trim());
-    var serving = null, inGroup = null, baptized = s ? !!s.baptized : null, inProcess = !!(s && s.newFamilyMember);
+    var serving = null, inGroup = null, baptized = !!bap[r.pid] || !!(s && s.baptized), inProcess = !!(s && s.newFamilyMember);
     if (s) { serving = (s.serveTeams || []).length > 0; inGroup = (s.groups || []).length > 0; }
     if (kind === 'group' && serving === null && Date.now() < budget) { var ta = jrGet_('/services/v2/people/' + r.pid + '/person_team_position_assignments?per_page=1'); serving = !!(ta && ta.data && ta.data.length); }
     if (kind === 'team' && inGroup === null && Date.now() < budget) { var gl = jrGet_('/groups/v2/people/' + r.pid + '/groups?per_page=50'); inGroup = ((gl && gl.data) || []).some(function(g) { return String(((((g.relationships || {}).group_type || {}).data) || {}).id) === JR_.CG_TYPE; }); }

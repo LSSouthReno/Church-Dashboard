@@ -346,10 +346,11 @@ function leadHtml(L) {
     const rows = m.map(x => '<tr><td class="n">' + esc(x.name) + (x.leader ? '<small>Co-leader</small>' : '') + '</td>' +
       '<td class="f" data-l="Family Member">' + (x.inProcess ? '<span class="q">In process</span>' : yn(x.familyMember)) + '</td>' +
       '<td class="o" data-l="' + other + '">' + yn(kind === 'group' ? x.serving : x.inGroup) + '</td>' +
+      '<td class="o" data-l="Baptized">' + yn(x.baptized) + '</td>' +
       '<td class="s">' + esc(x.step) + '</td></tr>').join('');
     return '<div class="card" style="margin-top:16px"><div class="card-h"><h3>' + (kind === 'group' ? 'Your group' : 'Your team') + ' · ' + esc(t.name) + '</h3><span class="c">' + m.length + (m.length === 1 ? ' person' : ' people') + '</span></div>' +
-      '<div class="lead-sum"><span><b>' + fam + '</b> of ' + m.length + ' are Family Members</span><span><b>' + oth + '</b> of ' + m.length + ' ' + (kind === 'group' ? 'are serving' : 'are in a group') + '</span></div>' +
-      (m.length ? '<table class="roster"><thead><tr><th>Name</th><th>Family Member</th><th>' + other + '</th><th>A next step you could encourage</th></tr></thead><tbody>' + rows + '</tbody></table>'
+      '<div class="lead-sum"><span><b>' + fam + '</b> of ' + m.length + ' are Family Members</span><span><b>' + oth + '</b> of ' + m.length + ' ' + (kind === 'group' ? 'are serving' : 'are in a group') + '</span><span><b>' + m.filter(x => x.baptized).length + '</b> of ' + m.length + ' are baptized</span></div>' +
+      (m.length ? '<table class="roster"><thead><tr><th>Name</th><th>Family Member</th><th>' + other + '</th><th>Baptized</th><th>A next step you could encourage</th></tr></thead><tbody>' + rows + '</tbody></table>'
                 : '<div class="dim">Nobody on the roster yet.</div>') +
       '<div class="quiet" style="margin:12px 0 0;font-size:12px">Shown to you because you lead this ' + kind + '. Names and simple yes/no only — never giving or pastoral notes. Suggestions are a starting point, not a grade.</div></div>';
   };
