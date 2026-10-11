@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T20:45:41.329Z",
+  "lastUpdated": "2026-10-11T20:58:20.733Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13283,7 +13283,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 1:45 PM",
+    "refreshed": "Oct 11, 2026, 1:58 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14177,7 +14177,7 @@
       "groups": 36,
       "members": 403,
       "groupSize": 11,
-      "fmInGroupsPct": 54,
+      "fmInGroupsPct": 55,
       "asOfMonth": "Oct '26"
     },
     "groupCountsByYear": {
@@ -14743,7 +14743,7 @@
         24,
         22,
         48,
-        18,
+        20,
         null,
         null
       ]
@@ -15133,6 +15133,14 @@
         "attPct": 64
       },
       {
+        "name": "Flores/Norton Community Group",
+        "members": 11,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 10am-12pm",
+        "avgAttended": 6,
+        "attPct": 55
+      },
+      {
         "name": "Geoffrey Caliger Community Group",
         "members": 11,
         "leaders": 1,
@@ -15171,14 +15179,6 @@
         "schedule": "Meets weekly on Wednesdays from 6:15-7:15am",
         "avgAttended": 7,
         "attPct": 70
-      },
-      {
-        "name": "Flores/Norton Community Group",
-        "members": 10,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 10am-12pm",
-        "avgAttended": 6,
-        "attPct": 60
       },
       {
         "name": "Dykins Community Group",
@@ -15287,31 +15287,31 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 402,
-      "both": 213,
-      "pctFmInCg": 54,
+      "cgMembers": 404,
+      "both": 215,
+      "pctFmInCg": 55,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 402,
+        "cg": 404,
         "serving": 291,
         "giving": 954
       },
       "universe": 1162,
       "regions": {
-        "1": 43,
+        "1": 42,
         "2": 91,
-        "3": 11,
+        "3": 12,
         "4": 31,
         "5": 10,
         "6": 7,
         "7": 15,
         "8": 524,
-        "9": 81,
+        "9": 80,
         "10": 69,
-        "11": 52,
+        "11": 53,
         "12": 26,
         "13": 45,
         "14": 22,
@@ -15346,7 +15346,6 @@
           "Kerry Munk",
           "Kristina Godsell",
           "Laurie Demaine",
-          "Lesley Welborn",
           "Linda L. McKenzie",
           "Lyssa Sutton",
           "Nita Taylor",
@@ -15462,6 +15461,7 @@
           "Jane Foote",
           "Jenn Ferguson",
           "Justin Bell",
+          "Lesley Welborn",
           "Lex Adams",
           "Malena Kosher",
           "Melissa Soule",
@@ -15764,7 +15764,6 @@
           "David Misanik",
           "Debbie Berge",
           "Diane Sikora",
-          "Donna Sarazen",
           "Elizabeth Wolfgang",
           "Erica Edwards",
           "Ginny Bartoldo",
@@ -15912,6 +15911,7 @@
           "Daniel Frank",
           "Darrell Vydra",
           "Diane Lane",
+          "Donna Sarazen",
           "Doug Neddenriep",
           "Dr Richard Reich",
           "Emily Smith",
@@ -16218,7 +16218,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 179,
+          "count": 177,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16271,7 +16271,6 @@
             "Dennis Brinson",
             "Diane Sikora",
             "Donald Hug",
-            "Donna Sarazen",
             "Douglas Drake",
             "Dwight Foreman",
             "Edward Jones",
@@ -16329,7 +16328,6 @@
             "Laurrie Brooks",
             "Layne Christopher",
             "Lee Ables",
-            "Lesley Welborn",
             "Linda Kucia",
             "Linda L. McKenzie",
             "Lisa Morris",
@@ -16544,7 +16542,7 @@
         },
         "memberOnly": {
           "label": "Family Members only — no CG, serving, or giving",
-          "count": 43,
+          "count": 42,
           "names": [
             "Allie Fava",
             "Andy Jones",
@@ -16573,7 +16571,6 @@
             "Kerry Munk",
             "Kristina Godsell",
             "Laurie Demaine",
-            "Lesley Welborn",
             "Linda L. McKenzie",
             "Lyssa Sutton",
             "Nita Taylor",
@@ -16593,7 +16590,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 605,
+          "count": 604,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -16698,7 +16695,6 @@
             "Diane Sikora",
             "Dominic Smith",
             "Donna Buckwalter",
-            "Donna Sarazen",
             "Dorothy Bell",
             "Douglas Devries",
             "Dru Bahnsen",
@@ -16794,7 +16790,8 @@
             "Laurrie Brooks",
             "Lee Ables",
             "Leigha Monaghan",
-            "Leona Lorenzen"
+            "Leona Lorenzen",
+            "Linda Cornell"
           ]
         }
       },
@@ -16802,7 +16799,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 179,
+        "count": 177,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -16855,7 +16852,6 @@
           "Dennis Brinson",
           "Diane Sikora",
           "Donald Hug",
-          "Donna Sarazen",
           "Douglas Drake",
           "Dwight Foreman",
           "Edward Jones",
@@ -16913,7 +16909,6 @@
           "Laurrie Brooks",
           "Layne Christopher",
           "Lee Ables",
-          "Lesley Welborn",
           "Linda Kucia",
           "Linda L. McKenzie",
           "Lisa Morris",
@@ -30176,6 +30171,20 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -30185,8 +30194,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 71
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -31249,6 +31258,13 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31258,8 +31274,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 71,
-            "totalVols": 71
+            "volsWithServiceTime": 72,
+            "totalVols": 72
           }
         }
       ]
