@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T13:59:12.880Z",
+  "lastUpdated": "2026-10-11T14:46:36.918Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      85104
+      90794
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      214
+      219
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5674243
+    "raised": 5679933
   },
   "attendance": {
     "months": [
@@ -952,7 +952,7 @@
       83,
       119,
       114,
-      110
+      57
     ]
   },
   "attendanceWeekly": {
@@ -13263,7 +13263,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 6:59 AM",
+    "refreshed": "Oct 11, 2026, 7:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -31661,14 +31661,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "error": "PCO request failed: 502 — https://api.planningcenteronline.com/people/v2/people?offset=1000&order=-created_at&per_page=100 — <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n"
+    "count30d": 51,
+    "weeklyAvg": 12,
+    "totalFetched": 7136,
+    "since": "2026-09-11",
+    "asOf": "2026-10-11T14:44:48.702Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.22305764411027568,
-    "avgOpenRate3": 0.27641296108443275,
+    "latestOpenRate": 0.22556390977443608,
+    "avgOpenRate3": 0.2772483829724863,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-11T13:44:03.008Z"
+    "asOf": "2026-10-11T14:44:49.934Z"
   }
 }
