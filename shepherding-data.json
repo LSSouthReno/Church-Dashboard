@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T17:19:22.424Z",
+  "generatedAt": "2026-10-11T18:19:10.292Z",
   "asOf": "2026-10-11",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 216,
+    "inGroup": 217,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 178,
+    "notInGroup": 177,
     "notServing": 160,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.5482233502538071,
+      "inGroup": 0.550761421319797,
       "serving": 0.5939086294416244,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -3447,7 +3447,7 @@
       "summary": {
         "totalPeople": 58,
         "avgScore": 0,
-        "inGroup": 30,
+        "inGroup": 31,
         "serving": 35,
         "leading": 10,
         "givingRegular": 0,
@@ -3457,7 +3457,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 58,
-        "notInGroup": 28,
+        "notInGroup": 27,
         "notServing": 23,
         "notGiving": 0,
         "paciCounts": {
@@ -3475,7 +3475,7 @@
           "unknown": 58
         },
         "pct": {
-          "inGroup": 0.5172413793103449,
+          "inGroup": 0.5344827586206896,
           "serving": 0.603448275862069,
           "leading": 0.1724137931034483,
           "givingRegular": 0,
@@ -4650,49 +4650,6 @@
         },
         {
           "id": null,
-          "name": "Kim Conrad",
-          "first": "Kim",
-          "last": "Conrad",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Hospitality Team",
-              "role": "member",
-              "joinedAt": "2026-02-17T01:18:14Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Steven Pradere",
           "first": "Steven",
           "last": "Pradere",
@@ -4999,6 +4956,53 @@
               "name": "Safety Team",
               "role": "member",
               "joinedAt": "2026-05-07T03:36:34Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Kim Conrad",
+          "first": "Kim",
+          "last": "Conrad",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2026-10-11T18:04:27Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Hospitality Team",
+              "role": "member",
+              "joinedAt": "2026-02-17T01:18:14Z"
             }
           ],
           "flags": [],
@@ -18604,8 +18608,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 64,
-    "adult": 64,
-    "child": 152,
+    "adult": 65,
+    "child": 151,
     "infant": 103
   }
 }
