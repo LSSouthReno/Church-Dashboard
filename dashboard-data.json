@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T05:45:55.359Z",
+  "lastUpdated": "2026-10-11T06:45:50.635Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13263,7 +13263,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 10, 2026, 10:45 PM",
+    "refreshed": "Oct 10, 2026, 11:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -26701,13 +26701,6 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
-              "name": "Teylor Baskharoon (Hinzman)",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
               "name": "Shawn Stoddard",
               "team": "Safety Team",
               "pos": "Safety Monitor",
@@ -27444,8 +27437,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 115,
-            "totalVols": 115
+            "volsWithServiceTime": 114,
+            "totalVols": 114
           }
         }
       ]
@@ -31657,7 +31650,23 @@
       ]
     }
   ],
-  "staffTimeOff": [],
+  "staffTimeOff": [
+    {
+      "name": "John Conelea",
+      "start": "2026-10-07",
+      "end": "2026-10-11"
+    },
+    {
+      "name": "Adam Carp",
+      "start": "2026-10-18",
+      "end": "2026-10-18"
+    },
+    {
+      "name": "Katie Thompson",
+      "start": "2026-11-08",
+      "end": "2026-11-10"
+    }
+  ],
   "studentMinistry": {
     "error": "stale_event_id",
     "cachedId": "925788"
@@ -31667,14 +31676,14 @@
     "weeklyAvg": 12,
     "totalFetched": 7136,
     "since": "2026-09-11",
-    "asOf": "2026-10-11T05:44:34.990Z"
+    "asOf": "2026-10-11T06:44:30.835Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.19548872180451127,
-    "avgOpenRate3": 0.2664271419718956,
+    "latestOpenRate": 0.20050125313283207,
+    "avgOpenRate3": 0.26809798574800253,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-11T05:44:35.773Z"
+    "asOf": "2026-10-11T06:44:31.647Z"
   }
 }
