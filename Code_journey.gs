@@ -518,7 +518,7 @@ function jrBuild_(pid) {
    Cached 6 h per leader (jr_lead_<pid>); jr_me's 10-min cache sits on top.
 ========================================================= */
 function jrLeading_(pid, groups, teamIds) {
-  var c = CacheService.getScriptCache(), key = 'jr_lead2_' + pid;   // v2: baptism from PCO for everyone
+  var c = CacheService.getScriptCache(), key = 'jr_lead3_' + pid;   // v3: baptism from PCO; no health-derived steps
   try { var hit = c.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
   var out = { groups: [], teams: [] }, budget = Date.now() + 150000;   // stay well inside the web-app limit
   try {
@@ -611,7 +611,9 @@ function jrRosterFlags_(rows, kind, sh, budget) {
     else if (kind === 'group' && serving === false) step = 'Invite them to serve on a team';
     else if (kind === 'team' && inGroup === false) step = 'Invite them to a community group';
     else if (baptized === false) step = 'Ask whether they’ve thought about baptism';
-    else if (shStep && !/giv|generos|tith/i.test(shStep)) step = shStep;
+    // Shepherding steps can reflect a pastor's private health assessment (e.g. "Re-establish contact")
+    // — leaders only get the growth-type ones.
+    else if (shStep && !/giv|generos|tith|re-?establish|contact|reach out|check in|care|pray|health|wander|lost|crisis|concern/i.test(shStep)) step = shStep;
     else step = r.leader ? 'Leading alongside you — thank them' : 'Connected and serving — ask who they could invite';
     return { pid: r.pid, name: r.name, avatar: r.avatar, leader: r.leader, familyMember: fam, inProcess: inProcess, serving: serving, inGroup: inGroup, baptized: baptized, step: step };
   }).sort(function(a, b) { return (b.leader ? 1 : 0) - (a.leader ? 1 : 0) || a.name.localeCompare(b.name); });

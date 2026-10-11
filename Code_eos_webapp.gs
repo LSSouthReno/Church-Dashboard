@@ -126,6 +126,18 @@ function doGet(e) {
       if (!spPastorForHash_((e.parameter||{}).pw)) return eosWaJson_({ error: 'unauthorized' });
       return eosWaJson_(jgProbe_());
     }
+    if (action === 'probe_jr_lead') {
+      // Signed-in lschurches.com user only: the leader roster summary My Journey builds for a person (no cache).
+      var who4 = ''; try { who4 = String(Session.getActiveUser().getEmail() || ''); } catch (x) {}
+      if (!/@lschurches\.com$/i.test(who4)) return eosWaJson_({ error: 'unauthorized' });
+      var lp = String((e.parameter||{}).pid || '').replace(/\D/g, '');
+      try { CacheService.getScriptCache().remove('jr_lead3_' + lp); } catch (x) {}
+      var built = jrBuild_(lp), L = built.leading || {};
+      var sum = function(t) { var m = t.members || []; return { name: t.name, people: m.length, family: m.filter(function(x) { return x.familyMember; }).length,
+        baptized: m.filter(function(x) { return x.baptized; }).length, notBaptized: m.filter(function(x) { return x.baptized === false; }).length,
+        sample: m.slice(0, 4).map(function(x) { return { name: x.name, fam: x.familyMember, bap: x.baptized, step: x.step }; }) }; };
+      return eosWaJson_({ groups: (L.groups || []).map(sum), teams: (L.teams || []).map(sum), error: L.error || null });
+    }
     if (action === 'probe_jr_log') {
       // Signed-in lschurches.com user only: last sign-in attempts (no codes, masked emails) + channel.
       var who3 = ''; try { who3 = String(Session.getActiveUser().getEmail() || ''); } catch (x) {}
