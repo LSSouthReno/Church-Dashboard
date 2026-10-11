@@ -985,6 +985,33 @@
   .mt-tpl:first-of-type { border-top: none; }
   .mt-tpl-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .mt-tpl-t { font-size: 12.5px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.45; }
+  /* TEMPORARY: Connection Sunday awards */
+  .cs-wrap { border: 1px solid rgba(212,175,55,.45); background: linear-gradient(180deg, rgba(212,175,55,.09), rgba(212,175,55,.02)); border-radius: 14px; padding: 18px 20px 14px; margin-bottom: 22px; }
+  .cs-head { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 14px; }
+  .cs-eyebrow { font-size: 18px; font-weight: 800; letter-spacing: .02em; color: var(--gold); }
+  .cs-sub, .cs-upd { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+  .cs-upd { font-size: 11.5px; color: var(--text-dim); }
+  .cs-awards { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (max-width: 900px) { .cs-awards { grid-template-columns: 1fr; } }
+  .cs-award { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; }
+  .cs-award.hero { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(212,175,55,.25) inset; }
+  .cs-t { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; margin-bottom: 8px; }
+  .cs-award.hero .cs-t { color: var(--gold); }
+  .cs-n { font-size: 34px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+  .cs-n span { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-left: 6px; }
+  .cs-g { font-size: 15px; font-weight: 700; margin-top: 4px; }
+  .cs-l { font-size: 12px; color: var(--text-muted); }
+  .cs-tie { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 6px; letter-spacing: .06em; text-transform: uppercase; }
+  .cs-none { color: var(--text-dim); font-size: 14px; padding: 8px 0; }
+  .cs-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cs-table th { text-align: left; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; padding: 6px 8px; border-bottom: 1px solid var(--card-border); }
+  .cs-table td { padding: 8px; border-bottom: 1px solid var(--card-border); vertical-align: top; }
+  .cs-table td small { display: block; color: var(--text-dim); font-size: 11.5px; }
+  .cs-table tr.lead td { background: rgba(212,175,55,.06); }
+  .cs-who { color: var(--text-muted); font-size: 12px; line-height: 1.5; }
+  .cs-who i { color: var(--text-dim); font-style: normal; font-size: 11px; }
+  .cs-foot { font-size: 11.5px; color: var(--text-dim); margin-top: 10px; }
+  @media (max-width: 700px) { .cs-table th:nth-child(5), .cs-table td:nth-child(5) { display: none; } }
   .tlh-toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
   .tlh-toolbar-txt { flex: 1; color: var(--text-muted); font-size: 13px; }
   #tlh-admin-btn { background: none; border: 1px solid #444; color: #777; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
@@ -4031,6 +4058,9 @@
 
   <!-- Unlocked content -->
   <div id="cgModContent" class="tmod-body" style="display:none">
+
+    <!-- TEMPORARY (Oct 2026): Connection Sunday awards — remove when Brad says -->
+    <div id="csAwards"></div>
 
     <!-- KPI cards -->
     <div class="cg-kpi-row" id="cgKPIs"></div>
@@ -8171,6 +8201,7 @@ function openCGModal() {
     document.getElementById('cgModLocked').style.display = 'none';
     document.getElementById('cgModContent').style.display = 'block';
     if (!cgRendered) { cgRenderAll(); cgRendered = true; }
+    csRenderAwards();   // re-render every open so the hourly data shows up
   } else {
     document.getElementById('cgModLocked').style.display = 'flex';
     document.getElementById('cgModContent').style.display = 'none';
@@ -8198,6 +8229,43 @@ async function cgDoUnlock() {
 }
 
 let _cgData = {};
+/* ── TEMPORARY: Connection Sunday awards (Adam's taco challenge, Oct 11 2026) ──
+   Data: DASHBOARD_DATA.connectionSunday from syncConnectionSunday_ (hourly). Remove this block,
+   #csAwards, its CSS and the backend step when Brad says the awards can come down. */
+function csRenderAwards() {
+  const el = document.getElementById('csAwards'); if (!el) return;
+  const cs = DASHBOARD_DATA && DASHBOARD_DATA.connectionSunday;
+  if (!cs) { el.innerHTML = ''; return; }
+  const E = escapeHtml, rows = cs.groups || [];
+  const dayLbl = new Date(cs.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const upd = cs.updated ? new Date(cs.updated).toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' }) : '';
+  const award = (key, title, unit, hero) => {
+    const max = rows.reduce((m, r) => Math.max(m, r[key] || 0), 0);
+    const win = max ? rows.filter(r => r[key] === max) : [];
+    const body = !win.length ? '<div class="cs-none">No one yet</div>'
+      : '<div class="cs-n">' + max + '<span>' + (max === 1 ? unit[0] : unit[1]) + '</span></div>' +
+        win.map(r => '<div class="cs-g">' + E(r.group.replace(/\s*Community Group$/i, '')) + '</div><div class="cs-l">' + E((r.leaders || []).join(', ')) + '</div>').join('') +
+        (win.length > 1 ? '<div class="cs-tie">' + win.length + '-way tie</div>' : '');
+    return '<div class="cs-award' + (hero ? ' hero' : '') + '"><div class="cs-t">' + title + '</div>' + body + '</div>';
+  };
+  const names = r => {
+    const both = r.appliedNames.filter(n => r.joinedNames.indexOf(n) >= 0);
+    const onlyA = r.appliedNames.filter(n => both.indexOf(n) < 0), onlyJ = r.joinedNames.filter(n => both.indexOf(n) < 0);
+    return [both.map(n => E(n) + ' <i>requested + joined</i>'), onlyA.map(n => E(n) + ' <i>requested</i>'), onlyJ.map(n => E(n) + ' <i>joined</i>')].flat().join(' · ');
+  };
+  el.innerHTML = '<div class="cs-wrap"><div class="cs-head"><div><div class="cs-eyebrow">Connection Sunday Awards</div><div class="cs-sub">' + (cs.since ? 'Since ' : '') + E(dayLbl) +
+      ' · ' + cs.totals.applied + ' requested to join · ' + cs.totals.joined + ' joined · ' + cs.totals.connections + ' new connections across ' + rows.length + ' groups</div></div>' +
+      '<div class="cs-upd">Updates hourly from Planning Center' + (upd ? ' · last ' + E(upd) : '') + '</div></div>' +
+    '<div class="cs-awards">' +
+      award('connections', 'Most new connections · the taco award', ['person', 'people'], true) +
+      award('applied', 'Most requests to join', ['request', 'requests'], false) +
+      award('joined', 'Most people joined', ['person', 'people'], false) +
+    '</div>' +
+    (rows.length ? '<table class="cs-table"><thead><tr><th>Group</th><th>Requested</th><th>Joined</th><th>New connections</th><th>Who</th></tr></thead><tbody>' +
+      rows.map((r, i) => '<tr' + (i === 0 ? ' class="lead"' : '') + '><td><b>' + E(r.group.replace(/\s*Community Group$/i, '')) + '</b><small>' + E((r.leaders || []).join(', ')) + '</small></td><td>' + r.applied + '</td><td>' + r.joined + '</td><td><b>' + r.connections + '</b></td><td class="cs-who">' + names(r) + '</td></tr>').join('') +
+      '</tbody></table>' : '') +
+    '<div class="cs-foot">Counting every request and join from Connection Sunday on, since some people take a week or two. New connections count each person once, so someone who requested and was then added counts one, not two. Only community groups are included.</div></div>';
+}
 function cgRenderAll() {
   const cg = DASHBOARD_DATA.communityGroupsDetailed || {};
   _cgData = cg;
@@ -11405,8 +11473,9 @@ function cgpPw() { try { return sessionStorage.getItem('cg_pw') || (pastorIdenti
 async function cgpApi(body) {
   let pw = cgpPw();
   if (!pw) {
-    mmShowPrompt(() => { if (cgpPw()) { cgpToast('Pipeline connected'); try { cgpLoad(); } catch (e) {} } });
-    throw new Error('The live pipeline needs the groups password (pastors are signed in already)');
+    // Only ask when the person clicked something; the automatic load on open just shows a Connect button.
+    if (body.action !== 'cgp_list') mmShowPrompt(() => { if (cgpPw()) { cgpToast('Pipeline connected'); try { cgpLoad(); } catch (e) {} } });
+    const err = new Error('The live leader pipeline needs the groups password or a pastor sign-in.'); err.needsPw = true; throw err;
   }
   const j = await gasCall(STAFF_OS_URL, Object.assign({ pw: pw }, body));
   if (j && j.auth === false) { try { sessionStorage.removeItem('cg_pw'); } catch (e) {} throw new Error('Wrong password — try again'); }
@@ -11464,7 +11533,7 @@ async function cgpLoad() {
     Object.assign(_cgp, { steps: j.steps, cards: j.cards, completed: j.completed, fetchedAt: j.fetchedAt, loaded: true, error: '' });
     cgpSaveCache();
   } catch (e) {
-    _cgp.error = e.message || String(e);
+    _cgp.error = e.message || String(e); _cgp.needsPw = !!e.needsPw;
   }
   cgpPaint();
 }
@@ -11473,7 +11542,8 @@ function cgpPaint() {
   const board = document.getElementById('cgpBoard'); if (!board) return;
   const meta = document.getElementById('cgpMeta');
   if (!_cgp.loaded) {
-    board.innerHTML = '<div class="cg-pipe-empty" style="padding:18px 4px">' + (_cgp.error ? '⚠ ' + escapeHtml(_cgp.error) + ' <button class="cgp-stepbtn" onclick="_cgp.error=\'\';cgpPaint();cgpLoad()">Retry</button>' : 'Loading the live pipeline from Planning Center…') + '</div>';
+    board.innerHTML = '<div class="cg-pipe-empty" style="padding:18px 4px">' + (_cgp.needsPw ? escapeHtml(_cgp.error) + ' <button class="cgp-stepbtn" onclick="mmShowPrompt(()=>{if(cgpPw()){_cgp.error=\'\';_cgp.needsPw=false;cgpPaint();cgpLoad();}})">Connect</button>'
+      : _cgp.error ? '⚠ ' + escapeHtml(_cgp.error) + ' <button class="cgp-stepbtn" onclick="_cgp.error=\'\';cgpPaint();cgpLoad()">Retry</button>' : 'Loading the live pipeline from Planning Center…') + '</div>';
     if (meta) meta.innerHTML = '<a href="' + CGP_WF_URL + '" target="_blank" rel="noopener">Open in Planning Center ↗</a>';
     return;
   }
@@ -18272,7 +18342,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261008T194258Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261011T231330Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {

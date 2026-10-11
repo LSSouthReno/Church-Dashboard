@@ -54,6 +54,13 @@ function doGet(e) {
       pushJsonToGitHub_(dataJr);
       return eosWaJson_({ ok: true, ran: 'json_rebuild' });
     }
+    if (action === 'run_connection_sunday') {
+      // TEMP (Oct 2026): recompute the Connection Sunday awards and republish dashboard-data.json now.
+      var csOut = syncConnectionSunday_();
+      var ssCs = SpreadsheetApp.getActiveSpreadsheet(), dataCs = buildDashboardDataFromSheet_(ssCs);
+      writeDashboardJsonToSheet_(ssCs, dataCs); pushJsonToGitHub_(dataCs);
+      return eosWaJson_({ ok: true, ran: 'connection_sunday', result: csOut });
+    }
     if (action === 'run_cg_venn') {
       // Rebuild the Groups dashboard Venn / 4-way (FM ∩ CG ∩ Serving ∩ Giving) + action
       // lists, then republish dashboard-data.json — same as the hourly step, on demand.
