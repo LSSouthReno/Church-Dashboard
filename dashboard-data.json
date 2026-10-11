@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-08T19:02:24.295Z",
+  "lastUpdated": "2026-10-11T23:11:59.229Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      72818
+      95525
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      200
+      234
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5661957
+    "raised": 5684664
   },
   "attendance": {
     "months": [
@@ -3282,6 +3282,11 @@
         "week": "Oct 4",
         "adults": 775,
         "kids": 110
+      },
+      {
+        "week": "Oct 11",
+        "adults": 774,
+        "kids": 110
       }
     ]
   },
@@ -4308,16 +4313,16 @@
       },
       "2026-10": {
         "8:00 AM": {
-          "adults": 206,
-          "kids": 18
+          "adults": 193,
+          "kids": 16
         },
         "9:30 AM": {
-          "adults": 303,
-          "kids": 41
+          "adults": 326,
+          "kids": 49
         },
         "11:00 AM": {
-          "adults": 266,
-          "kids": 51
+          "adults": 257,
+          "kids": 46
         }
       }
     }
@@ -4756,7 +4761,8 @@
       "2026-09-13",
       "2026-09-20",
       "2026-09-27",
-      "2026-10-04"
+      "2026-10-04",
+      "2026-10-11"
     ],
     "data": {
       "2018-08-19": {
@@ -8464,6 +8470,20 @@
           "adults": 266,
           "kids": 51
         }
+      },
+      "2026-10-11": {
+        "8:00 AM": {
+          "adults": 179,
+          "kids": 13
+        },
+        "9:30 AM": {
+          "adults": 348,
+          "kids": 56
+        },
+        "11:00 AM": {
+          "adults": 247,
+          "kids": 41
+        }
       }
     },
     "goodFridayEvents": {
@@ -10699,7 +10719,7 @@
       "t": "SERVICES",
       "c": 2,
       "d": 3,
-      "p": 6,
+      "p": 5,
       "r": 40
     },
     {
@@ -10737,18 +10757,10 @@
     {
       "n": "Alan Charles",
       "t": "SERVICES",
-      "c": 12,
+      "c": 10,
       "d": 0,
       "p": 0,
       "r": 100
-    },
-    {
-      "n": "Alex Buckwalter",
-      "t": "SERVICES",
-      "c": 0,
-      "d": 1,
-      "p": 0,
-      "r": 0
     },
     {
       "n": "Alex Mari",
@@ -10761,26 +10773,26 @@
     {
       "n": "Alexis Durham",
       "t": "SERVICES",
-      "c": 8,
+      "c": 7,
       "d": 1,
       "p": 2,
-      "r": 89
+      "r": 88
     },
     {
       "n": "Aliyah Ramirez",
       "t": "SERVICES",
-      "c": 8,
+      "c": 7,
       "d": 1,
       "p": 0,
-      "r": 89
+      "r": 88
     },
     {
       "n": "Alla Schock",
       "t": "SERVICES",
       "c": 2,
-      "d": 2,
+      "d": 1,
       "p": 0,
-      "r": 50
+      "r": 67
     },
     {
       "n": "Allison Wallace",
@@ -10817,10 +10829,10 @@
     {
       "n": "Ana Loftin",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 3,
       "p": 0,
-      "r": 63
+      "r": 57
     },
     {
       "n": "Anabel Dito",
@@ -10849,10 +10861,10 @@
     {
       "n": "Anita Bigger",
       "t": "SERVICES",
-      "c": 18,
+      "c": 16,
       "d": 1,
       "p": 0,
-      "r": 95
+      "r": 94
     },
     {
       "n": "Anita Irwin",
@@ -10866,9 +10878,9 @@
       "n": "Anna Faker",
       "t": "SERVICES",
       "c": 4,
-      "d": 4,
+      "d": 3,
       "p": 0,
-      "r": 50
+      "r": 57
     },
     {
       "n": "Anna Ferguson",
@@ -10889,7 +10901,7 @@
     {
       "n": "Anna Sawyer",
       "t": "SERVICES",
-      "c": 9,
+      "c": 8,
       "d": 0,
       "p": 0,
       "r": 100
@@ -10898,25 +10910,25 @@
       "n": "Annalissa Sanchez",
       "t": "SERVICES",
       "c": 0,
-      "d": 6,
+      "d": 5,
       "p": 0,
       "r": 0
     },
     {
       "n": "Annette Breach",
       "t": "SERVICES",
-      "c": 6,
+      "c": 5,
       "d": 1,
       "p": 0,
-      "r": 86
+      "r": 83
     },
     {
       "n": "Anthony Azzam",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 2,
       "p": 0,
-      "r": 67
+      "r": 60
     },
     {
       "n": "April Libby",
@@ -10961,7 +10973,7 @@
     {
       "n": "Audrey Hawkins",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -10970,9 +10982,9 @@
       "n": "Autumn Blattman",
       "t": "SERVICES",
       "c": 3,
-      "d": 5,
+      "d": 4,
       "p": 0,
-      "r": 38
+      "r": 43
     },
     {
       "n": "Barbara Drake",
@@ -10985,7 +10997,7 @@
     {
       "n": "Bart Wallace",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11001,7 +11013,7 @@
     {
       "n": "Bill Caraway",
       "t": "SERVICES",
-      "c": 15,
+      "c": 14,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11017,7 +11029,7 @@
     {
       "n": "Bill Wallace",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 1,
       "r": 100
@@ -11073,7 +11085,7 @@
     {
       "n": "Breanne Read",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11083,7 +11095,7 @@
       "t": "SERVICES",
       "c": 0,
       "d": 0,
-      "p": 4,
+      "p": 3,
       "r": 0
     },
     {
@@ -11106,9 +11118,9 @@
       "n": "Brianna Sanchez",
       "t": "SERVICES",
       "c": 1,
-      "d": 6,
+      "d": 5,
       "p": 0,
-      "r": 14
+      "r": 17
     },
     {
       "n": "Brianne Sullivan",
@@ -11129,7 +11141,7 @@
     {
       "n": "Byron Corletto",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11145,18 +11157,18 @@
     {
       "n": "Candy Bennett",
       "t": "SERVICES",
-      "c": 6,
+      "c": 5,
       "d": 1,
       "p": 0,
-      "r": 86
+      "r": 83
     },
     {
       "n": "Carlos Flores",
       "t": "SERVICES",
       "c": 6,
-      "d": 3,
+      "d": 2,
       "p": 0,
-      "r": 67
+      "r": 75
     },
     {
       "n": "Carlos Perez",
@@ -11177,7 +11189,7 @@
     {
       "n": "Casey Shull",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11185,7 +11197,7 @@
     {
       "n": "Cathy Cappini",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11201,10 +11213,10 @@
     {
       "n": "Chelsea Borowski",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 1,
       "p": 0,
-      "r": 67
+      "r": 50
     },
     {
       "n": "Cheryl Devore",
@@ -11217,18 +11229,18 @@
     {
       "n": "Cheryl O'Gorman",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 3,
       "p": 0,
-      "r": 50
+      "r": 40
     },
     {
       "n": "Christa Bowman",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 2,
       "p": 0,
-      "r": 71
+      "r": 67
     },
     {
       "n": "Christian Olson",
@@ -11249,10 +11261,10 @@
     {
       "n": "Cindy Lefler",
       "t": "SERVICES",
-      "c": 14,
+      "c": 13,
       "d": 2,
       "p": 0,
-      "r": 88
+      "r": 87
     },
     {
       "n": "Clare Lattin",
@@ -11289,18 +11301,18 @@
     {
       "n": "Cory Hunt",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 1,
       "p": 0,
-      "r": 75
+      "r": 67
     },
     {
       "n": "Courtney Rumbaugh",
       "t": "SERVICES",
-      "c": 6,
+      "c": 5,
       "d": 1,
       "p": 0,
-      "r": 86
+      "r": 83
     },
     {
       "n": "Damian Smith",
@@ -11345,10 +11357,10 @@
     {
       "n": "David Castro",
       "t": "SERVICES",
-      "c": 10,
+      "c": 9,
       "d": 1,
       "p": 0,
-      "r": 91
+      "r": 90
     },
     {
       "n": "David Hill",
@@ -11371,14 +11383,14 @@
       "t": "SERVICES",
       "c": 0,
       "d": 0,
-      "p": 10,
+      "p": 9,
       "r": 0
     },
     {
       "n": "David Yost",
       "t": "SERVICES",
       "c": 0,
-      "d": 4,
+      "d": 3,
       "p": 4,
       "r": 0
     },
@@ -11393,10 +11405,10 @@
     {
       "n": "Deana Griffin",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 2,
       "p": 0,
-      "r": 71
+      "r": 67
     },
     {
       "n": "Debbie Rowland",
@@ -11417,7 +11429,7 @@
     {
       "n": "Dena Steuer",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 1,
       "r": 100
@@ -11425,7 +11437,7 @@
     {
       "n": "Dennis Brinson",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 4,
       "r": 100
@@ -11449,7 +11461,7 @@
     {
       "n": "Don Lattin",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11457,10 +11469,10 @@
     {
       "n": "Doretta Brown",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 1,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Doug Laird",
@@ -11474,9 +11486,9 @@
       "n": "Douglas Drake",
       "t": "SERVICES",
       "c": 7,
-      "d": 2,
+      "d": 1,
       "p": 1,
-      "r": 78
+      "r": 88
     },
     {
       "n": "Dwight Boyko",
@@ -11489,10 +11501,10 @@
     {
       "n": "Ed Griggs",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 1,
       "p": 1,
-      "r": 75
+      "r": 67
     },
     {
       "n": "Edward Jones",
@@ -11521,10 +11533,10 @@
     {
       "n": "Elmer Alegre",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 1,
       "p": 0,
-      "r": 75
+      "r": 67
     },
     {
       "n": "Emery Fava",
@@ -11545,18 +11557,18 @@
     {
       "n": "Emma Baskharoon",
       "t": "SERVICES",
-      "c": 10,
+      "c": 9,
       "d": 5,
       "p": 0,
-      "r": 67
+      "r": 64
     },
     {
       "n": "Emory Breach",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 2,
       "p": 0,
-      "r": 50
+      "r": 33
     },
     {
       "n": "Eric Sikora",
@@ -11577,7 +11589,7 @@
     {
       "n": "Evven Gardner",
       "t": "SERVICES",
-      "c": 12,
+      "c": 11,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11593,7 +11605,7 @@
     {
       "n": "Fredy Bridges",
       "t": "SERVICES",
-      "c": 9,
+      "c": 8,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11609,7 +11621,7 @@
     {
       "n": "Gavin Au",
       "t": "SERVICES",
-      "c": 6,
+      "c": 5,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11633,10 +11645,10 @@
     {
       "n": "Ginger King",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 1,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Gloria Worthington",
@@ -11649,7 +11661,7 @@
     {
       "n": "Gordon Fava",
       "t": "SERVICES",
-      "c": 24,
+      "c": 22,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11665,10 +11677,10 @@
     {
       "n": "Halee Frink",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 2,
       "p": 0,
-      "r": 67
+      "r": 60
     },
     {
       "n": "Hannah Christopher",
@@ -11691,16 +11703,16 @@
       "t": "SERVICES",
       "c": 2,
       "d": 0,
-      "p": 1,
+      "p": 0,
       "r": 100
     },
     {
       "n": "Holly Graham",
       "t": "SERVICES",
-      "c": 9,
-      "d": 3,
+      "c": 8,
+      "d": 2,
       "p": 0,
-      "r": 75
+      "r": 80
     },
     {
       "n": "Holly O Connor",
@@ -11721,7 +11733,7 @@
     {
       "n": "Iain Dykins",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11745,10 +11757,10 @@
     {
       "n": "Isabella Sanchez",
       "t": "SERVICES",
-      "c": 1,
+      "c": 0,
       "d": 4,
       "p": 0,
-      "r": 20
+      "r": 0
     },
     {
       "n": "Isla Skinner",
@@ -11761,10 +11773,10 @@
     {
       "n": "Jack Jauron",
       "t": "SERVICES",
-      "c": 7,
+      "c": 5,
       "d": 2,
       "p": 0,
-      "r": 78
+      "r": 71
     },
     {
       "n": "Jackie Lewis",
@@ -11785,10 +11797,10 @@
     {
       "n": "Jaeley-Grace Ferguson",
       "t": "SERVICES",
-      "c": 1,
+      "c": 0,
       "d": 4,
       "p": 0,
-      "r": 20
+      "r": 0
     },
     {
       "n": "Jaime Tibaduiza",
@@ -11801,15 +11813,15 @@
     {
       "n": "Jaimie Sullivan",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 4,
       "p": 0,
-      "r": 64
+      "r": 60
     },
     {
       "n": "Jane Brinson",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11817,7 +11829,7 @@
     {
       "n": "Janet Colonna",
       "t": "SERVICES",
-      "c": 12,
+      "c": 11,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11825,7 +11837,7 @@
     {
       "n": "Janet Frederick",
       "t": "SERVICES",
-      "c": 4,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11850,9 +11862,9 @@
       "n": "Jed Ingalls",
       "t": "SERVICES",
       "c": 4,
-      "d": 4,
+      "d": 3,
       "p": 3,
-      "r": 50
+      "r": 57
     },
     {
       "n": "Jeff Bridges",
@@ -11875,16 +11887,16 @@
       "t": "SERVICES",
       "c": 0,
       "d": 0,
-      "p": 9,
+      "p": 8,
       "r": 0
     },
     {
       "n": "Jenn Ferguson",
       "t": "SERVICES",
-      "c": 1,
+      "c": 0,
       "d": 6,
       "p": 0,
-      "r": 14
+      "r": 0
     },
     {
       "n": "Jenn Meredith",
@@ -11897,7 +11909,7 @@
     {
       "n": "Jennifer Janakus",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11937,10 +11949,10 @@
     {
       "n": "Jeremy Low",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 3,
       "p": 0,
-      "r": 57
+      "r": 50
     },
     {
       "n": "Jeremy Peterson",
@@ -11961,7 +11973,7 @@
     {
       "n": "Jim Kellames",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11985,7 +11997,7 @@
     {
       "n": "John Munk",
       "t": "SERVICES",
-      "c": 12,
+      "c": 11,
       "d": 0,
       "p": 0,
       "r": 100
@@ -11993,10 +12005,10 @@
     {
       "n": "John Turcich",
       "t": "SERVICES",
-      "c": 3,
+      "c": 1,
       "d": 2,
       "p": 0,
-      "r": 60
+      "r": 33
     },
     {
       "n": "Jon Harrison",
@@ -12009,7 +12021,7 @@
     {
       "n": "Jorie Hetland",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 1,
       "r": 100
@@ -12018,9 +12030,9 @@
       "n": "Josie Nerska",
       "t": "SERVICES",
       "c": 3,
-      "d": 7,
+      "d": 6,
       "p": 0,
-      "r": 30
+      "r": 33
     },
     {
       "n": "Joyce Eli",
@@ -12058,9 +12070,9 @@
       "n": "Julie Serpa",
       "t": "SERVICES",
       "c": 1,
-      "d": 2,
+      "d": 1,
       "p": 0,
-      "r": 33
+      "r": 50
     },
     {
       "n": "Justice JB",
@@ -12121,10 +12133,10 @@
     {
       "n": "Kathy Herndon",
       "t": "SERVICES",
-      "c": 8,
+      "c": 7,
       "d": 3,
       "p": 1,
-      "r": 73
+      "r": 70
     },
     {
       "n": "Kathy McAlpine",
@@ -12145,7 +12157,7 @@
     {
       "n": "Kay Tietz",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12169,10 +12181,10 @@
     {
       "n": "Kellan Coan",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 3,
       "p": 0,
-      "r": 57
+      "r": 50
     },
     {
       "n": "Kelly Coan",
@@ -12210,14 +12222,14 @@
       "n": "Kim Conrad",
       "t": "SERVICES",
       "c": 1,
-      "d": 2,
+      "d": 1,
       "p": 2,
-      "r": 33
+      "r": 50
     },
     {
       "n": "Kristie Marchese",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12257,7 +12269,7 @@
     {
       "n": "Lauren Johnson",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12266,9 +12278,9 @@
       "n": "Lauren Rotter",
       "t": "SERVICES",
       "c": 4,
-      "d": 3,
+      "d": 2,
       "p": 0,
-      "r": 57
+      "r": 67
     },
     {
       "n": "Lauren Smith",
@@ -12281,7 +12293,7 @@
     {
       "n": "Layne Christopher",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12289,7 +12301,7 @@
     {
       "n": "Lily Perry",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12306,17 +12318,17 @@
       "n": "Lindsey Low",
       "t": "SERVICES",
       "c": 4,
-      "d": 3,
+      "d": 2,
       "p": 0,
-      "r": 57
+      "r": 67
     },
     {
       "n": "Lisa Castaneda",
       "t": "SERVICES",
-      "c": 12,
+      "c": 10,
       "d": 1,
       "p": 0,
-      "r": 92
+      "r": 91
     },
     {
       "n": "Lisa Morris",
@@ -12338,14 +12350,6 @@
       "n": "Lorie Roberts",
       "t": "SERVICES",
       "c": 7,
-      "d": 1,
-      "p": 0,
-      "r": 88
-    },
-    {
-      "n": "Louie Quiroz",
-      "t": "SERVICES",
-      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12393,10 +12397,10 @@
     {
       "n": "Manuel Sanchez",
       "t": "SERVICES",
-      "c": 7,
+      "c": 5,
       "d": 2,
       "p": 1,
-      "r": 78
+      "r": 71
     },
     {
       "n": "Marcy Goddard",
@@ -12425,7 +12429,7 @@
     {
       "n": "Matt Gardner",
       "t": "SERVICES",
-      "c": 9,
+      "c": 8,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12433,7 +12437,7 @@
     {
       "n": "Matt Sweitzer",
       "t": "SERVICES",
-      "c": 9,
+      "c": 8,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12441,10 +12445,10 @@
     {
       "n": "McKayla Leggett",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 3,
       "p": 0,
-      "r": 50
+      "r": 40
     },
     {
       "n": "Megan McKinley",
@@ -12489,9 +12493,9 @@
     {
       "n": "Michael Fitzsimmons",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
-      "p": 5,
+      "p": 4,
       "r": 100
     },
     {
@@ -12521,7 +12525,7 @@
     {
       "n": "Michael Poleselli",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12553,10 +12557,10 @@
     {
       "n": "Mikayla Sanchez",
       "t": "SERVICES",
-      "c": 1,
+      "c": 0,
       "d": 1,
       "p": 0,
-      "r": 50
+      "r": 0
     },
     {
       "n": "Mike McCarthy",
@@ -12579,7 +12583,7 @@
       "t": "SERVICES",
       "c": 5,
       "d": 0,
-      "p": 3,
+      "p": 2,
       "r": 100
     },
     {
@@ -12609,7 +12613,7 @@
     {
       "n": "Nathen Ross",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12625,7 +12629,7 @@
     {
       "n": "Nick Colonna",
       "t": "SERVICES",
-      "c": 12,
+      "c": 11,
       "d": 1,
       "p": 0,
       "r": 92
@@ -12633,7 +12637,7 @@
     {
       "n": "Nick Steuer",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 1,
       "r": 100
@@ -12659,7 +12663,7 @@
       "t": "SERVICES",
       "c": 5,
       "d": 2,
-      "p": 3,
+      "p": 2,
       "r": 71
     },
     {
@@ -12674,17 +12678,17 @@
       "n": "Paulette Thompson",
       "t": "SERVICES",
       "c": 3,
-      "d": 1,
+      "d": 0,
       "p": 0,
-      "r": 75
+      "r": 100
     },
     {
       "n": "Peggy Hart",
       "t": "SERVICES",
-      "c": 14,
+      "c": 12,
       "d": 2,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Rachel Primus",
@@ -12723,7 +12727,7 @@
       "t": "SERVICES",
       "c": 6,
       "d": 2,
-      "p": 3,
+      "p": 2,
       "r": 75
     },
     {
@@ -12737,7 +12741,7 @@
     {
       "n": "Rich Brown",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 0,
       "p": 0,
       "r": 100
@@ -12745,10 +12749,10 @@
     {
       "n": "Richard Price",
       "t": "SERVICES",
-      "c": 16,
+      "c": 14,
       "d": 2,
       "p": 2,
-      "r": 89
+      "r": 88
     },
     {
       "n": "Ron Moschetti",
@@ -12763,7 +12767,7 @@
       "t": "SERVICES",
       "c": 2,
       "d": 0,
-      "p": 3,
+      "p": 2,
       "r": 100
     },
     {
@@ -12775,25 +12779,17 @@
       "r": 80
     },
     {
-      "n": "Ryan Aiazzi",
-      "t": "SERVICES",
-      "c": 1,
-      "d": 0,
-      "p": 0,
-      "r": 100
-    },
-    {
       "n": "Ryan Baskharoon",
       "t": "SERVICES",
       "c": 0,
-      "d": 2,
+      "d": 1,
       "p": 0,
       "r": 0
     },
     {
       "n": "Ryan Griffin",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 2,
       "r": 100
@@ -12818,7 +12814,7 @@
       "n": "Sandra Pazen",
       "t": "SERVICES",
       "c": 0,
-      "d": 5,
+      "d": 4,
       "p": 0,
       "r": 0
     },
@@ -12834,9 +12830,9 @@
       "n": "Sarah Jones",
       "t": "SERVICES",
       "c": 2,
-      "d": 4,
+      "d": 3,
       "p": 0,
-      "r": 33
+      "r": 40
     },
     {
       "n": "Sarah King",
@@ -12859,7 +12855,7 @@
       "t": "SERVICES",
       "c": 0,
       "d": 0,
-      "p": 9,
+      "p": 8,
       "r": 0
     },
     {
@@ -12891,7 +12887,7 @@
       "t": "SERVICES",
       "c": 0,
       "d": 0,
-      "p": 7,
+      "p": 6,
       "r": 0
     },
     {
@@ -12913,10 +12909,10 @@
     {
       "n": "Shannon Coan",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 1,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Shawn Morris",
@@ -12953,10 +12949,10 @@
     {
       "n": "Shiona Dykins",
       "t": "SERVICES",
-      "c": 10,
+      "c": 9,
       "d": 2,
       "p": 0,
-      "r": 83
+      "r": 82
     },
     {
       "n": "Simon Lefler",
@@ -12977,10 +12973,10 @@
     {
       "n": "Stacey Corletto",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 1,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Stephanie Fava",
@@ -12993,7 +12989,7 @@
     {
       "n": "Stephanie Kellames",
       "t": "SERVICES",
-      "c": 3,
+      "c": 2,
       "d": 0,
       "p": 0,
       "r": 100
@@ -13001,10 +12997,10 @@
     {
       "n": "Stephanie Tompkins",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 5,
       "p": 0,
-      "r": 44
+      "r": 38
     },
     {
       "n": "Stephen W Harris",
@@ -13017,7 +13013,7 @@
     {
       "n": "Taryn Carl",
       "t": "SERVICES",
-      "c": 4,
+      "c": 3,
       "d": 0,
       "p": 0,
       "r": 100
@@ -13033,10 +13029,10 @@
     {
       "n": "Teylor Baskharoon (Hinzman)",
       "t": "SERVICES",
-      "c": 12,
+      "c": 10,
       "d": 4,
       "p": 0,
-      "r": 75
+      "r": 71
     },
     {
       "n": "Thomas Adams",
@@ -13049,7 +13045,7 @@
     {
       "n": "Thomas Lloyd",
       "t": "SERVICES",
-      "c": 11,
+      "c": 10,
       "d": 0,
       "p": 0,
       "r": 100
@@ -13057,7 +13053,7 @@
     {
       "n": "Thomas Peregrin",
       "t": "SERVICES",
-      "c": 2,
+      "c": 1,
       "d": 0,
       "p": 0,
       "r": 100
@@ -13065,26 +13061,26 @@
     {
       "n": "Tiffany Jackson",
       "t": "SERVICES",
-      "c": 6,
+      "c": 5,
       "d": 2,
       "p": 0,
-      "r": 75
+      "r": 71
     },
     {
       "n": "Tim Martin",
       "t": "SERVICES",
-      "c": 13,
+      "c": 12,
       "d": 1,
       "p": 4,
-      "r": 93
+      "r": 92
     },
     {
       "n": "Timothy Frederick",
       "t": "SERVICES",
-      "c": 7,
+      "c": 6,
       "d": 1,
       "p": 0,
-      "r": 88
+      "r": 86
     },
     {
       "n": "Timothy Milligan",
@@ -13098,9 +13094,9 @@
       "n": "Tina Faker",
       "t": "SERVICES",
       "c": 7,
-      "d": 5,
+      "d": 4,
       "p": 0,
-      "r": 58
+      "r": 64
     },
     {
       "n": "Tina Watson",
@@ -13122,17 +13118,17 @@
       "n": "Tonshai Hatcher",
       "t": "SERVICES",
       "c": 8,
-      "d": 1,
+      "d": 0,
       "p": 0,
-      "r": 89
+      "r": 100
     },
     {
       "n": "Tonya Lowry",
       "t": "SERVICES",
-      "c": 5,
+      "c": 4,
       "d": 2,
       "p": 0,
-      "r": 71
+      "r": 67
     },
     {
       "n": "Valerie Ridgers",
@@ -13146,9 +13142,9 @@
       "n": "Valerie Seno",
       "t": "SERVICES",
       "c": 5,
-      "d": 4,
+      "d": 3,
       "p": 0,
-      "r": 56
+      "r": 63
     },
     {
       "n": "Wende Schwake",
@@ -13161,10 +13157,10 @@
     {
       "n": "Whitney Maidens",
       "t": "SERVICES",
-      "c": 11,
+      "c": 10,
       "d": 3,
       "p": 1,
-      "r": 79
+      "r": 77
     }
   ],
   "teamsPlans": [
@@ -13284,19 +13280,10 @@
       "c": 96,
       "d": 30,
       "p": 17
-    },
-    {
-      "date": "2026-07-12",
-      "ds": "Jul 12, 2026",
-      "ty": "SERVICES",
-      "s": 140,
-      "c": 104,
-      "d": 24,
-      "p": 12
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 8, 2026, 12:02 PM",
+    "refreshed": "Oct 11, 2026, 4:12 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -13705,9 +13692,9 @@
       36,
       36,
       35,
+      35,
       36,
-      37,
-      37
+      36
     ]
   },
   "communityGroupMembers": {
@@ -14115,9 +14102,9 @@
       373,
       374,
       333,
-      352,
-      391,
-      402
+      343,
+      382,
+      404
     ]
   },
   "baptisms": {
@@ -14187,10 +14174,10 @@
       "fmInGroupsPct": 75
     },
     "current": {
-      "groups": 37,
-      "members": 402,
+      "groups": 36,
+      "members": 404,
       "groupSize": 11,
-      "fmInGroupsPct": 54,
+      "fmInGroupsPct": 55,
       "asOfMonth": "Oct '26"
     },
     "groupCountsByYear": {
@@ -14426,9 +14413,9 @@
         36,
         36,
         35,
+        35,
         36,
-        37,
-        37,
+        36,
         null,
         null
       ]
@@ -14666,9 +14653,9 @@
         373,
         374,
         333,
-        352,
-        391,
-        402,
+        343,
+        382,
+        404,
         null,
         null
       ]
@@ -14683,21 +14670,21 @@
         0,
         3,
         43,
-        43,
-        16,
-        17,
-        13
+        39,
+        14,
+        15,
+        12
       ],
       "2025": [
         17,
-        16,
-        14,
-        16,
-        37,
-        12,
         15,
-        10,
-        42,
+        14,
+        15,
+        37,
+        11,
+        14,
+        9,
+        39,
         33,
         40,
         21
@@ -14712,7 +14699,7 @@
         25,
         43,
         45,
-        10,
+        24,
         null,
         null
       ]
@@ -14725,7 +14712,7 @@
         null,
         null,
         3,
-        55,
+        50,
         7,
         10,
         0,
@@ -14734,21 +14721,21 @@
       ],
       "2025": [
         3,
-        6,
+        5,
         4,
         18,
         9,
         4,
         4,
         1,
-        19,
-        19,
+        17,
+        18,
         15,
         10
       ],
       "2026": [
         33,
-        24,
+        23,
         17,
         15,
         16,
@@ -14756,13 +14743,13 @@
         24,
         22,
         48,
-        8,
+        20,
         null,
         null
       ]
     },
     "leadersAdded": {
-      "total2026": 58
+      "total2026": 62
     },
     "outsidersInsiders": {
       "2024": [
@@ -14772,7 +14759,7 @@
         null,
         null,
         null,
-        10,
+        9,
         5,
         2,
         null,
@@ -14788,14 +14775,14 @@
         1,
         null,
         null,
-        11,
-        10,
+        9,
+        9,
         8,
         2
       ],
       "2026": [
         16,
-        15,
+        14,
         4,
         5,
         11,
@@ -14803,7 +14790,7 @@
         13,
         14,
         38,
-        7,
+        13,
         null,
         null
       ]
@@ -14814,6 +14801,8 @@
         "label": "Current Leader",
         "names": [
           "John Turcich",
+          "Jan Colburn",
+          "Diane Lane",
           "Don Lattin",
           "Matt Bowman",
           "Shannon Coan",
@@ -14828,8 +14817,6 @@
           "Desiree Quintero",
           "Michael Poleselli",
           "Kathy McAlpine",
-          "Diane Lane",
-          "Jan Colburn",
           "David Peissner",
           "Grace Peissner",
           "Ray Brown",
@@ -14892,7 +14879,6 @@
           "Tristan Martinez Valcher",
           "Annalissa Sanchez",
           "Carlos Flores",
-          "Ginger King",
           "Campbell Cummings",
           "Ashleigh Cummings",
           "Jenn Ferguson",
@@ -14966,44 +14952,47 @@
           "Lindsey Low",
           "Nancy Prahm"
         ],
-        "count": 78
+        "count": 77
       },
       {
         "phase": "2",
         "label": "Assess",
         "names": [
           "Holly Graham",
-          "Teylor Baskharoon (Hinzman)",
-          "Anna Ferguson"
+          "Anna Ferguson",
+          "Ginger King",
+          "Teylor Baskharoon (Hinzman)"
         ],
-        "count": 3
+        "count": 4
       },
       {
         "phase": "3",
         "label": "Prepare",
         "names": [
-          "Brandon Thompson",
           "Cody Wright",
           "Cody Wright",
           "Darren Wilford",
           "Bill Wallace",
-          "Brandon Thompson",
-          "Adam Carp"
+          "Anthony Azzam",
+          "Anthony Azzam"
         ],
-        "count": 7
+        "count": 6
       },
       {
         "phase": "4",
         "label": "Plant",
         "names": [
+          "Brandon Thompson",
           "Megan McKinley",
           "Brianna Mick",
           "Anna Moore",
           "Tina Faker",
           "Julia Perlingos-Jackson",
-          "Teodoro Kijah Banda"
+          "Teodoro Kijah Banda",
+          "Adam Carp",
+          "Brandon Thompson"
         ],
-        "count": 6
+        "count": 9
       }
     ],
     "groupAttendance": [
@@ -15017,11 +15006,11 @@
       },
       {
         "name": "Poleselli / McAlpine Community Group",
-        "members": 23,
+        "members": 24,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 12,
-        "attPct": 52
+        "avgAttended": 13,
+        "attPct": 54
       },
       {
         "name": "Martinson/Degener Community Group",
@@ -15060,8 +15049,16 @@
         "members": 16,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 8,
-        "attPct": 50
+        "avgAttended": 7,
+        "attPct": 44
+      },
+      {
+        "name": "Brown/Frank Community Group",
+        "members": 15,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 40
       },
       {
         "name": "Peissner Community Group",
@@ -15088,12 +15085,12 @@
         "attPct": 36
       },
       {
-        "name": "Brown/Frank Community Group",
+        "name": "Caliger/Rankin Community Group",
         "members": 14,
         "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 43
+        "schedule": "Meets weekly on Mondays from 5-7pm",
+        "avgAttended": 5,
+        "attPct": 36
       },
       {
         "name": "Brown/Peregrin Community Group",
@@ -15120,44 +15117,28 @@
         "attPct": 46
       },
       {
-        "name": "Caliger/Rankin Community Group",
-        "members": 13,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 5-7pm",
-        "avgAttended": 5,
-        "attPct": 38
-      },
-      {
-        "name": "Maidens Community Group",
-        "members": 12,
-        "leaders": 1,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 50
-      },
-      {
         "name": "Murad Community Group",
-        "members": 12,
+        "members": 13,
         "leaders": 1,
         "schedule": "Meets weekly on Thursdays from 6:30-8pm",
         "avgAttended": 6,
-        "attPct": 50
+        "attPct": 46
       },
       {
         "name": "Durham Community Group",
-        "members": 11,
+        "members": 12,
         "leaders": 3,
         "schedule": "Meets weekly on Wednesdays from 10am-12pm",
         "avgAttended": 7,
-        "attPct": 64
+        "attPct": 58
       },
       {
         "name": "Flores/Norton Community Group",
         "members": 11,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 10am-12pm",
-        "avgAttended": 7,
-        "attPct": 64
+        "avgAttended": 6,
+        "attPct": 55
       },
       {
         "name": "Geoffrey Caliger Community Group",
@@ -15174,6 +15155,14 @@
         "schedule": "Meets weekly on Fridays from 1-3pm",
         "avgAttended": 5,
         "attPct": 50
+      },
+      {
+        "name": "Maidens Community Group",
+        "members": 10,
+        "leaders": 1,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 60
       },
       {
         "name": "Gardner Community Group",
@@ -15216,6 +15205,14 @@
         "attPct": 56
       },
       {
+        "name": "Colburn/Turcich Community Group",
+        "members": 8,
+        "leaders": 3,
+        "schedule": "Meets weekly on Wednesdays from 6-8pm",
+        "avgAttended": 4,
+        "attPct": 50
+      },
+      {
         "name": "Lattin Community Group",
         "members": 8,
         "leaders": 2,
@@ -15232,20 +15229,12 @@
         "attPct": 63
       },
       {
-        "name": "Taylor Community Group",
-        "members": 7,
-        "leaders": 2,
-        "schedule": "Meets weekly on Wednesdays from 5-7pm",
-        "avgAttended": 4,
-        "attPct": 57
-      },
-      {
         "name": "Febo/Sanchez Community Group (Spanish Speaking)",
         "members": 6,
         "leaders": 2,
         "schedule": "Meets monthly on the first Wednesday from 5-6pm",
-        "avgAttended": 3,
-        "attPct": 50
+        "avgAttended": 4,
+        "attPct": 67
       },
       {
         "name": "Mick/McKinley Community Group",
@@ -15272,28 +15261,20 @@
         "attPct": 60
       },
       {
-        "name": "Saddle Ridge Community Group",
-        "members": 4,
-        "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 5:30-7pm",
-        "avgAttended": 0,
-        "attPct": 0
-      },
-      {
         "name": "Carp/Thompson Community Group",
-        "members": 4,
+        "members": 5,
         "leaders": 2,
         "schedule": "Meets weekly on Tuesdays from 6:15-8am",
         "avgAttended": 0,
         "attPct": 0
       },
       {
-        "name": "Colburn/Turcich Community Group",
-        "members": 3,
+        "name": "Saddle Ridge Community Group",
+        "members": 4,
         "leaders": 1,
-        "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 4,
-        "attPct": 133
+        "schedule": "Meets weekly on Wednesdays from 5:30-7pm",
+        "avgAttended": 0,
+        "attPct": 0
       },
       {
         "name": "Faker Community Group",
@@ -15306,33 +15287,33 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 402,
-      "both": 213,
-      "pctFmInCg": 54,
+      "cgMembers": 404,
+      "both": 215,
+      "pctFmInCg": 55,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 402,
-        "serving": 297,
-        "giving": 951
+        "cg": 404,
+        "serving": 291,
+        "giving": 954
       },
-      "universe": 1165,
+      "universe": 1162,
       "regions": {
         "1": 42,
-        "2": 93,
-        "3": 11,
-        "4": 34,
-        "5": 11,
+        "2": 91,
+        "3": 12,
+        "4": 31,
+        "5": 10,
         "6": 7,
-        "7": 16,
+        "7": 15,
         "8": 524,
         "9": 80,
-        "10": 67,
-        "11": 51,
+        "10": 69,
+        "11": 53,
         "12": 26,
-        "13": 46,
+        "13": 45,
         "14": 22,
         "15": 135
       },
@@ -15365,9 +15346,9 @@
           "Kerry Munk",
           "Kristina Godsell",
           "Laurie Demaine",
-          "Lesley Welborn",
           "Linda L. McKenzie",
           "Lyssa Sutton",
+          "Nita Taylor",
           "Paula J. Perialas",
           "RG Haddad",
           "Richard Diebert",
@@ -15393,6 +15374,7 @@
           "Ava Palmer",
           "Bella Palmer",
           "Ben L",
+          "Brandon Howe",
           "Brandon Mickey",
           "Brett Caron",
           "Carly Albright",
@@ -15415,7 +15397,6 @@
           "Elizabeth Kova",
           "Emilee Collins",
           "Erik Wilson",
-          "Fiona Delforge",
           "Frank Aguilar",
           "Gaelen Lamb",
           "Heather Winchester",
@@ -15449,9 +15430,7 @@
           "Lucas Piotto",
           "Lynn Henderson",
           "Margaret Skillicorn",
-          "Mary Davis",
           "Mary Jo (MJ) Mayer",
-          "Melia Shively",
           "Melissa Negrillo",
           "Mike McBride",
           "Mike Whiteford",
@@ -15480,11 +15459,12 @@
           "Aaron Owens",
           "David Cabrera",
           "Jane Foote",
+          "Jenn Ferguson",
           "Justin Bell",
+          "Lesley Welborn",
           "Lex Adams",
           "Malena Kosher",
           "Melissa Soule",
-          "Nita Taylor",
           "Rob Griffin",
           "Sarah Perez",
           "Tony Sanchez"
@@ -15505,20 +15485,17 @@
           "Hunter Mannin",
           "Isla Skinner",
           "Jack Jauron",
-          "Jaeley-Grace Ferguson",
           "Jaime Tibaduiza",
           "Jennifer Van Gelder",
           "Kadyn Skolnick",
           "Kenzie Tompkins",
           "Kylie Skolnick",
           "Lily Perry",
-          "Louie Quiroz",
           "Lucas Jauron",
           "Maddox Morris",
           "Maggie Thetford",
           "Michael Mcnerny",
           "Michael dykins",
-          "Mikayla Sanchez",
           "Niah Morris",
           "Rich Brown",
           "Sam Griffin",
@@ -15531,7 +15508,6 @@
           "Jane Brinson",
           "Janet Colonna",
           "John Andreano",
-          "Kristie Marchese",
           "Patricia Thomas",
           "Sarah Perlich",
           "Sarah Rawlins",
@@ -15555,7 +15531,6 @@
           "Carlos Perez",
           "Faith Howes",
           "Jeff Bridges",
-          "Jenn Ferguson",
           "Jenn Meredith",
           "Lindsey Low",
           "Melissa Peterson",
@@ -15566,6 +15541,7 @@
           "Teodoro Kijah Banda"
         ],
         "8": [
+          "Aaron Prince",
           "Adam Anderson",
           "Addie Guyer",
           "Alana Hysell",
@@ -15706,7 +15682,6 @@
           "Kathleen Lumsden",
           "Kathleen Sturgis",
           "Kathy Mandell",
-          "Kelly Anderson",
           "Kenneth Meyer",
           "Kevin Cebrero",
           "Kim Sandoval",
@@ -15789,12 +15764,12 @@
           "David Misanik",
           "Debbie Berge",
           "Diane Sikora",
-          "Donna Sarazen",
           "Elizabeth Wolfgang",
           "Erica Edwards",
           "Ginny Bartoldo",
           "Heather Luckey",
           "Irene Dehuff",
+          "Isabella Sanchez",
           "James Burns",
           "Jeffrey Luckey",
           "Jere England",
@@ -15886,6 +15861,7 @@
           "Julio Vargas",
           "Karen Warner",
           "Kati (Catherine) Andreano",
+          "Kelly Anderson",
           "Kim Yaeger",
           "Lauren Bruno",
           "Laurie Gretsinger",
@@ -15914,6 +15890,7 @@
           "Shanna Anderson",
           "Sue Henderson",
           "Suvidha Srestta Garnepudi",
+          "Suzy Heinz",
           "Tracy Brown",
           "Vickie Luchetti",
           "Wilfredo Torres"
@@ -15934,6 +15911,7 @@
           "Daniel Frank",
           "Darrell Vydra",
           "Diane Lane",
+          "Donna Sarazen",
           "Doug Neddenriep",
           "Dr Richard Reich",
           "Emily Smith",
@@ -15962,6 +15940,7 @@
           "Nancy Prahm",
           "Natalie Shishido",
           "Peter Sellman",
+          "Ryan Aiazzi",
           "Ryan Baskharoon",
           "Sandra Pazen",
           "Scott Mavros",
@@ -16023,14 +16002,13 @@
           "Gavin Au",
           "Ginger King",
           "Halee Frink",
-          "Isabella Sanchez",
           "Jed Ingalls",
           "Jeff Conrad",
           "Jennifer Janakus",
           "Julie Serpa",
           "Kate Andreano",
           "Kevin Moore",
-          "Kim Conrad",
+          "Kristie Marchese",
           "Lauren Rotter",
           "Layne Christopher",
           "Lisa Morris",
@@ -16161,6 +16139,7 @@
           "Keith Primus",
           "Kelly Coan",
           "Kelly Farson",
+          "Kim Conrad",
           "Lance Jauron",
           "Laura Dykins",
           "Lauren Johnson",
@@ -16188,7 +16167,6 @@
           "Ray Brown",
           "Reuben Lefler",
           "Richard Price",
-          "Ryan Aiazzi",
           "Ryan Griffin",
           "Sarah Jones",
           "Savannah Caliger",
@@ -16240,7 +16218,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 179,
+          "count": 177,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16293,7 +16271,6 @@
             "Dennis Brinson",
             "Diane Sikora",
             "Donald Hug",
-            "Donna Sarazen",
             "Douglas Drake",
             "Dwight Foreman",
             "Edward Jones",
@@ -16340,7 +16317,6 @@
             "Keenan Kelly",
             "Kerry Munk",
             "Kevin Moore",
-            "Kim Conrad",
             "Krista Van Allen",
             "Kristie Marchese",
             "Kristina Godsell",
@@ -16352,7 +16328,6 @@
             "Laurrie Brooks",
             "Layne Christopher",
             "Lee Ables",
-            "Lesley Welborn",
             "Linda Kucia",
             "Linda L. McKenzie",
             "Lisa Morris",
@@ -16377,6 +16352,7 @@
             "Nettie Jenkins",
             "Nick Stemper",
             "Nicole Leach",
+            "Nita Taylor",
             "Norman Horsley",
             "Patricia Thomas",
             "Paul Murad",
@@ -16516,6 +16492,7 @@
             "Keith Primus",
             "Kelly Coan",
             "Kelly Farson",
+            "Kim Conrad",
             "Lance Jauron",
             "Laura Dykins",
             "Lauren Johnson",
@@ -16543,7 +16520,6 @@
             "Ray Brown",
             "Reuben Lefler",
             "Richard Price",
-            "Ryan Aiazzi",
             "Ryan Griffin",
             "Sarah Jones",
             "Savannah Caliger",
@@ -16595,9 +16571,9 @@
             "Kerry Munk",
             "Kristina Godsell",
             "Laurie Demaine",
-            "Lesley Welborn",
             "Linda L. McKenzie",
             "Lyssa Sutton",
+            "Nita Taylor",
             "Paula J. Perialas",
             "RG Haddad",
             "Richard Diebert",
@@ -16616,6 +16592,7 @@
           "label": "Giving but not in a CG and not serving",
           "count": 604,
           "names": [
+            "Aaron Prince",
             "Adam Anderson",
             "Addie Guyer",
             "Alana Hysell",
@@ -16718,7 +16695,6 @@
             "Diane Sikora",
             "Dominic Smith",
             "Donna Buckwalter",
-            "Donna Sarazen",
             "Dorothy Bell",
             "Douglas Devries",
             "Dru Bahnsen",
@@ -16747,6 +16723,7 @@
             "Herman Manrriquez",
             "Ian Anderson",
             "Irene Dehuff",
+            "Isabella Sanchez",
             "Israel Sanchez",
             "Jacob Chase",
             "James Burns",
@@ -16794,7 +16771,6 @@
             "Kathy Mandell",
             "Kathy Pavlich",
             "Keenan Kelly",
-            "Kelly Anderson",
             "Kenneth Meyer",
             "Kevin Cebrero",
             "Kim Sandoval",
@@ -16819,11 +16795,11 @@
           ]
         }
       },
-      "asOf": "2026-10-08"
+      "asOf": "2026-10-11"
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 179,
+        "count": 177,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -16876,7 +16852,6 @@
           "Dennis Brinson",
           "Diane Sikora",
           "Donald Hug",
-          "Donna Sarazen",
           "Douglas Drake",
           "Dwight Foreman",
           "Edward Jones",
@@ -16923,7 +16898,6 @@
           "Keenan Kelly",
           "Kerry Munk",
           "Kevin Moore",
-          "Kim Conrad",
           "Krista Van Allen",
           "Kristie Marchese",
           "Kristina Godsell",
@@ -16935,7 +16909,6 @@
           "Laurrie Brooks",
           "Layne Christopher",
           "Lee Ables",
-          "Lesley Welborn",
           "Linda Kucia",
           "Linda L. McKenzie",
           "Lisa Morris",
@@ -16960,6 +16933,7 @@
           "Nettie Jenkins",
           "Nick Stemper",
           "Nicole Leach",
+          "Nita Taylor",
           "Norman Horsley",
           "Patricia Thomas",
           "Paul Murad",
@@ -17032,6 +17006,7 @@
           "Ben L",
           "Beth Watts",
           "Bill Winchester",
+          "Brandon Howe",
           "Brandon Mickey",
           "Brett Caron",
           "Carly Albright",
@@ -17075,7 +17050,6 @@
           "Erik Wilson",
           "Erin Wilson",
           "Ethan Berger",
-          "Fiona Delforge",
           "Frank Aguilar",
           "Gaelen Lamb",
           "Garrett Banks",
@@ -17121,6 +17095,7 @@
           "Kati (Catherine) Andreano",
           "Keith Baugh",
           "Keith Reister",
+          "Kelly Anderson",
           "Ken Croker",
           "Keyvan Hernández",
           "Kim Yaeger",
@@ -17141,11 +17116,9 @@
           "Marcia Morcom",
           "Margaret Skillicorn",
           "Marissa Keene",
-          "Mary Davis",
           "Mary Jo (MJ) Mayer",
           "Mary Lou Cox",
           "Mary Timko",
-          "Melia Shively",
           "Melissa Fielding",
           "Melissa Negrillo",
           "Michael France",
@@ -17188,6 +17161,7 @@
           "Steve Rester",
           "Sue Henderson",
           "Suvidha Srestta Garnepudi",
+          "Suzy Heinz",
           "Terri Mehlhaff",
           "Thomas Adams",
           "Tiffany Jackson",
@@ -17200,6 +17174,156 @@
           "Will Griffin"
         ]
       }
+    }
+  },
+  "connectionSunday": {
+    "date": "2026-10-11",
+    "since": true,
+    "updated": "2026-10-11T23:11:54.894Z",
+    "groupsChecked": 36,
+    "groups": [
+      {
+        "group": "Coan Community Group",
+        "leaders": [
+          "Kelly Coan"
+        ],
+        "applied": 2,
+        "joined": 0,
+        "connections": 2,
+        "appliedNames": [
+          "Austin Carne",
+          "Mike Hagstrand"
+        ],
+        "joinedNames": []
+      },
+      {
+        "group": "Brown/Frank Community Group",
+        "leaders": [
+          "Amber Brown",
+          "Kathy Frank"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Kelly Anderson"
+        ],
+        "joinedNames": [
+          "Kelly Anderson"
+        ]
+      },
+      {
+        "group": "Carp/Thompson Community Group",
+        "leaders": [
+          "Adam Carp",
+          "Brandon Thompson"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Brandon Howe"
+        ],
+        "joinedNames": [
+          "Brandon Howe"
+        ]
+      },
+      {
+        "group": "Durham Community Group",
+        "leaders": [
+          "Alexis Durham",
+          "Doretta Brown",
+          "Desiree Quintero"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Lesley Welborn"
+        ],
+        "joinedNames": [
+          "Lesley Welborn"
+        ]
+      },
+      {
+        "group": "Flores/Norton Community Group",
+        "leaders": [
+          "Heidi Flores",
+          "Sandy Norton"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Donna Sarazen"
+        ],
+        "joinedNames": [
+          "Donna Sarazen"
+        ]
+      },
+      {
+        "group": "Poleselli / McAlpine Community Group",
+        "leaders": [
+          "Michael Poleselli",
+          "Kathy McAlpine"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Kim Conrad"
+        ],
+        "joinedNames": [
+          "Kim Conrad"
+        ]
+      },
+      {
+        "group": "Frederick/Coggiola/Schelin Community Group",
+        "leaders": [
+          "Janet Frederick",
+          "Timothy Frederick",
+          "Bret Coggiola",
+          "Kara Schelin"
+        ],
+        "applied": 1,
+        "joined": 0,
+        "connections": 1,
+        "appliedNames": [
+          "Janet Needham"
+        ],
+        "joinedNames": []
+      },
+      {
+        "group": "Isaac Griffin Community Group",
+        "leaders": [
+          "Isaac Griffin"
+        ],
+        "applied": 1,
+        "joined": 0,
+        "connections": 1,
+        "appliedNames": [
+          "Nathen Ross"
+        ],
+        "joinedNames": []
+      },
+      {
+        "group": "Maidens Community Group",
+        "leaders": [
+          "Whitney Maidens"
+        ],
+        "applied": 1,
+        "joined": 0,
+        "connections": 1,
+        "appliedNames": [
+          "Kylee Rehberger"
+        ],
+        "joinedNames": []
+      }
+    ],
+    "totals": {
+      "applied": 10,
+      "joined": 5,
+      "connections": 10
     }
   },
   "sundayPlans": [
@@ -26563,7 +26687,7 @@
               "team": "Coffee Team",
               "pos": "Coffee Tear Down/Put Away",
               "status": "U",
-              "serviceTime": "8 AM, 9:30 AM, 11 AM"
+              "serviceTime": "11 AM"
             },
             {
               "name": "Bill Wallace",
@@ -26741,13 +26865,6 @@
               "serviceTime": "9:30 AM, 11 AM"
             },
             {
-              "name": "Teylor Baskharoon (Hinzman)",
-              "team": "Safety Team",
-              "pos": "Safety Monitor",
-              "status": "C",
-              "serviceTime": "9:30 AM, 11 AM"
-            },
-            {
               "name": "Shawn Stoddard",
               "team": "Safety Team",
               "pos": "Safety Monitor",
@@ -26779,7 +26896,7 @@
               "name": "Keith Primus",
               "team": "Worship Team",
               "pos": "Vocals",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -26842,7 +26959,7 @@
               "name": "Patricia Thomas",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Lead Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -26872,13 +26989,6 @@
               "pos": "Bear Cubs Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Elmer Alegre",
-              "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
-              "status": "U",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Lindsey Low",
@@ -26954,7 +27064,7 @@
               "name": "Tim Martin",
               "team": "First Impressions",
               "pos": "First Impressions Lead",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
@@ -27066,7 +27176,7 @@
               "name": "Analisa Wulfsberg",
               "team": "Hospitality Team",
               "pos": "Host",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27227,7 +27337,7 @@
               "name": "Chuck Grimm",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -27241,14 +27351,14 @@
               "name": "Richard Price",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
               "name": "Anthony Azzam",
               "team": "Enrichment Teams",
               "pos": "Back Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27262,7 +27372,7 @@
               "name": "Sean Lefler",
               "team": "Enrichment Teams",
               "pos": "Back Right Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -27313,6 +27423,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Morna Edmunds",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -27477,8 +27594,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592698\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 114,
-            "totalVols": 114
+            "volsWithServiceTime": 113,
+            "totalVols": 113
           }
         }
       ]
@@ -27791,13 +27908,6 @@
               "pos": "Check In",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "McKayla Leggett",
-              "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
-              "status": "C",
-              "serviceTime": "9:30 AM"
             },
             {
               "name": "Jeffrey Janakus",
@@ -28197,6 +28307,13 @@
               "pos": "Front Right Communion Server",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Thomas Adams",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -28554,7 +28671,7 @@
               "name": "Caleb Frink",
               "team": "Worship Team",
               "pos": "Electric Guitar",
-              "status": "U",
+              "status": "C",
               "serviceTime": "Mid Week Worship Team Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM"
             },
             {
@@ -28983,6 +29100,20 @@
               "pos": "Service Prayer",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Brenda Milligan",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (A Team)",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Heidi Flores",
+              "team": "Connection Team",
+              "pos": "Connect Desk Host (B Team)",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
@@ -29133,8 +29264,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 87,
-            "totalVols": 87
+            "volsWithServiceTime": 89,
+            "totalVols": 89
           }
         }
       ]
@@ -29629,6 +29760,34 @@
               "pos": "Sermon Text Reader",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Thomas Adams",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Breanne Read",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jennifer Van Gelder",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -29638,8 +29797,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 68
+            "volsWithServiceTime": 72,
+            "totalVols": 72
           }
         }
       ]
@@ -29975,13 +30134,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "John Andreano",
-              "team": "Stepping Stones",
-              "pos": "Hawks Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Kate Andreano",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -30127,6 +30279,55 @@
               "pos": "Front Right Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Brianne Sullivan",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Kevin Moore",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Emma Baskharoon",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Lead Guide",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -30136,8 +30337,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 67,
-            "totalVols": 67
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -30646,6 +30847,34 @@
               "pos": "Bluebirds Guide",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Bill Salcido",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Casey Shull",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Emma Baskharoon",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -30655,8 +30884,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 70,
-            "totalVols": 70
+            "volsWithServiceTime": 74,
+            "totalVols": 74
           }
         }
       ]
@@ -31151,6 +31380,34 @@
               "pos": "Offering Counter",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Nathan Meredith",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "U",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Jeannette Rumsey",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lorie Roberts",
+              "team": "Enrichment Teams",
+              "pos": "Front Left Communion Server",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31160,8 +31417,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 68,
-            "totalVols": 68
+            "volsWithServiceTime": 72,
+            "totalVols": 72
           }
         }
       ]
@@ -31378,7 +31635,7 @@
               "name": "John Andreano",
               "team": "Stepping Stones",
               "pos": "Bluebirds Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "11 AM"
             },
             {
@@ -31520,6 +31777,34 @@
               "pos": "Offering Counter",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Hospitality Team",
+              "pos": "Host",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Darren Wilford",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Breanne Read",
+              "team": "Coffee Team",
+              "pos": "Coffee Setup",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Harlow Shull",
+              "team": "Coffee Team",
+              "pos": "Coffee Tear Down/Put Away",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [],
@@ -31529,8 +31814,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"227200162\"},{\"type\":\"PlanTime\",\"id\":\"227200163\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 49,
-            "totalVols": 49
+            "volsWithServiceTime": 53,
+            "totalVols": 53
           }
         }
       ]
@@ -31543,9 +31828,9 @@
       "end": "2026-10-11"
     },
     {
-      "name": "Katie Thompson",
-      "start": "2026-10-08",
-      "end": "2026-10-08"
+      "name": "Adam Carp",
+      "start": "2026-10-18",
+      "end": "2026-10-18"
     },
     {
       "name": "Katie Thompson",
@@ -31558,18 +31843,18 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 53,
-    "weeklyAvg": 12,
-    "totalFetched": 7134,
-    "since": "2026-09-08",
-    "asOf": "2026-10-08T18:44:40.515Z"
+    "count30d": 59,
+    "weeklyAvg": 14,
+    "totalFetched": 7147,
+    "since": "2026-09-11",
+    "asOf": "2026-10-11T22:44:37.077Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.3937947494033413,
-    "avgOpenRate3": 0.34517003870430213,
+    "latestOpenRate": 0.24310776942355888,
+    "avgOpenRate3": 0.28460463885804255,
     "latestCampaign": "Your Next Step",
-    "latestSentAt": "2026-10-07T15:44:53+00:00",
+    "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-08T18:44:41.320Z"
+    "asOf": "2026-10-11T22:44:37.911Z"
   }
 }

@@ -587,7 +587,7 @@
       "metric": "Weekend Attendance (Adults)",
       "owner": "Ryan Griffin",
       "goal": "900+",
-      "current": "750",
+      "current": "752",
       "status": "yellow",
       "notes": ""
     },
@@ -635,7 +635,7 @@
       "metric": "Community Group Members (Active)",
       "owner": "Adam Carp",
       "goal": "500+",
-      "current": "402",
+      "current": "404",
       "status": "yellow",
       "notes": ""
     },
@@ -643,15 +643,15 @@
       "metric": "CG Attendance Rate",
       "owner": "Adam Carp",
       "goal": "75%+",
-      "current": "56%",
-      "status": "yellow",
+      "current": "54%",
+      "status": "red",
       "notes": ""
     },
     {
       "metric": "Active Community Groups",
       "owner": "Adam Carp",
       "goal": "50+",
-      "current": "37",
+      "current": "36",
       "status": "red",
       "notes": "17 new CG leaders launched in 2025"
     },
@@ -691,8 +691,8 @@
       "metric": "Weekly Email Open Rate",
       "owner": "Geoffrey Caliger",
       "goal": "≥ 50%",
-      "current": "35%",
-      "status": "yellow",
+      "current": "28%",
+      "status": "red",
       "notes": "Industry avg ~22%; 30%+ is healthy for church email"
     },
     {
@@ -942,10 +942,10 @@
     "guest": 0,
     "attender": 59,
     "member": 0,
-    "group": 402,
+    "group": 399,
     "leader": 83,
     "missionary": 2,
-    "asOf": "2026-10-08"
+    "asOf": "2026-10-11"
   },
   "calendar": {
     "events": [
@@ -2945,7 +2945,6 @@
         "date": "Oct 3",
         "time": "12:00 AM",
         "location": "",
-        "owner": "Bradley Borowski",
         "summary": "Save the Date, Registration coming soon for our 2026 Mission Trip to Ensenada, Mexico to assist Agua Viva Ministries reach Mexico for Christ!",
         "url": "https://lssr.churchcenter.com/calendar/event/209629422",
         "reg": "https://lssr.churchcenter.com/registrations/events/3618291",
@@ -3009,7 +3008,6 @@
         "date": "Oct 5",
         "time": "12:00 AM",
         "location": "",
-        "owner": "Rachel Primus",
         "visibleCC": false
       },
       {
@@ -3095,7 +3093,6 @@
         "location": "",
         "rbd": true,
         "timeEnd": "6:00 PM",
-        "owner": "Lindsay Congdon",
         "visibleCC": false
       },
       {
@@ -3107,7 +3104,6 @@
         "time": "9:00 AM",
         "location": "Carson City Rifle and Pistol Range - 2005 and 2155 Rifle Range Rd, Carson City, NV 89701",
         "timeEnd": "11:00 AM",
-        "owner": "Bradley Borowski",
         "summary": "Range Day at Carson City Rifle and Pistol Range",
         "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2380282/medium_ServeTeamGraphics_16_9_Safety(2).jpg",
         "imgLocal": "cal-img/bdb3c84c4f2bccf8.jpg",
@@ -3123,7 +3119,6 @@
         "time": "9:00 AM",
         "location": "Carson City Rifle and Pistol Range - 2005 and 2155 Rifle Range Rd, Carson City, NV 89701",
         "timeEnd": "11:00 AM",
-        "owner": "Bradley Borowski",
         "summary": "Range time at Carson Rifle and Pistol range",
         "img": "https://groups-production.s3.amazonaws.com/uploads/group/header_image/2419476/medium_krakenimages-Y5bvRlcCx8k-unsplash.jpg",
         "imgLocal": "cal-img/9fbac4d3878ccd03.jpg",
@@ -3140,7 +3135,6 @@
         "location": "",
         "rbd": true,
         "timeEnd": "10:00 PM",
-        "owner": "Lindsay Congdon",
         "visibleCC": false
       },
       {
@@ -3169,7 +3163,6 @@
         "time": "8:00 AM",
         "location": "",
         "timeEnd": "1:00 PM",
-        "owner": "Adam Carp",
         "summary": "Connection Sunday is not just a day it is THE day! The day when you courageously throw the excuses to the side and connect to a Community Group. Our Community Groups exist to help every find everything in Jesus together, and the only thing missing is YOU! On Connection Sunday, we will be launching 5-7 new groups and offering connection opportunities with different groups out on the patio after each service. We were created for community, and this is a perfect low-risk opportunity to take that next step. You don't need to wait until October 11th to join a group. Get a head start and join one today! https://lssr.churchcenter.com/groups/community-group?enrollment=open_signup%2Crequest_to_join&filter=enrollment",
         "url": "https://lssr.churchcenter.com/calendar/event/237495628",
         "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1793519999&key=uploads%2F447155%2Fye373yt9pdzam668jyztr3pexvp0&thumb=960x540%23&signature=c0795f4271f271ca93b6243bfd0187c5362a1dfd9a2c6fba0ab80b5b9e6dd203",
@@ -4558,7 +4551,12 @@
         "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
         "timeEnd": "11:59 PM",
         "owner": "Rachel Primus",
-        "visibleCC": false
+        "summary": "Join us as we kick off the Christmas season at the fourth annual South Creek Christmas Festival! This event exists to provide a fun, free event for the whole family, where Living Stones South Reno can bless our community and stimulate business for our South Creek neighbors.",
+        "url": "https://lssr.churchcenter.com/calendar/event/174553796",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1793519999&key=uploads%2F447155%2Fy3j097i23sx81cmewnrlhxps1h2u&thumb=960x540%23&signature=74dcfa7eafcd665209f28837c521f8061ea412c57c933fc2ee4ac272344cb54a",
+        "imgLocal": "cal-img/feb20c5faf40319b.jpg",
+        "desc": "Join us as we kick off the Christmas season at the fourth annual South Creek Christmas Festival ! This event exists to provide a fun, free event for the whole family, where Living Stones South Reno can bless our community and stimulate business for our South Creek neighbors. Whatever your idea of Christmas fun is, there is something for you! Indulge in festive treats, roast s'mores, and chestnuts by an open fire, create memorable crafts, and take photos to remember the moment. As the sun sets and the excitement builds, join us for a celebratory tree lighting that will illuminate the night with the spirit of Christmas. The South Creek Christmas Festival is where cherished memories and holiday cheer come together in perfect harmony.",
+        "visibleCC": true
       },
       {
         "name": "Baptisms",
@@ -6328,10 +6326,96 @@
         ],
         "desc": "Group: South Reno | Worship Team Campus: South Reno Church",
         "visibleCC": false
+      },
+      {
+        "name": "RBD-Sage Ridge Prom ",
+        "dateKey": "2027-04-10",
+        "endKey": null,
+        "dayOfWeek": "Sat",
+        "date": "Apr 10",
+        "time": "5:00 PM",
+        "location": "",
+        "rbd": true,
+        "timeEnd": "10:00 PM",
+        "owner": "Lindsay Congdon",
+        "visibleCC": false
+      },
+      {
+        "name": "Sage Ridge Prom ",
+        "dateKey": "2027-04-10",
+        "endKey": null,
+        "dayOfWeek": "Sat",
+        "date": "Apr 10",
+        "time": "5:00 PM",
+        "location": "",
+        "timeEnd": "10:00 PM",
+        "owner": "Lindsay Congdon",
+        "resources": [
+          "Patio",
+          "Main Auditorium",
+          "Bear Cubs",
+          "Mustangs",
+          "Wolf Pack",
+          "Rectangular Folding Tables",
+          "Round Tables",
+          "White Folding Chairs"
+        ],
+        "visibleCC": false
+      },
+      {
+        "name": "Sunday Gatherings 8, 9:30, & 11.",
+        "dateKey": "2027-04-11",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Apr 11",
+        "time": "8:00 AM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "12:30 PM",
+        "owner": "Bradley Borowski",
+        "summary": "Group: All attendees of South Reno Church Campus: South Reno Church",
+        "url": "https://lssr.churchcenter.com/calendar/event/237668182",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1793519999&key=uploads%2F447155%2F113ahtqb3wzp55pk5bgj11uquby8&thumb=960x540%23&signature=0b479b7daaf80433392f6fe9f87f9f0ace3cb0f82973b1012bf5a6b0c9d8e869",
+        "imgLocal": "cal-img/f303c543db3e03d9.png",
+        "desc": "Join us Sundays at 8:00, 9:30, or 11:00.",
+        "visibleCC": true
+      },
+      {
+        "name": "LS Students MS",
+        "dateKey": "2027-04-11",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Apr 11",
+        "time": "1:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "2:30 PM",
+        "owner": "Katie Thompson",
+        "summary": "LS Students Middle School meets every Sunday from 1:00–2:30 PM at Living Stones South Reno! Each week, students have time to hang out, enjoy good snacks, play fun games, and grow together through Bible study. We finish by sharing prayer requests and praying for one another. LS Students is a place to build friendships, have fun, and grow in your relationship with Jesus!",
+        "url": "https://lssr.churchcenter.com/calendar/event/230225807",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1793519999&key=uploads%2F447155%2F27ad74wmcg3ecyekxxk6qh6s0ild&thumb=960x540%23&signature=edf423cc36627b9487c1db416e4dd9c1b0df47f740f15267bdb4fb657811c02b",
+        "imgLocal": "cal-img/cf80da2bca071a58.png",
+        "desc": "LS Students Middle School meets every Sunday from 1:00–2:30 PM at Living Stones South Reno! Each week, students have time to hang out, enjoy good snacks, play fun games, and grow together through Bible study. We finish by sharing prayer requests and praying for one another. LS Students is a place to build friendships, have fun, and grow in your relationship with Jesus!",
+        "visibleCC": true
+      },
+      {
+        "name": "LS Students HS ",
+        "dateKey": "2027-04-11",
+        "endKey": null,
+        "dayOfWeek": "Sun",
+        "date": "Apr 11",
+        "time": "3:00 PM",
+        "location": "Living Stones South Reno - 95 Foothill Drive, Reno, NV 89521",
+        "timeEnd": "4:30 PM",
+        "owner": "Katie Thompson",
+        "summary": "LS Students High School meets every Sunday from 3:00–4:30 PM at Living Stones South Reno! Each week, students have time to hang out, enjoy good snacks, play fun games, and grow together through Bible study. We finish by sharing prayer requests and praying for one another. LS Students is a place to build friendships, have fun, and grow in your relationship with Jesus!",
+        "url": "https://lssr.churchcenter.com/calendar/event/230226000",
+        "img": "https://images.planningcenterusercontent.com/v1/transform?bucket=resources-production&disposition=inline&expires_at=1793519999&key=uploads%2F447155%2F08nffgcwu2lxykqoz72m2v1xj8jj&thumb=960x540%23&signature=919b7178e44bf77782a854c511c94eadab36be12778243618f4616643134cbc4",
+        "imgLocal": "cal-img/baa1373e9dee37b8.png",
+        "desc": "LS Students High School meets every Sunday from 3:00–4:30 PM at Living Stones South Reno! Each week, students have time to hang out, enjoy good snacks, play fun games, and grow together through Bible study. We finish by sharing prayer requests and praying for one another. LS Students is a place to build friendships, have fun, and grow in your relationship with Jesus!",
+        "visibleCC": true
       }
     ],
-    "asOf": "2026-10-08",
-    "syncedAt": "2026-10-08T19:02:36.000Z"
+    "asOf": "2026-10-11",
+    "syncedAt": "2026-10-11T23:05:59.594Z"
   },
   "staff_profiles": [
     {
@@ -6343,13 +6427,13 @@
     {
       "bambooId": "121",
       "name": "Bradley Borowski",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=DjIa5zafbLvnwkhowjh0SDAgRYNQ-BErOuyU-uHkEQVzWiy1OaVo5au2Rv9g720XH6HjGQLsU2sL0sllFOg5DZXauWNzrDRjnYF5KhXjizwT04S1dsjT~-KVPQDQw4F0ZBAcZM1iwY6XeIQSDYqRbHUBydoFdk2alWe5py8h9cTQuB4aXF4ZqpmnMyB2qKXKrtxtMYWHgHMKsxruJUJFfKB-zhHuoYMGttGBvPtzrbjFH0jJWJ-iY6gak8HwD-Tr4hPsGuEbUQomedpq3fEIATgK5beifWcnr8AQ3XHXvqQA3Yc2vVPJI8WDsW30JP7gQrRa9HaWC4WIMGpjeO1m7g__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/121-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzEyMS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNjUxNTEwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNDM1MjB9fX1dfQ__&Signature=OEXLMcUMr7esHcV6tvKFFXdc4Tfnp4OTSUBvDDhwenDN0TQ5htSxWyyGG~9LPl-dVVcgSXTOnGcXdRMsN3ATB-gdJey4OLcym8uP1WydU9z-NrOx8kqmIf~Gg5C7Qhi8hyu~tMRIYxA-u-kf6SS3x2dkeD2Iy40FwWretv1jgtatSqzCXdb7wsu40rMvsuZLzWhGe6uAU8l3SHHGNe-Vz-syJTr8LPTGPA52oFNCZTBK4TeNDjPLuQnT~AbRztQCi6Y51V1ze4bH6qs5moz2FAW5sWjObPyAhACBOuaElg7bURfeQyU3NaF4aawR~VtNshMRbJvQXXop7WraNexLPQ__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Executive Pastor"
     },
     {
       "bambooId": "182",
       "name": "Geoffrey Caliger",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=Nq6sFLYQ5GBIwfvJfUZn9xLvLsaEcWl7DZWjFz8o00a4IcvPeSplIMVjA1DkW-8uzmQI93EL9HK9ZfXDf5~F9vRmZ3Ddzns-~4vX22CdLP6cquZRzqoj1O~OBj0FiIIz8UgOhccgYN8sTvQ~0ArSnNRLMZ5JMPKN5d57wvPePa34qyQ1YoY8Ne1wt6ZQSTtdJgGXNPvzdQjzc8oH~l-Vpzg5Oz62ZlXp4m7NeKPNnNArxzTC-cH6-8ewgmJF~hvCQmHjQeEAKzh2SNla2VbFvPE8lkub6JEeSfrUOyTJxZ7dKdlgobG0ONoJ3R0txsaKdJGj1aPQNJG0dOGqi6AQAA__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/182-0-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE4Mi0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNjUxNTEwfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNDM1MjB9fX1dfQ__&Signature=Fs4JHMLpVHtEaAFQnlx-BUfOOHlq7FmFJf-xm4nlzwySIGTSU-HZKJMHV4hdZfv8BhVPsKblOZA4Yq6rIWFstiOcLg4wnvFb658SjikJPaDZCud4p1Hl-9tcQoS2bCsJCjJArnfqobenPnfJuj97xXL4ozi0W9~jGwAK8buIwhB7w5lweuT45xiWnDHPXsUAJGmVygH5NcYCFh0WupNekWB5rqBc68NfWWC-avlguaVA4bkNhTLMXXca9PzlcbLrc4c8gnC2~5dXCAd5i57rCKshHO3rRJ5UVcDemerZGqsAc4zlJcsXzO-IkSk6sKz0yManhqHFp9fGj6YeqyXZIQ__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Stepping Stones Staffing Director"
     },
     {
@@ -6361,7 +6445,7 @@
     {
       "bambooId": "179",
       "name": "John Conelea",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=iApANhWxun9lQYgGkk6U-Xcytj-JnJNiP~JoLbrcyHduftYrbn9iOA2gp1oxj2F2dlxlOPrV2NLXwQ0-MqU7XggqszMELRA5~Mxe-hkrA5FpPgtL1WFGM-vVYI9OA5PLLPXq9Lmelw4g3O3S4GXYVi4VE9KS8eMMGHfriQ8OLPw9hFITDDo5jL1O46ogIm2oAWQSR7V6OEzb2qf~EFscl2kYEY0nC5du-QX6uXRuhL5bDSFBbnW~6TNGsiT-p~eL2dF3hbG-9o~ODYHmQx-tK0s1gcYM2Ji6zeEKGaP3GQdlRG-vtXSG53IoILonYowp~FmeQd7DwS-AVSY7V7M5sw__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/179-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3OS0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNjUxNTExfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNDM1MjF9fX1dfQ__&Signature=KahZm-UTyVUmF-Pmp~MjNAdkbTRLeEY9daDflciIEjFFCMqDEm9rpyLeDuZLIqjOFtEzUCtjx1YJj0uTY9gWMTi~9mfPawiDZhgU2xCnGclOF3s~Ytur0gA~xPMUKrvqBkASMcmnJfKQsRsz3JTYye10GP-V1chxFOxvCz6wtQfG9ZFlTwzbnywlrFwpG9jmxpkxyu~THHbcYvVWhzuQsFKR9mmhaMsEavqTZ7tgZ~PX9PzNg1pUAQcXUGyaonsR7cXQ7xzIuZbgAfOzsZztr9QG0-QkYF3fD4YYIHebK5FeHRV9N6oLWV3mUw1aOUmKtXEIhKx2d0IGAa6yxOEy1A__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Creative Director"
     },
     {
@@ -6391,7 +6475,7 @@
     {
       "bambooId": "177",
       "name": "Katie Thompson",
-      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDg2MTQzfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQwNzgxNTN9fX1dfQ__&Signature=Jqvq87MyyAqbmiSfde8sdVAbYmWYn5Zsd-WfisiVwnLdFnLSB9eSfzS7tj9fgfPSjls0U9dmGM2BZuKIvi11ygc0avJ7hdDUb4z1GFg-znOmAYn6N7qM5pt4sJspJOTi-MfUJpklFbyEZaM1eI0yTcRgQ7fOU6LFkh7AXn-Y4sn8NoXnOBY31M5MhdFx5hXAT1RgBKng4AUlQCDy4tX9ZL3Z7H6jTU-06FIzZ1N3ym8PEeJ2JNxsbq1F0wmaLYYof1qUmhtNgmDKv4r3Sk6LBDsd0-pH63WwVAcme8-hLxbe9I3dGne2E-Ty2fFHDG5dszUZOkNhtsjFrWhjEXLmWQ__&Key-Pair-Id=K3R4N4FU6US991",
+      "photoUrl": "https://images7.bamboohr.com/520005/photos/177-1-4.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9pbWFnZXM3LmJhbWJvb2hyLmNvbS81MjAwMDUvcGhvdG9zLzE3Ny0qIiwiQ29uZGl0aW9uIjp7IkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNjUxNTExfSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNDM1MjF9fX1dfQ__&Signature=RugEDWnxcy5hCVlHMee4HgpcoufqxprSb2JG6JXoxFa6bHQHYaKFEl74eL6zKSdquZ99YdIBZt2V7NrM-JRrPr6M7wSfNoAKE9a27P0XYBLONKt~r5EUQWrMNeHvaD7nck-psL0tBf3tSV9yzDOJBGkRgbXqmbmga4WIwH-yEN2TDSKVflQNQTJBTfwBt7YE1JudCy7T3-lL1UkfLyJ0EixJc-kTODQL7McvhmW7H9IN0RmMyfjX9lyDmZvpOGa~no5hWsGZLEWD15JvTNsgdTSp43diC3yfVb8XFVHa-d~hKxIK8-SliSu5u7FuX0gHHN0JGg2LO~5zTlAgxc77gQ__&Key-Pair-Id=K3R4N4FU6US991",
       "jobTitle": "Student Ministry Director"
     }
   ],
@@ -6691,6 +6775,10 @@
         {
           "name": "Sheri Bell",
           "role": "member"
+        },
+        {
+          "name": "Suzy Heinz",
+          "role": "member"
         }
       ]
     },
@@ -6854,6 +6942,44 @@
         },
         {
           "name": "Stephanie Tompkins",
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "type": "Community Group",
+      "name": "Colburn/Turcich Community Group",
+      "members": [
+        {
+          "name": "Diane Dale",
+          "role": "member"
+        },
+        {
+          "name": "Diane Lane",
+          "role": "leader"
+        },
+        {
+          "name": "Jan Colburn",
+          "role": "leader"
+        },
+        {
+          "name": "Janelle Yost",
+          "role": "member"
+        },
+        {
+          "name": "John Turcich",
+          "role": "leader"
+        },
+        {
+          "name": "Lorna Elias",
+          "role": "member"
+        },
+        {
+          "name": "Mike Munoz",
+          "role": "member"
+        },
+        {
+          "name": "Nathen Ross",
           "role": "member"
         }
       ]
@@ -7108,10 +7234,6 @@
         },
         {
           "name": "Lillian Wong",
-          "role": "member"
-        },
-        {
-          "name": "Mary Davis",
           "role": "member"
         },
         {
@@ -7481,19 +7603,11 @@
           "role": "member"
         },
         {
-          "name": "Fiona Delforge",
-          "role": "member"
-        },
-        {
           "name": "Jennifer Torres",
           "role": "member"
         },
         {
           "name": "Jorie Hetland",
-          "role": "member"
-        },
-        {
-          "name": "Melia Shively",
           "role": "member"
         },
         {
@@ -7901,6 +8015,10 @@
           "role": "member"
         },
         {
+          "name": "Lauren Bruno",
+          "role": "member"
+        },
+        {
           "name": "Lyndsey Mott",
           "role": "member"
         },
@@ -8148,40 +8266,6 @@
     },
     {
       "type": "Community Group",
-      "name": "Taylor Community Group",
-      "members": [
-        {
-          "name": "Chris Taylor",
-          "role": "member"
-        },
-        {
-          "name": "Diane Dale",
-          "role": "member"
-        },
-        {
-          "name": "Diane Lane",
-          "role": "leader"
-        },
-        {
-          "name": "Jan Colburn",
-          "role": "leader"
-        },
-        {
-          "name": "Janelle Yost",
-          "role": "member"
-        },
-        {
-          "name": "Lorna Elias",
-          "role": "member"
-        },
-        {
-          "name": "Nita Taylor",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
       "name": "Thompson/Primus Community Group",
       "members": [
         {
@@ -8246,24 +8330,6 @@
         },
         {
           "name": "Stephanie Fava",
-          "role": "member"
-        }
-      ]
-    },
-    {
-      "type": "Community Group",
-      "name": "Turcich Community Group",
-      "members": [
-        {
-          "name": "John Turcich",
-          "role": "leader"
-        },
-        {
-          "name": "Mike Munoz",
-          "role": "member"
-        },
-        {
-          "name": "Nathen Ross",
           "role": "member"
         }
       ]
