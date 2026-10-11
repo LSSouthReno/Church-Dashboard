@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-11T20:00:02.414Z",
+  "lastUpdated": "2026-10-11T20:45:41.329Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13283,7 +13283,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 1:00 PM",
+    "refreshed": "Oct 11, 2026, 1:45 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14104,7 +14104,7 @@
       333,
       343,
       382,
-      402
+      403
     ]
   },
   "baptisms": {
@@ -14175,7 +14175,7 @@
     },
     "current": {
       "groups": 36,
-      "members": 402,
+      "members": 403,
       "groupSize": 11,
       "fmInGroupsPct": 54,
       "asOfMonth": "Oct '26"
@@ -14655,7 +14655,7 @@
         333,
         343,
         382,
-        402,
+        403,
         null,
         null
       ]
@@ -31684,18 +31684,14 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 59,
-    "weeklyAvg": 14,
-    "totalFetched": 7147,
-    "since": "2026-09-11",
-    "asOf": "2026-10-11T19:44:50.308Z"
+    "error": "PCO request failed: 502 — https://api.planningcenteronline.com/people/v2/people?offset=4200&order=-created_at&per_page=100 — <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n"
   },
   "emailStats": {
-    "latestOpenRate": 0.23809523809523808,
-    "avgOpenRate3": 0.2819562779753863,
+    "latestOpenRate": 0.24060150375939848,
+    "avgOpenRate3": 0.2827916998634397,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-11T19:44:51.314Z"
+    "asOf": "2026-10-11T20:44:19.732Z"
   }
 }
