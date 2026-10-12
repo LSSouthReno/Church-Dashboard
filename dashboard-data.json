@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-12T22:46:14.179Z",
+  "lastUpdated": "2026-10-12T23:03:48.610Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 3:46 PM",
+    "refreshed": "Oct 12, 2026, 4:03 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        26,
+        27,
         null,
         null
       ]
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        22,
+        24,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        15,
+        17,
         null,
         null
       ]
@@ -15094,20 +15094,20 @@
         "attPct": 52
       },
       {
+        "name": "Isaac Griffin Community Group",
+        "members": 19,
+        "leaders": 1,
+        "schedule": "Meets weekly on Fridays from 7-8:30pm",
+        "avgAttended": 8,
+        "attPct": 42
+      },
+      {
         "name": "Bridges Community Group",
         "members": 18,
         "leaders": 1,
         "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
         "avgAttended": 9,
         "attPct": 50
-      },
-      {
-        "name": "Isaac Griffin Community Group",
-        "members": 18,
-        "leaders": 1,
-        "schedule": "Meets weekly on Fridays from 7-8:30pm",
-        "avgAttended": 8,
-        "attPct": 44
       },
       {
         "name": "Thompson/Primus Community Group",
@@ -15119,11 +15119,11 @@
       },
       {
         "name": "Brown/Frank Community Group",
-        "members": 15,
+        "members": 16,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 6,
-        "attPct": 40
+        "attPct": 38
       },
       {
         "name": "Peissner Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 402,
+      "cgMembers": 403,
       "both": 215,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,20 +15360,20 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 402,
+        "cg": 403,
         "serving": 299,
-        "giving": 957
+        "giving": 958
       },
-      "universe": 1168,
+      "universe": 1170,
       "regions": {
         "1": 43,
-        "2": 91,
+        "2": 92,
         "3": 12,
         "4": 33,
         "5": 10,
         "6": 7,
         "7": 15,
-        "8": 527,
+        "8": 528,
         "9": 77,
         "10": 67,
         "11": 52,
@@ -15476,6 +15476,7 @@
           "Jenny Vasquex",
           "Jeremy Marin",
           "Jesse Wolf",
+          "Jett Norman",
           "John Brown",
           "John Hanson",
           "John Helmer",
@@ -16660,7 +16661,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 604,
+          "count": 605,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -17051,7 +17052,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 187,
+        "count": 188,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17142,6 +17143,7 @@
           "Jeremy Marin",
           "Jerimiah Turner",
           "Jesse Wolf",
+          "Jett Norman",
           "John Brown",
           "John Hanson",
           "John Helmer",
@@ -17247,7 +17249,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-12T21:57:02.615Z",
+    "updated": "2026-10-12T23:01:01.003Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17257,14 +17259,32 @@
           "Kathy Frank"
         ],
         "applied": 2,
-        "joined": 1,
+        "joined": 2,
         "connections": 2,
         "appliedNames": [
           "Kelly Anderson",
           "Samantha Gomez"
         ],
         "joinedNames": [
-          "Kelly Anderson"
+          "Kelly Anderson",
+          "Samantha Gomez"
+        ]
+      },
+      {
+        "group": "Isaac Griffin Community Group",
+        "leaders": [
+          "Isaac Griffin"
+        ],
+        "applied": 2,
+        "joined": 2,
+        "connections": 2,
+        "appliedNames": [
+          "Jett Norman",
+          "Nathen Ross"
+        ],
+        "joinedNames": [
+          "Jett Norman",
+          "Nathen Ross"
         ]
       },
       {
@@ -17331,21 +17351,6 @@
         ]
       },
       {
-        "group": "Isaac Griffin Community Group",
-        "leaders": [
-          "Isaac Griffin"
-        ],
-        "applied": 1,
-        "joined": 1,
-        "connections": 1,
-        "appliedNames": [
-          "Nathen Ross"
-        ],
-        "joinedNames": [
-          "Nathen Ross"
-        ]
-      },
-      {
         "group": "McCarthy Community Group",
         "leaders": [
           "Mike McCarthy",
@@ -17408,9 +17413,9 @@
       }
     ],
     "totals": {
-      "applied": 12,
-      "joined": 7,
-      "connections": 12
+      "applied": 13,
+      "joined": 9,
+      "connections": 13
     }
   },
   "sundayPlans": [
