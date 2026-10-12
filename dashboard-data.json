@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-12T14:51:14.425Z",
+  "lastUpdated": "2026-10-12T16:48:41.093Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 7:51 AM",
+    "refreshed": "Oct 12, 2026, 9:48 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -17249,7 +17249,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-12T14:00:49.384Z",
+    "updated": "2026-10-12T15:13:05.550Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -28253,6 +28253,13 @@
               "pos": "Connect Desk Host (B Team)",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Bret Coggiola",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [
@@ -28403,8 +28410,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 89,
-            "totalVols": 89
+            "volsWithServiceTime": 90,
+            "totalVols": 90
           }
         }
       ]
@@ -28927,6 +28934,20 @@
               "pos": "Coffee Tear Down/Put Away",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kara Schelin",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Bret Coggiola",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -28936,8 +28957,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592748\"},{\"type\":\"PlanTime\",\"id\":\"224592749\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 72
+            "volsWithServiceTime": 74,
+            "totalVols": 74
           }
         }
       ]
@@ -29266,13 +29287,6 @@
               "serviceTime": "11 AM"
             },
             {
-              "name": "Deborah Vydra",
-              "team": "Stepping Stones",
-              "pos": "Mustangs Guide",
-              "status": "U",
-              "serviceTime": "11 AM"
-            },
-            {
               "name": "Kate Andreano",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
@@ -29483,8 +29497,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 74,
-            "totalVols": 74
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -30561,6 +30575,20 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
+            },
+            {
+              "name": "Bret Coggiola",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Kara Schelin",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -30570,8 +30598,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 73,
-            "totalVols": 73
+            "volsWithServiceTime": 75,
+            "totalVols": 75
           }
         }
       ]
@@ -31014,14 +31042,14 @@
     "weeklyAvg": 13,
     "totalFetched": 7147,
     "since": "2026-09-12",
-    "asOf": "2026-10-12T14:46:51.963Z"
+    "asOf": "2026-10-12T16:45:25.141Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.24812030075187969,
-    "avgOpenRate3": 0.28627548263414954,
+    "latestOpenRate": 0.2531328320802005,
+    "avgOpenRate3": 0.2879463264102564,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-12T14:46:58.432Z"
+    "asOf": "2026-10-12T16:45:27.076Z"
   }
 }
