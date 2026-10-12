@@ -43,20 +43,6 @@
       "position": "Bear Cubs Guide"
     },
     {
-      "id": "jb_151514059_20261011_steppingstone",
-      "name": "Diane Sikora",
-      "pcoPersonId": "151514059",
-      "team": "Stepping Stones",
-      "phone": "17858132163",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Lead Guide"
-    },
-    {
       "id": "jb_151513296_20261011_steppingstone",
       "name": "Campbell Cummings",
       "pcoPersonId": "151513296",
@@ -799,7 +785,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bear Cubs Guide"
+    },
+    {
+      "id": "jb_151514059_20261011_steppingstone",
+      "name": "Diane Sikora",
+      "pcoPersonId": "151514059",
+      "team": "Stepping Stones",
+      "phone": "17858132163",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Lead Guide"
     }
   ],
-  "lastUpdated": "2026-10-12T19:39:37.947Z"
+  "lastUpdated": "2026-10-12T19:39:40.485Z"
 }
