@@ -720,6 +720,9 @@
   .ch-body > .grid, .ch-body .stack { display: contents; }
   .ch-body .ch-c { display: none; }
   .ch-body .ch-c.on { display: block; }
+  /* Inactive Church sub-tab cards stay hidden at every width (a ≤1200px .card.fill-row rule was
+     re-showing the Weekend Attendance card on every tab on phones and tablets). */
+  .ch-body .ch-c:not(.on) { display: none !important; }
   .ch-body .ch-c.on.fill-row { display: flex; }
   .ch-body .ch-c.fill-row .chart-wrap { height: 300px; min-height: 0; flex: none; }
   .ch-body:not([data-tab="overview"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -18342,7 +18345,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261011T231330Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261012T005336Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
