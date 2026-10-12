@@ -1,20 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_179377851_20261011_steppingstone",
-      "name": "Lauren Bruno",
-      "pcoPersonId": "179377851",
-      "team": "Stepping Stones",
-      "phone": "19253038752",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Guide WP, Hawks, Mustangs"
-    },
-    {
       "id": "jb_191496485_20261011_countingteam",
       "name": "Vonda Fineman",
       "pcoPersonId": "191496485",
@@ -799,7 +785,21 @@
       "notes": "",
       "source": "auto",
       "position": "Bear Cubs Guide"
+    },
+    {
+      "id": "jb_179377851_20261011_steppingstone",
+      "name": "Lauren Bruno",
+      "pcoPersonId": "179377851",
+      "team": "Stepping Stones",
+      "phone": "19253038752",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Guide WP, Hawks, Mustangs"
     }
   ],
-  "lastUpdated": "2026-10-12T19:44:44.746Z"
+  "lastUpdated": "2026-10-12T19:48:54.633Z"
 }
