@@ -1,34 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "jb_191496485_20261011_countingteam",
-      "name": "Vonda Fineman",
-      "pcoPersonId": "191496485",
-      "team": "Counting Team",
-      "phone": "17758420677",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Offering Counter"
-    },
-    {
-      "id": "jb_151514224_20261011_enrichmentteam",
-      "name": "Diane Lane",
-      "pcoPersonId": "151514224",
-      "team": "Enrichment Teams",
-      "phone": "17757227841",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Front Left Communion Server"
-    }
-  ],
+  "pending": [],
   "completed": [
     {
       "id": "jb_154084476_20260628",
@@ -799,7 +770,35 @@
       "notes": "",
       "source": "auto",
       "position": "Guide WP, Hawks, Mustangs"
+    },
+    {
+      "id": "jb_191496485_20261011_countingteam",
+      "name": "Vonda Fineman",
+      "pcoPersonId": "191496485",
+      "team": "Counting Team",
+      "phone": "17758420677",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Offering Counter"
+    },
+    {
+      "id": "jb_151514224_20261011_enrichmentteam",
+      "name": "Diane Lane",
+      "pcoPersonId": "151514224",
+      "team": "Enrichment Teams",
+      "phone": "17757227841",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Front Left Communion Server"
     }
   ],
-  "lastUpdated": "2026-10-12T19:48:54.633Z"
+  "lastUpdated": "2026-10-12T20:34:54.105Z"
 }
