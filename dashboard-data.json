@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-12T16:48:41.093Z",
+  "lastUpdated": "2026-10-12T17:46:39.979Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13078,9 +13078,9 @@
       "n": "Teylor Baskharoon (Hinzman)",
       "t": "SERVICES",
       "c": 10,
-      "d": 5,
+      "d": 4,
       "p": 0,
-      "r": 67
+      "r": 71
     },
     {
       "n": "Thomas Adams",
@@ -13224,9 +13224,9 @@
       "date": "2026-10-11",
       "ds": "Oct 11, 2026",
       "ty": "SERVICES",
-      "s": 125,
+      "s": 124,
       "c": 103,
-      "d": 12,
+      "d": 11,
       "p": 10
     },
     {
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 9:48 AM",
+    "refreshed": "Oct 12, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        24,
+        25,
         null,
         null
       ]
@@ -14808,7 +14808,7 @@
         24,
         22,
         48,
-        21,
+        22,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         38,
-        14,
+        15,
         null,
         null
       ]
@@ -15087,11 +15087,11 @@
       },
       {
         "name": "McCarthy Community Group",
-        "members": 20,
+        "members": 21,
         "leaders": 2,
         "schedule": "Meets every other week on Mondays from 6:30-8pm",
         "avgAttended": 11,
-        "attPct": 55
+        "attPct": 52
       },
       {
         "name": "Bridges Community Group",
@@ -17249,7 +17249,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-12T15:13:05.550Z",
+    "updated": "2026-10-12T17:08:22.975Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17347,6 +17347,22 @@
         ]
       },
       {
+        "group": "McCarthy Community Group",
+        "leaders": [
+          "Mike McCarthy",
+          "Darren Wilford"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Crystal Flaherty"
+        ],
+        "joinedNames": [
+          "Crystal Flaherty"
+        ]
+      },
+      {
         "group": "Poleselli / McAlpine Community Group",
         "leaders": [
           "Michael Poleselli",
@@ -17393,9 +17409,9 @@
       }
     ],
     "totals": {
-      "applied": 10,
-      "joined": 6,
-      "connections": 10
+      "applied": 11,
+      "joined": 7,
+      "connections": 11
     }
   },
   "sundayPlans": [
@@ -25994,7 +26010,7 @@
               "team": "Safety Team",
               "pos": "Safety Monitor",
               "status": "C",
-              "serviceTime": "8 AM"
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             },
             {
               "name": "Bill Caraway",
@@ -27521,83 +27537,90 @@
             },
             {
               "seq": 10,
+              "title": "ELDER COMMISSIONING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 11,
               "title": "YOUR NEXT STEP VIDEO",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 11,
+              "seq": 12,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 12,
+              "seq": 13,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 14,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 14,
+              "seq": 15,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore:"
             },
             {
-              "seq": 15,
+              "seq": 16,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 16,
+              "seq": 17,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 18,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 19,
               "title": "Reckless Love",
               "type": "song",
               "lengthMin": 6,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 20,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 21,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 22,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -31042,14 +31065,14 @@
     "weeklyAvg": 13,
     "totalFetched": 7147,
     "since": "2026-09-12",
-    "asOf": "2026-10-12T16:45:25.141Z"
+    "asOf": "2026-10-12T17:44:51.090Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.2531328320802005,
-    "avgOpenRate3": 0.2879463264102564,
+    "latestOpenRate": 0.2556390977443609,
+    "avgOpenRate3": 0.28904714107962626,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-12T16:45:27.076Z"
+    "asOf": "2026-10-12T17:44:52.491Z"
   }
 }
