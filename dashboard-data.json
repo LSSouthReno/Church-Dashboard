@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-12T01:46:11.670Z",
+  "lastUpdated": "2026-10-12T01:59:45.474Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13283,7 +13283,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 11, 2026, 6:46 PM",
+    "refreshed": "Oct 11, 2026, 6:59 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14737,7 +14737,7 @@
         33,
         23,
         17,
-        15,
+        14,
         16,
         23,
         24,
@@ -14784,7 +14784,7 @@
         16,
         14,
         4,
-        5,
+        4,
         11,
         12,
         13,
@@ -15022,11 +15022,11 @@
       },
       {
         "name": "McCarthy Community Group",
-        "members": 21,
+        "members": 20,
         "leaders": 2,
         "schedule": "Meets every other week on Mondays from 6:30-8pm",
         "avgAttended": 11,
-        "attPct": 52
+        "attPct": 55
       },
       {
         "name": "Bridges Community Group",
@@ -15287,7 +15287,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 404,
+      "cgMembers": 403,
       "both": 215,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15295,7 +15295,7 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 404,
+        "cg": 403,
         "serving": 291,
         "giving": 954
       },
@@ -15308,9 +15308,9 @@
         "5": 10,
         "6": 7,
         "7": 15,
-        "8": 524,
+        "8": 525,
         "9": 80,
-        "10": 69,
+        "10": 68,
         "11": 53,
         "12": 26,
         "13": 45,
@@ -15541,7 +15541,6 @@
           "Teodoro Kijah Banda"
         ],
         "8": [
-          "Aaron Prince",
           "Adam Anderson",
           "Addie Guyer",
           "Alana Hysell",
@@ -15589,6 +15588,7 @@
           "Chris Rehberger",
           "Christeen Schillo",
           "Christelle Martin",
+          "Christi Wilson",
           "Christina Caviglia",
           "Christine Crosby",
           "Christine Kooyers",
@@ -15835,7 +15835,6 @@
           "Bill Winchester",
           "Cheri Adams",
           "Chris Field",
-          "Christi Wilson",
           "Christine Genova",
           "Dave Timko",
           "David Weyhenmeyer",
@@ -16590,9 +16589,8 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 604,
+          "count": 605,
           "names": [
-            "Aaron Prince",
             "Adam Anderson",
             "Addie Guyer",
             "Alana Hysell",
@@ -16653,6 +16651,7 @@
             "Chris Rehberger",
             "Christeen Schillo",
             "Christelle Martin",
+            "Christi Wilson",
             "Christina Caviglia",
             "Christina Harter",
             "Christine Crosby",
@@ -16981,7 +16980,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 189,
+        "count": 188,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17018,7 +17017,6 @@
           "Chris Field",
           "Chris Wilson",
           "Christerson Ramlow",
-          "Christi Wilson",
           "Christian Menendez",
           "Christine Davis",
           "Christine Genova",
@@ -17179,7 +17177,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-12T00:59:17.841Z",
+    "updated": "2026-10-12T01:57:19.279Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -30328,6 +30326,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -30337,8 +30342,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983886\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 73,
-            "totalVols": 73
+            "volsWithServiceTime": 74,
+            "totalVols": 74
           }
         }
       ]
@@ -31408,6 +31413,13 @@
               "pos": "Front Left Communion Server",
               "status": "U",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Monitor",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -31417,8 +31429,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983900\"},{\"type\":\"PlanTime\",\"id\":\"225983901\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 72,
-            "totalVols": 72
+            "volsWithServiceTime": 73,
+            "totalVols": 73
           }
         }
       ]
@@ -31812,6 +31824,13 @@
               "pos": "Host",
               "status": "C",
               "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Michael Poleselli",
+              "team": "Safety Team",
+              "pos": "Safety Lead",
+              "status": "C",
+              "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
           "orderItems": [],
@@ -31821,8 +31840,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"227200162\"},{\"type\":\"PlanTime\",\"id\":\"227200163\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 54,
-            "totalVols": 54
+            "volsWithServiceTime": 55,
+            "totalVols": 55
           }
         }
       ]
