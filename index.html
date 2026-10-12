@@ -5317,8 +5317,6 @@ function cal6Today() {
   cal6Render();
 }
 
-// The TV page does a full reload every 5 minutes so it always shows fresh data.
-if (_cal6TV) setInterval(function () { location.reload(); }, 300000);
 // TV remote / keyboard: left/right (or PageUp/PageDown) change month; OK/Enter presses the focused button.
 document.addEventListener('keydown', function (e) {
   if (!document.body.classList.contains('cal-tv')) return;
@@ -5479,6 +5477,9 @@ let _cal6TV = false;
 try { if (new URLSearchParams(location.search).get('tv') === '1') { _cal6TV = true; sessionStorage.setItem('cal6_tv', '1'); } else if (sessionStorage.getItem('cal6_tv') === '1') _cal6TV = true; } catch (e) {}
 function cal6IsTV() { return _cal6TV || window.innerWidth >= 2400; }
 if (_cal6TV) { const _tvOn = () => document.body.classList.add('cal-tv'); if (document.body) _tvOn(); else document.addEventListener('DOMContentLoaded', _tvOn); }
+// The TV page does a full reload every 5 minutes so it always shows fresh data.
+// (Must sit AFTER `let _cal6TV` — reading it earlier throws and kills the whole calendar script.)
+if (_cal6TV) setInterval(function () { location.reload(); }, 300000);
 function cal6FitMonth() {
   const weeks = document.querySelector('#cal6Body.mode-1 .cal6-weeks');
   if (!weeks) return;
@@ -18378,7 +18379,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261012T005336Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261012T222019Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
