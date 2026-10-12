@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-12T20:48:26.148Z",
+  "lastUpdated": "2026-10-12T21:46:06.867Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      99822
+      105604
     ],
     "donors": [
       0,
@@ -334,12 +334,12 @@
       364,
       402,
       383,
-      238
+      248
     ]
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5688961
+    "raised": 5694743
   },
   "attendance": {
     "months": [
@@ -8505,7 +8505,7 @@
   "serveTeams": [
     {
       "name": "Stepping Stones",
-      "current": 117,
+      "current": 116,
       "needed": 150,
       "history": [
         {
@@ -8643,7 +8643,7 @@
         },
         {
           "d": "2026-10",
-          "n": 117
+          "n": 116
         }
       ]
     },
@@ -10443,7 +10443,7 @@
       ]
     }
   ],
-  "uniqueVolunteers": 360,
+  "uniqueVolunteers": 359,
   "budget": [
     {
       "label": "Network & Missions",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 1:48 PM",
+    "refreshed": "Oct 12, 2026, 2:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14807,7 +14807,7 @@
         23,
         24,
         22,
-        48,
+        47,
         22,
         null,
         null
@@ -14854,7 +14854,7 @@
         12,
         13,
         14,
-        38,
+        37,
         15,
         null,
         null
@@ -15079,11 +15079,11 @@
       },
       {
         "name": "Martinson/Degener Community Group",
-        "members": 23,
+        "members": 22,
         "leaders": 2,
         "schedule": "Meets every other week on Tuesdays from 6-8pm",
         "avgAttended": 7,
-        "attPct": 30
+        "attPct": 32
       },
       {
         "name": "McCarthy Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 403,
+      "cgMembers": 402,
       "both": 215,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,7 +15360,7 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 403,
+        "cg": 402,
         "serving": 299,
         "giving": 954
       },
@@ -15377,9 +15377,9 @@
         "9": 77,
         "10": 67,
         "11": 52,
-        "12": 28,
+        "12": 29,
         "13": 47,
-        "14": 23,
+        "14": 22,
         "15": 136
       },
       "regionNames": {
@@ -16029,6 +16029,7 @@
           "Jessica Adrian",
           "Kellan Coan",
           "Latisha Hill",
+          "Lorie Roberts",
           "Lydia Perlich",
           "Matt Sweitzer",
           "McKayla Leggett",
@@ -16107,7 +16108,6 @@
           "Karynn Sucaldito",
           "Lauren Bruno",
           "Liz Suto",
-          "Lorie Roberts",
           "Michael France",
           "Michael Rehberger",
           "Nathen Ross",
@@ -16258,7 +16258,7 @@
       "lists": {
         "engagedNotMember": {
           "label": "In CG + Serving + Giving — not yet a Member",
-          "count": 23,
+          "count": 22,
           "names": [
             "Aaron Marinucci",
             "Aliyah Ramirez",
@@ -16275,7 +16275,6 @@
             "Karynn Sucaldito",
             "Lauren Bruno",
             "Liz Suto",
-            "Lorie Roberts",
             "Michael France",
             "Michael Rehberger",
             "Nathen Ross",
@@ -17052,7 +17051,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 188,
+        "count": 187,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17178,7 +17177,6 @@
           "Lindsay Johnson",
           "Liz Suto",
           "Lori Traitel",
-          "Lorie Roberts",
           "Lorna Elias",
           "Lucas Piotto",
           "Lyndsey Mott",
@@ -17249,7 +17247,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-12T19:06:27.675Z",
+    "updated": "2026-10-12T21:05:17.182Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -27469,6 +27467,13 @@
               "pos": "Front Left Communion Server",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Josie Nerska",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -27539,88 +27544,81 @@
               "seq": 10,
               "title": "ELDER COMMISSIONING",
               "type": "item",
-              "lengthMin": 3,
+              "lengthMin": 5,
               "description": ""
             },
             {
               "seq": 11,
-              "title": "YOUR NEXT STEP VIDEO",
-              "type": "item",
-              "lengthMin": 2,
-              "description": ""
-            },
-            {
-              "seq": 12,
               "title": "SERMON TEXT READING",
               "type": "item",
               "lengthMin": 2,
               "description": ""
             },
             {
-              "seq": 13,
+              "seq": 12,
               "title": "SERMON BUMPER",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 14,
+              "seq": 13,
               "title": "SERMON BEGINS",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 15,
+              "seq": 14,
               "title": "SERMON",
               "type": "item",
               "lengthMin": 35,
               "description": "End Underscore: PEACE IN THE STORM"
             },
             {
-              "seq": 16,
+              "seq": 15,
               "title": "COMMUNION / OFFERING INSTRUCTION",
               "type": "item",
               "lengthMin": 3,
               "description": ""
             },
             {
-              "seq": 17,
+              "seq": 16,
               "title": "COMMUNION / OFFERING",
               "type": "item",
               "lengthMin": 4,
               "description": ""
             },
             {
-              "seq": 18,
+              "seq": 17,
               "title": "PROCLAMATION OF FAITH",
               "type": "item",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 19,
+              "seq": 18,
               "title": "Reckless Love",
               "type": "song",
               "lengthMin": 6,
               "description": ""
             },
             {
-              "seq": 20,
+              "seq": 19,
               "title": "BENEDICTION",
               "type": "item",
               "lengthMin": 1,
               "description": ""
             },
             {
-              "seq": 21,
+              "seq": 20,
               "title": "END OF SERVICE",
               "type": "header",
               "lengthMin": 0,
               "description": ""
             },
             {
-              "seq": 22,
+              "seq": 21,
               "title": "POST-SERVICE Reel",
               "type": "item",
               "lengthMin": 10,
@@ -27633,8 +27631,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 101,
+            "totalVols": 101
           }
         }
       ]
@@ -28283,6 +28281,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Josie Nerska",
+              "team": "Stepping Stones",
+              "pos": "Wolf Pack Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [
@@ -28433,8 +28438,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592732\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 90,
-            "totalVols": 90
+            "volsWithServiceTime": 91,
+            "totalVols": 91
           }
         }
       ]
@@ -28973,7 +28978,148 @@
               "serviceTime": "9:30 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "BAPTISMS",
+              "type": "item",
+              "lengthMin": 5,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 9,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 10,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "YOUR NEXT STEP VIDEO",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 14,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 35,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 16,
+              "title": "COMMUNION / OFFERING INST.",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "COMMUNION / OFFERING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "PROCLAIM / BENEDICTION",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -29513,7 +29659,162 @@
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 9,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 10,
+              "title": "YOUR NEXT STEP VIDEO",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 14,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 35,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "COMMUNION / OFFERING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "CHILD DEDICATION",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 22,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -30058,17 +30359,179 @@
               "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Lauren Johnson",
+              "team": "Enrichment Teams",
+              "pos": "Front Right Communion Server",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "FINANCIAL UPDATE",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 9,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 10,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 11,
+              "title": "YOUR NEXT STEP VIDEO",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 14,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 15,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 35,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 16,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "COMMUNION / OFFERING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 22,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"225983893\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 74,
-            "totalVols": 74
+            "volsWithServiceTime": 75,
+            "totalVols": 75
           }
         }
       ]
@@ -30614,7 +31077,155 @@
               "serviceTime": "9:30 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 9,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 10,
+              "title": "YOUR NEXT STEP VIDEO",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 14,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 35,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "COMMUNION / OFFERING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -31025,7 +31636,155 @@
               "serviceTime": "8 AM, 9:30 AM, 11 AM"
             }
           ],
-          "orderItems": [],
+          "orderItems": [
+            {
+              "seq": 1,
+              "title": "PRE-SERVICE Reel / Documents",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            },
+            {
+              "seq": 2,
+              "title": "Countdown",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 3,
+              "title": "SERVICE BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 4,
+              "title": "WELCOME",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 5,
+              "title": "SONG 1",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 6,
+              "title": "SONG 2",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 7,
+              "title": "CONFESSION / ASSURANCE",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 8,
+              "title": "SONG 3",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 9,
+              "title": "GREETING",
+              "type": "item",
+              "lengthMin": 1,
+              "description": "Underscore:"
+            },
+            {
+              "seq": 10,
+              "title": "YOUR NEXT STEP VIDEO",
+              "type": "item",
+              "lengthMin": 2,
+              "description": ""
+            },
+            {
+              "seq": 11,
+              "title": "SERMON TEXT READING",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 12,
+              "title": "SERMON BUMPER",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 13,
+              "title": "SERMON BEGINS",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 14,
+              "title": "SERMON",
+              "type": "item",
+              "lengthMin": 35,
+              "description": "End Underscore:"
+            },
+            {
+              "seq": 15,
+              "title": "COMMUNION / OFFERING INSTRUCTION",
+              "type": "item",
+              "lengthMin": 3,
+              "description": ""
+            },
+            {
+              "seq": 16,
+              "title": "COMMUNION / OFFERING",
+              "type": "item",
+              "lengthMin": 4,
+              "description": ""
+            },
+            {
+              "seq": 17,
+              "title": "PROCLAMATION OF FAITH",
+              "type": "item",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 18,
+              "title": "SONG 4",
+              "type": "item",
+              "lengthMin": 5,
+              "description": ""
+            },
+            {
+              "seq": 19,
+              "title": "BENEDICTION",
+              "type": "item",
+              "lengthMin": 1,
+              "description": ""
+            },
+            {
+              "seq": 20,
+              "title": "END OF SERVICE",
+              "type": "header",
+              "lengthMin": 0,
+              "description": ""
+            },
+            {
+              "seq": 21,
+              "title": "POST-SERVICE Reel",
+              "type": "item",
+              "lengthMin": 10,
+              "description": ""
+            }
+          ],
           "_debug": {
             "incTypes": "Team",
             "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
@@ -31061,11 +31820,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 59,
-    "weeklyAvg": 14,
-    "totalFetched": 7148,
+    "count30d": 63,
+    "weeklyAvg": 15,
+    "totalFetched": 7152,
     "since": "2026-09-12",
-    "asOf": "2026-10-12T20:45:14.946Z"
+    "asOf": "2026-10-12T21:44:36.068Z"
   },
   "emailStats": {
     "latestOpenRate": 0.2556390977443609,
@@ -31073,6 +31832,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-12T20:45:16.329Z"
+    "asOf": "2026-10-12T21:44:37.566Z"
   }
 }
