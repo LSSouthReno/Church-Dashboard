@@ -5317,16 +5317,11 @@ function cal6Today() {
   cal6Render();
 }
 
+// The TV page does a full reload every 5 minutes so it always shows fresh data.
+if (_cal6TV) setInterval(function () { location.reload(); }, 300000);
 // TV remote / keyboard: left/right (or PageUp/PageDown) change month; OK/Enter presses the focused button.
-// After ~2 min with no input the TV returns to the current month.
-let _cal6TvIdle = null;
-function cal6TvArm() {
-  clearTimeout(_cal6TvIdle);
-  _cal6TvIdle = setTimeout(cal6Today, 120000);
-}
 document.addEventListener('keydown', function (e) {
   if (!document.body.classList.contains('cal-tv')) return;
-  cal6TvArm();
   const dm = document.getElementById('cal6DmBg');
   if (dm && dm.classList.contains('open')) return;
   const k = e.key;
@@ -5336,7 +5331,6 @@ document.addEventListener('keydown', function (e) {
     e.preventDefault(); document.getElementById('cal6TvToday').focus();
   }
 });
-document.addEventListener('click', function () { if (document.body.classList.contains('cal-tv')) cal6TvArm(); });
 
 // Short time for dense views: "9:30 AM" → "9:30a", "6:00 PM" → "6p"
 function cal6TimeShort(t) {
