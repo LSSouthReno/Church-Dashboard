@@ -5079,6 +5079,13 @@
   body.cal-tv .cal6-span { font-size: 0.86vw; font-weight: 500; padding: 0.2vw 0.5vw; border-left-width: 0.18vw; border-radius: 0.2vw; }
   body.cal-tv .cal6-spans { padding: 0.25vw 0.45vw 0; gap: 0.2vw 0.45vw; }
   body.cal-tv .cal6-more { font-size: 0.9vw; }
+  /* TV month nav: big remote-friendly buttons in the header strip */
+  .cal6-tvnav { display: none; }
+  body.cal-tv .cal6-tvnav { display: flex; align-items: center; gap: 0.6vw; margin-left: 1.2vw; }
+  body.cal-tv .cal6-asof { margin-left: auto; }
+  body.cal-tv .cal6-tvbtn { appearance: none; background: #232323; color: var(--text); border: 0.15vw solid #3d3d3d; border-radius: 0.5vw; height: 2.4vw; min-width: 3.4vw; padding: 0 1vw; font: 600 1.5vw/1 'Montserrat', sans-serif; cursor: pointer; }
+  body.cal-tv .cal6-tvbtn.today { font-size: 1.1vw; letter-spacing: .12em; text-transform: uppercase; min-width: 6.5vw; }
+  body.cal-tv .cal6-tvbtn:focus, body.cal-tv .cal6-tvbtn:focus-visible { outline: none; border-color: var(--gold); background: var(--gold); color: #111; box-shadow: 0 0 0 0.25vw rgba(255,255,255,.85); }
 
   /* ── Event detail popup ─────────────────────────────────────── */
   .cal6-dm-bg {
@@ -5143,6 +5150,11 @@
       <div class="cal6-range" id="cal6Range"></div>
     </div>
     <div class="cal6-asof" id="cal6AsOf"></div>
+    <div class="cal6-tvnav" id="cal6TvNav">
+      <button class="cal6-tvbtn" id="cal6TvBack" onclick="cal6Nav(-1)" aria-label="Previous month">&#8249;</button>
+      <button class="cal6-tvbtn today" id="cal6TvToday" onclick="cal6Today()">Today</button>
+      <button class="cal6-tvbtn" id="cal6TvFwd" onclick="cal6Nav(1)" aria-label="Next month">&#8250;</button>
+    </div>
   </div>
   <div class="cal6-toolbar">
     <div class="cal6-mnav" id="cal6MNav" style="display:none;">
@@ -5298,6 +5310,33 @@ function cal6Nav(dir) {
   _cal6Off = next;
   cal6Render();
 }
+
+function cal6Today() {
+  if (_cal6Off === 0) return;
+  _cal6Off = 0;
+  cal6Render();
+}
+
+// TV remote / keyboard: left/right (or PageUp/PageDown) change month; OK/Enter presses the focused button.
+// After ~2 min with no input the TV returns to the current month.
+let _cal6TvIdle = null;
+function cal6TvArm() {
+  clearTimeout(_cal6TvIdle);
+  _cal6TvIdle = setTimeout(cal6Today, 120000);
+}
+document.addEventListener('keydown', function (e) {
+  if (!document.body.classList.contains('cal-tv')) return;
+  cal6TvArm();
+  const dm = document.getElementById('cal6DmBg');
+  if (dm && dm.classList.contains('open')) return;
+  const k = e.key;
+  if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); cal6Nav(-1); }
+  else if (k === 'ArrowRight' || k === 'PageDown') { e.preventDefault(); cal6Nav(1); }
+  else if ((k === 'Enter' || k === ' ') && !(document.activeElement && document.activeElement.classList.contains('cal6-tvbtn'))) {
+    e.preventDefault(); document.getElementById('cal6TvToday').focus();
+  }
+});
+document.addEventListener('click', function () { if (document.body.classList.contains('cal-tv')) cal6TvArm(); });
 
 // Short time for dense views: "9:30 AM" → "9:30a", "6:00 PM" → "6p"
 function cal6TimeShort(t) {
