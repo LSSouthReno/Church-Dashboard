@@ -1,34 +1,6 @@
 {
   "pending": [
     {
-      "id": "jb_151512484_20261011_steppingstone",
-      "name": "Jennie Kooyers",
-      "pcoPersonId": "151512484",
-      "team": "Stepping Stones",
-      "phone": "17074780627",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Guide"
-    },
-    {
-      "id": "jb_151512670_20261011_steppingstone",
-      "name": "Natalie Kooyers",
-      "pcoPersonId": "151512670",
-      "team": "Stepping Stones",
-      "phone": "17757450888",
-      "firstServeDate": "2026-10-11",
-      "status": "pending",
-      "bombedDate": "",
-      "bombedBy": "",
-      "notes": "",
-      "source": "auto",
-      "position": "Bear Cubs Guide"
-    },
-    {
       "id": "jb_151513296_20261011_steppingstone",
       "name": "Campbell Cummings",
       "pcoPersonId": "151513296",
@@ -787,6 +759,34 @@
       "position": "Bear Cubs Lead Guide"
     },
     {
+      "id": "jb_151512484_20261011_steppingstone",
+      "name": "Jennie Kooyers",
+      "pcoPersonId": "151512484",
+      "team": "Stepping Stones",
+      "phone": "17074780627",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Guide"
+    },
+    {
+      "id": "jb_151512670_20261011_steppingstone",
+      "name": "Natalie Kooyers",
+      "pcoPersonId": "151512670",
+      "team": "Stepping Stones",
+      "phone": "17757450888",
+      "firstServeDate": "2026-10-11",
+      "status": "bombed",
+      "bombedDate": "2026-10-12",
+      "bombedBy": "",
+      "notes": "",
+      "source": "auto",
+      "position": "Bear Cubs Guide"
+    },
+    {
       "id": "jb_151514059_20261011_steppingstone",
       "name": "Diane Sikora",
       "pcoPersonId": "151514059",
@@ -801,5 +801,5 @@
       "position": "Bear Cubs Lead Guide"
     }
   ],
-  "lastUpdated": "2026-10-12T19:41:36.736Z"
+  "lastUpdated": "2026-10-12T19:41:39.398Z"
 }
