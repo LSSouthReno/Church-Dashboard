@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="team-checklists.js"></script>
+<script src="conferences.js"></script>
 <script>
   // Force HTTPS: the password gates use crypto.subtle (Web Crypto), which browsers
   // disable on non-secure (http://) pages, so unlocking fails silently over HTTP.
@@ -1639,6 +1640,91 @@
   .sos-mini-row .sp-rock-status { flex: 0 0 auto; }
   .sos-add-inline { display: flex; gap: 7px; margin-top: 10px; }
   .sos-add-inline .sos-input { margin-bottom: 0; }
+  /* ── Conference Field Guide (Staff OS → Field Guide; cf* in the script) ── */
+  #sp-conf { padding-bottom: 40px; }
+  .cf-wrap { max-width: 860px; margin: 0 auto; }
+  .cf-views { display: flex; gap: 6px; margin-bottom: 10px; }
+  .cf-views button { font: 700 14px 'Montserrat', sans-serif; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 1px solid var(--sp-border); background: var(--sp-card-bg); color: var(--sp-muted); cursor: pointer; }
+  .cf-views button.on { background: var(--sp-gold); border-color: var(--sp-gold); color: #1a1407; }
+  .cf-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; margin-bottom: 10px; background: var(--sp-parchment); }
+  .cf-state { font-size: 13px; font-weight: 600; color: var(--sp-muted); min-width: 0; }
+  .cf-state.saved::before { content: '✓ '; color: var(--sp-green, #3a7a4a); }
+  .cf-state.offline, .cf-state.retry { color: var(--sp-yellow, #b87a20); }
+  .cf-bar-r { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; flex: 0 0 auto; }
+  #sp-conf .cf-bar .sos-btn { padding: 9px 14px; font-size: 14px; min-height: 42px; }
+  .cf-hero { background: var(--sp-inkbg, #1a1510); color: var(--sp-onink, #f5f0e8); border-radius: 16px; padding: 26px 26px 22px; border-top: 4px solid var(--sp-gold); margin-bottom: 24px; }
+  .cf-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sp-gold); }
+  .cf-title { font: 800 28px/1.15 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: -.3px; margin: 8px 0 10px; color: inherit; }
+  .cf-tagline { font-size: 16px; line-height: 1.5; opacity: .92; margin-bottom: 14px; }
+  .cf-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; font-weight: 600; color: var(--sp-gold-light, #e8c97a); }
+  .cf-for { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.12); font-size: 14px; opacity: .85; }
+  .cf-sec { margin: 0 0 28px; scroll-margin-top: 70px; }
+  .cf-h { font: 800 13px 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; color: var(--sp-gold); margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+  .cf-h::after { content: ''; flex: 1; height: 1px; background: var(--sp-border); }
+  .cf-vision { border-left: 4px solid var(--sp-gold); padding: 2px 0 2px 18px; }
+  .cf-vision p { margin: 0 0 12px; font-size: 16px; line-height: 1.65; color: var(--sp-ink); }
+  .cf-vision p:last-child { margin-bottom: 0; }
+  .cf-card { background: var(--sp-card-bg); border: 1px solid var(--sp-border); border-radius: 14px; padding: 16px; margin-bottom: 12px; min-width: 0; }
+  .cf-lf-grid, .cf-bo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cf-lf-grid .cf-card, .cf-bo-grid .cf-card { margin-bottom: 0; }
+  .cf-lf-top, .cf-bo-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .cf-num { font: 800 22px/1 'Montserrat', sans-serif; color: var(--sp-gold); }
+  .cf-lf-l, .cf-bo-l { font: 800 13px 'Montserrat', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-ink); flex: 1; }
+  .cf-q { font-size: 15.5px; line-height: 1.45; color: var(--sp-ink); margin-bottom: 10px; font-weight: 600; }
+  .cf-sec > .cf-q { font-weight: 500; color: var(--sp-muted); font-style: italic; }
+  .cf-lbl { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--sp-muted); margin-bottom: 6px; }
+  .cf-lbl-gap { margin-top: 18px; }
+  #sp-conf .sos-input { margin-bottom: 8px; font-size: 16px; }
+  #sp-conf .cf-ta { resize: none; overflow: hidden; min-height: 80px; line-height: 1.5; display: block; }
+  #sp-conf .cf-sel { min-height: 46px; }
+  .cf-chip { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: rgba(201,150,58,.16); color: var(--sp-gold); white-space: nowrap; }
+  .cf-chip.ok { background: rgba(90,160,100,.16); color: var(--sp-green, #3a7a4a); }
+  .cf-sub, .cf-hint { font-size: 13.5px; color: var(--sp-muted); font-style: italic; margin-bottom: 8px; }
+  .cf-note { font-size: 14px; color: var(--sp-muted); margin: 0 0 12px; }
+  .cf-warn { color: var(--sp-yellow, #b87a20); }
+  .cf-more { margin-top: 10px; }
+  .cf-more > summary { cursor: pointer; font-weight: 700; font-size: 14px; color: var(--sp-gold); padding: 10px 0; min-height: 44px; box-sizing: border-box; list-style: none; display: flex; align-items: center; gap: 8px; }
+  .cf-more > summary::-webkit-details-marker { display: none; }
+  .cf-more > summary::before { content: '▸'; transition: transform .15s; }
+  .cf-more[open] > summary::before { transform: rotate(90deg); }
+  .cf-tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--sp-border); border-radius: 12px; }
+  .cf-tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .cf-tbl th { text-align: left; padding: 9px 12px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sp-gold); background: var(--sp-inkbg, #1a1510); white-space: nowrap; }
+  .cf-tbl td { padding: 9px 12px; border-top: 1px solid var(--sp-border); vertical-align: top; color: var(--sp-ink); }
+  .cf-tbl tr.me td { background: rgba(201,150,58,.12); }
+  .cf-tbl-n { display: block; font-size: 12px; color: var(--sp-muted); }
+  .cf-item-top { display: flex; gap: 8px; align-items: flex-start; }
+  .cf-item-top .cf-sel { flex: 1 1 auto; min-width: 0; }
+  .cf-x { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--sp-border); background: none; color: var(--sp-muted); font-size: 22px; line-height: 1; cursor: pointer; }
+  .cf-x:hover { color: var(--sp-rust, #a84c2f); border-color: currentColor; }
+  #sp-conf .cf-add { min-height: 44px; }
+  .cf-bt { font-weight: 800; font-size: 16px; color: var(--sp-ink); margin-bottom: 2px; }
+  .cf-row { display: flex; gap: 8px; align-items: flex-start; }
+  .cf-row .sos-input { flex: 1 1 0; min-width: 0; }
+  .cf-person { display: flex; gap: 8px; align-items: flex-start; }
+  .cf-pgrid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; min-width: 0; }
+  .cf-foot { text-align: center; font-style: italic; color: var(--sp-muted); font-size: 15px; padding: 18px 0 8px; border-top: 1px solid var(--sp-border); }
+  .cf-roll-f { display: flex; gap: 8px; flex-wrap: wrap; }
+  #sp-conf .cf-roll-f .sos-input { flex: 1 1 200px; width: auto; }
+  .cf-ans { display: grid; grid-template-columns: 150px 1fr auto; gap: 8px 14px; align-items: start; padding: 12px 0; border-top: 1px solid var(--sp-border); }
+  .cf-ans-who { font-weight: 800; font-size: 14px; color: var(--sp-ink); }
+  .cf-ans-t { white-space: pre-wrap; font-size: 15px; line-height: 1.5; color: var(--sp-ink); overflow-wrap: anywhere; }
+  #sp-conf .cf-rock { padding: 7px 12px; font-size: 13px; white-space: nowrap; }
+  .cf-empty { color: var(--sp-muted); font-style: italic; font-size: 14px; }
+  #staffModal .sp-head .sp-nav-tab.sp-nav-conf:not(.sp-active) { color: var(--sp-gold-light, #e8c97a); }
+  @media (max-width: 640px) {
+    .cf-lf-grid, .cf-bo-grid { grid-template-columns: 1fr; }
+    .cf-hero { padding: 20px 18px 18px; border-radius: 14px; }
+    .cf-title { font-size: 22px; }
+    .cf-card { padding: 14px; }
+    .cf-row { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 0 8px; }
+    .cf-row .cf-x { grid-column: 2; grid-row: 1; }
+    .cf-row .sos-input { grid-column: 1; }
+    .cf-pgrid { grid-template-columns: 1fr; }
+    .cf-ans { grid-template-columns: minmax(0, 1fr) auto; }
+    .cf-ans-who { grid-column: 1 / -1; margin-bottom: -4px; }
+    .cf-bar { flex-wrap: wrap; }
+  }
   .sos-goal { background: #fbf9f4; border: 1px solid var(--sp-border,#d8cdb8); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
   .sos-goal-top { display: flex; align-items: baseline; gap: 8px; }
   .sos-goal-title { flex: 1 1 auto; font-size: 16px; font-weight: 700; color: var(--sp-ink,#1a1510); }
@@ -4249,6 +4335,9 @@
 
         <!-- MY SNAPSHOT (per-staff-member workspace, rendered by sosRender) -->
         <div class="sp-section sp-active" id="sp-mine"></div>
+
+        <!-- CONFERENCE FIELD GUIDE (content in conferences.js, rendered by cfInit) -->
+        <div class="sp-section" id="sp-conf"></div>
 
         <!-- TEAM SNAPSHOT (rendered by staffRenderSnapshot) -->
         <div class="sp-section" id="sp-snapshot"></div>
@@ -12068,6 +12157,7 @@ const SD_BLOCKED_RE = /sunday gatherings?/i;
 // The router only calls the same open-functions the buttons call, so every password
 // gate (Staff OS, Pastors, Members inline reveal) still fires exactly as before.
 let _routingLock = false;
+var _cfRouteWanted = false;   // opened at /fieldguide → land on the Field Guide after sign-in
 const NAV_ROUTES = ['today', 'church', 'sunday', 'serve', 'staff', 'calendar', 'care', 'groups', 'leaders', 'metrics', 'pastors', 'teams'];
 // Old section names keep working (bookmarks, checklist emails): metrics→church, pastors→care, teams→serve.
 const NAV_ALIAS = { metrics: 'church', pastors: 'care', teams: 'serve' };
@@ -12095,6 +12185,7 @@ function navCurrentRoute() {
     if (NAV_ALIAS[seg]) { try { history.replaceState(null, '', navPathFor(seg) + location.search); } catch (e) {} }   // /metrics → /church etc.
     return { tab: navAlias(seg), date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '' };
   }
+  if (seg === 'fieldguide' || seg === 'field-guide') { _cfRouteWanted = true; return { tab: 'staff', date: '' }; }   // lssouthreno.com/fieldguide → Staff OS › Field Guide
   try { history.replaceState(null, '', '/'); } catch (e) {}   // unknown path → front door
   return { tab: staffIsUnlocked() ? 'today' : 'church', date: '' };
 }
@@ -12104,6 +12195,7 @@ function applyHashRoute() {
   try {
     if (r.tab === 'sunday' && r.date) _sundayPendingDate = r.date;
     navGo(r.tab);
+    if (_cfRouteWanted && r.tab === 'staff') { _spCurSection = 'sp-conf'; if (staffIsUnlocked()) staffNavGo('sp-conf'); }
   } finally { _routingLock = false; }
 }
 window.addEventListener('DOMContentLoaded', applyHashRoute);
@@ -12862,7 +12954,7 @@ async function staffDoUnlock() {
     errEl.style.display = 'none';
     if (!staffRendered) staffLoadData();
   };
-  const goMine = () => staffShowSection('sp-mine');
+  const goMine = () => staffShowSection(_cfRouteWanted ? 'sp-conf' : 'sp-mine');
   staffDoUnlock._busy = true; if (btn) { btn.disabled = true; btn.textContent = 'Signing in…'; }
   say('Signing you in…');
   const r = await authTry(pw, { onSlow: attempt => say(attempt ? 'Trying once more…' : 'Still working — the staff server is a little slow right now…') });
@@ -13532,6 +13624,7 @@ function staffShowSection(id, tabEl) {
   if (typeof staffNavMark === 'function') staffNavMark(id);
   else if (tabEl) tabEl.classList.add('sp-active');
   if (id === 'sp-mine' && typeof cpLayout === 'function') setTimeout(cpLayout, 0);   // critical-path diagram needs a visible width
+  if (id === 'sp-conf' && typeof cfInit === 'function') cfInit();
 }
 
 function staffCopyScript() {
@@ -14746,6 +14839,482 @@ function stOpenFromSync(id) {
   setTimeout(() => { const c = document.getElementById('st-' + id); if (c) c.scrollIntoView({ block: 'center' }); }, 60);
 }
 
+// ── Conference Field Guide (Staff OS → Field Guide) ─────────────────────────
+// The printed conference notebook, on everyone's phone. Content lives in conferences.js
+// (CONFERENCES; the entry with active:true shows). Each person's answers are StaffPlans rows
+// (type 'conf', title = conference id, metric = field key, detail = the text or item JSON),
+// one row per field / repeatable item, saved through the same Staff OS web app as tasks and
+// plans — so they follow the person to any device. Every keystroke lands in a local draft
+// first, so a dropped conference Wi-Fi never loses text; unsaved fields retry until saved.
+// Leadership (Staff OS admins) also get a Team rollup with Send to Rocks + CSV/print.
+const CF_TYPE = 'conf';
+let _cf = { who: '', confId: '', vals: {}, ids: {}, dirty: {}, rid: {}, virt: {}, loaded: false, saving: false, again: false,
+            state: 'idle', timer: 0, retry: 0, view: 'mine', roll: null, fWho: '', fField: '' };
+function cfConf() { try { return Object.values(CONFERENCES).find(c => c.active) || null; } catch (e) { return null; } }
+function cfWho() { if (_sos.me) return _sos.me; try { return localStorage.getItem(SOS_ME_KEY) || ''; } catch (e) { return ''; } }
+function cfRoster() {
+  if (_sos.roster.length) return _sos.roster;
+  const c = cfWho() ? sosLoadCache(cfWho()) : null; return (c && c.roster) || [];
+}
+function cfIsLeader() {
+  if (_sos.me) return !!_sos.isAdmin;
+  const r = cfRoster().find(p => p.name === cfWho()); return !!(r && r.isAdmin);
+}
+function cfJsonKey(k) { return /^(breakouts|sentToRocks)$|^(session|invite|people)\./.test(k); }
+function cfSer(k, v) { return cfJsonKey(k) ? JSON.stringify(v) : String(v == null ? '' : v); }
+function cfParse(k, s) { if (!cfJsonKey(k)) return String(s == null ? '' : s); try { return JSON.parse(s); } catch (e) { return k === 'sentToRocks' ? [] : {}; } }
+function cfNewId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function cfDraftKey() { return 'lssr_cf_' + _cf.confId + '_' + _cf.who; }
+function cfSaveDraft() { try { localStorage.setItem(cfDraftKey(), JSON.stringify({ vals: _cf.vals, ids: _cf.ids, dirty: _cf.dirty, rid: _cf.rid, ts: Date.now() })); } catch (e) {} }
+function cfLoadDraft() { try { return JSON.parse(localStorage.getItem(cfDraftKey()) || 'null'); } catch (e) { return null; } }
+// Newest row per field key for one person + conference.
+function cfRowsFrom(plans, confId) {
+  const out = {};
+  (plans || []).forEach(p => {
+    if (p.type !== CF_TYPE || String(p.title) !== confId || !p.metric) return;
+    const k = String(p.metric), cur = out[k];
+    if (!cur || (Number(p.updatedAt) || 0) > (Number(cur.updatedAt) || 0)) out[k] = p;
+  });
+  return out;
+}
+function cfSuggestion(conf, who) {
+  const role = (typeof CONFERENCE_STAFF_ROLES !== 'undefined' && CONFERENCE_STAFF_ROLES[who]) || '';
+  const s = role && conf.suggestedBreakouts[role];
+  return s ? Object.assign({ role: role }, s) : null;
+}
+// Breakouts start on the person's suggestion. Saved once we know the server has none.
+function cfEnsureBreakouts(conf) {
+  if (_cf.vals.breakouts && typeof _cf.vals.breakouts === 'object') return;
+  const s = cfSuggestion(conf, _cf.who), b = {};
+  conf.breakoutSlots.forEach(sl => b[sl.id] = (s && s[sl.id]) || '');
+  _cf.vals.breakouts = b;
+  if (s && _cf.loaded) { _cf.dirty.breakouts = 1; cfSaveDraft(); }
+}
+
+function cfInit(force) {
+  const host = document.getElementById('sp-conf'); if (!host) return;
+  const conf = cfConf();
+  if (!conf) { host.innerHTML = '<div class="sos-loading">No conference is active right now.</div>'; return; }
+  const who = cfWho();
+  if (!who) {
+    _cf.who = ''; host.dataset.cf = '';
+    host.innerHTML = '<div class="sos-signin"><div class="sos-signin-box">' +
+      '<div class="sos-signin-t">Sign in to your Field Guide</div>' +
+      '<div class="sos-signin-s">Your notes save to your own staff workspace. Sign in on <b>My Snapshot</b> with your PIN (the last 4 digits of your phone), then come back here.</div>' +
+      '<button class="sos-btn hi" onclick="staffNavGo(\'sp-mine\')">Go to sign-in →</button></div></div>';
+    return;
+  }
+  // Already showing this person's guide → leave it alone (never disturb someone mid-typing).
+  if (!force && _cf.who === who && _cf.confId === conf.id && host.dataset.cf === who) return;
+  if (_cf.who && Object.keys(_cf.dirty).length) cfSaveDraft();
+  Object.assign(_cf, { who: who, confId: conf.id, vals: {}, ids: {}, dirty: {}, rid: {}, virt: {}, loaded: false, saving: false, again: false, roll: null, view: 'mine' });
+  const d = cfLoadDraft();
+  if (d) { _cf.vals = d.vals || {}; _cf.ids = d.ids || {}; _cf.dirty = d.dirty || {}; _cf.rid = d.rid || {}; }
+  cfEnsureBreakouts(conf);
+  host.dataset.cf = who;
+  _cf.state = 'loading';
+  cfRender();
+  cfLoad();
+}
+function cfLoad() {
+  const who = _cf.who, confId = _cf.confId;
+  return sosApiGet('action=sos_data&who=' + encodeURIComponent(who)).then(res => {
+    if (_cf.who !== who || _cf.confId !== confId) return;
+    if (!res || !res.ok) throw new Error('load');
+    if (res.roster && res.roster.length && !_sos.roster.length) _sos.roster = res.roster;
+    const rows = cfRowsFrom(res.plans, confId);
+    // A field we'd saved before that's gone from the server was removed on another device.
+    Object.keys(_cf.ids).forEach(k => { if (!rows[k] && !_cf.dirty[k]) { delete _cf.ids[k]; delete _cf.vals[k]; } });
+    Object.keys(rows).forEach(k => { _cf.ids[k] = rows[k].id; if (!_cf.dirty[k]) _cf.vals[k] = cfParse(k, rows[k].detail); });
+    if (!rows.breakouts && !_cf.dirty.breakouts) delete _cf.vals.breakouts;   // first visit → save the suggestion
+    _cf.loaded = true;
+    cfEnsureBreakouts(cfConf());
+    cfSaveDraft();
+    _cf.state = Object.keys(_cf.dirty).length ? 'saving' : 'saved';
+    cfRender(true);
+    if (Object.keys(_cf.dirty).length) cfSchedule(200);
+  }).catch(() => { if (_cf.who !== who) return; cfSetState(navigator.onLine === false ? 'offline' : 'retry'); cfRetryLater(); });
+}
+
+// ── Saving ───────────────────────────────────────────────────────────────────
+function cfSet(k, v) {
+  _cf.vals[k] = v; _cf.dirty[k] = 1; cfSaveDraft();
+  cfSetState('saving'); cfSchedule(1000);
+}
+function cfSchedule(ms) { clearTimeout(_cf.timer); _cf.timer = setTimeout(cfFlush, ms); }
+function cfRetryLater() { clearTimeout(_cf.retry); _cf.retry = setTimeout(() => { if (_cf.who) (_cf.loaded ? cfFlush() : cfLoad()); }, 15000); }
+async function cfFlush() {
+  clearTimeout(_cf.timer);
+  if (!_cf.who) return;
+  if (!_cf.loaded) { cfLoad(); return; }              // need the server's row ids first (no duplicate rows)
+  if (_cf.saving) { _cf.again = true; return; }
+  const keys = Object.keys(_cf.dirty);
+  if (!keys.length) { cfSetState('saved'); return; }
+  _cf.saving = true; _cf.again = false; cfSetState('saving');
+  const who = _cf.who, confId = _cf.confId;
+  let failed = false;
+  for (const k of keys) {
+    if (_cf.who !== who) break;
+    if (!_cf.dirty[k]) continue;
+    const v = _cf.vals[k], id = _cf.ids[k];
+    try {
+      if (v === null || v === undefined) {                // removed item
+        if (id) {
+          const r = await sosApiPost({ action: 'sos_plan_delete', id: id });
+          if (r && r.ok === false && !/not found/i.test(r.error || '')) throw new Error(r.error);
+        }
+        if (_cf.vals[k] == null) { delete _cf.vals[k]; delete _cf.ids[k]; delete _cf.dirty[k]; }
+        cfSaveDraft(); continue;
+      }
+      const snap = cfSer(k, v);
+      if (id) {
+        const r = await sosApiPost({ action: 'sos_plan_update', id: id, detail: snap });
+        if (r && r.ok === false) {
+          if (/not found/i.test(r.error || '')) { delete _cf.ids[k]; _cf.again = true; cfSaveDraft(); continue; }   // row gone → add it again
+          throw new Error(r.error);
+        }
+      } else {
+        // A stable request id per field: if the reply was lost, the retry gets the same row back.
+        const rid = _cf.rid[k] || (_cf.rid[k] = 'cf' + cfNewId());
+        const r = await sosApiPost({ action: 'sos_plan_add', rid: rid, owner: who, type: CF_TYPE, title: confId, metric: k, detail: snap });
+        if (!r || r.ok === false || !r.id) throw new Error((r && r.error) || 'add');
+        if (_cf.who !== who) break;
+        _cf.ids[k] = r.id; delete _cf.rid[k];
+      }
+      if (_cf.vals[k] != null && cfSer(k, _cf.vals[k]) === snap) delete _cf.dirty[k];   // typed more meanwhile → stays dirty
+      cfSaveDraft();
+    } catch (e) { failed = true; break; }
+  }
+  _cf.saving = false;
+  if (_cf.who !== who) return;
+  cfSaveDraft();
+  if (failed) { cfSetState(navigator.onLine === false ? 'offline' : 'retry'); cfRetryLater(); return; }
+  if (_cf.again || Object.keys(_cf.dirty).length) { _cf.again = false; cfSchedule(300); return; }
+  cfSetState('saved');
+}
+window.addEventListener('online', () => { if (_cf.who) (_cf.loaded ? cfFlush() : cfLoad()); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && _cf.who && Object.keys(_cf.dirty).length) cfFlush(); });
+function cfSetState(s) {
+  _cf.state = s;
+  const el = document.getElementById('cfState'); if (!el) return;
+  const L = { loading: 'Loading your notes…', saving: 'Saving…', saved: 'Saved', offline: 'Offline — kept on this device. Will sync when you’re back online.', retry: 'Can’t reach the server — kept on this device, retrying…', idle: '' };
+  el.textContent = L[s] || '';
+  el.className = 'cf-state ' + s;
+}
+
+// ── Editing ──────────────────────────────────────────────────────────────────
+function cfGrow(el) { if (!el || !el.scrollHeight) return; el.style.height = 'auto'; el.style.height = (el.scrollHeight + 2) + 'px'; }
+function cfIn(el) {
+  const k = el.dataset.k, f = el.dataset.f;
+  if (el.tagName === 'TEXTAREA') cfGrow(el);
+  if (!f) { cfSet(k, el.value); return; }
+  const cur = Object.assign({}, (_cf.vals[k] && typeof _cf.vals[k] === 'object') ? _cf.vals[k] : {});
+  if (!cur.at && k !== 'breakouts') cur.at = Date.now();
+  if (k.indexOf('session.') === 0 && !cur.session) cur.session = (cfConf().mainSessions[0] || 'Other');
+  cur[f] = el.value;
+  cfSet(k, cur);
+}
+function cfPick(el) { cfIn(el); cfRender(true); }   // selects: re-render (Suggested tag, session lists)
+function cfBlur() { if (Object.keys(_cf.dirty).length) cfSchedule(50); }
+function cfItems(kind) {
+  const out = Object.keys(_cf.vals).filter(k => k.indexOf(kind + '.') === 0 && _cf.vals[k] && typeof _cf.vals[k] === 'object')
+    .map(k => ({ k: k, v: _cf.vals[k] })).sort((a, b) => (a.v.at || 0) - (b.v.at || 0));
+  if (!out.length) out.push({ k: kind + '.' + (_cf.virt[kind] || (_cf.virt[kind] = cfNewId())), v: {}, blank: true });   // an empty row to start typing in
+  return out;
+}
+function cfAdd(kind) {
+  const conf = cfConf(), k = kind + '.' + cfNewId(), v = { at: Date.now() };
+  if (kind === 'session') {
+    // keep a blank starter row as a real row so it doesn't vanish when another is added
+    cfItems('session').filter(i => i.blank).forEach(i => { _cf.vals[i.k] = { at: Date.now() - 1, session: conf.mainSessions[0] || 'Other' }; _cf.dirty[i.k] = 1; });
+    const used = cfItems('session').map(i => i.v.session);
+    v.session = cfSessionOptions(conf).find(s => s !== 'Other' && used.indexOf(s) < 0) || 'Other';
+    _cf.vals[k] = v; _cf.dirty[k] = 1; cfSaveDraft(); cfSchedule(1000);
+  } else {
+    cfItems(kind).filter(i => i.blank).forEach(i => { _cf.vals[i.k] = { at: Date.now() - 1 }; });
+    _cf.vals[k] = v;   // saved once something is typed in it
+  }
+  cfRender();
+  const el = document.querySelector('#sp-conf [data-k="' + k + '"]' + (kind === 'session' ? '[data-f="notes"]' : ''));
+  if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+}
+function cfRemove(k) {
+  const v = _cf.vals[k];
+  const has = v && Object.keys(v).some(f => f !== 'at' && f !== 'session' && String(v[f] || '').trim());
+  if (has && !confirm('Remove this entry and what you wrote in it?')) return;
+  if (_cf.ids[k]) cfSet(k, null);
+  else { delete _cf.vals[k]; delete _cf.dirty[k]; cfSaveDraft(); }
+  cfRender();
+}
+function cfSessionOptions(conf) {
+  const b = _cf.vals.breakouts || {};
+  const picks = conf.breakoutSlots.map(sl => b[sl.id]).filter(Boolean);
+  return conf.mainSessions.concat(picks.filter((p, i) => picks.indexOf(p) === i), ['Other']);
+}
+function cfSetView(v) { _cf.view = v; cfRender(); if (v === 'team' && (!_cf.roll || _cf.roll.error)) cfRollLoad(); }
+
+// ── Rendering ────────────────────────────────────────────────────────────────
+function cfRender(keepFocus) {
+  const host = document.getElementById('sp-conf'); const conf = cfConf(); if (!host || !conf || !_cf.who) return;
+  let fk = null; const a = document.activeElement;
+  if (keepFocus && a && host.contains(a) && a.dataset && a.dataset.k) fk = { k: a.dataset.k, f: a.dataset.f || '', s: a.selectionStart, e: a.selectionEnd };
+  host.innerHTML = (cfIsLeader() && _cf.view === 'team') ? cfRollHtml(conf) : cfHtml(conf);
+  host.querySelectorAll('textarea.cf-ta').forEach(cfGrow);
+  if (fk) {
+    const el = host.querySelector('[data-k="' + fk.k + '"]' + (fk.f ? '[data-f="' + fk.f + '"]' : ':not([data-f])'));
+    if (el) { el.focus({ preventScroll: true }); try { if (fk.s != null) el.setSelectionRange(fk.s, fk.e); } catch (e) {} }
+  }
+  cfSetState(_cf.state);
+}
+function cfVal(k, f) { const v = _cf.vals[k]; if (v == null) return ''; return f ? String((v && v[f]) || '') : String(v); }
+function cfTa(k, f, ph, rows) {
+  return '<textarea class="sos-input cf-ta" rows="' + (rows || 3) + '" data-k="' + k + '"' + (f ? ' data-f="' + f + '"' : '') +
+    ' placeholder="' + escapeHtml(ph || '') + '" oninput="cfIn(this)">' + escapeHtml(cfVal(k, f)) + '</textarea>';
+}
+function cfInp(k, f, ph, type) {
+  return '<input class="sos-input cf-in" type="' + (type || 'text') + '" data-k="' + k + '" data-f="' + f + '" placeholder="' + escapeHtml(ph) +
+    '" value="' + escapeHtml(cfVal(k, f)) + '" oninput="cfIn(this)">';
+}
+function cfTopbar(right) {
+  return '<div class="cf-bar"><span id="cfState" class="cf-state"></span><span class="cf-bar-r">' + right + '</span></div>';
+}
+function cfViewTabs() {
+  if (!cfIsLeader()) return '';
+  return '<div class="cf-views" role="tablist">' +
+    '<button role="tab" class="' + (_cf.view === 'mine' ? 'on' : '') + '" onclick="cfSetView(\'mine\')">My notes</button>' +
+    '<button role="tab" class="' + (_cf.view === 'team' ? 'on' : '') + '" onclick="cfSetView(\'team\')">Team rollup</button></div>';
+}
+function cfHero(conf, sub) {
+  const E = escapeHtml;
+  return '<div class="cf-hero"><div class="cf-eyebrow">' + E(conf.eyebrow) + '</div>' +
+    '<h2 class="cf-title">' + E(conf.title) + '</h2>' +
+    '<div class="cf-tagline">' + E(conf.tagline) + '</div>' +
+    '<div class="cf-meta"><span>' + E(conf.dates) + '</span><span>' + E(conf.location) + '</span></div>' +
+    (sub ? '<div class="cf-for">' + sub + '</div>' : '') + '</div>';
+}
+function cfSuggestTable(conf, mineRole) {
+  const E = escapeHtml, names = {};
+  if (typeof CONFERENCE_STAFF_ROLES !== 'undefined') Object.keys(CONFERENCE_STAFF_ROLES).forEach(n => { const r = CONFERENCE_STAFF_ROLES[n]; (names[r] = names[r] || []).push(n.split(' ')[0]); });
+  return '<div class="cf-tbl-wrap"><table class="cf-tbl"><thead><tr><th>Role</th>' + conf.breakoutSlots.map(s => '<th>' + E(s.label) + '</th>').join('') + '</tr></thead><tbody>' +
+    Object.keys(conf.suggestedBreakouts).map(r => '<tr' + (r === mineRole ? ' class="me"' : '') + '><td><b>' + E(r) + '</b>' + (names[r] ? '<span class="cf-tbl-n">' + E(names[r].join(', ')) + '</span>' : '') + '</td>' +
+      conf.breakoutSlots.map(s => '<td>' + E(conf.suggestedBreakouts[r][s.id] || '') + '</td>').join('') + '</tr>').join('') +
+    '</tbody></table></div>';
+}
+function cfHtml(conf) {
+  const E = escapeHtml, sug = cfSuggestion(conf, _cf.who), b = _cf.vals.breakouts || {};
+  let h = '<div class="cf-wrap">' + cfViewTabs() +
+    cfTopbar('<button class="sos-btn cf-print" onclick="cfPrintMine()">Print / PDF</button>') +
+    cfHero(conf, 'Notes for <b>' + E(_cf.who) + '</b>');
+
+  h += '<section class="cf-sec"><div class="cf-h">Why we’re going</div><div class="cf-vision">' +
+    conf.vision.map(p => '<p>' + E(p) + '</p>').join('') + '</div></section>';
+
+  h += '<section class="cf-sec"><div class="cf-h">Listen for</div><div class="cf-lf-grid">' +
+    conf.listenFor.map((l, i) => '<div class="cf-card cf-lf"><div class="cf-lf-top"><span class="cf-num">' + String(i + 1).padStart(2, '0') + '</span><span class="cf-lf-l">' + E(l.label) + '</span></div>' +
+      '<div class="cf-q">' + E(l.question) + '</div><label class="cf-lbl">What I heard</label>' + cfTa('listen.' + l.id, '', '', 3) + '</div>').join('') +
+    '</div></section>';
+
+  h += '<section class="cf-sec"><div class="cf-h">My breakouts</div>' +
+    (sug ? '' : '<div class="cf-note">Pick the breakout you’re heading to in each slot — the team’s suggestions are below.</div>') +
+    '<div class="cf-bo-grid">' + conf.breakoutSlots.map(sl => {
+      const cur = b[sl.id] || '', opts = (conf.breakoutOptions[sl.id] || []).slice();
+      if (cur && opts.indexOf(cur) < 0) opts.push(cur);
+      const isSug = sug && cur && cur === sug[sl.id];
+      return '<div class="cf-card cf-bo"><div class="cf-bo-top"><span class="cf-bo-l">' + E(sl.label) + '</span>' + (isSug ? '<span class="cf-chip">Suggested</span>' : '') + '</div>' +
+        '<select class="sos-input cf-sel" data-k="breakouts" data-f="' + sl.id + '" onchange="cfPick(this)">' +
+        '<option value="">— Pick a session —</option>' + opts.map(o => '<option' + (o === cur ? ' selected' : '') + '>' + E(o) + '</option>').join('') + '</select>' +
+        (sug && !isSug && sug[sl.id] ? '<div class="cf-sub">Suggested for you: ' + E(sug[sl.id]) + '</div>' : '') + '</div>';
+    }).join('') + '</div>' +
+    '<details class="cf-more"' + (sug ? '' : ' open') + '><summary>See the whole team’s suggestions</summary>' + cfSuggestTable(conf, sug && sug.role) + '</details></section>';
+
+  const sOpts = cfSessionOptions(conf);
+  h += '<section class="cf-sec"><div class="cf-h">Session notes</div>' +
+    cfItems('session').map(it => {
+      const cur = it.v.session || conf.mainSessions[0] || 'Other', opts = sOpts.slice();
+      if (opts.indexOf(cur) < 0) opts.splice(opts.length - 1, 0, cur);
+      return '<div class="cf-card cf-item"><div class="cf-item-top">' +
+        '<select class="sos-input cf-sel" data-k="' + it.k + '" data-f="session" onchange="cfPick(this)">' + opts.map(o => '<option' + (o === cur ? ' selected' : '') + '>' + E(o) + '</option>').join('') + '</select>' +
+        '<button class="cf-x" title="Remove" aria-label="Remove this session" onclick="cfRemove(\'' + it.k + '\')">×</button></div>' +
+        (cur === 'Other' ? cfInp(it.k, 'other', 'Which session?') : '') +
+        cfTa(it.k, 'notes', 'Notes…', 4) + '</div>';
+    }).join('') +
+    '<button class="sos-btn cf-add" onclick="cfAdd(\'session\')">+ Add session</button>' +
+    '<label class="cf-lbl cf-lbl-gap">Other notes</label>' + cfTa('notes', '', 'Anything else worth remembering…', 3) + '</section>';
+
+  const prompt = (k, t, hint) => '<div class="cf-card cf-bring"><div class="cf-bt">' + E(t) + '</div><div class="cf-hint">' + E(hint) + '</div>' + cfTa(k, '', '', 2) + '</div>';
+  h += '<section class="cf-sec"><div class="cf-h">Bring it home</div>' +
+    prompt('startDoing', 'One thing to start doing', 'Something we saw that fits who we’re becoming') +
+    prompt('stopDoing', 'One thing to stop doing', 'Something we’ve outgrown') +
+    '<div class="cf-card cf-bring"><div class="cf-bt">People to invite up or delegate to</div><div class="cf-hint">Who could carry more — and what would you hand them?</div>' +
+      cfItems('invite').map(it => '<div class="cf-row">' + cfInp(it.k, 'name', 'Name') + cfInp(it.k, 'note', 'What to invite them into') +
+        '<button class="cf-x" title="Remove" aria-label="Remove" onclick="cfRemove(\'' + it.k + '\')">×</button></div>').join('') +
+      '<button class="sos-btn cf-add" onclick="cfAdd(\'invite\')">+ Add person</button></div>' +
+    prompt('questionToChase', 'A question to keep chasing', 'What we still need to figure out') + '</section>';
+
+  h += '<section class="cf-sec"><div class="cf-h">People I met</div>' +
+    cfItems('people').map(it => '<div class="cf-card cf-item cf-person"><div class="cf-pgrid">' +
+      cfInp(it.k, 'name', 'Name') + cfInp(it.k, 'church', 'Church') + cfInp(it.k, 'role', 'Role') + cfInp(it.k, 'contact', 'Email / phone') + '</div>' +
+      '<button class="cf-x" title="Remove" aria-label="Remove" onclick="cfRemove(\'' + it.k + '\')">×</button></div>').join('') +
+    '<button class="sos-btn cf-add" onclick="cfAdd(\'people\')">+ Add someone</button></section>';
+
+  h += '<div class="cf-foot">' + E(conf.debriefNote) + '</div></div>';
+  return h;
+}
+
+// ── Print (one clean column) ─────────────────────────────────────────────────
+function cfPrintDoc(title, body) {
+  const w = window.open('', '_blank');
+  if (!w) { sosToast('Allow pop-ups to print'); return; }
+  w.document.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escapeHtml(title) + '</title>' +
+    '<style>body{font-family:Montserrat,Helvetica,Arial,sans-serif;color:#1a1510;max-width:720px;margin:28px auto;padding:0 18px;line-height:1.5;font-size:14px}' +
+    '.eb{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a7b2c;font-weight:700}h1{font-size:24px;margin:4px 0 2px}.meta{color:#666;font-size:12px;margin-bottom:18px}' +
+    'h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border-bottom:2px solid #c9963a;padding-bottom:4px;margin:24px 0 10px}' +
+    'h3{font-size:14px;margin:12px 0 2px}.q{color:#666;font-style:italic;font-size:12.5px;margin-bottom:4px}.a{white-space:pre-wrap;margin:0 0 10px}.who{font-weight:700}.e{color:#aaa}' +
+    '.it{margin:0 0 10px;padding-left:10px;border-left:2px solid #e3d6b8}.foot{margin-top:28px;color:#666;font-style:italic}@media print{body{margin:0 auto}}</style></head><body>' +
+    body + '<script>setTimeout(function(){window.print()},350)<\/script></body></html>');
+  w.document.close();
+}
+function cfPrintMine() {
+  const conf = cfConf(), E = escapeHtml, b = _cf.vals.breakouts || {};
+  const ans = t => t && String(t).trim() ? '<div class="a">' + E(t) + '</div>' : '<div class="a e">—</div>';
+  let h = '<div class="eb">' + E(conf.eyebrow) + '</div><h1>' + E(conf.title) + '</h1><div class="meta">' + E(conf.dates) + ' · ' + E(conf.location) + ' · ' + E(_cf.who) + '</div>';
+  h += '<h2>Listen for</h2>' + conf.listenFor.map((l, i) => '<h3>' + String(i + 1).padStart(2, '0') + ' ' + E(l.label) + '</h3><div class="q">' + E(l.question) + '</div>' + ans(_cf.vals['listen.' + l.id])).join('');
+  h += '<h2>My breakouts</h2>' + conf.breakoutSlots.map(s => '<div class="a"><b>' + E(s.label) + ':</b> ' + E(b[s.id] || '—') + '</div>').join('');
+  const sess = cfItems('session').filter(i => !i.blank);
+  h += '<h2>Session notes</h2>' + (sess.length ? sess.map(i => '<h3>' + E(i.v.session === 'Other' ? (i.v.other || 'Other') : (i.v.session || '')) + '</h3>' + ans(i.v.notes)).join('') : '<div class="a e">—</div>');
+  if (String(_cf.vals.notes || '').trim()) h += '<h3>Other notes</h3>' + ans(_cf.vals.notes);
+  h += '<h2>Bring it home</h2><h3>One thing to start doing</h3>' + ans(_cf.vals.startDoing) + '<h3>One thing to stop doing</h3>' + ans(_cf.vals.stopDoing) +
+    '<h3>People to invite up or delegate to</h3>' + (cfItems('invite').filter(i => !i.blank && (i.v.name || i.v.note)).map(i => '<div class="a"><b>' + E(i.v.name || '') + '</b>' + (i.v.note ? ' — ' + E(i.v.note) : '') + '</div>').join('') || '<div class="a e">—</div>') +
+    '<h3>A question to keep chasing</h3>' + ans(_cf.vals.questionToChase);
+  const ppl = cfItems('people').filter(i => !i.blank && (i.v.name || i.v.church || i.v.contact));
+  h += '<h2>People I met</h2>' + (ppl.length ? ppl.map(i => '<div class="a"><b>' + E(i.v.name || '') + '</b>' + [i.v.church, i.v.role, i.v.contact].filter(Boolean).map(x => ' · ' + E(x)).join('') + '</div>').join('') : '<div class="a e">—</div>');
+  h += '<div class="foot">' + E(conf.debriefNote) + '</div>';
+  cfPrintDoc(conf.title + ' — ' + _cf.who, h);
+}
+
+// ── Team rollup (leadership) ─────────────────────────────────────────────────
+function cfRollFields(conf) {
+  return conf.listenFor.map(l => ({ id: 'listen.' + l.id, label: 'Listen for · ' + l.label, q: l.question, rock: true }))
+    .concat([
+      { id: 'startDoing', label: 'One thing to start doing', q: 'Something we saw that fits who we’re becoming', rock: true },
+      { id: 'stopDoing', label: 'One thing to stop doing', q: 'Something we’ve outgrown', rock: true },
+      { id: 'invite', label: 'People to invite up or delegate to', multi: true, rock: true },
+      { id: 'questionToChase', label: 'A question to keep chasing', q: 'What we still need to figure out', rock: true },
+      { id: 'session', label: 'Session notes', multi: true },
+      { id: 'notes', label: 'Other notes' },
+      { id: 'people', label: 'People they met', multi: true },
+      { id: 'breakouts', label: 'Breakouts' }
+    ]);
+}
+async function cfRollLoad() {
+  const conf = cfConf(); if (!conf) return;
+  const names = cfRoster().map(p => p.name).filter(Boolean);
+  _cf.roll = { loading: true, people: [] }; if (_cf.view === 'team') cfRender();
+  const people = await Promise.all(names.map(name =>
+    sosApiGet('action=sos_data&who=' + encodeURIComponent(name)).then(res => {
+      if (!res || !res.ok) throw new Error('load');
+      const rows = cfRowsFrom(res.plans, conf.id), vals = {}, ids = {};
+      Object.keys(rows).forEach(k => { vals[k] = cfParse(k, rows[k].detail); ids[k] = rows[k].id; });
+      return { name: name, vals: vals, ids: ids };
+    }).catch(() => ({ name: name, vals: {}, ids: {}, failed: true }))));
+  const failed = people.filter(p => p.failed).map(p => p.name);
+  _cf.roll = { loading: false, people: people, failed: failed, ts: Date.now() };
+  if (_cf.view === 'team') cfRender();
+}
+function cfPersonVals(p) { return p.name === _cf.who ? _cf.vals : p.vals; }   // my own answers: freshest copy is local
+// → [{ ref, text }]
+function cfAnswers(f, p) {
+  const v = cfPersonVals(p), out = [];
+  if (f.multi) {
+    Object.keys(v).filter(k => k.indexOf(f.id + '.') === 0 && v[k] && typeof v[k] === 'object').sort((a, b) => (v[a].at || 0) - (v[b].at || 0)).forEach(k => {
+      const it = v[k]; let t = '';
+      if (f.id === 'invite') t = [it.name, it.note].filter(x => String(x || '').trim()).join(' — ');
+      else if (f.id === 'people') t = [it.name, it.church, it.role, it.contact].filter(x => String(x || '').trim()).join(' · ');
+      else if (f.id === 'session') t = String(it.notes || '').trim() ? (it.session === 'Other' ? (it.other || 'Other') : it.session) + ': ' + it.notes : '';
+      if (t.trim()) out.push({ ref: k, text: t });
+    });
+  } else if (f.id === 'breakouts') {
+    const b = v.breakouts || {}, conf = cfConf();
+    const t = conf.breakoutSlots.map(s => b[s.id] ? s.label + ': ' + b[s.id] : '').filter(Boolean).join('  ·  ');
+    if (t) out.push({ ref: 'breakouts', text: t });
+  } else if (String(v[f.id] || '').trim()) out.push({ ref: f.id, text: String(v[f.id]) });
+  return out;
+}
+function cfInRocks(p, ref) { const s = cfPersonVals(p).sentToRocks; return Array.isArray(s) && s.some(x => x.ref === ref); }
+function cfRollHtml(conf) {
+  const E = escapeHtml, R = _cf.roll;
+  const right = '<button class="sos-btn" onclick="cfRollLoad()">Refresh</button><button class="sos-btn" onclick="cfRollCsv()">CSV</button><button class="sos-btn cf-print" onclick="cfRollPrint()">Print</button>';
+  let h = '<div class="cf-wrap">' + cfViewTabs() + cfTopbar(right) + cfHero(conf, 'Team rollup — everyone’s answers, for the debrief');
+  if (!R || R.loading) return h + '<div class="sos-loading">Gathering everyone’s notes…</div></div>';
+  const fields = cfRollFields(conf), people = R.people;
+  const started = people.filter(p => Object.keys(cfPersonVals(p)).some(k => k !== 'breakouts' && k !== 'sentToRocks')).length;
+  h += '<div class="cf-roll-f">' +
+    '<select class="sos-input" onchange="_cf.fWho=this.value;cfRender()"><option value="">Everyone</option>' + people.map(p => '<option' + (p.name === _cf.fWho ? ' selected' : '') + '>' + E(p.name) + '</option>').join('') + '</select>' +
+    '<select class="sos-input" onchange="_cf.fField=this.value;cfRender()"><option value="">All questions</option>' + fields.map(f => '<option value="' + f.id + '"' + (f.id === _cf.fField ? ' selected' : '') + '>' + E(f.label) + '</option>').join('') + '</select>' +
+    '</div><div class="cf-note">' + started + ' of ' + people.length + ' staff have started their notes' +
+    (R.failed && R.failed.length ? ' · <span class="cf-warn">Couldn’t load: ' + E(R.failed.join(', ')) + ' — tap Refresh</span>' : '') + '</div>';
+  fields.filter(f => !_cf.fField || f.id === _cf.fField).forEach(f => {
+    let rows = '';
+    people.filter(p => !_cf.fWho || p.name === _cf.fWho).forEach(p => {
+      cfAnswers(f, p).forEach(a => {
+        const inR = cfInRocks(p, a.ref);
+        rows += '<div class="cf-ans"><div class="cf-ans-who">' + E(p.name) + '</div><div class="cf-ans-t">' + E(a.text) + '</div>' +
+          (f.rock ? (inR ? '<span class="cf-chip ok">In Rocks</span>' : '<button class="sos-btn cf-rock" data-n="' + E(p.name) + '" data-r="' + a.ref + '" onclick="cfSendRock(this.dataset.n,this.dataset.r,this)">Send to Rocks</button>') : '') + '</div>';
+      });
+    });
+    h += '<section class="cf-sec"><div class="cf-h">' + E(f.label) + '</div>' + (f.q ? '<div class="cf-q">' + E(f.q) + '</div>' : '') +
+      (rows || '<div class="cf-empty">No answers yet.</div>') + '</section>';
+  });
+  return h + '<div class="cf-foot">Send to Rocks adds the answer to the team Rocks list (IDS) with the person’s name and “' + E(conf.rockSource || conf.title) + '”.</div></div>';
+}
+function cfSendRock(name, ref, btn) {
+  const conf = cfConf(), p = _cf.roll && _cf.roll.people.find(x => x.name === name); if (!p || cfInRocks(p, ref)) return;
+  const f = cfRollFields(conf).find(x => ref === x.id || ref.indexOf(x.id + '.') === 0);
+  const a = f && cfAnswers(f, p).find(x => x.ref === ref); if (!a) return;
+  let t = a.text.replace(/\s+/g, ' ').trim(); if (t.length > 240) t = t.slice(0, 237).trim() + '…';
+  const rock = t + ' (' + (conf.rockSource || conf.title) + ')';
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+  sosAddRockFor(name, rock, 'med');
+  try { staffRenderRocks(window._staffLastData || {}); staffRenderSnapshot(window._staffLastData || {}); } catch (e) {}
+  sosRefreshIfOpen();
+  const list = (Array.isArray(cfPersonVals(p).sentToRocks) ? cfPersonVals(p).sentToRocks : []).filter(x => x.ref !== ref)
+    .concat([{ ref: ref, rock: rock, at: Date.now(), by: _sos.me || _cf.who }]);
+  if (name === _cf.who) cfSet('sentToRocks', list);
+  else {
+    p.vals.sentToRocks = list;
+    const id = p.ids.sentToRocks, detail = JSON.stringify(list);
+    sosApiPost(id ? { action: 'sos_plan_update', id: id, detail: detail }
+                  : { action: 'sos_plan_add', owner: name, type: CF_TYPE, title: conf.id, metric: 'sentToRocks', detail: detail })
+      .then(r => { if (r && r.id) p.ids.sentToRocks = r.id; if (r && r.ok === false) sosToast('Rock added — couldn’t mark it on ' + name.split(' ')[0] + '’s notes'); })
+      .catch(() => sosToast('Rock added — couldn’t mark it on ' + name.split(' ')[0] + '’s notes'));
+  }
+  cfRender(); sosToast('Sent to Rocks');
+}
+function cfRollRows() {
+  const conf = cfConf(), out = [];
+  cfRollFields(conf).filter(f => !_cf.fField || f.id === _cf.fField).forEach(f =>
+    (_cf.roll ? _cf.roll.people : []).filter(p => !_cf.fWho || p.name === _cf.fWho).forEach(p =>
+      cfAnswers(f, p).forEach(a => out.push({ who: p.name, field: f.label, text: a.text, rocks: cfInRocks(p, a.ref) }))));
+  return out;
+}
+function cfRollCsv() {
+  const conf = cfConf(), q = s => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
+  const csv = [['Person', 'Question', 'Answer', 'In Rocks']].concat(cfRollRows().map(r => [r.who, r.field, r.text, r.rocks ? 'yes' : '']))
+    .map(r => r.map(q).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = conf.id + '-team-notes.csv'; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function cfRollPrint() {
+  const conf = cfConf(), E = escapeHtml, rows = cfRollRows();
+  let h = '<div class="eb">' + E(conf.eyebrow) + ' · Team rollup</div><h1>' + E(conf.title) + '</h1><div class="meta">' + E(conf.dates) + ' · ' + E(conf.location) + '</div>', last = '';
+  rows.forEach(r => { if (r.field !== last) { h += '<h2>' + E(r.field) + '</h2>'; last = r.field; } h += '<div class="it"><span class="who">' + E(r.who) + '</span>' + (r.rocks ? ' <i>(in Rocks)</i>' : '') + '<div class="a">' + E(r.text) + '</div></div>'; });
+  if (!rows.length) h += '<p class="e">No answers yet.</p>';
+  h += '<div class="foot">' + E(conf.debriefNote) + '</div>';
+  cfPrintDoc(conf.title + ' — Team rollup', h);
+}
+
 // Staff nav: "My Snapshot" first, then the sheet-driven tabs (the "Nav Tabs" tab of the
 // LS South Reno Staff OS sheet controls labels / visibility / order), grouped into themed
 // dropdowns, then "Announcement Card" pinned on the far right as a distinct tool tab.
@@ -14781,6 +15350,7 @@ function staffBuildNav(tabs) {
   _spNavItems['sp-stories'] = 'Stories'; _spNavItems['sp-announce'] = 'Announcement Card';
   const all = mid.concat([{ id: 'sp-stories', label: 'Stories' }, { id: 'sp-announce', label: 'Announcement Card' }]);
   let h = tab('sp-mine', 'My Snapshot');
+  if (cfConf()) { _spNavItems['sp-conf'] = 'Field Guide'; h += tab('sp-conf', 'Field Guide', 'sp-nav-conf'); }   // active conference only
   STAFF_NAV_GROUPS.forEach(g => {
     const kids = g.ids.filter(id => all.some(x => x.id === id));
     if (!kids.length) return; placed[g.key] = 1;
@@ -14841,7 +15411,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') staffNavClos
 function staffRenderTabs(data) {
   const nav = staffBuildNav(data && data.tabs); if (!nav) return;
   // Stay on the section that's showing; fall back to My Snapshot if that tab was hidden in the sheet.
-  const visible = id => id === 'sp-mine' || id === 'sp-stories' || id === 'sp-announce' || !!_spNavItems[id];
+  const visible = id => id === 'sp-mine' || (id === 'sp-conf' && !!cfConf()) || id === 'sp-stories' || id === 'sp-announce' || !!_spNavItems[id];
   const cur = visible(_spCurSection) ? _spCurSection : 'sp-mine';
   staffShowSection(cur);
   if (cur === 'sp-mine') sosInit();
@@ -18379,7 +18949,7 @@ async function aiAsk() {
 </div>
 <script>
 (function(){
-  var APP_BUILD='20261012T222019Z';                 // replaced at deploy time; matches /build.txt
+  var APP_BUILD='20261013T132941Z';                 // replaced at deploy time; matches /build.txt
   function showBar(){ var el=document.getElementById('lssrUpdateBar'); if(el) el.style.display='flex'; }
   function check(){
     try {
