@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T04:50:34.583Z",
+  "lastUpdated": "2026-10-13T05:46:05.523Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 9:50 PM",
+    "refreshed": "Oct 12, 2026, 10:46 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        28,
+        30,
         null,
         null
       ]
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        25,
+        27,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        17,
+        19,
         null,
         null
       ]
@@ -15079,11 +15079,11 @@
       },
       {
         "name": "Martinson/Degener Community Group",
-        "members": 22,
+        "members": 24,
         "leaders": 2,
-        "schedule": "Meets every other week on Tuesdays from 6-8pm",
+        "schedule": "Meets every other week on Wednesdays from 6-8pm",
         "avgAttended": 7,
-        "attPct": 32
+        "attPct": 29
       },
       {
         "name": "McCarthy Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 404,
+      "cgMembers": 406,
       "both": 216,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,14 +15360,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 404,
+        "cg": 406,
         "serving": 299,
         "giving": 958
       },
-      "universe": 1170,
+      "universe": 1172,
       "regions": {
         "1": 43,
-        "2": 93,
+        "2": 95,
         "3": 12,
         "4": 34,
         "5": 8,
@@ -15520,8 +15520,10 @@
           "Steve Rester",
           "Terri Mehlhaff",
           "Tori Meyer",
+          "Toryn Sumner",
           "Tyler Harte",
-          "Will Griffin"
+          "Will Griffin",
+          "dana martinson"
         ],
         "3": [
           "Aaron Owens",
@@ -17051,7 +17053,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 188,
+        "count": 190,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17235,12 +17237,14 @@
           "Thomas Adams",
           "Tiffany Jackson",
           "Tori Meyer",
+          "Toryn Sumner",
           "Tracy Brown",
           "Tyler Harte",
           "Vickie Luchetti",
           "Wende Schwake",
           "Wilfredo Torres",
-          "Will Griffin"
+          "Will Griffin",
+          "dana martinson"
         ]
       }
     }
@@ -17248,7 +17252,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-13T04:06:42.823Z",
+    "updated": "2026-10-13T05:05:47.662Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17284,6 +17288,24 @@
         "joinedNames": [
           "Jett Norman",
           "Nathen Ross"
+        ]
+      },
+      {
+        "group": "Martinson/Degener Community Group",
+        "leaders": [
+          "Isabella Peissner",
+          "Faith Martinson"
+        ],
+        "applied": 2,
+        "joined": 2,
+        "connections": 2,
+        "appliedNames": [
+          "Toryn Sumner",
+          "dana martinson"
+        ],
+        "joinedNames": [
+          "Toryn Sumner",
+          "dana martinson"
         ]
       },
       {
@@ -17414,9 +17436,9 @@
       }
     ],
     "totals": {
-      "applied": 14,
-      "joined": 10,
-      "connections": 14
+      "applied": 16,
+      "joined": 12,
+      "connections": 16
     }
   },
   "sundayPlans": [
@@ -31824,14 +31846,14 @@
     "weeklyAvg": 15,
     "totalFetched": 7155,
     "since": "2026-09-13",
-    "asOf": "2026-10-13T04:44:37.149Z"
+    "asOf": "2026-10-13T05:44:34.045Z"
   },
   "emailStats": {
-    "latestOpenRate": 0.2581453634085213,
-    "avgOpenRate3": 0.29316456108736016,
+    "latestOpenRate": 0.2606516290726817,
+    "avgOpenRate3": 0.29524289286327937,
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-13T04:44:38.228Z"
+    "asOf": "2026-10-13T05:44:34.808Z"
   }
 }
