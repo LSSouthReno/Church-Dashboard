@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T17:46:04.951Z",
+  "lastUpdated": "2026-10-13T18:01:19.123Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 13, 2026, 10:46 AM",
+    "refreshed": "Oct 13, 2026, 11:01 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        32,
+        33,
         null,
         null
       ]
@@ -14795,7 +14795,7 @@
         1,
         17,
         18,
-        15,
+        14,
         10
       ],
       "2026": [
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        28,
+        30,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        20,
+        22,
         null,
         null
       ]
@@ -15174,14 +15174,6 @@
         "attPct": 85
       },
       {
-        "name": "Frederick/Coggiola/Schelin Community Group",
-        "members": 13,
-        "leaders": 4,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
-        "avgAttended": 6,
-        "attPct": 46
-      },
-      {
         "name": "Murad Community Group",
         "members": 13,
         "leaders": 1,
@@ -15196,6 +15188,22 @@
         "schedule": "Meets weekly on Wednesdays from 10am-12pm",
         "avgAttended": 7,
         "attPct": 58
+      },
+      {
+        "name": "Frederick/Coggiola/Schelin Community Group",
+        "members": 12,
+        "leaders": 4,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
+        "avgAttended": 6,
+        "attPct": 50
+      },
+      {
+        "name": "Maidens Community Group",
+        "members": 11,
+        "leaders": 1,
+        "schedule": "Meets weekly on Thursdays from 6-8pm",
+        "avgAttended": 6,
+        "attPct": 55
       },
       {
         "name": "Flores/Norton Community Group",
@@ -15220,14 +15228,6 @@
         "schedule": "Meets weekly on Fridays from 1-3pm",
         "avgAttended": 5,
         "attPct": 50
-      },
-      {
-        "name": "Maidens Community Group",
-        "members": 10,
-        "leaders": 1,
-        "schedule": "Meets weekly on Thursdays from 6-8pm",
-        "avgAttended": 6,
-        "attPct": 60
       },
       {
         "name": "Gardner Community Group",
@@ -15302,20 +15302,20 @@
         "attPct": 67
       },
       {
+        "name": "Mick/McKinley Community Group",
+        "members": 6,
+        "leaders": 2,
+        "schedule": "Meets weekly on Mondays from 6-8pm",
+        "avgAttended": 3,
+        "attPct": 50
+      },
+      {
         "name": "Moore Community Group",
         "members": 6,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 5-6:30pm",
         "avgAttended": 3,
         "attPct": 50
-      },
-      {
-        "name": "Mick/McKinley Community Group",
-        "members": 5,
-        "leaders": 2,
-        "schedule": "Meets weekly on Mondays from 6-8pm",
-        "avgAttended": 3,
-        "attPct": 60
       },
       {
         "name": "Flores Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 407,
+      "cgMembers": 408,
       "both": 216,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,22 +15360,22 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 406,
+        "cg": 408,
         "serving": 299,
-        "giving": 958
+        "giving": 957
       },
       "universe": 1172,
       "regions": {
         "1": 43,
-        "2": 95,
+        "2": 96,
         "3": 12,
         "4": 34,
         "5": 8,
         "6": 7,
         "7": 15,
-        "8": 528,
+        "8": 526,
         "9": 77,
-        "10": 66,
+        "10": 67,
         "11": 52,
         "12": 28,
         "13": 48,
@@ -15457,6 +15457,7 @@
           "Coco Candler",
           "Collet Alano",
           "Crystal Flaherty",
+          "Dana Martinson",
           "Danielle Bunow",
           "Darlene Holtzer",
           "Dennis McGilvery",
@@ -15494,6 +15495,7 @@
           "Leandra Alejandro",
           "Lexi Maxwell",
           "Lori Traitel",
+          "Louise Ottmann",
           "Lucas Piotto",
           "Lynn Henderson",
           "Margaret Skillicorn",
@@ -15522,8 +15524,7 @@
           "Tori Meyer",
           "Toryn Sumner",
           "Tyler Harte",
-          "Will Griffin",
-          "dana martinson"
+          "Will Griffin"
         ],
         "3": [
           "Aaron Owens",
@@ -15622,6 +15623,7 @@
           "Amanda Jaksick",
           "Amy Bayer",
           "Amy Ewald",
+          "Amy Grace",
           "Andrea Ramos",
           "Andrea Stanley",
           "Andy Chidester",
@@ -15763,7 +15765,6 @@
           "Kimberly Mackey",
           "Kyle Miller",
           "Kyle Perlich",
-          "Kylee Rehberger",
           "Lacey Tompkins",
           "Laura Cale",
           "Laurie Coombs",
@@ -15930,6 +15931,7 @@
           "Kati (Catherine) Andreano",
           "Kelly Anderson",
           "Kim Yaeger",
+          "Kylee Rehberger",
           "Laurie Gretsinger",
           "Leah field",
           "Levi Lunde",
@@ -16663,7 +16665,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 605,
+          "count": 603,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -16677,6 +16679,7 @@
             "Amanda Jaksick",
             "Amy Bayer",
             "Amy Ewald",
+            "Amy Grace",
             "Andrea Ramos",
             "Andrea Stanley",
             "Andy Chidester",
@@ -16853,7 +16856,6 @@
             "Kyle Ferguson",
             "Kyle Miller",
             "Kyle Perlich",
-            "Kylee Rehberger",
             "Lacey Tompkins",
             "Larry Hood",
             "Laura Cale",
@@ -17053,7 +17055,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 191,
+        "count": 192,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17100,6 +17102,7 @@
           "Collet Alano",
           "Cory Hunt",
           "Crystal Flaherty",
+          "Dana Martinson",
           "Danielle Bunow",
           "Darlene Holtzer",
           "Dave Timko",
@@ -17171,6 +17174,7 @@
           "Ken Croker",
           "Keyvan Hernández",
           "Kim Yaeger",
+          "Kylee Rehberger",
           "Lauren Bruno",
           "Laurie Gretsinger",
           "Leah field",
@@ -17244,8 +17248,7 @@
           "Vickie Luchetti",
           "Wende Schwake",
           "Wilfredo Torres",
-          "Will Griffin",
-          "dana martinson"
+          "Will Griffin"
         ]
       }
     }
@@ -17253,7 +17256,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-13T16:10:29.349Z",
+    "updated": "2026-10-13T17:58:41.450Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17301,12 +17304,12 @@
         "joined": 2,
         "connections": 2,
         "appliedNames": [
-          "Toryn Sumner",
-          "dana martinson"
+          "Dana Martinson",
+          "Toryn Sumner"
         ],
         "joinedNames": [
-          "Toryn Sumner",
-          "dana martinson"
+          "Dana Martinson",
+          "Toryn Sumner"
         ]
       },
       {
@@ -17408,6 +17411,37 @@
         ]
       },
       {
+        "group": "Maidens Community Group",
+        "leaders": [
+          "Whitney Maidens"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Kylee Rehberger"
+        ],
+        "joinedNames": [
+          "Kylee Rehberger"
+        ]
+      },
+      {
+        "group": "Mick/McKinley Community Group",
+        "leaders": [
+          "Brianna Mick",
+          "Megan McKinley"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Tiffany Jackson"
+        ],
+        "joinedNames": [
+          "Tiffany Jackson"
+        ]
+      },
+      {
         "group": "Moore Community Group",
         "leaders": [
           "Anna Moore",
@@ -17438,25 +17472,12 @@
           "Janet Needham"
         ],
         "joinedNames": []
-      },
-      {
-        "group": "Maidens Community Group",
-        "leaders": [
-          "Whitney Maidens"
-        ],
-        "applied": 1,
-        "joined": 0,
-        "connections": 1,
-        "appliedNames": [
-          "Kylee Rehberger"
-        ],
-        "joinedNames": []
       }
     ],
     "totals": {
-      "applied": 18,
-      "joined": 13,
-      "connections": 18
+      "applied": 19,
+      "joined": 15,
+      "connections": 19
     }
   },
   "sundayPlans": [
