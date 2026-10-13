@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T02:47:12.430Z",
+  "lastUpdated": "2026-10-13T03:08:22.891Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 12, 2026, 7:47 PM",
+    "refreshed": "Oct 12, 2026, 8:08 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        27,
+        28,
         null,
         null
       ]
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        24,
+        25,
         null,
         null
       ]
@@ -15071,11 +15071,11 @@
       },
       {
         "name": "Poleselli / McAlpine Community Group",
-        "members": 24,
+        "members": 25,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 13,
-        "attPct": 54
+        "attPct": 52
       },
       {
         "name": "Martinson/Degener Community Group",
@@ -15352,15 +15352,15 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 403,
-      "both": 215,
+      "cgMembers": 404,
+      "both": 216,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 403,
+        "cg": 404,
         "serving": 299,
         "giving": 958
       },
@@ -15378,9 +15378,9 @@
         "10": 66,
         "11": 52,
         "12": 28,
-        "13": 49,
+        "13": 48,
         "14": 22,
-        "15": 136
+        "15": 137
       },
       "regionNames": {
         "1": [
@@ -16071,7 +16071,6 @@
           "Jane Brinson",
           "Janet Colonna",
           "Jed Ingalls",
-          "Jeff Conrad",
           "Jennifer Janakus",
           "Julie Serpa",
           "Kate Andreano",
@@ -16182,6 +16181,7 @@
           "Jaimie Sullivan",
           "Janet Frederick",
           "Jeana Rehberger",
+          "Jeff Conrad",
           "Jeffrey Janakus",
           "Jennifer Jauron",
           "Jenny Roccuzzo",
@@ -16287,7 +16287,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 177,
+          "count": 176,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16365,7 +16365,6 @@
             "Janet Colonna",
             "Jason Welch",
             "Jed Ingalls",
-            "Jeff Conrad",
             "Jeffrey Luckey",
             "Jenni Pereza",
             "Jennifer Janakus",
@@ -16470,7 +16469,7 @@
         },
         "coreAllFour": {
           "label": "Engaged in all four (Member · CG · Serving · Giving)",
-          "count": 136,
+          "count": 137,
           "names": [
             "Adam Carp",
             "Alan Charles",
@@ -16536,6 +16535,7 @@
             "Jaimie Sullivan",
             "Janet Frederick",
             "Jeana Rehberger",
+            "Jeff Conrad",
             "Jeffrey Janakus",
             "Jennifer Jauron",
             "Jenny Roccuzzo",
@@ -16870,7 +16870,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 177,
+        "count": 176,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -16948,7 +16948,6 @@
           "Janet Colonna",
           "Jason Welch",
           "Jed Ingalls",
-          "Jeff Conrad",
           "Jeffrey Luckey",
           "Jenni Pereza",
           "Jennifer Janakus",
@@ -17249,7 +17248,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-13T02:05:31.524Z",
+    "updated": "2026-10-13T03:04:43.046Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17285,6 +17284,24 @@
         "joinedNames": [
           "Jett Norman",
           "Nathen Ross"
+        ]
+      },
+      {
+        "group": "Poleselli / McAlpine Community Group",
+        "leaders": [
+          "Michael Poleselli",
+          "Kathy McAlpine"
+        ],
+        "applied": 2,
+        "joined": 2,
+        "connections": 2,
+        "appliedNames": [
+          "Jeff Conrad",
+          "Kim Conrad"
+        ],
+        "joinedNames": [
+          "Jeff Conrad",
+          "Kim Conrad"
         ]
       },
       {
@@ -17367,22 +17384,6 @@
         ]
       },
       {
-        "group": "Poleselli / McAlpine Community Group",
-        "leaders": [
-          "Michael Poleselli",
-          "Kathy McAlpine"
-        ],
-        "applied": 1,
-        "joined": 1,
-        "connections": 1,
-        "appliedNames": [
-          "Kim Conrad"
-        ],
-        "joinedNames": [
-          "Kim Conrad"
-        ]
-      },
-      {
         "group": "Frederick/Coggiola/Schelin Community Group",
         "leaders": [
           "Janet Frederick",
@@ -17413,9 +17414,9 @@
       }
     ],
     "totals": {
-      "applied": 13,
-      "joined": 9,
-      "connections": 13
+      "applied": 14,
+      "joined": 10,
+      "connections": 14
     }
   },
   "sundayPlans": [
@@ -29465,7 +29466,7 @@
               "name": "Anita Irwin",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
@@ -31540,7 +31541,7 @@
               "name": "Holly Graham",
               "team": "Stepping Stones",
               "pos": "Wolf Pack Guide",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
