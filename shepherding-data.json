@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T02:20:01.800Z",
+  "generatedAt": "2026-10-13T03:18:40.642Z",
   "asOf": "2026-10-12",
   "givingMonths": 12,
   "statusVocab": [
@@ -20,7 +20,7 @@
   "congregation": {
     "totalPeople": 394,
     "avgScore": 0,
-    "inGroup": 219,
+    "inGroup": 220,
     "serving": 234,
     "leading": 77,
     "givingRegular": 0,
@@ -30,7 +30,7 @@
     "needsAttention": 0,
     "overdue": 0,
     "notBaptized": 394,
-    "notInGroup": 175,
+    "notInGroup": 174,
     "notServing": 160,
     "notGiving": 0,
     "paciCounts": {
@@ -48,7 +48,7 @@
       "unknown": 394
     },
     "pct": {
-      "inGroup": 0.5558375634517766,
+      "inGroup": 0.5583756345177665,
       "serving": 0.5939086294416244,
       "leading": 0.19543147208121828,
       "givingRegular": 0,
@@ -3414,7 +3414,7 @@
       "summary": {
         "totalPeople": 59,
         "avgScore": 0,
-        "inGroup": 31,
+        "inGroup": 32,
         "serving": 35,
         "leading": 10,
         "givingRegular": 0,
@@ -3424,7 +3424,7 @@
         "needsAttention": 0,
         "overdue": 0,
         "notBaptized": 59,
-        "notInGroup": 28,
+        "notInGroup": 27,
         "notServing": 24,
         "notGiving": 0,
         "paciCounts": {
@@ -3442,7 +3442,7 @@
           "unknown": 59
         },
         "pct": {
-          "inGroup": 0.5254237288135594,
+          "inGroup": 0.5423728813559322,
           "serving": 0.5932203389830508,
           "leading": 0.1694915254237288,
           "givingRegular": 0,
@@ -4569,49 +4569,6 @@
         },
         {
           "id": null,
-          "name": "Jeff Conrad",
-          "first": "Jeff",
-          "last": "Conrad",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [],
-          "serveTeams": [
-            {
-              "name": "Safety Team",
-              "role": "member",
-              "joinedAt": "2025-07-27T17:40:43Z"
-            }
-          ],
-          "flags": [
-            "Not in a group"
-          ],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Kerry Munk",
           "first": "Kerry",
           "last": "Munk",
@@ -4914,6 +4871,53 @@
               "name": "Connection Team",
               "role": "member",
               "joinedAt": "2026-08-13T17:08:15Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jeff Conrad",
+          "first": "Jeff",
+          "last": "Conrad",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [
+            {
+              "name": "Poleselli / McAlpine Community Group",
+              "role": "member",
+              "joinedAt": "2026-10-13T02:43:52Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "Safety Team",
+              "role": "member",
+              "joinedAt": "2025-07-27T17:40:43Z"
             }
           ],
           "flags": [],
@@ -18623,8 +18627,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 64,
-    "adult": 65,
-    "child": 151,
+    "adult": 66,
+    "child": 150,
     "infant": 103
   }
 }
