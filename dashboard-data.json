@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T16:54:48.143Z",
+  "lastUpdated": "2026-10-13T17:46:04.951Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 13, 2026, 9:54 AM",
+    "refreshed": "Oct 13, 2026, 10:46 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -27035,9 +27035,9 @@
             {
               "name": "Hunter Mannin",
               "team": "Stepping Stones",
-              "pos": "Bluebirds Guide",
+              "pos": "Bear Cubs Guide",
               "status": "C",
-              "serviceTime": "8 AM"
+              "serviceTime": "9:30 AM"
             },
             {
               "name": "Michael Poleselli",
@@ -27385,9 +27385,9 @@
             {
               "name": "Jennifer Torres",
               "team": "Stepping Stones",
-              "pos": "Bear Cubs Guide",
+              "pos": "Bluebirds Guide",
               "status": "C",
-              "serviceTime": "9:30 AM"
+              "serviceTime": "8 AM"
             },
             {
               "name": "Geoffrey Caliger",
@@ -27510,6 +27510,27 @@
             },
             {
               "name": "Josie Nerska",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "9:30 AM"
+            },
+            {
+              "name": "Diane Sikora",
+              "team": "Stepping Stones",
+              "pos": "Bear Cubs Guide",
+              "status": "C",
+              "serviceTime": "8 AM"
+            },
+            {
+              "name": "Shiona Dykins",
+              "team": "Stepping Stones",
+              "pos": "Hawks Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Linda Poleselli",
               "team": "Stepping Stones",
               "pos": "Bear Cubs Guide",
               "status": "C",
@@ -27671,8 +27692,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 100,
-            "totalVols": 100
+            "volsWithServiceTime": 103,
+            "totalVols": 103
           }
         }
       ]
@@ -31836,6 +31857,402 @@
           }
         }
       ]
+    },
+    {
+      "date": "2026-12-06",
+      "ds": "Sunday, December 6, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664128",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562258\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-12-13",
+      "ds": "Sunday, December 13, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664129",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562265\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-12-20",
+      "ds": "Sunday, December 20, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664130",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562272\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-12-27",
+      "ds": "Sunday, December 27, 2026",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664131",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562280\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-01-03",
+      "ds": "Sunday, January 3, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664132",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562289\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-01-10",
+      "ds": "Sunday, January 10, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664133",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562296\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-01-17",
+      "ds": "Sunday, January 17, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664134",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562303\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-01-24",
+      "ds": "Sunday, January 24, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664135",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562310\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-01-31",
+      "ds": "Sunday, January 31, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664136",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562317\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-02-07",
+      "ds": "Sunday, February 7, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664137",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562324\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-02-14",
+      "ds": "Sunday, February 14, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664138",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562331\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
+    },
+    {
+      "date": "2027-02-21",
+      "ds": "Sunday, February 21, 2027",
+      "services": [
+        {
+          "serviceType": "SERVICES",
+          "planId": "92664139",
+          "title": "",
+          "series": "",
+          "preacher": "",
+          "captains": [],
+          "volunteers": [
+            {
+              "name": "Kathy Herndon",
+              "team": "First Impressions",
+              "pos": "Greeter",
+              "status": "U",
+              "serviceTime": "8 AM"
+            }
+          ],
+          "orderItems": [],
+          "_debug": {
+            "incTypes": "Team",
+            "firstRelKeys": "person,plan,scheduled_by,service_type,team,responds_to,times,service_times",
+            "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562338\"}]",
+            "planTimeMapCount": 7,
+            "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
+            "volsWithServiceTime": 1,
+            "totalVols": 1
+          }
+        }
+      ]
     }
   ],
   "staffTimeOff": [
@@ -31864,7 +32281,7 @@
     "weeklyAvg": 15,
     "totalFetched": 7154,
     "since": "2026-09-13",
-    "asOf": "2026-10-13T16:48:16.838Z"
+    "asOf": "2026-10-13T17:44:36.829Z"
   },
   "emailStats": {
     "latestOpenRate": 0.2631578947368421,
@@ -31872,6 +32289,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-13T16:48:19.324Z"
+    "asOf": "2026-10-13T17:44:37.879Z"
   }
 }
