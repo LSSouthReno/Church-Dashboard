@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T21:46:26.254Z",
+  "lastUpdated": "2026-10-13T22:01:54.048Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 13, 2026, 2:46 PM",
+    "refreshed": "Oct 13, 2026, 3:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        30,
+        31,
         null,
         null
       ]
@@ -15087,11 +15087,11 @@
       },
       {
         "name": "McCarthy Community Group",
-        "members": 21,
+        "members": 22,
         "leaders": 2,
         "schedule": "Meets every other week on Mondays from 6:30-8pm",
         "avgAttended": 11,
-        "attPct": 52
+        "attPct": 50
       },
       {
         "name": "Isaac Griffin Community Group",
@@ -15352,15 +15352,15 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 408,
-      "both": 216,
+      "cgMembers": 409,
+      "both": 217,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
     },
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 408,
+        "cg": 409,
         "serving": 299,
         "giving": 957
       },
@@ -15374,9 +15374,9 @@
         "6": 7,
         "7": 15,
         "8": 526,
-        "9": 77,
+        "9": 76,
         "10": 67,
-        "11": 52,
+        "11": 53,
         "12": 28,
         "13": 48,
         "14": 22,
@@ -15875,7 +15875,6 @@
           "Nick Stemper",
           "Norman Horsley",
           "Paul Murad",
-          "Peggy Jo Ewald",
           "Rafik George Haddad",
           "Rita Pescatore",
           "Robert Clark",
@@ -16005,6 +16004,7 @@
           "Mike Hagstrand",
           "Nancy Prahm",
           "Natalie Shishido",
+          "Peggy Jo Ewald",
           "Peter Sellman",
           "Ryan Aiazzi",
           "Ryan Baskharoon",
@@ -16291,7 +16291,7 @@
         },
         "memberNotInCg": {
           "label": "Family Members not in a Community Group",
-          "count": 176,
+          "count": 175,
           "names": [
             "Aaron Carl",
             "Alex Buckwalter",
@@ -16430,7 +16430,6 @@
             "Paul Murad",
             "Paula J. Perialas",
             "Paulette Thompson",
-            "Peggy Jo Ewald",
             "RG Haddad",
             "Rafik George Haddad",
             "Richard Diebert",
@@ -16665,7 +16664,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 603,
+          "count": 602,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -16874,7 +16873,7 @@
     },
     "actionLists": {
       "fmNotInCg": {
-        "count": 176,
+        "count": 175,
         "names": [
           "Aaron Carl",
           "Alex Buckwalter",
@@ -17013,7 +17012,6 @@
           "Paul Murad",
           "Paula J. Perialas",
           "Paulette Thompson",
-          "Peggy Jo Ewald",
           "RG Haddad",
           "Rafik George Haddad",
           "Richard Diebert",
@@ -17256,7 +17254,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-13T20:58:29.587Z",
+    "updated": "2026-10-13T21:58:47.260Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17313,6 +17311,24 @@
         ]
       },
       {
+        "group": "McCarthy Community Group",
+        "leaders": [
+          "Mike McCarthy",
+          "Darren Wilford"
+        ],
+        "applied": 2,
+        "joined": 2,
+        "connections": 2,
+        "appliedNames": [
+          "Crystal Flaherty",
+          "Peggy Jo Ewald"
+        ],
+        "joinedNames": [
+          "Crystal Flaherty",
+          "Peggy Jo Ewald"
+        ]
+      },
+      {
         "group": "Poleselli / McAlpine Community Group",
         "leaders": [
           "Michael Poleselli",
@@ -17328,23 +17344,6 @@
         "joinedNames": [
           "Jeff Conrad",
           "Kim Conrad"
-        ]
-      },
-      {
-        "group": "McCarthy Community Group",
-        "leaders": [
-          "Mike McCarthy",
-          "Darren Wilford"
-        ],
-        "applied": 2,
-        "joined": 1,
-        "connections": 2,
-        "appliedNames": [
-          "Crystal Flaherty",
-          "Peggy Jo Ewald"
-        ],
-        "joinedNames": [
-          "Crystal Flaherty"
         ]
       },
       {
@@ -17490,7 +17489,7 @@
     ],
     "totals": {
       "applied": 20,
-      "joined": 15,
+      "joined": 16,
       "connections": 20
     }
   },
