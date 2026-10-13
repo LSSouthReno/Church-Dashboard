@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-13T15:49:15.582Z",
+  "lastUpdated": "2026-10-13T16:54:48.143Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -226,7 +226,7 @@
       407656,
       239469,
       296466,
-      120171
+      120170
     ],
     "donors": [
       0,
@@ -339,7 +339,7 @@
   },
   "pledge": {
     "target": 8500000,
-    "raised": 5709310
+    "raised": 5709309
   },
   "attendance": {
     "months": [
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 13, 2026, 8:49 AM",
+    "refreshed": "Oct 13, 2026, 9:54 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14169,7 +14169,7 @@
       333,
       342,
       380,
-      407
+      408
     ]
   },
   "baptisms": {
@@ -14240,7 +14240,7 @@
     },
     "current": {
       "groups": 36,
-      "members": 407,
+      "members": 408,
       "groupSize": 11,
       "fmInGroupsPct": 55,
       "asOfMonth": "Oct '26"
@@ -14720,7 +14720,7 @@
         333,
         342,
         380,
-        407,
+        408,
         null,
         null
       ]
@@ -14764,7 +14764,7 @@
         25,
         43,
         45,
-        30,
+        32,
         null,
         null
       ]
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        27,
+        28,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        19,
+        20,
         null,
         null
       ]
@@ -15302,6 +15302,14 @@
         "attPct": 67
       },
       {
+        "name": "Moore Community Group",
+        "members": 6,
+        "leaders": 2,
+        "schedule": "Meets weekly on Thursdays from 5-6:30pm",
+        "avgAttended": 3,
+        "attPct": 50
+      },
+      {
         "name": "Mick/McKinley Community Group",
         "members": 5,
         "leaders": 2,
@@ -15314,14 +15322,6 @@
         "members": 5,
         "leaders": 1,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
-        "avgAttended": 3,
-        "attPct": 60
-      },
-      {
-        "name": "Moore Community Group",
-        "members": 5,
-        "leaders": 2,
-        "schedule": "Meets weekly on Thursdays from 5-6:30pm",
         "avgAttended": 3,
         "attPct": 60
       },
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 406,
+      "cgMembers": 407,
       "both": 216,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -17053,7 +17053,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 190,
+        "count": 191,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17181,6 +17181,7 @@
           "Liz Suto",
           "Lori Traitel",
           "Lorna Elias",
+          "Louise Ottmann",
           "Lucas Piotto",
           "Lyndsey Mott",
           "Lynn Henderson",
@@ -17252,7 +17253,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-13T14:11:08.486Z",
+    "updated": "2026-10-13T16:10:29.349Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17327,6 +17328,23 @@
         ]
       },
       {
+        "group": "McCarthy Community Group",
+        "leaders": [
+          "Mike McCarthy",
+          "Darren Wilford"
+        ],
+        "applied": 2,
+        "joined": 1,
+        "connections": 2,
+        "appliedNames": [
+          "Crystal Flaherty",
+          "Peggy Jo Ewald"
+        ],
+        "joinedNames": [
+          "Crystal Flaherty"
+        ]
+      },
+      {
         "group": "Coan Community Group",
         "leaders": [
           "Kelly Coan"
@@ -17390,19 +17408,19 @@
         ]
       },
       {
-        "group": "McCarthy Community Group",
+        "group": "Moore Community Group",
         "leaders": [
-          "Mike McCarthy",
-          "Darren Wilford"
+          "Anna Moore",
+          "Julia Perlingos-Jackson"
         ],
         "applied": 1,
         "joined": 1,
         "connections": 1,
         "appliedNames": [
-          "Crystal Flaherty"
+          "Louise Ottmann"
         ],
         "joinedNames": [
-          "Crystal Flaherty"
+          "Louise Ottmann"
         ]
       },
       {
@@ -17436,9 +17454,9 @@
       }
     ],
     "totals": {
-      "applied": 16,
-      "joined": 12,
-      "connections": 16
+      "applied": 18,
+      "joined": 13,
+      "connections": 18
     }
   },
   "sundayPlans": [
@@ -31842,11 +31860,11 @@
     "cachedId": "925788"
   },
   "newAdults30d": {
-    "count30d": 66,
+    "count30d": 63,
     "weeklyAvg": 15,
-    "totalFetched": 7156,
+    "totalFetched": 7154,
     "since": "2026-09-13",
-    "asOf": "2026-10-13T15:46:22.454Z"
+    "asOf": "2026-10-13T16:48:16.838Z"
   },
   "emailStats": {
     "latestOpenRate": 0.2631578947368421,
@@ -31854,6 +31872,6 @@
     "latestCampaign": "Your Next Step",
     "latestSentAt": "2026-10-10T14:30:00+00:00",
     "campaignCount": 5,
-    "asOf": "2026-10-13T15:46:23.995Z"
+    "asOf": "2026-10-13T16:48:19.324Z"
   }
 }
