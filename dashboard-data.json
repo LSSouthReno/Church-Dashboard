@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-14T14:46:09.297Z",
+  "lastUpdated": "2026-10-14T15:00:26.255Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 14, 2026, 7:46 AM",
+    "refreshed": "Oct 14, 2026, 8:00 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        32,
+        33,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        23,
+        24,
         null,
         null
       ]
@@ -15111,11 +15111,11 @@
       },
       {
         "name": "Thompson/Primus Community Group",
-        "members": 16,
+        "members": 17,
         "leaders": 2,
         "schedule": "Meets weekly on Wednesdays from 6-8pm",
         "avgAttended": 7,
-        "attPct": 44
+        "attPct": 41
       },
       {
         "name": "Brown/Frank Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 410,
+      "cgMembers": 411,
       "both": 217,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,7 +15360,7 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 410,
+        "cg": 411,
         "serving": 299,
         "giving": 950
       },
@@ -15373,9 +15373,9 @@
         "5": 9,
         "6": 7,
         "7": 17,
-        "8": 522,
+        "8": 521,
         "9": 75,
-        "10": 68,
+        "10": 69,
         "11": 53,
         "12": 28,
         "13": 47,
@@ -15899,6 +15899,7 @@
           "Alexander Franklin",
           "Amy Robinson",
           "Angie Bryan",
+          "Anna Torres",
           "Antonio Cendana",
           "Austin Aranda",
           "Avryl Benard",
@@ -16664,7 +16665,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 597,
+          "count": 596,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -17053,7 +17054,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 193,
+        "count": 194,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17068,6 +17069,7 @@
           "Anabel Dito",
           "Andrea Whittemore-Goad",
           "Angie Bryan",
+          "Anna Torres",
           "Annette Whittemore",
           "Anthony Lorenzi",
           "Antonio Cendana",
@@ -17255,7 +17257,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-14T12:57:33.570Z",
+    "updated": "2026-10-14T14:57:48.788Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17476,6 +17478,22 @@
         ]
       },
       {
+        "group": "Thompson/Primus Community Group",
+        "leaders": [
+          "Katie Thompson",
+          "Rachel Primus"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Anna Torres"
+        ],
+        "joinedNames": [
+          "Anna Torres"
+        ]
+      },
+      {
         "group": "Brown/Peregrin Community Group",
         "leaders": [
           "Ray Brown",
@@ -17488,25 +17506,11 @@
           "John Mclennan"
         ],
         "joinedNames": []
-      },
-      {
-        "group": "Thompson/Primus Community Group",
-        "leaders": [
-          "Katie Thompson",
-          "Rachel Primus"
-        ],
-        "applied": 1,
-        "joined": 0,
-        "connections": 1,
-        "appliedNames": [
-          "Anna Torres"
-        ],
-        "joinedNames": []
       }
     ],
     "totals": {
       "applied": 21,
-      "joined": 17,
+      "joined": 18,
       "connections": 21
     }
   },
