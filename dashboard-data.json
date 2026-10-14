@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-14T03:46:23.509Z",
+  "lastUpdated": "2026-10-14T04:01:16.977Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 13, 2026, 8:46 PM",
+    "refreshed": "Oct 13, 2026, 9:01 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        31,
+        32,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        22,
+        23,
         null,
         null
       ]
@@ -15066,8 +15066,8 @@
         "members": 25,
         "leaders": 2,
         "schedule": "Meets weekly on Tuesdays from 6-8pm",
-        "avgAttended": 9,
-        "attPct": 36
+        "avgAttended": 10,
+        "attPct": 40
       },
       {
         "name": "Poleselli / McAlpine Community Group",
@@ -15174,6 +15174,14 @@
         "attPct": 77
       },
       {
+        "name": "Frederick/Coggiola/Schelin Community Group",
+        "members": 13,
+        "leaders": 4,
+        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
+        "avgAttended": 6,
+        "attPct": 46
+      },
+      {
         "name": "Murad Community Group",
         "members": 13,
         "leaders": 1,
@@ -15188,14 +15196,6 @@
         "schedule": "Meets weekly on Wednesdays from 10am-12pm",
         "avgAttended": 7,
         "attPct": 58
-      },
-      {
-        "name": "Frederick/Coggiola/Schelin Community Group",
-        "members": 12,
-        "leaders": 4,
-        "schedule": "Meets weekly on Tuesdays from 6:30-8pm",
-        "avgAttended": 6,
-        "attPct": 50
       },
       {
         "name": "Maidens Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 409,
+      "cgMembers": 410,
       "both": 217,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,7 +15360,7 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 409,
+        "cg": 410,
         "serving": 299,
         "giving": 957
       },
@@ -15373,9 +15373,9 @@
         "5": 8,
         "6": 7,
         "7": 15,
-        "8": 526,
+        "8": 525,
         "9": 76,
-        "10": 67,
+        "10": 68,
         "11": 53,
         "12": 28,
         "13": 48,
@@ -15621,6 +15621,7 @@
           "Allen Blue and Nick Eisele",
           "Alyssa Rauchle",
           "Amanda Jaksick",
+          "Amos Munoz",
           "Amy Bayer",
           "Amy Ewald",
           "Amy Grace",
@@ -15724,7 +15725,6 @@
           "Jacob Chase",
           "Jade Osterhoudt",
           "Jamie Secrist-Lozier",
-          "Janet Needham",
           "Jay Cushing",
           "Jay England",
           "Jay Wiley",
@@ -15919,6 +15919,7 @@
           "Helen Koehm",
           "James A McLennan",
           "James Mclennan",
+          "Janet Needham",
           "Jennifer Griffo",
           "Jerimiah Turner",
           "John Mason",
@@ -16664,7 +16665,7 @@
         },
         "givingNotConnected": {
           "label": "Giving but not in a CG and not serving",
-          "count": 602,
+          "count": 601,
           "names": [
             "Aaron Prince",
             "Adam Anderson",
@@ -16676,6 +16677,7 @@
             "Allen Blue and Nick Eisele",
             "Alyssa Rauchle",
             "Amanda Jaksick",
+            "Amos Munoz",
             "Amy Bayer",
             "Amy Ewald",
             "Amy Grace",
@@ -16802,7 +16804,6 @@
             "Jade Osterhoudt",
             "James Burns",
             "Jamie Secrist-Lozier",
-            "Janet Needham",
             "Jay Cushing",
             "Jay England",
             "Jay Wiley",
@@ -17053,7 +17054,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 192,
+        "count": 193,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17137,6 +17138,7 @@
           "James Mclennan",
           "Jamison Leonis",
           "Janelle Yost",
+          "Janet Needham",
           "Jennavee Mathisen",
           "Jennifer Griffo",
           "Jennifer Kitts",
@@ -17254,7 +17256,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-14T03:02:33.820Z",
+    "updated": "2026-10-14T03:58:28.269Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17410,6 +17412,24 @@
         ]
       },
       {
+        "group": "Frederick/Coggiola/Schelin Community Group",
+        "leaders": [
+          "Janet Frederick",
+          "Timothy Frederick",
+          "Bret Coggiola",
+          "Kara Schelin"
+        ],
+        "applied": 1,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [
+          "Janet Needham"
+        ],
+        "joinedNames": [
+          "Janet Needham"
+        ]
+      },
+      {
         "group": "Maidens Community Group",
         "leaders": [
           "Whitney Maidens"
@@ -17469,27 +17489,11 @@
           "John Mclennan"
         ],
         "joinedNames": []
-      },
-      {
-        "group": "Frederick/Coggiola/Schelin Community Group",
-        "leaders": [
-          "Janet Frederick",
-          "Timothy Frederick",
-          "Bret Coggiola",
-          "Kara Schelin"
-        ],
-        "applied": 1,
-        "joined": 0,
-        "connections": 1,
-        "appliedNames": [
-          "Janet Needham"
-        ],
-        "joinedNames": []
       }
     ],
     "totals": {
       "applied": 20,
-      "joined": 16,
+      "joined": 17,
       "connections": 20
     }
   },
@@ -28381,7 +28385,7 @@
               "name": "Anthony Azzam",
               "team": "Enrichment Teams",
               "pos": "Front Left Communion Server",
-              "status": "U",
+              "status": "C",
               "serviceTime": "9:30 AM"
             },
             {
