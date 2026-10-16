@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-16T17:46:16.442Z",
+  "lastUpdated": "2026-10-16T18:02:35.887Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 16, 2026, 10:46 AM",
+    "refreshed": "Oct 16, 2026, 11:02 AM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -15362,12 +15362,12 @@
         "familyMembers": 392,
         "cg": 412,
         "serving": 299,
-        "giving": 950
+        "giving": 951
       },
       "universe": 1169,
       "regions": {
         "1": 44,
-        "2": 97,
+        "2": 96,
         "3": 12,
         "4": 34,
         "5": 9,
@@ -15375,7 +15375,7 @@
         "7": 16,
         "8": 520,
         "9": 75,
-        "10": 69,
+        "10": 70,
         "11": 53,
         "12": 28,
         "13": 47,
@@ -15435,7 +15435,6 @@
           "Adam Laub",
           "Alyssa Pichardo",
           "Amanda Klinger",
-          "Andrea Whittemore-Goad",
           "Annette Whittemore",
           "Anthony Lorenzi",
           "Ava Palmer",
@@ -15898,6 +15897,7 @@
         "10": [
           "Alexander Franklin",
           "Amy Robinson",
+          "Andrea Whittemore-Goad",
           "Angie Bryan",
           "Anna Torres",
           "Antonio Cendana",
@@ -17260,7 +17260,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-16T17:11:18.546Z",
+    "updated": "2026-10-16T17:59:10.913Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -26885,8 +26885,8 @@
           "series": "Who Do You Think You Are (Ephesians)",
           "preacher": "Ryan Griffin",
           "captains": [
-            "Manuel Sanchez",
-            "Matt Gardner"
+            "Matt Gardner",
+            "Garrett Kooyers"
           ],
           "volunteers": [
             {
@@ -27049,13 +27049,6 @@
               "pos": "Bluebirds Lead Guide",
               "status": "C",
               "serviceTime": "8 AM"
-            },
-            {
-              "name": "Manuel Sanchez",
-              "team": "Service Captains",
-              "pos": "Service Captain",
-              "status": "U",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Janet Colonna",
@@ -27614,7 +27607,7 @@
               "name": "Matt Gardner",
               "team": "Service Captains",
               "pos": "Service Captain",
-              "status": "U",
+              "status": "C",
               "serviceTime": "8 AM, 9:30 AM"
             },
             {
@@ -27635,6 +27628,20 @@
               "name": "Deana Griffin",
               "team": "Stepping Stones",
               "pos": "Mustangs Lead Guide",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Garrett Kooyers",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "C",
+              "serviceTime": "11 AM"
+            },
+            {
+              "name": "Kayleen Hagstrand",
+              "team": "Stepping Stones",
+              "pos": "Mustangs Guide",
               "status": "C",
               "serviceTime": "11 AM"
             }
@@ -27794,8 +27801,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"224592723\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 107,
-            "totalVols": 107
+            "volsWithServiceTime": 108,
+            "totalVols": 108
           }
         }
       ]
@@ -28668,7 +28675,7 @@
           "preacher": "Ryan Griffin",
           "captains": [
             "Timothy Milligan",
-            "Garrett Kooyers"
+            "Manuel Sanchez"
           ],
           "volunteers": [
             {
@@ -28691,13 +28698,6 @@
               "pos": "Service Captain",
               "status": "U",
               "serviceTime": "8 AM, 9:30 AM"
-            },
-            {
-              "name": "Garrett Kooyers",
-              "team": "Service Captains",
-              "pos": "Service Captain",
-              "status": "C",
-              "serviceTime": "11 AM"
             },
             {
               "name": "Katie Thompson",
@@ -29293,6 +29293,13 @@
               "pos": "Lights",
               "status": "U",
               "serviceTime": "Mid Week Tech Rehearsal, Pre Service Tech Rehearsal"
+            },
+            {
+              "name": "Manuel Sanchez",
+              "team": "Service Captains",
+              "pos": "Service Captain",
+              "status": "U",
+              "serviceTime": "11 AM"
             }
           ],
           "orderItems": [
