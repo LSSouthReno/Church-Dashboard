@@ -21,7 +21,7 @@
   .top { display:flex; align-items:center; gap:12px; margin-bottom:22px; } .top img { height:28px; } .top a { margin-left:auto; color:var(--gold); font-weight:700; text-decoration:none; font-size:14px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; display:grid; grid-template-columns:1fr 112px; gap:14px; align-items:start; }
-  .card h3 { margin:0 0 4px; font-size:17px; } .card .url { font-weight:800; color:var(--gold); font-size:15px; word-break:break-all; }
+  .card h3 { margin:0 0 4px; font-size:17px; } .card .url { font-weight:600; color:var(--muted); font-size:13.5px; white-space:nowrap; } .card .url b { color:var(--gold); font-weight:800; font-size:16px; }
   .card p { color:var(--muted); font-size:13px; line-height:1.5; margin:8px 0 10px; }
   .qr { background:#fff; padding:6px; border-radius:8px; width:112px; height:112px; } .qr img, .qr canvas { width:100% !important; height:100% !important; }
   .acts { display:flex; gap:6px; flex-wrap:wrap; }
@@ -79,7 +79,7 @@
   LINKS.forEach(([path, name, what], i) => {
     const url = BASE + path, card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = '<div><h3>' + name + '</h3><div class="url">' + url.replace('https://', '') + '</div><p>' + what + '</p><div class="acts">' +
+    card.innerHTML = '<div><h3>' + name + '</h3><div class="url">lssouthreno.com<b>' + path + '</b></div><p>' + what + '</p><div class="acts">' +
       '<button data-copy="' + url + '">Copy link</button><button data-png="' + i + '">Download QR</button><button data-open="' + path + '">Try it</button></div></div><div class="qr" id="qr' + i + '"></div>';
     grid.appendChild(card);
     try { new QRCode(document.getElementById('qr' + i), { text: url, width: 400, height: 400, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
