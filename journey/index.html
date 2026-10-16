@@ -328,12 +328,12 @@ function viewSignin(msg) {
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
   // or to the email on their Living Stones profile (a one-tap link + a code).
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
-    '<h1>My Journey</h1><p>A private look at your life at Living Stones, and a next step or two for the season you’re in.</p>' +
+    '<h1>Living Stones</h1><p>Your next step, your groups and teams, events, and giving, all in one place. Sign in with your phone number. No password.</p>' +
     '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
     '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link') + '</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
     '<div class="fine">Use the number you’ve given Living Stones. ' + (c.channel === 'sms' ? 'We’ll text you a code.' : 'We’ll email a one-tap sign-in link to the address we have for you.') +
-    '<br><br><b style="color:var(--muted)">Your page is private.</b> Only you — and the pastors who care for you — can see it. No password needed.</div></div>';
+    '<br><br><b style="color:var(--muted)">It’s private.</b> Only you, and the pastors who care for you, can see your information.</div></div>';
   const ph = $('ph'); if (ph) setTimeout(() => ph.focus(), 50);
 }
 async function sendCode() {
@@ -350,9 +350,9 @@ function viewCode(msg) {
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
     (S.channel === 'sms'
       ? '<h1 style="font-size:26px">Check your texts</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, a 6-digit code is on its way.</p>'
-      : '<h1 style="font-size:26px">Check your email</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, we just emailed you a sign-in link. ' + (appStandalone() ? '<b style="color:var(--text)">Type the 6-digit code from that email here</b> (the button in the email opens your web browser instead of this app).</p>' : '<b style="color:var(--text)">Tap “Open my journey”</b> in that email — or type the 6-digit code here.</p>')) +
+      : '<h1 style="font-size:26px">Check your email</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, we just emailed you a sign-in link. ' + (appStandalone() ? '<b style="color:var(--text)">Type the 6-digit code from that email here</b> (the button in the email opens your web browser instead of this app).</p>' : '<b style="color:var(--text)">Tap the button</b> in that email — or type the 6-digit code here.</p>')) +
     '<input class="field code" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" oninput="this.value=this.value.replace(/\\D/g,\'\');if(this.value.length===6)checkCode()">' +
-    '<button class="btn p" id="codeBtn" onclick="checkCode()">Open my journey</button>' +
+    '<button class="btn p" id="codeBtn" onclick="checkCode()">Sign in</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
     '<div class="fine"><a href="#" onclick="sendAgain();return false">Send it again</a> · <a href="#" onclick="viewSignin();return false">Use a different number</a><br>' +
     (S.channel === 'sms' ? '' : 'Don’t see it? Check your spam or promotions folder. ') + 'You’ll stay signed in on this device for 90 days.</div></div>';
@@ -366,7 +366,7 @@ async function checkCode() {
   const r = await api({ action: 'jr_phone_verify', phone: S.phone, code: code });
   if (r.ok && r.token) { tokenSet(r.token); return loadMe(); }
   if (r.ok && r.pick) { S.ticket = r.ticket; return viewPick(r.pick); }
-  b.disabled = false; b.textContent = 'Open my journey'; $('err').textContent = r.error || 'Please try again.';
+  b.disabled = false; b.textContent = 'Sign in'; $('err').textContent = r.error || 'Please try again.';
 }
 function viewPick(list) {
   noTabs();
@@ -387,8 +387,8 @@ async function pcoSignin() {
 // ── the journey ──────────────────────────────────────────────────────────────
 async function loadMe() {
   noTabs();
-  $('app').innerHTML = '<div class="loading">Gathering your journey…</div>';
-  const slow = slowNote('#app', 'Gathering your journey… this first load can take a few extra seconds.');
+  $('app').innerHTML = '<div class="loading">Getting everything ready…</div>';
+  const slow = slowNote('#app', 'Getting everything ready… the first load can take a few extra seconds.');
   const body = S.preview ? { action: 'jr_me', preview: S.preview, pw: S.pw } : { action: 'jr_me', token: tokenGet() };
   const r = await api(body, 3);
   clearTimeout(slow);
