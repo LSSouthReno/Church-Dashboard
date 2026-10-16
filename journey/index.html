@@ -136,7 +136,7 @@
   .toast.show { opacity:1; }
   @media (max-width: 900px) { .g2, .g3 { grid-template-columns:1fr; } }
   /* one grid: desktop = balanced columns, phone = app order (For you → News → Coming up → …) */
-  .jg { display:grid; gap:16px; grid-template-columns:repeat(12,minmax(0,1fr)); }
+  .jg { display:grid; gap:16px; grid-template-columns:repeat(12,minmax(0,1fr)); align-items:start; }
   .jg > .a-foryou { grid-column:span 7; } .jg > .a-year { grid-column:span 5; } .jg > .a-news { grid-column:1/-1; }
   .jg > .a-coming, .jg > .a-pastor, .jg > .a-ms { grid-column:span 4; }
   .hero h1 { font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:-.01em; }
