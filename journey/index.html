@@ -259,7 +259,8 @@
     .me-h .av { width:54px; height:54px; }
     .t-home .hero { gap:6px; margin-bottom:12px; } .t-home .hero .av { width:52px; height:52px; font-size:19px; }
     .t-home .hero h1 { font-size:24px; } .t-home .hero .s { font-size:13.5px; line-height:1.5; }
-    .a-coming .fact .k { width:auto; min-width:92px; white-space:nowrap; }
+    .fact .k.dk { width:auto; min-width:92px; white-space:nowrap; }
+    .flist { max-height:none; overflow:visible; }
   }
   /* "Get the app" card (phones that haven't installed it yet) */
   .getapp { display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--gold-line); border-radius:14px; padding:14px 16px; margin:0 0 18px; }
@@ -477,7 +478,7 @@ function stepsHtml(d) {
 function viewHome(d) {
   const p = d.person || {}, first = (p.first || '').split(' ')[0];
   const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' }), who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
-  const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
+  const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
   return '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '<div class="av ini">' + esc((first || '?').charAt(0)) + '</div>') + '<div><h1>' + greeting() + ', ' + esc(first) + '!</h1>' +
       '<div class="s">' + who + ' been part of Living Stones since ' + esc(sinceY) + '. Here’s where you are, and a next step or two.</div></div></div>' +
     badgesHtml(d) + seeYouHtml(d) +
@@ -537,8 +538,8 @@ function loadEvents(d) {
     _evShown = show.map(it => it.e);
     if (!j) { box.innerHTML = 'Couldn’t load events just now — see the <a href="' + CC + '/calendar" target="_blank" rel="noopener">church calendar</a>.'; return; }
     if (!show.length) { box.className = 'dim'; box.innerHTML = _evFilter === 'you' ? 'Nothing picked out just for you right now — browse All.' : 'Nothing coming up here right now.'; return; }
-    const wk = dk => { const dd = key(dk), diff = Math.floor((dd - today) / 864e5), dow = today.getDay();
-      return diff < 7 - dow ? 'This week' : diff < 14 - dow ? 'Next week' : dd.toLocaleDateString('en-US', { month: 'long' }); };
+    const wk = dk => { const dd = key(dk), diff = Math.floor((dd - today) / 864e5), m = dd.toLocaleDateString('en-US', { month: 'long' });
+      return diff < 7 ? 'Next 7 days' : dd.getMonth() === today.getMonth() && dd.getFullYear() === today.getFullYear() ? 'Later in ' + m : m; };
     let last = '', html = '';
     show.forEach((it, i) => { const e = it.e, g = wk(e.dateKey); if (g !== last) { html += '<h4 class="evh">' + g + '</h4>'; last = g; }
       const img = e.img || (e.imgLocal ? '/' + e.imgLocal : '');
@@ -573,7 +574,8 @@ function icsFor(e) {
   return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Living Stones South Reno//App//EN', 'BEGIN:VEVENT',
     'UID:' + day(e.dateKey) + '-' + String(e.name).trim().replace(/\W+/g, '-').slice(0, 40) + '@lssouthreno.com',
     'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', when, 'SUMMARY:' + q(String(e.name).trim()),
-    'LOCATION:' + q(e.location), 'URL:' + (e.url || ''), 'DESCRIPTION:' + q(e.desc || e.summary), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    'LOCATION:' + q(e.location), 'URL:' + (e.url || ''), 'DESCRIPTION:' + q(e.desc || e.summary), 'END:VEVENT', 'END:VCALENDAR']
+    .map(l => l.length <= 74 ? l : l.match(/.{1,73}/g).join('\r\n ')).join('\r\n');   // fold long lines (RFC 5545)
 }
 function addToCal(i) {
   const e = _evShown[i]; if (!e) return;
@@ -593,7 +595,7 @@ function viewConnect(d) {
           : '<div class="dim">You’re not in a group yet. Most of us found our closest friends in one.</div><div class="acts2">' + ext(L.groups, 'Find a group', 'btn p') + '</div>') + '</div>' +
       '<div class="card a-half"><div class="card-h"><h3>Your teams</h3>' + (sv.servedThisYear ? '<span class="c">served ' + sv.servedThisYear + '× this year</span>' : '') + '</div>' +
         (teams.length ? teams.map(x => '<div class="fact"><div class="v"><b>' + esc(x.name || x) + '</b></div></div>').join('') +
-          (serveUp.length ? '<div class="sub-h">You’re scheduled</div>' + serveUp.map(u => '<div class="fact"><div class="k">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('') : '') +
+          (serveUp.length ? '<div class="sub-h">You’re scheduled</div>' + serveUp.map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('') : '') +
           '<div class="acts2">' + ext(L.me, 'Schedule &amp; block-out dates', 'btn sm') + '</div>'
           : '<div class="dim">You’re not on a serve team yet. There’s a spot that fits how God made you.</div><div class="acts2">' + ext(L.serve, 'Find a team', 'btn p') + '</div>') + '</div>' +
     '</div>' +
@@ -611,7 +613,9 @@ function loadFind() {
     const q = (($('grpQ') || {}).value || '').toLowerCase().trim();
     const groups = (((dd || {}).communityGroupsDetailed || {}).groupAttendance || []).filter(g => !q || (g.name + ' ' + (g.schedule || '')).toLowerCase().indexOf(q) >= 0);
     gl.className = groups.length ? 'flist' : 'dim';
-    gl.innerHTML = groups.length ? groups.slice(0, 40).map(g => '<a class="frow" href="' + esc(L.groups) + '" target="_blank" rel="noopener"><b>' + esc(g.name) + '</b><small>' + esc(g.schedule || 'Ask about times') + (g.members ? ' · ' + g.members + ' people' : '') + '</small></a>').join('')
+    const lim = q ? 40 : 12;
+    gl.innerHTML = groups.length ? groups.slice(0, lim).map(g => '<a class="frow" href="' + esc(L.groups) + '" target="_blank" rel="noopener"><b>' + esc(g.name) + '</b><small>' + esc(g.schedule || 'Ask about times') + (g.members ? ' · ' + g.members + ' people' : '') + '</small></a>').join('')
+      + (groups.length > lim ? '<div class="dim" style="padding:10px 4px">' + (groups.length - lim) + ' more — search to find one, or <a href="' + esc(L.groups) + '" target="_blank" rel="noopener">see them all in Church Center</a>.</div>' : '')
       : (dd ? 'No groups match that — try another word.' : 'Couldn’t load groups — <a href="' + esc(L.groups) + '" target="_blank" rel="noopener">browse them in Church Center</a>.');
     const teams = ((dd || {}).serveTeams || []).filter(x => (+x.needed || 0) > (+x.current || 0)).sort((a, b) => (b.needed - b.current) - (a.needed - a.current));
     tl.className = teams.length ? 'flist' : 'dim';
