@@ -109,3 +109,35 @@ Apps Script can't sign Web Push messages itself, but it **can** call **Firebase 
 
 - **"Sign in with Planning Center" inside the installed iPhone app.** The trip out to PCO and back can land in a browser sheet instead of the app. The texted code always works.
 - **Offline open.** Put the phone in Airplane Mode and open the app. It should open the app and say it can't reach the server. It should not show the browser's offline error page. Your details still need a connection. Before the App Store, show the last saved journey offline instead, because Apple's reviewers test this.
+
+## Replacing the Church Center app (Oct 16, 2026)
+
+Brad's goal: the Living Stones app takes the place of the lssr.churchcenter.com app, and every link points to it.
+
+**What the app is:** `/journey/`, renamed "Living Stones". Everyone signs in with their phone number and a texted code, and there's no guest mode. It has five tabs:
+- **Home:** greeting, step badges, encouragement, *For you* next steps, *This Sunday* (sermon, series, times), coming up, and news.
+- **Events:** every public church event, tagged for the person. Each opens a detail sheet with Register / Details and Add to my calendar (an `.ics` file).
+- **Connect:** their groups and teams, serving dates, leader rosters, a group finder, and teams that need people.
+- **Give:** their giving rhythm (never amounts), with Give now and recurring giving.
+- **Me:** their journey and milestones, the year at a glance, their pastor (note or prayer), Church Center shortcuts, the theme switch, and sign out.
+
+**Church Center stays the engine.** Payments, registrations, group and team sign-ups, profile edits and kids check-in all still happen there. Each button goes to the exact Church Center page: `/giving`, `/registrations/events/<id>`, `/calendar/event/<id>`, the group finder, serve teams with open sign-up, baptism form 764941, `/me` and `/check-ins`.
+
+**Short links** (in `404.html`) open the app on the right tab after sign-in:
+
+| Short link | Opens |
+|---|---|
+| `/app` | Home |
+| `/events` | Events |
+| `/give` | Give |
+| `/connect` | Connect |
+| `/me` | Me |
+| `/prayer` | Me, with the prayer request form open |
+
+`/next` also goes to Home.
+
+**Staff page `/links/`:** each short link with a copy button, a downloadable QR code, a table of which Church Center link each one replaces, and the rollout steps. Rollout: Sunday slide, website buttons, emails and texts, signs, and a card on the Church Center home page pointing to `/app`.
+
+**Not yet possible without backend work:**
+- Joining a specific group inside the app. The group finder opens Church Center's list, because the public data has no per-group sign-up links.
+- Push reminders. See the PWA / Capacitor notes above.
