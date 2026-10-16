@@ -14,7 +14,9 @@
   var de = document.documentElement;
   function choose() {
     try {
-      var q = new URLSearchParams(location.search);
+      var q = new URLSearchParams(location.search), r = q.get('r');
+      // Clean URLs arrive via 404.html as /?r=%2Fcalendar%3Ftv%3D1 — read the real query too.
+      if (r && r.charAt(0) === '/') new URL(r, location.origin).searchParams.forEach(function (v, k) { if (!q.has(k)) q.set(k, v); });
       if (q.get('theme') === 'classic' || q.get('theme') === 'soft') localStorage.setItem(KEY, q.get('theme'));
       if (q.get('tv') === '1' || sessionStorage.getItem('cal6_tv') === '1') return 'classic';
       if (window.innerWidth >= 2400) return 'classic';
