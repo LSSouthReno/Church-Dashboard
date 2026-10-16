@@ -287,6 +287,37 @@
   .one .sec > .quiet { border-top:0; }
   html[data-theme="soft"] .one .sec { border-top-color:rgba(74,58,30,.09); }
   html[data-theme="soft"] .one .evr { border-top-color:rgba(74,58,30,.07) !important; }
+  /* ── calm home: one column, big type, two cards, a short list of big links ── */
+  .home { max-width:620px; margin:0 auto; }
+  .home .hi { font-size:15px; font-weight:600; color:var(--muted); margin:6px 0 4px; }
+  .home .belong { padding:4px 0 30px; }
+  .wrap.one.home .b-h { font-size:clamp(46px, 11vw, 68px); line-height:.98; margin:0 0 14px; }
+  .lbl { font-size:11.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+  .hcard { background:var(--card); border-radius:24px; padding:24px 22px 20px; margin:0 0 30px; box-shadow:0 1px 2px rgba(74,58,30,.05), 0 12px 32px rgba(74,58,30,.08); }
+  .hcard h2 { font-size:26px; line-height:1.2; margin:0 0 8px; font-weight:700; letter-spacing:-.015em; }
+  .hcard p { color:var(--muted); font-size:16px; line-height:1.55; margin:0 0 18px; }
+  .hcard .btn.big { width:100%; padding:15px 18px; font-size:16px; border-radius:14px; }
+  .hcard .nx { display:flex; justify-content:center; gap:10px; margin-top:12px; font-size:14px; color:var(--dim); }
+  .hcard .nx a { color:var(--muted); text-decoration:none; font-weight:600; }
+  .sun { margin:0 0 30px; padding:0 2px; }
+  .sun-big { font-size:clamp(28px, 7vw, 36px); line-height:1.12; font-weight:700; margin:0 0 8px; letter-spacing:-.02em; }
+  .sun-meta { color:var(--muted); font-size:15px; }
+  .rows .r { display:grid; grid-template-columns:96px 1fr; gap:12px; padding:13px 0; border-top:1px solid var(--line); font-size:16px; line-height:1.35; }
+  .rows .r:first-child { border-top:0; padding-top:2px; }
+  .rows .d { color:var(--muted); font-size:13px; font-weight:700; padding-top:2px; }
+  .hcard .more { display:inline-block; margin-top:6px; font-weight:700; font-size:14.5px; color:var(--gold); text-decoration:none; }
+  .biglinks { margin:4px 0 20px; }
+  .biglinks a { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:19px 2px; border-top:1px solid var(--line); font-size:22px; font-weight:600; letter-spacing:-.01em; color:var(--text); text-decoration:none; }
+  .biglinks a:last-child { border-bottom:1px solid var(--line); }
+  .biglinks a:hover { color:var(--gold); }
+  .biglinks .chv { width:22px; height:22px; }
+  .pg-back { appearance:none; background:none; border:0; padding:6px 0 14px; color:var(--gold); font:700 15px 'Montserrat',sans-serif; cursor:pointer; }
+  .top-me { appearance:none; width:36px; height:36px; border-radius:50%; border:0; padding:0; overflow:hidden; background:var(--gold-bg); color:var(--gold); font:800 15px 'Montserrat',sans-serif; cursor:pointer; }
+  .top-me img { width:100%; height:100%; object-fit:cover; }
+  .grat { font-size:17px; line-height:1.5; margin:-4px 0 22px; }
+  .tabbar:empty, .ttabs:empty { display:none !important; }
+  body.app-in:not(.embed) .wrap.one { padding-bottom:calc(40px + env(safe-area-inset-bottom)) !important; }
+  html[data-theme="soft"] .biglinks a, html[data-theme="soft"] .rows .r { border-color:rgba(74,58,30,.08); }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -516,21 +547,13 @@ function ccLinks() { const L = (S.data && S.data.links) || {}; return {
   baptism: L.baptism || CC + '/people/forms/764941', membership: L.membership || '', me: L.churchCenter || CC + '/me',
   checkins: CC + '/check-ins', calendar: CC + '/calendar', registrations: CC + '/registrations/events' }; }
 function curTab() { const h = (location.hash || '').replace(/^#/, '').split('/')[0]; return TABS.some(x => x[0] === h) ? h : 'home'; }
-// One continuous page: the tabs are jump links to its sections.
+// A calm home, and one simple page per area (Events · Groups & teams · Give · Me). Back = ‹ Home.
 function go(tab) {
-  const el = document.getElementById('s-' + tab); if (!el) return;
-  history.replaceState(null, '', location.pathname + location.search + '#' + tab);
-  if (tab === 'home') window.scrollTo({ top: 0, behavior: 'smooth' }); else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setActiveTab(tab);
+  const h = tab && tab !== 'home' ? '#' + tab : '';
+  if ((location.hash || '') !== h) history.pushState(null, '', location.pathname + location.search + h);
+  viewJourney(); window.scrollTo(0, 0);
 }
-function setActiveTab(tab) { document.querySelectorAll('#ttabs button, #tabbar button, .seg button').forEach((b, i) => { const on = TABS[i % TABS.length][0] === tab; b.classList.toggle('on', on); on ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'); }); }
-let _spy = null;
-function spySections() {   // highlight the tab for the section you're reading
-  if (_spy) _spy.disconnect();
-  if (!('IntersectionObserver' in window)) return;
-  _spy = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setActiveTab(e.target.id.slice(2)); }); }, { rootMargin: '-35% 0px -60% 0px' });
-  document.querySelectorAll('.sec').forEach(s => _spy.observe(s));
-}
+window.addEventListener('popstate', () => { if (S.data) viewJourney(); });
 function tabsHtml() { const cur = curTab(); return TABS.map(x => '<button class="' + (x[0] === cur ? 'on' : '') + '" onclick="go(\'' + x[0] + '\')"' + (x[0] === cur ? ' aria-current="page"' : '') + '><svg viewBox="0 0 24 24">' + TAB_ICONS[x[0]] + '</svg><span>' + x[1] + '</span></button>').join(''); }
 function noTabs() { $('ttabs').innerHTML = ''; $('tabbar').innerHTML = ''; document.body.classList.remove('app-in'); }
 const ext = (href, label, cls) => '<a class="' + (cls || 'btn') + '" href="' + esc(href) + '" target="_blank" rel="noopener">' + label + '</a>';
@@ -540,23 +563,23 @@ function linkRow(href, icon, title, sub, onclick) {
 }
 
 function viewJourney() {
-  const d = S.data, p = d.person || {}; tellParent();
-  $('ttabs').innerHTML = tabsHtml(); $('tabbar').innerHTML = tabsHtml(); document.body.classList.add('app-in');
-  $('topR').innerHTML = EMBED ? '' : '<a class="btn g sm wide-only" href="/">Dashboard</a>';
+  const d = S.data, p = d.person || {}, first = (p.first || '').split(' ')[0]; tellParent();
+  $('ttabs').innerHTML = ''; $('tabbar').innerHTML = ''; document.body.classList.add('app-in');
+  $('topR').innerHTML = EMBED ? '' : '<a class="btn g sm wide-only" href="/">Dashboard</a><button class="top-me" onclick="go(\'me\')" aria-label="Me">' + (p.avatar ? '<img src="' + esc(p.avatar) + '" alt="">' : esc(first.charAt(0) || '·')) + '</button>';
   const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
   $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s app · buttons that send or save are turned off' +
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
-  const first = !S.rendered, y = window.scrollY;
-  const sec = (id, html) => '<section class="sec" id="s-' + id + '">' + html + '</section>';
-  $('app').innerHTML = '<div class="wrap one">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') +
-    sec('home', viewHome(d)) + sec('events', viewEvents(d)) + sec('connect', viewConnect(d)) + sec('give', viewGive(d)) + sec('me', viewMe(d)) + '</div>';
-  S.rendered = true;
-  loadSunday(); loadEvents(d); loadFind(); appCard(); spySections();
-  const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
-  const tab = curTab(), sub = (location.hash || '').split('/')[1];      // e.g. /prayer → #me/prayer opens the prayer sheet once signed in
-  if (first) { if (tab !== 'home') setTimeout(() => { const el = document.getElementById('s-' + tab); if (el) el.scrollIntoView({ block: 'start' }); setActiveTab(tab); }, 60); }
-  else window.scrollTo(0, y);                                         // re-renders (e.g. “Not right now”) keep your place
-  if (sub === 'prayer' || sub === 'note') { history.replaceState(null, '', location.pathname + location.search + '#' + tab); setTimeout(() => openSheet(sub), 250); }
+  const tab = curTab(), sub = (location.hash || '').split('/')[1], y = window.scrollY, same = S.rendered && S.lastTab === tab;
+  const page = tab === 'events' ? viewEvents(d) : tab === 'connect' ? viewConnect(d) : tab === 'give' ? viewGive(d) : tab === 'me' ? viewMe(d) : '';
+  $('app').innerHTML = tab === 'home' ? '<div class="wrap one home">' + viewHome(d) + '</div>'
+    : '<div class="wrap one page"><button class="pg-back" onclick="go(\'home\')">‹ Home</button>' + page + '</div>';
+  S.rendered = true; S.lastTab = tab;
+  if (tab === 'home') { loadHomeSunday(); loadComing(d); }
+  if (tab === 'events') loadEvents(d);
+  if (tab === 'connect') loadFind();
+  if (tab === 'me') { appCard(); const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2; }
+  if (same) window.scrollTo(0, y);                                    // quiet refreshes keep your place
+  if (sub === 'prayer' || sub === 'note') { history.replaceState(null, '', location.pathname + location.search + (tab === 'home' ? '' : '#' + tab)); setTimeout(() => openSheet(sub), 250); }
 }
 
 // ── Home: persistent encouragement, For you, This Sunday, coming up, news ─────────
@@ -612,17 +635,52 @@ function greetHtml(d) {
     '<div class="b-k">Ways to grow</div>' + badgesHtml(d) + '</section>';
 }
 function viewHome(d) {
-  const p = d.person || {}, first = (p.first || '').split(' ')[0];
-  const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' }), who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
-  const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
-  return belongHero() + greetHtml(d) +
-    '<div class="jg">' +
-      '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepsHtml(d).html + '</div>' +
-      '<div class="a-side">' +
-        '<div class="card a-sunday"><div class="card-h"><h3>This Sunday</h3></div><div id="jrSunday" class="dim">Loading…</div></div>' +
-        '<div class="card a-coming"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
-      '</div>' +
-    '</div>';
+  const p = d.person || {}, first = (p.first || '').split(' ')[0], v = dailyVerse();
+  const dm = dismissed(), now = Date.now();
+  const steps = (d.steps || []).filter(s => s.kind !== 'celebrate' && !(dm[s.id] > now));
+  const i = Math.min(S.stepIdx || 0, Math.max(0, steps.length - 1)), s = steps[i];
+  const act = !s ? '' : s.url ? ext(s.url, esc(s.btn || 'Take this step'), 'btn p big')
+    : '<button class="btn p big" onclick="openSheet(\'note\',' + JSON.stringify(String(s.action || '').replace(/^note:/, '')).replace(/"/g, '&quot;') + ')">' + esc(s.btn || 'Tell me more') + '</button>';
+  const next = s
+    ? '<section class="hcard"><div class="lbl">Your next step</div><h2>' + esc(s.title) + '</h2><p>' + esc(s.why) + '</p>' + act +
+      '<div class="nx"><a href="#" onclick="dismiss(\'' + esc(s.id) + '\');return false">Not right now</a>' +
+      (steps.length > 1 ? '<span>·</span><a href="#" onclick="S.stepIdx=' + ((i + 1) % steps.length) + ';viewJourney();return false">' + (i + 1) + ' of ' + steps.length + ' · Next ›</a>' : '') + '</div></section>'
+    : '<section class="hcard"><div class="lbl">Your next step</div><h2>You’re all caught up.</h2><p>' + gratitudeLine(d) + '</p></section>';
+  const L = (t, on, sub) => '<a href="#" onclick="' + on + ';return false"><span>' + t + (sub ? '<small>' + sub + '</small>' : '') + '</span>' + chev + '</a>';
+  return '<div class="hi">' + greeting() + ', ' + esc(first) + '</div>' +
+    '<section class="belong"><h1 class="b-h">You belong<br>to <em>Jesus.</em></h1><p class="b-v">' + esc(v[0]) + '<span>' + esc(v[1]) + '</span></p></section>' +
+    next +
+    '<section class="sun"><div class="lbl">This Sunday</div><div id="hSun"><h2 class="sun-big">Sunday gatherings</h2><div class="sun-meta">8:00 · 9:30 · 11:00</div></div></section>' +
+    '<section class="hcard"><div class="lbl">Coming up</div><div id="hComing" class="rows"><div class="dim">Loading…</div></div><a class="more" href="#events" onclick="go(\'events\');return false">All events ›</a></section>' +
+    '<nav class="biglinks" aria-label="More">' +
+      L('Events', 'go(\'events\')') + L('Groups &amp; teams', 'go(\'connect\')') + L('Give', 'go(\'give\')') +
+      L('Prayer request', 'openSheet(\'prayer\')') + L('Me', 'go(\'me\')') +
+    '</nav>';
+}
+function loadHomeSunday() {
+  const key = nextSundayKey();
+  Promise.all([eosData(), dashData()]).then(([eos, dash]) => {
+    const el = $('hSun'); if (!el) return;
+    const gather = ((eos && eos.calendar && eos.calendar.events) || []).find(e => e.dateKey === key && /sunday gathering/i.test(e.name || ''));
+    const plan = ((dash && dash.sundayPlans) || []).find(x => x.date === key), svc = plan && (plan.services || []).find(x => x.title) || null;
+    const times = gather ? String(gather.desc || '').replace(/^Join us Sundays at /i, '').replace(/\.$/, '') : '8:00, 9:30, or 11:00';
+    el.innerHTML = '<h2 class="sun-big">' + esc(svc ? svc.title.replace(/\s*\([^)]*\)\s*$/, '') : 'Sunday gatherings') + '</h2>' +
+      '<div class="sun-meta">' + fmtDate(key, { month: 'short', day: 'numeric' }) + ' · ' + esc(times || '8:00, 9:30, or 11:00') +
+      ' · <a href="https://maps.apple.com/?q=Living+Stones+South+Reno+95+Foothill+Dr+Reno+NV" target="_blank" rel="noopener">Directions</a></div>';
+  });
+}
+function loadComing(d) {
+  eosData().then(j => {
+    const el = $('hComing'); if (!el) return;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const mine = (d.upcoming || []).map(u => ({ date: u.date, what: u.what, mine: true }));
+    const seen = {}, evs = [];
+    ((j && j.calendar && j.calendar.events) || []).filter(e => e.visibleCC && !e.rbd && new Date(e.dateKey + 'T12:00:00') >= today && !/sunday gathering/i.test(e.name || ''))
+      .sort((a, b) => a.dateKey < b.dateKey ? -1 : 1).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (seen[k]) return; seen[k] = 1; evs.push({ date: e.dateKey, what: String(e.name).trim(), tag: newsTag(e.name || '', d) }); });
+    const rows = mine.concat(evs.filter(e => e.tag), evs.filter(e => !e.tag)).slice(0, 3);
+    el.innerHTML = rows.length ? rows.map(r => '<div class="r"><div class="d">' + fmtDate(r.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div>' + esc(r.what) + (r.mine ? ' <span class="pill">You</span>' : r.tag ? ' <span class="pill">For you</span>' : '') + '</div></div>').join('')
+      : '<div class="dim">Nothing on the calendar yet.</div>';
+  });
 }
 let _dashP = null;
 function dashData() { return (_dashP = _dashP || fetch('/dashboard-data.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)); }
@@ -795,7 +853,8 @@ function viewMe(d) {
   const theme = window.lssrTheme ? linkRow('', '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>', 'Look: ' + (lssrTheme.get() === 'soft' ? 'Soft' : 'Classic dark'), 'Switch to ' + (lssrTheme.get() === 'soft' ? 'Classic dark' : 'Soft'), 'lssrTheme.toggle()') : '';
   return '<div class="me-h"><div class="av ini">' + (p.avatar ? '<img src="' + esc(p.avatar) + '" alt="">' : esc((first || '?').charAt(0))) + '</div><div><h2>' + esc(p.name || first) + '</h2><div class="dim">' +
       'Your life at Living Stones' + (d.member ? ' · Family Member' : '') + (p.since ? ' · since ' + fmtDate(p.since, { month: 'long', year: 'numeric' }) : '') + '</div></div></div>' +
-    '<div class="card"><div class="card-h"><h3>Your journey</h3><span class="c">' + esc((SEASONS[si] || [])[1] || '') + ' season</span></div>' + path +
+    '<p class="grat">' + gratitudeLine(d) + '</p><div class="b-k">Ways to grow</div>' + badgesHtml(d) +
+    '<div class="card" style="margin-top:26px"><div class="card-h"><h3>Your journey</h3><span class="c">' + esc((SEASONS[si] || [])[1] || '') + ' season</span></div>' + path +
       '<div class="ms">' + (ms || '<div class="next">Your story is just getting started</div>') + '</div></div>' +
     '<div class="jg" style="margin-top:16px">' +
       '<div class="card a-half"><div class="card-h"><h3>Your year at Living Stones</h3></div>' + facts.map(f => '<div class="fact"><div class="k">' + f[0] + '</div><div class="v">' + f[1] + (f[2] ? '<small>' + f[2] + '</small>' : '') + '</div></div>').join('') + '</div>' +
