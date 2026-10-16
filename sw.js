@@ -2,9 +2,10 @@
 // NETWORK FIRST for everything on this site: every visit still gets the newest page and
 // data; the saved copy is used only when the network fails (offline / dropped Wi-Fi).
 // Other origins (Apps Script web apps, CDNs, fonts) are never touched.
-const CACHE = 'lssr-app-v3';
+const CACHE = 'lssr-app-v4';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './team-checklists.js', './conferences.js', './engagement.js', './theme.js',
-  './assets/ls-logo-white.png', './assets/ls-lockup-white.png', './assets/app/icon-192.png'];
+  './assets/ls-logo-white.png', './assets/ls-lockup-white.png', './assets/app/icon-192.png',
+  './journey/', './journey/manifest.webmanifest'];   // the member app (My Journey) opens offline too
 
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -35,6 +36,6 @@ self.addEventListener('fetch', e => {
       }
       return res;
     }).catch(() => caches.match(key).then(hit => hit ||
-      (req.mode === 'navigate' ? caches.match(url.origin + '/') : Response.error())))
+      (nav ? caches.match(url.origin + (own ? '/journey/' : '/')) : Response.error())))
   );
 });

@@ -30,7 +30,13 @@
     set: function (t) { try { localStorage.setItem(KEY, t === 'classic' ? 'classic' : 'soft'); } catch (e) {} location.reload(); },
     toggle: function () { window.lssrTheme.set(theme === 'soft' ? 'classic' : 'soft'); }
   };
-  if (theme !== 'soft') return;
+  // Browser/app bar color: the pages ship the Soft one (#f5f3ee, same as the app manifests); Classic goes dark.
+  if (theme !== 'soft') {
+    document.addEventListener('DOMContentLoaded', function () {
+      var m = document.querySelectorAll('meta[name="theme-color"]'); for (var i = 0; i < m.length; i++) m[i].setAttribute('content', '#141414');
+    });
+    return;
+  }
 
   /* ── color math (OKLab) ─────────────────────────────────────────────────────────── */
   function lin(c) { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }

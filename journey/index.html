@@ -5,8 +5,15 @@
 <script src="/theme.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#141414">
+<meta name="theme-color" content="#f5f3ee">
 <title>My Journey · Living Stones</title>
+<!-- The member app: installing from this page gives "Living Stones" (opens on /journey/; scope "/" so
+     the Dashboard link stays inside the app for staff). The staff app is /manifest.webmanifest. See APP-PLAN.md. -->
+<link rel="manifest" href="/journey/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Living Stones">
 <link rel="icon" type="image/png" href="/assets/app/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/app/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,6 +191,15 @@
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
   }
+  /* "Get the app" card (phones that haven't installed it yet) */
+  .getapp { display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--gold-line); border-radius:14px; padding:14px 16px; margin:0 0 18px; }
+  .getapp img { width:52px; height:52px; border-radius:12px; flex:none; }
+  .getapp b { display:block; font-size:15px; margin-bottom:2px; }
+  .getapp p { margin:0; color:var(--muted); font-size:13.5px; line-height:1.45; }
+  .getapp p svg { width:15px; height:15px; vertical-align:-2px; color:var(--gold); }
+  .getapp .acts { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .getapp .acts .btn.p { min-height:40px; }
+  .standalone .top { padding-top:env(safe-area-inset-top); height:calc(60px + env(safe-area-inset-top)); }
   html[data-theme="soft"] .top { background:rgba(255,255,255,.9); backdrop-filter:saturate(1.2) blur(12px); -webkit-backdrop-filter:saturate(1.2) blur(12px); }
 </style>
 </head>
@@ -259,7 +275,7 @@ function viewCode(msg) {
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
     (S.channel === 'sms'
       ? '<h1 style="font-size:26px">Check your texts</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, a 6-digit code is on its way.</p>'
-      : '<h1 style="font-size:26px">Check your email</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, we just emailed you a sign-in link. <b style="color:var(--text)">Tap “Open my journey”</b> in that email — or type the 6-digit code here.</p>') +
+      : '<h1 style="font-size:26px">Check your email</h1><p>If ' + esc(fmtPhone(d)) + ' is the number Living Stones has for you, we just emailed you a sign-in link. ' + (appStandalone() ? '<b style="color:var(--text)">Type the 6-digit code from that email here</b> (the button in the email opens your web browser instead of this app).</p>' : '<b style="color:var(--text)">Tap “Open my journey”</b> in that email — or type the 6-digit code here.</p>')) +
     '<input class="field code" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" oninput="this.value=this.value.replace(/\\D/g,\'\');if(this.value.length===6)checkCode()">' +
     '<button class="btn p" id="codeBtn" onclick="checkCode()">Open my journey</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
@@ -370,7 +386,7 @@ function viewJourney() {
   $('app').innerHTML = '<div class="wrap">' +
     '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '<div class="av ini">' + esc((first || '?').charAt(0)) + '</div>') + '<div><h1>' + greeting() + ', ' + esc(first) + '!</h1>' +
       '<div class="s">' + who + ' been part of Living Stones since ' + esc(sinceY) + '. You’re in ' + (SEASON_WORD[d.season] || 'a') + ' season — here’s the road so far, and a next step or two.</div></div></div>' +
-    badgesHtml(d) +
+    badgesHtml(d) + '<div id="jrApp"></div>' +
     path + seeYouHtml(d) +
     '<div class="jg">' +
       '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepHtml + '</div>' +
@@ -385,7 +401,7 @@ function viewJourney() {
     leadHtml(d.leading) +
     '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.' + (EMBED && !S.preview ? ' · <a href="#" onclick="logout();return false">Sign out of My Journey</a>' : '') + '</div>' +
   '</div>';
-  loadNews(d);
+  loadNews(d); appCard();
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
 }
 
@@ -513,10 +529,41 @@ async function sendNote(kind) {
 }
 async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; viewSignin(); tellParent(); }
 // Signed-in state for the dashboard (so it can label the tab).
+// ── the member app: "Add to Home Screen" (manifest: /journey/manifest.webmanifest, service worker: /sw.js) ──
+// Android/Chrome hands us an install prompt; iPhone needs Share → Add to Home Screen. Installed apps on
+// iPhone keep their own storage, so people sign in once more inside the app (the 90-day token then lives there).
+let _appPrompt = null;
+const APP_SNOOZE = 'lssr_app_snooze';
+function appStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+function appIsIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
+function appIsPhone() { return /iphone|ipad|ipod|android/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && Math.min(screen.width, screen.height) < 820); }
+function appCard() {
+  const el = $('jrApp'); if (!el) return;
+  let snoozed = false; try { snoozed = Number(localStorage.getItem(APP_SNOOZE) || 0) > Date.now(); } catch (e) {}
+  if (EMBED || S.preview || appStandalone() || snoozed || !appIsPhone() || !(_appPrompt || appIsIOS())) { el.innerHTML = ''; return; }
+  const share = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg>';
+  el.innerHTML = '<div class="getapp"><img src="/assets/app/icon-192.png" alt=""><div><b>Get the Living Stones app</b>' +
+    (_appPrompt ? '<p>One tap puts this page on your home screen — it opens full-screen, and you stay signed in.</p>' +
+                  '<div class="acts"><button class="btn p sm" onclick="appInstall()">Add to Home Screen</button><button class="btn g sm" onclick="appSnooze()">Not now</button></div>'
+                : '<p>Tap ' + share + ' <b style="display:inline;font-size:inherit">Share</b> at the bottom of Safari, then <b style="display:inline;font-size:inherit">Add to Home Screen</b>. Open it from your home screen and sign in once more — then you’re set.</p>' +
+                  '<div class="acts"><button class="btn g sm" onclick="appSnooze()">Not now</button></div>') +
+    '</div></div>';
+}
+async function appInstall() {
+  const p = _appPrompt; _appPrompt = null; if (!p) return appCard();
+  try { p.prompt(); const c = await p.userChoice; if (c && c.outcome === 'dismissed') appSnooze(7); else appCard(); } catch (e) { appCard(); }
+}
+function appSnooze(days) { try { localStorage.setItem(APP_SNOOZE, String(Date.now() + (days || 30) * 864e5)); } catch (e) {} appCard(); }
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); _appPrompt = e; appCard(); });
+window.addEventListener('appinstalled', () => { _appPrompt = null; appCard(); toast('Added — find Living Stones on your home screen.'); });
+
 function tellParent() { if (EMBED) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && String(S.data.person.first).split(' ')[0]) || '' }, location.origin); } catch (e) {} } }
 
 // ── start ────────────────────────────────────────────────────────────────────
 const EMBED = new URLSearchParams(location.search).get('embed') === '1';
+if (appStandalone()) document.documentElement.classList.add('standalone');
+if (!EMBED && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost'))
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
 // The dashboard's Sign out ends this session too.
 window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { tokenSet(''); S.data = null; viewSignin(); tellParent(); } });
 if (EMBED) {
