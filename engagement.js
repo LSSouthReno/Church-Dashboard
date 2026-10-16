@@ -303,7 +303,7 @@ function engChurchPaint(el, S, open, seed) {
         '</div>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="eng-btn" onclick="engPrintPathway()">Print the pathway poster</button><button class="eng-btn g" onclick="navGo(\'today\')">See My Journey</button></div>' +
       '</div>' +
-      '<div>' + engWheelSvg(S, open) + '<div class="eng-dim" style="text-align:center;margin-top:6px">Brighter = more Family Members have taken that step</div></div>' +
+      '<div>' + engWheelSvg(S, open) + '<div class="eng-dim" style="text-align:center;margin-top:6px">Stronger color = more Family Members have taken that step</div></div>' +
     '</div>' +
     '<div class="card"><div class="eng-k">The seven steps</div><div class="eng-steps">' +
       stepCards.map(c => (c[4] ? '<button class="eng-step lock" onclick="mmShowPrompt(function(){engChurchRender()})">' : '<div class="eng-step">') + engIcon(c[0]) + '<b>' + engE(c[1]) + '</b><span class="v">' + c[2] + '</span><span class="d">' + c[3] + '</span>' + (c[4] ? '</button>' : '</div>')).join('') +

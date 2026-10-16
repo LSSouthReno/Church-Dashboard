@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v3';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v4';
   var de = document.documentElement;
   function choose() {
     try {
@@ -67,8 +67,11 @@
     return CURVE[CURVE.length - 1][1];
   }
   var WARM = 1.25;   // ~72° hue: linen / warm charcoal
-  function mapRGB(r, g, b, a, shadow) {
-    var o = toOklch(r, g, b), L = o[0], C = o[1], h = o[2], out;
+  // mode: '' (normal) · 's' (box/text shadow) · 'h' (SVG stroke — often a dark halo behind text) · 'c' (chart)
+  function mapRGB(r, g, b, a, mode) {
+    var o = toOklch(r, g, b), L = o[0], C = o[1], h = o[2], out, shadow = mode === 's';
+    if (C >= .035 && (a < .6 || mode === 'c')) return null;   // tints & chart data colors read fine on light — keep them
+    if (mode === 'h' && a < 1 && L < .3) return 'rgba(251,249,244,' + a + ')';
     if (shadow) {                                     // soft, warm, faint shadows
       if (L < .5) return 'rgba(74,58,30,' + +(a * .28).toFixed(3) + ')';
       out = fromOklch(Math.min(L, .7), C, h); return 'rgba(' + out + ',' + +(a * .45).toFixed(3) + ')';
@@ -92,7 +95,8 @@
   var memo = {};
   function mapValue(v, shadow) {
     if (!v || v.indexOf('var(') === 0 && v.indexOf(',') < 0) return v;
-    var key = (shadow ? 's|' : 'c|') + v;
+    shadow = shadow || '';
+    var key = shadow + '|' + v;
     if (memo[key] !== undefined) return memo[key];
     var res = v.replace(RE, function (m, hex, r, g, b, a, name) {
       var R, G, B, A = 1;
@@ -102,14 +106,14 @@
       } else if (name) { var n = NAMED[name.toLowerCase()]; R = n[0]; G = n[1]; B = n[2]; }
       else { R = +r; G = +g; B = +b; if (a != null) A = /%$/.test(a) ? parseFloat(a) / 100 : +a; }
       if (A === 0) return m;
-      return mapRGB(R, G, B, A, shadow);
+      return mapRGB(R, G, B, A, shadow) || m;
     });
     memo[key] = res; return res;
   }
   window.lssrSoftColor = function (v) { return mapValue(String(v)); };
 
   var COLOR_PROP = /^(color|background|background-color|background-image|border|border-(top|right|bottom|left)(-color)?|border-color|border-(block|inline)(-start|-end)?(-color)?|outline|outline-color|box-shadow|text-shadow|fill|stroke|caret-color|accent-color|text-decoration|text-decoration-color|column-rule(-color)?|stop-color|--[\w-]+|-webkit-text-fill-color|-webkit-tap-highlight-color)$/;
-  function isShadow(p) { return /shadow/.test(p); }
+  function isShadow(p) { return /shadow/.test(p) ? 's' : p === 'stroke' || /text-stroke/.test(p) ? 'h' : ''; }
 
   /* ── stylesheet rules → soft twins ─────────────────────────────────────────────────── */
   var P = 'html[data-theme="soft"]';
@@ -214,7 +218,7 @@
     if (el.namespaceURI === 'http://www.w3.org/2000/svg') {
       ['fill', 'stroke', 'stop-color'].forEach(function (a) {
         var v = el.getAttribute(a); if (!v || mine['@' + a] === v) return;
-        var nv = mapValue(v); if (nv !== v) el.setAttribute(a, nv); mine['@' + a] = el.getAttribute(a);
+        var nv = mapValue(v, a === 'stroke' ? 'h' : ''); if (nv !== v) el.setAttribute(a, nv); mine['@' + a] = el.getAttribute(a);
       });
     }
     mapped.set(el, mine);
@@ -242,8 +246,8 @@
     for (var k in o) {
       if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
       var v = o[k];
-      if (typeof v === 'string' && /color$/i.test(k)) o[k] = mapValue(v);
-      else if (Array.isArray(v) && /color$/i.test(k)) o[k] = v.map(function (x) { return typeof x === 'string' ? mapValue(x) : x; });
+      if (typeof v === 'string' && /color$/i.test(k)) o[k] = mapValue(v, 'c');
+      else if (Array.isArray(v) && /color$/i.test(k)) o[k] = v.map(function (x) { return typeof x === 'string' ? mapValue(x, 'c') : x; });
       else if (v && typeof v === 'object' && k !== 'data' && !(v instanceof Element)) softenCfg(v, depth + 1);
     }
   }
