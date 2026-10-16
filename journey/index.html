@@ -226,7 +226,7 @@
   .me-h { display:flex; align-items:center; gap:14px; margin-bottom:18px; } .me-h h2 { margin:0; font-size:24px; font-weight:700; }
   .me-h .av { width:60px; height:60px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:var(--gold); background:var(--gold-bg); flex:none; } .me-h .av img { width:100%; height:100%; object-fit:cover; }
   .t-me .path { margin:4px 0 18px; }
-  @media (max-width: 900px) { .jg > .a-side, .jg > .a-half { grid-column:1/-1 !important; } .jg > .a-side { order:2; } .jg > .a-news { order:3; } .ttabs button span { display:none; } }
+  @media (max-width: 900px) { .jg > .a-side, .jg > .a-half { grid-column:1/-1 !important; } .jg > .a-side { order:2; } .jg > .a-news { order:3; } }
   /* ── "You belong to Jesus." — the core belief, set large over South Reno's contour lines ── */
   .belong { position:relative; overflow:hidden; border-radius:22px; padding:30px 28px 26px; margin-bottom:18px; border:1px solid var(--line);
     background:radial-gradient(120% 140% at 0% 0%, var(--card) 35%, var(--gold-bg) 100%); }
@@ -248,6 +248,19 @@
     -webkit-mask-image:radial-gradient(closest-side, #000 40%, transparent); mask-image:radial-gradient(closest-side, #000 40%, transparent); }
   html[data-theme="soft"] .signin::before { opacity:.2; }
   .signin .b-v { margin:0 auto 22px; }
+  /* Home, simplified: belief → one personal card → For you → this Sunday / coming up → news */
+  .t-home .belong { padding:26px 26px 22px; }
+  .t-home .b-h { font-size:clamp(34px, 5vw, 54px); margin:0 0 12px; }
+  .t-home .b-v { font-size:15px; }
+  .me-card { margin-bottom:16px; }
+  .mc-top { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .mc-top .b-av { width:44px; height:44px; font-size:17px; }
+  .mc-top b { display:block; font-size:16.5px; } .mc-top p { margin:2px 0 0; color:var(--muted); font-size:14px; line-height:1.45; }
+  .me-card .b-k { margin-bottom:10px; }
+  .me-card .badges { display:grid; grid-template-columns:repeat(6, minmax(0, 64px)); gap:6px; margin:0; }
+  .me-card .badge { width:auto; font-size:10.5px; } .me-card .badge i { width:38px; height:38px; } .me-card .badge svg { width:18px; height:18px; }
+  @media (max-width: 900px) { .wide-only { display:none !important; } }
+  @media (max-width: 720px) { .ttabs button span { display:none; } }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -266,6 +279,8 @@
     .news .nv { flex:0 0 78%; scroll-snap-align:start; }
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
+    .t-home .belong { padding:20px 18px 18px; } .t-home .b-h { font-size:36px; }
+    .me-card .badges { grid-template-columns:repeat(6, minmax(0, 1fr)); }
     .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
     .b-h { font-size:40px; margin:2px 0 12px; } .b-v { font-size:14.5px; margin-bottom:2px; }
     .signin .b-h { font-size:36px; }
@@ -517,17 +532,33 @@ function belongHero() {
   return '<section class="belong"><h1 class="b-h">You belong<br>to <em>Jesus.</em></h1>' +
     '<p class="b-v">' + esc(v[0]) + '<span>' + esc(v[1]) + '</span></p></section>';
 }
-// Then the personal part: greeting, ways to grow (invitations, not a score), gratitude.
+// Then one quiet personal card: greeting, a single thank-you, small step icons (invitations, not a score).
+function gratitudeLine(d) {
+  const sv = d.serving || {}, g = d.giving || {}, p = d.person || {}, now = new Date();
+  for (const m of (d.milestones || [])) {
+    if (!/baptiz/i.test(m.label || '') || !m.date) continue;
+    const b = new Date(String(m.date).length === 10 ? m.date + 'T12:00:00' : m.date), ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()), days = Math.round((ann - now) / 864e5);
+    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) { const n = now.getFullYear() - b.getFullYear(); return n + (n === 1 ? ' year' : ' years') + ' since your baptism. A day worth remembering.'; }
+  }
+  const lead = (d.groups || []).find(x => x.leader); if (lead) return 'Thank you for leading ' + esc(lead.name) + '.';
+  const team = ((sv.teams || [])[0] || {}).name;
+  if (team) return 'Thank you for serving on ' + (/\bteam$/i.test(team) ? 'the ' + esc(team) : 'the ' + esc(team) + ' team') + '.';
+  if ((d.groups || []).length) return 'Glad you’re doing life with ' + esc(d.groups[0].name) + '.';
+  if (g.any) return 'Thank you for your generosity.';
+  const yrs = p.since ? Math.floor((Date.now() - new Date(p.since)) / 3156e7) : 0;
+  return yrs >= 1 ? yrs + (yrs === 1 ? ' year' : ' years') + ' at Living Stones. We’re glad you’re here.' : 'We’re so glad you’re here.';
+}
 function greetHtml(d) {
   const p = d.person || {}, first = (p.first || '').split(' ')[0];
-  return '<div class="greet"><div class="b-hi">' + (p.avatar ? '<img class="b-av" src="' + esc(p.avatar) + '" alt="">' : '<span class="b-av">' + esc((first || '?').charAt(0)) + '</span>') + greeting() + ', ' + esc(first) + '</div>' +
-    '<div class="b-k">Ways to grow</div>' + badgesHtml(d) + '</div>';
+  return '<section class="card me-card"><div class="mc-top">' + (p.avatar ? '<img class="b-av" src="' + esc(p.avatar) + '" alt="">' : '<span class="b-av">' + esc((first || '?').charAt(0)) + '</span>') +
+    '<div><b>' + greeting() + ', ' + esc(first) + '</b><p>' + gratitudeLine(d) + '</p></div></div>' +
+    '<div class="b-k">Ways to grow</div>' + badgesHtml(d) + '</section>';
 }
 function viewHome(d) {
   const p = d.person || {}, first = (p.first || '').split(' ')[0];
   const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' }), who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
   const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
-  return belongHero() + greetHtml(d) + seeYouHtml(d) +
+  return belongHero() + greetHtml(d) +
     '<div class="jg">' +
       '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepsHtml(d).html + '</div>' +
       '<div class="a-side">' +
@@ -753,22 +784,6 @@ function badgeTap(k, on) {
   const el = !on && document.querySelector('.step[data-sid*="' + (k === 'member' ? 'member' : k) + '"]');
   if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); return; }
   toast(on ? b[1] + ' ✓ — thank you. That step matters.' : b[1] + ': ' + b[3] + '. Send your pastor a note anytime to talk about it.');
-}
-// ── "we see you" — recognize and encourage before we ask for anything ──────────
-function seeYouHtml(d) {
-  const out = [], sv = d.serving || {}, g = d.giving || {}, p = d.person || {};
-  const team = ((sv.teams || [])[0] || {}); if (sv.servedThisYear || team.name) out.push('🙌 Thank you for serving' + (team.name ? ' on the ' + esc(team.name) + ' team' : ' our church family'));
-  if ((d.groups || []).some(x => x.leader)) out.push('⭐ Thank you for leading ' + esc((d.groups.find(x => x.leader) || {}).name || 'your group'));
-  else if ((d.groups || []).length) out.push('🤝 Doing life with ' + esc(d.groups[0].name));
-  if (g.any && (g.recurring || g.months >= 9)) out.push('💛 Your generosity is changing lives in South Reno');
-  const yrs = p.since ? Math.floor((Date.now() - new Date(p.since)) / 3156e7) : 0;
-  if (yrs >= 1) out.push('🏡 ' + yrs + (yrs === 1 ? ' year' : ' years') + ' at Living Stones');
-  const now = new Date();
-  (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(String(m.date).length === 10 ? m.date + 'T12:00:00' : m.date);
-    const ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()); const days = Math.round((ann - now) / 864e5);
-    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) { const n = now.getFullYear() - b.getFullYear(); out.unshift('💧 ' + n + (n === 1 ? ' year' : ' years') + ' since your baptism — a day worth remembering'); } });
-  if (!out.length) out.push('👋 We’re so glad you’re part of Living Stones');
-  return out.length ? '<div class="seeyou">' + out.slice(0, 3).map(s => '<span>' + s + '</span>').join('') + '</div>' : '';
 }
 // ── news & events — kept apart from "For you"; the same events, tagged for this person ──
 let _newsP = null;
