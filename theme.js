@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v9';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v10';
   var de = document.documentElement;
   function choose() {
     try {
@@ -91,6 +91,7 @@
     if (mode === 'bg' && L > .6) return null;          // light/bright backgrounds already read on a light page
     if (mode === 'fg' && L < .3) return null;          // dark ink only ever sat on light or gold — keep it
     if (mode === 'bd' && L > .7) return null;
+    if (mode === 'bd' && C < .035) return 'rgba(74,58,30,' + (a < 1 ? +(a * .5).toFixed(3) : .07) + ')';   // sleek: neutral outlines become a whisper; shadows and tints do the separating
     if (C < .035) {                                   // neutrals (incl. the warm greys)
       var L2 = curve(L), C2 = L2 > .85 ? .006 + (1 - L2) * .05 : .008, h2 = C > .012 ? h : WARM;
       if (L2 >= .999) return a < 1 ? 'rgba(255,255,255,' + a + ')' : '#ffffff';
@@ -296,8 +297,22 @@ window.SOFT_POLISH = `
 html[data-theme="soft"] { --soft-ink:#2b2924; --soft-muted:#6d675d; --soft-line:#e8e3d9; --soft-bronze:#9c7a26; --soft-shadow:0 1px 2px rgba(74,58,30,.05), 0 6px 22px rgba(74,58,30,.06); }
 html[data-theme="soft"] body { font-weight: 450; }
 html[data-theme="soft"] img[src*="-white.png"]:not([data-keep-colors]) { filter: brightness(0); opacity: .82; }
-html[data-theme="soft"] .card, html[data-theme="soft"] .ch-tile, html[data-theme="soft"] #engCare .card { border-color: var(--soft-line); box-shadow: var(--soft-shadow); border-radius: 16px; }
-html[data-theme="soft"] .ch-tile:hover { border-color: #d9d1c2; }
+html[data-theme="soft"] .card, html[data-theme="soft"] .ch-tile, html[data-theme="soft"] #engCare .card, html[data-theme="soft"] .tmod-tcard, html[data-theme="soft"] .sd-section, html[data-theme="soft"] .tmod-metric, html[data-theme="soft"] .sh-metric, html[data-theme="soft"] .sh-person { border-color: transparent !important; box-shadow: var(--soft-shadow); border-radius: 16px; }
+html[data-theme="soft"] .ch-tile:hover, html[data-theme="soft"] .tmod-tcard:hover, html[data-theme="soft"] .sh-person:hover { box-shadow: 0 2px 4px rgba(74,58,30,.06), 0 10px 28px rgba(74,58,30,.09); }
+/* sleek controls: a soft fill instead of an outline */
+html[data-theme="soft"] .members-btn, html[data-theme="soft"] .nav-search, html[data-theme="soft"] .csv-btn, html[data-theme="soft"] .cal6-nbtn, html[data-theme="soft"] .cal6-vbtn, html[data-theme="soft"] .cal6-fbtn,
+html[data-theme="soft"] .sd-week-nav, html[data-theme="soft"] .sd-week-select, html[data-theme="soft"] .sd-print-btn, html[data-theme="soft"] .eng-btn.g, html[data-theme="soft"] .sh-search, html[data-theme="soft"] .sh-sort,
+html[data-theme="soft"] .eng-scope select, html[data-theme="soft"] .tmod-body input, html[data-theme="soft"] .tmod-body select, html[data-theme="soft"] #kpIn, html[data-theme="soft"] .me-prev-btn { border-color: transparent !important; background-color: rgba(74,58,30,.06); }
+html[data-theme="soft"] .cal6-vbtn.on, html[data-theme="soft"] .cal6-fbtn.on { background-color: #f3ecdb; }
+html[data-theme="soft"] .nav-signin { border-color: transparent !important; background: #f3ecdb; }
+html[data-theme="soft"] .ch-subnav button.on, html[data-theme="soft"] .eng-btn { border-color: transparent !important; }
+html[data-theme="soft"] .sh-metric, html[data-theme="soft"] .sh-person { border-left-width: 0 !important; }
+html[data-theme="soft"] .eng-step, html[data-theme="soft"] .eng-opp, html[data-theme="soft"] .eng-pc, html[data-theme="soft"] .eng-ins, html[data-theme="soft"] .eng-funnel div, html[data-theme="soft"] .team-row, html[data-theme="soft"] .avg-box,
+html[data-theme="soft"] .tmod-tstat, html[data-theme="soft"] .sd-team-card, html[data-theme="soft"] .sd-captain-card { border-color: transparent !important; background-color: #f8f6f1 !important; }
+html[data-theme="soft"] .eng-opp, html[data-theme="soft"] .eng-pc { border-top: 3px solid var(--c, var(--gold)) !important; }
+html[data-theme="soft"] .eng-ins { border-left: 3px solid var(--gold) !important; }
+html[data-theme="soft"] .eng-strip { border-color: transparent !important; }
+html[data-theme="soft"] .eng .eng-step { background-color: transparent !important; }
 html[data-theme="soft"] #topNav { background: rgba(255,255,255,.92) !important; backdrop-filter: saturate(1.2) blur(10px); border-bottom: 1px solid var(--soft-line) !important; box-shadow: 0 1px 0 rgba(74,58,30,.03); }
 html[data-theme="soft"] .ch-subnav button.on { background: #f3ecdb; color: #7a5e14; border-color: #e6d7b0; }
 html[data-theme="soft"] h1, html[data-theme="soft"] .tmod-title, html[data-theme="soft"] .page-title { letter-spacing: .01em; }
