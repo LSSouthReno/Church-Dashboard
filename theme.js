@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v5';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v6';
   var de = document.documentElement;
   function choose() {
     try {
@@ -67,7 +67,9 @@
     return CURVE[CURVE.length - 1][1];
   }
   var WARM = 1.25;   // ~72° hue: linen / warm charcoal
-  // mode: '' (normal) · 's' (box/text shadow) · 'h' (SVG stroke — often a dark halo behind text) · 'c' (chart)
+  // mode: '' · 's' shadow · 'h' SVG stroke (often a dark halo behind text) · 'c' chart ·
+  //       'bg' background · 'fg' text color · 'bd' border. Light "paper" islands the dark theme drew on
+  //       purpose (inputs, pills, print previews) keep their light backgrounds and dark text.
   function mapRGB(r, g, b, a, mode) {
     var o = toOklch(r, g, b), L = o[0], C = o[1], h = o[2], out, shadow = mode === 's';
     if (C >= .035 && (a < .6 || mode === 'c')) return null;   // tints & chart data colors read fine on light — keep them
@@ -78,6 +80,9 @@
     }
     if (a < 1 && L < .06) return a >= .35 ? 'rgba(34,28,18,' + +Math.min(.42, a * .7).toFixed(3) + ')' : 'rgba(40,30,15,' + +(a * .5).toFixed(3) + ')';
     if (a < 1 && L > .97 && C < .02) return 'rgba(52,40,22,' + +(a * .85).toFixed(3) + ')';
+    if (mode === 'bg' && L > .6) return null;          // light/bright backgrounds already read on a light page
+    if (mode === 'fg' && L < .3) return null;          // dark ink only ever sat on light or gold — keep it
+    if (mode === 'bd' && L > .7) return null;
     if (C < .035) {                                   // neutrals (incl. the warm greys)
       var L2 = curve(L), C2 = L2 > .85 ? .006 + (1 - L2) * .05 : .008, h2 = C > .012 ? h : WARM;
       if (L2 >= .999) return a < 1 ? 'rgba(255,255,255,' + a + ')' : '#ffffff';
@@ -114,7 +119,11 @@
   window.lssrSoftColor = function (v) { return mapValue(String(v)); };
 
   var COLOR_PROP = /^(color|background|background-color|background-image|border|border-(top|right|bottom|left)(-color)?|border-color|border-(block|inline)(-start|-end)?(-color)?|outline|outline-color|box-shadow|text-shadow|fill|stroke|caret-color|accent-color|text-decoration|text-decoration-color|column-rule(-color)?|stop-color|--[\w-]+|-webkit-text-fill-color|-webkit-tap-highlight-color)$/;
-  function isShadow(p) { return /shadow/.test(p) ? 's' : p === 'stroke' || /text-stroke/.test(p) ? 'h' : ''; }
+  function isShadow(p) {
+    return /shadow/.test(p) ? 's' : p === 'stroke' || /text-stroke/.test(p) ? 'h'
+      : /^background/.test(p) ? 'bg' : /^(color|-webkit-text-fill-color|caret-color|text-decoration-color)$/.test(p) ? 'fg'
+      : /^(border|outline|column-rule)/.test(p) ? 'bd' : '';
+  }
 
   /* ── stylesheet rules → soft twins ─────────────────────────────────────────────────── */
   var P = 'html[data-theme="soft"]';
