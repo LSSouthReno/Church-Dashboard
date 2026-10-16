@@ -315,7 +315,7 @@ async function api(body, tries) {
   }
 }
 // First call after a quiet spell can take a while (the server is waking up) — say so.
-function slowNote(el, msg) { return setTimeout(() => { const a = document.querySelector(el); if (a && /Loading|Gathering/.test(a.innerText)) a.innerHTML = '<div class="loading">' + msg + '</div>'; }, 6000); }
+function slowNote(el, msg) { return setTimeout(() => { const a = document.querySelector(el); if (a && /Loading|Gathering|Getting everything/.test(a.innerText)) a.innerHTML = '<div class="loading">' + msg + '</div>'; }, 6000); }
 function fmtDate(iso, opts) { if (!iso) return ''; const d = new Date(String(iso).length === 10 ? iso + 'T12:00:00' : iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US', opts || { month: 'short', year: 'numeric' }); }
 function fmtPhone(v) { const d = v.replace(/\D/g, '').slice(0, 10); if (d.length < 4) return d; if (d.length < 7) return '(' + d.slice(0, 3) + ') ' + d.slice(3); return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6); }
 
