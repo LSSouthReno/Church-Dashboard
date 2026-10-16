@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v4';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v5';
   var de = document.documentElement;
   function choose() {
     try {
@@ -86,7 +86,8 @@
       out = fromOklch(curve(L), Math.min(C * .35, .03), h);
     } else {                                          // accents: deepen so they read on white
       var L3 = L <= .6 ? L : .6 - (L - .6) * .35;
-      out = fromOklch(L3, C * (L > .8 ? 1.15 : 1), h);
+      if (L > .6 && h > 1.2 && h < 1.95) h -= (h - 1.2) * .6;   // darkened gold/yellow turns olive — nudge it to warm bronze
+      out = fromOklch(L3, C * (L > .8 ? 1.15 : 1.05), h);
     }
     return a < 1 ? 'rgba(' + out + ',' + a + ')' : '#' + out.map(function (v) { return (v < 16 ? '0' : '') + v.toString(16); }).join('');
   }
@@ -283,4 +284,8 @@ html[data-theme="soft"] .eng-strip { background: linear-gradient(90deg, #f6efdc,
 html[data-theme="soft"] .eng-btn { background: #f6efdc; border-color: #e1cf9f; color: #7a5e14; }
 html[data-theme="soft"] .eng-btn.g { background: #fff; border-color: var(--soft-line); color: var(--soft-muted); }
 html[data-theme="soft"] ::selection { background: #f0e3bd; }
+html[data-theme="soft"] .sh-newfam-banner { background: #fbf0cc !important; color: #4d3b06 !important; }
+html[data-theme="soft"] .sh-nf-who, html[data-theme="soft"] .sh-nf-who b { color: #4d3b06 !important; }
+html[data-theme="soft"] .sh-nf-who { border-top-color: rgba(77,59,6,.15) !important; }
+html[data-theme="soft"] .sh-person.sh-newfam { border-color: #e7c766 !important; background: #fffbef !important; box-shadow: var(--soft-shadow) !important; }
 `;

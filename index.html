@@ -17506,7 +17506,7 @@ function shRenderHealth() {
   cards.push(shMetric(seed?dash:shPct(pct.givingRegular),'Giving Regularly',seed?'after first sync':((s.recurring||0)+' recurring'),'accent-green'));
   cards.push(shMetric(seed?dash:(pct.givingGrowing!=null?shPct(pct.givingGrowing):dash),'Giving Growing',seed?'':'year over year','accent-green'));
   cards.push(shMetric(seed?dash:(s.notBaptized!=null?s.notBaptized:dash),'Not Baptized',seed?'':'no baptism on file','accent-amber'));
-  cards.push(shMetric(seed?dash:(s.overdue!=null?s.overdue:dash),'Check-in Overdue',seed?'':'&gt; 6 months','accent-amber'));
+  cards.push(shMetric(seed?dash:(s.overdue!=null?s.overdue:dash),'Check-in Overdue',seed?'':'over 6 months','accent-amber'));
   cards.push(shMetric(seed?dash:(s.needsAttention!=null?s.needsAttention:dash),'Needs Attention',seed?'':'weak / lost / out of contact','accent-red'));
   document.getElementById('shHealthGrid').innerHTML = cards.join('');
   const ttl = document.querySelector('#pastorModContent .sh-section-ttl');
