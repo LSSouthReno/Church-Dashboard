@@ -228,21 +228,20 @@
   .t-me .path { margin:4px 0 18px; }
   @media (max-width: 900px) { .jg > .a-side, .jg > .a-half { grid-column:1/-1 !important; } .jg > .a-side { order:2; } .jg > .a-news { order:3; } .ttabs button span { display:none; } }
   /* ── "You belong to Jesus." — the core belief, set large over South Reno's contour lines ── */
-  .belong { position:relative; overflow:hidden; border-radius:22px; padding:26px 26px 22px; margin-bottom:18px; border:1px solid var(--line);
+  .belong { position:relative; overflow:hidden; border-radius:22px; padding:30px 28px 26px; margin-bottom:18px; border:1px solid var(--line);
     background:radial-gradient(120% 140% at 0% 0%, var(--card) 35%, var(--gold-bg) 100%); }
   .belong::before { content:''; position:absolute; inset:-10%; background:url(/assets/belong-topo.svg) center/cover no-repeat; opacity:.35; pointer-events:none; }
   html[data-theme="soft"] .belong::before { opacity:.22; }
   .belong > * { position:relative; }
   .b-hi { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--muted); }
   .b-av { width:30px; height:30px; border-radius:50%; object-fit:cover; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:var(--gold); background:var(--gold-bg); flex:none; }
-  .b-h { margin:14px 0 12px; font-size:clamp(38px, 6vw, 60px); font-weight:800; line-height:1; letter-spacing:-.03em; }
+  .b-h { margin:4px 0 14px; font-size:clamp(40px, 6vw, 64px); font-weight:800; line-height:1.02; letter-spacing:-.03em; }
   .b-h em { font-style:normal; color:var(--gold); }
-  .b-v { margin:0 0 20px; max-width:620px; font-size:15.5px; line-height:1.55; color:var(--text); opacity:.88; }
-  .b-v span { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--dim); opacity:1; margin-left:4px; }
+  .b-v { margin:0; max-width:620px; font-size:15.5px; line-height:1.55; color:var(--text); opacity:.88; }
+  .b-v span { display:block; margin-top:8px; padding-top:8px; border-top:2px solid var(--gold); width:fit-content; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+  .greet { margin:4px 0 14px; } .greet .b-hi { margin-bottom:12px; font-size:15px; color:var(--text); }
   .b-k { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
   .belong .badges { margin:0; }
-  .signoff { display:flex; align-items:center; gap:14px; margin:34px auto 8px; max-width:520px; color:var(--gold); font-weight:700; font-size:13px; letter-spacing:.04em; }
-  .signoff::before, .signoff::after { content:''; flex:1; height:1px; background:var(--gold-line); }
   .signin .b-h { font-size:40px; margin:22px 0 12px; }
   .signin .b-v { margin:0 auto 22px; }
   /* phone = the member app (kept last so it wins over the base rules above) */
@@ -264,7 +263,7 @@
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
     .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
-    .b-h { font-size:38px; margin:12px 0 10px; } .b-v { font-size:14.5px; margin-bottom:16px; }
+    .b-h { font-size:40px; margin:2px 0 12px; } .b-v { font-size:14.5px; margin-bottom:2px; }
     .signin .b-h { font-size:36px; }
     /* the app on a phone: bottom tab bar, like any app */
     body.app-in:not(.embed) .tabbar { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:15; background:rgba(31,31,31,.96); border-top:1px solid var(--line); padding:4px 4px calc(4px + env(safe-area-inset-bottom)); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
@@ -349,9 +348,9 @@ function viewSignin(msg) {
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
   // or to the email on their Living Stones profile (a one-tap link + a code).
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
-    '<h1 class="b-h">You belong to <em>Jesus.</em></h1><p>And you belong here. Your next step, your groups and teams, events and giving: all in one place. Sign in with your phone number. No password.</p>' +
+    '<h1 class="b-h">You belong<br>to <em>Jesus.</em></h1><p>' + (c.channel === 'sms' ? 'Enter your phone number. We’ll text you a sign-in code.' : 'Enter your phone number. We’ll email you a sign-in link.') + '</p>' +
     '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
-    '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link') + '</button>' +
+    '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Send code' : 'Email me a link') + '</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
     '<div class="fine">Use the number you’ve given Living Stones. ' + (c.channel === 'sms' ? 'We’ll text you a code.' : 'We’ll email a one-tap sign-in link to the address we have for you.') +
     '<br><br><b style="color:var(--muted)">It’s private.</b> Only you, and the pastors who care for you, can see your information.</div></div>';
@@ -362,7 +361,7 @@ async function sendCode() {
   if (d.length !== 10) { $('err').textContent = 'Please enter your 10-digit mobile number.'; return; }
   const b = $('sendBtn'); b.disabled = true; b.textContent = 'Sending…';
   const r = await api({ action: 'jr_phone_start', phone: d });
-  if (!r.ok) { b.disabled = false; b.textContent = (S.cfg || {}).channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link'; $('err').textContent = r.error || 'Please try again.'; return; }
+  if (!r.ok) { b.disabled = false; b.textContent = (S.cfg || {}).channel === 'sms' ? 'Send code' : 'Email me a link'; $('err').textContent = r.error || 'Please try again.'; return; }
   S.phone = d; S.channel = r.channel || (S.cfg || {}).channel; viewCode();
 }
 function viewCode(msg) {
@@ -475,7 +474,7 @@ function viewJourney() {
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
   const tab = curTab();
   const body = tab === 'events' ? viewEvents(d) : tab === 'connect' ? viewConnect(d) : tab === 'give' ? viewGive(d) : tab === 'me' ? viewMe(d) : viewHome(d);
-  $('app').innerHTML = '<div class="wrap t-' + tab + '">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + body + (tab === 'home' ? '' : SIGNOFF) + '</div>';
+  $('app').innerHTML = '<div class="wrap t-' + tab + '">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + body + '</div>';
   if (tab === 'home') { loadNews(d); loadSunday(); appCard(); }
   if (tab === 'events') loadEvents(d);
   if (tab === 'connect') loadFind();
@@ -494,35 +493,37 @@ function stepsHtml(d) {
                : '<button class="btn p sm" onclick="openSheet(\'note\',' + JSON.stringify(String(s.action || '').replace(/^note:/, '')).replace(/"/g, '&quot;') + ')">' + esc(s.btn) + '</button>') +
         '<button class="btn g sm" onclick="dismiss(\'' + esc(s.id) + '\')">Not right now</button></div>' : '') +
       '</div></div>').join('')
-    : '<div class="dim">You’re all caught up for this season — thank you for how you’re showing up.</div>' };
+    : '<div class="dim">You’re all caught up. There’s nothing more to do here today.</div>' };
 }
 // ── "You belong to Jesus." — our core belief, the first thing anyone sees ─────────
-const BELONG_VERSES = [
-  ['I have called you by name; you are mine.', 'Isaiah 43:1'],
-  ['Whether we live or die, we belong to the Lord.', 'Romans 14:8'],
-  ['You also, like living stones, are being built into a spiritual house.', '1 Peter 2:5'],
-  ['See what great love the Father has given us, that we should be called children of God.', '1 John 3:1'],
-  ['No one will snatch them out of my hand.', 'John 10:28'],
-  ['You are no longer strangers, but members of God’s household.', 'Ephesians 2:19'],
-  ['You are not your own; you were bought at a price.', '1 Corinthians 6:19–20'],
-  ['I will never leave you nor forsake you.', 'Hebrews 13:5']
+const BELONG_VERSES = [   // short paraphrases (no quotation marks), one per day
+  ['Called by name; you are mine.', 'Isaiah 43:1'],
+  ['Members of God’s household.', 'Ephesians 2:19'],
+  ['Living stones, being built into a spiritual house.', '1 Peter 2:5'],
+  ['Nothing can separate us from God’s love in Christ.', 'Romans 8:39'],
+  ['You are Christ’s.', '1 Corinthians 3:23'],
+  ['See the Father’s love: we are called God’s children.', '1 John 3:1'],
+  ['One body in Christ, belonging to one another.', 'Romans 12:5'],
+  ['Whoever comes to me, I will never turn away.', 'John 6:37'],
+  ['Whether we live or die, we belong to the Lord.', 'Romans 14:8']
 ];
 function dailyVerse() { const d = new Date(), n = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); return BELONG_VERSES[n % BELONG_VERSES.length]; }
-function belongHero(d) {
-  const p = d.person || {}, first = (p.first || '').split(' ')[0], v = dailyVerse();
-  return '<section class="belong">' +
-    '<div class="b-hi">' + (p.avatar ? '<img class="b-av" src="' + esc(p.avatar) + '" alt="">' : '<span class="b-av">' + esc((first || '?').charAt(0)) + '</span>') + greeting() + ', ' + esc(first) + '</div>' +
-    '<h1 class="b-h">You belong to <em>Jesus.</em></h1>' +
-    '<p class="b-v">“' + esc(v[0]) + '” <span>' + esc(v[1]) + '</span></p>' +
-    '<div class="b-k">Living it out</div>' + badgesHtml(d) +
-  '</section>';
+function belongHero() {
+  const v = dailyVerse();
+  return '<section class="belong"><h1 class="b-h">You belong<br>to <em>Jesus.</em></h1>' +
+    '<p class="b-v">' + esc(v[0]) + '<span>' + esc(v[1]) + '</span></p></section>';
 }
-const SIGNOFF = '<div class="signoff" aria-hidden="true"><span>You belong to Jesus.</span></div>';
+// Then the personal part: greeting, ways to grow (invitations, not a score), gratitude.
+function greetHtml(d) {
+  const p = d.person || {}, first = (p.first || '').split(' ')[0];
+  return '<div class="greet"><div class="b-hi">' + (p.avatar ? '<img class="b-av" src="' + esc(p.avatar) + '" alt="">' : '<span class="b-av">' + esc((first || '?').charAt(0)) + '</span>') + greeting() + ', ' + esc(first) + '</div>' +
+    '<div class="b-k">Ways to grow</div>' + badgesHtml(d) + '</div>';
+}
 function viewHome(d) {
   const p = d.person || {}, first = (p.first || '').split(' ')[0];
   const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' }), who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
   const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
-  return belongHero(d) + seeYouHtml(d) +
+  return belongHero() + greetHtml(d) + seeYouHtml(d) +
     '<div class="jg">' +
       '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepsHtml(d).html + '</div>' +
       '<div class="a-side">' +
@@ -561,7 +562,7 @@ function evKind(n) {
     : /mission|outreach|serve day|food|drive|trip/i.test(n) ? 'outreach' : 'other';
 }
 function viewEvents() {
-  return '<div class="ph"><h2>Events</h2><p class="muted">Everything coming up at Living Stones. Tap one to see details, register, or add it to your calendar.</p></div>' +
+  return '<div class="ph"><h2>Events</h2><p class="muted">Make time for life together. Tap any event for details, to register, or to add it to your calendar.</p></div>' +
     '<div class="chips" id="evF">' + EV_FILTERS.map(f => '<button class="' + (f[0] === _evFilter ? 'on' : '') + '" onclick="_evFilter=\'' + f[0] + '\';loadEvents(S.data)">' + f[1] + '</button>').join('') + '</div>' +
     '<div id="evList" class="dim">Loading…</div>';
 }
@@ -629,7 +630,7 @@ function addToCal(i) {
 function viewConnect(d) {
   const L = ccLinks(), sv = d.serving || {}, groups = d.groups || [], teams = sv.teams || [];
   const serveUp = (d.upcoming || []).filter(u => /serv/i.test(u.what || ''));
-  return '<div class="ph"><h2>Connect</h2><p class="muted">Your groups and teams, and a place for you if you’re looking.</p></div>' +
+  return '<div class="ph"><h2>Connect</h2><p class="muted">Find people to know and a place to serve.</p></div>' +
     '<div class="jg">' +
       '<div class="card a-half"><div class="card-h"><h3>Your groups</h3></div>' +
         (groups.length ? groups.map(g => '<div class="fact"><div class="v"><b>' + esc(g.name) + '</b>' + (g.leader ? ' <span class="pill">You lead this</span>' : '') + '</div></div>').join('') + '<div class="acts2">' + ext(L.groups, 'Open in Church Center', 'btn sm') + '</div>'
@@ -671,7 +672,7 @@ function viewGive(d) {
   const me = g.any ? (g.recurring ? 'You give regularly with a recurring gift — thank you. Your generosity is changing lives in South Reno and beyond.'
       : 'You gave in ' + g.months + ' of the last 12 months — thank you. A recurring gift can make generosity a rhythm instead of a reminder.')
     : 'Giving is a step of trust, not a transaction. Whenever you’re ready, it takes about a minute.';
-  return '<div class="ph"><h2>Give</h2><p class="muted">Generosity is part of following Jesus — it’s for you, not something the church needs from you.</p></div>' +
+  return '<div class="ph"><h2>Give</h2><p class="muted">Give toward the work we share in South Reno and beyond.</p></div>' +
     '<div class="jg">' +
       '<div class="card a-half give-hero"><div class="card-h"><h3>Your giving</h3></div><p class="gtxt">' + me + '</p>' +
         '<div class="give-acts">' + ext(L.giving, 'Give now', 'btn p big') + ext(L.giving, g.recurring ? 'Manage my recurring gift' : 'Set up recurring giving', 'btn big') + '</div>' +
@@ -701,7 +702,7 @@ function viewMe(d) {
   const pn = d.pastor && d.pastor.name ? d.pastor.name : '', pInit = pn ? pn.split(' ').map(x => x[0]).slice(0, 2).join('') : 'LS', pFirst = pn ? pn.split(' ')[0] : 'A pastor';
   const theme = window.lssrTheme ? linkRow('', '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>', 'Look: ' + (lssrTheme.get() === 'soft' ? 'Soft' : 'Classic dark'), 'Switch to ' + (lssrTheme.get() === 'soft' ? 'Classic dark' : 'Soft'), 'lssrTheme.toggle()') : '';
   return '<div class="me-h"><div class="av ini">' + (p.avatar ? '<img src="' + esc(p.avatar) + '" alt="">' : esc((first || '?').charAt(0))) + '</div><div><h2>' + esc(p.name || first) + '</h2><div class="dim">' +
-      (d.member ? 'Family Member' : 'Living Stones') + (p.since ? ' · since ' + fmtDate(p.since, { month: 'long', year: 'numeric' }) : '') + '</div></div></div>' +
+      'Your life at Living Stones' + (d.member ? ' · Family Member' : '') + (p.since ? ' · since ' + fmtDate(p.since, { month: 'long', year: 'numeric' }) : '') + '</div></div></div>' +
     '<div class="card"><div class="card-h"><h3>Your journey</h3><span class="c">' + esc((SEASONS[si] || [])[1] || '') + ' season</span></div>' + path +
       '<div class="ms">' + (ms || '<div class="next">Your story is just getting started</div>') + '</div></div>' +
     '<div class="jg" style="margin-top:16px">' +
@@ -752,7 +753,7 @@ function badgeTap(k, on) {
 // ── "we see you" — recognize and encourage before we ask for anything ──────────
 function seeYouHtml(d) {
   const out = [], sv = d.serving || {}, g = d.giving || {}, p = d.person || {};
-  if (sv.servedThisYear) out.push('🙌 You’ve served ' + sv.servedThisYear + (sv.servedThisYear === 1 ? ' time' : ' times') + ' this year');
+  const team = ((sv.teams || [])[0] || {}); if (sv.servedThisYear || team.name) out.push('🙌 Thank you for serving' + (team.name ? ' on the ' + esc(team.name) + ' team' : ' our church family'));
   if ((d.groups || []).some(x => x.leader)) out.push('⭐ Thank you for leading ' + esc((d.groups.find(x => x.leader) || {}).name || 'your group'));
   else if ((d.groups || []).length) out.push('🤝 Doing life with ' + esc(d.groups[0].name));
   if (g.any && (g.recurring || g.months >= 9)) out.push('💛 Your generosity is changing lives in South Reno');
@@ -761,7 +762,7 @@ function seeYouHtml(d) {
   const now = new Date();
   (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(String(m.date).length === 10 ? m.date + 'T12:00:00' : m.date);
     const ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()); const days = Math.round((ann - now) / 864e5);
-    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) { const n = now.getFullYear() - b.getFullYear(); out.unshift('💧 Happy baptism anniversary — ' + n + (n === 1 ? ' year!' : ' years!')); } });
+    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) { const n = now.getFullYear() - b.getFullYear(); out.unshift('💧 ' + n + (n === 1 ? ' year' : ' years') + ' since your baptism — a day worth remembering'); } });
   if (!out.length) out.push('👋 We’re so glad you’re part of Living Stones');
   return out.length ? '<div class="seeyou">' + out.slice(0, 3).map(s => '<span>' + s + '</span>').join('') + '</div>' : '';
 }
@@ -829,7 +830,7 @@ function openSheet(kind, prefill) {
   const pn = S.data && S.data.pastor && S.data.pastor.name ? S.data.pastor.name.split(' ')[0] : 'your pastor';
   $('sheet').innerHTML = '<h3>' + (kind === 'prayer' ? 'Share a prayer request' : 'Send ' + esc(pn) + ' a note') + '</h3>' +
     '<div class="dim">' + (kind === 'prayer' ? 'This goes to our prayer team, and ' + esc(pn) + ' is told too. It’s kept private.' : 'It goes straight to ' + esc(pn) + '.') + '</div>' +
-    '<textarea id="noteTxt" placeholder="' + (kind === 'prayer' ? 'How can we pray for you?' : 'Write a few words…') + '">' + esc(prefill || '') + '</textarea>' +
+    '<textarea id="noteTxt" placeholder="' + (kind === 'prayer' ? 'What would you like us to pray for?' : 'Write a few words…') + '">' + esc(prefill || '') + '</textarea>' +
     '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="btn g" onclick="closeSheet()">Cancel</button>' +
     '<button class="btn p" id="noteBtn" onclick="sendNote(\'' + kind + '\')"' + (S.preview ? ' disabled title="Turned off in preview"' : '') + '>Send</button></div>';
   $('sheetOv').classList.add('open');
@@ -842,7 +843,7 @@ async function sendNote(kind) {
   if (!text.trim()) return;
   b.disabled = true; b.textContent = 'Sending…';
   const r = await api({ action: 'jr_note', token: tokenGet(), kind: kind, text: text }, 1);
-  if (r.ok) { closeSheet(); toast(kind === 'prayer' ? 'Thank you — we’re praying with you.' : 'Sent. Thank you!'); }
+  if (r.ok) { closeSheet(); toast(kind === 'prayer' ? 'Your request has been sent. Thank you for sharing it with us.' : 'Sent. Thank you!'); }
   else { b.disabled = false; b.textContent = 'Send'; toast(r.error || 'That didn’t send — please try again.'); }
 }
 async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; viewSignin(); tellParent(); }
