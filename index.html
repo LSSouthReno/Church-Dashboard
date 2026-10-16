@@ -729,7 +729,7 @@
   .ch-body .ch-c.on.fill-row { display: flex; }
   .ch-body .ch-c.fill-row .chart-wrap { height: 300px; min-height: 0; flex: none; }
   .ch-body:not([data-tab="overview"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ch-body[data-tab="attendance"] .ch-c, .ch-body[data-tab="baptisms"] .ch-c, .ch-body[data-tab="members"] .ch-c, .ch-body[data-tab="serve"] .ch-c, .ch-body #budgetPieCard { grid-column: 1 / -1; }
+  .ch-body[data-tab="attendance"] .ch-c, .ch-body[data-tab="growth"] .ch-c, .ch-body[data-tab="serve"] .ch-c, .ch-body #budgetPieCard { grid-column: 1 / -1; }
   .ch-body .ch-c .chart-wrap.tall { height: 300px; }
   .ch-note { grid-column: 1 / -1; color: var(--text-muted); font-size: 13px; padding: 4px 2px 0; }
   @media (max-width: 1200px) {
@@ -3566,6 +3566,17 @@
     .sd-section { padding: 18px 16px; }
   }
   .belong-k { color: var(--gold); font-weight: 700; }
+  .me-prev-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(212,175,55,.45); background: var(--gold-soft); color: var(--gold); font: 700 12.5px 'Montserrat', sans-serif; cursor: pointer; }
+  .me-prev-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #mePrev { position: fixed; inset: 0; z-index: 4700; background: rgba(0,0,0,.45); display: none; justify-content: flex-end; }
+  #mePrev.open { display: flex; }
+  #mePrev .mp-panel { width: min(560px, 100vw); height: 100%; background: var(--bg); display: flex; flex-direction: column; box-shadow: -12px 0 40px rgba(0,0,0,.35); }
+  #mePrev .mp-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--card-border); background: var(--card-bg); }
+  #mePrev .mp-h b { display: block; font-size: 16px; } #mePrev .mp-h small { color: var(--text-muted); font-size: 12px; }
+  #mePrev .mp-h button { appearance: none; border: 1px solid var(--card-border); background: none; color: var(--text); width: 38px; height: 38px; border-radius: 10px; font-size: 16px; cursor: pointer; }
+  #mePrev iframe { flex: 1; width: 100%; border: 0; background: var(--bg); }
+  /* Simple nav: locked areas appear once you're signed in with access (sign in / ⌘K / the address still reach them) */
+  body:not(.staff-in) .nav-staffonly, body:not(.pastor-in) .nav-pastoronly, body:not(.signed-in) .nav-groupsonly { display: none !important; }
   /* Soft look: calmer page titles (Classic keeps the uppercase brand titles) */
   html[data-theme="soft"] .header h1, html[data-theme="soft"] .tmod-title, html[data-theme="soft"] .cal6-title { text-transform: none; font-weight: 700; letter-spacing: -.01em; }
   html[data-theme="soft"] .header h1 { font-size: 34px; }
@@ -3581,13 +3592,13 @@
 
   </div>
   <div class="nav-tabs" role="tablist">
-    <button class="nav-tab nav-today" data-tab="today" onclick="navGo('today')" title="Your private page — and, for staff, your day">My Journey</button>
+    <button class="nav-tab nav-today" data-tab="today" onclick="navGo('today')" title="Your next step, events, groups, giving — and, for staff, your day">Me</button>
     <button class="nav-tab active" data-tab="church" onclick="navGo('church')">Church</button>
     <button class="nav-tab" data-tab="sunday" onclick="navGo('sunday')">Sunday</button>
     <button class="nav-tab" data-tab="serve" onclick="navGo('serve')">Serve</button>
-    <button class="nav-tab" data-tab="staff" onclick="navGo('staff')">Staff <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></button>
     <button class="nav-tab" data-tab="calendar" onclick="navGo('calendar')">Calendar</button>
-    <button class="nav-tab" data-tab="care" onclick="navGo('care')">Care <svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg></button>
+    <button class="nav-tab nav-staffonly" data-tab="staff" onclick="navGo('staff')">Staff</button>
+    <button class="nav-tab nav-pastoronly" data-tab="care" onclick="navGo('care')">Care</button>
   </div>
   <div class="nav-right"><button class="nav-search" onclick="kpOpen()" title="Search (⌘K)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Search</span><kbd>⌘K</kbd></button><div id="navAuth"></div></div>
 </nav>
@@ -3601,18 +3612,19 @@
 <div id="lsToast" role="status"></div>
 <!-- Installed phone app only: bottom tab bar (replaces the top tabs) -->
 <nav id="appTabs" aria-label="Sections">
-  <button data-tab="today" onclick="appTab('today')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Journey</button>
+  <button data-tab="today" onclick="appTab('today')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Me</button>
   <button data-tab="church" onclick="appTab('church')"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Church</button>
   <button data-tab="sunday" onclick="appTab('sunday')"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 4v16"/></svg>Sunday</button>
-  <button data-tab="serve" onclick="appTab('serve')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M16 5a3 3 0 010 6M21 20c0-2-1.5-4-4-4.7"/></svg>Serve</button>
   <button data-tab="calendar" onclick="appTab('calendar')"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
   <button data-tab="more" onclick="appMore(event)"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button>
 </nav>
 <div id="appMoreMenu" role="menu">
-  <button onclick="appTab('staff')">Staff</button>
-  <button onclick="appTab('care')">Care</button>
-  <button onclick="appTab('groups')">Community Groups</button>
+  <button onclick="appTab('serve')">Serve</button>
   <button onclick="appTab('leaders')">Leader toolkit</button>
+  <button class="nav-staffonly" onclick="appTab('staff')">Staff</button>
+  <button class="nav-pastoronly" onclick="appTab('care')">Care</button>
+  <button class="nav-groupsonly" onclick="appTab('groups')">Community groups</button>
+  <button onclick="document.getElementById('appMoreMenu').classList.remove('open');kpOpen()">Search</button>
   <button id="appMoreAuth" onclick="signInOpen()">Sign in</button>
 </div>
 <!-- One-time "Add to Home Screen" prompt (phones, not already installed) -->
@@ -3661,7 +3673,7 @@
     </div>
 
     <div class="stack">
-      <div class="card ch-c" data-ch="baptisms" id="baptismsCard">
+      <div class="card ch-c" data-ch="growth" id="baptismsCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Baptisms</h2>
           <span id="baptismsTotalBadge" style="font-size:13px;color:#818cf8;font-weight:700;padding-top:2px;"></span>
@@ -3671,7 +3683,7 @@
         <div class="chart-wrap"><div class="chart-inner"><canvas id="baptismsChart"></canvas></div></div>
       </div>
 
-      <div class="card ch-c" data-ch="members" id="membersGrowthCard">
+      <div class="card ch-c" data-ch="growth" id="membersGrowthCard">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;">
           <h2 style="margin:0;">Church Members</h2>
           <span id="membersTotalBadge" style="font-size:13px;color:#34d399;font-weight:700;padding-top:2px;"></span>
@@ -3913,7 +3925,7 @@
     </div>
     <div id="mmMain">
     <div class="mm-ttl">Sign in</div>
-    <div class="mm-msg" id="mmMsg">Only needed for giving detail, Staff, Care and your team page. Church, Sunday, Serve and Calendar are open to everyone.<br><br>Looking for your own page? The <a href="#" onclick="mmClosePrompt();navGo('today');return false" style="color:var(--gold)">My Journey</a> tab signs you in with your phone number.</div>
+    <div class="mm-msg" id="mmMsg">Only needed for giving detail, Staff, Care and your team page. Church, Sunday, Serve and Calendar are open to everyone.<br><br>Looking for your own page? <a href="#" onclick="mmClosePrompt();navGo('today');return false" style="color:var(--gold)">Me</a> signs you in with your phone number.</div>
     <input id="mmPwInput" type="password" placeholder="Last 4 of your phone, or passcode" autocomplete="off" inputmode="text"
            onkeydown="if(event.key==='Enter')mmDoUnlock()" />
     <button class="mm-btn" id="mmGo" onclick="mmDoUnlock()">Continue</button>
@@ -4953,7 +4965,7 @@
 
 <!-- Today: one-page summary (first tab; the page the site and phone app open to) -->
 <div class="tmod-overlay" id="todayModal" aria-hidden="true">
-  <div class="tmod-body" id="tdBody"><div id="tdInner"></div><div id="jrEmbedWrap"><div class="jr-embed-h" id="jrEmbedH">My Journey</div><iframe id="jrEmbed" title="My Journey" src="about:blank" scrolling="no"></iframe></div></div>
+  <div class="tmod-body" id="tdBody"><div id="tdInner"></div><div id="jrEmbedWrap"><div class="jr-embed-h" id="jrEmbedH" hidden></div><iframe id="jrEmbed" title="Me" src="about:blank" scrolling="no"></iframe></div></div>
 </div>
 
 <!-- Sunday One-sheet Modal -->
@@ -5811,7 +5823,7 @@ async function loadDashboardData() {
    CHURCH — overview tiles + sub-nav. The cards below are the same cards
    as before; each carries data-ch="…" naming the tabs it belongs to.
    ================================================================ */
-const CH_TABS = [['overview', 'Overview'], ['engagement', 'Engagement'], ['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Groups'], ['serve', 'Serve'], ['giving', 'Giving', 1]];
+const CH_TABS = [['overview', 'Overview'], ['engagement', 'Engagement'], ['attendance', 'Attendance'], ['growth', 'Members & baptisms'], ['groups', 'Groups'], ['serve', 'Serve'], ['giving', 'Giving', 1]];
 const CH_LK = '<svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg>';
 function chBuildSubnav() {
   const el = document.getElementById('chSubnav'); if (!el) return;
@@ -5856,8 +5868,8 @@ function chRenderTiles() {
   const tile = (tab, k, v, d, t, cls) => '<button class="ch-tile' + (cls ? ' ' + cls : '') + '" onclick="' + (tab === 'giving' && !giveOpen ? "mmShowPrompt(function(){chTab('giving')})" : "chTab('" + tab + "')") + '"><span class="k">' + k + '</span><span class="v">' + v + '</span><span class="d">' + d + '</span><span class="t ' + (t.cls || '') + '">' + (t.txt || '') + '</span></button>';
   el.innerHTML =
     tile('attendance', 'Weekend avg', avg != null ? avg.toLocaleString() : '—', 'adults + kids · last 4 weeks', delta == null ? {} : { txt: (delta >= 0 ? '▲ ' : '▼ ') + Math.abs(delta) + '% vs prior 4 weeks', cls: delta >= 0 ? 'up' : 'dn' }) +
-    tile('members', 'Members', M.current || '—', 'member · deacon · pastor', { txt: mNew ? '+' + mNew + ' this year' : '', cls: 'up' }) +
-    tile('baptisms', 'Baptisms ' + yr, bapYtd, (B.total || 0).toLocaleString() + ' all-time', { txt: '', cls: 'up' }) +
+    tile('growth', 'Members', M.current || '—', 'member · deacon · pastor', { txt: mNew ? '+' + mNew + ' this year' : '', cls: 'up' }) +
+    tile('growth', 'Baptisms ' + yr, bapYtd, (B.total || 0).toLocaleString() + ' all-time', { txt: '', cls: 'up' }) +
     tile('groups', 'In a group', cgm != null ? cgm : '—', grp != null ? grp + ' community groups' : '', (cgm != null && cgm2 != null) ? { txt: (cgm - cgm2 >= 0 ? '+' : '') + (cgm - cgm2) + ' since ' + E(cgMon), cls: cgm - cgm2 >= 0 ? 'up' : 'dn' } : {}) +
     tile('serve', 'Serving', D.uniqueVolunteers || '—', need ? need + ' positions · ' + gap + ' open' : '', fill != null ? { txt: fill + '% staffed', cls: fill >= 90 ? 'up' : fill >= 75 ? 'wn' : 'dn' } : {}) +
     (giveOpen
@@ -8156,7 +8168,7 @@ function navMenuToggle(e) {
   m.innerHTML = '<div class="nm-sub">Unlocked: ' + bits.join(' · ') + '</div>' +
     (a.staff ? '<button onclick="navMenuClose();navGo(\'today\')">Today</button><button onclick="navMenuClose();navGo(\'staff\')">My Snapshot</button>' : '') +
     (a.leader ? '<button onclick="navMenuClose();navGo(\'serve\');tmTab(\'myteam\')">My team</button>' : '') +
-    '<button onclick="navMenuClose();navGo(\'today\')">My Journey</button>' +
+    '<button onclick="navMenuClose();navGo(\'today\')">Me</button>' +
     '<button onclick="navMenuClose();signOut()">Sign out</button>';
   m.classList.add('open');
 }
@@ -8191,13 +8203,18 @@ function kpStaticItems() {
   add('Pages', 'Church · Engagement', 'pathway, next steps taken, engagement score', () => { navGo('church'); chTab('engagement'); });
   add('Pages', 'Care · Engagement', 'primed to engage, drifting, donor health', () => engOpenCare());
   add('Tools', 'Living Stones app: links & QR codes', 'short links, QR, replace Church Center links', () => window.open('/links/', '_blank'), '⇗');
-  [['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
+  [['attendance', 'Attendance'], ['growth', 'Members & baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
     add('Pages', 'Church · ' + t[1], '', () => { navGo('church'); chTab(t[0]); }));
   add('Pages', 'Sunday one-sheet', 'this Sunday: order of service, captains, teams', () => navGo('sunday'));
   add('Pages', 'Serve · Teams', 'every team, every gap', () => { navGo('serve'); tmTab('teams'); });
   add('Pages', 'Serve · Service history', '', () => { navGo('serve'); tmTab('svcs'); });
   add('Pages', 'Serve · Leader toolkit', 'checklist, templates, onboarding guide', () => { navGo('serve'); tmTab('toolkit'); });
-  add('Pages', 'My Journey', 'your private page · sign in with your phone', () => navGo('today'));
+  add('Pages', 'Me', 'your next step, events, groups, giving · sign in with your phone', () => navGo('today'));
+  add('Me', 'Events', 'everything coming up · register · add to calendar', () => meGo('events'));
+  add('Me', 'Give', 'give now · recurring · statements', () => meGo('give'));
+  add('Me', 'Find a group or team', 'your groups and teams · groups looking for people', () => meGo('connect'));
+  add('Me', 'Prayer request', 'goes to the prayer team and your pastor', () => meGo('me/prayer'));
+  add('Me', 'My profile', 'family · your pastor · kids check-in', () => meGo('me'));
   if (leaderMe()) add('Pages', 'Serve · My team', leaderMe().teams.join(', '), () => { navGo('serve'); tmTab('myteam'); });
   add('Pages', 'Calendar', '', () => navGo('calendar'));
   add('Pages', 'Care · Shepherding', pastorIn ? '' : 'pastors sign in', () => navGo('care'));
@@ -11907,7 +11924,7 @@ function cgpRenderDrawer(p, source) {
   document.getElementById('cgpDrawerHead').innerHTML = '<div class="sh-person-name">' + escapeHtml(p.name) + '</div><div class="sh-badges">' + paci + status +
     (p.membershipType ? '<span class="sh-badge" style="background:rgba(96,165,250,.15);color:#93c5fd">' + escapeHtml(p.membershipType) + '</span>' : '') +
     (card ? '<span class="sh-badge" style="background:' + CGP_COLORS[stIdx % 4] + '33;color:' + CGP_COLORS[stIdx % 4] + '">Pipeline: ' + escapeHtml(cgpStepName(card.stepId)) + '</span>' : '') +
-    (planted ? '<span class="sh-badge" style="background:rgba(45,212,191,.15);color:#5eead4">Planted ✓</span>' : '') + '</div>';
+    (planted ? '<span class="sh-badge" style="background:rgba(45,212,191,.15);color:#5eead4">Planted ✓</span>' : '') + '</div>' + mePreviewBtn(p.pid, p.first || p.name);
   // Snapshot — same story as the shepherding card, minus any giving amounts.
   const rows = [], g = p.giving;
   if (g) {
@@ -17813,8 +17830,8 @@ function shOpenDrawer(pid) {
     '<div class="sh-person-name">'+shEsc(p.name)+'</div><div class="sh-badges">'+shPaciBadge(p)
     + (p.status&&p.status!=='unknown'?'<span class="sh-badge st-'+p.status+'">'+SH_STATUS_LABEL[p.status]+'</span>':'')
     + '</div>'
-    // My Journey is link-only for now; pastors can see exactly what this person would see.
-    + '<button class="sh-save-btn" style="margin-top:8px" onclick="window.open(\'/journey/?preview='+encodeURIComponent(pid)+'#k='+_shPastorHash+'\',\'_blank\',\'noopener\')" title="See this person’s private My Journey page (preview — nothing is sent)">Preview My Journey ↗</button>';
+    // Pastors can see exactly what this person sees in their own app (read-only preview).
+    + mePreviewBtn(pid, p.first || p.name);
   document.getElementById('shDrawerBody').innerHTML = shStoryHtml(p) + shEditControlsHtml(p) + '<div class="sh-d-loading" id="shDetailLoading">Loading Planning Center details…</div>';
   document.getElementById('shDrawer').classList.add('open');
   document.getElementById('shDrawerOv').classList.add('open');
@@ -18296,6 +18313,36 @@ function jrSignOut() {
   const f = document.getElementById('jrEmbed'); if (f && f.contentWindow) { try { f.contentWindow.postMessage({ jrLogout: true }, location.origin); } catch (e) {} }
 }
 // My Journey lives at /journey/ (its own page, so the email one-tap link works); the tab embeds it.
+// ── "See their Me page": any person drawer can open that person's own app, read-only ──
+function mePreviewToken() { try { return (typeof _shPastorHash !== 'undefined' && _shPastorHash) || (pastorIdentity() || {}).token || ''; } catch (e) { return ''; } }
+function mePreviewBtn(pid, name) {
+  if (!pid || !mePreviewToken()) return '';
+  const first = String(name || '').trim().split(' ')[0];
+  return '<button class="me-prev-btn" onclick="mePreviewOpen(' + JSON.stringify(String(pid)).replace(/"/g, '&quot;') + ',' + JSON.stringify(first).replace(/"/g, '&quot;') + ')">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>See ' + escapeHtml(first ? first + '’s' : 'their') + ' Me page</button>';
+}
+function mePreviewOpen(pid, first) {
+  const tok = mePreviewToken(); if (!tok) { if (typeof lsToast === 'function') lsToast('Sign in as a pastor to preview someone’s Me page'); return; }
+  let ov = document.getElementById('mePrev');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'mePrev';
+    ov.innerHTML = '<div class="mp-panel" role="dialog" aria-label="Me page preview"><div class="mp-h"><div><b id="mpTitle"></b><small>Pastor preview · read-only, nothing is sent</small></div><button onclick="mePreviewClose()" aria-label="Close">✕</button></div><iframe id="mpFrame" title="Me page preview"></iframe></div>';
+    ov.addEventListener('click', e => { if (e.target === ov) mePreviewClose(); });
+    document.body.appendChild(ov);
+  }
+  document.getElementById('mpTitle').textContent = (first ? first + '’s' : 'Their') + ' Me page';
+  document.getElementById('mpFrame').src = '/journey/?preview=' + encodeURIComponent(pid) + '&embed=1#k=' + tok;
+  ov.classList.add('open');
+}
+function mePreviewClose() { const ov = document.getElementById('mePrev'); if (!ov) return; ov.classList.remove('open'); const f = document.getElementById('mpFrame'); if (f) f.src = 'about:blank'; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') mePreviewClose(); });
+function meGo(tab) {
+  navGo('today');
+  const f = document.getElementById('jrEmbed'); if (!f) return;
+  const w = f.contentWindow;
+  if (f.getAttribute('src') !== 'about:blank' && w && typeof w.go === 'function' && w.S && w.S.data) { const [t, sub] = String(tab).split('/'); w.go(t); if (sub && w.openSheet) setTimeout(() => w.openSheet(sub), 150); }
+  else f.src = '/journey/?embed=1#' + tab;
+}
 function jrEmbedMount() {
   const f = document.getElementById('jrEmbed'); if (!f) return;
   if (f.getAttribute('src') === 'about:blank') f.src = '/journey/?embed=1';
@@ -18304,7 +18351,7 @@ window.addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data) return;
   const f = document.getElementById('jrEmbed');
   if (f && e.data.jrHeight) f.style.height = Math.max(420, e.data.jrHeight + 8) + 'px';
-  if (typeof e.data.jrSignedIn === 'boolean') { _jrSignedIn = e.data.jrSignedIn; _jrFirst = e.data.jrFirst || ''; const hd = document.getElementById('jrEmbedH'); if (hd) hd.textContent = _jrFirst ? 'My Journey · ' + _jrFirst : 'My Journey'; try { navRefreshAuth(); } catch (x) {} }
+  if (typeof e.data.jrSignedIn === 'boolean') { _jrSignedIn = e.data.jrSignedIn; _jrFirst = e.data.jrFirst || '';  try { navRefreshAuth(); } catch (x) {} }
 });
 function closeTodayModal() {
   const m = document.getElementById('todayModal'); if (!m || !m.classList.contains('open')) return;

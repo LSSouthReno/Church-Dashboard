@@ -896,7 +896,7 @@ function appSnooze(days) { try { localStorage.setItem(APP_SNOOZE, String(Date.no
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); _appPrompt = e; appCard(); });
 window.addEventListener('appinstalled', () => { _appPrompt = null; appCard(); toast('Added — find Living Stones on your home screen.'); });
 
-function tellParent() { if (EMBED) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && String(S.data.person.first).split(' ')[0]) || '' }, location.origin); } catch (e) {} } }
+function tellParent() { if (EMBED && !S.preview) { try { parent.postMessage({ jrSignedIn: !!tokenGet(), jrFirst: (S.data && S.data.person && String(S.data.person.first).split(' ')[0]) || '' }, location.origin); } catch (e) {} } }
 
 // ── start ────────────────────────────────────────────────────────────────────
 const EMBED = new URLSearchParams(location.search).get('embed') === '1';
