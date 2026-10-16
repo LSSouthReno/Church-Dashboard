@@ -139,23 +139,6 @@
     .jg > .a-foryou { order:1; } .jg > .a-news { order:2; } .jg > .a-coming { order:3; } .jg > .a-year { order:4; } .jg > .a-pastor { order:5; } .jg > .a-ms { order:6; }
   }
   @media (max-width: 640px) {
-    /* app header: centered greeting, badges, encouragement */
-    .hero { flex-direction:column; text-align:center; gap:10px; margin-bottom:16px; }
-    .hero .av { width:72px; height:72px; }
-    .hero .s { font-size:14px; }
-    .badges { margin:0 0 14px; }
-    .seeyou { flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px 2px; scrollbar-width:none; }
-    .seeyou::-webkit-scrollbar { display:none; }
-    .seeyou span { flex:none; }
-    .path { margin:0 0 18px; }
-    .step .acts .btn.p { flex:1; min-height:44px; } .step .acts .btn.g { min-height:44px; }
-    .step b { font-size:16px; }
-    .news { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin:0 -16px; padding:0 16px 4px; scrollbar-width:none; }
-    .news::-webkit-scrollbar { display:none; }
-    .news .nv { flex:0 0 78%; scroll-snap-align:start; }
-    .card-h h3 { font-size:12px; }
-  }
-  @media (max-width: 640px) {
     .wrap { padding:22px 16px 60px; } .top { padding:0 16px; } .top .t { display:none; }
     .hero h1 { font-size:26px; } .path { overflow-x:auto; padding-bottom:6px; } .stop { min-width:96px; } .stop span { display:none; }
     .card { padding:18px 16px; } .fact .k { width:78px; }
@@ -182,6 +165,24 @@
   .nv div { padding:11px 13px 13px; display:flex; flex-direction:column; gap:4px; }
   .nv small { color:var(--muted); font-size:12.5px; } .nv b { font-size:15px; line-height:1.3; }
   .nv em { align-self:flex-start; font-style:normal; font-size:11px; font-weight:800; letter-spacing:.04em; color:#1a1407; background:var(--gold); border-radius:99px; padding:2px 8px; margin-bottom:2px; }
+  /* phone = the member app (kept last so it wins over the base rules above) */
+  @media (max-width: 640px) {
+    /* app header: centered greeting, badges, encouragement */
+    .hero { flex-direction:column; text-align:center; gap:10px; margin-bottom:16px; }
+    .hero .av { width:72px; height:72px; }
+    .hero .s { font-size:14px; }
+    .badges { margin:0 0 14px; }
+    .seeyou { flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px 2px; scrollbar-width:none; }
+    .seeyou::-webkit-scrollbar { display:none; }
+    .seeyou span { flex:none; }
+    .path { margin:0 0 18px; }
+    .step .acts .btn.p { flex:1; min-height:44px; } .step .acts .btn.g { min-height:44px; }
+    .step b { font-size:16px; }
+    .news { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin:0 -16px; padding:0 16px 4px; scrollbar-width:none; }
+    .news::-webkit-scrollbar { display:none; }
+    .news .nv { flex:0 0 78%; scroll-snap-align:start; }
+    .card-h h3 { font-size:12px; }
+  }
 </style>
 </head>
 <body>
