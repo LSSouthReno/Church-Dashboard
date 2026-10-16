@@ -721,7 +721,8 @@ function loadNewsCards(d) {
     const plan = ((dash && dash.sundayPlans) || []).find(x => x.date === key), svc = plan && (plan.services || []).find(x => x.title);
     const seen = {}, rest = [];
     const fyRe = S.homeStep ? (STEP_PHOTO[stepIconKey(S.homeStep.id)] || null) : null;   // don't repeat what For You already shows
-    evs.filter(e => !/sunday gathering/i.test(e.name || '') && e.img && !(fyRe && fyRe.test(e.name || ''))).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (!seen[k]) { seen[k] = 1; rest.push(e); } });
+    const teen = (d.kids || []).some(k => k.age >= 11 && k.age <= 18);
+    evs.filter(e => !/sunday gathering/i.test(e.name || '') && e.img && !(fyRe && fyRe.test(e.name || '')) && (teen || !/student|youth/i.test(e.name || ''))).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (!seen[k]) { seen[k] = 1; rest.push(e); } });
     rest.sort((a, b) => (newsTag(b.name || '', d) ? 1 : 0) - (newsTag(a.name || '', d) ? 1 : 0));
     const cards = [];
     if (sun) cards.push(Object.assign({}, sun, { _kick: 'This Sunday', _title: svc ? svc.title.replace(/\s*\([^)]*\)\s*$/, '') : 'Sunday gatherings', _meta: String(sun.desc || '8:00, 9:30, or 11:00').replace(/^Join us Sundays at /i, '').replace(/\.$/, '') }));
