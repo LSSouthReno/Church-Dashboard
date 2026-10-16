@@ -139,6 +139,11 @@
   .badge svg { width:22px; height:22px; fill:none; stroke:#6a655d; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
   .badge.on { color:var(--text); } .badge.on i { background:var(--gold); border-color:var(--gold); } .badge.on svg { stroke:#1a1407; }
   .badge:hover i { transform:translateY(-2px); }
+  @media (max-width:520px) {
+    .badges { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:4px; }
+    .badge { width:auto; font-size:10px; } .badge i { width:40px; height:40px; } .badge svg { width:19px; height:19px; }
+  }
+  @media (max-width:420px) { .top { gap:8px; } .top img { height:24px; } .top .btn.sm { padding:6px 9px; font-size:12px; } }
   .seeyou { display:flex; gap:8px; flex-wrap:wrap; margin:-12px 0 22px; }
   .seeyou span { background:var(--gold-bg); border:1px solid var(--gold-line); color:var(--text); border-radius:99px; padding:7px 13px; font-size:13.5px; line-height:1.3; }
   .step.flash { animation:flash 1.6s ease; } @keyframes flash { 0%,60% { background:var(--gold-bg); } 100% { background:none; } }
@@ -392,7 +397,8 @@ function seeYouHtml(d) {
   const now = new Date();
   (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(m.date);
     const ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()); const days = Math.round((ann - now) / 864e5);
-    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) out.push('💧 Happy baptism anniversary — ' + (now.getFullYear() - b.getFullYear()) + ' years!'); });
+    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) out.unshift('💧 Happy baptism anniversary — ' + (now.getFullYear() - b.getFullYear()) + ' years!'); });
+  if (!out.length) out.push('👋 We’re so glad you’re part of Living Stones');
   return out.length ? '<div class="seeyou">' + out.slice(0, 3).map(s => '<span>' + s + '</span>').join('') + '</div>' : '';
 }
 // ── news & events — kept apart from "For you"; the same events, tagged for this person ──
@@ -426,7 +432,8 @@ function loadNews(d) {
     box.innerHTML = show.length ? show.map(it => { const e = it.e, img = e.img || (e.imgLocal ? '/' + e.imgLocal : '');
       return '<a class="nv" href="' + esc(e.url || 'https://lssr.churchcenter.com/calendar') + '" target="_blank" rel="noopener">' + (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '') +
         '<div>' + (it.tag ? '<em>' + esc(it.tag) + '</em>' : '') + '<b>' + esc(String(e.name).trim()) + '</b><small>' + fmtDate(e.dateKey + 'T12:00:00', { weekday: 'short', month: 'short', day: 'numeric' }) + (e.time && !/^12:00 AM$/.test(e.time) ? ' · ' + esc(e.time) : '') + (it.repeats ? ' · and ' + (it.repeats >= 3 ? 'weekly' : 'more dates') : '') + '</small></div></a>'; }).join('')
-      : 'Nothing on the church calendar in the next couple of months.';
+      : j ? 'Nothing on the church calendar in the next couple of months.'
+          : 'Couldn’t load events just now — see the <a href="https://lssr.churchcenter.com/calendar" target="_blank" rel="noopener">church calendar</a>.';
     tellParent();
   });
 }

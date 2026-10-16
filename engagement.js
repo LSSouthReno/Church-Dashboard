@@ -35,7 +35,8 @@ function engPct(a, b) { return b ? Math.round(a / b * 100) : 0; }
 function engDayOfYear(d) { d = d || new Date(); return Math.max(1, Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5)); }
 function engGiveOpen() { try { return typeof mmIsUnlocked === 'function' && mmIsUnlocked(); } catch (e) { return false; } }
 function engCopy(text, btn) {
-  const done = () => { if (btn) { const t = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(() => { btn.textContent = t; }, 1600); } };
+  const label = btn ? (btn.dataset.label || (btn.dataset.label = btn.textContent)) : '';
+  const done = () => { if (btn) { if (!/^Copied/.test(btn.textContent)) btn.textContent = 'Copied ✓'; clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = label; }, 2400); } };
   try { navigator.clipboard.writeText(text).then(done, () => { engCopyFallback(text); done(); }); } catch (e) { engCopyFallback(text); done(); }
 }
 function engCopyFallback(text) { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
@@ -73,6 +74,10 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-step { background: #191919; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .eng-step .eng-ic { color: var(--gold); width: 24px; height: 24px; }
   .eng-step b { font-size: 13px; } .eng-step .v { font-size: 22px; font-weight: 800; } .eng-step .d { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+  button.eng-step { font-family: inherit; color: var(--text); text-align: left; cursor: pointer; border-style: dashed; } button.eng-step:hover { border-color: #555; }
+  .eng-strip { display: none; align-items: center; gap: 14px; flex-wrap: wrap; background: linear-gradient(90deg, rgba(212,175,55,.13), rgba(212,175,55,.03)); border: 1px solid rgba(212,175,55,.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; cursor: pointer; font-family: inherit; color: var(--text); text-align: left; width: 100%; }
+  .eng-strip.on { display: flex; } .eng-strip:hover { border-color: rgba(212,175,55,.55); }
+  .eng-strip b { font-size: 20px; font-weight: 800; } .eng-strip span { color: var(--text-muted); font-size: 13px; } .eng-strip .go { margin-left: auto; color: var(--gold); font-weight: 700; font-size: 13px; }
   .eng-step.lock .v { font-size: 13px; color: var(--text-dim); font-weight: 700; padding-top: 6px; }
   /* score */
   .eng-score { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
@@ -81,7 +86,7 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-ring svg { width: 150px; height: 150px; transform: rotate(-90deg); }
   .eng-ring .lbl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .eng-ring .lbl b { font-size: 36px; font-weight: 800; line-height: 1; } .eng-ring .lbl span { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-  .eng-bar { margin: 6px 0 14px; } .eng-bar .t { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .eng-bar { margin: 6px 0 14px; } .eng-bar .t { display: flex; gap: 10px; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
   .eng-bar .tr { height: 8px; background: #2a2a2a; border-radius: 99px; overflow: hidden; } .eng-bar .tr i { display: block; height: 100%; background: var(--gold); border-radius: 99px; }
   .eng-opps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
   @media (max-width: 560px) { .eng-opps { grid-template-columns: 1fr; } }
@@ -124,7 +129,7 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-donor { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
   @media (max-width: 760px) { .eng-donor { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .eng-stage { display: grid; grid-template-columns: 150px 1fr 54px; gap: 10px; align-items: center; padding: 7px 0; border-top: 1px solid var(--card-border); font-size: 13px; }
-  @media (max-width: 560px) { .eng-stage { grid-template-columns: 110px 1fr 44px; } }
+  @media (max-width: 560px) { .eng-stage { grid-template-columns: 1fr auto; } .eng-stage > div { grid-column: 1 / -1; order: 3; } }
   .eng-stage .tr { height: 10px; background: #262626; border-radius: 99px; overflow: hidden; } .eng-stage .tr i { display: block; height: 100%; border-radius: 99px; }
   .eng-stage .n { text-align: right; font-weight: 800; }
   .eng-months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; align-items: end; height: 150px; margin-top: 14px; }
@@ -227,6 +232,22 @@ function engCmp(now, then, label) {
   return '<span class="' + (d >= 0 ? 'eng-up' : 'eng-dn') + '">' + (d >= 0 ? '▲ ' : '▼ ') + Math.abs(d) + '%</span> ' + engE(label);
 }
 
+// Overview: one line that puts next steps beside attendance and giving ("noses, nickels & next steps")
+function engStripRender(tab) {
+  let el = document.getElementById('engStrip');
+  const tiles = document.getElementById('chTiles');
+  if (!el && tiles) { el = document.createElement('button'); el.id = 'engStrip'; el.className = 'eng-strip'; el.onclick = () => chTab('engagement'); tiles.parentNode.insertBefore(el, tiles); }
+  if (!el) return;
+  el.classList.toggle('on', tab === 'overview');
+  if (tab !== 'overview') return;
+  const S = engChurchStats(); if (!S) return;
+  engSeedPeople().then(seed => {
+    let teamYtd = 0; (seed || []).forEach(p => (p.serveTeams || []).forEach(t => { if (new Date(t.joinedAt || '').getFullYear() === S.yr) teamYtd++; }));
+    const total = S.bapYtd + S.memYtd + S.joinYtd + teamYtd + S.leadersNew;
+    el.innerHTML = engIcon('lead') + '<b>' + engN(total) + '</b><span>next steps taken in ' + S.yr + '</span><b style="margin-left:10px">' + (S.score != null ? S.score.toFixed(1) : '—') + '</b><span>engagement score</span><span class="go">Engagement →</span>';
+  });
+}
+
 let _engChart = null;
 function engChurchRender() {
   const el = document.getElementById('engChurch'); if (!el) return;
@@ -260,10 +281,10 @@ function engChurchPaint(el, S, open, seed) {
   ];
   const fmEngaged = S.fm1 + S.fm2 + S.fm3;
   // "If you knew, what would you do?" — each insight carries the action it implies
-  const levers = [['group', 'a group', S.fmGroup], ['serve', 'a serve team', S.fmServe]].concat(open ? [['give', 'giving', S.fmGive]] : []).sort((a, b) => a[2] - b[2]);
+  const levers = [['group', 'in a group', S.fmGroup], ['serve', 'on a serve team', S.fmServe]].concat(open ? [['give', 'giving', S.fmGive]] : []).sort((a, b) => a[2] - b[2]);
   const low = levers[0];
   const ins = [
-    { q: 'Lever to pull', h: 'Only ' + engPct(low[2], S.fm) + '% of Family Members are in ' + low[1] + '.', p: 'It’s the least-taken step on our pathway right now — the place an extra push will move the most people.', a: low[0] === 'group' ? ['Open Groups', "navGo('groups')"] : low[0] === 'serve' ? ['Open Serve', "navGo('serve')"] : ['Care › Engagement', "engOpenCare()"] },
+    { q: 'Lever to pull', h: 'Only ' + engPct(low[2], S.fm) + '% of Family Members are ' + low[1] + '.', p: 'It’s the least-taken step on our pathway right now — the place an extra push will move the most people.', a: low[0] === 'group' ? ['Open Groups', "navGo('groups')"] : low[0] === 'serve' ? ['Open Serve', "navGo('serve')"] : ['Care › Engagement', "engOpenCare()"] },
     { q: 'Catch them early', h: engN(S.fm0) + ' Family Members haven’t taken a step yet.', p: 'No group, no team, no giving this year. A personal note from their shepherding pastor beats a church-wide email.', a: ['See who (pastors)', 'engOpenCare()'] },
     { q: 'Ready for more', h: engN(S.engagedNotMember) + ' people are in a group, serving and giving — but aren’t Family Members.', p: 'They’re already living it. Invite them to the next Family Member step personally.', a: ['Care › Engagement', 'engOpenCare()'] }
   ];
@@ -284,7 +305,7 @@ function engChurchPaint(el, S, open, seed) {
       '<div>' + engWheelSvg(S, open) + '<div class="eng-dim" style="text-align:center;margin-top:6px">Brighter = more Family Members have taken that step</div></div>' +
     '</div>' +
     '<div class="card"><div class="eng-k">The seven steps</div><div class="eng-steps">' +
-      stepCards.map(c => '<div class="eng-step' + (c[4] ? ' lock' : '') + '">' + engIcon(c[0]) + '<b>' + engE(c[1]) + '</b><span class="v">' + c[2] + '</span><span class="d">' + c[3] + '</span></div>').join('') +
+      stepCards.map(c => (c[4] ? '<button class="eng-step lock" onclick="mmShowPrompt(function(){engChurchRender()})">' : '<div class="eng-step">') + engIcon(c[0]) + '<b>' + engE(c[1]) + '</b><span class="v">' + c[2] + '</span><span class="d">' + c[3] + '</span>' + (c[4] ? '</button>' : '</div>')).join('') +
     '</div></div>' +
     '<div class="eng-two">' +
       '<div class="card"><div class="eng-k">How engaged is our church?</div><h2>Engagement score</h2>' +
@@ -344,8 +365,12 @@ function engOpenCare() {
 
 function engPrintPathway() {
   const w = window.open('', '_blank'); if (!w) return;
+  w.document.write(engPosterHtml(true));
+  w.document.close();
+}
+function engPosterHtml(print) {
   const icon = k => '<svg viewBox="0 0 24 24" fill="none" stroke="#b8932a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ENG_ICONS[k] + '</svg>';
-  w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Our Pathway · Living Stones South Reno</title>' +
+  return ('<!doctype html><html><head><meta charset="utf-8"><title>Our Pathway · Living Stones South Reno</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">' +
     '<style>@page{size:letter portrait;margin:.5in}body{font-family:Montserrat,sans-serif;color:#1a1a1a;margin:0;text-align:center}' +
     'h1{font-size:44px;font-weight:800;letter-spacing:.02em;margin:.2in 0 6px;text-transform:uppercase}.sub{font-size:16px;color:#555;margin-bottom:.35in}' +
@@ -356,8 +381,7 @@ function engPrintPathway() {
     '</style></head><body><h1>Your next step</h1><div class="sub">Living Stones South Reno · wherever you are, there’s a next step with Jesus</div><div class="steps">' +
     ENG_STEPS.map(s => '<div class="s">' + icon(s.k) + '<div><b>' + engE(s.label) + '</b><span>' + engE(s.line) + '</span></div></div>').join('') +
     '</div><div class="foot">See where you are and your next step: <b>lssouthreno.com/journey</b></div>' +
-    '<script>setTimeout(function(){window.print()},700)<\/script></body></html>');
-  w.document.close();
+    (print ? '<script>setTimeout(function(){window.print()},700)<\/script>' : '') + '</body></html>');
 }
 
 /* ─────────────────────────────── CARE › ENGAGEMENT (pastors) ─────────────────────────────── */
@@ -444,6 +468,8 @@ function engCopyList(key, what, btn) {
   const ps = _engLists[key] || [];
   const vals = what === 'email' ? ps.map(p => p.email).filter(Boolean) : ps.map(p => p.name);
   engCopy(vals.join(what === 'email' ? ', ' : '\n'), btn);
+  const miss = what === 'email' ? ps.length - vals.length : 0;
+  if (btn) setTimeout(() => { btn.textContent = 'Copied ' + vals.length + (miss ? ' · ' + miss + ' no email' : ''); }, 0);
 }
 function engPeopleDetails(people, chipFn, label) {
   if (!people.length) return '<div class="eng-dim">Nobody right now.</div>';
@@ -459,8 +485,8 @@ function engCareRender() {
   const people = engCarePeople(), F = new Map(people.map(p => [p, engFacts(p)]));
   const n = people.length || 1;
   // score: baptized · group · serve · giving (each 25); lead is celebrated, not scored
-  const steps = p => { const f = F.get(p); return (f.baptized ? 1 : 0) + (f.group ? 1 : 0) + (f.serve ? 1 : 0) + (f.give ? 1 : 0); };
-  const score = people.reduce((a, p) => a + steps(p), 0) / (4 * n) * 100;
+  const steps = p => { const f = F.get(p); return seed ? (f.group ? 1 : 0) + (f.serve ? 1 : 0) : (f.baptized ? 1 : 0) + (f.group ? 1 : 0) + (f.serve ? 1 : 0) + (f.give ? 1 : 0); };
+  const score = people.reduce((a, p) => a + steps(p), 0) / ((seed ? 2 : 4) * n) * 100;
   const engaged = people.filter(p => { const f = F.get(p); return f.group || f.serve || f.give; });
   const full = people.filter(p => { const f = F.get(p); return f.baptized && f.group && f.serve && f.give; });
   const reconnect = people.filter(p => F.get(p).away);
@@ -522,7 +548,7 @@ function engCareRender() {
     '<div class="eng-scope"><div class="eng-muted">Know your people · ' + engN(people.length) + ' people in view. Data is knowledge to shepherd with, never to pressure.</div>' +
       '<select onchange="_engScope=this.value;engCareRender()">' + scopeOpts + '</select></div>' +
     (seed ? '<div class="card eng-muted">Live Care data hasn’t loaded, so baptism and giving are missing below. Reload Care once signed in.</div>' : '') +
-    '<div class="card"><h2>Engagement score</h2><div class="eng-dim">Baptized · in a group · serving · giving — each person’s share of the four, averaged.</div>' +
+    '<div class="card"><h2>Engagement score</h2><div class="eng-dim">' + (seed ? 'Preview: group and serving only until live data loads.' : 'Baptized · in a group · serving · giving — each person’s share of the four, averaged.') + '</div>' +
       '<div class="eng-score" style="margin-top:14px"><div class="eng-ring">' + engRing(score) + '<div class="lbl"><b>' + score.toFixed(1) + '</b><span>out of 100</span></div></div><div>' +
         '<div class="eng-bar"><div class="t"><span>Engaged (group, team or giving)</span><span>' + engPct(engaged.length, n) + '%</span></div><div class="tr"><i style="width:' + engPct(engaged.length, n) + '%"></i></div></div>' +
         '<div class="eng-bar"><div class="t"><span>Fully engaged (all four)</span><span>' + engPct(full.length, n) + '%</span></div><div class="tr"><i style="width:' + engPct(full.length, n) + '%"></i></div></div>' +

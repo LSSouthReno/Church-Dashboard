@@ -5796,6 +5796,7 @@ function chTab(tab, silent) {
   document.querySelectorAll('#chSubnav button').forEach(b => b.classList.toggle('on', b.dataset.chTab === tab));
   const tiles = document.getElementById('chTiles'); if (tiles) tiles.classList.toggle('on', tab === 'overview');
   if (tab === 'engagement' && typeof engChurchRender === 'function') engChurchRender();
+  if (typeof engStripRender === 'function') engStripRender(tab);
   if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(chResizeCharts, 30);
 }
