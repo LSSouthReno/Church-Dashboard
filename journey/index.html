@@ -17,7 +17,8 @@
 <link rel="icon" type="image/png" href="/assets/app/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/app/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://script.google.com"><link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 <!--
   My Journey — every person's private page (linked from the dashboard nav). Backend: Code_journey.gs
   (jr_* actions on the Staff OS web app). Sign-in: phone number → texted code (Twilio Verify) or an
@@ -388,7 +389,7 @@ function fmtPhone(v) { const d = v.replace(/\D/g, '').slice(0, 10); if (d.length
 function viewSignin(msg) {
   noTabs();
   $('topR').innerHTML = EMBED ? '' : '<a class="btn g sm" href="/">Dashboard</a>'; $('banner').innerHTML = '';
-  if (!S.cfg) { $('app').innerHTML = '<div class="loading">Loading…</div>'; api({ action: 'jr_config' }).then(c => { S.cfg = c || {}; viewSignin(msg); }); return; }
+  if (!S.cfg) { S.cfg = cfgCached(); if (!S.cfg) { $('app').innerHTML = '<div class="loading">Loading…</div>'; api({ action: 'jr_config' }).then(c => { cfgSave(c); S.cfg = c || {}; viewSignin(msg); }); return; } }
   const c = S.cfg || {};
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
   // or to the email on their Living Stones profile (a one-tap link + a code).
@@ -450,15 +451,30 @@ async function pcoSignin() {
 }
 
 // ── the journey ──────────────────────────────────────────────────────────────
+// ── speed: show the last good page instantly (this device only, tied to this sign-in), refresh quietly ──
+const ME_CACHE = 'lssr_me_cache', CFG_CACHE = 'lssr_jr_cfg';
+function tokKey() { const t = tokenGet(); return t ? t.slice(-16) : ''; }
+function meCacheGet() { try { const c = JSON.parse(localStorage.getItem(ME_CACHE) || 'null'); return c && tokKey() && c.tok === tokKey() ? c.data : null; } catch (e) { return null; } }
+function meCacheSet(d) { try { localStorage.setItem(ME_CACHE, JSON.stringify({ tok: tokKey(), at: Date.now(), data: d })); } catch (e) {} }
+function meCacheClear() { try { localStorage.removeItem(ME_CACHE); } catch (e) {} }
+function cfgSave(c) { try { if (c && c.ok) localStorage.setItem(CFG_CACHE, JSON.stringify(c)); } catch (e) {} }
+function cfgCached() { try { return JSON.parse(localStorage.getItem(CFG_CACHE) || 'null'); } catch (e) { return null; } }
+const sameMe = (a, b) => { const k = x => JSON.stringify(Object.assign({}, x, { asOf: 0, for: 0 })); return !!a && !!b && k(a) === k(b); };
 async function loadMe() {
-  noTabs();
-  $('app').innerHTML = '<div class="loading">Getting everything ready…</div>';
-  const slow = slowNote('#app', 'Getting everything ready… the first load can take a few extra seconds.');
+  const cached = !S.preview && !S.data && meCacheGet();
+  if (cached) { S.data = cached; viewJourney(); }                     // instant
+  else if (!S.data) { noTabs(); $('app').innerHTML = '<div class="loading">Getting everything ready…</div>'; }
+  const slow = S.data ? 0 : slowNote('#app', 'Getting everything ready… the first load can take a few extra seconds.');
   const body = S.preview ? { action: 'jr_me', preview: S.preview, pw: S.pw } : { action: 'jr_me', token: tokenGet() };
   const r = await api(body, 3);
   clearTimeout(slow);
-  if (r.ok && r.person) { S.data = r; return viewJourney(); }   // only ever draw a real person's page
-  if (r.signin) { tokenSet(''); return viewSignin(); }
+  if (r.ok && r.person) {                                             // only ever draw a real person's page
+    const changed = !sameMe(r, S.data); S.data = r; if (!S.preview) meCacheSet(r);
+    if (changed || !S.rendered) viewJourney();                         // re-render keeps your scroll position
+    return;
+  }
+  if (r.signin) { meCacheClear(); tokenSet(''); S.data = null; S.rendered = false; return viewSignin(); }
+  if (S.rendered) return;                                             // offline/slow: keep showing the last good page
   $('app').innerHTML = '<div class="loading">' + esc(r.error || 'We couldn’t load your page.') + '<br><br><button class="btn" onclick="loadMe()">Try again</button></div>';
 }
 const SEASONS = [
@@ -906,7 +922,7 @@ async function sendNote(kind) {
   if (r.ok) { closeSheet(); toast(kind === 'prayer' ? 'Your request has been sent. Thank you for sharing it with us.' : 'Sent. Thank you!'); }
   else { b.disabled = false; b.textContent = 'Send'; toast(r.error || 'That didn’t send — please try again.'); }
 }
-async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); }
+async function logout() { meCacheClear(); await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); }
 // Signed-in state for the dashboard (so it can label the tab).
 // ── the member app: "Add to Home Screen" (manifest: /journey/manifest.webmanifest, service worker: /sw.js) ──
 // Android/Chrome hands us an install prompt; iPhone needs Share → Add to Home Screen. Installed apps on
@@ -944,7 +960,7 @@ if (appStandalone()) document.documentElement.classList.add('standalone');
 if (!EMBED && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost'))
   navigator.serviceWorker.register('/sw.js').catch(() => {});
 // The dashboard's Sign out ends this session too.
-window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); } });
+window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { meCacheClear(); tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); } });
 if (EMBED) {
   document.body.classList.add('embed');
   // Tell the dashboard how tall we are so its iframe never scrolls on its own.
@@ -973,9 +989,12 @@ if (EMBED) {
     S.cfg = (await api({ action: 'jr_config' })) || {}; return viewSignin(r.error);
   }
   if (tokenGet()) return loadMe();
+  const known = cfgCached();
+  if (known) { S.cfg = known; viewSignin(); api({ action: 'jr_config' }).then(c => { if (c && c.ok) { cfgSave(c); S.cfg = c; } }); return; }   // instant sign-in screen, refreshed quietly
   const slow = slowNote('#app', 'Loading… one moment.');
   const cfg = await api({ action: 'jr_config' });
   clearTimeout(slow);
+  cfgSave(cfg);
   S.cfg = cfg && cfg.ok ? cfg : { channel: 'email' };
   viewSignin();
 })();

@@ -43,6 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://script.google.com"><link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
@@ -18307,7 +18308,7 @@ function openTodayModal() {
 let _jrSignedIn = false, _jrFirst = '';
 const JR_API_URL = 'https://script.google.com/macros/s/AKfycbx-YDZg924fyFkG2U69o6Z0BBTLsh8ZAUvwK4fxSkW7LKGiXlxn5s2jyq9GCDxwA_sANA/exec';
 function jrSignOut() {
-  let tok = ''; try { tok = localStorage.getItem('lssr_journey_token') || ''; localStorage.removeItem('lssr_journey_token'); } catch (e) {}
+  let tok = ''; try { tok = localStorage.getItem('lssr_journey_token') || ''; localStorage.removeItem('lssr_journey_token'); localStorage.removeItem('lssr_me_cache'); } catch (e) {}
   if (tok) fetch(JR_API_URL + '?action=jr&p=' + encodeURIComponent(JSON.stringify({ action: 'jr_logout', token: tok })) + '&t=' + Date.now()).catch(() => {});
   _jrSignedIn = false; _jrFirst = '';
   const f = document.getElementById('jrEmbed'); if (f && f.contentWindow) { try { f.contentWindow.postMessage({ jrLogout: true }, location.origin); } catch (e) {} }
