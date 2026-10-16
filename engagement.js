@@ -372,13 +372,14 @@ function engPosterHtml(print) {
   const icon = k => '<svg viewBox="0 0 24 24" fill="none" stroke="#b8932a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ENG_ICONS[k] + '</svg>';
   return ('<!doctype html><html><head><meta charset="utf-8"><title>Our Pathway · Living Stones South Reno</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">' +
-    '<style>@page{size:letter portrait;margin:.5in}body{font-family:Montserrat,sans-serif;color:#1a1a1a;margin:0;text-align:center}' +
-    'h1{font-size:44px;font-weight:800;letter-spacing:.02em;margin:.2in 0 6px;text-transform:uppercase}.sub{font-size:16px;color:#555;margin-bottom:.35in}' +
-    '.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 30px;text-align:left;max-width:7in;margin:0 auto}' +
-    '.s{display:flex;gap:14px;align-items:center;border:2px solid #e8dcb5;border-radius:14px;padding:14px 16px}.s svg{width:46px;height:46px;flex:none}' +
-    '.s b{display:block;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}.s span{font-size:14px;color:#555}' +
-    '.s:last-child{grid-column:1/-1;justify-content:center;border-color:#b8932a}.foot{margin-top:.4in;font-size:15px;color:#555}.foot b{color:#1a1a1a}' +
-    '</style></head><body><h1>Your next step</h1><div class="sub">Living Stones South Reno · wherever you are, there’s a next step with Jesus</div><div class="steps">' +
+    '<style>@page{size:letter portrait;margin:.45in}body{font-family:Montserrat,sans-serif;color:#1a1a1a;margin:0;text-align:center}' +
+    '.logo{height:54px;filter:invert(1);margin:.1in 0 .18in}' +
+    'h1{font-size:62px;font-weight:800;letter-spacing:.02em;margin:0 0 8px;text-transform:uppercase;line-height:1}.sub{font-size:19px;color:#555;margin-bottom:.4in}' +
+    '.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 24px;text-align:left;max-width:7.4in;margin:0 auto}' +
+    '.s{display:flex;gap:18px;align-items:center;border:2.5px solid #e8dcb5;border-radius:18px;padding:22px 20px}.s svg{width:64px;height:64px;flex:none}' +
+    '.s b{display:block;font-size:26px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;line-height:1.1}.s span{font-size:16.5px;color:#555}' +
+    '.s:last-child{grid-column:1/-1;justify-content:center;border-color:#b8932a;background:#fbf7ea}.foot{margin-top:.45in;font-size:18px;color:#555}.foot b{color:#1a1a1a}' +
+    '</style></head><body><img class="logo" src="' + location.origin + '/assets/ls-lockup-white.png" alt="Living Stones South Reno"><h1>Your next step</h1><div class="sub">Wherever you are, there’s a next step with Jesus</div><div class="steps">' +
     ENG_STEPS.map(s => '<div class="s">' + icon(s.k) + '<div><b>' + engE(s.label) + '</b><span>' + engE(s.line) + '</span></div></div>').join('') +
     '</div><div class="foot">See where you are and your next step: <b>lssouthreno.com/journey</b></div>' +
     (print ? '<script>setTimeout(function(){window.print()},700)<\/script>' : '') + '</body></html>');
