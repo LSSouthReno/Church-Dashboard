@@ -272,7 +272,8 @@
   .wrap.one .card, .wrap.one .evr, .wrap.one .me-card { background:none !important; border:0 !important; box-shadow:none !important; border-radius:0; padding:0; }
   .one .sec { padding:36px 0 6px; border-top:1px solid var(--line); scroll-margin-top:76px; }
   .one .sec:first-of-type { border-top:0; padding-top:4px; }
-  .one .jg { gap:30px 40px; }
+  .one .jg { gap:30px 28px; }
+  @media (max-width: 900px) { .one .jg { grid-template-columns:1fr; } }
   .one .jg + .jg, .one .card + .card, .one .jg[style] { margin-top:30px !important; }
   .one .belong { border:0; box-shadow:none !important; background:transparent; border-radius:0; padding:18px 0 26px; margin:0; }
   .one .belong::before { inset:-30px -40px 0; -webkit-mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); }
