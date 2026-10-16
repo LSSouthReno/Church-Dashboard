@@ -131,6 +131,9 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-pc .v { font-size: 30px; font-weight: 800; line-height: 1.1; } .eng-pc .why { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
   .eng-pc .msg { font-size: 12.5px; font-style: italic; color: #cfc8ba; background: #141414; border-radius: 8px; padding: 9px 10px; line-height: 1.5; }
   .eng-pc .acts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .eng-note summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--text-muted); list-style: none; padding: 2px 0; } .eng-note summary::-webkit-details-marker { display: none; }
+  .eng-note[open] summary { margin-bottom: 6px; }
+  @media (max-width: 560px) { #engCare .card { padding: 16px 14px; } .eng-pc { padding: 12px; } .eng-pc .v { font-size: 26px; } }
   .eng-people { margin-top: 6px; } .eng-people summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--gold); list-style: none; } .eng-people summary::-webkit-details-marker { display: none; }
   .eng-plist { display: grid; gap: 2px; margin-top: 8px; max-height: 340px; overflow: auto; }
   .eng-prow { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 6px; background: #151515; font-size: 13px; }
@@ -571,7 +574,7 @@ function engCareRender() {
     '<div class="card"><h2>Primed to engage</h2><div class="eng-dim">The right note to the right person — each list skips people already past that step. Copy the emails into one message per list, or better, call.</div>' +
       '<div class="eng-primed">' + primed.map(pr => '<div class="eng-pc" style="--c:' + pr.c + '"><div class="h">' + engIcon(pr.icon) + engE(pr.t) + '</div><div class="v">' + (seed && !pr.ps.length && pr.k !== 'connect' && pr.k !== 'serve' ? '—' : engN(pr.ps.length)) + '</div>' +
         '<div class="why">' + engE(pr.why) + ' ' + engPct(pr.ps.length, n) + '% of people in view.</div>' +
-        '<div class="msg">' + engE(pr.msg.replace('{first}', '[first name]')) + '</div>' +
+        '<details class="eng-note"' + (window.innerWidth > 560 ? ' open' : '') + '><summary>Suggested note ▾</summary><div class="msg">' + engE(pr.msg.replace('{first}', '[first name]')) + '</div></details>' +
         '<div class="acts"><button class="eng-btn" onclick="engCopy(' + JSON.stringify(pr.msg.replace('{first}', '[first name]')).replace(/"/g, '&quot;') + ',this)">Copy note</button>' + engListBtns('pr_' + pr.k, pr.ps) + '</div>' +
         engPeopleDetails(pr.ps, stepChips) + '</div>').join('') + '</div></div>' +
     '<div class="eng-two">' +
