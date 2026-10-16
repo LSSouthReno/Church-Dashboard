@@ -227,6 +227,24 @@
   .me-h .av { width:60px; height:60px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:var(--gold); background:var(--gold-bg); flex:none; } .me-h .av img { width:100%; height:100%; object-fit:cover; }
   .t-me .path { margin:4px 0 18px; }
   @media (max-width: 900px) { .jg > .a-side, .jg > .a-half { grid-column:1/-1 !important; } .jg > .a-side { order:2; } .jg > .a-news { order:3; } .ttabs button span { display:none; } }
+  /* ── "You belong to Jesus." — the core belief, set large over South Reno's contour lines ── */
+  .belong { position:relative; overflow:hidden; border-radius:22px; padding:26px 26px 22px; margin-bottom:18px; border:1px solid var(--line);
+    background:radial-gradient(120% 140% at 0% 0%, var(--card) 35%, var(--gold-bg) 100%); }
+  .belong::before { content:''; position:absolute; inset:-10%; background:url(/assets/belong-topo.svg) center/cover no-repeat; opacity:.35; pointer-events:none; }
+  html[data-theme="soft"] .belong::before { opacity:.22; }
+  .belong > * { position:relative; }
+  .b-hi { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--muted); }
+  .b-av { width:30px; height:30px; border-radius:50%; object-fit:cover; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:var(--gold); background:var(--gold-bg); flex:none; }
+  .b-h { margin:14px 0 12px; font-size:clamp(38px, 6vw, 60px); font-weight:800; line-height:1; letter-spacing:-.03em; }
+  .b-h em { font-style:normal; color:var(--gold); }
+  .b-v { margin:0 0 20px; max-width:620px; font-size:15.5px; line-height:1.55; color:var(--text); opacity:.88; }
+  .b-v span { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--dim); opacity:1; margin-left:4px; }
+  .b-k { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+  .belong .badges { margin:0; }
+  .signoff { display:flex; align-items:center; gap:14px; margin:34px auto 8px; max-width:520px; color:var(--gold); font-weight:700; font-size:13px; letter-spacing:.04em; }
+  .signoff::before, .signoff::after { content:''; flex:1; height:1px; background:var(--gold-line); }
+  .signin .b-h { font-size:40px; margin:22px 0 12px; }
+  .signin .b-v { margin:0 auto 22px; }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -245,6 +263,9 @@
     .news .nv { flex:0 0 78%; scroll-snap-align:start; }
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
+    .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
+    .b-h { font-size:38px; margin:12px 0 10px; } .b-v { font-size:14.5px; margin-bottom:16px; }
+    .signin .b-h { font-size:36px; }
     /* the app on a phone: bottom tab bar, like any app */
     body.app-in:not(.embed) .tabbar { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:15; background:rgba(31,31,31,.96); border-top:1px solid var(--line); padding:4px 4px calc(4px + env(safe-area-inset-bottom)); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
     .tabbar button { flex:1; appearance:none; background:none; border:0; display:flex; flex-direction:column; align-items:center; gap:3px; font:600 11px 'Montserrat',sans-serif; color:var(--dim); padding:6px 0; min-height:50px; cursor:pointer; }
@@ -328,7 +349,7 @@ function viewSignin(msg) {
   // No passwords: they type their phone number; the code comes by text (if texting is set up)
   // or to the email on their Living Stones profile (a one-tap link + a code).
   $('app').innerHTML = '<div class="signin"><img class="mark" src="/assets/ls-logo-white.png" alt="">' +
-    '<h1>Living Stones</h1><p>Your next step, your groups and teams, events, and giving, all in one place. Sign in with your phone number. No password.</p>' +
+    '<h1 class="b-h">You belong to <em>Jesus.</em></h1><p>And you belong here. Your next step, your groups and teams, events and giving: all in one place. Sign in with your phone number. No password.</p>' +
     '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
     '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Text me a code' : 'Send me a sign-in link') + '</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
@@ -454,7 +475,7 @@ function viewJourney() {
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
   const tab = curTab();
   const body = tab === 'events' ? viewEvents(d) : tab === 'connect' ? viewConnect(d) : tab === 'give' ? viewGive(d) : tab === 'me' ? viewMe(d) : viewHome(d);
-  $('app').innerHTML = '<div class="wrap t-' + tab + '">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + body + '</div>';
+  $('app').innerHTML = '<div class="wrap t-' + tab + '">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + body + (tab === 'home' ? '' : SIGNOFF) + '</div>';
   if (tab === 'home') { loadNews(d); loadSunday(); appCard(); }
   if (tab === 'events') loadEvents(d);
   if (tab === 'connect') loadFind();
@@ -475,13 +496,33 @@ function stepsHtml(d) {
       '</div></div>').join('')
     : '<div class="dim">You’re all caught up for this season — thank you for how you’re showing up.</div>' };
 }
+// ── "You belong to Jesus." — our core belief, the first thing anyone sees ─────────
+const BELONG_VERSES = [
+  ['I have called you by name; you are mine.', 'Isaiah 43:1'],
+  ['Whether we live or die, we belong to the Lord.', 'Romans 14:8'],
+  ['You also, like living stones, are being built into a spiritual house.', '1 Peter 2:5'],
+  ['See what great love the Father has given us, that we should be called children of God.', '1 John 3:1'],
+  ['No one will snatch them out of my hand.', 'John 10:28'],
+  ['You are no longer strangers, but members of God’s household.', 'Ephesians 2:19'],
+  ['You are not your own; you were bought at a price.', '1 Corinthians 6:19–20'],
+  ['I will never leave you nor forsake you.', 'Hebrews 13:5']
+];
+function dailyVerse() { const d = new Date(), n = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); return BELONG_VERSES[n % BELONG_VERSES.length]; }
+function belongHero(d) {
+  const p = d.person || {}, first = (p.first || '').split(' ')[0], v = dailyVerse();
+  return '<section class="belong">' +
+    '<div class="b-hi">' + (p.avatar ? '<img class="b-av" src="' + esc(p.avatar) + '" alt="">' : '<span class="b-av">' + esc((first || '?').charAt(0)) + '</span>') + greeting() + ', ' + esc(first) + '</div>' +
+    '<h1 class="b-h">You belong to <em>Jesus.</em></h1>' +
+    '<p class="b-v">“' + esc(v[0]) + '” <span>' + esc(v[1]) + '</span></p>' +
+    '<div class="b-k">Living it out</div>' + badgesHtml(d) +
+  '</section>';
+}
+const SIGNOFF = '<div class="signoff" aria-hidden="true"><span>You belong to Jesus.</span></div>';
 function viewHome(d) {
   const p = d.person || {}, first = (p.first || '').split(' ')[0];
   const sinceY = fmtDate(p.since, { month: 'long', year: 'numeric' }), who = d.spouse ? 'You and ' + esc(d.spouse.first) + ' have' : 'You’ve';
   const up = (d.upcoming || []).map(u => '<div class="fact"><div class="k dk">' + fmtDate(u.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div class="v">' + esc(u.what) + '</div></div>').join('');
-  return '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '<div class="av ini">' + esc((first || '?').charAt(0)) + '</div>') + '<div><h1>' + greeting() + ', ' + esc(first) + '!</h1>' +
-      '<div class="s">' + who + ' been part of Living Stones since ' + esc(sinceY) + '. Here’s where you are, and a next step or two.</div></div></div>' +
-    badgesHtml(d) + seeYouHtml(d) +
+  return belongHero(d) + seeYouHtml(d) +
     '<div class="jg">' +
       '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepsHtml(d).html + '</div>' +
       '<div class="a-side">' +

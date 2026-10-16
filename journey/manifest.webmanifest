@@ -2,21 +2,56 @@
   "id": "/journey/",
   "name": "Living Stones",
   "short_name": "Living Stones",
-  "description": "Living Stones South Reno — your next steps, what's coming up, and your pastor, in one place.",
+  "description": "You belong to Jesus. Your next step, your groups and teams, events and giving at Living Stones South Reno.",
   "start_url": "/journey/?source=app",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f5f3ee",
   "theme_color": "#f5f3ee",
-  "categories": ["lifestyle", "social"],
+  "categories": [
+    "lifestyle",
+    "social"
+  ],
   "icons": [
-    { "src": "/assets/app/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/assets/app/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/assets/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/assets/app/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/app/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/app/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "My Journey", "url": "/journey/?source=shortcut", "icons": [{ "src": "/assets/app/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Staff dashboard", "short_name": "Dashboard", "url": "/?source=app", "icons": [{ "src": "/assets/app/icon-192.png", "sizes": "192x192" }] }
+    {
+      "name": "My Journey",
+      "url": "/journey/?source=shortcut",
+      "icons": [
+        {
+          "src": "/assets/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Staff dashboard",
+      "short_name": "Dashboard",
+      "url": "/?source=app",
+      "icons": [
+        {
+          "src": "/assets/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

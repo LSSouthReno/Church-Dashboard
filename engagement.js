@@ -308,7 +308,7 @@ function engChurchPaint(el, S, open, seed) {
 
   el.innerHTML =
     '<div class="card eng-path">' +
-      '<div><div class="eng-k">Our pathway · church on a page</div><h2>Every person, one next step</h2>' +
+      '<div><div class="eng-k">Our core belief · our pathway</div><h2>You belong to Jesus. <span style="color:var(--text-muted);font-weight:600">Every person, one next step.</span></h2>' +
         '<p class="eng-muted" style="max-width:560px">We don’t chase attendance and giving — we help each person take their next step with Jesus. Attendance and giving follow. People enter at the top, find a place on the wheel at their own pace, and the goal is someone who leads and brings others back in.</p>' +
         '<div class="eng-funnel">' +
           '<div><b>Aware</b><span>they know we exist</span></div>' +
@@ -390,12 +390,12 @@ function engPosterHtml(print) {
     '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">' +
     '<style>@page{size:letter portrait;margin:.45in}body{font-family:Montserrat,sans-serif;color:#1a1a1a;margin:0;text-align:center}' +
     '.logo{height:54px;filter:invert(1);margin:.1in 0 .18in}' +
-    'h1{font-size:62px;font-weight:800;letter-spacing:.02em;margin:0 0 8px;text-transform:uppercase;line-height:1}.sub{font-size:19px;color:#555;margin-bottom:.4in}' +
+    'h1{font-size:60px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;line-height:1}h1 em{font-style:normal;color:#9c7a26}.sub{font-size:19px;color:#555;margin-bottom:.4in}' +
     '.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 24px;text-align:left;max-width:7.4in;margin:0 auto}' +
     '.s{display:flex;gap:18px;align-items:center;border:2.5px solid #e8dcb5;border-radius:18px;padding:22px 20px}.s svg{width:64px;height:64px;flex:none}' +
     '.s b{display:block;font-size:26px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;line-height:1.1}.s span{font-size:16.5px;color:#555}' +
     '.s:last-child{grid-column:1/-1;justify-content:center;border-color:#b8932a;background:#fbf7ea}.foot{margin-top:.45in;font-size:18px;color:#555}.foot b{color:#1a1a1a}' +
-    '</style></head><body><img class="logo" src="' + location.origin + '/assets/ls-lockup-white.png" alt="Living Stones South Reno"><h1>Your next step</h1><div class="sub">Wherever you are, there’s a next step with Jesus</div><div class="steps">' +
+    '</style></head><body><img class="logo" src="' + location.origin + '/assets/ls-lockup-white.png" alt="Living Stones South Reno"><h1>You belong to <em>Jesus.</em></h1><div class="sub">Wherever you are, here’s your next step.</div><div class="steps">' +
     ENG_STEPS.map(s => '<div class="s">' + icon(s.k) + '<div><b>' + engE(s.label) + '</b><span>' + engE(s.line) + '</span></div></div>').join('') +
     '</div><div class="foot">See where you are and your next step: <b>lssouthreno.com/journey</b></div>' +
     (print ? '<script>setTimeout(function(){window.print()},700)<\/script>' : '') + '</body></html>');
