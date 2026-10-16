@@ -260,7 +260,15 @@
   .me-card .badges { display:grid; grid-template-columns:repeat(6, minmax(0, 64px)); gap:6px; margin:0; }
   .me-card .badge { width:auto; font-size:10.5px; } .me-card .badge i { width:38px; height:38px; } .me-card .badge svg { width:18px; height:18px; }
   @media (max-width: 900px) { .wide-only { display:none !important; } }
-  @media (max-width: 720px) { .ttabs button span { display:none; } }
+  /* phones and tablets: a labeled bottom tab bar, like any app */
+  @media (max-width: 900px) {
+    body.app-in:not(.embed) .tabbar { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:15; background:rgba(31,31,31,.96); border-top:1px solid var(--line); padding:4px 4px calc(4px + env(safe-area-inset-bottom)); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); justify-content:center; }
+    .tabbar button { flex:1; max-width:140px; appearance:none; background:none; border:0; display:flex; flex-direction:column; align-items:center; gap:3px; font:600 11px 'Montserrat',sans-serif; color:var(--dim); padding:6px 0; min-height:50px; cursor:pointer; }
+    .tabbar button svg { width:23px; height:23px; } .tabbar button.on { color:var(--gold); }
+    body.app-in:not(.embed) .wrap { padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
+    .ttabs, .wide-only { display:none !important; }
+    .toast { bottom:calc(84px + env(safe-area-inset-bottom)); }
+  }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -284,13 +292,6 @@
     .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
     .b-h { font-size:40px; margin:2px 0 12px; } .b-v { font-size:14.5px; margin-bottom:2px; }
     .signin .b-h { font-size:36px; }
-    /* the app on a phone: bottom tab bar, like any app */
-    body.app-in:not(.embed) .tabbar { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:15; background:rgba(31,31,31,.96); border-top:1px solid var(--line); padding:4px 4px calc(4px + env(safe-area-inset-bottom)); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
-    .tabbar button { flex:1; appearance:none; background:none; border:0; display:flex; flex-direction:column; align-items:center; gap:3px; font:600 11px 'Montserrat',sans-serif; color:var(--dim); padding:6px 0; min-height:50px; cursor:pointer; }
-    .tabbar button svg { width:23px; height:23px; } .tabbar button.on { color:var(--gold); }
-    body.app-in:not(.embed) .wrap { padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
-    .ttabs, .wide-only { display:none !important; }
-    .toast { bottom:calc(84px + env(safe-area-inset-bottom)); }
     .ph h2 { font-size:24px; }
     .chips { flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 12px; padding:0 16px 2px; scrollbar-width:none; } .chips::-webkit-scrollbar { display:none; } .chips button { flex:none; }
     .evr { grid-template-columns:56px 1fr 18px; } .evr img, .evr .evd { width:56px; height:44px; }
