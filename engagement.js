@@ -73,13 +73,13 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-steps { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
   @media (max-width: 1000px) { .eng-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) {   /* phone: a compact list, not seven tall cards */
-    .eng-steps { grid-template-columns: 1fr; gap: 0; margin-top: 8px; }
-    .eng-step { display: grid; grid-template-columns: 30px 1fr auto; column-gap: 12px; row-gap: 1px; align-items: center; background: none; border: 0; border-top: 1px solid var(--card-border); border-radius: 0; padding: 11px 2px; }
-    .eng-step .eng-ic { grid-row: 1 / 3; width: 24px; height: 24px; }
-    .eng-step b { grid-column: 2; font-size: 14px; } .eng-step .d { grid-column: 2; }
-    .eng-step .v { grid-column: 3; grid-row: 1 / 3; font-size: 20px; text-align: right; }
-    .eng-step.lock .v { font-size: 12px; padding-top: 0; }
-    button.eng-step { border-style: solid; }
+    .eng .eng-steps { grid-template-columns: 1fr; gap: 0; margin-top: 8px; }
+    .eng .eng-step { display: grid; grid-template-columns: 30px 1fr auto; column-gap: 12px; row-gap: 1px; align-items: center; background: none; border: 0; border-top: 1px solid var(--card-border); border-radius: 0; padding: 11px 2px; text-align: left; justify-items: start; }
+    .eng .eng-step .eng-ic { grid-row: 1 / 3; width: 24px; height: 24px; }
+    .eng .eng-step b { grid-column: 2; font-size: 14px; } .eng .eng-step .d { grid-column: 2; }
+    .eng .eng-step .v { grid-column: 3; grid-row: 1 / 3; font-size: 20px; text-align: right; justify-self: end; }
+    .eng .eng-step.lock .v { font-size: 12px; padding-top: 0; }
+    .eng button.eng-step { border-style: solid; }
   }
   .eng-step { background: #191919; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .eng-step .eng-ic { color: var(--gold); width: 24px; height: 24px; }
