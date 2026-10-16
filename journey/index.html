@@ -225,7 +225,7 @@
   .lrow:hover .lt b { color:var(--gold); }
   .me-h { display:flex; align-items:center; gap:14px; margin-bottom:18px; } .me-h h2 { margin:0; font-size:24px; font-weight:700; }
   .me-h .av { width:60px; height:60px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:var(--gold); background:var(--gold-bg); flex:none; } .me-h .av img { width:100%; height:100%; object-fit:cover; }
-  .t-me .path { margin:4px 0 18px; }
+  #s-me .path { margin:4px 0 18px; }
   @media (max-width: 900px) { .jg > .a-side, .jg > .a-half { grid-column:1/-1 !important; } .jg > .a-side { order:2; } .jg > .a-news { order:3; } }
   /* ── "You belong to Jesus." — the core belief, set large over South Reno's contour lines ── */
   .belong { position:relative; overflow:hidden; border-radius:22px; padding:30px 28px 26px; margin-bottom:18px; border:1px solid var(--line);
@@ -249,9 +249,8 @@
   html[data-theme="soft"] .signin::before { opacity:.2; }
   .signin .b-v { margin:0 auto 22px; }
   /* Home, simplified: belief → one personal card → For you → this Sunday / coming up → news */
-  .t-home .belong { padding:26px 26px 22px; }
-  .t-home .b-h { font-size:clamp(34px, 5vw, 54px); margin:0 0 12px; }
-  .t-home .b-v { font-size:15px; }
+  .one .b-h { font-size:clamp(34px, 5vw, 54px); margin:0 0 12px; }
+  .one .b-v { font-size:15px; }
   .me-card { margin-bottom:16px; }
   .mc-top { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
   .mc-top .b-av { width:44px; height:44px; font-size:17px; }
@@ -269,6 +268,22 @@
     .ttabs, .wide-only { display:none !important; }
     .toast { bottom:calc(84px + env(safe-area-inset-bottom)); }
   }
+  /* ── one continuous page: sections on a single surface, divided by space and a hairline ── */
+  .wrap.one .card, .wrap.one .evr, .wrap.one .me-card { background:none !important; border:0 !important; box-shadow:none !important; border-radius:0; padding:0; }
+  .one .sec { padding:36px 0 6px; border-top:1px solid var(--line); scroll-margin-top:76px; }
+  .one .sec:first-of-type { border-top:0; padding-top:4px; }
+  .one .jg { gap:30px 40px; }
+  .one .jg + .jg, .one .card + .card, .one .jg[style] { margin-top:30px !important; }
+  .one .belong { border:0; box-shadow:none !important; background:transparent; border-radius:0; padding:18px 0 26px; margin:0; }
+  .one .belong::before { inset:-30px -40px 0; -webkit-mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); }
+  .one .me-card { margin:0 0 28px; }
+  .one .evr { border-top:1px solid var(--line) !important; padding:12px 0 !important; }
+  .one .evl { gap:0; } .one .evh { margin:20px 0 2px; }
+  .one .ev-more { margin-top:14px; }
+  .one .ph h2 { font-size:24px; }
+  .one .sec > .quiet { border-top:0; }
+  html[data-theme="soft"] .one .sec { border-top-color:rgba(74,58,30,.09); }
+  html[data-theme="soft"] .one .evr { border-top-color:rgba(74,58,30,.07) !important; }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -287,7 +302,7 @@
     .news .nv { flex:0 0 78%; scroll-snap-align:start; }
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
-    .t-home .belong { padding:20px 18px 18px; } .t-home .b-h { font-size:36px; }
+    .one .b-h { font-size:36px; }
     .me-card .badges { grid-template-columns:repeat(6, minmax(0, 1fr)); }
     .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
     .b-h { font-size:40px; margin:2px 0 12px; } .b-v { font-size:14.5px; margin-bottom:2px; }
@@ -483,8 +498,21 @@ function ccLinks() { const L = (S.data && S.data.links) || {}; return {
   baptism: L.baptism || CC + '/people/forms/764941', membership: L.membership || '', me: L.churchCenter || CC + '/me',
   checkins: CC + '/check-ins', calendar: CC + '/calendar', registrations: CC + '/registrations/events' }; }
 function curTab() { const h = (location.hash || '').replace(/^#/, '').split('/')[0]; return TABS.some(x => x[0] === h) ? h : 'home'; }
-function go(tab) { const h = '#' + tab; if (location.hash !== h) history.pushState(null, '', location.pathname + location.search + h); viewJourney(); window.scrollTo(0, 0); }
-window.addEventListener('popstate', () => { if (S.data) viewJourney(); });
+// One continuous page: the tabs are jump links to its sections.
+function go(tab) {
+  const el = document.getElementById('s-' + tab); if (!el) return;
+  history.replaceState(null, '', location.pathname + location.search + '#' + tab);
+  if (tab === 'home') window.scrollTo({ top: 0, behavior: 'smooth' }); else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setActiveTab(tab);
+}
+function setActiveTab(tab) { document.querySelectorAll('#ttabs button, #tabbar button, .seg button').forEach((b, i) => { const on = TABS[i % TABS.length][0] === tab; b.classList.toggle('on', on); on ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'); }); }
+let _spy = null;
+function spySections() {   // highlight the tab for the section you're reading
+  if (_spy) _spy.disconnect();
+  if (!('IntersectionObserver' in window)) return;
+  _spy = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setActiveTab(e.target.id.slice(2)); }); }, { rootMargin: '-35% 0px -60% 0px' });
+  document.querySelectorAll('.sec').forEach(s => _spy.observe(s));
+}
 function tabsHtml() { const cur = curTab(); return TABS.map(x => '<button class="' + (x[0] === cur ? 'on' : '') + '" onclick="go(\'' + x[0] + '\')"' + (x[0] === cur ? ' aria-current="page"' : '') + '><svg viewBox="0 0 24 24">' + TAB_ICONS[x[0]] + '</svg><span>' + x[1] + '</span></button>').join(''); }
 function noTabs() { $('ttabs').innerHTML = ''; $('tabbar').innerHTML = ''; document.body.classList.remove('app-in'); }
 const ext = (href, label, cls) => '<a class="' + (cls || 'btn') + '" href="' + esc(href) + '" target="_blank" rel="noopener">' + label + '</a>';
@@ -500,15 +528,17 @@ function viewJourney() {
   const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
   $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s app · buttons that send or save are turned off' +
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
-  const tab = curTab();
-  const body = tab === 'events' ? viewEvents(d) : tab === 'connect' ? viewConnect(d) : tab === 'give' ? viewGive(d) : tab === 'me' ? viewMe(d) : viewHome(d);
-  $('app').innerHTML = '<div class="wrap t-' + tab + '">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + body + '</div>';
-  if (tab === 'home') { loadNews(d); loadSunday(); appCard(); }
-  if (tab === 'events') loadEvents(d);
-  if (tab === 'connect') loadFind();
-  if (tab === 'me') { appCard(); const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2; }
-  const sub = (location.hash || '').split('/')[1];      // e.g. /prayer → #me/prayer opens the prayer sheet once signed in
-  if (sub === 'prayer' || sub === 'note') { history.replaceState(null, '', location.pathname + location.search + '#' + tab); setTimeout(() => openSheet(sub), 200); }
+  const first = !S.rendered, y = window.scrollY;
+  const sec = (id, html) => '<section class="sec" id="s-' + id + '">' + html + '</section>';
+  $('app').innerHTML = '<div class="wrap one">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') +
+    sec('home', viewHome(d)) + sec('events', viewEvents(d)) + sec('connect', viewConnect(d)) + sec('give', viewGive(d)) + sec('me', viewMe(d)) + '</div>';
+  S.rendered = true;
+  loadSunday(); loadEvents(d); loadFind(); appCard(); spySections();
+  const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
+  const tab = curTab(), sub = (location.hash || '').split('/')[1];      // e.g. /prayer → #me/prayer opens the prayer sheet once signed in
+  if (first) { if (tab !== 'home') setTimeout(() => { const el = document.getElementById('s-' + tab); if (el) el.scrollIntoView({ block: 'start' }); setActiveTab(tab); }, 60); }
+  else window.scrollTo(0, y);                                         // re-renders (e.g. “Not right now”) keep your place
+  if (sub === 'prayer' || sub === 'note') { history.replaceState(null, '', location.pathname + location.search + '#' + tab); setTimeout(() => openSheet(sub), 250); }
 }
 
 // ── Home: persistent encouragement, For you, This Sunday, coming up, news ─────────
@@ -574,8 +604,7 @@ function viewHome(d) {
         '<div class="card a-sunday"><div class="card-h"><h3>This Sunday</h3></div><div id="jrSunday" class="dim">Loading…</div></div>' +
         '<div class="card a-coming"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
       '</div>' +
-      '<div class="card a-news"><div class="card-h"><h3>News &amp; events</h3><a class="c" href="#events" onclick="go(\'events\');return false">See all →</a></div><div id="jrNews" class="dim">Loading…</div></div>' +
-    '</div><div id="jrApp" style="margin-top:16px"></div>';
+    '</div>';
 }
 let _dashP = null;
 function dashData() { return (_dashP = _dashP || fetch('/dashboard-data.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)); }
@@ -620,7 +649,7 @@ function loadEvents(d) {
     ((j && j.calendar && j.calendar.events) || []).filter(e => e.visibleCC && !e.rbd && key(e.endKey || e.dateKey) >= today && key(e.dateKey) <= until && !/sunday gathering/i.test(e.name || ''))
       .sort((a, b) => a.dateKey < b.dateKey ? -1 : a.dateKey > b.dateKey ? 1 : 0)
       .forEach(e => { const nk = String(e.name).trim().toLowerCase(); if (seen[nk]) { seen[nk].more++; return; } const it = { e, more: 0, tag: newsTag(e.name || '', d), kind: evKind(e.name || '') }; seen[nk] = it; list.push(it); });
-    const show = list.filter(it => _evFilter === 'all' || (_evFilter === 'you' ? !!it.tag : it.kind === _evFilter));
+    const match = list.filter(it => _evFilter === 'all' || (_evFilter === 'you' ? !!it.tag : it.kind === _evFilter)), show = S.evAll ? match : match.slice(0, 8);
     _evShown = show.map(it => it.e);
     if (!j) { box.innerHTML = 'Couldn’t load events just now — see the <a href="' + CC + '/calendar" target="_blank" rel="noopener">church calendar</a>.'; return; }
     if (!show.length) { box.className = 'dim'; box.innerHTML = _evFilter === 'you' ? 'Nothing picked out just for you right now — browse All.' : 'Nothing coming up here right now.'; return; }
@@ -632,6 +661,7 @@ function loadEvents(d) {
       html += '<button class="evr" onclick="evOpen(' + i + ')">' + (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '<span class="evd"><b>' + key(e.dateKey).getDate() + '</b>' + key(e.dateKey).toLocaleDateString('en-US', { month: 'short' }) + '</span>') +
         '<span class="evt">' + (it.tag ? '<em>' + esc(it.tag) + '</em>' : '') + '<b>' + esc(String(e.name).trim()) + '</b><small>' + evWhen(e) + (it.more ? ' · ' + (it.more >= 3 ? 'weekly' : 'more dates') : '') + '</small></span>' + chev + '</button>';
     });
+    if (match.length > show.length) html += '<button class="btn sm ev-more" onclick="S.evAll=true;loadEvents(S.data)">Show all ' + match.length + ' events</button>';
     box.className = 'evl'; box.innerHTML = html;
   });
 }
@@ -874,7 +904,7 @@ async function sendNote(kind) {
   if (r.ok) { closeSheet(); toast(kind === 'prayer' ? 'Your request has been sent. Thank you for sharing it with us.' : 'Sent. Thank you!'); }
   else { b.disabled = false; b.textContent = 'Send'; toast(r.error || 'That didn’t send — please try again.'); }
 }
-async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; viewSignin(); tellParent(); }
+async function logout() { await api({ action: 'jr_logout', token: tokenGet() }, 1); tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); }
 // Signed-in state for the dashboard (so it can label the tab).
 // ── the member app: "Add to Home Screen" (manifest: /journey/manifest.webmanifest, service worker: /sw.js) ──
 // Android/Chrome hands us an install prompt; iPhone needs Share → Add to Home Screen. Installed apps on
@@ -912,7 +942,7 @@ if (appStandalone()) document.documentElement.classList.add('standalone');
 if (!EMBED && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost'))
   navigator.serviceWorker.register('/sw.js').catch(() => {});
 // The dashboard's Sign out ends this session too.
-window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { tokenSet(''); S.data = null; viewSignin(); tellParent(); } });
+window.addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.jrLogout) { tokenSet(''); S.data = null; S.rendered = false; viewSignin(); tellParent(); } });
 if (EMBED) {
   document.body.classList.add('embed');
   // Tell the dashboard how tall we are so its iframe never scrolls on its own.
