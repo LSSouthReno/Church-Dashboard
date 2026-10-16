@@ -190,6 +190,7 @@
     .news .nv { flex:0 0 78%; scroll-snap-align:start; }
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
+    .a-coming .fact .k { width:auto; min-width:92px; white-space:nowrap; }
   }
   /* "Get the app" card (phones that haven't installed it yet) */
   .getapp { display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--gold-line); border-radius:14px; padding:14px 16px; margin:0 0 18px; }
@@ -374,7 +375,8 @@ function viewJourney() {
   facts.push(['Giving', g.any ? (g.months >= 9 || g.recurring ? 'Generous and consistent <span class="ok">✓</span>' : 'Thank you for giving') : 'Not yet — see your next steps',
     g.any ? ['Gave in ' + g.months + ' of the last 12 months', g.recurring ? 'recurring gift set up' : ''].filter(Boolean).join(' · ') + ' · <a href="' + esc(d.links.giving) + '" target="_blank" rel="noopener">statements in Church Center</a>' : '']);
   if (d.baptized) facts.push(['Baptism', 'Baptized <span class="ok">✓</span>', '']);
-  (d.kids || []).filter(k => k.checkIns > 0).forEach(k => facts.push(['Kids', esc(k.first) + ' checked in ' + k.checkIns + ' Sundays this year', 'Stepping Stones']));
+  const kidsIn = (d.kids || []).filter(k => k.checkIns > 0);
+  if (kidsIn.length) facts.push(['Kids', kidsIn.map(k => esc(k.first) + ' · ' + k.checkIns + (k.checkIns === 1 ? ' Sunday' : ' Sundays')).join('<br>'), 'checked in this year · Stepping Stones']);
   const factHtml = facts.map(f => '<div class="fact"><div class="k">' + f[0] + '</div><div class="v">' + f[1] + (f[2] ? '<small>' + f[2] + '</small>' : '') + '</div></div>').join('');
 
   const ms = (d.milestones || []).map(m => '<div>' + esc(m.label) + '<span>' + fmtDate(m.date) + '</span></div>').join('');
