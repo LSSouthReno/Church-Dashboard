@@ -78,7 +78,9 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   button.eng-step { font-family: inherit; color: var(--text); text-align: left; cursor: pointer; border-style: dashed; } button.eng-step:hover { border-color: #555; }
   .eng-strip { display: none; align-items: center; gap: 14px; flex-wrap: wrap; background: linear-gradient(90deg, rgba(212,175,55,.13), rgba(212,175,55,.03)); border: 1px solid rgba(212,175,55,.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; cursor: pointer; font-family: inherit; color: var(--text); text-align: left; width: 100%; }
   .eng-strip.on { display: flex; } .eng-strip:hover { border-color: rgba(212,175,55,.55); }
-  .eng-strip b { font-size: 20px; font-weight: 800; } .eng-strip span { color: var(--text-muted); font-size: 13px; } .eng-strip .go { margin-left: auto; color: var(--gold); font-weight: 700; font-size: 13px; }
+  .eng-strip .pr { display: inline-flex; align-items: baseline; gap: 7px; margin-right: 10px; }
+  .eng-strip b { font-size: 20px; font-weight: 800; } .eng-strip .pr span { color: var(--text-muted); font-size: 13px; } .eng-strip .go { margin-left: auto; color: var(--gold); font-weight: 700; font-size: 13px; }
+  @media (max-width: 560px) { .eng-strip { gap: 6px 4px; } .eng-strip .go { width: 100%; margin-left: 0; } }
   .eng-step.lock .v { font-size: 13px; color: var(--text-dim); font-weight: 700; padding-top: 6px; }
   /* score */
   .eng-score { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
@@ -245,7 +247,7 @@ function engStripRender(tab) {
   engSeedPeople().then(seed => {
     let teamYtd = 0; (seed || []).forEach(p => (p.serveTeams || []).forEach(t => { if (new Date(t.joinedAt || '').getFullYear() === S.yr) teamYtd++; }));
     const total = S.bapYtd + S.memYtd + S.joinYtd + teamYtd + S.leadersNew;
-    el.innerHTML = engIcon('lead') + '<b>' + engN(total) + '</b><span>next steps taken in ' + S.yr + '</span><b style="margin-left:10px">' + (S.score != null ? S.score.toFixed(1) : '—') + '</b><span>engagement score</span><span class="go">Engagement →</span>';
+    el.innerHTML = engIcon('lead') + '<span class="pr"><b>' + engN(total) + '</b><span>next steps in ' + S.yr + '</span></span><span class="pr"><b>' + (S.score != null ? S.score.toFixed(1) : '—') + '</b><span>engagement score</span></span><span class="go">Engagement →</span>';
   });
 }
 
