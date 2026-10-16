@@ -201,6 +201,7 @@
   inject('softBase', 'html.soft-pending body{opacity:0}html[data-theme="soft"]{color-scheme:light}html[data-theme="soft"],html[data-theme="soft"] body{background:#f5f3ee}');
   setTimeout(function () { de.classList.remove('soft-pending'); }, 2500);
 
+  window.lssrTheme.timing = function () { var t0 = performance.now(), css = generate(); return { ms: Math.round(performance.now() - t0), kb: Math.round(css.length / 1024) }; };   // diagnostics
   function build() {
     var sig = sheetsSig();
     if (!cached || cached.sig !== sig) {
