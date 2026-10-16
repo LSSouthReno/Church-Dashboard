@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-16T03:46:05.927Z",
+  "lastUpdated": "2026-10-16T04:02:39.592Z",
   "sectionDescriptions": {
     "Weekend Attendance": "As summer has come to a close, we have seen our attendance bounce back to higher than ever before this time of year. We expect record numbers, and encourage anyone reading this to please attend the 8am service if you are able to make room at the others for guests!",
     "Baptisms": "Baptisms trending toward another record year!",
@@ -13348,7 +13348,7 @@
     }
   ],
   "teamsMeta": {
-    "refreshed": "Oct 15, 2026, 8:46 PM",
+    "refreshed": "Oct 15, 2026, 9:02 PM",
     "lookback": "Last 90 days",
     "source": "Planning Center Online"
   },
@@ -14808,7 +14808,7 @@
         24,
         22,
         47,
-        33,
+        34,
         null,
         null
       ]
@@ -14855,7 +14855,7 @@
         13,
         14,
         37,
-        24,
+        25,
         null,
         null
       ]
@@ -15127,11 +15127,11 @@
       },
       {
         "name": "Peissner Community Group",
-        "members": 14,
+        "members": 15,
         "leaders": 2,
         "schedule": "Meets weekly on Thursdays from 6-8pm",
         "avgAttended": 9,
-        "attPct": 64
+        "attPct": 60
       },
       {
         "name": "Griffin/Watson Community Group",
@@ -15352,7 +15352,7 @@
     ],
     "venn": {
       "familyMembers": 392,
-      "cgMembers": 411,
+      "cgMembers": 412,
       "both": 217,
       "pctFmInCg": 55,
       "pctCgAreFm": 53
@@ -15360,14 +15360,14 @@
     "venn4": {
       "sets": {
         "familyMembers": 392,
-        "cg": 411,
+        "cg": 412,
         "serving": 299,
         "giving": 950
       },
-      "universe": 1168,
+      "universe": 1169,
       "regions": {
         "1": 44,
-        "2": 96,
+        "2": 97,
         "3": 12,
         "4": 34,
         "5": 9,
@@ -15449,6 +15449,7 @@
           "Casey Stoddard",
           "Charles Ko",
           "Chase Pagán",
+          "Cheston Turner",
           "Chris Wilson",
           "Christerson Ramlow",
           "Christian Menendez",
@@ -17055,7 +17056,7 @@
         ]
       },
       "cgNotFm": {
-        "count": 194,
+        "count": 195,
         "names": [
           "Aaron Marinucci",
           "Aaron Shaw",
@@ -17090,6 +17091,7 @@
           "Charles Ko",
           "Chase Pagán",
           "Cheri Adams",
+          "Cheston Turner",
           "Chris Field",
           "Chris Wilson",
           "Christerson Ramlow",
@@ -17258,7 +17260,7 @@
   "connectionSunday": {
     "date": "2026-10-11",
     "since": true,
-    "updated": "2026-10-16T03:11:26.684Z",
+    "updated": "2026-10-16T03:59:51.314Z",
     "groupsChecked": 36,
     "groups": [
       {
@@ -17509,12 +17511,26 @@
         "joinedNames": [
           "Anna Torres"
         ]
+      },
+      {
+        "group": "Peissner Community Group",
+        "leaders": [
+          "David Peissner",
+          "Grace Peissner"
+        ],
+        "applied": 0,
+        "joined": 1,
+        "connections": 1,
+        "appliedNames": [],
+        "joinedNames": [
+          "Cheston Turner"
+        ]
       }
     ],
     "totals": {
       "applied": 23,
-      "joined": 18,
-      "connections": 23
+      "joined": 19,
+      "connections": 24
     }
   },
   "sundayPlans": [
@@ -32445,6 +32461,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Courtney Rumbaugh",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -32454,8 +32477,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562258\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 2,
-            "totalVols": 2
+            "volsWithServiceTime": 3,
+            "totalVols": 3
           }
         }
       ]
@@ -32485,6 +32508,13 @@
               "pos": "Safety Monitor",
               "status": "C",
               "serviceTime": "11 AM"
+            },
+            {
+              "name": "Courtney Rumbaugh",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "8 AM"
             }
           ],
           "orderItems": [],
@@ -32494,8 +32524,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562265\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 2,
-            "totalVols": 2
+            "volsWithServiceTime": 3,
+            "totalVols": 3
           }
         }
       ]
@@ -32598,6 +32628,13 @@
               "pos": "Greeter",
               "status": "U",
               "serviceTime": "8 AM"
+            },
+            {
+              "name": "Courtney Rumbaugh",
+              "team": "Stepping Stones",
+              "pos": "Check In",
+              "status": "C",
+              "serviceTime": "9:30 AM"
             }
           ],
           "orderItems": [],
@@ -32607,8 +32644,8 @@
             "firstTimeIds": "[{\"type\":\"PlanTime\",\"id\":\"229562289\"}]",
             "planTimeMapCount": 7,
             "planTimeNames": "Mid Week Tech Rehearsal, Mid Week Worship Team Rehearsal, Pre Service Tech Rehearsal, Pre Service Worship Team Reheasal, 8 AM, 9:30 AM, 11 AM",
-            "volsWithServiceTime": 1,
-            "totalVols": 1
+            "volsWithServiceTime": 2,
+            "totalVols": 2
           }
         }
       ]
