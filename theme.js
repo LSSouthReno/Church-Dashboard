@@ -305,6 +305,7 @@ html[data-theme="soft"] .eng-btn { background: #f6efdc; border-color: #e1cf9f; c
 html[data-theme="soft"] .eng-btn.g { background: #fff; border-color: var(--soft-line); color: var(--soft-muted); }
 html[data-theme="soft"] ::selection { background: #f0e3bd; }
 html[data-theme="soft"] #staffModal .sp-theme-btn { display: none !important; }
+html[data-theme="soft"] .nav-me .av, html[data-theme="soft"] .cf-views button.on, html[data-theme="soft"] .sp-nav-tab.sp-nav-tool.sp-active, html[data-theme="soft"] .sp-copy-btn, html[data-theme="soft"] .sp-snap-rocks-tab-btn:hover, html[data-theme="soft"] .sp-l10-print-btn, html[data-theme="soft"] .sp-away-save-btn, html[data-theme="soft"] .sp-joy-bomb-btn, html[data-theme="soft"] .sp-joy-add-btn:hover, html[data-theme="soft"] #staffModal .sos-btn.hi, html[data-theme="soft"] #staffModal .oga-btn.hi, html[data-theme="soft"] .sp-prof-bamboo:hover, html[data-theme="soft"] .sp-prof-add-btn:hover, html[data-theme="soft"] .st-navn { color: #fff !important; }   /* dark ink on the soft bronze read at 3.6:1 */
 html[data-theme="soft"] .sh-newfam-banner { background: #fbf0cc !important; color: #4d3b06 !important; }
 html[data-theme="soft"] .sh-nf-who, html[data-theme="soft"] .sh-nf-who b { color: #4d3b06 !important; }
 html[data-theme="soft"] .sh-nf-who { border-top-color: rgba(77,59,6,.15) !important; }
