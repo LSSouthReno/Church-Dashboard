@@ -8189,6 +8189,7 @@ function kpStaticItems() {
   add('Tools', 'Switch look: ' + (lssrTheme.get() === 'soft' ? 'Classic dark' : 'Soft light'), 'appearance, theme, dark mode, light mode', () => lssrTheme.toggle());
   add('Pages', 'Church · Engagement', 'pathway, next steps taken, engagement score', () => { navGo('church'); chTab('engagement'); });
   add('Pages', 'Care · Engagement', 'primed to engage, drifting, donor health', () => engOpenCare());
+  add('Tools', 'Living Stones app: links & QR codes', 'short links, QR, replace Church Center links', () => window.open('/links/', '_blank'), '⇗');
   [['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
     add('Pages', 'Church · ' + t[1], '', () => { navGo('church'); chTab(t[0]); }));
   add('Pages', 'Sunday one-sheet', 'this Sunday: order of service, captains, teams', () => navGo('sunday'));

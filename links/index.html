@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="/theme.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>App links · Living Stones</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!--
+  Staff page: every short link into the Living Stones app (the member app at /journey/), with a
+  copy button and a QR code to download for slides, print and signs. Short links live in /404.html.
+-->
+<style>
+  :root { --bg:#141414; --card:#1f1f1f; --line:#2e2e2e; --text:#f2efe9; --muted:#a39e94; --dim:#78726a; --gold:#d4af37; --gold-bg:rgba(212,175,55,.12); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1100px; margin:0 auto; padding:32px 20px 60px; }
+  h1 { font-size:30px; font-weight:700; margin:0 0 6px; } .lead { color:var(--muted); font-size:15px; line-height:1.6; max-width:760px; margin:0 0 22px; }
+  .top { display:flex; align-items:center; gap:12px; margin-bottom:22px; } .top img { height:28px; } .top a { margin-left:auto; color:var(--gold); font-weight:700; text-decoration:none; font-size:14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; display:grid; grid-template-columns:1fr 112px; gap:14px; align-items:start; }
+  .card h3 { margin:0 0 4px; font-size:17px; } .card .url { font-weight:800; color:var(--gold); font-size:15px; word-break:break-all; }
+  .card p { color:var(--muted); font-size:13px; line-height:1.5; margin:8px 0 10px; }
+  .qr { background:#fff; padding:6px; border-radius:8px; width:112px; height:112px; } .qr img, .qr canvas { width:100% !important; height:100% !important; }
+  .acts { display:flex; gap:6px; flex-wrap:wrap; }
+  button { appearance:none; border:1px solid var(--line); background:none; color:var(--text); border-radius:9px; padding:8px 12px; font:700 12.5px 'Montserrat',sans-serif; cursor:pointer; min-height:36px; }
+  button:hover { border-color:var(--gold); color:var(--gold); }
+  h2 { font-size:19px; margin:34px 0 10px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:11px 14px; border-top:1px solid var(--line); vertical-align:top; } th { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); border-top:0; }
+  td.n { color:var(--gold); font-weight:700; white-space:nowrap; } td small { color:var(--muted); }
+  ol { color:var(--muted); line-height:1.8; font-size:14.5px; padding-left:20px; } ol b { color:var(--text); }
+  @media (max-width:560px) { .card { grid-template-columns:1fr 92px; } .qr { width:92px; height:92px; } table { font-size:13px; } th, td { padding:9px 10px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="/assets/ls-lockup-white.png" alt="Living Stones South Reno"><a href="/">← Dashboard</a></div>
+  <h1>Living Stones app links</h1>
+  <p class="lead">Point people here instead of the Church Center app. Everyone signs in once with their phone number and a texted code; after that the app is personal: their next step, their groups and teams, events picked for them. Giving, registrations and sign-ups still happen securely in Church Center: the app takes them straight to the right page.</p>
+  <div class="grid" id="grid"></div>
+
+  <h2>Replace these Church Center links</h2>
+  <table>
+    <thead><tr><th>Where people go today</th><th>Send them here instead</th><th>What they get</th></tr></thead>
+    <tbody id="map"></tbody>
+  </table>
+
+  <h2>Rolling it out</h2>
+  <ol>
+    <li><b>Sunday slide + bulletin:</b> the <b>/app</b> QR code with “Get the Living Stones app.” iPhone: Share → Add to Home Screen. Android: the app offers “Add to Home Screen”.</li>
+    <li><b>Church Center:</b> keep it running (it handles payments, registrations and kids check-in). Add a card on the Church Center home page that links to <b>lssouthreno.com/app</b>.</li>
+    <li><b>Website buttons:</b> “Give”, “Events”, “Find a group”, “Prayer” → the short links above.</li>
+    <li><b>Emails and texts:</b> use the short link for the thing you’re asking for (e.g. lssouthreno.com/events). Sign-in remembers people for 90 days.</li>
+    <li><b>Signs and next-step cards:</b> the same QR codes, so the building and the app say the same thing.</li>
+  </ol>
+</div>
+<script>
+  const BASE = 'https://lssouthreno.com';
+  const LINKS = [
+    ['/app', 'The app', 'Opens on Home: their next step, this Sunday, what’s coming up for them.'],
+    ['/events', 'Events', 'Every church event, tagged for them; register or add to their calendar in a tap.'],
+    ['/give', 'Give', 'Their giving at a glance; “Give now” opens Church Center giving.'],
+    ['/connect', 'Groups & teams', 'Their groups and teams, serving dates, and groups/teams looking for people.'],
+    ['/prayer', 'Prayer request', 'Opens the prayer request form (it goes to the prayer team and their pastor).'],
+    ['/me', 'Me', 'Their journey, family, pastor, Church Center profile and kids check-in.']
+  ];
+  const MAP = [
+    ['lssr.churchcenter.com (the app / home)', '/app', 'A personal home with their next step instead of a feed'],
+    ['lssr.churchcenter.com/giving', '/give', 'Giving status + Give now (still Church Center underneath)'],
+    ['lssr.churchcenter.com/calendar · /registrations', '/events', 'Events tagged for them; Register buttons go to the same registration'],
+    ['lssr.churchcenter.com/groups · serve teams', '/connect', 'Their groups/teams, plus who needs people'],
+    ['Prayer request forms', '/prayer', 'Goes to the prayer team and their pastor'],
+    ['lssr.churchcenter.com/me · /check-ins', '/me', 'Profile, family, kids check-in links']
+  ];
+  const grid = document.getElementById('grid');
+  LINKS.forEach(([path, name, what], i) => {
+    const url = BASE + path, card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = '<div><h3>' + name + '</h3><div class="url">' + url.replace('https://', '') + '</div><p>' + what + '</p><div class="acts">' +
+      '<button data-copy="' + url + '">Copy link</button><button data-png="' + i + '">Download QR</button><button data-open="' + path + '">Try it</button></div></div><div class="qr" id="qr' + i + '"></div>';
+    grid.appendChild(card);
+    try { new QRCode(document.getElementById('qr' + i), { text: url, width: 400, height: 400, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+  });
+  document.getElementById('map').innerHTML = MAP.map(m => '<tr><td>' + m[0] + '</td><td class="n">lssouthreno.com' + m[1] + '</td><td><small>' + m[2] + '</small></td></tr>').join('');
+  grid.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.copy) { navigator.clipboard.writeText(b.dataset.copy).then(() => { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy link', 1500); }); }
+    if (b.dataset.open) window.open(b.dataset.open, '_blank');
+    if (b.dataset.png) {
+      const box = document.getElementById('qr' + b.dataset.png), c = box.querySelector('canvas'), img = box.querySelector('img');
+      const a = document.createElement('a'); a.href = c ? c.toDataURL('image/png') : img.src;
+      a.download = 'lssr-app-' + (LINKS[b.dataset.png][0].slice(1) || 'app') + '-qr.png'; a.click();
+    }
+  });
+</script>
+</body>
+</html>
