@@ -3,6 +3,7 @@
 <head>
 <script src="team-checklists.js"></script>
 <script src="conferences.js"></script>
+<script src="engagement.js"></script>
 <script>
   // Force HTTPS: the password gates use crypto.subtle (Web Crypto), which browsers
   // disable on non-secure (http://) pages, so unlocking fails silently over HTTP.
@@ -3780,6 +3781,8 @@
 
   </div>
 
+  <div class="ch-c eng" data-ch="engagement" id="engChurch"></div>
+
   </div><!-- /chGrid -->
 
   <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno</div>
@@ -5777,7 +5780,7 @@ async function loadDashboardData() {
    CHURCH — overview tiles + sub-nav. The cards below are the same cards
    as before; each carries data-ch="…" naming the tabs it belongs to.
    ================================================================ */
-const CH_TABS = [['overview', 'Overview'], ['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Groups'], ['serve', 'Serve'], ['giving', 'Giving', 1]];
+const CH_TABS = [['overview', 'Overview'], ['engagement', 'Engagement'], ['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Groups'], ['serve', 'Serve'], ['giving', 'Giving', 1]];
 const CH_LK = '<svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="6.5" rx="1.5"/><path d="M3.5 6V4a2.5 2.5 0 015 0v2"/></svg>';
 function chBuildSubnav() {
   const el = document.getElementById('chSubnav'); if (!el) return;
@@ -5792,6 +5795,7 @@ function chTab(tab, silent) {
   g.querySelectorAll('.ch-c').forEach(c => c.classList.toggle('on', (c.dataset.ch || '').split(/\s+/).indexOf(tab) >= 0));
   document.querySelectorAll('#chSubnav button').forEach(b => b.classList.toggle('on', b.dataset.chTab === tab));
   const tiles = document.getElementById('chTiles'); if (tiles) tiles.classList.toggle('on', tab === 'overview');
+  if (tab === 'engagement' && typeof engChurchRender === 'function') engChurchRender();
   if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(chResizeCharts, 30);
 }
@@ -8151,6 +8155,8 @@ function kpStaticItems() {
   const it = [];
   const add = (sec, label, hint, go, ic) => it.push({ sec, label, hint, go, ic: ic || '›' });
   add('Pages', 'Church · Overview', 'attendance, members, baptisms, groups, serving', () => { navGo('church'); chTab('overview'); });
+  add('Pages', 'Church · Engagement', 'pathway, next steps taken, engagement score', () => { navGo('church'); chTab('engagement'); });
+  add('Pages', 'Care · Engagement', 'primed to engage, drifting, donor health', () => engOpenCare());
   [['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
     add('Pages', 'Church · ' + t[1], '', () => { navGo('church'); chTab(t[0]); }));
   add('Pages', 'Sunday one-sheet', 'this Sunday: order of service, captains, teams', () => navGo('sunday'));
@@ -8269,6 +8275,7 @@ function mmApplyState() {
   mmUpdatePledgeDetails();
   addCsvButtons_();   // giving/donor charts just became available — ensure their export buttons exist
   try { chRenderTiles(); } catch (e) {}
+  try { if (chCurrentTab() === 'engagement' && typeof engChurchRender === 'function') engChurchRender(); } catch (e) {}
 
   // Re-render missions amounts (blur/unblur on lock state change)
   const missionsList = document.getElementById('missionsList');
@@ -17422,6 +17429,7 @@ function shApplyData(data, fromCache) {
   if (bapBtn) bapBtn.style.display = _shPastorHash ? '' : 'none';
   if (_shPastorHash && !_bap && !_bapLoading) bapLoad(true);   // fills the button's count badge
   shBuildElderTabs(); shBuildFilters(); shRenderHealth(); shRenderPeople();
+  if (typeof engOnCareData === 'function') engOnCareData();
 }
 
 function shActiveElderObj() { if (!_shepData || _shActiveElder==='all') return null; return (_shepData.elders||[]).find(e => e.elder===_shActiveElder) || null; }

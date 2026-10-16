@@ -3,7 +3,7 @@
 // data; the saved copy is used only when the network fails (offline / dropped Wi-Fi).
 // Other origins (Apps Script web apps, CDNs, fonts) are never touched.
 const CACHE = 'lssr-app-v3';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './team-checklists.js', './conferences.js',
+const SHELL = ['./', './index.html', './manifest.webmanifest', './team-checklists.js', './conferences.js', './engagement.js',
   './assets/ls-logo-white.png', './assets/ls-lockup-white.png', './assets/app/icon-192.png'];
 
 self.addEventListener('install', e => {
