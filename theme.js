@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v8';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v9';
   var de = document.documentElement;
   function choose() {
     try {
@@ -67,7 +67,7 @@
   }
   // Neutral lightness curve (in → out). V-shaped at the dark "card" level so surfaces keep
   // their elevation: page (.19) → linen, card (.24) → white, chips/borders darker again.
-  var CURVE = [[0, .90], [.17, .955], [.19, .968], [.215, .985], [.24, 1], [.265, .958], [.29, .928], [.34, .89], [.42, .74], [.52, .555], [.62, .50], [.70, .46], [.85, .37], [.95, .29], [1, .26]]   // dim/muted text tuned to ≥4.5:1 on linen;
+  var CURVE = [[0, .90], [.17, .955], [.19, .968], [.215, .985], [.24, 1], [.265, .958], [.29, .928], [.34, .89], [.42, .72], [.52, .53], [.62, .49], [.70, .46], [.85, .37], [.95, .29], [1, .26]]   // dim/muted text tuned to ≥4.5:1 on linen;
   function curve(L) {
     for (var i = 1; i < CURVE.length; i++) if (L <= CURVE[i][0]) {
       var a = CURVE[i - 1], b = CURVE[i]; return a[1] + (b[1] - a[1]) * (L - a[0]) / (b[0] - a[0]);
