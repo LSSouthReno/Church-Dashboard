@@ -13,7 +13,8 @@
 #   4. publishes it to the LSSouthReno/lssouthreno.github.io repo (GitHub Pages, ~1 min)
 # Ship what you tested with scripts/ship.sh.
 set -euo pipefail
-LOCAL=0; [ "${1:-}" = "--local" ] && LOCAL=1
+LOCAL=0; SERVE=1
+case "${1:-}" in --local) LOCAL=1;; --build-only) LOCAL=1; SERVE=0;; esac
 
 BETA_REPO="https://github.com/LSSouthReno/lssouthreno.github.io.git"
 ROOT="$(git rev-parse --show-toplevel)"
@@ -62,6 +63,7 @@ printf '%s\n' "$SHA" > beta-commit.txt
 printf 'User-agent: *\nDisallow: /\n' > robots.txt
 
 if [ $LOCAL = 1 ]; then
+  [ $SERVE = 0 ] && { echo "✅ Local beta built ($SHORT) in .beta-build/"; exit 0; }
   echo "✅ Local beta built ($SHORT) → http://localhost:8790/   (Ctrl-C to stop)"
   exec node "$ROOT/scripts/beta-serve.mjs" "$BUILD" 8790
 fi
