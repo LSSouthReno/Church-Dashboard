@@ -128,6 +128,33 @@
   .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:#1f1f1f; border:1px solid var(--gold-line); color:var(--text); padding:11px 18px; border-radius:10px; font-size:14px; opacity:0; transition:.2s; pointer-events:none; z-index:30; max-width:calc(100% - 32px); }
   .toast.show { opacity:1; }
   @media (max-width: 900px) { .g2, .g3 { grid-template-columns:1fr; } }
+  /* one grid: desktop = balanced columns, phone = app order (For you → News → Coming up → …) */
+  .jg { display:grid; gap:16px; grid-template-columns:repeat(12,minmax(0,1fr)); }
+  .jg > .a-foryou { grid-column:span 7; } .jg > .a-year { grid-column:span 5; } .jg > .a-news { grid-column:1/-1; }
+  .jg > .a-coming, .jg > .a-pastor, .jg > .a-ms { grid-column:span 4; }
+  .hero h1 { font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:-.01em; }
+  .hero .av.ini { display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:var(--gold); background:var(--gold-bg); }
+  @media (max-width: 900px) {
+    .jg > * { grid-column:1/-1 !important; }
+    .jg > .a-foryou { order:1; } .jg > .a-news { order:2; } .jg > .a-coming { order:3; } .jg > .a-year { order:4; } .jg > .a-pastor { order:5; } .jg > .a-ms { order:6; }
+  }
+  @media (max-width: 640px) {
+    /* app header: centered greeting, badges, encouragement */
+    .hero { flex-direction:column; text-align:center; gap:10px; margin-bottom:16px; }
+    .hero .av { width:72px; height:72px; }
+    .hero .s { font-size:14px; }
+    .badges { margin:0 0 14px; }
+    .seeyou { flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px 2px; scrollbar-width:none; }
+    .seeyou::-webkit-scrollbar { display:none; }
+    .seeyou span { flex:none; }
+    .path { margin:0 0 18px; }
+    .step .acts .btn.p { flex:1; min-height:44px; } .step .acts .btn.g { min-height:44px; }
+    .step b { font-size:16px; }
+    .news { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin:0 -16px; padding:0 16px 4px; scrollbar-width:none; }
+    .news::-webkit-scrollbar { display:none; }
+    .news .nv { flex:0 0 78%; scroll-snap-align:start; }
+    .card-h h3 { font-size:12px; }
+  }
   @media (max-width: 640px) {
     .wrap { padding:22px 16px 60px; } .top { padding:0 16px; } .top .t { display:none; }
     .hero h1 { font-size:26px; } .path { overflow-x:auto; padding-bottom:6px; } .stop { min-width:96px; } .stop span { display:none; }
@@ -338,22 +365,20 @@ function viewJourney() {
   const pFirst = pn ? pn.split(' ')[0] : 'A pastor';
 
   $('app').innerHTML = '<div class="wrap">' +
-    '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '') + '<div><h1>Hi ' + esc(first) + ', we’re so glad you’re here.</h1>' +
+    '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '<div class="av ini">' + esc((first || '?').charAt(0)) + '</div>') + '<div><h1>' + greeting() + ', ' + esc(first) + '!</h1>' +
       '<div class="s">' + who + ' been part of Living Stones since ' + esc(sinceY) + '. You’re in ' + (SEASON_WORD[d.season] || 'a') + ' season — here’s the road so far, and a next step or two.</div></div></div>' +
     badgesHtml(d) +
     path + seeYouHtml(d) +
-    '<div class="grid g2">' +
-      '<div class="card"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepHtml + '</div>' +
-      '<div class="card"><div class="card-h"><h3>Your year at Living Stones</h3></div>' + factHtml + '</div>' +
-    '</div>' +
-    '<div class="grid g3" style="margin-top:16px">' +
-      '<div class="card"><div class="card-h"><h3>Milestones</h3></div><div class="ms">' + (ms || '<div class="next">Your story is just getting started</div>') + (nextMs ? '<div class="next">Next: ' + esc(nextMs.title.replace(/\?$/, '')) + '</div>' : '') + '</div></div>' +
-      '<div class="card"><div class="card-h"><h3>Your pastor</h3></div><div class="pastor"><div class="av">' + esc(pInit) + '</div><div><b style="font-size:16px">' + esc(pn || 'Living Stones pastors') + '</b><div class="dim">' + (pn ? 'Your shepherding pastor' : 'We’d love to connect you with a pastor') + '</div></div></div>' +
+    '<div class="jg">' +
+      '<div class="card a-foryou"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepHtml + '</div>' +
+      '<div class="card a-year"><div class="card-h"><h3>Your year at Living Stones</h3></div>' + factHtml + '</div>' +
+      '<div class="card a-news"><div class="card-h"><h3>News &amp; events</h3><span class="c">coming up at Living Stones</span></div><div id="jrNews" class="dim">Loading…</div></div>' +
+      '<div class="card a-ms"><div class="card-h"><h3>Milestones</h3></div><div class="ms">' + (ms || '<div class="next">Your story is just getting started</div>') + (nextMs ? '<div class="next">Next: ' + esc(nextMs.title.replace(/\?$/, '')) + '</div>' : '') + '</div></div>' +
+      '<div class="card a-pastor"><div class="card-h"><h3>Your pastor</h3></div><div class="pastor"><div class="av">' + esc(pInit) + '</div><div><b style="font-size:16px">' + esc(pn || 'Living Stones pastors') + '</b><div class="dim">' + (pn ? 'Your shepherding pastor' : 'We’d love to connect you with a pastor') + '</div></div></div>' +
         '<p class="muted" style="font-size:14.5px;line-height:1.6;margin:14px 0">' + esc(pFirst) + ' would love to hear how you’re doing, and how to pray for you.</p>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="openSheet(\'note\')">Send a note</button><button class="btn sm" onclick="openSheet(\'prayer\')">Share a prayer request</button></div></div>' +
-      '<div class="card"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
+      '<div class="card a-coming"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
     '</div>' +
-    '<div class="card" style="margin-top:16px"><div class="card-h"><h3>News &amp; events</h3><span class="c">coming up at Living Stones</span></div><div id="jrNews" class="dim">Loading…</div></div>' +
     leadHtml(d.leading) +
     '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.' + (EMBED && !S.preview ? ' · <a href="#" onclick="logout();return false">Sign out of My Journey</a>' : '') + '</div>' +
   '</div>';
@@ -361,6 +386,7 @@ function viewJourney() {
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
 }
 
+function greeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
 // ── pathway badges: filled = a step you've taken, gray = one still ahead ──────────
 const BADGES = [
   ['baptism', 'Baptism', 'baptism', 'Go public with your faith'],
