@@ -133,7 +133,8 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-pc .acts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
   .eng-note summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--text-muted); list-style: none; padding: 2px 0; } .eng-note summary::-webkit-details-marker { display: none; }
   .eng-note[open] summary { margin-bottom: 6px; }
-  @media (max-width: 560px) { #engCare .card { padding: 16px 14px; } .eng-pc { padding: 12px; } .eng-pc .v { font-size: 26px; } }
+  @media (max-width: 560px) { #engCare .card { padding: 16px 14px; } .eng-pc { padding: 12px; } .eng-pc .v { font-size: 26px; }
+    .eng-pc .acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; } .eng-pc .acts .eng-btn { padding: 9px 4px; font-size: 11.5px; min-height: 40px; } }
   .eng-people { margin-top: 6px; } .eng-people summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--gold); list-style: none; } .eng-people summary::-webkit-details-marker { display: none; }
   .eng-plist { display: grid; gap: 2px; margin-top: 8px; max-height: 340px; overflow: auto; }
   .eng-prow { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 6px; background: #151515; font-size: 13px; }
