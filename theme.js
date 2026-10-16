@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v7';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v8';
   var de = document.documentElement;
   function choose() {
     try {
@@ -67,7 +67,7 @@
   }
   // Neutral lightness curve (in → out). V-shaped at the dark "card" level so surfaces keep
   // their elevation: page (.19) → linen, card (.24) → white, chips/borders darker again.
-  var CURVE = [[0, .90], [.17, .955], [.19, .968], [.215, .985], [.24, 1], [.265, .958], [.29, .928], [.34, .89], [.42, .80], [.52, .66], [.62, .56], [.70, .50], [.85, .385], [.95, .30], [1, .26]];
+  var CURVE = [[0, .90], [.17, .955], [.19, .968], [.215, .985], [.24, 1], [.265, .958], [.29, .928], [.34, .89], [.42, .74], [.52, .555], [.62, .50], [.70, .46], [.85, .37], [.95, .29], [1, .26]]   // dim/muted text tuned to ≥4.5:1 on linen;
   function curve(L) {
     for (var i = 1; i < CURVE.length; i++) if (L <= CURVE[i][0]) {
       var a = CURVE[i - 1], b = CURVE[i]; return a[1] + (b[1] - a[1]) * (L - a[0]) / (b[0] - a[0]);
@@ -98,8 +98,8 @@
     } else if (L < .45) {                             // dark tinted panels → light tinted panels
       out = fromOklch(curve(L), Math.min(C * .35, .03), h);
     } else {                                          // accents: deepen so they read on white
-      var L3 = L <= .6 ? L : .6 - (L - .6) * .35;
-      if (L > .6 && h > 1.2 && h < 1.95) h -= (h - 1.2) * .6;   // darkened gold/yellow turns olive — nudge it to warm bronze
+      var L3 = L <= .55 ? L : .55 - (L - .55) * .3;   // ≥4.5:1 for accent text on white
+      if (L > .55 && h > 1.2 && h < 1.95) h -= (h - 1.2) * .6;   // darkened gold/yellow turns olive — nudge it to warm bronze
       out = fromOklch(L3, C * (L > .8 ? 1.15 : 1.05), h);
     }
     return a < 1 ? 'rgba(' + out + ',' + a + ')' : '#' + out.map(function (v) { return (v < 16 ? '0' : '') + v.toString(16); }).join('');
