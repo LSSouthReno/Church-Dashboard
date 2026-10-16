@@ -243,6 +243,10 @@
   .b-k { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
   .belong .badges { margin:0; }
   .signin .b-h { font-size:40px; margin:22px 0 12px; }
+  .signin { position:relative; } .signin > * { position:relative; }
+  .signin::before { content:''; position:absolute; left:50%; top:0; width:min(760px, 100vw); height:330px; transform:translateX(-50%); background:url(/assets/belong-topo.svg) center/cover no-repeat; opacity:.3; pointer-events:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 40%, transparent); mask-image:radial-gradient(closest-side, #000 40%, transparent); }
+  html[data-theme="soft"] .signin::before { opacity:.2; }
   .signin .b-v { margin:0 auto 22px; }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
@@ -352,7 +356,7 @@ function viewSignin(msg) {
     '<input class="field" id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" oninput="this.value=fmtPhone(this.value)" onkeydown="if(event.key===\'Enter\')sendCode()">' +
     '<button class="btn p" id="sendBtn" onclick="sendCode()">' + (c.channel === 'sms' ? 'Send code' : 'Email me a link') + '</button>' +
     '<div class="err" id="err">' + esc(msg || '') + '</div>' +
-    '<div class="fine">Use the number you’ve given Living Stones. ' + (c.channel === 'sms' ? 'We’ll text you a code.' : 'We’ll email a one-tap sign-in link to the address we have for you.') +
+    '<div class="fine">Use the number you’ve given Living Stones.' + (c.channel === 'sms' ? '' : ' The link goes to the email on your Living Stones profile.') +
     '<br><br><b style="color:var(--muted)">It’s private.</b> Only you, and the pastors who care for you, can see your information.</div></div>';
   const ph = $('ph'); if (ph) setTimeout(() => ph.focus(), 50);
 }
