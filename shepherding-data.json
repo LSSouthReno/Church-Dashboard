@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T11:19:58.689Z",
+  "generatedAt": "2026-10-16T12:18:55.394Z",
   "asOf": "2026-10-16",
   "givingMonths": 12,
   "statusVocab": [
@@ -12559,58 +12559,6 @@
         },
         {
           "id": null,
-          "name": "Jeff Bridges",
-          "first": "Jeff",
-          "last": "Bridges",
-          "email": "",
-          "phone": "",
-          "member": false,
-          "membershipType": "",
-          "status": "unknown",
-          "statusRaw": "",
-          "healthDate": "",
-          "healthDaysAgo": null,
-          "overdue": false,
-          "assignedElder": "",
-          "spiritualMat": "",
-          "maturityManual": null,
-          "preferredComm": "",
-          "baptized": false,
-          "importantDates": {},
-          "nextStep": null,
-          "score": null,
-          "paci": null,
-          "leads": false,
-          "trajectory": "steady",
-          "pillars": null,
-          "giving": null,
-          "newFamilyMember": false,
-          "familyStep": "",
-          "familyAssignee": "",
-          "groups": [
-            {
-              "name": "Colonna/Mavros Community Group",
-              "role": "member",
-              "joinedAt": "2024-07-18T21:43:54Z"
-            }
-          ],
-          "serveTeams": [
-            {
-              "name": "First Impressions Team",
-              "role": "member",
-              "joinedAt": "2025-01-06T20:26:29Z"
-            },
-            {
-              "name": "Parking Team",
-              "role": "member",
-              "joinedAt": "2024-09-08T22:30:13Z"
-            }
-          ],
-          "flags": [],
-          "pending": true
-        },
-        {
-          "id": null,
           "name": "Kelly Farson",
           "first": "Kelly",
           "last": "Farson",
@@ -13560,6 +13508,58 @@
               "name": "Tech Team",
               "role": "member",
               "joinedAt": "2025-02-03T18:47:37Z"
+            }
+          ],
+          "flags": [],
+          "pending": true
+        },
+        {
+          "id": null,
+          "name": "Jeff Bridges",
+          "first": "Jeff",
+          "last": "Bridges",
+          "email": "",
+          "phone": "",
+          "member": false,
+          "membershipType": "",
+          "status": "unknown",
+          "statusRaw": "",
+          "healthDate": "",
+          "healthDaysAgo": null,
+          "overdue": false,
+          "assignedElder": "",
+          "spiritualMat": "",
+          "maturityManual": null,
+          "preferredComm": "",
+          "baptized": false,
+          "importantDates": {},
+          "nextStep": null,
+          "score": null,
+          "paci": null,
+          "leads": false,
+          "trajectory": "steady",
+          "pillars": null,
+          "giving": null,
+          "newFamilyMember": false,
+          "familyStep": "",
+          "familyAssignee": "",
+          "groups": [
+            {
+              "name": "Colonna/Mavros Community Group",
+              "role": "member",
+              "joinedAt": "2024-07-18T21:43:54Z"
+            }
+          ],
+          "serveTeams": [
+            {
+              "name": "First Impressions Team",
+              "role": "member",
+              "joinedAt": "2025-01-06T20:26:29Z"
+            },
+            {
+              "name": "Parking Team",
+              "role": "member",
+              "joinedAt": "2024-09-08T22:30:13Z"
             }
           ],
           "flags": [],
@@ -18627,8 +18627,8 @@
   "leaderCandidateCount": 40,
   "paciCounts": {
     "parent": 63,
-    "adult": 66,
-    "child": 151,
+    "adult": 67,
+    "child": 150,
     "infant": 103
   }
 }
