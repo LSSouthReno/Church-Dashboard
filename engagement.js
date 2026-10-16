@@ -89,7 +89,7 @@ function engCopyFallback(text) { const ta = document.createElement('textarea'); 
   .eng-strip.on { display: flex; } .eng-strip:hover { border-color: rgba(212,175,55,.55); }
   .eng-strip .pr { display: inline-flex; align-items: baseline; gap: 7px; margin-right: 10px; }
   .eng-strip b { font-size: 20px; font-weight: 800; } .eng-strip .pr span { color: var(--text-muted); font-size: 13px; } .eng-strip .go { margin-left: auto; color: var(--gold); font-weight: 700; font-size: 13px; }
-  @media (max-width: 560px) { .eng-strip { gap: 6px 4px; } .eng-strip .go { width: 100%; margin-left: 0; } }
+  @media (max-width: 560px) { .eng-strip { gap: 6px 4px; } .eng-strip .go { width: 100%; margin-left: 0; } .eng-btn { min-height: 40px; padding: 9px 16px; } }
   .eng-step.lock .v { font-size: 13px; color: var(--text-dim); font-weight: 700; padding-top: 6px; }
   /* score */
   .eng-score { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
