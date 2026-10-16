@@ -549,7 +549,7 @@ function engCareRender() {
       '</div>' +
     '</div>' +
     (seed ? '' :
-    '<div class="card"><h2>Donor health</h2><div class="eng-dim">Giving is a spiritual step. Talk about it always — just not the same way to everyone, and always for the giver’s good. Married couples are counted once each.</div>' +
+    '<div class="card"><h2>Donor health</h2><div class="eng-dim">Giving is a spiritual step. Talk about it always — just not the same way to everyone, and always for the giver’s good. Spouses who give together each count as a giver.</div>' +
       '<div class="eng-donor">' +
         '<div class="eng-opp"><div class="k">Givers · 12 months</div><div class="v">' + engN(givers) + '</div><div class="d">' + engPct(givers, n) + '% of people in view</div></div>' +
         '<div class="eng-opp" style="--c:#22c55e"><div class="k">Growing</div><div class="v">' + engN(stages.growing.length) + '</div><div class="d">giving more than last year</div></div>' +

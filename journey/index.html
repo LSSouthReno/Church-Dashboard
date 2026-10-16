@@ -132,6 +132,23 @@
     .hero h1 { font-size:26px; } .path { overflow-x:auto; padding-bottom:6px; } .stop { min-width:96px; } .stop span { display:none; }
     .card { padding:18px 16px; } .fact .k { width:78px; }
   }
+  /* pathway badges · "persistent encouragement" (same icons as the dashboard + lobby poster) */
+  .badges { display:flex; gap:10px; flex-wrap:wrap; margin:-8px 0 22px; }
+  .badge { appearance:none; display:flex; flex-direction:column; align-items:center; gap:5px; width:74px; background:none; border:0; padding:0; cursor:pointer; font:700 11px 'Montserrat',sans-serif; color:var(--dim); }
+  .badge i { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1.5px solid var(--line-2); background:var(--card); transition:transform .15s; }
+  .badge svg { width:22px; height:22px; fill:none; stroke:#6a655d; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+  .badge.on { color:var(--text); } .badge.on i { background:var(--gold); border-color:var(--gold); } .badge.on svg { stroke:#1a1407; }
+  .badge:hover i { transform:translateY(-2px); }
+  .seeyou { display:flex; gap:8px; flex-wrap:wrap; margin:-12px 0 22px; }
+  .seeyou span { background:var(--gold-bg); border:1px solid var(--gold-line); color:var(--text); border-radius:99px; padding:7px 13px; font-size:13.5px; line-height:1.3; }
+  .step.flash { animation:flash 1.6s ease; } @keyframes flash { 0%,60% { background:var(--gold-bg); } 100% { background:none; } }
+  .news { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
+  .nv { display:flex; flex-direction:column; background:var(--card-2); border:1px solid var(--line); border-radius:12px; overflow:hidden; color:var(--text); text-decoration:none; min-width:0; }
+  .nv:hover { border-color:var(--line-2); }
+  .nv img { width:100%; aspect-ratio:16/9; object-fit:cover; background:#191919; display:block; }
+  .nv div { padding:11px 13px 13px; display:flex; flex-direction:column; gap:4px; }
+  .nv small { color:var(--muted); font-size:12.5px; } .nv b { font-size:15px; line-height:1.3; }
+  .nv em { align-self:flex-start; font-style:normal; font-size:11px; font-weight:800; letter-spacing:.04em; color:#1a1407; background:var(--gold); border-radius:99px; padding:2px 8px; margin-bottom:2px; }
 </style>
 </head>
 <body>
@@ -286,7 +303,7 @@ function viewJourney() {
 
   const dm = dismissed(), now = Date.now();
   const steps = (d.steps || []).filter(s => s.kind === 'celebrate' || !(dm[s.id] > now));
-  const stepHtml = steps.length ? steps.map(s => '<div class="step' + (s.kind === 'celebrate' ? ' celebrate' : '') + '"><div class="ic">' + stepIcon(s.id) + '</div><div><b>' + esc(s.title) + '</b><p>' + esc(s.why) + '</p>' +
+  const stepHtml = steps.length ? steps.map(s => '<div class="step' + (s.kind === 'celebrate' ? ' celebrate' : '') + '" data-sid="' + esc(s.id) + '"><div class="ic">' + stepIcon(s.id) + '</div><div><b>' + esc(s.title) + '</b><p>' + esc(s.why) + '</p>' +
       (s.btn ? '<div class="acts">' +
         (s.url ? '<a class="btn p sm" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.btn) + '</a>'
                : '<button class="btn p sm" onclick="openSheet(\'note\',' + JSON.stringify(String(s.action || '').replace(/^note:/, '')).replace(/"/g, '&quot;') + ')">' + esc(s.btn) + '</button>') +
@@ -317,9 +334,10 @@ function viewJourney() {
   $('app').innerHTML = '<div class="wrap">' +
     '<div class="hero">' + (p.avatar ? '<img class="av" src="' + esc(p.avatar) + '" alt="">' : '') + '<div><h1>Hi ' + esc(first) + ', we’re so glad you’re here.</h1>' +
       '<div class="s">' + who + ' been part of Living Stones since ' + esc(sinceY) + '. You’re in ' + (SEASON_WORD[d.season] || 'a') + ' season — here’s the road so far, and a next step or two.</div></div></div>' +
-    path +
+    badgesHtml(d) +
+    path + seeYouHtml(d) +
     '<div class="grid g2">' +
-      '<div class="card"><div class="card-h"><h3>Your next steps</h3><span class="c">picked for this season</span></div>' + stepHtml + '</div>' +
+      '<div class="card"><div class="card-h"><h3>For you</h3><span class="c">picked for where you are</span></div>' + stepHtml + '</div>' +
       '<div class="card"><div class="card-h"><h3>Your year at Living Stones</h3></div>' + factHtml + '</div>' +
     '</div>' +
     '<div class="grid g3" style="margin-top:16px">' +
@@ -329,10 +347,86 @@ function viewJourney() {
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="openSheet(\'note\')">Send a note</button><button class="btn sm" onclick="openSheet(\'prayer\')">Share a prayer request</button></div></div>' +
       '<div class="card"><div class="card-h"><h3>Coming up for you</h3></div>' + (up || '<div class="dim">Nothing on your calendar yet.</div>') + '</div>' +
     '</div>' +
+    '<div class="card" style="margin-top:16px"><div class="card-h"><h3>News &amp; events</h3><span class="c">coming up at Living Stones</span></div><div id="jrNews" class="dim">Loading…</div></div>' +
     leadHtml(d.leading) +
     '<div class="quiet">This page is private — only you, and the pastors who care for you, can see it. It’s built from the information you’ve shared with Living Stones in Planning Center. See something that isn’t right? <a href="#" onclick="openSheet(\'note\',\'Something on my My Journey page isn’t right: \');return false">Let us know</a> and we’ll fix it.' + (EMBED && !S.preview ? ' · <a href="#" onclick="logout();return false">Sign out of My Journey</a>' : '') + '</div>' +
   '</div>';
+  loadNews(d);
   const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2;
+}
+
+// ── pathway badges: filled = a step you've taken, gray = one still ahead ──────────
+const BADGES = [
+  ['baptism', 'Baptism', 'baptism', 'Go public with your faith'],
+  ['member', 'Family', 'membership', 'Make Living Stones home'],
+  ['group', 'Group', 'group', 'Do life with others'],
+  ['serve', 'Serve', 'serve', 'Use your gifts for others'],
+  ['give', 'Give', 'give', 'Live generously'],
+  ['lead', 'Lead', 'lead', 'Help someone take their next step']
+];
+function badgeDone(k, d) {
+  const L = d.leading || {};
+  return k === 'baptism' ? !!d.baptized : k === 'member' ? !!d.member : k === 'group' ? (d.groups || []).length > 0
+    : k === 'serve' ? ((d.serving || {}).teams || []).length > 0 : k === 'give' ? !!(d.giving || {}).any
+    : ((L.groups || []).length + (L.teams || []).length > 0) || (d.groups || []).some(x => x.leader);
+}
+function badgesHtml(d) {
+  return '<div class="badges" aria-label="Your pathway">' + BADGES.map(b => { const on = badgeDone(b[0], d);
+    return '<button class="badge' + (on ? ' on' : '') + '" title="' + esc(b[1] + (on ? ' ✓' : ' · ' + b[3])) + '" onclick="badgeTap(\'' + b[0] + '\',' + on + ')"><i><svg viewBox="0 0 24 24">' + ICONS[b[2]] + '</svg></i>' + b[1] + '</button>'; }).join('') + '</div>';
+}
+function badgeTap(k, on) {
+  const b = BADGES.find(x => x[0] === k) || [];
+  const el = !on && document.querySelector('.step[data-sid*="' + (k === 'member' ? 'member' : k) + '"]');
+  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); return; }
+  toast(on ? b[1] + ' ✓ — thank you. That step matters.' : b[1] + ': ' + b[3] + '. Send your pastor a note anytime to talk about it.');
+}
+// ── "we see you" — recognize and encourage before we ask for anything ──────────
+function seeYouHtml(d) {
+  const out = [], sv = d.serving || {}, g = d.giving || {}, p = d.person || {};
+  if (sv.servedThisYear) out.push('🙌 You’ve served ' + sv.servedThisYear + (sv.servedThisYear === 1 ? ' time' : ' times') + ' this year');
+  if ((d.groups || []).some(x => x.leader)) out.push('⭐ Thank you for leading ' + esc((d.groups.find(x => x.leader) || {}).name || 'your group'));
+  else if ((d.groups || []).length) out.push('🤝 Doing life with ' + esc(d.groups[0].name));
+  if (g.any && (g.recurring || g.months >= 9)) out.push('💛 Your generosity is changing lives in South Reno');
+  const yrs = p.since ? Math.floor((Date.now() - new Date(p.since)) / 3156e7) : 0;
+  if (yrs >= 1) out.push('🏡 ' + yrs + (yrs === 1 ? ' year' : ' years') + ' at Living Stones');
+  const now = new Date();
+  (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(m.date);
+    const ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()); const days = Math.round((ann - now) / 864e5);
+    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) out.push('💧 Happy baptism anniversary — ' + (now.getFullYear() - b.getFullYear()) + ' years!'); });
+  return out.length ? '<div class="seeyou">' + out.slice(0, 3).map(s => '<span>' + s + '</span>').join('') + '</div>' : '';
+}
+// ── news & events — kept apart from "For you"; the same events, tagged for this person ──
+let _newsP = null;
+function newsTag(n, d) {
+  const kids = d.kids || [];
+  if (/baptism/i.test(n) && !d.baptized) return 'Your next step?';
+  if (/fundamentals|membership|family member|newcomer|starting point/i.test(n) && !d.member) return 'Great for you';
+  if (/student/i.test(n) && kids.some(k => k.age >= 11 && k.age <= 18)) return 'For your teen';
+  if (/stepping stones|kids/i.test(n) && kids.some(k => k.age != null && k.age < 11)) return 'For your kids';
+  if (/bible study|study|group/i.test(n) && !(d.groups || []).length) return 'A great way to connect';
+  return '';
+}
+function loadNews(d) {
+  const el = document.getElementById('jrNews'); if (!el) return;
+  (_newsP = _newsP || fetch('/eos-data.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)).then(j => {
+    const box = document.getElementById('jrNews'); if (!box) return;
+    const evs = ((j && j.calendar && j.calendar.events) || []);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const until = new Date(today.getTime() + 60 * 864e5), key = x => new Date(x + 'T12:00:00');
+    const teen = (d.kids || []).some(k => k.age >= 11 && k.age <= 18), seen = {}, list = [];
+    evs.filter(e => e.visibleCC && !e.rbd && key(e.dateKey) >= today && key(e.dateKey) <= until && !/sunday gathering/i.test(e.name || ''))
+      .filter(e => teen || !/student|youth/i.test(e.name || ''))
+      .sort((a, b) => a.dateKey < b.dateKey ? -1 : a.dateKey > b.dateKey ? 1 : 0)
+      .forEach(e => { const nk = String(e.name).trim().toLowerCase(); if (seen[nk]) { seen[nk].repeats++; return; } const it = { e, repeats: 0, tag: newsTag(e.name || '', d) }; seen[nk] = it; list.push(it); });
+    list.sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0));
+    const show = list.slice(0, 6).sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0) || (a.e.dateKey < b.e.dateKey ? -1 : 1));
+    box.className = show.length ? 'news' : 'dim';
+    box.innerHTML = show.length ? show.map(it => { const e = it.e, img = e.img || (e.imgLocal ? '/' + e.imgLocal : '');
+      return '<a class="nv" href="' + esc(e.url || 'https://lssr.churchcenter.com/calendar') + '" target="_blank" rel="noopener">' + (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '') +
+        '<div>' + (it.tag ? '<em>' + esc(it.tag) + '</em>' : '') + '<b>' + esc(String(e.name).trim()) + '</b><small>' + fmtDate(e.dateKey + 'T12:00:00', { weekday: 'short', month: 'short', day: 'numeric' }) + (e.time && !/^12:00 AM$/.test(e.time) ? ' · ' + esc(e.time) : '') + (it.repeats ? ' · and ' + (it.repeats >= 3 ? 'weekly' : 'more dates') : '') + '</small></div></a>'; }).join('')
+      : 'Nothing on the church calendar in the next couple of months.';
+    tellParent();
+  });
 }
 
 // ── leaders: your group / your team ──────────────────────────────────────────
