@@ -26,6 +26,9 @@ git fetch -q origin
 git cat-file -e "$SHA^{commit}" 2>/dev/null || git fetch -q origin staging || true
 git cat-file -e "$SHA^{commit}" || { echo "✋ Beta commit $SHA not found locally or on origin/staging." >&2; exit 1; }
 
+if git merge-base --is-ancestor "$SHA" origin/main; then
+  echo "✅ Beta build $(git rev-parse --short "$SHA") is already live — nothing to ship."; exit 0
+fi
 echo "→ Shipping beta build $(git rev-parse --short "$SHA") to lssouthreno.com. Changes:"
 git log --no-merges --format='   %h %s' "origin/main..$SHA" | grep -v -E ' Update (dashboard|shepherding|funnel)' || echo "   (nothing new — live already has it)"
 
@@ -45,7 +48,7 @@ p = wt / 'index.html'
 p.write_text(re.sub(r"var APP_BUILD='[^']*'", "var APP_BUILD='%s'" % s, p.read_text(), count=1))
 (wt / 'build.txt').write_text(s + '\n')
 PY
-  ( cd "$WT" && git add index.html build.txt && git commit -q --amend --no-edit )
+  ( cd "$WT" && git add index.html build.txt && git commit -q -m "Build stamp $STAMP" )
   if [ $DRY = 1 ]; then
     echo "→ Dry run — this is what would go live (not pushed):"
     ( cd "$WT" && git diff --stat origin/main HEAD | tail -20 )

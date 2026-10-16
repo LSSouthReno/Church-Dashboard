@@ -395,9 +395,9 @@ function seeYouHtml(d) {
   const yrs = p.since ? Math.floor((Date.now() - new Date(p.since)) / 3156e7) : 0;
   if (yrs >= 1) out.push('🏡 ' + yrs + (yrs === 1 ? ' year' : ' years') + ' at Living Stones');
   const now = new Date();
-  (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(m.date);
+  (d.milestones || []).forEach(m => { if (!/baptiz/i.test(m.label || '') || !m.date) return; const b = new Date(String(m.date).length === 10 ? m.date + 'T12:00:00' : m.date);
     const ann = new Date(now.getFullYear(), b.getMonth(), b.getDate()); const days = Math.round((ann - now) / 864e5);
-    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) out.unshift('💧 Happy baptism anniversary — ' + (now.getFullYear() - b.getFullYear()) + ' years!'); });
+    if (days >= -14 && days <= 14 && now.getFullYear() > b.getFullYear()) { const n = now.getFullYear() - b.getFullYear(); out.unshift('💧 Happy baptism anniversary — ' + n + (n === 1 ? ' year!' : ' years!')); } });
   if (!out.length) out.push('👋 We’re so glad you’re part of Living Stones');
   return out.length ? '<div class="seeyou">' + out.slice(0, 3).map(s => '<span>' + s + '</span>').join('') + '</div>' : '';
 }

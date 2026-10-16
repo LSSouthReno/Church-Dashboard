@@ -18,6 +18,7 @@ Backend (Apps Script) changes do not go through beta; deploy them separately.
 ```bash
 scripts/setup-beta.sh        # ONE TIME: creates the beta repo + first publish
 scripts/stage.sh             # put the current branch on beta (merges live main first)
+scripts/stage.sh --force     # replace beta even if origin/staging has commits this branch lacks
 scripts/stage.sh --local     # same build, on this Mac only: http://localhost:8790
 scripts/ship.sh --dry-run    # show exactly what would go live
 scripts/ship.sh              # ship EXACTLY what's on beta to lssouthreno.com

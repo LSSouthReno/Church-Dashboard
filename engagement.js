@@ -32,6 +32,7 @@ function engIcon(k, cls) { return '<svg class="' + (cls || 'eng-ic') + '" viewBo
 function engE(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 function engN(n) { return n == null || isNaN(n) ? '—' : Math.round(n).toLocaleString(); }
 function engPct(a, b) { return b ? Math.round(a / b * 100) : 0; }
+function engDate(s) { s = String(s || ''); return new Date(/^\d{4}-\d{2}-\d{2}$/.test(s) ? s + 'T12:00:00' : s); }
 function engDayOfYear(d) { d = d || new Date(); return Math.max(1, Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5)); }
 function engGiveOpen() { try { return typeof mmIsUnlocked === 'function' && mmIsUnlocked(); } catch (e) { return false; } }
 function engCopy(text, btn) {
@@ -436,18 +437,15 @@ function engFacts(p) {
 }
 function engDonorStage(p) {
   const g = p.giving; if (!g) return null;
-  const firstDays = g.firstGiftAt ? (Date.now() - new Date(g.firstGiftAt)) / 864e5 : null;
   if (!g.monthsGiven) return 'none';
   if (g.giftsEarlyHalf > 0 && !g.giftsRecentHalf) return 'lapsed';
-  if (firstDays != null && firstDays <= 365) return 'new';
   if (g.trend === 'down') return 'declining';
   if (g.trend === 'up') return 'growing';
   if (g.givesRegular) return 'regular';
   return 'occasional';
 }
 const ENG_DONOR = [
-  ['new', 'New givers', '#4c9aff', 'First gift in the last year', 'Thank them personally — a first gift is a big step of trust.'],
-  ['growing', 'Growing', '#22c55e', 'Giving more than the year before', 'Celebrate the story, not the amount: what has God been doing?'],
+  ['growing', 'Growing or new', '#22c55e', 'Giving more than the year before, or started this year', 'Thank them personally and celebrate the story, not the amount.'],
   ['regular', 'Steady', '#8fbf98', 'Consistent through the year', 'Show them the fruit — a baptism story, a family their giving helped.'],
   ['occasional', 'Occasional', '#d4af37', 'Gave in some months', 'Generosity as a rhythm: how recurring giving frees them up.'],
   ['declining', 'Declining', '#e0a63c', 'Giving less than the year before', 'Don’t talk money first — ask how they’re doing. Life may have changed.'],
@@ -482,6 +480,7 @@ function engCareRender() {
   const box = engCareMount(); if (!box) return;
   const data = typeof _shepData !== 'undefined' ? _shepData : null;
   if (!data) { box.innerHTML = '<div class="card eng-muted">Loading…</div>'; return; }
+  if (_engScope !== 'all' && !(data.elders || []).some(e => e.elder === _engScope)) _engScope = 'all';
   const seed = !!data.seed;
   const people = engCarePeople(), F = new Map(people.map(p => [p, engFacts(p)]));
   const n = people.length || 1;
@@ -534,12 +533,11 @@ function engCareRender() {
 
   // Next steps taken by month (this year) from dated records
   const yr = new Date().getFullYear(), months = Array(12).fill(0);
-  const bump = iso => { const d = new Date(iso || ''); if (d.getFullYear() === yr) months[d.getMonth()]++; };
+  const bump = iso => { const d = engDate(iso); if (d.getFullYear() === yr) months[d.getMonth()]++; };
   people.forEach(p => {
     const D = p.importantDates || {};
     bump(D.baptism); bump(D.membershipStart);
     (p.groups || []).forEach(x => bump(x.joinedAt)); (p.serveTeams || []).forEach(x => bump(x.joinedAt));
-    if (p.giving && p.giving.firstGiftAt) bump(p.giving.firstGiftAt);
   });
   const stepsYtd = months.reduce((a, b) => a + b, 0), mMax = Math.max(1, ...months), curM = new Date().getMonth();
 
@@ -567,10 +565,10 @@ function engCareRender() {
         engPeopleDetails(pr.ps, stepChips) + '</div>').join('') + '</div></div>' +
     '<div class="eng-two">' +
       '<div class="card"><h2>Drifting — reach out now</h2><div class="eng-dim">People showing the signs that came before others left: giving stopped or dropping, a weak or wandering health check, no group or team. Call them six months <i>before</i> they go, not after.</div>' +
-        '<div style="display:flex;align-items:baseline;gap:10px;margin:12px 0 4px"><span class="eng-big" style="font-size:36px">' + engN(drift.length) + '</span><span class="eng-muted">people</span><span style="margin-left:auto">' + engListBtns('drift', drift.map(x => x.p)) + '</span></div>' +
+        '<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:12px 0 4px"><span class="eng-big" style="font-size:36px">' + engN(drift.length) + '</span><span class="eng-muted">people</span><span style="margin-left:auto">' + engListBtns('drift', drift.map(x => x.p)) + '</span></div>' +
         (drift.length ? '<div class="eng-plist" style="max-height:420px">' + drift.map(x => engPersonRow(x.p, x.sig.concat(x.p.assignedElder ? [[x.p.assignedElder.split(' ')[0], '']] : []))).join('') + '</div>' : '<div class="eng-dim">Nobody is showing two or more warning signs right now.</div>') +
       '</div>' +
-      '<div class="card"><h2>Next steps taken · ' + yr + '</h2><div class="eng-dim">Baptisms, Family Member starts, group and team joins, and first gifts, by month, for the people in view.</div>' +
+      '<div class="card"><h2>Next steps taken · ' + yr + '</h2><div class="eng-dim">Baptisms, Family Member starts, and group and team joins, by month, for the people in view.</div>' +
         '<div style="display:flex;align-items:baseline;gap:10px;margin-top:12px"><span class="eng-big" style="font-size:36px">' + engN(stepsYtd) + '</span><span class="eng-muted">steps so far this year</span></div>' +
         '<div class="eng-months">' + months.map((v, i) => '<div' + (i > curM ? ' style="opacity:.25"' : '') + '><b>' + (i <= curM ? v : '') + '</b><i style="height:' + Math.round(v / mMax * 100) + '%"></i>' + ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][i] + '</div>').join('') + '</div>' +
       '</div>' +
@@ -579,7 +577,7 @@ function engCareRender() {
     '<div class="card"><h2>Donor health</h2><div class="eng-dim">Giving is a spiritual step. Talk about it always — just not the same way to everyone, and always for the giver’s good. Spouses who give together each count as a giver.</div>' +
       '<div class="eng-donor">' +
         '<div class="eng-opp"><div class="k">Givers · 12 months</div><div class="v">' + engN(givers) + '</div><div class="d">' + engPct(givers, n) + '% of people in view</div></div>' +
-        '<div class="eng-opp" style="--c:#22c55e"><div class="k">Growing</div><div class="v">' + engN(stages.growing.length) + '</div><div class="d">giving more than last year</div></div>' +
+        '<div class="eng-opp" style="--c:#22c55e"><div class="k">Growing</div><div class="v">' + engN(stages.growing.length) + '</div><div class="d">giving more than last year, or new</div></div>' +
         '<div class="eng-opp" style="--c:#e0a63c"><div class="k">Declining</div><div class="v">' + engN(stages.declining.length) + '</div><div class="d">giving less than last year</div></div>' +
         '<div class="eng-opp" style="--c:#ef6b6b"><div class="k">Lapsed</div><div class="v">' + engN(stages.lapsed.length) + '</div><div class="d">stopped in the last 6 months</div></div>' +
       '</div><div style="margin-top:14px">' +

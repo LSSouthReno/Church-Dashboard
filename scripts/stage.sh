@@ -13,8 +13,8 @@
 #   4. publishes it to the LSSouthReno/lssouthreno.github.io repo (GitHub Pages, ~1 min)
 # Ship what you tested with scripts/ship.sh.
 set -euo pipefail
-LOCAL=0; SERVE=1
-case "${1:-}" in --local) LOCAL=1;; --build-only) LOCAL=1; SERVE=0;; esac
+LOCAL=0; SERVE=1; FORCE=0
+for a in "$@"; do case "$a" in --local) LOCAL=1;; --build-only) LOCAL=1; SERVE=0;; --force) FORCE=1;; esac; done
 
 BETA_REPO="https://github.com/LSSouthReno/lssouthreno.github.io.git"
 ROOT="$(git rev-parse --show-toplevel)"
@@ -29,6 +29,10 @@ git fetch -q origin
 if ! git merge -q --no-edit origin/main; then
   echo "✋ Merge with live main has conflicts — resolve them, commit, and run again." >&2; exit 1
 fi
+# Don't let a different branch silently replace what's being tested on beta.
+if [ $LOCAL = 0 ] && [ $FORCE = 0 ] && git rev-parse -q --verify origin/staging >/dev/null && ! git merge-base --is-ancestor origin/staging HEAD; then
+  echo "✋ origin/staging has commits this branch doesn't (someone else's beta?). Merge origin/staging first, or run with --force to replace it." >&2; exit 1
+fi
 SHA="$(git rev-parse HEAD)"; SHORT="$(git rev-parse --short HEAD)"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 
@@ -36,7 +40,7 @@ if [ $LOCAL = 1 ]; then
   BUILD="$ROOT/.beta-build"; rm -rf "$BUILD"; mkdir -p "$BUILD"
 else
   echo "→ Backing up this branch to origin/staging…"
-  git push -q origin "HEAD:refs/heads/staging" --force-with-lease=staging 2>/dev/null || git push -q origin "HEAD:refs/heads/staging"
+  git push -q origin "HEAD:refs/heads/staging" $([ $FORCE = 1 ] && echo --force)
   BUILD="$(mktemp -d)"; trap 'rm -rf "$BUILD"' EXIT
 fi
 git archive "$SHA" | tar -x -C "$BUILD"
