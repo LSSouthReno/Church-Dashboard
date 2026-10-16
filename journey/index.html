@@ -274,13 +274,14 @@
   .one .sec:first-of-type { border-top:0; padding-top:4px; }
   .one .jg { gap:30px 28px; }
   @media (max-width: 900px) { .one .jg { grid-template-columns:1fr; } }
-  .one .jg + .jg, .one .card + .card, .one .jg[style] { margin-top:30px !important; }
+  .one .jg + .jg, .one .jg[style] { margin-top:30px !important; }
+  .one .a-side { gap:30px; }
   .one .belong { border:0; box-shadow:none !important; background:transparent; border-radius:0; padding:18px 0 26px; margin:0; }
   .one .belong::before { inset:-30px -40px 0; -webkit-mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); }
   .one .me-card { margin:0 0 28px; }
   .one .evr { border-top:1px solid var(--line) !important; padding:12px 0 !important; }
   .one .evl { gap:0; } .one .evh { margin:20px 0 2px; }
-  .one .ev-more { margin-top:14px; }
+  .one .ev-more { margin-top:14px; justify-self:start; }
   .one .ph h2 { font-size:24px; }
   .one .sec > .quiet { border-top:0; }
   html[data-theme="soft"] .one .sec { border-top-color:rgba(74,58,30,.09); }
