@@ -677,7 +677,7 @@ function loadComing(d) {
     const seen = {}, evs = [];
     ((j && j.calendar && j.calendar.events) || []).filter(e => e.visibleCC && !e.rbd && new Date(e.dateKey + 'T12:00:00') >= today && !/sunday gathering/i.test(e.name || ''))
       .sort((a, b) => a.dateKey < b.dateKey ? -1 : 1).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (seen[k]) return; seen[k] = 1; evs.push({ date: e.dateKey, what: String(e.name).trim(), tag: newsTag(e.name || '', d) }); });
-    const rows = mine.concat(evs.filter(e => e.tag), evs.filter(e => !e.tag)).slice(0, 3);
+    const rows = mine.concat(evs.filter(e => e.tag), evs.filter(e => !e.tag)).slice(0, 3).sort((a, b) => String(a.date) < String(b.date) ? -1 : 1);   // yours first, then shown in date order
     el.innerHTML = rows.length ? rows.map(r => '<div class="r"><div class="d">' + fmtDate(r.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div>' + esc(r.what) + (r.mine ? ' <span class="pill">You</span>' : r.tag ? ' <span class="pill">For you</span>' : '') + '</div></div>').join('')
       : '<div class="dim">Nothing on the calendar yet.</div>';
   });
