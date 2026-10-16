@@ -206,14 +206,15 @@
         var p = st[i]; if (!COLOR_PROP.test(p)) continue;
         var v = st.getPropertyValue(p); if (!v || mine[p] === v) continue;
         RE.lastIndex = 0; if (!RE.test(v)) { RE.lastIndex = 0; continue; } RE.lastIndex = 0;
-        var nv = mapValue(v, isShadow(p)); mine[p] = nv;
+        var nv = mapValue(v, isShadow(p));
         if (nv !== v) st.setProperty(p, nv, st.getPropertyPriority(p));
+        mine[p] = st.getPropertyValue(p);   // the browser re-serializes; remember ITS form so we never map twice
       }
     }
     if (el.namespaceURI === 'http://www.w3.org/2000/svg') {
       ['fill', 'stroke', 'stop-color'].forEach(function (a) {
         var v = el.getAttribute(a); if (!v || mine['@' + a] === v) return;
-        var nv = mapValue(v); mine['@' + a] = nv; if (nv !== v) el.setAttribute(a, nv);
+        var nv = mapValue(v); if (nv !== v) el.setAttribute(a, nv); mine['@' + a] = el.getAttribute(a);
       });
     }
     mapped.set(el, mine);
