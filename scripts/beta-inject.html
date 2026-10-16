@@ -16,7 +16,7 @@
   };
   window.LSSR_BETA = /*BETA_INFO*/{};
   function ribbon(){
-    if (document.getElementById('lssrBetaRibbon')) return;
+    if (document.getElementById('lssrBetaRibbon') || window.top !== window) return;   // one ribbon, not one per embedded frame
     var d = document.createElement('div');
     d.id = 'lssrBetaRibbon';
     d.innerHTML = 'BETA &middot; test site &middot; edits still save to the real data';
