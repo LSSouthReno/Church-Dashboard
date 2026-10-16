@@ -10,7 +10,7 @@
    Office TV (?tv=1 / ≥2400px wide) always stays Classic. Load this FIRST in <head>.
    ===================================================================================== */
 (function () {
-  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v6';
+  var KEY = 'lssr_theme', CACHE = 'lssr_soft_css_v7';
   var de = document.documentElement;
   function choose() {
     try {
@@ -160,6 +160,7 @@
         decl += p + ':' + nv + (st.getPropertyPriority(p) ? ' !important' : '') + ';';
       }
       if (!decl || !rule.selectorText) return '';
+      if (rule.selectorText.indexOf('data-theme') >= 0) return '';   // hand-written Soft/Classic rules are already in their colors
       return prefix(rule.selectorText) + '{' + decl + '}';
     }
     if (rule.type === 4 || rule.type === 12) {                 // @media / @supports
