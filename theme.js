@@ -264,6 +264,7 @@
   }
 
   function start() {
+    de.classList.remove('sp-light');   // Staff OS's own light switch: Soft already is the light look
     build(); patchChart(); softenTree(document.body);
     mo.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['style', 'fill', 'stroke', 'stop-color'] });
   }
@@ -284,6 +285,7 @@ html[data-theme="soft"] .eng-strip { background: linear-gradient(90deg, #f6efdc,
 html[data-theme="soft"] .eng-btn { background: #f6efdc; border-color: #e1cf9f; color: #7a5e14; }
 html[data-theme="soft"] .eng-btn.g { background: #fff; border-color: var(--soft-line); color: var(--soft-muted); }
 html[data-theme="soft"] ::selection { background: #f0e3bd; }
+html[data-theme="soft"] #staffModal .sp-theme-btn { display: none !important; }
 html[data-theme="soft"] .sh-newfam-banner { background: #fbf0cc !important; color: #4d3b06 !important; }
 html[data-theme="soft"] .sh-nf-who, html[data-theme="soft"] .sh-nf-who b { color: #4d3b06 !important; }
 html[data-theme="soft"] .sh-nf-who { border-top-color: rgba(77,59,6,.15) !important; }
