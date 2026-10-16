@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="theme.js"></script>
 <script src="team-checklists.js"></script>
 <script src="conferences.js"></script>
 <script src="engagement.js"></script>
@@ -3785,7 +3786,8 @@
 
   </div><!-- /chGrid -->
 
-  <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno</div>
+  <div class="footer">Auto-refreshes hourly · Living Stones Church, South Reno · <a href="#" onclick="lssrTheme.toggle();return false" style="color:inherit">Look: <span id="themeName"></span></a></div>
+  <script>document.getElementById('themeName').textContent = lssrTheme.get() === 'soft' ? 'Soft (switch to Classic)' : 'Classic (switch to Soft)';</script>
 </div>
 
 <!-- ======== PASTOR SHEPHERDING (password-gated) ======== -->
@@ -8156,6 +8158,7 @@ function kpStaticItems() {
   const it = [];
   const add = (sec, label, hint, go, ic) => it.push({ sec, label, hint, go, ic: ic || '›' });
   add('Pages', 'Church · Overview', 'attendance, members, baptisms, groups, serving', () => { navGo('church'); chTab('overview'); });
+  add('Tools', 'Switch look: ' + (lssrTheme.get() === 'soft' ? 'Classic dark' : 'Soft light'), 'appearance, theme, dark mode, light mode', () => lssrTheme.toggle());
   add('Pages', 'Church · Engagement', 'pathway, next steps taken, engagement score', () => { navGo('church'); chTab('engagement'); });
   add('Pages', 'Care · Engagement', 'primed to engage, drifting, donor health', () => engOpenCare());
   [['attendance', 'Attendance'], ['members', 'Members'], ['baptisms', 'Baptisms'], ['groups', 'Community groups'], ['serve', 'Serve teams'], ['giving', 'Giving']].forEach(t =>
