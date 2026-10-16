@@ -316,8 +316,45 @@
   .top-me img { width:100%; height:100%; object-fit:cover; }
   .grat { font-size:17px; line-height:1.5; margin:-4px 0 22px; }
   .tabbar:empty, .ttabs:empty { display:none !important; }
-  body.app-in:not(.embed) .wrap.one { padding-bottom:calc(40px + env(safe-area-inset-bottom)) !important; }
+  @media (min-width: 901px) { body.app-in:not(.embed) .wrap.one { padding-bottom:48px !important; } }
   html[data-theme="soft"] .biglinks a, html[data-theme="soft"] .rows .r { border-color:rgba(74,58,30,.08); }
+  /* ── Home, like the talk's app: header band · For You · News & Events ── */
+  .home { max-width:560px; }
+  html[data-theme] .band { position:relative; overflow:hidden; text-align:center; color:#fff; border-radius:0 0 30px 30px; margin:-30px -24px 26px; padding:34px 22px 22px;
+    background:linear-gradient(165deg, #2c2418 0%, #5a4520 55%, #8e6d22 100%); }
+  html[data-theme] .band::before { content:''; position:absolute; inset:0; background:url(/assets/belong-topo.svg) center/cover no-repeat; opacity:.18; filter:invert(1) sepia(.4); pointer-events:none; }
+  html[data-theme] .band > * { position:relative; }
+  html[data-theme] .band-av { width:78px; height:78px; margin:0 auto 10px; border-radius:50%; overflow:hidden; border:3px solid rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center; font:800 28px 'Montserrat',sans-serif; color:#fff; background:rgba(255,255,255,.14); }
+  html[data-theme] .band-av img { width:100%; height:100%; object-fit:cover; }
+  html[data-theme] .band-hi { font-size:15px; font-weight:600; color:rgba(255,255,255,.82); }
+  html[data-theme] .band-h { margin:6px 0 18px; font-size:clamp(30px, 8vw, 40px); font-weight:800; line-height:1.05; letter-spacing:-.02em; color:#fff; }
+  html[data-theme] .band-h em { font-style:normal; color:#f0cf7a; }
+  html[data-theme] .band .badges { display:flex; justify-content:center; gap:8px; margin:0; flex-wrap:nowrap; }
+  html[data-theme] .band .badge { width:auto; color:rgba(255,255,255,.85); font-size:10.5px; }
+  html[data-theme] .band .badge i { width:42px; height:42px; border:1.5px solid rgba(255,255,255,.45); background:transparent; }
+  html[data-theme] .band .badge svg { stroke:rgba(255,255,255,.85); width:19px; height:19px; }
+  html[data-theme] .band .badge.on i { background:#fff; border-color:#fff; }
+  html[data-theme] .band .badge.on svg { stroke:#6b5220; }
+  html[data-theme] .band-tip { margin-top:12px; font-size:12px; color:rgba(255,255,255,.65); }
+  .h-lbl { display:flex; justify-content:space-between; align-items:baseline; margin:4px 2px 10px; font-size:18px; font-weight:700; letter-spacing:-.01em; }
+  .h-lbl a { font-size:14px; font-weight:700; color:var(--gold); text-decoration:none; }
+  .fy { background:var(--card); border-radius:22px; overflow:hidden; margin:0 0 28px; box-shadow:0 1px 2px rgba(74,58,30,.05), 0 12px 32px rgba(74,58,30,.08); }
+  .fy-img { aspect-ratio:16/9; background:linear-gradient(135deg, var(--gold-bg), transparent); display:flex; align-items:center; justify-content:center; }
+  .fy-img svg { width:56px; height:56px; fill:none; stroke:var(--gold); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+  .fy-img.has { background:none; } .fy-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .fy-b { padding:18px 20px 16px; }
+  .fy h2 { font-size:21px; line-height:1.25; margin:0 0 8px; font-weight:700; letter-spacing:-.01em; }
+  .fy p { color:var(--muted); font-size:15px; line-height:1.55; margin:0 0 16px; }
+  .fy .btn.big { width:100%; padding:14px 18px; font-size:16px; border-radius:14px; }
+  .fy .nx { display:flex; justify-content:center; gap:18px; margin-top:12px; font-size:14px; }
+  .fy .nx a { color:var(--muted); text-decoration:none; font-weight:600; }
+  .news2 { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -24px 10px; padding:0 24px 8px; scrollbar-width:none; }
+  .news2::-webkit-scrollbar { display:none; }
+  .nc { appearance:none; flex:0 0 82%; max-width:400px; scroll-snap-align:start; text-align:left; padding:0; border:0; border-radius:20px; overflow:hidden; background:var(--card); color:var(--text); cursor:pointer; font-family:inherit; box-shadow:0 1px 2px rgba(74,58,30,.05), 0 10px 26px rgba(74,58,30,.07); }
+  .nc img, .nc-ph { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--card-2); }
+  .nc-b { display:block; padding:12px 16px 15px; } .nc-b small { display:block; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .nc-b b { display:block; font-size:17px; line-height:1.3; } .nc-b em { display:block; font-style:normal; color:var(--muted); font-size:13.5px; margin-top:3px; }
+  @media (min-width: 641px) { html[data-theme] .band { margin:0 0 26px; border-radius:28px; } .news2 { margin:0 0 10px; padding:0 0 8px; } }
   /* phone = the member app (kept last so it wins over the base rules above) */
   @media (max-width: 640px) {
     /* app header: centered greeting, badges, encouragement */
@@ -336,6 +373,8 @@
     .news .nv { flex:0 0 78%; scroll-snap-align:start; }
     .card-h h3 { font-size:12px; }
     .path { scrollbar-width:none; } .path::-webkit-scrollbar { display:none; }
+    html[data-theme] .band { margin:-22px -16px 22px; }
+    .news2 { margin:0 -16px 10px; padding:0 16px 8px; }
     .one .b-h { font-size:36px; }
     .me-card .badges { grid-template-columns:repeat(6, minmax(0, 1fr)); }
     .belong { padding:20px 18px 18px; border-radius:18px; margin:0 -4px 14px; }
@@ -540,7 +579,7 @@ const TAB_ICONS = {
   give: '<path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7c-2-4-6-3-6-1s4 1 6 1c2 0 6 1 6-1s-4-3-6 1z"/>',
   me: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'
 };
-const TABS = [['home', 'Home'], ['events', 'Events'], ['connect', 'Connect'], ['give', 'Give'], ['me', 'Me']];
+const TABS = [['home', 'Home'], ['events', 'Events'], ['connect', 'Groups'], ['give', 'Give'], ['me', 'Me']];
 const CC = 'https://lssr.churchcenter.com';
 function ccLinks() { const L = (S.data && S.data.links) || {}; return {
   giving: L.giving || CC + '/giving', groups: L.groups || CC + '/groups', serve: L.serve || CC + '/groups/serve-teams',
@@ -564,17 +603,17 @@ function linkRow(href, icon, title, sub, onclick) {
 
 function viewJourney() {
   const d = S.data, p = d.person || {}, first = (p.first || '').split(' ')[0]; tellParent();
-  $('ttabs').innerHTML = ''; $('tabbar').innerHTML = ''; document.body.classList.add('app-in');
+  $('ttabs').innerHTML = tabsHtml(); $('tabbar').innerHTML = tabsHtml(); document.body.classList.add('app-in');
   $('topR').innerHTML = EMBED ? '' : '<a class="btn g sm wide-only" href="/">Dashboard</a><button class="top-me" onclick="go(\'me\')" aria-label="Me">' + (p.avatar ? '<img src="' + esc(p.avatar) + '" alt="">' : esc(first.charAt(0) || '·')) + '</button>';
   const sName = (SEASONS.find(x => x[0] === d.season) || [, ''])[1];
   $('banner').innerHTML = S.preview ? '<div class="banner">Pastor preview of ' + esc(p.name) + '’s app · buttons that send or save are turned off' +
     (d.seasonWhy && d.seasonWhy.length ? '<div class="why"><b>Why ' + esc(sName) + ' (pastors only):</b> ' + d.seasonWhy.map(esc).join(' · ') + '</div>' : '') + '</div>' : '';
   const tab = curTab(), sub = (location.hash || '').split('/')[1], y = window.scrollY, same = S.rendered && S.lastTab === tab;
   const page = tab === 'events' ? viewEvents(d) : tab === 'connect' ? viewConnect(d) : tab === 'give' ? viewGive(d) : tab === 'me' ? viewMe(d) : '';
-  $('app').innerHTML = tab === 'home' ? '<div class="wrap one home">' + viewHome(d) + '</div>'
-    : '<div class="wrap one page"><button class="pg-back" onclick="go(\'home\')">‹ Home</button>' + page + '</div>';
+  $('app').innerHTML = tab === 'home' ? '<div class="wrap one home">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + viewHome(d) + '</div>'
+    : '<div class="wrap one page">' + (EMBED ? '<nav class="seg">' + tabsHtml() + '</nav>' : '') + page + '</div>';
   S.rendered = true; S.lastTab = tab;
-  if (tab === 'home') { loadHomeSunday(); loadComing(d); }
+  if (tab === 'home') { loadForYouImage(); loadNewsCards(d); }
   if (tab === 'events') loadEvents(d);
   if (tab === 'connect') loadFind();
   if (tab === 'me') { appCard(); const now_ = document.querySelector('.stop.now'); if (now_ && now_.parentElement.scrollWidth > now_.parentElement.clientWidth) now_.parentElement.scrollLeft = now_.offsetLeft - now_.parentElement.clientWidth / 2 + now_.offsetWidth / 2; }
@@ -635,51 +674,61 @@ function greetHtml(d) {
     '<div class="b-k">Ways to grow</div>' + badgesHtml(d) + '</section>';
 }
 function viewHome(d) {
-  const p = d.person || {}, first = (p.first || '').split(' ')[0], v = dailyVerse();
+  const p = d.person || {}, first = (p.first || '').split(' ')[0];
   const dm = dismissed(), now = Date.now();
   const steps = (d.steps || []).filter(s => s.kind !== 'celebrate' && !(dm[s.id] > now));
   const i = Math.min(S.stepIdx || 0, Math.max(0, steps.length - 1)), s = steps[i];
+  S.homeStep = s || null;
+  const personal = s ? (first ? esc(first) + ', ' + esc(s.title.charAt(0).toLowerCase() + s.title.slice(1)) : esc(s.title)) : '';
   const act = !s ? '' : s.url ? ext(s.url, esc(s.btn || 'Take this step'), 'btn p big')
     : '<button class="btn p big" onclick="openSheet(\'note\',' + JSON.stringify(String(s.action || '').replace(/^note:/, '')).replace(/"/g, '&quot;') + ')">' + esc(s.btn || 'Tell me more') + '</button>';
-  const next = s
-    ? '<section class="hcard"><div class="lbl">Your next step</div><h2>' + esc(s.title) + '</h2><p>' + esc(s.why) + '</p>' + act +
+  const forYou = s
+    ? '<article class="fy"><div class="fy-img" id="fyImg"><svg viewBox="0 0 24 24">' + (ICONS[stepIconKey(s.id)] || ICONS.invite) + '</svg></div>' +
+      '<div class="fy-b"><h2>' + personal + '</h2><p>' + esc(s.why) + '</p>' + act +
       '<div class="nx"><a href="#" onclick="dismiss(\'' + esc(s.id) + '\');return false">Not right now</a>' +
-      (steps.length > 1 ? '<span>·</span><a href="#" onclick="S.stepIdx=' + ((i + 1) % steps.length) + ';viewJourney();return false">' + (i + 1) + ' of ' + steps.length + ' · Next ›</a>' : '') + '</div></section>'
-    : '<section class="hcard"><div class="lbl">Your next step</div><h2>You’re all caught up.</h2><p>' + gratitudeLine(d) + '</p></section>';
-  const L = (t, on, sub) => '<a href="#" onclick="' + on + ';return false"><span>' + t + (sub ? '<small>' + sub + '</small>' : '') + '</span>' + chev + '</a>';
-  return '<div class="hi">' + greeting() + ', ' + esc(first) + '</div>' +
-    '<section class="belong"><h1 class="b-h">You belong<br>to <em>Jesus.</em></h1><p class="b-v">' + esc(v[0]) + '<span>' + esc(v[1]) + '</span></p></section>' +
-    next +
-    '<section class="sun"><div class="lbl">This Sunday</div><div id="hSun"><h2 class="sun-big">Sunday gatherings</h2><div class="sun-meta">8:00 · 9:30 · 11:00</div></div></section>' +
-    '<section class="hcard"><div class="lbl">Coming up</div><div id="hComing" class="rows"><div class="dim">Loading…</div></div><a class="more" href="#events" onclick="go(\'events\');return false">All events ›</a></section>' +
-    '<nav class="biglinks" aria-label="More">' +
-      L('Events', 'go(\'events\')') + L('Groups &amp; teams', 'go(\'connect\')') + L('Give', 'go(\'give\')') +
-      L('Prayer request', 'openSheet(\'prayer\')') + L('Me', 'go(\'me\')') +
-    '</nav>';
+      (steps.length > 1 ? '<a href="#" onclick="S.stepIdx=' + ((i + 1) % steps.length) + ';viewJourney();return false">Next idea ›</a>' : '') + '</div></div></article>'
+    : '<article class="fy"><div class="fy-b"><h2>' + (first ? esc(first) + ', you’re all caught up.' : 'You’re all caught up.') + '</h2><p>' + gratitudeLine(d) + '</p></div></article>';
+  return '<header class="band">' +
+      '<div class="band-av">' + (p.avatar ? '<img src="' + esc(p.avatar) + '" alt="">' : esc((first || '?').charAt(0))) + '</div>' +
+      '<div class="band-hi">' + greeting() + ', ' + esc(first) + '</div>' +
+      '<h1 class="band-h">You belong to <em>Jesus.</em></h1>' +
+      badgesHtml(d) + '<div class="band-tip">Tap an icon to learn more</div>' +
+    '</header>' +
+    '<div class="h-lbl">For You</div>' + forYou +
+    '<div class="h-lbl">News &amp; Events <a href="#events" onclick="go(\'events\');return false">See all</a></div>' +
+    '<div class="news2" id="news2"><div class="dim">Loading…</div></div>';
 }
-function loadHomeSunday() {
-  const key = nextSundayKey();
-  Promise.all([eosData(), dashData()]).then(([eos, dash]) => {
-    const el = $('hSun'); if (!el) return;
-    const gather = ((eos && eos.calendar && eos.calendar.events) || []).find(e => e.dateKey === key && /sunday gathering/i.test(e.name || ''));
-    const plan = ((dash && dash.sundayPlans) || []).find(x => x.date === key), svc = plan && (plan.services || []).find(x => x.title) || null;
-    const times = gather ? String(gather.desc || '').replace(/^Join us Sundays at /i, '').replace(/\.$/, '') : '8:00, 9:30, or 11:00';
-    el.innerHTML = '<h2 class="sun-big">' + esc(svc ? svc.title.replace(/\s*\([^)]*\)\s*$/, '') : 'Sunday gatherings') + '</h2>' +
-      '<div class="sun-meta">' + fmtDate(key, { month: 'short', day: 'numeric' }) + ' · ' + esc(times || '8:00, 9:30, or 11:00') +
-      ' · <a href="https://maps.apple.com/?q=Living+Stones+South+Reno+95+Foothill+Dr+Reno+NV" target="_blank" rel="noopener">Directions</a></div>';
+function stepIconKey(id) { return /group/.test(id) ? 'group' : /serve/.test(id) ? 'serve' : /baptism/.test(id) ? 'baptism' : /member/.test(id) ? 'membership' : /lead/.test(id) ? 'lead' : /give/.test(id) ? 'give' : 'invite'; }
+const STEP_PHOTO = { baptism: /baptism/i, group: /connection sunday|community group|group/i, serve: /coffee team|first impressions|serve team|volunteer/i,
+  give: /mission/i, membership: /fundamentals|membership|family member/i, lead: /leader/i, invite: /sunday gathering/i };
+function loadForYouImage() {
+  const s = S.homeStep; if (!s) return;
+  eosData().then(j => {
+    const box = $('fyImg'); if (!box) return;
+    const re = STEP_PHOTO[stepIconKey(s.id)] || STEP_PHOTO.invite;
+    const ev = ((j && j.calendar && j.calendar.events) || []).filter(e => e.img && re.test(e.name || '')).sort((a, b) => a.dateKey < b.dateKey ? 1 : -1)[0];
+    if (ev) { box.classList.add('has'); box.innerHTML = '<img src="' + esc(ev.img) + '" alt="" loading="lazy">'; }
   });
 }
-function loadComing(d) {
-  eosData().then(j => {
-    const el = $('hComing'); if (!el) return;
+let _news2 = [];
+function loadNewsCards(d) {
+  Promise.all([eosData(), dashData()]).then(([j, dash]) => {
+    const el = $('news2'); if (!el) return;
     const today = new Date(); today.setHours(0, 0, 0, 0);
-    const mine = (d.upcoming || []).map(u => ({ date: u.date, what: u.what, mine: true }));
-    const seen = {}, evs = [];
-    ((j && j.calendar && j.calendar.events) || []).filter(e => e.visibleCC && !e.rbd && new Date(e.dateKey + 'T12:00:00') >= today && !/sunday gathering/i.test(e.name || ''))
-      .sort((a, b) => a.dateKey < b.dateKey ? -1 : 1).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (seen[k]) return; seen[k] = 1; evs.push({ date: e.dateKey, what: String(e.name).trim(), tag: newsTag(e.name || '', d) }); });
-    const rows = mine.concat(evs.filter(e => e.tag), evs.filter(e => !e.tag)).slice(0, 3).sort((a, b) => String(a.date) < String(b.date) ? -1 : 1);   // yours first, then shown in date order
-    el.innerHTML = rows.length ? rows.map(r => '<div class="r"><div class="d">' + fmtDate(r.date, { weekday: 'short', month: 'short', day: 'numeric' }) + '</div><div>' + esc(r.what) + (r.mine ? ' <span class="pill">You</span>' : r.tag ? ' <span class="pill">For you</span>' : '') + '</div></div>').join('')
-      : '<div class="dim">Nothing on the calendar yet.</div>';
+    const evs = ((j && j.calendar && j.calendar.events) || []).filter(e => e.visibleCC && !e.rbd && new Date(e.dateKey + 'T12:00:00') >= today)
+      .sort((a, b) => a.dateKey < b.dateKey ? -1 : 1);
+    const key = nextSundayKey(), sun = evs.find(e => e.dateKey === key && /sunday gathering/i.test(e.name || ''));
+    const plan = ((dash && dash.sundayPlans) || []).find(x => x.date === key), svc = plan && (plan.services || []).find(x => x.title);
+    const seen = {}, rest = [];
+    evs.filter(e => !/sunday gathering/i.test(e.name || '') && e.img).forEach(e => { const k = String(e.name).trim().toLowerCase(); if (!seen[k]) { seen[k] = 1; rest.push(e); } });
+    rest.sort((a, b) => (newsTag(b.name || '', d) ? 1 : 0) - (newsTag(a.name || '', d) ? 1 : 0));
+    const cards = [];
+    if (sun) cards.push(Object.assign({}, sun, { _kick: 'This Sunday', _title: svc ? svc.title.replace(/\s*\([^)]*\)\s*$/, '') : 'Sunday gatherings', _meta: String(sun.desc || '8:00, 9:30, or 11:00').replace(/^Join us Sundays at /i, '').replace(/\.$/, '') }));
+    rest.slice(0, 4).forEach(e => cards.push(Object.assign({}, e, { _kick: newsTag(e.name || '', d) || fmtDate(e.dateKey, { weekday: 'short', month: 'short', day: 'numeric' }), _title: String(e.name).trim(), _meta: evWhen(e) })));
+    _news2 = cards; _evShown = cards;
+    el.innerHTML = cards.length ? cards.map((c, n) => '<button class="nc" onclick="evOpen(' + n + ')">' + (c.img ? '<img src="' + esc(c.img) + '" alt="" loading="lazy">' : '<span class="nc-ph"></span>') +
+      '<span class="nc-b"><small>' + esc(c._kick) + '</small><b>' + esc(c._title) + '</b><em>' + c._meta + '</em></span></button>').join('')
+      : '<div class="dim">Nothing coming up right now.</div>';
   });
 }
 let _dashP = null;
@@ -897,6 +946,8 @@ function badgesHtml(d) {
 }
 function badgeTap(k, on) {
   const b = BADGES.find(x => x[0] === k) || [];
+  if (!on && S.data) { const dm = dismissed(), now = Date.now(), list = (S.data.steps || []).filter(s => s.kind !== 'celebrate' && !(dm[s.id] > now)); const ix = list.findIndex(s => s.id.indexOf(k === 'member' ? 'member' : k) >= 0);
+    if (ix >= 0) { S.stepIdx = ix; if (curTab() !== 'home') return go('home'); viewJourney(); const f = document.querySelector('.fy'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; } }
   const el = !on && document.querySelector('.step[data-sid*="' + (k === 'member' ? 'member' : k) + '"]');
   if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); return; }
   toast(on ? b[1] + ' ✓ — thank you. That step matters.' : b[1] + ': ' + b[3] + '. Send your pastor a note anytime to talk about it.');
