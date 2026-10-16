@@ -195,6 +195,7 @@
 
   // Immediate: tokens + cached twins, so returning visitors never see a dark flash.
   var cached = null; try { cached = JSON.parse(localStorage.getItem(CACHE) || 'null'); } catch (e) {}
+  try { for (var k = localStorage.length - 1; k >= 0; k--) { var lk = localStorage.key(k); if (/^lssr_soft_css_v/.test(lk) && lk !== CACHE) localStorage.removeItem(lk); } } catch (e) {}   // old versions
   if (cached && cached.css) inject('softGen', cached.css);
   else de.classList.add('soft-pending');
   inject('softBase', 'html.soft-pending body{opacity:0}html[data-theme="soft"]{color-scheme:light}html[data-theme="soft"],html[data-theme="soft"] body{background:#f5f3ee}');

@@ -92,6 +92,8 @@ Apps Script can't sign Web Push messages itself, but it **can** call **Firebase 
 - `theme.js` switches the bar back to #141414 for anyone on Classic.
 - The iPhone status bar style on the dashboard is now `default` (dark text on light) instead of `black`.
 
+**Fixed along the way:** `theme.js` was re-softening the hand-written Soft rules, which turned the My Journey top bar dark brown. Rules that already name `data-theme` are now skipped. The soft CSS cache moved to `lssr_soft_css_v7`, and older versions are cleared from storage.
+
 **Unchanged:** the icons in `assets/app/` (white LS on dark). They look right on both light and dark home screens, and the maskable version stays inside Android's safe zone.
 
 ## Next steps (in order)
