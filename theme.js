@@ -210,8 +210,8 @@
       inject('softGen', css);
       try { localStorage.setItem(CACHE, JSON.stringify({ sig: sig, css: css })); } catch (e) {}
       cached = { sig: sig, css: css };
-    } else inject('softGen', cached.css);
-    inject('softPolish', window.SOFT_POLISH || '');
+    } else if (!document.getElementById('softGen')) inject('softGen', cached.css);   // already in place from the head: don't re-parse 60 KB of CSS
+    if (!document.getElementById('softPolish')) inject('softPolish', window.SOFT_POLISH || '');
     de.classList.remove('soft-pending');
   }
   // Styles added later (modules that inject <style> on open) get their twins too.
@@ -286,7 +286,8 @@
 
   function start() {
     de.classList.remove('sp-light');   // Staff OS's own light switch: Soft already is the light look
-    build(); patchChart(); softenTree(document.body);
+    var t0 = performance.now(); build(); var t1 = performance.now(); patchChart(); softenTree(document.body);
+    window.lssrTheme.t = { build: Math.round(t1 - t0), soften: Math.round(performance.now() - t1) };
     mo.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['style', 'fill', 'stroke', 'stop-color'] });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
