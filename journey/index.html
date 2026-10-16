@@ -418,8 +418,10 @@ function loadNews(d) {
       .filter(e => teen || !/student|youth/i.test(e.name || ''))
       .sort((a, b) => a.dateKey < b.dateKey ? -1 : a.dateKey > b.dateKey ? 1 : 0)
       .forEach(e => { const nk = String(e.name).trim().toLowerCase(); if (seen[nk]) { seen[nk].repeats++; return; } const it = { e, repeats: 0, tag: newsTag(e.name || '', d) }; seen[nk] = it; list.push(it); });
-    list.sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0));
-    const show = list.slice(0, 6).sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0) || (a.e.dateKey < b.e.dateKey ? -1 : 1));
+    // up to 2 picked-for-you per kind, then the rest of the calendar by date (6 total)
+    const perTag = {}, picked = list.filter(it => it.tag && (perTag[it.tag] = (perTag[it.tag] || 0) + 1) <= 2).slice(0, 4);
+    const show = picked.concat(list.filter(it => picked.indexOf(it) < 0 && !it.tag).slice(0, 6 - picked.length))
+      .sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0) || (a.e.dateKey < b.e.dateKey ? -1 : 1));
     box.className = show.length ? 'news' : 'dim';
     box.innerHTML = show.length ? show.map(it => { const e = it.e, img = e.img || (e.imgLocal ? '/' + e.imgLocal : '');
       return '<a class="nv" href="' + esc(e.url || 'https://lssr.churchcenter.com/calendar') + '" target="_blank" rel="noopener">' + (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '') +
